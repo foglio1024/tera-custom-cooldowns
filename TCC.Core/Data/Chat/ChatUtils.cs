@@ -147,14 +147,24 @@ namespace TCC.Data.Chat
                 default: return false;
             }
         }
-
-        public static void CheckNotify(string message, ChatChannel ch, string author, string titleOverride = "", string discordTextOverride = "")
+        public static void CheckDiscordNotify(string message, string discordUsername)
         {
             if (FocusManager.IsForeground) return;
-            var txt = GetPlainText(message).UnescapeHtml();
-            var chStr = new ChatChannelToName().Convert(ch, null, null, null);
-            if (App.Settings.WebhookEnabledMentions) Discord.FireWebhook(App.Settings.WebhookUrlMentions, string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
-            if (App.Settings.BackgroundNotifications) Log.N(string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}", NotificationType.Normal, 6000);
+            if (!App.Settings.WebhookEnabledMentions) return;
+            //var txt = GetPlainText(message).UnescapeHtml();
+            //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
+
+            Discord.FireWebhook(App.Settings.WebhookUrlMentions, message, discordUsername); //string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
+
+        }
+        public static void CheckWindowNotify(string message, string title)
+        {
+            if (FocusManager.IsForeground) return;
+            if (!App.Settings.BackgroundNotifications) return;
+            //var txt = GetPlainText(message).UnescapeHtml();
+            //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
+
+            Log.N(title, message /*string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}"*/, NotificationType.Normal, 6000);
 
         }
     }

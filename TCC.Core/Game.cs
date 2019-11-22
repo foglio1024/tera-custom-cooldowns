@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TCC.Converters;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
@@ -251,7 +252,7 @@ namespace TCC
 
             PacketAnalyzer.Processor.Hook<S_FIN_INTER_PARTY_MATCH>(OnFinInterPartyMatch);
             PacketAnalyzer.Processor.Hook<S_BATTLE_FIELD_ENTRANCE_INFO>(OnBattleFieldEntranceInfo);
-            PacketAnalyzer.Processor.Hook<S_REQUEST_CONTRACT>(OnRequestContract);
+            PacketAnalyzer.Processor.Hook<S_BEGIN_THROUGH_ARBITER_CONTRACT>(OnRequestContract);
             PacketAnalyzer.Processor.Hook<S_TRADE_BROKER_DEAL_SUGGESTED>(OnTradeBrokerDealSuggested);
 
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_LIST>(OnPartyMemberList);
@@ -265,14 +266,16 @@ namespace TCC
         private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
         {
             DB.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
-            ChatUtils.CheckNotify($"New broker offer for <{i?.Name ?? m.Item.ToString()}>", ChatChannel.Bargain, m.Name, "Broker offer", $"New broker offer for {i?.Name}");
+            ChatUtils.CheckWindowNotify($"New broker offer for ${m.Amount} <{i?.Name ?? m.Item.ToString()}> from ${m.Name}", "Broker offer");
+            ChatUtils.CheckDiscordNotify($"New broker offer for ${m.Amount} <{i?.Name ?? m.Item.ToString()}>", m.Name);
         }
 
-        private static void OnRequestContract(S_REQUEST_CONTRACT p)
+        private static void OnRequestContract(S_BEGIN_THROUGH_ARBITER_CONTRACT p)
         {
-            if (p.Type == S_REQUEST_CONTRACT.RequestType.PartyInvite)
+            if (p.Type == S_BEGIN_THROUGH_ARBITER_CONTRACT.RequestType.PartyInvite)
             {
-                ChatUtils.CheckNotify($"{p.Sender} invited you to join a party", ChatChannel.GroupAlerts, "System", "Party Invite", $"{p.Sender} invited you to join a party");
+                ChatUtils.CheckWindowNotify($"{p.Sender} invited you to join a party", "Party invite");
+                ChatUtils.CheckDiscordNotify($"**{p.Sender}** invited you to join a party", "TCC");
             }
         }
 
@@ -331,16 +334,22 @@ namespace TCC
         private static void OnWhisper(S_WHISPER p)
         {
             if (p.Recipient != Me.Name) return;
-
-            ChatUtils.CheckNotify(p.Message, ChatChannel.ReceivedWhisper, p.Author);
+            var txt = ChatUtils.GetPlainText(p.Message).UnescapeHtml();
+            var chStr = new ChatChannelToName().Convert(ChatChannel.ReceivedWhisper, null, null, null);
+            ChatUtils.CheckWindowNotify(txt, (string)chStr);
+            ChatUtils.CheckDiscordNotify($"`${chStr}` {txt}", p.Author);
         }
 
         private static void OnChat(S_CHAT m)
         {
+            #region Greet meme
             if ((ChatChannel)m.Channel == ChatChannel.Greet 
                 && (m.AuthorName == "Foglio" || m.AuthorName == "Folyemi"))
                 Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
 
+            #endregion
+
+            #region Global selling angery
             if (m.AuthorName == Me.Name)
             {
                 if ((ChatChannel)m.Channel != ChatChannel.Global) return;
@@ -351,9 +360,16 @@ namespace TCC
                 Log.N("REEEEEEEEEEEEEEEEEEEEEE", "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
 
             }
+            #endregion
+
             if (!ChatUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
             if (BlockList.Contains(m.AuthorName)) return;
-            ChatUtils.CheckNotify(m.Message, (ChatChannel)m.Channel, m.AuthorName);
+
+            var txt = ChatUtils.GetPlainText(m.Message).UnescapeHtml();
+            var chStr = new ChatChannelToName().Convert(m.Channel, null, null, null);
+
+            ChatUtils.CheckWindowNotify(txt, (string)chStr);
+            ChatUtils.CheckDiscordNotify($"`${chStr}` {txt}", m.AuthorName);
         }
 
         private static void OnSpawnNpc(S_SPAWN_NPC p)

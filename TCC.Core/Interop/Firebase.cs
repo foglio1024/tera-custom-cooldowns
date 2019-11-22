@@ -21,21 +21,19 @@ namespace TCC.Interop
                 {"user", App.Settings.LastAccountNameHash},
                 {"online", online }
             };
-            using (var c = MiscUtils.GetDefaultWebClient())
+            using var c = MiscUtils.GetDefaultWebClient();
+            c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+            c.Encoding = Encoding.UTF8;
+            try
             {
-                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                c.Encoding = Encoding.UTF8;
-                try
-                {
-                    await c.UploadStringTaskAsync(
-                        new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook"),
-                        Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
-                }
-                catch
-                {
-                    Log.F($"Failed to register webhook.");
-                }
+                await c.UploadStringTaskAsync(
+                    new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook"),
+                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
+            }
+            catch
+            {
+                Log.F($"Failed to register webhook.");
             }
         }
         public static async Task<bool> RequestWebhookExecution(string webhook)
@@ -53,7 +51,6 @@ namespace TCC.Interop
                 c.Encoding = Encoding.UTF8;
                 try
                 {
-
                     var res = await c.UploadStringTaskAsync(
                         new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/fire_webhook"),
                         Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
@@ -82,55 +79,53 @@ namespace TCC.Interop
 
             try
             {
-                using (var c = MiscUtils.GetDefaultWebClient())
-                {
-                    c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                    c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                    c.Encoding = Encoding.UTF8;
+                using var c = MiscUtils.GetDefaultWebClient();
+                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                c.Encoding = Encoding.UTF8;
 
-                    var js = new JObject
+                var js = new JObject
+                {
+                    {"region", Game.Server.Region},
+                    {"server", Game.Server.ServerId},
+                    {"account", App.Settings.LastAccountNameHash},
+                    {"tcc_version", App.AppVersion},
                     {
-                        {"region", Game.Server.Region},
-                        {"server", Game.Server.ServerId},
-                        {"account", App.Settings.LastAccountNameHash},
-                        {"tcc_version", App.AppVersion},
+                        "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
+                                   App.Settings.StatSentTime.Day == DateTime.Now.Day &&
+                                   App.Settings.StatSentVersion != App.AppVersion
+                    },
+                    {
+                        "settings_summary", new JObject
                         {
-                            "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
-                                       App.Settings.StatSentTime.Day == DateTime.Now.Day &&
-                                       App.Settings.StatSentVersion != App.AppVersion
-                        },
-                        {
-                            "settings_summary", new JObject
                             {
+                                "windows", new JObject
                                 {
-                                    "windows", new JObject
-                                    {
-                                        { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
-                                        { "buffs", App.Settings.BuffWindowSettings.Enabled },
-                                        { "character", App.Settings.CharacterWindowSettings.Enabled },
-                                        { "class", App.Settings.ClassWindowSettings.Enabled },
-                                        { "chat", App.Settings.ChatEnabled },
-                                        { "group", App.Settings.GroupWindowSettings.Enabled }
-                                    }
-                                },
+                                    { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
+                                    { "buffs", App.Settings.BuffWindowSettings.Enabled },
+                                    { "character", App.Settings.CharacterWindowSettings.Enabled },
+                                    { "class", App.Settings.ClassWindowSettings.Enabled },
+                                    { "chat", App.Settings.ChatEnabled },
+                                    { "group", App.Settings.GroupWindowSettings.Enabled }
+                                }
+                            },
+                            {
+                                "generic", new JObject
                                 {
-                                    "generic", new JObject
-                                    {
-                                        { "proxy_enabled", ProxyInterface.Instance.IsStubAvailable},
-                                        { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
-                                    }
+                                    { "proxy_enabled", ProxyInterface.Instance.IsStubAvailable},
+                                    { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
                                 }
                             }
                         }
-                    };
+                    }
+                };
 
-                    await c.UploadStringTaskAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
-                        Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                await c.UploadStringTaskAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
+                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                    App.Settings.StatSentTime = DateTime.UtcNow;
-                    App.Settings.StatSentVersion = App.AppVersion;
-                    App.Settings.Save();
-                }
+                App.Settings.StatSentTime = DateTime.UtcNow;
+                App.Settings.StatSentVersion = App.AppVersion;
+                App.Settings.Save();
             }
             catch
             {

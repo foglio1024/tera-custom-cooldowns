@@ -22,13 +22,10 @@ namespace TCC.Interop
 
             try
             {
-                using (var client = MiscUtils.GetDefaultWebClient())
-                {
-                    client.Encoding = Encoding.UTF8;
-                    client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                    client.UploadString(webhook, "POST", msg.ToString());
-                }
-
+                using var client = MiscUtils.GetDefaultWebClient();
+                client.Encoding = Encoding.UTF8;
+                client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                client.UploadString(webhook, "POST", msg.ToString());
             }
             catch (Exception e)
             {
