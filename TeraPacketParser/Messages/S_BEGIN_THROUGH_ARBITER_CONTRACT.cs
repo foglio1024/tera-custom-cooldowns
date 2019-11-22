@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace TeraPacketParser.Messages
 {
-    public class S_REQUEST_CONTRACT : ParsedMessage
+    public class S_BEGIN_THROUGH_ARBITER_CONTRACT : ParsedMessage
     {
         public RequestType Type { get; private set; }
         public string Sender { get; private set; }
         public string Recipient { get; private set; }
 
-        public S_REQUEST_CONTRACT(TeraMessageReader reader) : base(reader)
+        public S_BEGIN_THROUGH_ARBITER_CONTRACT(TeraMessageReader reader) : base(reader)
         {
-            reader.Skip(24);
-            var type = reader.ReadInt16();
-            Type = (RequestType)type;
-            reader.Skip(14);
+            var senderOffset = reader.ReadUInt16();
+            var recipientOffset = reader.ReadUInt16();
+            reader.Skip(2);
+            Type = (RequestType)reader.ReadUInt32();
+            reader.RepositionAt(senderOffset);
             Sender = reader.ReadTeraString();
+            reader.RepositionAt(recipientOffset);
             Recipient = reader.ReadTeraString();
         }
         public enum RequestType

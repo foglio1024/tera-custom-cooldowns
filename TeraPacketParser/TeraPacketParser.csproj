@@ -127,7 +127,7 @@
     <Compile Include="Messages\S_PRIVATE_CHAT.cs" />
     <Compile Include="Messages\S_REQUEST_CITY_WAR_MAP_INFO.cs" />
     <Compile Include="Messages\S_REQUEST_CITY_WAR_MAP_INFO_DETAIL.cs" />
-    <Compile Include="Messages\S_REQUEST_CONTRACT.cs" />
+    <Compile Include="Messages\S_BEGIN_THROUGH_ARBITER_CONTRACT.cs" />
     <Compile Include="Messages\S_REQUEST_SPAWN_SERVANT.cs" />
     <Compile Include="Messages\S_RESET_EP_PERK.cs" />
     <Compile Include="Messages\S_RESPONSE_GAMESTAT_PONG.cs" />

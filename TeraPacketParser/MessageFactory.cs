@@ -114,7 +114,7 @@ namespace TeraPacketParser
             { nameof(S_FIN_INTER_PARTY_MATCH),                 Contructor<Func<TeraMessageReader, S_FIN_INTER_PARTY_MATCH>>() },
             { nameof(S_BATTLE_FIELD_ENTRANCE_INFO),            Contructor<Func<TeraMessageReader, S_BATTLE_FIELD_ENTRANCE_INFO>>() },
             { nameof(S_LEAVE_GUILD),                           Contructor<Func<TeraMessageReader, S_LEAVE_GUILD>>() },
-            { nameof(S_REQUEST_CONTRACT),                      Contructor<Func<TeraMessageReader, S_REQUEST_CONTRACT>>() },
+            { nameof(S_BEGIN_THROUGH_ARBITER_CONTRACT),                      Contructor<Func<TeraMessageReader, S_BEGIN_THROUGH_ARBITER_CONTRACT>>() },
           //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
