@@ -110,8 +110,8 @@ namespace TCC.Test
             {
                 Alive = true,
                 Awakened = true,
-                CurrentHp = 0,
-                MaxHp = 1000,
+                CurrentHp = 150000,
+                MaxHp = 150000,
                 EntityId = Convert.ToUInt64(id),
                 ServerId = Convert.ToUInt32(id),
                 PlayerId = Convert.ToUInt32(id),
@@ -189,12 +189,14 @@ namespace TCC.Test
                 PlayerId = l.PlayerId,
                 ServerId = l.ServerId,
                 EntityId = l.EntityId,
-                Online = false,
+                Online = true,
                 Laurel = l.Laurel,
                 HasAggro = l.HasAggro,
                 Alive = l.Alive,
                 UserClass = l.UserClass,
                 Awakened = l.Awakened,
+                CurrentHp = 120000,
+                MaxHp = 120000
             };
             Task.Delay(2000).ContinueWith(t => WindowManager.ViewModels.GroupVM.AddOrUpdateMember(ut));
         }
