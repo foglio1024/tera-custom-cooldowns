@@ -179,7 +179,7 @@ namespace TCC
             //return App.BaseDispatcher.InvokeAsync(() =>
             //{
                 var ret = new JObject();
-
+                return ret;
                 App.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
                 {
                     var t = d.Thread;
