@@ -128,6 +128,7 @@
     <Compile Include="Exceptions\DeadlockException.cs" />
     <Compile Include="IconsUpdater.cs" />
     <Compile Include="Exceptions\PacketParseException.cs" />
+    <Compile Include="Exceptions\MessageProcessException.cs" />
     <Compile Include="Settings\CooldownData.cs" />
     <Compile Include="Data\Chat\LfgMessage.cs" />
     <Compile Include="Parsing\MessageProcessor.cs" />
