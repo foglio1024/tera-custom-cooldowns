@@ -11,7 +11,7 @@ namespace TCC.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var ch = ChatChannel.Say;
-            if (ch is ChatChannel cc) ch = cc;
+            if (value is ChatChannel cc) ch = cc;
             switch (ch)
             {
                 case ChatChannel.PartyNotice:
