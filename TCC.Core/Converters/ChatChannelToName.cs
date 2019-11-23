@@ -10,7 +10,8 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var ch = (ChatChannel?) value ?? ChatChannel.Say;
+            var ch = ChatChannel.Say;
+            if (ch is ChatChannel cc) ch = cc;
             switch (ch)
             {
                 case ChatChannel.PartyNotice:
