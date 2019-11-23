@@ -1528,7 +1528,7 @@
                             </settings:ValueSetting>
                             <settings:ValueSetting Value="{Binding NotificationAreaSettings.DefaultNotificationDuration, Mode=TwoWay}"
                                                    IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
-                                                    SettingName="Notification duration (sec)" Min="1" Max="3600">
+                                                    SettingName="Notification duration (sec)" Min="1" Max="60">
                                 <settings:ValueSetting.ToolTip>
                                     <Grid Margin="5">
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
@@ -1557,7 +1557,7 @@
                             <Button Style="{StaticResource SettingsButton}"
                                     IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                     Content="Move window to center screen"
-                                    Command="{Binding GroupWindowSettings.ResetPositionCommand}" />
+                                    Command="{Binding NotificationAreaSettings.ResetPositionCommand}" />
                             <Button Style="{StaticResource SettingsButton}"
                                     IsEnabled="{Binding NotificationAreaSettings.Enabled}" 
                                     Click="TestNotification" Content="Send test notification" />
