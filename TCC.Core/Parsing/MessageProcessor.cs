@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Windows.Media.Animation;
+using TCC.Exceptions;
+using TCC.Utils;
 using TeraPacketParser;
 
 namespace TCC.Parsing
@@ -38,7 +41,18 @@ namespace TCC.Parsing
             lock (_lock)
             {
                 //Log.All($"Handling {msg.GetType().Name}");
-                handlers.ForEach(del => del.DynamicInvoke(msg));
+                handlers.ForEach(del =>
+                {
+                    try
+                    {
+                        del.DynamicInvoke(msg);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.F($"Error while executing callback for {msg.GetType()}.\n{e}\n{e.InnerException}");
+                        throw new MessageProcessException($"Error while executing callback for {msg.GetType()}", e);
+                    }
+                });
             }
         }
     }
