@@ -19,7 +19,6 @@ using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
 using TCC.Windows;
-using TCC.Windows.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 using Player = TCC.Data.Pc.Player;
@@ -336,8 +335,8 @@ namespace TCC
             if (p.Recipient != Me.Name) return;
             var txt = ChatUtils.GetPlainText(p.Message).UnescapeHtml();
             var chStr = new ChatChannelToName().Convert(ChatChannel.ReceivedWhisper, null, null, null);
-            ChatUtils.CheckWindowNotify(txt, (string)chStr);
-            ChatUtils.CheckDiscordNotify($"`${chStr}` {txt}", p.Author);
+            ChatUtils.CheckWindowNotify(txt, $"{p.Author} {(string)chStr}");
+            ChatUtils.CheckDiscordNotify($"`{chStr}` {txt}", p.Author);
         }
 
         private static void OnChat(S_CHAT m)
@@ -346,7 +345,6 @@ namespace TCC
             if ((ChatChannel)m.Channel == ChatChannel.Greet 
                 && (m.AuthorName == "Foglio" || m.AuthorName == "Folyemi"))
                 Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
-
             #endregion
 
             #region Global selling angery
@@ -362,14 +360,15 @@ namespace TCC
             }
             #endregion
 
-            if (!ChatUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
             if (BlockList.Contains(m.AuthorName)) return;
+            if (!ChatUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
 
             var txt = ChatUtils.GetPlainText(m.Message).UnescapeHtml();
             var chStr = new ChatChannelToName().Convert(m.Channel, null, null, null);
 
-            ChatUtils.CheckWindowNotify(txt, (string)chStr);
+            ChatUtils.CheckWindowNotify(txt, $"{m.AuthorName} {(string)chStr}");
             ChatUtils.CheckDiscordNotify($"`${chStr}` {txt}", m.AuthorName);
+
         }
 
         private static void OnSpawnNpc(S_SPAWN_NPC p)
