@@ -130,7 +130,7 @@ namespace TCC.Settings
                 new XAttribute("ShowGroupWindowDetails", App.Settings.GroupWindowSettings.ShowDetails),
                 new XAttribute("ShowAwakenIcon", App.Settings.GroupWindowSettings.ShowAwakenIcon),
                 new XAttribute("ShowAllGroupAbnormalities", App.Settings.GroupWindowSettings.ShowAllAbnormalities),
-                new XAttribute("ShowMembersHpNumbers", App.Settings.GroupWindowSettings.ShowHpLabels),
+                new XAttribute("ShowMembersHpNumbers", App.Settings.GroupWindowSettings.HpLabelMode),
                 new XAttribute("GroupWindowLayout", App.Settings.GroupWindowSettings.Layout),
                 // Misc
                 new XAttribute(nameof(SettingsContainer.ForceSoftwareRendering), App.Settings.ForceSoftwareRendering),

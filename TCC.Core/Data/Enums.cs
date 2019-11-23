@@ -28,6 +28,12 @@ namespace TCC.Data
         [Description("Single column")]
         SingleColumn
     }
+    public enum GroupHpLabelMode
+    {
+        None,
+        Amount,
+        Percentage
+    }
     public enum ItemLevelTier
     {
         [Description("None")]

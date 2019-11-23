@@ -612,6 +612,7 @@ namespace TCC.ViewModels
         public IEnumerable<WarriorEdgeMode> WarriorEdgeModes => EnumUtils.ListFromEnum<WarriorEdgeMode>();
         public IEnumerable<ControlShape> ControlShapes => EnumUtils.ListFromEnum<ControlShape>();
         public IEnumerable<GroupWindowLayout> GroupWindowLayouts => EnumUtils.ListFromEnum<GroupWindowLayout>();
+        public IEnumerable<GroupHpLabelMode> GroupHpLabelModes => EnumUtils.ListFromEnum<GroupHpLabelMode>();
         public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
         public IEnumerable<MentionMode> MentionModes => EnumUtils.ListFromEnum<MentionMode>();
 

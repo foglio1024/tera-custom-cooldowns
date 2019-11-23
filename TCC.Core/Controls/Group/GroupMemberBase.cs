@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TCC.Data;
 using TCC.Data.Pc;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
@@ -39,7 +40,8 @@ namespace TCC.Controls.Group
         public bool ShowDebuffs => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideDebuffsThreshold;
         public bool ShowLaurel => App.Settings.GroupWindowSettings.ShowLaurels;
         public bool ShowAwaken => App.Settings.GroupWindowSettings.ShowAwakenIcon;
-        public bool ShowHpNumbers => App.Settings.GroupWindowSettings.ShowHpLabels && ShowHp;
+        public bool ShowHpAmount => App.Settings.GroupWindowSettings.HpLabelMode == GroupHpLabelMode.Amount && ShowHp;
+        public bool ShowHpPercentage => App.Settings.GroupWindowSettings.HpLabelMode == GroupHpLabelMode.Percentage && ShowHp;
         public DataTemplateSelector CurrentAbnormalityTemplateSelector
         {
             get => _currentAbnormalityTemplateSelector;
@@ -90,7 +92,8 @@ namespace TCC.Controls.Group
             NPC(nameof(DebuffsSource));
             NPC(nameof(ShowLaurel));
             NPC(nameof(ShowAwaken));
-            NPC(nameof(ShowHpNumbers));
+            NPC(nameof(ShowHpAmount));
+            NPC(nameof(ShowHpPercentage));
         }
         private void OnAbnormalityShapeChanged()
         {

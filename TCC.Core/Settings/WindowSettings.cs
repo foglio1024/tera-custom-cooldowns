@@ -875,7 +875,7 @@ namespace TCC.Settings
         public event Action ThresholdChanged;
         public event Action LayoutChanged;
 
-        private bool _showHpLabels;
+        private GroupHpLabelMode _hpLabelMode;
         private bool _ignoreMe;
         private uint _hideBuffsThreshold;
         private uint _hideDebuffsThreshold;
@@ -889,13 +889,13 @@ namespace TCC.Settings
         private bool _showLaurels;
         private bool _showOnlyAggroStacks;
 
-        public bool ShowHpLabels
+        public GroupHpLabelMode HpLabelMode
         {
-            get => _showHpLabels;
+            get => _hpLabelMode;
             set
             {
-                if (_showHpLabels == value) return;
-                _showHpLabels = value;
+                if (_hpLabelMode == value) return;
+                _hpLabelMode = value;
                 N();
                 SettingsUpdated?.Invoke();
             }
@@ -1031,9 +1031,6 @@ namespace TCC.Settings
                 N();
             }
         }
-
-
-
         public bool ShowAllAbnormalities { get; set; }
 
         public Dictionary<Class, List<uint>> GroupAbnormals { get; }
@@ -1062,7 +1059,7 @@ namespace TCC.Settings
             ShowOnlyAggroStacks = true;
             ShowDetails = true;
             ShowAwakenIcon = true;
-            ShowHpLabels = true;
+            HpLabelMode = GroupHpLabelMode.Percentage;
             Layout = GroupWindowLayout.RoleSeparated;
             GroupAbnormals = new Dictionary<Class, List<uint>>()
             {
