@@ -1177,7 +1177,7 @@
                                                        SelectedItem="{Binding GroupWindowSettings.Layout, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:GroupWindowLayout}"
                                                        Choices="{Binding GroupWindowLayouts, Mode=OneWay}" />
-                            <settings:SelectionSetting SettingName="Group window layout"
+                            <settings:SelectionSetting SettingName="HP labels mode"
                                                        IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                                        SelectedItem="{Binding GroupWindowSettings.HpLabelMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:GroupHpLabelMode}"
