@@ -29,12 +29,8 @@ namespace TCC.ViewModels.Widgets
 
         protected override void InstallHooks()
         {
-            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.Processor.Hook<S_LOAD_TOPO>(OnLoadTopo);
             PacketAnalyzer.Processor.Hook<S_CREATURE_LIFE>(OnCreatureLife);
-            PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
             PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
             PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_MP>(OnPlayerChangeMp);
@@ -43,27 +39,14 @@ namespace TCC.ViewModels.Widgets
 
         protected override void RemoveHooks()
         {
-            PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
-            PacketAnalyzer.Processor.Unhook<S_LOAD_TOPO>(OnLoadTopo);
             PacketAnalyzer.Processor.Unhook<S_CREATURE_LIFE>(OnCreatureLife);
-            PacketAnalyzer.Processor.Unhook<S_GET_USER_LIST>(OnGetUserList);
             PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
             PacketAnalyzer.Processor.Unhook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_MP>(OnPlayerChangeMp);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
         }
 
-        private void OnLogin(S_LOGIN m)
-        {
-            Player.ClearAbnormalities();
-            Player.EntityId = m.EntityId;
-            Player.PlayerId = m.PlayerId;
-            Player.ServerId = m.ServerId;
-            Player.Name = m.Name;
-            Player.Level = m.Level;
-        }
         private void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA m)
         {
             Player.MaxST = m.MaxST;
@@ -87,23 +70,13 @@ namespace TCC.ViewModels.Widgets
             if (!Game.IsMe(p.Target) || Player.CurrentShield < 0) return;
             Player.DamageShield(p.Damage);
         }
-        private void OnGetUserList(S_GET_USER_LIST m)
-        {
-            Player.ClearAbnormalities();
-        }
+
         private void OnCreatureLife(S_CREATURE_LIFE m)
         {
             if (!Game.IsMe(m.Target)) return;
             Player.IsAlive = m.Alive;
         }
-        private void OnLoadTopo(S_LOAD_TOPO m)
-        {
-            Player.ClearAbnormalities();
-        }
-        private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
-        {
-            Player.ClearAbnormalities();
-        }
+
         private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
         {
             Player.ItemLevel = m.Ilvl;

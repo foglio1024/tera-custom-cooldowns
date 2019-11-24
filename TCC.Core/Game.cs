@@ -335,7 +335,7 @@ namespace TCC
             if (p.Recipient != Me.Name) return;
             var txt = ChatUtils.GetPlainText(p.Message).UnescapeHtml();
             var chStr = new ChatChannelToName().Convert(ChatChannel.ReceivedWhisper, null, null, null);
-            ChatUtils.CheckWindowNotify(txt, $"{p.Author} {(string)chStr}");
+            ChatUtils.CheckWindowNotify(txt, $"{p.Author} - {(string)chStr}");
             ChatUtils.CheckDiscordNotify($"`{chStr}` {txt}", p.Author);
         }
 
@@ -364,10 +364,10 @@ namespace TCC
             if (!ChatUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
 
             var txt = ChatUtils.GetPlainText(m.Message).UnescapeHtml();
-            var chStr = new ChatChannelToName().Convert(m.Channel, null, null, null);
+            var chStr = new ChatChannelToName().Convert((ChatChannel)m.Channel, null, null, null);
 
             ChatUtils.CheckWindowNotify(txt, $"{m.AuthorName} {(string)chStr}");
-            ChatUtils.CheckDiscordNotify($"`${chStr}` {txt}", m.AuthorName);
+            ChatUtils.CheckDiscordNotify($"`{chStr}` {txt}", m.AuthorName);
 
         }
 
@@ -395,13 +395,7 @@ namespace TCC
             {
                 try
                 {
-                    //var msg = x.SysMessage.Split('\v');
-                    //var opcode = ushort.Parse(msg[0].Substring(1));
-                    //var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
-
-                    //if (!DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var m)) return;
                     SystemMessagesProcessor.AnalyzeMessage(x.SysMessage);
-                    //ChatWindowManager.Instance.AddSystemMessage(x.SysMessage, m);
                 }
                 catch (Exception)
                 {
@@ -510,6 +504,8 @@ namespace TCC
             Encounter = false;
             CurrentZoneId = m.Zone;
             Teleported?.Invoke();
+            Me.ClearAbnormalities();
+
         }
 
         private static void OnGetUserList(S_GET_USER_LIST m)
@@ -518,6 +514,7 @@ namespace TCC
             Logged = false;
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
+            Me.ClearAbnormalities();
         }
 
         private static void OnUserStatus(S_USER_STATUS m)
@@ -595,6 +592,8 @@ namespace TCC
         private static void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
             Logged = false;
+            Me.ClearAbnormalities();
+
         }
 
         private static void OnLogin(S_LOGIN m)
@@ -622,6 +621,7 @@ namespace TCC
             Me.PlayerId = m.PlayerId;
             Me.ServerId = m.ServerId;
             Me.Laurel = GetLaurel(Me.PlayerId);
+            Me.ClearAbnormalities();
 
             WindowManager.ReloadPositions();
             TimeManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
