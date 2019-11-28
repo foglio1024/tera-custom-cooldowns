@@ -59,6 +59,17 @@
         </Style>
     </grp:GroupMemberBase.Resources>
     <Grid Height="Auto" Margin="2 0" Width="145" Name="RootGrid" >
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="Opacity" Value="1" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding InRange}" Value="False">
+                        <Setter Property="Opacity" Value=".7" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -115,7 +126,7 @@
                         <Grid>
                             <Border Background="#556" CornerRadius="5" Padding="10,5,15,5" Effect="{StaticResource FadedDropShadow}">
                                 <StackPanel Orientation="Vertical" >
-                                    <TextBlock Foreground="White"  Text="{Binding Name, Mode=OneWay}" FontWeight="DemiBold" FontSize="14" Margin="0,0,0,0"/>
+                                    <!--<TextBlock Foreground="White"  Text="{Binding Name, Mode=OneWay}" FontWeight="DemiBold" FontSize="14" Margin="0,0,0,0"/>
                                     <StackPanel Orientation="Horizontal"  Visibility="{Binding Weapon, Converter={StaticResource NullToVisibleCollapsed}}" Margin="0,5,0,0">
                                         <Path Data="{Binding Weapon.Piece, Converter={StaticResource PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
                                         <TextBlock Foreground="White" FontSize="12" Text="{Binding Weapon.Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
@@ -131,7 +142,7 @@
                                     <StackPanel Orientation="Horizontal"  Visibility="{Binding Boots, Converter={StaticResource NullToVisibleCollapsed}}" Margin="0,0,0,0">
                                         <Path Data="{Binding Boots.Piece, Converter={StaticResource PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
                                         <TextBlock Foreground="White" FontSize="12" Text="{Binding Boots.Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    </StackPanel>
+                                    </StackPanel>-->
 
                                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Visibility="{Binding Online, Converter={StaticResource BoolToVisibleCollapsed}}">
                                         <!--map marker icon-->

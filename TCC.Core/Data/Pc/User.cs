@@ -45,6 +45,7 @@ namespace TCC.Data.Pc
         private GearItem _gloves;
         private GearItem _boots;
         private bool _visible = true;
+        private bool _inRange;
 
         public ulong EntityId
         {
@@ -377,11 +378,22 @@ namespace TCC.Data.Pc
                 N();
             }
         }
+        public bool InRange
+        {
+            get => _inRange || IsPlayer;
+            set
+            {
+                if (_inRange == value) return;
+                _inRange = value;
+                N();
+            }
+        }
 
         public ICommand RequestInteractiveCommand { get; }
         public ICommand AcceptApplyCommand { get; set; }
         public ICommand DeclineApplyCommand { get; set; }
         public ICommand InspectCommand { get; set; }
+
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {

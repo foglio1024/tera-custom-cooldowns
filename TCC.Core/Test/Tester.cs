@@ -117,7 +117,8 @@ namespace TCC.Test
                 PlayerId = Convert.ToUInt32(id),
                 UserClass = c,
                 Online = true,
-                Laurel = l
+                Laurel = l,
+                InRange = App.Random.Next(0, 10) >= 5
             });
 
         }

@@ -583,6 +583,7 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
             PacketAnalyzer.Processor.Hook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
             PacketAnalyzer.Processor.Hook<S_SPAWN_USER>(OnSpawnUser);
+            PacketAnalyzer.Processor.Hook<S_DESPAWN_USER>(OnDespawnUser);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_BUFF_UPDATE>(OnPartyMemberBuffUpdate);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_ABNORMAL_ADD>(OnPartyMemberAbnormalAdd);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_ABNORMAL_DEL>(OnPartyMemberAbnormalDel);
@@ -602,6 +603,9 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
         }
+
+
+
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_USER_EFFECT>(OnUserEffect);
@@ -729,8 +733,14 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnSpawnUser(S_SPAWN_USER m)
         {
-            if (!Exists(m.EntityId)) return;
-            UpdateMemberGear(m.PlayerId, m.ServerId, m.Weapon, m.Armor, m.Gloves, m.Boots);
+            if (!TryGetUser(m.EntityId, out var u)) return;
+            u.InRange = true;
+            //UpdateMemberGear(m.PlayerId, m.ServerId, m.Weapon, m.Armor, m.Gloves, m.Boots);
+        }
+        private void OnDespawnUser(S_DESPAWN_USER m)
+        {
+            if (!TryGetUser(m.EntityId, out var u)) return;
+            u.InRange = false;
         }
         private void OnResultItemBidding(S_RESULT_ITEM_BIDDING m)
         {
