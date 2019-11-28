@@ -265,8 +265,8 @@ namespace TCC
         private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
         {
             DB.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
-            ChatUtils.CheckWindowNotify($"New broker offer for ${m.Amount} <{i?.Name ?? m.Item.ToString()}> from ${m.Name}", "Broker offer");
-            ChatUtils.CheckDiscordNotify($"New broker offer for ${m.Amount} <{i?.Name ?? m.Item.ToString()}>", m.Name);
+            ChatUtils.CheckWindowNotify($"New broker offer for {m.Amount} <{i?.Name ?? m.Item.ToString()}> from {m.Name}", "Broker offer");
+            ChatUtils.CheckDiscordNotify($"New broker offer for {m.Amount} **<{i?.Name ?? m.Item.ToString()}>**", m.Name);
         }
 
         private static void OnRequestContract(S_BEGIN_THROUGH_ARBITER_CONTRACT p)
