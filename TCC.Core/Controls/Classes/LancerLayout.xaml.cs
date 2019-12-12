@@ -4,9 +4,7 @@ using TCC.ViewModels;
 
 namespace TCC.Controls.Classes
 {
-    /// <summary>
-    /// Logica di interazione per LancerLayout.xaml
-    /// </summary>
+    // TODO: refactor dis
     public partial class LancerLayout
     {
         private LancerLayoutVM _dc;
@@ -61,7 +59,7 @@ namespace TCC.Controls.Classes
         {
             Dispatcher?.Invoke(() =>
             {
-                _lineHeldStacksAn.To = stacks / 10D * 280 + 42;
+                _lineHeldStacksAn.To = stacks / 5D * 280 + 42;
                 _lineHeldStacksAn.Duration = TimeSpan.FromMilliseconds(150);
                 SecReArc.BeginAnimation(Arc.EndAngleProperty, _lineHeldStacksAn);
             });
