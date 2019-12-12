@@ -7,7 +7,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
              mc:Ignorable="d" Loaded="GunnerLayout_OnLoaded" d:DataContext="{d:DesignInstance viewModels:GunnerLayoutVM}">
-    <Grid Width="Auto" Margin="50 20 50 90" Name="Root" ClipToBounds="False" >
+    <Grid Width="Auto" Margin="50 30 50 90" Name="Root" ClipToBounds="False" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

@@ -209,8 +209,10 @@
                             <LinearGradientBrush EndPoint="1 0">
                                 <GradientStop Offset=".2"
                                               Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}" />
-                                <GradientStop Offset="1"
+                                <GradientStop Offset=".95"
                                               Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}" />
+                                <GradientStop Color="White" Offset="1" />
+
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                         <Rectangle.RenderTransform>
@@ -227,8 +229,9 @@
                                                             Converter={StaticResource BoolToVisibleCollapsed}}">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
-                                <GradientStop Color="{StaticResource MpColorLight}" Offset=".9" />
                                 <GradientStop Color="{StaticResource MpColor}" Offset="0" />
+                                <GradientStop Color="{StaticResource MpColorLight}" Offset=".95" />
+                                <GradientStop Color="White" Offset="1" />
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                         <Rectangle.RenderTransform>

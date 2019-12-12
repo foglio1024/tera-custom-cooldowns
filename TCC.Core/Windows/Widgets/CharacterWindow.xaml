@@ -134,7 +134,9 @@
                                             <Setter.Value>
                                                 <LinearGradientBrush EndPoint="1 0">
                                                     <GradientStop Offset=".6" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
-                                                    <GradientStop Offset="1" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                                    <GradientStop Offset=".98" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                                    <GradientStop Color="White" Offset="1" />
+
                                                 </LinearGradientBrush>
                                             </Setter.Value>
                                         </Setter>
@@ -146,8 +148,9 @@
                                             <Setter Property="Background">
                                                 <Setter.Value>
                                                     <LinearGradientBrush EndPoint="1 0">
-                                                        <GradientStop Offset=".4" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
-                                                        <GradientStop Offset="0" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                                        <GradientStop Offset="1" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
+                                                        <GradientStop Offset="0.02" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                                        <GradientStop Color="White" Offset="0" />
                                                     </LinearGradientBrush>
                                                 </Setter.Value>
                                             </Setter>
@@ -192,8 +195,10 @@
                                         <Setter Property="Background">
                                             <Setter.Value>
                                                 <LinearGradientBrush EndPoint="1 0">
-                                                    <GradientStop Color="#00ff7f" Offset="1"/>
+                                                    <GradientStop Color="#00ff7f" Offset=".98"/>
                                                     <GradientStop Color="#018743" Offset=".6"/>
+                                                    <GradientStop Color="White" Offset="1" />
+
                                                 </LinearGradientBrush>
                                             </Setter.Value>
                                         </Setter>
@@ -205,8 +210,10 @@
                                             <Setter Property="Background">
                                                 <Setter.Value>
                                                     <LinearGradientBrush EndPoint="1 0">
-                                                        <GradientStop Color="#00ff7f" Offset="0"/>
+                                                        <GradientStop Color="#00ff7f" Offset="0.02"/>
                                                         <GradientStop Color="#018743" Offset=".4"/>
+                                                        <GradientStop Color="White" Offset="0" />
+
                                                     </LinearGradientBrush>
                                                 </Setter.Value>
                                             </Setter>
@@ -286,8 +293,10 @@
                                     </FrameworkElement>
                                     <Border.Background>
                                         <LinearGradientBrush EndPoint="1 0">
-                                            <GradientStop Color="{StaticResource MpColorLight}" Offset=".9"></GradientStop>
+                                            <GradientStop Color="{StaticResource MpColorLight}" Offset=".98"></GradientStop>
                                             <GradientStop Color="{StaticResource MpColor}" Offset="0"></GradientStop>
+                                            <GradientStop Color="White" Offset="1" />
+
                                         </LinearGradientBrush>
                                     </Border.Background>
                                 </Border>

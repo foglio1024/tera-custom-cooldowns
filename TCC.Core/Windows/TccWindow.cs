@@ -43,6 +43,7 @@ namespace TCC.Windows
             if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             Dispatcher?.InvokeAsync(() =>
             {
+                BeginAnimation(OpacityProperty, null);
                 Opacity = 0;
                 Show();
                 Showed?.Invoke();
