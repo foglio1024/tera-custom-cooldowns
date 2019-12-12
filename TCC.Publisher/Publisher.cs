@@ -165,9 +165,9 @@ namespace TCC.Publisher
 
             var msg = new JObject
             {
-                {"content", $"**TCC v{_stringVersion}{_experimental}**\n{(Application.Current.MainWindow as MainWindow)?.ReleaseNotesTb.Text}"},
-                {"username", "TCC Update" },
-                {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
+                {"username", $"TCC v{_stringVersion}{_experimental}" },
+                {"content", $"{(Application.Current.MainWindow as MainWindow)?.ReleaseNotesTb.Text}"},
+                {"avatar_url", "https://i.imgur.com/jiWuveM.png" }
             };
 
             using (var client = MiscUtils.GetDefaultWebClient())
