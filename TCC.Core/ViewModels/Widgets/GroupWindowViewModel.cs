@@ -248,6 +248,7 @@ namespace TCC.ViewModels.Widgets
                 Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId)?.ClearAbnormalities();
             });
         }
+        [Obsolete]
         public void AddOrUpdateMember(User p)
         {
             if (((GroupWindowSettings)Settings).IgnoreMe && p.IsPlayer)
@@ -286,7 +287,7 @@ namespace TCC.ViewModels.Widgets
             var user = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (user == null)
             {
-                Members.Add(new User(p) {Visible =  visible});
+                Members.Add(new User(p) {Visible =  visible, InRange = Game.NearbyPlayers.ContainsKey(p.EntityId)});
                 SendAddMessage(p.Name);
                 return;
             }
