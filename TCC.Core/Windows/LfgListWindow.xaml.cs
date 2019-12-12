@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Controls;
+using TCC.Interop.Proxy;
 using TCC.ViewModels;
 
 namespace TCC.Windows
@@ -115,12 +116,13 @@ namespace TCC.Windows
 
         public override void ShowWindow()
         {
+            ProxyInterface.Instance.Stub.RequestListings();
+
             if (VM.StayClosed)
             {
                 VM.StayClosed = false;
                 return;
             }
-            Dispatcher?.InvokeAsync(() => VM.RefreshSorting(), DispatcherPriority.Background);
 
             base.ShowWindow();
         }

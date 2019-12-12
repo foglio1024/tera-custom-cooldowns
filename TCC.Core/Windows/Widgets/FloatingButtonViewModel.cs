@@ -42,7 +42,7 @@ namespace TCC.Windows.Widgets
         public FloatingButtonViewModel(FloatingButtonWindowSettings settings) : base(settings)
         {
             OpenSettingsCommand = new RelayCommand(_ => WindowManager.SettingsWindow.ShowWindow());
-            OpenLfgCommand = new RelayCommand(_ => ProxyInterface.Instance.Stub.RequestListings());
+            OpenLfgCommand = new RelayCommand(_ => WindowManager.LfgListWindow.ShowWindow());
             OpenDashboardCommand = new RelayCommand(_ =>
             {
                 WindowManager.DashboardWindow.ShowWindow();

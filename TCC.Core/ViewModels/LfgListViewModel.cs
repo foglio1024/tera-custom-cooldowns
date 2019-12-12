@@ -202,8 +202,7 @@ namespace TCC.ViewModels
             if (!ProxyInterface.Instance.IsStubAvailable) return;
             if (!WindowManager.LfgListWindow.IsVisible)
             {
-                StayClosed = false;
-                ProxyInterface.Instance.Stub.RequestListings();
+                WindowManager.LfgListWindow.ShowWindow();
             }
             else WindowManager.LfgListWindow.HideWindow();
         }
@@ -541,15 +540,18 @@ namespace TCC.ViewModels
         }
         private void OnShowPartyMatchInfo(S_SHOW_PARTY_MATCH_INFO m)
         {
-            //if (!App.Settings.LfgWindowSettings.Enabled) return; //
-            if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.RequestListingsPage(m.Page + 1);
+            if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable) 
+                ProxyInterface.Instance.Stub.RequestListingsPage(m.Page + 1);
 
             if (!m.IsLast) return;
 
-            if (S_SHOW_PARTY_MATCH_INFO.Listings.Count != 0) SyncListings(S_SHOW_PARTY_MATCH_INFO.Listings);
+            if (S_SHOW_PARTY_MATCH_INFO.Listings.Count != 0) 
+                SyncListings(S_SHOW_PARTY_MATCH_INFO.Listings);
 
             NotifyMyLfg();
-            WindowManager.LfgListWindow.ShowWindow();
+            //WindowManager.LfgListWindow.ShowWindow();
+            Dispatcher?.InvokeAsync(RefreshSorting, DispatcherPriority.Background);
+
         }
         private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER obj)
         {
