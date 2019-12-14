@@ -118,11 +118,11 @@ namespace TCC.Windows
         {
             ProxyInterface.Instance.Stub.RequestListings();
 
-            if (VM.StayClosed)
-            {
-                VM.StayClosed = false;
-                return;
-            }
+            //if (VM.StayClosed)
+            //{
+            //    VM.StayClosed = false;
+            //    return;
+            //}
 
             base.ShowWindow();
         }
