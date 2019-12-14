@@ -34,20 +34,17 @@ namespace TCC.Data.Pc
         }
         public void UpdateEntries(Dictionary<uint, short> dungeonCooldowns)
         {
-            (from keyValuePair in dungeonCooldowns
-             let dg = DungeonList.FirstOrDefault(x => x.Id == keyValuePair.Key)
-             where dg == null
-             select new { Id = keyValuePair.Key, Entries = keyValuePair.Value }).ToList()
-            .ForEach(x =>
-             {
-                 DungeonList.Add(new DungeonCooldownData(x.Id) { Entries = x.Entries });
-             });
+            foreach (var kv in dungeonCooldowns.Where(kv => DungeonList.All(d => d.Id != kv.Key)))
+            {
+                DungeonList.Add(new DungeonCooldownData(kv.Key) { Entries = kv.Value});
+            }
 
             DungeonList.ForEach(dung =>
             {
                 if (dungeonCooldowns.TryGetValue(dung.Dungeon.Id, out var entries)) dung.Entries = entries;
                 else dung.Reset();
             });
+
         }
         public void UpdateClears(uint dgId, int runs)
         {

@@ -242,7 +242,19 @@ namespace TCC.ViewModels
 
         public void SaveCharacters()
         {
-            //SaveCharDoc(CharactersXmlParser.BuildCharacterFile(Characters));
+            foreach (var ch in Game.Account.Characters)
+            {
+                var dungs = new Dictionary<uint, DungeonCooldownData>();
+                foreach (var dgcd in ch.DungeonInfo.DungeonList)
+                {
+                    dungs[dgcd.Id] = dgcd;
+                }
+                ch.DungeonInfo.DungeonList.Clear();
+                foreach (var dg in dungs.Values)
+                {
+                    ch.DungeonInfo.DungeonList.Add(dg);
+                }
+            }
             var json = JsonConvert.SerializeObject(Game.Account, Formatting.Indented);
             File.WriteAllText(Path.Combine(App.ResourcesPath, "config/characters.json"), json);
             if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml")))
