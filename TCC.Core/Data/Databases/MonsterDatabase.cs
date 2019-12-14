@@ -12,22 +12,23 @@ namespace TCC.Data.Databases
 {
     public class DatabaseQueryMeasure
     {
-        private Stopwatch _sw;
+        private readonly Stopwatch _sw;
         private static int _totalCount;
         private static int _hitCount;
         private static int _missCount;
         private static long _totTotalTime;
         private static long _totHitTime;
         private static long _totMissTime;
-        private static double _avgTotalTime => _totalCount == 0 ? 0 : _totTotalTime / (double)_totalCount;
-        private static double _avgHitTime => _hitCount == 0 ? 0 : _totHitTime / (double)_hitCount;
-        private static double _avgMissTime => _missCount == 0 ? 0 : _totMissTime / (double)_missCount;
+        private static double _avgTotalTime => _totalCount == 0 ? 0 : _totTotalTime / (double) _totalCount;
+        private static double _avgHitTime => _hitCount == 0 ? 0 : _totHitTime / (double) _hitCount;
+        private static double _avgMissTime => _missCount == 0 ? 0 : _totMissTime / (double) _missCount;
 
 
         public DatabaseQueryMeasure()
         {
             _sw = new Stopwatch();
         }
+
         public void StartQuery()
         {
             _totalCount++;
@@ -41,7 +42,6 @@ namespace TCC.Data.Databases
             _totHitTime += _sw.ElapsedMilliseconds;
             _totTotalTime += _sw.ElapsedMilliseconds;
             Log.CW($"Last query took: {_sw.ElapsedTicks}ticks [hit]");
-
         }
 
         public void RegisterMiss()
@@ -57,11 +57,13 @@ namespace TCC.Data.Databases
         {
             var sb = new StringBuilder();
             sb.AppendLine($"Total queries: {_totalCount} ({_hitCount} hit - {_missCount} miss)");
-            sb.AppendLine($"Avg time: {_avgTotalTime:N3}ticks ({_avgHitTime:N3}ticks hit - {_avgMissTime:N3}ticks miss)");
+            sb.AppendLine(
+                $"Avg time: {_avgTotalTime:N3}ticks ({_avgHitTime:N3}ticks hit - {_avgMissTime:N3}ticks miss)");
 
             Log.CW(sb.ToString());
         }
     }
+
     public class MonsterDatabase : DatabaseBase
     {
         public static event Action<uint, uint, bool> OverrideChangedEvent;
@@ -86,24 +88,25 @@ namespace TCC.Data.Databases
             //var measure = new DatabaseQueryMeasure();
             //measure.StartQuery();
             if (_zones.TryGetValue(zoneId, out var z) && z.Monsters.TryGetValue(templateId, out m))
-            {
                 //measure.RegisterHit();
                 return !m.IsHidden;
-            }
             m = new Monster(0, 0, "Unknown", 0, false, false, Species.Unknown);
             //measure.RegisterMiss();
 
             return false;
         }
+
         public string GetZoneName(uint zoneId)
         {
             _zones.TryGetValue(zoneId, out var z);
             return z != null ? z.Name : "Unknown zone";
         }
+
         public string GetName(uint templateId, uint zoneId)
         {
             return TryGetMonster(templateId, zoneId, out var m) ? m.Name : "Unknown";
         }
+
         public ulong GetMaxHP(uint templateId, uint zoneId)
         {
             return TryGetMonster(templateId, zoneId, out var m) ? m.MaxHP : 1;
@@ -126,14 +129,17 @@ namespace TCC.Data.Databases
                     var name = monster.Attribute("name")?.Value;
                     var isBoss = monster.Attribute("isBoss")?.Value == "True";
                     var maxHP = Convert.ToUInt64(monster.Attribute("hp")?.Value);
-                    var species = (Species)int.Parse(monster.Attribute("speciesId")?.Value ?? "0");
+                    var species = (Species) int.Parse(monster.Attribute("speciesId")?.Value ?? "0");
 
                     var m = new Monster(id, zoneId, name, maxHP, isBoss, false, species);
                     z.AddMonster(m);
                 }
+
                 _zones.Add(zoneId, z);
             }
-            var overrideDoc = XDocument.Load(OverrideFileFullPath);
+
+            var overrideDoc = CleanAndLoadOverrideDoc();
+
             foreach (var zone in overrideDoc.Descendants().Where(x => x.Name == "Zone"))
             {
                 var zoneId = Convert.ToUInt32(zone.Attribute("id")?.Value);
@@ -144,8 +150,10 @@ namespace TCC.Data.Databases
                     if (!_zones.TryGetValue(zoneId, out var z)) continue;
                     if (z.Monsters.TryGetValue(mId, out var m))
                     {
-                        if (monst.Attribute("isBoss") != null) m.IsBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
-                        if (monst.Attribute("isHidden") != null) m.IsHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
+                        if (monst.Attribute("isBoss") != null)
+                            m.IsBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
+                        if (monst.Attribute("isHidden") != null)
+                            m.IsHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
                         if (monst.Attribute("name") != null) m.Name = monst.Attribute("name")?.Value;
                     }
                     else
@@ -155,10 +163,69 @@ namespace TCC.Data.Databases
                         var isHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
                         var maxHp = ulong.Parse(monst.Attribute("hp")?.Value ?? "0");
                         var species = int.Parse(monst.Attribute("speciesId")?.Value ?? "0");
-                        z.Monsters.Add(mId, new Monster(mId, zoneId, name, maxHp, isBoss, isHidden, (Species)species));
+                        z.Monsters.Add(mId, new Monster(mId, zoneId, name, maxHp, isBoss, isHidden, (Species) species));
                     }
                 }
             }
+        }
+
+        private XDocument CleanAndLoadOverrideDoc()
+        {
+            var overrideDoc = XDocument.Load(OverrideFileFullPath);
+            var toRemove = new List<Tuple<uint, uint>>();
+            foreach (var xZone in overrideDoc.Descendants("Zone"))
+            {
+                var zoneId = Convert.ToUInt32(xZone.Attribute("id")?.Value);
+                foreach (var xMonster in xZone.Descendants("Monster"))
+                {
+                    var templateId = Convert.ToUInt32(xMonster.Attribute("id")?.Value);
+                    if (!TryGetMonster(templateId, zoneId, out var m))
+                    {
+                        toRemove.Add(new Tuple<uint, uint>(zoneId, templateId));
+                        continue;
+                    }
+
+                    var hasIsBossOverride = xMonster.Attribute("isBoss") != null;
+                    var hasIsHiddenOverride = xMonster.Attribute("isHidden") != null;
+
+                    var keepBoss = true;
+                    var keepHidden = true;
+                    if (hasIsBossOverride)
+                    {
+                        var isBossOverride = xMonster.Attribute("isBoss")?.Value == true.ToString();
+                        if (m.IsBoss == isBossOverride) keepBoss = false;
+                    }
+
+                    if (hasIsHiddenOverride)
+                    {
+                        var isHiddenOverride = xMonster.Attribute("isHidden")?.Value == true.ToString();
+                        if (m.IsHidden == isHiddenOverride) keepHidden = false;
+                    }
+
+                    var keep = keepBoss && hasIsBossOverride || keepHidden && hasIsHiddenOverride;
+
+                    if (!keepHidden) xMonster.Attribute("isHidden")?.Remove();
+
+                    if (!keepBoss) xMonster.Attribute("isBoss")?.Remove();
+
+                    if (keep) continue;
+                    toRemove.Add(new Tuple<uint, uint>(zoneId, templateId));
+                }
+            }
+
+            foreach (var tuple in toRemove)
+                overrideDoc.Descendants("Zone")
+                    .Where(x => x.Attribute("id")?.Value == tuple.Item1.ToString()).ToList()
+                    .ForEach(xz =>
+                    {
+                        xz.Descendants("Monster")
+                            .Where(m => m.Attribute("id")?.Value == tuple.Item2.ToString()).ToList()
+                            .ForEach(xm => xm.Remove());
+
+                        if (!xz.Descendants("Monster").Any()) xz.Remove();
+                    });
+            overrideDoc.Save(OverrideFileFullPath);
+            return overrideDoc;
         }
 
         public override void Update(string custom = null)
@@ -169,47 +236,49 @@ namespace TCC.Data.Databases
 
         public void ToggleOverride(uint zoneId, uint templateId, bool b)
         {
-            if (TryGetMonster(templateId, zoneId, out var m)) m.IsBoss = b;
+            var changed = false;
+            if (TryGetMonster(templateId, zoneId, out var m))
+            {
+                changed = m.IsBoss != b;
+                m.IsBoss = b;
+            }
+
             var overrideDoc = XDocument.Load(OverrideFileFullPath);
-            var zone = overrideDoc.Descendants("Zone").FirstOrDefault(x => uint.Parse(x.Attribute("id")?.Value) == zoneId);
+            var zone = overrideDoc.Descendants("Zone")
+                .FirstOrDefault(x => uint.Parse(x.Attribute("id")?.Value ?? "0") == zoneId);
             if (zone != null)
             {
-                var monster = zone.Descendants("Monster").FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == templateId);
+                var monster = zone.Descendants("Monster")
+                    .FirstOrDefault(x => uint.Parse(x.Attribute("id")?.Value ?? "0") == templateId);
                 if (monster != null)
-                {
-                    if (_zones[zoneId].Monsters[templateId].IsBoss == b)
-                    {
-                        if (monster.Attribute("isHidden") == null) monster.Remove();
-                        else monster.Attribute("isBoss")?.Remove();
-
-                        if (!zone.Descendants().Any()) zone.Remove();
-                    }
-                    else
-                    {
-                        monster.Attribute("isBoss").Value = b.ToString();
-                    }
-                }
+                    monster.Attribute("isBoss").Value = b.ToString();
+                else
+                    zone.Add(new XElement("Monster", new XAttribute("id", templateId),
+                        new XAttribute("isBoss", b.ToString())));
             }
             else
             {
                 overrideDoc.Descendants("Zones").First().Add(
                     new XElement("Zone", new XAttribute("id", zoneId),
                         new XElement("Monster", new XAttribute("id", templateId),
-                                                new XAttribute("isBoss", b.ToString()))));
+                            new XAttribute("isBoss", b.ToString()))));
             }
 
-            overrideDoc.Save(OverrideFileFullPath);
-
             OverrideChangedEvent?.Invoke(zoneId, templateId, b);
+
+            overrideDoc.Save(OverrideFileFullPath);
         }
+
         public void Blacklist(uint zoneId, uint templateId, bool b)
         {
             if (TryGetMonster(templateId, zoneId, out var m)) m.IsHidden = b;
             var overrideDoc = XDocument.Load(OverrideFileFullPath);
-            var zone = overrideDoc.Descendants("Zone").FirstOrDefault(x => uint.Parse(x.Attribute("id")?.Value) == zoneId);
+            var zone = overrideDoc.Descendants("Zone")
+                .FirstOrDefault(x => uint.Parse(x.Attribute("id")?.Value) == zoneId);
             if (zone != null)
             {
-                var monster = zone.Descendants("Monster").FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == templateId);
+                var monster = zone.Descendants("Monster")
+                    .FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == templateId);
                 if (monster != null)
                 {
                     if (!b)
@@ -235,8 +304,8 @@ namespace TCC.Data.Databases
             overrideDoc.Save(OverrideFileFullPath);
 
             BlacklistChangedEvent?.Invoke(zoneId, templateId, b);
-
         }
+
         public void Blacklist(Monster target, bool b)
         {
             Blacklist(target.ZoneId, target.TemplateId, b);
@@ -245,10 +314,7 @@ namespace TCC.Data.Databases
         public List<Monster> GetBlacklistedMonsters()
         {
             var ret = new List<Monster>();
-            foreach (var zone in _zones.Values)
-            {
-                ret.AddRange(zone.Monsters.Values.Where(m => m.IsHidden));
-            }
+            foreach (var zone in _zones.Values) ret.AddRange(zone.Monsters.Values.Where(m => m.IsHidden));
             return ret;
         }
     }
@@ -269,6 +335,7 @@ namespace TCC.Data.Databases
             Name = name;
         }
     }
+
     public class Monster
     {
         public uint TemplateId { get; }
