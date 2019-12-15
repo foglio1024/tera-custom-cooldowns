@@ -443,7 +443,14 @@ namespace TCC.ViewModels
         }
         private void OnGetUserList(S_GET_USER_LIST m)
         {
-            UpdateBuffs();
+            try
+            {
+                UpdateBuffs();
+            }
+            catch (Exception e )
+            {
+                Log.F($"Failed to update buffs: {e.Message}");
+            }
             foreach (var item in m.CharacterList)
             {
                 var ch = Game.Account.Characters.FirstOrDefault(x => x.Id == item.Id);
