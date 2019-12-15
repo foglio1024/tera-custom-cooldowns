@@ -710,12 +710,12 @@ namespace TCC.ViewModels
             //if (!Game.Logged) return;
             Task.Run(() =>
             {
-                CurrentCharacter.Buffs.Clear();
-                Game.Me.Buffs.ToList().ForEach(b =>
+                CurrentCharacter.Buffs?.Clear();
+                Game.Me.Buffs?.ToList().ForEach(b =>
                 {
                     CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
                 });
-                Game.Me.Debuffs.ToList().ForEach(b =>
+                Game.Me.Debuffs?.ToList().ForEach(b =>
                 {
                     CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
                 });
