@@ -34,13 +34,14 @@ namespace TCC.Interop.Proxy
                 { "listingId", id }
             });
         }
-        public async void ApplyToGroup(uint id)
+        public async Task<bool> ApplyToGroup(uint id)
         {
-            await TccStub.CallAsync("applyToGroup",
+            var resp = await TccStub.CallAsync("applyToGroup",
             new JObject
             {
                 { "listingId", id }
             });
+            return resp != null && resp.Result.Value<bool>();
         }
         public async void FriendUser([NotNull] string userName, [NotNull] string message)
         {

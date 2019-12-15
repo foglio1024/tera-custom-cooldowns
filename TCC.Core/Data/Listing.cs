@@ -8,6 +8,8 @@ using System.Windows.Threading;
 using TCC.Controls;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
+using TCC.Parsing;
+using TCC.ViewModels;
 using TeraDataLite;
 
 namespace TCC.Data
@@ -252,9 +254,11 @@ namespace TCC.Data
             return _listing.CanApply;
         }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
-            ProxyInterface.Instance.Stub.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
+            var success = await ProxyInterface.Instance.Stub.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
+            if (!success) return;
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{_listing.LeaderName}", "SMT_PARTYBOARD_APPLY");
             _listing.CanApply = false;
             _t.Start();
         }
