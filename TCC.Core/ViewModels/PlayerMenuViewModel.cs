@@ -248,7 +248,8 @@ namespace TCC.ViewModels
                         try
                         {
                             var i = Game.FriendList.IndexOf(Game.FriendList.FirstOrDefault(x => x.Name == Name));
-                            Game.FriendList.RemoveAt(i);
+                            if (i != -1)
+                                Game.FriendList.RemoveAt(i);
                         }
                         catch (Exception e)
                         {
