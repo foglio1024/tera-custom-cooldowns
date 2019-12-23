@@ -12,7 +12,7 @@ namespace TCC.Data.Chat
 
         public Money(long money)
         {
-            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatManager.Instance.GetDispatcher();
 
             Gold = Convert.ToInt64(money / 10000);
             Silver = Convert.ToInt64(money / 100) - Gold * 100;
@@ -20,7 +20,7 @@ namespace TCC.Data.Chat
         }
         public Money(int g, int s, int c)
         {
-            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatManager.Instance.GetDispatcher();
 
             Gold = g;
             Silver = s;

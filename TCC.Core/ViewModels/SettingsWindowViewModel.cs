@@ -570,7 +570,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.ChatEnabled == value) return;
                 App.Settings.ChatEnabled = value;
-                ChatWindowManager.Instance.NotifyEnabledChanged(value);
+                ChatManager.Instance.NotifyEnabledChanged(value);
                 N();
             }
         }
@@ -675,7 +675,7 @@ namespace TCC.ViewModels
             });
             ResetChatPositionsCommand = new RelayCommand(_ =>
             {
-                foreach (var cw in ChatWindowManager.Instance.ChatWindows)
+                foreach (var cw in ChatManager.Instance.ChatWindows)
                 {
                     cw.ResetToCenter();
                 }
@@ -683,7 +683,7 @@ namespace TCC.ViewModels
             MakePositionsGlobalCommand = new RelayCommand(_ => WindowManager.MakeGlobal());
             ResetWindowPositionsCommand = new RelayCommand(_ => WindowManager.ResetToCenter());
             OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(Path.Combine(App.BasePath, "resources/config")));
-            ClearChatCommand = new RelayCommand(_ => ChatWindowManager.Instance.ClearMessages());
+            ClearChatCommand = new RelayCommand(_ => ChatManager.Instance.ClearMessages());
 
             MonsterDatabase.BlacklistChangedEvent += MonsterDatabase_BlacklistChangedEvent;
         }

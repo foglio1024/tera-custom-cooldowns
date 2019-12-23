@@ -65,7 +65,7 @@ namespace TCC.Data.Chat
 
         public ChatMessage()
         {
-            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatManager.Instance.GetDispatcher();
             Pieces = new TSObservableCollection<MessagePieceBase>(Dispatcher);
             Lines = new TSObservableCollection<MessageLine>(Dispatcher);
             Timestamp = App.Settings.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();

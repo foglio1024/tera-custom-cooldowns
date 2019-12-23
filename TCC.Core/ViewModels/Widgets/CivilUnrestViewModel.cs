@@ -94,7 +94,7 @@ namespace TCC.ViewModels.Widgets
             catch
             {
                 Log.N("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
-                ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
+                ChatManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
 

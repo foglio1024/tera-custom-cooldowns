@@ -52,7 +52,7 @@ namespace TCC.Controls.Chat
                 WindowManager.ViewModels.LfgVM.Listings.ToList().ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id)
                     );
             }
-            ChatWindowManager.Instance.LastClickedLfg = _dc;
+            ChatManager.Instance.LastClickedLfg = _dc;
             ProxyInterface.Instance.Stub.RequestPartyInfo(_dc.Id); //ProxyOld.RequestPartyInfo(_dc.Id);
         }
 

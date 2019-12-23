@@ -227,7 +227,7 @@ namespace TCC
 
                 UpdateAvailable = true;
 
-                ChatWindowManager.Instance.AddTccMessage($"TCC v{vp.NewVersionNumber} is now available!");
+                ChatManager.Instance.AddTccMessage($"TCC v{vp.NewVersionNumber} is now available!");
                 Log.N("Update manager", $"TCC v{vp.NewVersionNumber} available!", NotificationType.Success, 10000);
             }
             catch (Exception ex)

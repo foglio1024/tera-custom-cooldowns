@@ -36,11 +36,11 @@ namespace TCC.Interop.Proxy
             var message = parameters["message"].Value<string>().AddFontTagsIfMissing();
             if (author == "undefined") author = "System";
 
-            if (!ChatWindowManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
-                ChatWindowManager.Instance.CachePrivateMessage(channel, author, message);
+            if (!ChatManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
+                ChatManager.Instance.CachePrivateMessage(channel, author, message);
             else
-                ChatWindowManager.Instance.AddChatMessage(
-                    ChatWindowManager.Instance.Factory.CreateMessage((ChatChannel)ChatWindowManager.Instance.PrivateChannels.FirstOrDefault(x =>
+                ChatManager.Instance.AddChatMessage(
+                    ChatManager.Instance.Factory.CreateMessage((ChatChannel)ChatManager.Instance.PrivateChannels.FirstOrDefault(x =>
                                         x.Id == channel && x.Joined).Index + 11, author, message));
         }
         private static void SetUiMode(JObject parameters)

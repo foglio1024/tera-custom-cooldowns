@@ -22,21 +22,21 @@ namespace TCC.Converters
                 case ChatChannel.Megaphone:
                     return "Megaphone";
                 case ChatChannel.Private1:
-                    return ChatWindowManager.Instance.PrivateChannels[0].Name ?? ch.ToString();
+                    return ChatManager.Instance.PrivateChannels[0].Name ?? ch.ToString();
                 case ChatChannel.Private2:
-                    return ChatWindowManager.Instance.PrivateChannels[1].Name ?? ch.ToString();
+                    return ChatManager.Instance.PrivateChannels[1].Name ?? ch.ToString();
                 case ChatChannel.Private3:
-                    return ChatWindowManager.Instance.PrivateChannels[2].Name ?? ch.ToString();
+                    return ChatManager.Instance.PrivateChannels[2].Name ?? ch.ToString();
                 case ChatChannel.Private4:
-                    return ChatWindowManager.Instance.PrivateChannels[3].Name ?? ch.ToString();
+                    return ChatManager.Instance.PrivateChannels[3].Name ?? ch.ToString();
                 case ChatChannel.Private5:
-                    return ChatWindowManager.Instance.PrivateChannels[4].Name ?? ch.ToString();
+                    return ChatManager.Instance.PrivateChannels[4].Name ?? ch.ToString();
                 case ChatChannel.Private6:
-                    return ChatWindowManager.Instance.PrivateChannels[5].Name ?? ch.ToString();
+                    return ChatManager.Instance.PrivateChannels[5].Name ?? ch.ToString();
                 case ChatChannel.Private7:
-                    return ChatWindowManager.Instance.PrivateChannels[6].Name ?? ch.ToString();
+                    return ChatManager.Instance.PrivateChannels[6].Name ?? ch.ToString();
                 case ChatChannel.Private8:
-                    return ChatWindowManager.Instance.PrivateChannels[7].Name ?? ch.ToString();
+                    return ChatManager.Instance.PrivateChannels[7].Name ?? ch.ToString();
                 case ChatChannel.Notify:
                     return "Info";
                 case ChatChannel.Error:

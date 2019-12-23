@@ -91,7 +91,7 @@ namespace TCC.Windows.Widgets
 
         private void OnWindowPreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            ChatWindowManager.Instance.RemoveEmptyChatWindows();
+            ChatManager.Instance.RemoveEmptyChatWindows();
             UpdateSettings();
         }
         private new void OnLoaded(object sender, RoutedEventArgs e)
@@ -116,13 +116,13 @@ namespace TCC.Windows.Widgets
             if (sw.VerticalOffset == 0)
             {
                 _bottom = true;
-                ChatWindowManager.Instance.AddFromQueue(App.Settings.ChatScrollAmount);
+                ChatManager.Instance.AddFromQueue(App.Settings.ChatScrollAmount);
             }
             else
             {
                 _bottom = false;
             }
-            ChatWindowManager.Instance.SetPaused(!_bottom || !ChatWindowManager.Instance.IsQueueEmpty);
+            ChatManager.Instance.SetPaused(!_bottom || !ChatManager.Instance.IsQueueEmpty);
 
         }
 
@@ -158,9 +158,9 @@ namespace TCC.Windows.Widgets
                     sw?.ScrollToVerticalOffset(0);
                 });
                 _bottom = true;
-                ChatWindowManager.Instance.AddFromQueue(2);
-                if (ChatWindowManager.Instance.IsQueueEmpty) ChatWindowManager.Instance.SetPaused(false);
-                ChatWindowManager.Instance.SetPaused(!_bottom);
+                ChatManager.Instance.AddFromQueue(2);
+                if (ChatManager.Instance.IsQueueEmpty) ChatManager.Instance.SetPaused(false);
+                ChatManager.Instance.SetPaused(!_bottom);
             }
         }
 

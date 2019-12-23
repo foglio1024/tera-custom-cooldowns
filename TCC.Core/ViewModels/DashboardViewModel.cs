@@ -527,7 +527,7 @@ namespace TCC.ViewModels
             if (region == null)
             {
                 Log.N("Info window", "No region specified; cannot load events.", NotificationType.Error);
-                ChatWindowManager.Instance.AddTccMessage("Unable to load events.");
+                ChatManager.Instance.AddTccMessage("Unable to load events.");
                 return;
             }
             LoadEventFile(today, region);
@@ -768,19 +768,19 @@ namespace TCC.ViewModels
         public void ResetDailyData()
         {
             Game.Account.Characters.ToList().ForEach(ch => ch.ResetDailyData());
-            ChatWindowManager.Instance.AddTccMessage("Daily data has been reset.");
+            ChatManager.Instance.AddTccMessage("Daily data has been reset.");
         }
 
         public void ResetWeeklyDungeons()
         {
             Game.Account.Characters.ToSyncList().ForEach(ch => ch.DungeonInfo.ResetAll(ResetMode.Weekly));
-            ChatWindowManager.Instance.AddTccMessage("Weekly dungeon entries have been reset.");
+            ChatManager.Instance.AddTccMessage("Weekly dungeon entries have been reset.");
         }
 
         public void ResetVanguardWeekly()
         {
             Game.Account.Characters.ToList().ForEach(ch => ch.VanguardInfo.WeekliesDone = 0);
-            ChatWindowManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
+            ChatManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
         }
 
         public void RefreshDungeons()

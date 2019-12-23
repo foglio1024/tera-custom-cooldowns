@@ -167,7 +167,7 @@ namespace TCC.Parsing
 
             if (Process(parameters, template, opcodeName)) return;
 
-            ChatWindowManager.Instance.AddSystemMessage(parameters, template);
+            ChatManager.Instance.AddSystemMessage(parameters, template);
         }
 
         private static bool Pass(string opcodeName)
@@ -183,7 +183,7 @@ namespace TCC.Parsing
         //}
         private static void HandleFriendLogin(string parameters, SystemMessageData template)
         {
-            ChatWindowManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Friend, ChatUtils.SplitDirectives(parameters)["UserName"]);
+            ChatManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Friend, ChatUtils.SplitDirectives(parameters)["UserName"]);
         }
         private static void HandleClearedGuardianQuestsMessage(string parameters, SystemMessageData template)
         {
@@ -192,28 +192,28 @@ namespace TCC.Parsing
             var standardCountString = $"<font color =\"#cccccc\">({cleared}/40)</font>";
             var maxedCountString = $"<font color=\"#cccccc\">(</font><font color =\"#ff0000\">{cleared}</font><font color=\"#cccccc\">/40)</font>";
             var newMsg = new SystemMessageData($"{template.Template} {(cleared == 40 ? maxedCountString : standardCountString)}", template.ChatChannel);
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, newMsg, ChatChannel.Guardian);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, newMsg, ChatChannel.Guardian);
             if (currChar.GuardianInfo.Cleared == 40)
             {
 
                 msg.ContainsPlayerName = true;
             }
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            ChatManager.Instance.AddChatMessage(msg);
 
         }
         private static void HandleNewGuildMasterMessage(string parameters, SystemMessageData template)
         {
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.GuildNotice);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.GuildNotice);
             Log.N("Guild", msg.ToString(), NotificationType.Success);
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            ChatManager.Instance.AddChatMessage(msg);
             msg.ContainsPlayerName = true;
 
         }
         private static void HandleGuilBamSpawn(string parameters, SystemMessageData template)
         {
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
             Log.N("Guild BAM", msg.ToString(), NotificationType.Normal, 2*60*1000);
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            ChatManager.Instance.AddChatMessage(msg);
 
             TimeManager.Instance.UploadGuildBamTimestamp();
 
@@ -226,18 +226,18 @@ namespace TCC.Parsing
             var dgId = Convert.ToUInt32(parameters.Substring(parameters.IndexOf(s, StringComparison.Ordinal) + s.Length));
             VMs.DashboardVM.CurrentCharacter.DungeonInfo.Engage(dgId);
 
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
+            ChatManager.Instance.AddChatMessage(msg);
         }
         private static void HandleFriendInAreaMessage(string parameters, SystemMessageData template)
         {
             if (!App.Settings.ChatEnabled) return;
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.Friend);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.Friend);
             var start = parameters.IndexOf("UserName\v", StringComparison.InvariantCultureIgnoreCase) + "UserName\v".Length;
             var end = parameters.IndexOf("\v", start, StringComparison.InvariantCultureIgnoreCase);
             var friendName = parameters.Substring(start, end - start);
             msg.Author = friendName;
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            ChatManager.Instance.AddChatMessage(msg);
         }
         private static void HandleRessMessage(string parameters, SystemMessageData template)
         {
@@ -245,8 +245,8 @@ namespace TCC.Parsing
 
             var newSysMsg = new SystemMessageData(template.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>")
                 .Replace("{PartyPlayerName}", "<font color='#cccccc'>{PartyPlayerName}</font>"), (int)ChatChannel.Ress);
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, newSysMsg, ChatChannel.Ress);
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, newSysMsg, ChatChannel.Ress);
+            ChatManager.Instance.AddChatMessage(msg);
 
         }
         private static void HandleDeathMessage(string parameters, SystemMessageData template)
@@ -255,37 +255,37 @@ namespace TCC.Parsing
 
             var newSysMsg = new SystemMessageData(template.Template.Replace("{UserName}", "<font color='#cccccc'>{UserName}</font>")
                 .Replace("{PartyPlayerName}", "<font color='#cccccc'>{PartyPlayerName}</font>"), (int)ChatChannel.Death);
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, newSysMsg, ChatChannel.Death);
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, newSysMsg, ChatChannel.Death);
+            ChatManager.Instance.AddChatMessage(msg);
         }
         private static void HandleInvalidLink(string parameters, SystemMessageData template)
         {
             if (App.Settings.LfgWindowSettings.Enabled) VMs.LfgVM.RemoveDeadLfg();
 
             if (!App.Settings.ChatEnabled) return;
-            ChatWindowManager.Instance.RemoveDeadLfg();
-            ChatWindowManager.Instance.AddChatMessage(ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel));
+            ChatManager.Instance.RemoveDeadLfg();
+            ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel));
         }
         private static void HandleMerchantSpawn(string parameters, SystemMessageData template)
         {
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
             Log.N("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            ChatManager.Instance.AddChatMessage(msg);
         }
         private static void HandleMerchantDespawn(string parameters, SystemMessageData template)
         {
-            var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
+            var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
             Log.N("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
-            ChatWindowManager.Instance.AddChatMessage(msg);
+            ChatManager.Instance.AddChatMessage(msg);
         }
         private static void HandleLfgNotListed(string parameters, SystemMessageData template)
         {
-            ChatWindowManager.Instance.AddSystemMessage(parameters, template);
+            ChatManager.Instance.AddSystemMessage(parameters, template);
             VMs.LfgVM.ForceStopPublicize();
         }
         private static void Redirect(string parameters, SystemMessageData template, ChatChannel ch)
         {
-            ChatWindowManager.Instance.AddSystemMessage(parameters, template, ch);
+            ChatManager.Instance.AddSystemMessage(parameters, template, ch);
         }
 
         //by HQ 20181224
@@ -294,9 +294,9 @@ namespace TCC.Parsing
             string notificationText;
             if (App.Settings.ChatEnabled)
             {
-                var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
+                var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
                 notificationText = msg.ToString();
-                ChatWindowManager.Instance.AddChatMessage(msg);
+                ChatManager.Instance.AddChatMessage(msg);
             }
             else
             {
@@ -325,9 +325,9 @@ namespace TCC.Parsing
 
             if (App.Settings.ChatEnabled)
             {
-                var msg = ChatWindowManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
+                var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
                 notificationText = msg.ToString();
-                ChatWindowManager.Instance.AddChatMessage(msg);
+                ChatManager.Instance.AddChatMessage(msg);
             }
             else
             {

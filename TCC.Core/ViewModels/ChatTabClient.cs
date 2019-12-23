@@ -18,7 +18,7 @@ namespace TCC.ViewModels
             { HideTimeout = 10, BackgroundOpacity = .3, FadeOut = true, LfgOn = false };
             var model = new ChatViewModel(ws);
             var view = new ChatWindow(ws, model);
-            ChatWindowManager.Instance.ChatWindows.Add(view);
+            ChatManager.Instance.ChatWindows.Add(view);
             return new NewTabHost<Window>(view, view.TabControl);
 
         }
@@ -26,7 +26,7 @@ namespace TCC.ViewModels
         {
             try
             {
-                ChatWindowManager.Instance.ChatWindows.Remove(window as ChatWindow);
+                ChatManager.Instance.ChatWindows.Remove(window as ChatWindow);
                 window.Close();
             }
             catch (System.Exception e)

@@ -213,9 +213,9 @@ namespace TCC.Settings
         private static XElement BuildChatWindowSettings()
         {
             var result = new XElement("ChatWindows");
-            if (ChatWindowManager.Instance.ChatWindows.Count == 0) return result;
+            if (ChatManager.Instance.ChatWindows.Count == 0) return result;
 
-            ChatWindowManager.Instance.ChatWindows.ToList().ForEach(cw =>
+            ChatManager.Instance.ChatWindows.ToList().ForEach(cw =>
             {
                 if (cw.VM.Tabs.Count == 0) return;
                 //cw.Dispatcher.Invoke(() =>

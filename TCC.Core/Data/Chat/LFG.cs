@@ -76,7 +76,7 @@ namespace TCC.Data.Chat
 
         public LFG(uint id, string name, string msg, bool raid)
         {
-            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatManager.Instance.GetDispatcher();
 
             Id = id;
             Name = name;
@@ -93,7 +93,7 @@ namespace TCC.Data.Chat
 
         private void _removeTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            ChatWindowManager.Instance.RemoveLfg(this);
+            ChatManager.Instance.RemoveLfg(this);
         }
         public void Refresh()
         {

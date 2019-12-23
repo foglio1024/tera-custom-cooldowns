@@ -74,7 +74,7 @@ namespace TCC.Test
             var i = 0;
             while (i < count)
             {
-                ChatWindowManager.Instance.AddTccMessage($"Test {i++}");
+                ChatManager.Instance.AddTccMessage($"Test {i++}");
             }
         }
         public static void ParsePacketFromHexString<PacketType>(string hex, uint version)
@@ -362,8 +362,8 @@ namespace TCC.Test
         {
             for (var i = 0; i < amount; i++)
             {
-                ChatWindowManager.Instance.AddChatMessage(
-                    ChatWindowManager.Instance.Factory.CreateMessage(ChatChannel.ReceivedWhisper, "Test", $"Test {i}"));
+                ChatManager.Instance.AddChatMessage(
+                    ChatManager.Instance.Factory.CreateMessage(ChatChannel.ReceivedWhisper, "Test", $"Test {i}"));
             }
         }
 
@@ -404,7 +404,7 @@ namespace TCC.Test
             t.Elapsed += (_, __) =>
             {
                 SettingsWindowViewModel.PrintEventsData();
-                Log.CW($"Messages: {ChatWindowManager.Instance.ChatMessages.Count}");
+                Log.CW($"Messages: {ChatManager.Instance.ChatMessages.Count}");
                 Log.CW("----------------------------------------------------------");
             };
             t.Start();
@@ -418,8 +418,8 @@ namespace TCC.Test
                 {
                     if (m.IsBoss)
                     {
-                        var msg = ChatWindowManager.Instance.Factory.CreateMessage(ChatChannel.WorldBoss, "System", $"<font>{m.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
-                        ChatWindowManager.Instance.AddChatMessage(msg);
+                        var msg = ChatManager.Instance.Factory.CreateMessage(ChatChannel.WorldBoss, "System", $"<font>{m.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
+                        ChatManager.Instance.AddChatMessage(msg);
                     }
                 }
 

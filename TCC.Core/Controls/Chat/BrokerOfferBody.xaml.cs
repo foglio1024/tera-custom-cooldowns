@@ -19,8 +19,8 @@ namespace TCC.Controls.Chat
         {
             var dc = (BrokerChatMessage) DataContext;
             ProxyInterface.Instance.Stub.AcceptBrokerOffer(dc.PlayerId, dc.ListingId); //ProxyOld.AcceptBrokerOffer(dc.PlayerId, dc.ListingId);
-            ChatWindowManager.Instance.SetPaused(false, dc);
-            ChatWindowManager.Instance.ScrollToBottom();
+            ChatManager.Instance.SetPaused(false, dc);
+            ChatManager.Instance.ScrollToBottom();
 
         }
 
@@ -30,8 +30,8 @@ namespace TCC.Controls.Chat
             if (dc.Handled) return;
             ProxyInterface.Instance.Stub.DeclineBrokerOffer(dc.PlayerId, dc.ListingId); //ProxyOld.DeclineBrokerOffer(dc.PlayerId, dc.ListingId);
             OnHandled();
-            ChatWindowManager.Instance.SetPaused(false, dc);
-            ChatWindowManager.Instance.ScrollToBottom();
+            ChatManager.Instance.SetPaused(false, dc);
+            ChatManager.Instance.ScrollToBottom();
 
         }
 
@@ -46,7 +46,7 @@ namespace TCC.Controls.Chat
         private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
         {
             var dc = (BrokerChatMessage) DataContext;
-            ChatWindowManager.Instance.SetPaused(true, dc);
+            ChatManager.Instance.SetPaused(true, dc);
         }
 
         private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
@@ -54,15 +54,15 @@ namespace TCC.Controls.Chat
             try
             {
                 var dc = (BrokerChatMessage) DataContext;
-                ChatWindowManager.Instance.SetPaused(false, dc);
+                ChatManager.Instance.SetPaused(false, dc);
             }
             catch 
             {
-                ChatWindowManager.Instance.SetPaused(false);
+                ChatManager.Instance.SetPaused(false);
             }
             finally
             {
-                ChatWindowManager.Instance.ScrollToBottom();
+                ChatManager.Instance.ScrollToBottom();
             }
         }
     }

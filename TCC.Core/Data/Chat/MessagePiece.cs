@@ -68,7 +68,7 @@ namespace TCC.Data.Chat
 
         public MessagePieceBase()
         {
-            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatManager.Instance.GetDispatcher();
             ClickCommand = new RelayCommand(_ => {});
         }
 

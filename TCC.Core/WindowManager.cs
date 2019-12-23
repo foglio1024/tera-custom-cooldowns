@@ -168,7 +168,7 @@ namespace TCC
 
             ViewModels.PlayerMenuVM = new PlayerMenuViewModel();
 
-            ChatWindowManager.Start();
+            ChatManager.Start();
 
             SettingsWindow = new SettingsWindow();
         }

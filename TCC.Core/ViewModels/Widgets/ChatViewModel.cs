@@ -130,7 +130,7 @@ namespace TCC.ViewModels.Widgets
         }
 
         public TSObservableCollection<TabViewModel> TabVMs { get; set; }
-        public TSObservableCollection<LFG> LFGs => ChatWindowManager.Instance.LFGs;
+        public TSObservableCollection<LFG> LFGs => ChatManager.Instance.LFGs;
         public IInterTabClient InterTabClient { get; }
         public List<Tab> Tabs
         {
@@ -172,7 +172,7 @@ namespace TCC.ViewModels.Widgets
             MakeGlobalCommand = new RelayCommand(_ => WindowSettings.MakePositionsGlobal());
             OpenSysMsgSettingsCommand = new RelayCommand(_ => new SystemMessagesConfigWindow { ShowActivated = true, Topmost = true }.Show());
 
-            ChatWindowManager.Instance.NewMessage += CheckAttention;
+            ChatManager.Instance.NewMessage += CheckAttention;
             Game.GameUiModeChanged += CheckCollapsed;
             Game.ChatModeChanged += CheckCollapsed;
             WindowSettings.CanCollapseChanged += () => N(nameof(Collapsed));

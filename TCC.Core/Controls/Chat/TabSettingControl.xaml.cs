@@ -138,7 +138,7 @@ namespace TCC.Controls.Chat
 
         private void DeleteTab(object sender, RoutedEventArgs e)
         {
-            var win = ChatWindowManager.Instance.ChatWindows.FirstOrDefault(w => w.VM.Tabs.Contains(_dc));
+            var win = ChatManager.Instance.ChatWindows.FirstOrDefault(w => w.VM.Tabs.Contains(_dc));
             win?.VM.RemoveTab(_dc);
             win?.UpdateSettings();
             Window.GetWindow(this)?.Close();

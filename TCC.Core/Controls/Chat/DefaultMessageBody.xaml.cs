@@ -19,7 +19,7 @@ namespace TCC.Controls.Chat
         private void PinBtn_OnClick(object sender, RoutedEventArgs e)
         {
             var dc = DataContext as ChatMessage;
-            foreach (var w in ChatWindowManager.Instance.ChatWindows)
+            foreach (var w in ChatManager.Instance.ChatWindows)
             {
                 if (!w.IsMouseOver) continue;
                 var currTabVm = w.TabControl.SelectedItem as HeaderedItemViewModel;

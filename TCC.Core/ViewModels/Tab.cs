@@ -196,7 +196,7 @@ namespace TCC.ViewModels
         public Tab()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            Messages = new ListCollectionView(ChatWindowManager.Instance.ChatMessages);
+            Messages = new ListCollectionView(ChatManager.Instance.ChatMessages);
             ImportantMessages = new TSObservableCollection<ChatMessage>(Dispatcher);
             RemoveImportantMessageCommand = new RelayCommand(msg =>
             {
@@ -208,7 +208,7 @@ namespace TCC.ViewModels
                 ClearImportant();
                 TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Clear));
             });
-            ScrollToMessageCommand = new RelayCommand(msg => { ChatWindowManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
+            ScrollToMessageCommand = new RelayCommand(msg => { ChatManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
             TabViewModel.ImportantRemoved += SyncImportant;
 
         }

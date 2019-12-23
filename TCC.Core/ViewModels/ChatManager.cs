@@ -28,12 +28,12 @@ using TeraPacketParser.Messages;
 namespace TCC.ViewModels
 {
     [TccModule]
-    public class ChatWindowManager : TccWindowViewModel
+    public class ChatManager : TccWindowViewModel
     {
-        private static ChatWindowManager _instance;
+        private static ChatManager _instance;
 
-        public static ChatWindowManager Instance =>
-            _instance ?? (_instance = new ChatWindowManager(App.Settings.ChatSettings));
+        public static ChatManager Instance =>
+            _instance ?? (_instance = new ChatManager(App.Settings.ChatSettings));
 
         public ChatMessageFactory Factory { get; }
 
@@ -59,7 +59,7 @@ namespace TCC.ViewModels
 #endif
         public TSObservableCollection<LFG> LFGs { get; }
 
-        private ChatWindowManager(WindowSettings settings) : base(settings)
+        private ChatManager(WindowSettings settings) : base(settings)
         {
             _pauseQueue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
@@ -480,7 +480,7 @@ namespace TCC.ViewModels
         {
             if (current.Author == "System") return true;
             if (current.Author == Game.Me.Name) return true;
-            if (old.RawMessage != current.RawMessage) return true;
+            if (current.RawMessage != old.RawMessage) return true;
 
             if (old.Author != current.Author) return true;
             switch (current.Channel)

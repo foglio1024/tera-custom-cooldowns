@@ -266,7 +266,7 @@
       <DependentUpon>DataTemplates.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ChatTabClient.cs" />
-    <Compile Include="ViewModels\ChatWindowManager.cs" />
+    <Compile Include="ViewModels\ChatManager.cs" />
     <Compile Include="ViewModels\ClassWindowTemplateSelector.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\MyAbnormalConfigVM.cs" />

@@ -142,7 +142,7 @@ namespace TCC
             catch
             {
 
-                ChatWindowManager.Instance.AddTccMessage("Failed to retrieve guild BAM info.");
+                ChatManager.Instance.AddTccMessage("Failed to retrieve guild BAM info.");
                 Log.N("Guild BAM", "Failed to retrieve guild BAM info.", NotificationType.Error);
 
                 return 0;
@@ -168,7 +168,7 @@ namespace TCC
             }
             catch
             {
-                ChatWindowManager.Instance.AddTccMessage("Failed to upload guild BAM info.");
+                ChatManager.Instance.AddTccMessage("Failed to upload guild BAM info.");
                 Log.N("Guild BAM", "Failed to upload guild BAM info.", NotificationType.Error);
 
             }
