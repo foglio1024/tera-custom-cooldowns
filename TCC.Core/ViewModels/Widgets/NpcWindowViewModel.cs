@@ -80,12 +80,14 @@ namespace TCC.ViewModels.Widgets
         public NpcWindowViewModel(NpcWindowSettings settings) : base(settings)
         {
             _npcList = new TSObservableCollection<NPC>(Dispatcher);
+            PendingAbnormalities = new List<PendingAbnormality>();
             InitFlushTimer();
             NpcListChanged += FlushCache;
             settings.AccurateHpChanged += OnAccurateHpChanged;
             settings.HideAddsChanged += OnHideAddsChanged;
             MonsterDatabase.OverrideChangedEvent += RefreshOverride;
             MonsterDatabase.BlacklistChangedEvent += RefreshBlacklist;
+
             void InitFlushTimer()
             {
                 var flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
@@ -119,9 +121,29 @@ namespace TCC.ViewModels.Widgets
                 SetEnrageTime(entityId, remainingEnrageTime);
                 if (boss.Visible == visibility) return;
                 boss.Visible = visibility;
+                Dispatcher.Invoke(() => CheckPendingAbnormalities(boss));
                 NpcListChanged?.Invoke();
             });
         }
+
+        private void CheckPendingAbnormalities(NPC npc)
+        {
+            if (PendingAbnormalities.Count == 0) return;
+            var npcAbs = PendingAbnormalities.Where(x => x.Target == npc.EntityId).ToList();
+            npcAbs.ForEach(ab =>
+            {
+                if (npc.EntityId != ab.Target) return;
+
+                var delay = (uint)(DateTime.Now - ab.ArrivalTime).TotalMilliseconds;
+                if (delay < ab.Duration)
+                {
+                    npc.AddorRefresh(ab.Abnormality, ab.Duration - delay, ab.Stacks);
+                    Log.CW($"Applied pending abnormal {ab.Abnormality.Name} to {ab.Target} ({npc.Name})");
+                }
+            });
+            npcAbs.ForEach(aa => PendingAbnormalities.Remove(aa));
+        }
+
         public void RemoveNPC(NPC npc, uint delay)
         {
             Dispatcher.InvokeAsync(() =>
@@ -141,9 +163,37 @@ namespace TCC.ViewModels.Widgets
         }
         public void UpdateAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
         {
-            if (!TryFindNPC(target, out var boss)) return;
+            if (!TryFindNPC(target, out var boss))
+            {
+                if (Game.IsMe(target) || Game.NearbyPlayers.ContainsKey(target)) return;
+                Log.CW($"Added pending abnormal {ab.Name} for {target}");
+                Dispatcher.Invoke(() =>
+                {
+                    PendingAbnormalities.Add(new PendingAbnormality
+                    {
+                        Target = target,
+                        Abnormality = ab,
+                        Duration = duration,
+                        Stacks = stacks,
+                        ArrivalTime = DateTime.Now
+                    });
+                });
+                return;
+            }
             boss.AddorRefresh(ab, duration, stacks);
         }
+
+        public List<PendingAbnormality> PendingAbnormalities { get; set; }
+
+        public struct PendingAbnormality
+        {
+            public ulong Target { get; set; }
+            public Abnormality Abnormality { get; set; }
+            public uint Duration { get; set; }
+            public int Stacks { get; set; }
+            public DateTime ArrivalTime { get; set; }
+        }
+
         public void EndAbnormality(ulong target, Abnormality ab)
         {
             if (!TryFindNPC(target, out var boss)) return;
@@ -178,7 +228,7 @@ namespace TCC.ViewModels.Widgets
             catch
             {
                 Log.N("Boss window", "Failed to copy boss HP to clipboard.", NotificationType.Error);
-                ChatWindowManager.Instance.AddTccMessage("Failed to copy boss HP.");
+                ChatManager.Instance.AddTccMessage("Failed to copy boss HP.");
             }
         }
         public bool TryFindNPC(ulong entityId, out NPC found)
@@ -422,6 +472,7 @@ namespace TCC.ViewModels.Widgets
         {
             CurrentHHphase = HarrowholdPhase.None;
             ClearGuildTowers();
+            Dispatcher.Invoke(() => PendingAbnormalities.Clear());
         }
         private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
@@ -656,20 +707,20 @@ namespace TCC.ViewModels.Widgets
                 CurrentHHphase = HarrowholdPhase.Phase1;
             }
             else switch (templateId)
-            {
-                case 1000:
-                    CurrentHHphase = HarrowholdPhase.Phase2;
-                    break;
-                case 2000:
-                    CurrentHHphase = HarrowholdPhase.Balistas;
-                    break;
-                case 3000:
-                    CurrentHHphase = HarrowholdPhase.Phase3;
-                    break;
-                case 4000:
-                    CurrentHHphase = HarrowholdPhase.Phase4;
-                    break;
-            }
+                {
+                    case 1000:
+                        CurrentHHphase = HarrowholdPhase.Phase2;
+                        break;
+                    case 2000:
+                        CurrentHHphase = HarrowholdPhase.Balistas;
+                        break;
+                    case 3000:
+                        CurrentHHphase = HarrowholdPhase.Phase3;
+                        break;
+                    case 4000:
+                        CurrentHHphase = HarrowholdPhase.Phase4;
+                        break;
+                }
         }
         private static Dragon CheckCurrentDragon(Point p)
         {
