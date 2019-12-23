@@ -40,17 +40,17 @@ namespace TCC
         /// <summary>
         ///     'TCC.exe' folder
         /// </summary>
-        public static string BasePath { get; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
+        public static string BasePath { get; private set; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
 
         /// <summary>
         ///     'TCC/resources' folder
         /// </summary>
-        public static string ResourcesPath { get; } = Path.Combine(BasePath, "resources");
+        public static string ResourcesPath { get; private set; } = Path.Combine(BasePath, "resources");
 
         /// <summary>
         ///     'TCC/resources/data' folder
         /// </summary>
-        public static string DataPath { get; } = Path.Combine(ResourcesPath, "data");
+        public static string DataPath { get; private set; } = Path.Combine(ResourcesPath, "data");
 
         public static bool Loading { get; private set; }
         public static bool ToolboxMode { get; private set; }
@@ -141,7 +141,7 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             // ----------------------------
-            ChatWindowManager.Instance.AddTccMessage($"{AppVersion} ready.");
+            ChatManager.Instance.AddTccMessage($"{AppVersion} ready.");
 
             if (!Beta && Settings.BetaNotification && UpdateManager.IsExperimentalNewer())
                 Log.N("TCC beta", "A beta version of TCC is available. Open System settings to download it or to disable this notification.",
@@ -158,7 +158,17 @@ namespace TCC
 
             // --settings_override 'path'
             var settingsOverrideIdx = args.IndexOf("--settings_override");
-            if (settingsOverrideIdx != -1) SettingsContainer.SettingsOverride = args[settingsOverrideIdx + 1];
+            if (settingsOverrideIdx != -1) 
+                SettingsContainer.SettingsOverride = args[settingsOverrideIdx + 1];
+
+            // --root_override 'path'
+            var rootOverrideIdx = args.IndexOf("--root_override");
+            if (rootOverrideIdx != -1)
+            {
+                BasePath = args[rootOverrideIdx + 1];
+                ResourcesPath = Path.Combine(BasePath, "resources");
+                DataPath = Path.Combine(ResourcesPath, "data");
+            }
         }
         public static void Restart()
         {
