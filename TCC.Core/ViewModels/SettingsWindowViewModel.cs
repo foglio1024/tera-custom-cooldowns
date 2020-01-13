@@ -569,8 +569,15 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.ChatEnabled == value) return;
+                if (!value)
+                {
+                    TccMessageBox.Show("Warning",
+                        "Disabling this while still having modded Chat2.gpk installed may cause corrupted data to be sent to the server. Make sure you keep Chat enabled active if you're using modded Chat2.gpk.",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
                 App.Settings.ChatEnabled = value;
                 ChatManager.Instance.NotifyEnabledChanged(value);
+                ProxyInterface.Instance.Stub.UpdateSetting("ChatEnabled ", App.Settings.ChatEnabled);
                 N();
             }
         }
