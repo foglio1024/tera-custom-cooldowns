@@ -372,6 +372,7 @@ namespace TCC.R
 		public static SkewTransform Skew45 => ((SkewTransform)App.Current.FindResource("Skew45"));
 		public static SkewTransform Skew45Inv => ((SkewTransform)App.Current.FindResource("Skew45Inv"));
 		public static Storyboard Pulse => ((Storyboard)App.Current.FindResource("Pulse"));
+		public static Storyboard Warn => ((Storyboard)App.Current.FindResource("Warn"));
 		public static FontFamily DroidSans => ((FontFamily)App.Current.FindResource("DroidSans"));
 		public static FontFamily DroidSansMono => ((FontFamily)App.Current.FindResource("DroidSansMono"));
 		public static FontFamily OpenSans => ((FontFamily)App.Current.FindResource("OpenSans"));
@@ -453,6 +454,7 @@ namespace TCC.R
 		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
 		public static EnumDescriptionConverter EnumDescriptionConverter => ((EnumDescriptionConverter)App.Current.FindResource("EnumDescriptionConverter"));
 		public static NotificationTypeToBrush NotificationTypeToBrush => ((NotificationTypeToBrush)App.Current.FindResource("NotificationTypeToBrush"));
+		public static WarriorStanceToColorConverter StanceToColorConverter => ((WarriorStanceToColorConverter)App.Current.FindResource("StanceToColorConverter"));
 	}
 	public static class DragablzMaterialDesign
 	{
