@@ -33,6 +33,7 @@ namespace TCC.Data
                 if (_crit == value) return;
                 _crit = value;
                 N();
+                N(nameof(OffenseAura));
                 AuraChanged?.Invoke();
             }
         }
@@ -43,6 +44,7 @@ namespace TCC.Data
                 if (_mp == value) return;
                 _mp = value;
                 N();
+                N(nameof(SupportAura));
                 AuraChanged?.Invoke();
             }
         }
@@ -53,6 +55,7 @@ namespace TCC.Data
                 if (_res == value) return;
                 _res = value;
                 N();
+                N(nameof(SupportAura));
                 AuraChanged?.Invoke();
             }
         }
@@ -63,12 +66,14 @@ namespace TCC.Data
                 if (_swift == value) return;
                 _swift = value;
                 N();
+                N(nameof(OffenseAura));
                 AuraChanged?.Invoke();
             }
         }
 
         public bool AllMissing => !_crit && !_mp && !_res && !_swift;
-
+        public bool OffenseAura => _crit || _swift;
+        public bool SupportAura => _mp || _res;
         public event Action AuraChanged;
 
         public AurasTracker()

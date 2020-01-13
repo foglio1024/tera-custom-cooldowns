@@ -10,7 +10,6 @@
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:WarriorLayoutVM}">
     <UserControl.Resources>
-        <converters:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
         <ControlTemplate x:Key="EdgeArrowLayout">
             <elements:EdgeArrowLayout EdgeCounter="{Binding EdgeCounter}"  Margin="0 -40"
                                       FillBrush="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}, ConverterParameter=light_fallback}"
@@ -35,10 +34,6 @@
                 </FrameworkElement.RenderTransform>
             </elements:EdgeBarLayout>
         </ControlTemplate>
-        <Storyboard x:Key="Warn" RepeatBehavior="Forever">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"  Duration="0:0:0.2" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.2" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}"/>
-        </Storyboard>
         <Storyboard x:Key="Explode" >
             <DoubleAnimation Storyboard.TargetProperty="Opacity"  Duration="0:0:0.1" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
             <DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.1" Duration="0:0:0.2" From="1" To=".2"/>
@@ -219,7 +214,7 @@
                     <TranslateTransform X="0" Y="92" />
                 </FrameworkElement.RenderTransform>
             </skills:RhombSkillEffectControl>
-            <!---->
+
             <Grid Visibility="{Binding AtkSpeedProc, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="18"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
