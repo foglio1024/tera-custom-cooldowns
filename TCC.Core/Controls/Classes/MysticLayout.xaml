@@ -5,9 +5,539 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MysticLayoutVM}"
-             HorizontalAlignment="Center">
-    <Grid HorizontalAlignment="Center" Width="Auto" IsHitTestVisible="False">
+             xmlns:controls="clr-namespace:TCC.Controls"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MysticLayoutVM}">
+
+    <Grid Margin="20 100 20 100" ClipToBounds="False" Width="Auto">
+        <Grid.Resources>
+            <Style TargetType="controls:Arc" x:Key="StanceArc">
+                <Setter Property="Height" Value="91" />
+                <Setter Property="Width" Value="91" />
+                <Setter Property="Rhomb" Value="True" />
+                <Setter Property="StartAngle" Value="56" />
+                <Setter Property="EndAngle" Value="123" />
+                <Setter Property="Margin" Value="-14" />
+                <Setter Property="RenderTransformOrigin" Value=".5 .5" />
+                <Setter Property="Stroke" Value="{StaticResource GreenBrush}" />
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="{StaticResource GreenColor}" ShadowDepth="5" Direction="0"
+                                          BlurRadius="10" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Grid" x:Key="ElementalizeWarnGrid">
+                <Setter Property="Opacity" Value="0" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ElementalizeWarning}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                            <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Warn}" />
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <StopStoryboard BeginStoryboardName="StartPulsing" />
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="0"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Grid" x:Key="AuraOffenseWarnGrid">
+                <Setter Property="Opacity" Value="0" />
+                <Setter Property="RenderTransformOrigin" Value=".5 .5" />
+                <Setter Property="RenderTransform" >
+                    <Setter.Value>
+                        <RotateTransform Angle="90"></RotateTransform>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding OffenseAuraWarning}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                            <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Warn}" />
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <StopStoryboard BeginStoryboardName="StartPulsing" />
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="0"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Grid" x:Key="AuraSupportWarnGrid">
+                <Setter Property="Opacity" Value="0" />
+                <Setter Property="RenderTransformOrigin" Value=".5 .5" />
+                <Setter Property="RenderTransform" >
+                    <Setter.Value>
+                        <RotateTransform Angle="-90"></RotateTransform>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding SupportAuraWarning}" Value="True">
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="1"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                            <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Warn}" />
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <StopStoryboard BeginStoryboardName="StartPulsing" />
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation To="0"
+                                                     Storyboard.TargetProperty="Opacity"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+        </Grid.Resources>
+        <!--Elementalize bottom-->
+        <controls:Arc StrokeThickness="10"
+                      Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibleCollapsed}}"
+                      Style="{StaticResource StanceArc}">
+            <Shape.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="90" />
+                    <TranslateTransform X="0" Y="-2" />
+                </TransformGroup>
+            </Shape.RenderTransform>
+
+        </controls:Arc>
+        <controls:Arc StrokeThickness="10"
+                      Visibility="{Binding Auras.SupportAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+                      Style="{StaticResource StanceArc}">
+            <Shape.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform X="-3" />
+
+                </TransformGroup>
+            </Shape.RenderTransform>
+
+        </controls:Arc>
+        <controls:Arc StrokeThickness="10"
+                      Visibility="{Binding Auras.OffenseAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+                      Style="{StaticResource StanceArc}">
+            <Shape.RenderTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="-180" />
+                    <TranslateTransform X="3" />
+
+                </TransformGroup>
+            </Shape.RenderTransform>
+
+        </controls:Arc>
+        <!--ElementalizeWarning bottom-->
+        <Grid Style="{StaticResource ElementalizeWarnGrid}">
+            <controls:Arc StrokeThickness="10" Stroke="White" Style="{StaticResource StanceArc}">
+                <Shape.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" />
+                </Shape.Effect>
+                <Shape.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90" />
+                        <TranslateTransform X="0" Y="-2" />
+                    </TransformGroup>
+                </Shape.RenderTransform>
+            </controls:Arc>
+        </Grid>
+        <Grid Style="{StaticResource AuraOffenseWarnGrid}">
+            <controls:Arc StrokeThickness="10" Stroke="White" Style="{StaticResource StanceArc}" Opacity=".5">
+                <Shape.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" />
+                </Shape.Effect>
+                <Shape.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90" />
+                        <TranslateTransform X="0" Y="-2" />
+                    </TransformGroup>
+                </Shape.RenderTransform>
+            </controls:Arc>
+        </Grid>
+        <Grid Style="{StaticResource AuraSupportWarnGrid}">
+            <controls:Arc StrokeThickness="10" Stroke="White" Style="{StaticResource StanceArc}" Opacity=".5">
+                <Shape.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" />
+                </Shape.Effect>
+                <Shape.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90" />
+                        <TranslateTransform X="0" Y="-2" />
+                    </TransformGroup>
+                </Shape.RenderTransform>
+            </controls:Arc>
+        </Grid>
+
+        <!--Image-->
+        <Image Source="../../resources/images/char_window_bg_triple.png" Margin="-14" Visibility="Visible"
+               Stretch="Uniform"
+               Effect="{StaticResource ClassWindowSkillBorderShadow}"
+               Width="101" RenderTransformOrigin=".5 .5" />
+        <!--Crit-->
+        <!--<Rectangle HorizontalAlignment="Left" Opacity="1"
+                   Width="35" VerticalAlignment="Stretch" Margin="-10 0 0 0"
+                   Height="35"
+                   Visibility="{Binding Auras.CritAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+        >
+            <Rectangle.Effect>
+                <BlurEffect Radius="20"/>
+            </Rectangle.Effect>
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush
+                    ImageSource="{Binding AuraMerciless.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
+        </Rectangle>-->
+        <Rectangle HorizontalAlignment="Left" Opacity="1"
+                   Width="35" VerticalAlignment="Stretch" Margin="-5 0 0 0"
+                   Height="35"
+                   Visibility="{Binding Auras.CritAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+
+        >
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush  
+                    ImageSource="{Binding AuraMerciless.Skill.IconName, Converter={StaticResource IconNameToPath}}" >
+                </ImageBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <!--Mana-->
+        <!--<Rectangle HorizontalAlignment="Right" Opacity="1"
+                   Width="35" VerticalAlignment="Stretch" Margin="0 0 -10 0"
+                   Height="35"
+                   Visibility="{Binding Auras.ManaAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+                   >
+            <Rectangle.Effect>
+                <BlurEffect Radius="20"/>
+            </Rectangle.Effect>
+
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush
+                    ImageSource="{Binding AuraTenacious.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
+        </Rectangle>-->
+        <Rectangle HorizontalAlignment="Right" Opacity="1"
+                   Width="35" VerticalAlignment="Stretch" Margin="0 0 -5 0"
+                   Height="35"
+                   Visibility="{Binding Auras.ManaAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+                   >
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush
+                    ImageSource="{Binding AuraTenacious.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <!--Swift-->
+        <!--<Rectangle HorizontalAlignment="Left" Opacity="1"
+                   Width="35" VerticalAlignment="Stretch" Margin="-10 0 0 0"
+                   Height="35"
+                   Visibility="{Binding Auras.SwiftAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+        >
+            <Rectangle.Effect>
+                <BlurEffect Radius="20"/>
+            </Rectangle.Effect>
+
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush
+                    ImageSource="{Binding AuraSwift.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
+        </Rectangle>-->
+        <Rectangle HorizontalAlignment="Left" Opacity="1"
+                   Width="35" VerticalAlignment="Stretch" Margin="-5 0 0 0"
+                   Height="35"
+                   Visibility="{Binding Auras.SwiftAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+
+        >
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush
+                    ImageSource="{Binding AuraSwift.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <!--CritRes-->
+        <!--<Rectangle HorizontalAlignment="Right" Opacity="1"
+                   Width="35" VerticalAlignment="Stretch" Margin="0 0 -10 0"
+                   Height="35"
+                   Visibility="{Binding Auras.CritResAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+                   >
+            <Rectangle.Effect>
+                <BlurEffect Radius="20"/>
+            </Rectangle.Effect>
+
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush
+                    ImageSource="{Binding AuraUnyielding.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
+        </Rectangle>-->
+        <Rectangle HorizontalAlignment="Right" Opacity="1"
+                   Width="35" VerticalAlignment="Stretch" Margin="0 0 -5 0"
+                   Height="35"
+                   Visibility="{Binding Auras.CritResAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+                   >
+
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush
+                    ImageSource="{Binding AuraUnyielding.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle HorizontalAlignment="Center" Opacity="1"
+                   Width="35" VerticalAlignment="Bottom" Margin="0 0 0 -6"
+                   Height="35"
+                   Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibleCollapsed}}"
+
+        >
+            <Rectangle.OpacityMask>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Rectangle RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"
+                                   Fill="White" Width="60" Height="60" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Rectangle.OpacityMask>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding ElementalizeIcon, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Image Source="../../resources/images/char_window_fg.png" Margin="-14" Visibility="Visible" Stretch="Uniform"
+               Width="101" RenderTransformOrigin=".5 .5" Opacity=".7" >
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="5"></DropShadowEffect>
+            </Image.Effect>
+        </Image>
+        <!--Elementalize top-->
+        <controls:Arc StrokeThickness="1"
+                      Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibleCollapsed}}"
+                      Style="{StaticResource StanceArc}">
+            <Shape.RenderTransform>
+                <RotateTransform Angle="90" />
+            </Shape.RenderTransform>
+        </controls:Arc>
+        <controls:Arc StrokeThickness="1"
+                      Visibility="{Binding Auras.SupportAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+                      Style="{StaticResource StanceArc}">
+            <Shape.RenderTransform>
+                <RotateTransform Angle="0" />
+            </Shape.RenderTransform>
+        </controls:Arc>
+        <controls:Arc StrokeThickness="1"
+                      Visibility="{Binding Auras.OffenseAura, Converter={StaticResource BoolToVisibleCollapsed}}"
+                      Style="{StaticResource StanceArc}">
+            <Shape.RenderTransform>
+                <RotateTransform Angle="-180" />
+            </Shape.RenderTransform>
+        </controls:Arc>
+
+        <!--ElementalizeWarning top-->
+        <Grid Style="{StaticResource ElementalizeWarnGrid}">
+            <controls:Arc StrokeThickness="1" Stroke="White" Style="{StaticResource StanceArc}">
+                <Shape.RenderTransform>
+                    <RotateTransform Angle="90" />
+                </Shape.RenderTransform>
+                <Shape.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" />
+                </Shape.Effect>
+            </controls:Arc>
+        </Grid>
+        <Grid Style="{StaticResource AuraOffenseWarnGrid}">
+            <controls:Arc StrokeThickness="1" Stroke="White" Style="{StaticResource StanceArc}">
+                <Shape.RenderTransform>
+                    <RotateTransform Angle="90" />
+                </Shape.RenderTransform>
+                <Shape.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" />
+                </Shape.Effect>
+            </controls:Arc>
+        </Grid>
+        <Grid Style="{StaticResource AuraSupportWarnGrid}">
+            <controls:Arc StrokeThickness="1" Stroke="White" Style="{StaticResource StanceArc}">
+                <Shape.RenderTransform>
+                    <RotateTransform Angle="90" />
+                </Shape.RenderTransform>
+                <Shape.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15" />
+                </Shape.Effect>
+            </controls:Arc>
+        </Grid>
+        <!--Class icon-->
+        <Path Data="{StaticResource SvgClassMystic}" Margin="0 -3 0 0" Opacity=".3" VerticalAlignment="Center"
+              HorizontalAlignment="Center" Fill="White"
+              Width="29" />
+
+        <!--Vow-->
+        <Grid Width="Auto" HorizontalAlignment="Center">
+            <FrameworkElement.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="-48" X="-47" />
+                </TransformGroup>
+            </FrameworkElement.RenderTransform>
+
+            <Border Style="{StaticResource ClassWindowSkillBorder}"
+                    VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+
+            <skills:RhombSkillEffectControl DataContext="{Binding Vow}" IsHitTestVisible="False"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch" />
+        </Grid>
+
+        <!--Contagion-->
+        <Grid Width="Auto" HorizontalAlignment="Center">
+            <FrameworkElement.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="-48" X="47" />
+                </TransformGroup>
+            </FrameworkElement.RenderTransform>
+
+            <Border Style="{StaticResource ClassWindowSkillBorder}" VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <skills:RhombFixedSkillControl DataContext="{Binding Contagion}"
+                                           IsHitTestVisible="False" />
+        </Grid>
+
+        <!--Wrath-->
+        <Grid Width="Auto" HorizontalAlignment="Center">
+            <FrameworkElement.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="48" X="47" />
+                </TransformGroup>
+            </FrameworkElement.RenderTransform>
+
+            <Border Style="{StaticResource ClassWindowSkillBorder}" VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <skills:RhombFixedSkillControl DataContext="{Binding ThrallOfWrath}"
+                                           IsHitTestVisible="False" />
+        </Grid>
+        <!--Vengeance-->
+        <Grid Width="Auto" HorizontalAlignment="Center">
+            <FrameworkElement.RenderTransform>
+                <TransformGroup>
+                    <TranslateTransform Y="48" X="-47" />
+                </TransformGroup>
+            </FrameworkElement.RenderTransform>
+
+            <Border Style="{StaticResource ClassWindowSkillBorder}" VerticalAlignment="Center">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <skills:RhombFixedSkillControl DataContext="{Binding ThrallOfVengeance}"
+                                           IsHitTestVisible="False" />
+        </Grid>
+
+
+    </Grid>
+
+    <!--<Grid HorizontalAlignment="Center" Width="Auto" IsHitTestVisible="False" Visibility="Collapsed">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -18,28 +548,23 @@
             <Polygon Stroke="{StaticResource RevampBorderBrush}" Fill="{StaticResource RevampDarkerBackground70Brush}"
                      StrokeThickness="1"
                      RenderTransformOrigin=".5 .5" Margin="-29 -15 0 15"
-                     Points="30 68.5, 67.5 30, 102.5 65,137.5 30, 175 68.5, 137.5 106, 102.5 72, 67.5 106">
-            </Polygon>
+                     Points="30 68.5, 67.5 30, 102.5 65,137.5 30, 175 68.5, 137.5 106, 102.5 72, 67.5 106" />
 
             <StackPanel Orientation="Horizontal" RenderTransformOrigin=".5 .5" Margin="4 0 0 0">
-                <skills:RhombFixedSkillControl VerticalAlignment="Center" Margin="0 0 1 0" DataContext="{Binding ThrallOfVengeance}" />
+                <skills:RhombFixedSkillControl VerticalAlignment="Center" Margin="0 0 1 0"
+                                               DataContext="{Binding ThrallOfVengeance}" />
                 <skills:RhombFixedSkillControl VerticalAlignment="Center" DataContext="{Binding ThrallOfWrath}" />
-
-                <!--<local:RhombFixedSkillControl VerticalAlignment="Top" DataContext="{Binding ThrallOfProtection }"/>-->
-                <!--<local:RhombFixedSkillControl VerticalAlignment="Top" Margin="-35 0 0 0" DataContext="{Binding ThrallOfLife}"/>-->
-                <!--<local:RhombFixedSkillControl VerticalAlignment="Top" Margin="-35 0 0 0" DataContext="{Binding  KingBlob}"/>-->
             </StackPanel>
 
         </Grid>
-        <Grid Margin="0 -15 0 -12" Grid.Row="1" >
+        <Grid Margin="0 -15 0 -12" Grid.Row="1">
 
             <Border BorderBrush="{StaticResource RevampBorderBrush}"
-                        BorderThickness="1"
-                        RenderTransform="{StaticResource Rotate45}"
-                        RenderTransformOrigin=".5 .5"
-                        Background="{StaticResource RevampDarkerBackground70Brush}"
-                        Width="55" Height="55" Margin="0 4 0 0">
-            </Border>
+                    BorderThickness="1"
+                    RenderTransform="{StaticResource Rotate45}"
+                    RenderTransformOrigin=".5 .5"
+                    Background="{StaticResource RevampDarkerBackground70Brush}"
+                    Width="55" Height="55" Margin="0 4 0 0" />
             <Grid Grid.RowSpan="2" Grid.Column="0"
                   Margin="0" Opacity="0"
                   Width="54" Height="54"
@@ -52,21 +577,21 @@
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation To="1" 
+                                            <DoubleAnimation To="1"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             Duration="0:0:0.2"/>
+                                                             Duration="0:0:0.2" />
                                         </Storyboard>
 
                                     </BeginStoryboard>
-                                    <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Pulse}"/>
+                                    <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Pulse}" />
                                 </DataTrigger.EnterActions>
                                 <DataTrigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="StartPulsing"/>
+                                    <StopStoryboard BeginStoryboardName="StartPulsing" />
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation To="0" 
+                                            <DoubleAnimation To="0"
                                                              Storyboard.TargetProperty="Opacity"
-                                                             Duration="0:0:0.2"/>
+                                                             Duration="0:0:0.2" />
                                         </Storyboard>
 
                                     </BeginStoryboard>
@@ -77,48 +602,46 @@
                     </Style>
 
                 </Grid.Style>
-                <Border  BorderThickness="4" RenderTransformOrigin=".5 .5"
-                    BorderBrush="White" Background="Transparent">
+                <Border BorderThickness="4" RenderTransformOrigin=".5 .5"
+                        BorderBrush="White" Background="Transparent">
                     <Border.Effect>
-                        <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10"/>
+                        <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" />
                     </Border.Effect>
                     <Border.RenderTransform>
-                        <RotateTransform Angle="45"/>
+                        <RotateTransform Angle="45" />
                     </Border.RenderTransform>
                 </Border>
             </Grid>
-            <!--<StackPanel Margin="-1" VerticalAlignment="Center">
-                <StackPanel.LayoutTransform>
-                    <ScaleTransform ScaleX=".5" ScaleY=".5"></ScaleTransform>
-                </StackPanel.LayoutTransform>
-                <local:RhombFixedSkillControl HorizontalAlignment="Center" DataContext="{Binding AuraMerciless}" x:Name="CritAura" />
-                <StackPanel Orientation="Horizontal" Margin="0 -34" HorizontalAlignment="Center">
-                    <local:RhombFixedSkillControl VerticalAlignment="Top" DataContext="{Binding AuraTenacious}" x:Name="ManaAura"/>
-                    <local:RhombFixedSkillControl VerticalAlignment="Top" DataContext="{Binding AuraSwift}" x:Name="SwiftAura"/>
-                </StackPanel>
-                <local:RhombFixedSkillControl HorizontalAlignment="Center" DataContext="{Binding AuraUnyielding}" x:Name="CritResAura"/>
-            </StackPanel>-->
+
             <UniformGrid RenderTransformOrigin=".5 .5"
-                         Margin="0 5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
-            >
+                         Margin="0 5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <UniformGrid.RenderTransform>
                     <TransformGroup>
-                        <StaticResource ResourceKey="Rotate45"/>
-                        <TranslateTransform X="-25" Y="10"></TranslateTransform>
+                        <StaticResource ResourceKey="Rotate45" />
+                        <TranslateTransform X="-25" Y="10" />
                     </TransformGroup>
                 </UniformGrid.RenderTransform>
                 <UniformGrid.LayoutTransform>
-                    <ScaleTransform ScaleX=".495" ScaleY=".495"></ScaleTransform>
+                    <ScaleTransform ScaleX=".495" ScaleY=".495" />
                 </UniformGrid.LayoutTransform>
-                <skills:RhombFixedSkillControl Margin="-25" HorizontalAlignment="Center" DataContext="{Binding AuraMerciless}" x:Name="CritAura"  LayoutTransform="{StaticResource Rotate45Inv}"/>
-                <skills:RhombFixedSkillControl Margin="-25" VerticalAlignment="Top" DataContext="{Binding AuraTenacious}" x:Name="ManaAura"  LayoutTransform="{StaticResource Rotate45Inv}"/>
-                <skills:RhombFixedSkillControl Margin="-25" VerticalAlignment="Top" DataContext="{Binding AuraSwift}" x:Name="SwiftAura"  LayoutTransform="{StaticResource Rotate45Inv}"/>
-                <skills:RhombFixedSkillControl Margin="-25" HorizontalAlignment="Center" DataContext="{Binding AuraUnyielding}" x:Name="CritResAura"  LayoutTransform="{StaticResource Rotate45Inv}"/>
+                <skills:RhombFixedSkillControl Margin="-25" HorizontalAlignment="Center"
+                                               DataContext="{Binding AuraMerciless}" x:Name="CritAura"
+                                               LayoutTransform="{StaticResource Rotate45Inv}" />
+                <skills:RhombFixedSkillControl Margin="-25" VerticalAlignment="Top"
+                                               DataContext="{Binding AuraTenacious}" x:Name="ManaAura"
+                                               LayoutTransform="{StaticResource Rotate45Inv}" />
+                <skills:RhombFixedSkillControl Margin="-25" VerticalAlignment="Top" DataContext="{Binding AuraSwift}"
+                                               x:Name="SwiftAura" LayoutTransform="{StaticResource Rotate45Inv}" />
+                <skills:RhombFixedSkillControl Margin="-25" HorizontalAlignment="Center"
+                                               DataContext="{Binding AuraUnyielding}" x:Name="CritResAura"
+                                               LayoutTransform="{StaticResource Rotate45Inv}" />
             </UniformGrid>
-            <Border Width="55" Height="55" BorderThickness="3" Grid.Row="0" Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibleCollapsed}}" RenderTransformOrigin=".5 .5"
-                BorderBrush="{StaticResource GreenBrush}" Background="Transparent" Margin="0 4 0 0">
+            <Border Width="55" Height="55" BorderThickness="3" Grid.Row="0"
+                    Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibleCollapsed}}"
+                    RenderTransformOrigin=".5 .5"
+                    BorderBrush="{StaticResource GreenBrush}" Background="Transparent" Margin="0 4 0 0">
                 <Border.RenderTransform>
-                    <RotateTransform Angle="45"/>
+                    <RotateTransform Angle="45" />
                 </Border.RenderTransform>
             </Border>
         </Grid>
@@ -126,109 +649,34 @@
             <Polygon Stroke="{StaticResource RevampBorderBrush}" Fill="{StaticResource RevampDarkerBackground70Brush}"
                      StrokeThickness="1"
                      RenderTransformOrigin=".5 .5" Margin="-29 3 0 -3" IsHitTestVisible="False"
-                     Points="30 68.5, 102.5 -4, 175 68.5, 137.5 106, 102.5 72, 67.5 106">
-            </Polygon>
+                     Points="30 68.5, 102.5 -4, 175 68.5, 137.5 106, 102.5 72, 67.5 106" />
 
             <Grid RenderTransformOrigin=".5 .5" HorizontalAlignment="Center"
-                        Margin="0 0 0 0">
+                  Margin="0 0 0 0">
                 <skills:RhombFixedSkillControl VerticalAlignment="Top" Margin="0"
-                                              DataContext="{Binding Contagion}" IsHitTestVisible="False">
+                                               DataContext="{Binding Contagion}" IsHitTestVisible="False">
                     <UIElement.RenderTransform>
-                        <TranslateTransform X="-35" Y="37"/>
+                        <TranslateTransform X="-35" Y="37" />
                     </UIElement.RenderTransform>
                 </skills:RhombFixedSkillControl>
                 <skills:RhombSkillEffectControl VerticalAlignment="Top" Margin="-2"
-                                                DataContext="{Binding VolleyOfCurse}" HorizontalAlignment="Center" IsHitTestVisible="False">
+                                                DataContext="{Binding VolleyOfCurse}" HorizontalAlignment="Center"
+                                                IsHitTestVisible="False">
                     <UIElement.RenderTransform>
-                        <TranslateTransform X="35" Y="37"/>
+                        <TranslateTransform X="35" Y="37" />
                     </UIElement.RenderTransform>
 
                 </skills:RhombSkillEffectControl>
                 <skills:RhombSkillEffectControl VerticalAlignment="Top" Margin="-2"
                                                 DataContext="{Binding Vow }" IsHitTestVisible="False">
                     <UIElement.RenderTransform>
-                        <TranslateTransform X="0" Y="2"/>
+                        <TranslateTransform X="0" Y="2" />
                     </UIElement.RenderTransform>
 
                 </skills:RhombSkillEffectControl>
-                <!--<StackPanel Margin="-33 35 0 0" >
-                <StackPanel.LayoutTransform>
-                    <ScaleTransform ScaleX=".48" ScaleY=".48"></ScaleTransform>
-                </StackPanel.LayoutTransform>
-                <local:RhombFixedSkillControl HorizontalAlignment="Center" DataContext="{Binding AuraMerciless}"/>
-                <StackPanel  Orientation="Horizontal" Margin="0 -34" HorizontalAlignment="Center">
-                    <local:RhombFixedSkillControl VerticalAlignment="Top" DataContext="{Binding AuraTenacious}" />
-                    <local:RhombFixedSkillControl VerticalAlignment="Top" DataContext="{Binding AuraSwift}" />
-                </StackPanel>
-                <local:RhombFixedSkillControl HorizontalAlignment="Center" DataContext="{Binding AuraUnyielding}" />
-            </StackPanel>-->
             </Grid>
-        </Grid>
-
-    </Grid>
-
-
-    <!--<Grid Margin="5" Name="Root" ClipToBounds="False">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center" Margin="0" ClipToBounds="False">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style TargetType="Border" BasedOn="{StaticResource DefaultBorderStyle}" x:Key="MysticBorder">
-                    <Setter Property="Effect" Value="{x:Null}"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Elementalize}" Value="True">
-                            <Setter Property="BorderBrush" Value="{StaticResource GreenColor}"></Setter>
-                            <Setter Property="BorderThickness" Value="2"></Setter>
-                            <Setter Property="Effect">
-                                <Setter.Value>
-                                    <DropShadowEffect ShadowDepth="0" Color="{StaticResource GreenColor}" BlurRadius="10"></DropShadowEffect>
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-
-            </Grid.Resources>
-            <Border Style="{StaticResource MysticBorder}"
-                    Opacity="1"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    CornerRadius="28"
-                    Margin="-10 1 -17 2"
-                    VerticalAlignment="Stretch"
-                    >
-            </Border>
-
-            <Grid Grid.Column="0" Margin="0" ClipToBounds="False" Background="Transparent">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <local:MysticAurasIndicator Grid.Column="1" VerticalAlignment="Center" UseLayoutRounding="True"
-                                            HorizontalAlignment="Stretch" Padding="0,0"
-                                            Margin="6 0 5 0" DataContext="{Binding Auras}" />
-
-                <local:FixedSkillControl Padding="30" DataContext="{Binding Contagion}" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" -40 -30"/>
-
-                <local:BuffCooldownControl Padding="30"  Grid.Column="2" DataContext="{Binding Vow}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-44 -34" >
-                    <local:BuffCooldownControl.LayoutTransform>
-                        <ScaleTransform ScaleX="1.05" ScaleY="1.05"></ScaleTransform>
-                    </local:BuffCooldownControl.LayoutTransform>
-                </local:BuffCooldownControl>
-
-            </Grid>
-
         </Grid>
     </Grid>-->
+
 
 </UserControl>

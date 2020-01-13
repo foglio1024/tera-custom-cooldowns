@@ -22,6 +22,7 @@ namespace TCC.ViewModels
         public Cooldown AuraTenacious { get; private set; }
         public Cooldown AuraSwift { get; private set; }
         public Cooldown AuraUnyielding { get; private set; }
+        public string ElementalizeIcon { get; } = "icon_skills.spiritedness_tex";
         public bool Elementalize
         {
             get => _elementalize;
@@ -34,7 +35,8 @@ namespace TCC.ViewModels
             }
         }
         public bool ElementalizeWarning => !Elementalize && (Game.Combat || Game.Encounter);
-
+        public bool OffenseAuraWarning => !Auras.OffenseAura && (Game.Combat || Game.Encounter);
+        public bool SupportAuraWarning => !Auras.SupportAura && (Game.Combat || Game.Encounter);
         public MysticLayoutVM()
         {
             Auras = new AurasTracker();
@@ -116,10 +118,15 @@ namespace TCC.ViewModels
             AuraSwift.FlashOnAvailable = !Auras.CritAura && !Auras.SwiftAura;
             AuraTenacious.FlashOnAvailable = !Auras.ManaAura && !Auras.CritResAura;
             AuraUnyielding.FlashOnAvailable = !Auras.ManaAura && !Auras.CritResAura;
+
+            N(nameof(OffenseAuraWarning));
+            N(nameof(SupportAuraWarning));
         }
         private void OnCombatChanged()
         {
             N(nameof(ElementalizeWarning));
+            N(nameof(OffenseAuraWarning));
+            N(nameof(SupportAuraWarning));
             CheckAurasWarning();
         }
 
