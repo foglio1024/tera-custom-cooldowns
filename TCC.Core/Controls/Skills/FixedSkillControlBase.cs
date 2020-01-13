@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoglioUtils;
+using System;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -24,8 +25,8 @@ namespace TCC.Controls.Skills
         }
         public FixedSkillControlBase()
         {
-            _resetAnimation = new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(500)) { EasingFunction = new QuadraticEase() };
-            _glowAnimation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
+            _resetAnimation = AnimationFactory.CreateDoubleAnimation(500, to: 0, from: 30, true, framerate: 20); // new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(500)) { EasingFunction = new QuadraticEase() };
+            _glowAnimation = AnimationFactory.CreateDoubleAnimation(200, to: 0, from: 1, framerate: 20); // new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
         }
 
         protected override void OnCooldownStarted(CooldownMode mode)
@@ -38,7 +39,6 @@ namespace TCC.Controls.Skills
         {
             base.OnCooldownEnded(mode);
             AnimateAvailableSkill();
-            Timeline.SetDesiredFrameRate(_glowAnimation, 20);
             GlowRef?.BeginAnimation(OpacityProperty, _glowAnimation);
         }
         protected override void OnLoaded(object sender, RoutedEventArgs e)
@@ -72,7 +72,6 @@ namespace TCC.Controls.Skills
         }
         private void OnReset()
         {
-            Timeline.SetDesiredFrameRate(_resetAnimation, 20);
             ResetArcRef.BeginAnimation(Shape.StrokeThicknessProperty, _resetAnimation);
         }
 
