@@ -269,7 +269,8 @@ namespace TCC.Interop.Proxy
             await TccStub.CallAsync("initialize", new JObject
             {
                 { "useLfg", App.Settings.LfgWindowSettings.Enabled },
-                { "EnablePlayerMenu", App.Settings.EnablePlayerMenu }
+                { "EnablePlayerMenu", App.Settings.EnablePlayerMenu },
+                { "ChatEnabled", App.Settings.ChatEnabled }
             });
         }
 
