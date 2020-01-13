@@ -161,7 +161,7 @@ namespace TCC
                 if (!App.Loading)
                 {
                     Log.N("TCC",
-                        $"Some database files are out of date, updating... Contact the deveolper if you see this message at every login.",
+                        $"Some database files are out of date, updating... Contact the developer if you see this message at every login.",
                         NotificationType.Warning, 5000);
                     ChatManager.Instance.AddTccMessage($"Some database files are out of date, updating...");
                 }
