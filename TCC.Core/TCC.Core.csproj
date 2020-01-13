@@ -1315,6 +1315,7 @@
     <Resource Include="resources\images\ic_label_white_24dp_2x.png" />
     <Resource Include="resources\images\chat.png" />
     <Resource Include="resources\images\kr_boss_icon_full.png" />
+    <Resource Include="resources\images\char_window_bg_triple.png" />
     <Content Include="TCC.exe.manifest">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
