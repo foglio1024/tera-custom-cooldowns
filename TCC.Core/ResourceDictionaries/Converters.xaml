@@ -80,5 +80,6 @@
     <uc:BooleanInverter x:Key="BoolInverter"/>
     <c:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
     <c:NotificationTypeToBrush x:Key="NotificationTypeToBrush"/>
+    <c:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
 
 </ResourceDictionary>

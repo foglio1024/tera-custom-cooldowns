@@ -21,6 +21,11 @@
         <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" BeginTime="0:0:0.2"/>
     </Storyboard>
 
+    <Storyboard x:Key="Warn" RepeatBehavior="Forever">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"  Duration="0:0:0.2" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.2" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}"/>
+    </Storyboard>
+
     <!-- Fonts -->
     <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid Sans</FontFamily>
     <FontFamily x:Key="DroidSansMono">pack://application:,,,/fonts/#Droid Sans Mono</FontFamily>
