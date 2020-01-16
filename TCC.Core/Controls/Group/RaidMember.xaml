@@ -117,7 +117,7 @@
             </Grid.ColumnDefinitions>
             <!--Name-->
             <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff" Cursor="Hand" ToolTipService.ShowDuration="50000"
-                       PreviewMouseLeftButtonDown="ShowUserMenu"
+                       PreviewMouseRightButtonDown="ShowUserMenu"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,-2,0,2" FontSize="12" Grid.Row="0" Grid.Column="0">
                 <Run Text="{Binding Level}" FontSize="10" Foreground="#6fff"/>
                 <Run Text="{Binding Name, Mode=OneWay}" FontSize="12"/>

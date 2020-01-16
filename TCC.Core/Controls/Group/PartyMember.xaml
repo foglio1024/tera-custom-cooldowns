@@ -115,7 +115,7 @@
             <!--Name-->
             <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff" Cursor="Hand"
                        ToolTipService.ShowDuration="50000"
-                       PreviewMouseLeftButtonDown="ShowUserMenu"
+                       PreviewMouseRightButtonDown="ShowUserMenu"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,-2,0,4" FontSize="12"
                        Grid.Row="0" Grid.Column="0">
                 <Run Text="{Binding Level}" FontSize="12" Foreground="#6fff" />
