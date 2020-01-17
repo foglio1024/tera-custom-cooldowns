@@ -88,19 +88,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Logger.cs" />
+    <Compile Include="ViewModels\Steps\CreateReleaseStepVM.cs" />
+    <Compile Include="ViewModels\Steps\GenerateStepVM.cs" />
+    <Compile Include="ViewModels\Steps\GetVersionStepVM.cs" />
     <Compile Include="Publisher.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="ViewModels\PublisherVM.cs" />
+    <Compile Include="Windows\PublisherWindow.xaml.cs">
+      <DependentUpon>PublisherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Steps\PushZipStepVM.cs" />
+    <Compile Include="ViewModels\Steps\StepVM.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Windows\PublisherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -130,9 +136,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="exclusions.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj">
       <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
       <Name>FoglioUtils</Name>
@@ -142,6 +145,7 @@
       <Name>TCC.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>del "$(SolutionDir)\release\*.xml"
