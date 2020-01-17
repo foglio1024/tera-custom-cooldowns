@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" 
              ClipToBounds="False" Background="Transparent"
              MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData  Cooldown}">
@@ -18,13 +19,13 @@
                     <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}"></ImageBrush>
                 </Ellipse.Fill>
             </Ellipse>
-            <local:Arc Margin="-500" x:Name="WarnArc" Opacity=".8" EndAngle="359.9" Stroke="White" StrokeThickness="30" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <local:Arc.LayoutTransform>
+            <controls:Arc Margin="-500" x:Name="WarnArc" Opacity=".8" EndAngle="359.9" Stroke="White" StrokeThickness="30" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <controls:Arc.LayoutTransform>
                     <ScaleTransform ScaleX="0" ScaleY="0"/>
-                </local:Arc.LayoutTransform>
-            </local:Arc>
+                </controls:Arc.LayoutTransform>
+            </controls:Arc>
         </Grid>
-        <local:Arc x:Name="Arc" 
+        <controls:Arc x:Name="Arc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
                    Width="Auto" 
@@ -34,7 +35,7 @@
                    EndAngle="0.01" 
                    HorizontalAlignment="Stretch" 
                    VerticalAlignment="Stretch" />
-        <local:Arc x:Name="PreArc" 
+        <controls:Arc x:Name="PreArc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
                    Width="Auto" 
@@ -91,14 +92,14 @@
             <Ellipse Fill="{StaticResource HpBrush}" Effect="{StaticResource DropShadow}"></Ellipse>
             <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5"></Path>
         </Grid>
-        <local:Arc StrokeThickness="0" Stroke="White" EndAngle="359.9" x:Name="ResetArc" Opacity=".6" Margin="2" RenderTransformOrigin=".5 .5">
-            <local:Arc.Effect>
+        <controls:Arc StrokeThickness="0" Stroke="White" EndAngle="359.9" x:Name="ResetArc" Opacity=".6" Margin="2" RenderTransformOrigin=".5 .5">
+            <controls:Arc.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="15" Color="White"></DropShadowEffect>
-            </local:Arc.Effect>
-            <local:Arc.RenderTransform>
+            </controls:Arc.Effect>
+            <controls:Arc.RenderTransform>
                 <ScaleTransform />
-            </local:Arc.RenderTransform>
-        </local:Arc>
+            </controls:Arc.RenderTransform>
+        </controls:Arc>
 
     </Grid>
 </skills:FixedSkillControlBase>

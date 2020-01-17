@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" Loaded="BrawlerLayout_OnLoaded" d:DataContext="{d:DesignData BrawlerLayoutVM}">
     <Grid Width="Auto" Margin="50 20 55 75" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
@@ -40,16 +41,16 @@
                     </Image.Style>
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5" StrokeThickness="4"
+                    <controls:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5" StrokeThickness="4"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Margin="-20" Width="81" Height="81" x:Name="MainReArc"
                                Rhomb="True">
-                        <local:Arc.RenderTransform>
+                        <controls:Arc.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="180" />
                             </TransformGroup>
-                        </local:Arc.RenderTransform>
-                        <local:Arc.Style>
+                        </controls:Arc.RenderTransform>
+                        <controls:Arc.Style>
                             <Style TargetType="Shape">
                                 <Setter Property="Opacity" Value=".8" />
                                 <Setter Property="Stroke" Value="{StaticResource RageBrushLight}" />
@@ -69,8 +70,8 @@
 
                                 </Style.Triggers>
                             </Style>
-                        </local:Arc.Style>
-                    </local:Arc>
+                        </controls:Arc.Style>
+                    </controls:Arc>
 
                     <Grid.Style>
                         <Style TargetType="FrameworkElement">

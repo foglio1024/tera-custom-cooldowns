@@ -8,6 +8,7 @@
              xmlns:classBars="clr-namespace:TCC.Controls.Classes"
              xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ValkyrieLayoutVM}">
     <Grid Width="Auto" Margin="50 20" Name="Root" >
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" Margin="0">
@@ -50,19 +51,19 @@
                     </Image.Style>
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                    <controls:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
                                StrokeThickness="4" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-18" 
                                Width="83" Height="83" x:Name="MainReArc">
-                        <local:Arc.LayoutTransform>
+                        <controls:Arc.LayoutTransform>
                                 <RotateTransform Angle="180"/>
-                        </local:Arc.LayoutTransform>
+                        </controls:Arc.LayoutTransform>
                         <Shape.Effect>
                             <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
                         </Shape.Effect>
 
-                        <local:Arc.Style>
+                        <controls:Arc.Style>
                             <Style TargetType="Shape">
                                 <Setter Property="Opacity" Value=".7"/>
                                 <Setter Property="Stroke" Value="White"/>
@@ -75,17 +76,17 @@
                                     </DataTrigger>-->
                                 </Style.Triggers>
                             </Style>
-                        </local:Arc.Style>
-                    </local:Arc>
-                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                        </controls:Arc.Style>
+                    </controls:Arc>
+                    <controls:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
                                StrokeThickness="4" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-18" 
                                Width="83" Height="83" x:Name="RagArc">
-                        <local:Arc.LayoutTransform>
+                        <controls:Arc.LayoutTransform>
                             <RotateTransform Angle="180"/>
-                        </local:Arc.LayoutTransform>
-                        <local:Arc.Style>
+                        </controls:Arc.LayoutTransform>
+                        <controls:Arc.Style>
                             <Style TargetType="Shape">
                                 <Setter Property="Opacity" Value="0"/>
                                 <Setter Property="Stroke" Value="DarkOrange"/>
@@ -96,8 +97,8 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </local:Arc.Style>
-                    </local:Arc>
+                        </controls:Arc.Style>
+                    </controls:Arc>
 
                     <!--<Grid.Style>
                         <Style TargetType="FrameworkElement">

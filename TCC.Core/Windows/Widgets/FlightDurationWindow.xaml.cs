@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels.Widgets;
-using Arc = TCC.Controls.Arc;
+using Arc = FoglioUtils.Controls.Arc;
 
 namespace TCC.Windows.Widgets
 {

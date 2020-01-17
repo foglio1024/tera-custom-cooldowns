@@ -8,6 +8,7 @@
              xmlns:w="clr-namespace:TCC.Windows"
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
              Title="TCC Flight" Height="300" Width="300" 
@@ -38,19 +39,19 @@
             </Style>
         </Grid.Style>
 
-        <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="6" EndAngle="90" Direction="Counterclockwise"
+        <controls:Arc RenderTransformOrigin=".5 .5" StrokeThickness="6" EndAngle="90" Direction="Counterclockwise"
                StrokeStartLineCap="Flat" Stroke="#5fff" x:Name="Arc" Height="300" Width="300"
                OriginRotationDegrees="-45">
-        </c:Arc>
-        <c:Arc RenderTransformOrigin=".5 .5" StrokeThickness="1" StrokeEndLineCap="Round"
+        </controls:Arc>
+        <controls:Arc RenderTransformOrigin=".5 .5" StrokeThickness="1" StrokeEndLineCap="Round"
                StrokeStartLineCap="Flat" Stroke="#9fff" Height="288" Width="288" OriginRotationDegrees="-45">
-        </c:Arc>
+        </controls:Arc>
         <Grid x:Name="StacksContainer" RenderTransformOrigin=".5 .5" Visibility="{Binding FlyingMissionInProgress, Converter={StaticResource BoolToVisibleCollapsed}}">
             <Grid.RenderTransform>
                 <ScaleTransform ScaleY="-1"></ScaleTransform>
             </Grid.RenderTransform>
             <Grid.Resources>
-                <Style TargetType="c:Arc">
+                <Style TargetType="controls:Arc">
                     <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
                     <Setter Property="StrokeThickness" Value="6"/>
                     <Setter Property="StrokeStartLineCap" Value="Flat"/>
@@ -76,16 +77,16 @@
                     </Style.Triggers>
                 </Style>
             </Grid.Resources>
-            <c:Arc OriginRotationDegrees="-44"/>
-            <c:Arc OriginRotationDegrees="-35"/>
-            <c:Arc OriginRotationDegrees="-26"/>
-            <c:Arc OriginRotationDegrees="-17"/>
-            <c:Arc OriginRotationDegrees="-8"/>
-            <c:Arc OriginRotationDegrees="1"/>
-            <c:Arc OriginRotationDegrees="10"/>
-            <c:Arc OriginRotationDegrees="19"/>
-            <c:Arc OriginRotationDegrees="28"/>
-            <c:Arc OriginRotationDegrees="37"/>
+            <controls:Arc OriginRotationDegrees="-44"/>
+            <controls:Arc OriginRotationDegrees="-35"/>
+            <controls:Arc OriginRotationDegrees="-26"/>
+            <controls:Arc OriginRotationDegrees="-17"/>
+            <controls:Arc OriginRotationDegrees="-8"/>
+            <controls:Arc OriginRotationDegrees="1"/>
+            <controls:Arc OriginRotationDegrees="10"/>
+            <controls:Arc OriginRotationDegrees="19"/>
+            <controls:Arc OriginRotationDegrees="28"/>
+            <controls:Arc OriginRotationDegrees="37"/>
 
         </Grid>
     </Grid>

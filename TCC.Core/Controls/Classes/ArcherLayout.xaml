@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" Loaded="OnLoaded" d:DataContext="{d:DesignInstance viewModels:ArcherLayoutVM}"
              Height="165">
             <!-- Add Height = "165" to fix windwalk UI cropping problem by HQ -->
@@ -23,17 +24,17 @@
                 <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
                 </Image>
                 <Grid x:Name="MainReArcGrid" >
-                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
+                    <controls:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
                                StrokeThickness="4" Stroke="{StaticResource LightGreenBrush}" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-20 -19 -20 -20"
                                Width="91" Height="91" x:Name="MainReArc">
-                        <local:Arc.RenderTransform>
+                        <controls:Arc.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="180"/>
                             </TransformGroup>
-                        </local:Arc.RenderTransform>
-                        <local:Arc.Style>
+                        </controls:Arc.RenderTransform>
+                        <controls:Arc.Style>
                             <Style TargetType="FrameworkElement">
                                 <Setter Property="Opacity" Value="1"/>
                                 <!--<Style.Triggers>
@@ -42,19 +43,19 @@
                                         </DataTrigger>
                                     </Style.Triggers>-->
                             </Style>
-                        </local:Arc.Style>
-                    </local:Arc>
-                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
+                        </controls:Arc.Style>
+                    </controls:Arc>
+                    <controls:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
                                StrokeThickness="4" Stroke="White" HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Margin="-20 -20 -20 -20" Rhomb="True"
                                Width="77" Height="77" x:Name="SecReArc">
-                        <local:Arc.RenderTransform>
+                        <controls:Arc.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="180"/>
                             </TransformGroup>
-                        </local:Arc.RenderTransform>
-                        <local:Arc.Style>
+                        </controls:Arc.RenderTransform>
+                        <controls:Arc.Style>
                             <Style TargetType="FrameworkElement">
                                 <Setter Property="Opacity" Value=".8"/>
                                 <!--<Style.Triggers>
@@ -63,8 +64,8 @@
                                         </DataTrigger>
                                     </Style.Triggers>-->
                             </Style>
-                        </local:Arc.Style>
-                    </local:Arc>
+                        </controls:Arc.Style>
+                    </controls:Arc>
                 </Grid>
                 <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassArcher}" Margin="19" Opacity=".3"/>

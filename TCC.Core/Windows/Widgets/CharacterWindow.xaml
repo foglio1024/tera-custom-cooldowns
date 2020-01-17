@@ -1,17 +1,16 @@
 ﻿<widgets1:TccWidget x:Class="TCC.Windows.Widgets.CharacterWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:w="clr-namespace:TCC.Windows"
-        xmlns:converters="clr-namespace:TCC.Converters"
-        xmlns:vm="clr-namespace:TCC.ViewModels"
-        xmlns:c="clr-namespace:TCC.Controls"
-        xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
-        xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
-        xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
-        xmlns:settings="clr-namespace:TCC.Settings"
-        mc:Ignorable="d"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+                    xmlns:c="clr-namespace:TCC.Controls"
+                    xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
+                    xmlns:converters="clr-namespace:TCC.Converters"
+                    xmlns:settings="clr-namespace:TCC.Settings"
+                    xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
+                    xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
+                    mc:Ignorable="d"
         Title="TCC Character" 
         Style="{StaticResource BaseWindowStyle}"
         d:DataContext="{d:DesignInstance widgets:CharacterWindowViewModel}"
@@ -613,16 +612,16 @@
                             </Rectangle.Effect>
                         </Rectangle>
                     </Grid>
-                    <c:Arc StrokeThickness="4" StrokeEndLineCap="Flat"
+                    <controls:Arc StrokeThickness="4" StrokeEndLineCap="Flat"
                                Stroke="{Binding Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=light}"
                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="ReArc"
                                Width="82" Height="82" StartAngle="42" EndAngle="318"  RenderTransformOrigin=".5 .5" Margin="0" 
                                Rhomb="True">
-                        <c:Arc.RenderTransform>
+                        <controls:Arc.RenderTransform>
                             <RotateTransform Angle="180"/>
-                        </c:Arc.RenderTransform>
-                        <c:Arc.Style>
-                            <Style TargetType="c:Arc">
+                        </controls:Arc.RenderTransform>
+                        <controls:Arc.Style>
+                            <Style TargetType="controls:Arc">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Setter Property="Opacity" Value=".8"/>
                                 <Style.Triggers>
@@ -643,8 +642,8 @@
                                 </Style.Triggers>
                             </Style>
 
-                        </c:Arc.Style>
-                    </c:Arc>
+                        </controls:Arc.Style>
+                    </controls:Arc>
                     <elements:SorcererElementsControl Fire="{Binding Player.Fire}"
                                                Ice="{Binding Player.Ice}"
                                                Arcane="{Binding Player.Arcane}"

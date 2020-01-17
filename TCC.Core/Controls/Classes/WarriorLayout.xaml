@@ -8,6 +8,7 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:WarriorLayoutVM}">
     <UserControl.Resources>
         <ControlTemplate x:Key="EdgeArrowLayout">
@@ -78,7 +79,7 @@
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.Resources>
-                    <Style TargetType="local:Arc">
+                    <Style TargetType="controls:Arc">
                         <Setter Property="Height" Value="91"/>
                         <Setter Property="Width" Value="91"/>
                         <Setter Property="Rhomb" Value="True"/>
@@ -122,17 +123,17 @@
                     </Style>
                 </Grid.Resources>
                 <!--Stance bottom-->
-                <local:Arc StrokeThickness="10" >
+                <controls:Arc StrokeThickness="10" >
                     <Shape.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="90"/>
                             <TranslateTransform X="0" Y="-2"/>
                         </TransformGroup>
                     </Shape.RenderTransform>
-                </local:Arc>
+                </controls:Arc>
                 <!--Warning bottom-->
                 <Grid Style="{StaticResource WarnGrid}">
-                    <local:Arc StrokeThickness="10" Stroke="White">
+                    <controls:Arc StrokeThickness="10" Stroke="White">
                         <Shape.Effect>
                             <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15"/>
                         </Shape.Effect>
@@ -142,26 +143,26 @@
                                 <TranslateTransform X="0" Y="-2"/>
                             </TransformGroup>
                         </Shape.RenderTransform>
-                    </local:Arc>
+                    </controls:Arc>
                 </Grid>
                 <!--Image-->
                 <Image Source="../../resources/images/char_window_bg.png" Margin="-14" Visibility="Visible" Stretch="Uniform" Width="101"/>
                 <!--Stance top-->
-                <local:Arc StrokeThickness="1">
+                <controls:Arc StrokeThickness="1">
                     <Shape.RenderTransform>
                         <RotateTransform Angle="90"/>
                     </Shape.RenderTransform>
-                </local:Arc>
+                </controls:Arc>
                 <!--Warning top-->
                 <Grid Style="{StaticResource WarnGrid}">
-                    <local:Arc StrokeThickness="1" Stroke="White">
+                    <controls:Arc StrokeThickness="1" Stroke="White">
                         <Shape.RenderTransform>
                             <RotateTransform Angle="90"/>
                         </Shape.RenderTransform>
                         <Shape.Effect>
                             <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15"/>
                         </Shape.Effect>
-                    </local:Arc>
+                    </controls:Arc>
                 </Grid>
                 <!--Class icon-->
                 <Path Data="{StaticResource SvgClassWarrior}" Margin="21" Opacity=".3"/>

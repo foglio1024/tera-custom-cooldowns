@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="TCC.Controls.Classes.GunnerLayout"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              mc:Ignorable="d" Loaded="GunnerLayout_OnLoaded" d:DataContext="{d:DesignInstance viewModels:GunnerLayoutVM}">
     <Grid Width="Auto" Margin="50 30 50 90" Name="Root" ClipToBounds="False" >
         <Grid.RowDefinitions>
@@ -35,17 +35,17 @@
 
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                    <local:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                    <controls:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
                                StrokeThickness="4" Stroke="{StaticResource WillpowerBrushLight}" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-20"
                                Width="83" Height="83" x:Name="MainReArc">
-                        <local:Arc.RenderTransform>
+                        <controls:Arc.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="180"/>
                             </TransformGroup>
-                        </local:Arc.RenderTransform>
-                        <local:Arc.Style>
+                        </controls:Arc.RenderTransform>
+                        <controls:Arc.Style>
                             <Style TargetType="FrameworkElement">
                                 <Setter Property="Opacity" Value=".7"/>
                                 <Setter Property="Effect" >
@@ -59,8 +59,8 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </local:Arc.Style>
-                    </local:Arc>
+                        </controls:Arc.Style>
+                    </controls:Arc>
 
                     <Grid.Style>
                         <Style TargetType="FrameworkElement">

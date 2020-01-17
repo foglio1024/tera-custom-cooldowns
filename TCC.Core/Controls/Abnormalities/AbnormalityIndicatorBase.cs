@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using FoglioUtils.Controls;
 using TCC.Data.Abnormalities;
 
 namespace TCC.Controls.Abnormalities

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:data="clr-namespace:TCC.Data"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d"  d:DataContext="{d:DesignInstance data:GearItem}" 
              Loaded="GearItemControl_OnLoaded" >
     <UserControl.Resources>
@@ -73,7 +74,7 @@
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                 </Viewbox>
 
-                <local:Arc VerticalAlignment="Center"
+                <controls:Arc VerticalAlignment="Center"
                            Width="32" 
                            Height="32" 
                            Stroke="{Binding Tier, Converter={StaticResource GearLevelToColor}}" 
@@ -94,7 +95,7 @@
                                    Foreground="{StaticResource MpBrush}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
-                    <local:Arc
+                    <controls:Arc
                            Width="32" 
                            Height="32" 
                            Stroke="{StaticResource MpBrush}" 

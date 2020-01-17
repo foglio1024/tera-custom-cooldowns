@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
-             xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MysticLayoutVM}">
 
     <Grid Margin="20 100 20 100" ClipToBounds="False" Width="Auto">

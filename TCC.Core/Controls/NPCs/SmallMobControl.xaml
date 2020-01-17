@@ -7,6 +7,7 @@
              xmlns:npc="clr-namespace:TCC.Controls.NPCs"
              xmlns:tcc="clr-namespace:TCC"
              xmlns:npCs="clr-namespace:TCC.Data.NPCs"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" Loaded="OnLoaded" UseLayoutRounding="True"
              d:DataContext="{d:DesignInstance npCs:NPC}"
              MouseEnter="SmallMobControl_OnMouseEnter"
@@ -40,7 +41,7 @@
 
         <Grid ClipToBounds="True" 
               RenderTransformOrigin=".5 .5" Width="26" Height="26" Margin="-20">
-            <local:Arc Width="80"
+            <controls:Arc Width="80"
                        Height="80"
                        StrokeThickness="30"
                        HorizontalAlignment="Center"
@@ -50,7 +51,7 @@
                        x:Name="ExternalArc"
                        Margin="-20"
                        RenderTransformOrigin=".5 .5">
-                <local:Arc.Style>
+                <controls:Arc.Style>
                     <Style TargetType="Shape">
                         <Setter Property="Stroke" Value="{StaticResource TccNormalGradientBrush}" />
                         <Style.Triggers>
@@ -59,13 +60,13 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </local:Arc.Style>
-                <local:Arc.RenderTransform>
+                </controls:Arc.Style>
+                <controls:Arc.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="-45" />
                     </TransformGroup>
-                </local:Arc.RenderTransform>
-            </local:Arc>
+                </controls:Arc.RenderTransform>
+            </controls:Arc>
             <Grid.Style>
                 <Style TargetType="FrameworkElement">
                     <Setter Property="Visibility" Value="Collapsed" />

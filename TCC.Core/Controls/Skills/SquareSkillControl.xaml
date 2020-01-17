@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d"
              d:DesignHeight="100" d:DesignWidth="100" 
              MouseLeave="UserControl_MouseLeave" Background="Transparent"
@@ -26,7 +27,7 @@
         </Grid>
         <Grid ClipToBounds="True" Width="48" Height="48">
 
-        <local:Arc x:Name="Arc" 
+        <controls:Arc x:Name="Arc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
                    Width="80" 
@@ -39,8 +40,8 @@
                    EndAngle="0.01"
                    RenderTransformOrigin=".5 .5">
 
-        </local:Arc>
-        <local:Arc x:Name="PreArc" 
+        </controls:Arc>
+        <controls:Arc x:Name="PreArc" 
                    Opacity="1" 
                    UseLayoutRounding="False" 
                    Width="80" 
@@ -50,7 +51,7 @@
                    EndAngle=".01" 
                    HorizontalAlignment="Stretch" 
                    VerticalAlignment="Stretch" >
-        </local:Arc>
+        </controls:Arc>
         </Grid>
 
         <Grid Width="Auto" MinWidth="12" 

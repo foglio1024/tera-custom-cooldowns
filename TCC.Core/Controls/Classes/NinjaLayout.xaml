@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" Loaded="NinjaLayout_OnLoaded" d:DataContext="{d:DesignInstance viewModels:NinjaLayoutVM}">
     <Grid Width="Auto" Margin="50 10 50 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
@@ -35,17 +36,17 @@
 
                 </Image>
                 <Grid x:Name="MainReArcGrid">
-                        <local:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
+                        <controls:Arc StartAngle="40" EndAngle="40" RenderTransformOrigin=".5 .5"
                        StrokeThickness="4" Stroke="{StaticResource ArcaneBrushLight}" HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Margin="-20" Rhomb="True"
                        Width="83" Height="83" x:Name="MainReArc">
-                            <local:Arc.RenderTransform>
+                            <controls:Arc.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="180"/>
                                 </TransformGroup>
-                            </local:Arc.RenderTransform>
-                            <local:Arc.Style>
+                            </controls:Arc.RenderTransform>
+                            <controls:Arc.Style>
                                 <Style TargetType="FrameworkElement">
                                     <Setter Property="Opacity" Value=".7"/>
                                     <Setter Property="Effect" >
@@ -59,8 +60,8 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </local:Arc.Style>
-                        </local:Arc>
+                            </controls:Arc.Style>
+                        </controls:Arc>
                     <Grid.Style>
                         <Style TargetType="FrameworkElement">
                                     <Setter Property="Effect" >

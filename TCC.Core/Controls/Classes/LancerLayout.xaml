@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:LancerLayoutVM}">
     <Grid Width="Auto" Margin="45 35 45 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
@@ -42,27 +43,27 @@
                 </Image>
                 <Path Data="{StaticResource SvgClassLancer}" Margin="19" Opacity=".3"/>
                 <Grid x:Name="LineHeldContainer" >
-                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
+                    <controls:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
                                StrokeThickness="4" Stroke="#dfff" HorizontalAlignment="Center"
                                VerticalAlignment="Center" Rhomb="True"
                                Margin="-20"
                                Width="91" Height="91" x:Name="MainReArc" Panel.ZIndex="1">
-                        <local:Arc.RenderTransform>
+                        <controls:Arc.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="180"/>
                             </TransformGroup>
-                        </local:Arc.RenderTransform>
-                    </local:Arc>
-                    <local:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
+                        </controls:Arc.RenderTransform>
+                    </controls:Arc>
+                    <controls:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
                                StrokeThickness="4" Stroke="{StaticResource TankRoleBrush}" HorizontalAlignment="Center"
                                VerticalAlignment="Center"
                                Margin="-20" Opacity="1" Rhomb="True"
                                Width="77" Height="77" x:Name="SecReArc">
-                        <local:Arc.RenderTransform>
+                        <controls:Arc.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="180"/>
                             </TransformGroup>
-                        </local:Arc.RenderTransform>
+                        </controls:Arc.RenderTransform>
                         <!--<local:Arc.Style>
                             <Style TargetType="FrameworkElement">
 
@@ -79,7 +80,7 @@
                             </Style>
                         </local:Arc.Style>-->
 
-                    </local:Arc>
+                    </controls:Arc>
                     <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="22" 
                            FontWeight="DemiBold" Foreground="#afff"  Width="45" VerticalAlignment="Center"
                                              Text="{Binding LH.Stacks}"></TextBlock>

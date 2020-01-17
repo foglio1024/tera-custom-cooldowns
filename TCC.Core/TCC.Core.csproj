@@ -732,7 +732,6 @@
     <Compile Include="Windows\LfgListWindow.xaml.cs">
       <DependentUpon>LfgListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Arc.cs" />
     <Compile Include="Data\Pc\Character.cs" />
     <Compile Include="FocusManager.cs" />
     <Compile Include="Data\Skills\Skill.cs" />

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using FoglioUtils.Controls;
 using TCC.Controls;
 using TCC.Data.Pc;
 using TCC.ViewModels.Widgets;

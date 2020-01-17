@@ -1,12 +1,12 @@
 ﻿<abnormalitiesCtrl:AbnormalityIndicatorBase x:Class="TCC.Controls.Abnormalities.SquareAbnormalityIndicator"
-                                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                                        xmlns:local="clr-namespace:TCC.Controls"
-                                        xmlns:abnormalitiesCtrl="clr-namespace:TCC.Controls.Abnormalities"
-                                        xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
-                                        mc:Ignorable="d" 
+                                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                            xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+                                            xmlns:abnormalitiesCtrl="clr-namespace:TCC.Controls.Abnormalities"
+                                            xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
+                                            mc:Ignorable="d" 
              Width="Auto" Height="Auto" FlowDirection="LeftToRight"
              d:DataContext="{d:DesignInstance abnormalities:AbnormalityDuration}">
     <Grid Margin="2 0" Name="RootGrid"  ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="50000" >
@@ -40,9 +40,9 @@
 
         <!-- Arc -->
         <Grid ClipToBounds="True" Margin="-1">
-            <local:Arc Grid.Row="0" x:Name="MainArc" Stroke="#8000" StrokeThickness="40" EndAngle="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <controls:Arc Grid.Row="0" x:Name="MainArc" Stroke="#8000" StrokeThickness="40" EndAngle="1" HorizontalAlignment="Center" VerticalAlignment="Center"
                       Height="80" Width="80" Margin="-80">
-            </local:Arc>
+            </controls:Arc>
         </Grid>
         <!-- Duration -->
         <Grid x:Name="DurationLabel"  Width="Auto" 

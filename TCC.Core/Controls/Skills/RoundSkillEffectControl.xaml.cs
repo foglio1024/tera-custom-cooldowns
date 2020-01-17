@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using FoglioUtils.Controls;
 using TCC.Properties;
 using TCC.ViewModels;
 

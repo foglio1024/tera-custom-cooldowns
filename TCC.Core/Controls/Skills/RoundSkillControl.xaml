@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100" 
              MouseLeave="UserControl_MouseLeave"
@@ -23,12 +24,12 @@
                 </Ellipse.Fill>
             </Ellipse>
         </Grid>
-        <local:Arc x:Name="Arc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
+        <controls:Arc x:Name="Arc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
                    Stroke="#a000" EndAngle="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-        </local:Arc>        
-        <local:Arc x:Name="PreArc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
+        </controls:Arc>        
+        <controls:Arc x:Name="PreArc" Opacity="1" Width="Auto" Height="Auto" StrokeThickness="26" Margin="2"
                    Stroke="#9fa0" EndAngle="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-        </local:Arc>
+        </controls:Arc>
 
         <Grid Width="Auto" MinWidth="12" 
               Height="Auto" x:Name="G" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" >

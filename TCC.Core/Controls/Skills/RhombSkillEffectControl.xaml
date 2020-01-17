@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              UseLayoutRounding="False"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
@@ -22,7 +23,7 @@
                    Margin="8"
                    Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
                    ></Rectangle>
-            <local:Arc Width="71" 
+            <controls:Arc Width="71" 
                        Height="71" 
                        StrokeThickness="3" 
                        Stroke="#ffbd3d" 
@@ -34,10 +35,10 @@
                        x:Name="ExternalArc"
                        Margin="-0"
                        RenderTransformOrigin=".5 .5">
-                <local:Arc.Effect>
+                <controls:Arc.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#ffffaa"/>
-                </local:Arc.Effect>
-            </local:Arc>
+                </controls:Arc.Effect>
+            </controls:Arc>
 
 
         <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 -1 0 0" 

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              Loaded="UserControl_Loaded"
              mc:Ignorable="d" d:DataContext="{d:DesignData Npc}">
     <UserControl.Resources>
@@ -40,7 +41,7 @@
                                HorizontalAlignment="Center"
                                TextAlignment="Center"/>
             <Grid Grid.Row="1" Visibility="{Binding Shield, Converter={StaticResource ShieldStatusToVisibility}}">
-                <local:Arc Stroke="{Binding Shield, Converter={StaticResource ShieldStatusColor}}" 
+                <controls:Arc Stroke="{Binding Shield, Converter={StaticResource ShieldStatusColor}}" 
                            x:Name="ShieldArc"
                            Width="48" 
                            Height="48"
@@ -61,7 +62,7 @@
                            237.263,60.498,237.263,60.498z"/>
             </Grid>
 
-            <local:Arc Width="50" Height="50"
+            <controls:Arc Width="50" Height="50"
                                 Stroke="{Binding TemplateId, Converter={StaticResource DragonIdToColor}}"
                                StrokeThickness="4"
                                EndAngle="{Binding HpFactor, Converter={StaticResource FactorToAngle}}"
@@ -77,7 +78,7 @@
                 </Path>
             </Grid>
 
-            <local:Arc Width="58" Height="58"
+            <controls:Arc Width="58" Height="58"
                        Stroke="Red"
                        Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleHidden}}"
                        StrokeThickness="3"

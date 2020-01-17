@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              Cursor="Hand" Background="Transparent"
              mc:Ignorable="d" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded"
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown" d:DataContext="{d:DesignData Character}">
@@ -69,7 +70,7 @@
                                    Foreground="{StaticResource MarksBrush}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
-                    <local:Arc x:Name="ElleonArc"
+                    <controls:Arc x:Name="ElleonArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource MarksBrush}" 
@@ -89,7 +90,7 @@
                                    Foreground="{StaticResource ArcaneBrush}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"/>
                     </Viewbox>
-                    <local:Arc x:Name="GuardianCreditsArc"
+                    <controls:Arc x:Name="GuardianCreditsArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource ArcaneBrush}" 
@@ -108,7 +109,7 @@
                                    Foreground="{StaticResource FireBrush}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
                     </Viewbox>
-                    <local:Arc x:Name="GuardianArc"
+                    <controls:Arc x:Name="GuardianArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource FireBrush}" 
@@ -127,7 +128,7 @@
                                    Foreground="{StaticResource ArcaneBrush}" 
                                    TextAlignment="Center" FontSize="15" VerticalAlignment="Center"/>
                     </Viewbox>
-                    <local:Arc x:Name="VanguardCreditsArc"
+                    <controls:Arc x:Name="VanguardCreditsArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource ArcaneBrush}" 
@@ -143,7 +144,7 @@
                   HorizontalAlignment="Right" VerticalAlignment="Center" ToolTip="Completed daily Vanguard quests.">
                     <Ellipse Fill="{StaticResource FireBrush}" Opacity=".2" Margin="2"></Ellipse>
                     <TextBlock Text="{Binding VanguardDailiesDone}" Foreground="{StaticResource FireBrush}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
-                    <local:Arc x:Name="DailyArc"
+                    <controls:Arc x:Name="DailyArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource FireBrush}"
@@ -158,7 +159,7 @@
                   HorizontalAlignment="Right" VerticalAlignment="Center"  ToolTip="Completed weekly Vanguard quests.">
                     <Ellipse Fill="{StaticResource FireBrushLight}" Opacity=".2" Margin="2"/>
                     <TextBlock Text="{Binding VanguardWeekliesDone}" Foreground="{StaticResource FireBrushLight}" TextAlignment="Center" FontSize="15" VerticalAlignment="Center"></TextBlock>
-                    <local:Arc x:Name="WeeklyArc"
+                    <controls:Arc x:Name="WeeklyArc"
                            Width="30" 
                            Height="30" 
                            Stroke="{StaticResource FireBrushLight}" 
