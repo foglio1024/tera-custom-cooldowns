@@ -70,7 +70,7 @@
     <c:LfgVmToButtonLabelConverter x:Key="LfgVmToButtonLabel"/>
     <c:ClassToNameConverter x:Key="ClassToName" />
 
-    <c:RoundedClipConverter x:Key="RoundedClipConverter" />
+    <uc:RoundedClipConverter x:Key="RoundedClipConverter" />
 
     <c:ItemLevelTierToColorConverter x:Key="IlvlTierToColor" />
     <c:EntriesToColor x:Key="EntriesToColor" />

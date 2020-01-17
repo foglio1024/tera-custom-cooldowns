@@ -247,7 +247,6 @@
     <Compile Include="Converters\EpochConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter2.cs" />
     <Compile Include="Converters\ItemLevelTierToColorConverter.cs" />
-    <Compile Include="Converters\RoundedClipConverter.cs" />
     <Compile Include="Converters\SizeToDurationLabelMarginConverter.cs" />
     <Compile Include="Converters\MathMultiplicationConverter.cs" />
     <Compile Include="Converters\SizeToStackLabelSizeConverter.cs" />
