@@ -16,9 +16,10 @@
                                                            
     <Color x:Key="ClassGlowColor">               #55ccff   </Color>
                                                            
-    <Color x:Key="GreenColor">                   #00A561   </Color>
     <Color x:Key="MainColor">                    #a1c8dd   </Color>
+    <Color x:Key="GreenColor">                   #00A561   </Color>
     <Color x:Key="LightGreenColor">              #55ff77   </Color>
+    <Color x:Key="DarkGreenColor">               #234842   </Color>
     <Color x:Key="TwitchColor">                  #975eff   </Color>
     <Color x:Key="WeeklyColor">                  #2f9952   </Color>
     <Color x:Key="DailyColor">                   #42b0f4   </Color>

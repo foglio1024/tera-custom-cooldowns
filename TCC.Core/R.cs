@@ -123,9 +123,10 @@ namespace TCC.R
 		public static Color TeraRestyleBorderColor => ((Color)App.Current.FindResource("TeraRestyleBorderColor"));
 		public static Color TeraRestyleBorderColorLight => ((Color)App.Current.FindResource("TeraRestyleBorderColorLight"));
 		public static Color ClassGlowColor => ((Color)App.Current.FindResource("ClassGlowColor"));
-		public static Color GreenColor => ((Color)App.Current.FindResource("GreenColor"));
 		public static Color MainColor => ((Color)App.Current.FindResource("MainColor"));
+		public static Color GreenColor => ((Color)App.Current.FindResource("GreenColor"));
 		public static Color LightGreenColor => ((Color)App.Current.FindResource("LightGreenColor"));
+		public static Color DarkGreenColor => ((Color)App.Current.FindResource("DarkGreenColor"));
 		public static Color TwitchColor => ((Color)App.Current.FindResource("TwitchColor"));
 		public static Color WeeklyColor => ((Color)App.Current.FindResource("WeeklyColor"));
 		public static Color DailyColor => ((Color)App.Current.FindResource("DailyColor"));
@@ -238,6 +239,7 @@ namespace TCC.R
 		public static SolidColorBrush MainBrush => ((SolidColorBrush)App.Current.FindResource("MainBrush"));
 		public static SolidColorBrush GreenBrush => ((SolidColorBrush)App.Current.FindResource("GreenBrush"));
 		public static SolidColorBrush LightGreenBrush => ((SolidColorBrush)App.Current.FindResource("LightGreenBrush"));
+		public static SolidColorBrush DarkGreenBrush => ((SolidColorBrush)App.Current.FindResource("DarkGreenBrush"));
 		public static SolidColorBrush TwitchBrush => ((SolidColorBrush)App.Current.FindResource("TwitchBrush"));
 		public static SolidColorBrush WeeklyBrush => ((SolidColorBrush)App.Current.FindResource("WeeklyBrush"));
 		public static SolidColorBrush DailyBrush => ((SolidColorBrush)App.Current.FindResource("DailyBrush"));

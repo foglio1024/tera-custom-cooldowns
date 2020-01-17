@@ -4,6 +4,8 @@
     <SolidColorBrush x:Key="MainBrush"                      Color="{StaticResource MainColor}"                                 />
     <SolidColorBrush x:Key="GreenBrush"                     Color="{StaticResource GreenColor}"                                />
     <SolidColorBrush x:Key="LightGreenBrush"                Color="{StaticResource LightGreenColor}"                           />
+    <SolidColorBrush x:Key="DarkGreenBrush"                 Color="{StaticResource DarkGreenColor}"                            />
+
     <SolidColorBrush x:Key="TwitchBrush"                    Color="{StaticResource TwitchColor}"                               />
     <SolidColorBrush x:Key="WeeklyBrush"                    Color="{StaticResource WeeklyColor}"                               />
     <SolidColorBrush x:Key="DailyBrush"                     Color="{StaticResource DailyColor}"                                />
