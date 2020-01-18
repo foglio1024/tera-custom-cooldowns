@@ -497,7 +497,7 @@ namespace TCC.Data.Pc
             });
             RequestInteractiveCommand = new RelayCommand(_ =>
             {
-                WindowManager.ViewModels.PlayerMenuVM.Open(Name, ServerId);
+                WindowManager.ViewModels.PlayerMenuVM.Open(Name, ServerId, (int)Level);
                 //ProxyInterface.Instance.Stub.AskInteractive(ServerId, Name);
             });
             InspectCommand = new RelayCommand(_ =>

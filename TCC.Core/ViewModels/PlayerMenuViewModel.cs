@@ -339,18 +339,35 @@ namespace TCC.ViewModels
             PacketAnalyzer.ProcessorReady += () => PacketAnalyzer.Processor.Hook<S_ANSWER_INTERACTIVE>(OnAnswerInteractive);
         }
 
-        public void Open(string name, uint serverId)
+        public void Open(string name, uint serverId, int level = 0)
         {
             if (!App.Settings.EnablePlayerMenu) return;
+
             Dispatcher.InvokeAsync(() =>
             {
                 Name = name;
                 _serverId = serverId;
                 Class = Class.None;
-                Info = "";
-                Level = 0;
+                Info = Class.ToString();
+                Level = level;
                 _win.ShowAndPosition();
-                AskInteractive();
+                if (serverId != Game.Server.ServerId)
+                {
+                    Dispatcher.InvokeAsync(() =>
+                    {
+                        Info = Class.ToString();
+                        ShowGuildInvite = false;
+                        ShowPartyInvite = false;
+
+                        Refresh();
+                        _win.ShowAndPosition();
+                        _win.AnimateOpening();
+                    });
+                }
+                else
+                {
+                    AskInteractive();
+                }
             });
         }
         public void Close()
