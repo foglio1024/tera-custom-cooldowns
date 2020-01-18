@@ -34,9 +34,10 @@ namespace TCC.Windows.Widgets
         {
             var offsetW =  (newPos.X - oldPos.X )/ (double)size.Width;
             var offsetH =  (newPos.Y - oldPos.Y)/ (double) size.Height;
-            Log.CW($"Moving window by {offsetW},{offsetH}");
 
-            Position = Point.Add(Position, new Vector(offsetW, offsetH));
+            var p = new Point {X = Position.X + offsetW, Y = Position.Y + offsetH};
+            Position = p;
+            //Log.CW($"Moving window to {Position.X},{Position.Y} by {offsetW},{offsetH}");
         }
     }
 }

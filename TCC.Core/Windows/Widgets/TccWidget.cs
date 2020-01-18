@@ -118,8 +118,6 @@ namespace TCC.Windows.Widgets
 
         protected void ReloadPosition()
         {
-            Log.CW($"[{GetType().Name}] {nameof(ReloadPosition)}()");
-
             Dispatcher?.InvokeAsync(() =>
             {
                 var left = WindowSettings.X * WindowManager.ScreenSize.Width;
@@ -426,8 +424,8 @@ namespace TCC.Windows.Widgets
 
         private void SetRelativeCoordinates()
         {
-            WindowSettings.X = (Left + FocusManager.TeraScreen.Bounds.Left) / WindowManager.ScreenSize.Width;
-            WindowSettings.Y = (Top + FocusManager.TeraScreen.Bounds.Top) / WindowManager.ScreenSize.Height;
+            WindowSettings.X = (Left /*+ FocusManager.TeraScreen.Bounds.Left*/) / WindowManager.ScreenSize.Width;
+            WindowSettings.Y = (Top /*+ FocusManager.TeraScreen.Bounds.Top*/) / WindowManager.ScreenSize.Height;
         }
 
 

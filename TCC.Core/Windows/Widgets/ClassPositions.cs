@@ -74,9 +74,9 @@ namespace TCC.Windows.Widgets
 
         public void ApplyOffset(Point oldPos, Point newPos, Size size)
         {
-            foreach (Class cl in Enum.GetValues(typeof(Class)))
+            foreach (var cl in Classes.Values)
             {
-                Classes[cl].ApplyOffset(oldPos, newPos,size);
+                cl.ApplyOffset(oldPos, newPos,size);
             }
         }
     }

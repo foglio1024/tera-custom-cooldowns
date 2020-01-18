@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace TCC
         private static bool _forceFocused;
         private static bool _disposed;
         private static bool _pauseTopmost;
+        private static readonly object _lock = new object();
         private static Screen _teraScreen;
         private static Timer _focusTimer;
 
@@ -69,19 +71,25 @@ namespace TCC
         private static IntPtr TeraWindow => User32.FindWindow("LaunchUnrealUWindowsClient", "TERA");
         private static IntPtr MeterWindow => User32.FindWindow("Shinra Meter", null);
         private static IntPtr ForegroundWindow => User32.GetForegroundWindow();
+
         public static Screen TeraScreen
         {
             get
             {
-                var rect = new User32.RECT();
-                User32.GetWindowRect(TeraWindow, ref rect);
-                var ret = Screen.AllScreens.FirstOrDefault(x => x.Bounds.IntersectsWith(new Rectangle(
+                lock (_lock)
+                {
+                    var rect = new User32.RECT();
+                    User32.GetWindowRect(TeraWindow, ref rect);
+                    var ret = Screen.AllScreens.FirstOrDefault(x => x.Bounds.IntersectsWith(new Rectangle(
                               new Point(rect.Left, rect.Top),
                               new Size(rect.Right - rect.Left, rect.Bottom - rect.Top)))) ?? Screen.PrimaryScreen;
-                if (Equals(_teraScreen, ret)) return _teraScreen;
-                TeraScreenChanged?.Invoke(_teraScreen.Bounds.Location, ret.Bounds.Location, ret.Bounds.Size);
-                _teraScreen = ret;
-                return _teraScreen;
+                    if (Equals(_teraScreen, ret)) return _teraScreen;
+                    var old = _teraScreen;
+                    _teraScreen = ret;
+
+                    TeraScreenChanged?.Invoke(old.Bounds.Location, _teraScreen.Bounds.Location, _teraScreen.Bounds.Size);
+                    return _teraScreen;
+                }
             }
         }
 
