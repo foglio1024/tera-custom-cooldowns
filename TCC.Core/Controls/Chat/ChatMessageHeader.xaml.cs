@@ -19,8 +19,8 @@ namespace TCC.Controls.Chat
         private void OutlinedTextBlock_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!(DataContext is ChatMessage context)) return;
-            if (context.Author == "System" || context.Channel == ChatChannel.Twitch) return;
-            WindowManager.ViewModels.PlayerMenuVM.Open(context.Author, Game.Server.ServerId);
+            if (context.Author == "System" || context.Channel == ChatChannel.Twitch || context.Channel == ChatChannel.Private8) return;
+            WindowManager.ViewModels.PlayerMenuVM.Open(context.Author, Game.Server.ServerId, gameId: context.AuthorGameId);
             //ProxyInterface.Instance.Stub.AskInteractive(Game.Server.ServerId, context.Author); //ProxyOld.AskInteractive(SessionManager.Server.ServerId, context.Author);
         }
 

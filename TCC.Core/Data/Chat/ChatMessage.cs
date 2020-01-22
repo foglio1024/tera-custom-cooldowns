@@ -24,6 +24,7 @@ namespace TCC.Data.Chat
         public string RawMessage { get; protected set; }
 
         public string Author { get; set; }
+        public ulong AuthorGameId { get; set; }
 
         public bool ContainsPlayerName { get; set; }
         public bool Animate
@@ -75,13 +76,14 @@ namespace TCC.Data.Chat
         {
             Channel = ch;
         }
-        public ChatMessage(ChatChannel ch, string auth, string msg) : this()
+        public ChatMessage(ChatChannel ch, string auth, string msg, ulong authorGameId) : this()
         {
             Channel = ch;
             RawMessage = msg;
             var authHtml = new HtmlDocument();
             authHtml.LoadHtml(auth);
             Author = authHtml.DocumentNode.InnerText;
+            AuthorGameId = authorGameId;
 
             try
             {

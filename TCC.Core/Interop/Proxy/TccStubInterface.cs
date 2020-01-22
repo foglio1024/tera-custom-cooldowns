@@ -104,6 +104,13 @@ namespace TCC.Interop.Proxy
                 { "userName", userName }
             });
         }
+        public async void InspectUser([NotNull] ulong userGameId)
+        {
+            await TccStub.CallAsync("inspectUserWithGameId", new JObject
+            {
+                { "gameId", userGameId}
+            });
+        }
         public async void GroupInviteUser([NotNull] string userName)
         {
             await TccStub.CallAsync("groupInviteUser", new JObject

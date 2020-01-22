@@ -3,10 +3,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:chatControls="clr-namespace:TCC.Controls.Chat"
         xmlns:viewModels="clr-namespace:TCC.ViewModels"
         xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
+        xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
         mc:Ignorable="d" MouseLeave="OnMouseLeave"
         Topmost="True"
         ShowInTaskbar="False"
@@ -205,8 +205,9 @@
                         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#00F4F4F4" />
                         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#00ADB2B5" />
                         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#00838383" />
+                        <!--TODO why-->
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyFocusVisual}" />
                             <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
                             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
                             <Setter Property="Foreground" Value="White" />
@@ -298,7 +299,7 @@
                     </Button>
                     <!-- Whisper -->
                     <Button Click="WhisperClick" Command="{Binding WhisperCommand}"
-                            Visibility="{Binding ShowWhisper, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding ShowWhisper, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal">
                             <Path Data="{StaticResource SvgChatMessage}" />
                             <TextBlock Text="Whisper" Margin="3" />
@@ -306,7 +307,7 @@
                     </Button>
                     <!-- Friend/Unfriend -->
                     <Grid ClipToBounds="True" x:Name="FriendGrid"
-                          Visibility="{Binding ShowAddFriend, Converter={StaticResource BoolToVisibleCollapsed}}">
+                          Visibility="{Binding ShowAddFriend, Converter={StaticResource BoolToVisibility}}">
                         <controls:Ripple x:Name="UnfriendConfirmRipple"
                                          Color="{StaticResource TccRedGradientBrush}"
                                          StaysVisible="True"
@@ -320,14 +321,16 @@
                         </Button>
                     </Grid>
                     <!-- Block/Unblock -->
-                    <Grid ClipToBounds="True" x:Name="BlockGrid">
+                    <Grid ClipToBounds="True" x:Name="BlockGrid"
+                          Visibility="{Binding ShowBlockUnblock, Converter={StaticResource BoolToVisibility}}">
                         <controls:Ripple x:Name="BlockConfirmRipple"
                                          Color="{StaticResource TccRedGradientBrush}"
                                          StaysVisible="True"
                                          IsHitTestVisible="False" />
 
                         <Button Command="{Binding BlockUnblockCommand}"
-                                extensions:ButtonExtensions.RippleEnabled="False">
+                                extensions:ButtonExtensions.RippleEnabled="False"
+                                >
                             <StackPanel Orientation="Horizontal">
                                 <Path Fill="{StaticResource TccRedGradientBrush}" Data="{StaticResource SvgBlock}" />
                                 <TextBlock Text="{Binding BlockLabelText}" Margin="3" />
@@ -336,11 +339,11 @@
                     </Grid>
 
                     <Separator Margin="10 0" Background="#2fff"
-                               Visibility="{Binding ShowSeparator1, Converter={StaticResource BoolToVisibleCollapsed}}" />
+                               Visibility="{Binding ShowSeparator1, Converter={StaticResource BoolToVisibility}}" />
 
                     <!-- Group invite -->
                     <Button Click="PartyInviteClick" Command="{Binding GroupInviteCommand}"
-                            Visibility="{Binding ShowPartyInvite, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding ShowPartyInvite, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal">
                             <Path Data="{StaticResource SvgAddUser}" />
                             <TextBlock Text="Party invite" Margin="3" />
@@ -348,7 +351,7 @@
                     </Button>
                     <!-- Grant/revoke powers -->
                     <Button Click="GrantInviteClick" Command="{Binding GrantInviteCommand}"
-                            Visibility="{Binding ShowGrantPowers, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding ShowGrantPowers, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal">
                             <Path Data="{StaticResource SvgAchievements}" />
                             <TextBlock Text="{Binding PowersLabelText}" Margin="3" />
@@ -356,7 +359,7 @@
                     </Button>
                     <!-- Delegate leader -->
                     <Button Click="DelegateLeaderClick" Command="{Binding DelegateLeaderCommand}"
-                            Visibility="{Binding ShowDelegateLeader, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding ShowDelegateLeader, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal">
                             <Path Margin="4,3,2,3" Data="{StaticResource SvgDelegateLeader}" />
                             <TextBlock Text="Delegate leader" Margin="3" />
@@ -364,7 +367,7 @@
                     </Button>
                     <!-- Group kick -->
                     <Grid ClipToBounds="True" x:Name="KickGrid"
-                          Visibility="{Binding ShowKick, Converter={StaticResource BoolToVisibleCollapsed}}">
+                          Visibility="{Binding ShowKick, Converter={StaticResource BoolToVisibility}}">
                         <controls:Ripple x:Name="KickConfirmRipple"
                                          Color="{StaticResource TccRedGradientBrush}"
                                          StaysVisible="True"
@@ -380,11 +383,11 @@
                     </Grid>
 
                     <Separator Margin="10 0" Background="#2fff"
-                               Visibility="{Binding ShowSeparator2, Converter={StaticResource BoolToVisibleCollapsed}}" />
+                               Visibility="{Binding ShowSeparator2, Converter={StaticResource BoolToVisibility}}" />
 
                     <!-- Guild invite -->
                     <Button Click="GuildInviteClick" Command="{Binding GuildInviteCommand}"
-                            Visibility="{Binding ShowGuildInvite, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding ShowGuildInvite, Converter={StaticResource BoolToVisibility}}">
 
                         <StackPanel Orientation="Horizontal">
                             <Path Data="{StaticResource SvgAddUsers}" />
@@ -393,7 +396,7 @@
                     </Button>
                     <!-- Make guild master -->
                     <Button Click="MakeGuildMasterClick" Command="{Binding MakeGuildMasterCommand}"
-                            Visibility="{Binding ShowMakeGuildMaster, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding ShowMakeGuildMaster, Converter={StaticResource BoolToVisibility}}">
                         <StackPanel Orientation="Horizontal">
                             <Path Data="{StaticResource SvgDelegateLeader}" />
                             <TextBlock Text="Make guild master" Margin="3" />
@@ -401,7 +404,7 @@
                     </Button>
                     <!-- Guild kick -->
                     <Grid ClipToBounds="True" x:Name="GKickGrid"
-                          Visibility="{Binding ShowGuildKick, Converter={StaticResource BoolToVisibleCollapsed}}">
+                          Visibility="{Binding ShowGuildKick, Converter={StaticResource BoolToVisibility}}">
                         <controls:Ripple x:Name="GkickConfirmRipple"
                                          Color="{StaticResource TccRedGradientBrush}"
                                          StaysVisible="True"
@@ -426,7 +429,7 @@
                     <!-- Moongourd -->
                     <Button Click="MoongourdClick" Margin="-1 0 -1 0" x:Name="MgButton" HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
-                            Visibility="{Binding ShowMgButtons, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding ShowMgButtons, Converter={StaticResource BoolToVisibility}}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -447,7 +450,7 @@
                     <!-- Fps utils -->
                     <Button Click="FpsUtilsClick" Margin="-1 0 -1 0" x:Name="FpsUtilsButton"
                             HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                            Visibility="{Binding ShowFpsUtils, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding ShowFpsUtils, Converter={StaticResource BoolToVisibility}}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />

@@ -20,9 +20,11 @@ namespace TCC.ViewModels
         private string _info;
         private int _level;
         private Class _class = Class.Warrior;
+        private uint _serverId;
+        private ulong _gameId;
         private bool _showPartyInvite;
         private bool _showGuildInvite;
-        private uint _serverId;
+        private bool _isFromOtherServer;
         private bool _unfriending;
         private bool _blocking;
         private bool _kicking;
@@ -73,6 +75,20 @@ namespace TCC.ViewModels
                 N(nameof(Class));
             }
         }
+        public bool IsFromOtherServer
+        {
+            get => _isFromOtherServer;
+            set
+            {
+                if (_isFromOtherServer == value) return;
+                _isFromOtherServer = value;
+                N();
+                N(nameof(ShowAddFriend));
+                N(nameof(ShowBlockUnblock));
+                N(nameof(ShowWhisper));
+            }
+        }
+
         public bool ShowPartyInvite
         {
             get => _showPartyInvite;
@@ -93,8 +109,9 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool ShowAddFriend => !IsBlocked && Name != Game.Me.Name;
-        public bool ShowWhisper => !IsBlocked;
+        public bool ShowAddFriend => !IsBlocked && Name != Game.Me.Name && !IsFromOtherServer;
+        public bool ShowBlockUnblock => !IsFromOtherServer;
+        public bool ShowWhisper => !IsBlocked && !IsFromOtherServer;
         public string BlockLabelText => !IsBlocked ? Blocking ? "Are you sure?" : "Block" : "Unblock";
         public string FriendLabelText => IsFriend ? Unfriending ? "Are you sure?" : "Remove friend" : "Add friend";
         public string KickLabelText
@@ -196,6 +213,7 @@ namespace TCC.ViewModels
         public ICommand GuildKickCommand { get; }
         public ICommand HideShowPlayerCommand { get; }
 
+
         public PlayerMenuViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
@@ -205,7 +223,15 @@ namespace TCC.ViewModels
 
             InspectCommand = new RelayCommand(_ =>
             {
-                ProxyInterface.Instance.Stub.InspectUser(Name);
+                if (IsFromOtherServer)
+                {
+                    if (_gameId == 0) return;
+                    ProxyInterface.Instance.Stub.InspectUser(_gameId);
+                }
+                else
+                {
+                    ProxyInterface.Instance.Stub.InspectUser(Name);
+                }
             });
             WhisperCommand = new RelayCommand(_ =>
             {
@@ -339,7 +365,8 @@ namespace TCC.ViewModels
             PacketAnalyzer.ProcessorReady += () => PacketAnalyzer.Processor.Hook<S_ANSWER_INTERACTIVE>(OnAnswerInteractive);
         }
 
-        public void Open(string name, uint serverId, int level = 0)
+
+        public void Open(string name, uint serverId, int level = 0, Class cl = Class.None, ulong gameId = 0)
         {
             if (!App.Settings.EnablePlayerMenu) return;
 
@@ -347,15 +374,16 @@ namespace TCC.ViewModels
             {
                 Name = name;
                 _serverId = serverId;
-                Class = Class.None;
+                _gameId = gameId;
+                Class = cl;
                 Info = Class.ToString();
                 Level = level;
                 _win.ShowAndPosition();
-                if (serverId != Game.Server.ServerId)
+                IsFromOtherServer = serverId != Game.Server.ServerId;
+                if (IsFromOtherServer)
                 {
                     Dispatcher.InvokeAsync(() =>
                     {
-                        Info = Class.ToString();
                         ShowGuildInvite = false;
                         ShowPartyInvite = false;
 

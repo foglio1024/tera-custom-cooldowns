@@ -104,7 +104,7 @@ namespace TCC.Controls.Group
         protected void ShowUserMenu(object sender, MouseButtonEventArgs e)
         {
             var dc = (User)DataContext;
-            WindowManager.ViewModels.PlayerMenuVM.Open(dc.Name, dc.ServerId, (int)dc.Level);
+            WindowManager.ViewModels.PlayerMenuVM.Open(dc.Name, dc.ServerId, (int)dc.Level, dc.UserClass, dc.EntityId);
             //ProxyInterface.Instance.Stub.AskInteractive(dc.ServerId, dc.Name); //ProxyOld.AskInteractive(dc.ServerId, dc.Name);
         }
         protected void ToolTip_OnOpened(object sender, RoutedEventArgs e)
