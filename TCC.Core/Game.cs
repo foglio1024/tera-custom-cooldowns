@@ -2,6 +2,7 @@
 using FoglioUtils.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -556,9 +557,11 @@ namespace TCC
             if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
             try
             {
-                p.GuildLogo.Save(
+                var clonebmp = (Bitmap)p.GuildLogo.Clone();
+                clonebmp.Save(
                     Path.Combine(App.ResourcesPath, $"images/guilds/guildlogo_{Server.ServerId}_{p.GuildId}_{0}.bmp"),
                     ImageFormat.Bmp);
+                clonebmp.Dispose();
             }
             catch (Exception e)
             {
