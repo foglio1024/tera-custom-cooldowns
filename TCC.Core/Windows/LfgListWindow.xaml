@@ -14,7 +14,7 @@
              Style="{StaticResource BaseWindowStyle}"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
         Title="TCC LFG" Height="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="Manual">
     <Window.Resources>
         <Style TargetType="ListBoxItem" x:Key="PlayerListItemStyle">
             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
@@ -67,7 +67,7 @@
                         <Run Text="{Binding Name, Mode=OneWay}" />
                     </TextBlock>
                     <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldBrush}" Height="8"
-                          Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
                           HorizontalAlignment="Right" Margin="5 0 5 1" />
                 </StackPanel>
                 <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
@@ -137,7 +137,7 @@
                         <Run Text="{Binding Name, Mode=OneWay}" />
                     </TextBlock>
                     <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldBrush}" Height="8"
-                          Visibility="{Binding IsLeader, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
                           HorizontalAlignment="Right" Margin="5 0 5 1" />
                 </StackPanel>
 
@@ -155,7 +155,7 @@
                     </UniformGrid.Resources>
                     <Button Background="{StaticResource GreenBrush}" 
                             Command="{Binding AcceptApplyCommand}"
-                            Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibility}}">
                         <Path Data="{StaticResource SvgCheckCircle}"/>
                     </Button>
 
@@ -165,7 +165,7 @@
                     </Button>
                     <Button Background="{StaticResource HpBrush}" 
                             Command="{Binding DeclineApplyCommand}"
-                            Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibleCollapsed}}">
+                            Visibility="{Binding Path=DataContext.AmILeader, RelativeSource={RelativeSource AncestorType=w:LfgListWindow}, Converter={StaticResource BoolToVisibility}}">
                         <Path Data="{StaticResource SvgClose}"/>
                     </Button>
                 </UniformGrid>

@@ -92,7 +92,7 @@ namespace TCC.ViewModels
                                                                                           || listing.LeaderName == Game.Me.Name
                                                                                           || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
                                                                                           || Game.Group.Has(listing.LeaderId)));
-                                                                                        //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
+        //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
 
         private void NotifyMyLfg()
         {
@@ -110,7 +110,7 @@ namespace TCC.ViewModels
         public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
                                                                    || listing.LeaderId == Game.Me.PlayerId
                                                                    || Game.Group.Has(listing.LeaderId)
-                                                                   //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
+                                                             //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
                                                              ));
 
 
@@ -540,13 +540,23 @@ namespace TCC.ViewModels
         }
         private void OnShowPartyMatchInfo(S_SHOW_PARTY_MATCH_INFO m)
         {
-            if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable) 
+            if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable)
                 ProxyInterface.Instance.Stub.RequestListingsPage(m.Page + 1);
 
-            if (!m.IsLast) return;
+            if (!m.IsLast)
+            {
+                Log.CW($"S_SHOW_PARTY_MATCH_INFO is not last {m.Page + 1}/{m.Pages + 1}");
+                return;
+            }
+            else
+            {
+                Log.CW($"S_SHOW_PARTY_MATCH_INFO is last {m.Page + 1}/{m.Pages + 1}");
 
-            if (S_SHOW_PARTY_MATCH_INFO.Listings.Count != 0) 
+            }
+
+            if (S_SHOW_PARTY_MATCH_INFO.Listings.Count != 0)
                 SyncListings(S_SHOW_PARTY_MATCH_INFO.Listings);
+            else Log.CW("No listings to show.");
 
             NotifyMyLfg();
             //WindowManager.LfgListWindow.ShowWindow();

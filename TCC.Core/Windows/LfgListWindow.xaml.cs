@@ -72,25 +72,6 @@ namespace TCC.Windows
                     FocusManager.MakeUnfocusable(Handle);
 
                 }
-                //if (!VM.Creating || (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))) FocusManager.UndoUnfocusable(Handle);
-                //if (VM.Creating)
-                //{
-                //    Activate();
-                //    NewMessageTextBox.Focus();
-                //}
-                //if (!VM.Creating)
-                //{
-                //    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 1, easing: true));
-                //}
-                //else if (VM.Creating && !string.IsNullOrEmpty(VM.NewMessage))
-                //{
-                //    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 0, easing: true));
-                //}
-                //else
-                //{
-                //    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 0, easing: true));
-                //}
-
             });
         }
 
@@ -99,10 +80,7 @@ namespace TCC.Windows
             Dispatcher?.InvokeAsync(() =>
             {
                 LfgMgmtBtn.BeginAnimation(OpacityProperty, VM.AmIinLfg ? _expandAn : _shrinkAn);
-                //LfgMgmtBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, VM.AmIinLfg ? _expandAn : _shrinkAn);
                 CreateMessageBtn.BeginAnimation(OpacityProperty, VM.AmIinLfg ? _shrinkAn : _expandAn);
-                //CreateMessageBtn.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, VM.AmIinLfg ? _shrinkAn : _expandAn);
-                //CreateMessageBtn.BeginAnimation(FrameworkElement.MarginProperty, VM.AmIinLfg ? _margin1An : _margin2An);
             });
         }
 
@@ -118,11 +96,15 @@ namespace TCC.Windows
         {
             ProxyInterface.Instance.Stub.RequestListings();
 
-            //if (VM.StayClosed)
-            //{
-            //    VM.StayClosed = false;
-            //    return;
-            //}
+            var teraScreen = FocusManager.TeraScreen;
+            var x = teraScreen.Bounds.X + teraScreen.Bounds.Size.Width / 2D;
+            var y = teraScreen.Bounds.Y + teraScreen.Bounds.Size.Height / 2D;
+
+            x -= this.ActualWidth / 2;
+            y -= this.ActualHeight/ 2;
+
+            Left = x;
+            Top = y;
 
             base.ShowWindow();
         }
