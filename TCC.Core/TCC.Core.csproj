@@ -190,7 +190,6 @@
     <Compile Include="TeraCommon\PacketLog\Parsing\StreamHelper.cs" />
     <Compile Include="Test\ThreadInfo.cs" />
     <Compile Include="Test\Tester.cs" />
-    <Compile Include="Utilities\ContextMenuLeftClickBehavior.cs" />
     <Compile Include="Utilities\EventUtils.cs" />
     <Compile Include="ViewModels\CharactersXmlParser.cs" />
     <Compile Include="ViewModels\ChatMessageFactory.cs" />
@@ -238,17 +237,11 @@
       <DependentUpon>SquareSkillControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\AggroTypeToFillConverter.cs" />
-    <Compile Include="Converters\ColorToTransparentConverter.cs" />
     <Compile Include="Converters\DungeonImageConverter.cs" />
     <Compile Include="Converters\EntityIdToNameConverter.cs" />
-    <Compile Include="Converters\DurationLabelConverter.cs" />
-    <Compile Include="Converters\DurationToVisibilityConverter.cs" />
-    <Compile Include="Converters\EnumDescriptionConverter.cs" />
-    <Compile Include="Converters\EpochConverter.cs" />
     <Compile Include="Converters\HPbarColorConverter2.cs" />
     <Compile Include="Converters\ItemLevelTierToColorConverter.cs" />
     <Compile Include="Converters\SizeToDurationLabelMarginConverter.cs" />
-    <Compile Include="Converters\MathMultiplicationConverter.cs" />
     <Compile Include="Converters\SizeToStackLabelSizeConverter.cs" />
     <Compile Include="Converters\AbnormalityTypeToColorConverter.cs" />
     <Compile Include="Controls\Abnormalities\SquareAbnormalityIndicator.xaml.cs">
@@ -334,12 +327,8 @@
     <Compile Include="Controls\NPCs\GuildTowerControl.xaml.cs">
       <DependentUpon>GuildTowerControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\OutlinedTextBlock.cs" />
     <Compile Include="Controls\Skills\RhombFixedSkillControl.xaml.cs">
       <DependentUpon>RhombFixedSkillControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Ripple.xaml.cs">
-      <DependentUpon>Ripple.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Settings\SelectionSetting.xaml.cs">
       <DependentUpon>SelectionSetting.xaml</DependentUpon>
@@ -409,7 +398,6 @@
     </Compile>
     <Compile Include="Converters\LfgVmToButtonLabelConverter.cs" />
     <Compile Include="Converters\LogoInfoToImageConverter.cs" />
-    <Compile Include="Converters\NullToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\PieceToPathConverter.cs" />
     <Compile Include="Converters\RaidToColorConverter.cs" />
     <Compile Include="Converters\ReadyToColorConverter.cs" />
@@ -422,7 +410,6 @@
     <Compile Include="Converters\BoolToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\BoolToVisibleHidden.cs" />
     <Compile Include="Converters\ContractedToColWidthConverter.cs" />
-    <Compile Include="Converters\FactorToAngleConverter.cs" />
     <Compile Include="Converters\GroupSizeToTemplateConverter.cs" />
     <Compile Include="Converters\HHphaseToEnemyWindowTemplate.cs" />
     <Compile Include="Converters\LocationToMapConverter.cs" />
@@ -433,7 +420,6 @@
     <Compile Include="Converters\StringToFillConverter.cs" />
     <Compile Include="Converters\DragonIdToColorConverter.cs" />
     <Compile Include="Converters\MessageTypeToCursor.cs" />
-    <Compile Include="Converters\ValueToFactorConverter.cs" />
     <Compile Include="Data\Chat\ApplyMessage.cs" />
     <Compile Include="Data\Chat\BrokerChatMessage.cs" />
     <Compile Include="Data\Chat\ChatChannelOnOff.cs" />
@@ -560,9 +546,6 @@
     <Compile Include="Data\Databases\MonsterDatabase.cs" />
     <Compile Include="Controls\GenericGauge.xaml.cs">
       <DependentUpon>GenericGauge.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MaterialSwitch.xaml.cs">
-      <DependentUpon>MaterialSwitch.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Group\PartyMember.xaml.cs">
       <DependentUpon>PartyMember.xaml</DependentUpon>
@@ -950,10 +933,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Ripple.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Controls\Settings\SelectionSetting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -991,10 +970,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Skills\RoundSkillEffectControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\MaterialSwitch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1067,10 +1042,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceDictionaries\DataTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ResourceDictionaries\Dragablz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1508,7 +1479,7 @@
     </PropertyGroup>
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)\dependencies\WpfRB\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\App.xaml $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
+    <PreBuildEvent>$(SolutionDir)\dependencies\WpfRB\bin\Release\WpfResourcesBuilder.exe $(ProjectDir)\$(ProjectFileName) $(ProjectDir)\R.cs TCC.R</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
