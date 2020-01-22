@@ -139,7 +139,7 @@
               VerticalAlignment="Bottom"
               ClipToBounds="False"
               Margin="0 0 1 0"
-              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:SquareFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:SquareFixedSkillControl}, Converter={StaticResource BoolToVisibility}}">
             <Border Background="{StaticResource RevampBackgroundBrush}" CornerRadius="0" RenderTransformOrigin=".5 .5"
                     Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource RevampBorderBrush}"
                     BorderThickness="1"

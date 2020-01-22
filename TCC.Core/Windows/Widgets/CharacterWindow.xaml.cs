@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using FoglioUtils;
 using FoglioUtils.Controls;
 using TCC.Controls;
 using TCC.Data.Pc;
@@ -38,35 +39,10 @@ namespace TCC.Windows.Widgets
 
         private void InitAnimations()
         {
-            var duration = TimeSpan.FromMilliseconds(200);
-            var ease = R.MiscResources.QuadraticEase;
-            _hpAnim = new DoubleAnimation
-            {
-                Duration = duration,
-                EasingFunction = ease
-            };
-            _mpAnim = new DoubleAnimation
-            {
-                Duration = duration,
-                EasingFunction = ease
-            };
-            _stAnim = new DoubleAnimation
-            {
-                Duration = duration,
-                EasingFunction = ease
-            };
-            _shAnim = new DoubleAnimation
-            {
-                Duration = duration,
-                EasingFunction = ease
-            };
-
-            Timeline.SetDesiredFrameRate(_hpAnim, 30);
-            Timeline.SetDesiredFrameRate(_mpAnim, 30);
-            Timeline.SetDesiredFrameRate(_stAnim, 30);
-            Timeline.SetDesiredFrameRate(_shAnim, 30);
-
-
+            _hpAnim = AnimationFactory.CreateDoubleAnimation(200, 0, easing: true, framerate: 30);
+            _mpAnim = AnimationFactory.CreateDoubleAnimation(200, 0, easing: true, framerate: 30);
+            _stAnim = AnimationFactory.CreateDoubleAnimation(200, 0, easing: true, framerate: 30);
+            _shAnim = AnimationFactory.CreateDoubleAnimation(200, 0, easing: true, framerate: 30);
         }
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

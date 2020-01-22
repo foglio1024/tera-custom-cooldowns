@@ -66,7 +66,7 @@
               HorizontalAlignment="Right" 
               VerticalAlignment="Bottom"
               ClipToBounds="False"
-              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:RoundFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:RoundFixedSkillControl}, Converter={StaticResource BoolToVisibility}}"
               >
             <Border Background="{StaticResource RevampBackgroundBrush}" 
                     CornerRadius="5" Effect="{StaticResource FadedDropShadow}" 

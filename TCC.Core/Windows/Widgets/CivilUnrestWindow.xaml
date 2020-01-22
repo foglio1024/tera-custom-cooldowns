@@ -12,7 +12,7 @@
                  Style="{StaticResource BaseWindowStyle}"
         Loaded="OnLoaded"
         d:DataContext="{d:DesignInstance {x:Type widgets:CivilUnrestViewModel}}" MouseDoubleClick="OnMouseDoubleClick">
-    <Grid x:Name="ZoneBoundContent" Visibility="{Binding CivilUnrest, Converter={StaticResource BoolToVisibleCollapsed}}">
+    <Grid x:Name="ZoneBoundContent" Visibility="{Binding CivilUnrest, Converter={StaticResource BoolToVisibility}}">
 
         <Grid Width="250" Margin="4" x:Name="WindowContent" Height="310">
             <Grid.RowDefinitions>

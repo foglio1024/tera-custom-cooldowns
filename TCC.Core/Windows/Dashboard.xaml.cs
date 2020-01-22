@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using FoglioUtils;
 using TCC.Data.Pc;
 using TCC.R;
 using TCC.ViewModels;
@@ -38,7 +39,7 @@ namespace TCC.Windows
 
         private void OnDetailsMouseButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var an = new DoubleAnimation(0, TimeSpan.FromSeconds(.3)) {EasingFunction = MiscResources.QuadraticEase};
+            var an = AnimationFactory.CreateDoubleAnimation(300, 0, easing: true);
             an.Completed += (o, args) => DetailsBorder.IsHitTestVisible = false;
             DetailsBorder.BeginAnimation(OpacityProperty, an);
         }
@@ -48,9 +49,8 @@ namespace TCC.Windows
             Dispatcher.InvokeAsync(() =>
             {
                 InventoryFilter.Clear();
-                var an = new DoubleAnimation(1, TimeSpan.FromSeconds(.3))
-                    {EasingFunction = MiscResources.QuadraticEase};
-                an.Completed += (o, args) => DetailsBorder.IsHitTestVisible = true;
+                var an = AnimationFactory.CreateDoubleAnimation(300, 1, easing: true, completed:
+                    (_, __) => DetailsBorder.IsHitTestVisible = true);
                 DetailsBorder.BeginAnimation(OpacityProperty, an);
             });
         }
@@ -62,7 +62,7 @@ namespace TCC.Windows
             {
                 var item = ((InventoryItem) o).Item;
                 var name = item.Name;
-                return name.IndexOf(((TextBox) sender).Text,
+                return name.IndexOf(((TextBox)sender).Text,
                            StringComparison.InvariantCultureIgnoreCase) != -1;
             };
             view.Refresh();
@@ -83,7 +83,7 @@ namespace TCC.Windows
         private void OpenMergedInventory(object sender, RoutedEventArgs e)
         {
             new MergedInventoryWindow
-                {Topmost = true, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner}.ShowDialog();
+            { Topmost = true, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner }.ShowDialog();
         }
 
         private void OnMenuButtonClick(object sender, RoutedEventArgs e)

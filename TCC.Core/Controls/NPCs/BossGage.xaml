@@ -8,6 +8,7 @@
              xmlns:npc="clr-namespace:TCC.Data.NPCs"
              xmlns:tcc="clr-namespace:TCC"
              xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
              mc:Ignorable="d"
              Loaded="OnLoaded"
              UseLayoutRounding="True"
@@ -110,7 +111,7 @@
                             Height="{Binding ElementName=IconBaseBorder, Path=ActualWidth}"
                             BorderThickness="{Binding ElementName=IconBaseBorder, Path=BorderThickness}"
                             BorderBrush="White"
-                            Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleCollapsed}}"
+                            Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibility}}"
                             >
                         <Border.Background>
                             <LinearGradientBrush StartPoint="-.5 .5" EndPoint="1 2">
@@ -149,7 +150,7 @@
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
                            Source="../../resources/images/kr_boss_icon.png"
-                           Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}">
+                           Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}">
                         <Image.RenderTransform>
                             <TranslateTransform Y="20" X="0.5" />
                         </Image.RenderTransform>
@@ -262,7 +263,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Style="{StaticResource DefaultTextStyle}"
-                               Visibility="{Binding VM.ShowHP, RelativeSource={RelativeSource AncestorType=npcCtrl:BossGage}, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"
+                               Visibility="{Binding VM.ShowHP, RelativeSource={RelativeSource AncestorType=npcCtrl:BossGage}, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Bottom"
                                FontSize="13"
@@ -278,7 +279,7 @@
                         </TextBlock.Effect>
                     </TextBlock>
                     <TextBlock Style="{StaticResource DefaultTextStyle}"
-                               Visibility="{Binding VM.ShowHP, RelativeSource={RelativeSource AncestorType=npcCtrl:BossGage}, Converter={StaticResource BoolToVisibleCollapsed}}"
+                               Visibility="{Binding VM.ShowHP, RelativeSource={RelativeSource AncestorType=npcCtrl:BossGage}, Converter={StaticResource BoolToVisibility}}"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Bottom"
                                FontSize="13"
@@ -358,7 +359,7 @@
                                                Fill="{StaticResource TccRedGradientBrush}" 
 
                                                Width="90"
-                                               Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleHidden}}">
+                                               Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}">
                                         <Rectangle.RenderTransform>
                                             <ScaleTransform ScaleX="1" />
                                         </Rectangle.RenderTransform>
@@ -446,7 +447,7 @@
                                 VerticalAlignment="Center"
                                 RenderTransformOrigin=".5 .5"
                                 UseLayoutRounding="True"
-                                Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"
+                                Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}"
                                 >
                             <StackPanel.RenderTransform>
                                 <TranslateTransform X="0"/>
@@ -480,7 +481,7 @@
                     </Grid>
                     <!-- Timer -->
                     <Grid Grid.Row="1" Margin="0 -1 0 2"
-                            Visibility="{Binding VM.IsTimerRunning, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}"
+                            Visibility="{Binding VM.IsTimerRunning, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}"
                           >
                         <Border HorizontalAlignment="Stretch"
                             Width="Auto"
@@ -515,7 +516,7 @@
                                    HorizontalAlignment="Left"
                                    Margin="-3 0 -50 0"
                                    VerticalAlignment="Bottom"
-                                   Visibility="{Binding VM.IsTimerRunning, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}" />
+                                   Visibility="{Binding VM.IsTimerRunning, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}" />
                         </StackPanel>
                     </Grid>
                     <UniformGrid Rows="1" VerticalAlignment="Center" Margin="0 2 0 2">
@@ -559,10 +560,10 @@
                     Margin="-5 0 0 0"
                     Height="14"
                     Grid.RowSpan="2"
-                    tcc:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
+                    extensions:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
                     ToolTip="Blacklist or change type"
                     Style="{StaticResource ButtonContentOpacityStyle}"
-                    Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource AncestorType={x:Type npcCtrl:BossGage}}}"
+                    Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource AncestorType={x:Type npcCtrl:BossGage}}}"
                     >
                 <Button.ContextMenu>
                     <controls:TccContextMenu Style="{StaticResource {x:Type ContextMenu}}">

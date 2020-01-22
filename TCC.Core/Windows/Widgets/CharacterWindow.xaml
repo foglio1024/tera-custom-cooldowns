@@ -178,7 +178,7 @@
                     </Border.Style>
                 </Border>
                 <!--SH-->
-                <Border Visibility="{Binding Player.HasShield, Converter={StaticResource BoolToVisibleCollapsed}}" 
+                <Border Visibility="{Binding Player.HasShield, Converter={StaticResource BoolToVisibility}}" 
                     Padding="3 2" >
                     <Grid x:Name="ShGrid">
                         <Border VerticalAlignment="Top" BorderThickness="0" Height="8" Margin="0" >
@@ -341,15 +341,15 @@
 
                 <!--Player Info-->
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 35" VerticalAlignment="Bottom" >
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="Lv." Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.Level}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="5 0 0 -1" Text="{Binding Player.Name}" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="Lv." Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.Level}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="5 0 0 -1" Text="{Binding Player.Name}" 
                                          Fill="#eee" StrokeThickness="3" Stroke="#7000"  FontSize="16" FontFamily="{StaticResource Frutiger}"/>
                     <Path Data="{StaticResource SvgWeapon}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Item level"></Path>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.ItemLevel, StringFormat={}{0:N1}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.ItemLevel, StringFormat={}{0:N1}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <Path Data="{StaticResource SvgCrossedSwords}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Current crit factor"></Path>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.CritFactor, StringFormat={}{0:0}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000" 
-                                         FontSize="14" FontFamily="{StaticResource Frutiger}" Margin="0 0 -300 0"/>
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.CritFactor, StringFormat={}{0:0}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000" 
+                                                FontSize="14" FontFamily="{StaticResource Frutiger}" Margin="0 0 -300 0"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel"  >
                             <Setter Property="Grid.Column" Value="2"/>
@@ -419,10 +419,10 @@
                 </StackPanel>
 
                 <!--HP Perc-->
-                <c:OutlinedTextBlock VerticalAlignment="Center" Text="{Binding Player.HpFactor, StringFormat=0.# %}" 
+                <controls:OutlinedTextBlock VerticalAlignment="Center" Text="{Binding Player.HpFactor, StringFormat=0.# %}" 
                                      Fill="#eee" StrokeThickness="4" Stroke="#4000" FontSize="16" FontFamily="{StaticResource Frutiger}">
-                    <c:OutlinedTextBlock.Style>
-                        <Style TargetType="c:OutlinedTextBlock">
+                    <controls:OutlinedTextBlock.Style>
+                        <Style TargetType="controls:OutlinedTextBlock">
                             <Setter Property="Grid.Column" Value="2"/>
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                             <Setter Property="Margin" Value="0 0 30 20"/>
@@ -436,14 +436,14 @@
                             </Style.Triggers>
 
                         </Style>
-                    </c:OutlinedTextBlock.Style>
-                </c:OutlinedTextBlock>
+                    </controls:OutlinedTextBlock.Style>
+                </controls:OutlinedTextBlock>
                 <!--RE Info-->
-                <c:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.CurrentST}" 
+                <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.CurrentST}" 
                                      Visibility="{Binding Player.Class, Converter={StaticResource StaminaVisConv}}"
                                      Fill="#eee" StrokeThickness="3" Stroke="#3000" FontSize="16" FontFamily="{StaticResource Frutiger}">
-                    <c:OutlinedTextBlock.Style>
-                        <Style TargetType="c:OutlinedTextBlock">
+                    <controls:OutlinedTextBlock.Style>
+                        <Style TargetType="controls:OutlinedTextBlock">
                             <Setter Property="Grid.Column" Value="2"/>
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                             <Setter Property="Margin" Value="0 0 28 5"/>
@@ -454,16 +454,16 @@
                             </Style.Triggers>
 
                         </Style>
-                    </c:OutlinedTextBlock.Style>
-                </c:OutlinedTextBlock>
+                    </controls:OutlinedTextBlock.Style>
+                </controls:OutlinedTextBlock>
 
                 <!--HP Info-->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                    <c:OutlinedTextBlock VerticalAlignment="Top" Margin="0 -2 0 0" Text="{Binding Player.TotalHP}" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Top" Margin="0 -2 0 0" Text="{Binding Player.TotalHP}" 
                                         Fill="#eee" StrokeThickness="4" Stroke="#4000" FontSize="16" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Top" Margin="3 0 2 0" Text="/" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Top" Margin="3 0 2 0" Text="/" 
                                         Fill="#ccc" StrokeThickness="4" Stroke="#4000" FontSize="13" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Top" Margin="0 0 0 0" Text="{Binding Player.MaxHP}" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Top" Margin="0 0 0 0" Text="{Binding Player.MaxHP}" 
                                         Fill="#ccc" StrokeThickness="4" Stroke="#4000" FontSize="13" FontFamily="{StaticResource Frutiger}"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
@@ -483,11 +483,11 @@
 
                 <!--MP Info-->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="2">
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 -2" Text="{Binding Player.CurrentMP}" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 -2" Text="{Binding Player.CurrentMP}" 
                                          Fill="#eee" StrokeThickness="4" Stroke="#4000" FontSize="16" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="3 0 2 0" Text="/" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="3 0 2 0" Text="/" 
                                          Fill="#ccc" StrokeThickness="4" Stroke="#4000" FontSize="13" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.MaxMP}" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.MaxMP}" 
                                          Fill="#ccc" StrokeThickness="4" Stroke="#4000" FontSize="13" FontFamily="{StaticResource Frutiger}"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
@@ -507,12 +507,12 @@
                 <!--SH Info-->
                 <StackPanel Orientation="Horizontal" 
                             VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                            Visibility="{Binding Player.HasShield, Converter={StaticResource BoolToVisibleCollapsed}}">
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.CurrentShield}" 
+                            Visibility="{Binding Player.HasShield, Converter={StaticResource BoolToVisibility}}">
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.CurrentShield}" 
                                          Fill="#ddd" StrokeThickness="3" Stroke="#99005723" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="2 0 2 0" Text="/" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="2 0 2 0" Text="/" 
                                          Fill="#ddd" StrokeThickness="3" Stroke="#99005723" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
-                    <c:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.MaxShield}" 
+                    <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="0 0 0 0" Text="{Binding Player.MaxShield}" 
                                          Fill="#ddd" StrokeThickness="3" Stroke="#99005723" FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
@@ -702,7 +702,7 @@
                             <TranslateTransform Y="0"/>
                         </Path.RenderTransform>
                     </Path>
-                    <c:OutlinedTextBlock HorizontalAlignment="Center"
+                    <controls:OutlinedTextBlock HorizontalAlignment="Center"
                                VerticalAlignment="Top" Fill="#dfff"
                                          StrokeThickness="4"
                                          Stroke="#6000"
@@ -710,8 +710,8 @@
                                Margin="0 -18 0 0" FontSize="20" Text="{Binding Player.CurrentST}"
                                >
 
-                        <c:OutlinedTextBlock.Style>
-                            <Style TargetType="c:OutlinedTextBlock">
+                        <controls:OutlinedTextBlock.Style>
+                            <Style TargetType="controls:OutlinedTextBlock">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ShowRe}" Value="True">
@@ -719,9 +719,9 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </c:OutlinedTextBlock.Style>
+                        </controls:OutlinedTextBlock.Style>
 
-                    </c:OutlinedTextBlock>
+                    </controls:OutlinedTextBlock>
                 </Grid>
             </Grid>
         </Grid>

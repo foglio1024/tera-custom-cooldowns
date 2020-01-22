@@ -93,7 +93,7 @@ namespace TCC
 
         private void RegisterHotkeys()
         {
-            Console.WriteLine("RegisterHotkeys()");
+            //Console.WriteLine("RegisterHotkeys()");
             _callbacks.Keys.ToList().ForEach(RegisterHotKey);
             _isRegistered = true;
         }
@@ -182,7 +182,7 @@ namespace TCC
 
         private void ClearHotkeys()
         {
-            Console.WriteLine("ClearHotkeys()");
+            //Console.WriteLine("ClearHotkeys()");
 
             for (var i = _currentId; i > 0; i--) User32.UnregisterHotKey(_window.Handle, i);
             _currentId = 0;

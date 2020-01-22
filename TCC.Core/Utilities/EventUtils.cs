@@ -1,4 +1,4 @@
-﻿namespace TCC
+﻿namespace TCC.Utilities
 {
     public static class EventUtils
     {

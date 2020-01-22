@@ -29,7 +29,7 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <ItemsControl x:Name="ItemSkillsPanel" Grid.Row="2" ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}" Width="Auto" ItemsSource="{Binding ItemSkills}"
-                      Visibility="{Binding ShowItems, Converter={StaticResource BoolToVisibleHidden}}">
+                      Visibility="{Binding ShowItems, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="Auto"/>

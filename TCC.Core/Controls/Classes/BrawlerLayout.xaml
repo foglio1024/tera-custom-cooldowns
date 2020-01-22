@@ -181,13 +181,13 @@
                     <TranslateTransform X="0" Y="70" />
                 </FrameworkElement.RenderTransform>
             </Polygon>
-            <local:OutlinedTextBlock TextAlignment="Center" Margin="0,0,0,0" FontSize="19" 
+            <controls:OutlinedTextBlock TextAlignment="Center" Margin="0,0,0,0" FontSize="19" 
                            FontFamily="{StaticResource Frutiger}" Fill="#fff"
                                      Stroke="#8000"
                        Text="{Binding StaminaTracker.Val}" 
                        Width="45" VerticalAlignment="Center">
                 <FrameworkElement.Style>
-                    <Style TargetType="local:OutlinedTextBlock">
+                    <Style TargetType="controls:OutlinedTextBlock">
                         <Setter Property="StrokeThickness" Value="0"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsGfOn}" Value="True">
@@ -197,8 +197,8 @@
                     </Style>
                 </FrameworkElement.Style>
 
-            </local:OutlinedTextBlock>
-            <Grid Visibility="{Binding CounterProc, Converter={StaticResource BooleanToVisibilityConverter}}">
+            </controls:OutlinedTextBlock>
+            <Grid Visibility="{Binding CounterProc, Converter={StaticResource BoolToVisibility}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="8"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7"

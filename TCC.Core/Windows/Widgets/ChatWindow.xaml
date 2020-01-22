@@ -273,7 +273,7 @@
                     <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png"
                            VerticalAlignment="Bottom" IsHitTestVisible="False"
                            HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
-                           Visibility="{Binding Paused, Converter={StaticResource BoolToVisibleCollapsed}}" />
+                           Visibility="{Binding Paused, Converter={StaticResource BoolToVisibility}}" />
 
                     <!-- LFG bar -->
                     <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
@@ -283,7 +283,7 @@
                                   Width="Auto"
                                   Height="18"
                                   Style="{StaticResource LfgItemsControl}"
-                                  Visibility="{Binding WindowSettings.LfgOn, Converter={StaticResource BoolToVisibleCollapsed}}">
+                                  Visibility="{Binding WindowSettings.LfgOn, Converter={StaticResource BoolToVisibility}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" />

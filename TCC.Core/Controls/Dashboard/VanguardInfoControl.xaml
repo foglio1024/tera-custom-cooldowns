@@ -63,7 +63,7 @@
                   HorizontalAlignment="Right" VerticalAlignment="Center" 
                       >
                       <!--Visibility="{Binding Source={x:Static vm:InfoWindowViewModel.Instance},
-                    Path=ShowElleonMarks, Converter={StaticResource BoolToVisibleCollapsed}}"-->
+                    Path=ShowElleonMarks, Converter={StaticResource BoolToVisibility}}"-->
                     <Ellipse Fill="{StaticResource MarksBrush}" Opacity=".2" Margin="2"></Ellipse>
                     <Viewbox StretchDirection="DownOnly" Width="19">
                         <TextBlock Text="{Binding ElleonMarks}" 

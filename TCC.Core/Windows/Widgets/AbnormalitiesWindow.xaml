@@ -1,19 +1,17 @@
-﻿<widgets1:TccWidget x:Class="TCC.Windows.Widgets.BuffWindow"
+﻿<widgets:TccWidget x:Class="TCC.Windows.Widgets.BuffWindow"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:w="clr-namespace:TCC.Windows"
                     xmlns:controls="clr-namespace:TCC.Controls"
-                    xmlns:vm="clr-namespace:TCC.ViewModels"
-                    xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
-                    xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
+                    xmlns:widgetsWm="clr-namespace:TCC.ViewModels.Widgets"
+                    xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
                     mc:Ignorable="d"
                     Title="TCC buffs"
                     MouseLeftButtonDown="Drag"
                     Style="{StaticResource BaseWindowStyle}"
-                    d:DataContext="{d:DesignInstance widgets:AbnormalityWindowViewModel}">
-    <widgets1:TccWidget.Resources>
+                    d:DataContext="{d:DesignInstance widgetsWm:AbnormalityWindowViewModel}">
+    <widgets:TccWidget.Resources>
         <Style x:Key="GridRowStyle" TargetType="Grid">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Style.Triggers>
@@ -22,7 +20,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-    </widgets1:TccWidget.Resources>
+    </widgets:TccWidget.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -33,14 +31,24 @@
 
         <FrameworkElement FlowDirection="{Binding Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top" />
         <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons"
-                                HorizontalAlignment="{Binding ElementName=DirectionGovernor, Path=FlowDirection, Converter={StaticResource DirectionToHorAlignConveter}}"
-                                DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" />
+                                DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}">
+            <controls:WindowButtons.Style>
+                <Style TargetType="controls:WindowButtons">
+                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=DirectionGovernor, Path=FlowDirection}" Value="RightToLeft">
+                            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </controls:WindowButtons.Style>
+        </controls:WindowButtons>
 
         <StackPanel Background="Transparent" Name="WindowContent" Grid.Row="1">
             <StackPanel.LayoutTransform>
                 <ScaleTransform
-                    ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}"
-                    ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" />
+                    ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}"
+                    ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}" />
             </StackPanel.LayoutTransform>
             <Grid Width="Auto" Style="{StaticResource GridRowStyle}">
                 <Grid.ColumnDefinitions>
@@ -137,4 +145,4 @@
             </ItemsControl>
         </StackPanel>
     </Grid>
-</widgets1:TccWidget>
+</widgets:TccWidget>

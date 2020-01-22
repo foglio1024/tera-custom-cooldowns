@@ -7,53 +7,68 @@
              xmlns:settings="clr-namespace:TCC.Settings"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance settings:WindowSettings}">
     <Grid Margin="3">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
         <Grid.Resources>
-            <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="Height" Value="20"/>
-                <Setter Property="Width" Value="20"/>
-                <Setter Property="Margin" Value="5 2"/>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonContentOpacityStyle}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Height" Value="20" />
+                <Setter Property="Width" Value="20" />
+                <Setter Property="Margin" Value="5 2" />
+            </Style>
+            <Style TargetType="{x:Type Path}" BasedOn="{StaticResource {x:Type Path}}">
+                <Setter Property="Fill" Value="White"/>
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="Height" Value="16" />
+                <Setter Property="Width" Value="16" />
             </Style>
         </Grid.Resources>
-        <Border Style="{StaticResource DefaultBorderStyle}" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Border Style="{StaticResource DefaultBorderStyle}"
                 Background="{StaticResource RevampBackgroundBrush}"
                 BorderBrush="{StaticResource RevampBorderBrush}"
-                Grid.ColumnSpan="20" Opacity=".5"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                Effect="{x:Null}"/>
+                Grid.ColumnSpan="20" 
+                Opacity=".5"
+                VerticalAlignment="Stretch" 
+                HorizontalAlignment="Stretch"
+                Effect="{x:Null}" />
+
         <Button Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
-                Click="Hide" ToolTip="Hide">
-            <Path Fill="White" Data="{StaticResource SvgHide}" Stretch="Uniform" Margin="2"/>
+                Command="{Binding HideCommand}"
+                ToolTip="Hide">
+            <Path Data="{StaticResource SvgHide}"/>
         </Button>
-        <Button Click="Pin" Grid.Column="1" ToolTip="Show always">
-            <Path Fill="White" Data="{Binding ShowAlways, Converter={StaticResource BoolToSvgSwitchConverter}, ConverterParameter=SvgPin:SvgUnpin}" 
-                  Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
+        <Button Command="{Binding PinCommand}"
+                Grid.Column="1" ToolTip="Show always">
+            <Path Data="{Binding ShowAlways, Converter={StaticResource BoolToSvgSwitchConverter}, ConverterParameter=SvgPin:SvgUnpin}"/>
         </Button>
         <Button Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
-                Click="AutoDim" Grid.Column="2" ToolTip="Auto dim">
-            <Path Fill="White" Data="{Binding AutoDim, Converter={StaticResource BoolToSvgSwitchConverter}, ConverterParameter=SvgBlurOn:SvgBlurOff}" 
-                   HorizontalAlignment="Center" Margin="2"/>
+                Command="{Binding AutoDimCommand}"
+                Grid.Column="2" 
+                ToolTip="Auto dim">
+            <Path Data="{Binding AutoDim, Converter={StaticResource BoolToSvgSwitchConverter}, ConverterParameter=SvgBlurOn:SvgBlurOff}"/>
         </Button>
-        <Button Click="MakeGlobal" Grid.Column="3" ToolTip="Apply current position to all classes">
-            <Path Fill="White" Data="{StaticResource SvgCheckAll}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
+        <Button Command="{Binding MakeGlobalCommand}"
+                Grid.Column="3" 
+                ToolTip="Apply current position to all classes">
+            <Path Data="{StaticResource SvgCheckAll}" />
         </Button>
-        <Button Click="Close" Grid.Column="4" ToolTip="Close" Visibility="{Binding CloseButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}">
-            <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" HorizontalAlignment="Center" Margin="2"/>
+        <Button Command="{Binding CloseCommand}"
+                Grid.Column="4" ToolTip="Close"
+                Visibility="{Binding CloseButtonVisibility, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}">
+            <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" />
         </Button>
 
-        <!--<Path Fill="#3fff" Data="{StaticResource SvgMove}" Height="22" Width="22" Stretch="Uniform" Grid.Column="1" Margin="5 5 10 5" VerticalAlignment="Center"></Path>-->
         <TextBlock Text="{Binding WindowName, RelativeSource={RelativeSource AncestorType=c:WindowButtons}}"
-                   Grid.Column="5" Foreground="#5fff" VerticalAlignment="Center" Margin="5 0 10 1" FontSize="14"></TextBlock>
+                   Grid.Column="5" Foreground="#5fff" VerticalAlignment="Center" Margin="5 0 10 1" FontSize="14" />
 
     </Grid>
 </UserControl>

@@ -250,7 +250,7 @@
               VerticalAlignment="Bottom"
               ClipToBounds="False"
               Margin="0 0 0 6"
-              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:RhombFixedSkillControl}, Converter={StaticResource BooleanToVisibilityConverter}}">
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:RhombFixedSkillControl}, Converter={StaticResource BoolToVisibility}}">
             <Border Background="{StaticResource RevampBackgroundBrush}" CornerRadius="0" RenderTransformOrigin=".5 .5"
                     Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource RevampBorderBrush}"
                     BorderThickness="1" Padding="0" RenderTransform="{StaticResource Rotate45}"

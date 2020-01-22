@@ -1,6 +1,6 @@
-////////////////////////////////////////////////////
-//// File automatically generated from App.xaml ////
-////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//// File automatically generated from csproj file ////
+///////////////////////////////////////////////////////
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -274,9 +274,6 @@ namespace TCC.R
 		public static SolidColorBrush TeraRestylePanelBrush => ((SolidColorBrush)App.Current.FindResource("TeraRestylePanelBrush"));
 		public static SolidColorBrush TeraRestyleBorderBrush => ((SolidColorBrush)App.Current.FindResource("TeraRestyleBorderBrush"));
 		public static SolidColorBrush TeraRestyleBorderBrushLight => ((SolidColorBrush)App.Current.FindResource("TeraRestyleBorderBrushLight"));
-		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
-		public static SolidColorBrush SelectionBackgroundLightBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundLightBrush"));
-		public static SolidColorBrush SelectionBorderBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBorderBrush"));
 		public static SolidColorBrush HpBrush => ((SolidColorBrush)App.Current.FindResource("HpBrush"));
 		public static SolidColorBrush HpBrushLight => ((SolidColorBrush)App.Current.FindResource("HpBrushLight"));
 		public static SolidColorBrush MpBrush => ((SolidColorBrush)App.Current.FindResource("MpBrush"));
@@ -363,7 +360,7 @@ namespace TCC.R
 		public static LinearGradientBrush TccYellowGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccYellowGradientBrush"));
 		public static LinearGradientBrush TccRedGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccRedGradientBrush"));
 	}
-	public static class MiscResources
+	public static class FoglioUtils_MiscResources
 	{
 		public static QuadraticEase QuadraticEase => ((QuadraticEase)App.Current.FindResource("QuadraticEase"));
 		public static TranslateTransform DefaultTranslateTransform => ((TranslateTransform)App.Current.FindResource("DefaultTranslateTransform"));
@@ -373,6 +370,9 @@ namespace TCC.R
 		public static RotateTransform Rotate45Inv => ((RotateTransform)App.Current.FindResource("Rotate45Inv"));
 		public static SkewTransform Skew45 => ((SkewTransform)App.Current.FindResource("Skew45"));
 		public static SkewTransform Skew45Inv => ((SkewTransform)App.Current.FindResource("Skew45Inv"));
+	}
+	public static class MiscResources
+	{
 		public static Storyboard Pulse => ((Storyboard)App.Current.FindResource("Pulse"));
 		public static Storyboard Warn => ((Storyboard)App.Current.FindResource("Warn"));
 		public static FontFamily DroidSans => ((FontFamily)App.Current.FindResource("DroidSans"));
@@ -385,19 +385,28 @@ namespace TCC.R
 		public static FontFamily NotoSansMed => ((FontFamily)App.Current.FindResource("NotoSansMed"));
 		public static FontFamily ProductSans => ((FontFamily)App.Current.FindResource("ProductSans"));
 		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
-		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
-		public static DropShadowEffect BigDropShadow => ((DropShadowEffect)App.Current.FindResource("BigDropShadow"));
-		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
 		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
 		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
 		public static Double MapWidth => ((Double)App.Current.FindResource("MapWidth"));
 		public static Double MapHeight => ((Double)App.Current.FindResource("MapHeight"));
 	}
+	public static class FoglioUtils_Converters
+	{
+		public static BoolToVisibility BoolToVisibility => ((BoolToVisibility)App.Current.FindResource("BoolToVisibility"));
+		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
+		public static RoundedClipConverter RoundedClipConverter => ((RoundedClipConverter)App.Current.FindResource("RoundedClipConverter"));
+		public static EnumDescriptionConverter EnumDescriptionConverter => ((EnumDescriptionConverter)App.Current.FindResource("EnumDescriptionConverter"));
+		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
+		public static ValueToFactorConverter ValueToFactor => ((ValueToFactorConverter)App.Current.FindResource("ValueToFactor"));
+		public static FactorToAngleConverter FactorToAngle => ((FactorToAngleConverter)App.Current.FindResource("FactorToAngle"));
+		public static ColorToTransparentConverter ColorToTransparent => ((ColorToTransparentConverter)App.Current.FindResource("ColorToTransparent"));
+		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
+		public static NullToVisibleCollapsedConverter NullToVisibleCollapsed => ((NullToVisibleCollapsedConverter)App.Current.FindResource("NullToVisibleCollapsed"));
+		public static DurationLabelConverter DurationToTimeFormat => ((DurationLabelConverter)App.Current.FindResource("DurationToTimeFormat"));
+	}
 	public static class Converters
 	{
 		public static BoolToSvgSwitchConverter BoolToSvgSwitchConverter => ((BoolToSvgSwitchConverter)App.Current.FindResource("BoolToSvgSwitchConverter"));
-		public static BoolToVisibleCollapsedConverter BoolToVisibleCollapsed => ((BoolToVisibleCollapsedConverter)App.Current.FindResource("BoolToVisibleCollapsed"));
-		public static BoolToVisibleHidden BoolToVisibleHidden => ((BoolToVisibleHidden)App.Current.FindResource("BoolToVisibleHidden"));
 		public static RollToStringConverter RollToString => ((RollToStringConverter)App.Current.FindResource("RollToString"));
 		public static WinningToColorConverter WinningToColor => ((WinningToColorConverter)App.Current.FindResource("WinningToColor"));
 		public static IconConverter IconNameToPath => ((IconConverter)App.Current.FindResource("IconNameToPath"));
@@ -415,16 +424,9 @@ namespace TCC.R
 		public static PieceToPathConverter PieceToPath => ((PieceToPathConverter)App.Current.FindResource("PieceToPath"));
 		public static GearLevelToFactorConverter GearLevelToFactor => ((GearLevelToFactorConverter)App.Current.FindResource("GearLevelToFactor"));
 		public static GearLevelToColorConverter GearLevelToColor => ((GearLevelToColorConverter)App.Current.FindResource("GearLevelToColor"));
-		public static NullToVisibleCollapsedConverter NullToVisibleCollapsed => ((NullToVisibleCollapsedConverter)App.Current.FindResource("NullToVisibleCollapsed"));
 		public static LogoInfoToImageConverter LogoInfoToImage => ((LogoInfoToImageConverter)App.Current.FindResource("LogoInfoToImage"));
 		public static DirectionToHorAlignConveter DirectionToHorAlignConveter => ((DirectionToHorAlignConveter)App.Current.FindResource("DirectionToHorAlignConveter"));
 		public static AbnormalityTypeToColorConverter AbnormalityTypeToStrokeColor => ((AbnormalityTypeToColorConverter)App.Current.FindResource("AbnormalityTypeToStrokeColor"));
-		public static DurationLabelConverter DurationToTimeFormat => ((DurationLabelConverter)App.Current.FindResource("DurationToTimeFormat"));
-		public static DurationToVisibilityConverter DurationToLabelVisibility => ((DurationToVisibilityConverter)App.Current.FindResource("DurationToLabelVisibility"));
-		public static SizeToStackLabelSizeConverter MainSizeToStackLabelSize => ((SizeToStackLabelSizeConverter)App.Current.FindResource("MainSizeToStackLabelSize"));
-		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
-		public static SizeToDurationLabelMarginConverter MainSizeToDurationLabelMargin => ((SizeToDurationLabelMarginConverter)App.Current.FindResource("MainSizeToDurationLabelMargin"));
-		public static ColorToTransparentConverter ColorToTransparent => ((ColorToTransparentConverter)App.Current.FindResource("ColorToTransparent"));
 		public static MessageTextToIconConverter MessageTextToIcon => ((MessageTextToIconConverter)App.Current.FindResource("MessageTextToIcon"));
 		public static EntityIdToNameConverter EntityIdToName => ((EntityIdToNameConverter)App.Current.FindResource("EntityIdToName"));
 		public static AggroTypeToFillConverter AggroTypeToFill => ((AggroTypeToFillConverter)App.Current.FindResource("AggroTypeToFill"));
@@ -441,56 +443,39 @@ namespace TCC.R
 		public static ValueConverterGroup IlvlTierToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("IlvlTierToTransparentFill"));
 		public static ShieldStatusColorConverter ShieldStatusColor => ((ShieldStatusColorConverter)App.Current.FindResource("ShieldStatusColor"));
 		public static ShieldStatusToVisibilityConverter ShieldStatusToVisibility => ((ShieldStatusToVisibilityConverter)App.Current.FindResource("ShieldStatusToVisibility"));
-		public static FactorToAngleConverter FactorToAngle => ((FactorToAngleConverter)App.Current.FindResource("FactorToAngle"));
-		public static ValueToFactorConverter ValueToFactor => ((ValueToFactorConverter)App.Current.FindResource("ValueToFactor"));
 		public static StringToFillConverter StringToFill => ((StringToFillConverter)App.Current.FindResource("StringToFill"));
 		public static GuardianPointsStringConverter GuardianPointsStringConverter => ((GuardianPointsStringConverter)App.Current.FindResource("GuardianPointsStringConverter"));
 		public static LfgVmToButtonLabelConverter LfgVmToButtonLabel => ((LfgVmToButtonLabelConverter)App.Current.FindResource("LfgVmToButtonLabel"));
 		public static ClassToNameConverter ClassToName => ((ClassToNameConverter)App.Current.FindResource("ClassToName"));
-		public static RoundedClipConverter RoundedClipConverter => ((RoundedClipConverter)App.Current.FindResource("RoundedClipConverter"));
 		public static ItemLevelTierToColorConverter IlvlTierToColor => ((ItemLevelTierToColorConverter)App.Current.FindResource("IlvlTierToColor"));
 		public static EntriesToColor EntriesToColor => ((EntriesToColor)App.Current.FindResource("EntriesToColor"));
 		public static DungeonImageConverter DungeonImageConverter => ((DungeonImageConverter)App.Current.FindResource("DungeonImageConverter"));
-		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
 		public static MoneyAmountToVisibilityConverter AmountToVisibilityConv => ((MoneyAmountToVisibilityConverter)App.Current.FindResource("AmountToVisibilityConv"));
-		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
-		public static EnumDescriptionConverter EnumDescriptionConverter => ((EnumDescriptionConverter)App.Current.FindResource("EnumDescriptionConverter"));
 		public static NotificationTypeToBrush NotificationTypeToBrush => ((NotificationTypeToBrush)App.Current.FindResource("NotificationTypeToBrush"));
 		public static WarriorStanceToColorConverter StanceToColorConverter => ((WarriorStanceToColorConverter)App.Current.FindResource("StanceToColorConverter"));
 	}
-	public static class DragablzMaterialDesign
+	public static class FoglioUtils_Styles
 	{
-		public static BooleanToVisibilityConverter BooleanToVisibilityConverter => ((BooleanToVisibilityConverter)App.Current.FindResource("BooleanToVisibilityConverter"));
-		public static EqualityToVisibilityConverter EqualityToVisibilityConverter => ((EqualityToVisibilityConverter)App.Current.FindResource("EqualityToVisibilityConverter"));
-		public static BooleanAndToVisibilityConverter BooleanAndToVisibilityConverter => ((BooleanAndToVisibilityConverter)App.Current.FindResource("BooleanAndToVisibilityConverter"));
-		public static EqualityToBooleanConverter EqualityToBooleanConverter => ((EqualityToBooleanConverter)App.Current.FindResource("EqualityToBooleanConverter"));
-		public static ShowDefaultCloseButtonConverter ShowDefaultCloseButtonConverter => ((ShowDefaultCloseButtonConverter)App.Current.FindResource("ShowDefaultCloseButtonConverter"));
-		public static BrushToRadialGradientBrushConverter BrushToRadialGradientBrushConverter => ((BrushToRadialGradientBrushConverter)App.Current.FindResource("BrushToRadialGradientBrushConverter"));
-		public static Style MaterialDesignFocusVisual => ((Style)App.Current.FindResource("MaterialDesignFocusVisual"));
-		public static Style InvisibleThumbStyle => ((Style)App.Current.FindResource("InvisibleThumbStyle"));
-		public static Style MaterialDesignInvisibleThumbStyle => ((Style)App.Current.FindResource("MaterialDesignInvisibleThumbStyle"));
-		public static Style MaterialDesignMenuCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignMenuCommandButtonStyle"));
-		public static Style MaterialDesignCloseItemCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignCloseItemCommandButtonStyle"));
-		public static Style MaterialDesignAddItemCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignAddItemCommandButtonStyle"));
-		public static Style MaterialDesignDragableTabItemStyle => ((Style)App.Current.FindResource("MaterialDesignDragableTabItemStyle"));
-		public static Style MaterialDesignDragableTabItemVerticalStyle => ((Style)App.Current.FindResource("MaterialDesignDragableTabItemVerticalStyle"));
-		public static Style MaterialDesignMetroBaseWindowButtonStyle => ((Style)App.Current.FindResource("MaterialDesignMetroBaseWindowButtonStyle"));
-		public static Style MaterialDesignToolWindowButtonStyle => ((Style)App.Current.FindResource("MaterialDesignToolWindowButtonStyle"));
-		public static Style MaterialDesignToolDragablzItemStyle => ((Style)App.Current.FindResource("MaterialDesignToolDragablzItemStyle"));
-		public static ControlTemplate TabablzScrollViewerControlTemplate => ((ControlTemplate)App.Current.FindResource("TabablzScrollViewerControlTemplate"));
-		public static Style TabablzDragablzItemsControlStyle => ((Style)App.Current.FindResource("TabablzDragablzItemsControlStyle"));
-		public static Style StandardEmbeddedButtonStyle => ((Style)App.Current.FindResource("StandardEmbeddedButtonStyle"));
-		public static Style MaterialDesignTabablzControlStyle => ((Style)App.Current.FindResource("MaterialDesignTabablzControlStyle"));
-		public static Style MaterialDesignAlternateDragableTabItemStyle => ((Style)App.Current.FindResource("MaterialDesignAlternateDragableTabItemStyle"));
-		public static Style MaterialDesignAlternateDragableTabItemVerticalStyle => ((Style)App.Current.FindResource("MaterialDesignAlternateDragableTabItemVerticalStyle"));
-		public static Style MaterialDesignAlternateTabablzControlStyle => ((Style)App.Current.FindResource("MaterialDesignAlternateTabablzControlStyle"));
+		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
+		public static SolidColorBrush SelectionBackgroundLightBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundLightBrush"));
+		public static SolidColorBrush SelectionBorderBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBorderBrush"));
+		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
+		public static DropShadowEffect BigDropShadow => ((DropShadowEffect)App.Current.FindResource("BigDropShadow"));
+		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
+		public static Style EmptyFocusVisual => ((Style)App.Current.FindResource("EmptyFocusVisual"));
+		public static Style ButtonMainStyle => ((Style)App.Current.FindResource("ButtonMainStyle"));
+		public static Style ButtonContentOpacityStyle => ((Style)App.Current.FindResource("ButtonContentOpacityStyle"));
+		public static Style ComboBoxEditableTextBox => ((Style)App.Current.FindResource("ComboBoxEditableTextBox"));
+		public static Style ComboBoxToggleButton => ((Style)App.Current.FindResource("ComboBoxToggleButton"));
+		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
+		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
+		public static Style DefaultListItemStyle => ((Style)App.Current.FindResource("DefaultListItemStyle"));
+		public static Style NoHilightListItemStyleWithLines => ((Style)App.Current.FindResource("NoHilightListItemStyleWithLines"));
+		public static Style NoHilightListItemStyle => ((Style)App.Current.FindResource("NoHilightListItemStyle"));
+		public static ControlTemplate MenuItemControlTemplate1 => ((ControlTemplate)App.Current.FindResource("MenuItemControlTemplate1"));
 	}
 	public static class Styles
 	{
-		public static Style FocusVisual => ((Style)App.Current.FindResource("FocusVisual"));
-		public static Style FocusVisual2 => ((Style)App.Current.FindResource("FocusVisual2"));
-		public static Style FocusVisual3 => ((Style)App.Current.FindResource("FocusVisual3"));
-		public static Style OptionMarkFocusVisual => ((Style)App.Current.FindResource("OptionMarkFocusVisual"));
 		public static Style NotificationTitle => ((Style)App.Current.FindResource("NotificationTitle"));
 		public static Style NotificationBody => ((Style)App.Current.FindResource("NotificationBody"));
 		public static Style NotificationVersion => ((Style)App.Current.FindResource("NotificationVersion"));
@@ -501,25 +486,30 @@ namespace TCC.R
 		public static Style RevampBorderStyle => ((Style)App.Current.FindResource("RevampBorderStyle"));
 		public static Style BoundaryBorderStyle => ((Style)App.Current.FindResource("BoundaryBorderStyle"));
 		public static Style DefaultTextStyle => ((Style)App.Current.FindResource("DefaultTextStyle"));
-		public static Style ButtonMainStyle => ((Style)App.Current.FindResource("ButtonMainStyle"));
-		public static Style ButtonContentOpacityStyle => ((Style)App.Current.FindResource("ButtonContentOpacityStyle"));
 		public static Style SettingsButton => ((Style)App.Current.FindResource("SettingsButton"));
 		public static Style ScrollThumbs => ((Style)App.Current.FindResource("ScrollThumbs"));
 		public static Style ReversedScrollBar => ((Style)App.Current.FindResource("ReversedScrollBar"));
 		public static Style ScrollViewerWithReversedVerticalScrollBar => ((Style)App.Current.FindResource("ScrollViewerWithReversedVerticalScrollBar"));
 		public static Style ChatTabControlStyle => ((Style)App.Current.FindResource("ChatTabControlStyle"));
-		public static Style ChatDragableTabItemStyle => ((Style)App.Current.FindResource("ChatDragableTabItemStyle"));
-		public static Style ChatTabablzControlStyle => ((Style)App.Current.FindResource("ChatTabablzControlStyle"));
-		public static Style DefaultListItemStyle => ((Style)App.Current.FindResource("DefaultListItemStyle"));
-		public static Style NoHilightListItemStyleWithLines => ((Style)App.Current.FindResource("NoHilightListItemStyleWithLines"));
-		public static Style NoHilightListItemStyle => ((Style)App.Current.FindResource("NoHilightListItemStyle"));
-		public static Style ComboBoxEditableTextBox => ((Style)App.Current.FindResource("ComboBoxEditableTextBox"));
-		public static Style ComboBoxToggleButton => ((Style)App.Current.FindResource("ComboBoxToggleButton"));
-		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
-		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
 		public static Style GlowHoverGrid => ((Style)App.Current.FindResource("GlowHoverGrid"));
 		public static Style ClassWindowSkillBorder => ((Style)App.Current.FindResource("ClassWindowSkillBorder"));
-		public static ControlTemplate MenuItemControlTemplate1 => ((ControlTemplate)App.Current.FindResource("MenuItemControlTemplate1"));
+	}
+	public static class DragablzMaterialDesign
+	{
+		public static ShowDefaultCloseButtonConverter ShowDefaultCloseButtonConverter => ((ShowDefaultCloseButtonConverter)App.Current.FindResource("ShowDefaultCloseButtonConverter"));
+		public static Style MaterialDesignFocusVisual => ((Style)App.Current.FindResource("MaterialDesignFocusVisual"));
+		public static Style MaterialDesignInvisibleThumbStyle => ((Style)App.Current.FindResource("MaterialDesignInvisibleThumbStyle"));
+		public static Style MaterialDesignMenuCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignMenuCommandButtonStyle"));
+		public static Style MaterialDesignCloseItemCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignCloseItemCommandButtonStyle"));
+		public static Style MaterialDesignAddItemCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignAddItemCommandButtonStyle"));
+		public static Style MaterialDesignDragableTabItemStyle => ((Style)App.Current.FindResource("MaterialDesignDragableTabItemStyle"));
+		public static Style MaterialDesignDragableTabItemVerticalStyle => ((Style)App.Current.FindResource("MaterialDesignDragableTabItemVerticalStyle"));
+		public static ControlTemplate TabablzScrollViewerControlTemplate => ((ControlTemplate)App.Current.FindResource("TabablzScrollViewerControlTemplate"));
+		public static Style TabablzDragablzItemsControlStyle => ((Style)App.Current.FindResource("TabablzDragablzItemsControlStyle"));
+		public static Style StandardEmbeddedButtonStyle => ((Style)App.Current.FindResource("StandardEmbeddedButtonStyle"));
+		public static Style MaterialDesignTabablzControlStyle => ((Style)App.Current.FindResource("MaterialDesignTabablzControlStyle"));
+		public static Style ChatDragableTabItemStyle => ((Style)App.Current.FindResource("ChatDragableTabItemStyle"));
+		public static Style ChatTabablzControlStyle => ((Style)App.Current.FindResource("ChatTabablzControlStyle"));
 	}
 	public static class DataTemplates
 	{
@@ -527,6 +517,10 @@ namespace TCC.R
 		public static DataTemplate SquareNormalSkill => ((DataTemplate)App.Current.FindResource("SquareNormalSkill"));
 		public static DataTemplate RoundFixedSkill => ((DataTemplate)App.Current.FindResource("RoundFixedSkill"));
 		public static DataTemplate SquareFixedSkill => ((DataTemplate)App.Current.FindResource("SquareFixedSkill"));
+		public static DataTemplate SkillDataTemplate => ((DataTemplate)App.Current.FindResource("SkillDataTemplate"));
+		public static DataTemplate FixedSkillDataTemplateForConfig => ((DataTemplate)App.Current.FindResource("FixedSkillDataTemplateForConfig"));
+		public static DataTemplate FixedCooldownTemplate => ((DataTemplate)App.Current.FindResource("FixedCooldownTemplate"));
+		public static DataTemplate NormalCooldownTemplate => ((DataTemplate)App.Current.FindResource("NormalCooldownTemplate"));
 		public static DataTemplate SquareAbnormality => ((DataTemplate)App.Current.FindResource("SquareAbnormality"));
 		public static DataTemplate RoundAbnormality => ((DataTemplate)App.Current.FindResource("RoundAbnormality"));
 		public static DataTemplate RoundPartyAbnormality => ((DataTemplate)App.Current.FindResource("RoundPartyAbnormality"));
@@ -535,12 +529,9 @@ namespace TCC.R
 		public static DataTemplate SquareRaidAbnormality => ((DataTemplate)App.Current.FindResource("SquareRaidAbnormality"));
 		public static DataTemplate RoundBossAbnormality => ((DataTemplate)App.Current.FindResource("RoundBossAbnormality"));
 		public static DataTemplate SquareBossAbnormality => ((DataTemplate)App.Current.FindResource("SquareBossAbnormality"));
-		public static DataTemplate SkillDataTemplate => ((DataTemplate)App.Current.FindResource("SkillDataTemplate"));
-		public static DataTemplate ItemDataTemplate => ((DataTemplate)App.Current.FindResource("ItemDataTemplate"));
 		public static DataTemplate AbnormalityDataTemplate => ((DataTemplate)App.Current.FindResource("AbnormalityDataTemplate"));
 		public static DataTemplate GroupAbnormalitySelectorDataTemplate => ((DataTemplate)App.Current.FindResource("GroupAbnormalitySelectorDataTemplate"));
 		public static DataTemplate MyAbnormalitySelectorDataTemplate => ((DataTemplate)App.Current.FindResource("MyAbnormalitySelectorDataTemplate"));
-		public static DataTemplate FixedSkillDataTemplateForConfig => ((DataTemplate)App.Current.FindResource("FixedSkillDataTemplateForConfig"));
 		public static DataTemplate SimpleTemplate => ((DataTemplate)App.Current.FindResource("SimpleTemplate"));
 		public static DataTemplate ActionTemplate => ((DataTemplate)App.Current.FindResource("ActionTemplate"));
 		public static DataTemplate MoneyTemplate => ((DataTemplate)App.Current.FindResource("MoneyTemplate"));
@@ -560,6 +551,8 @@ namespace TCC.R
 		public static DataTemplate SystemAuthorTemplate => ((DataTemplate)App.Current.FindResource("SystemAuthorTemplate"));
 		public static DataTemplate ToolboxSystemAuthorTemplate => ((DataTemplate)App.Current.FindResource("ToolboxSystemAuthorTemplate"));
 		public static DataTemplate LfgTemplate => ((DataTemplate)App.Current.FindResource("LfgTemplate"));
+		public static DataTemplate TabSettingsTemplate => ((DataTemplate)App.Current.FindResource("TabSettingsTemplate"));
+		public static DataTemplate SimpleChatChannelTemplate => ((DataTemplate)App.Current.FindResource("SimpleChatChannelTemplate"));
 		public static DataTemplate BossDataTemplate => ((DataTemplate)App.Current.FindResource("BossDataTemplate"));
 		public static DataTemplate MobDataTemplate => ((DataTemplate)App.Current.FindResource("MobDataTemplate"));
 		public static DataTemplate GuildTowerTemplate => ((DataTemplate)App.Current.FindResource("GuildTowerTemplate"));
@@ -574,16 +567,13 @@ namespace TCC.R
 		public static DataTemplate SingleColumnGroupLayout => ((DataTemplate)App.Current.FindResource("SingleColumnGroupLayout"));
 		public static DataTemplate PartyDataTemplate => ((DataTemplate)App.Current.FindResource("PartyDataTemplate"));
 		public static DataTemplate RaidDataTemplate => ((DataTemplate)App.Current.FindResource("RaidDataTemplate"));
-		public static DataTemplate FixedCooldownTemplate => ((DataTemplate)App.Current.FindResource("FixedCooldownTemplate"));
-		public static DataTemplate NormalCooldownTemplate => ((DataTemplate)App.Current.FindResource("NormalCooldownTemplate"));
-		public static DataTemplate TabSettingsTemplate => ((DataTemplate)App.Current.FindResource("TabSettingsTemplate"));
-		public static DataTemplate SimpleChatChannelTemplate => ((DataTemplate)App.Current.FindResource("SimpleChatChannelTemplate"));
-		public static DataTemplate MoongourdEncounterDataTemplate => ((DataTemplate)App.Current.FindResource("MoongourdEncounterDataTemplate"));
 		public static DataTemplate NameClassCharDataTemplate => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplate"));
 		public static DataTemplate NameClassCharDataTemplateWithVM => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplateWithVM"));
-		public static DataTemplate EnumDescrDataTemplate => ((DataTemplate)App.Current.FindResource("EnumDescrDataTemplate"));
 		public static DataTemplate DefaultNotificationTemplate => ((DataTemplate)App.Current.FindResource("DefaultNotificationTemplate"));
 		public static DataTemplate ProgressNotificationTemplate => ((DataTemplate)App.Current.FindResource("ProgressNotificationTemplate"));
+		public static DataTemplate ItemDataTemplate => ((DataTemplate)App.Current.FindResource("ItemDataTemplate"));
+		public static DataTemplate MoongourdEncounterDataTemplate => ((DataTemplate)App.Current.FindResource("MoongourdEncounterDataTemplate"));
+		public static DataTemplate EnumDescrDataTemplate => ((DataTemplate)App.Current.FindResource("EnumDescrDataTemplate"));
 	}
 	public static class TemplateSelectors
 	{

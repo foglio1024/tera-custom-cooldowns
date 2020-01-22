@@ -22,7 +22,7 @@
         <Border Grid.Row="0" Grid.RowSpan="2" Background="{StaticResource RevampDarkerBackground70Brush}" BorderThickness="0"
                  BorderBrush="{StaticResource RevampBorderBrush}"/>
         <Image x:Name="Img" HorizontalAlignment="Stretch" Stretch="UniformToFill" Opacity=".5" Margin="1" Source="{Binding Image}"/>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" x:Name="TtbLogoContainer" Visibility="{Binding Toolbox, Converter={StaticResource BoolToVisibleCollapsed}}">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" x:Name="TtbLogoContainer" Visibility="{Binding Toolbox, Converter={StaticResource BoolToVisibility}}">
             <TextBlock Text="Powered by" FontWeight="DemiBold" Foreground="#9fff" VerticalAlignment="Bottom" Margin="0 0 3 0"></TextBlock>
             <Image Source="/resources/images/ttb64.png" Opacity="1" Width="48" Height="48" RenderOptions.BitmapScalingMode="HighQuality" HorizontalAlignment="Right" VerticalAlignment="Center"  x:Name="TtbLogo"/>
         </StackPanel>

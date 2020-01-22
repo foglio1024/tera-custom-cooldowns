@@ -8,12 +8,10 @@ namespace TCC.Controls
     /// </summary>
     public partial class WindowButtons
     {
-        private WindowSettings Dc => DataContext as WindowSettings;
         public WindowButtons()
         {
             InitializeComponent();
         }
-
 
         public string WindowName
         {
@@ -42,30 +40,5 @@ namespace TCC.Controls
             set => SetValue(CloseButtonVisibilityProperty, value);
         }
         public static readonly DependencyProperty CloseButtonVisibilityProperty = DependencyProperty.Register("CloseButtonVisibility", typeof(Visibility), typeof(WindowButtons));
-
-        private void Hide(object sender, RoutedEventArgs e)
-        {
-            Dc.Visible = false;
-        }
-
-        private void Pin(object sender, RoutedEventArgs e)
-        {
-            Dc.ShowAlways = !Dc.ShowAlways;
-        }
-
-        private void Close(object sender, RoutedEventArgs e)
-        {
-            Dc.Enabled = false;
-        }
-        
-        private void AutoDim(object sender, RoutedEventArgs e)
-        {
-            Dc.AutoDim = !Dc.AutoDim;
-        }
-
-        private void MakeGlobal(object sender, RoutedEventArgs e)
-        {
-            Dc.MakePositionsGlobal();
-        }
     }
 }

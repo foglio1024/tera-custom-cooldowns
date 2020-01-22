@@ -58,7 +58,7 @@
                 </Grid.ToolTip>
 
                 <Rectangle Height="1"
-                           Visibility="{Binding Hilight, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           Visibility="{Binding Hilight, Converter={StaticResource BoolToVisibility}}"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
                            Margin="1 0"
@@ -83,7 +83,7 @@
             <Grid Width="34" Margin="0">
                 <Rectangle x:Name="Hilight"
                            Opacity=".6"
-                           Visibility="{Binding Hilight, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           Visibility="{Binding Hilight, Converter={StaticResource BoolToVisibility}}"
                            Grid.ColumnSpan="10">
                     <Rectangle.Fill>
                         <LinearGradientBrush Opacity=".06">

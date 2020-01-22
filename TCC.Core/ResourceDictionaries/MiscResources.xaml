@@ -1,19 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-
-    <QuadraticEase x:Key="QuadraticEase"/>
     
-    <TranslateTransform x:Key="DefaultTranslateTransform"/>
-    <RotateTransform x:Key="DefaultRotateTransform"/>
-    <ScaleTransform x:Key="DefaultScaleTransform"/>
-
-    <RotateTransform x:Key="Rotate45" Angle="45"/>
-    <RotateTransform x:Key="Rotate45Inv" Angle="-45"/>
-
-    <SkewTransform x:Key="Skew45" AngleX="-45"/>
-    <SkewTransform x:Key="Skew45Inv" AngleX="45"/>
-
     <Storyboard x:Key="Pulse" RepeatBehavior="Forever" Duration="0:0:2" Timeline.DesiredFrameRate="20">
         <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
         <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
@@ -39,9 +27,6 @@
 
     <ImageSource x:Key="DefaultGuildLogo">pack://application:,,,/resources/images/default_guild_logo.png</ImageSource>
 
-    <DropShadowEffect x:Key="DropShadow" BlurRadius="4" ShadowDepth="2" Opacity=".4" />
-    <DropShadowEffect x:Key="BigDropShadow" BlurRadius="10" ShadowDepth="5" Opacity=".4" />
-    <DropShadowEffect x:Key="FadedDropShadow" BlurRadius="3" ShadowDepth="1" Opacity=".3" />
     <DropShadowEffect x:Key="ClassIconGlow" Color="{StaticResource ClassGlowColor}" BlurRadius="3" ShadowDepth="0" Opacity=".5"/>
     <DropShadowEffect x:Key="ClassWindowSkillBorderShadow" ShadowDepth="0" BlurRadius="20"/>
 

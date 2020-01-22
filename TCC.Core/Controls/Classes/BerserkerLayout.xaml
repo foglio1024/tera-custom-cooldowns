@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
+             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              UseLayoutRounding="True"
              mc:Ignorable="d" d:DataContext="{d:DesignData BerserkerLayoutVM}">
     <Grid Width="Auto" Margin="50 20 50 90" Name="Root" ClipToBounds="False">
@@ -23,7 +24,7 @@
             </Grid>
 
             <!-- Show if Unleash isn't active -->
-            <Grid Visibility="{Binding IsUnleashOff, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Visibility="{Binding IsUnleashOff, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -80,7 +81,7 @@
             </Grid>
 
             <!-- Show if Unleash is active -->
-            <Grid Visibility="{Binding IsUnleashOn, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Visibility="{Binding IsUnleashOn, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -118,13 +119,13 @@
                             </TransformGroup>
                         </FrameworkElement.RenderTransform>
                     </skills:RhombFixedSkillControl>
-                    <local:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
+                    <controls:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
                                          FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
                                          Text="{Binding DexterTracker.Val}" Width="45" VerticalAlignment="Center">
                         <FrameworkElement.RenderTransform>
                             <TranslateTransform X="-45" Y="45" />
                         </FrameworkElement.RenderTransform>
-                    </local:OutlinedTextBlock>
+                    </controls:OutlinedTextBlock>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
@@ -143,13 +144,13 @@
                             </TransformGroup>
                         </FrameworkElement.RenderTransform>
                     </skills:RhombFixedSkillControl>
-                    <local:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
+                    <controls:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
                                          FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
                                          Text="{Binding SinisterTracker.Val}" Width="45" VerticalAlignment="Center">
                         <FrameworkElement.RenderTransform>
                             <TranslateTransform X="45" Y="45" />
                         </FrameworkElement.RenderTransform>
-                    </local:OutlinedTextBlock>
+                    </controls:OutlinedTextBlock>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">
@@ -168,13 +169,13 @@
                             </TransformGroup>
                         </FrameworkElement.RenderTransform>
                     </skills:RhombFixedSkillControl>
-                    <local:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
+                    <controls:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
                                          FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
                                          Text="{Binding RampageTracker.Val}" Width="45" VerticalAlignment="Center">
                         <FrameworkElement.RenderTransform>
                             <TranslateTransform  Y="90" />
                         </FrameworkElement.RenderTransform>
-                    </local:OutlinedTextBlock>
+                    </controls:OutlinedTextBlock>
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7">

@@ -97,7 +97,7 @@
                                         VerticalAlignment="Center"
                                         Click="AddDungeon"
                                         Style="{StaticResource ButtonContentOpacityStyle}"
-                                        Visibility="{Binding Show, Converter={StaticResource BoolToVisibleCollapsed}, ConverterParameter=invert}"
+                                        Visibility="{Binding Show, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}"
                                         >
                                     <Path Data="{StaticResource SvgAddCircle}" Margin="2"/>
                                 </Button>

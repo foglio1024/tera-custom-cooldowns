@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using FoglioUtils;
@@ -80,7 +81,17 @@ namespace TCC.Settings
         [JsonIgnore]
         public bool PerClassPosition { get; set; } = true;
         [JsonIgnore]
-        public RelayCommand ResetPositionCommand { get; }
+        public ICommand ResetPositionCommand { get; }
+        [JsonIgnore]
+        public ICommand HideCommand { get; }
+        [JsonIgnore]
+        public ICommand PinCommand { get; }
+        [JsonIgnore]
+        public ICommand AutoDimCommand { get; }
+        [JsonIgnore]
+        public ICommand MakeGlobalCommand { get; }
+        [JsonIgnore]
+        public ICommand CloseCommand { get; }
 
         public bool Enabled
         {
@@ -242,9 +253,15 @@ namespace TCC.Settings
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Positions = new ClassPositions();
-            ResetPositionCommand = new RelayCommand(o => { ResetToCenter?.Invoke(); });
             GpkNames = new List<string>();
             EnabledChanged += OnEnabledChanged;
+
+            ResetPositionCommand = new RelayCommand(_ => ResetToCenter?.Invoke());
+            HideCommand = new RelayCommand(_ => Visible = false);
+            PinCommand = new RelayCommand(_ => ShowAlways = !ShowAlways);
+            AutoDimCommand = new RelayCommand(_ => AutoDim = !AutoDim);
+            MakeGlobalCommand = new RelayCommand(_ => MakePositionsGlobal());
+            CloseCommand = new RelayCommand(_ => Enabled = false);
             //Game.LoadingScreenChanged += () => OnEnabledChanged(!Game.LoadingScreen && Enabled);
         }
         public WindowSettings(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above) : this()

@@ -317,7 +317,7 @@
                       ToolTipService.InitialShowDelay="0"
                       ToolTipService.ShowDuration="50000"
                       Background="Transparent"
-                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BoolToVisibility}}"
                       >
                     <StackPanel Margin="6 0" VerticalAlignment="Center">
                         <local:RectangleBarGauge Width="100"
@@ -404,7 +404,7 @@
                        Width="100"
                        Grid.Column="4"
                        Margin="6 0" 
-                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={StaticResource BoolToVisibility}}"
             />
         </Grid>
         <ListBox ItemsSource="{Binding SortedCharacters}" AlternationCount="1" Grid.ColumnSpan="2"
@@ -474,12 +474,12 @@
             <TextBlock Text="Marks:"
                        FontWeight="Thin"
                        Margin="145 0 0 0"
-                       Visibility="{Binding ShowElleonMarks, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Visibility="{Binding ShowElleonMarks, Converter={StaticResource BoolToVisibility}}"
                        />
             <TextBlock Text="{Binding TotalElleonMarks}"
                        FontWeight="Normal"
                        Margin="10 0 0 0"
-                       Visibility="{Binding ShowElleonMarks, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Visibility="{Binding ShowElleonMarks, Converter={StaticResource BoolToVisibility}}"
                        Width="60" />
         </StackPanel>
     </Grid>

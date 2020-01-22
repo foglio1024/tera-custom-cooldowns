@@ -69,7 +69,7 @@ namespace TCC
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
             TccMessageBox.CreateAsync();
-            if (IsAlreadyRunning())
+            if (IsAlreadyRunning() && !Debugger.IsAttached)
             {
                 if (!ToolboxMode) TccMessageBox.Show("Another instance of TCC is already running. Shutting down.", MessageBoxType.Information);
                 Current.Shutdown();

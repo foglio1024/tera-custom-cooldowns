@@ -34,7 +34,7 @@
     </UserControl.Resources>
     <Grid>
         <!--Fire-->
-        <controls:Arc Visibility="{Binding Fire, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
+        <controls:Arc Visibility="{Binding Fire, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                    StartAngle="219" EndAngle="302"  >
             <Shape.Stroke>
                 <RadialGradientBrush GradientOrigin="1 .7" RadiusX="10" RadiusY="10">
@@ -46,7 +46,7 @@
                 <DropShadowEffect Color="{StaticResource FireColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
             </Shape.Effect>
         </controls:Arc>
-        <Polygon Visibility="{Binding FireBoosted, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
+        <Polygon Visibility="{Binding FireBoosted, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                  Width="{Binding  FireIceBoostWidth,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                  Margin="{Binding FireBoostMargin,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                  Points="0,0 .75,0 .75,.28 .3,.28 .3,1.05 0,1.05">
@@ -72,7 +72,7 @@
             </Shape.Style>
         </Polygon>
         <!--Ice-->
-        <controls:Arc Visibility="{Binding Ice, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
+        <controls:Arc Visibility="{Binding Ice, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                    StartAngle="219" EndAngle="302">
             <FrameworkElement.RenderTransform>
                 <ScaleTransform ScaleX="-1"></ScaleTransform>
@@ -87,7 +87,7 @@
                 <DropShadowEffect Color="{StaticResource IceColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
             </Shape.Effect>
         </controls:Arc>
-        <Polygon Visibility="{Binding IceBoosted,  Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
+        <Polygon Visibility="{Binding IceBoosted,  Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                  Width="{Binding  FireIceBoostWidth,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                  Margin="{Binding IceBoostMargin,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                  Points="0,0 .75,0 .75,.28 .3,.28 .3,1.05 0,1.05" 
@@ -116,7 +116,7 @@
 
         </Polygon>
         <!--Arcane-->
-        <controls:Arc Visibility="{Binding Arcane, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
+        <controls:Arc Visibility="{Binding Arcane, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                    StartAngle="38" EndAngle="142">
             <Shape.Stroke>
                 <RadialGradientBrush GradientOrigin=".2 .7" RadiusX="10" RadiusY="10">
@@ -131,7 +131,7 @@
                 <RotateTransform Angle="-90"/>
             </Shape.RenderTransform>
         </controls:Arc>
-        <Polygon Visibility="{Binding ArcaneBoosted, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
+        <Polygon Visibility="{Binding ArcaneBoosted, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                  VerticalAlignment="Top" Points="0,0 1.05,0 1.05,.28 .3,.28 .3,1.05 0,1.05" 
                  Width="{Binding ArcaneBoostWidth,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                  Margin="{Binding ArcaneBoostMargin,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"

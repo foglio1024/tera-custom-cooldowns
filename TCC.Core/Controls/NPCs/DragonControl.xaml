@@ -80,7 +80,7 @@
 
             <controls:Arc Width="58" Height="58"
                        Stroke="Red"
-                       Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibleHidden}}"
+                       Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}"
                        StrokeThickness="3"
                        x:Name="EnrageArc"
                        EndAngle="359.9"

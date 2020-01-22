@@ -44,10 +44,6 @@
     <SolidColorBrush x:Key="TeraRestyleBorderBrush"         Color="{StaticResource TeraRestyleBorderColor}"                    />
     <SolidColorBrush x:Key="TeraRestyleBorderBrushLight"    Color="{StaticResource TeraRestyleBorderColorLight}"               />
 
-    <SolidColorBrush x:Key="SelectionBackgroundBrush"       Color="White"                                        Opacity=".04" />
-    <SolidColorBrush x:Key="SelectionBackgroundLightBrush"  Color="White"                                        Opacity=".08" />
-    <SolidColorBrush x:Key="SelectionBorderBrush"           Color="Transparent"                                                />
-
     <SolidColorBrush x:Key="HpBrush"                        Color="{StaticResource HpColor}"                                   />
     <SolidColorBrush x:Key="HpBrushLight"                   Color="{StaticResource HpColorLight}"                              />
     <SolidColorBrush x:Key="MpBrush"                        Color="{StaticResource MpColor}"                                   />
@@ -140,10 +136,8 @@
     <SolidColorBrush x:Key="TccRedGradient0Brush"           Color="{StaticResource TccRedGradient0Color}"                      />
     <SolidColorBrush x:Key="TccRedGradient1Brush"           Color="{StaticResource TccRedGradient1Color}"                      />
 
-
-
-
-<LinearGradientBrush x:Key="RevampBackgroundGradientBrush" EndPoint="1 1" StartPoint="0 0" >                               
+    <!-- Gradients -->
+    <LinearGradientBrush x:Key="RevampBackgroundGradientBrush" EndPoint="1 1" StartPoint="0 0" >                               
         <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="0.1"/>                                      
         <GradientStop Color="{StaticResource RevampDarkerBackgroundColor}" Offset="0.4"/>                                      
         <GradientStop Color="{StaticResource RevampDarkerBackgroundColor}" Offset="0.5"/>                                      
@@ -151,20 +145,20 @@
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="TccNormalGradientBrush">
-        <GradientStop Color="{StaticResource TccNormalGradient0Color}" Offset="0"></GradientStop>
-        <GradientStop Color="{StaticResource TccNormalGradient1Color}" Offset="1"></GradientStop>
+        <GradientStop Color="{StaticResource TccNormalGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccNormalGradient1Color}" Offset="1" />
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="TccGreenGradientBrush">
-        <GradientStop Color="{StaticResource TccGreenGradient0Color}" Offset="0"></GradientStop>
-        <GradientStop Color="{StaticResource TccGreenGradient1Color}" Offset="1"></GradientStop>
+        <GradientStop Color="{StaticResource TccGreenGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccGreenGradient1Color}" Offset="1" />
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="TccYellowGradientBrush">
-        <GradientStop Color="{StaticResource TccYellowGradient0Color}" Offset="0"></GradientStop>
-        <GradientStop Color="{StaticResource TccYellowGradient1Color}" Offset="1"></GradientStop>
+        <GradientStop Color="{StaticResource TccYellowGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccYellowGradient1Color}" Offset="1" />
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="TccRedGradientBrush">
-        <GradientStop Color="{StaticResource TccRedGradient0Color}" Offset="0"></GradientStop>
-        <GradientStop Color="{StaticResource TccRedGradient1Color}" Offset="1"></GradientStop>
+        <GradientStop Color="{StaticResource TccRedGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccRedGradient1Color}" Offset="1" />
     </LinearGradientBrush>
 
 

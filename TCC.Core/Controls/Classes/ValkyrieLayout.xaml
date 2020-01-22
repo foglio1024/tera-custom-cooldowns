@@ -164,10 +164,10 @@
                         </Rectangle>
                     </Grid>
 
-                    <local:OutlinedTextBlock Text="{Binding Ragnarok.Buff.Seconds}" HorizontalAlignment="Center"
+                    <controls:OutlinedTextBlock Text="{Binding Ragnarok.Buff.Seconds}" HorizontalAlignment="Center"
                                VerticalAlignment="Center" TextAlignment="Center" FontFamily="{StaticResource DroidSansMono}"
                                FontSize="19" Fill="White" StrokeThickness="3" Stroke="#5000" Margin="0 1 0 0">
-                    </local:OutlinedTextBlock>
+                    </controls:OutlinedTextBlock>
 
                     <FrameworkElement.Style>
                         <Style TargetType="FrameworkElement">

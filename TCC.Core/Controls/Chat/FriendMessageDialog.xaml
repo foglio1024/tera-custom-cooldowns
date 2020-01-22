@@ -25,7 +25,7 @@
                 <UniformGrid.Resources>
                     
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                    <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyFocusVisual}"/>
                     <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
                     <Setter Property="Foreground" Value="White"/>

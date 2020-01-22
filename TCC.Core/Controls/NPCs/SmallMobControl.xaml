@@ -8,6 +8,7 @@
              xmlns:tcc="clr-namespace:TCC"
              xmlns:npCs="clr-namespace:TCC.Data.NPCs"
              xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
              mc:Ignorable="d" Loaded="OnLoaded" UseLayoutRounding="True"
              d:DataContext="{d:DesignInstance npCs:NPC}"
              MouseEnter="SmallMobControl_OnMouseEnter"
@@ -219,12 +220,11 @@
             </ItemsControl.Style>
         </ItemsControl>
         <Button Grid.Column="0"
-                Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibleCollapsed}, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
                 Margin="-2 -7 0 0"
-                tcc:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
-
+                extensions:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
                 ToolTip="Blacklist or change type"
                 Style="{StaticResource ButtonContentOpacityStyle}">
             <Button.ContextMenu>

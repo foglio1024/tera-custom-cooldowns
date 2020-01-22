@@ -21,7 +21,7 @@
                    VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch"
                    Margin="8"
-                   Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BoolToVisibility}}"
                    ></Rectangle>
             <controls:Arc Width="71" 
                        Height="71" 
@@ -42,7 +42,7 @@
 
 
         <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 -1 0 0" 
-              Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BoolToVisibility}}"
               >
 
             <Border BorderThickness="0"

@@ -1,9 +1,9 @@
 ﻿<UserControl x:Class="TCC.Controls.Chat.BrokerOfferBody"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:TCC.Controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fogControls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
              mc:Ignorable="d" d:DataContext="{d:DesignData data:BrokerChatMessage}">
     <Grid HorizontalAlignment="Left" Margin="3,0" >
         <Grid.RowDefinitions>
@@ -18,11 +18,11 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <controls:OutlinedTextBlock VerticalAlignment="Center" Text="Starting price" Grid.Row="1"
+        <fogControls:OutlinedTextBlock VerticalAlignment="Center" Text="Starting price" Grid.Row="1"
                                     Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                                     FontSize="14" StrokeThickness="3" Stroke="#9000" Margin="5,0,5,0"
                                     FontFamily="{StaticResource NotoSansMed}" />
-        <controls:OutlinedTextBlock VerticalAlignment="Center" Text="Offered price " Grid.Row="2" Grid.Column="0"
+        <fogControls:OutlinedTextBlock VerticalAlignment="Center" Text="Offered price " Grid.Row="2" Grid.Column="0"
                                     Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                                     FontSize="14" StrokeThickness="3" Stroke="#9000" Margin="5,0,5,0"
                                     FontFamily="{StaticResource NotoSansMed}" />

@@ -19,7 +19,7 @@
         <Rectangle Fill="{Binding BarColor, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}" 
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="Bar" />
         <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Visibility="{Binding ShowValues, Converter={StaticResource BoolToVisibleHidden},RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
+                   Visibility="{Binding ShowValues, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
 >
             <Run Text="{Binding CurrentVal, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}" />
             <Run Text=" / "/>
@@ -28,11 +28,11 @@
         </TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="3,-1,0,0" Style="{StaticResource Text}" VerticalAlignment="Center"
                    Text="{Binding GaugeName, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
-                    Visibility="{Binding ShowName, Converter={StaticResource BoolToVisibleHidden},RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
+                    Visibility="{Binding ShowName, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden,RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
 />
         <TextBlock HorizontalAlignment="Right" Margin="0,-1,3,0" 
                    Style="{StaticResource Text}" VerticalAlignment="Center"
-                   Visibility="{Binding ShowPercentage, Converter={StaticResource BoolToVisibleHidden},RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
+                   Visibility="{Binding ShowPercentage, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"
                    Text="{Binding Factor, StringFormat=#.##%, RelativeSource={RelativeSource AncestorType=local:GenericGauge}}"/>
 
 

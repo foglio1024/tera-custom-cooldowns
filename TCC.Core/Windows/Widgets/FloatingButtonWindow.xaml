@@ -64,7 +64,7 @@
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     Margin="0 0 -42 0"
                     RenderTransformOrigin=".5,.5"
-                    Visibility="{Binding PendingNotifications, Converter={StaticResource BoolToVisibleHidden}}"
+                    Visibility="{Binding PendingNotifications, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}"
                     ToolTip="There are events starting in few minutes.">
                 <Border.RenderTransform>
                     <ScaleTransform />
