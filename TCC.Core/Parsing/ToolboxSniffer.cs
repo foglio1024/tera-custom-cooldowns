@@ -79,19 +79,28 @@ namespace TCC.Parsing
             return resp?.Result?.Value<uint>() ?? 0;
         }
     }
-    
+
     internal class ToolboxSniffer : ITeraSniffer
     {
         private readonly TcpListener _dataConnection;
         public readonly ToolboxControlInterface ControlConnection;
         private bool _enabled;
+        private bool _failed;
         private bool _connected;
 
         public ToolboxSniffer()
         {
             _dataConnection = new TcpListener(IPAddress.Parse("127.0.0.60"), 5200);
-            _dataConnection.Start();
-            ControlConnection = new ToolboxControlInterface("http://127.0.0.61:5200");
+            try
+            {
+                _dataConnection.Start();
+                ControlConnection = new ToolboxControlInterface("http://127.0.0.61:5200");
+            }
+            catch (Exception e)
+            {
+                Log.CW($"Failed to start Toolbox sniffer: {e}");
+                _failed = true;
+            }
         }
 
         public bool Enabled
@@ -123,6 +132,7 @@ namespace TCC.Parsing
 
         private async void Listen()
         {
+            if (_failed) return;
             while (Enabled)
             {
                 var client = _dataConnection.AcceptTcpClient();
