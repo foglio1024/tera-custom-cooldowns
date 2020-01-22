@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 

@@ -1,11 +1,11 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using FoglioUtils.Controls;
+using Nostrum.Controls;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Skills;

@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 using TCC.ViewModels;
 using TeraDataLite;
 

@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Skills

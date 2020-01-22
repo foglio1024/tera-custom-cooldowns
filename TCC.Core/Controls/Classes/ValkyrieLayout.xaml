@@ -8,7 +8,7 @@
              xmlns:classBars="clr-namespace:TCC.Controls.Classes"
              xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              mc:Ignorable="d" Loaded="UserControl_Loaded" d:DataContext="{d:DesignInstance viewModels:ValkyrieLayoutVM}">
     <Grid Width="Auto" Margin="50 20" Name="Root" >
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" Margin="0">

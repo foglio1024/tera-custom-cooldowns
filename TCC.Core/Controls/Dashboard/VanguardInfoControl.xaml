@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              Cursor="Hand" Background="Transparent"
              mc:Ignorable="d" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded"
              MouseLeftButtonDown="UserControl_MouseLeftButtonDown" d:DataContext="{d:DesignData Character}">

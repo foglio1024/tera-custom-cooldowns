@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Text;
-using FoglioUtils;
+using Nostrum;
 using Newtonsoft.Json.Linq;
 using TCC.Utils;
 

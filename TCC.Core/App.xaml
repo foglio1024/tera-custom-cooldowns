@@ -8,11 +8,11 @@
                 <ResourceDictionary Source="ResourceDictionaries/SVG.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Colors.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Brushes.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/FoglioUtils;component/Resources/MiscResources.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/MiscResources.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/MiscResources.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/FoglioUtils;component/Resources/Converters.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/Converters.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Converters.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/FoglioUtils;component/Resources/Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/Styles.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Styles.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/DragablzMaterialDesign.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/DataTemplates.xaml"/>

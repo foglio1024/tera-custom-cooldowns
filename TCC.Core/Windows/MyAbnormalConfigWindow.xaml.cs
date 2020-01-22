@@ -8,7 +8,7 @@ ClassToggle                 -> MyClassToggle
 ToggleCommand               -> MyToggleCommand
 */
 
-using FoglioUtils;
+using Nostrum;
 using System;
 using System.Linq;
 using System.Windows;
@@ -17,7 +17,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.Controls;
 using TCC.ViewModels;
 using TeraDataLite;

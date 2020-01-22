@@ -1,9 +1,9 @@
 ﻿<Application x:Class="TCC.Publisher.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
-             xmlns:converters="clr-namespace:FoglioUtils.Converters;assembly=FoglioUtils"
-             xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+             xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
              StartupUri="Windows/PublisherWindow.xaml"
              Startup="Application_Startup">
     <Application.Resources>

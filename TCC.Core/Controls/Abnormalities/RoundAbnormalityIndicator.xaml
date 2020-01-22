@@ -5,7 +5,7 @@
                                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                                             xmlns:abnormalitiesCtrl="clr-namespace:TCC.Controls.Abnormalities"
                                             xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
-                                            xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+                                            xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
                                             mc:Ignorable="d" 
              FlowDirection="LeftToRight" Width="Auto" Height="Auto" 
              d:DataContext="{d:DesignInstance abnormalities:AbnormalityDuration}">

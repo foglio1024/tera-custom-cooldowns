@@ -4,8 +4,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using FoglioUtils;
-using FoglioUtils.Extensions;
+using Nostrum;
+using Nostrum.Extensions;
 
 namespace TCC.Windows
 {

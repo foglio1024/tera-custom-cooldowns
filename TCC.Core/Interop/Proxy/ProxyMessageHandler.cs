@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using TCC.Data;
 using TCC.Interop.JsonRPC;
 using TCC.Parsing;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.ViewModels;
 using TeraPacketParser;
 using TeraPacketParser.Data;

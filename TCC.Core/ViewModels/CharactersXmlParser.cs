@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using FoglioUtils;
+using Nostrum;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TCC.Data.Pc;

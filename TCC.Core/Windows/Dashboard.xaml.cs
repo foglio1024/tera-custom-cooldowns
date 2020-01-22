@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using FoglioUtils;
+using Nostrum;
 using TCC.Data.Pc;
 using TCC.R;
 using TCC.ViewModels;

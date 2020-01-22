@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 
 namespace TCC.Controls.Dashboard
 {

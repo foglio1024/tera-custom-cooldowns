@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using FoglioUtils;
+using Nostrum;
 using TCC.Utils;
 
 namespace TCC.Windows.Widgets

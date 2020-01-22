@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Media;
-using FoglioUtils;
+using Nostrum;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.R;

@@ -1,5 +1,5 @@
-﻿using FoglioUtils;
-using FoglioUtils.Extensions;
+﻿using Nostrum;
+using Nostrum.Extensions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

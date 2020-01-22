@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.Converters;
 using TCC.Interop;
 using TCC.R;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;

@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.Publisher", "TCC.Publis
 		{32BD409E-AB38-4024-BA36-1E08B753C528} = {32BD409E-AB38-4024-BA36-1E08B753C528}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoglioUtils", "dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj", "{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostrum", "dependencies\Nostrum\Nostrum\Nostrum.csproj", "{C62B6AEE-2527-4B56-9B77-B02DCEFD1CF5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{96E79573-D3AE-4F2B-B592-0C6FD107387C} = {96E79573-D3AE-4F2B-B592-0C6FD107387C}
 	EndProjectSection

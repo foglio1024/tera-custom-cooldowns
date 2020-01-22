@@ -4,7 +4,7 @@ using System.Threading;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using FoglioUtils;
+using Nostrum;
 using TCC.Controls;
 
 namespace TCC.Windows

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 using Newtonsoft.Json;
 using TCC.Controls;
 using TCC.Data;

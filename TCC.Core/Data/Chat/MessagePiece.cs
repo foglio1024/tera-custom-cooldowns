@@ -1,4 +1,4 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.Annotations;
 using TCC.Converters;
 using TCC.Data.Map;

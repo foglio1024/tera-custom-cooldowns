@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.Data.Chat;
 using TCC.Parsing;
 

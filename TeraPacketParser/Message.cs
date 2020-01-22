@@ -1,5 +1,5 @@
 ﻿using System;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TeraPacketParser.Data;
 
 namespace TeraPacketParser

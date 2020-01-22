@@ -8,7 +8,7 @@
              xmlns:converters="clr-namespace:TCC.Converters"
              xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:WarriorLayoutVM}">
     <UserControl.Resources>
         <ControlTemplate x:Key="EdgeArrowLayout">

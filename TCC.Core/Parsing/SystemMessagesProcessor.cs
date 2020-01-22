@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using HtmlAgilityPack;
 using TCC.Data;
 using TCC.Data.Chat;

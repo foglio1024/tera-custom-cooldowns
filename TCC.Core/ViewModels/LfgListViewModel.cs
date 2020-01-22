@@ -1,4 +1,4 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Pc;

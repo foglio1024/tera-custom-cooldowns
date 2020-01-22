@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FoglioUtils;
+using Nostrum;
 using Newtonsoft.Json;
 using TCC.Data;
 using Key = System.Windows.Forms.Keys;

@@ -1,10 +1,10 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
 using System;
 using System.Windows;
 using System.Windows.Media.Animation;
 using TCC.Data;
 using TCC.ViewModels.Widgets;
-using Arc = FoglioUtils.Controls.Arc;
+using Arc = Nostrum.Controls.Arc;
 
 namespace TCC.Windows.Widgets
 {

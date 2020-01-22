@@ -1,5 +1,5 @@
 ﻿using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 
 namespace TCC.Controls.NPCs
 {

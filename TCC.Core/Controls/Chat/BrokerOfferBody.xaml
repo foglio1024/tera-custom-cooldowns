@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:fogControls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:fogControls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              mc:Ignorable="d" d:DataContext="{d:DesignData data:BrokerChatMessage}">
     <Grid HorizontalAlignment="Left" Margin="3,0" >
         <Grid.RowDefinitions>

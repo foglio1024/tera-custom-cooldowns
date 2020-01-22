@@ -1,4 +1,4 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
 
 namespace TCC.Data.Chat
 {

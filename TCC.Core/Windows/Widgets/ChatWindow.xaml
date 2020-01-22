@@ -9,7 +9,7 @@
                    xmlns:settings="clr-namespace:TCC.Controls.Settings"
                    xmlns:viewModels="clr-namespace:TCC.ViewModels"
                    xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
-                   xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
+                   xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
                    xmlns:data="clr-namespace:TCC.Data"
                    xmlns:widgets1="clr-namespace:TCC.ViewModels.Widgets"
                    xmlns:chat="clr-namespace:TCC.Data.Chat"

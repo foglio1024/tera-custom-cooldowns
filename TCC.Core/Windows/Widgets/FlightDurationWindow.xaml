@@ -8,7 +8,7 @@
              xmlns:w="clr-namespace:TCC.Windows"
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
              Title="TCC Flight" Height="300" Width="300" 

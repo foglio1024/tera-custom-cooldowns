@@ -3,8 +3,8 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using FoglioUtils;
-using FoglioUtils.Extensions;
+using Nostrum;
+using Nostrum.Extensions;
 using TCC.Utils;
 using TCC.ViewModels;
 

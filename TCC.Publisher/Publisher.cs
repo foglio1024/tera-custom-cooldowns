@@ -5,7 +5,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using FoglioUtils;
+using Nostrum;
 using Newtonsoft.Json.Linq;
 using Octokit;
 using SevenZip;

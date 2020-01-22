@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using FoglioUtils;
+using Nostrum;
 
 namespace TCC.Controls
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 
 namespace TCC.Data
 {

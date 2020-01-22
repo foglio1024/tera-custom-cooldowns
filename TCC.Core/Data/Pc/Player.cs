@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 using TCC.Data.Abnormalities;
 using TCC.Utilities;
 using TCC.Utils;

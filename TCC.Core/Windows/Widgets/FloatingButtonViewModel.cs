@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using FoglioUtils;
+using Nostrum;
 using TCC.Controls;
 using TCC.Interop.Proxy;
 using TCC.Settings;

@@ -6,7 +6,7 @@ using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data.Chat;
 using TCC.Settings;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 

@@ -1,6 +1,6 @@
 ﻿
 
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TeraDataLite;
 
 namespace TeraPacketParser.Messages

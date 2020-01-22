@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:tccConv="clr-namespace:TCC.Converters"
-                    xmlns:fogConv="clr-namespace:FoglioUtils.Converters;assembly=FoglioUtils">
+                    xmlns:fogConv="clr-namespace:Nostrum.Converters;assembly=Nostrum">
 
     <tccConv:BoolToSvgSwitchConverter x:Key="BoolToSvgSwitchConverter"/>
     <tccConv:RollToStringConverter x:Key="RollToString"/>

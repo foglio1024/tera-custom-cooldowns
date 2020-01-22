@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:data="clr-namespace:TCC.Data"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              mc:Ignorable="d"  d:DataContext="{d:DesignInstance data:GearItem}" 
              Loaded="GearItemControl_OnLoaded" >
     <UserControl.Resources>

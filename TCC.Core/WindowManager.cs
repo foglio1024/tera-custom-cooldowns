@@ -1,4 +1,4 @@
-﻿using FoglioUtils.Extensions;
+﻿using Nostrum.Extensions;
 using Microsoft.Win32;
 using System;
 using System.Linq;

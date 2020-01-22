@@ -5,7 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 
 namespace TCC.Windows.Widgets
 {

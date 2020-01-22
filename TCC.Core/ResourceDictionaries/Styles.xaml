@@ -4,12 +4,12 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:extensions="clr-namespace:FoglioUtils.Extensions;assembly=FoglioUtils"
+                    xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                     xmlns:tccControls="clr-namespace:TCC.Controls"
                     xmlns:settings="clr-namespace:TCC.Controls.Settings"
                     xmlns:chat="clr-namespace:TCC.Data.Chat"
-                    xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+                    xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
                     mc:Ignorable="d">
 
 
@@ -491,7 +491,7 @@
         <Setter Property="OffColor" Value="#f222"/>
     </Style>
 
-    <!--#region Based on FoglioUtils -->
+    <!--#region Based on Nostrum -->
     <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
         <Setter Property="extensions:ComboBoxExtensions.DropDownBorderStyle" Value="{StaticResource RevampBorderStyle}" />
     </Style>

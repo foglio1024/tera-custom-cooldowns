@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media.Animation;
-using FoglioUtils;
-using FoglioUtils.Controls;
+using Nostrum;
+using Nostrum.Controls;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Classes

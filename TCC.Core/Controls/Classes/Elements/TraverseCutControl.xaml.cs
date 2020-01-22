@@ -70,7 +70,7 @@ namespace TCC.Controls.Classes.Elements
                 //_toZeroAnimation.BeginTime = TimeSpan.FromMilliseconds(_isAnimating ? delay : 0);
                 _toZeroAnimation.Duration = TimeSpan.FromMilliseconds(duration);
                 _toZeroAnimation.From = _dc.Factor * 359.9;
-                ExternalArc.BeginAnimation(FoglioUtils.Controls.Arc.EndAngleProperty, _toZeroAnimation);
+                ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _toZeroAnimation);
             });
         }
 
@@ -79,7 +79,7 @@ namespace TCC.Controls.Classes.Elements
             if (e.PropertyName == nameof(StatTracker.Factor))
             {
                 _anim.To = _dc.Factor * 359.9;
-                ExternalArc.BeginAnimation(FoglioUtils.Controls.Arc.EndAngleProperty, _anim);
+                ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _anim);
                 _isAnimating = true;
             }
         }

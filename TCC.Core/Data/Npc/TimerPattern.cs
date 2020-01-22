@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Timers;
-using FoglioUtils;
+using Nostrum;
 
 namespace TCC.Data.NPCs
 {

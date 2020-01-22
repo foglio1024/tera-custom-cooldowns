@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using FoglioUtils;
+using Nostrum;
 using TCC.Data.NPCs;
 using TCC.ViewModels;
 

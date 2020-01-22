@@ -9,7 +9,7 @@ using TCC.Annotations;
 using TCC.Interop.Proxy;
 using TCC.TeraCommon.Sniffing;
 using TeraPacketParser;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.Utils;
 using Server = TCC.TeraCommon.Game.Server;
 

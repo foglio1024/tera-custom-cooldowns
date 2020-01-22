@@ -5,13 +5,13 @@ GroupAbnormals              -> MyAbnormals
 
 ShowAllGroupAbnormalities   -> ShowAllMyAbnormalities
 */
-using FoglioUtils;
+using Nostrum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Threading;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.Utilities;
 using TeraDataLite;
 

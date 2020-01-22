@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using FoglioUtils;
+using Nostrum;
 
 namespace TCC.Parsing
 {

@@ -1,4 +1,4 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data;
 using TCC.Data.Pc;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 

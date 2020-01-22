@@ -9,7 +9,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using Dragablz.Converters;
 using Dragablz.Themes;
-using FoglioUtils.Converters;
+using Nostrum.Converters;
 using TCC.Converters;
 using TCC.TemplateSelectors;
 
@@ -360,7 +360,7 @@ namespace TCC.R
 		public static LinearGradientBrush TccYellowGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccYellowGradientBrush"));
 		public static LinearGradientBrush TccRedGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccRedGradientBrush"));
 	}
-	public static class FoglioUtils_MiscResources
+	public static class Nostrum_MiscResources
 	{
 		public static QuadraticEase QuadraticEase => ((QuadraticEase)App.Current.FindResource("QuadraticEase"));
 		public static TranslateTransform DefaultTranslateTransform => ((TranslateTransform)App.Current.FindResource("DefaultTranslateTransform"));
@@ -390,7 +390,7 @@ namespace TCC.R
 		public static Double MapWidth => ((Double)App.Current.FindResource("MapWidth"));
 		public static Double MapHeight => ((Double)App.Current.FindResource("MapHeight"));
 	}
-	public static class FoglioUtils_Converters
+	public static class Nostrum_Converters
 	{
 		public static BoolToVisibility BoolToVisibility => ((BoolToVisibility)App.Current.FindResource("BoolToVisibility"));
 		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
@@ -454,7 +454,7 @@ namespace TCC.R
 		public static NotificationTypeToBrush NotificationTypeToBrush => ((NotificationTypeToBrush)App.Current.FindResource("NotificationTypeToBrush"));
 		public static WarriorStanceToColorConverter StanceToColorConverter => ((WarriorStanceToColorConverter)App.Current.FindResource("StanceToColorConverter"));
 	}
-	public static class FoglioUtils_Styles
+	public static class Nostrum_Styles
 	{
 		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
 		public static SolidColorBrush SelectionBackgroundLightBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundLightBrush"));

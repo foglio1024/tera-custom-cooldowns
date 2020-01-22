@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 using TCC.Annotations;
 using TCC.Data;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 
 namespace TCC.Controls.NPCs
 {

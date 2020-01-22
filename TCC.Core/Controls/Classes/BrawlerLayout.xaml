@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              mc:Ignorable="d" Loaded="BrawlerLayout_OnLoaded" d:DataContext="{d:DesignData BrawlerLayoutVM}">
     <Grid Width="Auto" Margin="50 20 55 75" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>

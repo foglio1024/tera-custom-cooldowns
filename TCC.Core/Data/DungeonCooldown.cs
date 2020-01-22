@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 using Newtonsoft.Json;
 using TCC.Data.Pc;
 

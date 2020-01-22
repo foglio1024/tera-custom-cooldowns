@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using FoglioUtils;
+using Nostrum;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;

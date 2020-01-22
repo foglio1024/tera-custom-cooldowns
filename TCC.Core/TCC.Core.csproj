@@ -1430,9 +1430,9 @@
       <Project>{cc3be26c-a6d9-4301-b86e-a7fcba9b7162}</Project>
       <Name>TCC.Loader</Name>
     </ProjectReference>
-    <ProjectReference Include="..\dependencies\FoglioUtils\FoglioUtils\FoglioUtils.csproj">
+    <ProjectReference Include="..\dependencies\Nostrum\Nostrum\Nostrum.csproj">
       <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
-      <Name>FoglioUtils</Name>
+      <Name>Nostrum</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCC.Utils\TCC.Utils.csproj">
       <Project>{0e5c7c6c-8d28-4731-82da-2d37a69c5ac8}</Project>

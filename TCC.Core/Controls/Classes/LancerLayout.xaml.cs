@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Media.Animation;
-using FoglioUtils.Controls;
+using Nostrum.Controls;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Classes

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using FoglioUtils;
+using Nostrum;
 using TCC.Data.Pc;
 using TCC.Utils;
 

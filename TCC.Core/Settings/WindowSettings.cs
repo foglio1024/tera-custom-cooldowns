@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using FoglioUtils;
+using Nostrum;
 using Newtonsoft.Json;
 using TCC.Annotations;
 using TCC.Controls;

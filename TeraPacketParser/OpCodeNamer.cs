@@ -47,7 +47,7 @@ namespace TeraPacketParser
 
             if (!File.Exists(filename)) { return new List<KeyValuePair<ushort, string>>(); }
 
-            await FoglioUtils.MiscUtils.WaitForFileUnlock(filename, FileAccess.Read);
+            await Nostrum.MiscUtils.WaitForFileUnlock(filename, FileAccess.Read);
 
             var names = File.ReadLines(filename)
                 .Select(s => Regex.Replace(s.Replace("=", " "), @"\s+", " ").Split(' ').ToArray())

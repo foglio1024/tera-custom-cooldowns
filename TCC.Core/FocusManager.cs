@@ -6,7 +6,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
-using FoglioUtils.WinAPI;
+using Nostrum.WinAPI;
 using TCC.Utils;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;

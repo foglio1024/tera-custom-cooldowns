@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using FoglioUtils;
+using Nostrum;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Utils;

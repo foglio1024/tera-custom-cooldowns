@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Settings;

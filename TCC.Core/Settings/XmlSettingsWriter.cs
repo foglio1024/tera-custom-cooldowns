@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Xml.Linq;
-using FoglioUtils.Extensions;
+using Nostrum.Extensions;
 using TCC.ViewModels;
 using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;

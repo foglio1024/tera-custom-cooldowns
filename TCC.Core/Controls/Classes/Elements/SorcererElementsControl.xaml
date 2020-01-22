@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              mc:Ignorable="d" MaxWidth="200" MaxHeight="200"
              d:DesignHeight="100" d:DesignWidth="100" d:DataContext="{d:DesignData SorcererElementsControl}">
     <UserControl.Resources>

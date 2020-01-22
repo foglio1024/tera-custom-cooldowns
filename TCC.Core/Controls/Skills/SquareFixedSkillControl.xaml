@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:skills="clr-namespace:TCC.Controls.Skills"
-             xmlns:controls="clr-namespace:FoglioUtils.Controls;assembly=FoglioUtils"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              mc:Ignorable="d" ClipToBounds="False" Background="Transparent" 
              MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData Cooldown}">
     <skills:FixedSkillControlBase.Resources>

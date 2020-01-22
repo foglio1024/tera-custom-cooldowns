@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media;
 using System.Windows.Threading;
-using FoglioUtils;
+using Nostrum;
 
 namespace TCC.Windows.Widgets
 {
