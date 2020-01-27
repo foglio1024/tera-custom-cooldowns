@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TCC.Controls.Settings"
+             xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
              mc:Ignorable="d" 
              d:DesignHeight="35" d:DesignWidth="300">
-    <Grid Height="35" Cursor="Hand" 
+    <Grid VerticalAlignment="Stretch" Cursor="Hand" 
           MouseLeftButtonDown="OnMouseButtonDown"
           Style="{StaticResource GlowHoverGrid}">
         <Grid.ColumnDefinitions>
@@ -22,6 +23,7 @@
               HorizontalAlignment="Center"
               Opacity=".7"/>
         <TextBlock Style="{StaticResource DefaultTextStyle}"
+                   Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CheckboxSetting}}"
                    Grid.Column="1" 
                    Margin="5 0 5 0" 
                    Text="{Binding SettingName, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CheckboxSetting}}" 
@@ -35,6 +37,7 @@
                   IsChecked="{Binding IsOn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CheckboxSetting}}" 
                   BorderBrush="{Binding CheckBoxColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CheckboxSetting}}"
                   VerticalAlignment="Center"
+                  extensions:CheckBoxExtensions.Size="{Binding CheckboxSize, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:CheckboxSetting}}"
                   Grid.Column="2"
                   Margin="7 0"/>
     </Grid>

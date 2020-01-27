@@ -43,6 +43,16 @@ namespace TCC.Controls.Settings
         public static readonly DependencyProperty SvgIconProperty =
             DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(CheckboxSetting));
 
+        public double CheckboxSize
+        {
+            get => (double)GetValue(CheckboxSizeProperty);
+            set => SetValue(CheckboxSizeProperty, value);
+        }
+        public static readonly DependencyProperty CheckboxSizeProperty =
+            DependencyProperty.Register("CheckboxSize", typeof(double), typeof(CheckboxSetting), new PropertyMetadata(18D));
+
+
+
         private void OnMouseButtonDown(object sender, MouseButtonEventArgs e)
         {
             CheckBox.IsChecked = !CheckBox.IsChecked;
