@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -162,16 +163,66 @@ namespace TCC.Test
 
         public static void AddFakeLfgAndShowWindow()
         {
+            Game.Me.PlayerId = 10;
             WindowManager.LfgListWindow.ShowWindow();
-            var l = new Listing
+            var party = new Listing
             {
                 LeaderId = 10,
                 Message = "SJG exp only",
-                LeaderName = "Foglio"
+                LeaderName = "Foglio",
+                IsExpanded = true
             };
-            l.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 10, IsLeader = true, Online = true });
-            l.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 1, Name = "Applicant", Online = true, UserClass = Class.Priest });
-            WindowManager.ViewModels.LfgVM.Listings.Add(l);
+            var idx = 20U;
+            foreach (var cl in EnumUtils.ListFromEnum<Class>().Where(x => x != Class.None && x != Class.Common))
+            {
+                party.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = idx, IsLeader = true, Online = true, Name = $"Member{cl}", UserClass = cl, Location = "Sirjuka Gallery"});
+                party.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = idx + 100, Name = $"Applicant{cl}", Online = true, UserClass = cl, Location = "Sirjuka Gallery" });
+                idx++;
+            }
+
+            var raid = new Listing
+            {
+                LeaderId = 11,
+                Message = "WHHM 166+",
+                LeaderName = "Foglio",
+                IsExpanded = true,
+                IsRaid = true
+            };
+            raid.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 11, IsLeader = true, Online = true, Name = "Foglio" });
+            raid.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 2, Name = "Applicant", Online = true, UserClass = Class.Priest });
+
+            var trade = new Listing
+            {
+                LeaderId = 12,
+                Message = "WTS stuff",
+                LeaderName = "Foglio",
+                IsExpanded = true
+            };
+            trade.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 12, IsLeader = true, Online = true, Name = "Foglio" });
+
+            var trade2 = new Listing
+            {
+                LeaderId = 13,
+                Message = "WTS more stuff",
+                LeaderName = "Foglio",
+                IsExpanded = true
+            };
+            trade2.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 13, IsLeader = true, Online = true, Name = "Foglio" });
+            var twitch = new Listing
+            {
+                LeaderId = 14,
+                Message = "twitch.tv/FoglioTera",
+                LeaderName = "Foglio",
+                IsExpanded = true
+            };
+            twitch.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = 14, IsLeader = true, Online = true, Name = "Foglio" });
+
+
+            WindowManager.ViewModels.LfgVM.AddOrRefreshListing(party);
+            WindowManager.ViewModels.LfgVM.AddOrRefreshListing(raid);
+            WindowManager.ViewModels.LfgVM.AddOrRefreshListing(trade);
+            WindowManager.ViewModels.LfgVM.AddOrRefreshListing(trade2);
+            WindowManager.ViewModels.LfgVM.AddOrRefreshListing(twitch);
         }
         public static void AddFakeGroupMembers(int count)
         {
