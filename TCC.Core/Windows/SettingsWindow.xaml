@@ -258,6 +258,10 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="settings:CheckboxSetting"
+               BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">
+            <Setter Property="Foreground" Value="#cfff" />
+        </Style>
 
         <Style x:Key="EnabledSettingStyle" TargetType="settings:CheckboxSetting"
                BasedOn="{StaticResource {x:Type settings:CheckboxSetting}}">
@@ -555,7 +559,7 @@
                             <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.ShowAlways, Mode=TwoWay}"
                                                       Style="{StaticResource ShowAlwaysSettingStyle}" 
                                                       IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
-                            <settings:CheckboxSetting
+                            <settings:CheckboxSetting 
                                 IsOn="{Binding CharacterWindowSettings.AllowOffScreen, Mode=TwoWay}"
                                 Style="{StaticResource AllowOffscreenSettingStyle}" 
                                 IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>

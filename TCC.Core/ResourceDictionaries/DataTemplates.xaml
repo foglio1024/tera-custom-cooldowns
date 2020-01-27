@@ -17,7 +17,11 @@
                     xmlns:moongourd="clr-namespace:TCC.Moongourd"
                     xmlns:vm="clr-namespace:TCC.ViewModels"
                     xmlns:windows="clr-namespace:TCC.Windows"
-                    xmlns:widgets="clr-namespace:TCC.Windows.Widgets">
+                    xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+                    xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+                    xmlns:settings="clr-namespace:TCC.Controls.Settings">
     <!--#region Skills -->
     <DataTemplate x:Key="RoundNormalSkill">
         <skillControls:RoundSkillControl />
@@ -146,8 +150,8 @@
                 <ToolTip Background="Transparent" BorderBrush="Transparent">
                     <Grid>
                         <abnormalityControls:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}"
-                                                                 AbnormalityToolTip="{Binding Abnormality.ToolTip}"
-                                                                 Id="{Binding Abnormality.Id}" />
+                                                                       AbnormalityToolTip="{Binding Abnormality.ToolTip}"
+                                                                       Id="{Binding Abnormality.Id}" />
                     </Grid>
                 </ToolTip>
             </Grid.ToolTip>
@@ -206,8 +210,8 @@
                 <ToolTip Background="Transparent" BorderBrush="Transparent">
                     <Grid>
                         <abnormalityControls:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}"
-                                                                 AbnormalityToolTip="{Binding Abnormality.ToolTip}"
-                                                                 Id="{Binding Abnormality.Id}" />
+                                                                       AbnormalityToolTip="{Binding Abnormality.ToolTip}"
+                                                                       Id="{Binding Abnormality.Id}" />
                     </Grid>
                 </ToolTip>
             </Grid.ToolTip>
@@ -261,7 +265,8 @@
             </ItemsControl>
             <Button Width="30" HorizontalContentAlignment="Center" Command="{Binding SpecialCommand}"
                     Visibility="{Binding CanBeSpecial, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}"
-                    VerticalContentAlignment="Center" Grid.Column="2" ToolTip="Special buffs are displayed at the beginning of the list and have gold border.">
+                    VerticalContentAlignment="Center" Grid.Column="2"
+                    ToolTip="Special buffs are displayed at the beginning of the list and have gold border.">
                 <Path Data="{StaticResource SvgStar}"
                       Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
                       HorizontalAlignment="Center">
@@ -294,7 +299,7 @@
     </DataTemplate>
     <!--======================================-->
     <!--#endregion-->
-    
+
     <!--#region Chat -->
     <DataTemplate x:Key="SimpleTemplate" DataType="chat:SimpleMessagePiece">
         <Grid UseLayoutRounding="True">
@@ -371,7 +376,7 @@
     <DataTemplate x:Key="LfgBody">
         <chatCtrl:LfgBody />
     </DataTemplate>
-    
+
     <!--Channel label templates-->
     <DataTemplate x:Key="WhisperChannelLabelTemplate" DataType="chat:ChatMessage">
         <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
@@ -526,7 +531,6 @@
     <!--#endregion-->
 
     <!--#region NPCs -->
-    <!--NPC templates-->
     <DataTemplate x:Key="BossDataTemplate">
         <npc:BossGage />
     </DataTemplate>
@@ -574,7 +578,7 @@
         <group:RaidMember />
     </DataTemplate>
     <!--#endregion-->
-    
+
     <!--#region Dashboard -->
     <DataTemplate x:Key="NameClassCharDataTemplate" DataType="pc:Character">
         <Grid HorizontalAlignment="Stretch" ShowGridLines="False" Background="Transparent" Height="30">
@@ -759,7 +763,762 @@
         <widgets:ProgressNotificationControl />
     </DataTemplate>
     <!--#endregion-->
-    
+
+    <!--#region LFG-->
+    <DataTemplate x:Key="PlayerDt" DataType="pc:User">
+        <Grid Background="Transparent" Grid.IsSharedSizeScope="False" ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" SharedSizeGroup="A" />
+                <ColumnDefinition Width="2*" SharedSizeGroup="B" />
+                <ColumnDefinition Width="Auto" SharedSizeGroup="C" />
+            </Grid.ColumnDefinitions>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseRightButtonDown">
+                    <i:InvokeCommandAction Command="{Binding RequestInteractiveCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Path Fill="#afff" 
+                      Opacity="1"
+                           Margin="4" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True"
+                      HorizontalAlignment="Left" VerticalAlignment="Center"
+                      Width="16" Height="16" Stretch="Uniform"
+                      Data="{Binding UserClass, Converter={StaticResource ClassToSvg}}"/>
+
+                <TextBlock Foreground="#6fff" Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0"
+                           VerticalAlignment="Center">
+                    <Run Text="lv." Foreground="#5999" FontSize="10" />
+                    <Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10" />
+                    <Run Text="{Binding Name, Mode=OneWay}" />
+                </TextBlock>
+                <Path Data="{StaticResource SvgDelegateLeader}" 
+                      Fill="{StaticResource GoldBrush}" Height="8"
+                      Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
+                      HorizontalAlignment="Right" Margin="5 0 5 -1" />
+            </StackPanel>
+            <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
+                       Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0" VerticalAlignment="Center" />
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Online}" Value="False">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="1" To=".3"
+                                             Duration="0:0:0.2"
+                                             Storyboard.TargetProperty="Opacity" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From=".3" To="1"
+                                             Duration="0:0:0.2"
+                                             Storyboard.TargetProperty="Opacity" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+
+        </DataTemplate.Triggers>
+    </DataTemplate>
+    <DataTemplate x:Key="ApplicantDt" DataType="pc:User">
+        <Grid Background="Transparent" Grid.IsSharedSizeScope="False" ShowGridLines="False">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseRightButtonDown">
+                    <i:InvokeCommandAction Command="{Binding RequestInteractiveCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" SharedSizeGroup="A" />
+                <ColumnDefinition Width="2*" SharedSizeGroup="B" />
+                <ColumnDefinition Width="Auto" SharedSizeGroup="C" />
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Path" BasedOn="{StaticResource {x:Type Path}}">
+                    <Setter Property="Margin" Value="2" />
+                    <Setter Property="Height" Value="12" />
+                    <Setter Property="Fill" Value="#bfff" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+            </Grid.Resources>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Path Fill="#afff" 
+                      Opacity="1"
+                      Margin="4" RenderOptions.BitmapScalingMode="Fant" UseLayoutRounding="True"
+                      HorizontalAlignment="Left" VerticalAlignment="Center"
+                      Width="16" Height="16" Stretch="Uniform"
+                      Data="{Binding UserClass, Converter={StaticResource ClassToSvg}}"/>
+                <TextBlock Foreground="{StaticResource GoldBrush}" Style="{StaticResource DefaultTextStyle}"
+                           Margin="0 0 0 0"
+                           VerticalAlignment="Center">
+                    <Run Text="lv." Foreground="#5999" FontSize="10" />
+                    <Run Text="{Binding Level, Mode=OneWay}" Foreground="#5999" FontSize="10" />
+                    <Run Text="{Binding Name, Mode=OneWay}" />
+                </TextBlock>
+                <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldBrush}" Height="8"
+                      Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
+                      HorizontalAlignment="Right" Margin="5 0 5 1" />
+            </StackPanel>
+
+            <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
+                       Style="{StaticResource DefaultTextStyle}" Margin="0 0 0 0" VerticalAlignment="Center" />
+            <UniformGrid Grid.Column="2" Rows="1" HorizontalAlignment="Right">
+                <UniformGrid.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
+                        <Setter Property="extensions:ButtonExtensions.CornerRadius" Value="2" />
+                        <Setter Property="Margin" Value="2 3" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </UniformGrid.Resources>
+                <Button Command="{Binding InspectCommand}"
+                        ToolTip="Inspect">
+                    <Path Data="{StaticResource SvgEye}" />
+                </Button>
+
+                <Button Command="{Binding AcceptApplyCommand}"
+                        ToolTip="Accept"
+                        Visibility="{Binding Path=DataContext.(vm:LfgListViewModel.AmILeader), RelativeSource={RelativeSource AncestorType=windows:LfgListWindow}, Converter={StaticResource BoolToVisibility}}">
+                    <Path Data="{StaticResource SvgConfirm}" 
+                          Fill="{StaticResource GreenBrush}"/>
+                </Button>
+
+                <Button Command="{Binding DeclineApplyCommand}"
+                        ToolTip="Decline"
+                        Visibility="{Binding Path=DataContext.(vm:LfgListViewModel.AmILeader), RelativeSource={RelativeSource AncestorType=windows:LfgListWindow}, Converter={StaticResource BoolToVisibility}}">
+                    <Path Data="{StaticResource SvgClose}" 
+                          Fill="{StaticResource HpBrush}"/>
+                </Button>
+            </UniformGrid>
+
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Online}" Value="False">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="1" To=".3"
+                                             Duration="0:0:0.2"
+                                             Storyboard.TargetProperty="Opacity" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From=".3" To="1"
+                                             Duration="0:0:0.2"
+                                             Storyboard.TargetProperty="Opacity" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type data:Listing}" x:Key="ListingDt">
+        <DataTemplate.Resources>
+            <Style TargetType="ListBoxItem" x:Key="PlayerListItemStyle">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <!--<Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>-->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Grid Style="{StaticResource GlowHoverGridLeft}">
+                                <!--<Rectangle x:Name="hl" Fill="#1fff" Opacity="0" />-->
+                                <ContentPresenter />
+                            </Grid>
+                            <!--<ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="1" TargetName="hl" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>-->
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DataTemplate.Resources>
+        <Grid HorizontalAlignment="Stretch" Height="Auto" Background="Transparent"
+              ShowGridLines="False">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding ExpandCollapseCommand}" CommandParameter="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="345" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="22" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" x:Name="DotsRow" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Grid.RowSpan="6"
+                    Background="#2000" VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.ColumnSpan="5"
+                    CornerRadius="1"
+                    Margin="-5 0 -5 0"
+                    BorderThickness="0" />
+            <Border Grid.Row="2" Grid.RowSpan="4"
+                    Background="#2000" VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.ColumnSpan="5"
+                    Margin="-5 0 -5 0"
+                    BorderThickness="0 1 0 0"
+                    BorderBrush="#0affffff"
+                    CornerRadius="1" />
+            <Border x:Name="hover"
+                    Margin="-5 0 -5 0"
+                    Grid.ColumnSpan="6"
+                    CornerRadius="1"
+                    Opacity=".3"
+                    Grid.RowSpan="2">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource ChatPartyColor}" Opacity=".5" />
+
+                </Border.Background>
+
+            </Border>
+            <Border HorizontalAlignment="Stretch" x:Name="Ell"
+                    Margin="-5 0 -5 0"
+                    Grid.ColumnSpan="6"
+                    Grid.RowSpan="5"
+                    Opacity=".5"
+                    BorderThickness="3 0 0 0"
+                    CornerRadius="1 0 0 1"
+                    BorderBrush="{StaticResource ChatPartyBrush}">
+            </Border>
+            <TextBox Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Foreground="#afff"
+                     x:Name="MessageTb"
+                     FontSize="14"
+                     FontWeight="DemiBold"
+                     HorizontalAlignment="Left"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     CaretBrush="White"
+                     IsReadOnly="{Binding IsMyLfg, Converter={StaticResource BoolInverter}}"
+                     IsHitTestVisible="{Binding IsMyLfg}"
+                     Margin="3 3 0 3"
+                     VerticalAlignment="Center"
+                     GotKeyboardFocus="LfgMessage_OnGotKeyboardFocus"
+                     LostKeyboardFocus="LfgMessage_OnTbLostKeyboardFocus"
+                     KeyDown="LfgMessage_OnKeyDown"
+                     PreviewMouseLeftButtonDown="LfgMessage_OnMouseLeftButtonDown" 
+                     Grid.Column="1">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding BrowseTwitchCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+            <ItemsControl ItemsSource="{Binding Players}" Grid.Column="1"
+                          VerticalAlignment="Bottom"
+                          Grid.Row="1"
+                          Height="6"
+                          Margin="3 -3 3 3">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Ellipse Width="4" Height="4"
+                                 x:Name="ell"
+                                 Opacity=".5"
+                                 Margin="2 0" />
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Role}" Value="0">
+                                <Setter Property="Fill" TargetName="ell" Value="{StaticResource DpsRoleBrush}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Role}" Value="1">
+                                <Setter Property="Fill" TargetName="ell" Value="{StaticResource TankRoleBrush}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Role}" Value="2">
+                                <Setter Property="Fill" TargetName="ell" Value="{StaticResource HealerRoleBrush}" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <TextBlock Text="{Binding LeaderName}"
+                       Style="{StaticResource DefaultTextStyle}"
+                       Grid.Column="2"
+                       Grid.RowSpan="2"
+                       x:Name="LeaderNameTb"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left" />
+            <TextBlock Style="{StaticResource DefaultTextStyle}"
+                       Grid.Column="3"
+                       Grid.RowSpan="2"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center">
+                <Run Text="{Binding PlayerCount, Mode=OneWay}" />
+            </TextBlock>
+            <TextBlock Foreground="#5fff"
+                       FontSize="10"
+                       Grid.RowSpan="2"
+                       Grid.Column="1"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="15 0"
+                       Text="{Binding AliveSinceMs, Converter={StaticResource MillisecondsToString}, ConverterParameter=d_h_M}"></TextBlock>
+            <ListBox ItemsSource="{Binding Players}"
+                     x:Name="players"
+                     Grid.Row="3"
+                     Grid.ColumnSpan="5"
+                     Grid.Column="0"
+                     Margin="10 0 0 0"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     HorizontalAlignment="Stretch"
+                     ItemTemplate="{StaticResource PlayerDt}"
+                     ItemContainerStyle="{StaticResource PlayerListItemStyle}">
+                <ListBox.Template>
+                    <ControlTemplate TargetType="ListBox">
+                        <ItemsPresenter />
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.LayoutTransform>
+                    <ScaleTransform ScaleY="0" />
+                </ListBox.LayoutTransform>
+            </ListBox>
+            <Grid Grid.ColumnSpan="5"
+                  Grid.Row="4"
+                  x:Name="ApplicantsGrid"
+                  Visibility="Collapsed"
+                >
+                <Separator x:Name="Sep" VerticalAlignment="Top" Margin="0 0 0 0">
+                    <Separator.Background>
+                        <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
+                            <GradientStop Color="Transparent"/>
+                            <GradientStop Color="#3fff" Offset=".5"/>
+                            <GradientStop Color="Transparent" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Separator.Background>
+                    <Separator.LayoutTransform>
+                        <ScaleTransform ScaleY="0"/>
+                    </Separator.LayoutTransform>
+                </Separator>
+                <ListBox ItemsSource="{Binding Applicants}"
+                     x:Name="applicants"
+                     Margin="10 4 10 3"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     HorizontalAlignment="Stretch"
+                     ItemTemplate="{StaticResource ApplicantDt}"
+                     ItemContainerStyle="{StaticResource PlayerListItemStyle}">
+                    <ListBox.Template>
+                        <ControlTemplate TargetType="ListBox">
+                            <ItemsPresenter />
+                        </ControlTemplate>
+                    </ListBox.Template>
+                </ListBox>
+
+                <Grid.LayoutTransform>
+                    <ScaleTransform ScaleY="0" />
+                </Grid.LayoutTransform>
+            </Grid>
+            <controls:Arc StrokeThickness="10"
+                          Stroke="{StaticResource Tier5DungeonBrush}"
+                          Grid.Column="4"
+                          Width="22"
+                          Height="22"
+                          EndAngle="0"
+                          Opacity=".8"
+                          HorizontalAlignment="Center"
+                          Margin="4 0 -4 0"
+                          x:Name="cdArc" />
+            <Button x:Name="btn"
+                    Grid.RowSpan="2"
+                    VerticalAlignment="Center"
+                    Grid.Column="4"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Stretch"
+                    Margin=" 0 0 0 0"
+                    Width="15"
+                    Style="{StaticResource ButtonContentOpacityStyle}"
+                    Command="{Binding OpenPopupCommand}">
+                <Path Data="{StaticResource SvgDotsVertical}" Margin="3" Height="12" Width="15"
+                      Stretch="Uniform" ToolTip="Apply"
+                      Fill="White" />
+
+            </Button>
+            <Popup PlacementTarget="{Binding ElementName=btn}"
+                   IsOpen="{Binding IsPopupOpen}"
+                   PopupAnimation="Slide"
+                   AllowsTransparency="True"
+                   MouseLeave="LfgPopup_OnMouseLeave"
+                   Placement="Left"
+                   HorizontalOffset="15">
+                <Grid Margin="10">
+                    <Border Background="{StaticResource RevampDarkerBackgroundBrush}"
+                            Style="{StaticResource RevampBorderStyle}">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="15" Opacity=".4" Direction="-90" />
+                        </Border.Effect>
+                    </Border>
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonMainStyle}">
+                                <Setter Property="Padding" Value="10 5" />
+                            </Style>
+                            <Style TargetType="{x:Type Path}" BasedOn="{StaticResource {x:Type Path}}">
+                                <Setter Property="Width" Value="16" />
+                                <Setter Property="Height" Value="16" />
+                                <Setter Property="Margin" Value="0 5 10 5" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button x:Name="ApplyButton"
+                                extensions:ButtonExtensions.CornerRadius="3"
+                                Command="{Binding ApplyCommand}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Path Data="{StaticResource SvgUserAdd}" />
+                                <TextBlock Text="Apply" Grid.Column="1"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="WhisperLeaderButton"
+                                extensions:ButtonExtensions.CornerRadius="3"
+                                Command="{Binding WhisperLeaderCommand}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Path Data="{StaticResource SvgChatMessage}" />
+                                <TextBlock Grid.Column="1"
+                                           VerticalAlignment="Center">
+                                    <Run Text="Whisper" />
+                                    <Run Text="{Binding LeaderName, Mode=OneWay}" />
+                                </TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="DeleteButton"
+                                Command="{Binding RemoveCommand}"
+                                Visibility="Collapsed">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Path Data="{StaticResource SvgClose}" />
+                                <TextBlock Text="Remove" Grid.Column="1"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+
+                        </Button>
+                        <Button x:Name="RefreshButton"
+                                Command="{Binding RefreshApplicantsCommand}"
+                                Visibility="Collapsed">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Path Data="{StaticResource SvgReload}" />
+                                <TextBlock Text="Refresh applies" Grid.Column="1"
+                                           Foreground="White"
+                                           VerticalAlignment="Center" />
+                            </Grid>
+
+
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Popup>
+
+        </Grid>
+        <DataTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter TargetName="hover" Property="Opacity" Value="0" />
+            </Trigger>
+            <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="players"
+                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                             To="1"
+                                             Duration="0:0:0.15"
+                                             EasingFunction="{StaticResource QuadraticEase}" />
+                            <DoubleAnimation Storyboard.TargetName="btn"
+                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                             EasingFunction="{StaticResource QuadraticEase}"
+                                             To="1"
+                                             Duration="0:0:0.15" />
+                            <ThicknessAnimation Storyboard.TargetName="players"
+                                                Storyboard.TargetProperty="Margin"
+                                                To="10 5 10 3"
+                                                EasingFunction="{StaticResource QuadraticEase}"
+                                                Duration="0:0:0.15" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="players"
+                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                             EasingFunction="{StaticResource QuadraticEase}"
+                                             To="0"
+                                             Duration="0:0:0.15" />
+                            <DoubleAnimation Storyboard.TargetName="btn"
+                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                             EasingFunction="{StaticResource QuadraticEase}"
+                                             To="0"
+                                             Duration="0:0:0.15" />
+                            <ThicknessAnimation Storyboard.TargetName="players"
+                                                Storyboard.TargetProperty="Margin"
+                                                EasingFunction="{StaticResource QuadraticEase}"
+                                                To="10 0"
+                                                Duration="0:0:0.15" />
+
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding CanApply}" Value="False">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="cdArc"
+                                             Storyboard.TargetProperty="EndAngle"
+                                             From="359.9" To="0"
+                                             Duration="0:0:5" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsRaid}" Value="True">
+
+                <Setter TargetName="hover" Property="Background">
+                    <Setter.Value>
+
+                        <SolidColorBrush Color="{StaticResource Tier4DungeonColor}" Opacity=".5" />
+
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="Ell" Property="BorderBrush" Value="{StaticResource Tier4DungeonBrush}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsTrade}" Value="True">
+                <Setter TargetName="Ell" Property="BorderBrush" Value="{StaticResource ChatTradeBrush}" />
+                <Setter TargetName="hover" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource ChatTradeColor}" Opacity=".5" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="MessageTb" Property="Foreground" Value="{StaticResource ChatTradeBrush}" />
+                <Setter TargetName="LeaderNameTb" Property="Foreground" Value="{StaticResource ChatTradeBrush}" />
+                <Setter TargetName="DotsRow" Property="Height" Value="0" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsTwitch}" Value="True">
+                <Setter TargetName="MessageTb" Property="Foreground" Value="{StaticResource TwitchBrush}" />
+                <Setter TargetName="LeaderNameTb" Property="Foreground" Value="{StaticResource TwitchBrush}" />
+                <Setter TargetName="MessageTb" Property="Cursor" Value="Hand" />
+                <Setter TargetName="Ell" Property="BorderBrush" Value="{StaticResource TwitchBrush}" />
+                <Setter TargetName="DotsRow" Property="Height" Value="0" />
+                <Setter TargetName="hover" Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource TwitchColor}" Opacity=".5" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="MessageTb" Property="IsHitTestVisible" Value="True" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsMyLfg}" Value="True">
+                <Setter Property="Foreground" TargetName="MessageTb" Value="{StaticResource GreenBrush}" />
+                <Setter Property="Visibility" TargetName="cdArc" Value="Collapsed" />
+                <Setter Property="Visibility" TargetName="ApplicantsGrid" Value="Visible" />
+                <Setter Property="Visibility" TargetName="ApplyButton" Value="Collapsed" />
+                <Setter Property="Visibility" TargetName="DeleteButton" Value="Visible" />
+                <Setter Property="Visibility" TargetName="RefreshButton" Value="Visible" />
+                <Setter Property="Visibility" TargetName="WhisperLeaderButton" Value="Collapsed" />
+                <Setter Property="Background" TargetName="hover">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource GreenColor}" Opacity=".5" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsMyLfg}" Value="True"/>
+                    <Condition Binding="{Binding ElementName=applicants, Path=HasItems}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Visibility" TargetName="Sep" Value="Visible"/>
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsExpanded}" Value="True"/>
+                    <Condition Binding="{Binding IsMyLfg}" Value="True"/>
+                    <Condition Binding="{Binding ElementName=applicants, Path=HasItems}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Sep"
+                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                             To="1"
+                                             EasingFunction="{StaticResource QuadraticEase}"
+                                             Duration="0:0:0.15" />
+
+                            <DoubleAnimation Storyboard.TargetName="ApplicantsGrid"
+                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                             To="1"
+                                             EasingFunction="{StaticResource QuadraticEase}"
+                                             Duration="0:0:0.15" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.EnterActions>
+                <MultiDataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Sep"
+                                             EasingFunction="{StaticResource QuadraticEase}"
+                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                             To="0"
+                                             Duration="0:0:0.15" />
+                            <DoubleAnimation Storyboard.TargetName="ApplicantsGrid"
+                                             Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleY)"
+                                             EasingFunction="{StaticResource QuadraticEase}"
+                                             To="0"
+                                             Duration="0:0:0.15" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiDataTrigger.ExitActions>
+
+
+            </MultiDataTrigger>
+
+        </DataTemplate.Triggers>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type data:Listing}" x:Key="TempListingDt">
+        <Grid HorizontalAlignment="Stretch" Height="Auto" Background="Transparent"
+              ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="345" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="1" Grid.RowSpan="4"
+                    Background="#2000" VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.ColumnSpan="6"
+                    Margin="-5 0 -5 0"
+                    BorderThickness="0 1 0 0"
+                    BorderBrush="#1fff"
+                    CornerRadius="0 0 0 0" />
+            <Border HorizontalAlignment="Stretch" x:Name="Ell"
+                    Margin="-5 0 -5 0"
+                    Grid.ColumnSpan="6"
+                    Grid.RowSpan="5"
+                    Opacity="1"
+                    BorderThickness="2 0 0 0"
+                    CornerRadius="0"
+                    BorderBrush="{StaticResource GreenBrush}">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop
+                            Color="{Binding Path=., Source={StaticResource GreenColor}, Converter={StaticResource ColorToTransparent}, ConverterParameter=0.5}"
+                            Offset="0" />
+                        <GradientStop
+                            Color="{Binding Path=., Source={StaticResource GreenColor}, Converter={StaticResource ColorToTransparent}}"
+                            Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <TextBox Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Column="1"
+                     Foreground="#9fff"
+                     x:Name="MessageTb"
+                     FontSize="14"
+                     FontWeight="Normal"
+                     HorizontalAlignment="Left"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     CaretBrush="White"
+                     IsReadOnly="{Binding IsMyLfg, Converter={StaticResource BoolInverter}}"
+                     IsHitTestVisible="{Binding IsMyLfg}"
+                     Margin="5 0 0 0"
+                     VerticalAlignment="Center"
+                     GotKeyboardFocus="LfgMessage_OnGotKeyboardFocus"
+                     LostKeyboardFocus="LfgMessage_OnTbLostKeyboardFocus"
+                     Loaded="LfgMessage_OnTbLoaded"
+                     KeyDown="LfgMessage_OnKeyDown"
+                     PreviewMouseLeftButtonDown="LfgMessage_OnMouseLeftButtonDown" 
+                     />
+
+            <settings:CheckboxSetting Grid.Column="2"
+                                      Foreground="{StaticResource GreenBrush}"
+                                      x:Name="IsRaidCb"
+                                      IsOn="{Binding IsRaid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      VerticalAlignment="Stretch"
+                                      HorizontalAlignment="Left"
+                                      Height="Auto"
+                                      Margin="-37 0 0 0"
+                                      SettingName="Raid"
+                                      CheckboxSize="14"
+                                      CheckBoxColor="{StaticResource GreenBrush}" />
+
+            <StackPanel
+                Orientation="Horizontal"
+                Grid.Column="5">
+
+                <Button VerticalAlignment="Center"
+                        Margin=" 5 2 0 0"
+                        Style="{StaticResource ButtonContentOpacityStyle}"
+                        Command="{Binding PostCommand}">
+
+                    <Path Data="{StaticResource SvgConfirm}" Margin="3" Height="11" Width="15" Stretch="Uniform"
+                          ToolTip="Apply"
+                          Fill="White" />
+                </Button>
+                <Button x:Name="btn"
+                        VerticalAlignment="Center"
+                        Margin=" 5 2 0 0"
+                        Style="{StaticResource ButtonContentOpacityStyle}"
+                        Command="{Binding RemoveCommand}">
+
+                    <Path Data="{StaticResource SvgClose}" Margin="3" Height="11" Width="15" Stretch="Uniform"
+                          ToolTip="Apply"
+                          Fill="White" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+    </DataTemplate>
+
+    <!--#endregion-->
+
     <!--#region Misc -->
     <DataTemplate x:Key="ItemDataTemplate" DataType="data:Item">
         <Grid>

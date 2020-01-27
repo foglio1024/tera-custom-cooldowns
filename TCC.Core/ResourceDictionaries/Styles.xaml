@@ -465,6 +465,43 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <Style TargetType="{x:Type Grid}" x:Key="GlowHoverGridLeft">
+        <Style.Setters>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush Opacity="0">
+                        <GradientStop Color="#0ddf" />
+                        <GradientStop Color="#2ddf" Offset="0.2" />
+                        <!--<GradientStop Color="#1ddf" Offset="0.6" />-->
+                        <GradientStop Color="#0ddf" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="0" To="1"
+                                             Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                                             Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation From="1" To="0"
+                                             Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                                             Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <Style TargetType="{x:Type Border}" x:Key="ClassWindowSkillBorder" >
         <Setter Property="BorderBrush" Value="#89a" />
@@ -478,6 +515,7 @@
 
     <Style TargetType="{x:Type settings:CheckboxSetting}">
         <Setter Property="CheckBoxColor" Value="{StaticResource DefensiveStanceBrush}" />
+        <Setter Property="Height" Value="35" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=(UIElement.IsEnabled), RelativeSource={RelativeSource Self}}"
                          Value="False">
@@ -492,7 +530,7 @@
     </Style>
 
     <!--#region Based on Nostrum -->
-    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxMainStyle}">
         <Setter Property="extensions:ComboBoxExtensions.DropDownBorderStyle" Value="{StaticResource RevampBorderStyle}" />
     </Style>
     <Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">

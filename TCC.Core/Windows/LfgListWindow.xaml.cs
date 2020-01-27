@@ -1,11 +1,15 @@
 ﻿using Nostrum;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
-using TCC.Controls;
+using GongSolutions.Wpf.DragDrop.Utilities;
+using Nostrum.Extensions;
+using Nostrum.Factories;
+using TCC.Data;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 
@@ -31,6 +35,7 @@ namespace TCC.Windows
             VM.Publicized += OnPublicized;
             VM.MyLfgStateChanged += OnMyLfgStateChanged;
             VM.CreatingStateChanged += OnCreatingStateChanged;
+            VM.TempLfgCreated += OnTempLfgCreated;
             WindowManager.VisibilityManager.VisibilityChanged += () =>
             {
                 if (!WindowManager.VisibilityManager.Visible) return;
@@ -40,6 +45,11 @@ namespace TCC.Windows
 
             HideWindowCommand = new RelayCommand(_ => HideWindow());
         }
+
+        private void OnTempLfgCreated()
+        {
+        }
+
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
             base.OnLoaded(sender, e);
@@ -51,27 +61,26 @@ namespace TCC.Windows
         {
             Dispatcher?.InvokeAsync(() =>
             {
-                _colAn.To = VM.Creating
-                    ? string.IsNullOrEmpty(VM.NewMessage)
-                        ? R.Colors.HpColor
-                        : R.Colors.GreenColor
-                    : R.Colors.ChatMegaphoneColorDark;
-                var newBg = new SolidColorBrush(((SolidColorBrush) CreateMessageBtn.Background).Color);
-                CreateMessageBtn.Background = newBg;
-                CreateMessageBtn.Background.BeginAnimation(SolidColorBrush.ColorProperty, _colAn);
-                if (VM.Creating)
-                {
-                    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 1, easing: true));
-                    FocusManager.UndoUnfocusable(Handle);
-                    Activate();
-                    NewMessageTextBox.Focus();
-                }
-                else
-                {
-                    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 0, easing: true));
-                    FocusManager.MakeUnfocusable(Handle);
-
-                }
+                //_colAn.To = VM.Creating
+                //    ? string.IsNullOrEmpty(VM.NewMessage)
+                //        ? R.Colors.HpColor
+                //        : R.Colors.GreenColor
+                //    : R.Colors.ChatMegaphoneColorDark;
+                //var newBg = new SolidColorBrush(((SolidColorBrush) CreateMessageBtn.Background).Color);
+                //CreateMessageBtn.Background = newBg;
+                //CreateMessageBtn.Background.BeginAnimation(SolidColorBrush.ColorProperty, _colAn);
+                //if (VM.Creating)
+                //{
+                //    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 1, easing: true));
+                //    FocusManager.UndoUnfocusable(Handle);
+                //    Activate();
+                //    NewMessageTextBox.Focus();
+                //}
+                //else
+                //{
+                //    NewMessageGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateDoubleAnimation(150, 0, easing: true));
+                //    FocusManager.MakeUnfocusable(Handle);
+                //}
             });
         }
 
@@ -79,16 +88,16 @@ namespace TCC.Windows
         {
             Dispatcher?.InvokeAsync(() =>
             {
-                LfgMgmtBtn.BeginAnimation(OpacityProperty, VM.AmIinLfg ? _expandAn : _shrinkAn);
-                CreateMessageBtn.BeginAnimation(OpacityProperty, VM.AmIinLfg ? _shrinkAn : _expandAn);
+                //LfgMgmtBtn.BeginAnimation(OpacityProperty, VM.AmIinLfg ? _expandAn : _shrinkAn);
+                //CreateMessageBtn.BeginAnimation(OpacityProperty, VM.AmIinLfg ? _shrinkAn : _expandAn);
             });
         }
 
 
         private void OnPublicized(int cd)
         {
-            _publicizeCdAn.Duration = TimeSpan.FromMilliseconds(cd * 1000);
-            PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _publicizeCdAn);
+            //_publicizeCdAn.Duration = TimeSpan.FromMilliseconds(cd * 1000);
+            //PublicizeBarGovernor.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _publicizeCdAn);
         }
 
 
@@ -96,17 +105,20 @@ namespace TCC.Windows
         {
             ProxyInterface.Instance.Stub.RequestListings();
 
-            var teraScreen = FocusManager.TeraScreen;
-            var x = teraScreen.Bounds.X + teraScreen.Bounds.Size.Width / 2D;
-            var y = teraScreen.Bounds.Y + teraScreen.Bounds.Size.Height / 2D;
-
-            x -= this.ActualWidth / 2;
-            y -= this.ActualHeight/ 2;
-
-            Left = x;
-            Top = y;
-
             base.ShowWindow();
+
+            Dispatcher.Invoke(() =>
+            {
+                var teraScreen = FocusManager.TeraScreen;
+                var x = teraScreen.Bounds.X + teraScreen.Bounds.Size.Width / 2D;
+                var y = teraScreen.Bounds.Y + teraScreen.Bounds.Size.Height / 2D;
+
+                x -= this.Width / 2;
+                y -= this.Height / 2;
+                Left = x;
+                Top = y;
+            });
+
         }
 
         private void OnTbMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -123,6 +135,11 @@ namespace TCC.Windows
         private void OnBgMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Keyboard.ClearFocus();
+        }
+
+        private void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            VM.IsPopupOpen = false;
         }
     }
 }

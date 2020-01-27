@@ -48,6 +48,10 @@
         <tccConv:ItemLevelTierToColorConverter/>
         <fogConv:ColorToTransparent Opacity="0"/>
     </fogConv:ValueConverterGroup>
+    <fogConv:ValueConverterGroup x:Key="IsRaidToTransparentFill">
+        <tccConv:RaidToColorConverter/>
+        <fogConv:ColorToTransparent Opacity="0"/>
+    </fogConv:ValueConverterGroup>
 
     <tccConv:ShieldStatusColorConverter x:Key="ShieldStatusColor"/>
     <tccConv:ShieldStatusToVisibilityConverter x:Key="ShieldStatusToVisibility"/>

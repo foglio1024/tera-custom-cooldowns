@@ -1,5 +1,4 @@
-﻿using Nostrum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -8,8 +7,9 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Nostrum;
 using Nostrum.Extensions;
-using TCC.Controls;
+using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
@@ -21,32 +21,48 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels
 {
-
     [TccModule]
     public class LfgListViewModel : TccWindowViewModel
     {
+        #region Events
         public event Action<int> Publicized;
         public event Action CreatingStateChanged;
+        public event Action TempLfgCreated;
         public event Action MyLfgStateChanged;
+
+        #endregion
+
         public static DispatcherTimer RequestTimer;
-        private DispatcherTimer PublicizeTimer;
-        private DispatcherTimer AutoPublicizeTimer;
+        //private readonly DispatcherTimer PublicizeTimer;
+        private readonly DispatcherTimer AutoPublicizeTimer;
         public static Queue<uint> RequestQueue = new Queue<uint>();
         private bool _creating;
         private bool _creatingRaid;
         private int _lastGroupSize;
         public Listing LastClicked;
         private string _newMessage;
+        private bool _isPopupOpen;
 
         public string LastSortDescr { get; set; } = "Message";
         public int PublicizeCooldown => 5;
-        public int AutoPublicizeCooldown => 30;
-        public void RefreshSorting()
+        public int AutoPublicizeCooldown => 20;
+
+
+        //public bool IsPublicizeEnabled => !PublicizeTimer.IsEnabled;
+        private bool _isAutoPublicizeEnabled;
+
+        public bool IsAutoPublicizeEnabled
         {
-            SortCommand.Refresh(LastSortDescr);
+            get => _isAutoPublicizeEnabled;
+            set
+            {
+                if (_isAutoPublicizeEnabled == value) return;
+                _isAutoPublicizeEnabled = value;
+                N();
+            }
         }
-        public bool IsPublicizeEnabled => !PublicizeTimer.IsEnabled;
-        public bool IsAutoPublicizeOn => AutoPublicizeTimer.IsEnabled;
+
+        public bool IsAutoPublicizeRunning => AutoPublicizeTimer.IsEnabled;
         private bool _stopAuto;
         public TSObservableCollection<Listing> Listings { get; }
         public SortCommand SortCommand { get; }
@@ -55,7 +71,12 @@ namespace TCC.ViewModels
         public ICommand CreateMessageCommand { get; }
         public ICommand RemoveMessageCommand { get; }
         public ICommand ReloadCommand { get; }
+        public ICommand ExpandAllCommand { get; }
+        public ICommand CollapseAllCommand { get; }
+        public ICommand OpenPopupCommand { get; }
+
         public ICollectionViewLiveShaping ListingsView { get; }
+
         public bool Creating
         {
             get => _creating;
@@ -67,6 +88,7 @@ namespace TCC.ViewModels
                 CreatingStateChanged?.Invoke();
             }
         }
+
         public bool CreatingRaid
         {
             get => _creatingRaid;
@@ -77,6 +99,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
+
         public string NewMessage
         {
             get => _newMessage;
@@ -88,31 +111,22 @@ namespace TCC.ViewModels
                 CreatingStateChanged?.Invoke();
             }
         }
-        public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing => listing.LeaderId == Game.Me.PlayerId
-                                                                                          || listing.LeaderName == Game.Me.Name
-                                                                                          || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
-                                                                                          || Game.Group.Has(listing.LeaderId)));
-        //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)));
 
-        private void NotifyMyLfg()
-        {
-            N(nameof(AmIinLfg));
-            MyLfgStateChanged?.Invoke();
-            N(nameof(MyLfg));
-            foreach (var listing in Listings.ToSyncList())
-            {
-                listing?.UpdateIsMyLfg();
-            }
-            MyLfg?.UpdateIsMyLfg();
-        }
+        public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing =>
+            listing.LeaderId == Game.Me.PlayerId
+            || listing.LeaderName == Game.Me.Name
+            || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
+            || Game.Group.Has(listing.LeaderId)));
 
-        public bool AmILeader => Game.Group.AmILeader;
-        public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing => listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
-                                                                   || listing.LeaderId == Game.Me.PlayerId
-                                                                   || Game.Group.Has(listing.LeaderId)
-                                                             //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
-                                                             ));
 
+        public bool AmILeader => Game.Group.AmILeader || (MyLfg != null && MyLfg?.LeaderId == Game.Me.PlayerId);
+
+        public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing =>
+                listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
+                || listing.LeaderId == Game.Me.PlayerId
+                || Game.Group.Has(listing.LeaderId)
+        //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
+        ));
 
         public int MinLevel
         {
@@ -125,6 +139,7 @@ namespace TCC.ViewModels
                 N(nameof(MaxLevel));
             }
         }
+
         public int MaxLevel
         {
             get => ((LfgWindowSettings)Settings).MaxLevel;
@@ -136,64 +151,89 @@ namespace TCC.ViewModels
                 N(nameof(MinLevel));
             }
         }
+        public bool IsPopupOpen
+        {
+            get => _isPopupOpen;
+            set
+            {
+                if (_isPopupOpen == value) return;
+                _isPopupOpen = value;
+                FocusManager.PauseTopmost = _isPopupOpen;
+                N();
+            }
+        }
 
 
         public bool StayClosed { get; set; }
 
-        public ICommand ExpandAllCommand { get; }
-        public ICommand CollapseAllCommand { get; }
-
         public LfgListViewModel(LfgWindowSettings settings) : base(settings)
         {
-            KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
+
             Listings = new TSObservableCollection<Listing>(Dispatcher);
-            ListingsView = CollectionViewUtils.InitLiveView(Listings);
-            SortCommand = new SortCommand(ListingsView);
+            ListingsView = CollectionViewFactory.CreateLiveCollectionView(Listings, sortFilters: new[]
+            {
+                new SortDescription(nameof(Listing.IsTwitch), ListSortDirection.Ascending),
+                new SortDescription(nameof(Listing.IsTrade), ListSortDirection.Ascending),
+                new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending),
+                new SortDescription(LastSortDescr, ListSortDirection.Ascending),
+            });
+
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             settings.HideTradeListingsChangedEvent += OnHideTradeChanged;
+
+            KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
+
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
-            PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher) { IsEnabled = false };
+            //PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher) { IsEnabled = false };
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
-            PublicizeCommand = new RelayCommand(Publicize, CanPublicize);
-            ToggleAutoPublicizeCommand = new RelayCommand(ToggleAutoPublicize, CanToggleAutoPublicize);
+
+            SortCommand = new SortCommand(ListingsView);
+            PublicizeCommand = new RelayCommand(_ => Publicize(), _ => CanPublicize());
+            ToggleAutoPublicizeCommand = new RelayCommand(_ => ToggleAutoPublicize(), _ => CanToggleAutoPublicize());
             ReloadCommand = new RelayCommand(_ => ProxyInterface.Instance.Stub.RequestListings());
-            RemoveMessageCommand = new RelayCommand(_ =>
-            {
-                ForceStopPublicize();
-                ProxyInterface.Instance.Stub.RemoveListing();
-                ProxyInterface.Instance.Stub.RequestListings();
+            RemoveMessageCommand = new RelayCommand(_ => RemoveMessage());
+            CreateMessageCommand = new RelayCommand(_ => CreateMessage(), _ => CanCreateMessage());
+            ExpandAllCommand = new RelayCommand(_ => ExpandAll());
+            CollapseAllCommand = new RelayCommand(_ => CollapseAll());
+            OpenPopupCommand = new RelayCommand(_ => IsPopupOpen = true);
 
-            });
-            CreateMessageCommand = new RelayCommand(_ =>
-            {
-                if (!Creating)
-                {
-                    Creating = true;
-                    NewMessage = MyLfg != null ? MyLfg.Message : "";
-                }
-                else if (Creating && !string.IsNullOrEmpty(NewMessage))
-                {
-                    Creating = false;
-                    ProxyInterface.Instance.Stub.RegisterListing(NewMessage, CreatingRaid);
-                    NewMessage = MyLfg != null ? MyLfg.Message : "";
-                    Task.Delay(200).ContinueWith(t => ProxyInterface.Instance.Stub.RequestListings());
+        }
 
-                }
-                else
-                {
-                    Creating = false;
-                    NewMessage = MyLfg != null ? MyLfg.Message : "";
-                }
-            });
-            ExpandAllCommand = new RelayCommand(_ =>
-            {
-                Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(true));
-            });
-            CollapseAllCommand = new RelayCommand(_ =>
-            {
-                Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(false));
+        private void CollapseAll()
+        {
+            Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(false));
+        }
 
+        private void ExpandAll()
+        {
+            Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(true));
+        }
+
+        private bool CanCreateMessage()
+        {
+            return Listings.All(l => !l.Temp && !AmIinLfg);
+        }
+
+        private void CreateMessage()
+        {
+            var listing = new Listing(new ListingData
+            {
+                LeaderId = Game.Group.InGroup ? Game.Group.Leader.PlayerId : Game.Me.PlayerId,
+                LeaderName = Game.Group.InGroup ? Game.Group.Leader.Name : Game.Me.Name,
+                Message = "Looking for group members!",
+                PlayerCount = Game.Group.InGroup ? Game.Group.Size : 1,
+                Temp = true
             });
+            Listings.Insert(0, listing);
+            //RefreshSorting();
+            TempLfgCreated?.Invoke();
+        }
+
+        private void RemoveMessage()
+        {
+            ForceStopPublicize();
+            ProxyInterface.Instance.Stub.RemoveListing();
+            ProxyInterface.Instance.Stub.RequestListings();
         }
 
         private void OnShowLfgHotkeyPressed()
@@ -201,9 +241,7 @@ namespace TCC.ViewModels
             if (!Game.Logged) return;
             if (!ProxyInterface.Instance.IsStubAvailable) return;
             if (!WindowManager.LfgListWindow.IsVisible)
-            {
                 WindowManager.LfgListWindow.ShowWindow();
-            }
             else WindowManager.LfgListWindow.HideWindow();
         }
 
@@ -214,8 +252,8 @@ namespace TCC.ViewModels
             if (_stopAuto)
             {
                 AutoPublicizeTimer.Stop();
-                N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
-                N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+                N(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
+                //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
                 _stopAuto = false;
             }
             else
@@ -228,29 +266,40 @@ namespace TCC.ViewModels
 
         private void OnPublicizeTimerTick(object sender, EventArgs e)
         {
-            PublicizeTimer.Stop();
-            N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+            //PublicizeTimer.Stop();
+            //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
         }
 
-        private void Publicize(object obj)
+        private void Publicize()
         {
             if (Game.IsInDungeon) return;
-            PublicizeTimer.Start();
-            N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+            //PublicizeTimer.Start();
+            //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
             if (!ProxyInterface.Instance.IsStubAvailable) return;
-            ProxyInterface.Instance.Stub.PublicizeListing(); ;
+            ProxyInterface.Instance.Stub.PublicizeListing();
             Publicized?.Invoke(PublicizeCooldown);
+        }
 
-        }
-        private bool CanPublicize(object arg)
+        private bool CanPublicize()
         {
-            return IsPublicizeEnabled && !IsAutoPublicizeOn;
+            return /*IsPublicizeEnabled &&*/ !IsAutoPublicizeRunning;
         }
-        private void ToggleAutoPublicize(object obj)
+
+        private void ToggleAutoPublicize()
         {
-            if (IsAutoPublicizeOn)
+            if (IsAutoPublicizeRunning)
             {
-                _stopAuto = true;
+                if (IsAutoPublicizeEnabled)
+                {
+                    IsAutoPublicizeEnabled = false;
+                    _stopAuto = true;
+                }
+                else
+                {
+                    _stopAuto = false;
+                    IsAutoPublicizeEnabled = true;
+
+                }
             }
             else
             {
@@ -259,22 +308,34 @@ namespace TCC.ViewModels
                     _stopAuto = true;
                     return;
                 }
+
+                IsAutoPublicizeEnabled = true;
+
                 AutoPublicizeTimer.Start();
-                N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
-                N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-                if (!/*ProxyOld.IsConnected */ ProxyInterface.Instance.IsStubAvailable) return;
-                ProxyInterface.Instance.Stub.PublicizeListing(); //ProxyOld.PublicizeLfg();
+                N(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
+                //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+                if (!ProxyInterface.Instance.IsStubAvailable) return;
+                ProxyInterface.Instance.Stub.PublicizeListing();
                 Publicized?.Invoke(AutoPublicizeCooldown);
             }
         }
-        private bool CanToggleAutoPublicize(object arg)
-        {
-            return ProxyInterface.Instance.IsStubAvailable &&
-                   !Game.LoadingScreen &&
-                    Game.Logged &&
-                   !Game.IsInDungeon;
-        }
 
+        private bool CanToggleAutoPublicize()
+        {
+            if (!IsAutoPublicizeEnabled)
+            {
+
+                return ProxyInterface.Instance.IsStubAvailable &&
+                       !Game.LoadingScreen &&
+                       Game.Logged &&
+                       !Game.IsInDungeon;
+            }
+            else
+            {
+                return ProxyInterface.Instance.IsStubAvailable;
+
+            }
+        }
 
         private void RequestNextLfg(object sender, EventArgs e)
         {
@@ -305,9 +366,7 @@ namespace TCC.ViewModels
 
         private void ListingsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //NotifyMyLfg();
-            Task.Delay(500).ContinueWith(t => { Dispatcher.Invoke(NotifyMyLfg); });
-
+            Task.Delay(500).ContinueWith(t => Dispatcher.Invoke(NotifyMyLfg));
         }
 
         internal void RemoveDeadLfg()
@@ -322,56 +381,32 @@ namespace TCC.ViewModels
                 if (RequestQueue.Count > 0 && RequestQueue.Last() == 0) return;
                 RequestQueue.Enqueue(0);
             });
-
         }
 
         public void ForceStopPublicize()
         {
-            PublicizeTimer.Stop();
+            //PublicizeTimer.Stop();
             AutoPublicizeTimer.Stop();
-            N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-            N(nameof(IsAutoPublicizeOn)); //notify UI that CanPublicize changed
+            //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+            N(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
         }
 
         private void SyncListings(List<ListingData> listings)
         {
             Task.Factory.StartNew(() =>
             {
-                listings.ForEach(l => Dispatcher.InvokeAsync(() => { AddOrRefreshListing(l); }));
+                listings.ForEach(l => Dispatcher.InvokeAsync(() => AddOrRefreshListing(l)));
                 RemoveMissingListings();
             });
 
 
-
-            void AddOrRefreshListing(ListingData l)
-            {
-                if (Listings.ToSyncList().Any(toFind => toFind.LeaderId == l.LeaderId))
-                {
-                    var target = Listings.ToSyncList().FirstOrDefault(t => t.LeaderId == l.LeaderId);
-                    if (target == null) return;
-                    target.LeaderId = l.LeaderId;
-                    target.Message = l.Message;
-                    target.IsRaid = l.IsRaid;
-                    target.LeaderName = l.LeaderName;
-                    if (target.PlayerCount != l.PlayerCount)
-                    {
-                        EnqueueRequest(l.LeaderId);
-                    }
-                }
-                else
-                {
-                    if (l.IsTrade && ((LfgWindowSettings)Settings).HideTradeListings) return;
-                    Listings.Add(new Listing(l));
-                    EnqueueRequest(l.LeaderId);
-                }
-            }
             void RemoveMissingListings()
             {
                 var toRemove = new List<uint>();
 
                 Listings.ToSyncList().ForEach(l =>
                 {
-                    if (listings.All(f => f.LeaderId != l.LeaderId)) toRemove.Add(l.LeaderId);
+                    if (listings.All(f => f.LeaderId != l.LeaderId) && !l.Temp) toRemove.Add(l.LeaderId);
                 });
                 toRemove.ForEach(r =>
                 {
@@ -384,6 +419,31 @@ namespace TCC.ViewModels
             }
         }
 
+        public void AddOrRefreshListing(Listing l)
+        {
+            if (Listings.ToSyncList().Any(toFind => toFind.LeaderId == l.LeaderId))
+            {
+                var target = Listings.ToSyncList().FirstOrDefault(t => t.LeaderId == l.LeaderId);
+                if (target == null) return;
+                target.LeaderId = l.LeaderId;
+                target.Message = l.Message;
+                target.IsRaid = l.IsRaid;
+                target.LeaderName = l.LeaderName;
+                target.ExN(nameof(Listing.AliveSinceMs));
+                if (target.PlayerCount != l.PlayerCount) EnqueueRequest(l.LeaderId);
+            }
+            else
+            {
+                if (l.IsTrade && ((LfgWindowSettings)Settings).HideTradeListings) return;
+                Listings.Add(l);
+                EnqueueRequest(l.LeaderId);
+            }
+        }
+        private void AddOrRefreshListing(ListingData l)
+        {
+            AddOrRefreshListing(new Listing(l));
+        }
+
         private void OnHideTradeChanged()
         {
             if (!((LfgWindowSettings)Settings).HideTradeListings) return;
@@ -393,6 +453,21 @@ namespace TCC.ViewModels
                 var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
                 if (target != null) Listings.Remove(target);
             });
+        }
+
+        public void RefreshSorting()
+        {
+            SortCommand.Refresh(LastSortDescr);
+        }
+
+        private void NotifyMyLfg()
+        {
+            N(nameof(AmIinLfg));
+            MyLfgStateChanged?.Invoke();
+            N(nameof(MyLfg));
+            foreach (var listing in Listings.ToSyncList()) listing?.UpdateIsMyLfg();
+            MyLfg?.UpdateIsMyLfg();
+            N(nameof(AmILeader));
         }
 
         protected override void InstallHooks()
@@ -407,7 +482,6 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Hook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
             PacketAnalyzer.Processor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
-
         }
         protected override void RemoveHooks()
         {
@@ -421,40 +495,40 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INFO>(OnPartyMemberInfo);
             PacketAnalyzer.Processor.Unhook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
             PacketAnalyzer.Processor.Unhook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
-
         }
 
-
+        #region Hooks
         private void OnLogin(S_LOGIN m)
         {
-            Listings.Clear();
+            //Listings.Clear();
             EnqueueListRequest(); // need invoke?
         }
+
         private void OnShowCandidateList(S_SHOW_CANDIDATE_LIST p)
         {
             if (MyLfg == null) return;
 
             var dest = MyLfg.Applicants;
             foreach (var applicant in p.Candidates)
-            {
-                if (dest.All(x => x.PlayerId != applicant.PlayerId)) dest.Add(new User(applicant));
-            }
+                if (dest.All(x => x.PlayerId != applicant.PlayerId))
+                    dest.Add(new User(applicant));
 
             var toRemove = new List<User>();
             foreach (var user in dest)
-            {
-                if (p.Candidates.All(x => x.PlayerId != user.PlayerId)) toRemove.Add(user);
-            }
+                if (p.Candidates.All(x => x.PlayerId != user.PlayerId))
+                    toRemove.Add(user);
 
             toRemove.ForEach(r => dest.Remove(r));
         }
+
         private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
         {
             //if (!App.Settings.LfgWindowSettings.Enabled) return;
             try
             {
                 var lfg = Listings.ToSyncList().FirstOrDefault(listing => listing.LeaderId == m.Id
-                                                                          || m.Members.Any(member => member.PlayerId == listing.LeaderId));
+                                                                          || m.Members.Any(member =>
+                                                                              member.PlayerId == listing.LeaderId));
                 if (lfg == null) return;
                 Task.Factory.StartNew(() =>
                 {
@@ -462,7 +536,8 @@ namespace TCC.ViewModels
                     {
                         if (lfg.Players.ToSyncList().Any(toFind => toFind.PlayerId == member.PlayerId))
                         {
-                            var target = lfg.Players.ToSyncList().FirstOrDefault(player => player.PlayerId == member.PlayerId);
+                            var target = lfg.Players.ToSyncList()
+                                .FirstOrDefault(player => player.PlayerId == member.PlayerId);
                             if (target == null) return;
                             target.IsLeader = member.IsLeader;
                             target.Online = member.Online;
@@ -471,23 +546,28 @@ namespace TCC.ViewModels
                             lfg.LeaderId = member.PlayerId;
                             lfg.LeaderName = member.Name;
                         }
-                        else Dispatcher.InvokeAsync(() =>
+                        else
                         {
-                            lfg.Players.Add(new User(member));
-                            if (!member.IsLeader) return;
-                            lfg.LeaderId = member.PlayerId;
-                            lfg.LeaderName = member.Name;
-                        });
+                            Dispatcher.InvokeAsync(() =>
+                            {
+                                lfg.Players.Add(new User(member));
+                                if (!member.IsLeader) return;
+                                lfg.LeaderId = member.PlayerId;
+                                lfg.LeaderName = member.Name;
+                            });
+                        }
                     });
 
                     var toDelete = new List<uint>();
                     lfg.Players.ToSyncList().ForEach(player =>
                     {
-                        if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId)) toDelete.Add(player.PlayerId);
+                        if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId))
+                            toDelete.Add(player.PlayerId);
                     });
                     toDelete.ForEach(targetId =>
                     {
-                        var target = lfg.Players.ToSyncList().FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId);
+                        var target = lfg.Players.ToSyncList()
+                            .FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId);
                         lfg.Players.Remove(target);
                     });
 
@@ -498,30 +578,34 @@ namespace TCC.ViewModels
                     lfg.PlayerCount = m.Members.Count;
                     NotifyMyLfg();
                 });
-
             }
             catch (Exception e)
             {
                 Log.CW(e.ToString());
             }
         }
+
         private void OnLeaveParty(S_LEAVE_PARTY m)
         {
             NotifyMyLfg();
         }
+
         private void OnBanParty(S_BAN_PARTY m)
         {
             NotifyMyLfg();
         }
+
         private void OnPartyMemberList(S_PARTY_MEMBER_LIST m)
         {
             if (_lastGroupSize == 0) NotifyMyLfg();
             _lastGroupSize = m.Members.Count;
-            if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled || !Game.InGameUiOn) return;
+            if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled ||
+                !Game.InGameUiOn) return;
             ProxyInterface.Instance.Stub.RequestListingCandidates();
             if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
             ProxyInterface.Instance.Stub.RequestListings();
         }
+
         private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
         {
             //if (!App.Settings.LfgWindowSettings.Enabled) return;
@@ -538,9 +622,10 @@ namespace TCC.ViewModels
                 ServerId = Game.Me.ServerId
             });
         }
+
         private void OnShowPartyMatchInfo(S_SHOW_PARTY_MATCH_INFO m)
         {
-            if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable)
+            if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable && m.Page <= m.Pages)
                 ProxyInterface.Instance.Stub.RequestListingsPage(m.Page + 1);
 
             if (!m.IsLast)
@@ -548,21 +633,17 @@ namespace TCC.ViewModels
                 Log.CW($"S_SHOW_PARTY_MATCH_INFO is not last {m.Page + 1}/{m.Pages + 1}");
                 return;
             }
-            else
-            {
-                Log.CW($"S_SHOW_PARTY_MATCH_INFO is last {m.Page + 1}/{m.Pages + 1}");
 
-            }
+            Log.CW($"S_SHOW_PARTY_MATCH_INFO is last {m.Page + 1}/{m.Pages + 1}");
 
             if (S_SHOW_PARTY_MATCH_INFO.Listings.Count != 0)
                 SyncListings(S_SHOW_PARTY_MATCH_INFO.Listings);
             else Log.CW("No listings to show.");
 
             NotifyMyLfg();
-            //WindowManager.LfgListWindow.ShowWindow();
-            Dispatcher?.InvokeAsync(RefreshSorting, DispatcherPriority.Background);
-
+            //Dispatcher?.InvokeAsync(RefreshSorting, DispatcherPriority.Background);
         }
+
         private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER obj)
         {
             N(nameof(AmILeader));
@@ -572,6 +653,8 @@ namespace TCC.ViewModels
         {
             ForceStopPublicize();
         }
+
+        #endregion    
     }
 
     public class SortCommand : ICommand
@@ -589,12 +672,19 @@ namespace TCC.ViewModels
 
         public void Execute(object parameter)
         {
-            var f = (string)parameter;
-            if (!_refreshing) _direction = _direction == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            var f = (string) parameter;
+            if (!_refreshing)
+                _direction = _direction == ListSortDirection.Ascending
+                    ? ListSortDirection.Descending
+                    : ListSortDirection.Ascending;
             ((CollectionView)_view).SortDescriptions.Clear();
+            ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsTwitch), ListSortDirection.Ascending));
+            ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsTrade), ListSortDirection.Ascending));
+            ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending));
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(f, _direction));
             WindowManager.ViewModels.LfgVM.LastSortDescr = parameter.ToString();
         }
+
         public SortCommand(ICollectionViewLiveShaping view)
         {
             _view = view;
@@ -607,5 +697,4 @@ namespace TCC.ViewModels
             _refreshing = false;
         }
     }
-
 }

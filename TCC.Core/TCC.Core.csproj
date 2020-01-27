@@ -135,6 +135,8 @@
     <Compile Include="Settings\CooldownConfigParser.cs" />
     <Compile Include="Sniffing\SnifferFactory.cs" />
     <Compile Include="Controls\TccTrayIcon.cs" />
+    <Compile Include="TemplateSelectors\ListingTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\NotificationTemplateSelector.cs" />
     <Compile Include="Windows\Widgets\FloatingButtonViewModel.cs" />
     <Compile Include="Windows\Widgets\NotificationControlBase.cs" />
     <Compile Include="Windows\Widgets\ProgressNotificationControl.xaml.cs">

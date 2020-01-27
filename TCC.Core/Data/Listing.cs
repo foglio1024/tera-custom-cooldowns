@@ -2,14 +2,13 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using System.Windows.Threading;
-using TCC.Controls;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
-using TCC.ViewModels;
 using TeraDataLite;
 
 namespace TCC.Data
@@ -21,14 +20,20 @@ namespace TCC.Data
         private string _message;
         private string _leaderName;
         private bool _isExpanded;
+        private bool _isPopupOpen;
         private int _playerCount;
-        private TSObservableCollection<User> _players;
-        private TSObservableCollection<User> _applicants;
         private bool _canApply = true;
         private bool _isMyLfg;
+        private bool _temp;
+        private DateTime _createdOn;
 
         public ICommand ExpandCollapseCommand { get; }
+        public ICommand PostCommand { get; }
+        public ICommand RemoveCommand { get; }
         public ICommand BrowseTwitchCommand { get; }
+        public ICommand OpenPopupCommand { get; }
+        public ICommand WhisperLeaderCommand { get; }
+        public ICommand ToggleAutoPublicizeCommand { get; }
 
         public uint LeaderId
         {
@@ -100,7 +105,27 @@ namespace TCC.Data
                 N();
             }
         }
-
+        public bool IsPopupOpen
+        {
+            get => _isPopupOpen;
+            set
+            {
+                if (_isPopupOpen == value) return;
+                _isPopupOpen = value;
+                FocusManager.PauseTopmost = _isPopupOpen;
+                N();
+            }
+        }
+        public bool Temp
+        {
+            get => _temp;
+            set
+            {
+                if (_temp == value) return;
+                _temp = value;
+                N();
+            }
+        }
         public bool IsMyLfg
         {
             get => _isMyLfg;
@@ -111,34 +136,19 @@ namespace TCC.Data
                 N();
             }
         }
-
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;
-        public TSObservableCollection<User> Players
-        {
-            get => _players;
-            set
-            {
-                if (_players == value) return;
-                _players = value;
-                N();
-            }
-        }
-        public TSObservableCollection<User> Applicants
-        {
-            get => _applicants;
-            set
-            {
-                if (_applicants == value) return;
-                _applicants = value;
-                N();
-            }
-        }
+
+        public double AliveSinceMs => (DateTime.Now - _createdOn).TotalMilliseconds;
+
+
+        public TSObservableCollection<User> Players { get; set; }
+        public TSObservableCollection<User> Applicants { get; set; }
 
         public int MaxCount => IsRaid ? 30 : 5;
-        public ApplyCommand Apply { get; }
-        public RefreshApplicantsCommand RefreshApplicants { get; }
+        public ApplyCommand ApplyCommand { get; }
+        public ICommand RefreshApplicantsCommand { get; }
         public bool CanApply
         {
             get => _canApply;
@@ -183,15 +193,20 @@ namespace TCC.Data
             Dispatcher = App.BaseDispatcher;
             Players = new TSObservableCollection<User>(Dispatcher);
             Applicants = new TSObservableCollection<User>(Dispatcher);
-            Apply = new ApplyCommand(this);
-            RefreshApplicants = new RefreshApplicantsCommand(this);
+            ApplyCommand = new ApplyCommand(this);
+            RefreshApplicantsCommand = new RelayCommand(_ => ProxyInterface.Instance.Stub.RequestListingCandidates(), _ => IsMyLfg);
             ExpandCollapseCommand = new RelayCommand(force =>
             {
+                if (IsPopupOpen) return;
                 if (force != null)
                 {
-                    if ((bool)force)
+                    var bForce = false;
+                    if (force is string s) bForce = bool.TryParse(s, out var v) && v;
+                    else bForce = (bool)force;
+                    if (bForce)
                     {
-                        if (IsExpanded) return;
+                        IsExpanded = !IsExpanded;
+                        //if (IsExpanded) return;
                         //todo: expand
                     }
                     else
@@ -217,7 +232,38 @@ namespace TCC.Data
                 if (!IsTwitch) return;
                 Process.Start(TwitchLink);
             });
+            PostCommand = new RelayCommand(_ =>
+            {
+                var msg = Message;
+                var isRaid = IsRaid;
 
+                if (Temp) WindowManager.ViewModels.LfgVM.Listings.Remove(this);
+
+                ProxyInterface.Instance.Stub.RegisterListing(msg, isRaid);
+
+                Task.Delay(200).ContinueWith(t => ProxyInterface.Instance.Stub.RequestListings());
+
+            },
+            ce => Temp && !string.IsNullOrEmpty(Message));
+            RemoveCommand = new RelayCommand(_ =>
+            {
+                if (Temp)
+                    WindowManager.ViewModels.LfgVM.Listings.Remove(this);
+                else
+                    WindowManager.ViewModels.LfgVM.RemoveMessageCommand.Execute(null);
+            });
+
+            OpenPopupCommand = new RelayCommand(_ => IsPopupOpen = true);
+
+            WhisperLeaderCommand = new RelayCommand(_ =>
+            {
+                if (!Game.InGameChatOpen) FocusManager.SendNewLine();
+                FocusManager.SendString($"/w {LeaderName} ");
+            });
+
+            ToggleAutoPublicizeCommand = new RelayCommand(_ => WindowManager.ViewModels.LfgVM.ToggleAutoPublicizeCommand.Execute(null));
+
+            _createdOn = DateTime.Now;
         }
 
         public Listing(ListingData l) : this()
@@ -227,6 +273,7 @@ namespace TCC.Data
             IsRaid = l.IsRaid;
             Message = l.Message;
             PlayerCount = l.PlayerCount;
+            Temp = l.Temp;
         }
     }
 
@@ -263,25 +310,4 @@ namespace TCC.Data
             _t.Start();
         }
     }
-    public class RefreshApplicantsCommand : ICommand
-    {
-        private readonly Listing _listing;
-        public RefreshApplicantsCommand(Listing listing)
-        {
-            _listing = listing;
-        }
-#pragma warning disable 0067
-        public event EventHandler CanExecuteChanged;
-#pragma warning restore 0067
-        public bool CanExecute(object parameter)
-        {
-            return _listing.IsMyLfg;
-        }
-
-        public void Execute(object parameter)
-        {
-            ProxyInterface.Instance.Stub.RequestListingCandidates(); //ProxyOld.RequestCandidates();
-        }
-    }
-
 }
