@@ -15,7 +15,7 @@ using TCC.TemplateSelectors;
 
 namespace TCC.R
 {
-	public static class SVG
+	public static class Nostrum_SVG
 	{
 		public static Geometry SvgClose => ((Geometry)App.Current.FindResource("SvgClose"));
 		public static Geometry SvgConfirm => ((Geometry)App.Current.FindResource("SvgConfirm"));
@@ -25,15 +25,6 @@ namespace TCC.R
 		public static Geometry SvgFolder => ((Geometry)App.Current.FindResource("SvgFolder"));
 		public static Geometry SvgTwitch => ((Geometry)App.Current.FindResource("SvgTwitch"));
 		public static Geometry SvgPaypal => ((Geometry)App.Current.FindResource("SvgPaypal"));
-		public static Geometry SvgWeapon => ((Geometry)App.Current.FindResource("SvgWeapon"));
-		public static Geometry SvgArmor => ((Geometry)App.Current.FindResource("SvgArmor"));
-		public static Geometry SvgHands => ((Geometry)App.Current.FindResource("SvgHands"));
-		public static Geometry SvgFeet => ((Geometry)App.Current.FindResource("SvgFeet"));
-		public static Geometry SvgRing => ((Geometry)App.Current.FindResource("SvgRing"));
-		public static Geometry SvgEarring => ((Geometry)App.Current.FindResource("SvgEarring"));
-		public static Geometry SvgBelt => ((Geometry)App.Current.FindResource("SvgBelt"));
-		public static Geometry SvgCirclet => ((Geometry)App.Current.FindResource("SvgCirclet"));
-		public static Geometry SvgNecklace => ((Geometry)App.Current.FindResource("SvgNecklace"));
 		public static Geometry SvgMapMarker => ((Geometry)App.Current.FindResource("SvgMapMarker"));
 		public static Geometry SvgHide => ((Geometry)App.Current.FindResource("SvgHide"));
 		public static Geometry SvgMove => ((Geometry)App.Current.FindResource("SvgMove"));
@@ -78,6 +69,29 @@ namespace TCC.R
 		public static Geometry SvgAwaken => ((Geometry)App.Current.FindResource("SvgAwaken"));
 		public static Geometry SvgCopy => ((Geometry)App.Current.FindResource("SvgCopy"));
 		public static Geometry SvgAddCircle => ((Geometry)App.Current.FindResource("SvgAddCircle"));
+		public static Geometry SvgAdd => ((Geometry)App.Current.FindResource("SvgAdd"));
+		public static Geometry SvgGitHub => ((Geometry)App.Current.FindResource("SvgGitHub"));
+		public static Geometry SvgDiscord => ((Geometry)App.Current.FindResource("SvgDiscord"));
+		public static Geometry SvgDotsVertical => ((Geometry)App.Current.FindResource("SvgDotsVertical"));
+		public static Geometry SvgAuto => ((Geometry)App.Current.FindResource("SvgAuto"));
+		public static Geometry SvgShare => ((Geometry)App.Current.FindResource("SvgShare"));
+		public static Geometry SvgMoney => ((Geometry)App.Current.FindResource("SvgMoney"));
+		public static Geometry SvgDownArrow => ((Geometry)App.Current.FindResource("SvgDownArrow"));
+		public static Geometry SvgUpArrow => ((Geometry)App.Current.FindResource("SvgUpArrow"));
+		public static Geometry SvgExpandAll => ((Geometry)App.Current.FindResource("SvgExpandAll"));
+		public static Geometry SvgCollapseAll => ((Geometry)App.Current.FindResource("SvgCollapseAll"));
+	}
+	public static class SVG
+	{
+		public static Geometry SvgWeapon => ((Geometry)App.Current.FindResource("SvgWeapon"));
+		public static Geometry SvgArmor => ((Geometry)App.Current.FindResource("SvgArmor"));
+		public static Geometry SvgHands => ((Geometry)App.Current.FindResource("SvgHands"));
+		public static Geometry SvgFeet => ((Geometry)App.Current.FindResource("SvgFeet"));
+		public static Geometry SvgRing => ((Geometry)App.Current.FindResource("SvgRing"));
+		public static Geometry SvgEarring => ((Geometry)App.Current.FindResource("SvgEarring"));
+		public static Geometry SvgBelt => ((Geometry)App.Current.FindResource("SvgBelt"));
+		public static Geometry SvgCirclet => ((Geometry)App.Current.FindResource("SvgCirclet"));
+		public static Geometry SvgNecklace => ((Geometry)App.Current.FindResource("SvgNecklace"));
 		public static Geometry SvgClassGunner => ((Geometry)App.Current.FindResource("SvgClassGunner"));
 		public static Geometry SvgClassBrawler => ((Geometry)App.Current.FindResource("SvgClassBrawler"));
 		public static Geometry SvgClassBerserker => ((Geometry)App.Current.FindResource("SvgClassBerserker"));
@@ -93,21 +107,10 @@ namespace TCC.R
 		public static Geometry SvgClassLancer => ((Geometry)App.Current.FindResource("SvgClassLancer"));
 		public static Geometry SvgClassNone => ((Geometry)App.Current.FindResource("SvgClassNone"));
 		public static Geometry SvgClassCommon => ((Geometry)App.Current.FindResource("SvgClassCommon"));
-		public static Geometry SvgGitHub => ((Geometry)App.Current.FindResource("SvgGitHub"));
-		public static Geometry SvgDiscord => ((Geometry)App.Current.FindResource("SvgDiscord"));
 		public static Geometry SvgCooldownIcon => ((Geometry)App.Current.FindResource("SvgCooldownIcon"));
 		public static Geometry SvgCharacterIcon => ((Geometry)App.Current.FindResource("SvgCharacterIcon"));
 		public static Geometry SvgNpcIcon => ((Geometry)App.Current.FindResource("SvgNpcIcon"));
 		public static Geometry SvgBuffIcon => ((Geometry)App.Current.FindResource("SvgBuffIcon"));
-		public static Geometry SvgDotsVertical => ((Geometry)App.Current.FindResource("SvgDotsVertical"));
-		public static Geometry SvgAuto => ((Geometry)App.Current.FindResource("SvgAuto"));
-		public static Geometry SvgShare => ((Geometry)App.Current.FindResource("SvgShare"));
-		public static Geometry SvgMoney => ((Geometry)App.Current.FindResource("SvgMoney"));
-		public static Geometry SvgDownArrow => ((Geometry)App.Current.FindResource("SvgDownArrow"));
-		public static Geometry SvgUpArrow => ((Geometry)App.Current.FindResource("SvgUpArrow"));
-		public static Geometry SvgExpandAll => ((Geometry)App.Current.FindResource("SvgExpandAll"));
-		public static Geometry SvgCollapseAll => ((Geometry)App.Current.FindResource("SvgCollapseAll"));
-		public static Geometry Svg => ((Geometry)App.Current.FindResource("Svg"));
 	}
 	public static class Colors
 	{
@@ -399,10 +402,12 @@ namespace TCC.R
 		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
 		public static ValueToFactorConverter ValueToFactor => ((ValueToFactorConverter)App.Current.FindResource("ValueToFactor"));
 		public static FactorToAngleConverter FactorToAngle => ((FactorToAngleConverter)App.Current.FindResource("FactorToAngle"));
-		public static ColorToTransparentConverter ColorToTransparent => ((ColorToTransparentConverter)App.Current.FindResource("ColorToTransparent"));
+		public static ColorToTransparent ColorToTransparent => ((ColorToTransparent)App.Current.FindResource("ColorToTransparent"));
 		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
 		public static NullToVisibleCollapsedConverter NullToVisibleCollapsed => ((NullToVisibleCollapsedConverter)App.Current.FindResource("NullToVisibleCollapsed"));
 		public static DurationLabelConverter DurationToTimeFormat => ((DurationLabelConverter)App.Current.FindResource("DurationToTimeFormat"));
+		public static ListBoxItemIndexConverter ListBoxItemIndex => ((ListBoxItemIndexConverter)App.Current.FindResource("ListBoxItemIndex"));
+		public static MillisecondsToStringConverter MillisecondsToString => ((MillisecondsToStringConverter)App.Current.FindResource("MillisecondsToString"));
 	}
 	public static class Converters
 	{
@@ -441,6 +446,7 @@ namespace TCC.R
 		public static RaidToColorConverter RaidToColor => ((RaidToColorConverter)App.Current.FindResource("RaidToColor"));
 		public static ValueConverterGroup ClassToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("ClassToTransparentFill"));
 		public static ValueConverterGroup IlvlTierToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("IlvlTierToTransparentFill"));
+		public static ValueConverterGroup IsRaidToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("IsRaidToTransparentFill"));
 		public static ShieldStatusColorConverter ShieldStatusColor => ((ShieldStatusColorConverter)App.Current.FindResource("ShieldStatusColor"));
 		public static ShieldStatusToVisibilityConverter ShieldStatusToVisibility => ((ShieldStatusToVisibilityConverter)App.Current.FindResource("ShieldStatusToVisibility"));
 		public static StringToFillConverter StringToFill => ((StringToFillConverter)App.Current.FindResource("StringToFill"));
@@ -469,6 +475,7 @@ namespace TCC.R
 		public static Style ComboBoxToggleButton => ((Style)App.Current.FindResource("ComboBoxToggleButton"));
 		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
 		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
+		public static Style ComboBoxMainStyle => ((Style)App.Current.FindResource("ComboBoxMainStyle"));
 		public static Style DefaultListItemStyle => ((Style)App.Current.FindResource("DefaultListItemStyle"));
 		public static Style NoHilightListItemStyleWithLines => ((Style)App.Current.FindResource("NoHilightListItemStyleWithLines"));
 		public static Style NoHilightListItemStyle => ((Style)App.Current.FindResource("NoHilightListItemStyle"));
@@ -492,6 +499,7 @@ namespace TCC.R
 		public static Style ScrollViewerWithReversedVerticalScrollBar => ((Style)App.Current.FindResource("ScrollViewerWithReversedVerticalScrollBar"));
 		public static Style ChatTabControlStyle => ((Style)App.Current.FindResource("ChatTabControlStyle"));
 		public static Style GlowHoverGrid => ((Style)App.Current.FindResource("GlowHoverGrid"));
+		public static Style GlowHoverGridLeft => ((Style)App.Current.FindResource("GlowHoverGridLeft"));
 		public static Style ClassWindowSkillBorder => ((Style)App.Current.FindResource("ClassWindowSkillBorder"));
 	}
 	public static class DragablzMaterialDesign
@@ -571,6 +579,11 @@ namespace TCC.R
 		public static DataTemplate NameClassCharDataTemplateWithVM => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplateWithVM"));
 		public static DataTemplate DefaultNotificationTemplate => ((DataTemplate)App.Current.FindResource("DefaultNotificationTemplate"));
 		public static DataTemplate ProgressNotificationTemplate => ((DataTemplate)App.Current.FindResource("ProgressNotificationTemplate"));
+		public static DataTemplate PlayerDt => ((DataTemplate)App.Current.FindResource("PlayerDt"));
+		public static DataTemplate ApplicantDt => ((DataTemplate)App.Current.FindResource("ApplicantDt"));
+		public static DataTemplate ListingDt => ((DataTemplate)App.Current.FindResource("ListingDt"));
+		public static Style PlayerListItemStyle => ((Style)App.Current.FindResource("PlayerListItemStyle"));
+		public static DataTemplate TempListingDt => ((DataTemplate)App.Current.FindResource("TempListingDt"));
 		public static DataTemplate ItemDataTemplate => ((DataTemplate)App.Current.FindResource("ItemDataTemplate"));
 		public static DataTemplate MoongourdEncounterDataTemplate => ((DataTemplate)App.Current.FindResource("MoongourdEncounterDataTemplate"));
 		public static DataTemplate EnumDescrDataTemplate => ((DataTemplate)App.Current.FindResource("EnumDescrDataTemplate"));
@@ -590,5 +603,6 @@ namespace TCC.R
 		public static SkillTemplateSelector FixedSkillTemplateSelector => ((SkillTemplateSelector)App.Current.FindResource("FixedSkillTemplateSelector"));
 		public static GroupWindowTemplateSelector GroupWindowTemplateSelector => ((GroupWindowTemplateSelector)App.Current.FindResource("GroupWindowTemplateSelector"));
 		public static NotificationTemplateSelector NotificationTemplateSelector => ((NotificationTemplateSelector)App.Current.FindResource("NotificationTemplateSelector"));
+		public static ListingTemplateSelector ListingTemplateSelector => ((ListingTemplateSelector)App.Current.FindResource("ListingTemplateSelector"));
 	}
 }
