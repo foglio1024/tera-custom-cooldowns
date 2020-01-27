@@ -9,8 +9,9 @@ namespace TCC.Data
         public bool InGroup { get; private set; }
         public bool IsRaid { get; private set; }
         public bool AmILeader => Game.Me.Name == Leader.Name;
+        public int Size { get; private set; }
 
-        private GroupMemberData Leader { get; set; } = new GroupMemberData();
+        public GroupMemberData Leader { get; private set; } = new GroupMemberData();
         private List<GroupMemberData> Members { get; set; } = new List<GroupMemberData>();
 
         public void SetGroup(List<GroupMemberData> members, bool raid)
@@ -19,6 +20,7 @@ namespace TCC.Data
             Leader = members.Find(m => m.IsLeader);
             IsRaid = raid;
             InGroup = true;
+            Size = Members.Count;
         }
         public void ChangeLeader(string name)
         {
@@ -29,6 +31,7 @@ namespace TCC.Data
         {
             var target = Members.Find(m => m.PlayerId == playerId && m.ServerId == serverId);
             Members.Remove(target);
+            Size = Members.Count;
         }
         public void Disband()
         {
@@ -36,6 +39,7 @@ namespace TCC.Data
             Leader = new GroupMemberData();
             IsRaid = false;
             InGroup = false;
+            Size = Members.Count;
         }
         public bool Has(string name)
         {
