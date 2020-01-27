@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media.Animation;
-using Nostrum;
 using Nostrum.Controls;
+using Nostrum.Factories;
 using TCC.ViewModels;
 
 namespace TCC.Controls.Classes

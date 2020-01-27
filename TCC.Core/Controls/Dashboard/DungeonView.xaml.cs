@@ -7,6 +7,7 @@ using System.Windows.Input;
 using TCC.Data;
 using TCC.Data.Pc;
 using Nostrum.Extensions;
+using Nostrum.Factories;
 using TCC.ViewModels;
 using TCC.Windows;
 
@@ -102,7 +103,7 @@ namespace TCC.Controls.Dashboard
         public DungeonColumnViewModel()
         {
             DungeonsList = new TSObservableCollection<DungeonCooldownViewModel>();
-            DungeonsListView = CollectionViewUtils.InitLiveView(DungeonsList,
+            DungeonsListView = CollectionViewFactory.CreateLiveCollectionView(DungeonsList,
                 o => !o.Owner.Hidden,
                 new[] { $"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}" }, 
                 new[] { new SortDescription($"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });

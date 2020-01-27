@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
-using TCC.Controls;
 using TCC.Data.Abnormalities;
 using TCC.Utilities;
 using TCC.ViewModels.Widgets;

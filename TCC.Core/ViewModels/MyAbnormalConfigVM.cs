@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Threading;
 using Nostrum.Extensions;
+using Nostrum.Factories;
 using TCC.Utilities;
 using TeraDataLite;
 
@@ -57,7 +58,7 @@ namespace TCC.ViewModels
                 _myAbnormals.Add(abVM);
             }
 
-            AbnormalitiesView = CollectionViewUtils.InitView(_myAbnormals);
+            AbnormalitiesView = CollectionViewFactory.CreateCollectionView(_myAbnormals);
         }
 
         public void Dispose()

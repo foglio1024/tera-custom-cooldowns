@@ -8,7 +8,6 @@ using System.Windows.Threading;
 using Dragablz;
 using Nostrum;
 using Nostrum.Extensions;
-using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;

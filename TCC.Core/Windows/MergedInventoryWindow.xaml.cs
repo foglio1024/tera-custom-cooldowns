@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Pc;
 
@@ -20,7 +21,7 @@ namespace TCC.Windows
         public MergedInventoryViewModel()
         {
             MergedInventory = new TSObservableCollection<MergedInventoryItem>();
-            MergedInventoryView = CollectionViewUtils.InitLiveView(MergedInventory, 
+            MergedInventoryView = CollectionViewFactory.CreateLiveCollectionView(MergedInventory, 
                 sortFilters: new[]
                 {
                     new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending),

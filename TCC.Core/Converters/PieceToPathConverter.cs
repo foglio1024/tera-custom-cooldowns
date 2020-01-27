@@ -37,7 +37,7 @@ namespace TCC.Converters
                 case GearPiece.Belt:
                     return R.SVG.SvgBelt;
             }
-            return R.SVG.SvgClose;
+            return R.Nostrum_SVG.SvgClose;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

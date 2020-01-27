@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Threading;
+using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -419,7 +420,7 @@ namespace TCC.ViewModels.Widgets
                 data.Secondary.ForEach(cdData => TryAddToList(cdData, SecondarySkills));
                 data.Hidden.ForEach(cdData => TryAddToList(cdData, HiddenSkills));
 
-                Dispatcher.Invoke(() => SkillsView = CollectionViewUtils.InitLiveView(SkillsDatabase.SkillsForClass));
+                Dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(SkillsDatabase.SkillsForClass));
 
                 N(nameof(SkillsView));
                 N(nameof(MainSkills));
@@ -497,8 +498,8 @@ namespace TCC.ViewModels.Widgets
         private void InitViews()
         {
             if (ItemsView != null && AbnormalitiesView != null) return;
-            ItemsView = CollectionViewUtils.InitLiveView(Items);
-            AbnormalitiesView = CollectionViewUtils.InitLiveView(Passivities);
+            ItemsView = CollectionViewFactory.CreateLiveCollectionView(Items);
+            AbnormalitiesView = CollectionViewFactory.CreateLiveCollectionView(Passivities);
         }
         public void NotifyItemsDisplay()
         {

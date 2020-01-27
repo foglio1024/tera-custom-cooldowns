@@ -1,8 +1,8 @@
-﻿using Nostrum;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Nostrum.Factories;
 
 namespace TCC.Data.Pc
 {
@@ -15,7 +15,7 @@ namespace TCC.Data.Pc
         public DungeonInfo()
         {
             DungeonList = Game.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).Select(d => new DungeonCooldownData(d.Id)).ToList();
-            VisibleDungeonsView = CollectionViewUtils.InitLiveView(DungeonList,
+            VisibleDungeonsView = CollectionViewFactory.CreateLiveCollectionView(DungeonList,
                 sortFilters: new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
 
         }

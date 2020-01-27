@@ -3,10 +3,8 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
-using Nostrum;
+using Nostrum.Factories;
 using TCC.Data.Pc;
-using TCC.R;
 using TCC.ViewModels;
 
 namespace TCC.Windows

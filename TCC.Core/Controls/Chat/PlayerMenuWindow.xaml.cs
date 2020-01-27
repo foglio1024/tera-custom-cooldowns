@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
-using Nostrum;
+using Nostrum.Factories;
 using Nostrum.WinAPI;
 using TCC.Annotations;
 using TCC.ViewModels;

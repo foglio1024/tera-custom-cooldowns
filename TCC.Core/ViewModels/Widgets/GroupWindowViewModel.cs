@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Nostrum;
+using Nostrum.Factories;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -60,19 +61,19 @@ namespace TCC.ViewModels.Widgets
             Members = new TSObservableCollection<User>(Dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
-            Dps = CollectionViewUtils.InitLiveView(Members,
+            Dps = CollectionViewFactory.CreateLiveCollectionView(Members,
                 dps => dps.Role == Role.Dps && dps.Visible,
                 new[] { nameof(User.Role), nameof(User.Visible) },
                 new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            Tanks = CollectionViewUtils.InitLiveView(Members,
+            Tanks = CollectionViewFactory.CreateLiveCollectionView(Members,
                 tank => tank.Role == Role.Tank && tank.Visible,
                 new[] { nameof(User.Role), nameof(User.Visible) },
                 new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            Healers = CollectionViewUtils.InitLiveView(Members,
+            Healers = CollectionViewFactory.CreateLiveCollectionView(Members,
                 healer => healer.Role == Role.Healer && healer.Visible,
                 new[] { nameof(User.Role), nameof(User.Visible) },
                 new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
-            All = CollectionViewUtils.InitLiveView(Members,
+            All = CollectionViewFactory.CreateLiveCollectionView(Members,
                 user => user.Visible,
                 new[] { nameof(User.Visible) },
                 new[]

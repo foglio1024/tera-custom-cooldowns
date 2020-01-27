@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using Nostrum.Factories;
 using TCC.Controls.Dashboard;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -21,7 +22,6 @@ using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Settings;
-using TCC.TemplateSelectors;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.Windows;
@@ -65,10 +65,10 @@ namespace TCC.ViewModels
         {
             get
             {
-                return _sortedColumns ?? (_sortedColumns = CollectionViewUtils.InitLiveView(Columns,
-                                          o => o.IsVisible,
-                                          new[] { $"{nameof(DungeonColumnViewModel.IsVisible)}", $"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}" },
-                                          new[] { new SortDescription($"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) }));
+                return _sortedColumns ??= CollectionViewFactory.CreateLiveCollectionView(Columns,
+                    o => o.IsVisible,
+                    new[] { $"{nameof(DungeonColumnViewModel.IsVisible)}", $"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}" },
+                    new[] { new SortDescription($"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
             }
         }
         public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
@@ -211,22 +211,22 @@ namespace TCC.ViewModels
 
             Game.Account.Characters.ToList().ForEach(c => CharacterViewModels.Add(new CharacterViewModel { Character = c }));
 
-            SortedCharacters = CollectionViewUtils.InitLiveView(Game.Account.Characters,
+            SortedCharacters = CollectionViewFactory.CreateLiveCollectionView(Game.Account.Characters,
                 character => !character.Hidden,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            HiddenCharacters = CollectionViewUtils.InitLiveView(Game.Account.Characters,
+            HiddenCharacters = CollectionViewFactory.CreateLiveCollectionView(Game.Account.Characters,
                 character => character.Hidden,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            CharacterViewModelsView = CollectionViewUtils.InitLiveView(CharacterViewModels,
+            CharacterViewModelsView = CollectionViewFactory.CreateLiveCollectionView(CharacterViewModels,
                 characterVM => !characterVM.Character.Hidden,
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
                 new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
 
-            //SortedColumns = CollectionViewUtils.InitLiveView(Columns,
+            //SortedColumns = CollectionViewFactory.CreateLiveView(Columns,
             //    o => o.Dungeon.Show,
             //    new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
             //    new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
@@ -359,7 +359,7 @@ namespace TCC.ViewModels
                 ((ICollectionView)SelectedCharacterInventory)?.Free();
 
                 SelectedCharacter = character;
-                SelectedCharacterInventory = CollectionViewUtils.InitLiveView(character.Inventory,
+                SelectedCharacterInventory = CollectionViewFactory.CreateLiveCollectionView(character.Inventory,
                     sortFilters: new[]
                     {
                         new SortDescription($"{nameof(Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending),

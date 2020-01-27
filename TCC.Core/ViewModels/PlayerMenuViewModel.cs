@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Nostrum;
-using TCC.Controls;
 using TCC.Controls.Chat;
 using TCC.Interop.Proxy;
 using TCC.Parsing;

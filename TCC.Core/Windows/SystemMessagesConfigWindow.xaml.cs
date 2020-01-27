@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Nostrum.Factories;
 
 namespace TCC.Windows
 {
@@ -52,8 +53,8 @@ namespace TCC.Windows
                 App.Settings.Save();
             };
 
-            ShowedMessagesView = CollectionViewUtils.InitLiveView(ShowedMessages);
-            HiddenMessagesView = CollectionViewUtils.InitLiveView(HiddenMessages);
+            ShowedMessagesView = CollectionViewFactory.CreateLiveCollectionView(ShowedMessages);
+            HiddenMessagesView = CollectionViewFactory.CreateLiveCollectionView(HiddenMessages);
         }
 
         private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)

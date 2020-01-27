@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using TCC.Data;
-using TCC.Utils;
 
 namespace TCC.Windows.Widgets
 {

@@ -1,4 +1,4 @@
-﻿using Nostrum;
+﻿using Nostrum.Factories;
 
 namespace TCC.Windows
 {

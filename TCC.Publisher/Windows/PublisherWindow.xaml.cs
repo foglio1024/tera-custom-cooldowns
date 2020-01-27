@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls.Primitives;
-using Nostrum;
+using Nostrum.Factories;
 using TCC.Publisher.ViewModels;
 
 namespace TCC.Publisher.Windows

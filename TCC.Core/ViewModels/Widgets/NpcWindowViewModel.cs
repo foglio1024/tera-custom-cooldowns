@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -45,7 +46,7 @@ namespace TCC.ViewModels.Widgets
             get
             {
                 if (_bams != null) return _bams;
-                _bams = CollectionViewUtils.InitLiveView(_npcList,
+                _bams = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                     npc => npc.IsBoss && !npc.IsTower && npc.Visible,
                     new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
@@ -57,7 +58,7 @@ namespace TCC.ViewModels.Widgets
             get
             {
                 if (_mobs != null) return _mobs;
-                _mobs = CollectionViewUtils.InitLiveView(_npcList,
+                _mobs = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                     npc => !npc.IsBoss && !npc.IsTower && npc.Visible,
                     new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
                     new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
@@ -69,7 +70,7 @@ namespace TCC.ViewModels.Widgets
             get
             {
                 if (_guildTowers != null) return _guildTowers;
-                _guildTowers = CollectionViewUtils.InitLiveView(_npcList,
+                _guildTowers = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                         npc => npc.IsTower,
                         sortFilters: new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
                 return _guildTowers;

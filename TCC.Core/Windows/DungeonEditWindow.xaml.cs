@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using Dragablz;
 using Nostrum;
 using TCC.Controls.Dashboard;
 using TCC.Data;
-using TCC.ViewModels;
 
 namespace TCC.Windows
 {

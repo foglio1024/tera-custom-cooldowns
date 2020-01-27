@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Nostrum;
+using Nostrum.Factories;
 using TCC.Data.Chat;
 
 namespace TCC.Controls.Chat

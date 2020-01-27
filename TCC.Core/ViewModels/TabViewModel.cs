@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using Dragablz;
 using Nostrum;
-using TCC.Controls;
 using TCC.ViewModels.Widgets;
 
 namespace TCC.ViewModels

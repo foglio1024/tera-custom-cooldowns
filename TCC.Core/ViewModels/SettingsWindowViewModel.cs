@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;

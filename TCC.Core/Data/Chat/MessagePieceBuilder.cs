@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Text;
 using HtmlAgilityPack;
-using TCC.Data.Map;
 using Nostrum.Extensions;
 
 namespace TCC.Data.Chat

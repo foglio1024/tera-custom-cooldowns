@@ -3,9 +3,8 @@ using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using Nostrum;
 using Nostrum.Controls;
-using TCC.Controls;
+using Nostrum.Factories;
 using TCC.Data.Pc;
 using TCC.ViewModels.Widgets;
 

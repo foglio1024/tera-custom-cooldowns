@@ -2,14 +2,10 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Nostrum.Extensions;
-using TCC.Annotations;
 using TCC.Converters;
-using TCC.Data.Map;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 using TCC.Windows;

@@ -9,8 +9,8 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.Factories;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Settings;
@@ -84,6 +84,7 @@ namespace TCC.Windows.Widgets
                 return;
             }
 
+            ButtonsRef.Opacity = 0;
             _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
             _buttonsTimer.Tick += OnButtonsTimerTick;
 

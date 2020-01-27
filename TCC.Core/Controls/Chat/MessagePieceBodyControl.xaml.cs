@@ -1,10 +1,6 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Interop.Proxy;
-using TCC.Windows;
 
 namespace TCC.Controls.Chat
 {

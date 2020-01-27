@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using Nostrum;
+using Nostrum.Factories;
 using TCC.Data.Pc;
 using TCC.Utils;
 
@@ -59,7 +60,7 @@ namespace TCC.Data.Chat
         {
             AuthorId = authorId;
             _members = new TSObservableCollection<User>();
-            MembersView = CollectionViewUtils.InitView(_members, null, new List<SortDescription>());
+            MembersView = CollectionViewFactory.CreateCollectionView(_members, null, new List<SortDescription>());
         }
 
         protected override void DisposeImpl()

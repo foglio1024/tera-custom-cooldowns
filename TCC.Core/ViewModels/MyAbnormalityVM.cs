@@ -8,7 +8,6 @@ ClassToggle         -> MyClassToggle
 using System.Windows.Input;
 using System.Windows.Threading;
 using Nostrum;
-using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Windows;

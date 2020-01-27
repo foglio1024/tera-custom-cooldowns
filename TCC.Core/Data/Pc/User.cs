@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
-using TCC.Controls;
 using TCC.Data.Abnormalities;
 using TCC.Interop.Proxy;
 using TeraDataLite;

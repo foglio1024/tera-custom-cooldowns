@@ -18,7 +18,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Nostrum.Extensions;
-using TCC.Controls;
+using Nostrum.Factories;
 using TCC.ViewModels;
 using TeraDataLite;
 

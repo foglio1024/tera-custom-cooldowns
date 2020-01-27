@@ -1,8 +1,8 @@
-﻿using Nostrum;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Nostrum.Factories;
 using TCC.Data;
 
 namespace TCC.Controls.Skills

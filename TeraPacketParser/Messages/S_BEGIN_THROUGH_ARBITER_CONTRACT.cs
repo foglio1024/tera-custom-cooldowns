@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TeraPacketParser.Messages
+﻿namespace TeraPacketParser.Messages
 {
     public class S_BEGIN_THROUGH_ARBITER_CONTRACT : ParsedMessage
     {

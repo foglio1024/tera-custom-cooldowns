@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Windows.Media.Animation;
 using TCC.Exceptions;
 using TCC.Utils;
 using TeraPacketParser;

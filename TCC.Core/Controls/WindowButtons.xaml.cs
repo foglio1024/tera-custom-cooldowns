@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using TCC.Settings;
 
 namespace TCC.Controls
 {

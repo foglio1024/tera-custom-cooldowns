@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
-using Nostrum;
+using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Settings;
@@ -28,10 +28,10 @@ namespace TCC.ViewModels.Widgets
 
             ((BuffWindowSettings)settings).DirectionChanged += () => ExN(nameof(Direction));
 
-            BuffsView = CollectionViewUtils.InitLiveView(Player.Buffs, a => a.Abnormality.Type != AbnormalityType.Special);
-            SpecBuffsView = CollectionViewUtils.InitLiveView(Player.Buffs, a => a.Abnormality.Type == AbnormalityType.Special);
-            InfBuffsView = CollectionViewUtils.InitLiveView(Player.InfBuffs, a => a.Abnormality.Type != AbnormalityType.Special);
-            SpecInfBuffsView = CollectionViewUtils.InitLiveView(Player.InfBuffs, a => a.Abnormality.Type == AbnormalityType.Special);
+            BuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs, a => a.Abnormality.Type != AbnormalityType.Special);
+            SpecBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs, a => a.Abnormality.Type == AbnormalityType.Special);
+            InfBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.InfBuffs, a => a.Abnormality.Type != AbnormalityType.Special);
+            SpecInfBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.InfBuffs, a => a.Abnormality.Type == AbnormalityType.Special);
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.AbnormalSettingsHotkey, OnShowAbnormalConfigHotkeyPressed);
 

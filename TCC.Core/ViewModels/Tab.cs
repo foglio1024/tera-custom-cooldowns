@@ -7,7 +7,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Nostrum;
 using Newtonsoft.Json;
-using TCC.Controls;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Utilities;

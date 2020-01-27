@@ -1,7 +1,7 @@
-﻿using Nostrum;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using Nostrum.Factories;
 using TCC.Data;
 
 namespace TCC.Windows
@@ -16,7 +16,7 @@ namespace TCC.Windows
             InitializeComponent();
         }
 
-        public ICollectionView Dungeons => CollectionViewUtils.InitView(Game.DB.DungeonDatabase.Dungeons.Values, d => d != null, new[]
+        public ICollectionView Dungeons => CollectionViewFactory.CreateCollectionView(Game.DB.DungeonDatabase.Dungeons.Values, d => d != null, new[]
         {
             new SortDescription(nameof(Dungeon.Name), ListSortDirection.Ascending)
         });

@@ -9,7 +9,6 @@ using Nostrum;
 using Newtonsoft.Json.Linq;
 using Octokit;
 using SevenZip;
-using Application = System.Windows.Application;
 
 namespace TCC.Publisher
 {

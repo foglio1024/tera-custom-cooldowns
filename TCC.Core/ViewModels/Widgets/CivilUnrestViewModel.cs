@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Nostrum;
+using Nostrum.Factories;
 using TCC.Parsing;
 using TCC.Settings;
 using TCC.Utils;
@@ -62,7 +63,7 @@ namespace TCC.ViewModels.Widgets
         {
             get
             { 
-                var ret = CollectionViewUtils.InitLiveView(_guilds,
+                var ret = CollectionViewFactory.CreateLiveCollectionView(_guilds,
                     sortFilters: new[]
                     {
                         //new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
