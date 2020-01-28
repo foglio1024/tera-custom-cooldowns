@@ -65,7 +65,6 @@
         <Button Style="{StaticResource PathButtonStyle}"
                 Command="{Binding GetVersionStep.Command}"
                 Grid.ColumnSpan="2"
-                Margin="30 0 0 0"
                 Grid.RowSpan="2"
                 Content="Get version" />
         <Button Style="{StaticResource PathButtonStyle}"
@@ -247,6 +246,7 @@
             <TextBox Text="{Binding ReleaseNotes}"
                      Background="#1fff"
                      Foreground="#afff"
+                     AcceptsReturn="True"
                      Padding="3"
                      Grid.Row="1"
                      BorderThickness="0" />
