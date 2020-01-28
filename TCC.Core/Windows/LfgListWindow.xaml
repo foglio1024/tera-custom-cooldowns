@@ -16,7 +16,7 @@
         <Border Background="{StaticResource RevampBackgroundBrush}"
                 CornerRadius="1" Effect="{StaticResource DropShadow}"
                 BorderThickness="1" BorderBrush="{StaticResource RevampBorderBrush}"
-                Margin="6" Width="600" HorizontalAlignment="Stretch" Opacity=".7" />
+                Margin="6" Width="600" HorizontalAlignment="Stretch" Opacity=".75" />
         <Grid HorizontalAlignment="Stretch" Margin="6" MouseLeftButtonDown="OnBgMouseLeftButtonDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="38" />
@@ -37,10 +37,10 @@
             <Path Data="{StaticResource SvgUsers}" HorizontalAlignment="Left" Margin="8 9 5 7"
                   VerticalAlignment="Center" Fill="#9fff" />
             <TextBlock VerticalAlignment="Center" Opacity=".8" FontSize="24"
-                       FontWeight="Thin" IsHitTestVisible="False" Foreground="#ddd" Grid.Row="0" Margin="50 0">
-                <Run Text="Looking for group" ></Run>
-                <Run Text="-" Foreground="#3fff"></Run>
-                <Run Text="{Binding ListingsView.(CollectionView.Count), Mode=OneWay}" Foreground="#5fff"></Run>
+                       FontWeight="Thin" IsHitTestVisible="False" Foreground="#eee" Grid.Row="0" Margin="50 0">
+                <Run Text="Looking for group " ></Run>
+                <Run Text="{Binding ListingsView.(CollectionView.Count), Mode=OneWay}" Foreground="#5fff"
+                     FontWeight="Normal" FontSize="20"></Run>
             </TextBlock>
             <Rectangle MouseLeftButtonDown="Drag" Fill="Transparent" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -217,22 +217,22 @@
                 </Grid.ColumnDefinitions>
                 <Button Command="{Binding SortCommand}" CommandParameter="Message" Padding="5 3 5 3"
                         Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="0"
-                        Grid.ColumnSpan="2" Margin="5 0 0 -5" Foreground="#9aaa" HorizontalContentAlignment="Left">
+                        Grid.ColumnSpan="2" Margin="5 0 0 -5" Foreground="#faaa" HorizontalContentAlignment="Left">
                     Message
                 </Button>
                 <Button Command="{Binding SortCommand}" CommandParameter="AliveSinceMs" Padding="5 3 5 3"
                         Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="2"
-                        Margin="0 0 0 -5" Foreground="#9aaa" HorizontalContentAlignment="Right">
+                        Margin="0 0 0 -5" Foreground="#faaa" HorizontalContentAlignment="Right">
                     Time
                 </Button>
                 <Button Command="{Binding SortCommand}" CommandParameter="LeaderName" Padding="5 3 5 3"
                         Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="3"
-                        Margin="0 0 0 -5" Foreground="#9aaa" HorizontalContentAlignment="Left">
+                        Margin="0 0 0 -5" Foreground="#faaa" HorizontalContentAlignment="Left">
                     Leader
                 </Button>
                 <Button Command="{Binding SortCommand}" CommandParameter="PlayerCount" Padding="16 3"
                         Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="4"
-                        Margin="0 0 0 -5" Foreground="#9aaa" HorizontalContentAlignment="Left">
+                        Margin="0 0 0 -5" Foreground="#faaa" HorizontalContentAlignment="Left">
                     Count
                 </Button>
             </Grid>
