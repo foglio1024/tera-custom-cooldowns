@@ -15,6 +15,7 @@
 
             <converters:RoundedClipConverter x:Key="RoundedClipConverter" />
 
+
             <Style x:Key="BigEllipseStyle" TargetType="Ellipse">
                 <Setter Property="Width" Value="34" />
                 <Setter Property="Height" Value="34" />
@@ -78,7 +79,7 @@
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter TargetName="hl" Property="Background"
-                                    Value="{StaticResource SelectionBackgroundBrush}" />
+                                    Value="#2fff" />
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
                                     <Setter Property="Opacity"
