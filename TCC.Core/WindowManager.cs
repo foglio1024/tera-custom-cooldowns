@@ -169,8 +169,6 @@ namespace TCC
             ViewModels.PlayerMenuVM = new PlayerMenuViewModel();
 
             ChatManager.Start();
-
-            SettingsWindow = new SettingsWindow();
         }
 
         public static void ReloadPositions()
@@ -187,6 +185,11 @@ namespace TCC
         public static void ResetToCenter()
         {
             ResetToCenterEvent?.Invoke();
+        }
+
+        public static void InitSettingsWindow()
+        {
+            SettingsWindow = new SettingsWindow();
         }
     }
 }

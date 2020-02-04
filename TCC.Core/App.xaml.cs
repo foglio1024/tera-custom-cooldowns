@@ -99,6 +99,7 @@ namespace TCC
             SplashScreen.VM.Progress = 10;
             SplashScreen.VM.BottomText = "Loading settings...";
             SettingsContainer.Load();
+            WindowManager.InitSettingsWindow(); // need it in case language is not correct
 
             SplashScreen.VM.Progress = 20;
             Process.GetCurrentProcess().PriorityClass = Settings.HighPriority
