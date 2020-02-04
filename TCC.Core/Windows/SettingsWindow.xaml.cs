@@ -23,6 +23,15 @@ namespace TCC.Windows
             _bigPathFadeAnim = AnimationFactory.CreateDoubleAnimation(750, 1, 0, true);
         }
 
+        public void ShowDialogAtPage(int idx)
+        {
+            Dispatcher?.Invoke(() =>
+            {
+                TabControl.SelectedIndex = idx;
+                ShowDialog();
+            });
+        }
+
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
             HideWindow();

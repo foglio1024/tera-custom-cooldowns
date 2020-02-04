@@ -179,17 +179,19 @@ namespace TCC
                 var res = TccMessageBox.Show(
                     $"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.",
                     MessageBoxType.ConfirmationWithYesNoCancel);
-                if (res == MessageBoxResult.Yes)
+                switch (res)
                 {
-                    App.BaseDispatcher.Invoke(() =>
-                    {
-                        WindowManager.SettingsWindow.TabControl.SelectedIndex = 8;
-                        WindowManager.SettingsWindow.ShowDialog();
-                    });
-                    InitDatabases(App.Settings.LastLanguage);
+                    case MessageBoxResult.Yes:
+                        WindowManager.SettingsWindow.ShowDialogAtPage(9);
+                        InitDatabases(App.Settings.LastLanguage);
+                        break;
+                    case MessageBoxResult.No:
+                        InitDatabases("EU-EN");
+                        break;
+                    case MessageBoxResult.Cancel:
+                        App.Close();
+                        break;
                 }
-                else if (res == MessageBoxResult.No) InitDatabases("EU-EN");
-                else if (res == MessageBoxResult.Cancel) App.Close();
             }
             else DB.Load();
         }
