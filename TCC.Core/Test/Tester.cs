@@ -492,7 +492,7 @@ namespace TCC.Test
         public static void AddAbnormality(uint id)
         {
             if (!AbnormalityUtils.Exists(id, out var ab) || !AbnormalityUtils.Pass(ab)) return;
-            ab.Infinity = true;
+            ab.Infinity = false;
             Game.Me.UpdateAbnormality(ab, int.MaxValue, 1);
 
         }
