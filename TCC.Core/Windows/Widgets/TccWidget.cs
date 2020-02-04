@@ -15,6 +15,7 @@ using TCC.Controls;
 using TCC.Data;
 using TCC.Settings;
 using TCC.Utils;
+using Size = System.Drawing.Size;
 
 namespace TCC.Windows.Widgets
 {
@@ -23,9 +24,9 @@ namespace TCC.Windows.Widgets
         private static bool _showBoundaries;
         private static event Action ShowBoundariesToggled;
 
-        private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, to: 0);
-        private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, to: 0);
-        private readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, to: 1);
+        private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, 0);
+        private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, 0);
+        private readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, 1);
         private DispatcherTimer _buttonsTimer;
         private IntPtr _handle;
         protected bool _canMove = true;
@@ -43,13 +44,14 @@ namespace TCC.Windows.Widgets
             MainContent.Opacity = 0;
             if (BoundaryRef != null) BoundaryRef.Opacity = 0;
             Topmost = true;
-            Left = (WindowSettings.X * WindowManager.ScreenSize.Width);
-            Top = (WindowSettings.Y * WindowManager.ScreenSize.Height);
+            Left = WindowSettings.X * WindowManager.ScreenSize.Width;
+            Top = WindowSettings.Y * WindowManager.ScreenSize.Height;
             if (!WindowSettings.IgnoreSize)
             {
                 if (WindowSettings.H != 0) Height = WindowSettings.H;
                 if (WindowSettings.W != 0) Width = WindowSettings.W;
             }
+
             CheckBounds();
 
             WindowSettings.EnabledChanged += OnEnabledChanged;
@@ -67,7 +69,6 @@ namespace TCC.Windows.Widgets
             WindowManager.ResetToCenterEvent += ResetToCenter;
             WindowManager.DisposeEvent += CloseWindowSafe;
             WindowManager.MakeGlobalEvent += WindowSettings.MakePositionsGlobal;
-            //WindowManager.ApplyScreenCorrectionEvent += _ => OnTeraScreenChanged(); //WindowSettings.ApplyScreenCorrection;
 
             FocusManager.TeraScreenChanged += OnTeraScreenChanged;
             FocusManager.FocusTick += OnFocusTick;
@@ -78,6 +79,9 @@ namespace TCC.Windows.Widgets
 
             FocusManager.MakeUnfocusable(_handle);
 
+            if (BoundaryRef != null)
+                if (_canMove)
+                    BoundaryRef.MouseLeftButtonDown += Drag;
             if (ButtonsRef == null)
             {
                 if (_canMove) MouseLeftButtonDown += Drag;
@@ -85,7 +89,7 @@ namespace TCC.Windows.Widgets
             }
 
             ButtonsRef.Opacity = 0;
-            _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            _buttonsTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(2)};
             _buttonsTimer.Tick += OnButtonsTimerTick;
 
             MouseEnter += (_, __) =>
@@ -97,11 +101,11 @@ namespace TCC.Windows.Widgets
             ShowBoundariesToggled += ShowHideBoundaries;
         }
 
-        private void OnTeraScreenChanged(System.Drawing.Point oldPos, System.Drawing.Point newPos, System.Drawing.Size size)
+        private void OnTeraScreenChanged(System.Drawing.Point oldPos, System.Drawing.Point newPos, Size size)
         {
             var op = new Point(oldPos.X, oldPos.Y); //sigh
             var np = new Point(newPos.X, newPos.Y); //sigh
-            var s = new Size(size.Width, size.Height); //sigh
+            var s = new System.Windows.Size(size.Width, size.Height); //sigh
             WindowSettings.ApplyScreenOffset(op, np, s);
             ReloadPosition();
         }
@@ -128,24 +132,12 @@ namespace TCC.Windows.Widgets
                 Top = top >= int.MaxValue ? 0 : top;
 
                 CheckBounds();
-
-                if (ButtonsRef == null) return;
-                switch (WindowSettings.ButtonsPosition)
-                {
-                    case ButtonsPosition.Above:
-                        Grid.SetRow(ButtonsRef, 0);
-                        break;
-                    case ButtonsPosition.Below:
-                        Grid.SetRow(ButtonsRef, 2);
-                        break;
-                }
                 UpdateButtons();
             });
         }
+
         public void ResetToCenter()
         {
-            Log.CW($"[{GetType().Name}] {nameof(ResetToCenter)}()");
-
             Dispatcher?.Invoke(() =>
             {
                 Left = FocusManager.TeraScreen.Bounds.X + FocusManager.TeraScreen.Bounds.Width / 2 - ActualWidth / 2;
@@ -193,41 +185,49 @@ namespace TCC.Windows.Widgets
             FocusManager.HideFromToolBar(_handle);
             if (!WindowSettings.Enabled) Hide();
         }
+
         private void OnDimChanged()
         {
             if (!WindowManager.VisibilityManager.Visible) return;
 
             if (!WindowSettings.AutoDim)
+            {
                 AnimateContentOpacity(WindowSettings.MaxOpacity);
+            }
             else
             {
-                if (WindowSettings.UndimOnFlyingGuardian) AnimateContentOpacity(WindowManager.VisibilityManager.Dim ? WindowSettings.DimOpacity : WindowSettings.MaxOpacity);
+                if (WindowSettings.UndimOnFlyingGuardian)
+                    AnimateContentOpacity(WindowManager.VisibilityManager.Dim
+                        ? WindowSettings.DimOpacity
+                        : WindowSettings.MaxOpacity);
                 else if (FlyingGuardianDataProvider.IsInProgress) AnimateContentOpacity(WindowSettings.DimOpacity);
-                else AnimateContentOpacity(WindowManager.VisibilityManager.Dim ? WindowSettings.DimOpacity : WindowSettings.MaxOpacity);
+                else
+                    AnimateContentOpacity(WindowManager.VisibilityManager.Dim
+                        ? WindowSettings.DimOpacity
+                        : WindowSettings.MaxOpacity);
             }
 
             OnClickThruModeChanged();
         }
+
         protected virtual void OnVisibilityChanged()
         {
             if (WindowManager.VisibilityManager.Visible)
             {
                 if (WindowManager.VisibilityManager.Dim && WindowSettings.AutoDim)
-                {
                     AnimateContentOpacity(WindowSettings.DimOpacity);
-                }
                 else
-                {
                     AnimateContentOpacity(WindowSettings.MaxOpacity);
-                }
             }
             else
             {
                 if (WindowSettings.ShowAlways) return;
                 AnimateContentOpacity(0);
             }
+
             RefreshTopmost();
         }
+
         private void OnClickThruModeChanged()
         {
             if (_showBoundaries)
@@ -260,6 +260,7 @@ namespace TCC.Windows.Widgets
                     throw new ArgumentOutOfRangeException();
             }
         }
+
         protected virtual void OnEnabledChanged(bool enabled)
         {
             try
@@ -270,8 +271,11 @@ namespace TCC.Windows.Widgets
                     else Hide();
                 });
             }
-            catch { }
+            catch
+            {
+            }
         }
+
         private void AnimateContentOpacity(double opacity)
         {
             if (MainContent == null) return;
@@ -280,16 +284,19 @@ namespace TCC.Windows.Widgets
                     _opacityAnimation.To = opacity;
                     MainContent.BeginAnimation(OpacityProperty, _opacityAnimation);
                 }
-            , DispatcherPriority.DataBind);
+                , DispatcherPriority.DataBind);
         }
+
         private void RefreshTopmost()
         {
             Dispatcher?.InvokeAsync(() =>
             {
                 if (FocusManager.PauseTopmost) return;
-                Topmost = false; Topmost = true;
+                Topmost = false;
+                Topmost = true;
             }, DispatcherPriority.DataBind);
         }
+
         private void SetVisibility(bool v)
         {
             if (Dispatcher?.Thread.IsAlive == false) return;
@@ -299,18 +306,15 @@ namespace TCC.Windows.Widgets
                 Visibility = v ? Visibility.Visible : Visibility.Collapsed;
             });
         }
+
         private void CheckBounds()
         {
             if (WindowSettings == null) return;
             if (WindowSettings.AllowOffScreen) return;
             if (Left + ActualWidth > SystemParameters.VirtualScreenWidth)
-            {
                 Left = SystemParameters.VirtualScreenWidth - ActualWidth;
-            }
             if (Top + ActualHeight > SystemParameters.VirtualScreenHeight)
-            {
                 Top = SystemParameters.VirtualScreenHeight - ActualHeight;
-            }
             CheckIndividualScreensBounds();
             SetRelativeCoordinates();
         }
@@ -320,9 +324,11 @@ namespace TCC.Windows.Widgets
             if (IsWindowFullyVisible()) return;
             var nearestScreen = FindNearestScreen();
 
-            if (Top + ActualHeight > nearestScreen.Bounds.Y + nearestScreen.Bounds.Height) Top = nearestScreen.Bounds.Y + nearestScreen.Bounds.Height - ActualHeight;
+            if (Top + ActualHeight > nearestScreen.Bounds.Y + nearestScreen.Bounds.Height)
+                Top = nearestScreen.Bounds.Y + nearestScreen.Bounds.Height - ActualHeight;
             else if (Top < nearestScreen.Bounds.Y) Top = nearestScreen.Bounds.Y;
-            if (Left + ActualWidth > nearestScreen.Bounds.X + nearestScreen.Bounds.Width) Left = nearestScreen.Bounds.X + nearestScreen.Bounds.Width - ActualWidth;
+            if (Left + ActualWidth > nearestScreen.Bounds.X + nearestScreen.Bounds.Width)
+                Left = nearestScreen.Bounds.X + nearestScreen.Bounds.Width - ActualWidth;
             else if (Left < nearestScreen.Bounds.X) Left = nearestScreen.Bounds.X;
         }
 
@@ -333,7 +339,7 @@ namespace TCC.Windows.Widgets
             foreach (var screen in Screen.AllScreens)
             {
                 var screenCenter = new Point(screen.Bounds.X + screen.Bounds.Size.Width / 2,
-                                             screen.Bounds.Y + screen.Bounds.Size.Height / 2);
+                    screen.Bounds.Y + screen.Bounds.Size.Height / 2);
 
                 var dist = screenCenter - WindowCenter;
                 distances.Add(dist);
@@ -341,9 +347,8 @@ namespace TCC.Windows.Widgets
 
             var min = new Vector(double.MaxValue, double.MaxValue);
             foreach (var distance in distances)
-            {
-                if (distance.Length < min.Length) min = distance;
-            }
+                if (distance.Length < min.Length)
+                    min = distance;
             var index = distances.IndexOf(min);
             return Screen.AllScreens[index != -1 ? index : 0];
         }
@@ -351,7 +356,10 @@ namespace TCC.Windows.Widgets
 
         private bool IsWindowFullyVisible()
         {
-            var tl = false; var tr = false; var bl = false; var br = false;
+            var tl = false;
+            var tr = false;
+            var bl = false;
+            var br = false;
             foreach (var screen in Screen.AllScreens)
             {
                 if (IsTopLeftCornerInScreen(screen)) tl = true;
@@ -361,20 +369,23 @@ namespace TCC.Windows.Widgets
             }
 
             return tl && tr && bl && br;
-
         }
+
         private bool IsTopLeftCornerInScreen(Screen screen)
         {
             return screen.Bounds.Contains(Convert.ToInt32(Left), Convert.ToInt32(Top));
         }
+
         private bool IsBottomRightCornerInScreen(Screen screen)
         {
             return screen.Bounds.Contains(Convert.ToInt32(Left + ActualWidth), Convert.ToInt32(Top + ActualHeight));
         }
+
         private bool IsTopRightCornerInScreen(Screen screen)
         {
             return screen.Bounds.Contains(Convert.ToInt32(Left + ActualWidth), Convert.ToInt32(Top));
         }
+
         private bool IsBottomLeftCornerInScreen(Screen screen)
         {
             return screen.Bounds.Contains(Convert.ToInt32(Left), Convert.ToInt32(Top + ActualHeight));
@@ -385,6 +396,7 @@ namespace TCC.Windows.Widgets
             return Screen.AllScreens.FirstOrDefault(x =>
                 x.Bounds.Contains(Convert.ToInt32(WindowCenter.X), Convert.ToInt32(WindowCenter.Y)));
         }
+
         private void UpdateButtons()
         {
             if (ButtonsRef == null) return;
@@ -406,6 +418,7 @@ namespace TCC.Windows.Widgets
                 Grid.SetRow(ButtonsRef, 2);
             }
         }
+
         protected void Drag(object sender, MouseButtonEventArgs e)
         {
             if (WindowSettings != null && !WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
@@ -425,8 +438,8 @@ namespace TCC.Windows.Widgets
 
         private void SetRelativeCoordinates()
         {
-            WindowSettings.X = (Left /*+ FocusManager.TeraScreen.Bounds.Left*/) / WindowManager.ScreenSize.Width;
-            WindowSettings.Y = (Top /*+ FocusManager.TeraScreen.Bounds.Top*/) / WindowManager.ScreenSize.Height;
+            WindowSettings.X = Left / WindowManager.ScreenSize.Width;
+            WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
         }
 
 
@@ -464,6 +477,5 @@ namespace TCC.Windows.Widgets
             _showBoundaries = !_showBoundaries;
             ShowBoundariesToggled?.Invoke();
         }
-
     }
 }

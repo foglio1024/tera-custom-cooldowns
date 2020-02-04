@@ -8,9 +8,8 @@
                  xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
                  xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
                  mc:Ignorable="d"
-        Title="TCC Civil Unrest"
+                Title="TCC Civil Unrest"
                  Style="{StaticResource BaseWindowStyle}"
-        Loaded="OnLoaded"
         d:DataContext="{d:DesignInstance {x:Type widgets:CivilUnrestViewModel}}" MouseDoubleClick="OnMouseDoubleClick">
     <Grid x:Name="ZoneBoundContent" Visibility="{Binding CivilUnrest, Converter={StaticResource BoolToVisibility}}">
 
