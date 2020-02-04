@@ -689,10 +689,11 @@ namespace TCC
         private static void OnNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
             if (p.Type != S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce) return;
-
-            var questName = p.QuestId == 0
-                ? "Defeat Guild BAM"
-                : DB.GuildQuestDatabase.GuildQuests[p.QuestId].Title;
+            
+            var questName = DB.GuildQuestDatabase.GuildQuests.TryGetValue(p.QuestId, out var gq) 
+                ?
+                 gq.Title
+                    : "Defeat Guild BAM";
             var zone = DB.MonsterDatabase.GetZoneName(p.ZoneId);
             var name = DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
             SystemMessagesProcessor.AnalyzeMessage($"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}", "SMT_GQUEST_URGENT_NOTIFY");
