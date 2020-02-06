@@ -1,242 +1,21 @@
-///////////////////////////////////////////////////////
-//// File automatically generated from csproj file ////
-///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+//// File automatically generated from TCC.Core.csproj ////
+///////////////////////////////////////////////////////////
+
+using Dragablz.Converters;
+using Nostrum.Converters;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
-using Dragablz.Converters;
-using Dragablz.Themes;
-using Nostrum.Converters;
 using TCC.Converters;
 using TCC.TemplateSelectors;
 
 namespace TCC.R
 {
-	public static class Nostrum_SVG
-	{
-		public static Geometry SvgClose => ((Geometry)App.Current.FindResource("SvgClose"));
-		public static Geometry SvgConfirm => ((Geometry)App.Current.FindResource("SvgConfirm"));
-		public static Geometry SvgStar => ((Geometry)App.Current.FindResource("SvgStar"));
-		public static Geometry SvgInfo => ((Geometry)App.Current.FindResource("SvgInfo"));
-		public static Geometry SvgSettings => ((Geometry)App.Current.FindResource("SvgSettings"));
-		public static Geometry SvgFolder => ((Geometry)App.Current.FindResource("SvgFolder"));
-		public static Geometry SvgTwitch => ((Geometry)App.Current.FindResource("SvgTwitch"));
-		public static Geometry SvgPaypal => ((Geometry)App.Current.FindResource("SvgPaypal"));
-		public static Geometry SvgMapMarker => ((Geometry)App.Current.FindResource("SvgMapMarker"));
-		public static Geometry SvgHide => ((Geometry)App.Current.FindResource("SvgHide"));
-		public static Geometry SvgMove => ((Geometry)App.Current.FindResource("SvgMove"));
-		public static Geometry SvgPin => ((Geometry)App.Current.FindResource("SvgPin"));
-		public static Geometry SvgUnpin => ((Geometry)App.Current.FindResource("SvgUnpin"));
-		public static Geometry SvgBlurOn => ((Geometry)App.Current.FindResource("SvgBlurOn"));
-		public static Geometry SvgBlurOff => ((Geometry)App.Current.FindResource("SvgBlurOff"));
-		public static Geometry SvgUser => ((Geometry)App.Current.FindResource("SvgUser"));
-		public static Geometry SvgBasket => ((Geometry)App.Current.FindResource("SvgBasket"));
-		public static Geometry SvgQuestLog => ((Geometry)App.Current.FindResource("SvgQuestLog"));
-		public static Geometry SvgSocial => ((Geometry)App.Current.FindResource("SvgSocial"));
-		public static Geometry SvgGuild => ((Geometry)App.Current.FindResource("SvgGuild"));
-		public static Geometry SvgAchievements => ((Geometry)App.Current.FindResource("SvgAchievements"));
-		public static Geometry SvgCrossedSwords => ((Geometry)App.Current.FindResource("SvgCrossedSwords"));
-		public static Geometry SvgMatching => ((Geometry)App.Current.FindResource("SvgMatching"));
-		public static Geometry SvgMail => ((Geometry)App.Current.FindResource("SvgMail"));
-		public static Geometry SvgGift => ((Geometry)App.Current.FindResource("SvgGift"));
-		public static Geometry SvgShirt => ((Geometry)App.Current.FindResource("SvgShirt"));
-		public static Geometry SvgShop => ((Geometry)App.Current.FindResource("SvgShop"));
-		public static Geometry SvgUserAdd => ((Geometry)App.Current.FindResource("SvgUserAdd"));
-		public static Geometry SvgTrophy => ((Geometry)App.Current.FindResource("SvgTrophy"));
-		public static Geometry SvgDrag => ((Geometry)App.Current.FindResource("SvgDrag"));
-		public static Geometry SvgEye => ((Geometry)App.Current.FindResource("SvgEye"));
-		public static Geometry SvgChatMessage => ((Geometry)App.Current.FindResource("SvgChatMessage"));
-		public static Geometry SvgAddUser => ((Geometry)App.Current.FindResource("SvgAddUser"));
-		public static Geometry SvgDelegateLeader => ((Geometry)App.Current.FindResource("SvgDelegateLeader"));
-		public static Geometry SvgAddUsers => ((Geometry)App.Current.FindResource("SvgAddUsers"));
-		public static Geometry SvgBlock => ((Geometry)App.Current.FindResource("SvgBlock"));
-		public static Geometry SvgRemoveUser => ((Geometry)App.Current.FindResource("SvgRemoveUser"));
-		public static Geometry SvgPen => ((Geometry)App.Current.FindResource("SvgPen"));
-		public static Geometry SvgHeart => ((Geometry)App.Current.FindResource("SvgHeart"));
-		public static Geometry SvgCheckCircle => ((Geometry)App.Current.FindResource("SvgCheckCircle"));
-		public static Geometry SvgUsers => ((Geometry)App.Current.FindResource("SvgUsers"));
-		public static Geometry SvgReload => ((Geometry)App.Current.FindResource("SvgReload"));
-		public static Geometry SvgDisband => ((Geometry)App.Current.FindResource("SvgDisband"));
-		public static Geometry SvgRemoveCircle => ((Geometry)App.Current.FindResource("SvgRemoveCircle"));
-		public static Geometry SvgSearch => ((Geometry)App.Current.FindResource("SvgSearch"));
-		public static Geometry SvgCheckAll => ((Geometry)App.Current.FindResource("SvgCheckAll"));
-		public static Geometry SvgMenuRight => ((Geometry)App.Current.FindResource("SvgMenuRight"));
-		public static Geometry SvgOpenLink => ((Geometry)App.Current.FindResource("SvgOpenLink"));
-		public static Geometry SvgWarning => ((Geometry)App.Current.FindResource("SvgWarning"));
-		public static Geometry SvgAwaken => ((Geometry)App.Current.FindResource("SvgAwaken"));
-		public static Geometry SvgCopy => ((Geometry)App.Current.FindResource("SvgCopy"));
-		public static Geometry SvgAddCircle => ((Geometry)App.Current.FindResource("SvgAddCircle"));
-		public static Geometry SvgAdd => ((Geometry)App.Current.FindResource("SvgAdd"));
-		public static Geometry SvgGitHub => ((Geometry)App.Current.FindResource("SvgGitHub"));
-		public static Geometry SvgDiscord => ((Geometry)App.Current.FindResource("SvgDiscord"));
-		public static Geometry SvgDotsVertical => ((Geometry)App.Current.FindResource("SvgDotsVertical"));
-		public static Geometry SvgAuto => ((Geometry)App.Current.FindResource("SvgAuto"));
-		public static Geometry SvgShare => ((Geometry)App.Current.FindResource("SvgShare"));
-		public static Geometry SvgMoney => ((Geometry)App.Current.FindResource("SvgMoney"));
-		public static Geometry SvgDownArrow => ((Geometry)App.Current.FindResource("SvgDownArrow"));
-		public static Geometry SvgUpArrow => ((Geometry)App.Current.FindResource("SvgUpArrow"));
-		public static Geometry SvgExpandAll => ((Geometry)App.Current.FindResource("SvgExpandAll"));
-		public static Geometry SvgCollapseAll => ((Geometry)App.Current.FindResource("SvgCollapseAll"));
-	}
-	public static class SVG
-	{
-		public static Geometry SvgWeapon => ((Geometry)App.Current.FindResource("SvgWeapon"));
-		public static Geometry SvgArmor => ((Geometry)App.Current.FindResource("SvgArmor"));
-		public static Geometry SvgHands => ((Geometry)App.Current.FindResource("SvgHands"));
-		public static Geometry SvgFeet => ((Geometry)App.Current.FindResource("SvgFeet"));
-		public static Geometry SvgRing => ((Geometry)App.Current.FindResource("SvgRing"));
-		public static Geometry SvgEarring => ((Geometry)App.Current.FindResource("SvgEarring"));
-		public static Geometry SvgBelt => ((Geometry)App.Current.FindResource("SvgBelt"));
-		public static Geometry SvgCirclet => ((Geometry)App.Current.FindResource("SvgCirclet"));
-		public static Geometry SvgNecklace => ((Geometry)App.Current.FindResource("SvgNecklace"));
-		public static Geometry SvgClassGunner => ((Geometry)App.Current.FindResource("SvgClassGunner"));
-		public static Geometry SvgClassBrawler => ((Geometry)App.Current.FindResource("SvgClassBrawler"));
-		public static Geometry SvgClassBerserker => ((Geometry)App.Current.FindResource("SvgClassBerserker"));
-		public static Geometry SvgClassArcher => ((Geometry)App.Current.FindResource("SvgClassArcher"));
-		public static Geometry SvgClassWarrior => ((Geometry)App.Current.FindResource("SvgClassWarrior"));
-		public static Geometry SvgClassValkyrie => ((Geometry)App.Current.FindResource("SvgClassValkyrie"));
-		public static Geometry SvgClassSorcerer => ((Geometry)App.Current.FindResource("SvgClassSorcerer"));
-		public static Geometry SvgClassSlayer => ((Geometry)App.Current.FindResource("SvgClassSlayer"));
-		public static Geometry SvgClassReaper => ((Geometry)App.Current.FindResource("SvgClassReaper"));
-		public static Geometry SvgClassPriest => ((Geometry)App.Current.FindResource("SvgClassPriest"));
-		public static Geometry SvgClassNinja => ((Geometry)App.Current.FindResource("SvgClassNinja"));
-		public static Geometry SvgClassMystic => ((Geometry)App.Current.FindResource("SvgClassMystic"));
-		public static Geometry SvgClassLancer => ((Geometry)App.Current.FindResource("SvgClassLancer"));
-		public static Geometry SvgClassNone => ((Geometry)App.Current.FindResource("SvgClassNone"));
-		public static Geometry SvgClassCommon => ((Geometry)App.Current.FindResource("SvgClassCommon"));
-		public static Geometry SvgCooldownIcon => ((Geometry)App.Current.FindResource("SvgCooldownIcon"));
-		public static Geometry SvgCharacterIcon => ((Geometry)App.Current.FindResource("SvgCharacterIcon"));
-		public static Geometry SvgNpcIcon => ((Geometry)App.Current.FindResource("SvgNpcIcon"));
-		public static Geometry SvgBuffIcon => ((Geometry)App.Current.FindResource("SvgBuffIcon"));
-	}
-	public static class Colors
-	{
-		public static Color CardDarkColor => ((Color)App.Current.FindResource("CardDarkColor"));
-		public static Color BackgroundDarkColor => ((Color)App.Current.FindResource("BackgroundDarkColor"));
-		public static Color DefaultBackgroundColor => ((Color)App.Current.FindResource("DefaultBackgroundColor"));
-		public static Color TooltipColor => ((Color)App.Current.FindResource("TooltipColor"));
-		public static Color RevampBackgroundColor => ((Color)App.Current.FindResource("RevampBackgroundColor"));
-		public static Color RevampDarkBackgroundColor => ((Color)App.Current.FindResource("RevampDarkBackgroundColor"));
-		public static Color RevampDarkerBackgroundColor => ((Color)App.Current.FindResource("RevampDarkerBackgroundColor"));
-		public static Color RevampBorderColor => ((Color)App.Current.FindResource("RevampBorderColor"));
-		public static Color TeraRestylePanelColor => ((Color)App.Current.FindResource("TeraRestylePanelColor"));
-		public static Color TeraRestyleBorderColor => ((Color)App.Current.FindResource("TeraRestyleBorderColor"));
-		public static Color TeraRestyleBorderColorLight => ((Color)App.Current.FindResource("TeraRestyleBorderColorLight"));
-		public static Color ClassGlowColor => ((Color)App.Current.FindResource("ClassGlowColor"));
-		public static Color MainColor => ((Color)App.Current.FindResource("MainColor"));
-		public static Color GreenColor => ((Color)App.Current.FindResource("GreenColor"));
-		public static Color LightGreenColor => ((Color)App.Current.FindResource("LightGreenColor"));
-		public static Color DarkGreenColor => ((Color)App.Current.FindResource("DarkGreenColor"));
-		public static Color TwitchColor => ((Color)App.Current.FindResource("TwitchColor"));
-		public static Color WeeklyColor => ((Color)App.Current.FindResource("WeeklyColor"));
-		public static Color DailyColor => ((Color)App.Current.FindResource("DailyColor"));
-		public static Color MarksColor => ((Color)App.Current.FindResource("MarksColor"));
-		public static Color GuardianColor => ((Color)App.Current.FindResource("GuardianColor"));
-		public static Color EnchantLowColor => ((Color)App.Current.FindResource("EnchantLowColor"));
-		public static Color EnchantHighColor => ((Color)App.Current.FindResource("EnchantHighColor"));
-		public static Color HpColor => ((Color)App.Current.FindResource("HpColor"));
-		public static Color HpColorLight => ((Color)App.Current.FindResource("HpColorLight"));
-		public static Color MpColor => ((Color)App.Current.FindResource("MpColor"));
-		public static Color MpColorLight => ((Color)App.Current.FindResource("MpColorLight"));
-		public static Color HpDebuffColor => ((Color)App.Current.FindResource("HpDebuffColor"));
-		public static Color HpDebuffColorLight => ((Color)App.Current.FindResource("HpDebuffColorLight"));
-		public static Color RunemarkColor => ((Color)App.Current.FindResource("RunemarkColor"));
-		public static Color MaxRunemarkColor => ((Color)App.Current.FindResource("MaxRunemarkColor"));
-		public static Color FireColor => ((Color)App.Current.FindResource("FireColor"));
-		public static Color FireColorLight => ((Color)App.Current.FindResource("FireColorLight"));
-		public static Color IceColor => ((Color)App.Current.FindResource("IceColor"));
-		public static Color IceColorLight => ((Color)App.Current.FindResource("IceColorLight"));
-		public static Color ArcaneColor => ((Color)App.Current.FindResource("ArcaneColor"));
-		public static Color ArcaneColorLight => ((Color)App.Current.FindResource("ArcaneColorLight"));
-		public static Color RageColor => ((Color)App.Current.FindResource("RageColor"));
-		public static Color RageColorLight => ((Color)App.Current.FindResource("RageColorLight"));
-		public static Color RageColorDark => ((Color)App.Current.FindResource("RageColorDark"));
-		public static Color WillpowerColor => ((Color)App.Current.FindResource("WillpowerColor"));
-		public static Color WillpowerColorLight => ((Color)App.Current.FindResource("WillpowerColorLight"));
-		public static Color GoldColor => ((Color)App.Current.FindResource("GoldColor"));
-		public static Color SilverColor => ((Color)App.Current.FindResource("SilverColor"));
-		public static Color CopperColor => ((Color)App.Current.FindResource("CopperColor"));
-		public static Color AssaultStanceColor => ((Color)App.Current.FindResource("AssaultStanceColor"));
-		public static Color AssaultStanceColorLight => ((Color)App.Current.FindResource("AssaultStanceColorLight"));
-		public static Color AssaultStanceColorDark => ((Color)App.Current.FindResource("AssaultStanceColorDark"));
-		public static Color DefensiveStanceColor => ((Color)App.Current.FindResource("DefensiveStanceColor"));
-		public static Color DefensiveStanceColorLight => ((Color)App.Current.FindResource("DefensiveStanceColorLight"));
-		public static Color DefensiveStanceColorDark => ((Color)App.Current.FindResource("DefensiveStanceColorDark"));
-		public static Color SniperEyeColor => ((Color)App.Current.FindResource("SniperEyeColor"));
-		public static Color DpsRoleColor => ((Color)App.Current.FindResource("DpsRoleColor"));
-		public static Color HealerRoleColor => ((Color)App.Current.FindResource("HealerRoleColor"));
-		public static Color TankRoleColor => ((Color)App.Current.FindResource("TankRoleColor"));
-		public static Color IgnidraxColor => ((Color)App.Current.FindResource("IgnidraxColor"));
-		public static Color TerradraxColor => ((Color)App.Current.FindResource("TerradraxColor"));
-		public static Color AquadraxColor => ((Color)App.Current.FindResource("AquadraxColor"));
-		public static Color UmbradraxColor => ((Color)App.Current.FindResource("UmbradraxColor"));
-		public static Color Tier1DungeonColor => ((Color)App.Current.FindResource("Tier1DungeonColor"));
-		public static Color Tier2DungeonColor => ((Color)App.Current.FindResource("Tier2DungeonColor"));
-		public static Color Tier3DungeonColor => ((Color)App.Current.FindResource("Tier3DungeonColor"));
-		public static Color Tier4DungeonColor => ((Color)App.Current.FindResource("Tier4DungeonColor"));
-		public static Color Tier5DungeonColor => ((Color)App.Current.FindResource("Tier5DungeonColor"));
-		public static Color MoongourdBackgroundColor => ((Color)App.Current.FindResource("MoongourdBackgroundColor"));
-		public static Color MoongourdDarkBackgroundColor => ((Color)App.Current.FindResource("MoongourdDarkBackgroundColor"));
-		public static Color MoongourdHeaderColor => ((Color)App.Current.FindResource("MoongourdHeaderColor"));
-		public static Color MoongourdAccentColor => ((Color)App.Current.FindResource("MoongourdAccentColor"));
-		public static Color MoongourdFadedAccentColor => ((Color)App.Current.FindResource("MoongourdFadedAccentColor"));
-		public static Color AbnormalityBuffColor => ((Color)App.Current.FindResource("AbnormalityBuffColor"));
-		public static Color AbnormalityStunColor => ((Color)App.Current.FindResource("AbnormalityStunColor"));
-		public static Color AbnormalityDebuffColor => ((Color)App.Current.FindResource("AbnormalityDebuffColor"));
-		public static Color AbnormalityDotColor => ((Color)App.Current.FindResource("AbnormalityDotColor"));
-		public static Color ItemCommonColor => ((Color)App.Current.FindResource("ItemCommonColor"));
-		public static Color ItemUncommonColor => ((Color)App.Current.FindResource("ItemUncommonColor"));
-		public static Color ItemRareColor => ((Color)App.Current.FindResource("ItemRareColor"));
-		public static Color ItemSuperiorColor => ((Color)App.Current.FindResource("ItemSuperiorColor"));
-		public static Color ToolboxColor => ((Color)App.Current.FindResource("ToolboxColor"));
-		public static Color ChatSayColor => ((Color)App.Current.FindResource("ChatSayColor"));
-		public static Color ChatPartyColor => ((Color)App.Current.FindResource("ChatPartyColor"));
-		public static Color ChatGuildColor => ((Color)App.Current.FindResource("ChatGuildColor"));
-		public static Color ChatAreaColor => ((Color)App.Current.FindResource("ChatAreaColor"));
-		public static Color ChatTradeColor => ((Color)App.Current.FindResource("ChatTradeColor"));
-		public static Color ChatGreetColor => ((Color)App.Current.FindResource("ChatGreetColor"));
-		public static Color ChatPartyNoticeColor => ((Color)App.Current.FindResource("ChatPartyNoticeColor"));
-		public static Color ChatRaidNoticeColor => ((Color)App.Current.FindResource("ChatRaidNoticeColor"));
-		public static Color ChatEmoteColor => ((Color)App.Current.FindResource("ChatEmoteColor"));
-		public static Color ChatGlobalColor => ((Color)App.Current.FindResource("ChatGlobalColor"));
-		public static Color ChatRaidColor => ((Color)App.Current.FindResource("ChatRaidColor"));
-		public static Color ChatMegaphoneColor => ((Color)App.Current.FindResource("ChatMegaphoneColor"));
-		public static Color ChatMegaphoneColorDark => ((Color)App.Current.FindResource("ChatMegaphoneColorDark"));
-		public static Color ChatGuildAdColor => ((Color)App.Current.FindResource("ChatGuildAdColor"));
-		public static Color ChatPrivateColor => ((Color)App.Current.FindResource("ChatPrivateColor"));
-		public static Color ChatProxyColor => ((Color)App.Current.FindResource("ChatProxyColor"));
-		public static Color ChatWhisperColor => ((Color)App.Current.FindResource("ChatWhisperColor"));
-		public static Color ChatSystemGenericColor => ((Color)App.Current.FindResource("ChatSystemGenericColor"));
-		public static Color ChatSystemNotifyColor => ((Color)App.Current.FindResource("ChatSystemNotifyColor"));
-		public static Color ChatSystemEventColor => ((Color)App.Current.FindResource("ChatSystemEventColor"));
-		public static Color ChatSystemErrorColor => ((Color)App.Current.FindResource("ChatSystemErrorColor"));
-		public static Color ChatSystemGroupColor => ((Color)App.Current.FindResource("ChatSystemGroupColor"));
-		public static Color ChatSystemDeathmatchColor => ((Color)App.Current.FindResource("ChatSystemDeathmatchColor"));
-		public static Color ChatSystemContractAlertColor => ((Color)App.Current.FindResource("ChatSystemContractAlertColor"));
-		public static Color ChatSystemGroupAlertColor => ((Color)App.Current.FindResource("ChatSystemGroupAlertColor"));
-		public static Color ChatSystemLootColor => ((Color)App.Current.FindResource("ChatSystemLootColor"));
-		public static Color ChatSystemExpColor => ((Color)App.Current.FindResource("ChatSystemExpColor"));
-		public static Color ChatSystemMoneyColor => ((Color)App.Current.FindResource("ChatSystemMoneyColor"));
-		public static Color ChatSystemBargainColor => ((Color)App.Current.FindResource("ChatSystemBargainColor"));
-		public static Color ChatSystemQuestColor => ((Color)App.Current.FindResource("ChatSystemQuestColor"));
-		public static Color ChatSystemFriendColor => ((Color)App.Current.FindResource("ChatSystemFriendColor"));
-		public static Color ChatSystemWorldBossColor => ((Color)App.Current.FindResource("ChatSystemWorldBossColor"));
-		public static Color ChatDiamondLaurelColor => ((Color)App.Current.FindResource("ChatDiamondLaurelColor"));
-		public static Color ChatChampionLaurelColor => ((Color)App.Current.FindResource("ChatChampionLaurelColor"));
-		public static Color TccNormalLightGradient0Color => ((Color)App.Current.FindResource("TccNormalLightGradient0Color"));
-		public static Color TccNormalLightGradient1Color => ((Color)App.Current.FindResource("TccNormalLightGradient1Color"));
-		public static Color TccNormalGradient0Color => ((Color)App.Current.FindResource("TccNormalGradient0Color"));
-		public static Color TccNormalGradient1Color => ((Color)App.Current.FindResource("TccNormalGradient1Color"));
-		public static Color TccGreenGradient0Color => ((Color)App.Current.FindResource("TccGreenGradient0Color"));
-		public static Color TccGreenGradient1Color => ((Color)App.Current.FindResource("TccGreenGradient1Color"));
-		public static Color TccYellowGradient0Color => ((Color)App.Current.FindResource("TccYellowGradient0Color"));
-		public static Color TccYellowGradient1Color => ((Color)App.Current.FindResource("TccYellowGradient1Color"));
-		public static Color TccRedGradient0Color => ((Color)App.Current.FindResource("TccRedGradient0Color"));
-		public static Color TccRedGradient1Color => ((Color)App.Current.FindResource("TccRedGradient1Color"));
-	}
+	// ResourceDictionaries/Brushes.xaml
 	public static class Brushes
 	{
 		public static SolidColorBrush MainBrush => ((SolidColorBrush)App.Current.FindResource("MainBrush"));
@@ -363,52 +142,135 @@ namespace TCC.R
 		public static LinearGradientBrush TccYellowGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccYellowGradientBrush"));
 		public static LinearGradientBrush TccRedGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccRedGradientBrush"));
 	}
-	public static class Nostrum_MiscResources
+
+	// ResourceDictionaries/Colors.xaml
+	public static class Colors
 	{
-		public static QuadraticEase QuadraticEase => ((QuadraticEase)App.Current.FindResource("QuadraticEase"));
-		public static TranslateTransform DefaultTranslateTransform => ((TranslateTransform)App.Current.FindResource("DefaultTranslateTransform"));
-		public static RotateTransform DefaultRotateTransform => ((RotateTransform)App.Current.FindResource("DefaultRotateTransform"));
-		public static ScaleTransform DefaultScaleTransform => ((ScaleTransform)App.Current.FindResource("DefaultScaleTransform"));
-		public static RotateTransform Rotate45 => ((RotateTransform)App.Current.FindResource("Rotate45"));
-		public static RotateTransform Rotate45Inv => ((RotateTransform)App.Current.FindResource("Rotate45Inv"));
-		public static SkewTransform Skew45 => ((SkewTransform)App.Current.FindResource("Skew45"));
-		public static SkewTransform Skew45Inv => ((SkewTransform)App.Current.FindResource("Skew45Inv"));
+		public static Color CardDarkColor => ((Color)App.Current.FindResource("CardDarkColor"));
+		public static Color BackgroundDarkColor => ((Color)App.Current.FindResource("BackgroundDarkColor"));
+		public static Color DefaultBackgroundColor => ((Color)App.Current.FindResource("DefaultBackgroundColor"));
+		public static Color TooltipColor => ((Color)App.Current.FindResource("TooltipColor"));
+		public static Color RevampBackgroundColor => ((Color)App.Current.FindResource("RevampBackgroundColor"));
+		public static Color RevampDarkBackgroundColor => ((Color)App.Current.FindResource("RevampDarkBackgroundColor"));
+		public static Color RevampDarkerBackgroundColor => ((Color)App.Current.FindResource("RevampDarkerBackgroundColor"));
+		public static Color RevampBorderColor => ((Color)App.Current.FindResource("RevampBorderColor"));
+		public static Color TeraRestylePanelColor => ((Color)App.Current.FindResource("TeraRestylePanelColor"));
+		public static Color TeraRestyleBorderColor => ((Color)App.Current.FindResource("TeraRestyleBorderColor"));
+		public static Color TeraRestyleBorderColorLight => ((Color)App.Current.FindResource("TeraRestyleBorderColorLight"));
+		public static Color ClassGlowColor => ((Color)App.Current.FindResource("ClassGlowColor"));
+		public static Color MainColor => ((Color)App.Current.FindResource("MainColor"));
+		public static Color GreenColor => ((Color)App.Current.FindResource("GreenColor"));
+		public static Color LightGreenColor => ((Color)App.Current.FindResource("LightGreenColor"));
+		public static Color DarkGreenColor => ((Color)App.Current.FindResource("DarkGreenColor"));
+		public static Color TwitchColor => ((Color)App.Current.FindResource("TwitchColor"));
+		public static Color WeeklyColor => ((Color)App.Current.FindResource("WeeklyColor"));
+		public static Color DailyColor => ((Color)App.Current.FindResource("DailyColor"));
+		public static Color MarksColor => ((Color)App.Current.FindResource("MarksColor"));
+		public static Color GuardianColor => ((Color)App.Current.FindResource("GuardianColor"));
+		public static Color EnchantLowColor => ((Color)App.Current.FindResource("EnchantLowColor"));
+		public static Color EnchantHighColor => ((Color)App.Current.FindResource("EnchantHighColor"));
+		public static Color HpColor => ((Color)App.Current.FindResource("HpColor"));
+		public static Color HpColorLight => ((Color)App.Current.FindResource("HpColorLight"));
+		public static Color MpColor => ((Color)App.Current.FindResource("MpColor"));
+		public static Color MpColorLight => ((Color)App.Current.FindResource("MpColorLight"));
+		public static Color HpDebuffColor => ((Color)App.Current.FindResource("HpDebuffColor"));
+		public static Color HpDebuffColorLight => ((Color)App.Current.FindResource("HpDebuffColorLight"));
+		public static Color RunemarkColor => ((Color)App.Current.FindResource("RunemarkColor"));
+		public static Color MaxRunemarkColor => ((Color)App.Current.FindResource("MaxRunemarkColor"));
+		public static Color FireColor => ((Color)App.Current.FindResource("FireColor"));
+		public static Color FireColorLight => ((Color)App.Current.FindResource("FireColorLight"));
+		public static Color IceColor => ((Color)App.Current.FindResource("IceColor"));
+		public static Color IceColorLight => ((Color)App.Current.FindResource("IceColorLight"));
+		public static Color ArcaneColor => ((Color)App.Current.FindResource("ArcaneColor"));
+		public static Color ArcaneColorLight => ((Color)App.Current.FindResource("ArcaneColorLight"));
+		public static Color RageColor => ((Color)App.Current.FindResource("RageColor"));
+		public static Color RageColorLight => ((Color)App.Current.FindResource("RageColorLight"));
+		public static Color RageColorDark => ((Color)App.Current.FindResource("RageColorDark"));
+		public static Color WillpowerColor => ((Color)App.Current.FindResource("WillpowerColor"));
+		public static Color WillpowerColorLight => ((Color)App.Current.FindResource("WillpowerColorLight"));
+		public static Color GoldColor => ((Color)App.Current.FindResource("GoldColor"));
+		public static Color SilverColor => ((Color)App.Current.FindResource("SilverColor"));
+		public static Color CopperColor => ((Color)App.Current.FindResource("CopperColor"));
+		public static Color AssaultStanceColor => ((Color)App.Current.FindResource("AssaultStanceColor"));
+		public static Color AssaultStanceColorLight => ((Color)App.Current.FindResource("AssaultStanceColorLight"));
+		public static Color AssaultStanceColorDark => ((Color)App.Current.FindResource("AssaultStanceColorDark"));
+		public static Color DefensiveStanceColor => ((Color)App.Current.FindResource("DefensiveStanceColor"));
+		public static Color DefensiveStanceColorLight => ((Color)App.Current.FindResource("DefensiveStanceColorLight"));
+		public static Color DefensiveStanceColorDark => ((Color)App.Current.FindResource("DefensiveStanceColorDark"));
+		public static Color SniperEyeColor => ((Color)App.Current.FindResource("SniperEyeColor"));
+		public static Color DpsRoleColor => ((Color)App.Current.FindResource("DpsRoleColor"));
+		public static Color HealerRoleColor => ((Color)App.Current.FindResource("HealerRoleColor"));
+		public static Color TankRoleColor => ((Color)App.Current.FindResource("TankRoleColor"));
+		public static Color IgnidraxColor => ((Color)App.Current.FindResource("IgnidraxColor"));
+		public static Color TerradraxColor => ((Color)App.Current.FindResource("TerradraxColor"));
+		public static Color AquadraxColor => ((Color)App.Current.FindResource("AquadraxColor"));
+		public static Color UmbradraxColor => ((Color)App.Current.FindResource("UmbradraxColor"));
+		public static Color Tier1DungeonColor => ((Color)App.Current.FindResource("Tier1DungeonColor"));
+		public static Color Tier2DungeonColor => ((Color)App.Current.FindResource("Tier2DungeonColor"));
+		public static Color Tier3DungeonColor => ((Color)App.Current.FindResource("Tier3DungeonColor"));
+		public static Color Tier4DungeonColor => ((Color)App.Current.FindResource("Tier4DungeonColor"));
+		public static Color Tier5DungeonColor => ((Color)App.Current.FindResource("Tier5DungeonColor"));
+		public static Color MoongourdBackgroundColor => ((Color)App.Current.FindResource("MoongourdBackgroundColor"));
+		public static Color MoongourdDarkBackgroundColor => ((Color)App.Current.FindResource("MoongourdDarkBackgroundColor"));
+		public static Color MoongourdHeaderColor => ((Color)App.Current.FindResource("MoongourdHeaderColor"));
+		public static Color MoongourdAccentColor => ((Color)App.Current.FindResource("MoongourdAccentColor"));
+		public static Color MoongourdFadedAccentColor => ((Color)App.Current.FindResource("MoongourdFadedAccentColor"));
+		public static Color AbnormalityBuffColor => ((Color)App.Current.FindResource("AbnormalityBuffColor"));
+		public static Color AbnormalityStunColor => ((Color)App.Current.FindResource("AbnormalityStunColor"));
+		public static Color AbnormalityDebuffColor => ((Color)App.Current.FindResource("AbnormalityDebuffColor"));
+		public static Color AbnormalityDotColor => ((Color)App.Current.FindResource("AbnormalityDotColor"));
+		public static Color ItemCommonColor => ((Color)App.Current.FindResource("ItemCommonColor"));
+		public static Color ItemUncommonColor => ((Color)App.Current.FindResource("ItemUncommonColor"));
+		public static Color ItemRareColor => ((Color)App.Current.FindResource("ItemRareColor"));
+		public static Color ItemSuperiorColor => ((Color)App.Current.FindResource("ItemSuperiorColor"));
+		public static Color ToolboxColor => ((Color)App.Current.FindResource("ToolboxColor"));
+		public static Color ChatSayColor => ((Color)App.Current.FindResource("ChatSayColor"));
+		public static Color ChatPartyColor => ((Color)App.Current.FindResource("ChatPartyColor"));
+		public static Color ChatGuildColor => ((Color)App.Current.FindResource("ChatGuildColor"));
+		public static Color ChatAreaColor => ((Color)App.Current.FindResource("ChatAreaColor"));
+		public static Color ChatTradeColor => ((Color)App.Current.FindResource("ChatTradeColor"));
+		public static Color ChatGreetColor => ((Color)App.Current.FindResource("ChatGreetColor"));
+		public static Color ChatPartyNoticeColor => ((Color)App.Current.FindResource("ChatPartyNoticeColor"));
+		public static Color ChatRaidNoticeColor => ((Color)App.Current.FindResource("ChatRaidNoticeColor"));
+		public static Color ChatEmoteColor => ((Color)App.Current.FindResource("ChatEmoteColor"));
+		public static Color ChatGlobalColor => ((Color)App.Current.FindResource("ChatGlobalColor"));
+		public static Color ChatRaidColor => ((Color)App.Current.FindResource("ChatRaidColor"));
+		public static Color ChatMegaphoneColor => ((Color)App.Current.FindResource("ChatMegaphoneColor"));
+		public static Color ChatMegaphoneColorDark => ((Color)App.Current.FindResource("ChatMegaphoneColorDark"));
+		public static Color ChatGuildAdColor => ((Color)App.Current.FindResource("ChatGuildAdColor"));
+		public static Color ChatPrivateColor => ((Color)App.Current.FindResource("ChatPrivateColor"));
+		public static Color ChatProxyColor => ((Color)App.Current.FindResource("ChatProxyColor"));
+		public static Color ChatWhisperColor => ((Color)App.Current.FindResource("ChatWhisperColor"));
+		public static Color ChatSystemGenericColor => ((Color)App.Current.FindResource("ChatSystemGenericColor"));
+		public static Color ChatSystemNotifyColor => ((Color)App.Current.FindResource("ChatSystemNotifyColor"));
+		public static Color ChatSystemEventColor => ((Color)App.Current.FindResource("ChatSystemEventColor"));
+		public static Color ChatSystemErrorColor => ((Color)App.Current.FindResource("ChatSystemErrorColor"));
+		public static Color ChatSystemGroupColor => ((Color)App.Current.FindResource("ChatSystemGroupColor"));
+		public static Color ChatSystemDeathmatchColor => ((Color)App.Current.FindResource("ChatSystemDeathmatchColor"));
+		public static Color ChatSystemContractAlertColor => ((Color)App.Current.FindResource("ChatSystemContractAlertColor"));
+		public static Color ChatSystemGroupAlertColor => ((Color)App.Current.FindResource("ChatSystemGroupAlertColor"));
+		public static Color ChatSystemLootColor => ((Color)App.Current.FindResource("ChatSystemLootColor"));
+		public static Color ChatSystemExpColor => ((Color)App.Current.FindResource("ChatSystemExpColor"));
+		public static Color ChatSystemMoneyColor => ((Color)App.Current.FindResource("ChatSystemMoneyColor"));
+		public static Color ChatSystemBargainColor => ((Color)App.Current.FindResource("ChatSystemBargainColor"));
+		public static Color ChatSystemQuestColor => ((Color)App.Current.FindResource("ChatSystemQuestColor"));
+		public static Color ChatSystemFriendColor => ((Color)App.Current.FindResource("ChatSystemFriendColor"));
+		public static Color ChatSystemWorldBossColor => ((Color)App.Current.FindResource("ChatSystemWorldBossColor"));
+		public static Color ChatDiamondLaurelColor => ((Color)App.Current.FindResource("ChatDiamondLaurelColor"));
+		public static Color ChatChampionLaurelColor => ((Color)App.Current.FindResource("ChatChampionLaurelColor"));
+		public static Color TccNormalLightGradient0Color => ((Color)App.Current.FindResource("TccNormalLightGradient0Color"));
+		public static Color TccNormalLightGradient1Color => ((Color)App.Current.FindResource("TccNormalLightGradient1Color"));
+		public static Color TccNormalGradient0Color => ((Color)App.Current.FindResource("TccNormalGradient0Color"));
+		public static Color TccNormalGradient1Color => ((Color)App.Current.FindResource("TccNormalGradient1Color"));
+		public static Color TccGreenGradient0Color => ((Color)App.Current.FindResource("TccGreenGradient0Color"));
+		public static Color TccGreenGradient1Color => ((Color)App.Current.FindResource("TccGreenGradient1Color"));
+		public static Color TccYellowGradient0Color => ((Color)App.Current.FindResource("TccYellowGradient0Color"));
+		public static Color TccYellowGradient1Color => ((Color)App.Current.FindResource("TccYellowGradient1Color"));
+		public static Color TccRedGradient0Color => ((Color)App.Current.FindResource("TccRedGradient0Color"));
+		public static Color TccRedGradient1Color => ((Color)App.Current.FindResource("TccRedGradient1Color"));
 	}
-	public static class MiscResources
-	{
-		public static Storyboard Pulse => ((Storyboard)App.Current.FindResource("Pulse"));
-		public static Storyboard Warn => ((Storyboard)App.Current.FindResource("Warn"));
-		public static FontFamily DroidSans => ((FontFamily)App.Current.FindResource("DroidSans"));
-		public static FontFamily DroidSansMono => ((FontFamily)App.Current.FindResource("DroidSansMono"));
-		public static FontFamily OpenSans => ((FontFamily)App.Current.FindResource("OpenSans"));
-		public static FontFamily Frutiger => ((FontFamily)App.Current.FindResource("Frutiger"));
-		public static FontFamily SourceSans => ((FontFamily)App.Current.FindResource("SourceSans"));
-		public static FontFamily RobotoMonoMedium => ((FontFamily)App.Current.FindResource("RobotoMonoMedium"));
-		public static FontFamily ArialMonoBold => ((FontFamily)App.Current.FindResource("ArialMonoBold"));
-		public static FontFamily NotoSansMed => ((FontFamily)App.Current.FindResource("NotoSansMed"));
-		public static FontFamily ProductSans => ((FontFamily)App.Current.FindResource("ProductSans"));
-		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
-		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
-		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
-		public static Double MapWidth => ((Double)App.Current.FindResource("MapWidth"));
-		public static Double MapHeight => ((Double)App.Current.FindResource("MapHeight"));
-	}
-	public static class Nostrum_Converters
-	{
-		public static BoolToVisibility BoolToVisibility => ((BoolToVisibility)App.Current.FindResource("BoolToVisibility"));
-		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
-		public static RoundedClipConverter RoundedClipConverter => ((RoundedClipConverter)App.Current.FindResource("RoundedClipConverter"));
-		public static EnumDescriptionConverter EnumDescriptionConverter => ((EnumDescriptionConverter)App.Current.FindResource("EnumDescriptionConverter"));
-		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
-		public static ValueToFactorConverter ValueToFactor => ((ValueToFactorConverter)App.Current.FindResource("ValueToFactor"));
-		public static FactorToAngleConverter FactorToAngle => ((FactorToAngleConverter)App.Current.FindResource("FactorToAngle"));
-		public static ColorToTransparent ColorToTransparent => ((ColorToTransparent)App.Current.FindResource("ColorToTransparent"));
-		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
-		public static NullToVisibleCollapsedConverter NullToVisibleCollapsed => ((NullToVisibleCollapsedConverter)App.Current.FindResource("NullToVisibleCollapsed"));
-		public static DurationLabelConverter DurationToTimeFormat => ((DurationLabelConverter)App.Current.FindResource("DurationToTimeFormat"));
-		public static ListBoxItemIndexConverter ListBoxItemIndex => ((ListBoxItemIndexConverter)App.Current.FindResource("ListBoxItemIndex"));
-		public static MillisecondsToStringConverter MillisecondsToString => ((MillisecondsToStringConverter)App.Current.FindResource("MillisecondsToString"));
-	}
+
+	// ResourceDictionaries/Converters.xaml
 	public static class Converters
 	{
 		public static BoolToSvgSwitchConverter BoolToSvgSwitchConverter => ((BoolToSvgSwitchConverter)App.Current.FindResource("BoolToSvgSwitchConverter"));
@@ -460,65 +322,8 @@ namespace TCC.R
 		public static NotificationTypeToBrush NotificationTypeToBrush => ((NotificationTypeToBrush)App.Current.FindResource("NotificationTypeToBrush"));
 		public static WarriorStanceToColorConverter StanceToColorConverter => ((WarriorStanceToColorConverter)App.Current.FindResource("StanceToColorConverter"));
 	}
-	public static class Nostrum_Styles
-	{
-		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
-		public static SolidColorBrush SelectionBackgroundLightBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundLightBrush"));
-		public static SolidColorBrush SelectionBorderBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBorderBrush"));
-		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
-		public static DropShadowEffect BigDropShadow => ((DropShadowEffect)App.Current.FindResource("BigDropShadow"));
-		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
-		public static Style EmptyFocusVisual => ((Style)App.Current.FindResource("EmptyFocusVisual"));
-		public static Style ButtonMainStyle => ((Style)App.Current.FindResource("ButtonMainStyle"));
-		public static Style ButtonContentOpacityStyle => ((Style)App.Current.FindResource("ButtonContentOpacityStyle"));
-		public static Style ComboBoxEditableTextBox => ((Style)App.Current.FindResource("ComboBoxEditableTextBox"));
-		public static Style ComboBoxToggleButton => ((Style)App.Current.FindResource("ComboBoxToggleButton"));
-		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
-		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
-		public static Style ComboBoxMainStyle => ((Style)App.Current.FindResource("ComboBoxMainStyle"));
-		public static Style DefaultListItemStyle => ((Style)App.Current.FindResource("DefaultListItemStyle"));
-		public static Style NoHilightListItemStyleWithLines => ((Style)App.Current.FindResource("NoHilightListItemStyleWithLines"));
-		public static Style NoHilightListItemStyle => ((Style)App.Current.FindResource("NoHilightListItemStyle"));
-		public static ControlTemplate MenuItemControlTemplate1 => ((ControlTemplate)App.Current.FindResource("MenuItemControlTemplate1"));
-	}
-	public static class Styles
-	{
-		public static Style NotificationTitle => ((Style)App.Current.FindResource("NotificationTitle"));
-		public static Style NotificationBody => ((Style)App.Current.FindResource("NotificationBody"));
-		public static Style NotificationVersion => ((Style)App.Current.FindResource("NotificationVersion"));
-		public static Style NotificationTimestamp => ((Style)App.Current.FindResource("NotificationTimestamp"));
-		public static Style NotificationRectangle => ((Style)App.Current.FindResource("NotificationRectangle"));
-		public static Style BaseWindowStyle => ((Style)App.Current.FindResource("BaseWindowStyle"));
-		public static Style DefaultBorderStyle => ((Style)App.Current.FindResource("DefaultBorderStyle"));
-		public static Style RevampBorderStyle => ((Style)App.Current.FindResource("RevampBorderStyle"));
-		public static Style BoundaryBorderStyle => ((Style)App.Current.FindResource("BoundaryBorderStyle"));
-		public static Style DefaultTextStyle => ((Style)App.Current.FindResource("DefaultTextStyle"));
-		public static Style SettingsButton => ((Style)App.Current.FindResource("SettingsButton"));
-		public static Style ScrollThumbs => ((Style)App.Current.FindResource("ScrollThumbs"));
-		public static Style ReversedScrollBar => ((Style)App.Current.FindResource("ReversedScrollBar"));
-		public static Style ScrollViewerWithReversedVerticalScrollBar => ((Style)App.Current.FindResource("ScrollViewerWithReversedVerticalScrollBar"));
-		public static Style ChatTabControlStyle => ((Style)App.Current.FindResource("ChatTabControlStyle"));
-		public static Style GlowHoverGrid => ((Style)App.Current.FindResource("GlowHoverGrid"));
-		public static Style GlowHoverGridLeft => ((Style)App.Current.FindResource("GlowHoverGridLeft"));
-		public static Style ClassWindowSkillBorder => ((Style)App.Current.FindResource("ClassWindowSkillBorder"));
-	}
-	public static class DragablzMaterialDesign
-	{
-		public static ShowDefaultCloseButtonConverter ShowDefaultCloseButtonConverter => ((ShowDefaultCloseButtonConverter)App.Current.FindResource("ShowDefaultCloseButtonConverter"));
-		public static Style MaterialDesignFocusVisual => ((Style)App.Current.FindResource("MaterialDesignFocusVisual"));
-		public static Style MaterialDesignInvisibleThumbStyle => ((Style)App.Current.FindResource("MaterialDesignInvisibleThumbStyle"));
-		public static Style MaterialDesignMenuCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignMenuCommandButtonStyle"));
-		public static Style MaterialDesignCloseItemCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignCloseItemCommandButtonStyle"));
-		public static Style MaterialDesignAddItemCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignAddItemCommandButtonStyle"));
-		public static Style MaterialDesignDragableTabItemStyle => ((Style)App.Current.FindResource("MaterialDesignDragableTabItemStyle"));
-		public static Style MaterialDesignDragableTabItemVerticalStyle => ((Style)App.Current.FindResource("MaterialDesignDragableTabItemVerticalStyle"));
-		public static ControlTemplate TabablzScrollViewerControlTemplate => ((ControlTemplate)App.Current.FindResource("TabablzScrollViewerControlTemplate"));
-		public static Style TabablzDragablzItemsControlStyle => ((Style)App.Current.FindResource("TabablzDragablzItemsControlStyle"));
-		public static Style StandardEmbeddedButtonStyle => ((Style)App.Current.FindResource("StandardEmbeddedButtonStyle"));
-		public static Style MaterialDesignTabablzControlStyle => ((Style)App.Current.FindResource("MaterialDesignTabablzControlStyle"));
-		public static Style ChatDragableTabItemStyle => ((Style)App.Current.FindResource("ChatDragableTabItemStyle"));
-		public static Style ChatTabablzControlStyle => ((Style)App.Current.FindResource("ChatTabablzControlStyle"));
-	}
+
+	// ResourceDictionaries/DataTemplates.xaml
 	public static class DataTemplates
 	{
 		public static DataTemplate RoundNormalSkill => ((DataTemplate)App.Current.FindResource("RoundNormalSkill"));
@@ -588,6 +393,104 @@ namespace TCC.R
 		public static DataTemplate MoongourdEncounterDataTemplate => ((DataTemplate)App.Current.FindResource("MoongourdEncounterDataTemplate"));
 		public static DataTemplate EnumDescrDataTemplate => ((DataTemplate)App.Current.FindResource("EnumDescrDataTemplate"));
 	}
+
+	// ResourceDictionaries/DragablzMaterialDesign.xaml
+	public static class DragablzMaterialDesign
+	{
+		public static ShowDefaultCloseButtonConverter ShowDefaultCloseButtonConverter => ((ShowDefaultCloseButtonConverter)App.Current.FindResource("ShowDefaultCloseButtonConverter"));
+		public static Style MaterialDesignFocusVisual => ((Style)App.Current.FindResource("MaterialDesignFocusVisual"));
+		public static Style MaterialDesignInvisibleThumbStyle => ((Style)App.Current.FindResource("MaterialDesignInvisibleThumbStyle"));
+		public static Style MaterialDesignMenuCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignMenuCommandButtonStyle"));
+		public static Style MaterialDesignCloseItemCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignCloseItemCommandButtonStyle"));
+		public static Style MaterialDesignAddItemCommandButtonStyle => ((Style)App.Current.FindResource("MaterialDesignAddItemCommandButtonStyle"));
+		public static Style MaterialDesignDragableTabItemStyle => ((Style)App.Current.FindResource("MaterialDesignDragableTabItemStyle"));
+		public static Style MaterialDesignDragableTabItemVerticalStyle => ((Style)App.Current.FindResource("MaterialDesignDragableTabItemVerticalStyle"));
+		public static ControlTemplate TabablzScrollViewerControlTemplate => ((ControlTemplate)App.Current.FindResource("TabablzScrollViewerControlTemplate"));
+		public static Style TabablzDragablzItemsControlStyle => ((Style)App.Current.FindResource("TabablzDragablzItemsControlStyle"));
+		public static Style StandardEmbeddedButtonStyle => ((Style)App.Current.FindResource("StandardEmbeddedButtonStyle"));
+		public static Style MaterialDesignTabablzControlStyle => ((Style)App.Current.FindResource("MaterialDesignTabablzControlStyle"));
+		public static Style ChatDragableTabItemStyle => ((Style)App.Current.FindResource("ChatDragableTabItemStyle"));
+		public static Style ChatTabablzControlStyle => ((Style)App.Current.FindResource("ChatTabablzControlStyle"));
+	}
+
+	// ResourceDictionaries/MiscResources.xaml
+	public static class MiscResources
+	{
+		public static Storyboard Pulse => ((Storyboard)App.Current.FindResource("Pulse"));
+		public static Storyboard Warn => ((Storyboard)App.Current.FindResource("Warn"));
+		public static FontFamily DroidSans => ((FontFamily)App.Current.FindResource("DroidSans"));
+		public static FontFamily DroidSansMono => ((FontFamily)App.Current.FindResource("DroidSansMono"));
+		public static FontFamily OpenSans => ((FontFamily)App.Current.FindResource("OpenSans"));
+		public static FontFamily Frutiger => ((FontFamily)App.Current.FindResource("Frutiger"));
+		public static FontFamily SourceSans => ((FontFamily)App.Current.FindResource("SourceSans"));
+		public static FontFamily RobotoMonoMedium => ((FontFamily)App.Current.FindResource("RobotoMonoMedium"));
+		public static FontFamily ArialMonoBold => ((FontFamily)App.Current.FindResource("ArialMonoBold"));
+		public static FontFamily NotoSansMed => ((FontFamily)App.Current.FindResource("NotoSansMed"));
+		public static FontFamily ProductSans => ((FontFamily)App.Current.FindResource("ProductSans"));
+		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
+		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
+		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
+		public static Double MapWidth => ((Double)App.Current.FindResource("MapWidth"));
+		public static Double MapHeight => ((Double)App.Current.FindResource("MapHeight"));
+	}
+
+	// ResourceDictionaries/Styles.xaml
+	public static class Styles
+	{
+		public static Style NotificationTitle => ((Style)App.Current.FindResource("NotificationTitle"));
+		public static Style NotificationBody => ((Style)App.Current.FindResource("NotificationBody"));
+		public static Style NotificationVersion => ((Style)App.Current.FindResource("NotificationVersion"));
+		public static Style NotificationTimestamp => ((Style)App.Current.FindResource("NotificationTimestamp"));
+		public static Style NotificationRectangle => ((Style)App.Current.FindResource("NotificationRectangle"));
+		public static Style BaseWindowStyle => ((Style)App.Current.FindResource("BaseWindowStyle"));
+		public static Style DefaultBorderStyle => ((Style)App.Current.FindResource("DefaultBorderStyle"));
+		public static Style RevampBorderStyle => ((Style)App.Current.FindResource("RevampBorderStyle"));
+		public static Style BoundaryBorderStyle => ((Style)App.Current.FindResource("BoundaryBorderStyle"));
+		public static Style DefaultTextStyle => ((Style)App.Current.FindResource("DefaultTextStyle"));
+		public static Style SettingsButton => ((Style)App.Current.FindResource("SettingsButton"));
+		public static Style ScrollThumbs => ((Style)App.Current.FindResource("ScrollThumbs"));
+		public static Style ReversedScrollBar => ((Style)App.Current.FindResource("ReversedScrollBar"));
+		public static Style ScrollViewerWithReversedVerticalScrollBar => ((Style)App.Current.FindResource("ScrollViewerWithReversedVerticalScrollBar"));
+		public static Style ChatTabControlStyle => ((Style)App.Current.FindResource("ChatTabControlStyle"));
+		public static Style GlowHoverGrid => ((Style)App.Current.FindResource("GlowHoverGrid"));
+		public static Style GlowHoverGridLeft => ((Style)App.Current.FindResource("GlowHoverGridLeft"));
+		public static Style ClassWindowSkillBorder => ((Style)App.Current.FindResource("ClassWindowSkillBorder"));
+	}
+
+	// ResourceDictionaries/SVG.xaml
+	public static class SVG
+	{
+		public static Geometry SvgWeapon => ((Geometry)App.Current.FindResource("SvgWeapon"));
+		public static Geometry SvgArmor => ((Geometry)App.Current.FindResource("SvgArmor"));
+		public static Geometry SvgHands => ((Geometry)App.Current.FindResource("SvgHands"));
+		public static Geometry SvgFeet => ((Geometry)App.Current.FindResource("SvgFeet"));
+		public static Geometry SvgRing => ((Geometry)App.Current.FindResource("SvgRing"));
+		public static Geometry SvgEarring => ((Geometry)App.Current.FindResource("SvgEarring"));
+		public static Geometry SvgBelt => ((Geometry)App.Current.FindResource("SvgBelt"));
+		public static Geometry SvgCirclet => ((Geometry)App.Current.FindResource("SvgCirclet"));
+		public static Geometry SvgNecklace => ((Geometry)App.Current.FindResource("SvgNecklace"));
+		public static Geometry SvgClassGunner => ((Geometry)App.Current.FindResource("SvgClassGunner"));
+		public static Geometry SvgClassBrawler => ((Geometry)App.Current.FindResource("SvgClassBrawler"));
+		public static Geometry SvgClassBerserker => ((Geometry)App.Current.FindResource("SvgClassBerserker"));
+		public static Geometry SvgClassArcher => ((Geometry)App.Current.FindResource("SvgClassArcher"));
+		public static Geometry SvgClassWarrior => ((Geometry)App.Current.FindResource("SvgClassWarrior"));
+		public static Geometry SvgClassValkyrie => ((Geometry)App.Current.FindResource("SvgClassValkyrie"));
+		public static Geometry SvgClassSorcerer => ((Geometry)App.Current.FindResource("SvgClassSorcerer"));
+		public static Geometry SvgClassSlayer => ((Geometry)App.Current.FindResource("SvgClassSlayer"));
+		public static Geometry SvgClassReaper => ((Geometry)App.Current.FindResource("SvgClassReaper"));
+		public static Geometry SvgClassPriest => ((Geometry)App.Current.FindResource("SvgClassPriest"));
+		public static Geometry SvgClassNinja => ((Geometry)App.Current.FindResource("SvgClassNinja"));
+		public static Geometry SvgClassMystic => ((Geometry)App.Current.FindResource("SvgClassMystic"));
+		public static Geometry SvgClassLancer => ((Geometry)App.Current.FindResource("SvgClassLancer"));
+		public static Geometry SvgClassNone => ((Geometry)App.Current.FindResource("SvgClassNone"));
+		public static Geometry SvgClassCommon => ((Geometry)App.Current.FindResource("SvgClassCommon"));
+		public static Geometry SvgCooldownIcon => ((Geometry)App.Current.FindResource("SvgCooldownIcon"));
+		public static Geometry SvgCharacterIcon => ((Geometry)App.Current.FindResource("SvgCharacterIcon"));
+		public static Geometry SvgNpcIcon => ((Geometry)App.Current.FindResource("SvgNpcIcon"));
+		public static Geometry SvgBuffIcon => ((Geometry)App.Current.FindResource("SvgBuffIcon"));
+	}
+
+	// ResourceDictionaries/TemplateSelectors.xaml
 	public static class TemplateSelectors
 	{
 		public static AbnormalityTemplateSelector PlayerAbnormalityTemplateSelector => ((AbnormalityTemplateSelector)App.Current.FindResource("PlayerAbnormalityTemplateSelector"));
@@ -605,4 +508,127 @@ namespace TCC.R
 		public static NotificationTemplateSelector NotificationTemplateSelector => ((NotificationTemplateSelector)App.Current.FindResource("NotificationTemplateSelector"));
 		public static ListingTemplateSelector ListingTemplateSelector => ((ListingTemplateSelector)App.Current.FindResource("ListingTemplateSelector"));
 	}
+
+	// pack://application:,,,/Nostrum;component/Resources/Converters.xaml
+	public static class Nostrum_Converters
+	{
+		public static BoolToVisibility BoolToVisibility => ((BoolToVisibility)App.Current.FindResource("BoolToVisibility"));
+		public static NullToVisibleCollapsedConverter NullToVisibleCollapsed => ((NullToVisibleCollapsedConverter)App.Current.FindResource("NullToVisibleCollapsed"));
+		public static ColorToTransparent ColorToTransparent => ((ColorToTransparent)App.Current.FindResource("ColorToTransparent"));
+		public static EnumDescriptionConverter EnumDescriptionConverter => ((EnumDescriptionConverter)App.Current.FindResource("EnumDescriptionConverter"));
+		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
+		public static RoundedClipConverter RoundedClipConverter => ((RoundedClipConverter)App.Current.FindResource("RoundedClipConverter"));
+		public static DurationLabelConverter DurationToTimeFormat => ((DurationLabelConverter)App.Current.FindResource("DurationToTimeFormat"));
+		public static FactorToAngleConverter FactorToAngle => ((FactorToAngleConverter)App.Current.FindResource("FactorToAngle"));
+		public static ListBoxItemIndexConverter ListBoxItemIndex => ((ListBoxItemIndexConverter)App.Current.FindResource("ListBoxItemIndex"));
+		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
+		public static MillisecondsToStringConverter MillisecondsToString => ((MillisecondsToStringConverter)App.Current.FindResource("MillisecondsToString"));
+		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
+		public static ValueToFactorConverter ValueToFactor => ((ValueToFactorConverter)App.Current.FindResource("ValueToFactor"));
+	}
+
+	// pack://application:,,,/Nostrum;component/Resources/MiscResources.xaml
+	public static class Nostrum_MiscResources
+	{
+		public static ScaleTransform DefaultScaleTransform => ((ScaleTransform)App.Current.FindResource("DefaultScaleTransform"));
+		public static SkewTransform Skew45 => ((SkewTransform)App.Current.FindResource("Skew45"));
+		public static SkewTransform Skew45Inv => ((SkewTransform)App.Current.FindResource("Skew45Inv"));
+		public static TranslateTransform DefaultTranslateTransform => ((TranslateTransform)App.Current.FindResource("DefaultTranslateTransform"));
+		public static RotateTransform Rotate45Inv => ((RotateTransform)App.Current.FindResource("Rotate45Inv"));
+		public static RotateTransform Rotate45 => ((RotateTransform)App.Current.FindResource("Rotate45"));
+		public static QuadraticEase QuadraticEase => ((QuadraticEase)App.Current.FindResource("QuadraticEase"));
+		public static RotateTransform DefaultRotateTransform => ((RotateTransform)App.Current.FindResource("DefaultRotateTransform"));
+	}
+
+	// pack://application:,,,/Nostrum;component/Resources/Styles.xaml
+	public static class Nostrum_Styles
+	{
+		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
+		public static Style ButtonContentOpacityStyle => ((Style)App.Current.FindResource("ButtonContentOpacityStyle"));
+		public static SolidColorBrush SelectionBackgroundLightBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundLightBrush"));
+		public static Style ComboBoxEditableTextBox => ((Style)App.Current.FindResource("ComboBoxEditableTextBox"));
+		public static Style NoHilightListItemStyleWithLines => ((Style)App.Current.FindResource("NoHilightListItemStyleWithLines"));
+		public static Style DefaultListItemStyle => ((Style)App.Current.FindResource("DefaultListItemStyle"));
+		public static ControlTemplate MenuItemControlTemplate1 => ((ControlTemplate)App.Current.FindResource("MenuItemControlTemplate1"));
+		public static Style ButtonMainStyle => ((Style)App.Current.FindResource("ButtonMainStyle"));
+		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
+		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
+		public static Style NoHilightListItemStyle => ((Style)App.Current.FindResource("NoHilightListItemStyle"));
+		public static DropShadowEffect BigDropShadow => ((DropShadowEffect)App.Current.FindResource("BigDropShadow"));
+		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
+		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
+		public static Style ComboBoxMainStyle => ((Style)App.Current.FindResource("ComboBoxMainStyle"));
+		public static SolidColorBrush SelectionBorderBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBorderBrush"));
+		public static Style EmptyFocusVisual => ((Style)App.Current.FindResource("EmptyFocusVisual"));
+		public static Style ComboBoxToggleButton => ((Style)App.Current.FindResource("ComboBoxToggleButton"));
+	}
+
+	// pack://application:,,,/Nostrum;component/Resources/SVG.xaml
+	public static class Nostrum_SVG
+	{
+		public static StreamGeometry SvgCopy => ((StreamGeometry)App.Current.FindResource("SvgCopy"));
+		public static StreamGeometry SvgUpArrow => ((StreamGeometry)App.Current.FindResource("SvgUpArrow"));
+		public static StreamGeometry SvgAchievements => ((StreamGeometry)App.Current.FindResource("SvgAchievements"));
+		public static StreamGeometry SvgAwaken => ((StreamGeometry)App.Current.FindResource("SvgAwaken"));
+		public static StreamGeometry SvgGitHub => ((StreamGeometry)App.Current.FindResource("SvgGitHub"));
+		public static StreamGeometry SvgCheckAll => ((StreamGeometry)App.Current.FindResource("SvgCheckAll"));
+		public static StreamGeometry SvgPaypal => ((StreamGeometry)App.Current.FindResource("SvgPaypal"));
+		public static StreamGeometry SvgCollapseAll => ((StreamGeometry)App.Current.FindResource("SvgCollapseAll"));
+		public static StreamGeometry SvgBasket => ((StreamGeometry)App.Current.FindResource("SvgBasket"));
+		public static StreamGeometry SvgMove => ((StreamGeometry)App.Current.FindResource("SvgMove"));
+		public static StreamGeometry SvgEye => ((StreamGeometry)App.Current.FindResource("SvgEye"));
+		public static StreamGeometry SvgAdd => ((StreamGeometry)App.Current.FindResource("SvgAdd"));
+		public static StreamGeometry SvgConfirm => ((StreamGeometry)App.Current.FindResource("SvgConfirm"));
+		public static StreamGeometry SvgAddUser => ((StreamGeometry)App.Current.FindResource("SvgAddUser"));
+		public static StreamGeometry SvgShare => ((StreamGeometry)App.Current.FindResource("SvgShare"));
+		public static StreamGeometry SvgUser => ((StreamGeometry)App.Current.FindResource("SvgUser"));
+		public static StreamGeometry SvgShop => ((StreamGeometry)App.Current.FindResource("SvgShop"));
+		public static StreamGeometry SvgShirt => ((StreamGeometry)App.Current.FindResource("SvgShirt"));
+		public static StreamGeometry SvgReload => ((StreamGeometry)App.Current.FindResource("SvgReload"));
+		public static StreamGeometry SvgCheckCircle => ((StreamGeometry)App.Current.FindResource("SvgCheckCircle"));
+		public static StreamGeometry SvgMatching => ((StreamGeometry)App.Current.FindResource("SvgMatching"));
+		public static StreamGeometry SvgDiscord => ((StreamGeometry)App.Current.FindResource("SvgDiscord"));
+		public static StreamGeometry SvgDrag => ((StreamGeometry)App.Current.FindResource("SvgDrag"));
+		public static StreamGeometry SvgStar => ((StreamGeometry)App.Current.FindResource("SvgStar"));
+		public static StreamGeometry SvgFolder => ((StreamGeometry)App.Current.FindResource("SvgFolder"));
+		public static StreamGeometry SvgMapMarker => ((StreamGeometry)App.Current.FindResource("SvgMapMarker"));
+		public static StreamGeometry SvgChatMessage => ((StreamGeometry)App.Current.FindResource("SvgChatMessage"));
+		public static StreamGeometry SvgClose => ((StreamGeometry)App.Current.FindResource("SvgClose"));
+		public static StreamGeometry SvgHide => ((StreamGeometry)App.Current.FindResource("SvgHide"));
+		public static StreamGeometry SvgSocial => ((StreamGeometry)App.Current.FindResource("SvgSocial"));
+		public static StreamGeometry SvgBlurOff => ((StreamGeometry)App.Current.FindResource("SvgBlurOff"));
+		public static StreamGeometry SvgPen => ((StreamGeometry)App.Current.FindResource("SvgPen"));
+		public static StreamGeometry SvgUsers => ((StreamGeometry)App.Current.FindResource("SvgUsers"));
+		public static StreamGeometry SvgInfo => ((StreamGeometry)App.Current.FindResource("SvgInfo"));
+		public static StreamGeometry SvgGift => ((StreamGeometry)App.Current.FindResource("SvgGift"));
+		public static StreamGeometry SvgCrossedSwords => ((StreamGeometry)App.Current.FindResource("SvgCrossedSwords"));
+		public static StreamGeometry SvgWarning => ((StreamGeometry)App.Current.FindResource("SvgWarning"));
+		public static StreamGeometry SvgDownArrow => ((StreamGeometry)App.Current.FindResource("SvgDownArrow"));
+		public static StreamGeometry SvgQuestLog => ((StreamGeometry)App.Current.FindResource("SvgQuestLog"));
+		public static StreamGeometry SvgAddUsers => ((StreamGeometry)App.Current.FindResource("SvgAddUsers"));
+		public static StreamGeometry SvgRemoveUser => ((StreamGeometry)App.Current.FindResource("SvgRemoveUser"));
+		public static StreamGeometry SvgAuto => ((StreamGeometry)App.Current.FindResource("SvgAuto"));
+		public static StreamGeometry SvgBlurOn => ((StreamGeometry)App.Current.FindResource("SvgBlurOn"));
+		public static StreamGeometry SvgPin => ((StreamGeometry)App.Current.FindResource("SvgPin"));
+		public static StreamGeometry SvgSearch => ((StreamGeometry)App.Current.FindResource("SvgSearch"));
+		public static StreamGeometry SvgDotsVertical => ((StreamGeometry)App.Current.FindResource("SvgDotsVertical"));
+		public static StreamGeometry SvgHeart => ((StreamGeometry)App.Current.FindResource("SvgHeart"));
+		public static StreamGeometry SvgMenuRight => ((StreamGeometry)App.Current.FindResource("SvgMenuRight"));
+		public static StreamGeometry SvgRemoveCircle => ((StreamGeometry)App.Current.FindResource("SvgRemoveCircle"));
+		public static StreamGeometry SvgAddCircle => ((StreamGeometry)App.Current.FindResource("SvgAddCircle"));
+		public static StreamGeometry SvgUnpin => ((StreamGeometry)App.Current.FindResource("SvgUnpin"));
+		public static StreamGeometry SvgDisband => ((StreamGeometry)App.Current.FindResource("SvgDisband"));
+		public static StreamGeometry SvgMoney => ((StreamGeometry)App.Current.FindResource("SvgMoney"));
+		public static StreamGeometry SvgTwitch => ((StreamGeometry)App.Current.FindResource("SvgTwitch"));
+		public static StreamGeometry SvgExpandAll => ((StreamGeometry)App.Current.FindResource("SvgExpandAll"));
+		public static StreamGeometry SvgMail => ((StreamGeometry)App.Current.FindResource("SvgMail"));
+		public static StreamGeometry SvgGuild => ((StreamGeometry)App.Current.FindResource("SvgGuild"));
+		public static StreamGeometry SvgTrophy => ((StreamGeometry)App.Current.FindResource("SvgTrophy"));
+		public static StreamGeometry SvgSettings => ((StreamGeometry)App.Current.FindResource("SvgSettings"));
+		public static StreamGeometry SvgUserAdd => ((StreamGeometry)App.Current.FindResource("SvgUserAdd"));
+		public static StreamGeometry SvgOpenLink => ((StreamGeometry)App.Current.FindResource("SvgOpenLink"));
+		public static StreamGeometry SvgDelegateLeader => ((StreamGeometry)App.Current.FindResource("SvgDelegateLeader"));
+		public static StreamGeometry SvgBlock => ((StreamGeometry)App.Current.FindResource("SvgBlock"));
+	}
+
 }
