@@ -235,21 +235,20 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Command="{Binding MyToggleCommand}" Width="30" HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgCheckCircle}" Fill="#fff"
+                                VerticalContentAlignment="Center"
+                                Style="{StaticResource ButtonContentOpacityStyle}">
+                            <Path Data="{StaticResource SvgCheckCircle}" Fill="#666"
                                   Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
-                                  HorizontalAlignment="Center" />
-                            <Button.Style>
-                                <Style BasedOn="{StaticResource ButtonContentOpacityStyle}" TargetType="Button">
-                                    <Setter Property="Opacity" Value=".2" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Selected}" Value="True">
-                                            <Setter Property="Opacity" Value="1" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
+                                  HorizontalAlignment="Center" 
+                                  x:Name="btnContent">
+
+                            </Path>
                         </Button>
+                        <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Selected}" Value="True">
+                                    <Setter TargetName="btnContent" Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
+                                </DataTrigger>
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.Style>
@@ -272,7 +271,7 @@
                       HorizontalAlignment="Center">
                     <Path.Style>
                         <Style BasedOn="{StaticResource {x:Type Path}}" TargetType="Path">
-                            <Setter Property="Fill" Value="White" />
+                            <Setter Property="Fill" Value="#666" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Special}" Value="True">
                                     <Setter Property="Fill" Value="Orange" />

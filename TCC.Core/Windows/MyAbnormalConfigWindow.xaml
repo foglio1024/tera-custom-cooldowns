@@ -139,7 +139,7 @@
         <Grid Grid.Row="2">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#2fff" Margin="3 0 3 0"
                        Text="Setting/unsetting a buff as 'Special' will show its effect only when the buff is applied again or after relog." />
-            <settings:CheckboxSetting HorizontalAlignment="Right" Margin="0 0 0 0" VerticalAlignment="Center"
+            <settings:CheckboxSetting HorizontalAlignment="Right" Margin="0 0 0 0" VerticalAlignment="Center" Foreground="White"
                                       SettingName="Show all" IsOn="{Binding ShowAll, Mode=TwoWay}" />
         </Grid>
     </Grid>
