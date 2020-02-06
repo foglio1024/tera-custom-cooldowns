@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
+using Nostrum;
+using Nostrum.Extensions;
+using Nostrum.WinAPI;
+using System;
 using System.Collections;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
-using Nostrum;
-using Nostrum.Extensions;
-using Nostrum.WinAPI;
-using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 using TCC.Exceptions;
 using TCC.Interop;
 using TCC.Interop.Proxy;
@@ -173,28 +172,21 @@ namespace TCC
 #pragma warning disable 618
         private static JObject /*Task<JObject>*/ GetThreadTraces()
         {
-            //return await Task.Factory.StartNew(() =>
+            var ret = new JObject();
+            //App.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
             //{
+            //    var t = d.Thread;
+            //    t.Suspend();
+            //    ret[t.Name] = new StackTrace(t, false).ToString();
+            //    t.Resume();
             //});
-            //return App.BaseDispatcher.InvokeAsync(() =>
-            //{
-                var ret = new JObject();
-                return ret;
-                App.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
-                {
-                    var t = d.Thread;
-                    t.Suspend();
-                    ret[t.Name] = new StackTrace(t, false).ToString();
-                    t.Resume();
-                });
 
-                if (PacketAnalyzer.AnalysisThread == null) return ret;
-                PacketAnalyzer.AnalysisThread.Suspend();
-                ret["Analysis"] = new StackTrace(PacketAnalyzer.AnalysisThread, false).ToString();
-                PacketAnalyzer.AnalysisThread.Resume();
+            //if (PacketAnalyzer.AnalysisThread == null) return ret;
+            //PacketAnalyzer.AnalysisThread.Suspend();
+            //ret["Analysis"] = new StackTrace(PacketAnalyzer.AnalysisThread, false).ToString();
+            //PacketAnalyzer.AnalysisThread.Resume();
 
-                return ret;
-            //}).Result;
+            return ret;
         }
 #pragma warning restore 618
 
@@ -220,7 +212,7 @@ namespace TCC
             sb.AppendLine($"{js["thread_traces"]}");
             Log.F(sb.ToString(), "crash.log");
         }
-        private static  void UploadCrashDump(JObject js)
+        private static void UploadCrashDump(JObject js)
         {
             Log.CW("Uploading crash dump");
             try
