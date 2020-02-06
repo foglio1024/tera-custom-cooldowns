@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nostrum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nostrum.1.0.2\lib\net48\Nostrum.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -162,10 +166,6 @@
     <Compile Include="Data\Vector3f.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\dependencies\Nostrum\Nostrum\Nostrum.csproj">
-      <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
-      <Name>Nostrum</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TCC.Utils\TCC.Utils.csproj">
       <Project>{0E5C7C6C-8D28-4731-82DA-2D37A69C5AC8}</Project>
       <Name>TCC.Utils</Name>
@@ -174,6 +174,9 @@
       <Project>{E8A1FC0B-C9BC-448E-9702-94CE50412D99}</Project>
       <Name>TeraDataLite</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

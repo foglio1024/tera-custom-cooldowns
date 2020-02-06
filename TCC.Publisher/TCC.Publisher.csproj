@@ -62,9 +62,13 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Nostrum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nostrum.1.0.2\lib\net48\Nostrum.dll</HintPath>
+    </Reference>
     <Reference Include="Octokit, Version=0.34.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Octokit.0.34.0\lib\net45\Octokit.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="SevenZipSharp, Version=1.0.19.0, Culture=neutral, PublicKeyToken=c8ff6ba0184838bb, processorArchitecture=MSIL">
       <HintPath>..\packages\SevenZipSharp.Net45.1.0.19\lib\net45\SevenZipSharp.dll</HintPath>
     </Reference>
@@ -136,10 +140,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\dependencies\Nostrum\Nostrum\Nostrum.csproj">
-      <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
-      <Name>Nostrum</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TCC.Core\TCC.Core.csproj">
       <Project>{b3f6e516-cd4b-404e-93c5-ffc729406fa9}</Project>
       <Name>TCC.Core</Name>

@@ -1376,6 +1376,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Nostrum">
+      <HintPath>..\packages\Nostrum.1.0.2\lib\net48\Nostrum.dll</HintPath>
+    </Reference>
     <Reference Include="PacketDotNet, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PacketDotNet.0.16.0\lib\PacketDotNet.dll</HintPath>
     </Reference>
@@ -1431,10 +1434,6 @@
     <ProjectReference Include="..\..\TCC.Loader\TCC.Loader\TCC.Loader.csproj">
       <Project>{cc3be26c-a6d9-4301-b86e-a7fcba9b7162}</Project>
       <Name>TCC.Loader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\dependencies\Nostrum\Nostrum\Nostrum.csproj">
-      <Project>{c62b6aee-2527-4b56-9b77-b02dcefd1cf5}</Project>
-      <Name>Nostrum</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCC.Utils\TCC.Utils.csproj">
       <Project>{0e5c7c6c-8d28-4731-82da-2d37a69c5ac8}</Project>

@@ -7,6 +7,3 @@
 # [submodule "dependencies/Nostrum"]
 # 	path = dependencies/Nostrum
 # 	url = https://github.com/Foglio1024/Nostrum.git
-[submodule "dependencies/Nostrum"]
-	path = dependencies/Nostrum
-	url = https://github.com/Foglio1024/Nostrum
