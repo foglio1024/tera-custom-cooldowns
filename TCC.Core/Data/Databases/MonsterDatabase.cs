@@ -75,7 +75,7 @@ namespace TCC.Data.Databases
         protected override string FolderName => "monsters";
         protected override string Extension => "xml";
         public override bool Exists => base.Exists && File.Exists(OverrideFileFullPath);
-        private string OverrideFileFullPath => FullPath.Replace(Language, "override");
+        private string OverrideFileFullPath => FullPath.Replace($"{FolderName}-{Language}.{Extension}", $"{FolderName}-override.{Extension}");
         private string OverrideFileRelativePath => RelativePath.Replace(Language, "override");
 
         public MonsterDatabase(string lang) : base(lang)
