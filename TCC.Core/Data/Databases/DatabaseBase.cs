@@ -19,12 +19,29 @@ namespace TCC.Data.Databases
         public abstract void Load();
         public virtual void CheckVersion(string customAbsPath = null, string customRelPath = null)
         {
-            if (!Exists) return;
+            if (!Exists)
+            {
+                Log.F($"{customAbsPath ?? FullPath} not found. Skipping hash check.");
+                return;
+            }
             var localHash = HashUtils.GenerateFileHash(customAbsPath ?? FullPath);
-            if (UpdateManager.DatabaseHashes.Count == 0) return;
-            if (!UpdateManager.DatabaseHashes.TryGetValue(customRelPath ?? RelativePath, out var remoteHash)) return;
-            if (remoteHash == localHash) return;
-            Log.CW($"Hash mismatch for {customRelPath ?? RelativePath}");
+            if (UpdateManager.DatabaseHashes.Count == 0)
+            {
+                Log.F($"No database hashes in update manager. Skipping hash check.");
+                return;
+            }
+
+            if (!UpdateManager.DatabaseHashes.TryGetValue(customRelPath ?? RelativePath, out var remoteHash))
+            {
+                Log.F($"No entry found in update manager for {customAbsPath ?? FullPath}. Skipping hash check.");
+                return;
+            }
+
+            if (remoteHash == localHash)
+            {
+                return;
+            }
+            //Log.F($"Hash mismatch for {customRelPath ?? RelativePath} (local:{localHash} remote:{remoteHash})");
             outdatedCount++;
 
         }
