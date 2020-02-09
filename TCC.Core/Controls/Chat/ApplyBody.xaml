@@ -20,13 +20,15 @@
         </Border>
         <Border Background="{StaticResource GreenBrush}" Margin="2,0" CornerRadius="11" Padding="6,0" Opacity=".9" Cursor="Hand" PreviewMouseLeftButtonDown="AcceptApplyBtn">
             <StackPanel Orientation="Horizontal">
-                <Image Height="19" Source="/TCC;component/resources/images/ic_done_white_24dp_2x.png" Margin="0,0,2,0" ></Image>
+                <Path Height="12" Width="12" Data="{StaticResource SvgConfirm}" Margin="2 0 4 0"
+                      Fill="White"/>
                 <TextBlock Text="ACCEPT" Foreground="White" VerticalAlignment="Center"></TextBlock>
             </StackPanel>
         </Border>
         <Border Background="{StaticResource ChatPartyBrush}" Margin="2,0" CornerRadius="11" Padding="6,0" Opacity=".9" Cursor="Hand" PreviewMouseLeftButtonDown="InspectBtn">
             <StackPanel Orientation="Horizontal">
-                <Image Height="19" Source="/TCC;component/resources/images/ic_remove_red_eye_white_24dp_2x.png" Margin="0,0,2,0"></Image>
+                <Path Height="12" Width="12" Data="{StaticResource SvgEye}" Margin="2 0 4 0"
+                      Fill="White"></Path>
 
                 <TextBlock Text="INSPECT" Foreground="White" VerticalAlignment="Center"></TextBlock>
                 
@@ -34,7 +36,8 @@
         </Border>
         <Border Background="{StaticResource HpBrush}" Margin="2,0" CornerRadius="11" Opacity=".9" Padding="6,0" Cursor="Hand" PreviewMouseLeftButtonDown="DeclineApplyBtn">
             <StackPanel Orientation="Horizontal">
-                <Image Height="19" Source="/TCC;component/resources/images/ic_close_white_24dp_2x.png" Margin="0,0,2,0"></Image>
+                <Path Height="12" Width="12" Data="{StaticResource SvgClose}" Margin="2 0 4 0"
+                      Fill="White"></Path>
 
                 <TextBlock Text="DECLINE" Foreground="White" VerticalAlignment="Center"></TextBlock>
             </StackPanel>
