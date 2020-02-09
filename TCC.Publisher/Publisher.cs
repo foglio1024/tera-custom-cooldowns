@@ -5,6 +5,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Nostrum;
 using Newtonsoft.Json.Linq;
 using Octokit;
@@ -12,24 +13,34 @@ using SevenZip;
 
 namespace TCC.Publisher
 {
+    public class PublisherSettings
+    {
+        public string RepositoryName { get; set; }
+        public string RepositoryOwner { get; set; }
+        public string SevenZipLibPath { get; set; }
+        public string LocalRepositoryPath { get; set; }
+        public string DiscordWebhook { get; set; }
+        public string GithubToken { get; set; }
+        public string FirestoreUrl { get; set; }
+        public List<string> ExcludedFiles { get; set; }
+
+        public PublisherSettings()
+        {
+            
+        }
+    }
+
     public static class Publisher
     {
         private static GitHubClient _client;
         private static List<string> _exclusions;
 
-        private const string TCC_PATH = "D:/Repos/TCC";
-        private const string REPO = "Tera-custom-cooldowns";
-        private const string OWNER = "Foglio1024";
-        private const string SEVENZIP_LIB_PATH = "C:/Program Files/7-Zip/7z.dll";
-        private const string TOKEN_PATH = "D:/Repos/TCC/TCC.Publisher/github-token.txt";
-        private const string FIRESTORE_URL_PATH = "D:/Repos/TCC/TCC.Publisher/firestore_version_update.txt";
-        private const string WEBHOOK_URL_PATH = "D:/Repos/TCC/TCC.Publisher/webhook.txt";
-        private const string EXCLUSIONS_PATH = "D:/Repos/TCC/TCC.Publisher/exclusions.txt";
+        private static PublisherSettings _settings;
 
         /// <summary>
         /// TCC/release/
         /// </summary>
-        private static readonly string _releaseFolder = Path.Combine(TCC_PATH, "release");
+        private static string _releaseFolder;
         /// <summary>
         /// TCC/release/TCC.exe
         /// </summary>
@@ -53,10 +64,13 @@ namespace TCC.Publisher
 
         public static void Init()
         {
-            _exclusions = File.ReadAllLines(EXCLUSIONS_PATH).ToList();
+            _settings = JsonConvert.DeserializeObject<PublisherSettings>(File.ReadAllText("settings.json"));
+
+            _releaseFolder = Path.Combine(_settings.LocalRepositoryPath, "release");
+
             _client = new GitHubClient(new ProductHeaderValue("TCC.Publisher"))
             {
-                Credentials = new Credentials(File.ReadAllText(TOKEN_PATH))
+                Credentials = new Credentials(_settings.GithubToken)
             };
         }
 
@@ -83,7 +97,7 @@ namespace TCC.Publisher
                 File.Delete(f);
             }
 
-            SevenZipBase.SetLibraryPath(SEVENZIP_LIB_PATH);
+            SevenZipBase.SetLibraryPath(_settings.SevenZipLibPath);
             Logger.WriteLine("    Starting compression...");
             await Task.Factory.StartNew(() =>
             {
@@ -119,7 +133,7 @@ namespace TCC.Publisher
         {
             Logger.WriteLine("    Building version file...");
             var url = $"https://github.com/Foglio1024/Tera-custom-cooldowns/releases/download/v{_stringVersion}{_experimental}/{_zipName}";
-            var versionCheckFile = Path.Combine(TCC_PATH, "version");
+            var versionCheckFile = Path.Combine(_settings.LocalRepositoryPath, "version");
             var sb = new StringBuilder();
             sb.AppendLine(_stringVersion);
             Logger.WriteLine($"    Added version: {_stringVersion}.");
@@ -132,7 +146,7 @@ namespace TCC.Publisher
         {
             try
             {
-                await _client.Repository.Release.Get(OWNER, REPO, _tag);
+                await _client.Repository.Release.Get(_settings.RepositoryOwner, _settings.RepositoryName, _tag);
                 Logger.WriteLine($"WARNING: Release already existing.");
             }
             catch (NotFoundException)
@@ -144,7 +158,7 @@ namespace TCC.Publisher
                     Prerelease = false,
                     TargetCommitish = string.IsNullOrEmpty(_experimental) ? "master" : "experimental"
                 };
-                await Task.Run(() => _client.Repository.Release.Create(OWNER, REPO, newRelease));
+                await Task.Run(() => _client.Repository.Release.Create(_settings.RepositoryOwner, _settings.RepositoryName, newRelease));
                 ExecuteWebhook(changelog);
                 UpdateFirestoreVersion();
                 Logger.WriteLine($"Release created");
@@ -164,7 +178,7 @@ namespace TCC.Publisher
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                 c.Encoding = Encoding.UTF8;
-                c.UploadString(File.ReadAllText(FIRESTORE_URL_PATH), msg.ToString());
+                c.UploadString(File.ReadAllText(_settings.FirestoreUrl), msg.ToString());
             }
         }
 
@@ -177,17 +191,15 @@ namespace TCC.Publisher
                 {"avatar_url", "https://i.imgur.com/jiWuveM.png" }
             };
 
-            using (var client = MiscUtils.GetDefaultWebClient())
-            {
-                client.Encoding = Encoding.UTF8;
-                client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                client.UploadString(File.ReadAllText(WEBHOOK_URL_PATH), msg.ToString());
-            }
+            using var client = MiscUtils.GetDefaultWebClient();
+            client.Encoding = Encoding.UTF8;
+            client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            client.UploadString(File.ReadAllText(_settings.DiscordWebhook), msg.ToString());
         }
 
         public static async Task Upload()
         {
-            var rls = await _client.Repository.Release.Get(owner: OWNER, name: REPO, tag: $"v{_stringVersion}{_experimental}");
+            var rls = await _client.Repository.Release.Get(owner: _settings.RepositoryOwner, name: _settings.RepositoryName, tag: $"v{_stringVersion}{_experimental}");
             if (rls.Assets.Any(x => x.Name == _zipName))
             {
                 Logger.WriteLine("ERROR: This release already contains an asset with the same name.");
