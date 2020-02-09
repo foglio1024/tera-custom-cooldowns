@@ -278,3 +278,5 @@ TCC\.Publisher/github-token.txt
 TCC\.Publisher/webhook.txt
 
 TCC\.Publisher/firestore_version_update.txt
+
+TCC\.Publisher/settings.json
