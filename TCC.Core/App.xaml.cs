@@ -190,7 +190,7 @@ namespace TCC
         }
         private static bool IsAlreadyRunning()
         {
-            _mutex = new Mutex(true, "TCC", out var createdNew);
+            _mutex = new Mutex(true, nameof(TCC), out var createdNew);
             if (createdNew || !_restarted) return !createdNew;
             _mutex.WaitOne();
             return false;
