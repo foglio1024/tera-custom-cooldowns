@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Nostrum;
 using TCC.Utils;
 
@@ -7,8 +8,6 @@ namespace TCC.Windows.Widgets
 {
     public class ProgressNotificationInfo : NotificationInfoBase
     {
-        public event Action Disposed;
-        public event Action<int> Disposing;
         private double _progress;
         public double Progress
         {
@@ -28,19 +27,22 @@ namespace TCC.Windows.Widgets
 
         public void Dispose(int msDelay)
         {
-            Disposing?.Invoke(msDelay);
+            InvokeDisposing(msDelay);
             if (msDelay == 0)
             {
-                Disposed?.Invoke();
+                InvokeDisposed();
             }
             else
             {
-                Task.Delay(msDelay).ContinueWith(t => Disposed?.Invoke());
+                Task.Delay(msDelay).ContinueWith(t => InvokeDisposed());
             }
         }
     }
     public class NotificationInfoBase : TSPropertyChanged
     {
+        public event Action Disposed;
+        public event Action<int> Disposing;
+
         private string _message;
         private NotificationType _notificationType;
 
@@ -56,7 +58,6 @@ namespace TCC.Windows.Widgets
                 N();
             }
         }
-
         public NotificationType NotificationType
         {
             get => _notificationType;
@@ -67,11 +68,12 @@ namespace TCC.Windows.Widgets
                 N();
             }
         }
-
         public NotificationTemplate NotificationTemplate { get; }
         public int Duration { get; }
         public string TimeStamp { get; }
         public string Version => App.AppVersion;
+
+        public ICommand DismissCommand { get; }
 
         public NotificationInfoBase(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template)
         {
@@ -82,6 +84,19 @@ namespace TCC.Windows.Widgets
             Duration = duration;
             TimeStamp = DateTime.Now.ToString("HH:mm:ss");
             NotificationTemplate = template;
+
+            DismissCommand = new RelayCommand(_ => InvokeDisposed());
         }
+
+        protected void InvokeDisposing(int delay)
+        {
+            Disposing?.Invoke(delay);
+        }
+
+        protected void InvokeDisposed()
+        {
+            Disposed?.Invoke();
+        }
+
     }
 }

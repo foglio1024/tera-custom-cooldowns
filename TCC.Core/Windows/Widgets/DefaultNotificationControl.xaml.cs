@@ -19,6 +19,7 @@ namespace TCC.Windows.Widgets
         {
             base.OnSlideInCompleted(sender, e);
             if (_dc == null) return;
+            _dc.Disposed += OnDisposed;
             _duration.Interval = TimeSpan.FromMilliseconds(_dc.Duration);
             _duration.Tick += OnTimeExpired;
             _duration.Start();
@@ -28,16 +29,27 @@ namespace TCC.Windows.Widgets
 
         }
 
+        private void OnDisposed()
+        {
+            OnTimeExpired(null, null);
+        }
+
         private void OnTimeExpired(object sender, EventArgs e)
         {
             _duration.Stop();
             _duration.Tick -= OnTimeExpired;
+            AnimateDismiss();
+        }
+
+        private void AnimateDismiss()
+        {
             Dispatcher?.InvokeAsync(() =>
             {
                 Root.Effect = null;
                 Root.BeginAnimation(OpacityProperty, _fadeOutAnimation);
                 Root.RenderTransform.BeginAnimation(TranslateTransform.YProperty, _slideOutAnimation);
             }, DispatcherPriority.Background);
+
         }
     }
 }

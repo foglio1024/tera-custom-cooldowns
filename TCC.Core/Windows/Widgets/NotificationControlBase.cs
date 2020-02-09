@@ -29,8 +29,9 @@ namespace TCC.Windows.Widgets
             _slideOutAnimation = AnimationFactory.CreateDoubleAnimation(250, -20, 0, completed: OnFadeFinished, easing: true);
             _fadeOutAnimation = AnimationFactory.CreateDoubleAnimation(250, 0, framerate: 30);
             _shrinkAnimation = AnimationFactory.CreateDoubleAnimation(250, 0, 1, true, OnShrinkFinished);
-        }
 
+        }
+        
         protected void Init(FrameworkElement root)
         {
             _root = root;
