@@ -21,11 +21,12 @@ namespace TCC.Controls.Skills
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
+            if (_context?.Buff == null) return;
             _context.Buff.Started -= OnBuffStarted;
             _context.Buff.SecondsUpdated -= OnSecondsUpdated;
             _context.Buff.Ended -= OnBuffEnded;
-            Loaded -= OnLoaded;
-            Unloaded -= OnUnloaded;
 
         }
 
