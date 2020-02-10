@@ -264,11 +264,15 @@
                                     </DataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding ShowHpPercentage, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}" Value="False"/>
-                                            <Condition Binding="{Binding ShowHpAmount, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}" Value="False"/>
+                                            <Condition
+                                                Binding="{Binding ShowHpPercentage, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}"
+                                                Value="False" />
+                                            <Condition
+                                                Binding="{Binding ShowHpAmount, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}"
+                                                Value="False" />
                                         </MultiDataTrigger.Conditions>
                                         <MultiDataTrigger.Setters>
-                                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                         </MultiDataTrigger.Setters>
                                     </MultiDataTrigger>
                                 </Style.Triggers>
@@ -396,7 +400,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Stretch"
                    Stretch="Uniform"
-                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr_half}"
+                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=half}"
                    Visibility="{Binding ShowLaurel, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
                                                     Converter={StaticResource BoolToVisibility}}">
                 <Image.RenderTransform>
@@ -487,11 +491,8 @@
                     <RotateTransform Angle="45" />
                 </Border.RenderTransform>
             </Border>
-            <Rectangle Fill="{StaticResource RevampBackgroundBrush}" RenderOptions.BitmapScalingMode="Fant" Margin="2">
-                <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="/TCC;component/resources/images/crown.png" />
-                </Rectangle.OpacityMask>
-            </Rectangle>
+            <Path Data="{StaticResource SvgCrown}"
+                  Fill="{StaticResource RevampBackgroundBrush}" RenderOptions.BitmapScalingMode="Fant" Margin="3 2 3 3"/>
             <Grid.RenderTransform>
                 <TranslateTransform X="0" />
             </Grid.RenderTransform>
@@ -509,11 +510,8 @@
             <Border Width="16" Height="16"
                     Background="{Binding Ready, Converter={StaticResource ReadyToColor}}"
                     RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" />
-            <Rectangle Width="14" Height="14" Fill="Black" RenderOptions.BitmapScalingMode="Fant">
-                <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="{Binding Ready, Converter={StaticResource ReadyToIcon}}" />
-                </Rectangle.OpacityMask>
-            </Rectangle>
+            <Path Width="10" Height="10" Fill="Black" RenderOptions.BitmapScalingMode="Fant"
+                  Data="{Binding Ready, Converter={StaticResource ReadyToSvg}}" />
         </Grid>
 
         <!--Roll result grid-->

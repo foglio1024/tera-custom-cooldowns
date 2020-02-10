@@ -1,12 +1,13 @@
 ﻿<grp:GroupMemberBase x:Class="TCC.Controls.Group.RaidMember"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pc="clr-namespace:TCC.Data.Pc"
-             xmlns:grp="clr-namespace:TCC.Controls.Group"
-             mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance pc:User}">
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:pc="clr-namespace:TCC.Data.Pc"
+                     xmlns:grp="clr-namespace:TCC.Controls.Group"
+                     UseLayoutRounding="True"
+                     mc:Ignorable="d"
+                     d:DataContext="{d:DesignInstance pc:User}">
     <grp:GroupMemberBase.Resources>
         <Style TargetType="FrameworkElement" x:Key="OnlineBoundVisibility">
             <Style.Triggers>
@@ -15,8 +16,8 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation From="1" To="0"
-                                                             Duration="0:0:0.2"
-                                                             Storyboard.TargetProperty="Opacity"/>
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity" />
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -24,8 +25,8 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation From="0" To="1"
-                                                             Duration="0:0:0.2"
-                                                             Storyboard.TargetProperty="Opacity"/>
+                                                 Duration="0:0:0.2"
+                                                 Storyboard.TargetProperty="Opacity" />
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
@@ -34,10 +35,11 @@
             </Style.Triggers>
         </Style>
         <Style TargetType="ItemsControl" x:Key="AbnormalitiesItemsControlStyle">
-            <Setter Property="ItemTemplateSelector" Value="{Binding CurrentAbnormalityTemplateSelector, 
-                                                                    RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}"/>
-            <Setter Property="ClipToBounds" Value="False"/>
-            <Setter Property="Margin" Value="-10 0 0 0"/>
+            <Setter Property="ItemTemplateSelector"
+                    Value="{Binding CurrentAbnormalityTemplateSelector, 
+                                                                    RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}" />
+            <Setter Property="ClipToBounds" Value="False" />
+            <Setter Property="Margin" Value="-10 0 0 0" />
             <Setter Property="ItemContainerStyle">
                 <Setter.Value>
                     <Style>
@@ -52,13 +54,13 @@
                         <WrapPanel Orientation="Horizontal"
                                    HorizontalAlignment="Left"
                                    Height="Auto"
-                                   Width="Auto"/>
+                                   Width="Auto" />
                     </ItemsPanelTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </grp:GroupMemberBase.Resources>
-    <Grid Height="Auto" Margin="2 0" Width="145" Name="RootGrid" >
+    <Grid Height="Auto" Margin="2 0" Width="145" Name="RootGrid">
         <Grid.Style>
             <Style TargetType="Grid">
                 <Setter Property="Opacity" Value="1" />
@@ -71,61 +73,64 @@
         </Grid.Style>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <!--Abnormalities grids-->
         <Grid Name="DebuffGrid" Grid.Row="2" Grid.ColumnSpan="2">
-            <ItemsControl Name="Debuffs" 
+            <ItemsControl Name="Debuffs"
                           Style="{StaticResource AbnormalitiesItemsControlStyle}"
-                          ItemsSource="{Binding DebuffsSource, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}" 
-                          Grid.ColumnSpan="2"
-                     >
+                          ItemsSource="{Binding DebuffsSource, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}"
+                          Grid.ColumnSpan="2">
                 <ItemsControl.RenderTransform>
-                    <TranslateTransform X="26"/>
+                    <TranslateTransform X="26" />
                 </ItemsControl.RenderTransform>
             </ItemsControl>
         </Grid>
-        <Grid Name="BuffGrid" Grid.Row="1" Grid.ColumnSpan="2" >
-            <ItemsControl Name="Buffs" 
+        <Grid Name="BuffGrid" Grid.Row="1" Grid.ColumnSpan="2">
+            <ItemsControl Name="Buffs"
                           Style="{StaticResource AbnormalitiesItemsControlStyle}"
-                          ItemsSource="{Binding BuffsSource, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}" 
-                          Grid.ColumnSpan="2" >
+                          ItemsSource="{Binding BuffsSource, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}}"
+                          Grid.ColumnSpan="2">
                 <ItemsControl.RenderTransform>
-                    <TranslateTransform X="26" Y="-2"/>
+                    <TranslateTransform X="26" Y="-2" />
                 </ItemsControl.RenderTransform>
             </ItemsControl>
         </Grid>
 
         <!--Info grid-->
-        <Grid Grid.Column="1" VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Margin="0"
+        <Grid Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0"
               UseLayoutRounding="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <!--Name-->
-            <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff" Cursor="Hand" ToolTipService.ShowDuration="50000"
+            <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff" Cursor="Hand"
+                       ToolTipService.ShowDuration="50000"
                        PreviewMouseRightButtonDown="ShowUserMenu"
-                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,-2,0,2" FontSize="12" Grid.Row="0" Grid.Column="0">
-                <Run Text="{Binding Level}" FontSize="10" Foreground="#6fff"/>
-                <Run Text="{Binding Name, Mode=OneWay}" FontSize="12"/>
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,-2,0,2" FontSize="12"
+                       Grid.Row="0" Grid.Column="0">
+                <Run Text="{Binding Level}" FontSize="10" Foreground="#6fff" />
+                <Run Text="{Binding Name, Mode=OneWay}" FontSize="12" />
                 <TextBlock.ToolTip>
-                    <ToolTip Background="Transparent" BorderBrush="Transparent" Opened="ToolTip_OnOpened" Closed="ToolTip_OnClosed">
+                    <ToolTip Background="Transparent" BorderBrush="Transparent" Opened="ToolTip_OnOpened"
+                             Closed="ToolTip_OnClosed">
                         <Grid>
-                            <Border Background="#556" CornerRadius="5" Padding="10,5,15,5" Effect="{StaticResource FadedDropShadow}">
-                                <StackPanel Orientation="Vertical" >
+                            <Border Background="#556" CornerRadius="5" Padding="10,5,15,5"
+                                    Effect="{StaticResource FadedDropShadow}">
+                                <StackPanel Orientation="Vertical">
                                     <!--<TextBlock Foreground="White"  Text="{Binding Name, Mode=OneWay}" FontWeight="DemiBold" FontSize="14" Margin="0,0,0,0"/>
                                     <StackPanel Orientation="Horizontal"  Visibility="{Binding Weapon, Converter={StaticResource NullToVisibleCollapsed}}" Margin="0,5,0,0">
                                         <Path Data="{Binding Weapon.Piece, Converter={StaticResource PieceToPath}}" Fill="#afff" Stretch="Uniform" Height="12" Width="12"/>
@@ -144,48 +149,54 @@
                                         <TextBlock Foreground="White" FontSize="12" Text="{Binding Boots.Name, Mode=OneWay}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     </StackPanel>-->
 
-                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0" Visibility="{Binding Online, Converter={StaticResource BoolToVisibility}}">
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0"
+                                                Visibility="{Binding Online, Converter={StaticResource BoolToVisibility}}">
                                         <!--map marker icon-->
-                                        <Path Data="{StaticResource SvgMapMarker}" Fill="#6fff" Stretch="Uniform" Height="12" Margin="3"/>
+                                        <Path Data="{StaticResource SvgMapMarker}" Fill="#6fff" Stretch="Uniform"
+                                              Height="12" Margin="3" />
                                         <TextBlock Foreground="#7fff" VerticalAlignment="Center" Margin="3,0,0,0">
                                             <Run Text="{Binding Location, Mode=OneWay}" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
-                            <Border Width="5" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Stretch" CornerRadius="0,3,3,0" Background="{Binding UserClass, Converter={StaticResource ClassToFill}}"></Border>
+                            <Border Width="5" HorizontalAlignment="Right" Height="Auto" VerticalAlignment="Stretch"
+                                    CornerRadius="0,3,3,0"
+                                    Background="{Binding UserClass, Converter={StaticResource ClassToFill}}" />
                         </Grid>
                     </ToolTip>
                 </TextBlock.ToolTip>
-            <TextBlock.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="15"/>
-            </TextBlock.Effect>
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="15" />
+                </TextBlock.Effect>
             </TextBlock>
-            <Border Grid.Row="1" Grid.ColumnSpan="2" 
-                    RenderTransform="{StaticResource Skew45}" 
+            <Border Grid.Row="1" Grid.ColumnSpan="2"
+                    RenderTransform="{StaticResource Skew45}"
                     RenderTransformOrigin=".5 .5" Height="Auto"
-                    Background="#5000" BorderThickness="2 1" 
+                    Background="#5000" BorderThickness="2 1"
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     Margin="-2 -10 3 7" Padding="1"
                     Visibility="{Binding Online, Converter={StaticResource BoolToVisibility}}">
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Rectangle 
-                               Height="3" Width="Auto" 
-                               Margin="0" HorizontalAlignment="Stretch"
-                               Style="{StaticResource OnlineBoundVisibility}"
-                                                       Visibility="{Binding ShowHp, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}, 
+                    <Rectangle
+                        Height="3" Width="Auto"
+                        Margin="0" HorizontalAlignment="Stretch"
+                        Style="{StaticResource OnlineBoundVisibility}"
+                        Visibility="{Binding ShowHp, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}, 
                                                             Converter={StaticResource BoolToVisibility}}"
 
-                               x:Name="HpBar">
+                        x:Name="HpBar">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
-                                <GradientStop Offset=".2" Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
-                                <GradientStop Offset="1" Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                <GradientStop Offset=".2"
+                                              Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}" />
+                                <GradientStop Offset="1"
+                                              Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}" />
 
                                 <!--<GradientStop Color="{StaticResource HpColorLight}" Offset="0"></GradientStop>
                             <GradientStop Color="{StaticResource HpColor}" Offset=".6"></GradientStop>-->
@@ -195,28 +206,28 @@
                         <Rectangle.RenderTransform>
                             <TransformGroup>
                                 <!--<SkewTransform AngleX="-45"></SkewTransform>-->
-                                <ScaleTransform ScaleX="{Binding HpFactor}"/>
+                                <ScaleTransform ScaleX="{Binding HpFactor}" />
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
-                    <Rectangle x:Name="MpBar" 
-                               Grid.Row="1" Height="2" 
-                               Margin="0 1 0 0" Width="Auto" HorizontalAlignment="Stretch" 
+                    <Rectangle x:Name="MpBar"
+                               Grid.Row="1" Height="2"
+                               Margin="0 1 0 0" Width="Auto" HorizontalAlignment="Stretch"
                                Visibility="{Binding ShowMp, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase}, 
                                                             Converter={StaticResource BoolToVisibility}}"
 
                                Style="{StaticResource OnlineBoundVisibility}">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
-                                <GradientStop Color="{StaticResource MpColorLight}" Offset=".9"></GradientStop>
-                                <GradientStop Color="{StaticResource MpColor}" Offset="0"></GradientStop>
+                                <GradientStop Color="{StaticResource MpColorLight}" Offset=".9" />
+                                <GradientStop Color="{StaticResource MpColor}" Offset="0" />
                             </LinearGradientBrush>
 
                         </Rectangle.Fill>
                         <Rectangle.RenderTransform>
                             <TransformGroup>
                                 <!--<SkewTransform AngleX="-45"></SkewTransform>-->
-                                <ScaleTransform ScaleX="{Binding MpFactor}"/>
+                                <ScaleTransform ScaleX="{Binding MpFactor}" />
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
@@ -227,32 +238,31 @@
 
         <!--Class/Laurel icon-->
         <Grid Margin="0" Width="34" Height="34" UseLayoutRounding="False">
-            <Border RenderTransform="{StaticResource Rotate45}" 
-                    RenderTransformOrigin=".5 .5" 
-                    Background="{StaticResource RevampBackgroundBrush}" 
-                    BorderThickness="2" 
+            <Border RenderTransform="{StaticResource Rotate45}"
+                    RenderTransformOrigin=".5 .5"
+                    Background="{StaticResource RevampBackgroundBrush}"
+                    BorderThickness="2"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     BorderBrush="{StaticResource RevampBorderBrush}"
-                    Margin="5"
-                    />
+                    Margin="5" />
 
             <!--Aggro indicator -->
             <Grid x:Name="AggroBorderGrid" RenderTransformOrigin=".5 .5">
-                <Border Name="AggroBorder" 
-                    Visibility="{Binding HasAggro, Converter={StaticResource BoolToVisibility}}"
-                    Background="#40ffa500"
-                    BorderBrush="Orange" 
-                    BorderThickness="3" 
-                    Margin="4" 
-                    VerticalAlignment="Stretch" 
-                    HorizontalAlignment="Stretch"  
-                    d:IsHidden="True" 
-                    RenderTransform="{StaticResource Rotate45}"
+                <Border Name="AggroBorder"
+                        Visibility="{Binding HasAggro, Converter={StaticResource BoolToVisibility}}"
+                        Background="#40ffa500"
+                        BorderBrush="Orange"
+                        BorderThickness="3"
+                        Margin="4"
+                        VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        d:IsHidden="True"
+                        RenderTransform="{StaticResource Rotate45}"
 
-                    RenderTransformOrigin=".5 .5">
+                        RenderTransformOrigin=".5 .5">
                     <Border.Effect>
-                        <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="10" RenderingBias="Performance"/>
+                        <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="10" RenderingBias="Performance" />
                     </Border.Effect>
                 </Border>
                 <Grid.Style>
@@ -260,10 +270,10 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding HasAggro}" Value="True">
                                 <DataTrigger.EnterActions>
-                                    <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Pulse}"/>
+                                    <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Pulse}" />
                                 </DataTrigger.EnterActions>
                                 <DataTrigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="StartPulsing"/>
+                                    <StopStoryboard BeginStoryboardName="StartPulsing" />
                                 </DataTrigger.ExitActions>
                             </DataTrigger>
 
@@ -272,38 +282,38 @@
                 </Grid.Style>
 
                 <Grid.RenderTransform>
-                    <ScaleTransform/>
+                    <ScaleTransform />
                 </Grid.RenderTransform>
             </Grid>
             <!--Death indicator -->
             <Grid x:Name="DeathBorderGrid" RenderTransformOrigin=".5 .5">
-                <Border x:Name="DeathBorder" 
-                Visibility="{Binding Alive, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}"
-                Background="#600"
-                BorderBrush="Red"
-                BorderThickness="3" 
-                Margin="4" 
-                    RenderTransform="{StaticResource Rotate45}"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                d:IsHidden="True" RenderTransformOrigin=".5 .5">
+                <Border x:Name="DeathBorder"
+                        Visibility="{Binding Alive, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}"
+                        Background="#600"
+                        BorderBrush="Red"
+                        BorderThickness="3"
+                        Margin="4"
+                        RenderTransform="{StaticResource Rotate45}"
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                        d:IsHidden="True" RenderTransformOrigin=".5 .5">
 
                     <Border.Effect>
-                        <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="10" RenderingBias="Performance"/>
+                        <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="10" RenderingBias="Performance" />
                     </Border.Effect>
                 </Border>
                 <Grid.RenderTransform>
-                    <ScaleTransform  ScaleX="1" ScaleY="1"/>
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
                 </Grid.RenderTransform>
                 <Grid.Style>
                     <Style>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Alive}" Value="False">
                                 <DataTrigger.EnterActions>
-                                    <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Pulse}"/>
+                                    <BeginStoryboard x:Name="StartPulsing" Storyboard="{StaticResource Pulse}" />
 
                                 </DataTrigger.EnterActions>
                                 <DataTrigger.ExitActions>
-                                    <StopStoryboard BeginStoryboardName="StartPulsing"/>
+                                    <StopStoryboard BeginStoryboardName="StartPulsing" />
                                 </DataTrigger.ExitActions>
                             </DataTrigger>
 
@@ -313,51 +323,49 @@
 
             </Grid>
 
-            <Image  Opacity="1" x:Name="LaurelImage" 
-                    Margin="-3" 
-                    Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr_half}" 
-                    RenderOptions.BitmapScalingMode="Linear" 
-                    UseLayoutRounding="True" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Stretch"
-                    Stretch="Uniform" 
-                    Visibility="{Binding ShowLaurel, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
-                                                     Converter={StaticResource BoolToVisibility}}"
-                    >
+            <Image Opacity="1" x:Name="LaurelImage"
+                   Margin="-3"
+                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=half}"
+                   RenderOptions.BitmapScalingMode="Linear"
+                   UseLayoutRounding="True"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Stretch"
+                   Stretch="Uniform"
+                   Visibility="{Binding ShowLaurel, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
+                                                     Converter={StaticResource BoolToVisibility}}">
                 <Image.RenderTransform>
-                    <TranslateTransform Y="1" X="-.5"/>
+                    <TranslateTransform Y="1" X="-.5" />
                 </Image.RenderTransform>
             </Image>
-            <Grid  Width="13" Height="13" Margin="0 0 0 0"
-                   HorizontalAlignment="Right" VerticalAlignment="Center"
-                   Grid.Column="0" ToolTip="Awakened"
-                   Visibility="{Binding ShowAwaken, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
+            <Grid Width="13" Height="13" Margin="0 0 0 0"
+                  HorizontalAlignment="Right" VerticalAlignment="Center"
+                  Grid.Column="0" ToolTip="Awakened"
+                  Visibility="{Binding ShowAwaken, RelativeSource={RelativeSource AncestorType=grp:GroupMemberBase},
                                                     Converter={StaticResource BoolToVisibility}}">
-                <Border Background="Transparent" 
+                <Border Background="Transparent"
                         BorderBrush="Transparent"
                         Visibility="{Binding Awakened, Converter={StaticResource BoolToVisibility}}"
                         RenderTransformOrigin=".5 .5"
                         x:Name="AwakenBorder">
                     <Border.RenderTransform>
-                        <RotateTransform Angle="45"/>
+                        <RotateTransform Angle="45" />
                     </Border.RenderTransform>
                 </Border>
-                <Path Stroke="Transparent" RenderOptions.BitmapScalingMode="Fant" Margin="4 0 0 0" Data="m0,1 1,-1 1,1"  Fill="Orange"
+                <Path Stroke="Transparent" RenderOptions.BitmapScalingMode="Fant" Margin="4 0 0 0" Data="m0,1 1,-1 1,1"
+                      Fill="Orange"
                       Visibility="{Binding Awakened, Converter={StaticResource BoolToVisibility}}" x:Name="AwakenIcon"
-                      RenderTransformOrigin=".5 .5" Width="10"
-                      
-                >
+                      RenderTransformOrigin=".5 .5" Width="10">
                     <Path.RenderTransform>
-                        <RotateTransform Angle="90"/>
+                        <RotateTransform Angle="90" />
                     </Path.RenderTransform>
                     <Path.Effect>
-                        <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                        <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="20" />
                     </Path.Effect>
                 </Path>
 
                 <Grid.RenderTransform>
                     <TransformGroup>
-                        <TranslateTransform X="0"/>
+                        <TranslateTransform X="0" />
                     </TransformGroup>
                 </Grid.RenderTransform>
 
@@ -365,14 +373,13 @@
 
             <Path Fill="#eee" Opacity="1"
                   Margin="9 0"
-                  HorizontalAlignment="Center" VerticalAlignment="Stretch" Stretch="Uniform" 
+                  HorizontalAlignment="Center" VerticalAlignment="Stretch" Stretch="Uniform"
                   Data="{Binding UserClass,Converter={StaticResource ClassToSvg}}"
-                  Effect="{StaticResource ClassIconGlow}" 
+                  Effect="{StaticResource ClassIconGlow}"
                   UseLayoutRounding="True"
-                    RenderOptions.BitmapScalingMode="HighQuality" 
-            >
+                  RenderOptions.BitmapScalingMode="HighQuality">
                 <Path.RenderTransform>
-                    <TranslateTransform Y="0"></TranslateTransform>
+                    <TranslateTransform Y="0" />
                 </Path.RenderTransform>
 
                 <Path.Style>
@@ -384,7 +391,7 @@
                                         <Storyboard>
                                             <DoubleAnimation From="1" To=".3"
                                                              Duration="0:0:0.2"
-                                                             Storyboard.TargetProperty="Opacity"/>
+                                                             Storyboard.TargetProperty="Opacity" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </DataTrigger.EnterActions>
@@ -393,7 +400,7 @@
                                         <Storyboard>
                                             <DoubleAnimation From=".3" To="1"
                                                              Duration="0:0:0.2"
-                                                             Storyboard.TargetProperty="Opacity"/>
+                                                             Storyboard.TargetProperty="Opacity" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </DataTrigger.ExitActions>
@@ -403,36 +410,27 @@
                 </Path.Style>
             </Path>
         </Grid>
-        <Grid  Width="14" Height="14" 
-               Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
-               HorizontalAlignment="Left" VerticalAlignment="Top"
-               Grid.Column="0"
-               Margin="0"
-        >
+        <Grid Width="14" Height="14"
+              Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
+              HorizontalAlignment="Left" VerticalAlignment="Top"
+              Grid.Column="0"
+              Margin="0">
             <!--<Ellipse Fill="Orange"/>-->
-            <Border Background="Orange" 
+            <Border Background="Orange"
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     BorderThickness="1"
                     RenderTransformOrigin=".5 .5">
                 <Border.RenderTransform>
-                    <RotateTransform Angle="45"/>
+                    <RotateTransform Angle="45" />
                 </Border.RenderTransform>
             </Border>
-            <Rectangle Fill="{StaticResource RevampBackgroundBrush}" RenderOptions.BitmapScalingMode="Fant" Margin="2">
-                <Rectangle.OpacityMask>
-                    <ImageBrush  ImageSource="/TCC;component/resources/images/crown.png"></ImageBrush>
-                </Rectangle.OpacityMask>
-            </Rectangle>
-            <!--<Image Source="/TCC;component/resources/images/crown.png" Margin="1 0" 
-                   HorizontalAlignment="Left" VerticalAlignment="Top"
-                   UseLayoutRounding="False" 
-                   RenderOptions.BitmapScalingMode="Fant" 
-                   Width="10" />-->
+            <Path Data="{StaticResource SvgCrown}"
+                  Fill="{StaticResource RevampBackgroundBrush}" RenderOptions.BitmapScalingMode="Fant" Margin="3 2 3 3"/>
             <Grid.RenderTransform>
-                <TranslateTransform X="0"/>
+                <TranslateTransform X="0" />
             </Grid.RenderTransform>
             <Grid.Effect>
-                <DropShadowEffect ShadowDepth="2" Opacity=".7"></DropShadowEffect>
+                <DropShadowEffect ShadowDepth="2" Opacity=".7" />
             </Grid.Effect>
         </Grid>
 
@@ -443,33 +441,33 @@
         </StackPanel>
 
         <!--Ready check grid-->
-        <Grid  VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" 
-             Opacity="{Binding Ready, Converter={StaticResource ReadyToOpacityConv}}"
-              >
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2"
+              Opacity="{Binding Ready, Converter={StaticResource ReadyToOpacityConv}}">
             <Grid.Effect>
-                <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3"/>
+                <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3" />
             </Grid.Effect>
             <Border Width="16" Height="16"
-             Background="{Binding Ready, Converter={StaticResource ReadyToColor}}"
-                    RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5"/>
-            <Rectangle Width="14" Height="14" Fill="Black" RenderOptions.BitmapScalingMode="Fant">
-                <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="{Binding Ready, Converter={StaticResource ReadyToIcon}}" />
-                    <!--<ImageBrush ImageSource="../resources/images/ic_done_white_24dp_2x.png"></ImageBrush>-->
-                </Rectangle.OpacityMask>
-            </Rectangle>
+                    Background="{Binding Ready, Converter={StaticResource ReadyToColor}}"
+                    RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
+
+            <Path Margin="3" Fill="#a000" 
+                  RenderTransform="{StaticResource Rotate45Inv}" RenderTransformOrigin=".5 .5" 
+                  Data="{Binding Ready, Converter={StaticResource ReadyToSvg}}" />
+            </Border>
         </Grid>
 
         <!--Roll result grid-->
-        <Grid Margin="0,-1" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2" Opacity="1" Width="30">
+        <Grid Margin="0,-1" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2" Opacity="1"
+              Width="30">
             <Grid.Effect>
-                <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3"/>
+                <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3" />
             </Grid.Effect>
-            <Border Background="{Binding IsWinning, Converter={StaticResource WinningToColor}}" CornerRadius="2"></Border>
-            <TextBlock FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                           Margin="0,0,0,1" FontWeight="SemiBold" Text="{Binding RollResult, Converter={StaticResource RollToString}}"/>
+            <Border Background="{Binding IsWinning, Converter={StaticResource WinningToColor}}" CornerRadius="2" />
+            <TextBlock FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Margin="0,0,0,1" FontWeight="SemiBold"
+                       Text="{Binding RollResult, Converter={StaticResource RollToString}}" />
             <Grid.RenderTransform>
-                <ScaleTransform ScaleX="0"/>
+                <ScaleTransform ScaleX="0" />
             </Grid.RenderTransform>
             <Grid.Style>
                 <Style>

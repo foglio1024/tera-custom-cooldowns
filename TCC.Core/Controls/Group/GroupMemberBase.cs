@@ -64,6 +64,9 @@ namespace TCC.Controls.Group
         private void OnLoaded(object _, RoutedEventArgs __)
         {
             UpdateSettings();
+
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+            
             WindowManager.ViewModels.GroupVM.SettingsUpdated += UpdateSettings;
             WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupVmPropertyChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
