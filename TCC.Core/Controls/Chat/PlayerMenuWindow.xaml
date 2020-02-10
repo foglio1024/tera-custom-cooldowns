@@ -440,7 +440,7 @@
                                 <chatControls:MoongourdPopup />
                             </Popup>
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/TCC;component/resources/images/moongourd.png" Margin="4 6 2 6" />
+                                <Image Source="{StaticResource MoongourdLogo}" Margin="4 6 2 6" />
                                 <TextBlock Text="Moongourd info" Margin="3" />
                             </StackPanel>
                             <Path Data="{StaticResource SvgMenuRight}" HorizontalAlignment="Right"

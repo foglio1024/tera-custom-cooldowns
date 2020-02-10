@@ -69,7 +69,7 @@
                     Click="ClosewWindow" VerticalContentAlignment="Center">
                 <Path Data="{StaticResource SvgClose}" Margin="10 0" />
             </Button>
-            <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Width="30"
+            <Image Source="{StaticResource TeraFlatLogo}" Width="30"
                    RenderOptions.BitmapScalingMode="HighQuality"
                    VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".6" Margin="3 3" />
             <TextBlock Text="Cooldown bar settings" Style="{StaticResource DefaultTextStyle}"

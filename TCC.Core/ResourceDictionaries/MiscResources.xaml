@@ -27,6 +27,9 @@
 
     <!-- Embedded images -->
     <ImageSource x:Key="DefaultGuildLogo">         pack://application:,,,/resources/images/default_guild_logo.png                </ImageSource>
+    <ImageSource x:Key="MoongourdLogo">            pack://application:,,,/resources/images/moongourd.png                         </ImageSource>
+    <ImageSource x:Key="TeraFlatLogo">             pack://application:,,,/resources/images/tera-logo-flat.png                    </ImageSource>
+
     <ImageSource x:Key="BlankImage">               pack://application:,,,/resources/images/Icon_Laurels/blank.png                </ImageSource>
     <ImageSource x:Key="BronzeLaurel">             pack://application:,,,/resources/images/Icon_Laurels/bronze.png               </ImageSource>
     <ImageSource x:Key="BronzeLaurelNew">          pack://application:,,,/resources/images/Icon_Laurels/bronze_kr.png            </ImageSource>

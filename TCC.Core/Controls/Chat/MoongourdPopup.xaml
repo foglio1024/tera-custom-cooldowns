@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Image Source="/TCC;component/resources/images/moongourd.png" Margin="5" Width="20"></Image>
+            <Image Source="{StaticResource MoongourdLogo}" Margin="5" Width="20"></Image>
             <TextBlock Grid.Column="1" Foreground="#7fff" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 5 0">
                 <Run Text="Five most recent"/>
                 <Run Text="{Binding PlayerName, RelativeSource={RelativeSource AncestorType=local:MoongourdPopup}, Mode=OneWay}" Foreground="{StaticResource MoongourdAccentBrush}"/><Run Text="'s Moongourd parses"/>

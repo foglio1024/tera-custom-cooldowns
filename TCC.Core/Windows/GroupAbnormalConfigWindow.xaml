@@ -38,7 +38,7 @@
                     Click="Close" VerticalContentAlignment="Center">
                 <Path Data="{StaticResource SvgClose}" Margin="10 0" />
             </Button>
-            <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Width="30"
+            <Image Source="{StaticResource TeraFlatLogo}" Width="30"
                    RenderOptions.BitmapScalingMode="HighQuality"
                    VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".4" Margin="3 3" />
             <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=windows:GroupAbnormalConfigWindow}}" Style="{StaticResource DefaultTextStyle}"
@@ -173,7 +173,7 @@
                     Click="Close" VerticalContentAlignment="Center">
                 <Path Data="{StaticResource SvgClose}" Margin="10 0" />
             </Button>
-            <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Width="30"
+            <Image Source="{StaticResource TeraFlatLogo}" Width="30"
                    RenderOptions.BitmapScalingMode="HighQuality"
                    VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".4" Margin="3 3" />
             <TextBlock Text="Group members buffs settings" Style="{StaticResource DefaultTextStyle}"

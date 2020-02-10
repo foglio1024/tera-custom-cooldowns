@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Image Source="/TCC;component/resources/images/tera-logo-flat.png"
+            <Image Source="{StaticResource TeraFlatLogo}"
                    Opacity=".4"
                    Width="Auto" Height="32"
                    Margin="0"
