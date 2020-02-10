@@ -13,27 +13,9 @@ using SevenZip;
 
 namespace TCC.Publisher
 {
-    public class PublisherSettings
-    {
-        public string RepositoryName { get; set; }
-        public string RepositoryOwner { get; set; }
-        public string SevenZipLibPath { get; set; }
-        public string LocalRepositoryPath { get; set; }
-        public string DiscordWebhook { get; set; }
-        public string GithubToken { get; set; }
-        public string FirestoreUrl { get; set; }
-        public List<string> ExcludedFiles { get; set; }
-
-        public PublisherSettings()
-        {
-            
-        }
-    }
-
     public static class Publisher
     {
         private static GitHubClient _client;
-        private static List<string> _exclusions;
 
         private static PublisherSettings _settings;
 
@@ -115,7 +97,7 @@ namespace TCC.Publisher
                 var extr = new SevenZipExtractor(_zipName);
                 foreach (var f in extr.ArchiveFileData)
                 {
-                    if (_exclusions.Any(ex => f.FileName.StartsWith(ex)))
+                    if (_settings.ExcludedFiles.Any(ex => f.FileName.StartsWith(ex)))
                     {
                         files[f.Index] = null;
                     }
