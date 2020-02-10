@@ -9,7 +9,7 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var l = (Laurel?)value ?? Laurel.None;
+            if (!(value is Laurel l)) l = Laurel.None;
             bool kr = false, big = false, half = false;
             if (parameter != null)
             {
@@ -17,35 +17,58 @@ namespace TCC.Converters
                 big = parameter.ToString().Contains("big");
                 half = parameter.ToString().Contains("half");
             }
-            var laurel = "";
-            switch (l)
+
+            if (half)
             {
-                case Laurel.None:
-                    return null;
-                case Laurel.Bronze:
-                    laurel = "bronze";
-                    break;
-                case Laurel.Silver:
-                    laurel = "silver";
-                    break;
-                case Laurel.Gold:
-                    laurel = "gold";
-                    break;
-                case Laurel.Diamond:
-                    laurel = "diamond";
-                    break;
-                case Laurel.Champion:
-                    laurel = "champion";
-                    break;
+                return l switch
+                {
+                    Laurel.Bronze => R.MiscResources.BronzeLaurelNewBottom,
+                    Laurel.Silver => R.MiscResources.SilverLaurelNewBottom,
+                    Laurel.Gold => R.MiscResources.GoldLaurelNewBottom,
+                    Laurel.Diamond => R.MiscResources.DiamondLaurelNewBottom,
+                    Laurel.Champion => R.MiscResources.ChampionLaurelNewBottom,
+                    _ => null
+                };
             }
 
-            if (kr)
+            if (big)
             {
-                laurel += "_kr";
-                if (half) laurel += "_bottom";
+                return l switch
+                {
+                    Laurel.Bronze => R.MiscResources.BronzeLaurelNewBig,
+                    Laurel.Silver => R.MiscResources.SilverLaurelNewBig,
+                    Laurel.Gold => R.MiscResources.GoldLaurelNewBig,
+                    Laurel.Diamond => R.MiscResources.DiamondLaurelNewBig,
+                    Laurel.Champion => R.MiscResources.ChampionLaurelNewBig,
+                    _ => null
+                };
+
             }
-            if (big) laurel += "_big";
-            return "/resources/images/Icon_Laurels/" + laurel + ".png";
+
+            if (!kr)
+            {
+                return l switch
+                {
+                    Laurel.Bronze => R.MiscResources.BronzeLaurel,
+                    Laurel.Silver => R.MiscResources.SilverLaurel,
+                    Laurel.Gold => R.MiscResources.GoldLaurel,
+                    Laurel.Diamond => R.MiscResources.DiamondLaurel,
+                    Laurel.Champion => R.MiscResources.ChampionLaurel,
+                    _ => null
+                };
+            }
+
+            return l switch
+            {
+                Laurel.Bronze => R.MiscResources.BronzeLaurelNew,
+                Laurel.Silver => R.MiscResources.SilverLaurelNew,
+                Laurel.Gold => R.MiscResources.GoldLaurelNew,
+                Laurel.Diamond => R.MiscResources.DiamondLaurelNew,
+                Laurel.Champion => R.MiscResources.ChampionLaurelNew,
+                _ => null
+            };
+
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

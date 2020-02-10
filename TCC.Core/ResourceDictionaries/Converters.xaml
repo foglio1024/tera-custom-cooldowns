@@ -7,7 +7,6 @@
     <tccConv:RollToStringConverter x:Key="RollToString"/>
     <tccConv:WinningToColorConverter x:Key="WinningToColor"/>
     <tccConv:IconConverter x:Key="IconNameToPath"/>
-    <tccConv:ClassImageConverter x:Key="ClassToImageConverter"/>
     <tccConv:ClassSvgConverter x:Key="ClassToSvg"/>
     <tccConv:ChatChannelToColorConverter x:Key="ChatChannelToColor"/>
     <tccConv:ChatChannelToName x:Key="ChatChannelToName"/>
@@ -36,7 +35,7 @@
     <tccConv:LaurelImageConverter x:Key="LaurelToImage"/>
     <tccConv:ClassToFillConverter x:Key="ClassToFill"/>
     <tccConv:ReadyToOpacityConverter x:Key="ReadyToOpacityConv"/>
-    <tccConv:ReadyToIconConverter x:Key="ReadyToIcon"/>
+    <tccConv:ReadyToSvgConverter x:Key="ReadyToSvg"/>
     <tccConv:ReadyToColorConverter x:Key="ReadyToColor"/>
     <tccConv:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplate"/>
     <tccConv:RaidToColorConverter x:Key="RaidToColor"/>

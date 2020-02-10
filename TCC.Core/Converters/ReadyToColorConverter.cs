@@ -10,17 +10,14 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((ReadyStatus?)value ?? ReadyStatus.None)
+            if (!(value is ReadyStatus r)) r = ReadyStatus.None;
+            return r switch
             {
-                case ReadyStatus.NotReady:
-                    return R.Brushes.HpBrush; //Application.Current.FindResource("HpBrush");
-                case ReadyStatus.Ready:
-                    return R.Brushes.LightGreenBrush; //Application.Current.FindResource("LightGreenBrush");
-                case ReadyStatus.Undefined:
-                    return R.Brushes.GoldBrush;// Application.Current.FindResource("GoldBrush");
-                default:
-                    return Brushes.Transparent;
-            }
+                ReadyStatus.NotReady => R.Brushes.HpBrush,
+                ReadyStatus.Ready => R.Brushes.LightGreenBrush,
+                ReadyStatus.Undefined => R.Brushes.GoldBrush,
+                _ => Brushes.Transparent
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
