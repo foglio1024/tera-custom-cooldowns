@@ -15,15 +15,9 @@
     </Storyboard>
 
     <!-- Fonts -->
-    <FontFamily x:Key="DroidSans">                 pack://application:,,,/fonts/#Droid Sans                                      </FontFamily>
-    <FontFamily x:Key="DroidSansMono">             pack://application:,,,/fonts/#Droid Sans Mono                                 </FontFamily>
-    <FontFamily x:Key="OpenSans">                  pack://application:,,,/resources/fonts/#Open Sans                             </FontFamily>
     <FontFamily x:Key="Frutiger">                  pack://application:,,,/resources/fonts/#Frutiger LT Pro 55 Roman              </FontFamily>
-    <FontFamily x:Key="SourceSans">                pack://application:,,,/resources/fonts/#Source Sans Pro SemiBold              </FontFamily>
-    <FontFamily x:Key="RobotoMonoMedium">          pack://application:,,,/resources/fonts/#Roboto Mono Medium                    </FontFamily>
     <FontFamily x:Key="ArialMonoBold">             pack://application:,,,/resources/fonts/#Arial Monospaced MT                   </FontFamily>
     <FontFamily x:Key="NotoSansMed">               pack://application:,,,/resources/fonts/#Noto Sans Med                         </FontFamily>
-    <FontFamily x:Key="ProductSans">               pack://application:,,,/resources/fonts/#Product Sans                          </FontFamily>
 
     <!-- Embedded images -->
     <ImageSource x:Key="DefaultGuildLogo">         pack://application:,,,/resources/images/default_guild_logo.png                </ImageSource>

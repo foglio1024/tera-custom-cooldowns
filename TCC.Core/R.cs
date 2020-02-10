@@ -417,16 +417,12 @@ namespace TCC.R
 	{
 		public static Storyboard Pulse => ((Storyboard)App.Current.FindResource("Pulse"));
 		public static Storyboard Warn => ((Storyboard)App.Current.FindResource("Warn"));
-		public static FontFamily DroidSans => ((FontFamily)App.Current.FindResource("DroidSans"));
-		public static FontFamily DroidSansMono => ((FontFamily)App.Current.FindResource("DroidSansMono"));
-		public static FontFamily OpenSans => ((FontFamily)App.Current.FindResource("OpenSans"));
 		public static FontFamily Frutiger => ((FontFamily)App.Current.FindResource("Frutiger"));
-		public static FontFamily SourceSans => ((FontFamily)App.Current.FindResource("SourceSans"));
-		public static FontFamily RobotoMonoMedium => ((FontFamily)App.Current.FindResource("RobotoMonoMedium"));
 		public static FontFamily ArialMonoBold => ((FontFamily)App.Current.FindResource("ArialMonoBold"));
 		public static FontFamily NotoSansMed => ((FontFamily)App.Current.FindResource("NotoSansMed"));
-		public static FontFamily ProductSans => ((FontFamily)App.Current.FindResource("ProductSans"));
 		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
+		public static ImageSource MoongourdLogo => ((ImageSource)App.Current.FindResource("MoongourdLogo"));
+		public static ImageSource TeraFlatLogo => ((ImageSource)App.Current.FindResource("TeraFlatLogo"));
 		public static ImageSource BlankImage => ((ImageSource)App.Current.FindResource("BlankImage"));
 		public static ImageSource BronzeLaurel => ((ImageSource)App.Current.FindResource("BronzeLaurel"));
 		public static ImageSource BronzeLaurelNew => ((ImageSource)App.Current.FindResource("BronzeLaurelNew"));
@@ -486,6 +482,7 @@ namespace TCC.R
 		public static Geometry SvgNpcIcon => ((Geometry)App.Current.FindResource("SvgNpcIcon"));
 		public static Geometry SvgBuffIcon => ((Geometry)App.Current.FindResource("SvgBuffIcon"));
 		public static Geometry SvgCrown => ((Geometry)App.Current.FindResource("SvgCrown"));
+		public static Geometry SvgPauseCircle => ((Geometry)App.Current.FindResource("SvgPauseCircle"));
 	}
 
 	// ResourceDictionaries/Styles.xaml

@@ -34,6 +34,9 @@
     <Reference Include="PresentationFramework.Aero" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="resources\fonts\copyfonts.com_arial-monospaced-mt-bold.ttf" />
+    <None Remove="resources\fonts\Frutiger.ttf" />
+    <None Remove="resources\fonts\NotoSans-Medium.ttf" />
     <None Remove="resources\images\10kdays.jpg" />
     <None Remove="resources\images\char_window_bg.png" />
     <None Remove="resources\images\char_window_bg_bar.png" />
@@ -104,6 +107,9 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <Resource Include="resources\fonts\copyfonts.com_arial-monospaced-mt-bold.ttf" />
+    <Resource Include="resources\fonts\Frutiger.ttf" />
+    <Resource Include="resources\fonts\NotoSans-Medium.ttf" />
     <Resource Include="resources\images\10kdays.jpg" />
     <Resource Include="resources\images\char_window_bg.png" />
     <Resource Include="resources\images\char_window_bg_bar.png" />
