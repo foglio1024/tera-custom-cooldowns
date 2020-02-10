@@ -141,10 +141,10 @@
     <DataTemplate x:Key="GroupAbnormalitySelectorDataTemplate" DataType="vm:GroupAbnormalityVM">
         <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition Width="350" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="340" />
                 <ColumnDefinition Width="450" />
-                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.ToolTip>
                 <ToolTip Background="Transparent" BorderBrush="Transparent">
@@ -155,7 +155,7 @@
                     </Grid>
                 </ToolTip>
             </Grid.ToolTip>
-            <Ellipse Width="30" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
+            <Ellipse Width="40" Height="{Binding ElementName=icon, Path=ActualWidth}" x:Name="icon"
                      Stroke="#7fff"
                      StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Ellipse.Fill>
@@ -165,7 +165,8 @@
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Abnormality.Name}"
                        VerticalAlignment="Center" Margin="5 0" />
-            <ItemsControl ItemsSource="{Binding Classes}" Grid.Column="2">
+            <ItemsControl ItemsSource="{Binding Classes}" Grid.Column="2"
+                          IsEnabled="{Binding DC.ShowAll, RelativeSource={RelativeSource AncestorType=windows:GroupAbnormalConfigWindow}, Converter={StaticResource BoolInverter}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Rows="1" />
@@ -174,23 +175,32 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Command="{Binding ToggleCommand}" Width="30" HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgCheckCircle}" Fill="#fff"
+                                VerticalContentAlignment="Center"
+                                Style="{StaticResource ButtonContentOpacityStyle}">
+                            <Path Data="{StaticResource SvgCheckCircle}" Fill="#666"
                                   Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
-                                  HorizontalAlignment="Center" />
-                            <Button.Style>
-                                <Style BasedOn="{StaticResource ButtonContentOpacityStyle}" TargetType="Button">
-                                    <Setter Property="Opacity" Value=".1" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Selected}" Value="True">
-                                            <Setter Property="Opacity" Value="1" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
+                                  HorizontalAlignment="Center" 
+                                  x:Name="btnContent">
+
+                            </Path>
                         </Button>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Selected}" Value="True">
+                                <Setter TargetName="btnContent" Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+                <ItemsControl.Style>
+                    <Style TargetType="ItemsControl">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value=".5" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ItemsControl.Style>
+
             </ItemsControl>
             <TextBlock Grid.Column="3" Foreground="#3fff" Text="{Binding Abnormality.Id}"
                        VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Right" />

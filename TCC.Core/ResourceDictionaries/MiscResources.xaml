@@ -15,17 +15,39 @@
     </Storyboard>
 
     <!-- Fonts -->
-    <FontFamily x:Key="DroidSans">pack://application:,,,/fonts/#Droid Sans</FontFamily>
-    <FontFamily x:Key="DroidSansMono">pack://application:,,,/fonts/#Droid Sans Mono</FontFamily>
-    <FontFamily x:Key="OpenSans">pack://application:,,,/resources/fonts/#Open Sans</FontFamily>
-    <FontFamily x:Key="Frutiger">pack://application:,,,/resources/fonts/#Frutiger LT Pro 55 Roman</FontFamily>
-    <FontFamily x:Key="SourceSans">pack://application:,,,/resources/fonts/#Source Sans Pro SemiBold</FontFamily>
-    <FontFamily x:Key="RobotoMonoMedium">pack://application:,,,/resources/fonts/#Roboto Mono Medium</FontFamily>
-    <FontFamily x:Key="ArialMonoBold">pack://application:,,,/resources/fonts/#Arial Monospaced MT</FontFamily>
-    <FontFamily x:Key="NotoSansMed">pack://application:,,,/resources/fonts/#Noto Sans Med</FontFamily>
-    <FontFamily x:Key="ProductSans">pack://application:,,,/resources/fonts/#Product Sans</FontFamily>
+    <FontFamily x:Key="DroidSans">                 pack://application:,,,/fonts/#Droid Sans                                      </FontFamily>
+    <FontFamily x:Key="DroidSansMono">             pack://application:,,,/fonts/#Droid Sans Mono                                 </FontFamily>
+    <FontFamily x:Key="OpenSans">                  pack://application:,,,/resources/fonts/#Open Sans                             </FontFamily>
+    <FontFamily x:Key="Frutiger">                  pack://application:,,,/resources/fonts/#Frutiger LT Pro 55 Roman              </FontFamily>
+    <FontFamily x:Key="SourceSans">                pack://application:,,,/resources/fonts/#Source Sans Pro SemiBold              </FontFamily>
+    <FontFamily x:Key="RobotoMonoMedium">          pack://application:,,,/resources/fonts/#Roboto Mono Medium                    </FontFamily>
+    <FontFamily x:Key="ArialMonoBold">             pack://application:,,,/resources/fonts/#Arial Monospaced MT                   </FontFamily>
+    <FontFamily x:Key="NotoSansMed">               pack://application:,,,/resources/fonts/#Noto Sans Med                         </FontFamily>
+    <FontFamily x:Key="ProductSans">               pack://application:,,,/resources/fonts/#Product Sans                          </FontFamily>
 
-    <ImageSource x:Key="DefaultGuildLogo">pack://application:,,,/resources/images/default_guild_logo.png</ImageSource>
+    <!-- Embedded images -->
+    <ImageSource x:Key="DefaultGuildLogo">         pack://application:,,,/resources/images/default_guild_logo.png                </ImageSource>
+    <ImageSource x:Key="BlankImage">               pack://application:,,,/resources/images/Icon_Laurels/blank.png                </ImageSource>
+    <ImageSource x:Key="BronzeLaurel">             pack://application:,,,/resources/images/Icon_Laurels/bronze.png               </ImageSource>
+    <ImageSource x:Key="BronzeLaurelNew">          pack://application:,,,/resources/images/Icon_Laurels/bronze_kr.png            </ImageSource>
+    <ImageSource x:Key="BronzeLaurelNewBig">       pack://application:,,,/resources/images/Icon_Laurels/bronze_kr_big.png        </ImageSource>
+    <ImageSource x:Key="BronzeLaurelNewBottom">    pack://application:,,,/resources/images/Icon_Laurels/bronze_kr_bottom.png     </ImageSource>
+    <ImageSource x:Key="SilverLaurel">             pack://application:,,,/resources/images/Icon_Laurels/silver.png               </ImageSource>
+    <ImageSource x:Key="SilverLaurelNew">          pack://application:,,,/resources/images/Icon_Laurels/silver_kr.png            </ImageSource>
+    <ImageSource x:Key="SilverLaurelNewBig">       pack://application:,,,/resources/images/Icon_Laurels/silver_kr_big.png        </ImageSource>
+    <ImageSource x:Key="SilverLaurelNewBottom">    pack://application:,,,/resources/images/Icon_Laurels/silver_kr_bottom.png     </ImageSource>
+    <ImageSource x:Key="GoldLaurel">               pack://application:,,,/resources/images/Icon_Laurels/gold.png                 </ImageSource>
+    <ImageSource x:Key="GoldLaurelNew">            pack://application:,,,/resources/images/Icon_Laurels/gold_kr.png              </ImageSource>
+    <ImageSource x:Key="GoldLaurelNewBig">         pack://application:,,,/resources/images/Icon_Laurels/gold_kr_big.png          </ImageSource>
+    <ImageSource x:Key="GoldLaurelNewBottom">      pack://application:,,,/resources/images/Icon_Laurels/gold_kr_bottom.png       </ImageSource>
+    <ImageSource x:Key="DiamondLaurel">            pack://application:,,,/resources/images/Icon_Laurels/diamond.png              </ImageSource>
+    <ImageSource x:Key="DiamondLaurelNew">         pack://application:,,,/resources/images/Icon_Laurels/diamond_kr.png           </ImageSource>
+    <ImageSource x:Key="DiamondLaurelNewBig">      pack://application:,,,/resources/images/Icon_Laurels/diamond_kr_big.png       </ImageSource>
+    <ImageSource x:Key="DiamondLaurelNewBottom">   pack://application:,,,/resources/images/Icon_Laurels/diamond_kr_bottom.png    </ImageSource>
+    <ImageSource x:Key="ChampionLaurel">           pack://application:,,,/resources/images/Icon_Laurels/champion.png             </ImageSource>
+    <ImageSource x:Key="ChampionLaurelNew">        pack://application:,,,/resources/images/Icon_Laurels/champion_kr.png          </ImageSource>
+    <ImageSource x:Key="ChampionLaurelNewBig">     pack://application:,,,/resources/images/Icon_Laurels/champion_kr_big.png      </ImageSource>
+    <ImageSource x:Key="ChampionLaurelNewBottom">  pack://application:,,,/resources/images/Icon_Laurels/champion_kr_bottom.png   </ImageSource>
 
     <DropShadowEffect x:Key="ClassIconGlow" Color="{StaticResource ClassGlowColor}" BlurRadius="3" ShadowDepth="0" Opacity=".5"/>
     <DropShadowEffect x:Key="ClassWindowSkillBorderShadow" ShadowDepth="0" BlurRadius="20"/>
