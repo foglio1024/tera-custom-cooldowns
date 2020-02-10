@@ -8,7 +8,7 @@ namespace TeraPacketParser.Messages
         public long Diff { get; }
         public ulong Target { get; }
         public ulong Source { get; }
-        public bool Crit { get; }
+        public bool Crit { get; } //TODO: not actually used
 
         public S_CREATURE_CHANGE_HP(TeraMessageReader reader) : base(reader)
         {
