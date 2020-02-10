@@ -14,7 +14,6 @@ using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.NPCs;
 using TCC.Parsing;
-using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.Utilities;
 using TCC.Utils;

@@ -5,7 +5,6 @@ using System.Windows.Input;
 using Dragablz;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data.Chat;
-using TCC.Settings;
 using Nostrum.Extensions;
 using TCC.Settings.WindowSettings;
 using TCC.ViewModels;

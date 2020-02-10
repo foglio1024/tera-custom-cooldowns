@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows.Threading;
 using Nostrum;
-using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TCC.ViewModels;

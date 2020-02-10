@@ -6,7 +6,6 @@ using System.Windows;
 using Nostrum;
 using Nostrum.Factories;
 using TCC.Parsing;
-using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TeraDataLite;

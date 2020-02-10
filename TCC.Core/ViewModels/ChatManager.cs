@@ -16,7 +16,6 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Parsing;
 using TCC.R;
-using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.TeraCommon.Game;
 using TCC.Utilities;

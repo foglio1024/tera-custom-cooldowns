@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TCC.ViewModels;

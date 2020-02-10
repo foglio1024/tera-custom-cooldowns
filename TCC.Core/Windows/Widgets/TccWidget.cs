@@ -13,7 +13,6 @@ using Nostrum.Extensions;
 using Nostrum.Factories;
 using TCC.Controls;
 using TCC.Data;
-using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using Size = System.Drawing.Size;

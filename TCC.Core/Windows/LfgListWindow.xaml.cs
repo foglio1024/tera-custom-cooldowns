@@ -1,15 +1,8 @@
 ﻿using Nostrum;
-using System;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using GongSolutions.Wpf.DragDrop.Utilities;
-using Nostrum.Extensions;
 using Nostrum.Factories;
-using TCC.Data;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 

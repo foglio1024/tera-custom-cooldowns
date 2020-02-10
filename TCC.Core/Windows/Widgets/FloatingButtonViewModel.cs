@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 using Nostrum;
-using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.ViewModels;
 
