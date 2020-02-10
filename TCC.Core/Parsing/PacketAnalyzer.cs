@@ -11,6 +11,7 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Sniffing;
 using TCC.TeraCommon.Sniffing;
+using TCC.Update;
 using TCC.Utils;
 using TCC.Windows;
 using TeraPacketParser;
