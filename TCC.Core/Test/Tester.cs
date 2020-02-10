@@ -26,7 +26,7 @@ namespace TCC.Test
     [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public static class Tester
     {
-        public static bool Enabled = true;
+        public static bool Enabled = false;
 
         public static void Deadlock()
         {
