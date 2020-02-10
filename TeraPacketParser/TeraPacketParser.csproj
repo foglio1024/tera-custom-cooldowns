@@ -13,7 +13,7 @@
     <OutputPath>..\TCC.Core\bin\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Nostrum" Version="1.0.2" />
+    <PackageReference Include="Nostrum" Version="1.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeraDataLite\TeraDataLite.csproj" />
