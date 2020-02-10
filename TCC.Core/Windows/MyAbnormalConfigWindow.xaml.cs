@@ -27,7 +27,7 @@ namespace TCC.Windows
     public partial class MyAbnormalConfigWindow
     {
         private static MyAbnormalConfigWindow _instance;
-        public static MyAbnormalConfigWindow Instance => (_instance ?? new MyAbnormalConfigWindow());
+        public static MyAbnormalConfigWindow Instance => _instance ?? new MyAbnormalConfigWindow();
         private Class _currentFilter;
 
         public MyAbnormalConfigVM DC { get; private set; }

@@ -923,7 +923,6 @@
                                                        ChoicesType="{x:Type data:WarriorEdgeMode}"
                                                        Choices="{Binding WarriorEdgeModes, Mode=OneWay}"
                                                        Margin="0 0 15 0" />
-                            <!--<settings:BoolSetting SettingName="Show Traverse Cut indicator" IsOn="{Binding WarriorShowTraverseCut, Mode=TwoWay}" SettingImage="/TCC;component/resources/images/ic_remove_white_24dp_2x.png" />-->
                             <ContentControl Template="{StaticResource ClassHeaderTemplate}" Content="Sorcerer" />
                             <settings:CheckboxSetting SettingName="Show elements"
                                                       IsOn="{Binding ClassWindowSettings.SorcererShowElements, Mode=TwoWay}"

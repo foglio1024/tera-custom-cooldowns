@@ -671,7 +671,7 @@
                     </elements:SorcererElementsControl>
 
                     <Image Opacity="1"
-                        Source="{Binding Player.Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=kr.big}"
+                        Source="{Binding Player.Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=big}"
                            Margin="-3 -2 -3 -4"/>
                     <Path Data="{Binding Player.Class, Converter={StaticResource ClassToSvg}}" 
                       HorizontalAlignment="Center" 

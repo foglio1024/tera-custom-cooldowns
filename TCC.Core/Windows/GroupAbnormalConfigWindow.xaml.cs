@@ -7,6 +7,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.Extensions;
 using Nostrum.Factories;
 using TCC.ViewModels;
 using TeraDataLite;
@@ -16,6 +17,8 @@ namespace TCC.Windows
     public partial class GroupAbnormalConfigWindow
     {
         private Class _currentFilter;
+        private readonly DispatcherTimer _searchCooldown;
+        private string _searchText;
 
         public GroupConfigVM DC { get; private set; }
 
@@ -24,25 +27,25 @@ namespace TCC.Windows
             InitializeComponent();
             Dispatcher?.Invoke(() => DataContext = new GroupConfigVM());
             DC = (GroupConfigVM) DataContext;
-            DC.ShowAllChanged += OnShowAllChanged;
-            OnShowAllChanged();
-        }
+            _searchCooldown = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, OnSearchTriggered, Dispatcher ?? throw new InvalidOperationException());
 
-        private void OnShowAllChanged()
+        }
+        private void OnSearchTriggered(object sender, EventArgs e)
         {
-            var an = AnimationFactory.CreateDoubleAnimation(200, DC.ShowAll ? .2 : 1);
-            MainGrid.BeginAnimation(OpacityProperty, an);
-            MainGrid.IsHitTestVisible = !DC.ShowAll;
+            _searchCooldown.Stop();
+            if (_searchText == null) return;
+            var view = DC.AbnormalitiesView;
+            view.Filter = o => ((GroupAbnormalityVM)o).Abnormality.Name.IndexOf(_searchText, StringComparison.InvariantCultureIgnoreCase) != -1;
+            view.Refresh();
         }
 
 
 
         private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var txt = ((TextBox)sender).Text;
-            var view = DC.AbnormalitiesView;
-            view.Filter = o => ((GroupAbnormalityVM)o).Abnormality.Name.IndexOf(txt, StringComparison.InvariantCultureIgnoreCase) != -1;
-            view.Refresh();
+            _searchText = ((TextBox)sender).Text;
+            if (_searchText == null) return;
+            _searchCooldown.Refresh();
         }
 
 

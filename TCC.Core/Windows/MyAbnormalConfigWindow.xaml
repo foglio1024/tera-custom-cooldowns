@@ -12,11 +12,12 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:settings="clr-namespace:TCC.Controls.Settings"
                    xmlns:windows="clr-namespace:TCC.Windows"
+                   xmlns:viewModels="clr-namespace:TCC.ViewModels"
                    SizeToContent="Height"
                    mc:Ignorable="d"
                    Style="{StaticResource BaseWindowStyle}"
                    DataContext="{Binding DC, RelativeSource={RelativeSource Self}}"
-                   Title="TCC Player buffs settings" Width="960" d:DataContext="{d:DesignData MyAbnormalConfigVM}">
+                   Title="TCC Player buffs settings" Width="960" d:DataContext="{d:DesignInstance viewModels:MyAbnormalConfigVM}">
     <Window.Resources>
         <Style TargetType="ListBox">
             <Setter Property="ItemTemplate" Value="{StaticResource FixedSkillDataTemplateForConfig}" />
@@ -47,7 +48,7 @@
             <Image Source="/TCC;component/resources/images/tera-logo-flat.png" Width="30"
                    RenderOptions.BitmapScalingMode="HighQuality"
                    VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".4" Margin="3 3" />
-            <TextBlock Text="My Abnormalities settings" Style="{StaticResource DefaultTextStyle}"
+            <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=windows:MyAbnormalConfigWindow}}" Style="{StaticResource DefaultTextStyle}"
                        Margin="36 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        FontSize="15" Foreground="#999" />
         </Grid>
@@ -98,12 +99,9 @@
                                 </Style>
                             </DataTemplate.Resources>
                             <Button Click="FilterByClass" Opacity=".5" x:Name="Btn">
-                                <Rectangle>
-                                    <Rectangle.OpacityMask>
-                                        <ImageBrush
-                                            ImageSource="{Binding Converter={StaticResource ClassToImageConverter}}" />
-                                    </Rectangle.OpacityMask>
-                                </Rectangle>
+                                <Path Data="{Binding Converter={StaticResource ClassToSvg}}"
+                                      Margin="4"
+                                      Fill="White"/>
                                 <Button.ToolTip>
                                     <ToolTip>
                                         <TextBlock>
