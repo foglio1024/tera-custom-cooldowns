@@ -270,10 +270,12 @@
                     </dragablz:TabablzControl>
 
                     <!-- Pause icon -->
-                    <Image Source="/TCC;component/resources/images/ic_pause_white_24dp_2x.png"
-                           VerticalAlignment="Bottom" IsHitTestVisible="False"
-                           HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
-                           Visibility="{Binding Paused, Converter={StaticResource BoolToVisibility}}" />
+                    <Path Data="{StaticResource SvgPauseCircle}"
+                          VerticalAlignment="Bottom" IsHitTestVisible="False"
+                          HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
+                          Margin="10"
+                          Visibility="{Binding Paused, Converter={StaticResource BoolToVisibility}}" 
+                          />
 
                     <!-- LFG bar -->
                     <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
