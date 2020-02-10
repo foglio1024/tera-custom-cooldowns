@@ -34,10 +34,55 @@
     <Reference Include="PresentationFramework.Aero" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="resources\images\10kdays.jpg" />
+    <None Remove="resources\images\char_window_bg.png" />
+    <None Remove="resources\images\char_window_bg_bar.png" />
+    <None Remove="resources\images\char_window_bg_side.png" />
+    <None Remove="resources\images\char_window_bg_side_2.png" />
+    <None Remove="resources\images\char_window_bg_sorc.png" />
+    <None Remove="resources\images\char_window_bg_triple.png" />
+    <None Remove="resources\images\char_window_fg.png" />
+    <None Remove="resources\images\default_guild_logo.png" />
+    <None Remove="resources\images\Icon_Laurels\blank.png" />
+    <None Remove="resources\images\Icon_Laurels\bronze.png" />
+    <None Remove="resources\images\Icon_Laurels\bronze_kr.png" />
+    <None Remove="resources\images\Icon_Laurels\bronze_kr_big.png" />
+    <None Remove="resources\images\Icon_Laurels\bronze_kr_bottom.png" />
+    <None Remove="resources\images\Icon_Laurels\champion.png" />
+    <None Remove="resources\images\Icon_Laurels\champion_kr.png" />
+    <None Remove="resources\images\Icon_Laurels\champion_kr_2.png" />
+    <None Remove="resources\images\Icon_Laurels\champion_kr_big.png" />
+    <None Remove="resources\images\Icon_Laurels\champion_kr_big_2.png" />
+    <None Remove="resources\images\Icon_Laurels\champion_kr_bottom.png" />
+    <None Remove="resources\images\Icon_Laurels\diamond.png" />
+    <None Remove="resources\images\Icon_Laurels\diamond_kr.png" />
+    <None Remove="resources\images\Icon_Laurels\diamond_kr_big.png" />
+    <None Remove="resources\images\Icon_Laurels\diamond_kr_bottom.png" />
+    <None Remove="resources\images\Icon_Laurels\gold.png" />
+    <None Remove="resources\images\Icon_Laurels\gold_kr.png" />
+    <None Remove="resources\images\Icon_Laurels\gold_kr_big.png" />
+    <None Remove="resources\images\Icon_Laurels\gold_kr_bottom.png" />
+    <None Remove="resources\images\Icon_Laurels\silver.png" />
+    <None Remove="resources\images\Icon_Laurels\silver_kr.png" />
+    <None Remove="resources\images\Icon_Laurels\silver_kr_big.png" />
+    <None Remove="resources\images\Icon_Laurels\silver_kr_bottom.png" />
+    <None Remove="resources\images\kr_boss_icon.png" />
+    <None Remove="resources\images\kr_boss_icon_enrage.png" />
+    <None Remove="resources\images\kr_boss_icon_full.png" />
+    <None Remove="resources\images\kr_mob_icon.png" />
+    <None Remove="resources\images\moongourd.png" />
+    <None Remove="resources\images\tera-logo-flat.png" />
+    <None Remove="resources\tcc-logo-on.ico" />
+    <None Remove="resources\tcc-logo.ico" />
+    <None Remove="resources\tcc_off.ico" />
+    <None Remove="resources\tcc_on.ico" />
+    <None Remove="resources\ttb.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="gong-wpf-dragdrop" Version="2.2.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.18" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Nostrum" Version="1.0.2" />
+    <PackageReference Include="Nostrum" Version="1.0.3" />
     <PackageReference Include="PacketDotNet" Version="0.13.0" />
     <PackageReference Include="SharpPcap" Version="4.2.0" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
@@ -59,10 +104,55 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="resources\tcc.ico">
+    <Resource Include="resources\images\10kdays.jpg" />
+    <Resource Include="resources\images\char_window_bg.png" />
+    <Resource Include="resources\images\char_window_bg_bar.png" />
+    <Resource Include="resources\images\char_window_bg_side.png" />
+    <Resource Include="resources\images\char_window_bg_side_2.png" />
+    <Resource Include="resources\images\char_window_bg_sorc.png" />
+    <Resource Include="resources\images\char_window_bg_triple.png" />
+    <Resource Include="resources\images\char_window_fg.png" />
+    <Resource Include="resources\images\default_guild_logo.png" />
+    <Resource Include="resources\images\Icon_Laurels\blank.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\bronze_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_2.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_big_2.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\diamond_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\gold_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver_kr.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver_kr_big.png" />
+    <Resource Include="resources\images\Icon_Laurels\silver_kr_bottom.png" />
+    <Resource Include="resources\images\kr_boss_icon.png" />
+    <Resource Include="resources\images\kr_boss_icon_enrage.png" />
+    <Resource Include="resources\images\kr_boss_icon_full.png" />
+    <Resource Include="resources\images\kr_mob_icon.png" />
+    <Resource Include="resources\images\moongourd.png" />
+    <Resource Include="resources\images\tera-logo-flat.png" />
+    <Resource Include="resources\tcc-logo-on.ico" />
+    <Resource Include="resources\tcc-logo.ico" />
+    <Resource Include="resources\tcc.ico">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
-    </None>
+    </Resource>
+    <Resource Include="resources\tcc_off.ico" />
+    <Resource Include="resources\tcc_on.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\ttb.ico" />
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="$(SolutionDir)\dependencies\ReSource\src\bin\Release\net48\ReSource.exe $(ProjectDir)\$(ProjectFileName) $(TargetPath) $(ProjectDir)\R.cs TCC.R" />
