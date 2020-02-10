@@ -450,7 +450,7 @@ namespace TCC.ViewModels.Widgets
             return Members.ToSyncList().OrderByDescending(u => u.RollResult).First().EntityId;
             //Members.ToList().ForEach(user => user.IsWinning = user.EntityId == Members.OrderByDescending(u => u.RollResult).First().EntityId);
         }
-        private void SetReadyStatus(ReadyPartyMember p)
+        public void SetReadyStatus(ReadyPartyMember p)
         {
 
             if (_firstCheck)
