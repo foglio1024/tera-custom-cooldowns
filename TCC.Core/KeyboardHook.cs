@@ -11,7 +11,7 @@ namespace TCC
     public sealed class KeyboardHook : IDisposable
     {
         private static KeyboardHook _instance;
-        public static KeyboardHook Instance => _instance ?? (_instance = new KeyboardHook());
+        public static KeyboardHook Instance => _instance ??= new KeyboardHook();
 
         private readonly Window _window;
         private readonly Dictionary<HotKey, Action> _callbacks;

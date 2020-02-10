@@ -4,8 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:c="clr-namespace:TCC.Controls"
-             xmlns:settings="clr-namespace:TCC.Settings"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance settings:WindowSettings}">
+             xmlns:windowSettings="clr-namespace:TCC.Settings.WindowSettings"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance windowSettings:WindowSettingsBase}">
     <Grid Margin="3">
         <Grid.Resources>
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonContentOpacityStyle}">

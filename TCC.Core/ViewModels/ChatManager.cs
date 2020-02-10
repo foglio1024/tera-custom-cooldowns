@@ -17,6 +17,7 @@ using TCC.Data.Chat;
 using TCC.Parsing;
 using TCC.R;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.TeraCommon.Game;
 using TCC.Utilities;
 using TCC.Utils;
@@ -59,7 +60,7 @@ namespace TCC.ViewModels
 #endif
         public TSObservableCollection<LFG> LFGs { get; }
 
-        private ChatManager(WindowSettings settings) : base(settings)
+        private ChatManager(WindowSettingsBase settings) : base(settings)
         {
             _pauseQueue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();

@@ -22,6 +22,7 @@ using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.Windows;
@@ -168,7 +169,7 @@ namespace TCC.ViewModels
         public RelayCommand LoadDungeonsCommand { get; }
         /* -- Constructor ------------------------------------------ */
         bool _loaded;
-        public DashboardViewModel(WindowSettings settings) : base(settings)
+        public DashboardViewModel(WindowSettingsBase settings) : base(settings)
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.DashboardHotkey, OnShowDashboardHotkeyPressed);
 

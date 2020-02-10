@@ -41,14 +41,14 @@ namespace TCC
             public static NotificationAreaViewModel NotificationAreaVM { get; set; }
             public static PlayerMenuViewModel PlayerMenuVM { get; set; }
 
-            public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ?? (_civilUnrestVm = new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings));
+            public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ??= new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings);
 
-            public static DashboardViewModel DashboardVM => _dashboardVm ?? (_dashboardVm = new DashboardViewModel(null));
+            public static DashboardViewModel DashboardVM => _dashboardVm ??= new DashboardViewModel(null);
 
-            public static LfgListViewModel LfgVM => _lfgVm ?? (_lfgVm = new LfgListViewModel(App.Settings.LfgWindowSettings));
+            public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
 
-            public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ?? (_flightGaugeVm = new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings));
-            public static FloatingButtonViewModel FloatingButtonVM => _floatingButtonVm ?? (_floatingButtonVm = new FloatingButtonViewModel(App.Settings.FloatingButtonSettings));
+            public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ??= new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings);
+            public static FloatingButtonViewModel FloatingButtonVM => _floatingButtonVm ??= new FloatingButtonViewModel(App.Settings.FloatingButtonSettings);
 
             public static GroupWindowViewModel GroupVM { get; set; }
         }

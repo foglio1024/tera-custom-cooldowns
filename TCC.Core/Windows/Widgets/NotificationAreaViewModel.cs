@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Threading;
 using Nostrum;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TCC.ViewModels;
 
@@ -14,7 +15,7 @@ namespace TCC.Windows.Widgets
         private readonly ConcurrentQueue<NotificationInfoBase> _queue;
         public TSObservableCollection<NotificationInfoBase> Notifications { get; }
 
-        public NotificationAreaViewModel(WindowSettings settings) : base(settings)
+        public NotificationAreaViewModel(WindowSettingsBase settings) : base(settings)
         {
             _queue = new ConcurrentQueue<NotificationInfoBase>();
             Notifications = new TSObservableCollection<NotificationInfoBase>(Dispatcher);

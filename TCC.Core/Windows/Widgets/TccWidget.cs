@@ -14,6 +14,7 @@ using Nostrum.Factories;
 using TCC.Controls;
 using TCC.Data;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using Size = System.Drawing.Size;
 
@@ -36,9 +37,9 @@ namespace TCC.Windows.Widgets
         protected UIElement MainContent;
         protected UIElement BoundaryRef;
 
-        public WindowSettings WindowSettings { get; private set; }
+        public WindowSettingsBase WindowSettings { get; private set; }
 
-        protected void Init(WindowSettings settings)
+        protected void Init(WindowSettingsBase settings)
         {
             WindowSettings = settings;
             MainContent.Opacity = 0;

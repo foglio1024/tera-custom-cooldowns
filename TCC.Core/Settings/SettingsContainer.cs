@@ -5,6 +5,7 @@ using System.Linq;
 using Nostrum;
 using Newtonsoft.Json;
 using TCC.Data;
+using TCC.Settings.WindowSettings;
 using Key = System.Windows.Forms.Keys;
 
 namespace TCC.Settings
@@ -89,9 +90,8 @@ namespace TCC.Settings
         public NotificationAreaSettings NotificationAreaSettings { get; set; }
 
         #region Chat
-        // Chat window
         public TSObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; }
-        public WindowSettings ChatSettings { get; private set; } // added to have the EnabledChanged event
+        public WindowSettingsBase ChatSettings { get; private set; } // added to have the EnabledChanged event
         public bool ChatEnabled
         {
             get => ChatWindowsSettings.Count > 0 ? ChatWindowsSettings[0].Enabled : _chatEnabled;
@@ -152,7 +152,7 @@ namespace TCC.Settings
             FloatingButtonSettings = new FloatingButtonWindowSettings(/*0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true*/);
             CivilUnrestWindowSettings = new CivilUnrestWindowSettings(/*1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings)*/);
             ChatWindowsSettings = new TSObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
-            ChatSettings = new WindowSettings();
+            ChatSettings = new WindowSettingsBase();
             LfgWindowSettings = new LfgWindowSettings();
             NotificationAreaSettings = new NotificationAreaSettings();
 
@@ -209,11 +209,7 @@ namespace TCC.Settings
             var settingsPath = SettingsOverride == ""
                 ? Path.Combine(App.BasePath, SettingsGlobals.JsonFileName)
                 : SettingsOverride;
-            //if (File.Exists(settingsPath))
             new JsonSettingsReader().LoadSettings(settingsPath);
-            //else if (File.Exists(Path.Combine(App.BasePath, SettingsGlobals.XmlFileName)))
-            //  new XmlSettingsReader().LoadSettings();
-            //else App.Settings = new SettingsContainer();
         }
         public void Save()
         {

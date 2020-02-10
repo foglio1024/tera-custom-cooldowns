@@ -14,6 +14,7 @@ using TCC.Data.Databases;
 using TCC.Data.Skills;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.Windows;
@@ -463,7 +464,7 @@ namespace TCC.ViewModels.Widgets
             N(nameof(Mode));
         }
 
-        public CooldownWindowViewModel(WindowSettings settings) : base(settings)
+        public CooldownWindowViewModel(WindowSettingsBase settings) : base(settings)
         {
             ShortSkills = new TSObservableCollection<Cooldown>(Dispatcher);
             LongSkills = new TSObservableCollection<Cooldown>(Dispatcher);

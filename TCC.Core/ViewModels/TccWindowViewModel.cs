@@ -2,12 +2,13 @@
 using Nostrum;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 
 namespace TCC.ViewModels
 {
     public class TccWindowViewModel : TSPropertyChanged
     {
-        public WindowSettings Settings { get; }
+        public WindowSettingsBase Settings { get; }
         protected virtual void InstallHooks() { }
         protected virtual void RemoveHooks() { }
 
@@ -22,7 +23,7 @@ namespace TCC.ViewModels
             Dispatcher = Dispatcher.CurrentDispatcher;
         }
 
-        protected TccWindowViewModel(WindowSettings settings) : this()
+        protected TccWindowViewModel(WindowSettingsBase settings) : this()
         {
             Settings = settings;
             //App.BaseDispatcher.Invoke(() =>

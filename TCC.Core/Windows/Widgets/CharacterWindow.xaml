@@ -10,6 +10,7 @@
                     xmlns:settings="clr-namespace:TCC.Settings"
                     xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
                     xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
+                    xmlns:windowSettings="clr-namespace:TCC.Settings.WindowSettings"
                     mc:Ignorable="d"
         Title="TCC Character" 
         Style="{StaticResource BaseWindowStyle}"
@@ -50,7 +51,7 @@
                 <Grid.Style>
                     <Style TargetType="Grid">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="True">
+                            <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="True">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
@@ -109,7 +110,7 @@
                                         <Setter Property="HorizontalAlignment" Value="Left"/>
                                     </Style.Setters>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                        <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                             <Setter Property="HorizontalAlignment" Value="Right"/>
                                             <Setter Property="Height" Value="10"/>
                                         </DataTrigger>
@@ -141,7 +142,7 @@
                                         </Setter>
                                     </Style.Setters>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                        <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                             <Setter Property="HorizontalAlignment" Value="Right"/>
                                             <Setter Property="Height" Value="10"/>
                                             <Setter Property="Background">
@@ -168,7 +169,7 @@
                                 <Setter Property="Width" Value="350"/>
                             </Style.Setters>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="0 50 0 0"/>
                                     <Setter Property="Width" Value="300"/>
@@ -204,7 +205,7 @@
                                     </Style.Setters>
 
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                        <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                             <Setter Property="HorizontalAlignment" Value="Right"></Setter>
                                             <Setter Property="Background">
                                                 <Setter.Value>
@@ -232,7 +233,7 @@
                                 <Setter Property="Margin" Value="-33 16 33 0"/>
                             </Style.Setters>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                     <Setter Property="Width" Value="300"/>
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="14 65 -14 0"/>
@@ -257,7 +258,7 @@
                                                 <Setter Property="Height" Value="12"/>
                                             </Style.Setters>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                                     <Setter Property="Height" Value="10"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -278,7 +279,7 @@
                                                 <Setter Property="Height" Value="12"/>
                                             </Style.Setters>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                                     <Setter Property="Height" Value="10"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -329,7 +330,7 @@
                                 <Setter Property="Width" Value="350"/>
                             </Style.Setters>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                     <Setter Property="Width" Value="300"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -357,7 +358,7 @@
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Player.HasShield}" Value="True"/>
-                                        <Condition Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="True"/>
+                                        <Condition Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="True"/>
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>
                                         <Setter Property="Opacity" Value=".5"/>
@@ -372,7 +373,7 @@
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Player.HasShield}" Value="False"/>
-                                        <Condition Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False"/>
+                                        <Condition Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False"/>
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>
                                         <Setter Property="RenderTransform">
@@ -387,7 +388,7 @@
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Player.HasShield}" Value="False"/>
-                                        <Condition Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="True"/>
+                                        <Condition Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="True"/>
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>
                                         <Setter Property="RenderTransform">
@@ -400,7 +401,7 @@
                                 <MultiDataTrigger>
                                     <MultiDataTrigger.Conditions>
                                         <Condition Binding="{Binding Player.HasShield}" Value="True"/>
-                                        <Condition Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False"/>
+                                        <Condition Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False"/>
                                     </MultiDataTrigger.Conditions>
                                     <MultiDataTrigger.Setters>
                                         <Setter Property="RenderTransform">
@@ -427,7 +428,7 @@
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                             <Setter Property="Margin" Value="0 0 30 20"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="0 0 0 13"/>
                                     <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -448,7 +449,7 @@
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                             <Setter Property="Margin" Value="0 0 28 5"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                     <Setter Property="Margin" Value="0 0 25 7"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -471,7 +472,7 @@
                             <Setter Property="Margin" Value="0 -18 0 0"/>
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="0 -11 5 0"/>
                                     <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -494,7 +495,7 @@
                             <Setter Property="Margin" Value="0 17 0 0"/>
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                     <Setter Property="Margin" Value="5 -14 0 0"/>
                                     <Setter Property="HorizontalAlignment" Value="Left"/>
                                 </DataTrigger>
@@ -520,7 +521,7 @@
                             <Setter Property="Grid.Column" Value="2"/>
 
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Settings.(settings:CharacterWindowSettings.CompactMode)}" Value="False">
+                                <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
                                     <Setter Property="Grid.Column" Value="0"/>
                                     <Setter Property="Margin" Value="40 0 0 19"/>
                                 </DataTrigger>

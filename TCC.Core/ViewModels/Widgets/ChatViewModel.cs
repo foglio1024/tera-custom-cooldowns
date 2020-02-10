@@ -11,6 +11,7 @@ using Nostrum.Extensions;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Windows;
 
 namespace TCC.ViewModels.Widgets

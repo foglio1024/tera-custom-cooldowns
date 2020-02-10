@@ -1,10 +1,10 @@
-﻿using System.ComponentModel;
+﻿using Nostrum.Factories;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
-using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Pc;
-using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TCC.Windows;
 
@@ -22,7 +22,7 @@ namespace TCC.ViewModels.Widgets
         public ICollectionViewLiveShaping InfBuffsView { get; }
         public ICollectionViewLiveShaping SpecInfBuffsView { get; }
 
-        public AbnormalityWindowViewModel(WindowSettings settings) : base(settings)
+        public AbnormalityWindowViewModel(WindowSettingsBase settings) : base(settings)
         {
             Player.InitAbnormalityCollections(Dispatcher);
 

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TCC.ViewModels;
 
@@ -30,12 +31,12 @@ namespace TCC.Windows.Widgets
             });
         }
 
-        public TccWidgetBuilder(WindowSettings ws)
+        public TccWidgetBuilder(WindowSettingsBase ws)
         {
             Create(ws);
         }
 
-        private void Create(WindowSettings ws)
+        private void Create(WindowSettingsBase ws)
         {
             var thread = new Thread(() =>
         {

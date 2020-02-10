@@ -15,6 +15,8 @@ using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
+using TCC.Update;
 using TCC.Utils;
 using TCC.Windows;
 using CaptureMode = TCC.Data.CaptureMode;

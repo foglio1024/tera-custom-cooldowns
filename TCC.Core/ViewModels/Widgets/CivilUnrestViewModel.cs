@@ -7,6 +7,7 @@ using Nostrum;
 using Nostrum.Factories;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TeraDataLite;
 using TeraPacketParser.Messages;
@@ -99,7 +100,7 @@ namespace TCC.ViewModels.Widgets
             }
         }
 
-        public CivilUnrestViewModel(WindowSettings settings) : base(settings)
+        public CivilUnrestViewModel(WindowSettingsBase settings) : base(settings)
         {
             _guilds = new TSObservableCollection<CivilUnrestGuild>();
         }

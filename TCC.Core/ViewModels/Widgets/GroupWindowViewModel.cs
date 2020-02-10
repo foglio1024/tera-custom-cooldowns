@@ -11,6 +11,7 @@ using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Settings.WindowSettings;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;

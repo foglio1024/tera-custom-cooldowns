@@ -17,6 +17,7 @@ using TCC.Exceptions;
 using TCC.Interop.Proxy;
 using TCC.Parsing;
 using TCC.Settings;
+using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
