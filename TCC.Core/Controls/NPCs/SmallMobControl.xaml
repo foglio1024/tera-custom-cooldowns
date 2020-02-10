@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:TCC.Controls"
              xmlns:npc="clr-namespace:TCC.Controls.NPCs"
-             xmlns:tcc="clr-namespace:TCC"
              xmlns:npCs="clr-namespace:TCC.Data.NPCs"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"

@@ -6,7 +6,6 @@
              xmlns:c="clr-namespace:TCC.Controls"
              xmlns:classBars="clr-namespace:TCC.Controls.Classes"
              xmlns:wm="clr-namespace:TCC.ViewModels"
-             xmlns:w="clr-namespace:TCC.Windows"
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
              Style="{StaticResource BaseWindowStyle}"

@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCC.Windows.Widgets"
-        xmlns:windows="clr-namespace:TCC.Windows"
         xmlns:controls="clr-namespace:TCC.Controls"
         d:DataContext="{d:DesignInstance local:NotificationAreaViewModel}"
         mc:Ignorable="d"

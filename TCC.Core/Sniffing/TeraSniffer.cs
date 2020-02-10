@@ -99,6 +99,8 @@ namespace TCC.Sniffing
 
                 var process = Process.GetProcessesByName("TERA")[0];
                 var fullPath = process?.MainModule?.FileName.Replace("TERA.exe", "ReleaseRevision.txt");
+                if(fullPath== null) throw new Exception("TERA.exe location not found.");
+
                 var txt = File.ReadAllLines(fullPath);
                 foreach (var line in txt)
                 {

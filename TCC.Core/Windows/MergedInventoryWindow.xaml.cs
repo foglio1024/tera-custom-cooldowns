@@ -123,7 +123,7 @@ namespace TCC.Windows
         {
             InitializeComponent();
             DataContext = new MergedInventoryViewModel();
-            (DataContext as MergedInventoryViewModel).SetDispatcher(Dispatcher);
+            ((MergedInventoryViewModel) DataContext).SetDispatcher(Dispatcher);
             Loaded += OnLoaded;
 
         }
@@ -145,7 +145,7 @@ namespace TCC.Windows
 
         private void FilterInventory(object sender, TextChangedEventArgs e)
         {
-            Dispatcher.InvokeAsync(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 var view = (ICollectionView)((MergedInventoryViewModel) DataContext).MergedInventoryView;
                 view.Filter = o =>

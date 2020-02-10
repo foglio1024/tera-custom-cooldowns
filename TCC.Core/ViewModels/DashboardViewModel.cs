@@ -9,7 +9,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -332,24 +331,6 @@ namespace TCC.ViewModels
         {
             CurrentCharacter.ElleonMarks = val;
             N(nameof(TotalElleonMarks));
-        }
-        private static void SaveCharDoc(XDocument doc)
-        {
-            try
-            {
-                var fs = new FileStream(Path.Combine(App.ResourcesPath, "config/characters.xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-                fs.SetLength(0);
-                using (var sr = new StreamWriter(fs, new UTF8Encoding(true)))
-                {
-                    sr.Write(doc.Declaration + Environment.NewLine + doc);
-                }
-                fs.Close();
-            }
-            catch (Exception)
-            {
-                var res = TccMessageBox.Show("TCC", "Could not write character data to characters.xml. File is being used by another process. Try again?", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (res == MessageBoxResult.Yes) SaveCharDoc(doc);
-            }
         }
 
         public void SelectCharacter(Character character)

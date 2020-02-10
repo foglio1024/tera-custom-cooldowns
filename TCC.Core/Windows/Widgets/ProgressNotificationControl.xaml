@@ -4,7 +4,6 @@
                                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                                xmlns:local="clr-namespace:TCC.Windows.Widgets"
-                               xmlns:controls="clr-namespace:TCC.Controls"
                                mc:Ignorable="d" d:DataContext="{d:DesignInstance local:ProgressNotificationInfo}">
     <Border x:Name="Root" Style="{StaticResource RevampBorderStyle}" MinWidth="200" MaxWidth="250"
             HorizontalAlignment="Left" MinHeight="20" Margin="5" BorderThickness="0">

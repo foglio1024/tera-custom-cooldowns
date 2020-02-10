@@ -6,7 +6,6 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:npcCtrl="clr-namespace:TCC.Controls.NPCs"
              xmlns:npc="clr-namespace:TCC.Data.NPCs"
-             xmlns:tcc="clr-namespace:TCC"
              xmlns:controls="clr-namespace:TCC.Controls"
              xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
              mc:Ignorable="d"

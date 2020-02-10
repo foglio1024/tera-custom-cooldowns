@@ -20,7 +20,6 @@ namespace TCC.Windows
             VM = DataContext as DashboardViewModel;
             Showed += () => VM.UpdateBuffs();
             Hidden += () => Game.DB.DungeonDatabase.SaveCustomDefs();
-            //MouseLeftButtonDown += (_, __) => MenuPopup.IsOpen = false;
         }
 
 
@@ -28,11 +27,6 @@ namespace TCC.Windows
         {
             HideWindow();
             VM.SaveCharacters();
-        }
-
-        private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
         }
 
         private void OnDetailsMouseButtonDown(object sender, MouseButtonEventArgs e)
@@ -44,7 +38,7 @@ namespace TCC.Windows
 
         public void ShowDetails()
         {
-            Dispatcher.InvokeAsync(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 InventoryFilter.Clear();
                 var an = AnimationFactory.CreateDoubleAnimation(300, 1, easing: true, completed:

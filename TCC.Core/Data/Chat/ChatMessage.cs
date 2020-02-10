@@ -151,7 +151,7 @@ namespace TCC.Data.Chat
                     var endsWithG = word.ToLower().EndsWith("g ", StringComparison.InvariantCultureIgnoreCase) ||
                                     word.ToLower().EndsWith("g", StringComparison.InvariantCultureIgnoreCase);
                     var isNumber = int.TryParse(word.ToLower().Replace("k ", "").Replace("k", "").Replace("g ", "").Replace("g", ""), out var money);
-                    var mp = new MessagePieceBase();
+                    MessagePieceBase mp;
                     if ((endsWithK || endsWithG) && isNumber && (Channel == ChatChannel.Trade ||
                                                                 Channel == ChatChannel.TradeRedirect))
                     {

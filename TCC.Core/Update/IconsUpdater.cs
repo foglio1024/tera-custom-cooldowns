@@ -35,7 +35,7 @@ namespace TCC.Update
         }
         private async Task CheckHashes()
         {
-            var hashFile = "";
+            string hashFile;
             try
             {
                 using var c = MiscUtils.GetDefaultWebClient();

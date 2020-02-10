@@ -707,21 +707,15 @@ namespace TCC.ViewModels.Widgets
             {
                 CurrentHHphase = HarrowholdPhase.Phase1;
             }
-            else switch (templateId)
+            else
+                CurrentHHphase = templateId switch
                 {
-                    case 1000:
-                        CurrentHHphase = HarrowholdPhase.Phase2;
-                        break;
-                    case 2000:
-                        CurrentHHphase = HarrowholdPhase.Balistas;
-                        break;
-                    case 3000:
-                        CurrentHHphase = HarrowholdPhase.Phase3;
-                        break;
-                    case 4000:
-                        CurrentHHphase = HarrowholdPhase.Phase4;
-                        break;
-                }
+                    1000 => HarrowholdPhase.Phase2,
+                    2000 => HarrowholdPhase.Balistas,
+                    3000 => HarrowholdPhase.Phase3,
+                    4000 => HarrowholdPhase.Phase4,
+                    _ => CurrentHHphase
+                };
         }
         private static Dragon CheckCurrentDragon(Point p)
         {

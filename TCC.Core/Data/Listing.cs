@@ -200,7 +200,7 @@ namespace TCC.Data
                 if (IsPopupOpen) return;
                 if (force != null)
                 {
-                    var bForce = false;
+                    bool bForce;
                     if (force is string s) bForce = bool.TryParse(s, out var v) && v;
                     else bForce = (bool)force;
                     if (bForce)

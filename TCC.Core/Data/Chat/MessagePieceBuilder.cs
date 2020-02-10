@@ -1,8 +1,7 @@
-﻿using System;
-using System.Globalization;
-using System.Text;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using Nostrum.Extensions;
+using System;
+using System.Text;
 
 namespace TCC.Data.Chat
 {
@@ -11,7 +10,7 @@ namespace TCC.Data.Chat
         public static string ParseSysMsgZone(string msgText)
         {
             var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-            var zoneId = UInt32.Parse(dictionary["zoneName"]);
+            var zoneId = uint.Parse(dictionary["zoneName"]);
             var zoneName = Game.DB.MonsterDatabase.GetZoneName(zoneId);
             var txt = zoneId.ToString();
             if (zoneName != null) txt = zoneName;
@@ -135,7 +134,6 @@ namespace TCC.Data.Chat
             }
 
             if (dictionary.TryGetValue("UserName", out var username)) rawLink.Append("@" + username);
-            else username = Game.Me.Name;
 
             var name = $"Unknown item [{id}]";
             var grade = RareGrade.Common;
@@ -262,9 +260,10 @@ namespace TCC.Data.Chat
             var guardId = uint.Parse(locTree[1]);
             var sectionId = uint.Parse(locTree[2]);
             if (worldId == 1 && guardId == 2 && sectionId == 9) sectionId = 7;
-            var coords = pars[2].Split(',');
-            var x = double.Parse(coords[0], CultureInfo.InvariantCulture);
-            var y = double.Parse(coords[1], CultureInfo.InvariantCulture);
+            //var coords = pars[2].Split(',');
+
+            //var x = double.Parse(coords[0], CultureInfo.InvariantCulture);
+            //var y = double.Parse(coords[1], CultureInfo.InvariantCulture);
 
             var world = Game.DB.MapDatabase.Worlds[worldId];
             var guard = world.Guards[guardId];

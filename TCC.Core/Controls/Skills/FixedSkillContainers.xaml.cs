@@ -67,7 +67,8 @@ namespace TCC.Controls.Skills
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
 
-            VM = Window.GetWindow(this).DataContext as CooldownWindowViewModel;
+            VM = (CooldownWindowViewModel)Window.GetWindow(this)?.DataContext;
+            if (VM == null) return;
             VM.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
             VM.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
             VM.SkillsLoaded += OnSkillsLoaded;

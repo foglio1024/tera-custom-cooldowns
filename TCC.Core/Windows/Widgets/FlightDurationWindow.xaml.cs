@@ -56,7 +56,7 @@ namespace TCC.Windows.Widgets
         public void SetEnergy(double val)
         {
             if (!App.Settings.FlightGaugeWindowSettings.Enabled) return;
-            Dispatcher.InvokeAsync(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 if (Opacity == 0) ShowWindow();
                 _arcAn.From = Arc.EndAngle;
@@ -72,7 +72,7 @@ namespace TCC.Windows.Widgets
 
         private void SetStacks()
         {
-            Dispatcher.InvokeAsync(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 for (var i = 9; i >= 0; i--)
                 {

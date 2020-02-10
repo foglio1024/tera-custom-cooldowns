@@ -82,7 +82,7 @@ namespace TCC.Windows
             FocusManager.ForceFocused = true;
             WindowManager.VisibilityManager.ForceUndim = true;
             WindowManager.SkillConfigWindow = this;
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 IsOpen = true;
                 var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));

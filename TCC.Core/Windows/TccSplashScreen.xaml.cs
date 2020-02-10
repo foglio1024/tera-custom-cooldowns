@@ -21,7 +21,7 @@ namespace TCC.Windows
 
         private void OnProgressChanged()
         {
-            Dispatcher.InvokeAsync(() =>
+            Dispatcher?.InvokeAsync(() =>
             {
                 _progressAnimation.To = VM.ProgressPerc;
                 (ProgressBar.RenderTransform as ScaleTransform)?.BeginAnimation(ScaleTransform.ScaleXProperty, _progressAnimation);
@@ -30,12 +30,12 @@ namespace TCC.Windows
 
         public new void CloseWindowSafe()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 var an = AnimationFactory.CreateDoubleAnimation(300, 0, easing: true, completed: (s, ev) =>
                 {
                     Close();
-                    Dispatcher.InvokeShutdown();
+                    Dispatcher?.InvokeShutdown();
                 });
 
                 BeginAnimation(OpacityProperty, an);

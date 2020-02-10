@@ -1,4 +1,4 @@
-﻿<widgets1:TccWidget x:Class="TCC.Windows.Widgets.CharacterWindow"
+﻿<widgets:TccWidget x:Class="TCC.Windows.Widgets.CharacterWindow"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,17 +7,16 @@
                     xmlns:c="clr-namespace:TCC.Controls"
                     xmlns:elements="clr-namespace:TCC.Controls.Classes.Elements"
                     xmlns:converters="clr-namespace:TCC.Converters"
-                    xmlns:settings="clr-namespace:TCC.Settings"
-                    xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
-                    xmlns:widgets1="clr-namespace:TCC.Windows.Widgets"
+                    xmlns:widgetsVm="clr-namespace:TCC.ViewModels.Widgets"
+                    xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
                     xmlns:windowSettings="clr-namespace:TCC.Settings.WindowSettings"
                     mc:Ignorable="d"
         Title="TCC Character" 
         Style="{StaticResource BaseWindowStyle}"
-        d:DataContext="{d:DesignInstance widgets:CharacterWindowViewModel}"
+        d:DataContext="{d:DesignInstance widgetsVm:CharacterWindowViewModel}"
         MouseLeftButtonDown="Drag"
         >
-    <widgets1:TccWidget.Resources>
+    <widgets:TccWidget.Resources>
         <converters:ClassToReColorConverter x:Key="ReColorConverter"/>
         <Style TargetType="Border">
             <Setter Property="BorderBrush"                Value="{StaticResource RevampBorderBrush}"/>
@@ -28,7 +27,7 @@
             <Setter Property="RenderTransformOrigin"      Value="0 0"/>
         </Style>
         <converters:StaminaBarVisibilityConverter x:Key="StaminaVisConv"/>
-    </widgets1:TccWidget.Resources>
+    </widgets:TccWidget.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -39,8 +38,8 @@
 
         <Grid Name="WindowContent" Grid.Row="1">
             <Grid.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" 
-                            ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}"/>
+                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}" 
+                            ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}"/>
             </Grid.LayoutTransform>
             <Grid Margin="25 20 10 20">
                 <Grid.ColumnDefinitions>
@@ -571,7 +570,7 @@
                         </Image.Style>
                     </Image>
                     <Image Source="../../resources/images/char_window_fg.png" Stretch="Uniform"/>
-                    <Grid Grid.RenderTransformOrigin=".5 .5" Margin="27" ClipToBounds="True">
+                    <Grid RenderTransformOrigin=".5 .5" Margin="27" ClipToBounds="True">
                         <Grid.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="45" />
@@ -727,7 +726,7 @@
             </Grid>
         </Grid>
         <c:WindowButtons WindowName="Character window" x:Name="Buttons" HorizontalAlignment="Right"
-                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" />
+                         DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}" />
     </Grid>
     <!--<w:TccWidget.DataContext>
         <vm:CharacterWindowViewModel/>
@@ -917,4 +916,4 @@
         </Grid>
         <c:WindowButtons WindowName="Character window" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=w:TccWidget}}" />
     </Grid>-->
-</widgets1:TccWidget>
+</widgets:TccWidget>

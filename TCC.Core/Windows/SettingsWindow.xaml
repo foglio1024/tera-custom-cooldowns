@@ -7,7 +7,6 @@
                  xmlns:data="clr-namespace:TCC.Data"
                  xmlns:local="clr-namespace:TCC.Windows"
                  xmlns:viewModels="clr-namespace:TCC.ViewModels"
-                 xmlns:databases="clr-namespace:TCC.Data.Databases"
                  Topmost="True"
                  mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
                  Title="TCC Settings" Height="600" Width="900" ResizeMode="NoResize"

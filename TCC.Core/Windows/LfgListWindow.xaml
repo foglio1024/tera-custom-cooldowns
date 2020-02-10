@@ -4,7 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
-             xmlns:settingsCtrl="clr-namespace:TCC.Controls.Settings"
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
              UseLayoutRounding="True"

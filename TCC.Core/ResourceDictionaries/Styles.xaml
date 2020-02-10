@@ -1,14 +1,11 @@
 ﻿<ResourceDictionary x:Class="TCC.ResourceDictionaries.Styles"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
-                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                     xmlns:tccControls="clr-namespace:TCC.Controls"
                     xmlns:settings="clr-namespace:TCC.Controls.Settings"
-                    xmlns:chat="clr-namespace:TCC.Data.Chat"
                     xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
                     mc:Ignorable="d">
 

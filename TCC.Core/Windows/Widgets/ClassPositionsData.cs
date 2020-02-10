@@ -31,8 +31,8 @@ namespace TCC.Windows.Widgets
 
         public void ApplyOffset(Point oldPos, Point newPos, Size size)
         {
-            var offsetW =  (newPos.X - oldPos.X )/ (double)size.Width;
-            var offsetH =  (newPos.Y - oldPos.Y)/ (double) size.Height;
+            var offsetW =  (newPos.X - oldPos.X )/ size.Width;
+            var offsetH =  (newPos.Y - oldPos.Y)/ size.Height;
 
             var p = new Point {X = Position.X + offsetW, Y = Position.Y + offsetH};
             Position = p;

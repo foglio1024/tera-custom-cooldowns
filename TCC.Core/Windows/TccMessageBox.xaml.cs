@@ -70,7 +70,7 @@ namespace TCC.Windows
         {
             if (_messageBox == null) App.BaseDispatcher.Invoke(Create); //TODO: remove
 
-            _messageBox?.Dispatcher.Invoke(() =>
+            _messageBox?.Dispatcher?.Invoke(() =>
             {
                 _messageBox.TxtMsg.Text = text;
                 _messageBox.MessageTitle.Text = caption;
@@ -146,7 +146,7 @@ namespace TCC.Windows
             //RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, .8, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
             Task.Delay(250).ContinueWith(t =>
             {
-                Dispatcher.Invoke(() =>
+                Dispatcher?.Invoke(() =>
                 {
                     _messageBox.Hide();
                     //_messageBox = null;

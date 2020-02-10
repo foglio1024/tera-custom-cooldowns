@@ -15,12 +15,12 @@ namespace TCC.Windows
 
         public new void CloseWindowSafe()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher?.Invoke(() =>
             {
                 var an = AnimationFactory.CreateDoubleAnimation(300, 0, easing: true, completed: (s, ev) =>
                 {
                     Close();
-                    Dispatcher.InvokeShutdown();
+                    Dispatcher?.InvokeShutdown();
                 });
 
                 BeginAnimation(OpacityProperty, an);

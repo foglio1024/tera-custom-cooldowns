@@ -3,7 +3,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:TCC.Controls"
         xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
         mc:Ignorable="d" SizeToContent="WidthAndHeight"
         Title="DebugWindow" Background="{StaticResource RevampBackgroundBrush}">

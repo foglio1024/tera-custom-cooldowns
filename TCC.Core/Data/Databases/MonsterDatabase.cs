@@ -236,10 +236,10 @@ namespace TCC.Data.Databases
 
         public void ToggleOverride(uint zoneId, uint templateId, bool b)
         {
-            var changed = false;
+            //var changed = false;
             if (TryGetMonster(templateId, zoneId, out var m))
             {
-                changed = m.IsBoss != b;
+                //changed = m.IsBoss != b;
                 m.IsBoss = b;
             }
 

@@ -5,7 +5,7 @@ using Nostrum.Factories;
 
 namespace TCC.Windows.Widgets
 {
-    public partial class DefaultNotificationControl : NotificationControlBase
+    public partial class DefaultNotificationControl
     {
         private readonly DispatcherTimer _duration;
         public DefaultNotificationControl()
@@ -25,7 +25,7 @@ namespace TCC.Windows.Widgets
             _duration.Start();
             Root.Effect = _rootEffect;
             TimeRect.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty,
-                AnimationFactory.CreateDoubleAnimation((int)_dc.Duration, 0, 1));
+                AnimationFactory.CreateDoubleAnimation(_dc.Duration, 0, 1));
 
         }
 

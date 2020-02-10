@@ -32,7 +32,7 @@ namespace TCC.Windows
 
         public MyAbnormalConfigVM DC { get; private set; }
 
-        private DispatcherTimer _searchCooldown;
+        private readonly DispatcherTimer _searchCooldown;
         private string _searchText;
 
         public MyAbnormalConfigWindow() : base(true)
@@ -41,7 +41,7 @@ namespace TCC.Windows
             InitializeComponent();
             DC = new MyAbnormalConfigVM();
             DataContext = DC;
-            _searchCooldown = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, OnSearchTriggered, Dispatcher);
+            _searchCooldown = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, OnSearchTriggered, Dispatcher ?? throw new InvalidOperationException());
         }
 
         private void OnSearchTriggered(object sender, EventArgs e)

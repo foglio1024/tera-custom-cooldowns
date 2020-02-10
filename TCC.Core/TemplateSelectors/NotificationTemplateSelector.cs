@@ -14,11 +14,13 @@ namespace TCC.TemplateSelectors
         {
             var n = (NotificationInfoBase) item;
 
-            switch (n.NotificationTemplate)
-            {
-                case NotificationTemplate.Progress: return Progress;
-                default: return Default; 
-            }
+            if (n != null)
+                return n.NotificationTemplate switch
+                {
+                    NotificationTemplate.Progress => Progress,
+                    _ => Default
+                };
+            else return Default;
         }
     }
 }

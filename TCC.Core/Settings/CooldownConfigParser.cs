@@ -25,7 +25,7 @@ namespace TCC.Settings
             filePath = filePath.Replace(".json", ".xml");
             if (File.Exists(filePath))
             {
-                Data = ParseXML(filePath, c);
+                Data = ParseXML(filePath);
                 return;
             }
             // -------------------------------------------------
@@ -273,7 +273,7 @@ namespace TCC.Settings
         }
 
         [Obsolete]
-        private CooldownConfigData ParseXML(string filePath, Class c)
+        private CooldownConfigData ParseXML(string filePath)
         {
             var ret = new CooldownConfigData();
             var skillsDoc = XDocument.Load(filePath);

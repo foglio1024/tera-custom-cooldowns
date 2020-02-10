@@ -264,12 +264,6 @@ namespace TCC.ViewModels
             }
         }
 
-        private void OnPublicizeTimerTick(object sender, EventArgs e)
-        {
-            //PublicizeTimer.Stop();
-            //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-        }
-
         private void Publicize()
         {
             if (Game.IsInDungeon) return;
