@@ -26,7 +26,7 @@ namespace TCC.Test
     [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public static class Tester
     {
-        public static bool Enabled = false;
+        public static bool Enabled = true;
 
         public static void Deadlock()
         {
@@ -104,7 +104,7 @@ namespace TCC.Test
         {
             TccUtils.CurrentClassVM<WarriorLayoutVM>()?.DeadlyGamble.Cooldown.Start(cd);
         }
-        public static void AddFakeGroupMember(int id, Class c, Laurel l)
+        public static void AddFakeGroupMember(int id, Class c, Laurel l, bool leader = false)
         {
             WindowManager.ViewModels.GroupVM.AddOrUpdateMember(new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
             {
@@ -118,7 +118,8 @@ namespace TCC.Test
                 UserClass = c,
                 Online = true,
                 Laurel = l,
-                InRange = App.Random.Next(0, 10) >= 5
+                InRange = App.Random.Next(0, 10) >= 5,
+                IsLeader = leader
             });
 
         }
@@ -174,7 +175,7 @@ namespace TCC.Test
             var idx = 20U;
             foreach (var cl in EnumUtils.ListFromEnum<Class>().Where(x => x != Class.None && x != Class.Common))
             {
-                party.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = idx, IsLeader = true, Online = true, Name = $"Member{cl}", UserClass = cl, Location = "Sirjuka Gallery"});
+                party.Players.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = idx, IsLeader = true, Online = true, Name = $"Member{cl}", UserClass = cl, Location = "Sirjuka Gallery" });
                 party.Applicants.Add(new User(WindowManager.LfgListWindow.Dispatcher) { PlayerId = idx + 100, Name = $"Applicant{cl}", Online = true, UserClass = cl, Location = "Sirjuka Gallery" });
                 idx++;
             }
@@ -228,7 +229,7 @@ namespace TCC.Test
             var r = App.Random;
             for (var i = 0; i <= count; i++)
             {
-                AddFakeGroupMember(i, (Class)r.Next(0, 12), (Laurel)r.Next(0, 6));
+                AddFakeGroupMember(i, (Class)r.Next(0, 12), (Laurel)r.Next(0, 6), i == 0);
             }
         }
         public static void UpdateFakeMember(ulong eid)
@@ -494,6 +495,21 @@ namespace TCC.Test
             ab.Infinity = false;
             Game.Me.UpdateAbnormality(ab, int.MaxValue, 1);
 
+        }
+
+        public static void ReadyCheck()
+        {
+            var status = new[] {ReadyStatus.Ready, ReadyStatus.NotReady, ReadyStatus.Undefined};
+            foreach (var m in WindowManager.ViewModels.GroupVM.Members)
+            {
+                WindowManager.ViewModels.GroupVM.SetReadyStatus(new ReadyPartyMember
+                {
+                    ServerId = m.ServerId,
+                    PlayerId = m.PlayerId,
+                    Status = status[App.Random.Next(0,3)]
+                });
+
+            }
         }
     }
 }
