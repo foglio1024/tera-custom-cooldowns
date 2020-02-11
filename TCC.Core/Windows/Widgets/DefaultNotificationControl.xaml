@@ -67,10 +67,12 @@
                        Text="{Binding TimeStamp, Mode=OneWay}" />
             <Button Style="{StaticResource ButtonContentOpacityStyle}"
                     HorizontalAlignment="Right"
-                    Width="20"
-                    Height="20"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Width="18"
+                    Height="18"
                     Command="{Binding DismissCommand}">
-                <Path Data="{StaticResource SvgClose}" Margin="4"/>
+                <Path Data="{StaticResource SvgClose}" Margin="5 0"/>
             </Button>
         </Grid>
     </Border>
