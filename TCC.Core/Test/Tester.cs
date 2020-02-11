@@ -380,7 +380,7 @@ namespace TCC.Test
 
         }
 
-        public async static void RegisterWebhook(string username)
+        public static async void RegisterWebhook(string username)
         {
             var wh = "";
             var whHash = HashUtils.GenerateHash(wh);
@@ -510,6 +510,12 @@ namespace TCC.Test
                 });
 
             }
+        }
+
+        public static void StartRoll()
+        {
+            WindowManager.ViewModels.GroupVM.StartRoll();
+            WindowManager.ViewModels.GroupVM.Members[0].IsWinning = true;
         }
     }
 }
