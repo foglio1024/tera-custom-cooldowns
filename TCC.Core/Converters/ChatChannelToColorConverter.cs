@@ -9,110 +9,64 @@ namespace TCC.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var ch = (ChatChannel?)value ?? ChatChannel.Say;
-            switch (ch)
+            if (!(value is ChatChannel ch)) ch = ChatChannel.Say;
+
+            return ch switch
             {
-                case ChatChannel.Say:
-                    return R.Brushes.ChatSayBrush;
-                case ChatChannel.Party:
-                    return R.Brushes.ChatPartyBrush;
-                case ChatChannel.Guild:
-                    return R.Brushes.ChatGuildBrush;
-                case ChatChannel.Area:
-                    return R.Brushes.ChatAreaBrush;
-                case ChatChannel.Trade:
-                    return R.Brushes.ChatTradeBrush;
-                case ChatChannel.Greet:
-                case ChatChannel.Angler:
-                    return R.Brushes.ChatGreetBrush;
-                case ChatChannel.PartyNotice:
-                    return R.Brushes.ChatPartyNoticeBrush;
-                case ChatChannel.RaidNotice:
-                    return R.Brushes.ChatRaidNoticeBrush;
-                case ChatChannel.Emote:
-                    return R.Brushes.ChatEmoteBrush;
-                case ChatChannel.Global:
-                    return R.Brushes.ChatGlobalBrush;
-                case ChatChannel.Raid:
-                    return R.Brushes.ChatRaidBrush;
-                case ChatChannel.GuildAdvertising:
-                    return R.Brushes.ChatGuildAdBrush;
-                case ChatChannel.Private1:
-                case ChatChannel.Private2:
-                case ChatChannel.Private3:
-                case ChatChannel.Private4:
-                case ChatChannel.Private5:
-                case ChatChannel.Private6:
-                    return R.Brushes.ChatPrivateBrush;
-                case ChatChannel.Private7:
-                case ChatChannel.Private8:
-                    return R.Brushes.ChatProxyBrush;
-                case ChatChannel.SentWhisper:
-                case ChatChannel.ReceivedWhisper:
-                    return R.Brushes.ChatWhisperBrush;
-                case ChatChannel.System:
-                    return R.Brushes.ChatSystemGenericBrush;
-                case ChatChannel.Notify:
-                    return R.Brushes.ChatSystemNotifyBrush;
-                case ChatChannel.Event:
-                    return R.Brushes.ChatSystemEventBrush;
-                case ChatChannel.Error:
-                    return R.Brushes.ChatSystemErrorBrush;
-                case ChatChannel.Group:
-                    return R.Brushes.ChatSystemGroupBrush;
-                case ChatChannel.GuildNotice:
-                    return R.Brushes.ChatGuildBrush;
-                case ChatChannel.Deathmatch:
-                    return R.Brushes.ChatSystemDeathmatchBrush;
-                case ChatChannel.ContractAlert:
-                    return R.Brushes.ChatSystemContractAlertBrush;
-                case ChatChannel.GroupAlerts:
-                    return R.Brushes.ChatSystemGroupAlertBrush;
-                case ChatChannel.Loot:
-                    return R.Brushes.ChatSystemLootBrush;
-                case ChatChannel.Exp:
-                    return R.Brushes.ChatSystemExpBrush;
-                case ChatChannel.Money:
-                    return R.Brushes.ChatSystemMoneyBrush;
-                case ChatChannel.TradeRedirect:
-                    return R.Brushes.ChatTradeBrush;
-                //case ChatChannel.Enchant12:
-                //case ChatChannel.Enchant7:
-                //case ChatChannel.Enchant8:
-                case ChatChannel.Enchant:
-                    return R.Brushes.EnchantLowBrush;
-                //case ChatChannel.Enchant9:
-                case ChatChannel.Laurel:
-                //case ChatChannel.Enchant15:
-                    return R.Brushes.EnchantHighBrush;
-                case ChatChannel.RaidLeader:
-                    return R.Brushes.ChatRaidNoticeBrush;
-                case ChatChannel.TCC:
-                    return R.Brushes.MainBrush;
-                case ChatChannel.Bargain:
-                    return R.Brushes.ChatSystemBargainBrush;
-                case ChatChannel.Apply:
-                case ChatChannel.LFG:
-                case ChatChannel.Megaphone:
-                    return R.Brushes.ChatMegaphoneBrush;
-                case ChatChannel.Death:
-                case ChatChannel.Damage:
-                    return R.Brushes.HpBrush;
-                case ChatChannel.Ress:
-                    return R.Brushes.GreenBrush;
-                case ChatChannel.Quest:
-                    return R.Brushes.ChatSystemQuestBrush;
-                case ChatChannel.Friend:
-                    return R.Brushes.ChatSystemFriendBrush;
-                case ChatChannel.Twitch:
-                    return R.Brushes.TwitchBrush;
-                case ChatChannel.WorldBoss:
-                    return R.Brushes.ChatSystemWorldBossBrush;
-                case ChatChannel.Guardian:
-                    return R.Brushes.GuardianBrush;
-                default:
-                    return R.Brushes.ChatSystemGenericBrush;
-            }
+                ChatChannel.Say => R.Brushes.ChatSayBrush,
+                ChatChannel.Party => R.Brushes.ChatPartyBrush,
+                ChatChannel.Guild => R.Brushes.ChatGuildBrush,
+                ChatChannel.Area => R.Brushes.ChatAreaBrush,
+                ChatChannel.Trade => R.Brushes.ChatTradeBrush,
+                ChatChannel.Greet => R.Brushes.ChatGreetBrush,
+                ChatChannel.Angler => R.Brushes.ChatGreetBrush,
+                ChatChannel.PartyNotice => R.Brushes.ChatPartyNoticeBrush,
+                ChatChannel.RaidNotice => R.Brushes.ChatRaidNoticeBrush,
+                ChatChannel.Emote => R.Brushes.ChatEmoteBrush,
+                ChatChannel.Global => R.Brushes.ChatGlobalBrush,
+                ChatChannel.Raid => R.Brushes.ChatRaidBrush,
+                ChatChannel.GuildAdvertising => R.Brushes.ChatGuildAdBrush,
+                ChatChannel.Private1 => R.Brushes.ChatPrivateBrush,
+                ChatChannel.Private2 => R.Brushes.ChatPrivateBrush,
+                ChatChannel.Private3 => R.Brushes.ChatPrivateBrush,
+                ChatChannel.Private4 => R.Brushes.ChatPrivateBrush,
+                ChatChannel.Private5 => R.Brushes.ChatPrivateBrush,
+                ChatChannel.Private6 => R.Brushes.ChatPrivateBrush,
+                ChatChannel.Private7 => R.Brushes.ChatProxyBrush,
+                ChatChannel.Private8 => R.Brushes.ChatProxyBrush,
+                ChatChannel.SentWhisper => R.Brushes.ChatWhisperBrush,
+                ChatChannel.ReceivedWhisper => R.Brushes.ChatWhisperBrush,
+                ChatChannel.System => R.Brushes.ChatSystemGenericBrush,
+                ChatChannel.Notify => R.Brushes.ChatSystemNotifyBrush,
+                ChatChannel.Event => R.Brushes.ChatSystemEventBrush,
+                ChatChannel.Error => R.Brushes.ChatSystemErrorBrush,
+                ChatChannel.Group => R.Brushes.ChatSystemGroupBrush,
+                ChatChannel.GuildNotice => R.Brushes.ChatGuildBrush,
+                ChatChannel.Deathmatch => R.Brushes.ChatSystemDeathmatchBrush,
+                ChatChannel.ContractAlert => R.Brushes.ChatSystemContractAlertBrush,
+                ChatChannel.GroupAlerts => R.Brushes.ChatSystemGroupAlertBrush,
+                ChatChannel.Loot => R.Brushes.ChatSystemLootBrush,
+                ChatChannel.Exp => R.Brushes.ChatSystemExpBrush,
+                ChatChannel.Money => R.Brushes.ChatSystemMoneyBrush,
+                ChatChannel.TradeRedirect => R.Brushes.ChatTradeBrush,
+                ChatChannel.Enchant => R.Brushes.EnchantLowBrush,
+                ChatChannel.Laurel => R.Brushes.EnchantHighBrush,
+                ChatChannel.RaidLeader => R.Brushes.ChatRaidNoticeBrush,
+                ChatChannel.TCC => R.Brushes.MainBrush,
+                ChatChannel.Bargain => R.Brushes.ChatSystemBargainBrush,
+                ChatChannel.Apply => R.Brushes.ChatMegaphoneBrush,
+                ChatChannel.LFG => R.Brushes.ChatMegaphoneBrush,
+                ChatChannel.Megaphone => R.Brushes.ChatMegaphoneBrush,
+                ChatChannel.Death => R.Brushes.HpBrush,
+                ChatChannel.Damage => R.Brushes.HpBrush,
+                ChatChannel.Ress => R.Brushes.GreenBrush,
+                ChatChannel.Quest => R.Brushes.ChatSystemQuestBrush,
+                ChatChannel.Friend => R.Brushes.ChatSystemFriendBrush,
+                ChatChannel.Twitch => R.Brushes.TwitchBrush,
+                ChatChannel.WorldBoss => R.Brushes.ChatSystemWorldBossBrush,
+                ChatChannel.Guardian => R.Brushes.GuardianBrush,
+                _ => R.Brushes.ChatSystemGenericBrush
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
