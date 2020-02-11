@@ -45,11 +45,9 @@
                     Click="Close" VerticalContentAlignment="Center">
                 <Path Data="{StaticResource SvgClose}" Margin="10 0" />
             </Button>
-            <Image Source="{StaticResource TeraFlatLogo}" Width="30"
-                   RenderOptions.BitmapScalingMode="HighQuality"
-                   VerticalAlignment="Center" HorizontalAlignment="Left" Opacity=".4" Margin="3 3" />
+            <Path Style="{StaticResource WindowLogo}"/>
             <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=windows:MyAbnormalConfigWindow}}" Style="{StaticResource DefaultTextStyle}"
-                       Margin="36 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Margin="34 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        FontSize="15" Foreground="#999" />
         </Grid>
 

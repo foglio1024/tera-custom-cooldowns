@@ -30,11 +30,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Image Source="{StaticResource TeraFlatLogo}"
-                   Opacity=".4"
-                   Width="Auto" Height="32"
-                   Margin="0"
-                   RenderOptions.BitmapScalingMode="HighQuality" />
+            <Path Style="{StaticResource WindowLogo}"/>
             <TextBlock Style="{StaticResource DefaultTextStyle}"
                        Foreground="#999"
                        Text="Add dungeon"

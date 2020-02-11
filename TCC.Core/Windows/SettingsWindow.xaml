@@ -367,18 +367,14 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Image Source="{StaticResource TeraFlatLogo}"
-                   Opacity=".4"
-                   Width="Auto" Height="32"
-                   Margin="0"
-                   RenderOptions.BitmapScalingMode="HighQuality" />
+            <Path Style="{StaticResource WindowLogo}"/>
             <TextBlock Style="{StaticResource DefaultTextStyle}"
                        Foreground="#999"
-                       Text="Settings"
+                       Text="TCC Settings"
                        VerticalAlignment="Center"
                        FontSize="16"
                        Grid.Column="1"
-                       Margin="2 0" />
+                       Margin="0 0" />
             <Button Style="{StaticResource ButtonContentOpacityStyle}"
                     VerticalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
