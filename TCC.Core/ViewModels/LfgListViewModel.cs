@@ -389,8 +389,8 @@ namespace TCC.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
-                listings.ForEach(l => Dispatcher.InvokeAsync(() => AddOrRefreshListing(l)));
                 RemoveMissingListings();
+                listings.ForEach(l => Dispatcher.InvokeAsync(() => AddOrRefreshListing(l)));
             });
 
 

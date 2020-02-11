@@ -206,8 +206,9 @@ namespace TCC.Data
                     if (bForce)
                     {
                         IsExpanded = !IsExpanded;
-                        //if (IsExpanded) return;
-                        //todo: expand
+                        if (!IsExpanded) return;
+                        WindowManager.ViewModels.LfgVM.LastClicked = this;
+                        ProxyInterface.Instance.Stub.RequestPartyInfo(LeaderId);
                     }
                     else
                     {
