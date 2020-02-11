@@ -422,7 +422,6 @@ namespace TCC.R
 		public static FontFamily NotoSansMed => ((FontFamily)App.Current.FindResource("NotoSansMed"));
 		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
 		public static ImageSource MoongourdLogo => ((ImageSource)App.Current.FindResource("MoongourdLogo"));
-		public static ImageSource TeraFlatLogo => ((ImageSource)App.Current.FindResource("TeraFlatLogo"));
 		public static ImageSource BlankImage => ((ImageSource)App.Current.FindResource("BlankImage"));
 		public static ImageSource BronzeLaurel => ((ImageSource)App.Current.FindResource("BronzeLaurel"));
 		public static ImageSource BronzeLaurelNew => ((ImageSource)App.Current.FindResource("BronzeLaurelNew"));
@@ -453,6 +452,7 @@ namespace TCC.R
 	// ResourceDictionaries/SVG.xaml
 	public static class SVG
 	{
+		public static Geometry SvgTera => ((Geometry)App.Current.FindResource("SvgTera"));
 		public static Geometry SvgWeapon => ((Geometry)App.Current.FindResource("SvgWeapon"));
 		public static Geometry SvgArmor => ((Geometry)App.Current.FindResource("SvgArmor"));
 		public static Geometry SvgHands => ((Geometry)App.Current.FindResource("SvgHands"));
@@ -506,6 +506,7 @@ namespace TCC.R
 		public static Style GlowHoverGrid => ((Style)App.Current.FindResource("GlowHoverGrid"));
 		public static Style GlowHoverGridLeft => ((Style)App.Current.FindResource("GlowHoverGridLeft"));
 		public static Style ClassWindowSkillBorder => ((Style)App.Current.FindResource("ClassWindowSkillBorder"));
+		public static Style WindowLogo => ((Style)App.Current.FindResource("WindowLogo"));
 	}
 
 	// ResourceDictionaries/TemplateSelectors.xaml

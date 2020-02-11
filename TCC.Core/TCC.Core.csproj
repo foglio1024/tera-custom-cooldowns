@@ -34,6 +34,7 @@
     <Reference Include="PresentationFramework.Aero" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="resources\fonts\ArialMono-Bold.ttf" />
     <None Remove="resources\fonts\copyfonts.com_arial-monospaced-mt-bold.ttf" />
     <None Remove="resources\fonts\Frutiger.ttf" />
     <None Remove="resources\fonts\NotoSans-Medium.ttf" />
@@ -74,9 +75,6 @@
     <None Remove="resources\images\kr_boss_icon_full.png" />
     <None Remove="resources\images\kr_mob_icon.png" />
     <None Remove="resources\images\moongourd.png" />
-    <None Remove="resources\images\tera-logo-flat.png" />
-    <None Remove="resources\tcc-logo-on.ico" />
-    <None Remove="resources\tcc-logo.ico" />
     <None Remove="resources\tcc_off.ico" />
     <None Remove="resources\tcc_on.ico" />
     <None Remove="resources\ttb.ico" />
@@ -107,7 +105,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <Resource Include="resources\fonts\copyfonts.com_arial-monospaced-mt-bold.ttf" />
+    <Resource Include="resources\fonts\ArialMono-Bold.ttf" />
     <Resource Include="resources\fonts\Frutiger.ttf" />
     <Resource Include="resources\fonts\NotoSans-Medium.ttf" />
     <Resource Include="resources\images\10kdays.jpg" />
@@ -147,9 +145,6 @@
     <Resource Include="resources\images\kr_boss_icon_full.png" />
     <Resource Include="resources\images\kr_mob_icon.png" />
     <Resource Include="resources\images\moongourd.png" />
-    <Resource Include="resources\images\tera-logo-flat.png" />
-    <Resource Include="resources\tcc-logo-on.ico" />
-    <Resource Include="resources\tcc-logo.ico" />
     <Resource Include="resources\tcc.ico">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
