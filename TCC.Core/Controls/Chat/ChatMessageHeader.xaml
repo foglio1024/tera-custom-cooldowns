@@ -12,7 +12,7 @@
             <Style x:Key="MentionLitBorder" TargetType="Border">
                 <Setter Property="Background" Value="Black" />
                 <Style.Triggers>
-                    <DataTrigger Binding="{Binding ContainsPlayerName}">
+                    <DataTrigger Binding="{Binding ContainsPlayerName}" Value="True">
                         <Setter Property="Background" Value="{StaticResource GoldBrush}" />
                     </DataTrigger>
                 </Style.Triggers>
