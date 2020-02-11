@@ -1,17 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Storyboard x:Key="Pulse" RepeatBehavior="Forever" Duration="0:0:2" Timeline.DesiredFrameRate="20">
-        <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"/>
-        <DoubleAnimation  From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"/>
-        <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" BeginTime="0:0:0.2"/>
-        <DoubleAnimation  From="1.1" To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" BeginTime="0:0:0.2"/>
+        <DoubleAnimation From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" />
+        <DoubleAnimation From="1" To="1.1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" />
+        <DoubleAnimation From="1.1" To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" BeginTime="0:0:0.2"/>
+        <DoubleAnimation From="1.1" To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" BeginTime="0:0:0.2"/>
     </Storyboard>
 
     <Storyboard x:Key="Warn" RepeatBehavior="Forever">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity"  Duration="0:0:0.2" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.2" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}"/>
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}" />
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}" BeginTime="0:0:0.2" />
     </Storyboard>
 
     <!-- Fonts -->
@@ -22,7 +21,6 @@
     <!-- Embedded images -->
     <ImageSource x:Key="DefaultGuildLogo">         pack://application:,,,/resources/images/default_guild_logo.png                </ImageSource>
     <ImageSource x:Key="MoongourdLogo">            pack://application:,,,/resources/images/moongourd.png                         </ImageSource>
-    <ImageSource x:Key="TeraFlatLogo">             pack://application:,,,/resources/images/tera-logo-flat.png                    </ImageSource>
 
     <ImageSource x:Key="BlankImage">               pack://application:,,,/resources/images/Icon_Laurels/blank.png                </ImageSource>
     <ImageSource x:Key="BronzeLaurel">             pack://application:,,,/resources/images/Icon_Laurels/bronze.png               </ImageSource>
@@ -46,11 +44,7 @@
     <ImageSource x:Key="ChampionLaurelNewBig">     pack://application:,,,/resources/images/Icon_Laurels/champion_kr_big.png      </ImageSource>
     <ImageSource x:Key="ChampionLaurelNewBottom">  pack://application:,,,/resources/images/Icon_Laurels/champion_kr_bottom.png   </ImageSource>
 
-    <DropShadowEffect x:Key="ClassIconGlow" Color="{StaticResource ClassGlowColor}" BlurRadius="3" ShadowDepth="0" Opacity=".5"/>
-    <DropShadowEffect x:Key="ClassWindowSkillBorderShadow" ShadowDepth="0" BlurRadius="20"/>
-
-
-    <system:Double x:Key="MapWidth">800</system:Double>
-    <system:Double x:Key="MapHeight">600</system:Double>
+    <DropShadowEffect x:Key="ClassIconGlow"                ShadowDepth="0" BlurRadius="3"  Opacity=".5"  Color="{StaticResource ClassGlowColor}" />
+    <DropShadowEffect x:Key="ClassWindowSkillBorderShadow" ShadowDepth="0" BlurRadius="20" />
 
 </ResourceDictionary>
