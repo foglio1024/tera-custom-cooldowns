@@ -432,13 +432,10 @@ namespace TCC
             AbnormalityTracker.CheckMarkingOnDespawn(p.Target);
 
             // TODO: this shouldn't reference modules ------------------
-            if (WindowManager.ViewModels.NpcVM.VisibleBossesCount == 0)
-            {
-                Encounter = false;
-                WindowManager.ViewModels.GroupVM.SetAggro(0);
-            }
-
-            // TODO ----------------------------------------------------
+            if (WindowManager.ViewModels.NpcVM.VisibleBossesCount != 0) return;
+            Encounter = false;
+            WindowManager.ViewModels.GroupVM.SetAggro(0);
+            // ----------------------------------------------------
         }
 
         private static void OnDespawnUser(S_DESPAWN_USER p)

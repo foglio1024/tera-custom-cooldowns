@@ -39,23 +39,48 @@
                                Width="60"
                                HorizontalAlignment="Center"
                                TextAlignment="Center"/>
-            <Grid Grid.Row="1" Visibility="{Binding Shield, Converter={StaticResource ShieldStatusToVisibility}}">
-                <controls:Arc Stroke="{Binding Shield, Converter={StaticResource ShieldStatusColor}}" 
-                           x:Name="ShieldArc"
-                           Width="48" 
-                           Height="48"
-                           StrokeThickness="24"
-                           VerticalAlignment="Center"
-                           EndAngle="359.9"
-                           Margin="3"/>
+            <Grid Grid.Row="1">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Shield}" Value="Off">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <controls:Arc x:Name="ShieldArc"
+                              Width="48" 
+                              Height="48"
+                              StrokeThickness="24"
+                              VerticalAlignment="Center"
+                              EndAngle="359.9"
+                              Margin="3">
+                    <controls:Arc.Style>
+                        <Style TargetType="controls:Arc">
+                            <Setter Property="Stroke" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Shield}" Value="On">
+                                    <Setter Property="Stroke" Value="{StaticResource MpBrush}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Shield}" Value="Broken">
+                                    <Setter Property="Stroke" Value="{StaticResource GreenBrush}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Shield}" Value="Failed">
+                                    <Setter Property="Stroke" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </controls:Arc.Style>
+                </controls:Arc>
                 <Path  Fill="White" 
-                               Visibility="Collapsed"
-                           Width="15" 
-                           Height="15" 
-                           Margin="0,1,0,0"
-                           VerticalAlignment="Center"
-                           Stretch="Uniform" 
-                           Data="M237.263,60.498c-4.65,3.535-68.417,50.977-150.197,
+                       Visibility="Collapsed"
+                       Width="15" 
+                       Height="15" 
+                       Margin="0,1,0,0"
+                       VerticalAlignment="Center"
+                       Stretch="Uniform" 
+                       Data="M237.263,60.498c-4.65,3.535-68.417,50.977-150.197,
                            67.352C76.285,316.566,237.161,414.269,237.263,414.213 c0.102,
                            0.056,160.979-97.646,150.198-286.368C305.676,111.475,
                            237.263,60.498,237.263,60.498z"/>
@@ -95,7 +120,7 @@
                                Grid.Row="1"
                                Text="{Binding CurrentPercentage, StringFormat=0.#}"
                                Margin="0,0,2,1"/>
-            
+
         </Grid>
     </Grid>
 

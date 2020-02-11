@@ -403,7 +403,8 @@ namespace TCC.ViewModels.Widgets
             N(nameof(AmILeader));
             N(nameof(ShowLeaderButtons));
         }
-        private void StartRoll()
+
+        public void StartRoll()
         {
             Rolling = true;
             //Members.ToList().ForEach(u => u.IsRolling = true);

@@ -1,85 +1,76 @@
 ﻿<UserControl x:Class="TCC.Controls.Chat.ChatMessageHeader"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" d:DataContext="{d:DesignData Type=ChatMessage}">
+             xmlns:chat="clr-namespace:TCC.Data.Chat"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance chat:ChatMessage}">
     <Grid Width="Auto" MinWidth="0" Margin="0,0,0,0"
           VerticalAlignment="Stretch" Height="Auto"
           UseLayoutRounding="True">
+        <Grid.Resources>
+            <Style x:Key="MentionLitBorder" TargetType="Border">
+                <Setter Property="Background" Value="Black" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ContainsPlayerName}">
+                        <Setter Property="Background" Value="{StaticResource GoldBrush}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <!--Background -->
-        <Border 
-                            Opacity=".35" 
-                            CornerRadius="1" 
-                            Visibility="Visible"
-                            Margin="0 0 0 0" 
-                            Grid.ColumnSpan="4"
-                            Grid.Column="0"
-                            VerticalAlignment="Stretch"
-            Background="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}" >
-            <!--<Border.Background>
-                <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
-                    <GradientStop Offset=".2" Color="{Binding ContainsPlayerName, Converter={StaticResource MentionToColor}, ConverterParameter=color}"/>
-                    <GradientStop Offset=".9" Color="{Binding ContainsPlayerName, Converter={StaticResource MentionToColor}, ConverterParameter=color_transparent}" />
-                </LinearGradientBrush>
-            </Border.Background>-->
-        </Border>
+        <Border Style="{StaticResource MentionLitBorder}"
+                Opacity=".35"
+                CornerRadius="1"
+                Grid.ColumnSpan="4"
+                VerticalAlignment="Stretch" />
         <!--Background tip-->
-        <Border Width="3" Background="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}" 
-                Grid.Column="3" CornerRadius="0 1 1 0" Margin="0,0" Opacity=".8" />
-        <!--<Path Fill="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}"  
-              Data="M0,0 1,-1 1,1" Grid.Column="2" VerticalAlignment="Top" Opacity=".5"
-              Width="20" Height="20"  HorizontalAlignment="Left" Stretch="Uniform"></Path>
-        <Rectangle Fill="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}"  Grid.Column="2"
-                   Opacity=".5" VerticalAlignment="Top" Height="20" Margin="10 0 10 0"></Rectangle>
-        <Path Fill="{Binding ContainsPlayerName,Converter={StaticResource MentionToColor}}"  
-              Data="M0,-1 1,0 0,1" Grid.Column="2" VerticalAlignment="Top" Opacity=".5"
-              Width="20" Height="20"  HorizontalAlignment="Right" Stretch="Uniform" Margin="0 0 0 0"></Path>-->
+        <Border Style="{StaticResource MentionLitBorder}"
+                Width="3"
+                Grid.Column="3"
+                CornerRadius="0 1 1 0"
+                Opacity=".8" />
         <!--Author-->
-        <ContentControl ContentTemplateSelector="{StaticResource AuthorTemplateSelector}" 
+        <ContentControl ContentTemplateSelector="{StaticResource AuthorTemplateSelector}"
                         Name="Author"
                         Content="{Binding}"
                         Margin="2 1"
                         Grid.Column="2"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        Width="Auto"  
+                        Width="Auto"
                         PreviewMouseRightButtonDown="OutlinedTextBlock_PreviewMouseLeftButtonDown"
                         MouseEnter="UIElement_OnMouseEnter"
-                        MouseLeave="UIElement_OnMouseLeave"
-        >
+                        MouseLeave="UIElement_OnMouseLeave">
             <ContentControl.Effect>
-                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="2" Opacity="0"></DropShadowEffect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="2" Opacity="0" />
             </ContentControl.Effect>
         </ContentControl>
 
         <!--Channel-->
-        <ContentControl ContentTemplateSelector="{StaticResource ChannelLabelTemplateSelector}" 
+        <ContentControl ContentTemplateSelector="{StaticResource ChannelLabelTemplateSelector}"
                         Content="{Binding}"
-                        Width="42"   
+                        Width="42"
                         Margin="0,5,0,0"
                         Grid.Column="1"
-                        Visibility="{Binding ShowChannel, Converter={StaticResource BoolToVisibility}}"
-                        />
+                        Visibility="{Binding ShowChannel, Converter={StaticResource BoolToVisibility}}" />
         <!--Timestamp-->
-        <TextBlock  Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}" 
-                    Width="Auto"   
-                    Opacity=".8" 
-                    FontWeight="Normal" 
-                    FontSize="11"
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Top"
-                    Text="{Binding Timestamp}"
-                    Grid.Column="0"
-                    Visibility="{Binding ShowTimestamp, Converter={StaticResource BoolToVisibility}}"
-                    
-                    />
+        <TextBlock Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
+                   Width="Auto"
+                   Opacity=".8"
+                   FontWeight="Normal"
+                   FontSize="11"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Text="{Binding Timestamp}"
+                   Grid.Column="0"
+                   Visibility="{Binding ShowTimestamp, Converter={StaticResource BoolToVisibility}}" />
     </Grid>
 </UserControl>
