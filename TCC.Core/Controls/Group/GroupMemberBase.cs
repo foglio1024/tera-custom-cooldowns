@@ -59,6 +59,7 @@ namespace TCC.Controls.Group
         {
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
+            PreviewMouseRightButtonDown += ShowUserMenu;
         }
 
         private void OnLoaded(object _, RoutedEventArgs __)
@@ -66,7 +67,7 @@ namespace TCC.Controls.Group
             UpdateSettings();
 
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            
+
             WindowManager.ViewModels.GroupVM.SettingsUpdated += UpdateSettings;
             WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupVmPropertyChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
@@ -74,11 +75,14 @@ namespace TCC.Controls.Group
 
         private void OnUnloaded(object _, RoutedEventArgs __)
         {
+            Loaded -= OnLoaded;
+            Unloaded -= OnUnloaded;
+
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
             SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;
             WindowManager.ViewModels.GroupVM.SettingsUpdated -= UpdateSettings;
             WindowManager.ViewModels.GroupVM.PropertyChanged -= OnGroupVmPropertyChanged;
-            Loaded -= OnLoaded;
-            Unloaded -= OnUnloaded;
         }
         private void OnGroupVmPropertyChanged(object ___, PropertyChangedEventArgs args)
         {
@@ -106,9 +110,8 @@ namespace TCC.Controls.Group
 
         protected void ShowUserMenu(object sender, MouseButtonEventArgs e)
         {
-            var dc = (User)DataContext;
-            WindowManager.ViewModels.PlayerMenuVM.Open(dc.Name, dc.ServerId, (int)dc.Level, dc.UserClass, dc.EntityId);
-            //ProxyInterface.Instance.Stub.AskInteractive(dc.ServerId, dc.Name); //ProxyOld.AskInteractive(dc.ServerId, dc.Name);
+            if (!(DataContext is User user)) return;
+            WindowManager.ViewModels.PlayerMenuVM.Open(user.Name, user.ServerId, (int)user.Level, user.UserClass, user.EntityId);
         }
         protected void ToolTip_OnOpened(object sender, RoutedEventArgs e)
         {
