@@ -117,9 +117,8 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <!--Name-->
-            <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff" Cursor="Hand"
+            <TextBlock TextTrimming="CharacterEllipsis" Foreground="#cfff"
                        ToolTipService.ShowDuration="50000"
-                       PreviewMouseRightButtonDown="ShowUserMenu"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,-2,0,2" FontSize="12"
                        Grid.Row="0" Grid.Column="0">
                 <Run Text="{Binding Level}" FontSize="10" Foreground="#6fff" />
@@ -441,71 +440,17 @@
         </StackPanel>
 
         <!--Ready check grid-->
-        <Grid VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2"
-              Opacity="{Binding Ready, Converter={StaticResource ReadyToOpacityConv}}">
-            <Grid.Effect>
-                <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3" />
-            </Grid.Effect>
-            <Border Width="16" Height="16"
-                    Background="{Binding Ready, Converter={StaticResource ReadyToColor}}"
-                    RenderTransform="{StaticResource Rotate45}" RenderTransformOrigin=".5 .5" >
-
-            <Path Margin="3" Fill="#a000" 
-                  RenderTransform="{StaticResource Rotate45Inv}" RenderTransformOrigin=".5 .5" 
-                  Data="{Binding Ready, Converter={StaticResource ReadyToSvg}}" />
-            </Border>
-        </Grid>
+        <ContentControl Content="{Binding}" 
+                        ContentTemplate="{StaticResource ReadyCheckIndicator}"
+                        Grid.ColumnSpan="2"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"/>
 
         <!--Roll result grid-->
-        <Grid Margin="0,-1" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2" Opacity="1"
-              Width="30">
-            <Grid.Effect>
-                <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3" />
-            </Grid.Effect>
-            <Border Background="{Binding IsWinning, Converter={StaticResource WinningToColor}}" CornerRadius="2" />
-            <TextBlock FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Margin="0,0,0,1" FontWeight="SemiBold"
-                       Text="{Binding RollResult, Converter={StaticResource RollToString}}" />
-            <Grid.RenderTransform>
-                <ScaleTransform ScaleX="0" />
-            </Grid.RenderTransform>
-            <Grid.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsRolling}" Value="False">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation From="1" To="0"
-                                                         Duration="0:0:0.100"
-                                                         Storyboard.TargetProperty="RenderTransform.ScaleX">
-                                            <DoubleAnimation.EasingFunction>
-                                                <QuadraticEase />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation From="0" To="1"
-                                                         Duration="0:0:0.100"
-                                                         Storyboard.TargetProperty="RenderTransform.ScaleX">
-                                            <DoubleAnimation.EasingFunction>
-                                                <QuadraticEase />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.ExitActions>
-
-                        </DataTrigger>
-
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
-        </Grid>
+        <ContentControl Content="{Binding}"
+                        ContentTemplate="{StaticResource RollResultIndicator}"
+                        Margin="0 -1"
+                        VerticalAlignment="Top" HorizontalAlignment="Right" Grid.ColumnSpan="2" />
     </Grid>
 
 </grp:GroupMemberBase>

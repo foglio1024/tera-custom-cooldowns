@@ -255,9 +255,9 @@
                             </Path>
                         </Button>
                         <DataTemplate.Triggers>
-                                <DataTrigger Binding="{Binding Selected}" Value="True">
-                                    <Setter TargetName="btnContent" Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
-                                </DataTrigger>
+                            <DataTrigger Binding="{Binding Selected}" Value="True">
+                                <Setter TargetName="btnContent" Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
+                            </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -389,14 +389,8 @@
     <!--Channel label templates-->
     <DataTemplate x:Key="WhisperChannelLabelTemplate" DataType="chat:ChatMessage">
         <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
-            <Path Data="M12 8V4l8 8-8 8v-4H4V8z" Opacity=".7"
+            <Path x:Name="arrow" Data="M12 8V4l8 8-8 8v-4H4V8z" Opacity=".7"
                   Stretch="Uniform" VerticalAlignment="Center">
-                <Path.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform CenterX="1"
-                                        ScaleX="{Binding Channel, Converter={StaticResource WhisperDirectionToAngle}}" />
-                    </TransformGroup>
-                </Path.LayoutTransform>
                 <Path.Style>
                     <Style TargetType="Path">
                         <Setter Property="Fill" Value="{StaticResource ChatWhisperBrush}" />
@@ -409,6 +403,16 @@
                 </Path.Style>
             </Path>
         </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Channel}" Value="ReceivedWhisper">
+                <Setter TargetName="arrow" Property="LayoutTransform">
+                    <Setter.Value>
+                        <ScaleTransform CenterX="1"
+                                        ScaleX="-1" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
     <DataTemplate x:Key="MegaphoneChannelLabelTemplate">
         <Grid Height="12" Width="12" VerticalAlignment="Top" UseLayoutRounding="True">
@@ -585,6 +589,85 @@
     </DataTemplate>
     <DataTemplate x:Key="RaidDataTemplate">
         <group:RaidMember />
+    </DataTemplate>
+
+    <DataTemplate x:Key="ReadyCheckIndicator" DataType="pc:User">
+        <Grid x:Name="root">
+            <Grid.Effect>
+                <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3" />
+            </Grid.Effect>
+            <Border x:Name="bg"
+                    Width="16" Height="16"
+                    RenderTransform="{StaticResource Rotate45}" 
+                    RenderTransformOrigin=".5 .5" />
+            <Path x:Name="icon" 
+                  Width="10" Height="10" 
+                  Fill="Black"
+                  Stretch="Uniform"/>
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Ready}" Value="None">
+                <Setter TargetName="root" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Ready}" Value="Ready">
+                <Setter TargetName="bg" Property="Background" Value="{StaticResource LightGreenBrush}" />
+                <Setter TargetName="icon" Property="Data" Value="{StaticResource SvgConfirm}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Ready}" Value="NotReady">
+                <Setter TargetName="bg" Property="Background" Value="{StaticResource HpBrush}" />
+                <Setter TargetName="icon" Property="Data" Value="{StaticResource SvgClose}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Ready}" Value="Undefined">
+                <Setter TargetName="bg" Property="Background" Value="{StaticResource GoldBrush}" />
+                <Setter TargetName="icon" Property="Data" Value="{StaticResource SvgMinimize}" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RollResultIndicator" DataType="pc:User">
+        <Grid x:Name="root" Width="30">
+            <Grid.Effect>
+                <DropShadowEffect ShadowDepth="1" RenderingBias="Performance" BlurRadius="3" />
+            </Grid.Effect>
+            <Border x:Name="bg" CornerRadius="2" Background="White"/>
+            <TextBlock FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Margin="0,0,0,1" FontWeight="SemiBold"
+                       Text="{Binding RollResult, Converter={StaticResource RollToString}}" />
+            <Grid.RenderTransform>
+                <ScaleTransform ScaleX="0" />
+            </Grid.RenderTransform>
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsRolling}" Value="False">
+                <DataTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation To="0"
+                                             Storyboard.TargetName="root"
+                                             Duration="0:0:0.100"
+                                             Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                             EasingFunction="{StaticResource QuadraticEase}">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation To="1"
+                                             Duration="0:0:0.100"
+                                             Storyboard.TargetName="root"
+                                             Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                             EasingFunction="{StaticResource QuadraticEase}">
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </DataTrigger.ExitActions>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsWinning}" Value="True">
+                <Setter TargetName="bg" Property="Background" Value="{StaticResource GoldBrush}"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
     <!--#endregion-->
 
