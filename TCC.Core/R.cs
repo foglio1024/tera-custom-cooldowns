@@ -4,7 +4,6 @@
 
 using Dragablz.Converters;
 using Nostrum.Converters;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -275,14 +274,11 @@ namespace TCC.R
 	{
 		public static BoolToSvgSwitchConverter BoolToSvgSwitchConverter => ((BoolToSvgSwitchConverter)App.Current.FindResource("BoolToSvgSwitchConverter"));
 		public static RollToStringConverter RollToString => ((RollToStringConverter)App.Current.FindResource("RollToString"));
-		public static WinningToColorConverter WinningToColor => ((WinningToColorConverter)App.Current.FindResource("WinningToColor"));
 		public static IconConverter IconNameToPath => ((IconConverter)App.Current.FindResource("IconNameToPath"));
 		public static ClassSvgConverter ClassToSvg => ((ClassSvgConverter)App.Current.FindResource("ClassToSvg"));
 		public static ChatChannelToColorConverter ChatChannelToColor => ((ChatChannelToColorConverter)App.Current.FindResource("ChatChannelToColor"));
 		public static ChatChannelToName ChatChannelToName => ((ChatChannelToName)App.Current.FindResource("ChatChannelToName"));
 		public static MessageTypeToCursor MessageTypeToCursor => ((MessageTypeToCursor)App.Current.FindResource("MessageTypeToCursor"));
-		public static MentionToColorConverter MentionToColor => ((MentionToColorConverter)App.Current.FindResource("MentionToColor"));
-		public static SentReceivedToAngleConverter WhisperDirectionToAngle => ((SentReceivedToAngleConverter)App.Current.FindResource("WhisperDirectionToAngle"));
 		public static HPbarColorConverter DebuffStatusToHpColor => ((HPbarColorConverter)App.Current.FindResource("DebuffStatusToHpColor"));
 		public static HPbarColorConverter2 DebuffStatusToHpColor2 => ((HPbarColorConverter2)App.Current.FindResource("DebuffStatusToHpColor2"));
 		public static RowsToHeightConverter RowsToHeight => ((RowsToHeightConverter)App.Current.FindResource("RowsToHeight"));
@@ -300,16 +296,11 @@ namespace TCC.R
 		public static HHphaseToEnemyWindowTemplate HarrowholdPhaseToLayout => ((HHphaseToEnemyWindowTemplate)App.Current.FindResource("HarrowholdPhaseToLayout"));
 		public static LaurelImageConverter LaurelToImage => ((LaurelImageConverter)App.Current.FindResource("LaurelToImage"));
 		public static ClassToFillConverter ClassToFill => ((ClassToFillConverter)App.Current.FindResource("ClassToFill"));
-		public static ReadyToOpacityConverter ReadyToOpacityConv => ((ReadyToOpacityConverter)App.Current.FindResource("ReadyToOpacityConv"));
-		public static ReadyToSvgConverter ReadyToSvg => ((ReadyToSvgConverter)App.Current.FindResource("ReadyToSvg"));
-		public static ReadyToColorConverter ReadyToColor => ((ReadyToColorConverter)App.Current.FindResource("ReadyToColor"));
 		public static GroupSizeToTemplateConverter GroupSizeToTemplate => ((GroupSizeToTemplateConverter)App.Current.FindResource("GroupSizeToTemplate"));
 		public static RaidToColorConverter RaidToColor => ((RaidToColorConverter)App.Current.FindResource("RaidToColor"));
 		public static ValueConverterGroup ClassToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("ClassToTransparentFill"));
 		public static ValueConverterGroup IlvlTierToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("IlvlTierToTransparentFill"));
 		public static ValueConverterGroup IsRaidToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("IsRaidToTransparentFill"));
-		public static ShieldStatusColorConverter ShieldStatusColor => ((ShieldStatusColorConverter)App.Current.FindResource("ShieldStatusColor"));
-		public static ShieldStatusToVisibilityConverter ShieldStatusToVisibility => ((ShieldStatusToVisibilityConverter)App.Current.FindResource("ShieldStatusToVisibility"));
 		public static StringToFillConverter StringToFill => ((StringToFillConverter)App.Current.FindResource("StringToFill"));
 		public static GuardianPointsStringConverter GuardianPointsStringConverter => ((GuardianPointsStringConverter)App.Current.FindResource("GuardianPointsStringConverter"));
 		public static LfgVmToButtonLabelConverter LfgVmToButtonLabel => ((LfgVmToButtonLabelConverter)App.Current.FindResource("LfgVmToButtonLabel"));
@@ -379,6 +370,8 @@ namespace TCC.R
 		public static DataTemplate SingleColumnGroupLayout => ((DataTemplate)App.Current.FindResource("SingleColumnGroupLayout"));
 		public static DataTemplate PartyDataTemplate => ((DataTemplate)App.Current.FindResource("PartyDataTemplate"));
 		public static DataTemplate RaidDataTemplate => ((DataTemplate)App.Current.FindResource("RaidDataTemplate"));
+		public static DataTemplate ReadyCheckIndicator => ((DataTemplate)App.Current.FindResource("ReadyCheckIndicator"));
+		public static DataTemplate RollResultIndicator => ((DataTemplate)App.Current.FindResource("RollResultIndicator"));
 		public static DataTemplate NameClassCharDataTemplate => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplate"));
 		public static DataTemplate NameClassCharDataTemplateWithVM => ((DataTemplate)App.Current.FindResource("NameClassCharDataTemplateWithVM"));
 		public static DataTemplate DefaultNotificationTemplate => ((DataTemplate)App.Current.FindResource("DefaultNotificationTemplate"));
@@ -445,8 +438,6 @@ namespace TCC.R
 		public static ImageSource ChampionLaurelNewBottom => ((ImageSource)App.Current.FindResource("ChampionLaurelNewBottom"));
 		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
 		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
-		public static Double MapWidth => ((Double)App.Current.FindResource("MapWidth"));
-		public static Double MapHeight => ((Double)App.Current.FindResource("MapHeight"));
 	}
 
 	// ResourceDictionaries/SVG.xaml

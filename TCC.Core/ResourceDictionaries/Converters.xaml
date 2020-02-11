@@ -5,14 +5,11 @@
 
     <tccConv:BoolToSvgSwitchConverter x:Key="BoolToSvgSwitchConverter"/>
     <tccConv:RollToStringConverter x:Key="RollToString"/>
-    <tccConv:WinningToColorConverter x:Key="WinningToColor"/>
     <tccConv:IconConverter x:Key="IconNameToPath"/>
     <tccConv:ClassSvgConverter x:Key="ClassToSvg"/>
     <tccConv:ChatChannelToColorConverter x:Key="ChatChannelToColor"/>
     <tccConv:ChatChannelToName x:Key="ChatChannelToName"/>
     <tccConv:MessageTypeToCursor x:Key="MessageTypeToCursor"/>
-    <tccConv:MentionToColorConverter x:Key="MentionToColor"/>
-    <tccConv:SentReceivedToAngleConverter x:Key="WhisperDirectionToAngle"/>
     <tccConv:HPbarColorConverter x:Key="DebuffStatusToHpColor"/>
     <tccConv:HPbarColorConverter2 x:Key="DebuffStatusToHpColor2"/>
     <tccConv:RowsToHeightConverter x:Key="RowsToHeight"/>
@@ -34,9 +31,6 @@
     <!--Party/raid member resources-->
     <tccConv:LaurelImageConverter x:Key="LaurelToImage"/>
     <tccConv:ClassToFillConverter x:Key="ClassToFill"/>
-    <tccConv:ReadyToOpacityConverter x:Key="ReadyToOpacityConv"/>
-    <tccConv:ReadyToSvgConverter x:Key="ReadyToSvg"/>
-    <tccConv:ReadyToColorConverter x:Key="ReadyToColor"/>
     <tccConv:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplate"/>
     <tccConv:RaidToColorConverter x:Key="RaidToColor"/>
     <fogConv:ValueConverterGroup x:Key="ClassToTransparentFill" >
@@ -52,8 +46,6 @@
         <fogConv:ColorToTransparent Opacity="0"/>
     </fogConv:ValueConverterGroup>
 
-    <tccConv:ShieldStatusColorConverter x:Key="ShieldStatusColor"/>
-    <tccConv:ShieldStatusToVisibilityConverter x:Key="ShieldStatusToVisibility"/>
     <tccConv:StringToFillConverter x:Key="StringToFill"/>
     <tccConv:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
     <tccConv:LfgVmToButtonLabelConverter x:Key="LfgVmToButtonLabel"/>
