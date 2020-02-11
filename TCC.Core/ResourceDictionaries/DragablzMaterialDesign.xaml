@@ -938,6 +938,7 @@
         <Setter Property="BorderBrush" Value="{StaticResource SelectionBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="#9fff" />
+        <Setter Property="FontWeight" Value="DemiBold" />
     </Style>
 
 </ResourceDictionary>
