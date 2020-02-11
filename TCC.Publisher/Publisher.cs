@@ -160,7 +160,7 @@ namespace TCC.Publisher
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                 c.Encoding = Encoding.UTF8;
-                c.UploadString(File.ReadAllText(_settings.FirestoreUrl), msg.ToString());
+                c.UploadString(_settings.FirestoreUrl, msg.ToString());
             }
         }
 
@@ -176,7 +176,7 @@ namespace TCC.Publisher
             using var client = MiscUtils.GetDefaultWebClient();
             client.Encoding = Encoding.UTF8;
             client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-            client.UploadString(File.ReadAllText(_settings.DiscordWebhook), msg.ToString());
+            client.UploadString(_settings.DiscordWebhook, msg.ToString());
         }
 
         public static async Task Upload()
