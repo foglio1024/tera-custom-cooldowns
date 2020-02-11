@@ -100,7 +100,6 @@ namespace TeraPacketParser.Messages
     //    public bool IsOpen { get; }
     //    public S_INVEN(TeraMessageReader reader) : base(reader)
     //    {
-    //        //TODO
     //        if (SessionManager.CurrentPlayer.InfBuffs.Any(x => AbnormalityDatabase.NoctIds.Contains(x.Abnormality.Id))) return;
     //        var count = reader.ReadUInt16();
     //        var invOffset = reader.ReadUInt16();

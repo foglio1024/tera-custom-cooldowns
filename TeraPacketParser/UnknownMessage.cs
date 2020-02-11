@@ -5,7 +5,7 @@
     {
         internal UnknownMessage(TeraMessageReader reader) : base(reader)
         {
-#if false   //TODO: redo this without references to settings
+#if false   
             // [Foglio] better not do this at every UnknownMessage - it could be a good parser for OpcodeSearcher though
             // added as a setting (needed only for KR)
             if (!App.Settings.CheckGuildBamWithoutOpcode || !MessageFactory.NoGuildBamOpcode) return;

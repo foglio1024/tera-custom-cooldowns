@@ -27,7 +27,6 @@ namespace TeraPacketParser.Messages
                     var name = reader.ReadTeraString();
                     /*var gm = */reader.ReadTeraString();
                     /*var logo = */reader.ReadTeraString();
-                    //TODO: use gm and logo?
                     GuildDetails.Add(new Tuple<uint, string>(id, name));
                     if (next != 0) reader.BaseStream.Position = next - 4;
                 }
