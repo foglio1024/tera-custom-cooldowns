@@ -274,14 +274,14 @@ namespace TCC.ViewModels
         //        NPC(nameof(ChatFadeOut));
         //    }
         //}
-        public string RegionOverride
+        public LanguageOverride RegionOverride
         {
             get => App.Settings.LanguageOverride;
             set
             {
                 if (App.Settings.LanguageOverride == value) return;
                 App.Settings.LanguageOverride = value;
-                if (value == "") App.Settings.LastLanguage = "EU-EN";
+                if (value == LanguageOverride.None) App.Settings.LastLanguage = "EU-EN";
                 N(nameof(RegionOverride));
             }
         }
@@ -622,6 +622,7 @@ namespace TCC.ViewModels
         public IEnumerable<GroupHpLabelMode> GroupHpLabelModes => EnumUtils.ListFromEnum<GroupHpLabelMode>();
         public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
         public IEnumerable<MentionMode> MentionModes => EnumUtils.ListFromEnum<MentionMode>();
+        public IEnumerable<LanguageOverride> LanguageOverrides => EnumUtils.ListFromEnum<LanguageOverride>();
 
 
         private TSObservableCollection<BlacklistedMonsterVM> _blacklistedMonsters;

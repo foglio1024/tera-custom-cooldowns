@@ -7,6 +7,7 @@
                  xmlns:data="clr-namespace:TCC.Data"
                  xmlns:local="clr-namespace:TCC.Windows"
                  xmlns:viewModels="clr-namespace:TCC.ViewModels"
+                 xmlns:tccData="clr-namespace:TCC.Data;assembly=TCC.Utils"
                  Topmost="True"
                  mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
                  Title="TCC Settings" Height="600" Width="900" ResizeMode="NoResize"
@@ -1669,8 +1670,10 @@
                                 </settings:SelectionSetting.ToolTip>
 
                             </settings:SelectionSetting>
-                            <settings:FieldSetting SettingName="Region override"
-                                                   Value="{Binding RegionOverride, Mode=TwoWay}" />
+                            <settings:SelectionSetting SettingName="Region override"
+                                                   SelectedItem="{Binding RegionOverride, Mode=TwoWay}"
+                                                   ChoicesType="{x:Type tccData:LanguageOverride}"
+                                                   Choices="{Binding LanguageOverrides, Mode=OneWay}"/>
                         </StackPanel>
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" 

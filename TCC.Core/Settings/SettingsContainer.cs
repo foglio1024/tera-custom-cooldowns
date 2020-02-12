@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Nostrum;
 using Newtonsoft.Json;
+using Nostrum.Converters;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 using Key = System.Windows.Forms.Keys;
@@ -21,13 +22,13 @@ namespace TCC.Settings
         public DateTime LastRun { get; set; }
         public string LastLanguage
         {
-            get => LanguageOverride != "" ? LanguageOverride : _lastLanguage;
+            get => LanguageOverride != LanguageOverride.None ? new EnumDescriptionConverter().Convert(LanguageOverride, null, null, null).ToString() : _lastLanguage;
             set => _lastLanguage = value;
         }
         public System.Drawing.Size LastScreenSize { get; set; }
         public DateTime StatSentTime { get; set; }
         public string StatSentVersion { get; set; }
-        public string LanguageOverride { get; set; }
+        public LanguageOverride LanguageOverride { get; set; } 
         public bool ShowTradeLfg { get; set; }
         public bool UseHotkeys { get; set; }
         public bool EthicalMode { get; set; }
@@ -177,7 +178,7 @@ namespace TCC.Settings
             ReturnToLobbyHotkey = new HotKey(Key.R, ModifierKeys.Control | ModifierKeys.Alt);
             ForceClickableChatHotkey = new HotKey(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
             ToggleBoundariesHotkey = new HotKey(Key.H, ModifierKeys.Control | ModifierKeys.Alt);
-            LanguageOverride = "";
+            LanguageOverride = LanguageOverride.None;
             HideHandles = false;
             HighPriority = false;
             ForceSoftwareRendering = true;

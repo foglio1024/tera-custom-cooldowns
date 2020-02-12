@@ -1,4 +1,6 @@
-﻿namespace TCC.Utils
+﻿using System.ComponentModel;
+
+namespace TCC.Utils
 {
     public enum NotificationType
     {
@@ -19,6 +21,23 @@
 
 namespace TCC.Data
 {
+    public enum LanguageOverride
+    {
+        None = 0,
+        [Description("EU-EN")]
+        EU_EN,
+        [Description("EU-FR")]
+        EU_FR,
+        [Description("EU-GER")]
+        EU_GER,
+        RU,
+        NA,
+        KR,
+        JP,
+        TW,
+        SE,
+        THA
+    }
     public enum ChatChannel
     {
         Say = 0,

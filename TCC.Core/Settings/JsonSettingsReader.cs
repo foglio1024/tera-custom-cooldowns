@@ -26,7 +26,9 @@ namespace TCC.Settings
                                .Replace("\"ExcludedAuthors\"", "\"HiddenAuthors\"")
                                .Replace("\"ExcludedChannels\"", "\"HiddenChannels\"")
                                .Replace("\"Channels\"", "\"ShowedChannels\"")
-                               .Replace("\"Authors\"", "\"ShowedAuthors\"");
+                               .Replace("\"Authors\"", "\"ShowedAuthors\"")
+                               .Replace("\"LanguageOverride\": \"\"", "\"LanguageOverride\" : 0");
+                    
                     #endregion
                     App.Settings = JsonConvert.DeserializeObject<SettingsContainer>(file);
                 }
