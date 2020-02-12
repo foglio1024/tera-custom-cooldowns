@@ -199,7 +199,7 @@ namespace TCC
         public static void ReleaseMutex()
         {
             _running = false;
-            _mutex.ReleaseMutex();
+            BaseDispatcher.Invoke(() => _mutex.ReleaseMutex());
         }
 
         #region Dispatchers
