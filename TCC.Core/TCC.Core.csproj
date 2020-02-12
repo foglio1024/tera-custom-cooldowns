@@ -20,6 +20,7 @@
     <RepositoryUrl>https://github.com/Foglio1024/Tera-custom-cooldowns</RepositoryUrl>
     <Copyright>MIT</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
@@ -154,6 +155,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\ttb.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="TCC.exe.manifest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="$(SolutionDir)\dependencies\ReSource\src\bin\Release\net48\ReSource.exe $(ProjectDir)\$(ProjectFileName) $(TargetPath) $(ProjectDir)\R.cs TCC.R" />
