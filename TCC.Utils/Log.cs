@@ -16,7 +16,7 @@ namespace TCC.Utils
         [Conditional("DEBUG")]
         public static void CW(string line)
         {
-            Console.WriteLine(line);
+            Debug.WriteLine(line);
         }
 
         public static void F(string line, string fileName = "error.log")
