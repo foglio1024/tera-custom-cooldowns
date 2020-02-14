@@ -167,6 +167,17 @@ namespace TCC.ViewModels
                 N();
             }
         }
+        public HotKey ToggleHideAllHotkey
+        {
+            get => App.Settings.ToggleHideAllHotkey;
+            set
+            {
+                if (App.Settings.ToggleHideAllHotkey.Equals(value)) return;
+                KeyboardHook.Instance.ChangeHotkey(App.Settings.ToggleHideAllHotkey, value);
+                App.Settings.ToggleHideAllHotkey = value;
+                N();
+            }
+        }
 
         private int _khCount;
         private bool _kh;

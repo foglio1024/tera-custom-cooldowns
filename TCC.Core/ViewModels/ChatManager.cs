@@ -614,7 +614,7 @@ namespace TCC.ViewModels
 
         private void ToggleForcedClickThru()
         {
-            App.Settings.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForceToggleClickThru(); });
+            App.Settings.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForcedClickable = !s.ForcedClickable; });
             if (App.Settings.ChatWindowsSettings.Count == 0) return;
             var msg =
                 $"Forcing chat clickable turned {(App.Settings.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";

@@ -388,6 +388,7 @@ namespace TCC.Controls.Skills
 
         private void OpenCooldownSettings(object sender, RoutedEventArgs e)
         {
+            if (WindowManager.SkillConfigWindow != null) return;
             new SkillConfigWindow().ShowWindow();
         }
 

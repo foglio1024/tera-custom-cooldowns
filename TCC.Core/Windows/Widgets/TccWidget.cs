@@ -22,7 +22,9 @@ namespace TCC.Windows.Widgets
     public class TccWidget : Window
     {
         private static bool _showBoundaries;
+        private static bool _hidden;
         private static event Action ShowBoundariesToggled;
+        private static event Action HiddenToggled;
 
         private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, 0);
         private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, 0);
@@ -37,6 +39,7 @@ namespace TCC.Windows.Widgets
         protected UIElement BoundaryRef;
 
         public WindowSettingsBase WindowSettings { get; private set; }
+        public IntPtr Handle => _handle;
 
         protected void Init(WindowSettingsBase settings)
         {
@@ -61,6 +64,7 @@ namespace TCC.Windows.Widgets
 
             Loaded += OnLoaded;
             SizeChanged += OnSizeChanged;
+            HiddenToggled += OnHiddenToggled;
 
             WindowManager.VisibilityManager.VisibilityChanged += OnVisibilityChanged;
             WindowManager.VisibilityManager.DimChanged += OnDimChanged;
@@ -99,6 +103,11 @@ namespace TCC.Windows.Widgets
             MouseLeave += (_, __) => _buttonsTimer.Start();
             if (_canMove) ButtonsRef.MouseLeftButtonDown += Drag;
             ShowBoundariesToggled += ShowHideBoundaries;
+        }
+
+        private void OnHiddenToggled()
+        {
+            OnVisibilityChanged();
         }
 
         private void OnTeraScreenChanged(System.Drawing.Point oldPos, System.Drawing.Point newPos, Size size)
@@ -189,8 +198,12 @@ namespace TCC.Windows.Widgets
         private void OnDimChanged()
         {
             if (!WindowManager.VisibilityManager.Visible) return;
-
-            if (!WindowSettings.AutoDim)
+            if (_hidden)
+            {
+                AnimateContentOpacity(0);
+                return;
+            }
+            if (!WindowSettings.AutoDim || WindowSettings.ForcedVisible)
             {
                 AnimateContentOpacity(WindowSettings.MaxOpacity);
             }
@@ -212,16 +225,16 @@ namespace TCC.Windows.Widgets
 
         protected virtual void OnVisibilityChanged()
         {
-            if (WindowManager.VisibilityManager.Visible)
+            if (WindowManager.VisibilityManager.Visible && !_hidden)
             {
-                if (WindowManager.VisibilityManager.Dim && WindowSettings.AutoDim)
+                if (WindowManager.VisibilityManager.Dim && WindowSettings.AutoDim && !WindowSettings.ForcedVisible)
                     AnimateContentOpacity(WindowSettings.DimOpacity);
                 else
                     AnimateContentOpacity(WindowSettings.MaxOpacity);
             }
             else
             {
-                if (WindowSettings.ShowAlways) return;
+                if (WindowSettings.ShowAlways && !_hidden) return;
                 AnimateContentOpacity(0);
             }
 
@@ -476,6 +489,12 @@ namespace TCC.Windows.Widgets
         {
             _showBoundaries = !_showBoundaries;
             ShowBoundariesToggled?.Invoke();
+        }
+
+        public static void OnHideAllToggled()
+        {
+            _hidden = !_hidden;
+            HiddenToggled?.Invoke();
         }
     }
 }

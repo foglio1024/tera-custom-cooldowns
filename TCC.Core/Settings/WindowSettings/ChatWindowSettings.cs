@@ -134,10 +134,6 @@ namespace TCC.Settings.WindowSettings
 
         }
 
-        public void ForceToggleClickThru()
-        {
-            ForcedClickable = !ForcedClickable;
-            InvokeClickThruModeChanged();
-        }
+
     }
 }

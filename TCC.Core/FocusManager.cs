@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Nostrum.WinAPI;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
-using Nostrum.WinAPI;
 using TCC.Utils;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
@@ -42,8 +42,13 @@ namespace TCC
         public static bool IsForeground
         {
             get => _isForeground || ForceFocused;
-            private set => _isForeground = value;
+            private set
+            {
+                _isForeground = value;
+                Log.CW($"{nameof(IsForeground)} set to {value}; {nameof(ForceFocused)} is {ForceFocused}");
+            }
         }
+
         private static bool IsActive
         {
             get
@@ -54,6 +59,17 @@ namespace TCC
                 if (ForegroundWindow == WindowManager.SkillConfigWindow?.Handle && WindowManager.SkillConfigWindow?.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.LfgListWindow?.Handle && WindowManager.LfgListWindow?.Handle != IntPtr.Zero) return true;
                 if (ForegroundWindow == WindowManager.DashboardWindow?.Handle && WindowManager.DashboardWindow?.Handle != IntPtr.Zero) return true;
+
+                if (ForegroundWindow == WindowManager.CooldownWindow?.Handle && WindowManager.CooldownWindow?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.CharacterWindow?.Handle && WindowManager.CharacterWindow?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.BossWindow?.Handle && WindowManager.BossWindow?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.BuffWindow?.Handle && WindowManager.BuffWindow?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.FloatingButton?.Handle && WindowManager.FloatingButton?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.CivilUnrestWindow?.Handle && WindowManager.CivilUnrestWindow?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.ClassWindow?.Handle && WindowManager.ClassWindow?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.FlightDurationWindow?.Handle && WindowManager.FlightDurationWindow?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.GroupWindow?.Handle && WindowManager.GroupWindow?.Handle != IntPtr.Zero) return true;
+                if (ForegroundWindow == WindowManager.NotificationArea?.Handle && WindowManager.NotificationArea?.Handle != IntPtr.Zero) return true;
                 return false;
             }
         }
@@ -157,12 +173,6 @@ namespace TCC
             IsForeground = IsActive;
             ForegroundChanged?.Invoke();
         }
-
-
-        #region WinAPI
-
-
-        #endregion
     }
 
     public static class InputInjector

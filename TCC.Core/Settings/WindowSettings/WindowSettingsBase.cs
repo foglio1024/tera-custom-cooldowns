@@ -27,6 +27,8 @@ namespace TCC.Settings.WindowSettings
         protected bool _showAlways;
         protected bool _enabled;
         protected bool _allowOffScreen;
+        private bool _forcedClickable;
+        private bool _forcedVisible;
 
 
         public event Action ResetToCenter;
@@ -38,8 +40,33 @@ namespace TCC.Settings.WindowSettings
         public string Name { [UsedImplicitly] get; }
         [JsonIgnore]
         protected List<string> GpkNames { get; }
+
         [JsonIgnore]
-        public bool ForcedClickable { get; protected set; }
+        public bool ForcedClickable
+        {
+            get => _forcedClickable;
+            set
+            {
+                if(_forcedClickable == value) return;
+                _forcedClickable = value;
+                N();
+                N(nameof(ClickThruMode));
+            }
+        }
+
+        [JsonIgnore]
+        public bool ForcedVisible
+        {
+            get => _forcedVisible;
+            set
+            {
+                if(_forcedVisible == value) return;
+                _forcedVisible = value;
+                N();
+                WindowManager.VisibilityManager?.RefreshDim();
+            }
+        }
+
         [JsonIgnore]
         public double X
         {
@@ -225,7 +252,7 @@ namespace TCC.Settings.WindowSettings
             {
                 _clickThruMode = value;
                 N(nameof(ClickThruMode));
-                InvokeClickThruModeChanged();
+                ClickThruModeChanged?.Invoke();
             }
         }
         public ButtonsPosition ButtonsPosition
@@ -243,6 +270,7 @@ namespace TCC.Settings.WindowSettings
                 N(nameof(ButtonsPosition));
             }
         }
+
         public ClassPositions Positions { get; set; }
 
         public WindowSettingsBase()
@@ -352,7 +380,7 @@ namespace TCC.Settings.WindowSettings
             App.Settings.Save();
         }
 
-        protected void InvokeClickThruModeChanged() => ClickThruModeChanged?.Invoke();
+        //protected void InvokeClickThruModeChanged() => ClickThruModeChanged?.Invoke();
 
         public void ApplyScreenCorrection(Size sc)
         {
@@ -372,4 +400,5 @@ namespace TCC.Settings.WindowSettings
             Positions.ApplyOffset(oldPos, newPos, size);
         }
     }
+
 }

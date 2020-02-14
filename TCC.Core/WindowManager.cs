@@ -86,13 +86,12 @@ namespace TCC
             if (App.Settings.UseHotkeys) KeyboardHook.Instance.Enable();
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.ToggleBoundariesHotkey, TccWidget.OnShowAllHandlesToggled);
+            KeyboardHook.Instance.RegisterCallback(App.Settings.ToggleHideAllHotkey, TccWidget.OnHideAllToggled);
+
             SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
 
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
         }
-
-
-
 
         private static void SystemEventsOnDisplaySettingsChanged(object sender, EventArgs e)
         {

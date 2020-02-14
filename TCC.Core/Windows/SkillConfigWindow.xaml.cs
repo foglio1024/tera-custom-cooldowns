@@ -63,7 +63,10 @@ namespace TCC.Windows
 
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             FocusManager.ForceFocused = false;
-            WindowManager.VisibilityManager.ForceUndim = false;
+            //WindowManager.VisibilityManager.ForceUndim = false;
+            VM.Settings.ForcedClickable = false;
+            VM.Settings.ForcedVisible = false;
+
             WindowManager.SkillConfigWindow = null;
 
             an.Completed += (s, ev) =>
@@ -80,7 +83,9 @@ namespace TCC.Windows
         {
             if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             FocusManager.ForceFocused = true;
-            WindowManager.VisibilityManager.ForceUndim = true;
+            //WindowManager.VisibilityManager.ForceUndim = true;
+            VM.Settings.ForcedClickable = true;
+            VM.Settings.ForcedVisible = true;
             WindowManager.SkillConfigWindow = this;
             Dispatcher?.Invoke(() =>
             {

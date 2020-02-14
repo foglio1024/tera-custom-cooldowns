@@ -62,6 +62,7 @@ namespace TCC.Settings
         public HotKey ForceClickableChatHotkey { get; set; }
         public HotKey ReturnToLobbyHotkey { get; set; }
         public HotKey ToggleBoundariesHotkey { get; set; }
+        public HotKey ToggleHideAllHotkey { get; set; }
         public HotKey AbnormalSettingsHotkey { get; set; }
 
         #endregion
@@ -178,6 +179,7 @@ namespace TCC.Settings
             ReturnToLobbyHotkey = new HotKey(Key.R, ModifierKeys.Control | ModifierKeys.Alt);
             ForceClickableChatHotkey = new HotKey(Key.C, ModifierKeys.Control | ModifierKeys.Alt);
             ToggleBoundariesHotkey = new HotKey(Key.H, ModifierKeys.Control | ModifierKeys.Alt);
+            ToggleHideAllHotkey = new HotKey(Key.Z, ModifierKeys.Control | ModifierKeys.Alt);
             LanguageOverride = LanguageOverride.None;
             HideHandles = false;
             HighPriority = false;
@@ -203,7 +205,6 @@ namespace TCC.Settings
             WebhookEnabledMentions = false;
             WebhookUrlMentions = "";
         }
-
 
         public static void Load()
         {
