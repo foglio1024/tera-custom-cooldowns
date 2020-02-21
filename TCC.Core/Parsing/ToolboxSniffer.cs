@@ -164,7 +164,12 @@ namespace TCC.Parsing
                         }
                         var length = len - 2;
                         var dataBuf = new byte[length];
-                        stream.Read(dataBuf, 0, length);
+
+                        var progress = 0;
+                        while (progress < length)
+                        {
+                            progress += stream.Read(dataBuf, progress, length - progress);
+                        }
 
                         MessageReceived?.Invoke(new Message(DateTime.Now, dataBuf));
 
