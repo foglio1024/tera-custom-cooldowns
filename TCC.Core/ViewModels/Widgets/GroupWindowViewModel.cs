@@ -149,7 +149,7 @@ namespace TCC.ViewModels.Widgets
         public bool TryGetUser(ulong id, out User u)
         {
             u = Exists(id) ? Members.ToSyncList().FirstOrDefault(x => x.EntityId == id) : null;
-            return Exists(id);
+            return u != null;
         }
         public bool TryGetUser(uint pId, uint sId, out User u)
         {

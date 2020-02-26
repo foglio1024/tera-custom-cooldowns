@@ -49,7 +49,7 @@ namespace TCC.ViewModels.Widgets
 
         private void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA m)
         {
-            Player.MaxST = m.MaxST;
+            Player.MaxST = m.MaxST + m.BonusST;
             Player.CurrentST = m.CurrentST;
         }
         private void OnPlayerChangeMp(S_PLAYER_CHANGE_MP m)

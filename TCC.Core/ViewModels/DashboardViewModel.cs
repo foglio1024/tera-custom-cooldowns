@@ -206,8 +206,15 @@ namespace TCC.ViewModels
 
             Game.Account.Characters.CollectionChanged += SyncViewModel;
 
-            LoadCharacters();
+            try
+            {
+                LoadCharacters();
 
+            }
+            catch (Exception ex)
+            {
+                Log.F(ex.ToString());
+            }
             Game.Account.Characters.ToList().ForEach(c => CharacterViewModels.Add(new CharacterViewModel { Character = c }));
 
             SortedCharacters = CollectionViewFactory.CreateLiveCollectionView(Game.Account.Characters,
@@ -429,7 +436,7 @@ namespace TCC.ViewModels
             {
                 UpdateBuffs();
             }
-            catch (Exception e )
+            catch (Exception e)
             {
                 Log.F($"Failed to update buffs: {e.Message}");
             }
@@ -725,7 +732,7 @@ namespace TCC.ViewModels
                     CurrentCharacter.Inventory.Clear();
                     _firstInven = false;
                 }
-                
+
 
                 foreach (var keyVal in list)
                 {
