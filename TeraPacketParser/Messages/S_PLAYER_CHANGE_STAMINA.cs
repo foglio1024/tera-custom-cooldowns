@@ -12,10 +12,7 @@
         {
             CurrentST = reader.ReadInt32();
             MaxST = reader.ReadInt32();
-            reader.Skip(12);
             BonusST = reader.ReadInt32();
-            //unk2 = reader.ReadInt32();
-            //unk3 = reader.ReadInt32();
         }
     }
 }
