@@ -161,7 +161,21 @@ namespace TCC.Parsing
                     return;
                 }
             }
-            var opcNamer = new OpCodeNamer(opcPath);
+
+            OpCodeNamer opcNamer;
+            try
+            {
+                opcNamer = new OpCodeNamer(opcPath);
+            }
+            catch (OverflowException ex)
+            {
+                TccMessageBox.Show(
+                    "TCC encountered errors while reading opcodes file. This is probably caused by a manually mapped file containing wrong values. TCC will now close.",
+                    MessageBoxType.Error);
+                Log.F(ex.ToString());
+                App.Close();
+                return;
+            }
             Factory.Set(p.Versions[0], opcNamer);
             Sniffer.Connected = true;
         }
@@ -201,7 +215,7 @@ namespace TCC.Parsing
             }
             Factory.ReloadSysMsg(path);
 
-            Log.N("TCC", $"Release Version: {Factory.ReleaseVersion / 100D}", NotificationType.Normal); //by HQ 20190209
+            Log.N("TCC", $"Release Version: {Factory.ReleaseVersion / 100}.{Factory.ReleaseVersion % 100}", NotificationType.Normal); //by HQ 20190209
         }
     }
 }
