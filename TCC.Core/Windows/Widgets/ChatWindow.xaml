@@ -295,8 +295,14 @@
                     <!-- Settings button -->
                     <Button x:Name="SettingsButton" Margin="0 5" HorizontalAlignment="Right"
                             Click="OnSettingsButtonClick" Opacity=".5"
-                            Style="{StaticResource ButtonContentOpacityStyle}" Grid.Row="1" Height="16"
-                            VerticalAlignment="Top">
+                            ToolTip="Settings"
+                            Style="{StaticResource ButtonMainStyle}" Grid.Row="1" Height="18"
+                            Padding="2"
+                            VerticalAlignment="Top"
+                            Background="{StaticResource RevampBackgroundBrush}"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource RevampBorderBrush}"
+                            >
                         <Grid Background="#01000000">
                             <Path Data="{StaticResource SvgSettings}" />
                         </Grid>
@@ -391,9 +397,15 @@
                     </StackPanel>
 
                     <!-- Settings button-->
-                    <Button Margin="0 5 10 64" HorizontalAlignment="Right" Click="OnSettingsButtonClick"
+                    <Button Margin="0 0 10 64" HorizontalAlignment="Right" Click="OnSettingsButtonClick"
                             Opacity=".5"
-                            Style="{StaticResource ButtonContentOpacityStyle}" Height="16"
+                            Visibility="{Binding WindowSettings.StaysCollapsed, Converter={StaticResource BoolToVisibility}}"
+                            Style="{StaticResource ButtonMainStyle}" Height="18"
+                            Padding="2"
+                            Background="{StaticResource RevampBackgroundBrush}"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource RevampBorderBrush}"
+
                             VerticalAlignment="Bottom">
                         <Grid Background="#01000000">
                             <Path Data="{StaticResource SvgSettings}" />
