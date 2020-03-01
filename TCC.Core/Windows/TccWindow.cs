@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -6,11 +8,15 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Nostrum.Extensions;
 using Nostrum.Factories;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.Windows
 {
     public class TccWindow : Window
     {
+
+        private static List<TccWindow> _createdWindows = new List<TccWindow>();
+
         public event Action Hidden;
         public event Action Showed;
 
@@ -23,6 +29,7 @@ namespace TCC.Windows
 
         public TccWindow(bool canClose)
         {
+            _createdWindows.Add(this);
             _canClose = canClose;
             Closing += OnClosing;
             Loaded += OnLoaded;
@@ -60,7 +67,7 @@ namespace TCC.Windows
         {
             if (_canClose)
             {
-
+                _createdWindows.Remove(this);
                 return;
             }
             e.Cancel = true;
@@ -85,5 +92,9 @@ namespace TCC.Windows
             });
         }
 
+        public static bool IsCreated(Type type)
+        {
+            return _createdWindows.Any(w => w.GetType() == type);
+        }
     }
 }
