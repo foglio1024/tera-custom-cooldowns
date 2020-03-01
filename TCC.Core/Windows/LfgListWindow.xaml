@@ -6,6 +6,7 @@
              xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
              xmlns:vm="clr-namespace:TCC.ViewModels"
              xmlns:w="clr-namespace:TCC.Windows"
+             xmlns:windowSettings="clr-namespace:TCC.Settings.WindowSettings"
              UseLayoutRounding="True"
              Style="{StaticResource BaseWindowStyle}"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
@@ -28,7 +29,7 @@
                     Background="{StaticResource RevampDarkerBackgroundBrush}"
                     BorderThickness="1"
                     Opacity=".5"
-                    Margin="4  21 4 40"
+                    Margin="4  21 4 4"
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     HorizontalAlignment="Stretch" />
 
@@ -89,28 +90,26 @@
                         </Path.Style>
                     </Path>
                 </Button>
-                <TextBox Text="{Binding MinLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="White" Background="#0fff" Width="20"
-                         PreviewMouseLeftButtonDown="OnTbMouseLeftButtonDown"
-                         LostKeyboardFocus="OnTbLostKeyboardFocus"
-                         TextAlignment="Center"
-                         VerticalAlignment="Center" BorderThickness="0 0 0 1" />
-                <TextBlock Text="~" VerticalAlignment="Center" Foreground="#3fff"
-                           Margin="5 0" />
-                <TextBox Text="{Binding MaxLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White"
-                         Background="#0fff" Width="20"
-                         PreviewMouseLeftButtonDown="OnTbMouseLeftButtonDown"
-                         LostKeyboardFocus="OnTbLostKeyboardFocus"
-                         TextAlignment="Center"
-                         VerticalAlignment="Center" BorderThickness="0 0 0 1" />
-                <Rectangle Margin="10 8 0 8" Fill="#1fff" Width="1" VerticalAlignment="Stretch" />
-
-
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
+                        VerticalAlignment="Stretch" x:Name="CreateBtn"
+                        ToolTip="Create new LFG message."
+                        Command="{Binding CreateMessageCommand}">
+                    <Path Data="{StaticResource SvgAdd}" Stretch="Uniform" Fill="#fff" Margin="12" />
+                </Button>
+                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
+                        VerticalAlignment="Stretch" x:Name="RefreshBtn"
+                        ToolTip="Refresh LFG list (same as pressing LFG hotkey)"
+                        Command="{Binding ReloadCommand}">
+                    <Path Data="{StaticResource SvgReload}" Stretch="Uniform" Fill="#fff" Margin="12" />
+                </Button>
+                <Rectangle Margin="0 8 0 8" Fill="#1fff" Width="1" VerticalAlignment="Stretch" />
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
                         VerticalAlignment="Stretch" x:Name="ActionsBtn"
+                        ToolTip="More actions..."
                         Command="{Binding OpenPopupCommand}">
                     <Path Data="{StaticResource SvgDotsVertical}" Stretch="Uniform" Fill="#fff" Margin="12" />
                 </Button>
+                <Rectangle Margin="0 8 0 8" Fill="#1fff" Width="1" VerticalAlignment="Stretch" />
                 <Popup PlacementTarget="{Binding ElementName=ActionsBtn}"
                    IsOpen="{Binding IsPopupOpen}"
                    PopupAnimation="Slide"
@@ -118,7 +117,8 @@
                    MouseLeave="LfgPopup_OnMouseLeave"
                    Placement="Relative"
                    HorizontalOffset="-5"
-                   VerticalOffset="5">
+                   VerticalOffset="5"
+                   x:Name="ActionsPopup">
                     <Grid Margin="10">
                         <Border Style="{StaticResource RevampBorderStyle}"
                                 Background="{StaticResource RevampDarkerBackgroundBrush}">
@@ -130,6 +130,7 @@
                             <StackPanel.Resources>
                                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonMainStyle}">
                                     <Setter Property="Padding" Value="10 5" />
+                                    <Setter Property="Height" Value="36" />
                                 </Style>
                                 <Style TargetType="{x:Type Path}" BasedOn="{StaticResource {x:Type Path}}">
                                     <Setter Property="Width" Value="16" />
@@ -137,34 +138,6 @@
                                     <Setter Property="Margin" Value="0 5 10 5" />
                                 </Style>
                             </StackPanel.Resources>
-                            <Button x:Name="CreateLfgButton"
-                                extensions:ButtonExtensions.CornerRadius="3"
-                                Command="{Binding CreateMessageCommand}"
-                                ToolTip="Create new LFG message.">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Path Data="{StaticResource SvgAdd}" />
-                                    <TextBlock Text="Create message" Grid.Column="1"
-                                           VerticalAlignment="Center" />
-                                </Grid>
-                            </Button>
-                            <Button x:Name="ReloadButton"
-                                extensions:ButtonExtensions.CornerRadius="3"
-                                Command="{Binding ReloadCommand}"
-                                ToolTip="Refresh LFG list (same as pressing LFG hotkey)">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Path Data="{StaticResource SvgReload}" />
-                                    <TextBlock Text="Refresh" Grid.Column="1"
-                                           VerticalAlignment="Center" />
-                                </Grid>
-                            </Button>
                             <Button x:Name="CollapseAllButton"
                                 extensions:ButtonExtensions.CornerRadius="3"
                                 Command="{Binding CollapseAllCommand}"
@@ -194,10 +167,64 @@
                                            Foreground="White" />
                                 </Grid>
                             </Button>
+                            <Rectangle Margin="10 0" Fill="#1fff" Height="1" VerticalAlignment="Stretch" />
+                            <Grid Height="36">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding MinLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Foreground="White" Background="#0fff" Width="20"
+                                         PreviewMouseLeftButtonDown="OnTbMouseLeftButtonDown"
+                                         LostKeyboardFocus="OnTbLostKeyboardFocus"
+                                         TextAlignment="Center"
+                                         KeyDown="OnTbKeyDown"
+                                         MouseLeave="OnTbMouseLeave"
+                                         CaretBrush="#9fff"
+                                         VerticalAlignment="Center" BorderThickness="0 0 0 1" />
+                                <TextBlock Text="Min level" Grid.Column="1" Foreground="White"
+                                           VerticalAlignment="Center" />
+
+                            </Grid>
+                            <Grid Height="36">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="36" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding MaxLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White"
+                                         Background="#0fff" Width="20"
+                                         PreviewMouseLeftButtonDown="OnTbMouseLeftButtonDown"
+                                         LostKeyboardFocus="OnTbLostKeyboardFocus"
+                                         TextAlignment="Center"
+                                         CaretBrush="#9fff"
+                                         KeyDown="OnTbKeyDown"
+                                         MouseLeave="OnTbMouseLeave"
+                                         VerticalAlignment="Center" BorderThickness="0 0 0 1" />
+                                <TextBlock Text="Max level" Grid.Column="1" Foreground="White"
+                                           VerticalAlignment="Center" />
+
+                            </Grid>
+                            <Rectangle Margin="10 0" Fill="#1fff" Height="1" VerticalAlignment="Stretch" />
+                            <Button x:Name="ShowTradeListingsButton" 
+                                    ToolTip="Enable auto-publicize of LFG message with a 20 seconds cooldown."
+                                    Command="{Binding ToggleShowTradeListingsCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Width="16" Height="16" Margin="0 5 10 5"
+                                              IsChecked="{Binding HideTradeListings, Mode=OneWay}"
+
+                                              />
+                                    <TextBlock Text="Hide trade listings" Grid.Column="1"
+                                               VerticalAlignment="Center"
+                                               Foreground="White" />
+                                </Grid>
+                            </Button>
                         </StackPanel>
                     </Grid>
                 </Popup>
-
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
                         VerticalAlignment="Stretch"
                         Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=w:LfgListWindow}, Path=HideWindowCommand}">
@@ -238,14 +265,14 @@
             <!--Main List-->
             <ListBox Background="Transparent"
                      Padding="-1 -1 -1 -1"
-                     ScrollViewer.CanContentScroll="False"
                      Height="600"
+                     ScrollViewer.CanContentScroll="False"
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
                      BorderThickness="0"
                      Grid.Row="2"
                      ItemsSource="{Binding ListingsView}"
                      HorizontalAlignment="Stretch"
-                     Margin="5 5 5 40"
+                     Margin="5 5 5 5"
                      AlternationCount="2"
                      ItemTemplateSelector="{StaticResource ListingTemplateSelector}"
                      x:Name="MainList">
