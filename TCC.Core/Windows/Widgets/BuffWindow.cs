@@ -1,6 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
 using Nostrum.Extensions;
+using Nostrum.Factories;
+using TCC.Settings.WindowSettings;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 
@@ -8,8 +12,16 @@ namespace TCC.Windows.Widgets
 {
     public partial class BuffWindow
     {
+        private readonly DoubleAnimation _opacityUp;
+        private readonly DoubleAnimation _opacityDown;
+
         public BuffWindow(AbnormalityWindowViewModel vm)
         {
+
+            _opacityUp = AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);
+            _opacityDown = AnimationFactory.CreateDoubleAnimation(250, 0, easing: true, delay: 1000);
+
+
             InitializeComponent();
             DataContext = vm;
             ButtonsRef = Buttons;
@@ -52,6 +64,22 @@ namespace TCC.Windows.Widgets
             Debuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
             InfBuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
             SpecInfBuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
+        }
+
+        private void OnWindowMouseEnter(object sender, MouseEventArgs e)
+        {
+            SettingsButton.BeginAnimation(OpacityProperty, _opacityUp);
+        }
+
+        private void OnWindowMouseLeave(object sender, MouseEventArgs e)
+        {
+            SettingsButton.BeginAnimation(OpacityProperty, _opacityDown);
+        }
+
+        private void OpenBuffSettings(object sender, RoutedEventArgs e)
+        {
+            if (TccWindow.IsCreated(typeof(MyAbnormalConfigWindow))) return;
+            new MyAbnormalConfigWindow().Show();
         }
     }
 }

@@ -6,6 +6,9 @@
                    xmlns:controls="clr-namespace:TCC.Controls"
                    xmlns:widgetsWm="clr-namespace:TCC.ViewModels.Widgets"
                    xmlns:widgets="clr-namespace:TCC.Windows.Widgets"
+                   xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+                   MouseEnter="OnWindowMouseEnter"
+                   MouseLeave="OnWindowMouseLeave"
                    mc:Ignorable="d"
                    Title="TCC buffs"
                    Style="{StaticResource BaseWindowStyle}"
@@ -63,6 +66,21 @@
                     ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}"
                     ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}" />
             </StackPanel.LayoutTransform>
+            <Grid Style="{StaticResource GridRowStyle}" Margin="3">
+
+                <Button Style="{StaticResource ButtonMainStyle}"
+                        BorderThickness="1" Padding="2"
+                        BorderBrush="{StaticResource RevampBorderBrush}"
+                        Background="{StaticResource RevampBackgroundBrush}"
+                        Height="18"
+                        extensions:ButtonExtensions.CornerRadius="1"
+                        Opacity="0"
+                        Click="OpenBuffSettings" ToolTip="Configure buffs" VerticalAlignment="Bottom"
+                        x:Name="SettingsButton">
+                    <Path Data="{StaticResource SvgSettings}" />
+                </Button>
+            </Grid>
+
             <Grid Width="Auto" Style="{StaticResource GridRowStyle}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -92,8 +110,8 @@
             </Grid>
             <Grid Style="{StaticResource GridRowStyle}">
                 <ItemsControl Name="Debuffs"
-                          Style="{StaticResource BuffBarItemsControlStyle}"
-                          ItemsSource="{Binding Player.Debuffs}" />
+                              Style="{StaticResource BuffBarItemsControlStyle}"
+                              ItemsSource="{Binding Player.Debuffs}" />
             </Grid>
         </StackPanel>
     </Grid>
