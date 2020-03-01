@@ -1,6 +1,6 @@
 ﻿// Unknown Author and License
 
-namespace TCC.TeraCommon.Sniffing.Crypt
+namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
 {
     internal class CryptorKey
     {

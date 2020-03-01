@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace TCC.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing
 {
     internal struct ConnectionId : IEquatable<ConnectionId>
     {

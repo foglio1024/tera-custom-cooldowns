@@ -1,7 +1,7 @@
 ﻿// Copyright (c) CodesInChaos
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace TCC.Sniffing.Packets
+namespace TeraPacketParser.TeraCommon.Sniffing.Packets
 {
     internal static class ParserHelpers
     {

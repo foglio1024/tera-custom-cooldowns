@@ -2,17 +2,18 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using TCC.TeraCommon.PacketLog.Parsing;
 using TeraPacketParser.Data;
+using TeraPacketParser.TeraCommon.PacketLog.Parsing;
+using TeraPacketParser.TeraCommon.Sniffing.Crypt;
 
-namespace TCC.TeraCommon.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public class ConnectionDecrypter
     {
         private readonly string _region;
         private MemoryStream _client = new MemoryStream();
         private MemoryStream _server = new MemoryStream();
-        private Crypt.Session _session;
+        private Session _session;
 
         public ConnectionDecrypter(string region = "Unknown")
         {
@@ -36,9 +37,9 @@ namespace TCC.TeraCommon.Sniffing
             action?.Invoke(data);
         }
 
-        private Crypt.Session CreateSession(byte[] clientKey1, byte[] clientKey2, byte[] serverKey1, byte[] serverKey2)
+        private Session CreateSession(byte[] clientKey1, byte[] clientKey2, byte[] serverKey1, byte[] serverKey2)
         {
-            var session = Crypt.Session.Instance;
+            var session = Session.Instance;
             session.ClientKey1 = clientKey1;
             session.ClientKey2 = clientKey2;
             session.ServerKey1 = serverKey1;

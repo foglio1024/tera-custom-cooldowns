@@ -1,4 +1,4 @@
-﻿namespace TCC.TeraCommon.Game
+﻿namespace TeraPacketParser.TeraCommon.Game
 {
     public class Server
     {

@@ -2,7 +2,7 @@
 
 using System;
 
-namespace TCC.TeraCommon.Sniffing.Crypt
+namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
 {
     public class Session
     {

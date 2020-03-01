@@ -2,10 +2,9 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
-using TCC.TeraCommon.Game;
-using TeraPacketParser;
+using TeraPacketParser.TeraCommon.Game;
 
-namespace TCC.TeraCommon.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public interface ITeraSniffer
     {

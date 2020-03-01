@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using TCC.Annotations;
 
-namespace TCC.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public class TcpConnection
     {
@@ -41,7 +40,7 @@ namespace TCC.Sniffing
 
         public uint CurrentSequenceNumber => unchecked((uint) (InitialSequenceNumber + 1 + BytesReceived));
 
-        private static uint NextSequenceNumber { [UsedImplicitly] get; set; }
+        private static uint NextSequenceNumber { get; set; }
 
         public event Action<TcpConnection, byte[], int> DataReceived;
 

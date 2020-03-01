@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using PacketDotNet;
 using PacketDotNet.Utils;
 
-namespace TCC.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public class IpSnifferRawSocketSingleInterface : IpSniffer
     {

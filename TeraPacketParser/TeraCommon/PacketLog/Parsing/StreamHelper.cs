@@ -3,7 +3,7 @@
 
 using System.IO;
 
-namespace TCC.TeraCommon.PacketLog.Parsing
+namespace TeraPacketParser.TeraCommon.PacketLog.Parsing
 {
     internal static class StreamHelper
     {

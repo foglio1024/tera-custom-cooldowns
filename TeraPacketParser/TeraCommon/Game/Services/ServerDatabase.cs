@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using TCC.Update;
 using TeraDataLite;
 
-namespace TCC.TeraCommon.Game.Services
+namespace TeraPacketParser.TeraCommon.Game.Services
 {
     //TODO: make this the same as other DBs
     public class ServerDatabase
@@ -14,10 +13,8 @@ namespace TCC.TeraCommon.Game.Services
         private readonly List<Server> _servers;
         private List<Server> _serverlist;
 
-        public ServerDatabase(string folder)
+        public ServerDatabase(string folder, string serversOverridePath)
         {
-            UpdateManager.CheckServersFile();
-
             _serverlist = File.ReadAllLines(Path.Combine(folder, "servers.txt"))
                 .Where(s => !string.IsNullOrWhiteSpace(s))
                 .Select(s => s.Split(new[] { ' ' }, 4))
@@ -28,7 +25,6 @@ namespace TCC.TeraCommon.Game.Services
             _servers = _serverlist.Where(x => x.ServerId != uint.MaxValue).ToList();
             _serverlist.Add(new Server("VPN", "Unknown", "127.0.0.1"));
 
-            var serversOverridePath = Path.Combine(App.ResourcesPath, "config/server-overrides.txt");
             if (!File.Exists(serversOverridePath)) //create the default file if it doesn't exist
             {
                 if (!Directory.Exists(Path.GetDirectoryName(serversOverridePath)))

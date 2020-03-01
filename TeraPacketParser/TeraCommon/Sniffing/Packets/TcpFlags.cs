@@ -3,7 +3,7 @@
 
 using System;
 
-namespace TCC.Sniffing.Packets
+namespace TeraPacketParser.TeraCommon.Sniffing.Packets
 {
     [Flags]
     public enum TcpFlags : byte

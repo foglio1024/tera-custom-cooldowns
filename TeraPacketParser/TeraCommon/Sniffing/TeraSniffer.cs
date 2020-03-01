@@ -4,20 +4,11 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using TCC.Data;
-using TCC.Interop.Proxy;
-using TCC.Parsing;
-using TCC.TeraCommon.Sniffing;
-using TCC.Utils;
-using TCC.Windows;
-using TeraPacketParser;
 using TeraPacketParser.Data;
-using Server = TCC.TeraCommon.Game.Server;
+using Server = TeraPacketParser.TeraCommon.Game.Server;
 
-namespace TCC.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public class TeraSniffer : ITeraSniffer
     {
@@ -52,11 +43,11 @@ namespace TCC.Sniffing
         public ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
         public int ServerProxyOverhead;
 
-        public TeraSniffer()
+        public TeraSniffer(bool useNpcap, Dictionary<string, Server> serversByIp)
         {
-            _serversByIp = Game.DB.ServerDatabase.GetServersByIp();
+            _serversByIp = serversByIp;
 
-            if (App.Settings.Npcap || App.Settings.CaptureMode == CaptureMode.Npcap)
+            if (useNpcap)
             {
                 var netmasks = _serversByIp.Keys.Select(s => string.Join(".", s.Split('.').Take(3)) + ".0/24").Distinct().ToArray();
 
@@ -94,38 +85,7 @@ namespace TCC.Sniffing
 
         protected virtual void OnNewConnection(Server server)
         {
-            try
-            {
 
-                var process = Process.GetProcessesByName("TERA")[0];
-                var fullPath = process?.MainModule?.FileName.Replace("TERA.exe", "ReleaseRevision.txt");
-                if(fullPath== null) throw new Exception("TERA.exe location not found.");
-
-                var txt = File.ReadAllLines(fullPath);
-                foreach (var line in txt)
-                {
-                    if (!line.StartsWith("Version:")) continue;
-                    var idx = line.IndexOf("Live-", StringComparison.InvariantCultureIgnoreCase);
-                    var v = line.Substring(idx + 5);
-                    var idx2 = v.IndexOf(' ');
-                    v = v.Substring(0, idx2);
-                    v = v.Replace(".", "");
-                    PacketAnalyzer.Factory.ReleaseVersion = int.Parse(v);
-                }
-            }
-            catch (Exception e)
-            {
-                Log.F($"Failed to detect client version from file: {e}");
-                var msg = "Failed to detect client version.";
-
-                msg += ProxyInterface.Instance.IsStubAvailable
-                    ? "\nSince you're already using TERA Toolbox, please consider installing TCC as a module (more info in the wiki)."
-                    : "\nPlease consider installing TCC as a TERA Toolbox module (more info in the wiki).";
-
-                msg += "\nTCC will now close.";
-                TccMessageBox.Show(msg, MessageBoxType.Error);
-                App.Close();
-            }
             NewConnection?.Invoke(server);
         }
 
@@ -224,7 +184,7 @@ namespace TCC.Sniffing
 
         private void OnResync(MessageDirection direction, int skipped, int size)
         {
-            Log.F("Resync occured " + direction + ", skipped:" + skipped + ", block size:" + size);
+            //Log.F("Resync occured " + direction + ", skipped:" + skipped + ", block size:" + size);
         }
 
         // called indirectly from HandleTcpDataReceived, so the current thread already holds the lock

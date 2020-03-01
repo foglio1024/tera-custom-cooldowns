@@ -9,9 +9,10 @@ using PacketDotNet;
 using PacketDotNet.Utils;
 using SharpPcap;
 using SharpPcap.WinPcap;
+
 //using log4net;
 
-namespace TCC.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing
 {
     // Only works when WinPcap is installed
     public class IpSnifferWinPcap : IpSniffer

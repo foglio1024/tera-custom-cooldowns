@@ -4,7 +4,7 @@
 using System;
 using PacketDotNet;
 
-namespace TCC.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public abstract class IpSniffer
     {
