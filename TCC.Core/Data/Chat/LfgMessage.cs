@@ -8,6 +8,7 @@ using System.Timers;
 using Nostrum;
 using Nostrum.Factories;
 using TCC.Data.Pc;
+using TCC.UI;
 using TCC.Utils;
 
 namespace TCC.Data.Chat

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Nostrum.Converters;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
+using TCC.UI;
 using Key = System.Windows.Forms.Keys;
 
 namespace TCC.Settings

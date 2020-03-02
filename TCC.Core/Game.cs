@@ -8,22 +8,25 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using TCC.Converters;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
 using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Parsing;
+using TCC.Analysis;
+using TCC.Processing;
+using TCC.UI;
+using TCC.UI.Converters;
+using TCC.UI.Windows;
+using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
-using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 using Player = TCC.Data.Pc.Player;
-using Server = TCC.TeraCommon.Game.Server;
+using Server = TeraPacketParser.TeraCommon.Game.Server;
 
 namespace TCC
 {
@@ -155,6 +158,8 @@ namespace TCC
 
         private static void InitDatabases(string lang)
         {
+            UpdateManager.CheckServersFile();
+
             DB = new TccDatabase(lang);
             DB.CheckVersion();
             if (!DB.IsUpToDate)
@@ -526,17 +531,17 @@ namespace TCC
         {
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_LEAVE");
 
-            if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable ||
+            if (!StubInterface.Instance.IsStubAvailable || !StubInterface.Instance.IsFpsUtilsAvailable ||
                 !App.Settings.FpsAtGuardian) return;
-            ProxyInterface.Instance.Stub.InvokeCommand("fps mode 1");
+            StubInterface.Instance.StubClient.InvokeCommand("fps mode 1");
         }
         private static void OnFieldEventOnEnter(S_FIELD_EVENT_ON_ENTER p)
         {
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_ENTER");
 
-            if (!ProxyInterface.Instance.IsStubAvailable || !ProxyInterface.Instance.IsFpsUtilsAvailable ||
+            if (!StubInterface.Instance.IsStubAvailable || !StubInterface.Instance.IsFpsUtilsAvailable ||
                 !App.Settings.FpsAtGuardian) return;
-            ProxyInterface.Instance.Stub.InvokeCommand("fps mode 3");
+            StubInterface.Instance.StubClient.InvokeCommand("fps mode 3");
         }
         private static void OnFieldPointInfo(S_FIELD_POINT_INFO p)
         {
@@ -626,8 +631,7 @@ namespace TCC
             Me.ClearAbnormalities();
 
             WindowManager.ReloadPositions();
-            TimeManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
-            TimeManager.Instance.SetGuildBamTime(false);
+            GameEventManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
             InitDatabases(App.Settings.LastLanguage);
             SetAbnormalityTracker(m.CharacterClass);
         }
@@ -643,7 +647,7 @@ namespace TCC
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             if (!IsMe(p.TargetId)) return;
-            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
@@ -653,7 +657,7 @@ namespace TCC
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (!IsMe(p.TargetId)) return;
-            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
@@ -662,7 +666,7 @@ namespace TCC
         private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
             if (!IsMe(p.TargetId)) return;
-            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             FlyingGuardianDataProvider.HandleAbnormal(p);
             Me.EndAbnormality(ab);
         }
@@ -762,10 +766,10 @@ namespace TCC
             if (!Logged
               || LoadingScreen
               || Combat
-              || !ProxyInterface.Instance.IsStubAvailable) return;
+              || !StubInterface.Instance.IsStubAvailable) return;
 
             WindowManager.ViewModels.LfgVM.ForceStopPublicize();
-            ProxyInterface.Instance.Stub.ReturnToLobby();
+            StubInterface.Instance.StubClient.ReturnToLobby();
         }
 
         private static void OnDisconnected()

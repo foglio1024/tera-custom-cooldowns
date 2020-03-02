@@ -8,6 +8,9 @@ using TCC.Utils;
 
 namespace TCC.Interop.Proxy
 {
+    /// <summary>
+    /// Uses an <see cref="T:System.Net.Http.HttpClient" /> to send RPC requests to Toolbox.
+    /// </summary>
     public class ToolboxHttpClient
     {
         private readonly HttpClient _client;
@@ -33,8 +36,6 @@ namespace TCC.Interop.Proxy
                 return null;
             }
         }
-
-
         public async Task<Response> CallAsync(string methodName, JObject parameters = null)
         {
             return await CallAsync(new Request(methodName, parameters));
@@ -52,7 +53,5 @@ namespace TCC.Interop.Proxy
         //{
         //    Send(resp);
         //}
-
-
     }
 }

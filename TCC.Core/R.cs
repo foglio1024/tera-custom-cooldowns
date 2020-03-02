@@ -9,8 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
-using TCC.Converters;
-using TCC.TemplateSelectors;
+using TCC.UI.Converters;
+using TCC.UI.TemplateSelectors;
 
 namespace TCC.R
 {

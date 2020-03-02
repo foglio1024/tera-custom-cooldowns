@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using TCC.Data.Abnormalities;
+using TCC.UI;
 using TCC.Utilities;
 using TCC.ViewModels.Widgets;
 using TeraDataLite;

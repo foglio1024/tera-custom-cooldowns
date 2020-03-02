@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="TCC.UI.Controls.Chat.EmojiMessagePiece"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:chat="clr-namespace:TCC.Data.Chat"
+             xmlns:converters="clr-namespace:TCC.UI.Converters"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance chat:IconMessagePiece}">
+    <UserControl.Resources>
+        <converters:EmojiNameToImageConverter x:Key="EmojiNameToImageConverter" />
+    </UserControl.Resources>
+    <Grid SnapsToDevicePixels="True" UseLayoutRounding="True" ClipToBounds="False">
+        <Image RenderOptions.BitmapScalingMode="HighQuality" Margin="-2 0 4 -4" Width="22" Stretch="Uniform" HorizontalAlignment="Center" 
+               Height="22" Source="{Binding Text, Converter={StaticResource EmojiNameToImageConverter}}"/>
+    </Grid>
+</UserControl>

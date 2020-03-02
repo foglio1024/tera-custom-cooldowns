@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
 using TCC.Interop.Proxy;
+using TCC.UI;
 using TeraDataLite;
 
 namespace TCC.Data.Pc
@@ -487,12 +488,12 @@ namespace TCC.Data.Pc
         {
             AcceptApplyCommand = new RelayCommand(_ =>
             {
-                ProxyInterface.Instance.Stub.GroupInviteUser(Name);
+                StubInterface.Instance.StubClient.GroupInviteUser(Name);
             });
             DeclineApplyCommand = new RelayCommand(_ =>
             {
-                ProxyInterface.Instance.Stub.DeclineUserGroupApply(PlayerId);
-                ProxyInterface.Instance.Stub.RequestListingCandidates();
+                StubInterface.Instance.StubClient.DeclineUserGroupApply(PlayerId);
+                StubInterface.Instance.StubClient.RequestListingCandidates();
             });
             RequestInteractiveCommand = new RelayCommand(_ =>
             {
@@ -501,7 +502,7 @@ namespace TCC.Data.Pc
             });
             InspectCommand = new RelayCommand(_ =>
             {
-                ProxyInterface.Instance.Stub.InspectUser(Name);
+                StubInterface.Instance.StubClient.InspectUser(Name);
             });
         }
 

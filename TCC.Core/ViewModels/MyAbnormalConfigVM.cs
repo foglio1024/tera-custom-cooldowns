@@ -51,7 +51,7 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             _myAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
-            foreach (var abnormality in Game.DB.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && AbnormalityUtils.Pass(a)))
+            foreach (var abnormality in Game.DB.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
             {
                 var abVM = new MyAbnormalityVM(abnormality);
 

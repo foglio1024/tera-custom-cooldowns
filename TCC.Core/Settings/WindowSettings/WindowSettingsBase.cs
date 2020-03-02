@@ -8,8 +8,9 @@ using Newtonsoft.Json;
 using Nostrum;
 using TCC.Annotations;
 using TCC.Data;
+using TCC.UI;
+using TCC.UI.Windows.Widgets;
 using TCC.Utils;
-using TCC.Windows.Widgets;
 using TeraDataLite;
 
 namespace TCC.Settings.WindowSettings

@@ -60,7 +60,7 @@ namespace TCC.Settings.WindowSettings
 
         protected override void OnEnabledChanged(bool enabled)
         {
-            ProxyInterface.Instance.Stub.UpdateSetting("useLfg", enabled);
+            StubInterface.Instance.StubClient.UpdateSetting("useLfg", enabled);
             // do nothing
         }
     }

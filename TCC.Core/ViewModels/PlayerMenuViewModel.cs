@@ -3,13 +3,14 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Nostrum;
-using TCC.Controls.Chat;
 using TCC.Interop.Proxy;
-using TCC.Parsing;
+using TCC.Analysis;
+using TCC.UI.Controls.Chat;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
 using TeraPacketParser.Messages;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels
 {
@@ -149,8 +150,8 @@ namespace TCC.ViewModels
         public bool IsBlocked => _name != ""
                               && Game.BlockList?.Contains(_name) == true;
         public bool IsFriend => !Game.FriendList.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
-        public bool ShowFpsUtils => ProxyInterface.Instance.IsStubAvailable
-                                 && ProxyInterface.Instance.IsFpsUtilsAvailable;
+        public bool ShowFpsUtils => StubInterface.Instance.IsStubAvailable
+                                 && StubInterface.Instance.IsFpsUtilsAvailable;
         public bool ShowMakeGuildMaster => Game.Guild.AmIMaster &&
                                            Game.Guild.Has(Name);
         public bool ShowGuildKick => Game.Guild.AmIMaster &&
@@ -225,11 +226,11 @@ namespace TCC.ViewModels
                 if (IsFromOtherServer)
                 {
                     if (_gameId == 0) return;
-                    ProxyInterface.Instance.Stub.InspectUser(_gameId);
+                    StubInterface.Instance.StubClient.InspectUser(_gameId);
                 }
                 else
                 {
-                    ProxyInterface.Instance.Stub.InspectUser(Name);
+                    StubInterface.Instance.StubClient.InspectUser(Name);
                 }
             });
             WhisperCommand = new RelayCommand(_ =>
@@ -244,7 +245,7 @@ namespace TCC.ViewModels
                     if (Unfriending)
                     {
                         Close();
-                        ProxyInterface.Instance.Stub.UnfriendUser(Name);
+                        StubInterface.Instance.StubClient.UnfriendUser(Name);
                     }
                     else
                     {
@@ -268,7 +269,7 @@ namespace TCC.ViewModels
                     if (Blocking)
                     {
                         Close();
-                        ProxyInterface.Instance.Stub.BlockUser(Name);
+                        StubInterface.Instance.StubClient.BlockUser(Name);
                         Game.BlockList.Add(Name);
                         try
                         {
@@ -290,7 +291,7 @@ namespace TCC.ViewModels
                 }
                 else
                 {
-                    ProxyInterface.Instance.Stub.UnblockUser(Name);
+                    StubInterface.Instance.StubClient.UnblockUser(Name);
                     Game.BlockList.Remove(Name);
                     Close();
                 }
@@ -299,19 +300,19 @@ namespace TCC.ViewModels
             });
             GroupInviteCommand = new RelayCommand(_ =>
             {
-                ProxyInterface.Instance.Stub.GroupInviteUser(Name);
+                StubInterface.Instance.StubClient.GroupInviteUser(Name);
 
             });
             GrantInviteCommand = new RelayCommand(_ =>
             {
                 if (!Game.Group.TryGetMember(Name, out var u)) return;
-                ProxyInterface.Instance.Stub.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
+                StubInterface.Instance.StubClient.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
                 u.CanInvite = !u.CanInvite;
             });
             DelegateLeaderCommand = new RelayCommand(_ =>
             {
                 if (!Game.Group.TryGetMember(Name, out var u)) return;
-                ProxyInterface.Instance.Stub.DelegateLeader(u.ServerId, u.PlayerId);
+                StubInterface.Instance.StubClient.DelegateLeader(u.ServerId, u.PlayerId);
             });
             GroupKickCommand = new RelayCommand(_ =>
             {
@@ -319,7 +320,7 @@ namespace TCC.ViewModels
                 {
                     if (Game.Group.TryGetMember(Name, out var u))
                     {
-                        ProxyInterface.Instance.Stub.KickUser(u.ServerId, u.PlayerId);
+                        StubInterface.Instance.StubClient.KickUser(u.ServerId, u.PlayerId);
                     }
                     Close();
                 }
@@ -332,7 +333,7 @@ namespace TCC.ViewModels
             });
             GuildInviteCommand = new RelayCommand(_ =>
             {
-                ProxyInterface.Instance.Stub.GuildInviteUser(Name);
+                StubInterface.Instance.StubClient.GuildInviteUser(Name);
             });
             MakeGuildMasterCommand = new RelayCommand(_ =>
             {
@@ -356,8 +357,8 @@ namespace TCC.ViewModels
             });
             HideShowPlayerCommand = new RelayCommand(cmd =>
             {
-                ProxyInterface.Instance.Stub.InvokeCommand($"fps {cmd} {Name}");
-            }, ce => ProxyInterface.Instance.IsStubAvailable && ProxyInterface.Instance.IsFpsUtilsAvailable);
+                StubInterface.Instance.StubClient.InvokeCommand($"fps {cmd} {Name}");
+            }, ce => StubInterface.Instance.IsStubAvailable && StubInterface.Instance.IsFpsUtilsAvailable);
 
             _win = new PlayerMenuWindow(this);
 
@@ -456,9 +457,9 @@ namespace TCC.ViewModels
         }
         private void AskInteractive()
         {
-            if (_serverId == 0 || string.IsNullOrEmpty(Name) || !ProxyInterface.Instance.IsStubAvailable) return;
+            if (_serverId == 0 || string.IsNullOrEmpty(Name) || !StubInterface.Instance.IsStubAvailable) return;
 
-            ProxyInterface.Instance.Stub.AskInteractive(_serverId, Name);
+            StubInterface.Instance.StubClient.AskInteractive(_serverId, Name);
         }
     }
 }

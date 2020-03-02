@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using TCC.Data;
 using TCC.Data.Abnormalities;
-using TCC.Windows.Widgets;
+using TCC.UI.Windows.Widgets;
 using TeraDataLite;
 
 namespace TCC.Settings.WindowSettings

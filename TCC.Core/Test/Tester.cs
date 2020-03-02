@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum;
+using Nostrum.Extensions;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -6,16 +9,15 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-using Nostrum;
-using Newtonsoft.Json.Linq;
 using TCC.Data;
+using TCC.Data.Chat;
 using TCC.Data.Pc;
-using TCC.Parsing;
-using Nostrum.Extensions;
+using TCC.Processing;
+using TCC.UI;
+using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
-using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser;
 using TeraPacketParser.Data;
@@ -469,7 +471,8 @@ namespace TCC.Test
                 {
                     if (m.IsBoss)
                     {
-                        var msg = ChatManager.Instance.Factory.CreateMessage(ChatChannel.WorldBoss, "System", $"<font>{m.Name}</font><font size=\"15\" color=\"#cccccc\"> is nearby.</font>");
+                        var msg = ChatManager.Instance.Factory.CreateMessage(ChatChannel.WorldBoss, "System",
+                            $"{ChatUtils.Font(m.Name)}{ChatUtils.Font(" is nearby.", "cccccc", 15)}");
                         ChatManager.Instance.AddChatMessage(msg);
                     }
                 }
@@ -491,7 +494,7 @@ namespace TCC.Test
 
         public static void AddAbnormality(uint id)
         {
-            if (!AbnormalityUtils.Exists(id, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(id, out var ab) || !ab.CanShow) return;
             ab.Infinity = false;
             Game.Me.UpdateAbnormality(ab, int.MaxValue, 1);
 
@@ -506,7 +509,7 @@ namespace TCC.Test
                 {
                     ServerId = m.ServerId,
                     PlayerId = m.PlayerId,
-                    Status = status[App.Random.Next(0,3)]
+                    Status = status[App.Random.Next(0, 3)]
                 });
 
             }

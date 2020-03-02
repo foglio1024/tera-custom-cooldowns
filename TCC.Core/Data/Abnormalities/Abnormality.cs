@@ -7,7 +7,6 @@
         public string Name { get; set; }
         public string ToolTip { get; set; }
         public bool IsBuff { get; set; }
-
         public bool IsDebuff => Type == AbnormalityType.DOT ||
                                Type == AbnormalityType.Stun ||
                                Type == AbnormalityType.Debuff;
@@ -16,6 +15,15 @@
         public AbnormalityType Type { get; set; }
         public uint ShieldSize { get; private set; }
         public bool IsShield { get; private set; }
+
+        public bool CanShow => IsShow
+                               && !ToolTip.Contains("BTS")
+                               && !Name.Contains("BTS")
+                               && !Name.Contains("(Hidden)")
+                               && !Name.Equals("Unknown")
+                               && !Name.Equals(string.Empty);
+
+
         public Abnormality(uint id, bool isShow, bool isBuff, bool infinity, AbnormalityType prop)
         {
             Id = id;
@@ -41,5 +49,6 @@
             IsShield = true;
             ShieldSize = size;
         }
+
     }
 }

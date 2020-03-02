@@ -1,6 +1,6 @@
 ﻿using System;
 using TCC.Data;
-using TCC.Parsing;
+using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TeraPacketParser.Messages;

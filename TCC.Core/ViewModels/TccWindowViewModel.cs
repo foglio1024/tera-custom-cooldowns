@@ -1,6 +1,6 @@
 ﻿using System.Windows.Threading;
 using Nostrum;
-using TCC.Parsing;
+using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 
 namespace TCC.ViewModels

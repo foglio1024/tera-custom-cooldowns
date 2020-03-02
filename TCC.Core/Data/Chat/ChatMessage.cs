@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Nostrum;
 using Nostrum.Extensions;
+using TCC.UI;
 using TCC.Utils;
 using TCC.ViewModels;
 

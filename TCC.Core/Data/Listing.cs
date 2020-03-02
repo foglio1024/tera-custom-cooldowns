@@ -8,8 +8,10 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
-using TCC.Parsing;
+using TCC.Processing;
+using TCC.UI;
 using TeraDataLite;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.Data
 {
@@ -194,7 +196,7 @@ namespace TCC.Data
             Players = new TSObservableCollection<User>(Dispatcher);
             Applicants = new TSObservableCollection<User>(Dispatcher);
             ApplyCommand = new ApplyCommand(this);
-            RefreshApplicantsCommand = new RelayCommand(_ => ProxyInterface.Instance.Stub.RequestListingCandidates(), _ => IsMyLfg);
+            RefreshApplicantsCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.RequestListingCandidates(), _ => IsMyLfg);
             ExpandCollapseCommand = new RelayCommand(force =>
             {
                 if (IsPopupOpen) return;
@@ -208,7 +210,7 @@ namespace TCC.Data
                         IsExpanded = !IsExpanded;
                         if (!IsExpanded) return;
                         WindowManager.ViewModels.LfgVM.LastClicked = this;
-                        ProxyInterface.Instance.Stub.RequestPartyInfo(LeaderId);
+                        StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId);
                     }
                     else
                     {
@@ -224,7 +226,7 @@ namespace TCC.Data
                     else
                     {
                         WindowManager.ViewModels.LfgVM.LastClicked = this;
-                        ProxyInterface.Instance.Stub.RequestPartyInfo(LeaderId);
+                        StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId);
                     }
                 }
             });
@@ -240,9 +242,9 @@ namespace TCC.Data
 
                 if (Temp) WindowManager.ViewModels.LfgVM.Listings.Remove(this);
 
-                ProxyInterface.Instance.Stub.RegisterListing(msg, isRaid);
+                StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
 
-                Task.Delay(200).ContinueWith(t => ProxyInterface.Instance.Stub.RequestListings());
+                Task.Delay(200).ContinueWith(t => StubInterface.Instance.StubClient.RequestListings());
 
             },
             ce => Temp && !string.IsNullOrEmpty(Message));
@@ -304,7 +306,7 @@ namespace TCC.Data
 
         public async void Execute(object parameter)
         {
-            var success = await ProxyInterface.Instance.Stub.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
+            var success = await StubInterface.Instance.StubClient.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
             if (!success) return;
             SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{_listing.LeaderName}", "SMT_PARTYBOARD_APPLY");
             _listing.CanApply = false;

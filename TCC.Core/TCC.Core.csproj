@@ -84,9 +84,7 @@
     <PackageReference Include="gong-wpf-dragdrop" Version="2.2.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.18" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Nostrum" Version="1.0.3" />
-    <PackageReference Include="PacketDotNet" Version="0.13.0" />
-    <PackageReference Include="SharpPcap" Version="4.2.0" />
+    <PackageReference Include="Nostrum" Version="1.0.4" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +100,9 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\LICENSE">
+    <None Include="App.config" Visible="False"/>
+    <None Include="packages.config" Visible="False"/>
+    <None Include="..\LICENSE" Visible="False">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
@@ -157,7 +157,7 @@
     <Resource Include="resources\ttb.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="TCC.exe.manifest">
+    <None Update="TCC.exe.manifest" Visible="False">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

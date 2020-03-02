@@ -7,6 +7,7 @@ using Nostrum;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.R;
+using TCC.UI;
 using TCC.ViewModels;
 using TeraDataLite;
 

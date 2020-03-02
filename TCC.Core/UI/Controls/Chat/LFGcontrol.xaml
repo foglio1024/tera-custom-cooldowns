@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="TCC.UI.Controls.Chat.LFGcontrol"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"  MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave"
+             d:DataContext="{d:DesignData LFG}">
+    <Border Height="Auto" x:Name="Root" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" 
+            Background="#50af" Width="Auto" 
+            Padding="5,0,5,0" CornerRadius="3" 
+            Cursor="Hand"
+            MouseLeftButtonDown="root_MouseLeftButtonDown"
+            >
+            <TextBlock Foreground="#0af" Name="Label">
+                <Run Text="{Binding DungeonName}"/>
+            </TextBlock>
+        <Border.ToolTip>
+            <ToolTip Background="Transparent" BorderBrush="Transparent" 
+                     Placement="Top" >
+                
+            <Grid Margin="0">
+                <Border Style="{StaticResource DefaultBorderStyle}" Padding="5,3" Opacity="1">
+                    <TextBlock >
+                        <Run Text="{Binding Name}" Foreground="#3fff"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding Message}" Foreground="#9fff"/>
+                        </TextBlock>
+                </Border>
+            </Grid>
+            </ToolTip>
+        </Border.ToolTip>
+    </Border>
+</UserControl>

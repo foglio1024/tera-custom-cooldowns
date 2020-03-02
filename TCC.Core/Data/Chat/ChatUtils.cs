@@ -7,6 +7,7 @@ using HtmlAgilityPack;
 using Nostrum.Extensions;
 using TCC.Interop;
 using TCC.R;
+using TCC.UI;
 using TCC.Utils;
 
 namespace TCC.Data.Chat
@@ -165,6 +166,12 @@ namespace TCC.Data.Chat
 
             Log.N(title, message /*string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}"*/, NotificationType.Normal, 6000);
 
+        }
+
+        public static string Font(string msg, string color = "", int size = -1)
+        {
+            if (color.StartsWith("#")) color = color.Replace("#", "");
+            return $"<font{(color == "" ? "" : $" color=\"#{color}\"")}{(size == -1 ? "" : $" size=\"{size}\"")}>{msg}</font>";
         }
     }
 }

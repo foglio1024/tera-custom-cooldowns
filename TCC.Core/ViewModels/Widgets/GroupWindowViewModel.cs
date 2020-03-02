@@ -1,16 +1,18 @@
-﻿using System;
+﻿using Nostrum;
+using Nostrum.Factories;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Nostrum;
-using Nostrum.Factories;
+using TCC.Analysis;
 using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
-using TCC.Parsing;
+using TCC.Processing;
 using TCC.Settings.WindowSettings;
+using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
@@ -52,8 +54,8 @@ namespace TCC.ViewModels.Widgets
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
         public bool ShowDetails => Formed && ((GroupWindowSettings)Settings).ShowDetails;
-        public bool ShowLeaveButton => Formed && ProxyInterface.Instance.IsStubAvailable;
-        public bool ShowLeaderButtons => Formed && ProxyInterface.Instance.IsStubAvailable && AmILeader;
+        public bool ShowLeaveButton => Formed && StubInterface.Instance.IsStubAvailable;
+        public bool ShowLeaderButtons => Formed && StubInterface.Instance.IsStubAvailable && AmILeader;
         public bool Rolling { get; set; }
 
         public GroupWindowViewModel(GroupWindowSettings settings) : base(settings)
@@ -539,7 +541,7 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (!AbnormalityUtils.Exists(id, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+                if (!Game.DB.AbnormalityDatabase.Exists(id, out var ab) || !ab.CanShow) return;
                 BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
             });
         }
@@ -547,7 +549,7 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (!AbnormalityUtils.Exists(id, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+                if (!Game.DB.AbnormalityDatabase.Exists(id, out var ab) || !ab.CanShow) return;
                 EndAbnormality(ab, playerId, serverId);
             });
         }
@@ -632,7 +634,7 @@ namespace TCC.ViewModels.Widgets
         {
             if (!Game.IsMe(p.TargetId)) return;
             if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
-            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             if (p.Duration == int.MaxValue) ab.Infinity = true;
 
             BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
@@ -641,7 +643,7 @@ namespace TCC.ViewModels.Widgets
         {
             if (!Game.IsMe(p.TargetId)) return;
             if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
-            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             if (p.Duration == int.MaxValue) ab.Infinity = true;
 
             BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
@@ -649,7 +651,7 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
             if (!Game.IsMe(p.TargetId)) return;
-            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             EndAbnormality(ab, Game.Me.PlayerId, Game.Me.ServerId);
         }

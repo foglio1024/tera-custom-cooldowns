@@ -11,7 +11,7 @@ namespace TCC.ViewModels
         private readonly int _hourOffset;
         public string TimeString => _dateTime.ToShortTimeString();
 
-        public double TimeFactor => (_dateTime.Hour * 60 + _dateTime.Minute) * 60 / TimeManager.SecondsInDay;
+        public double TimeFactor => (_dateTime.Hour * 60 + _dateTime.Minute) * 60 / GameEventManager.SecondsInDay;
         public string Name { get; }
         public string Color { get; }
         public TimeMarker(int hourOffset, string name, string color = "ffffff")

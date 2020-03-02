@@ -8,9 +8,10 @@ using Newtonsoft.Json.Linq;
 using Nostrum;
 using Nostrum.Extensions;
 using TCC.Data;
+using TCC.UI;
+using TCC.UI.Windows;
+using TCC.UI.Windows.Widgets;
 using TCC.Utils;
-using TCC.Windows;
-using TCC.Windows.Widgets;
 
 namespace TCC.Update
 {

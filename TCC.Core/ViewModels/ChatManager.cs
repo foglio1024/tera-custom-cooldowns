@@ -1,5 +1,7 @@
 ﻿//#define BATCH // pepehands
 
+using Nostrum;
+using Nostrum.Extensions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,20 +12,20 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
-using Nostrum;
-using Nostrum.Extensions;
+using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Parsing;
+using TCC.Processing;
 using TCC.R;
 using TCC.Settings.WindowSettings;
-using TCC.TeraCommon.Game;
+using TCC.UI;
+using TCC.UI.Windows.Widgets;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels.Widgets;
-using TCC.Windows.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Messages;
+using TeraPacketParser.TeraCommon.Game;
 
 namespace TCC.ViewModels
 {
@@ -230,17 +232,19 @@ namespace TCC.ViewModels
         private void OnPlayerChangeExp(S_PLAYER_CHANGE_EXP m)
         {
             if (Game.Me.Level == 70) return;
-            var msg = "<font>You gained </font>";
-            msg += $"<font color='{Colors.GoldColor.ToHex()}'>{m.GainedTotalExp - m.GainedRestedExp:N0}</font>";
-            msg +=
-                $"<font>{(m.GainedRestedExp > 0 ? $" + </font><font color='{Colors.ChatMegaphoneColor.ToHex()}'>{m.GainedRestedExp:N0}" : "")} </font>";
-            msg += "<font>(</font>";
-            msg += $"<font color='{Colors.GoldColor.ToHex()}'>";
-            msg += $"{m.GainedTotalExp / (double)m.NextLevelExp:P3}</font>";
-            msg += "<font>) XP.</font>";
-            msg += "<font> Total: </font>";
-            msg += $"<font color='{Colors.GoldColor.ToHex()}'>{m.LevelExp / (double)m.NextLevelExp:P3}</font>";
-            msg += "<font>.</font>";
+
+            var msg = ChatUtils.Font("You gained ")
+                    + ChatUtils.Font($"{m.GainedTotalExp - m.GainedRestedExp:N0}", Colors.GoldColor.ToHex());
+
+            if (m.GainedRestedExp > 0)
+                msg += ChatUtils.Font(" + ") +
+                       ChatUtils.Font($"{m.GainedRestedExp:N0}", Colors.ChatMegaphoneColor.ToHex());
+
+            msg += ChatUtils.Font($" (");
+            msg += ChatUtils.Font($"{m.GainedTotalExp / (double)m.NextLevelExp:P3}", Colors.GoldColor.ToHex());
+            msg += ChatUtils.Font($") XP. Total: ");
+            msg += ChatUtils.Font($"{m.LevelExp / (double)m.NextLevelExp:P3}", Colors.GoldColor.ToHex());
+            msg += ChatUtils.Font($".");
 
             AddChatMessage(Factory.CreateMessage(ChatChannel.Exp, "System", msg));
         }
@@ -425,7 +429,7 @@ namespace TCC.ViewModels
         {
             if (!App.Settings.ChatEnabled) return;
 
-            var msg = Factory.CreateMessage(ChatChannel.TCC, "System", $"<FONT>{message}</FONT>");
+            var msg = Factory.CreateMessage(ChatChannel.TCC, "System", ChatUtils.Font(message));
             AddChatMessage(msg);
         }
 

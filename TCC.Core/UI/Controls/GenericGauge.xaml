@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="TCC.UI.Controls.GenericGauge"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:TCC.UI.Controls"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded" >
+    <UserControl.Resources>
+        <DropShadowEffect x:Key="TextShadow" BlurRadius="2" ShadowDepth="1" Opacity="1" RenderingBias="Performance"/>
+        <Style TargetType="TextBlock" x:Key="Text" BasedOn="{StaticResource DefaultTextStyle}">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Effect" Value="{StaticResource TextShadow}"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="RootGrid" >
+        <Rectangle Fill="#40000000" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="#20ffffff" Margin="-1"/>
+        <Rectangle Fill="{Binding BarColor, RelativeSource={RelativeSource AncestorType=controls:GenericGauge}}" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="Bar" />
+        <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Visibility="{Binding ShowValues, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden, RelativeSource={RelativeSource AncestorType=controls:GenericGauge}}"
+>
+            <Run Text="{Binding CurrentVal, RelativeSource={RelativeSource AncestorType=controls:GenericGauge}}" />
+            <Run Text=" / "/>
+            <Run Text="{Binding MaxVal, RelativeSource={RelativeSource AncestorType=controls:GenericGauge}}" />
+
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="3,-1,0,0" Style="{StaticResource Text}" VerticalAlignment="Center"
+                   Text="{Binding GaugeName, RelativeSource={RelativeSource AncestorType=controls:GenericGauge}}"
+                    Visibility="{Binding ShowName, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden,RelativeSource={RelativeSource AncestorType=controls:GenericGauge}}"
+/>
+        <TextBlock HorizontalAlignment="Right" Margin="0,-1,3,0" 
+                   Style="{StaticResource Text}" VerticalAlignment="Center"
+                   Visibility="{Binding ShowPercentage, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden, RelativeSource={RelativeSource AncestorType=controls:GenericGauge}}"
+                   Text="{Binding Factor, StringFormat=#.##%, RelativeSource={RelativeSource AncestorType=controls:GenericGauge}}"/>
+
+
+    </Grid>
+</UserControl>

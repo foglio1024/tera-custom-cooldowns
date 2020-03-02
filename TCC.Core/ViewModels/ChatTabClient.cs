@@ -2,18 +2,16 @@
 using Dragablz;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
+using TCC.UI.Windows.Widgets;
 using TCC.Utils;
 using TCC.ViewModels.Widgets;
-using TCC.Windows.Widgets;
 
 namespace TCC.ViewModels
 {
     public class ChatTabClient : IInterTabClient
     {
-        public static ChatWindow LastSource;
         public INewTabHost<Window> GetNewHost(IInterTabClient interTabClient, object partition, TabablzControl source)
         {
-            LastSource = Window.GetWindow(source) as ChatWindow;
             var ws = new ChatWindowSettings(0, 0, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true, false)
             { HideTimeout = 10, BackgroundOpacity = .3, FadeOut = true, LfgOn = false };
             var model = new ChatViewModel(ws);

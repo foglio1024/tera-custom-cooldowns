@@ -1,7 +1,8 @@
 ﻿using System;
 using TCC.Data.Skills;
-using TCC.Parsing;
+using TCC.Analysis;
 using TCC.Settings.WindowSettings;
+using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;

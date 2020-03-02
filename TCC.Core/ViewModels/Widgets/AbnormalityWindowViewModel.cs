@@ -5,8 +5,9 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Settings.WindowSettings;
+using TCC.UI;
+using TCC.UI.Windows;
 using TCC.Utils;
-using TCC.Windows;
 
 namespace TCC.ViewModels.Widgets
 {

@@ -14,16 +14,17 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using Nostrum.Factories;
-using TCC.Controls.Dashboard;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TCC.Data.Pc;
-using TCC.Parsing;
+using TCC.Analysis;
 using TCC.Settings.WindowSettings;
+using TCC.UI;
+using TCC.UI.Controls.Dashboard;
+using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
-using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -429,6 +430,7 @@ namespace TCC.ViewModels
         private void OnLogin(S_LOGIN m)
         {
             SetLoggedIn(m.PlayerId);
+            SetGuildBamTime(false);
         }
         private void OnGetUserList(S_GET_USER_LIST m)
         {
@@ -520,7 +522,7 @@ namespace TCC.ViewModels
                 return;
             }
             LoadEventFile(today, region);
-            if (Game.Logged) TimeManager.Instance.SetGuildBamTime(false);
+            if (Game.Logged) SetGuildBamTime(false);
 
         }
         public void ClearEvents()
@@ -573,8 +575,8 @@ namespace TCC.ViewModels
                         ? DateTime.Parse(egElement.Attribute("end").Value).AddDays(1)
                         : DateTime.MaxValue;
 
-                    if (TimeManager.Instance.CurrentServerTime < egStart ||
-                        TimeManager.Instance.CurrentServerTime > egEnd) continue;
+                    if (GameEventManager.Instance.CurrentServerTime < egStart ||
+                        GameEventManager.Instance.CurrentServerTime > egEnd) continue;
 
                     var eg = new EventGroup(egName, egStart, egEnd, egRc);
                     foreach (var evElement in egElement.Descendants().Where(x => x.Name == "Event"))
@@ -664,7 +666,7 @@ namespace TCC.ViewModels
                     }
                     if (eg.Events.Count != 0) AddEventGroup(eg);
                 }
-                SpecialEvents.Add(new DailyEvent("Reset", TimeManager.Instance.ResetHour, 0, 0, "ff0000"));
+                SpecialEvents.Add(new DailyEvent("Reset", GameEventManager.Instance.ResetHour, 0, 0, "ff0000"));
 
 
 
@@ -797,6 +799,17 @@ namespace TCC.ViewModels
                     }, DispatcherPriority.Background);
                 });
             });
+        }
+
+        public void SetGuildBamTime(bool force)
+        {
+            foreach (var eg in EventGroups.ToSyncList().Where(x => x.RemoteCheck))
+            {
+                foreach (var ev in eg.Events.ToSyncList())
+                {
+                    ev.UpdateFromServer(force);
+                }
+            }
         }
     }
 }

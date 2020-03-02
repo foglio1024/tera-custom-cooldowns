@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Nostrum;
 using TCC.Data;
+using TCC.UI.Windows;
 using TCC.Utils;
 using TCC.ViewModels;
-using TCC.Windows;
 using Timer = System.Timers.Timer;
 
 namespace TCC.Update

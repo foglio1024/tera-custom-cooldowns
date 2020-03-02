@@ -1,61 +1,61 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:tccConv="clr-namespace:TCC.Converters"
-                    xmlns:fogConv="clr-namespace:Nostrum.Converters;assembly=Nostrum">
+                    xmlns:fogConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                    xmlns:converters="clr-namespace:TCC.UI.Converters">
 
-    <tccConv:BoolToSvgSwitchConverter x:Key="BoolToSvgSwitchConverter"/>
-    <tccConv:RollToStringConverter x:Key="RollToString"/>
-    <tccConv:IconConverter x:Key="IconNameToPath"/>
-    <tccConv:ClassSvgConverter x:Key="ClassToSvg"/>
-    <tccConv:ChatChannelToColorConverter x:Key="ChatChannelToColor"/>
-    <tccConv:ChatChannelToName x:Key="ChatChannelToName"/>
-    <tccConv:MessageTypeToCursor x:Key="MessageTypeToCursor"/>
-    <tccConv:HPbarColorConverter x:Key="DebuffStatusToHpColor"/>
-    <tccConv:HPbarColorConverter2 x:Key="DebuffStatusToHpColor2"/>
-    <tccConv:RowsToHeightConverter x:Key="RowsToHeight"/>
-    <tccConv:CooldownWindowModeToTemplateConverter x:Key="CooldowWindowModeToTemplate"/>
-    <tccConv:PieceToPathConverter x:Key="PieceToPath"/>
-    <tccConv:GearLevelToFactorConverter x:Key="GearLevelToFactor"/>
-    <tccConv:GearLevelToColorConverter x:Key="GearLevelToColor"/>
-    <tccConv:LogoInfoToImageConverter x:Key="LogoInfoToImage"/>
-    <tccConv:DirectionToHorAlignConveter x:Key="DirectionToHorAlignConveter"/>
-    <tccConv:AbnormalityTypeToColorConverter x:Key="AbnormalityTypeToStrokeColor"/>
-    <tccConv:MessageTextToIconConverter x:Key="MessageTextToIcon"/>
+    <converters:BoolToSvgSwitchConverter x:Key="BoolToSvgSwitchConverter"/>
+    <converters:RollToStringConverter x:Key="RollToString"/>
+    <converters:IconConverter x:Key="IconNameToPath"/>
+    <converters:ClassSvgConverter x:Key="ClassToSvg"/>
+    <converters:ChatChannelToColorConverter x:Key="ChatChannelToColor"/>
+    <converters:ChatChannelToName x:Key="ChatChannelToName"/>
+    <converters:MessageTypeToCursor x:Key="MessageTypeToCursor"/>
+    <converters:HPbarColorConverter x:Key="DebuffStatusToHpColor"/>
+    <converters:HPbarColorConverter2 x:Key="DebuffStatusToHpColor2"/>
+    <converters:RowsToHeightConverter x:Key="RowsToHeight"/>
+    <converters:CooldownWindowModeToTemplateConverter x:Key="CooldowWindowModeToTemplate"/>
+    <converters:PieceToPathConverter x:Key="PieceToPath"/>
+    <converters:GearLevelToFactorConverter x:Key="GearLevelToFactor"/>
+    <converters:GearLevelToColorConverter x:Key="GearLevelToColor"/>
+    <converters:LogoInfoToImageConverter x:Key="LogoInfoToImage"/>
+    <converters:DirectionToHorAlignConveter x:Key="DirectionToHorAlignConveter"/>
+    <converters:AbnormalityTypeToColorConverter x:Key="AbnormalityTypeToStrokeColor"/>
+    <converters:MessageTextToIconConverter x:Key="MessageTextToIcon"/>
 
     <!--BossGage resources-->
-    <tccConv:EntityIdToNameConverter x:Key="EntityIdToName"/>
-    <tccConv:AggroTypeToFillConverter x:Key="AggroTypeToFill"/>
-    <tccConv:DragonIdToColorConverter x:Key="DragonIdToColor"/>
-    <tccConv:HHphaseToEnemyWindowTemplate x:Key="HarrowholdPhaseToLayout"/>
+    <converters:EntityIdToNameConverter x:Key="EntityIdToName"/>
+    <converters:AggroTypeToFillConverter x:Key="AggroTypeToFill"/>
+    <converters:DragonIdToColorConverter x:Key="DragonIdToColor"/>
+    <converters:HHphaseToEnemyWindowTemplate x:Key="HarrowholdPhaseToLayout"/>
 
     <!--Party/raid member resources-->
-    <tccConv:LaurelImageConverter x:Key="LaurelToImage"/>
-    <tccConv:ClassToFillConverter x:Key="ClassToFill"/>
-    <tccConv:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplate"/>
-    <tccConv:RaidToColorConverter x:Key="RaidToColor"/>
+    <converters:LaurelImageConverter x:Key="LaurelToImage"/>
+    <converters:ClassToFillConverter x:Key="ClassToFill"/>
+    <converters:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplate"/>
+    <converters:RaidToColorConverter x:Key="RaidToColor"/>
     <fogConv:ValueConverterGroup x:Key="ClassToTransparentFill" >
-        <tccConv:ClassToFillConverter/>
+        <converters:ClassToFillConverter/>
         <fogConv:ColorToTransparent Opacity="0"/>
     </fogConv:ValueConverterGroup>
     <fogConv:ValueConverterGroup x:Key="IlvlTierToTransparentFill">
-        <tccConv:ItemLevelTierToColorConverter/>
+        <converters:ItemLevelTierToColorConverter/>
         <fogConv:ColorToTransparent Opacity="0"/>
     </fogConv:ValueConverterGroup>
     <fogConv:ValueConverterGroup x:Key="IsRaidToTransparentFill">
-        <tccConv:RaidToColorConverter/>
+        <converters:RaidToColorConverter/>
         <fogConv:ColorToTransparent Opacity="0"/>
     </fogConv:ValueConverterGroup>
 
-    <tccConv:StringToFillConverter x:Key="StringToFill"/>
-    <tccConv:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
-    <tccConv:LfgVmToButtonLabelConverter x:Key="LfgVmToButtonLabel"/>
-    <tccConv:ClassToNameConverter x:Key="ClassToName" />
+    <converters:StringToFillConverter x:Key="StringToFill"/>
+    <converters:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
+    <converters:LfgVmToButtonLabelConverter x:Key="LfgVmToButtonLabel"/>
+    <converters:ClassToNameConverter x:Key="ClassToName" />
 
-    <tccConv:ItemLevelTierToColorConverter x:Key="IlvlTierToColor" />
-    <tccConv:EntriesToColor x:Key="EntriesToColor" />
-    <tccConv:DungeonImageConverter x:Key="DungeonImageConverter" />
-    <tccConv:MoneyAmountToVisibilityConverter x:Key="AmountToVisibilityConv" />
-    <tccConv:NotificationTypeToBrush x:Key="NotificationTypeToBrush"/>
-    <tccConv:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
+    <converters:ItemLevelTierToColorConverter x:Key="IlvlTierToColor" />
+    <converters:EntriesToColor x:Key="EntriesToColor" />
+    <converters:DungeonImageConverter x:Key="DungeonImageConverter" />
+    <converters:MoneyAmountToVisibilityConverter x:Key="AmountToVisibilityConv" />
+    <converters:NotificationTypeToBrush x:Key="NotificationTypeToBrush"/>
+    <converters:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
 
 </ResourceDictionary>

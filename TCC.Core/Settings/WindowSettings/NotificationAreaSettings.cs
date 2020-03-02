@@ -1,5 +1,5 @@
 ﻿using TCC.Data;
-using TCC.Windows.Widgets;
+using TCC.UI.Windows.Widgets;
 
 namespace TCC.Settings.WindowSettings
 {

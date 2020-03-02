@@ -1,7 +1,7 @@
 ﻿using System.Windows.Threading;
 using Nostrum;
 using TCC.Data.Abnormalities;
-using TCC.Windows;
+using TCC.UI.Windows;
 using TeraDataLite;
 
 namespace TCC.ViewModels

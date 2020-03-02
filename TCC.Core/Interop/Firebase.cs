@@ -112,7 +112,7 @@ namespace TCC.Interop
                             {
                                 "generic", new JObject
                                 {
-                                    { "proxy_enabled", ProxyInterface.Instance.IsStubAvailable},
+                                    { "proxy_enabled", StubInterface.Instance.IsStubAvailable},
                                     { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
                                 }
                             }

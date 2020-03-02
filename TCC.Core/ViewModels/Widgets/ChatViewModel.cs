@@ -11,7 +11,9 @@ using Nostrum.Extensions;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings.WindowSettings;
-using TCC.Windows;
+using TCC.UI;
+using TCC.UI.Windows;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels.Widgets
 {

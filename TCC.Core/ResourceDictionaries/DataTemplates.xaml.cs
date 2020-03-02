@@ -5,6 +5,8 @@ using System.Windows.Input;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
+using TCC.UI;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ResourceDictionaries
 {
@@ -25,11 +27,11 @@ namespace TCC.ResourceDictionaries
 
             if (lfg.Temp) WindowManager.ViewModels.LfgVM.Listings.Remove(lfg);
 
-            ProxyInterface.Instance.Stub.RegisterListing(msg, isRaid);
+            StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
             Keyboard.ClearFocus();
             FocusManager.MakeUnfocusable(WindowManager.LfgListWindow.Handle);
 
-            Task.Delay(200).ContinueWith(t => ProxyInterface.Instance.Stub.RequestListings());
+            Task.Delay(200).ContinueWith(t => StubInterface.Instance.StubClient.RequestListings());
         }
 
         private void LfgMessage_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

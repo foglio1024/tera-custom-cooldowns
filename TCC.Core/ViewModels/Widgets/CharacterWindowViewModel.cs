@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using TCC.Data.Pc;
-using TCC.Parsing;
+using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TeraDataLite;

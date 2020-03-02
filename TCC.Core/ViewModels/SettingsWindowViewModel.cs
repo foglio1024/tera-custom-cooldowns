@@ -15,9 +15,10 @@ using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Settings.WindowSettings;
+using TCC.UI;
+using TCC.UI.Windows;
 using TCC.Update;
 using TCC.Utils;
-using TCC.Windows;
 using CaptureMode = TCC.Data.CaptureMode;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
@@ -66,7 +67,6 @@ namespace TCC.ViewModels
                 N();
             }
         }
-
         public bool UseHotkeys
         {
             get => App.Settings.UseHotkeys;
@@ -79,6 +79,7 @@ namespace TCC.ViewModels
                 N(nameof(UseHotkeys));
             }
         }
+
         public HotKey SettingsHotkey
         {
             get => App.Settings.SettingsHotkey;
@@ -588,7 +589,7 @@ namespace TCC.ViewModels
                 }
                 App.Settings.ChatEnabled = value;
                 ChatManager.Instance.NotifyEnabledChanged(value);
-                ProxyInterface.Instance.Stub.UpdateSetting("ChatEnabled ", App.Settings.ChatEnabled);
+                StubInterface.Instance.StubClient.UpdateSetting("ChatEnabled ", App.Settings.ChatEnabled);
                 N();
             }
         }
@@ -665,7 +666,7 @@ namespace TCC.ViewModels
                 if (App.Settings.EnablePlayerMenu == value) return;
                 App.Settings.EnablePlayerMenu = value;
                 N();
-                ProxyInterface.Instance.Stub.UpdateSetting("EnablePlayerMenu", App.Settings.EnablePlayerMenu);
+                StubInterface.Instance.StubClient.UpdateSetting("EnablePlayerMenu", App.Settings.EnablePlayerMenu);
             }
         }
 
@@ -681,6 +682,7 @@ namespace TCC.ViewModels
             OpenWindowCommand = new RelayCommand(winType =>
             {
                 var t = (Type) winType;
+                if (TccWindow.IsCreated(t)) return;
                 var win = Activator.CreateInstance(t, null) as TccWindow;
                 win?.ShowWindow();
             });

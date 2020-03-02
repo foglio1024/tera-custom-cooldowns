@@ -9,14 +9,14 @@ namespace TCC.ViewModels
         private DateTime Start { get; set; }
         private TimeSpan Duration { get; set; }
         private readonly TimeSpan _realDuration;
-        public double StartFactor => 60 * (Start.Hour * 60 + Start.Minute) / TimeManager.SecondsInDay;
-        public double DurationFactor => Duration.TotalSeconds / TimeManager.SecondsInDay;
+        public double StartFactor => 60 * (Start.Hour * 60 + Start.Minute) / GameEventManager.SecondsInDay;
+        public double DurationFactor => Duration.TotalSeconds / GameEventManager.SecondsInDay;
         private bool _happened;
         public bool IsClose
         {
             get
             {
-                var ts = Start - TimeManager.Instance.CurrentServerTime;
+                var ts = Start - GameEventManager.Instance.CurrentServerTime;
                 return ts.TotalMinutes > 0 && ts.TotalMinutes <= 15;
             }
         }
@@ -48,23 +48,22 @@ namespace TCC.ViewModels
             Color = color;
         }
 
-        public void UpdateFromServer(bool force = false)
+        public async void UpdateFromServer(bool force = false)
         {
-            if (TimeManager.Instance.CurrentServerTime >= Start && !_happened)
+            if (GameEventManager.Instance.CurrentServerTime >= Start && !_happened)
             {
-                var time = force
-                    ? TimeManager.Instance.CurrentServerTime
-                    : TimeManager.Instance.RetrieveGuildBamDateTime().AddHours(TimeManager.Instance.ServerHourOffsetFromUtc);
 
-                if (time >= Start)
-                {
-                    Start = time;
-                    Duration = TimeSpan.Zero;
-                    _happened = true;
-                    N(nameof(StartFactor));
-                    N(nameof(DurationFactor));
-                    N(nameof(ToolTip));
-                }
+                var time = force
+                    ? GameEventManager.Instance.CurrentServerTime
+                    : (await GameEventManager.Instance.RetrieveGuildBamDateTime()).AddHours(GameEventManager.Instance.ServerHourOffsetFromUtc);
+
+                if (time < Start) return;
+                Start = time;
+                Duration = TimeSpan.Zero;
+                _happened = true;
+                N(nameof(StartFactor));
+                N(nameof(DurationFactor));
+                N(nameof(ToolTip));
             }
         }
     }

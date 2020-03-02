@@ -5,10 +5,10 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using Nostrum.Extensions;
-using TCC.Converters;
 using TCC.Interop.Proxy;
+using TCC.UI.Converters;
+using TCC.UI.Windows;
 using TCC.ViewModels;
-using TCC.Windows;
 
 namespace TCC.Data.Chat
 {
@@ -117,7 +117,7 @@ namespace TCC.Data.Chat
 
         public ActionMessagePiece(string text) : base(text)
         {
-            ClickCommand = new RelayCommand(_ => ProxyInterface.Instance.Stub.ChatLinkAction(ChatLinkAction));
+            ClickCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.ChatLinkAction(ChatLinkAction));
         }
         public ActionMessagePiece(string text, int fontSize, bool customSize, string col = "") : base(text, fontSize, customSize, col)
         {

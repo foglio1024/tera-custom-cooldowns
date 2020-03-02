@@ -1,0 +1,480 @@
+﻿<widgets:TccWidget x:Class="TCC.UI.Windows.Widgets.ChatWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:dockablz="http://dragablz.net/winfx/xaml/dockablz"
+                   xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:viewModels="clr-namespace:TCC.ViewModels"
+                   xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+                   xmlns:data="clr-namespace:TCC.Data"
+                   xmlns:widgets1="clr-namespace:TCC.ViewModels.Widgets"
+                   xmlns:chat="clr-namespace:TCC.Data.Chat"
+                   xmlns:chat1="clr-namespace:TCC.UI.Controls.Chat"
+                   xmlns:controls="clr-namespace:TCC.UI.Controls"
+                   xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
+                   xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
+                   mc:Ignorable="d"
+                   Style="{StaticResource BaseWindowStyle}"
+                   MouseEnter="OnWindowMouseEnter"
+                   MouseLeave="OnWindowMouseLeave"
+                   PreviewMouseUp="OnWindowPreviewMouseUp"
+                   Title="TCC Chat"
+                   MinWidth="350" MinHeight="84"
+                   ResizeMode="CanResize"
+                   SizeToContent="Manual"
+                   Loaded="OnLoaded" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" 
+                      ResizeBorderThickness="7 12 7 7" 
+                      GlassFrameThickness="0 0 0 1" 
+                      CornerRadius="0" />
+    </WindowChrome.WindowChrome>
+    <widgets:TccWidget.Resources>
+        <DataTemplate x:Key="ChatMessageTemplate">
+            <chat1:ChatMessageControl VerticalAlignment="Top">
+                <chat1:ChatMessageControl.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" />
+                        <RotateTransform Angle="0" />
+                    </TransformGroup>
+                </chat1:ChatMessageControl.LayoutTransform>
+            </chat1:ChatMessageControl>
+        </DataTemplate>
+        <Style TargetType="ItemsControl" x:Key="LfgItemsControl">
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border SnapsToDevicePixels="True"
+                                BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                Padding="{TemplateBinding Control.Padding}"
+                                BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                Background="{TemplateBinding Panel.Background}">
+                            <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False"
+                                          VerticalContentAlignment="Top" VerticalAlignment="Top" Height="Auto"
+                                          CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="TabContentTemplate" DataType="dragablz:HeaderedDragablzItem">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Pinned message -->
+                <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf" Margin="1 3 2 0"
+                        Visibility="{Binding Path=Content.(viewModels:Tab.PinnedMessage), Converter={StaticResource NullToVisibleCollapsed}}">
+                    <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}"
+                                    Content="{Binding Path=Content.(viewModels:Tab.PinnedMessage)}"
+                                    Margin="10 3 4 2">
+                        <ContentControl.LayoutTransform>
+                            <RotateTransform Angle="180" />
+                        </ContentControl.LayoutTransform>
+                    </ContentControl>
+                </Border>
+                <!-- Messages -->
+                <ItemsControl Name="itemsControl" VerticalAlignment="Top"
+                              VerticalContentAlignment="Top"
+                              ScrollViewer.CanContentScroll="True"
+                              Margin="0 5 5 3"
+                              ItemsSource="{Binding Path=Content.(viewModels:Tab.Messages)}"
+                              ItemTemplate="{StaticResource ChatMessageTemplate}"
+                              Width="Auto"
+                              Grid.Row="1"
+                              HorizontalAlignment="Stretch"
+                              VirtualizingStackPanel.IsVirtualizing="True"
+                              VirtualizingStackPanel.VirtualizationMode="Recycling"
+                              PreviewMouseWheel="ItemsControl_OnMouseWheel">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.LayoutTransform>
+                        <RotateTransform Angle="180" />
+                    </ItemsControl.LayoutTransform>
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <Border SnapsToDevicePixels="True"
+                                    BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                    Padding="{TemplateBinding Control.Padding}"
+                                    BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                    Background="{TemplateBinding Panel.Background}">
+                                <ScrollViewer VerticalAlignment="Top" Focusable="False">
+                                    <ItemsPresenter
+                                        SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                </ScrollViewer>
+                            </Border>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+
+                </ItemsControl>
+                <!-- Count -->
+                <TextBlock IsHitTestVisible="False" Text="{Binding ElementName=itemsControl, Path=Items.Count}"
+                           Foreground="#2fff" Margin="5" HorizontalAlignment="Right"
+                           VerticalAlignment="Top" Grid.RowSpan="3" />
+            </Grid>
+        </DataTemplate>
+    </widgets:TccWidget.Resources>
+    <!-- Root -->
+    <Grid>
+        <!-- Main content -->
+        <dockablz:Layout Name="ChatContent">
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Visible}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             To="1" Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             To="0.01" Duration="0:0:1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <!-- Normal mode content -->
+                <Grid Margin="3" Width="Auto" Name="Root">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Collapsed}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                 From="0" To="1" Duration="0:0:0.010" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                    From="20" To="0" Duration="0:0:0.10"
+                                                    EasingFunction="{StaticResource QuadraticEase}" />
+
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.RenderTransform>
+                        <TranslateTransform />
+                    </Grid.RenderTransform>
+
+                    <!-- Blurred bg -->
+                    <Border Grid.Row="1" Margin="5 35 5 5" Background="#000509"
+                            Opacity="{Binding WindowSettings.BackgroundOpacity}">
+                        <Border.Effect>
+                            <BlurEffect Radius="20" />
+                        </Border.Effect>
+                    </Border>
+                    <!-- Main frame -->
+                    <Border Background="#3445"
+                            Opacity="{Binding WindowSettings.FrameOpacity}" x:Name="MainBorder"
+                            CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1 0 1 1"
+                            BorderBrush="#8666" Grid.Row="0" VerticalAlignment="Stretch">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Margin" Value="0 25 0 0" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WindowSettings.LfgOn}" Value="True">
+                                        <Setter Property="Margin" Value="0 50 0 0" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".9" />
+                        </Border.Effect>
+                    </Border>
+                    <!-- Left top-line -->
+                    <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0"
+                            Margin="0 0 0 0" HorizontalAlignment="Left"
+                            VerticalAlignment="Top" Grid.Row="1"
+                            Opacity="{Binding WindowSettings.FrameOpacity}"
+                            x:Name="LeftLine">
+                        <Border.RenderTransform>
+                            <TranslateTransform Y="26" />
+                        </Border.RenderTransform>
+                    </Border>
+                    <!-- Right top-line -->
+                    <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0"
+                            Margin="0 0 0 0" HorizontalAlignment="Stretch"
+                            VerticalAlignment="Top" Grid.Row="1"
+                            Opacity="{Binding WindowSettings.FrameOpacity}"
+                            x:Name="RightLine">
+                        <Border.RenderTransform>
+                            <TranslateTransform Y="26" />
+                        </Border.RenderTransform>
+                    </Border>
+
+                    <!-- Main tab control -->
+                    <dragablz:TabablzControl Grid.Row="1"
+                                             Background="Transparent"
+                                             BorderBrush="#0000"
+                                             BorderThickness="0,0,0,0"
+                                             Margin="1,0,0,0"
+                                             ScrollViewer.CanContentScroll="False"
+                                             HeaderMemberPath="Header"
+                                             DisplayMemberPath="Content"
+                                             ItemsSource="{Binding TabVMs, Mode=TwoWay}"
+                                             ContentTemplate="{StaticResource TabContentTemplate}"
+                                             SelectionChanged="TabChanged"
+                                             x:Name="TabControl"
+                                             ShowDefaultAddButton="True"
+                                             NewItemFactory="{Binding AddNewTabCommand}"
+                                             ShowDefaultCloseButton="True"
+                                             Style="{DynamicResource ChatTabablzControlStyle}">
+                        <dragablz:TabablzControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type dragablz:DragablzItem}"
+                                   BasedOn="{StaticResource ChatDragableTabItemStyle}">
+                                <Setter Property="extensions:DragablzHeaderExtensions.FrameOpacity"
+                                        Value="{Binding Path=DataContext.WindowSettings.FrameOpacity, RelativeSource={RelativeSource AncestorType=widgets:ChatWindow}}" />
+
+                                <EventSetter Event="PreviewMouseRightButtonDown" Handler="OpenTabSettings" />
+                                <EventSetter Event="PreviewMouseLeftButtonUp" Handler="SetLines" />
+                                <EventSetter Event="Loaded" Handler="TabLoaded" />
+                            </Style>
+                        </dragablz:TabablzControl.ItemContainerStyle>
+                        <dragablz:TabablzControl.InterTabController>
+                            <dragablz:InterTabController Partition="2AE89D18-F236-4D20-9605-6C03319038E6"
+                                                         InterTabClient="{Binding InterTabClient}" />
+                        </dragablz:TabablzControl.InterTabController>
+                    </dragablz:TabablzControl>
+
+                    <!-- Pause icon -->
+                    <Path Data="{StaticResource SvgPauseCircle}"
+                          VerticalAlignment="Bottom" IsHitTestVisible="False"
+                          HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
+                          Margin="10"
+                          Visibility="{Binding Paused, Converter={StaticResource BoolToVisibility}}" 
+                          />
+
+                    <!-- LFG bar -->
+                    <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
+                                  ItemTemplate="{StaticResource LfgTemplate}"
+                                  Margin="2"
+                                  HorizontalAlignment="Left"
+                                  Width="Auto"
+                                  Height="18"
+                                  Style="{StaticResource LfgItemsControl}"
+                                  Visibility="{Binding WindowSettings.LfgOn, Converter={StaticResource BoolToVisibility}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                    <!-- Settings button -->
+                    <Button x:Name="SettingsButton" Margin="0 5" HorizontalAlignment="Right"
+                            Click="OnSettingsButtonClick" Opacity=".5"
+                            ToolTip="Settings"
+                            Style="{StaticResource ButtonMainStyle}" Grid.Row="1" Height="18"
+                            Padding="2"
+                            VerticalAlignment="Top"
+                            Background="{StaticResource RevampBackgroundBrush}"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource RevampBorderBrush}"
+                            >
+                        <Grid Background="#01000000">
+                            <Path Data="{StaticResource SvgSettings}" />
+                        </Grid>
+                    </Button>
+                </Grid>
+
+                <!-- Collapsed mode content -->
+                <Grid>
+                    <Grid.RenderTransform>
+                        <TranslateTransform />
+                    </Grid.RenderTransform>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Collapsed}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                 From="0" To="1" Duration="0:0:0.05" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                    From="-10" To="0" Duration="0:0:0.15"
+                                                    EasingFunction="{StaticResource QuadraticEase}" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                    <!-- Blurred bg -->
+                    <Border Margin="21 10 10 6" Background="#000509" Height="64" VerticalAlignment="Bottom"
+                            Opacity="{Binding WindowSettings.BackgroundOpacity}">
+                        <Border.Effect>
+                            <BlurEffect Radius="10" />
+                        </Border.Effect>
+                    </Border>
+
+                    <!-- Pinned + messages -->
+                    <StackPanel VerticalAlignment="Bottom">
+                        <!-- Pinned message -->
+                        <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf" Margin="20 0 10 12"
+                                Visibility="{Binding Path=CurrentTab.PinnedMessage, Converter={StaticResource NullToVisibleCollapsed}}">
+                            <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}"
+                                            Content="{Binding Path=CurrentTab.PinnedMessage}"
+                                            Margin="10 3 4 2">
+                                <ContentControl.LayoutTransform>
+                                    <RotateTransform Angle="180" />
+                                </ContentControl.LayoutTransform>
+                            </ContentControl>
+                        </Border>
+                        <!-- Messages -->
+                        <ItemsControl ItemsSource="{Binding CurrentTab.Messages}"
+                                      Height="64"
+                                      ScrollViewer.CanContentScroll="True"
+                                      VirtualizingStackPanel.IsVirtualizing="True"
+                                      VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                      Margin="21 0 0 6">
+                            <ItemsControl.LayoutTransform>
+                                <RotateTransform Angle="180" />
+                            </ItemsControl.LayoutTransform>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="chat:ChatMessage">
+                                    <chat1:ChatMessageControl VerticalAlignment="Top" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.Template>
+                                <ControlTemplate>
+                                    <Border SnapsToDevicePixels="True"
+                                            BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                            Padding="{TemplateBinding Control.Padding}"
+                                            BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                            Background="{TemplateBinding Panel.Background}">
+                                        <ScrollViewer VerticalAlignment="Top" Focusable="False"
+                                                      VerticalScrollBarVisibility="Hidden">
+                                            <ItemsPresenter
+                                                SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </ItemsControl.Template>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <!-- Settings button-->
+                    <Button Margin="0 0 10 64" HorizontalAlignment="Right" Click="OnSettingsButtonClick"
+                            Opacity=".5"
+                            Visibility="{Binding WindowSettings.StaysCollapsed, Converter={StaticResource BoolToVisibility}}"
+                            Style="{StaticResource ButtonMainStyle}" Height="18"
+                            Padding="2"
+                            Background="{StaticResource RevampBackgroundBrush}"
+                            BorderThickness="1"
+                            BorderBrush="{StaticResource RevampBorderBrush}"
+
+                            VerticalAlignment="Bottom">
+                        <Grid Background="#01000000">
+                            <Path Data="{StaticResource SvgSettings}" />
+                        </Grid>
+                    </Button>
+
+                </Grid>
+
+            </Grid>
+        </dockablz:Layout>
+        <!-- Settings popup-->
+        <controls:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup"
+                           Focusable="True"
+                           HorizontalOffset="20"
+                           AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}"
+                           StaysOpen="True" DataContext="{Binding}"
+                           PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
+            <Grid>
+                <Border Style="{StaticResource RevampBorderStyle}" Margin="3" Opacity=".6" />
+                <StackPanel Width="350" Margin="3">
+                    <settings:ValueSetting SettingName="Background opacity" Foreground="#9fff"
+                                           TextBoxVisibility="Collapsed"
+                                           Value="{Binding WindowSettings.BackgroundOpacity,  Mode=TwoWay}"
+                                           Min="0" Max="1" Visibility="Visible" />
+                    <settings:ValueSetting SettingName="Frame opacity" Foreground="#9fff" TextBoxVisibility="Collapsed"
+                                           Value="{Binding WindowSettings.FrameOpacity,  Mode=TwoWay}"
+                                           Min="0" Max="1" Visibility="Visible" />
+                    <settings:CheckboxSetting SettingName="LFG bar" Foreground="#9fff"
+                                              IsOn="{Binding WindowSettings.LfgOn, Mode=TwoWay}"
+                                              CheckBoxColor="{StaticResource DefensiveStanceBrush}" />
+                    <settings:CheckboxSetting SettingName="Fade out" Foreground="#9fff"
+                                              IsOn="{Binding WindowSettings.FadeOut, Mode=TwoWay}"
+                                              CheckBoxColor="{StaticResource DefensiveStanceBrush}" />
+                    <settings:ValueSetting SettingName="Fade timeout" Foreground="#9fff" TextBoxVisibility="Visible"
+                                           Value="{Binding WindowSettings.HideTimeout,  Mode=TwoWay}"
+                                           Min="3" Max="60" Visibility="Visible" />
+                    <settings:CheckboxSetting SettingName="Show always" Foreground="#9fff"
+                                              IsOn="{Binding WindowSettings.ShowAlways, Mode=TwoWay}"
+                                              CheckBoxColor="{StaticResource DefensiveStanceBrush}" />
+                    <settings:CheckboxSetting SettingName="Allow offscreen" Foreground="#9fff"
+                                              IsOn="{Binding WindowSettings.AllowOffScreen, Mode=TwoWay}"
+                                              CheckBoxColor="{StaticResource DefensiveStanceBrush}" />
+                    <settings:CheckboxSetting SettingName="Show important" Foreground="#9fff"
+                                              IsOn="{Binding WindowSettings.ShowImportant, Mode=TwoWay}"
+                                              CheckBoxColor="{StaticResource DefensiveStanceBrush}" />
+                    <settings:CheckboxSetting SettingName="Can collapse" Foreground="#9fff"
+                                              IsOn="{Binding WindowSettings.CanCollapse, Mode=TwoWay}"
+                                              CheckBoxColor="{StaticResource DefensiveStanceBrush}" />
+                    <settings:CheckboxSetting SettingName="Stays collapsed" Foreground="#9fff"
+                                              IsOn="{Binding WindowSettings.StaysCollapsed, Mode=TwoWay}"
+                                              CheckBoxColor="{StaticResource DefensiveStanceBrush}"
+                                              IsEnabled="{Binding WindowSettings.CanCollapse}" />
+                    <settings:SelectionSetting SettingName="Click thru" Foreground="#9fff"
+                                               SelectedItem="{Binding WindowSettings.ClickThruMode, Mode=TwoWay}"
+                                               Choices="{Binding ClickThruModes}"
+                                               ChoicesType="{x:Type data:ClickThruMode}" />
+                    <Button Style="{StaticResource SettingsButton}"
+                            Command="{Binding MakeGlobalCommand}"
+                            ToolTip="Use current position for all classes" Margin="10 5 10 7">
+                        <TextBlock Text="Make position global" />
+                    </Button>
+                    <Button Style="{StaticResource SettingsButton}"
+                            Command="{Binding OpenSysMsgSettingsCommand}"
+                            ToolTip="Open a window to configure displayed System messages" Margin="10 5 10 7">
+                        <TextBlock Text="Configure System messages" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </controls:TccPopup>
+    </Grid>
+    <!--/Root -->
+</widgets:TccWidget>

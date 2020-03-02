@@ -15,13 +15,14 @@ using System.Windows.Threading;
 using TCC.Data;
 using TCC.Exceptions;
 using TCC.Interop.Proxy;
-using TCC.Parsing;
+using TCC.Analysis;
 using TCC.Settings;
+using TCC.UI;
+using TCC.UI.Windows;
 using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
-using TCC.Windows;
 
 namespace TCC
 {
@@ -136,7 +137,7 @@ namespace TCC
             // ----------------------------
             SplashScreen.VM.Progress = 90;
             SplashScreen.VM.BottomText = "Starting";
-            TimeManager.Instance.SetServerTimeZone(Settings.LastLanguage);
+            GameEventManager.Instance.SetServerTimeZone(Settings.LastLanguage);
             UpdateManager.StartPeriodicCheck();
 
             SplashScreen.VM.Progress = 100;
@@ -185,7 +186,7 @@ namespace TCC
             PacketAnalyzer.Sniffer.Enabled = false;
             Settings.Save();
             WindowManager.Dispose();
-            ProxyInterface.Instance.Disconnect();
+            StubInterface.Instance.Disconnect();
             UpdateManager.StopTimer();
             Environment.Exit(0);
         }

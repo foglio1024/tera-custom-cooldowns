@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TCC.Data.Skills;
-using TCC.TeraCommon.Game.Services;
 using TeraDataLite;
+using TeraPacketParser.TeraCommon.Game.Services;
 
 namespace TCC.Data.Databases
 {
@@ -39,7 +40,7 @@ namespace TCC.Data.Databases
 
         public TccDatabase(string lang)
         {
-            ServerDatabase = new ServerDatabase(App.DataPath) { Language = (LangEnum)Enum.Parse(typeof(LangEnum), lang.Replace("EU-", "")) };
+            ServerDatabase = new ServerDatabase(App.DataPath, Path.Combine(App.ResourcesPath, "config/server-overrides.txt")) { Language = (LangEnum)Enum.Parse(typeof(LangEnum), lang.Replace("EU-", "")) };
             MonsterDatabase = new MonsterDatabase(lang);
             AccountBenefitDatabase = new AccountBenefitDatabase(lang);
             ItemsDatabase = new ItemsDatabase(lang);

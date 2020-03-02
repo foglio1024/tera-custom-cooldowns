@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
 using Newtonsoft.Json;
-using TCC.Windows;
+using TCC.UI.Windows;
 
 namespace TCC.Settings
 {

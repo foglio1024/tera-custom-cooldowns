@@ -12,12 +12,13 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.Skills;
-using TCC.Parsing;
+using TCC.Analysis;
 using TCC.Settings;
 using TCC.Settings.WindowSettings;
+using TCC.UI;
+using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
-using TCC.Windows;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
@@ -579,14 +580,14 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             if (App.Settings.EthicalMode) return;
-            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             if (Game.IsMe(p.CasterId) || Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (App.Settings.EthicalMode) return;
-            if (!AbnormalityUtils.Exists(p.AbnormalityId, out var ab) || !AbnormalityUtils.Pass(ab)) return;
+            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             if (Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }

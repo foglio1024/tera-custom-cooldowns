@@ -13,11 +13,13 @@ using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
-using TCC.Parsing;
+using TCC.Analysis;
 using TCC.Settings.WindowSettings;
+using TCC.UI;
 using TCC.Utils;
 using TeraDataLite;
 using TeraPacketParser.Messages;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels
 {
@@ -74,6 +76,8 @@ namespace TCC.ViewModels
         public ICommand ExpandAllCommand { get; }
         public ICommand CollapseAllCommand { get; }
         public ICommand OpenPopupCommand { get; }
+        public ICommand OpenSettingsCommand { get; }
+        public ICommand ToggleShowTradeListingsCommand { get; }
 
         public ICollectionViewLiveShaping ListingsView { get; }
 
@@ -151,6 +155,18 @@ namespace TCC.ViewModels
                 N(nameof(MinLevel));
             }
         }
+
+        public bool HideTradeListings
+        {
+            get => ((LfgWindowSettings) Settings).HideTradeListings;
+            set
+            {
+                if (((LfgWindowSettings) Settings).HideTradeListings == value) return;
+                ((LfgWindowSettings) Settings).HideTradeListings = value;
+                N();
+            }
+        }
+
         public bool IsPopupOpen
         {
             get => _isPopupOpen;
@@ -190,13 +206,14 @@ namespace TCC.ViewModels
             SortCommand = new SortCommand(ListingsView);
             PublicizeCommand = new RelayCommand(_ => Publicize(), _ => CanPublicize());
             ToggleAutoPublicizeCommand = new RelayCommand(_ => ToggleAutoPublicize(), _ => CanToggleAutoPublicize());
-            ReloadCommand = new RelayCommand(_ => ProxyInterface.Instance.Stub.RequestListings());
+            ReloadCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.RequestListings());
             RemoveMessageCommand = new RelayCommand(_ => RemoveMessage());
             CreateMessageCommand = new RelayCommand(_ => CreateMessage(), _ => CanCreateMessage());
             ExpandAllCommand = new RelayCommand(_ => ExpandAll());
             CollapseAllCommand = new RelayCommand(_ => CollapseAll());
             OpenPopupCommand = new RelayCommand(_ => IsPopupOpen = true);
-
+            OpenSettingsCommand = new RelayCommand(_ => WindowManager.SettingsWindow.ShowDialogAtPage(11));
+            ToggleShowTradeListingsCommand = new RelayCommand(_ => HideTradeListings = !HideTradeListings);
         }
 
         private void CollapseAll()
@@ -232,14 +249,14 @@ namespace TCC.ViewModels
         private void RemoveMessage()
         {
             ForceStopPublicize();
-            ProxyInterface.Instance.Stub.RemoveListing();
-            ProxyInterface.Instance.Stub.RequestListings();
+            StubInterface.Instance.StubClient.RemoveListing();
+            StubInterface.Instance.StubClient.RequestListings();
         }
 
         private void OnShowLfgHotkeyPressed()
         {
             if (!Game.Logged) return;
-            if (!ProxyInterface.Instance.IsStubAvailable) return;
+            if (!StubInterface.Instance.IsStubAvailable) return;
             if (!WindowManager.LfgListWindow.IsVisible)
                 WindowManager.LfgListWindow.ShowWindow();
             else WindowManager.LfgListWindow.HideWindow();
@@ -258,8 +275,8 @@ namespace TCC.ViewModels
             }
             else
             {
-                if (!ProxyInterface.Instance.IsStubAvailable) return;
-                ProxyInterface.Instance.Stub.PublicizeListing();
+                if (!StubInterface.Instance.IsStubAvailable) return;
+                StubInterface.Instance.StubClient.PublicizeListing();
                 Publicized?.Invoke(AutoPublicizeCooldown);
             }
         }
@@ -269,8 +286,8 @@ namespace TCC.ViewModels
             if (Game.IsInDungeon) return;
             //PublicizeTimer.Start();
             //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-            if (!ProxyInterface.Instance.IsStubAvailable) return;
-            ProxyInterface.Instance.Stub.PublicizeListing();
+            if (!StubInterface.Instance.IsStubAvailable) return;
+            StubInterface.Instance.StubClient.PublicizeListing();
             Publicized?.Invoke(PublicizeCooldown);
         }
 
@@ -308,8 +325,8 @@ namespace TCC.ViewModels
                 AutoPublicizeTimer.Start();
                 N(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
                 //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-                if (!ProxyInterface.Instance.IsStubAvailable) return;
-                ProxyInterface.Instance.Stub.PublicizeListing();
+                if (!StubInterface.Instance.IsStubAvailable) return;
+                StubInterface.Instance.StubClient.PublicizeListing();
                 Publicized?.Invoke(AutoPublicizeCooldown);
             }
         }
@@ -319,14 +336,14 @@ namespace TCC.ViewModels
             if (!IsAutoPublicizeEnabled)
             {
 
-                return ProxyInterface.Instance.IsStubAvailable &&
+                return StubInterface.Instance.IsStubAvailable &&
                        !Game.LoadingScreen &&
                        Game.Logged &&
                        !Game.IsInDungeon;
             }
             else
             {
-                return ProxyInterface.Instance.IsStubAvailable;
+                return StubInterface.Instance.IsStubAvailable;
 
             }
         }
@@ -340,11 +357,11 @@ namespace TCC.ViewModels
             if (req == 0)
             {
                 StayClosed = true;
-                ProxyInterface.Instance.Stub.RequestListings(); //ProxyOld.RequestLfgList();
+                StubInterface.Instance.StubClient.RequestListings(); //ProxyOld.RequestLfgList();
             }
             else
             {
-                ProxyInterface.Instance.Stub.RequestPartyInfo(req); //ProxyOld.RequestPartyInfo(req);
+                StubInterface.Instance.StubClient.RequestPartyInfo(req); //ProxyOld.RequestPartyInfo(req);
             }
         }
 
@@ -593,11 +610,11 @@ namespace TCC.ViewModels
         {
             if (_lastGroupSize == 0) NotifyMyLfg();
             _lastGroupSize = m.Members.Count;
-            if (!ProxyInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled ||
+            if (!StubInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled ||
                 !Game.InGameUiOn) return;
-            ProxyInterface.Instance.Stub.RequestListingCandidates();
+            StubInterface.Instance.StubClient.RequestListingCandidates();
             if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
-            ProxyInterface.Instance.Stub.RequestListings();
+            StubInterface.Instance.StubClient.RequestListings();
         }
 
         private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
@@ -619,8 +636,8 @@ namespace TCC.ViewModels
 
         private void OnShowPartyMatchInfo(S_SHOW_PARTY_MATCH_INFO m)
         {
-            if (!m.IsLast && ProxyInterface.Instance.IsStubAvailable && m.Page <= m.Pages)
-                ProxyInterface.Instance.Stub.RequestListingsPage(m.Page + 1);
+            if (!m.IsLast && StubInterface.Instance.IsStubAvailable && m.Page <= m.Pages)
+                StubInterface.Instance.StubClient.RequestListingsPage(m.Page + 1);
 
             if (!m.IsLast)
             {

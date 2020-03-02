@@ -10,12 +10,14 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
+using TCC.Data;
 using TCC.Exceptions;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Parsing;
+using TCC.Analysis;
+using TCC.UI;
+using TCC.UI.Windows;
 using TCC.Utils;
-using TCC.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
@@ -43,6 +45,19 @@ namespace TCC
                     "An error in render thread occured. This is usually caused by outdated video card drivers. TCC will now close.",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else if (ex is ClientVersionDetectionException cvde)
+            {
+                Log.F($"Failed to detect client version from file: {cvde}");
+                var msg = "Failed to detect client version.";
+
+                msg += StubInterface.Instance.IsStubAvailable
+                    ? "\nSince you're already using TERA Toolbox, please consider installing TCC as a module (more info in the wiki)."
+                    : "\nPlease consider installing TCC as a TERA Toolbox module (more info in the wiki).";
+
+                msg += "\nTCC will now close.";
+                TccMessageBox.Show(msg, MessageBoxType.Error);
+
+            }
             else
             {
                 TccMessageBox.Show("TCC",
@@ -51,7 +66,7 @@ namespace TCC
             }
 
             App.ReleaseMutex();
-            ProxyInterface.Instance.Disconnect();
+            StubInterface.Instance.Disconnect();
             if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
 
             try { WindowManager.Dispose(); } catch {/* ignored*/}

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Windows;
 using TCC.Data;
-using TCC.Windows;
+using TCC.UI.Windows;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.Settings

@@ -79,7 +79,7 @@ namespace TCC.Data.Abnormalities
 
         private static void CheckUnleashAbnormals(S_ABNORMALITY_BEGIN p)
         {
-            if(TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
+            if(GameEventManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
                 if (p.AbnormalityId == SinisterKR && Game.IsMe(p.TargetId))
                 {
@@ -112,7 +112,7 @@ namespace TCC.Data.Abnormalities
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_REFRESH p)
         {
-            if (TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
+            if (GameEventManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
                 if (p.AbnormalityId == SinisterKR && Game.IsMe(p.TargetId))
                 {
@@ -145,7 +145,7 @@ namespace TCC.Data.Abnormalities
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_END p)
         {
-            if (TimeManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
+            if (GameEventManager.Instance.CurrentRegion == RegionEnum.KR)  // KR patch by HQ
             {
                 if (p.AbnormalityId == SinisterKR)
                 {
