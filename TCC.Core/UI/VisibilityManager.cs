@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Windows.Threading;
-using TCC.Test;
 
 namespace TCC.UI
 {
     public class VisibilityManager
     {
         private readonly DispatcherTimer _dimTimer;
-        private bool _forceVisible = Tester.Enabled;
-        private bool _forceUndim = Tester.Enabled;
+        private bool _forceVisible;
+        private bool _forceUndim;
 
         public event Action VisibilityChanged;
         public event Action DimChanged;
@@ -20,7 +19,7 @@ namespace TCC.UI
         public bool Visible => Game.Logged &&
                                !Game.LoadingScreen &&
                                 FocusManager.IsForeground ||
-                                Tester.Enabled;
+                                ForceVisible;
         public bool ForceUndim
         {
             get => _forceUndim;
