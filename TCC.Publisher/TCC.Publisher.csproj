@@ -27,6 +27,9 @@ node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
     <ProjectReference Include="..\TCC.Core\TCC.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" Visible="False"/>
+    <None Include="packages.config" Visible="False"/>
+
     <None Update="settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

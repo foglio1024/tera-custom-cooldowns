@@ -18,4 +18,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>..\release\</OutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" Visible="False"/>
+  </ItemGroup>
+
 </Project>
