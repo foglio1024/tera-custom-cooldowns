@@ -23,7 +23,7 @@ namespace TCC.Settings
         public DateTime LastRun { get; set; }
         public string LastLanguage
         {
-            get => LanguageOverride != LanguageOverride.None ? new EnumDescriptionConverter().Convert(LanguageOverride, null, null, null).ToString() : _lastLanguage;
+            get => LanguageOverride != LanguageOverride.None ? new EnumDescriptionConverter().Convert(LanguageOverride, null, null, null)?.ToString() : _lastLanguage;
             set => _lastLanguage = value;
         }
         public System.Drawing.Size LastScreenSize { get; set; }

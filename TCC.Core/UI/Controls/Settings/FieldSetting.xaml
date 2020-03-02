@@ -17,6 +17,7 @@
             </Grid>
         </ControlTemplate>
 
+        <!-- ReSharper disable once Xaml.RedundantResource -->
         <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
             <Setter Property="Template" Value="{StaticResource TooltipTemplate}"/>
         </Style>

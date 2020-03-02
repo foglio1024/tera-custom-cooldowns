@@ -24,6 +24,7 @@
             <ColorAnimation To="{StaticResource TccYellowGradient0Color}" Duration="{StaticResource Duration}" Storyboard.TargetProperty="(Shape.Fill).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"/>
             <ColorAnimation To="{StaticResource TccYellowGradient1Color}" Duration="{StaticResource Duration}" Storyboard.TargetProperty="(Shape.Fill).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"/>
         </Storyboard>
+        <!-- ReSharper disable once Xaml.RedundantResource -->
         <Storyboard x:Key="ToRed">
             <ColorAnimation To="{StaticResource TccRedGradient0Color}" Duration="{StaticResource Duration}" Storyboard.TargetProperty="(Shape.Fill).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"/>
             <ColorAnimation To="{StaticResource TccRedGradient1Color}" Duration="{StaticResource Duration}" Storyboard.TargetProperty="(Shape.Fill).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"/>

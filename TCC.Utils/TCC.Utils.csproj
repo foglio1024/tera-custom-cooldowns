@@ -14,4 +14,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>..\release\</OutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Nostrum" Version="1.0.4" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.18" />
+  </ItemGroup>
 </Project>

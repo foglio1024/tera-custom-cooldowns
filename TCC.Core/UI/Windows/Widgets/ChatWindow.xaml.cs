@@ -99,11 +99,6 @@ namespace TCC.UI.Windows.Widgets
             base.OnLoaded(sender, e);
             TabControl.SelectedIndex = 0;
         }
-        private void UnpinMessage(object sender, RoutedEventArgs e)
-        {
-            var currTabVm = TabControl.SelectedItem as HeaderedItemViewModel;
-            if (currTabVm?.Content != null) ((Tab)currTabVm.Content).PinnedMessage = null;
-        }
 
         private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {

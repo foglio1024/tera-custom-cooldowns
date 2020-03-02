@@ -144,7 +144,7 @@
                     </controls:Arc>
                 </Grid>
                 <!--Image-->
-                <Image Source="../../resources/images/char_window_bg.png" Margin="-14" Visibility="Visible" Stretch="Uniform" Width="101"/>
+                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Visibility="Visible" Stretch="Uniform" Width="101"/>
                 <!--Stance top-->
                 <controls:Arc StrokeThickness="1">
                     <Shape.RenderTransform>

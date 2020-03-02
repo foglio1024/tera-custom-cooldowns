@@ -147,7 +147,7 @@
                            StretchDirection="DownOnly"
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           Source="../../resources/images/kr_boss_icon.png"
+                           Source="{StaticResource BossIcon}"
                            Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}">
                         <Image.RenderTransform>
                             <TranslateTransform Y="20" X="0.5" />

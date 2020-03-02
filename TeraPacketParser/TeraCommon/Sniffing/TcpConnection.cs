@@ -40,6 +40,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
         public uint CurrentSequenceNumber => unchecked((uint) (InitialSequenceNumber + 1 + BytesReceived));
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static uint NextSequenceNumber { get; set; }
 
         public event Action<TcpConnection, byte[], int> DataReceived;

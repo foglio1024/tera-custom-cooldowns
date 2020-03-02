@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -234,6 +235,7 @@ namespace TCC.Data.Databases
             if (!File.Exists(OverrideFileFullPath)) base.Update(OverrideFileRelativePath);
         }
 
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         public void ToggleOverride(uint zoneId, uint templateId, bool b)
         {
             //var changed = false;
@@ -269,6 +271,8 @@ namespace TCC.Data.Databases
             overrideDoc.Save(OverrideFileFullPath);
         }
 
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public void Blacklist(uint zoneId, uint templateId, bool b)
         {
             if (TryGetMonster(templateId, zoneId, out var m)) m.IsHidden = b;
@@ -289,7 +293,7 @@ namespace TCC.Data.Databases
                     }
                     else
                     {
-                        monster.Attribute("isHidden").Value = b.ToString();
+                        monster.Attribute("isHidden").Value = true.ToString();
                     }
                 }
             }

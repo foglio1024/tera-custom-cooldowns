@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Nostrum.Factories;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Nostrum.Factories;
 using TCC.Utils;
 using TCC.ViewModels;
 
@@ -13,7 +13,6 @@ namespace TCC.UI.Windows
     {
         private readonly DoubleAnimation _bigPathSlideAnim;
         private readonly DoubleAnimation _bigPathFadeAnim;
-
 
         public SettingsWindow() : base(false)
         {
@@ -31,7 +30,6 @@ namespace TCC.UI.Windows
                 ShowDialog();
             });
         }
-
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
             HideWindow();
@@ -49,6 +47,12 @@ namespace TCC.UI.Windows
         {
             Keyboard.ClearFocus();
             ((FrameworkElement)sender).Focus();
+        }
+
+        public override void ShowWindow()
+        {
+            base.ShowWindow();
+            ((SettingsWindowViewModel)DataContext).ExN(nameof(SettingsWindowViewModel.BlacklistedMonsters));
         }
 
         // memeing
@@ -118,7 +122,6 @@ namespace TCC.UI.Windows
             "Still alive",
             "Still alive" //55
         };
-
 
         private void TestNotification(object sender, RoutedEventArgs e)
         {

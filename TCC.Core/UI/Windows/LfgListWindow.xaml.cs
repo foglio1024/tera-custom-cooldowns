@@ -10,7 +10,7 @@ namespace TCC.UI.Windows
 {
     public partial class LfgListWindow
     {
-        private bool _keepPopupOpen = false;
+        private bool _keepPopupOpen;
 
         private LfgListViewModel VM { get; }
 
@@ -51,8 +51,8 @@ namespace TCC.UI.Windows
                 var x = teraScreen.Bounds.X + teraScreen.Bounds.Size.Width / 2D;
                 var y = teraScreen.Bounds.Y + teraScreen.Bounds.Size.Height / 2D;
 
-                x -= this.Width / 2;
-                y -= this.Height / 2;
+                x -= Width / 2;
+                y -= Height / 2;
                 Left = x;
                 Top = y;
             });
@@ -64,8 +64,11 @@ namespace TCC.UI.Windows
             _keepPopupOpen = true;
             FocusManager.UndoUnfocusable(Handle);
             var src = (HwndSource) PresentationSource.FromVisual(ActionsPopup.Child);
-            User32.SetForegroundWindow(src.Handle);
-            FocusManager.UndoUnfocusable(src.Handle);
+            if (src != null)
+            {
+                User32.SetForegroundWindow(src.Handle);
+                FocusManager.UndoUnfocusable(src.Handle);
+            }
 
             ((FrameworkElement) sender).Focus();
             Keyboard.Focus((FrameworkElement)sender);

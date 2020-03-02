@@ -1,17 +1,16 @@
 ﻿<windows:TccWindow x:Class="TCC.UI.Windows.LfgListWindow"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
-             xmlns:vm="clr-namespace:TCC.ViewModels"
-             xmlns:windowSettings="clr-namespace:TCC.Settings.WindowSettings"
-             xmlns:windows="clr-namespace:TCC.UI.Windows"
-             UseLayoutRounding="True"
-             Style="{StaticResource BaseWindowStyle}"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
-             Title="TCC LFG" Height="800" Width="612"
-             WindowStartupLocation="Manual">
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+                   xmlns:windows="clr-namespace:TCC.UI.Windows"
+                   xmlns:vm="clr-namespace:TCC.ViewModels"
+                   UseLayoutRounding="True"
+                   Style="{StaticResource BaseWindowStyle}"
+                   mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
+                   Title="TCC LFG" Height="800" Width="612"
+                   WindowStartupLocation="Manual">
     <Grid>
         <Border Background="{StaticResource RevampBackgroundBrush}"
                 CornerRadius="1" Effect="{StaticResource DropShadow}"
@@ -38,9 +37,9 @@
                   VerticalAlignment="Center" Fill="#9fff" />
             <TextBlock VerticalAlignment="Center" Opacity=".8" FontSize="24"
                        FontWeight="Thin" IsHitTestVisible="False" Foreground="#eee" Grid.Row="0" Margin="50 0">
-                <Run Text="Looking for group " ></Run>
+                <Run Text="Looking for group " />
                 <Run Text="{Binding ListingsView.(CollectionView.Count), Mode=OneWay}" Foreground="#5fff"
-                     FontWeight="Normal" FontSize="20"></Run>
+                     FontWeight="Normal" FontSize="20" />
             </TextBlock>
             <Rectangle MouseLeftButtonDown="Drag" Fill="Transparent" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -50,15 +49,17 @@
                         Command="{Binding ToggleAutoPublicizeCommand}">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
-                            <Setter Property="ToolTip" Value="Auto-publicize running. Click to disable."/>
+                            <Setter Property="ToolTip" Value="Auto-publicize running. Click to disable." />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsAutoPublicizeEnabled}" Value="False">
-                                    <Setter Property="ToolTip" Value="Disabling after cooldown ends. Click to keep enabled."/>
+                                    <Setter Property="ToolTip"
+                                            Value="Disabling after cooldown ends. Click to keep enabled." />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
-                    <Path Data="{StaticResource SvgAuto}" RenderTransformOrigin=".5 .5" Stretch="Uniform" Fill="#fff" Margin="12" >
+                    <Path Data="{StaticResource SvgAuto}" RenderTransformOrigin=".5 .5" Stretch="Uniform" Fill="#fff"
+                          Margin="12">
                         <Path.Style>
                             <Style TargetType="Path" BasedOn="{StaticResource {x:Type Path}}">
                                 <Setter Property="RenderTransform"
@@ -81,8 +82,9 @@
                                         </DataTrigger.ExitActions>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsAutoPublicizeEnabled}" Value="False">
-                                        <Setter Property="Opacity" Value=".3"/>
-                                        <Setter Property="ToolTip" Value="Disabling after cooldown ends. Click to re-enable."/>
+                                        <Setter Property="Opacity" Value=".3" />
+                                        <Setter Property="ToolTip"
+                                                Value="Disabling after cooldown ends. Click to re-enable." />
                                     </DataTrigger>
 
                                 </Style.Triggers>
@@ -111,14 +113,14 @@
                 </Button>
                 <Rectangle Margin="0 8 0 8" Fill="#1fff" Width="1" VerticalAlignment="Stretch" />
                 <Popup PlacementTarget="{Binding ElementName=ActionsBtn}"
-                   IsOpen="{Binding IsPopupOpen}"
-                   PopupAnimation="Slide"
-                   AllowsTransparency="True"
-                   MouseLeave="LfgPopup_OnMouseLeave"
-                   Placement="Relative"
-                   HorizontalOffset="-5"
-                   VerticalOffset="5"
-                   x:Name="ActionsPopup">
+                       IsOpen="{Binding IsPopupOpen}"
+                       PopupAnimation="Slide"
+                       AllowsTransparency="True"
+                       MouseLeave="LfgPopup_OnMouseLeave"
+                       Placement="Relative"
+                       HorizontalOffset="-5"
+                       VerticalOffset="5"
+                       x:Name="ActionsPopup">
                     <Grid Margin="10">
                         <Border Style="{StaticResource RevampBorderStyle}"
                                 Background="{StaticResource RevampDarkerBackgroundBrush}">
@@ -139,9 +141,9 @@
                                 </Style>
                             </StackPanel.Resources>
                             <Button x:Name="CollapseAllButton"
-                                extensions:ButtonExtensions.CornerRadius="3"
-                                Command="{Binding CollapseAllCommand}"
-                                ToolTip="Collapse any expanded LFG">
+                                    extensions:ButtonExtensions.CornerRadius="3"
+                                    Command="{Binding CollapseAllCommand}"
+                                    ToolTip="Collapse any expanded LFG">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
@@ -149,10 +151,10 @@
                                     </Grid.ColumnDefinitions>
                                     <Path Data="{StaticResource SvgCollapseAll}" />
                                     <TextBlock Text="Collapse all" Grid.Column="1"
-                                           VerticalAlignment="Center" />
+                                               VerticalAlignment="Center" />
                                 </Grid>
                             </Button>
-                            <Button x:Name="AutoPublicizeButton" 
+                            <Button x:Name="AutoPublicizeButton"
                                     ToolTip="Enable auto-publicize of LFG message with a 20 seconds cooldown."
                                     Command="{Binding ToggleAutoPublicizeCommand}">
                                 <Grid>
@@ -161,10 +163,10 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <CheckBox Width="16" Height="16" Margin="0 5 10 5"
-                                              IsChecked="{Binding IsAutoPublicizeRunning, Mode=OneWay}"/>
+                                              IsChecked="{Binding IsAutoPublicizeRunning, Mode=OneWay}" />
                                     <TextBlock Text="Auto publicize" Grid.Column="1"
-                                           VerticalAlignment="Center"
-                                           Foreground="White" />
+                                               VerticalAlignment="Center"
+                                               Foreground="White" />
                                 </Grid>
                             </Button>
                             <Rectangle Margin="10 0" Fill="#1fff" Height="1" VerticalAlignment="Stretch" />
@@ -191,7 +193,8 @@
                                     <ColumnDefinition Width="36" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBox Text="{Binding MaxLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="White"
+                                <TextBox Text="{Binding MaxLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Foreground="White"
                                          Background="#0fff" Width="20"
                                          PreviewMouseLeftButtonDown="OnTbMouseLeftButtonDown"
                                          LostKeyboardFocus="OnTbLostKeyboardFocus"
@@ -205,7 +208,7 @@
 
                             </Grid>
                             <Rectangle Margin="10 0" Fill="#1fff" Height="1" VerticalAlignment="Stretch" />
-                            <Button x:Name="ShowTradeListingsButton" 
+                            <Button x:Name="ShowTradeListingsButton"
                                     ToolTip="Enable auto-publicize of LFG message with a 20 seconds cooldown."
                                     Command="{Binding ToggleShowTradeListingsCommand}">
                                 <Grid>
@@ -214,9 +217,7 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <CheckBox Width="16" Height="16" Margin="0 5 10 5"
-                                              IsChecked="{Binding HideTradeListings, Mode=OneWay}"
-
-                                              />
+                                              IsChecked="{Binding HideTradeListings, Mode=OneWay}" />
                                     <TextBlock Text="Hide trade listings" Grid.Column="1"
                                                VerticalAlignment="Center"
                                                Foreground="White" />

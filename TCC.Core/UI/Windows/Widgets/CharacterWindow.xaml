@@ -559,17 +559,17 @@
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Style.Setters>
-                                    <Setter Property="Source" Value="../../resources/images/char_window_bg.png"/>
+                                    <Setter Property="Source" Value="{StaticResource CharWindowBg}"/>
                                 </Style.Setters>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ShowElements}" Value="True">
-                                        <Setter Property="Source" Value="../../resources/images/char_window_bg_sorc.png"/>
+                                        <Setter Property="Source" Value="{StaticResource CharWindowBgSorc}"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image Source="../../resources/images/char_window_fg.png" Stretch="Uniform"/>
+                    <Image Source="{StaticResource CharWindowFg}" Stretch="Uniform"/>
                     <Grid RenderTransformOrigin=".5 .5" Margin="27" ClipToBounds="True">
                         <Grid.RenderTransform>
                             <TransformGroup>

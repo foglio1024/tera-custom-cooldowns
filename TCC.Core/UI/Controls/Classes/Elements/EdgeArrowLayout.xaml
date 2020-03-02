@@ -35,7 +35,7 @@
 
                 </Style>
             </Grid.Resources>
-            <Image Source="../../../resources/images/char_window_bg_side_2.png" Height="101" Grid.RowSpan="2"></Image>
+            <Image Source="{StaticResource CharWindowBgSide2}" Height="101" Grid.RowSpan="2"></Image>
             <Border Style="{StaticResource EdgeContainer}" VerticalAlignment="Top" Margin="4 6 0 -20"
                     RenderTransform="{StaticResource Skew45Inv}">
                 <StackPanel UseLayoutRounding="False" x:Name="Edge10To6">

@@ -44,6 +44,16 @@
     <ImageSource x:Key="ChampionLaurelNewBig">     pack://application:,,,/resources/images/Icon_Laurels/champion_kr_big.png      </ImageSource>
     <ImageSource x:Key="ChampionLaurelNewBottom">  pack://application:,,,/resources/images/Icon_Laurels/champion_kr_bottom.png   </ImageSource>
 
+    <ImageSource x:Key="CharWindowBg">             pack://application:,,,/resources/images/char_window_bg.png                    </ImageSource>
+    <ImageSource x:Key="CharWindowBgSide2">        pack://application:,,,/resources/images/char_window_bg_side_2.png             </ImageSource>
+    <ImageSource x:Key="CharWindowBgTriple">       pack://application:,,,/resources/images/char_window_bg_triple.png             </ImageSource>
+    <ImageSource x:Key="CharWindowBgSorc">         pack://application:,,,/resources/images/char_window_bg_sorc.png               </ImageSource>
+    <ImageSource x:Key="CharWindowFg">             pack://application:,,,/resources/images/char_window_fg.png                    </ImageSource>
+
+    <ImageSource x:Key="MobIcon">                  pack://application:,,,/resources/images/kr_mob_icon.png                       </ImageSource>
+    <ImageSource x:Key="BossIcon">                 pack://application:,,,/resources/images/kr_boss_icon.png                      </ImageSource>
+    <ImageSource x:Key="BossIconFull">             pack://application:,,,/resources/images/kr_boss_icon_full.png                 </ImageSource>
+
     <DropShadowEffect x:Key="ClassIconGlow"                ShadowDepth="0" BlurRadius="3"  Opacity=".5"  Color="{StaticResource ClassGlowColor}" />
     <DropShadowEffect x:Key="ClassWindowSkillBorderShadow" ShadowDepth="0" BlurRadius="20" />
 

@@ -34,7 +34,7 @@
             </elements:RunemarksControl>
             <!--Runemarks-->
             <Grid>
-                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Width="101" Stretch="Uniform" x:Name="BgImage">
+                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Width="101" Stretch="Uniform" x:Name="BgImage">
                     <Image.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>

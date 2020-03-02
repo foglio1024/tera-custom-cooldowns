@@ -2,7 +2,6 @@
 using Nostrum;
 using Nostrum.Extensions;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using TCC.Data;
-using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Processing;
 using TCC.UI;
@@ -22,10 +20,11 @@ using TeraDataLite;
 using TeraPacketParser;
 using TeraPacketParser.Data;
 using TeraPacketParser.Messages;
+// ReSharper disable All
+#pragma warning disable 612
 
 namespace TCC.Test
 {
-    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public static class Tester
     {
         public static bool Enabled = false;
@@ -108,7 +107,7 @@ namespace TCC.Test
         }
         public static void AddFakeGroupMember(int id, Class c, Laurel l, bool leader = false)
         {
-            WindowManager.ViewModels.GroupVM.AddOrUpdateMember(new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
+            WindowManager.ViewModels.GroupVM?.AddOrUpdateMember(new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
             {
                 Alive = true,
                 Awakened = true,
@@ -128,7 +127,7 @@ namespace TCC.Test
         public static void SpawnNpcAndUpdateHP(ushort zoneId, uint templateId, ulong eid)
         {
             SpawnNPC(zoneId, templateId, eid, true, false, 36);
-            var t = new System.Timers.Timer { Interval = 1000 };
+            var t = new Timer { Interval = 1000 };
             var hp = 1000;
             t.Elapsed += (_, __) =>
             {
@@ -420,10 +419,10 @@ namespace TCC.Test
             }
         }
 
-        private static System.Timers.Timer _t;
+        private static Timer _t;
         public static void AddMobs()
         {
-            _t = new System.Timers.Timer { Interval = 1 };
+            _t = new Timer { Interval = 1 };
             _t.Elapsed += T_Elapsed;
             _t.Start();
         }
@@ -431,7 +430,7 @@ namespace TCC.Test
         public static void AddNpcAndAbnormalities()
         {
             SpawnNPC(950, 4000, 1, true, false, 36);
-            var t = new System.Timers.Timer(1);
+            var t = new Timer(1);
             var a = true;
             t.Elapsed += (_, __) =>
             {
@@ -453,7 +452,7 @@ namespace TCC.Test
 
         public static void CheckDelegateSubs()
         {
-            var t = new System.Timers.Timer(1000);
+            var t = new Timer(1000);
             t.Elapsed += (_, __) =>
             {
                 SettingsWindowViewModel.PrintEventsData();

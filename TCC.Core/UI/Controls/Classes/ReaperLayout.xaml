@@ -7,35 +7,34 @@
              mc:Ignorable="d" d:DataContext="{d:DesignData ReaperLayoutVM}">
     <Grid Width="Auto" Margin="10 10 10 30 " Name="Root">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Grid >
+        <Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5"
+                    Effect="{StaticResource DropShadow}"
                     RenderTransform="{StaticResource Rotate45}"
-                    Opacity=".7">
-            </Border>
+                    Opacity=".7" />
 
-<Image Source="../../resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" Visibility="Collapsed"></Image>
+            <Image Source="{StaticResource CharWindowBg}" Margin="-14" Stretch="Uniform" Visibility="Collapsed" />
         </Grid>
-            <skills:RhombSkillEffectControl DataContext="{Binding ShadowReaping}"  />
+        <skills:RhombSkillEffectControl DataContext="{Binding ShadowReaping}" />
         <Grid HorizontalAlignment="Center" Grid.Row="1">
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
-                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5"
+                    Effect="{StaticResource DropShadow}"
                     RenderTransform="{StaticResource Rotate45}"
-                    Opacity=".7">
-            </Border>
+                    Opacity=".7" />
 
-            <skills:RhombSkillEffectControl DataContext="{Binding ShroudedEscape}" >
-            </skills:RhombSkillEffectControl>
-                <FrameworkElement.RenderTransform>
-                    <TranslateTransform Y="5"></TranslateTransform>
-                </FrameworkElement.RenderTransform>
+            <skills:RhombSkillEffectControl DataContext="{Binding ShroudedEscape}" />
+            <FrameworkElement.RenderTransform>
+                <TranslateTransform Y="5" />
+            </FrameworkElement.RenderTransform>
 
         </Grid>
 

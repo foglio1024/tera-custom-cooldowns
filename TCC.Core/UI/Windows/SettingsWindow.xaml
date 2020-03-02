@@ -732,10 +732,10 @@
                                             <Image MaxHeight="36" HorizontalAlignment="Left">
                                                 <Image.Style>
                                                     <Style TargetType="Image">
-                                                        <Setter Property="Source" Value="../resources/images/kr_mob_icon.png"/>
+                                                        <Setter Property="Source" Value="{StaticResource MobIcon}"/>
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding IsBoss}" Value="True">
-                                                                <Setter Property="Source" Value="../resources/images/kr_boss_icon_full.png"/>
+                                                                <Setter Property="Source" Value="{StaticResource BossIconFull}"/>
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>

@@ -1,38 +1,23 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using Nostrum.Extensions;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using HtmlAgilityPack;
-using Nostrum.Extensions;
-using TCC.Interop;
-using TCC.R;
-using TCC.UI;
-using TCC.Utils;
 
-namespace TCC.Data.Chat
+namespace TCC.Utils
 {
     public static class ChatUtils
     {
-        public static string GradeToColorString(RareGrade g)
-        {
-            switch (g)
-            {
-                case RareGrade.Common: return Colors.ItemCommonColor.ToHex();
-                case RareGrade.Uncommon: return Colors.ItemUncommonColor.ToHex();
-                case RareGrade.Rare: return Colors.ItemRareColor.ToHex();
-                case RareGrade.Superior: return Colors.ItemSuperiorColor.ToHex();
-                default: return "";
-            }
-        }
+        
         public static uint GetId(Dictionary<string, string> d, string paramName)
         {
-            return UInt32.Parse(d[paramName]);
+            return uint.Parse(d[paramName]);
         }
 
         public static long GetItemUid(Dictionary<string, string> d)
         {
-            return d.TryGetValue("dbid", out var value) ? Int64.Parse(value) : 0;
+            return d.TryGetValue("dbid", out var value) ? long.Parse(value) : 0;
         }
 
         public static Dictionary<string, string> SplitDirectives(string m)
@@ -126,46 +111,6 @@ namespace TCC.Data.Chat
             }
 
             return sb.ToString();
-        }
-
-        public static bool CheckMention(string text)
-        {
-            switch (App.Settings.MentionMode)
-            {
-                case MentionMode.Current:
-                    try
-                    {
-                        return text.IndexOf(Game.Me.Name, StringComparison.InvariantCultureIgnoreCase) != -1;
-                    }
-                    catch { return false; }
-                case MentionMode.All:
-                    try
-                    {
-                        return Game.Account.Characters.Where(c => !c.Hidden).Any(ch => text.IndexOf(ch.Name, StringComparison.InvariantCultureIgnoreCase) != -1);
-                    }
-                    catch { return false; }
-                default: return false;
-            }
-        }
-        public static void CheckDiscordNotify(string message, string discordUsername)
-        {
-            if (FocusManager.IsForeground) return;
-            if (!App.Settings.WebhookEnabledMentions) return;
-            //var txt = GetPlainText(message).UnescapeHtml();
-            //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
-
-            Discord.FireWebhook(App.Settings.WebhookUrlMentions, message, discordUsername); //string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
-
-        }
-        public static void CheckWindowNotify(string message, string title)
-        {
-            if (FocusManager.IsForeground) return;
-            if (!App.Settings.BackgroundNotifications) return;
-            //var txt = GetPlainText(message).UnescapeHtml();
-            //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
-
-            Log.N(title, message /*string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}"*/, NotificationType.Normal, 6000);
-
         }
 
         public static string Font(string msg, string color = "", int size = -1)

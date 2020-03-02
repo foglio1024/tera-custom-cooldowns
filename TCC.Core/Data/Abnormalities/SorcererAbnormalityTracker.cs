@@ -1,4 +1,5 @@
-﻿using TCC.Data.Skills;
+﻿using System;
+using TCC.Data.Skills;
 using TCC.Utilities;
 using TCC.ViewModels;
 using TeraDataLite;
@@ -22,6 +23,8 @@ namespace TCC.Data.Abnormalities
         private static Skill _fireIceFusion;
         //private static Skill _fireArcaneFusion;
         //private static Skill _iceArcaneFusion;
+
+        public static event Action BoostChanged;
 
         private static bool IsManaBoost(uint id)
         {
@@ -67,6 +70,8 @@ namespace TCC.Data.Abnormalities
             {
                 Game.SetSorcererElementsBoost(false, false, true);
             }
+            else return;
+            BoostChanged?.Invoke();
         }
         private static void CheckFusionBoost(S_ABNORMALITY_REFRESH p)
         {
@@ -82,13 +87,20 @@ namespace TCC.Data.Abnormalities
             {
                 Game.SetSorcererElementsBoost(false, false, true);
             }
+            else return;
+            BoostChanged?.Invoke();
+
         }
         private static void CheckFusionBoost(S_ABNORMALITY_END p)
         {
-            if (FlameFusionIncreaseId == p.AbnormalityId || FrostFusionIncreaseId == p.AbnormalityId || ArcaneFusionIncreaseId == p.AbnormalityId)
+            if (FlameFusionIncreaseId == p.AbnormalityId || FrostFusionIncreaseId == p.AbnormalityId ||
+                ArcaneFusionIncreaseId == p.AbnormalityId)
             {
                 Game.SetSorcererElementsBoost(false, false, false);
             }
+            else return;
+            BoostChanged?.Invoke();
+
         }
         private static void CheckFusions(S_ABNORMALITY_BEGIN p)
         {

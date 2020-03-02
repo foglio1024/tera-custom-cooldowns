@@ -4,12 +4,16 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Media;
 using Nostrum;
+using Nostrum.Extensions;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Interop;
 using TCC.R;
 using TCC.UI;
+using TCC.Utils;
 using TCC.ViewModels;
 using TeraDataLite;
+using Colors = TCC.R.Colors;
 
 namespace TCC.Utilities
 {
@@ -139,6 +143,54 @@ namespace TCC.Utilities
         {
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Beta ? "-e" : "")}";
+
+        }
+
+        public static string GradeToColorString(RareGrade g)
+        {
+            return g switch
+            {
+                RareGrade.Common => Colors.ItemCommonColor.ToHex(),
+                RareGrade.Uncommon => Colors.ItemUncommonColor.ToHex(),
+                RareGrade.Rare => Colors.ItemRareColor.ToHex(),
+                RareGrade.Superior => Colors.ItemSuperiorColor.ToHex(),
+                _ => ""
+            };
+        }
+
+        public static bool CheckMention(string text)
+        {
+            try
+            {
+                return App.Settings.MentionMode switch
+                {
+                    MentionMode.Current => (text.IndexOf(Game.Me.Name, StringComparison.InvariantCultureIgnoreCase) != -1),
+                    MentionMode.All => Game.Account.Characters.Where(c => !c.Hidden).Any(ch => text.IndexOf(ch.Name, StringComparison.InvariantCultureIgnoreCase) != -1),
+                    _ => false
+                };
+            }
+            catch { return false; }
+        }
+
+        public static void CheckDiscordNotify(string message, string discordUsername)
+        {
+            if (FocusManager.IsForeground) return;
+            if (!App.Settings.WebhookEnabledMentions) return;
+            //var txt = GetPlainText(message).UnescapeHtml();
+            //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
+
+            Discord.FireWebhook(App.Settings.WebhookUrlMentions, message, discordUsername); //string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
+
+        }
+
+        public static void CheckWindowNotify(string message, string title)
+        {
+            if (FocusManager.IsForeground) return;
+            if (!App.Settings.BackgroundNotifications) return;
+            //var txt = GetPlainText(message).UnescapeHtml();
+            //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
+
+            Log.N(title, message /*string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}"*/, NotificationType.Normal, 6000);
 
         }
     }

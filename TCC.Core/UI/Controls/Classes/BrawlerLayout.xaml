@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Stretch="Uniform" x:Name="BgImage">
                     <Image.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
@@ -93,7 +93,7 @@
                         </Style>
                     </Grid.Style>
                 </Grid>
-                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage" />
+                <Image Source="{StaticResource CharWindowFg}" Margin="-14" Stretch="Uniform" x:Name="FgImage" />
                 <Path Data="{StaticResource SvgClassBrawler}" Margin="19" Opacity=".3" />
 
                 <Grid>

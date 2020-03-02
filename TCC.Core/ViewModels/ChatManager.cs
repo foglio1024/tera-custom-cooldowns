@@ -34,8 +34,7 @@ namespace TCC.ViewModels
     {
         private static ChatManager _instance;
 
-        public static ChatManager Instance =>
-            _instance ?? (_instance = new ChatManager(App.Settings.ChatSettings));
+        public static ChatManager Instance => _instance ??= new ChatManager(App.Settings.ChatSettings);
 
         public ChatMessageFactory Factory { get; }
 

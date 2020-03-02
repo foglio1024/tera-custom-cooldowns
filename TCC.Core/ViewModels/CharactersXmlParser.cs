@@ -34,12 +34,7 @@ namespace TCC.Data
         private const string DungeonsTag             = "Dungeons";
         private const string EntriesTag              = "entries";
         private const string TotalTag                = "total";
-        private const string GearTag                 = "Gear";
         private const string GearPiecesTag           = "GearPieces";
-        private const string PieceTag                = "piece";
-        private const string TierTag                 = "tier";
-        private const string EnchantTag              = "enchant";
-        private const string ExpTag                  = "exp";
         private const string EliteTag                = "elite";
         private const string LastOnlineTag           = "lastOnline";
         private const string LastLocationTag         = "lastLocation";
@@ -68,7 +63,7 @@ namespace TCC.Data
             {
                 var xChar = BuildGeneralDataXelement(c);
                 xChar.Add(BuildDungeonDataXelement(c));
-                xChar.Add(BuildGearDataXelement(c));
+                xChar.Add(BuildGearDataXelement());
                 xChar.Add(BuildBuffsXelement(c));
                 xChar.Add(BuildInventoryDataXelement(c));
                 root.Add(xChar);
@@ -90,7 +85,7 @@ namespace TCC.Data
             });
             return xRet;
         }
-        private static XElement BuildGearDataXelement(Character c)
+        private static XElement BuildGearDataXelement()
         {
             var xGear = new XElement(GearPiecesTag);
             //c.Gear.ToSyncList().ForEach(item =>
@@ -204,29 +199,6 @@ namespace TCC.Data
 
             ch.DungeonInfo.UpdateEntries(dungeons);
         }
-        private static void ParseGearCharInfo(XElement xChar, Character ch)
-        {
-            var gear = new List<GearItem>();
-            xChar.Descendants().Where(x => x.Name == GearTag).ToList().ForEach(xPiece =>
-            {
-                uint id = 0;
-                var type = GearPiece.Weapon;
-                var tier = GearTier.Low;
-                var enchant = 0;
-                uint exp = 0;
-
-                xPiece.Attributes().ToList().ForEach(attr =>
-                {
-                    if (attr.Name == IdTag) id = Convert.ToUInt32(attr.Value);
-                    if (attr.Name == PieceTag) type = (GearPiece)Enum.Parse(typeof(GearPiece), attr.Value);
-                    if (attr.Name == TierTag) tier = (GearTier)Enum.Parse(typeof(GearTier), attr.Value);
-                    if (attr.Name == EnchantTag) enchant = Convert.ToInt32(attr.Value);
-                    if (attr.Name == ExpTag) exp = Convert.ToUInt32(attr.Value);
-                });
-                gear.Add(new GearItem(id, tier, type, enchant, exp));
-            });
-            //ch.UpdateGear(gear);
-        }
         private static void ParseBuffsInfo(XElement xChar, Character ch)
         {
             xChar.Descendants().Where(x => x.Name == BuffTag).ToList().ForEach(xBuff =>
@@ -275,7 +247,6 @@ namespace TCC.Data
                 var ch = new Character();
                 ParseGeneralCharInfo(xChar, ch);
                 ParseDungeonCharInfo(xChar, ch);
-                ParseGearCharInfo(xChar, ch);
                 ParseBuffsInfo(xChar, ch);
                 ParseInventoryInfo(xChar, ch);
                 dest.Add(ch);

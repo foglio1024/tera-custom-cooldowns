@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using Nostrum;
 using Nostrum.Extensions;
 using TCC.UI;
+using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
 
@@ -276,7 +277,7 @@ namespace TCC.Data.Chat
                 {
                     //parse normal formatted piece
                     var text = piece.InnerText;
-                    if (!App.Loading) ContainsPlayerName = ChatUtils.CheckMention(text);
+                    if (!App.Loading) ContainsPlayerName = TccUtils.CheckMention(text);
                     CheckRedirect(text);
                     var content = GetPieceContent(text);
                     if (content != "")
@@ -296,7 +297,7 @@ namespace TCC.Data.Chat
             {
                 //parse normal non formatted piece
                 var text = piece.InnerText;
-                if (!App.Loading) ContainsPlayerName = ChatUtils.CheckMention(text);
+                if (!App.Loading) ContainsPlayerName = TccUtils.CheckMention(text);
                 CheckRedirect(text);
                 var content = GetPieceContent(text);
                 if (content != "")

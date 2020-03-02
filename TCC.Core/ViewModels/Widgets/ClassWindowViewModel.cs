@@ -27,51 +27,23 @@ namespace TCC.ViewModels.Widgets
                 Dispatcher.Invoke(() =>
                 {
                     CurrentManager.Dispose();
-                    switch (_currentClass)
+                    CurrentManager = _currentClass switch
                     {
-                        case Class.Warrior:
-                            CurrentManager = new WarriorLayoutVM();
-                            break;
-                        case Class.Valkyrie:
-                            CurrentManager = new ValkyrieLayoutVM();
-                            break;
-                        case Class.Archer:
-                            CurrentManager = new ArcherLayoutVM();
-                            break;
-                        case Class.Lancer:
-                            CurrentManager = new LancerLayoutVM();
-                            break;
-                        case Class.Priest:
-                            CurrentManager = new PriestLayoutVM();
-                            break;
-                        case Class.Mystic:
-                            CurrentManager = new MysticLayoutVM();
-                            break;
-                        case Class.Slayer:
-                            CurrentManager = new SlayerLayoutVM();
-                            break;
-                        case Class.Berserker:
-                            CurrentManager = new BerserkerLayoutVM();
-                            break;
-                        case Class.Sorcerer:
-                            CurrentManager = new SorcererLayoutVM();
-                            break;
-                        case Class.Reaper:
-                            CurrentManager = new ReaperLayoutVM();
-                            break;
-                        case Class.Gunner:
-                            CurrentManager = new GunnerLayoutVM();
-                            break;
-                        case Class.Brawler:
-                            CurrentManager = new BrawlerLayoutVM();
-                            break;
-                        case Class.Ninja:
-                            CurrentManager = new NinjaLayoutVM();
-                            break;
-                        default:
-                            CurrentManager = new NullClassManager();
-                            break;
-                    }
+                        Class.Warrior => new WarriorLayoutVM(),
+                        Class.Valkyrie => new ValkyrieLayoutVM(),
+                        Class.Archer => new ArcherLayoutVM(),
+                        Class.Lancer => new LancerLayoutVM(),
+                        Class.Priest => new PriestLayoutVM(),
+                        Class.Mystic => new MysticLayoutVM(),
+                        Class.Slayer => new SlayerLayoutVM(),
+                        Class.Berserker => new BerserkerLayoutVM(),
+                        Class.Sorcerer => new SorcererLayoutVM(),
+                        Class.Reaper => new ReaperLayoutVM(),
+                        Class.Gunner => new GunnerLayoutVM(),
+                        Class.Brawler => new BrawlerLayoutVM(),
+                        Class.Ninja => new NinjaLayoutVM(),
+                        _ => new NullClassManager()
+                    };
                 });
                 N();
             }

@@ -3,6 +3,7 @@ using System.IO;
 using Nostrum.Extensions;
 using TCC.Data.Chat;
 using TCC.Analysis;
+using TCC.Utils;
 
 namespace TCC.Data.Databases
 {

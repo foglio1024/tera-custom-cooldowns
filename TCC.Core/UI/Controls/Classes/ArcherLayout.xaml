@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                <Image Source="/resources/images/char_window_bg.png" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Stretch="Uniform" x:Name="BgImage">
                 </Image>
                 <Grid x:Name="MainReArcGrid" >
                     <controls:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
@@ -66,7 +66,7 @@
                         </controls:Arc.Style>
                     </controls:Arc>
                 </Grid>
-                <Image Source="/resources/images/char_window_fg.png" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
+                <Image Source="{StaticResource CharWindowFg}" Margin="-14" Stretch="Uniform" x:Name="FgImage"/>
                 <Path Data="{StaticResource SvgClassArcher}" Margin="19" Opacity=".3"/>
             </Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"

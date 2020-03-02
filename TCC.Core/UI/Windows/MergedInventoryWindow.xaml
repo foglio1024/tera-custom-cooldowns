@@ -16,6 +16,7 @@
         d:DataContext="{d:DesignInstance local:MergedInventoryViewModel}"
 >
     <Window.Resources>
+        <!-- ReSharper disable once Xaml.RedundantResource -->
         <PopupAnimation x:Key="{x:Static SystemParameters.ToolTipPopupAnimationKey}">None</PopupAnimation>
     </Window.Resources>
     <Grid Margin="10">

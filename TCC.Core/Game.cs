@@ -8,13 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Abnormalities;
-using TCC.Data.Chat;
 using TCC.Data.Databases;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Analysis;
 using TCC.Processing;
 using TCC.UI;
 using TCC.UI.Converters;
@@ -22,7 +21,6 @@ using TCC.UI.Windows;
 using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
-using TCC.ViewModels;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 using Player = TCC.Data.Pc.Player;
@@ -169,7 +167,7 @@ namespace TCC
                     Log.N("TCC",
                         $"Some database files are out of date, updating... Contact the developer if you see this message at every login.",
                         NotificationType.Warning, 5000);
-                    ChatManager.Instance.AddTccMessage($"Some database files are out of date, updating...");
+                    Log.Chat(ChatChannel.TCC, "System", "Some database files are out of date, updating...");
                 }
 
                 //var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
@@ -270,70 +268,125 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
         }
 
+        private static Laurel GetLaurel(uint pId)
+        {
+            var ch = Account.Characters.FirstOrDefault(x => x.Id == pId);
+            return ch?.Laurel ?? Laurel.None;
+        }
+
+        public static void SetEncounter(float curHP, float maxHP)
+        {
+            if (maxHP > curHP)
+            {
+                Encounter = true;
+            }
+            else if (maxHP == curHP || curHP == 0)
+            {
+                Encounter = false;
+            }
+        }
+
+        public static void SetSorcererElementsBoost(bool f, bool i, bool a)
+        {
+            Me.FireBoost = f;
+            Me.IceBoost = i;
+            Me.ArcaneBoost = a;
+        }
+
+        private static void OnReturnToLobbyHotkeyPressed()
+        {
+            if (!Logged
+              || LoadingScreen
+              || Combat
+              || !StubInterface.Instance.IsStubAvailable) return;
+
+            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
+            StubInterface.Instance.StubClient.ReturnToLobby();
+        }
+
+        private static void OnDisconnected()
+        {
+            Me.ClearAbnormalities();
+            Logged = false;
+            LoadingScreen = true;
+        }
+
+        private static void SetAbnormalityTracker(Class c)
+        {
+            CurrentAbnormalityTracker = c switch
+            {
+                Class.Warrior => new WarriorAbnormalityTracker(),
+                Class.Lancer => new LancerAbnormalityTracker(),
+                Class.Slayer => new SlayerAbnormalityTracker(),
+                Class.Berserker => new BerserkerAbnormalityTracker(),
+                Class.Sorcerer => new SorcererAbnormalityTracker(),
+                Class.Archer => new ArcherAbnormalityTracker(),
+                Class.Priest => new PriestAbnormalityTracker(),
+                Class.Mystic => new MysticAbnormalityTracker(),
+                Class.Reaper => new ReaperAbnormalityTracker(),
+                Class.Gunner => new GunnerAbnormalityTracker(),
+                Class.Brawler => new BrawlerAbnormalityTracker(),
+                Class.Ninja => new NinjaAbnormalityTracker(),
+                Class.Valkyrie => new ValkyrieAbnormalityTracker(),
+                _ => CurrentAbnormalityTracker
+            };
+        }
+
+        #region Hooks
+
         private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
         {
             DB.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
-            ChatUtils.CheckWindowNotify($"New broker offer for {m.Amount} <{i?.Name ?? m.Item.ToString()}> from {m.Name}", "Broker offer");
-            ChatUtils.CheckDiscordNotify($"New broker offer for {m.Amount} **<{i?.Name ?? m.Item.ToString()}>**", m.Name);
+            TccUtils.CheckWindowNotify($"New broker offer for {m.Amount} <{i?.Name ?? m.Item.ToString()}> from {m.Name}", "Broker offer");
+            TccUtils.CheckDiscordNotify($"New broker offer for {m.Amount} **<{i?.Name ?? m.Item.ToString()}>**", m.Name);
         }
-
         private static void OnRequestContract(S_BEGIN_THROUGH_ARBITER_CONTRACT p)
         {
             if (p.Type == S_BEGIN_THROUGH_ARBITER_CONTRACT.RequestType.PartyInvite)
             {
-                ChatUtils.CheckWindowNotify($"{p.Sender} invited you to join a party", "Party invite");
-                ChatUtils.CheckDiscordNotify($"**{p.Sender}** invited you to join a party", "TCC");
+                TccUtils.CheckWindowNotify($"{p.Sender} invited you to join a party", "Party invite");
+                TccUtils.CheckDiscordNotify($"**{p.Sender}** invited you to join a party", "TCC");
             }
         }
-
         private static void OnBanPartyMember(S_BAN_PARTY_MEMBER obj)
         {
             Group.Remove(obj.PlayerId, obj.ServerId);
         }
-
         private static void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER obj)
         {
             Group.Remove(obj.PlayerId, obj.ServerId);
         }
-
         private static void OnChangePartyManager(S_CHANGE_PARTY_MANAGER p)
         {
             Group.ChangeLeader(p.Name);
         }
-
         private static void OnBanParty(S_BAN_PARTY p)
         {
             Group.Disband();
         }
-
         private static void OnLeaveParty(S_LEAVE_PARTY p)
         {
             Group.Disband();
         }
-
         private static void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
         {
             Group.SetGroup(p.Members, p.Raid);
         }
-
         private static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
         {
             Log.N("Instance Matching", "Battleground matching completed", NotificationType.Success);
             Log.F($"Zone: {p.Zone}\nId: {p.Id}\nData: {p.Data.Array.ToStringEx()}", "S_BATTLE_FIELD_ENTRANCE_INFO.txt");
         }
-
         private static void OnFinInterPartyMatch(S_FIN_INTER_PARTY_MATCH p)
         {
             Log.N("Instance Matching", "Dungeon matching completed", NotificationType.Success);
             Log.F($"Zone: {p.Zone}\nData: {p.Data.Array.ToStringEx()}", "S_FIN_INTER_PARTY_MATCH.txt");
         }
-
         private static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
             if (IsMe(m.Target)) return;
             SetEncounter(m.CurrentHP, m.MaxHP);
         }
-
         private static void OnBossGageInfo(S_BOSS_GAGE_INFO m)
         {
             SetEncounter(m.CurrentHP, m.MaxHP);
@@ -343,14 +396,13 @@ namespace TCC
             if (p.Recipient != Me.Name) return;
             var txt = ChatUtils.GetPlainText(p.Message).UnescapeHtml();
             var chStr = new ChatChannelToName().Convert(ChatChannel.ReceivedWhisper, null, null, null);
-            ChatUtils.CheckWindowNotify(txt, $"{p.Author} - {(string)chStr}");
-            ChatUtils.CheckDiscordNotify($"`{chStr}` {txt}", p.Author);
+            TccUtils.CheckWindowNotify(txt, $"{p.Author} - {(string)chStr}");
+            TccUtils.CheckDiscordNotify($"`{chStr}` {txt}", p.Author);
         }
-
         private static void OnChat(S_CHAT m)
         {
             #region Greet meme
-            if ((ChatChannel)m.Channel == ChatChannel.Greet 
+            if ((ChatChannel)m.Channel == ChatChannel.Greet
                 && (m.AuthorName == "Foglio" || m.AuthorName == "Folyemi"))
                 Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
             #endregion
@@ -369,34 +421,30 @@ namespace TCC
             #endregion
 
             if (BlockList.Contains(m.AuthorName)) return;
-            if (!ChatUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
+            if (!TccUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
 
             var txt = ChatUtils.GetPlainText(m.Message).UnescapeHtml();
             var chStr = new ChatChannelToName().Convert((ChatChannel)m.Channel, null, null, null);
 
-            ChatUtils.CheckWindowNotify(txt, $"{m.AuthorName} {(string)chStr}");
-            ChatUtils.CheckDiscordNotify($"`{chStr}` {txt}", m.AuthorName);
+            TccUtils.CheckWindowNotify(txt, $"{m.AuthorName} {(string)chStr}");
+            TccUtils.CheckDiscordNotify($"`{chStr}` {txt}", m.AuthorName);
 
         }
-
         private static void OnSpawnNpc(S_SPAWN_NPC p)
         {
             if (!DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
             NearbyNPC[p.EntityId] = m.Name;
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
-
         private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO x)
         {
             if (!x.Online) return;
             SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{x.Name}", "SMT_FRIEND_IS_CONNECTED");
         }
-
         private static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
             SystemMessagesProcessor.AnalyzeMessage($"@0\vAchievementName\v@achievement:{x.AchievementId}", "SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE");
         }
-
         private static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM x)
         {
             App.BaseDispatcher.InvokeAsync(() =>
@@ -412,7 +460,6 @@ namespace TCC
                 }
             });
         }
-
         private static void OnSystemMessage(S_SYSTEM_MESSAGE x)
         {
             if (DB.SystemMessagesDatabase.IsHandledInternally(x.Message)) return;
@@ -429,7 +476,6 @@ namespace TCC
                 }
             });
         }
-
         private static void OnDespawnNpc(S_DESPAWN_NPC p)
         {
             NearbyNPC.Remove(p.Target);
@@ -442,13 +488,11 @@ namespace TCC
             WindowManager.ViewModels.GroupVM.SetAggro(0);
             // ----------------------------------------------------
         }
-
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {
             if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024);
             NearbyPlayers.Remove(p.EntityId);
         }
-
         private static void OnSpawnUser(S_SPAWN_USER p)
         {
             switch (p.Name)
@@ -476,7 +520,6 @@ namespace TCC
 
             NearbyPlayers[p.EntityId] = p.Name;
         }
-
         private static void OnSpawnMe(S_SPAWN_ME p)
         {
             NearbyNPC.Clear();
@@ -497,12 +540,10 @@ namespace TCC
                 SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
             });
         }
-
         private static void OnAccountPackageList(S_ACCOUNT_PACKAGE_LIST m)
         {
             Account.IsElite = m.IsElite;
         }
-
         private static void OnLoadTopo(S_LOAD_TOPO m)
         {
             LoadingScreen = true;
@@ -512,7 +553,6 @@ namespace TCC
             Me.ClearAbnormalities();
 
         }
-
         private static void OnGetUserList(S_GET_USER_LIST m)
         {
             if (PacketAnalyzer.Factory.ReleaseVersion == 0) Log.F("Warning: C_LOGIN_ARBITER not received.");
@@ -521,12 +561,10 @@ namespace TCC
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
             Me.ClearAbnormalities();
         }
-
         private static void OnUserStatus(S_USER_STATUS m)
         {
             if (IsMe(m.EntityId)) Combat = m.IsInCombat;
         }
-
         private static void OnFieldEventOnLeave(S_FIELD_EVENT_ON_LEAVE p)
         {
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_LEAVE");
@@ -550,9 +588,8 @@ namespace TCC
             Account.CurrentCharacter.GuardianInfo.Claimed = p.Claimed;
             Account.CurrentCharacter.GuardianInfo.Cleared = p.Cleared;
             if (old == p.Cleared) return;
-            SystemMessagesProcessor.AnalyzeMessage("@0","SMT_FIELD_EVENT_REWARD_AVAILABLE");
+            SystemMessagesProcessor.AnalyzeMessage("@0", "SMT_FIELD_EVENT_REWARD_AVAILABLE");
         }
-
         private static void OnGetUserGuildLogo(S_GET_USER_GUILD_LOGO p)
         {
             if (p.GuildLogo == null) return;
@@ -572,37 +609,31 @@ namespace TCC
                 Log.F($"Error while saving guild logo: {e}");
             }
         }
-
         private static void OnGuildMemberList(S_GUILD_MEMBER_LIST m)
         {
             Guild.Set(m.Members, m.MasterId, m.MasterName);
             //m.GuildMembersList.ToList().ForEach(g => { GuildMembersNames[g.Key] = g.Value; });
         }
-
         private static void OnLoadEpInfo(S_LOAD_EP_INFO m)
         {
             if (!m.Perks.TryGetValue(851010, out var level)) return;
             EpDataProvider.SetManaBarrierPerkLevel(level);
         }
-
         private static void OnLearnEpPerk(S_LEARN_EP_PERK m)
         {
             if (!m.Perks.TryGetValue(851010, out var level)) return;
             EpDataProvider.SetManaBarrierPerkLevel(level);
         }
-
         private static void OnResetEpPerk(S_RESET_EP_PERK m)
         {
             if (m.Success) EpDataProvider.SetManaBarrierPerkLevel(0);
         }
-
         private static void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
             Logged = false;
             Me.ClearAbnormalities();
 
         }
-
         private static void OnLogin(S_LOGIN m)
         {
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true);
@@ -635,7 +666,6 @@ namespace TCC
             InitDatabases(App.Settings.LastLanguage);
             SetAbnormalityTracker(m.CharacterClass);
         }
-
         private static void OnLoginArbiter(C_LOGIN_ARBITER m)
         {
             CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
@@ -643,55 +673,48 @@ namespace TCC
             App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
             App.Settings.LastAccountNameHash = CurrentAccountNameHash;
         }
-
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             if (!IsMe(p.TargetId)) return;
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
 
         }
-
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (!IsMe(p.TargetId)) return;
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
         }
-
         private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
             if (!IsMe(p.TargetId)) return;
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             FlyingGuardianDataProvider.HandleAbnormal(p);
             Me.EndAbnormality(ab);
         }
-
         private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
         {
             App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
-
         private static void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
             App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
-
         private static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF m)
         {
             SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Guild.NameOf(m.PlayerId)}", "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED");
             Guild.SetMaster(m.PlayerId, Guild.NameOf(m.PlayerId));
         }
-
         private static void OnNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
             if (p.Type != S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce) return;
-            
-            var questName = DB.GuildQuestDatabase.GuildQuests.TryGetValue(p.QuestId, out var gq) 
+
+            var questName = DB.GuildQuestDatabase.GuildQuests.TryGetValue(p.QuestId, out var gq)
                 ?
                  gq.Title
                     : "Defeat Guild BAM";
@@ -699,7 +722,6 @@ namespace TCC
             var name = DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
             SystemMessagesProcessor.AnalyzeMessage($"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}", "SMT_GQUEST_URGENT_NOTIFY");
         }
-
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
             var friend = FriendList.FirstOrDefault(f => f.PlayerId == x.PlayerId);
@@ -716,12 +738,10 @@ namespace TCC
 
             SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{friend.Name}\vAreaName\v{areaName}", "SMT_FRIEND_WALK_INTO_SAME_AREA");
         }
-
         private static void OnFriendList(S_FRIEND_LIST m)
         {
             FriendList = m.Friends;
         }
-
         private static void OnUserBlockList(S_USER_BLOCK_LIST m)
         {
             m.BlockedUsers.ForEach(u =>
@@ -731,98 +751,6 @@ namespace TCC
             });
         }
 
-        private static Laurel GetLaurel(uint pId)
-        {
-            var ch = Account.Characters.FirstOrDefault(x => x.Id == pId);
-            return ch?.Laurel ?? Laurel.None;
-        }
-
-        public static void SetEncounter(float curHP, float maxHP)
-        {
-            if (maxHP > curHP)
-            {
-                Encounter = true;
-            }
-            else if (maxHP == curHP || curHP == 0)
-            {
-                Encounter = false;
-            }
-        }
-
-        public static void SetSorcererElementsBoost(bool f, bool i, bool a)
-        {
-            Me.FireBoost = f;
-            Me.IceBoost = i;
-            Me.ArcaneBoost = a;
-
-            if (App.Settings.ClassWindowSettings.Enabled && Me.Class == Class.Sorcerer)
-            {
-                TccUtils.CurrentClassVM<SorcererLayoutVM>().NotifyElementBoostChanged(); //todo: this reference is bad
-            }
-        }
-
-        private static void OnReturnToLobbyHotkeyPressed()
-        {
-            if (!Logged
-              || LoadingScreen
-              || Combat
-              || !StubInterface.Instance.IsStubAvailable) return;
-
-            WindowManager.ViewModels.LfgVM.ForceStopPublicize();
-            StubInterface.Instance.StubClient.ReturnToLobby();
-        }
-
-        private static void OnDisconnected()
-        {
-            Me.ClearAbnormalities();
-            Logged = false;
-            LoadingScreen = true;
-        }
-
-        private static void SetAbnormalityTracker(Class c)
-        {
-            switch (c)
-            {
-                case Class.Warrior:
-                    CurrentAbnormalityTracker = new WarriorAbnormalityTracker();
-                    break;
-                case Class.Lancer:
-                    CurrentAbnormalityTracker = new LancerAbnormalityTracker();
-                    break;
-                case Class.Slayer:
-                    CurrentAbnormalityTracker = new SlayerAbnormalityTracker();
-                    break;
-                case Class.Berserker:
-                    CurrentAbnormalityTracker = new BerserkerAbnormalityTracker();
-                    break;
-                case Class.Sorcerer:
-                    CurrentAbnormalityTracker = new SorcererAbnormalityTracker();
-                    break;
-                case Class.Archer:
-                    CurrentAbnormalityTracker = new ArcherAbnormalityTracker();
-                    break;
-                case Class.Priest:
-                    CurrentAbnormalityTracker = new PriestAbnormalityTracker();
-                    break;
-                case Class.Mystic:
-                    CurrentAbnormalityTracker = new MysticAbnormalityTracker();
-                    break;
-                case Class.Reaper:
-                    CurrentAbnormalityTracker = new ReaperAbnormalityTracker();
-                    break;
-                case Class.Gunner:
-                    CurrentAbnormalityTracker = new GunnerAbnormalityTracker();
-                    break;
-                case Class.Brawler:
-                    CurrentAbnormalityTracker = new BrawlerAbnormalityTracker();
-                    break;
-                case Class.Ninja:
-                    CurrentAbnormalityTracker = new NinjaAbnormalityTracker();
-                    break;
-                case Class.Valkyrie:
-                    CurrentAbnormalityTracker = new ValkyrieAbnormalityTracker();
-                    break;
-            }
-        }
+        #endregion
     }
 }

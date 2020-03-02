@@ -436,6 +436,14 @@ namespace TCC.R
 		public static ImageSource ChampionLaurelNew => ((ImageSource)App.Current.FindResource("ChampionLaurelNew"));
 		public static ImageSource ChampionLaurelNewBig => ((ImageSource)App.Current.FindResource("ChampionLaurelNewBig"));
 		public static ImageSource ChampionLaurelNewBottom => ((ImageSource)App.Current.FindResource("ChampionLaurelNewBottom"));
+		public static ImageSource CharWindowBg => ((ImageSource)App.Current.FindResource("CharWindowBg"));
+		public static ImageSource CharWindowBgSide2 => ((ImageSource)App.Current.FindResource("CharWindowBgSide2"));
+		public static ImageSource CharWindowBgTriple => ((ImageSource)App.Current.FindResource("CharWindowBgTriple"));
+		public static ImageSource CharWindowBgSorc => ((ImageSource)App.Current.FindResource("CharWindowBgSorc"));
+		public static ImageSource CharWindowFg => ((ImageSource)App.Current.FindResource("CharWindowFg"));
+		public static ImageSource MobIcon => ((ImageSource)App.Current.FindResource("MobIcon"));
+		public static ImageSource BossIcon => ((ImageSource)App.Current.FindResource("BossIcon"));
+		public static ImageSource BossIconFull => ((ImageSource)App.Current.FindResource("BossIconFull"));
 		public static DropShadowEffect ClassIconGlow => ((DropShadowEffect)App.Current.FindResource("ClassIconGlow"));
 		public static DropShadowEffect ClassWindowSkillBorderShadow => ((DropShadowEffect)App.Current.FindResource("ClassWindowSkillBorderShadow"));
 	}

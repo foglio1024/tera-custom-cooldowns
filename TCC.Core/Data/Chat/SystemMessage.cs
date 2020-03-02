@@ -103,8 +103,7 @@ namespace TCC.Data.Chat
                         var abName = "Unknown";
                         if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
                             uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
-                        mp = new SimpleMessagePiece(abName, App.Settings.FontSize, false);
-                        mp.Color = col;
+                        mp = new SimpleMessagePiece(abName, App.Settings.FontSize, false) { Color = col };
                     }
                     else if (inPiece.StartsWith("@achievement"))
                     {

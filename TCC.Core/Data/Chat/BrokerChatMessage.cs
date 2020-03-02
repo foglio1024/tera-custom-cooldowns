@@ -1,4 +1,6 @@
-﻿namespace TCC.Data.Chat
+﻿using TCC.Utilities;
+
+namespace TCC.Data.Chat
 {
     public class BrokerChatMessage : ChatMessage
     {
@@ -68,7 +70,7 @@
             {
                 Listing.Text = "<" + i.Name + ">";
                 //TODO: //Listing.ItemId = i.Id;
-                Listing.Color = ChatUtils.GradeToColorString(i.RareGrade);
+                Listing.Color = TccUtils.GradeToColorString(i.RareGrade);
             }
             //Listing.Type = MessagePieceType.Item;
         }

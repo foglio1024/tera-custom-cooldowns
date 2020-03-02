@@ -24,15 +24,15 @@ namespace TeraPacketParser.Messages
             {
                 var count = r.ReadUInt16();
                 var offset = r.ReadUInt16();
-                var gameId = r.ReadUInt64();
-                var container = r.ReadInt32();
+                r.Skip(8); // gameId
+                r.Skip(4); // container
                 Pocket = r.ReadInt32();
-                var numPockets = r.ReadInt32();
-                var size = r.ReadInt32();
-                var money = r.ReadInt64();
-                var lootPriority = r.ReadInt32();
+                r.Skip(4); // var numPockets = r.ReadInt32();
+                r.Skip(4); // var size = r.ReadInt32();
+                r.Skip(8); // var money = r.ReadInt64();
+                r.Skip(4); // var lootPriority = r.ReadInt32();
                 IsOpen = r.ReadBoolean();
-                var requested = r.ReadBoolean();
+                r.Skip(1); // var requested = r.ReadBoolean();
                 First = r.ReadBoolean();
                 More = r.ReadBoolean();
                 LastInBatch= r.ReadBoolean();
@@ -47,34 +47,34 @@ namespace TeraPacketParser.Messages
                     r.Skip(4); // merged passivity ref
                     r.Skip(2); // custom string offset
                     var itemId = r.ReadUInt32();
-                    r.Skip(8); //dbid
-                    r.Skip(8); //ownerId (playerId)
+                    r.Skip(8); // dbid
+                    r.Skip(8); // ownerId (playerId)
                     var slot = r.ReadUInt32();
                     var amount = r.ReadInt32();
-                    var enchant = r.ReadInt32();
-                    r.Skip(4); //durability
-                    r.Skip(4); //soulbound
-                    r.Skip(4); //passivity sets
-                    r.Skip(4); //extra passivity sets
-                    r.Skip(4); //remodel
-                    r.Skip(4); //dye
-                    r.Skip(4); //dye sec remaining
-                    r.Skip(8); //dye date
-                    r.Skip(8); //dye expire date
-                    r.Skip(1); //masterwork
-                    r.Skip(4); //enigma
-                    r.Skip(4); //times brokered
-                    r.Skip(4); //enchant advantage
-                    r.Skip(4); //enchant bonus
-                    r.Skip(4); //enchant bonus max plus
-                    r.Skip(8); //bound to player (playerId)
-                    r.Skip(1); //awakened
-                    r.Skip(4); //liberation count
-                    r.Skip(4); //feedstock
-                    r.Skip(4); //bound to item
-                    r.Skip(1); //has etching
-                    r.Skip(1); //pc bang
-                    var exp = r.ReadInt64();
+                    r.Skip(4); // enchant
+                    r.Skip(4); // durability
+                    r.Skip(4); // soulbound
+                    r.Skip(4); // passivity sets
+                    r.Skip(4); // extra passivity sets
+                    r.Skip(4); // remodel
+                    r.Skip(4); // dye
+                    r.Skip(4); // dye sec remaining
+                    r.Skip(8); // dye date
+                    r.Skip(8); // dye expire date
+                    r.Skip(1); // masterwork
+                    r.Skip(4); // enigma
+                    r.Skip(4); // times brokered
+                    r.Skip(4); // enchant advantage
+                    r.Skip(4); // enchant bonus
+                    r.Skip(4); // enchant bonus max plus
+                    r.Skip(8); // bound to player (playerId)
+                    r.Skip(1); // awakened
+                    r.Skip(4); // liberation count
+                    r.Skip(4); // feedstock
+                    r.Skip(4); // bound to item
+                    r.Skip(1); // has etching
+                    r.Skip(1); // pc bang
+                    r.Skip(8); // exp
 
                     Items[slot] = new ItemAmount(itemId, amount);
                     //if (slot > 39) Items[slot] = new ItemAmount(itemId, amount);

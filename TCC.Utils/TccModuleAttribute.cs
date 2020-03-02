@@ -9,7 +9,7 @@ namespace TCC.Utils
 
         public TccModuleAttribute(bool enabled = true)
         {
-            this.Enabled = enabled;
+            Enabled = enabled;
         }
     }
 }

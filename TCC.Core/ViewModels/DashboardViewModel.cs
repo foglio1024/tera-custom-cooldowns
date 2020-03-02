@@ -413,12 +413,6 @@ namespace TCC.ViewModels
         {
             SetVanguard(m.WeeklyDone, m.DailyDone, m.VanguardCredits);
         }
-        private void OnFieldPointInfo(S_FIELD_POINT_INFO m)
-        {
-            if (CurrentCharacter == null) return;
-            CurrentCharacter.GuardianInfo.Claimed = m.Claimed;
-            CurrentCharacter.GuardianInfo.Cleared = m.Cleared;
-        }
         private void OnDungeonCoolTimeList(S_DUNGEON_COOL_TIME_LIST m)
         {
             SetDungeons(m.DungeonCooldowns);

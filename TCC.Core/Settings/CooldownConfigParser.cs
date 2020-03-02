@@ -44,7 +44,7 @@ namespace TCC.Settings
                         new CooldownData(410100, CooldownType.Skill),
                         new CooldownData(300100, CooldownType.Skill),
                         new CooldownData(181100, CooldownType.Skill),
-                        new CooldownData(40100, CooldownType.Skill),
+                        new CooldownData(40100,  CooldownType.Skill),
                         new CooldownData(280730, CooldownType.Skill),
                         new CooldownData(160700, CooldownType.Skill),
                         new CooldownData(191000, CooldownType.Skill),

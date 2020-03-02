@@ -1,15 +1,16 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using Nostrum.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HtmlAgilityPack;
-using Nostrum.Extensions;
 using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.UI;
 using TCC.Utils;
 using TCC.ViewModels;
+
 
 namespace TCC.Processing
 {

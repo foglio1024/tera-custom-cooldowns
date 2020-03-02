@@ -39,6 +39,9 @@ namespace TCC.Interop.Proxy
         public void Disconnect()
         {
             StubServer.Stop();
+            StubServer.RequestReceived -= MessageHandler.HandleRequest;
+            StubServer.ResponseReceived -= MessageHandler.HandleResponse;
+
         }
     }
 }

@@ -6,6 +6,7 @@ using TCC.Data.NPCs;
 
 namespace TCC.UI.Converters
 {
+    // todo: reintroduce this
     public class BossToLaurelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -58,9 +59,6 @@ namespace TCC.UI.Converters
             if (laurel == "") return null;
 
             return Path.Combine(App.ResourcesPath, "images/Icon_Laurels/" + laurel + "_kr_big.png");
-
-            //return "../resources/images/Icon_Laurels/" + laurel + "_kr_big.png";
-
 
         }
 

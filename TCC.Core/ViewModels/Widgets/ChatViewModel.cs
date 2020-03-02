@@ -106,8 +106,6 @@ namespace TCC.ViewModels.Widgets
         }
         public ICommand MakeGlobalCommand { get; }
         public ICommand OpenSysMsgSettingsCommand { get; }
-        public ICommand UnpinMessageCommand { get; }
-
 
         public ChatWindowSettings WindowSettings
         {

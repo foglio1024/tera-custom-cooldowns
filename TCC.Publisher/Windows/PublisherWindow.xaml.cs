@@ -1,11 +1,10 @@
-﻿using System.Windows;
+﻿using Nostrum.Factories;
 using System.Windows.Controls.Primitives;
-using Nostrum.Factories;
 using TCC.Publisher.ViewModels;
 
 namespace TCC.Publisher.Windows
 {
-    public partial class PublisherWindow : Window
+    public partial class PublisherWindow
     {
         private PublisherVM _vm { get; }
 

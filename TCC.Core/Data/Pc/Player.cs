@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Threading;
 using Nostrum;
 using TCC.Data.Abnormalities;
-using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
 using TeraDataLite;

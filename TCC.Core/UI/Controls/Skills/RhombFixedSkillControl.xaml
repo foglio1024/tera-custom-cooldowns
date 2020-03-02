@@ -10,6 +10,7 @@
              MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData Cooldown}">
     <UserControl.Resources>
         <ElasticEase x:Key="BounceEase" Oscillations="3" />
+        <!-- ReSharper disable once Xaml.RedundantResource -->
         <Storyboard x:Key="WarnShake" RepeatBehavior="Forever" Timeline.DesiredFrameRate="30" Duration="0:0:2">
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)"  Duration="0:0:0.1" From="0" To="-5"  EasingFunction="{StaticResource QuadraticEase}"/>
             <DoubleAnimation Storyboard.TargetProperty="(RenderTransform).(RotateTransform.Angle)" BeginTime="0:0:0.1" Duration="0:0:0.9" From="-5" To="0"  EasingFunction="{StaticResource BounceEase}"/>

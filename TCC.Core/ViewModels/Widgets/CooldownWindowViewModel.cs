@@ -17,7 +17,6 @@ using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows;
-using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
 using TeraPacketParser.Messages;

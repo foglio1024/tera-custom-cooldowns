@@ -13,7 +13,6 @@ namespace TCC.Utils
         private static string _logPath = "logs";
         private static string _version = "";
 
-        [Conditional("DEBUG")]
         public static void CW(string line)
         {
             Debug.WriteLine(line);
@@ -43,6 +42,7 @@ namespace TCC.Utils
 
         public static void Chat(ChatChannel channel, string author, string message)
         {
+            if (!message.StartsWith("<font")) message = ChatUtils.Font(message);
             NewChatMessage?.Invoke(channel, message, author);
         }
     }

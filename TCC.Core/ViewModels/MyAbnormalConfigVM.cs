@@ -13,17 +13,14 @@ using System.Linq;
 using System.Windows.Threading;
 using Nostrum.Extensions;
 using Nostrum.Factories;
-using TCC.Utilities;
 using TeraDataLite;
 
 namespace TCC.ViewModels
 {
     public class MyAbnormalConfigVM : TSPropertyChanged, IDisposable
     {
-
         public event Action ShowAllChanged;
 
-        private TSObservableCollection<MyAbnormalityVM> _myAbnormals;
         public ICollectionView AbnormalitiesView { get; set; }
 
         public bool ShowAll
@@ -50,15 +47,15 @@ namespace TCC.ViewModels
         public MyAbnormalConfigVM()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            _myAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
+            var myAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
             foreach (var abnormality in Game.DB.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
             {
                 var abVM = new MyAbnormalityVM(abnormality);
 
-                _myAbnormals.Add(abVM);
+                myAbnormals.Add(abVM);
             }
 
-            AbnormalitiesView = CollectionViewFactory.CreateCollectionView(_myAbnormals);
+            AbnormalitiesView = CollectionViewFactory.CreateCollectionView(myAbnormals);
         }
 
         public void Dispose()

@@ -643,7 +643,8 @@ namespace TCC.ViewModels
             get
             {
                 if (_blacklistedMonsters == null) _blacklistedMonsters = new TSObservableCollection<BlacklistedMonsterVM>(Dispatcher);
-                var bl =Game.DB.MonsterDatabase.GetBlacklistedMonsters();
+                if (Game.DB == null) return null;
+                 var bl =Game.DB.MonsterDatabase.GetBlacklistedMonsters();
                 bl.ForEach(m =>
                 {
                     if (_blacklistedMonsters.Any(x => x.Monster == m)) return;

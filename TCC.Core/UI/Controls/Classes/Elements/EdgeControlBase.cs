@@ -34,6 +34,8 @@ namespace TCC.UI.Controls.Classes.Elements
 
         public EdgeControlBase()
         {
+            EdgeElements = new List<FrameworkElement>();
+
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
         }

@@ -85,7 +85,7 @@
                 </TransformGroup>
             </Grid.RenderTransform>
         </Grid>
-        <Image Source="../../resources/images/kr_mob_icon.png" Stretch="Uniform"
+        <Image Source="{StaticResource MobIcon}" Stretch="Uniform"
                Margin="0 4 -8 0"
                Grid.RowSpan="2" VerticalAlignment="Top"
                HorizontalAlignment="Center" Width="34" Height="34" />

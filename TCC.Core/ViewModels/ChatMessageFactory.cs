@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Utils;
 
 namespace TCC.ViewModels
 {

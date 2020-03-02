@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
 using TeraDataLite;
 
@@ -7,6 +8,9 @@ namespace TCC.ViewModels
 {
     public class SorcererLayoutVM : BaseClassLayoutVM
     {
+        private Stopwatch _sw;
+        private long _latestCooldown;
+
         public DurationCooldownIndicator ManaBoost { get; set; }
 
         public Cooldown Fusion { get; set; }
@@ -35,6 +39,16 @@ namespace TCC.ViewModels
         public bool IsBoostFrost => Game.Me.IceBoost;
         public bool IsBoostArcane => Game.Me.ArcaneBoost;
 
+        public SorcererLayoutVM()
+        {
+            SorcererAbnormalityTracker.BoostChanged += OnBoostChanged;
+        }
+
+        private void OnBoostChanged()
+        {
+            NotifyElementBoostChanged();
+        }
+
         public override void LoadSpecialSkills()
         {
             Game.DB.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
@@ -62,10 +76,9 @@ namespace TCC.ViewModels
         public override void Dispose()
         {
             ManaBoost.Cooldown.Dispose();
+            SorcererAbnormalityTracker.BoostChanged -= OnBoostChanged;
         }
 
-        private Stopwatch _sw;
-        private long _latestCooldown;
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
@@ -117,5 +130,6 @@ namespace TCC.ViewModels
             N(nameof(IsBoostFrost));
             N(nameof(IsBoostArcane));
         }
+
     }
 }

@@ -13,7 +13,6 @@ using TCC.Interop.Proxy;
 using TCC.Processing;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
-using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
 using TeraPacketParser.Messages;

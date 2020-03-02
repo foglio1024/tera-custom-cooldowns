@@ -8,10 +8,13 @@ namespace TCC.Data.Abnormalities
 {
     public class MysticAbnormalityTracker : AbnormalityTracker
     {
+        // ReSharper disable UnusedMember.Local
         private const int HurricaneId = 60010;
         private const int HurricaneDuration = 120000;
-        private static readonly int VowId = 700100;
-        private static readonly int VocId = 27160;
+        // ReSharper restore UnusedMember.Local
+
+        private const int VowId = 700100;
+        private const int VocId = 27160;
 
         private static readonly uint[] CritAuraIDs = { 700600, 700601, 700602, 700603 };
         private static readonly uint[] ManaAuraIDs = { 700300 };
