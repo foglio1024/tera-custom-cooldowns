@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Settings.WindowSettings;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Chat
@@ -141,6 +142,12 @@ namespace TCC.UI.Controls.Chat
             var win = ChatManager.Instance.ChatWindows.FirstOrDefault(w => w.VM.Tabs.Contains(_dc));
             win?.VM.RemoveTab(_dc);
             win?.UpdateSettings();
+
+            if (win?.VM.TabVMs.Count == 0)
+            {
+                win.Close();
+                App.Settings.ChatWindowsSettings.Remove((ChatWindowSettings)win?.WindowSettings);
+            }
             Window.GetWindow(this)?.Close();
         }
     }
