@@ -1,0 +1,21 @@
+{
+    "notices": [
+        {
+            "type": "notification",
+            "details": {
+                "title": "Notification title",
+                "content": "Notification content.",
+                "duration": 20,
+                "NotificationType": 0
+            }
+        },
+        {
+            "type": "messagebox",
+            "details": {
+                "title": "Window title",
+                "content": "Window content",
+                "MessageBoxType": 2
+            }
+        }
+    ]
+}
