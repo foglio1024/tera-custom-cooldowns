@@ -1,20 +1,45 @@
 {
     "notices": [
         {
-            "type": "notification",
-            "details": {
-                "title": "Notification title",
-                "content": "Notification content.",
-                "duration": 20,
+            "Type": "NotificationNotice",
+            "Trigger" : 1,
+            "TriggerOnDownload" : true,
+            "Details": {
+                "Title": "Notification 1",
+                "Content": "Fired at Ready",
+                "Duration": 20,
                 "NotificationType": 0
             }
         },
         {
-            "type": "messagebox",
-            "details": {
-                "title": "Window title",
-                "content": "Window content",
-                "MessageBoxType": 2
+            "Type": "NotificationNotice",
+            "Trigger" : 2,
+            "TriggerOnDownload" : true,
+            "Details": {
+                "Title": "Notification 1",
+                "Content": "Fired at server Connection",
+                "Duration": 20,
+                "NotificationType": 1
+            }
+        },
+        {
+            "Type": "NotificationNotice",
+            "Trigger" : 3,
+            "TriggerOnDownload" : true,
+            "Details": {
+                "Title": "Notification 2",
+                "Content": "Fired at char Login",
+                "Duration": 20,
+                "NotificationType": 1
+            }
+        },
+        {
+            "Type": "MessageBoxNotice",
+            "Trigger" : 0,
+            "TriggerOnDownload" : true,
+            "Details": {
+                "Title": "Notice",
+                "Content": "Fired before setup"
             }
         }
     ]
