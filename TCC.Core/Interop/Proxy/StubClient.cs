@@ -257,7 +257,7 @@ namespace TCC.Interop.Proxy
         {
             await TccStub.CallAsync("chatLinkAction", new JObject
             {
-                { "linkData", $":tcc:{data.Replace("#####", ":tcc:")}:tcc:" }
+                { "linkData", $":tcc-chatLinkAction:{data}:tcc-chatLinkAction:" }
             });
         }
         public async void ResetInstance()
@@ -281,10 +281,9 @@ namespace TCC.Interop.Proxy
             {
                 { "useLfg", App.Settings.LfgWindowSettings.Enabled },
                 { "EnablePlayerMenu", App.Settings.EnablePlayerMenu },
-                { "ChatEnabled", App.Settings.ChatEnabled }
+                { "EnableProxy", App.Settings.EnableProxy },
+                { "ShowIngameChat", App.Settings.ShowIngameChat}
             });
         }
-
-
     }
 }
