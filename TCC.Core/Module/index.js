@@ -7,6 +7,11 @@ module.exports = function TCC(m)
     const tccPath = path.join(__dirname, 'TCC.exe');
     const modsPath = path.join(__dirname, 'TCC.Modules.dll');
 
+    if(!m.manager.isLoaded("tcc-chat-link"))
+    {
+        m.log("TCC chat link is not installed. Advanced functionality won't be available.");
+    }
+
     m.log('Starting ngen...');
 
     // Cringe.
