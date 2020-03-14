@@ -37,6 +37,7 @@ namespace TCC.Settings
         public bool HighPriority { get; set; }
         public bool ForceSoftwareRendering { get; set; }
         public bool Npcap { get; set; } //TODO: remove
+        public bool ShowIngameChat { get; set; }
         public bool CheckOpcodesHash { get; set; }
         public bool CheckGuildBamWithoutOpcode { get; set; } //by HQ 20190324
         public bool BetaNotification { get; set; }

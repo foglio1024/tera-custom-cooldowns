@@ -1712,6 +1712,9 @@
                             <settings:CheckboxSetting SettingName="Enable player menu"
                                                       IsEnabled="{Binding EnableProxy}"
                                                       IsOn="{Binding EnablePlayerMenu, Mode=TwoWay}"/>
+                            <settings:CheckboxSetting SettingName="Show ingame chat messages"
+                                                      IsEnabled="{Binding EnableProxy}"
+                                                      IsOn="{Binding ShowIngameChat, Mode=TwoWay}"/>
                         </StackPanel>
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1" Grid.RowSpan="2">
                             <Grid>

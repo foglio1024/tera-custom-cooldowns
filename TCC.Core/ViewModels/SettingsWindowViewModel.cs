@@ -383,6 +383,8 @@ namespace TCC.ViewModels
                 App.Settings.EnableProxy = value;
                 N();
                 N(nameof(ClickThruModes));
+                StubInterface.Instance.StubClient.UpdateSetting("EnableProxy", App.Settings.ChatEnabled);
+
             }
         }
         public bool HideHandles
@@ -581,15 +583,15 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.ChatEnabled == value) return;
-                if (!value)
-                {
-                    TccMessageBox.Show("Warning",
-                        "Disabling this while still having modded Chat2.gpk installed may cause corrupted data to be sent to the server. Make sure you keep Chat enabled active if you're using modded Chat2.gpk.",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                //if (!value)
+                //{
+                //    TccMessageBox.Show("Warning",
+                //        "Disabling this while still having modded Chat2.gpk installed may cause corrupted data to be sent to the server. Make sure you keep Chat enabled active if you're using modded Chat2.gpk.",
+                //        MessageBoxButton.OK, MessageBoxImage.Warning);
+                //}
                 App.Settings.ChatEnabled = value;
                 ChatManager.Instance.NotifyEnabledChanged(value);
-                StubInterface.Instance.StubClient.UpdateSetting("ChatEnabled ", App.Settings.ChatEnabled);
+                //StubInterface.Instance.StubClient.UpdateSetting("ChatEnabled", App.Settings.ChatEnabled);
                 N();
             }
         }
@@ -668,6 +670,18 @@ namespace TCC.ViewModels
                 App.Settings.EnablePlayerMenu = value;
                 N();
                 StubInterface.Instance.StubClient.UpdateSetting("EnablePlayerMenu", App.Settings.EnablePlayerMenu);
+            }
+        }
+                
+        public bool ShowIngameChat
+        {
+            get => App.Settings.ShowIngameChat;
+            set
+            {
+                if (App.Settings.ShowIngameChat == value) return;
+                App.Settings.ShowIngameChat = value;
+                N();
+                StubInterface.Instance.StubClient.UpdateSetting("ShowIngameChat", App.Settings.ShowIngameChat);
             }
         }
 
