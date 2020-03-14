@@ -16,6 +16,7 @@ using TCC.Data;
 using TCC.Exceptions;
 using TCC.Interop.Proxy;
 using TCC.Analysis;
+using TCC.Notice;
 using TCC.Settings;
 using TCC.UI;
 using TCC.UI.Windows;
@@ -77,8 +78,9 @@ namespace TCC
                 Current.Shutdown();
                 return;
             }
-            
             if (!Debugger.IsAttached) AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.HandleGlobalException;
+            
+            //NoticeChecker.Init();
 
             Loading = true;
             await Setup();
@@ -150,6 +152,8 @@ namespace TCC
                 Log.N("TCC beta", "A beta version of TCC is available. Open System settings to download it or to disable this notification.",
                     NotificationType.Success,
                     10000);
+
+            //NoticeChecker.Ready();
         }
         private static void ParseStartupArgs(IList<string> args)
         {

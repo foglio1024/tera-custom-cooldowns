@@ -3,6 +3,17 @@ using System.ComponentModel;
 
 namespace TCC.Data
 {
+    public enum NoticeTrigger
+    {
+        // before setup, only MessageBox
+        Startup = 0,
+        // after splashscreen is closed
+        Ready = 1,
+        // upon server connection
+        Connection = 2,
+        // upon character login
+        Login = 3
+    }
     public enum MentionMode
     {
         [Description("Disabled")]
