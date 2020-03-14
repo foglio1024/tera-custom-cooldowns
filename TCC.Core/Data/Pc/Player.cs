@@ -463,7 +463,7 @@ namespace TCC.Data.Pc
         }
         public void EndAbnormality(uint id)
         {
-            if (!Game.DB.AbnormalityDatabase.Exists(id, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
             if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
             FindAndRemove(ab);
         }

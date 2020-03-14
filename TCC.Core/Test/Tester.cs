@@ -493,7 +493,7 @@ namespace TCC.Test
 
         public static void AddAbnormality(uint id)
         {
-            if (!Game.DB.AbnormalityDatabase.Exists(id, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
             ab.Infinity = false;
             Game.Me.UpdateAbnormality(ab, int.MaxValue, 1);
 

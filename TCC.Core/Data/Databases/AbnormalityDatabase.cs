@@ -105,7 +105,7 @@ namespace TCC.Data.Databases
             return ret;
         }
 
-        public new bool Exists(uint id, out Abnormality ab)
+        public bool GetAbnormality(uint id, out Abnormality ab)
         {
             return Abnormalities.TryGetValue(id, out ab);
         }

@@ -579,14 +579,14 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             if (App.Settings.EthicalMode) return;
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             if (Game.IsMe(p.CasterId) || Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (App.Settings.EthicalMode) return;
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             if (Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }

@@ -540,7 +540,7 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (!Game.DB.AbnormalityDatabase.Exists(id, out var ab) || !ab.CanShow) return;
+                if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
                 BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
             });
         }
@@ -548,7 +548,7 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (!Game.DB.AbnormalityDatabase.Exists(id, out var ab) || !ab.CanShow) return;
+                if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
                 EndAbnormality(ab, playerId, serverId);
             });
         }
@@ -633,7 +633,7 @@ namespace TCC.ViewModels.Widgets
         {
             if (!Game.IsMe(p.TargetId)) return;
             if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             if (p.Duration == int.MaxValue) ab.Infinity = true;
 
             BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
@@ -642,7 +642,7 @@ namespace TCC.ViewModels.Widgets
         {
             if (!Game.IsMe(p.TargetId)) return;
             if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             if (p.Duration == int.MaxValue) ab.Infinity = true;
 
             BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
@@ -650,7 +650,7 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
             if (!Game.IsMe(p.TargetId)) return;
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             EndAbnormality(ab, Game.Me.PlayerId, Game.Me.ServerId);
         }

@@ -548,7 +548,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             if (p.Duration == int.MaxValue) ab.Infinity = true;
 
 
@@ -556,14 +556,14 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             if (p.Duration == Int32.MaxValue) ab.Infinity = true;
 
             UpdateAbnormality(ab, p.Stacks, p.Duration, p.TargetId);
         }
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            if (!Game.DB.AbnormalityDatabase.Exists(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             EndAbnormality(p.TargetId, ab);
         }
 
