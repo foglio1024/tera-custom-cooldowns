@@ -83,9 +83,9 @@
   <ItemGroup>
     <PackageReference Include="gong-wpf-dragdrop" Version="2.2.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.18" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Nostrum" Version="1.0.4" />
-    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TCC.Loader\TCC.Loader\TCC.Loader.csproj" />
@@ -100,8 +100,8 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" Visible="False"/>
-    <None Include="packages.config" Visible="False"/>
+    <None Include="App.config" Visible="False" />
+    <None Include="packages.config" Visible="False" />
     <None Include="..\LICENSE" Visible="False">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -161,7 +161,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(SolutionDir)\dependencies\ReSource\src\bin\Release\net48\ReSource.exe $(ProjectDir)\$(ProjectFileName) $(TargetPath) $(ProjectDir)\R.cs TCC.R" />
-  </Target>
 </Project>

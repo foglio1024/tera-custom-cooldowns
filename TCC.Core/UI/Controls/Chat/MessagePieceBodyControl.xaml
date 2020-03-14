@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:chat="clr-namespace:TCC.Data.Chat"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded" 
@@ -26,11 +26,11 @@
                         Visibility="Visible"
                         ContentTemplateSelector="{StaticResource PieceTemplateSelector}"
                         >
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                    <i:InvokeCommandAction Command="{Binding ClickCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                    <b:InvokeCommandAction Command="{Binding ClickCommand}"/>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
 
         </ContentControl>
     </Grid>
