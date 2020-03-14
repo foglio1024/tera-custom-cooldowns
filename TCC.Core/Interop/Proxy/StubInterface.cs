@@ -22,12 +22,13 @@ namespace TCC.Interop.Proxy
             StubClient = new StubClient();
             MessageHandler = new StubMessageHandler();
             
-            StubServer.RequestReceived += MessageHandler.HandleRequest;
-            StubServer.ResponseReceived += MessageHandler.HandleResponse;
         }
 
         public async Task Init()
         {
+            StubServer.RequestReceived += MessageHandler.HandleRequest;
+            StubServer.ResponseReceived += MessageHandler.HandleResponse;
+
             if (!App.Settings.EnableProxy) return;
             IsStubAvailable = await StubClient.PingStub();
             if (!IsStubAvailable) return;

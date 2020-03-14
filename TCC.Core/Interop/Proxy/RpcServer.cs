@@ -33,7 +33,6 @@ namespace TCC.Interop.Proxy
 
         public void Stop()
         {
-            _listening = false;
             try
             {
                 _server.Stop();
@@ -42,6 +41,7 @@ namespace TCC.Interop.Proxy
             {
                 Log.F($"[ObjectDisposedException] {ex.ObjectName} disposed, skipping Stop()..."); 
             }
+            _listening = false;
         }
         private void Listen()
         {
@@ -53,17 +53,24 @@ namespace TCC.Interop.Proxy
                     using var reader = new StreamReader(ctx.Request.InputStream, ctx.Request.ContentEncoding);
                     var stringReq = reader.ReadToEnd();
                     var jsonReq = JObject.Parse(stringReq);
-                    if (jsonReq.ContainsKey(Request.MethodKey)) RequestReceived?.Invoke(new Request(jsonReq));
-                    else if (jsonReq.ContainsKey(Response.ErrorKey) || jsonReq.ContainsKey(Response.ResultKey)) ResponseReceived?.Invoke(new Response(jsonReq));
-                    else Log.CW("[Server] Unknown message type.");
+                    if (jsonReq.ContainsKey(Request.MethodKey))
+                    {
+                        RequestReceived?.Invoke(new Request(jsonReq));
+                    }
+                    else if (jsonReq.ContainsKey(Response.ErrorKey) || jsonReq.ContainsKey(Response.ResultKey))
+                    {
+                        ResponseReceived?.Invoke(new Response(jsonReq));
+                    }
+                    else
+                    {
+                        Log.F($"Received unknown message type: \n{jsonReq}", "http_server.log");
+                    }
                     ctx.Response.StatusCode = 200;
                     ctx.Response.Close();
                 }
                 catch (Exception e)
                 {
-                    Log.CW($"[Server] Error while parsing request: {e}");
                     Log.F($"Error while parsing request: {e}", "http_server.log");
-                    //_listening = false;
                 }
             }
             _listening = false;
