@@ -47,6 +47,7 @@ namespace TCC.ViewModels.Widgets
         private bool _collapsed;
         private bool _mouseOver;
         private Tab _currentTab;
+        private bool _showCollapsedSettingsButton;
 
         public bool Paused
         {
@@ -94,6 +95,17 @@ namespace TCC.ViewModels.Widgets
                 N();
             }
         }
+        public bool ShowCollapsedSettingsButton
+        {
+            get => _showCollapsedSettingsButton;
+            set
+            {
+                if (_showCollapsedSettingsButton == value) return;
+                _showCollapsedSettingsButton = value;
+                N();
+            }
+        }
+
         public Tab CurrentTab
         {
             get => _currentTab;
@@ -182,8 +194,8 @@ namespace TCC.ViewModels.Widgets
         private void CheckCollapsed()
         {
             Collapsed = !(Game.InGameUiOn || Game.InGameChatOpen) || WindowSettings.StaysCollapsed;
+            ShowCollapsedSettingsButton = Game.InGameUiOn;
         }
-
         private void ChangeTimerInterval()
         {
             _hideTimer.Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout);

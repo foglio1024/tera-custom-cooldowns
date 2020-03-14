@@ -399,7 +399,7 @@
                     <!-- Settings button-->
                     <Button Margin="0 0 10 64" HorizontalAlignment="Right" Click="OnSettingsButtonClick"
                             Opacity=".5"
-                            Visibility="{Binding WindowSettings.StaysCollapsed, Converter={StaticResource BoolToVisibility}}"
+                            Visibility="{Binding ShowCollapsedSettingsButton, Converter={StaticResource BoolToVisibility}}"
                             Style="{StaticResource ButtonMainStyle}" Height="18"
                             Padding="2"
                             Background="{StaticResource RevampBackgroundBrush}"
