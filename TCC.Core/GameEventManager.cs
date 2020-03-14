@@ -92,7 +92,7 @@ namespace TCC
                 ServerHourOffsetFromUtc = timezone.IsDaylightSavingTime(DateTime.UtcNow + timezone.BaseUtcOffset)
                     ? timezone.BaseUtcOffset.Hours + 1
                     : timezone.BaseUtcOffset.Hours;
-                ServerHourOffsetFromLocal = -TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Hours + ServerHourOffsetFromUtc;
+                ServerHourOffsetFromLocal = -TimeZoneInfo.Local.GetUtcOffset(DateTime.Now).Hours + ServerHourOffsetFromUtc;
             }
 
             if (WindowManager.ViewModels.DashboardVM.Markers.FirstOrDefault(x => x.Name.Equals(CurrentRegion + " server time")) == null)
