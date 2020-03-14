@@ -199,15 +199,22 @@ namespace TCC.Analysis
             {
                 opcNamer = new OpCodeNamer(opcPath);
             }
-            catch (OverflowException ex)
+            catch (Exception ex)
             {
-                TccMessageBox.Show(
-                    "TCC encountered errors while reading opcodes file. This is probably caused by a manually mapped file containing wrong values. TCC will now close.",
-                    MessageBoxType.Error);
-                Log.F(ex.ToString());
-                App.Close();
+                switch (ex)
+                {
+                    case OverflowException _:
+                    case ArgumentException _:
+                        TccMessageBox.Show(
+                            $"TCC encountered errors while reading opcodes file. This is probably caused by a manually mapped file containing wrong values. Error: {ex.Message}. TCC will now close.",
+                            MessageBoxType.Error);
+                        Log.F(ex.ToString());
+                        App.Close();
+                        break;
+                }
                 return;
             }
+
             Factory.Set(p.Versions[0], opcNamer);
             Sniffer.Connected = true;
         }
