@@ -146,7 +146,7 @@ namespace TCC.UI.Controls.Chat
             if (win?.VM.TabVMs.Count == 0)
             {
                 win.Close();
-                App.Settings.ChatWindowsSettings.Remove((ChatWindowSettings)win?.WindowSettings);
+                App.Settings.ChatWindowsSettings.Remove((ChatWindowSettings)win.WindowSettings);
             }
             Window.GetWindow(this)?.Close();
         }
