@@ -19,7 +19,7 @@ node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
 </PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Nostrum" Version="1.0.4" />
+    <PackageReference Include="Nostrum" Version="1.0.5" />
     <PackageReference Include="Octokit" Version="0.38.0" />
     <PackageReference Include="SevenZipSharp" Version="0.64.0" />
   </ItemGroup>

@@ -81,11 +81,11 @@
     <None Remove="resources\ttb.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="gong-wpf-dragdrop" Version="2.2.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.18" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+    <PackageReference Include="gong-wpf-dragdrop" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="Nostrum" Version="1.0.4" />
+    <PackageReference Include="Nostrum" Version="1.0.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TCC.Loader\TCC.Loader\TCC.Loader.csproj" />
