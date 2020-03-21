@@ -11,7 +11,7 @@ using TeraDataLite;
 
 namespace TCC.Data
 {
-
+    [Obsolete("Remove after merge with master")]
     public class CharactersXmlParser
     {
         private const string CharactersTag           = "Characters";

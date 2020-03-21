@@ -208,15 +208,8 @@ namespace TCC.ViewModels
 
             Game.Account.Characters.CollectionChanged += SyncViewModel;
 
-            try
-            {
-                LoadCharacters();
+            LoadCharacters();
 
-            }
-            catch (Exception ex)
-            {
-                Log.F(ex.ToString());
-            }
             Game.Account.Characters.ToList().ForEach(c => CharacterViewModels.Add(new CharacterViewModel { Character = c }));
 
             SortedCharacters = CollectionViewFactory.CreateLiveCollectionView(Game.Account.Characters,
@@ -304,24 +297,28 @@ namespace TCC.ViewModels
         {
             try
             {
-                if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml")))
+                if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml"))) // remove after merge
                     new CharactersXmlParser().Read(Game.Account.Characters);
                 else
                 {
-                    if (!File.Exists(Path.Combine(App.ResourcesPath, "config/characters.json"))) return;
-                    Game.Account =
-                        JsonConvert.DeserializeObject<Account>(
-                            File.ReadAllText(Path.Combine(App.ResourcesPath, "config/characters.json")));
+                    var path = Path.Combine(App.ResourcesPath, "config/characters.json");
+                    if (!File.Exists(path)) return;
+                    var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(path));
+                    Game.Account = account ?? throw new FileFormatException(new Uri(path));
                 }
             }
             catch (Exception e)
             {
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters file (more info in error.log). Manually correct the error and press Ok to try again, else press Cancel to delete current data.", MessageBoxButton.OKCancel);
+                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters file (more info in error.log). \nManually correct the error and press Ok to try again, else press Cancel to delete current data.", MessageBoxButton.OKCancel);
                 Log.F($"Cannot read characters file: {e}");
-                if (res == MessageBoxResult.OK) LoadCharacters();
+                if (res == MessageBoxResult.OK)
+                {
+                    LoadCharacters();
+                }
                 else
                 {
-                    File.Delete(Path.Combine(App.ResourcesPath, "config/characters.xml"));
+                    File.Delete(Path.Combine(App.ResourcesPath, "config/characters.xml")); // todo: remove after merge
+                    File.Delete(Path.Combine(App.ResourcesPath, "config/characters.json"));
                     LoadCharacters();
                 }
             }
