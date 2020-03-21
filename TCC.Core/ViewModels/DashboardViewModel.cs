@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Threading;
 using System.Xml.Linq;
@@ -233,10 +234,40 @@ namespace TCC.ViewModels
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
                 new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
 
+
+            _pendingTabs = new List<Dictionary<uint, ItemAmount>>();
+            _tabFlushTimer = new Timer(1000)
+            {
+                AutoReset = false
+            };
+            _tabFlushTimer.Elapsed += OnTabFlushTimerElapsed;
             //SortedColumns = CollectionViewFactory.CreateLiveView(Columns,
             //    o => o.Dungeon.Show,
             //    new[] { $"{nameof(Dungeon)}.{nameof(Dungeon.Index)}" },
             //    new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
+        }
+
+        private void OnTabFlushTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            Dispatcher.InvokeAsync(() =>
+            {
+                CurrentCharacter.Inventory.Clear();
+                foreach (var pendingTab in _pendingTabs)
+                {
+                    foreach (var keyVal in pendingTab)
+                    {
+                        var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
+                        if (existing != null)
+                        {
+                            existing.Amount = keyVal.Value.Amount;
+                            continue;
+                        }
+                        CurrentCharacter.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
+                    }
+                }
+
+                _pendingTabs.Clear();
+            });
         }
 
         private void OnShowDashboardHotkeyPressed()
@@ -467,8 +498,12 @@ namespace TCC.ViewModels
         }
         private void OnItemList(S_ITEMLIST m)
         {
-            if (m.Failed) return;
-            UpdateInventory(m.Items, m.Pocket > 0);
+            if (m.Failed || m.Container == 14) return;
+            _pendingTabs.Add(m.Items);
+            _tabFlushTimer.Stop();
+            _tabFlushTimer.Start();
+            //UpdateInventory(m.Items, m.Pocket, m.NumPockets);
+            //UpdateInventory(m.Items);
         }
         private void OnNpcGuildList(S_NPCGUILD_LIST m)
         {
@@ -499,6 +534,9 @@ namespace TCC.ViewModels
                     break;
             }
         }
+
+        private readonly Timer _tabFlushTimer;
+        private readonly List<Dictionary<uint, ItemAmount>> _pendingTabs;
 
         /* -- TODO EVENTS: TO BE REFACTORED ------------------------- */
 
@@ -708,25 +746,61 @@ namespace TCC.ViewModels
         }
 
         private bool _firstInven = true;
-        public void UpdateInventory(Dictionary<uint, ItemAmount> list, bool pocket)
+        private int _parsedPockets = 0;
+
+        private void UpdateInventory(Dictionary<uint, ItemAmount> list)
         {
+            var em = list.Values.FirstOrDefault(x => x.Id == 151643);
+            var ds = list.Values.FirstOrDefault(x => x.Id == 45474);
+            var ps = list.Values.FirstOrDefault(x => x.Id == 45482);
+            if (em.Id != 0) SetElleonMarks(em.Amount);
+            if (ds.Id != 0) CurrentCharacter.DragonwingScales = ds.Amount;
+            if (ps.Id != 0) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
+
+            foreach (var keyVal in list)
+            {
+                var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
+                if (existing != null)
+                {
+                    existing.Amount = keyVal.Value.Amount;
+                    continue;
+                }
+                CurrentCharacter.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
+            }
+
+            var toRemove = CurrentCharacter.Inventory.ToSyncList().Where(i => !list.ContainsKey(i.Id));
+
+            foreach (var item in toRemove)
+            {
+                CurrentCharacter.Inventory.Remove(item);
+            }
+
+        }
+        public void UpdateInventory(Dictionary<uint, ItemAmount> list, int pocketIdx, int numPockets)
+        {
+
+            //Console.WriteLine($"Updating inventory ({list.Count} items, isPocket = {pocket})");
             var em = list.Values.FirstOrDefault(x => x.Id == 151643);
             var ds = list.Values.FirstOrDefault(x => x.Id == 45474);
             var ps = list.Values.FirstOrDefault(x => x.Id == 45482);
 
             //TODO: check this
-            /*if (em != null)*/
             if (em.Id != 0) SetElleonMarks(em.Amount);
-            /*if (ds != null)*/
             if (ds.Id != 0) CurrentCharacter.DragonwingScales = ds.Amount;
-            /*if (ps != null)*/
             if (ps.Id != 0) CurrentCharacter.PiecesOfDragonScroll = ps.Amount;
+
             try
             {
                 if (_firstInven)
                 {
+                    // Console.WriteLine($"_firstInven = {_firstInven}, clearing");
+
                     CurrentCharacter.Inventory.Clear();
                     _firstInven = false;
+                }
+                else
+                {
+                    //Console.WriteLine($"_firstInven = {_firstInven}, adding items");
                 }
 
 
@@ -740,13 +814,17 @@ namespace TCC.ViewModels
                     }
                     CurrentCharacter.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
                 }
+
+                //Console.WriteLine($"Inventory has now {CurrentCharacter.Inventory.Count} items");
+
             }
             catch (Exception e)
             {
                 Log.F($"Error while refreshing inventory: {e}");
             }
 
-            if (!pocket) _firstInven = true;
+            _parsedPockets++;
+            if (_parsedPockets == numPockets) _firstInven = true;
             N(nameof(SelectedCharacterInventory));
         }
 

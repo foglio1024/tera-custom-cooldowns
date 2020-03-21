@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using TeraDataLite;
 
 namespace TeraPacketParser.Messages
@@ -11,6 +13,9 @@ namespace TeraPacketParser.Messages
         public bool More { get; }
         public bool LastInBatch { get; }
         public int Pocket { get; set; }
+        public int NumPockets { get; set; }
+        public int Size { get; set; }
+        public int Container { get; set; }
 
         public Dictionary<uint, ItemAmount> Items { get; private set; }
         public Dictionary<uint, ParsedGearItem> GearItems { get; private set; }
@@ -25,10 +30,10 @@ namespace TeraPacketParser.Messages
                 var count = r.ReadUInt16();
                 var offset = r.ReadUInt16();
                 r.Skip(8); // gameId
-                r.Skip(4); // container
+                Container = r.ReadInt32();
                 Pocket = r.ReadInt32();
-                r.Skip(4); // var numPockets = r.ReadInt32();
-                r.Skip(4); // var size = r.ReadInt32();
+                NumPockets = r.ReadInt32();
+                Size = r.ReadInt32();
                 r.Skip(8); // var money = r.ReadInt64();
                 r.Skip(4); // var lootPriority = r.ReadInt32();
                 IsOpen = r.ReadBoolean();
@@ -50,6 +55,8 @@ namespace TeraPacketParser.Messages
                     r.Skip(8); // dbid
                     r.Skip(8); // ownerId (playerId)
                     var slot = r.ReadUInt32();
+                    Console.WriteLine($"Added item in slot {slot} (p:{Pocket})");
+                    //if(slot <= 39) continue;
                     var amount = r.ReadInt32();
                     r.Skip(4); // enchant
                     r.Skip(4); // durability
@@ -88,6 +95,8 @@ namespace TeraPacketParser.Messages
             {
                 Failed = true;
             }
+
+
         }
 
     }
