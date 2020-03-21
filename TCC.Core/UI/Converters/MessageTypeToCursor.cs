@@ -11,21 +11,17 @@ namespace TCC.UI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (MessagePieceType?)value;
-            var c = Cursors.Arrow;
-            switch (val)
+            var c = val switch
             {
-                case MessagePieceType.Simple:
-                case MessagePieceType.Money:
-                    c = Cursors.Arrow;
-                    break;
-                case MessagePieceType.Item:
-                case MessagePieceType.Quest:
-                case MessagePieceType.PointOfInterest:
-                case MessagePieceType.Url:
-                case MessagePieceType.Achievement:
-                    c = Cursors.Hand;
-                    break;
-            }
+                MessagePieceType.Simple => Cursors.Arrow,
+                MessagePieceType.Money => Cursors.Arrow,
+                MessagePieceType.Item => Cursors.Hand,
+                MessagePieceType.Quest => Cursors.Hand,
+                MessagePieceType.PointOfInterest => Cursors.Hand,
+                MessagePieceType.Url => Cursors.Hand,
+                MessagePieceType.Achievement => Cursors.Hand,
+                _ => Cursors.Arrow
+            };
             return c;
         }
 

@@ -10,20 +10,12 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // ReSharper disable once PossibleNullReferenceException
-            var x = (AggroCircle)value;
-
-            switch (x)
+            return (AggroCircle?)value switch
             {
-                case AggroCircle.Main:
-                    return new SolidColorBrush(Colors.Orange);
-                case AggroCircle.Secondary:
-                    return new SolidColorBrush(Color.FromRgb(0x70, 0x40, 0xff));
-                case AggroCircle.None:
-                    return new SolidColorBrush(Colors.Transparent);
-                default:
-                    return new SolidColorBrush(Colors.Transparent);
-            }
+                AggroCircle.Main => R.Brushes.GoldBrush,
+                AggroCircle.Secondary => R.Brushes.TwitchBrush,
+                _ => Brushes.Transparent
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

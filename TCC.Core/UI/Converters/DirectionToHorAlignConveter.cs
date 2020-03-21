@@ -10,13 +10,11 @@ namespace TCC.UI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var v = (FlowDirection?)value;
-            switch (v)
+            return v switch
             {
-                case FlowDirection.RightToLeft:
-                    return HorizontalAlignment.Right;
-                default:
-                    return HorizontalAlignment.Left;
-            }
+                FlowDirection.RightToLeft => HorizontalAlignment.Right,
+                _ => HorizontalAlignment.Left
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

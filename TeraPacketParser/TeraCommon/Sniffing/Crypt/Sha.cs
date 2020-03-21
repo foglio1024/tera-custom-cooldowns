@@ -30,11 +30,9 @@
             if (Corrupted != 0)
                 return 0;
 
-            if (Computed == 0)
-            {
-                PadMessage();
-                Computed = 1;
-            }
+            if (Computed != 0) return 1;
+            PadMessage();
+            Computed = 1;
 
             return 1;
         }

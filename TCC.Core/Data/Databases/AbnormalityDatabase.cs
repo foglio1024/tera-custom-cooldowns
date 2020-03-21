@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
 using TeraDataLite;
@@ -25,52 +26,42 @@ namespace TCC.Data.Databases
         public override void Load()
         {
             Abnormalities.Clear();
-            //var hd = File.OpenText(FullPath);
             var lines = File.ReadAllLines(FullPath);
-            foreach (var l in lines)
+            foreach (var l in lines.Where(x => x != ""))
             {
-                if (l == null) break;
-                if (l == "") continue;
                 var s = l.Split('\t');
                 var id = uint.Parse(s[0]);
-                var type = s[1];
-                var amount = double.Parse(s[7], CultureInfo.InvariantCulture);
                 var isBuff = bool.Parse(s[3]);
                 var isShow = bool.Parse(s[14]);
-                var name = s[8];
-                var tooltip = s[11];
-                var icon = s[13];
-                var abType = (AbnormalityType)Enum.Parse(typeof(AbnormalityType), s[2]);
+                var abType = (AbnormalityType) Enum.Parse(typeof(AbnormalityType), s[2]);
                 var infinite = s[5] == "0";
-                var ab = new Abnormality(id, isShow, isBuff, infinite, abType);
-                ab.SetIcon(icon);
-                ab.SetInfo(name, tooltip);
-                if (type.IndexOf("Absorb", StringComparison.Ordinal) > -1)
+                var ab = new Abnormality(id, isShow, isBuff, infinite, abType, s[13], s[8], s[11]);
+                if (s[1].IndexOf("Absorb", StringComparison.Ordinal) > -1)
                 {
-                    ab.SetShield((uint)amount); //TODO: may just parse everything instead of doing this
+                    var amount = double.Parse(s[7], CultureInfo.InvariantCulture);
+                    ab.SetShield(amount); //TODO: may just parse everything instead of doing this
                 }
-                if (Abnormalities.TryGetValue(id, out var ex)) //.ContainsKey(id))
+
+                if (Abnormalities.TryGetValue(id, out var ex))
                 {
                     if (!ex.IsShield && ab.IsShield) Abnormalities[id] = ab;
                     if (ab.Infinity && !ex.Infinity) ex.Infinity = false;
-                    if (ex.Type != AbnormalityType.Debuff && ab.Type == AbnormalityType.Debuff) ex.Type = AbnormalityType.Debuff;
+                    if (ex.Type != AbnormalityType.Debuff && ab.Type == AbnormalityType.Debuff)
+                        ex.Type = AbnormalityType.Debuff;
                     if (!isBuff) ex.IsBuff = false;
                     continue;
                 }
+
+                if (App.Settings.BuffWindowSettings.Specials.Contains(id) && ab.Type == AbnormalityType.Buff)
+                    ab.Type = AbnormalityType.Special;
+
                 Abnormalities[id] = ab;
-                if(App.Settings.BuffWindowSettings.Specials.Contains(id) && ab.Type == AbnormalityType.Buff) ab.Type = AbnormalityType.Special;
             }
 
-            var foglioAura = new Abnormality(10241024, true, true, true, AbnormalityType.Buff);
-            foglioAura.SetInfo("Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
-            foglioAura.SetIcon("icon_items.bloodchipa_tex");
-            foglioAura.Type = AbnormalityType.Special;
+            var foglioAura = new Abnormality(10241024, true, true, true, AbnormalityType.Special,"icon_items.bloodchipa_tex", "Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
             Abnormalities[foglioAura.Id] = foglioAura;
 
-            var fearInoculum = new Abnormality(30082019, true, true, true, AbnormalityType.Buff);
-            fearInoculum.SetInfo("Fear Inoculum", "New $H_W_GOODTool$COLOR_END album release provides the following effects:$BR - increases attack speed by $H_W_GOOD25%$COLOR_END $BR - increases skill damage by $H_W_GOOD100%$COLOR_END $BR - decreases skill cooldowns by $H_W_GOOD80%$COLOR_END $BR - increases drop rate in dungeons by $H_W_GOOD800%$COLOR_END $BR$BREffect only applies while Tool music is playing.");
-            fearInoculum.SetIcon("icon_status.third_eye_ab");
-            fearInoculum.Type = AbnormalityType.Special;
+            var fearInoculum = new Abnormality(30082019, true, true, true, AbnormalityType.Special,"icon_status.third_eye_ab","Fear Inoculum", "New $H_W_GOODTool$COLOR_END album release provides the following effects:$BR - increases attack speed by $H_W_GOOD25%$COLOR_END $BR - increases skill damage by $H_W_GOOD100%$COLOR_END $BR - decreases skill cooldowns by $H_W_GOOD80%$COLOR_END $BR - increases drop rate in dungeons by $H_W_GOOD800%$COLOR_END $BR$BREffect only applies while Tool music is playing.");
             Abnormalities[fearInoculum.Id] = fearInoculum;
 
             #region Extreme overrides
@@ -95,7 +86,6 @@ namespace TCC.Data.Databases
         public bool TryGetPassiveSkill(uint id, out Skill sk)
         {
             var ret = false;
-            sk = null;
             if (PassivityDatabase.TryGetPassivitySkill(id, out sk)) ret = true;
             else if (Abnormalities.TryGetValue(id, out var ab))
             {

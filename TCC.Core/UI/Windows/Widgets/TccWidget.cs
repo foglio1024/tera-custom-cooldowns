@@ -178,13 +178,10 @@ namespace TCC.UI.Windows.Widgets
         {
             if (!WindowSettings.AllowOffScreen) CheckBounds();
             if (WindowSettings.IgnoreSize) return;
-            if (WindowSettings.W != ActualWidth ||
-                WindowSettings.H != ActualHeight)
-            {
-                WindowSettings.W = ActualWidth;
-                WindowSettings.H = ActualHeight;
-                if (!App.Loading) App.Settings.Save();
-            }
+            if (WindowSettings.W == ActualWidth && WindowSettings.H == ActualHeight) return;
+            WindowSettings.W = ActualWidth;
+            WindowSettings.H = ActualHeight;
+            if (!App.Loading) App.Settings.Save();
         }
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
@@ -477,12 +474,10 @@ namespace TCC.UI.Windows.Widgets
                 Close();
             });
 
-            if (Dispatcher != App.BaseDispatcher)
-            {
-                Log.CW($"[{GetType().Name}] Invoking dispatcher shutdown");
-                Dispatcher?.Invoke(() => Thread.Sleep(100)); //uhmmmmm ok
-                Dispatcher?.BeginInvokeShutdown(DispatcherPriority.ContextIdle);
-            }
+            if (Dispatcher == App.BaseDispatcher) return;
+            Log.CW($"[{GetType().Name}] Invoking dispatcher shutdown");
+            Dispatcher?.Invoke(() => Thread.Sleep(100)); //uhmmmmm ok
+            Dispatcher?.BeginInvokeShutdown(DispatcherPriority.ContextIdle);
         }
 
         public static void OnShowAllHandlesToggled()

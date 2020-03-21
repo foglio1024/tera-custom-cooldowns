@@ -70,11 +70,9 @@ namespace TCC.UI.Controls.NPCs
             {
                 SlideEnrageIndicator(VM.CurrentPercentage);
                 //EnrageBorder.BeginAnimation(OpacityProperty, _flash);
-                if (!VM.NPC.EnragePattern.StaysEnraged)
-                {
-                    _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
-                    EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
-                }
+                if (VM.NPC.EnragePattern.StaysEnraged) return;
+                _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
+                EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
             }
             else
             {

@@ -61,15 +61,13 @@ namespace TCC.Update
             }
             catch { /* ignored*/ }
 
-            if (!ret)
+            if (ret) return true;
+            try
             {
-                try
-                {
-                    Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol.{version}.map", filename);
-                    ret = IsFileValid(filename);
-                }
-                catch { /* ignored*/ }
+                Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol.{version}.map", filename);
+                ret = IsFileValid(filename);
             }
+            catch { /* ignored*/ }
 
             return ret;
         }

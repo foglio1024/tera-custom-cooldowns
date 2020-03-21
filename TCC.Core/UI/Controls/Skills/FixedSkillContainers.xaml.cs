@@ -102,11 +102,9 @@ namespace TCC.UI.Controls.Skills
             for (var j = 0; j < positions.Count; j++)
             {
                 if (j + 1 == positions.Count) continue;
-                if (positions[j] > positions[j + 1])
-                {
-                    needsReorder = true;
-                    break;
-                }
+                if (!(positions[j] > positions[j + 1])) continue;
+                needsReorder = true;
+                break;
             }
 
             if (!needsReorder) return;

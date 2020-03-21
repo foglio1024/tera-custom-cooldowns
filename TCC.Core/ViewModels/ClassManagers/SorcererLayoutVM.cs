@@ -88,25 +88,22 @@ namespace TCC.ViewModels
                 ManaBoost.Cooldown.Start(sk.Duration);
                 return true;
             }
+
             if (sk.Skill.IconName == PrimeFlame.IconName)
             {
                 Fusion.Skill = PrimeFlame;
                 Fusion.Start(sk.Duration, sk.Mode);
-                if (sk.Mode == CooldownMode.Normal)
-                {
-                    _latestCooldown = (long)sk.OriginalDuration;
-                    _sw.Restart();
-
-                }
+                if (sk.Mode != CooldownMode.Normal) return true;
+                _latestCooldown = (long)sk.OriginalDuration;
+                _sw.Restart();
 
                 return true;
             }
-            if (sk.Skill.IconName == Fusion.Skill.IconName)
-            {
-                _latestCooldown = (long)sk.OriginalDuration;
-                Fusion.Start(sk.Duration, sk.Mode);
-                _sw.Restart();
-            }
+
+            if (sk.Skill.IconName != Fusion.Skill.IconName) return false;
+            _latestCooldown = (long)sk.OriginalDuration;
+            Fusion.Start(sk.Duration, sk.Mode);
+            _sw.Restart();
             return false;
         }
 

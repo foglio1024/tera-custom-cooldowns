@@ -101,22 +101,17 @@ namespace TCC.ViewModels
                 Unleash.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == BeastFury.Skill.IconName)
-            {
-                BeastFury.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != BeastFury.Skill.IconName) return false;
+            BeastFury.Start(sk.Duration);
+            return true;
         }
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)
         {
-            if (skill.IconName == Unleash.Cooldown.Skill.IconName)
-            {
-                Unleash.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
-                return true;
-            }
-            return false;
+            if (skill.IconName != Unleash.Cooldown.Skill.IconName) return false;
+            Unleash.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
+            return true;
         }
 
         public override void Dispose()

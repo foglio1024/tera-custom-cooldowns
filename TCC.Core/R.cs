@@ -303,7 +303,6 @@ namespace TCC.R
 		public static ValueConverterGroup IsRaidToTransparentFill => ((ValueConverterGroup)App.Current.FindResource("IsRaidToTransparentFill"));
 		public static StringToFillConverter StringToFill => ((StringToFillConverter)App.Current.FindResource("StringToFill"));
 		public static GuardianPointsStringConverter GuardianPointsStringConverter => ((GuardianPointsStringConverter)App.Current.FindResource("GuardianPointsStringConverter"));
-		public static LfgVmToButtonLabelConverter LfgVmToButtonLabel => ((LfgVmToButtonLabelConverter)App.Current.FindResource("LfgVmToButtonLabel"));
 		public static ClassToNameConverter ClassToName => ((ClassToNameConverter)App.Current.FindResource("ClassToName"));
 		public static ItemLevelTierToColorConverter IlvlTierToColor => ((ItemLevelTierToColorConverter)App.Current.FindResource("IlvlTierToColor"));
 		public static EntriesToColor EntriesToColor => ((EntriesToColor)App.Current.FindResource("EntriesToColor"));

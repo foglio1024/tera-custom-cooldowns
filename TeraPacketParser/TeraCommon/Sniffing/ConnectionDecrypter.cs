@@ -78,18 +78,16 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
         public void Skip(MessageDirection direction, int needToSkip)
         {
-            if (needToSkip > 0)
+            if (needToSkip <= 0) return;
+            if (direction == MessageDirection.ServerToClient)
             {
-                if (direction == MessageDirection.ServerToClient)
-                {
-                    var skip = new byte[needToSkip];
-                    _session.Encrypt(skip);
-                }
-                else
-                {
-                    var skip = new byte[needToSkip];
-                    _session.Decrypt(skip);
-                }
+                var skip = new byte[needToSkip];
+                _session.Encrypt(skip);
+            }
+            else
+            {
+                var skip = new byte[needToSkip];
+                _session.Decrypt(skip);
             }
         }
 

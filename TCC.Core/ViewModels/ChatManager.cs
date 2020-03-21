@@ -486,38 +486,36 @@ namespace TCC.ViewModels
             if (current.RawMessage != old.RawMessage) return true;
 
             if (old.Author != current.Author) return true;
-            switch (current.Channel)
+            return current.Channel switch
             {
-                case ChatChannel.Exp:
-                case ChatChannel.Group:
-                case ChatChannel.Party:
-                case ChatChannel.PartyNotice:
-                case ChatChannel.Raid:
-                case ChatChannel.RaidLeader:
-                case ChatChannel.RaidNotice:
-                case ChatChannel.GroupAlerts:
-                case ChatChannel.Money:
-                case ChatChannel.Loot:
-                case ChatChannel.Bargain:
-                case ChatChannel.Damage:
-                case ChatChannel.Private7:
-                case ChatChannel.Private8:
-                case ChatChannel.TCC:
-                case ChatChannel.Guardian:
-                case ChatChannel.Apply:
-                case ChatChannel.Death:
-                case ChatChannel.Ress:
-                case ChatChannel.WorldBoss:
-                case ChatChannel.Enchant:
-                case ChatChannel.Friend:
-                case ChatChannel.Laurel:
-                case ChatChannel.GuildNotice:
-                case ChatChannel.SentWhisper:
-                case ChatChannel.ReceivedWhisper when old.Channel == ChatChannel.SentWhisper:
-                    return true;
-            }
-
-            return false;
+                ChatChannel.Exp => true,
+                ChatChannel.Group => true,
+                ChatChannel.Party => true,
+                ChatChannel.PartyNotice => true,
+                ChatChannel.Raid => true,
+                ChatChannel.RaidLeader => true,
+                ChatChannel.RaidNotice => true,
+                ChatChannel.GroupAlerts => true,
+                ChatChannel.Money => true,
+                ChatChannel.Loot => true,
+                ChatChannel.Bargain => true,
+                ChatChannel.Damage => true,
+                ChatChannel.Private7 => true,
+                ChatChannel.Private8 => true,
+                ChatChannel.TCC => true,
+                ChatChannel.Guardian => true,
+                ChatChannel.Apply => true,
+                ChatChannel.Death => true,
+                ChatChannel.Ress => true,
+                ChatChannel.WorldBoss => true,
+                ChatChannel.Enchant => true,
+                ChatChannel.Friend => true,
+                ChatChannel.Laurel => true,
+                ChatChannel.GuildNotice => true,
+                ChatChannel.SentWhisper => true,
+                ChatChannel.ReceivedWhisper when old.Channel == ChatChannel.SentWhisper => true,
+                _ => false
+            };
         }
 
         private void JoinPrivateChannel(uint id, int index, string name)
@@ -580,11 +578,9 @@ namespace TCC.ViewModels
 
         public void RemoveDeadLfg()
         {
-            if (LastClickedLfg != null)
-            {
-                RemoveLfg(LastClickedLfg);
-                LastClickedLfg = null;
-            }
+            if (LastClickedLfg == null) return;
+            RemoveLfg(LastClickedLfg);
+            LastClickedLfg = null;
         }
 
         private bool TryGetLfg(uint id, string msg, string name, out LFG lfg)

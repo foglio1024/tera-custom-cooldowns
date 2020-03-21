@@ -25,11 +25,9 @@ namespace TCC.ViewModels
 
         private void FlashOnMaxSt(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(StaminaTracker.Maxed))
-            {
-                BurningHeart.FlashOnAvailable = StaminaTracker.Maxed;
-                FireAvalanche.FlashOnAvailable = StaminaTracker.Maxed;
-            }
+            if (e.PropertyName != nameof(StaminaTracker.Maxed)) return;
+            BurningHeart.FlashOnAvailable = StaminaTracker.Maxed;
+            FireAvalanche.FlashOnAvailable = StaminaTracker.Maxed;
         }
 
         public override void LoadSpecialSkills()
@@ -71,12 +69,10 @@ namespace TCC.ViewModels
                 BurningHeart.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == InnerHarmony.Cooldown.Skill.IconName)
-            {
-                InnerHarmony.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != InnerHarmony.Cooldown.Skill.IconName) return false;
+            InnerHarmony.Cooldown.Start(sk.Duration);
+            return true;
         }
     }
 }

@@ -43,7 +43,6 @@ namespace TCC.UI
             private set
             {
                 _isForeground = value;
-                Log.CW($"{nameof(IsForeground)} set to {value}; {nameof(ForceFocused)} is {ForceFocused}");
             }
         }
 

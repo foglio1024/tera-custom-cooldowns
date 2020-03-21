@@ -122,24 +122,18 @@ namespace TCC.ViewModels
                 return true;
             }
 
-            if (sk.Skill.IconName == TripleNemesis.Cooldown.Skill.IconName)
-            {
-                TripleNemesis.Cooldown.Start(sk.Duration);
-                return true;
-            }
+            if (sk.Skill.IconName != TripleNemesis.Cooldown.Skill.IconName) return false;
+            TripleNemesis.Cooldown.Start(sk.Duration);
+            return true;
 
-            return false;
         }
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)
         {
-            if (skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
-            {
-                EdictOfJudgment.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
-                return true;
-            }
+            if (skill.IconName != EdictOfJudgment.Cooldown.Skill.IconName) return false;
+            EdictOfJudgment.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
+            return true;
 
-            return false;
         }
 
         public override void Dispose()

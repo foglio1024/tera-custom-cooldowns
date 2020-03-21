@@ -12,23 +12,31 @@ namespace TCC.UI.Converters
         {
             var col = Colors.Transparent;
             var light = parameter != null && parameter.ToString().Contains("light");
-            //var parLight = parameter != null && parameter.ToString().Contains("light") ? "Light" : "";
-            if (value != null)
-                switch ((Class)value)
-                {
-                    case Class.Gunner:
-                        col = light ? R.Colors.WillpowerColorLight : R.Colors.WillpowerColor; // (Color) Application.Current.FindResource("WillpowerColor"+parLight);
-                        break;
-                    case Class.Brawler:
-                        col = light ? R.Colors.RageColorLight : R.Colors.RageColor; //(Color)Application.Current.FindResource("RageColor" + parLight);
-                        break;
-                    case Class.Ninja:
-                        col = light ? R.Colors.ArcaneColorLight : R.Colors.ArcaneColor; // (Color) Application.Current.FindResource("ArcaneColor"+parLight);
-                        break;
-                    case Class.Valkyrie:
-                        col = Colors.White;
-                        break;
-                }
+            if (!(value is Class c))
+                return parameter != null && parameter.ToString().Contains("color")
+                    ? (object)col
+                    : new SolidColorBrush(col);
+
+            col = c switch
+            {
+                Class.Gunner =>
+                (light
+                    ? R.Colors.WillpowerColorLight
+                    : R.Colors.WillpowerColor)
+                ,
+                Class.Brawler =>
+                (light
+                    ? R.Colors.RageColorLight
+                    : R.Colors.RageColor)
+                ,
+                Class.Ninja =>
+                (light
+                    ? R.Colors.ArcaneColorLight
+                    : R.Colors.ArcaneColor)
+                ,
+                Class.Valkyrie => Colors.White,
+                _ => col
+            };
             return parameter != null && parameter.ToString().Contains("color") ? (object)col : new SolidColorBrush(col);
         }
 

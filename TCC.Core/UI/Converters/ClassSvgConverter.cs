@@ -10,16 +10,12 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var c = Class.Common;
-            switch (value)
+            var c = value switch
             {
-                case Class cl:
-                    c = cl;
-                    break;
-                case string s:
-                    c = (Class)Enum.Parse(typeof(Class), s);
-                    break;
-            }
+                Class cl => cl,
+                string s => (Class) Enum.Parse(typeof(Class), s),
+                _ => Class.Common
+            };
 
             return TccUtils.SvgClass(c); //App.Current.FindResource("SvgClass" + c.ToString());
         }

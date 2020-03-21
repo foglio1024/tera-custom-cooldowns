@@ -13,20 +13,15 @@ namespace TCC.UI.TemplateSelectors
         public DataTemplate LfgBody { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            var m = item as ChatMessage;
-            if (m == null) return null;
+            if (!(item is ChatMessage m)) return null;
 
-            switch (m.Channel)
+            return m.Channel switch
             {
-                case ChatChannel.LFG:
-                    return LfgBody;
-                case ChatChannel.Bargain:
-                    return BrokerBody;
-                case ChatChannel.Apply:
-                    return ApplyBody;
-                default:
-                    return DefaultBody;
-            }
+                ChatChannel.LFG => LfgBody,
+                ChatChannel.Bargain => BrokerBody,
+                ChatChannel.Apply => ApplyBody,
+                _ => DefaultBody
+            };
         }
     }
 }

@@ -9,17 +9,16 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is NotificationType nt)
+            if (!(value is NotificationType nt)) 
+                return R.Brushes.TccNormalGradientBrush;
+            
+            return nt switch
             {
-                switch (nt)
-                {
-                    case NotificationType.Success: return R.Brushes.TccGreenGradientBrush;
-                    case NotificationType.Warning: return R.Brushes.TccYellowGradientBrush;
-                    case NotificationType.Error: return R.Brushes.TccRedGradientBrush;
-                }
-            }
-
-            return R.Brushes.TccNormalGradientBrush;
+                NotificationType.Success => R.Brushes.TccGreenGradientBrush,
+                NotificationType.Warning => R.Brushes.TccYellowGradientBrush,
+                NotificationType.Error => R.Brushes.TccRedGradientBrush,
+                _ => R.Brushes.TccNormalGradientBrush
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -64,11 +64,12 @@ namespace TCC.UI.Controls
 
         private void OnMouseDown(object sender, MouseEventArgs e)
         {
-            switch (e.Button)
+            _contextMenu.IsOpen = e.Button switch
             {
-                case MouseButtons.Right: _contextMenu.IsOpen = true; break;
-                case MouseButtons.Left: _contextMenu.IsOpen = false; break;
-            }
+                MouseButtons.Right => true,
+                MouseButtons.Left => false,
+                _ => _contextMenu.IsOpen
+            };
         }
 
         public void Dispose()

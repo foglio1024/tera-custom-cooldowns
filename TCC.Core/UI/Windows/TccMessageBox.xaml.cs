@@ -34,21 +34,15 @@ namespace TCC.UI.Windows
 
         private static MessageBoxResult Show (string caption, string msg, MessageBoxType type)
         {
-            switch (type)
+            return type switch
             {
-                case MessageBoxType.ConfirmationWithYesNo:
-                    return Show(caption, msg, MessageBoxButton.YesNo, MessageBoxImage.Question);
-                case MessageBoxType.ConfirmationWithYesNoCancel:
-                    return Show(caption, msg, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                case MessageBoxType.Information:
-                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Information);
-                case MessageBoxType.Error:
-                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Error);
-                case MessageBoxType.Warning:
-                    return Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Warning);
-                default:
-                    return MessageBoxResult.No;
-            }
+                MessageBoxType.ConfirmationWithYesNo => Show(caption, msg, MessageBoxButton.YesNo, MessageBoxImage.Question),
+                MessageBoxType.ConfirmationWithYesNoCancel => Show(caption, msg, MessageBoxButton.YesNoCancel, MessageBoxImage.Question),
+                MessageBoxType.Information => Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Information),
+                MessageBoxType.Error => Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Error),
+                MessageBoxType.Warning => Show(caption, msg, MessageBoxButton.OK, MessageBoxImage.Warning),
+                _ => MessageBoxResult.No
+            };
         }
         public static MessageBoxResult Show(string msg, MessageBoxType type)
         {

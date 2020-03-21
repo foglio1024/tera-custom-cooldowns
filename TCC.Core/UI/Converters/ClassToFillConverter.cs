@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using TeraDataLite;
@@ -12,20 +11,22 @@ namespace TCC.UI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var c = (Class?)value ?? Class.Common;
-            var color = targetType == typeof(Color); 
-            switch (c)
+            var color = targetType == typeof(Color);
+
+
+            return (c, color) switch
             {
-                case Class.Lancer:
-                    return Application.Current.FindResource($"TankRole{(color ? "Color" : "Brush")}");
-                case Class.Brawler:
-                    return Application.Current.FindResource($"TankRole{(color ? "Color" : "Brush")}");
-                case Class.Priest:
-                    return Application.Current.FindResource($"HealerRole{(color ? "Color" : "Brush")}");
-                case Class.Mystic:
-                    return Application.Current.FindResource($"HealerRole{(color ? "Color" : "Brush")}");
-                default:
-                    return Application.Current.FindResource($"DpsRole{(color ? "Color" : "Brush")}");
-            }
+                (Class.Lancer, true) => R.Colors.TankRoleColor,
+                (Class.Lancer, false) => R.Brushes.TankRoleBrush,
+                (Class.Brawler, true) => R.Colors.TankRoleColor,
+                (Class.Brawler, false) => R.Brushes.TankRoleBrush,
+                (Class.Priest, true) => R.Colors.HealerRoleColor,
+                (Class.Priest, false) => R.Brushes.HealerRoleBrush,
+                (Class.Mystic, true) => R.Colors.HealerRoleColor,
+                (Class.Mystic, false) => R.Brushes.HealerRoleBrush,
+                (_, true) => R.Colors.DpsRoleColor,
+                (_, false) => R.Brushes.DpsRoleBrush
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

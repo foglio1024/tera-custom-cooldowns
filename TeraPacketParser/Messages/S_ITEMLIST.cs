@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using TeraDataLite;
 
 namespace TeraPacketParser.Messages
@@ -55,7 +53,6 @@ namespace TeraPacketParser.Messages
                     r.Skip(8); // dbid
                     r.Skip(8); // ownerId (playerId)
                     var slot = r.ReadUInt32();
-                    Console.WriteLine($"Added item in slot {slot} (p:{Pocket})");
                     //if(slot <= 39) continue;
                     var amount = r.ReadInt32();
                     r.Skip(4); // enchant

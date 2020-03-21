@@ -156,16 +156,10 @@ namespace TCC.Data.Databases
         {
             get
             {
-                var t = GetType();
-                var ret = new List<DatabaseBase>();
-                foreach (var prop in t.GetProperties())
-                {
-                    if (prop.PropertyType.IsSubclassOf(typeof(DatabaseBase)))
-                    {
-                        ret.Add(prop.GetValue(this) as DatabaseBase);
-                    }
-                }
-                return ret;
+                return GetType()
+                       .GetProperties()
+                       .Where(p => p.PropertyType.IsSubclassOf(typeof(DatabaseBase)))
+                       .Select(prop => prop.GetValue(this) as DatabaseBase).ToList();
             }
         }
         public void CheckVersion()

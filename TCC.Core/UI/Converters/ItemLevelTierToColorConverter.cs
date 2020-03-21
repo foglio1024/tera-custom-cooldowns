@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
+using TCC.Utils;
 
 namespace TCC.UI.Converters
 {
@@ -22,57 +23,40 @@ namespace TCC.UI.Converters
                 var tier = (ItemLevelTier)tierInt;
 
                 if (targetType == typeof(Brush))
-                    switch (tier)
+                    ret = tier switch
                     {
-                        case ItemLevelTier.Tier0: ret = R.Brushes.IceBrushLight; break;
-                        case ItemLevelTier.Tier1: ret = R.Brushes.Tier1DungeonBrush; break;
-                        case ItemLevelTier.Tier2: ret = R.Brushes.Tier2DungeonBrush; break;
-                        case ItemLevelTier.Tier3: ret = R.Brushes.Tier3DungeonBrush; break;
-                        case ItemLevelTier.Tier4: ret = R.Brushes.Tier4DungeonBrush; break;
-                        case ItemLevelTier.Tier5: ret = R.Brushes.Tier5DungeonBrush; break;
-                        case ItemLevelTier.Tier6: ret = R.Brushes.HpBrush; break;
-                        case ItemLevelTier.Tier7: ret = R.Brushes.AssaultStanceBrush; break;
-                    }
+                        ItemLevelTier.Tier0 => R.Brushes.IceBrushLight,
+                        ItemLevelTier.Tier1 => R.Brushes.Tier1DungeonBrush,
+                        ItemLevelTier.Tier2 => R.Brushes.Tier2DungeonBrush,
+                        ItemLevelTier.Tier3 => R.Brushes.Tier3DungeonBrush,
+                        ItemLevelTier.Tier4 => R.Brushes.Tier4DungeonBrush,
+                        ItemLevelTier.Tier5 => R.Brushes.Tier5DungeonBrush,
+                        ItemLevelTier.Tier6 => R.Brushes.HpBrush,
+                        ItemLevelTier.Tier7 => R.Brushes.AssaultStanceBrush,
+                        _ => ret
+                    };
                 else
-                    switch (tier)
+                    ret = tier switch
                     {
-                        case ItemLevelTier.Tier0: ret = R.Colors.IceColorLight; break;
-                        case ItemLevelTier.Tier1: ret = R.Colors.Tier1DungeonColor; break;
-                        case ItemLevelTier.Tier2: ret = R.Colors.Tier2DungeonColor; break;
-                        case ItemLevelTier.Tier3: ret = R.Colors.Tier3DungeonColor; break;
-                        case ItemLevelTier.Tier4: ret = R.Colors.Tier4DungeonColor; break;
-                        case ItemLevelTier.Tier5: ret = R.Colors.Tier5DungeonColor; break;
-                        case ItemLevelTier.Tier6: ret = R.Colors.HpColor; break;
-                        case ItemLevelTier.Tier7: ret = R.Colors.AssaultStanceColor; break;
-                    }
-
+                        ItemLevelTier.Tier0 => R.Colors.IceColorLight,
+                        ItemLevelTier.Tier1 => R.Colors.Tier1DungeonColor,
+                        ItemLevelTier.Tier2 => R.Colors.Tier2DungeonColor,
+                        ItemLevelTier.Tier3 => R.Colors.Tier3DungeonColor,
+                        ItemLevelTier.Tier4 => R.Colors.Tier4DungeonColor,
+                        ItemLevelTier.Tier5 => R.Colors.Tier5DungeonColor,
+                        ItemLevelTier.Tier6 => R.Colors.HpColor,
+                        ItemLevelTier.Tier7 => R.Colors.AssaultStanceColor,
+                        _ => ret
+                    };
             }
-            catch
+            catch(Exception e)
             {
+                Log.F($"Failed to convert ilvl to color {e}");
             }
             return ret;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    public class EntriesToColor : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            var retCol = Colors.Transparent;
-            if (!(values[0] is int entries) || !(values[1] is int max)) { return targetType == typeof(Brush) ? new SolidColorBrush(retCol) : (object)retCol; }
-
-            retCol = R.Colors.Tier3DungeonColor;
-            if (entries == max) retCol = R.Colors.GreenColor;
-            else if (entries == 0) retCol = R.Colors.AssaultStanceColor;
-
-            return targetType == typeof(Brush) ? new SolidColorBrush(retCol) : (object)retCol;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

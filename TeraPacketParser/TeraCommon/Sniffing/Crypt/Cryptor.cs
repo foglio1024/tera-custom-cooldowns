@@ -90,7 +90,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
             }
 
             var remain = size & 3;
-            if (remain != 0)
+            if (remain == 0) return;
+            
             {
                 var result = _key[0].Key & _key[1].Key | _key[2].Key & (_key[0].Key | _key[1].Key);
                 _changeData = 0;

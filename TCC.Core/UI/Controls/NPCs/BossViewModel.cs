@@ -57,15 +57,13 @@ namespace TCC.UI.Controls.NPCs
         public double NextEnragePercentage
         {
             get => _nextEnragePerc;
-            set
+            private set
             {
-                if (_nextEnragePerc != value)
-                {
-                    _nextEnragePerc = value;
-                    if (value < 0) _nextEnragePerc = 0;
-                    N();
-                    N(nameof(EnrageTBtext));
-                }
+                if (_nextEnragePerc == value) return;
+                _nextEnragePerc = value;
+                if (value < 0) _nextEnragePerc = 0;
+                N();
+                N(nameof(EnrageTBtext));
             }
         }
         public string EnrageTBtext
@@ -78,16 +76,12 @@ namespace TCC.UI.Controls.NPCs
                 }
                 else
                 {
-                    switch (App.Settings.NpcWindowSettings.EnrageLabelMode)
+                    return App.Settings.NpcWindowSettings.EnrageLabelMode switch
                     {
-                        case EnrageLabelMode.Next:
-                            return $"{NextEnragePercentage:0.#}%";
-                        case EnrageLabelMode.Remaining:
-                            return $"{CurrentPercentage - NextEnragePercentage:0.#}%";
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                    //return $"{NextEnrageTime:0.0}s";
+                        EnrageLabelMode.Next => $"{NextEnragePercentage:0.#}%",
+                        EnrageLabelMode.Remaining => $"{CurrentPercentage - NextEnragePercentage:0.#}%",
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
                 }
             }
         }
@@ -110,14 +104,11 @@ namespace TCC.UI.Controls.NPCs
             get => _curEnrageTime;
             set
             {
-                if (_curEnrageTime != value)
-                {
-                    _curEnrageTime = value;
-                    N();
-                    N(nameof(EnrageTBtext));
-                    N(nameof(RhombEnrageTimerText));
-
-                }
+                if (_curEnrageTime == value) return;
+                _curEnrageTime = value;
+                N();
+                N(nameof(EnrageTBtext));
+                N(nameof(RhombEnrageTimerText));
             }
         }
 
@@ -171,11 +162,9 @@ namespace TCC.UI.Controls.NPCs
 
             NPC.PropertyChanged += OnPropertyChanged;
 
-            if (NPC.TimerPattern != null)
-            {
-                NPC.TimerPattern.Started += OnTimerPatternStarted;
-                NPC.TimerPattern.Ended += OnTimerPatternEnded;
-            }
+            if (NPC.TimerPattern == null) return;
+            NPC.TimerPattern.Started += OnTimerPatternStarted;
+            NPC.TimerPattern.Ended += OnTimerPatternEnded;
 
         }
 

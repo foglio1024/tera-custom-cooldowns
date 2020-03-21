@@ -13,22 +13,14 @@ namespace TCC.UI.TemplateSelectors
         public DataTemplate EnchantChannelDataTemplate { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            var m = item as ChatMessage;
-            if (m == null) return null;
-            switch (m.Channel)
+            if (!(item is ChatMessage m)) return null;
+            return m.Channel switch
             {
-                case ChatChannel.SentWhisper:
-                case ChatChannel.ReceivedWhisper:
-                    return WhisperChannelDataTemplate;
-                case ChatChannel.Megaphone:
-                    return MegaphoneChannelDataTemplate;
-                //case ChatChannel.Enchant12:
-                //    return EnchantChannelDataTemplate;
-                //case ChatChannel.Enchant15:
-                //    return EnchantChannelDataTemplate;
-                default:
-                    return NormalChannelDataTemplate;
-            }
+                ChatChannel.SentWhisper => WhisperChannelDataTemplate,
+                ChatChannel.ReceivedWhisper => WhisperChannelDataTemplate,
+                ChatChannel.Megaphone => MegaphoneChannelDataTemplate,
+                _ => NormalChannelDataTemplate
+            };
         }
     }
 }

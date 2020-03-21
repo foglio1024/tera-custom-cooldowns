@@ -10,34 +10,22 @@ namespace TCC.UI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var p = (GearPiece?) value ?? 0;
-            switch (p)
+            return p switch
             {
-                case GearPiece.Weapon:
-                    return R.SVG.SvgWeapon;
-                case GearPiece.Armor:
-                    return R.SVG.SvgArmor;
-                case GearPiece.Hands:
-                    return R.SVG.SvgHands;
-                case GearPiece.Feet:
-                    return R.SVG.SvgFeet;
-                case GearPiece.CritNecklace:
-                    return R.SVG.SvgNecklace;
-                case GearPiece.CritEarring:
-                    return R.SVG.SvgEarring;
-                case GearPiece.CritRing:
-                    return R.SVG.SvgRing;
-                case GearPiece.PowerNecklace:
-                    return R.SVG.SvgNecklace;
-                case GearPiece.PowerEarring:
-                    return R.SVG.SvgEarring;
-                case GearPiece.PowerRing:
-                    return R.SVG.SvgRing;
-                case GearPiece.Circlet:
-                    return R.SVG.SvgCirclet;
-                case GearPiece.Belt:
-                    return R.SVG.SvgBelt;
-            }
-            return R.Nostrum_SVG.SvgClose;
+                GearPiece.Weapon => R.SVG.SvgWeapon,
+                GearPiece.Armor => R.SVG.SvgArmor,
+                GearPiece.Hands => R.SVG.SvgHands,
+                GearPiece.Feet => R.SVG.SvgFeet,
+                GearPiece.CritNecklace => R.SVG.SvgNecklace,
+                GearPiece.CritEarring => R.SVG.SvgEarring,
+                GearPiece.CritRing => R.SVG.SvgRing,
+                GearPiece.PowerNecklace => R.SVG.SvgNecklace,
+                GearPiece.PowerEarring => R.SVG.SvgEarring,
+                GearPiece.PowerRing => R.SVG.SvgRing,
+                GearPiece.Circlet => R.SVG.SvgCirclet,
+                GearPiece.Belt => R.SVG.SvgBelt,
+                _ => R.Nostrum_SVG.SvgClose
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

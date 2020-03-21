@@ -62,11 +62,9 @@ namespace TCC.Data.Pc
             get => _entityId;
             set
             {
-                if (_entityId != value)
-                {
-                    _entityId = value;
-                    N();
-                }
+                if (_entityId == value) return;
+                _entityId = value;
+                N();
             }
         }
         public uint PlayerId { get; internal set; }
@@ -76,11 +74,9 @@ namespace TCC.Data.Pc
             get => _playerclass;
             set
             {
-                if (_playerclass != value)
-                {
-                    _playerclass = value;
-                    N();
-                }
+                if (_playerclass == value) return;
+                _playerclass = value;
+                N();
             }
         }
         public Laurel Laurel
@@ -88,11 +84,9 @@ namespace TCC.Data.Pc
             get => _laurel;
             set
             {
-                if (_laurel != value)
-                {
-                    _laurel = value;
-                    N();
-                }
+                if (_laurel == value) return;
+                _laurel = value;
+                N();
             }
         }
         public int Level
@@ -100,11 +94,9 @@ namespace TCC.Data.Pc
             get => _level;
             set
             {
-                if (_level != value)
-                {
-                    _level = value;
-                    N();
-                }
+                if (_level == value) return;
+                _level = value;
+                N();
             }
         }
         public float ItemLevel
@@ -112,11 +104,9 @@ namespace TCC.Data.Pc
             get => _itemLevel;
             set
             {
-                if (value != _itemLevel)
-                {
-                    _itemLevel = value;
-                    N();
-                }
+                if (value == _itemLevel) return;
+                _itemLevel = value;
+                N();
             }
         }
         public float CurrentHP
@@ -136,13 +126,10 @@ namespace TCC.Data.Pc
             get => _currentMP;
             set
             {
-                if (_currentMP != value)
-                {
-                    _currentMP = value;
-                    N();
-                    N(nameof(MpFactor));
-
-                }
+                if (_currentMP == value) return;
+                _currentMP = value;
+                N();
+                N(nameof(MpFactor));
             }
         }
         public float CurrentST
@@ -150,13 +137,10 @@ namespace TCC.Data.Pc
             get => _currentST;
             set
             {
-                if (_currentST != value)
-                {
-                    _currentST = value;
-                    N();
-                    N(nameof(StFactor));
-
-                }
+                if (_currentST == value) return;
+                _currentST = value;
+                N();
+                N(nameof(StFactor));
             }
         }
         public long MaxHP
@@ -164,13 +148,10 @@ namespace TCC.Data.Pc
             get => _maxHP;
             set
             {
-                if (_maxHP != value)
-                {
-                    _maxHP = value;
-                    N();
-                    N(nameof(HpFactor));
-
-                }
+                if (_maxHP == value) return;
+                _maxHP = value;
+                N();
+                N(nameof(HpFactor));
 
             }
         }
@@ -179,13 +160,10 @@ namespace TCC.Data.Pc
             get => _maxMP;
             set
             {
-                if (_maxMP != value)
-                {
-                    _maxMP = value;
-                    N();
-                    N(nameof(MpFactor));
-
-                }
+                if (_maxMP == value) return;
+                _maxMP = value;
+                N();
+                N(nameof(MpFactor));
 
             }
         }
@@ -205,13 +183,11 @@ namespace TCC.Data.Pc
             get => _maxShield;
             private set
             {
-                if (_maxShield != value)
-                {
-                    _maxShield = value;
-                    N(nameof(MaxShield));
-                    N(nameof(ShieldFactor));
-                    N(nameof(HasShield));
-                }
+                if (_maxShield == value) return;
+                _maxShield = value;
+                N(nameof(MaxShield));
+                N(nameof(ShieldFactor));
+                N(nameof(HasShield));
             }
         }
         public double HpFactor => MaxHP > 0 ? CurrentHP / MaxHP : 1;
@@ -529,19 +505,15 @@ namespace TCC.Data.Pc
         // utils
         private TSObservableCollection<AbnormalityDuration> GetList(Abnormality ab)
         {
-            TSObservableCollection<AbnormalityDuration> list = null;
-            switch (ab.Type)
+            var list = ab.Type switch
             {
-                case AbnormalityType.Debuff:
-                case AbnormalityType.DOT:
-                case AbnormalityType.Stun:
-                    list = Debuffs;
-                    break;
-                case AbnormalityType.Buff:
-                case AbnormalityType.Special:
-                    list = ab.Infinity ? InfBuffs : Buffs;
-                    break;
-            }
+                AbnormalityType.Debuff => Debuffs,
+                AbnormalityType.DOT => Debuffs,
+                AbnormalityType.Stun => Debuffs,
+                AbnormalityType.Buff => (ab.Infinity ? InfBuffs : Buffs),
+                AbnormalityType.Special => (ab.Infinity ? InfBuffs : Buffs),
+                _ => null
+            };
 
             return list;
         }

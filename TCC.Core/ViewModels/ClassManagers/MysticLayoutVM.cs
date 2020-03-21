@@ -177,17 +177,14 @@ namespace TCC.ViewModels
             //    ThrallOfLife.Start(sk.Cooldown);
             //    return true;
             //}
-            if (sk.Skill.IconName == ThrallOfWrath.Skill.IconName)
-            {
-                ThrallOfWrath.Start(sk.Duration);
-                return true;
-            }
+            if (sk.Skill.IconName != ThrallOfWrath.Skill.IconName) return false;
+            ThrallOfWrath.Start(sk.Duration);
+            return true;
             //if (sk.Skill.IconName == KingBlob.Skill.IconName)
             //{
             //    KingBlob.Start(sk.Cooldown);
             //    return true;
             //}
-            return false;
         }
     }
 }

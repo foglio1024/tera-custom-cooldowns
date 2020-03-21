@@ -13,13 +13,13 @@ namespace TCC.UI.TemplateSelectors
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            switch (item)
+            return item switch
             {
-                case ActionMessagePiece _: return ActionTemplate;
-                case IconMessagePiece _: return IconTemplate;
-                case MoneyMessagePiece _: return MoneyTemplate;
-                default: return SimpleTemplate;
-            }
+                ActionMessagePiece _ => ActionTemplate,
+                IconMessagePiece _ => IconTemplate,
+                MoneyMessagePiece _ => MoneyTemplate,
+                _ => SimpleTemplate
+            };
         }
     }
 }

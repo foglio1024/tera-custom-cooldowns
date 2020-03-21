@@ -2,6 +2,8 @@
 using Nostrum;
 using Nostrum.Extensions;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -9,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using TCC.Data;
+using TCC.Data.Databases;
 using TCC.Data.Pc;
 using TCC.Processing;
 using TCC.UI;
@@ -518,6 +521,22 @@ namespace TCC.Test
         {
             WindowManager.ViewModels.GroupVM.StartRoll();
             WindowManager.ViewModels.GroupVM.Members[0].IsWinning = true;
+        }
+
+        public static void TestAbnormDbLoad()
+        {
+            var db = new ItemsDatabase("EU-EN");
+            var samples = new List<long>();
+            var sw = new Stopwatch();
+            for (int i = 0; i < 1000; i++)
+            {
+                sw.Restart();
+                db.Load();
+                sw.Stop();
+                samples.Add(sw.ElapsedMilliseconds);
+                Debug.WriteLine($"Average: {samples.Average():N2}ms Last:{sw.ElapsedMilliseconds:N2}ms n:{i+1}");
+            }
+
         }
     }
 }

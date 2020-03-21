@@ -47,18 +47,15 @@ namespace TeraPacketParser.TeraCommon.Game.Services
             set
             {
                 _language = value;
-                switch (_language)
+                Region = _language switch
                 {
-                    case LangEnum.EN:
-                    case LangEnum.GER:
-                    case LangEnum.FR:
-                        Region = "EU"; break;
-                    case LangEnum.THA:
-                    case LangEnum.SE:
-                        Region = "THA"; break;
-                    default:
-                        Region = _language.ToString(); break;
-                }
+                    LangEnum.EN => "EU",
+                    LangEnum.GER => "EU",
+                    LangEnum.FR => "EU",
+                    LangEnum.THA => "THA",
+                    LangEnum.SE => "THA",
+                    _ => _language.ToString()
+                };
             }
         }
 
@@ -67,14 +64,13 @@ namespace TeraPacketParser.TeraCommon.Game.Services
             get
             {
                 var ret = _language.ToString();
-                switch (_language)
+                ret = _language switch
                 {
-                    case LangEnum.GER:
-                    case LangEnum.FR:
-                    case LangEnum.EN:
-                        ret = "EU-" + ret;
-                        break;
-                }
+                    LangEnum.GER => ($"EU-{ret}"),
+                    LangEnum.FR => ($"EU-{ret}"),
+                    LangEnum.EN => ($"EU-{ret}"),
+                    _ => ret
+                };
 
                 return ret;
             }

@@ -130,13 +130,11 @@ namespace TCC.ViewModels.Widgets
                     _windowSettings.TimeoutChanged -= ChangeTimerInterval;
                 }
                 _windowSettings = value;
-                if (_windowSettings != null)
-                {
-                    _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout) };
-                    _hideTimer.Tick += OnHideTimerTick;
-                    _hideTimer.Start();
-                    _windowSettings.TimeoutChanged += ChangeTimerInterval;
-                }
+                if (_windowSettings == null) return;
+                _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout) };
+                _hideTimer.Tick += OnHideTimerTick;
+                _hideTimer.Start();
+                _windowSettings.TimeoutChanged += ChangeTimerInterval;
             }
         }
 
@@ -240,11 +238,9 @@ namespace TCC.ViewModels.Widgets
             var items = newOrder.ToList();
             for (var i = 0; i < items.Count; i++)
             {
-                if (old[i].Header != items.ToList()[i].Content)
-                {
-                    same = false;
-                    break;
-                }
+                if (old[i].Header == items.ToList()[i].Content) continue;
+                same = false;
+                break;
             }
             if (same)
             {

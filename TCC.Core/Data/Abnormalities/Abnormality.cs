@@ -10,7 +10,7 @@
         public bool IsDebuff => Type == AbnormalityType.DOT ||
                                Type == AbnormalityType.Stun ||
                                Type == AbnormalityType.Debuff;
-        public bool IsShow { get; set; }
+        public bool IsShow { get; }
         public bool Infinity { get; set; }
         public AbnormalityType Type { get; set; }
         public uint ShieldSize { get; private set; }
@@ -24,30 +24,25 @@
                                && !Name.Equals(string.Empty);
 
 
-        public Abnormality(uint id, bool isShow, bool isBuff, bool infinity, AbnormalityType prop)
+        public Abnormality(uint id, bool isShow, bool isBuff, bool infinity, AbnormalityType prop, string iconName, string name, string tooltip)
         {
             Id = id;
             IsBuff = isBuff;
             IsShow = isShow;
             Infinity = infinity;
             Type = prop;
-        }
-
-        public void SetIcon(string iconName)
-        {
             IconName = iconName;
-        }
-
-        public void SetInfo(string name, string toolTip)
-        {
             Name = name;
-            ToolTip = toolTip;
+            ToolTip = tooltip;
+            ShieldSize = 0;
+            IsShield = false;
         }
 
-        public void SetShield(uint size)
+
+        public void SetShield(double size)
         {
             IsShield = true;
-            ShieldSize = size;
+            ShieldSize = (uint)size;
         }
 
     }

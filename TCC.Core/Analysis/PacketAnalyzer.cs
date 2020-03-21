@@ -4,12 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using TCC.Data;
 using TCC.Exceptions;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Loader;
 using TCC.Processing;
 using TCC.Sniffing;
 using TCC.UI;
@@ -20,7 +18,6 @@ using TeraPacketParser;
 using TeraPacketParser.Messages;
 using TeraPacketParser.TeraCommon.Game;
 using TeraPacketParser.TeraCommon.Sniffing;
-using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.Analysis
 {
@@ -52,31 +49,11 @@ namespace TCC.Analysis
 
         public static async Task InitAsync()
         {
-            ProcessorReady += () => App.BaseDispatcher.Invoke(() =>
-            {
-                try
-                {
-                    ModuleLoader.LoadModules(App.BasePath);
-                }
-                catch (FileLoadException fle)
-                {
-                    TccMessageBox.Show("TCC module loader",
-                        $"An error occured while loading {fle.FileName}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                    App.Close();
-                }
-                catch (FileNotFoundException fnfe)
-                {
-                    TccMessageBox.Show("TCC module loader",
-                        $"An error occured while loading {Path.GetFileName(fnfe.FileName)}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                    App.Close();
-                }
-            });
 
             await Task.Factory.StartNew(Init);
             Log.N("TCC", "Ready to connect.", NotificationType.Normal);
         }
+
         private static void PacketAnalysisLoop()
         {
             Processor = new MessageProcessor();

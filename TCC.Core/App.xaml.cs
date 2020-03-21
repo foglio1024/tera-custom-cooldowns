@@ -12,11 +12,11 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using TCC.Analysis;
 using TCC.Data;
 using TCC.Exceptions;
 using TCC.Interop.Proxy;
-using TCC.Analysis;
-using TCC.Notice;
+using TCC.Loader;
 using TCC.Settings;
 using TCC.UI;
 using TCC.UI.Windows;
@@ -24,6 +24,7 @@ using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
+using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
 {
@@ -134,6 +135,7 @@ namespace TCC
             // ----------------------------
             SplashScreen.VM.BottomText = "Initializing packet processor...";
             SplashScreen.VM.Progress = 80;
+            PacketAnalyzer.ProcessorReady += LoadModules;
             await PacketAnalyzer.InitAsync();
 
             // ----------------------------
@@ -170,12 +172,11 @@ namespace TCC
 
             // --root_override 'path'
             var rootOverrideIdx = args.IndexOf("--root_override");
-            if (rootOverrideIdx != -1)
-            {
-                BasePath = args[rootOverrideIdx + 1];
-                ResourcesPath = Path.Combine(BasePath, "resources");
-                DataPath = Path.Combine(ResourcesPath, "data");
-            }
+            if (rootOverrideIdx == -1) return;
+
+            BasePath = args[rootOverrideIdx + 1];
+            ResourcesPath = Path.Combine(BasePath, "resources");
+            DataPath = Path.Combine(ResourcesPath, "data");
         }
         public static void Restart()
         {
@@ -205,6 +206,26 @@ namespace TCC
         {
             _running = false;
             BaseDispatcher.Invoke(() => _mutex.ReleaseMutex());
+        }
+        private static void LoadModules()
+        {
+            BaseDispatcher.Invoke(() =>
+            {
+                try
+                {
+                    ModuleLoader.LoadModules(BasePath);
+                }
+                catch (FileLoadException fle)
+                {
+                    TccMessageBox.Show("TCC module loader", $"An error occured while loading {fle.FileName}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
+                }
+                catch (FileNotFoundException fnfe)
+                {
+                    TccMessageBox.Show("TCC module loader", $"An error occured while loading {Path.GetFileName(fnfe.FileName)}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
+                }
+            });
         }
 
         #region Dispatchers
@@ -284,5 +305,6 @@ namespace TCC
         }
 
         #endregion
+
     }
 }

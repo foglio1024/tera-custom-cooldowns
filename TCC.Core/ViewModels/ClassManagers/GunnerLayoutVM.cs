@@ -54,12 +54,11 @@ namespace TCC.ViewModels
                 Bombardment.Start(sk.Duration);
                 return true;
             }
-            if (ModularSystem.Cooldown.Skill != null && sk.Skill.IconName == ModularSystem.Cooldown.Skill.IconName)
-            {
-                ModularSystem.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (ModularSystem.Cooldown.Skill == null ||
+                sk.Skill.IconName != ModularSystem.Cooldown.Skill.IconName) return false;
+            ModularSystem.Cooldown.Start(sk.Duration);
+            return true;
         }
     }
 }

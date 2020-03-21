@@ -74,24 +74,14 @@ namespace TCC.Data.Pc
             {
                 if (_userClass == value) return;
                 _userClass = value;
-                switch (value)
+                Role = value switch
                 {
-                    case Class.Lancer:
-                        Role = Role.Tank;
-                        break;
-                    case Class.Priest:
-                        Role = Role.Healer;
-                        break;
-                    case Class.Mystic:
-                        Role = Role.Healer;
-                        break;
-                    case Class.Brawler:
-                        Role = Role.Tank;
-                        break;
-                    default:
-                        Role = Role.Dps;
-                        break;
-                }
+                    Class.Lancer => Role.Tank,
+                    Class.Priest => Role.Healer,
+                    Class.Mystic => Role.Healer,
+                    Class.Brawler => Role.Tank,
+                    _ => Role.Dps
+                };
                 N(nameof(UserClass));
             }
         }

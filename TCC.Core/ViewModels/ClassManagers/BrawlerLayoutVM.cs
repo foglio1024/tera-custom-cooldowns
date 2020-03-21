@@ -65,12 +65,10 @@ namespace TCC.ViewModels
                 RhythmicBlows.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == Infuriate.Skill.IconName)
-            {
-                Infuriate.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != Infuriate.Skill.IconName) return false;
+            Infuriate.Start(sk.Duration);
+            return true;
         }
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)
@@ -80,12 +78,10 @@ namespace TCC.ViewModels
                 RhythmicBlows.Refresh(skill.Id, cd, CooldownMode.Normal);
                 return true;
             }
-            if (skill.IconName == Infuriate.Skill.IconName)
-            {
-                Infuriate.Refresh(cd, CooldownMode.Normal);
-                return true;
-            }
-            return false;
+
+            if (skill.IconName != Infuriate.Skill.IconName) return false;
+            Infuriate.Refresh(cd, CooldownMode.Normal);
+            return true;
         }
 
         public override void Dispose()

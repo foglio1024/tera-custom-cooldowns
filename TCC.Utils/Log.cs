@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using TCC.Data;
 
@@ -15,7 +14,7 @@ namespace TCC.Utils
 
         public static void CW(string line)
         {
-            Debug.WriteLine(line);
+            Console.WriteLine(line);
         }
 
         public static void F(string line, string fileName = "error.log")

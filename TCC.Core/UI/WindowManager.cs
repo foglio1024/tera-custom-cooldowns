@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Win32;
 using Nostrum.Extensions;
+using Nostrum.WinAPI;
 using TCC.UI.Controls;
 using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
@@ -188,6 +189,7 @@ namespace TCC.UI
 
         public static void InitSettingsWindow()
         {
+            if (App.Settings.ShowConsole) Kernel32.AllocConsole();
             SettingsWindow = new SettingsWindow();
         }
     }

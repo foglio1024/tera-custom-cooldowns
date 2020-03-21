@@ -79,17 +79,13 @@ namespace TCC.Data
 
         private static FlightStackType IdToStackType(uint id)
         {
-            switch (id)
+            return id switch
             {
-                case FireEssenceId:
-                    return FlightStackType.Fire;
-                case SparkEssenceId:
-                    return FlightStackType.Spark;
-                case AirEssenceId:
-                    return FlightStackType.Air;
-                default:
-                    return FlightStackType.None;
-            }
+                FireEssenceId => FlightStackType.Fire,
+                SparkEssenceId => FlightStackType.Spark,
+                AirEssenceId => FlightStackType.Air,
+                _ => FlightStackType.None
+            };
         }
         private static bool IsEssence(uint id)
         {

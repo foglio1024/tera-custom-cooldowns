@@ -195,12 +195,9 @@ namespace TCC.ViewModels.Widgets
                     shortSkill.Dispose();
                 }
                 var itemSkill = ItemSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == sk.Name);
-                if (itemSkill != null)
-                {
-
-                    ItemSkills.Remove(itemSkill);
-                    itemSkill.Dispose();
-                }
+                if (itemSkill == null) return;
+                ItemSkills.Remove(itemSkill);
+                itemSkill.Dispose();
             }
             catch
             {
@@ -235,16 +232,13 @@ namespace TCC.ViewModels.Widgets
                 return true;
             }
             skill = SecondarySkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
-            if (skill != null)
+            if (skill == null) return UpdateOther(sk);
+            if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
             {
-                if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
-                {
-                    return false;
-                }
-                skill.Start(sk);
-                return true;
+                return false;
             }
-            return UpdateOther(sk);
+            skill.Start(sk);
+            return true;
         }
         private void FixedMode_Change(Skill sk, uint cd)
         {
@@ -308,11 +302,9 @@ namespace TCC.ViewModels.Widgets
             try
             {
                 var otherSkill = OtherSkills.ToSyncList().FirstOrDefault(x => x.Skill.Name == sk.Name);
-                if (otherSkill != null)
-                {
-                    OtherSkills.Remove(otherSkill);
-                    otherSkill.Dispose();
-                }
+                if (otherSkill == null) return;
+                OtherSkills.Remove(otherSkill);
+                otherSkill.Dispose();
             }
             catch
             {

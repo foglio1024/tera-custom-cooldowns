@@ -161,26 +161,25 @@ namespace TCC
                 ret["inner_exception"] = innEx;
             }
 
-            if (ex is PacketParseException ppe)
-            {
-                ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
-                ret.Add("packet_data", new JValue(ppe.RawData.ToStringEx()));
-            }
+            if (!(ex is PacketParseException ppe)) return ret;
+            
+            ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
+            ret.Add("packet_data", new JValue(ppe.RawData.ToStringEx()));
             return ret;
         }
 
         private static JObject BuildInnerExceptionJObject(Exception ex)
         {
-            var ret = new JObject();
-            ret["exception"] = new JValue(ex.Message);
-            ret["exception_type"] = new JValue(ex.GetType().FullName);
-            ret["exception_source"] = new JValue(ex.Source);
-            ret["stack_trace"] = new JValue(ex.StackTrace);
-            if (ex.InnerException != null)
+            var ret = new JObject
             {
-                var innEx = BuildInnerExceptionJObject(ex.InnerException);
-                ret["inner_exception"] = innEx;
-            }
+                ["exception"] = new JValue(ex.Message),
+                ["exception_type"] = new JValue(ex.GetType().FullName),
+                ["exception_source"] = new JValue(ex.Source),
+                ["stack_trace"] = new JValue(ex.StackTrace)
+            };
+            if (ex.InnerException == null) return ret;
+            var innEx = BuildInnerExceptionJObject(ex.InnerException);
+            ret["inner_exception"] = innEx;
             return ret;
         }
 

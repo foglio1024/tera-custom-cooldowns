@@ -12,68 +12,35 @@ namespace TCC.UI.Converters
         {
             var ch = ChatChannel.Say;
             if (value is ChatChannel cc) ch = cc;
-            switch (ch)
+            return ch switch
             {
-                case ChatChannel.PartyNotice:
-                case ChatChannel.RaidNotice:
-                    return "Notice";
-                case ChatChannel.GuildAdvertising:
-                    return "G. Ad";
-                case ChatChannel.Megaphone:
-                    return "Megaphone";
-                case ChatChannel.Private1:
-                    return ChatManager.Instance.PrivateChannels[0].Name ?? ch.ToString();
-                case ChatChannel.Private2:
-                    return ChatManager.Instance.PrivateChannels[1].Name ?? ch.ToString();
-                case ChatChannel.Private3:
-                    return ChatManager.Instance.PrivateChannels[2].Name ?? ch.ToString();
-                case ChatChannel.Private4:
-                    return ChatManager.Instance.PrivateChannels[3].Name ?? ch.ToString();
-                case ChatChannel.Private5:
-                    return ChatManager.Instance.PrivateChannels[4].Name ?? ch.ToString();
-                case ChatChannel.Private6:
-                    return ChatManager.Instance.PrivateChannels[5].Name ?? ch.ToString();
-                case ChatChannel.Private7:
-                    return ChatManager.Instance.PrivateChannels[6].Name ?? ch.ToString();
-                case ChatChannel.Private8:
-                    return ChatManager.Instance.PrivateChannels[7].Name ?? ch.ToString();
-                case ChatChannel.Notify:
-                    return "Info";
-                case ChatChannel.Error:
-                    return "Alert";
-                case ChatChannel.GuildNotice:
-                    return "Guild";
-                case ChatChannel.GroupAlerts:
-                    return "Group";
-                case ChatChannel.TradeRedirect:
-                    return "Global";
-                //case ChatChannel.Enchant12:
-                //    return "+12";
-                //case ChatChannel.Enchant15:
-                //    return "+15";
-                case ChatChannel.Enchant:
-                    return "Gear";
-                //case ChatChannel.Enchant8:
-                //    return "+8";
-                //case ChatChannel.Enchant9:
-                //    return "+9";
-                case ChatChannel.RaidLeader:
-                    return "Leader";
-                case ChatChannel.Bargain:
-                    return "Offer";
-                case ChatChannel.WorldBoss:
-                    return "W.B.";
-                case ChatChannel.SystemDefault:
-                    return "System";
-                case ChatChannel.Damage:
-                    return "Dmg";
-                case ChatChannel.Guardian:
-                    return "G.L.";
-                case ChatChannel.ReceivedWhisper:
-                    return "Whisper";
-                default:
-                    return ch.ToString();
-            }
+                ChatChannel.PartyNotice => "Notice",
+                ChatChannel.RaidNotice => "Notice",
+                ChatChannel.GuildAdvertising => "G. Ad",
+                ChatChannel.Megaphone => "Megaphone",
+                ChatChannel.Private1 => (ChatManager.Instance.PrivateChannels[0].Name ?? ch.ToString()),
+                ChatChannel.Private2 => (ChatManager.Instance.PrivateChannels[1].Name ?? ch.ToString()),
+                ChatChannel.Private3 => (ChatManager.Instance.PrivateChannels[2].Name ?? ch.ToString()),
+                ChatChannel.Private4 => (ChatManager.Instance.PrivateChannels[3].Name ?? ch.ToString()),
+                ChatChannel.Private5 => (ChatManager.Instance.PrivateChannels[4].Name ?? ch.ToString()),
+                ChatChannel.Private6 => (ChatManager.Instance.PrivateChannels[5].Name ?? ch.ToString()),
+                ChatChannel.Private7 => (ChatManager.Instance.PrivateChannels[6].Name ?? ch.ToString()),
+                ChatChannel.Private8 => (ChatManager.Instance.PrivateChannels[7].Name ?? ch.ToString()),
+                ChatChannel.Notify => "Info",
+                ChatChannel.Error => "Alert",
+                ChatChannel.GuildNotice => "Guild",
+                ChatChannel.GroupAlerts => "Group",
+                ChatChannel.TradeRedirect => "Global",
+                ChatChannel.Enchant => "Gear",
+                ChatChannel.RaidLeader => "Leader",
+                ChatChannel.Bargain => "Offer",
+                ChatChannel.WorldBoss => "W.B.",
+                ChatChannel.SystemDefault => "System",
+                ChatChannel.Damage => "Dmg",
+                ChatChannel.Guardian => "G.L.",
+                ChatChannel.ReceivedWhisper => "Whisper",
+                _ => ch.ToString()
+            };
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

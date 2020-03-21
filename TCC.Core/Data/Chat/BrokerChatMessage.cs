@@ -66,12 +66,10 @@ namespace TCC.Data.Chat
             Listing = new SimpleMessagePiece("") { Container = this };
 
             Game.DB.ItemsDatabase.Items.TryGetValue((uint)item, out var i);
-            if (i != null)
-            {
-                Listing.Text = "<" + i.Name + ">";
-                //TODO: //Listing.ItemId = i.Id;
-                Listing.Color = TccUtils.GradeToColorString(i.RareGrade);
-            }
+            if (i == null) return;
+            Listing.Text = "<" + i.Name + ">";
+            //TODO: //Listing.ItemId = i.Id;
+            Listing.Color = TccUtils.GradeToColorString(i.RareGrade);
             //Listing.Type = MessagePieceType.Item;
         }
     }

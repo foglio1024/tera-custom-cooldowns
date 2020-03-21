@@ -10,19 +10,14 @@ namespace TCC.UI.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (GearTier? ) value ?? GearTier.Low;
-            switch (val)
+            return val switch
             {
-                case GearTier.Low:
-                    return R.Brushes.Tier2DungeonBrush; 
-                case GearTier.Mid:
-                    return R.Brushes.Tier3DungeonBrush; 
-                case GearTier.High:
-                    return R.Brushes.Tier4DungeonBrush; 
-                case GearTier.Top:
-                    return R.Brushes.Tier5DungeonBrush; 
-                default:
-                    return R.Brushes.Tier1DungeonBrush; 
-            }
+                GearTier.Low => R.Brushes.Tier2DungeonBrush,
+                GearTier.Mid => R.Brushes.Tier3DungeonBrush,
+                GearTier.High => R.Brushes.Tier4DungeonBrush,
+                GearTier.Top => R.Brushes.Tier5DungeonBrush,
+                _ => R.Brushes.Tier1DungeonBrush
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

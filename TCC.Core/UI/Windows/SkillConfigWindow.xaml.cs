@@ -141,19 +141,13 @@ namespace TCC.UI.Windows
             var l = dropInfo.TargetCollection.TryGetList();
             if (l.Cast<Cooldown>().Any(cd =>
             {
-                var ret = false;
-                switch (dropInfo.Data)
+                var ret = dropInfo.Data switch
                 {
-                    case Skill s:
-                        ret = cd.Skill.IconName == s.IconName;
-                        break;
-                    case Item i:
-                        ret = cd.Skill.IconName == i.IconName;
-                        break;
-                    case Abnormality a:
-                        ret = cd.Skill.IconName == a.IconName;
-                        break;
-                }
+                    Skill s => (cd.Skill.IconName == s.IconName),
+                    Item i => (cd.Skill.IconName == i.IconName),
+                    Abnormality a => (cd.Skill.IconName == a.IconName),
+                    _ => false
+                };
 
                 return ret;
             })) return;

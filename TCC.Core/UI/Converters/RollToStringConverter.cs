@@ -8,15 +8,12 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((int?)value)
+            return (int?) value switch
             {
-                case -1:
-                    return "x";
-                case 0:
-                    return "-";
-                default:
-                    return ((int?)value).ToString();
-            }
+                -1 => "x",
+                0 => "-",
+                _ => ((int?) value).ToString()
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

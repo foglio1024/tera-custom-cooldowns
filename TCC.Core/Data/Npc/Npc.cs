@@ -24,11 +24,9 @@ namespace TCC.Data.NPCs
             get => _name;
             set
             {
-                if (_name != value)
-                {
-                    _name = value;
-                    N(nameof(Name));
-                }
+                if (_name == value) return;
+                _name = value;
+                N(nameof(Name));
             }
         }
 
@@ -73,12 +71,10 @@ namespace TCC.Data.NPCs
             get => _maxHP;
             set
             {
-                if (_maxHP != value)
-                {
-                    _maxHP = value;
-                    EnragePattern?.Update(value);
-                    N();
-                }
+                if (_maxHP == value) return;
+                _maxHP = value;
+                EnragePattern?.Update(value);
+                N();
             }
         }
 
@@ -88,13 +84,11 @@ namespace TCC.Data.NPCs
             get => _currentHP;
             set
             {
-                if (_currentHP != value)
-                {
-                    _currentHP = value;
-                    N(nameof(CurrentHP));
-                    N(nameof(CurrentPercentage));
-                    N(nameof(HPFactor));
-                }
+                if (_currentHP == value) return;
+                _currentHP = value;
+                N(nameof(CurrentHP));
+                N(nameof(CurrentPercentage));
+                N(nameof(HPFactor));
             }
         }
         private uint _maxShield;
@@ -103,12 +97,10 @@ namespace TCC.Data.NPCs
             get => _maxShield;
             set
             {
-                if (_maxShield != value)
-                {
-                    _maxShield = value;
-                    N(nameof(MaxShield));
-                    N(nameof(ShieldFactor));
-                }
+                if (_maxShield == value) return;
+                _maxShield = value;
+                N(nameof(MaxShield));
+                N(nameof(ShieldFactor));
             }
         }
         private float _currentShield;
@@ -179,11 +171,9 @@ namespace TCC.Data.NPCs
                 var newAb = new AbnormalityDuration(ab, duration, stacks, _target, Dispatcher, true);
                 if (ab.Infinity) Buffs.Insert(0, newAb);
                 else Buffs.Add(newAb);
-                if (ab.IsShield)
-                {
-                    MaxShield = ab.ShieldSize;
-                    CurrentShield = ab.ShieldSize;
-                }
+                if (!ab.IsShield) return;
+                MaxShield = ab.ShieldSize;
+                CurrentShield = ab.ShieldSize;
                 return;
             }
             existing.Duration = duration;

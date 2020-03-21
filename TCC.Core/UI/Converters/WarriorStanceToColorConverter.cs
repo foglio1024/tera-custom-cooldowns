@@ -20,15 +20,12 @@ namespace TCC.UI.Converters
             if (value != null)
             {
                 var s = (WarriorStance)value;
-                switch (s)
+                color = s switch
                 {
-                    case WarriorStance.Assault:
-                        color = light? R.Colors.AssaultStanceColorLight : R.Colors.AssaultStanceColor;
-                        break;
-                    case WarriorStance.Defensive:
-                        color = light ? R.Colors.DefensiveStanceColorLight : R.Colors.DefensiveStanceColor;
-                        break;
-                }
+                    WarriorStance.Assault => (light ? R.Colors.AssaultStanceColorLight : R.Colors.AssaultStanceColor),
+                    WarriorStance.Defensive => (light ? R.Colors.DefensiveStanceColorLight : R.Colors.DefensiveStanceColor),
+                    _ => color
+                };
             }
 
             if (col) return color;

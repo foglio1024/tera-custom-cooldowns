@@ -46,12 +46,10 @@ namespace TCC.ViewModels
                 Ragnarok.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == Godsfall.Cooldown.Skill.IconName)
-            {
-                Godsfall.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != Godsfall.Cooldown.Skill.IconName) return false;
+            Godsfall.Cooldown.Start(sk.Duration);
+            return true;
         }
     }
 }

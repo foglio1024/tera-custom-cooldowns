@@ -12,7 +12,7 @@ namespace TCC.Data.Databases
         protected abstract string Extension { get; }
 
         public string RelativePath => $"{FolderName}/{FolderName}-{Language}.{Extension}";
-        protected string FullPath => Path.Combine(App.DataPath, RelativePath);
+        protected string FullPath { get; }
         public virtual bool Exists => File.Exists(FullPath);
         public bool IsUpToDate => outdatedCount == 0 && Exists;
         protected int outdatedCount;
@@ -49,6 +49,7 @@ namespace TCC.Data.Databases
         public DatabaseBase(string lang)
         {
             Language = lang;
+            FullPath = Path.Combine(App.DataPath, RelativePath);
         }
 
         public virtual void Update(string custom = null)

@@ -21,14 +21,14 @@ namespace TCC.Settings
                 return;
             }
 
-            // todo: remove after a while ----------------------
+            // todo: remove after merge with master ----------------------
             filePath = filePath.Replace(".json", ".xml");
             if (File.Exists(filePath))
             {
                 Data = ParseXML(filePath);
                 return;
             }
-            // -------------------------------------------------
+            // -----------------------------------------------------------
 
             Data = GetDefaults(c);
         }
@@ -272,7 +272,7 @@ namespace TCC.Settings
             return ret;
         }
 
-        [Obsolete]
+        [Obsolete("Remove after merge with master.")]
         private CooldownConfigData ParseXML(string filePath)
         {
             var ret = new CooldownConfigData();

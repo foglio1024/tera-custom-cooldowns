@@ -300,17 +300,15 @@ namespace TCC.Data.Chat
                 if (!App.Loading) ContainsPlayerName = TccUtils.CheckMention(text);
                 CheckRedirect(text);
                 var content = GetPieceContent(text);
-                if (content != "")
-                {
-                    var p = new SimpleMessagePiece(
-                        content
-                            .Replace("<a href=\"asfunction:chatLinkAction\">", "")
-                            .Replace("</a>", "")
-                            .UnescapeHtml(), App.Settings.FontSize, false
-                    );
-                    if (Channel == ChatChannel.ReceivedWhisper) p.Color = R.Brushes.GoldBrush.Color.ToHex();
-                    AddPiece(p);
-                }
+                if (content == "") return;
+                var p = new SimpleMessagePiece(
+                    content
+                        .Replace("<a href=\"asfunction:chatLinkAction\">", "")
+                        .Replace("</a>", "")
+                        .UnescapeHtml(), App.Settings.FontSize, false
+                );
+                if (Channel == ChatChannel.ReceivedWhisper) p.Color = R.Brushes.GoldBrush.Color.ToHex();
+                AddPiece(p);
             }
         }
 

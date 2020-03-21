@@ -48,7 +48,6 @@
 
     <converters:StringToFillConverter x:Key="StringToFill"/>
     <converters:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
-    <converters:LfgVmToButtonLabelConverter x:Key="LfgVmToButtonLabel"/>
     <converters:ClassToNameConverter x:Key="ClassToName" />
 
     <converters:ItemLevelTierToColorConverter x:Key="IlvlTierToColor" />

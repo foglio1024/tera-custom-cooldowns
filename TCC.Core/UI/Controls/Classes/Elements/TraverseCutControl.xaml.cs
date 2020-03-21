@@ -76,12 +76,10 @@ namespace TCC.UI.Controls.Classes.Elements
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(StatTracker.Factor))
-            {
-                _anim.To = _dc.Factor * 359.9;
-                ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _anim);
-                _isAnimating = true;
-            }
+            if (e.PropertyName != nameof(StatTracker.Factor)) return;
+            _anim.To = _dc.Factor * 359.9;
+            ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _anim);
+            _isAnimating = true;
         }
     }
 }

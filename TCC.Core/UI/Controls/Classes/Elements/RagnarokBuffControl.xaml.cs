@@ -42,15 +42,12 @@ namespace TCC.UI.Controls.Classes.Elements
 
         private void ST_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Val")
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SecondsText)));
-                IconGlow.Opacity = WindowManager.ViewModels.ClassVM.CurrentManager.StaminaTracker.Factor == 1 ? 1 : 0;
-                if (Running) return;
-                var an = new DoubleAnimation((1-WindowManager.ViewModels.ClassVM.CurrentManager.StaminaTracker.Factor) * 359.9, TimeSpan.FromMilliseconds(50));
-                InternalArc.BeginAnimation(Arc.EndAngleProperty, an);
-
-            }
+            if (e.PropertyName != "Val") return;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SecondsText)));
+            IconGlow.Opacity = WindowManager.ViewModels.ClassVM.CurrentManager.StaminaTracker.Factor == 1 ? 1 : 0;
+            if (Running) return;
+            var an = new DoubleAnimation((1-WindowManager.ViewModels.ClassVM.CurrentManager.StaminaTracker.Factor) * 359.9, TimeSpan.FromMilliseconds(50));
+            InternalArc.BeginAnimation(Arc.EndAngleProperty, an);
         }
 
         private bool _running;

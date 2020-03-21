@@ -26,23 +26,23 @@ namespace TCC.ViewModels
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (App.Loading) return None;
-            switch (WindowManager.ViewModels.ClassVM.CurrentClass)
+            return WindowManager.ViewModels.ClassVM.CurrentClass switch
             {
-                case Class.Warrior: return Warrior;
-                case Class.Lancer: return Lancer;
-                case Class.Slayer: return Slayer;
-                case Class.Berserker: return Berserker;
-                case Class.Sorcerer: return Sorcerer;
-                case Class.Archer: return Archer;
-                case Class.Priest: return Priest;
-                case Class.Mystic: return Mystic;
-                case Class.Reaper: return Reaper;
-                case Class.Gunner: return Gunner;
-                case Class.Brawler: return Brawler;
-                case Class.Ninja: return Ninja;
-                case Class.Valkyrie: return Valkyrie;
-                default: return None;
-            }
+                Class.Warrior => Warrior,
+                Class.Lancer => Lancer,
+                Class.Slayer => Slayer,
+                Class.Berserker => Berserker,
+                Class.Sorcerer => Sorcerer,
+                Class.Archer => Archer,
+                Class.Priest => Priest,
+                Class.Mystic => Mystic,
+                Class.Reaper => Reaper,
+                Class.Gunner => Gunner,
+                Class.Brawler => Brawler,
+                Class.Ninja => Ninja,
+                Class.Valkyrie => Valkyrie,
+                _ => None
+            };
         }
     }
 }

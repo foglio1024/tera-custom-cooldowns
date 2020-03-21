@@ -39,13 +39,11 @@ namespace TCC.ViewModels
                 InColdBlood.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == OverhandStrike.Skill.IconName)
-            {
-                OverhandStrike.Start(sk.Duration);
-                return true;
-            }
-            
-            return false;
+
+            if (sk.Skill.IconName != OverhandStrike.Skill.IconName) return false;
+            OverhandStrike.Start(sk.Duration);
+            return true;
+
         }
     }
 }

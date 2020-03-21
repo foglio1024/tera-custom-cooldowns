@@ -50,21 +50,18 @@ namespace TCC.ViewModels
 
         public async void UpdateFromServer(bool force = false)
         {
-            if (GameEventManager.Instance.CurrentServerTime >= Start && !_happened)
-            {
+            if (GameEventManager.Instance.CurrentServerTime < Start || _happened) return;
+            var time = force
+                ? GameEventManager.Instance.CurrentServerTime
+                : (await GameEventManager.Instance.RetrieveGuildBamDateTime()).AddHours(GameEventManager.Instance.ServerHourOffsetFromUtc);
 
-                var time = force
-                    ? GameEventManager.Instance.CurrentServerTime
-                    : (await GameEventManager.Instance.RetrieveGuildBamDateTime()).AddHours(GameEventManager.Instance.ServerHourOffsetFromUtc);
-
-                if (time < Start) return;
-                Start = time;
-                Duration = TimeSpan.Zero;
-                _happened = true;
-                N(nameof(StartFactor));
-                N(nameof(DurationFactor));
-                N(nameof(ToolTip));
-            }
+            if (time < Start) return;
+            Start = time;
+            Duration = TimeSpan.Zero;
+            _happened = true;
+            N(nameof(StartFactor));
+            N(nameof(DurationFactor));
+            N(nameof(ToolTip));
         }
     }
 }

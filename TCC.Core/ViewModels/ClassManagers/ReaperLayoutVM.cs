@@ -38,12 +38,10 @@ namespace TCC.ViewModels
                 ShadowReaping.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == ShroudedEscape.Cooldown.Skill.IconName)
-            {
-                ShroudedEscape.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != ShroudedEscape.Cooldown.Skill.IconName) return false;
+            ShroudedEscape.Cooldown.Start(sk.Duration);
+            return true;
         }
     }
 }

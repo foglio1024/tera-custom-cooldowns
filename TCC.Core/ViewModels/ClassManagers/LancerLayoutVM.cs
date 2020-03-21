@@ -37,12 +37,10 @@ namespace TCC.ViewModels
                 AdrenalineRush.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == Infuriate.Skill.IconName)
-            {
-                Infuriate.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != Infuriate.Skill.IconName) return false;
+            Infuriate.Start(sk.Duration);
+            return true;
         }
 
         public override void LoadSpecialSkills()

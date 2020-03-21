@@ -9,23 +9,16 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((Class?)value)
+            return (Class?) value switch
             {
-                case Class.Warrior:
-                    return "RE";
-                case Class.Lancer:
-                    return "RE";
-                case Class.Gunner:
-                    return "WP";
-                case Class.Brawler:
-                case Class.Valkyrie:
-                    return "RG";
-                case Class.Ninja:
-                    return "CH";
-                default:
-                    return "";
-            }
-
+                Class.Warrior => "RE",
+                Class.Lancer => "RE",
+                Class.Gunner => "WP",
+                Class.Brawler => "RG",
+                Class.Valkyrie => "RG",
+                Class.Ninja => "CH",
+                _ => ""
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

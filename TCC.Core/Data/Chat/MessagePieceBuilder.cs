@@ -170,19 +170,18 @@ namespace TCC.Data.Chat
             var txt = id.ToString();
             var col = "fcb06f";
 
-            if (Game.DB.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
-            {
-                txt = g;
-                switch (id)
+            if (!Game.DB.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
+                return new SimpleMessagePiece(txt)
                 {
-                    case 104:
-                        col = R.Colors.ChatDiamondLaurelColor.ToHex(false, false);
-                        break;
-                    case 105:
-                        col = R.Colors.ChatChampionLaurelColor.ToHex(false, false);
-                        break;
-                }
-            }
+                    Color = col
+                };
+            txt = g;
+            col = id switch
+            {
+                104 => R.Colors.ChatDiamondLaurelColor.ToHex(false, false),
+                105 => R.Colors.ChatChampionLaurelColor.ToHex(false, false),
+                _ => col
+            };
 
             return new SimpleMessagePiece (txt)
             {
@@ -209,24 +208,14 @@ namespace TCC.Data.Chat
         {
             var param = chatLinkAction.GetAttributeValue("param", "");
             var type = int.Parse(param.Substring(0, 1));
-            ActionMessagePiece mp;
-            switch (type)
+            var mp = type switch
             {
-                case 1:
-                    mp = ParseHtmlItem(chatLinkAction);
-                    break;
-                case 2:
-                    mp = ParseHtmlQuest(chatLinkAction);
-                    break;
-                case 3:
-                    mp = ParseHtmlLocation(chatLinkAction);
-                    break;
-                case 7:
-                    mp = ParseHtmlAchievement(chatLinkAction);
-                    break;
-                default:
-                    throw new Exception();
-            }
+                1 => ParseHtmlItem(chatLinkAction),
+                2 => ParseHtmlQuest(chatLinkAction),
+                3 => ParseHtmlLocation(chatLinkAction),
+                7 => ParseHtmlAchievement(chatLinkAction),
+                _ => throw new Exception()
+            };
 
             return mp;
         }

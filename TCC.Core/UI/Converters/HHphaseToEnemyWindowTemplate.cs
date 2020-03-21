@@ -9,14 +9,11 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // ReSharper disable once PossibleNullReferenceException
-            switch ((HarrowholdPhase)value)
+            return (HarrowholdPhase?) value switch
             {
-                case HarrowholdPhase.Phase1:
-                    return R.DataTemplates.Phase1EnemyWindowLayout; //Application.Current.FindResource("Phase1EnemyWindowLayout");
-                default:
-                    return R.DataTemplates.DefaultEnemyWindowLayout; //Application.Current.FindResource("DefaultEnemyWindowLayout");
-            }
+                HarrowholdPhase.Phase1 => R.DataTemplates.Phase1EnemyWindowLayout,
+                _ => R.DataTemplates.DefaultEnemyWindowLayout
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
