@@ -137,5 +137,17 @@ namespace TCC.UI.Windows
             _testNotifIdx++;
             if (_testNotifIdx >= _lyrics.Count) _testNotifIdx = 0;
         }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.LeftCtrl) return;
+            ((SettingsWindowViewModel) DataContext).ShowDebugSettings = true;
+        }
+
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.LeftCtrl) return;
+            ((SettingsWindowViewModel)DataContext).ShowDebugSettings = false;
+        }
     }
 }

@@ -132,13 +132,14 @@ namespace TCC.Settings
         public string TwitchToken { get; set; } //TODO: re-add this
         [JsonIgnore]
         public string TwitchChannelName { get; set; } //TODO: re-add this 
+        #endregion
 
         public static string SettingsOverride { get; set; } = "";
         public string LastAccountNameHash { get; set; }
         public bool BackgroundNotifications { get; set; }
         public bool EnablePlayerMenu { get; set; }
+        public bool ShowConsole { get; set; }
 
-        #endregion
 
         public SettingsContainer()
         {

@@ -13,6 +13,8 @@
                  Title="TCC Settings" Height="600" Width="900" ResizeMode="NoResize"
                  Background="Transparent" UseLayoutRounding="True"
                  WindowStartupLocation="CenterScreen"
+                 KeyDown="OnKeyDown"
+                 KeyUp="OnKeyUp"
                  d:DataContext="{d:DesignInstance viewModels:SettingsWindowViewModel}">
     <windows:TccWindow.Resources>
         <Style TargetType="TabItem" x:Key="TabItemStyle">
@@ -1768,6 +1770,14 @@
                             <settings:HotkeySetting SettingName="Toggle widgets" Value="{Binding ToggleHideAllHotkey, Mode=TwoWay}" IsEnabled="{Binding UseHotkeys}"/>
 
                         </StackPanel>
+
+                        <StackPanel VerticalAlignment="Stretch" Grid.Row="3" Visibility="{Binding ShowDebugSettings, Converter= {StaticResource BoolToVisibility}}">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}" 
+                                            Content="Debug settings" />
+                            <settings:CheckboxSetting SettingName="Show console"
+                                                      IsOn="{Binding ShowConsole, Mode=TwoWay}" />
+                        </StackPanel>
+
                     </Grid>
                 </TabItem>
                 <!-- Discord settings -->

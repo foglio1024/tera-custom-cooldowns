@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Nostrum.WinAPI;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;
@@ -618,6 +619,20 @@ namespace TCC.ViewModels
             }
         }
 
+        public bool ShowConsole
+        {
+            get => App.Settings.ShowConsole;
+            set
+            {
+                if (App.Settings.ShowConsole == value) return;
+                App.Settings.ShowConsole = value;
+                N();
+
+                if (value) Kernel32.AllocConsole();
+                else Kernel32.FreeConsole();
+            }
+        }
+
         public IEnumerable<ClickThruMode> ClickThruModes
         {
             get
@@ -640,6 +655,8 @@ namespace TCC.ViewModels
 
 
         private TSObservableCollection<BlacklistedMonsterVM> _blacklistedMonsters;
+        private bool _showDebugSettings;
+
         public TSObservableCollection<BlacklistedMonsterVM> BlacklistedMonsters
         {
             get
@@ -682,6 +699,17 @@ namespace TCC.ViewModels
                 App.Settings.ShowIngameChat = value;
                 N();
                 StubInterface.Instance.StubClient.UpdateSetting("ShowIngameChat", App.Settings.ShowIngameChat);
+            }
+        }
+
+        public bool ShowDebugSettings
+        {
+            get => _showDebugSettings;
+            set
+            {
+                if(_showDebugSettings == value) return;
+                _showDebugSettings = value;
+                N();
             }
         }
 
