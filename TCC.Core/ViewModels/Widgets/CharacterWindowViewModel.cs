@@ -91,10 +91,11 @@ namespace TCC.ViewModels.Widgets
             Player.CurrentMP = m.CurrentMP;
             Player.CurrentST = m.CurrentST;
 
-            if (Player.Class != Class.Sorcerer) return;
-            Player.Fire = m.Fire;
-            Player.Ice = m.Ice;
-            Player.Arcane = m.Arcane;
+            // moved to Game
+            //if (Player.Class != Class.Sorcerer) return;
+            //Player.Fire = m.Fire;
+            //Player.Ice = m.Ice;
+            //Player.Arcane = m.Arcane;
         }
 
         private void MePropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -209,6 +209,7 @@ namespace TCC
             // player stuff
             PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
 
             // ep
             PacketAnalyzer.Processor.Hook<S_RESET_EP_PERK>(OnResetEpPerk);
@@ -334,6 +335,13 @@ namespace TCC
 
         #region Hooks
 
+        private static void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
+        {
+            if (Me.Class != Class.Sorcerer) return;
+            Me.Fire = m.Fire;
+            Me.Ice = m.Ice;
+            Me.Arcane = m.Arcane;
+        }
         private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
         {
             DB.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
@@ -342,11 +350,9 @@ namespace TCC
         }
         private static void OnRequestContract(S_BEGIN_THROUGH_ARBITER_CONTRACT p)
         {
-            if (p.Type == S_BEGIN_THROUGH_ARBITER_CONTRACT.RequestType.PartyInvite)
-            {
-                TccUtils.CheckWindowNotify($"{p.Sender} invited you to join a party", "Party invite");
-                TccUtils.CheckDiscordNotify($"**{p.Sender}** invited you to join a party", "TCC");
-            }
+            if (p.Type != S_BEGIN_THROUGH_ARBITER_CONTRACT.RequestType.PartyInvite) return;
+            TccUtils.CheckWindowNotify($"{p.Sender} invited you to join a party", "Party invite");
+            TccUtils.CheckDiscordNotify($"**{p.Sender}** invited you to join a party", "TCC");
         }
         private static void OnBanPartyMember(S_BAN_PARTY_MEMBER obj)
         {
