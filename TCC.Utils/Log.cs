@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using TCC.Data;
 
@@ -7,14 +8,19 @@ namespace TCC.Utils
     public static class Log
     {
         public static event Action<ChatChannel, string, string> NewChatMessage;
-        public static event Func<string, string, NotificationType, int, NotificationTemplate, int > NewNotification;
+        public static event Func<string, string, NotificationType, int, NotificationTemplate, int> NewNotification;
 
         private static string _logPath = "logs";
         private static string _version = "";
 
         public static void CW(string line)
         {
-            Console.WriteLine(line);
+            Debug.WriteLine(line);
+            //if (Debugger.IsAttached) Debug.WriteLine(line);
+            //else
+            //{
+                //Console.WriteLine(line);
+            //}
         }
 
         public static void F(string line, string fileName = "error.log")
