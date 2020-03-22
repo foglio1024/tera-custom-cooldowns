@@ -11,7 +11,7 @@
     <LangVersion>8</LangVersion>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <Version>1.4.78</Version>
+    <Version>1.4.79</Version>
     <Description>TERA Custom Cooldowns</Description>
     <PackageIcon>tcc.ico</PackageIcon>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -102,10 +102,7 @@
   <ItemGroup>
     <None Include="App.config" Visible="False" />
     <None Include="packages.config" Visible="False" />
-    <None Include="..\LICENSE" Visible="False">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
+    <None Include="..\LICENSE" Visible="False" Pack="True"/>
     <Resource Include="resources\fonts\ArialMono-Bold.ttf" />
     <Resource Include="resources\fonts\Frutiger.ttf" />
     <Resource Include="resources\fonts\NotoSans-Medium.ttf" />
@@ -146,19 +143,12 @@
     <Resource Include="resources\images\kr_boss_icon_full.png" />
     <Resource Include="resources\images\kr_mob_icon.png" />
     <Resource Include="resources\images\moongourd.png" />
-    <Resource Include="resources\tcc.ico">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </Resource>
+    <Resource Include="resources\tcc.ico" Pack="True"/>
     <Resource Include="resources\tcc_off.ico" />
     <Resource Include="resources\tcc_on.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\ttb.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="TCC.exe.manifest" Visible="False">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Update="TCC.exe.manifest" Visible="False" CopyToOutputDirectory="PreserveNewest"/>
   </ItemGroup>
-</Project>
+</Project> 
