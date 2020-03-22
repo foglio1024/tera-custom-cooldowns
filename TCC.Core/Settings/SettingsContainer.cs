@@ -138,7 +138,7 @@ namespace TCC.Settings
         public string LastAccountNameHash { get; set; }
         public bool BackgroundNotifications { get; set; }
         public bool EnablePlayerMenu { get; set; }
-        public bool ShowConsole { get; set; }
+        //public bool ShowConsole { get; set; }
 
 
         public SettingsContainer()

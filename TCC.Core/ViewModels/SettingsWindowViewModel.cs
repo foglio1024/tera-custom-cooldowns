@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Nostrum.WinAPI;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;
@@ -619,19 +618,23 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool ShowConsole
-        {
-            get => App.Settings.ShowConsole;
-            set
-            {
-                if (App.Settings.ShowConsole == value) return;
-                App.Settings.ShowConsole = value;
-                N();
+        //public bool ShowConsole
+        //{
+        //    get => App.Settings.ShowConsole;
+        //    set
+        //    {
+        //        if (App.Settings.ShowConsole == value) return;
+        //        App.Settings.ShowConsole = value;
+        //        N();
 
-                if (value) Kernel32.AllocConsole();
-                else Kernel32.FreeConsole();
-            }
-        }
+        //        if (value)
+        //        {
+        //            TccUtils.CreateConsole();
+        //            Log.CW("Console opened");
+        //        }
+        //        else Kernel32.FreeConsole();
+        //    }
+        //}
 
         public IEnumerable<ClickThruMode> ClickThruModes
         {
