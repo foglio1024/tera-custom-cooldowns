@@ -49,7 +49,8 @@ namespace TCC.Update
         public static void CheckServersFile()
         {
             var path = Path.Combine(App.DataPath, "servers.txt");
-            if (File.Exists(path) && HashUtils.GenerateFileHash(path) == DatabaseHashes["servers.txt"]) return;
+            if (!DatabaseHashes.TryGetValue("servers.txt", out var serversHash)) return;
+            if (File.Exists(path) && HashUtils.GenerateFileHash(path) == serversHash) return;
             DownloadServersFile();
         }
         public static void CheckDatabaseHash()
