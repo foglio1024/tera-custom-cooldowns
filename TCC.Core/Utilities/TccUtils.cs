@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Media;
 using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WinAPI;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Interop;
@@ -192,6 +195,30 @@ namespace TCC.Utilities
 
             Log.N(title, message /*string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}"*/, NotificationType.Normal, 6000);
 
+        }
+
+        // TODO: move to nostrum
+        private const uint StdOutputHandle = 0xFFFFFFF5;
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetStdHandle(uint nStdHandle);
+        [DllImport("kernel32.dll")]
+        private static extern void SetStdHandle(uint nStdHandle, IntPtr handle);
+        public static void CreateConsole()
+        {
+            Kernel32.AllocConsole();
+
+            // stdout's handle seems to always be equal to 7
+            var defaultStdout = new IntPtr(7);
+            var currentStdout = GetStdHandle(StdOutputHandle);
+
+            if (currentStdout != defaultStdout)
+                // reset stdout
+                SetStdHandle(StdOutputHandle, defaultStdout);
+
+            // reopen stdout
+            TextWriter writer = new StreamWriter(Console.OpenStandardOutput())
+                { AutoFlush = true };
+            Console.SetOut(writer);
         }
     }
 }
