@@ -1,18 +1,18 @@
 ﻿<windows:TccWindow x:Class="TCC.UI.Windows.Dashboard"
-                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
-                 xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
-                 xmlns:data="clr-namespace:TCC.Data"
-                 xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
-                 xmlns:pc="clr-namespace:TCC.Data.Pc"
-                 xmlns:viewModels="clr-namespace:TCC.ViewModels"
-                 xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
-                 xmlns:abnormalities1="clr-namespace:TCC.UI.Controls.Abnormalities"
-                 xmlns:windows="clr-namespace:TCC.UI.Windows"
-                 mc:Ignorable="d"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+                   xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+                   xmlns:data="clr-namespace:TCC.Data"
+                   xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
+                   xmlns:pc="clr-namespace:TCC.Data.Pc"
+                   xmlns:abnormalities1="clr-namespace:TCC.UI.Controls.Abnormalities"
+                   xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
+                   xmlns:windows="clr-namespace:TCC.UI.Windows"
+                   xmlns:viewModels="clr-namespace:TCC.ViewModels"
+                   mc:Ignorable="d"
                  Title="TCC Dashboard" Height="650" Width="1220"
                  ResizeMode="NoResize"
                  WindowStyle="None"
@@ -388,8 +388,8 @@
                       Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
-                        <ColumnDefinition Width="1.05*" />
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="0.95*" />
+                        <ColumnDefinition Width="0"/>
                     </Grid.ColumnDefinitions>
                     <!-- Col 1 -->
                     <Grid>
@@ -802,7 +802,7 @@
                         </Grid>
                     </Grid>
                     <!-- Col 3 -->
-                    <Grid Grid.Column="2">
+                    <Grid Grid.Column="2" Visibility="Collapsed">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -812,7 +812,7 @@
                                 Grid.Row="1"
                                 Margin="5" />
 
-                        <Grid Grid.Row="1" Margin="10" VerticalAlignment="Stretch">
+                        <Grid Grid.Row="1" Margin="10" VerticalAlignment="Stretch" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
