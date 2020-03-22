@@ -155,13 +155,11 @@ namespace TCC.Publisher
                 {"hash", HashUtils.GenerateFileHash(_exePath) }
             };
 
-            using (var c = MiscUtils.GetDefaultWebClient())
-            {
-                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                c.Encoding = Encoding.UTF8;
-                c.UploadString(_settings.FirestoreUrl, msg.ToString());
-            }
+            using var c = MiscUtils.GetDefaultWebClient();
+            c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+            c.Encoding = Encoding.UTF8;
+            c.UploadString(_settings.FirestoreUrl, msg.ToString());
         }
 
         private static void ExecuteWebhook(string changelog)

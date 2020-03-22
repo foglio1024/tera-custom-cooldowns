@@ -36,50 +36,47 @@ namespace TCC.Moongourd
         private void DownloadEncountersJson(JObject request)
         {
             if (request == null) return;
-            using (var c = new WebClient())
+            using var c = new WebClient();
+            c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+            c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+            c.Encoding = Encoding.UTF8;
+            new Task(() =>
             {
-                c.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
-                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                c.Encoding = Encoding.UTF8;
-                new Task(() =>
+                if (_asking) return;
+                Started?.Invoke();
+                _asking = true;
+                try
                 {
-                    if (_asking) return;
-                    Started?.Invoke();
-                    _asking = true;
+                    var str = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(request.ToString()));
+                    // ReSharper disable once AccessToDisposedClosure
+                    var resp = c.UploadString(new Uri(RecentUploadsUrl), str);
+                    LastResponse = null;
                     try
                     {
-                        var str = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(request.ToString()));
-                        // ReSharper disable once AccessToDisposedClosure
-                        var resp = c.UploadString(new Uri(RecentUploadsUrl), str);
-                        LastResponse = null;
-                        try
+                        LastResponse = JArray.Parse(resp);
+                        var ret = new List<MoongourdEncounter>();
+                        if (LastResponse == null) return;
+                        foreach (var jToken in LastResponse)
                         {
-                            LastResponse = JArray.Parse(resp);
-                            var ret = new List<MoongourdEncounter>();
-                            if (LastResponse == null) return;
-                            foreach (var jToken in LastResponse)
-                            {
-                                var jEncounter = (JObject)jToken;
-                                var encounter = new MoongourdEncounter(jEncounter);
-                                ret.Add(encounter);
-                            }
-                            Done?.Invoke(ret);
+                            var jEncounter = (JObject)jToken;
+                            var encounter = new MoongourdEncounter(jEncounter);
+                            ret.Add(encounter);
                         }
-                        catch
-                        {
-                            LastResponse = null;
-                        }
+                        Done?.Invoke(ret);
                     }
                     catch
                     {
-                        // ignored
+                        LastResponse = null;
                     }
+                }
+                catch
+                {
+                    // ignored
+                }
 
-                    _asking = false;
-                }).Start();
-            }
-
+                _asking = false;
+            }).Start();
         }
 
         public void GetEncounters(string playerName, string region, string playerServer = "", int areaId = 0, int bossId = 0)

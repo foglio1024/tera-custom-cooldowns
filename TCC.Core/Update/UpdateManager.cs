@@ -70,14 +70,12 @@ namespace TCC.Update
         {
             try
             {
-                using (var c = MiscUtils.GetDefaultWebClient())
-                {
-                    var st = c.OpenRead(AppVersionExperimentalUrl);
-                    if (st == null) return false;
-                    var newVersionInfo = new StreamReader(st).ReadLine();
-                    if (newVersionInfo == null) return false;
-                    if (Version.Parse(newVersionInfo) > Assembly.GetExecutingAssembly().GetName().Version) return true;
-                }
+                using var c = MiscUtils.GetDefaultWebClient();
+                var st = c.OpenRead(AppVersionExperimentalUrl);
+                if (st == null) return false;
+                var newVersionInfo = new StreamReader(st).ReadLine();
+                if (newVersionInfo == null) return false;
+                if (Version.Parse(newVersionInfo) > Assembly.GetExecutingAssembly().GetName().Version) return true;
             }
             catch (Exception e)
             {
@@ -94,10 +92,8 @@ namespace TCC.Update
                 var destPath = Path.Combine(App.DataPath, relativePath);
                 var destDir = Path.GetDirectoryName(destPath);
                 if (!Directory.Exists(destDir) && destDir != null) Directory.CreateDirectory(destDir);
-                using (var c = MiscUtils.GetDefaultWebClient())
-                {
-                    c.DownloadFile(url, destPath);
-                }
+                using var c = MiscUtils.GetDefaultWebClient();
+                c.DownloadFile(url, destPath);
             }
             catch
             {
@@ -113,33 +109,31 @@ namespace TCC.Update
         }
         public static async void ForceUpdateToBeta()
         {
-            using (var c = MiscUtils.GetDefaultWebClient())
+            using var c = MiscUtils.GetDefaultWebClient();
+            try
             {
-                try
-                {
-                    var vp = new VersionParser(forceExperimental: true);
-                    if (!vp.Valid) return;
+                var vp = new VersionParser(forceExperimental: true);
+                if (!vp.Valid) return;
 
-                    Log.N("TCC update manager", "Download started", NotificationType.Success, 3000);
-                    c.DownloadFile(new Uri(vp.NewVersionUrl), "update.zip");
+                Log.N("TCC update manager", "Download started", NotificationType.Success, 3000);
+                c.DownloadFile(new Uri(vp.NewVersionUrl), "update.zip");
 
-                    Log.N("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
-                    if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
-                    ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
+                Log.N("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
+                if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
+                ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
 
-                    Log.N("TCC update manager", "Moving files", NotificationType.Success, 2000);
-                    File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
+                Log.N("TCC update manager", "Moving files", NotificationType.Success, 2000);
+                File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
 
-                    Log.N("TCC update manager", "Starting updater", NotificationType.Success, 1000);
-                    await Task.Delay(1000).ContinueWith(t => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
-                    Environment.Exit(0);
-                }
-                catch (Exception ex)
-                {
-                    Log.F($"Error while checking updates. \nException: {ex.Message}\n{ex.StackTrace}");
-                    if (TccMessageBox.Show("Error while checking updates. Try again?", MessageBoxType.ConfirmationWithYesNo) != System.Windows.MessageBoxResult.Yes) return;
-                    ForceUpdateToBeta();
-                }
+                Log.N("TCC update manager", "Starting updater", NotificationType.Success, 1000);
+                await Task.Delay(1000).ContinueWith(t => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
+                Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                Log.F($"Error while checking updates. \nException: {ex.Message}\n{ex.StackTrace}");
+                if (TccMessageBox.Show("Error while checking updates. Try again?", MessageBoxType.ConfirmationWithYesNo) != System.Windows.MessageBoxResult.Yes) return;
+                ForceUpdateToBeta();
             }
         }
         public static void StopTimer()
@@ -161,55 +155,51 @@ namespace TCC.Update
         //---------------------------------------------------------------------
         private static async Task Update(string url)
         {
-            using (var c = MiscUtils.GetDefaultWebClient())
+            using var c = MiscUtils.GetDefaultWebClient();
+            try
             {
-                try
+                App.SplashScreen.VM.BottomText = "Downloading update...";
+                c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
+                c.DownloadProgressChanged += (s, ev) => App.SplashScreen.VM.Progress = ev.ProgressPercentage;
+                // ReSharper disable once PossibleNullReferenceException
+                await App.SplashScreen.Dispatcher.InvokeAsync(() =>
                 {
-                    App.SplashScreen.VM.BottomText = "Downloading update...";
-                    c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
-                    c.DownloadProgressChanged += (s, ev) => App.SplashScreen.VM.Progress = ev.ProgressPercentage;
-                    // ReSharper disable once PossibleNullReferenceException
-                    await App.SplashScreen.Dispatcher.InvokeAsync(() =>
-                    {
-                        c.DownloadFileAsync(new Uri(url), "update.zip");
-                    });
+                    c.DownloadFileAsync(new Uri(url), "update.zip");
+                });
 
-                    while (_waitingDownload) Thread.Sleep(1000); //only way to wait for downlaod
+                while (_waitingDownload) Thread.Sleep(1000); //only way to wait for downlaod
 
-                    App.SplashScreen.VM.BottomText = "Extracting zip...";
-                    if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
-                    ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
+                App.SplashScreen.VM.BottomText = "Extracting zip...";
+                if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
+                ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
 
-                    App.SplashScreen.VM.BottomText = "Moving files...";
-                    File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
+                App.SplashScreen.VM.BottomText = "Moving files...";
+                File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
 
-                    App.SplashScreen.VM.BottomText = "Starting updater...";
-                    Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update");
-                    Environment.Exit(0);
-                }
-                catch (Exception e)
-                {
-                    Log.F($"Error while downloading update. \nException:\n{e.Message}\n{e.StackTrace}");
-                    var res = TccMessageBox.Show("Error while downloading update. Try again? If the error perists download TCC manually.", MessageBoxType.ConfirmationWithYesNo);
-                    if (res != System.Windows.MessageBoxResult.Yes) return;
-                    await Update(url);
-                }
+                App.SplashScreen.VM.BottomText = "Starting updater...";
+                Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update");
+                Environment.Exit(0);
+            }
+            catch (Exception e)
+            {
+                Log.F($"Error while downloading update. \nException:\n{e.Message}\n{e.StackTrace}");
+                var res = TccMessageBox.Show("Error while downloading update. Try again? If the error perists download TCC manually.", MessageBoxType.ConfirmationWithYesNo);
+                if (res != System.Windows.MessageBoxResult.Yes) return;
+                await Update(url);
             }
         }
         private static void DownloadServersFile()
         {
             if (!Directory.Exists(App.DataPath)) Directory.CreateDirectory(App.DataPath);
-            using (var c = MiscUtils.GetDefaultWebClient())
+            using var c = MiscUtils.GetDefaultWebClient();
+            try
             {
-                try
-                {
-                    c.DownloadFile("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/servers.txt", Path.Combine(App.DataPath, "servers.txt"));
-                }
-                catch
-                {
-                    var res = TccMessageBox.Show("Failed to download servers file. Try again?", MessageBoxType.ConfirmationWithYesNo);
-                    if (res == System.Windows.MessageBoxResult.Yes) DownloadServersFile();
-                }
+                c.DownloadFile("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/servers.txt", Path.Combine(App.DataPath, "servers.txt"));
+            }
+            catch
+            {
+                var res = TccMessageBox.Show("Failed to download servers file. Try again?", MessageBoxType.ConfirmationWithYesNo);
+                if (res == System.Windows.MessageBoxResult.Yes) DownloadServersFile();
             }
         }
         private static void CheckTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -238,21 +228,17 @@ namespace TCC.Update
         private static void DownloadDatabaseHashes()
         {
             DatabaseHashes.Clear();
-            using (var c = MiscUtils.GetDefaultWebClient())
+            using var c = MiscUtils.GetDefaultWebClient();
+            var f = c.OpenRead(DatabaseHashFileUrl);
+            if (f == null) return;
+            using var sr = new StreamReader(f);
+            var sHashes = sr.ReadToEnd();
+            var jHashes = JObject.Parse(sHashes);
+            jHashes.Descendants().ToList().ForEach(jDesc =>
             {
-                var f = c.OpenRead(DatabaseHashFileUrl);
-                if (f == null) return;
-                using (var sr = new StreamReader(f))
-                {
-                    var sHashes = sr.ReadToEnd();
-                    var jHashes = JObject.Parse(sHashes);
-                    jHashes.Descendants().ToList().ForEach(jDesc =>
-                    {
-                        if (!(jDesc is JProperty jProp)) return;
-                        DatabaseHashes[jProp.Name] = jProp.Value.ToString();
-                    });
-                }
-            }
+                if (!(jDesc is JProperty jProp)) return;
+                DatabaseHashes[jProp.Name] = jProp.Value.ToString();
+            });
         }
 
 

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum;
+using Nostrum.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using Nostrum;
-using Nostrum.Extensions;
 using TCC.Data;
 using TCC.UI;
 using TCC.UI.Windows;
@@ -84,45 +84,43 @@ namespace TCC.Update
         }
         private async Task DownloadArchive()
         {
-            using (var c = MiscUtils.GetDefaultWebClient())
+            using var c = MiscUtils.GetDefaultWebClient();
+            c.DownloadProgressChanged += (s, ev) =>
             {
-                c.DownloadProgressChanged += (s, ev) =>
-                {
-                    var total = ev.TotalBytesToReceive;
-                    if (total == -1) total = 71000000;
-                    var perc = ev.BytesReceived * 100 / (double) total;
-                    _n.Progress = perc;
-                    _n.Message = $"Downloading icons...\n({ev.BytesReceived / (1024 * 1024D):N1}/{total / (1024 * 1024D):N1}MB)";
-                };
-                c.DownloadFileCompleted += async (_, args) =>
-                {
-                    if (args.Error != null)
-                    {
-                        var res = TccMessageBox.Show("Failed to download icons, try again?", MessageBoxType.ConfirmationWithYesNo);
-                        if (res == System.Windows.MessageBoxResult.Yes) await DownloadArchive();
-                    }
-                    else
-                    {
-                        _n.Message = "Download completed.";
-                        _n.Progress = 0;
-                        Extract();
-                    }
-                };
-                try
-                {
-                    if (_n == null)
-                    {
-                        var notifId = Log.N("TCC update manager", "Downloading icons...", NotificationType.Normal, template: NotificationTemplate.Progress);
-                        _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(notifId);
-                    }
-
-                    await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), Path.Combine(App.BasePath, "icons.zip")));
-                }
-                catch (Exception)
+                var total = ev.TotalBytesToReceive;
+                if (total == -1) total = 71000000;
+                var perc = ev.BytesReceived * 100 / (double)total;
+                _n.Progress = perc;
+                _n.Message = $"Downloading icons...\n({ev.BytesReceived / (1024 * 1024D):N1}/{total / (1024 * 1024D):N1}MB)";
+            };
+            c.DownloadFileCompleted += async (_, args) =>
+            {
+                if (args.Error != null)
                 {
                     var res = TccMessageBox.Show("Failed to download icons, try again?", MessageBoxType.ConfirmationWithYesNo);
                     if (res == System.Windows.MessageBoxResult.Yes) await DownloadArchive();
                 }
+                else
+                {
+                    _n.Message = "Download completed.";
+                    _n.Progress = 0;
+                    Extract();
+                }
+            };
+            try
+            {
+                if (_n == null)
+                {
+                    var notifId = Log.N("TCC update manager", "Downloading icons...", NotificationType.Normal, template: NotificationTemplate.Progress);
+                    _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(notifId);
+                }
+
+                await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), Path.Combine(App.BasePath, "icons.zip")));
+            }
+            catch (Exception)
+            {
+                var res = TccMessageBox.Show("Failed to download icons, try again?", MessageBoxType.ConfirmationWithYesNo);
+                if (res == System.Windows.MessageBoxResult.Yes) await DownloadArchive();
             }
         }
         private void DownloadMissingIcons(List<string> missing)
@@ -137,12 +135,10 @@ namespace TCC.Update
                     var dir = splitPath.Last().Split('/')[0];
                     var iconName = splitPath.Last().Split('/')[1];
                     var url = $"https://github.com/Foglio1024/tera-used-icons/raw/master/{dir}/{iconName}";
-                    using (var c = MiscUtils.GetDefaultWebClient())
-                    {
-                        c.DownloadFile(new Uri(url), Path.Combine(App.ResourcesPath, "images", dir, iconName));
-                        _n.Progress = idx * 100 / (double)missing.Count;
-                        _n.Message = $"Updating icons... ({idx}/{missing.Count})";
-                    }
+                    using var c = MiscUtils.GetDefaultWebClient();
+                    c.DownloadFile(new Uri(url), Path.Combine(App.ResourcesPath, "images", dir, iconName));
+                    _n.Progress = idx * 100 / (double)missing.Count;
+                    _n.Message = $"Updating icons... ({idx}/{missing.Count})";
                 }
                 catch (Exception e)
                 {

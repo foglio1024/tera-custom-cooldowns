@@ -231,15 +231,13 @@ namespace TCC
             Log.CW("Uploading crash dump");
             try
             {
-                using (var c = MiscUtils.GetDefaultWebClient())
-                {
-                    c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                    c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                    c.Encoding = Encoding.UTF8;
+                using var c = MiscUtils.GetDefaultWebClient();
+                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                c.Encoding = Encoding.UTF8;
 
-                    c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
-                    Log.CW("Crash dump uploaded");
-                }
+                c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                Log.CW("Crash dump uploaded");
             }
             catch (Exception e)
             {
