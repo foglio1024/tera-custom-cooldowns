@@ -5,37 +5,33 @@ GroupAbnormals              -> MyAbnormals
 
 ShowAllGroupAbnormalities   -> ShowAllMyAbnormalities
 */
-using FoglioUtils;
+using Nostrum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Data;
 using System.Windows.Threading;
-using TCC.Data;
-using TCC.Data.Abnormalities;
-using TCC.Settings;
+using Nostrum.Extensions;
+using Nostrum.Factories;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class MyAbnormalConfigVM : TSPropertyChanged
+    public class MyAbnormalConfigVM : TSPropertyChanged, IDisposable
     {
-
         public event Action ShowAllChanged;
 
-        public SynchronizedObservableCollection<MyAbnormalityVM> MyAbnormals;
-        public IEnumerable<Abnormality> Abnormalities => SessionManager.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
 
         public bool ShowAll
         {
-            get => SettingsHolder.ShowAllMyAbnormalities;
+            get => App.Settings.BuffWindowSettings.ShowAll;
             set
             {
-                if (SettingsHolder.ShowAllMyAbnormalities== value) return;
-                SettingsHolder.ShowAllMyAbnormalities= value;
+                if (App.Settings.BuffWindowSettings.ShowAll== value) return;
+                App.Settings.BuffWindowSettings.ShowAll= value;
                 Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
-                SettingsWriter.Save();
+                App.Settings.Save();
                 N();
             }
         }
@@ -51,20 +47,20 @@ namespace TCC.ViewModels
         public MyAbnormalConfigVM()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            MyAbnormals = new SynchronizedObservableCollection<MyAbnormalityVM>(Dispatcher);
-            foreach (var abnormality in Abnormalities)
+            var myAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
+            foreach (var abnormality in Game.DB.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
             {
                 var abVM = new MyAbnormalityVM(abnormality);
 
-                MyAbnormals.Add(abVM);
+                myAbnormals.Add(abVM);
             }
-            AbnormalitiesView = new CollectionViewSource { Source = MyAbnormals }.View;
-            AbnormalitiesView.CurrentChanged += OnAbnormalitiesViewOnCurrentChanged;
-            AbnormalitiesView.Filter = null;
+
+            AbnormalitiesView = CollectionViewFactory.CreateCollectionView(myAbnormals);
         }
-        //to keep view referenced
-        private void OnAbnormalitiesViewOnCurrentChanged(object s, EventArgs ev)
+
+        public void Dispose()
         {
+            AbnormalitiesView.Free();
         }
     }
 }

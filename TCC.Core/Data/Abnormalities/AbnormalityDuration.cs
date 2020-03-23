@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Timers;
 using System.Windows.Threading;
+using Nostrum;
 
 namespace TCC.Data.Abnormalities
 {
@@ -63,11 +64,9 @@ namespace TCC.Data.Abnormalities
             Target = t;
             DurationLeft = d;
 
-            if (!Abnormality.Infinity)
-            {
-                _timer.Elapsed += DecreaseDuration;
-                _timer.Start();
-            }
+            if (Abnormality.Infinity) return;
+            _timer.Elapsed += DecreaseDuration;
+            _timer.Start();
         }
 
 

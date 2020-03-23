@@ -1,5 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -17,8 +18,8 @@ namespace TCC.ViewModels
         public override void LoadSpecialSkills()
         {
             //Ragnarok
-            SessionManager.DB.SkillsDatabase.TryGetSkill(120100, Class.Valkyrie, out var rag);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(250100, Class.Valkyrie, out var gf);
+            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Valkyrie, out var rag);
+            Game.DB.SkillsDatabase.TryGetSkill(250100, Class.Valkyrie, out var gf);
             Ragnarok = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(rag, true) { CanFlash = true },
@@ -45,12 +46,10 @@ namespace TCC.ViewModels
                 Ragnarok.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == Godsfall.Cooldown.Skill.IconName)
-            {
-                Godsfall.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != Godsfall.Cooldown.Skill.IconName) return false;
+            Godsfall.Cooldown.Start(sk.Duration);
+            return true;
         }
     }
 }

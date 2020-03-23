@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Skills;
+﻿using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -11,8 +11,8 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
+            Game.DB.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
+            Game.DB.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
             ShadowReaping = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(sr, true) { CanFlash = true },
@@ -38,12 +38,10 @@ namespace TCC.ViewModels
                 ShadowReaping.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == ShroudedEscape.Cooldown.Skill.IconName)
-            {
-                ShroudedEscape.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != ShroudedEscape.Cooldown.Skill.IconName) return false;
+            ShroudedEscape.Cooldown.Start(sk.Duration);
+            return true;
         }
     }
 }

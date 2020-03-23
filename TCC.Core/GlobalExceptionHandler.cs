@@ -1,21 +1,23 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
+using Nostrum;
+using Nostrum.Extensions;
+using Nostrum.WinAPI;
+using System;
 using System.Collections;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using FoglioUtils;
-using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
+using TCC.Data;
+using TCC.Exceptions;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Parsing;
-using TCC.Settings;
-using TCC.Windows;
+using TCC.Analysis;
+using TCC.UI;
+using TCC.UI.Windows;
+using TCC.Utils;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
@@ -24,33 +26,60 @@ namespace TCC
     {
         public static void HandleGlobalException(object sender, UnhandledExceptionEventArgs e)
         {
-            var ex = (Exception)e.ExceptionObject;
-            DumpCrashToFile(ex);
-            //#if !DEBUG
-            try { new Thread(() => UploadCrashDump(ex)).Start(); }
-            catch { /*ignored*/ }
-            //#endif
+            FocusManager.Dispose();
+            HandleGlobalExceptionImpl(e);
+        }
 
-            TccMessageBox.Show("TCC",
-                "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
-                MessageBoxButton.OK, MessageBoxImage.Error);
+        private static void HandleGlobalExceptionImpl(UnhandledExceptionEventArgs e)
+        {
+            var ex = (Exception)e.ExceptionObject;
+            var js = BuildJsonDump(ex);//await App.BaseDispatcher.InvokeAsync(() => BuildJsonDump(ex));
+            DumpCrashToFile(js, ex);
+            UploadCrashDump(js);
+
+
+            if (ex is COMException com && (com.HResult == 88980406 /*not sure if getting this value like this is correct*/
+                                        || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")))
+            {
+                TccMessageBox.Show("TCC",
+                    "An error in render thread occured. This is usually caused by outdated video card drivers. TCC will now close.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (ex is ClientVersionDetectionException cvde)
+            {
+                Log.F($"Failed to detect client version from file: {cvde}");
+                var msg = "Failed to detect client version.";
+
+                msg += StubInterface.Instance.IsStubAvailable
+                    ? "\nSince you're already using TERA Toolbox, please consider installing TCC as a module (more info in the wiki)."
+                    : "\nPlease consider installing TCC as a TERA Toolbox module (more info in the wiki).";
+
+                msg += "\nTCC will now close.";
+                TccMessageBox.Show(msg, MessageBoxType.Error);
+
+            }
+            else
+            {
+                TccMessageBox.Show("TCC",
+                    "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             App.ReleaseMutex();
-            ProxyInterface.Instance.Disconnect();
+            StubInterface.Instance.Disconnect();
             if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
 
-            try { WindowManager.Dispose(); }
-            catch {/* ignored*/}
+            try { WindowManager.Dispose(); } catch {/* ignored*/}
 
             try
             {
-                Firebase.RegisterWebhook(SettingsHolder.WebhookUrlGuildBam, false);
-                Firebase.RegisterWebhook(SettingsHolder.WebhookUrlFieldBoss, false);
+                Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
+                Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
             }
             catch { }
             Environment.Exit(-1);
-        }
 
+        }
         private static string FormatFullException(Exception ex)
         {
             var fullSb = new StringBuilder();
@@ -78,39 +107,39 @@ namespace TCC
 
             return fullSb.ToString();
         }
-        private static async Task<JObject> BuildJsonDump(Exception ex)
+        private static /*async*/ /*Task<JObject>*/ JObject BuildJsonDump(Exception ex)
         {
-            return new JObject
+            var ret = new JObject
             {
                 { "tcc_version" , new JValue(App.AppVersion) },
-                { "id" , new JValue(SessionManager.CurrentAccountName != null ? HashUtils.GenerateHash(SessionManager.CurrentAccountName) : "") },
+                { "id" , new JValue(App.Settings.LastAccountNameHash != null ? App.Settings.LastAccountNameHash: "") },
                 { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
                 { "exception", new JValue(ex.Message)},
                 { "exception_type", new JValue(ex.GetType().FullName)},
                 { "exception_source", new JValue(ex.Source)},
                 { "stack_trace", new JValue(ex.StackTrace)},
                 { "full_exception", new JValue(FormatFullException(ex))},
-                { "thread_traces", await GetThreadTraces() },
-                { "inner_exception", ex.InnerException != null ? BuildInnerExceptionJObject(ex.InnerException) : null },
+                { "thread_traces", GetThreadTraces() },
                 { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
-                { "region", new JValue(SessionManager.Server != null ? SessionManager.Server.Region : "")},
-                { "server_id", new JValue(SessionManager.Server != null ? SessionManager.Server.ServerId.ToString() : "")},
+                { "region", new JValue(Game.Server != null ? Game.Server.Region : "")},
+                { "server_id", new JValue(Game.Server != null ? Game.Server.ServerId.ToString() : "")},
                 { "settings_summary", new JObject
                     {
                         { "windows", new JObject
                             {
-                                { "cooldown", SettingsHolder.CooldownWindowSettings.Enabled },
-                                { "buffs", SettingsHolder.BuffWindowSettings.Enabled },
-                                { "character", SettingsHolder.CharacterWindowSettings.Enabled },
-                                { "class", SettingsHolder.ClassWindowSettings.Enabled },
-                                { "chat", SettingsHolder.ChatEnabled},
-                                { "group", SettingsHolder.GroupWindowSettings.Enabled }
+                                { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
+                                { "buffs", App.Settings.BuffWindowSettings.Enabled },
+                                { "character", App.Settings.CharacterWindowSettings.Enabled },
+                                { "class", App.Settings.ClassWindowSettings.Enabled },
+                                { "chat", App.Settings.ChatEnabled},
+                                { "group", App.Settings.GroupWindowSettings.Enabled }
                             }
                         },
                         {
                             "generic", new JObject
                             {
-                                { "proxy_enabled", SettingsHolder.EnableProxy },
+                                { "proxy_enabled", App.Settings.EnableProxy },
+                                { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
                             }
                         }
                     }
@@ -125,54 +154,60 @@ namespace TCC
                     }
                 }
             };
+            if (ex.InnerException != null)
+            {
+
+                var innEx =BuildInnerExceptionJObject(ex.InnerException);
+                ret["inner_exception"] = innEx;
+            }
+
+            if (!(ex is PacketParseException ppe)) return ret;
+            
+            ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
+            ret.Add("packet_data", new JValue(ppe.RawData.ToStringEx()));
+            return ret;
         }
 
         private static JObject BuildInnerExceptionJObject(Exception ex)
         {
-            return new JObject
+            var ret = new JObject
             {
-                { "exception", new JValue(ex.Message)},
-                { "exception_type", new JValue(ex.GetType().FullName)},
-                { "exception_source", new JValue(ex.Source)},
-                { "stack_trace", new JValue(ex.StackTrace)},
-                //{ "stack_trace", new JValue(new StackTrace().ToString())}, //just for test
-                { "inner_exception", ex.InnerException != null ? new JValue(BuildInnerExceptionJObject(ex.InnerException)) : new JValue("undefined") },
+                ["exception"] = new JValue(ex.Message),
+                ["exception_type"] = new JValue(ex.GetType().FullName),
+                ["exception_source"] = new JValue(ex.Source),
+                ["stack_trace"] = new JValue(ex.StackTrace)
             };
-        }
-
-        private static async Task<JObject> GetThreadTraces()
-        {
-            var ret = new JObject();
-
-            ret["Main"] = new StackTrace(false).ToString();
-
-            WindowManager.RunningDispatchers.ToList().ForEach(d =>
-            {
-                var t = d.Value.Thread;
-                t.Suspend();
-                ret[t.Name] = new StackTrace(t, false).ToString();
-                t.Resume();
-            });
-
-            if (PacketAnalyzer.AnalysisThread != null)
-            {
-                PacketAnalyzer.AnalysisThread.Suspend();
-                ret["Analysis"] = new StackTrace(PacketAnalyzer.AnalysisThread, false).ToString();
-                PacketAnalyzer.AnalysisThread.Resume();
-            }
-
+            if (ex.InnerException == null) return ret;
+            var innEx = BuildInnerExceptionJObject(ex.InnerException);
+            ret["inner_exception"] = innEx;
             return ret;
         }
 
-
-        private static async void DumpCrashToFile(Exception ex)
+#pragma warning disable 618
+        private static JObject /*Task<JObject>*/ GetThreadTraces()
         {
-            //if (ex is TaskCanceledException tce)
+            var ret = new JObject();
+            //App.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
             //{
-            //    // TODO
-            //}
+            //    var t = d.Thread;
+            //    t.Suspend();
+            //    ret[t.Name] = new StackTrace(t, false).ToString();
+            //    t.Resume();
+            //});
+
+            //if (PacketAnalyzer.AnalysisThread == null) return ret;
+            //PacketAnalyzer.AnalysisThread.Suspend();
+            //ret["Analysis"] = new StackTrace(PacketAnalyzer.AnalysisThread, false).ToString();
+            //PacketAnalyzer.AnalysisThread.Resume();
+
+            return ret;
+        }
+#pragma warning restore 618
+
+
+        private static void DumpCrashToFile(JObject js, Exception ex)
+        {
             var sb = new StringBuilder();
-            var js = await BuildJsonDump(ex);
             sb.AppendLine($"id: {js["id"]}");
             sb.AppendLine($"tcc_hash: {js["tcc_hash"]}");
             sb.AppendLine($"game_version: {js["game_version"]}");
@@ -182,34 +217,38 @@ namespace TCC
             sb.AppendLine($"stats: {js["stats"]}");
             sb.AppendLine($"exception: {js["exception_type"]} {js["exception"]}");
             sb.AppendLine($"{js["full_exception"].ToString().Replace("\\n", "\n")}");
+            if (ex is PacketParseException)
+            {
+                sb.AppendLine($"opcode: {js["packet_opcode_name"]}");
+                sb.AppendLine($"data: {js["packet_data"]}");
+            }
             sb.AppendLine($"threads");
             sb.AppendLine($"{js["thread_traces"]}");
             Log.F(sb.ToString(), "crash.log");
         }
-        private static async void UploadCrashDump(Exception ex)
+        private static void UploadCrashDump(JObject js)
         {
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            Log.CW("Uploading crash dump");
+            try
             {
+                using var c = MiscUtils.GetDefaultWebClient();
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                 c.Encoding = Encoding.UTF8;
 
-                var js = await BuildJsonDump(ex);
-                try
-                {
-                    c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"),
-                                   Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
-                }
-                catch { }
+                c.UploadString(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/crash_report"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                Log.CW("Crash dump uploaded");
+            }
+            catch (Exception e)
+            {
+                Log.CW($"Failed to upload crash dump: {e}");
             }
         }
 
-        [DllImport("user32.dll")]
-        static extern uint GetGuiResources(IntPtr hProcess, uint uiFlags);
 
         private static uint GetUSERObjectsCount()
         {
-            return GetGuiResources(Process.GetCurrentProcess().Handle, 1);
+            return User32.GetGuiResources(Process.GetCurrentProcess().Handle, 1);
         }
     }
 }

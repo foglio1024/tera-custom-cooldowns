@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
+using Nostrum;
 
 namespace TCC.Data
 {
@@ -42,8 +43,14 @@ namespace TCC.Data
             MaxValue = max;
             _autoexpire = autoexpire;
             _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(9000) };
-            _expire.Tick += (s, ev) => Val = 0;
+            _expire.Tick += OnExpireTick;
         }
+
+        private void OnExpireTick(object s, EventArgs ev)
+        {
+            Val = 0;
+        }
+
         private void RefreshTimer()
         {
             _expire.Stop();

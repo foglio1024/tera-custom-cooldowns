@@ -1,9 +1,17 @@
-﻿using System;
+﻿using Nostrum;
+using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
+using TCC.Processing;
+using TCC.UI;
+using TeraDataLite;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.Data
 {
@@ -14,19 +22,29 @@ namespace TCC.Data
         private string _message;
         private string _leaderName;
         private bool _isExpanded;
+        private bool _isPopupOpen;
         private int _playerCount;
-        private SynchronizedObservableCollection<User> _players;
-        private SynchronizedObservableCollection<User> _applicants;
         private bool _canApply = true;
+        private bool _isMyLfg;
+        private bool _temp;
+        private DateTime _createdOn;
+
+        public ICommand ExpandCollapseCommand { get; }
+        public ICommand PostCommand { get; }
+        public ICommand RemoveCommand { get; }
+        public ICommand BrowseTwitchCommand { get; }
+        public ICommand OpenPopupCommand { get; }
+        public ICommand WhisperLeaderCommand { get; }
+        public ICommand ToggleAutoPublicizeCommand { get; }
 
         public uint LeaderId
         {
             get
             {
-                return Players.ToSyncList().Count == 0
-                    ? _playerId
-                    // ReSharper disable once PossibleNullReferenceException
-                    : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.PlayerId ?? 0;
+                return _playerId;
+                //return Players.ToSyncList().Count == 0
+                //    ? _playerId
+                //    : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.PlayerId ?? 0;
             }
             set
             {
@@ -71,7 +89,7 @@ namespace TCC.Data
         }
         public string LeaderName
         {
-            get => Players.ToSyncList().Count == 0 ? _leaderName : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.Name;
+            get => _leaderName; //Players.ToSyncList().Count == 0 ? _leaderName : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.Name;
             set
             {
                 if (_leaderName == value) return;
@@ -89,37 +107,50 @@ namespace TCC.Data
                 N();
             }
         }
-
-        //TODO: deadlock may happen here
-        public bool IsMyLfg => Dispatcher.Invoke(()=> Players.Any(x => x.PlayerId == SessionManager.CurrentPlayer.PlayerId) || 
-                                                      LeaderId == SessionManager.CurrentPlayer.PlayerId ||
-                                                      WindowManager.GroupWindow.VM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId));
+        public bool IsPopupOpen
+        {
+            get => _isPopupOpen;
+            set
+            {
+                if (_isPopupOpen == value) return;
+                _isPopupOpen = value;
+                FocusManager.PauseTopmost = _isPopupOpen;
+                N();
+            }
+        }
+        public bool Temp
+        {
+            get => _temp;
+            set
+            {
+                if (_temp == value) return;
+                _temp = value;
+                N();
+            }
+        }
+        public bool IsMyLfg
+        {
+            get => _isMyLfg;
+            set
+            {
+                if (_isMyLfg == value) return;
+                _isMyLfg = value;
+                N();
+            }
+        }
         public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
                                _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;
-        public SynchronizedObservableCollection<User> Players
-        {
-            get => _players;
-            set
-            {
-                if (_players == value) return;
-                _players = value;
-                N();
-            }
-        }
-        public SynchronizedObservableCollection<User> Applicants
-        {
-            get => _applicants;
-            set
-            {
-                if (_applicants == value) return;
-                _applicants= value;
-                N();
-            }
-        }
+
+        public double AliveSinceMs => (DateTime.Now - _createdOn).TotalMilliseconds;
+
+
+        public TSObservableCollection<User> Players { get; set; }
+        public TSObservableCollection<User> Applicants { get; set; }
+
         public int MaxCount => IsRaid ? 30 : 5;
-        public ApplyCommand Apply { get; }
-        public RefreshApplicantsCommand RefreshApplicants { get; }
+        public ApplyCommand ApplyCommand { get; }
+        public ICommand RefreshApplicantsCommand { get; }
         public bool CanApply
         {
             get => _canApply;
@@ -140,26 +171,112 @@ namespace TCC.Data
                 var twLink = split.FirstOrDefault(x =>
                     x.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1);
                 var splitLink = twLink?.Split('/');
-                if (splitLink != null && splitLink.Length >= 2) username = splitLink[1]; 
+                if (splitLink != null && splitLink.Length >= 2) username = splitLink[1];
                 return $"https://www.twitch.tv/{username}";
             }
         }
 
-        public bool IsTwitch => _message.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) !=-1;
+        public bool IsTwitch => _message.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1;
 
-
-        public void NotifyMyLfg()
+        public void UpdateIsMyLfg()
         {
-            N(nameof(IsMyLfg));
+            Dispatcher.InvokeAsync(() =>
+            {
+                IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId) ||
+                          LeaderId == Game.Me.PlayerId ||
+                          WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId);
+            }, DispatcherPriority.DataBind);
         }
+
+
 
         public Listing()
         {
-            Dispatcher = App.BaseDispatcher; //TODO check this
-            Players = new SynchronizedObservableCollection<User>(Dispatcher);
-            Applicants = new SynchronizedObservableCollection<User>(Dispatcher);
-            Apply = new ApplyCommand(this);
-            RefreshApplicants = new RefreshApplicantsCommand(this);
+            Dispatcher = App.BaseDispatcher;
+            Players = new TSObservableCollection<User>(Dispatcher);
+            Applicants = new TSObservableCollection<User>(Dispatcher);
+            ApplyCommand = new ApplyCommand(this);
+            RefreshApplicantsCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.RequestListingCandidates(), _ => IsMyLfg);
+            ExpandCollapseCommand = new RelayCommand(force =>
+            {
+                if (IsPopupOpen) return;
+                if (force != null)
+                {
+                    bool bForce;
+                    if (force is string s) bForce = bool.TryParse(s, out var v) && v;
+                    else bForce = (bool)force;
+                    if (bForce)
+                    {
+                        IsExpanded = !IsExpanded;
+                        if (!IsExpanded) return;
+                        WindowManager.ViewModels.LfgVM.LastClicked = this;
+                        StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId);
+                    }
+                    else
+                    {
+                        if (IsExpanded) IsExpanded = false;
+                    }
+                }
+                else
+                {
+                    if (IsExpanded)
+                    {
+                        IsExpanded = false;
+                    }
+                    else
+                    {
+                        WindowManager.ViewModels.LfgVM.LastClicked = this;
+                        StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId);
+                    }
+                }
+            });
+            BrowseTwitchCommand = new RelayCommand(_ =>
+            {
+                if (!IsTwitch) return;
+                Process.Start(TwitchLink);
+            });
+            PostCommand = new RelayCommand(_ =>
+            {
+                var msg = Message;
+                var isRaid = IsRaid;
+
+                if (Temp) WindowManager.ViewModels.LfgVM.Listings.Remove(this);
+
+                StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
+
+                Task.Delay(200).ContinueWith(t => StubInterface.Instance.StubClient.RequestListings());
+
+            },
+            ce => Temp && !string.IsNullOrEmpty(Message));
+            RemoveCommand = new RelayCommand(_ =>
+            {
+                if (Temp)
+                    WindowManager.ViewModels.LfgVM.Listings.Remove(this);
+                else
+                    WindowManager.ViewModels.LfgVM.RemoveMessageCommand.Execute(null);
+            });
+
+            OpenPopupCommand = new RelayCommand(_ => IsPopupOpen = true);
+
+            WhisperLeaderCommand = new RelayCommand(_ =>
+            {
+                if (!Game.InGameChatOpen) FocusManager.SendNewLine();
+                FocusManager.SendString($"/w {LeaderName} ");
+            });
+
+            ToggleAutoPublicizeCommand = new RelayCommand(_ => WindowManager.ViewModels.LfgVM.ToggleAutoPublicizeCommand.Execute(null));
+
+            _createdOn = DateTime.Now;
+        }
+
+        public Listing(ListingData l) : this()
+        {
+            LeaderName = l.LeaderName;
+            LeaderId = l.LeaderId;
+            IsRaid = l.IsRaid;
+            Message = l.Message;
+            PlayerCount = l.PlayerCount;
+            Temp = l.Temp;
         }
     }
 
@@ -170,12 +287,14 @@ namespace TCC.Data
         public ApplyCommand(Listing listing)
         {
             _listing = listing;
-            _t = new Timer() { Interval = 5000 };
-            _t.Elapsed += (s, ev) =>
-            {
-                _t.Stop();
-                listing.CanApply = true;
-            };
+            _t = new Timer { Interval = 5000 };
+            _t.Elapsed += OnTimerElapsed;
+        }
+
+        void OnTimerElapsed(object s, ElapsedEventArgs ev)
+        {
+            _t.Stop();
+            _listing.CanApply = true;
         }
 #pragma warning disable 0067
         public event EventHandler CanExecuteChanged;
@@ -185,32 +304,13 @@ namespace TCC.Data
             return _listing.CanApply;
         }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
-            ProxyInterface.Instance.Stub.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
+            var success = await StubInterface.Instance.StubClient.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
+            if (!success) return;
+            SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{_listing.LeaderName}", "SMT_PARTYBOARD_APPLY");
             _listing.CanApply = false;
             _t.Start();
         }
     }
-    public class RefreshApplicantsCommand : ICommand
-    {
-        private readonly Listing _listing;
-        public RefreshApplicantsCommand(Listing listing)
-        {
-            _listing = listing;
-        }
-#pragma warning disable 0067
-        public event EventHandler CanExecuteChanged;
-#pragma warning restore 0067
-        public bool CanExecute(object parameter)
-        {
-            return _listing.IsMyLfg;
-        }
-
-        public void Execute(object parameter)
-        {
-            ProxyInterface.Instance.Stub.RequestListingCandidates(); //ProxyOld.RequestCandidates();
-        }
-    }
-
 }

@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="TCC.UI.Controls.Classes.Elements.RunemarksControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"  >
+    <Border RenderTransform="{StaticResource Skew45}" 
+            Background="#a223" 
+            BorderBrush="{StaticResource RevampBorderBrush}"
+            BorderThickness="2 1"
+            RenderTransformOrigin=".5 1"
+            Padding="2 1">
+        <StackPanel Orientation="Horizontal" x:Name="RunemarkContainer">
+            <StackPanel.Resources>
+                <Style TargetType="Rectangle">
+                    <Setter Property="Fill" Value="#6fff"></Setter>
+                    <Setter Property="Opacity" Value=".1"></Setter>
+                    <Setter Property="Width" Value="24"></Setter>
+                    <Setter Property="Margin" Value="2 2"></Setter>
+                    <Setter Property="StrokeThickness" Value="1"></Setter>
+                    <Setter Property="Stroke" Value="#dfff"></Setter>
+                </Style>
+            </StackPanel.Resources>
+            <Rectangle/>
+            <Rectangle/>
+            <Rectangle/>
+            <Rectangle/>
+            <Rectangle/>
+            <Rectangle/>
+            <Rectangle/>
+        </StackPanel>
+    </Border>
+
+    <!--<UserControl.Resources>
+        <Style x:Key="Ell" TargetType="Shape">
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="20"></Setter>
+            <Setter Property="Opacity" Value="0"></Setter>
+            <Setter Property="Stroke" Value="White"></Setter>
+            <Setter Property="StrokeThickness" Value="0"></Setter>
+            <Setter Property="Fill" Value="#ffe3bd"/>
+
+        </Style>
+
+        <Style x:Key="Cont" TargetType="UniformGrid">
+            <Setter Property="Margin" Value="6,0"/>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid Margin="0" x:Name="Root" >
+        <Border Style="{StaticResource DefaultBorderStyle}" 
+                Opacity="1" 
+                Height="26" 
+                CornerRadius="0" 
+                BorderThickness="0" 
+                x:Name="BaseBorder"
+                Visibility="Hidden"
+                RenderTransform="{StaticResource Skew45}"
+                RenderTransformOrigin="1 .5"
+                >
+        </Border>
+        <Border Width="Auto"
+                Height="16"
+                RenderTransform="{StaticResource Skew45}"
+                CornerRadius="0"
+                x:Name="MaxBorder"
+                RenderTransformOrigin="1 .5"
+                Background="#ff98bb"
+                Margin="12,0"
+                Opacity="0">
+            <Border.Effect>
+                <DropShadowEffect Color="#ff98bb" ShadowDepth="0" BlurRadius="20" />
+            </Border.Effect>
+        </Border>
+
+        <UniformGrid Width="Auto" 
+                     Height="26" 
+                     Rows="1" 
+                     Columns="7" 
+                     Opacity="1" 
+                     Style="{StaticResource Cont}">
+            <Rectangle Style="{StaticResource Ell}" Fill="Gray" Opacity=".1"/>
+            <Rectangle Style="{StaticResource Ell}" Fill="Gray" Opacity=".1"/>
+            <Rectangle Style="{StaticResource Ell}" Fill="Gray" Opacity=".1"/>
+            <Rectangle Style="{StaticResource Ell}" Fill="Gray" Opacity=".1"/>
+            <Rectangle Style="{StaticResource Ell}" Fill="Gray" Opacity=".1"/>
+            <Rectangle Style="{StaticResource Ell}" Fill="Gray" Opacity=".1"/>
+            <Rectangle Style="{StaticResource Ell}" Fill="Gray" Opacity=".1"/>
+        </UniformGrid>
+        <UniformGrid Height="26" 
+                     Rows="1" 
+                     Columns="7" 
+                     Opacity="1" 
+                     x:Name="DotsContainer"
+                     Style="{StaticResource Cont}">
+            
+            <Rectangle Style="{StaticResource Ell}" />
+            <Rectangle Style="{StaticResource Ell}" />
+            <Rectangle Style="{StaticResource Ell}" />
+            <Rectangle Style="{StaticResource Ell}" />
+            <Rectangle Style="{StaticResource Ell}" />
+            <Rectangle Style="{StaticResource Ell}" />
+            <Rectangle Style="{StaticResource Ell}" />
+        </UniformGrid>
+    </Grid>-->
+</UserControl>

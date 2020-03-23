@@ -1,5 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using TCC.Data.Skills;
+using TeraDataLite;
+using TeraPacketParser.TeraCommon.Game.Services;
 
 namespace TCC.Data.Databases
 {
@@ -23,6 +28,7 @@ namespace TCC.Data.Databases
         public AbnormalityDatabase AbnormalityDatabase { get; private set; }
         public DungeonDatabase DungeonDatabase { get; private set; }
         public SocialDatabase SocialDatabase { get; private set; }
+        public ServerDatabase ServerDatabase { get; private set; }
 
         /// <summary>
         /// True if all database files are found.
@@ -34,6 +40,7 @@ namespace TCC.Data.Databases
 
         public TccDatabase(string lang)
         {
+            ServerDatabase = new ServerDatabase(App.DataPath, Path.Combine(App.ResourcesPath, "config/server-overrides.txt")) { Language = (LangEnum)Enum.Parse(typeof(LangEnum), lang.Replace("EU-", "")) };
             MonsterDatabase = new MonsterDatabase(lang);
             AccountBenefitDatabase = new AccountBenefitDatabase(lang);
             ItemsDatabase = new ItemsDatabase(lang);
@@ -105,6 +112,25 @@ namespace TCC.Data.Databases
             return ret;
         }
 
+        public bool GetSkillFromId(uint id, Class c, CooldownType t, out Skill sk)
+        {
+            sk = null;
+            switch (t)
+            {
+                case CooldownType.Skill:
+                    if (!Game.DB.SkillsDatabase.TryGetSkill(id, c, out sk)) return false;
+                    break;
+                case CooldownType.Item:
+                    if (!Game.DB.ItemsDatabase.TryGetItemSkill(id, out sk)) return false;
+                    break;
+                case CooldownType.Passive:
+                    if (!Game.DB.AbnormalityDatabase.TryGetPassiveSkill(id, out sk)) return false;
+                    break;
+            }
+
+            return true;
+        }
+
         public void DownloadOutdatedDatabases()
         {
             foreach (var outdated in Databases.Where(db => !db.IsUpToDate))
@@ -130,16 +156,10 @@ namespace TCC.Data.Databases
         {
             get
             {
-                var t = GetType();
-                var ret = new List<DatabaseBase>();
-                foreach (var prop in t.GetProperties())
-                {
-                    if (prop.PropertyType.IsSubclassOf(typeof(DatabaseBase)))
-                    {
-                        ret.Add(prop.GetValue(this) as DatabaseBase);
-                    }
-                }
-                return ret;
+                return GetType()
+                       .GetProperties()
+                       .Where(p => p.PropertyType.IsSubclassOf(typeof(DatabaseBase)))
+                       .Select(prop => prop.GetValue(this) as DatabaseBase).ToList();
             }
         }
         public void CheckVersion()

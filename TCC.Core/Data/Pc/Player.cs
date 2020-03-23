@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
+using Nostrum;
 using TCC.Data.Abnormalities;
-using TCC.Data.Chat;
-using TCC.Settings;
+using TCC.Utils;
 using TCC.ViewModels;
+using TeraDataLite;
 
 namespace TCC.Data.Pc
 {
@@ -13,12 +14,15 @@ namespace TCC.Data.Pc
 
     public class Player : TSPropertyChanged
     {
+        public event Action Death;
+        public event Action Ress;
+
         private string _name = "";
         private ulong _entityId;
         private Class _playerclass = Class.None;
         private Laurel _laurel = Laurel.None;
         private int _level;
-        private int _itemLevel;
+        private float _itemLevel;
         private float _currentHP;
         private float _currentMP;
         private float _currentST;
@@ -38,37 +42,10 @@ namespace TCC.Data.Pc
         private bool _iceBoost;
         private bool _arcaneBoost;
         private bool _isAlive;
-
         private uint _coins;
-        public uint Coins
-        {
-            get { return _coins; }
-            set
-            {
-                if (_coins == value) return;
-                _coins = value;
-                if (_coins == _maxCoins)
-                {
-                    WindowManager.FloatingButton.NotifyExtended("TCC", "Adventure coins maxed!", NotificationType.Success);
-                    ChatWindowManager.Instance.AddChatMessage(new ChatMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
-                }
-
-                N();
-
-            }
-        }
         private uint _maxCoins;
-        public uint MaxCoins
-        {
-            get { return _maxCoins; }
-            set
-            {
-                if (_maxCoins == value) return;
-                _maxCoins = value;
-                N();
-
-            }
-        }
+        private List<uint> _debuffList;
+        private Dictionary<uint, uint> _shields;
 
         public string Name
         {
@@ -85,11 +62,9 @@ namespace TCC.Data.Pc
             get => _entityId;
             set
             {
-                if (_entityId != value)
-                {
-                    _entityId = value;
-                    N();
-                }
+                if (_entityId == value) return;
+                _entityId = value;
+                N();
             }
         }
         public uint PlayerId { get; internal set; }
@@ -99,11 +74,9 @@ namespace TCC.Data.Pc
             get => _playerclass;
             set
             {
-                if (_playerclass != value)
-                {
-                    _playerclass = value;
-                    N();
-                }
+                if (_playerclass == value) return;
+                _playerclass = value;
+                N();
             }
         }
         public Laurel Laurel
@@ -111,11 +84,9 @@ namespace TCC.Data.Pc
             get => _laurel;
             set
             {
-                if (_laurel != value)
-                {
-                    _laurel = value;
-                    N();
-                }
+                if (_laurel == value) return;
+                _laurel = value;
+                N();
             }
         }
         public int Level
@@ -123,23 +94,19 @@ namespace TCC.Data.Pc
             get => _level;
             set
             {
-                if (_level != value)
-                {
-                    _level = value;
-                    N();
-                }
+                if (_level == value) return;
+                _level = value;
+                N();
             }
         }
-        public int ItemLevel
+        public float ItemLevel
         {
             get => _itemLevel;
             set
             {
-                if (value != _itemLevel)
-                {
-                    _itemLevel = value;
-                    N();
-                }
+                if (value == _itemLevel) return;
+                _itemLevel = value;
+                N();
             }
         }
         public float CurrentHP
@@ -159,13 +126,10 @@ namespace TCC.Data.Pc
             get => _currentMP;
             set
             {
-                if (_currentMP != value)
-                {
-                    _currentMP = value;
-                    N();
-                    N(nameof(MpFactor));
-
-                }
+                if (_currentMP == value) return;
+                _currentMP = value;
+                N();
+                N(nameof(MpFactor));
             }
         }
         public float CurrentST
@@ -173,13 +137,10 @@ namespace TCC.Data.Pc
             get => _currentST;
             set
             {
-                if (_currentST != value)
-                {
-                    _currentST = value;
-                    N();
-                    N(nameof(StFactor));
-
-                }
+                if (_currentST == value) return;
+                _currentST = value;
+                N();
+                N(nameof(StFactor));
             }
         }
         public long MaxHP
@@ -187,13 +148,10 @@ namespace TCC.Data.Pc
             get => _maxHP;
             set
             {
-                if (_maxHP != value)
-                {
-                    _maxHP = value;
-                    N();
-                    N(nameof(HpFactor));
-
-                }
+                if (_maxHP == value) return;
+                _maxHP = value;
+                N();
+                N(nameof(HpFactor));
 
             }
         }
@@ -202,13 +160,10 @@ namespace TCC.Data.Pc
             get => _maxMP;
             set
             {
-                if (_maxMP != value)
-                {
-                    _maxMP = value;
-                    N();
-                    N(nameof(MpFactor));
-
-                }
+                if (_maxMP == value) return;
+                _maxMP = value;
+                N();
+                N(nameof(MpFactor));
 
             }
         }
@@ -228,13 +183,11 @@ namespace TCC.Data.Pc
             get => _maxShield;
             private set
             {
-                if (_maxShield != value)
-                {
-                    _maxShield = value;
-                    N(nameof(MaxShield));
-                    N(nameof(ShieldFactor));
-                    N(nameof(HasShield));
-                }
+                if (_maxShield == value) return;
+                _maxShield = value;
+                N(nameof(MaxShield));
+                N(nameof(ShieldFactor));
+                N(nameof(HasShield));
             }
         }
         public double HpFactor => MaxHP > 0 ? CurrentHP / MaxHP : 1;
@@ -267,44 +220,56 @@ namespace TCC.Data.Pc
                 N();
             }
         }
-
-        private readonly List<uint> _debuffList;
-        internal void AddToDebuffList(Abnormality ab)
+        public uint Coins
         {
-            if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
+            get { return _coins; }
+            set
             {
-                _debuffList.Add(ab.Id);
-                N(nameof(IsDebuffed));
+                if (_coins == value) return;
+                _coins = value;
+                if (_coins == _maxCoins)
+                {
+                    Log.N("TCC", "Adventure coins maxed!", NotificationType.Success);
+                    ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
+                }
+
+                N();
+
             }
         }
-        internal void RemoveFromDebuffList(Abnormality ab)
+        public uint MaxCoins
         {
-            if (ab.IsBuff == false)
+            get { return _maxCoins; }
+            set
             {
-                _debuffList.Remove(ab.Id);
-                N(nameof(IsDebuffed));
+                if (_maxCoins == value) return;
+                _maxCoins = value;
+                N();
+
             }
         }
-        public bool IsDebuffed => _debuffList.Count != 0;
-
+        public bool IsDebuffed => _debuffList?.Count != 0;
         public bool IsInCombat
         {
             get => _isInCombat;
             set
             {
-                if (value != _isInCombat)
-                {
-                    _isInCombat = value;
-                    N();
-                }
+                if (value == _isInCombat) return;
+                _isInCombat = value;
+                N();
             }
         }
-
-        public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; set; }
-        public Dictionary<uint, uint> Shields { get; set; }
-        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; set; }
-        public SynchronizedObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
-
+        public bool IsAlive
+        {
+            get => _isAlive;
+            internal set
+            {
+                if (_isAlive == value) return;
+                _isAlive = value;
+                if (value) Ress?.Invoke();
+                else Death?.Invoke();
+            }
+        }
         public float CritFactor
         {
             get => _critFactor;
@@ -315,7 +280,6 @@ namespace TCC.Data.Pc
                 N();
             }
         }
-
         public bool FireBoost
         {
             get => _fireBoost;
@@ -346,7 +310,6 @@ namespace TCC.Data.Pc
                 N();
             }
         }
-
         public bool Fire
         {
             get => _fire;
@@ -378,56 +341,188 @@ namespace TCC.Data.Pc
             }
         }
 
-        public event Action Death;
-        public event Action Ress;
-        public bool IsAlive
+        public TSObservableCollection<AbnormalityDuration> Buffs { get; set; }
+        public TSObservableCollection<AbnormalityDuration> Debuffs { get; set; }
+        public TSObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
+
+        public Player()
         {
-            get => _isAlive;
-            internal set
-            {
-                if (_isAlive == value) return;
-                _isAlive = value;
-                if (value) Ress?.Invoke();
-                else Death?.Invoke();
-            }
+            Dispatcher = Dispatcher.CurrentDispatcher;
         }
 
-        //Add My Abnormals Setting by HQ ============================================================
-        public bool MyAbnormalsContainKey(Abnormality ab)
+
+        #region Shield
+        public void DamageShield(uint damage)
         {
-            if (!SettingsHolder.ShowAllMyAbnormalities)
+            Dispatcher.Invoke(() =>
             {
-                if (SettingsHolder.MyAbnormals.TryGetValue(Class.Common, out var commonList))
+                if (_shields.Count == 0) return;
+                var firstShield = _shields.First();
+                if (_shields[firstShield.Key] >= damage)
                 {
-                    if (!commonList.Contains(ab.Id))
-                    {
-                        if (SettingsHolder.MyAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
-                        {
-                            if (!classList.Contains(ab.Id)) return false;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
+                    _shields[firstShield.Key] -= damage;
                 }
                 else
                 {
-                    return false;
+                    _shields[firstShield.Key] = 0;
                 }
-            }
-            return true;
+                RefreshShieldAmount();
+            });
         }
-        //===========================================================================================
-
-        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
+        private void AddShield(Abnormality ab)
         {
-            //Add My Abnormals Setting by HQ ============================================================
-            if (!MyAbnormalsContainKey(ab))
+            Dispatcher.Invoke(() =>
             {
+                _shields[ab.Id] = GetShieldSize(ab);
+                RefreshMaxShieldAmount();
+                RefreshShieldAmount();
+            });
+
+            uint GetShieldSize(Abnormality a)
+            {
+                return Class != Class.Sorcerer ? a.ShieldSize : Convert.ToUInt32(EpDataProvider.ManaBarrierMult * a.ShieldSize);
+            }
+        }
+        private void EndShield(Abnormality ab)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                _shields.Remove(ab.Id);
+                RefreshShieldAmount();
+            });
+        }
+        private void RefreshShieldAmount()
+        {
+            if (_shields.Count == 0)
+            {
+                CurrentShield = 0;
+                MaxShield = 0;
                 return;
             }
-            //===========================================================================================
+            _currentShield = 0;
+            var total = 0U;
+            foreach (var amount in _shields.Values)
+            {
+                total += amount;
+            }
+            CurrentShield = total;
+        }
+        private void RefreshMaxShieldAmount()
+        {
+            foreach (var amount in _shields.Values)
+            {
+                MaxShield += amount;
+            }
+        }
+        #endregion
+
+        #region Abnormalities
+        public void InitAbnormalityCollections(Dispatcher disp)
+        {
+            Buffs = new TSObservableCollection<AbnormalityDuration>(disp);
+            Debuffs = new TSObservableCollection<AbnormalityDuration>(disp);
+            InfBuffs = new TSObservableCollection<AbnormalityDuration>(disp);
+            _shields = new Dictionary<uint, uint>();
+            _debuffList = new List<uint>();
+
+        }
+
+        public void UpdateAbnormality(Abnormality ab, uint pDuration, int pStacks)
+        {
+            if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
+            FindAndUpdate(ab, pDuration, pStacks);
+        }
+        public void EndAbnormality(Abnormality ab)
+        {
+            if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
+            FindAndRemove(ab);
+        }
+        public void EndAbnormality(uint id)
+        {
+            if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
+            if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
+            FindAndRemove(ab);
+        }
+        private void FindAndUpdate(Abnormality ab, uint duration, int stacks)
+        {
+            var list = GetList(ab);
+            var existing = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            if (existing == null)
+            {
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true);
+                list.Add(newAb);
+                if (ab.IsShield) AddShield(ab);
+                if (ab.IsDebuff) AddToDebuffList(ab);
+                return;
+            }
+            existing.Duration = duration;
+            existing.DurationLeft = duration;
+            existing.Stacks = stacks;
+            existing.Refresh();
+        }
+        private void FindAndRemove(Abnormality ab)
+        {
+            var list = GetList(ab);
+            var target = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            if (target == null) return;
+            list.Remove(target);
+            target.Dispose();
+
+            if (ab.IsShield) EndShield(ab);
+            if (ab.IsDebuff) RemoveFromDebuffList(ab);
+        }
+
+        internal void AddToDebuffList(Abnormality ab)
+        {
+            if (ab.IsBuff || _debuffList.Contains(ab.Id)) return;
+            _debuffList.Add(ab.Id);
+            N(nameof(IsDebuffed));
+        }
+
+        internal void RemoveFromDebuffList(Abnormality ab)
+        {
+            if (ab.IsBuff) return;
+            _debuffList.Remove(ab.Id);
+            N(nameof(IsDebuffed));
+        }
+
+        public void ClearAbnormalities()
+        {
+            Buffs.ToSyncList().ForEach(item => item.Dispose());
+            Debuffs.ToSyncList().ForEach(item => item.Dispose());
+            InfBuffs.ToSyncList().ForEach(item => item.Dispose());
+
+            Buffs.Clear();
+            Debuffs.Clear();
+            InfBuffs.Clear();
+
+            _debuffList.Clear();
+
+            CurrentShield = 0;
+            N(nameof(IsDebuffed));
+        }
+
+        // utils
+        private TSObservableCollection<AbnormalityDuration> GetList(Abnormality ab)
+        {
+            var list = ab.Type switch
+            {
+                AbnormalityType.Debuff => Debuffs,
+                AbnormalityType.DOT => Debuffs,
+                AbnormalityType.Stun => Debuffs,
+                AbnormalityType.Buff => (ab.Infinity ? InfBuffs : Buffs),
+                AbnormalityType.Special => (ab.Infinity ? InfBuffs : Buffs),
+                _ => null
+            };
+
+            return list;
+        }
+        #endregion
+
+        #region Deprecated
+        [Obsolete]
+        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
+        {
             var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
@@ -436,8 +531,6 @@ namespace TCC.Data.Pc
                 Buffs.Add(newAb);
                 if (ab.IsShield)
                 {
-                    //MaxShield = ab.ShieldSize;
-                    //CurrentShield = ab.ShieldSize;
                     AddShield(ab);
                 }
 
@@ -449,38 +542,9 @@ namespace TCC.Data.Pc
             existing.Refresh();
 
         }
-
-        private void AddShield(Abnormality ab)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                Shields[ab.Id] = GetShieldSize(ab);
-                RefreshMaxShieldAmount();
-                RefreshShieldAmount();
-            });
-
-            uint GetShieldSize(Abnormality a)
-            {
-                return Class != Class.Sorcerer ? a.ShieldSize : Convert.ToUInt32(EpDataProvider.ManaBarrierMult * a.ShieldSize);
-            }
-        }
-
-        private void RefreshMaxShieldAmount()
-        {
-            foreach (var amount in Shields.Values)
-            {
-                MaxShield += amount;
-            }
-        }
-
+        [Obsolete]
         public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
         {
-            //Add My Abnormals Setting by HQ ============================================================
-            if (!MyAbnormalsContainKey(ab))
-            {
-                return;
-            }
-            //===========================================================================================
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
@@ -494,14 +558,9 @@ namespace TCC.Data.Pc
             existing.Stacks = stacks;
             existing.Refresh();
         }
+        [Obsolete]
         public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks)
         {
-            //Add My Abnormals Setting by HQ ============================================================
-            if (!MyAbnormalsContainKey(ab))
-            {
-                return;
-            }
-            //===========================================================================================
             var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
@@ -516,7 +575,7 @@ namespace TCC.Data.Pc
             existing.Refresh();
 
         }
-
+        [Obsolete]
         public void RemoveBuff(Abnormality ab)
         {
             var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -525,45 +584,13 @@ namespace TCC.Data.Pc
             Buffs.Remove(buff);
             buff.Dispose();
 
-            //if (ab.IsShield)
-            //{
-            //MaxShield = 0;
-            //CurrentShield = 0;
-            //}
             if (ab.IsShield)
             {
                 EndShield(ab);
-                //SessionManager.SetPlayerShield(0);
-                //SessionManager.SetPlayerMaxShield(0);
             }
 
         }
-
-        private void EndShield(Abnormality ab)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                Shields.Remove(ab.Id);
-                RefreshShieldAmount();
-            });
-        }
-
-        private void RefreshShieldAmount()
-        {
-            if (Shields.Count == 0)
-            {
-                CurrentShield = 0;
-                MaxShield = 0;
-                return;
-            }
-            _currentShield = 0;
-            var total = 0U;
-            foreach (var amount in Shields.Values)
-            {
-                total += amount;
-            }
-            CurrentShield = total;
-        }
+        [Obsolete]
         public void RemoveDebuff(Abnormality ab)
         {
 
@@ -572,6 +599,7 @@ namespace TCC.Data.Pc
             Debuffs.Remove(buff);
             buff.Dispose();
         }
+        [Obsolete]
         public void RemoveInfBuff(Abnormality ab)
         {
             var buff = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -580,63 +608,7 @@ namespace TCC.Data.Pc
             buff.Dispose();
         }
 
-        public void ClearAbnormalities()
-        {
-            foreach (var item in Buffs)
-            {
-                item.Dispose();
-            }
-            foreach (var item in Debuffs)
-            {
-                item.Dispose();
-            }
-            foreach (var item in InfBuffs)
-            {
-                item.Dispose();
-            }
-            Buffs.Clear();
-            Debuffs.Clear();
-            InfBuffs.Clear();
-            _debuffList.Clear();
-            CurrentShield = 0;
-            N(nameof(IsDebuffed));
-        }
+        #endregion
 
-        public Player()
-        {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-            _debuffList = new List<uint>();
-        }
-        public Player(ulong id, string name) : this()
-        {
-            _entityId = id;
-            _name = name;
-        }
-
-        public void InitAbnormalityCollections(Dispatcher disp)
-        {
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
-            InfBuffs = new SynchronizedObservableCollection<AbnormalityDuration>(disp);
-            Shields = new Dictionary<uint, uint>();
-        }
-
-        public void DamageShield(uint damage)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (Shields.Count == 0) return;
-                var firstShield = Shields.First();
-                if (Shields[firstShield.Key] >= damage)
-                {
-                    Shields[firstShield.Key] -= damage;
-                }
-                else
-                {
-                    Shields[firstShield.Key] = 0;
-                }
-                RefreshShieldAmount();
-            });
-        }
     }
 }

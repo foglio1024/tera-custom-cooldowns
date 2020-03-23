@@ -1,5 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -8,8 +9,9 @@ namespace TCC.ViewModels
     {
 
         public DurationCooldownIndicator DeadlyGamble { get; set; }
+        public DurationCooldownIndicator AdrenalineRush { get; set; }
+        public DurationCooldownIndicator Swift { get; set; }
         public Counter EdgeCounter { get; set; }
-        public Cooldown Swift { get; set; }
         public StanceTracker<WarriorStance> Stance { get; set; }
         public StatTracker TraverseCut { get; set; }
 
@@ -26,17 +28,8 @@ namespace TCC.ViewModels
         }
 
         //public StatTracker TempestAura { get; set; }
-        private bool _swiftProc;
 
-        public bool SwiftProc
-        {
-            get => _swiftProc;
-            set
-            {
-                if (_swiftProc == value) return; _swiftProc = value;
-                N();
-            }
-        }
+        public bool AtkSpeedProc => !(Swift.Buff.IsAvailable && AdrenalineRush.Buff.IsAvailable);
 
         public WarriorLayoutVM()
         {
@@ -44,8 +37,8 @@ namespace TCC.ViewModels
             TraverseCut = new StatTracker { Max = 13, Val = 0 };
             //TempestAura = new StatTracker { Max = 50, Val = 0 };
             Stance = new StanceTracker<WarriorStance>();
-            SessionManager.CurrentPlayer.Death += OnDeath;
-            SessionManager.CombatChanged += CheckStanceWarning;
+            Game.Me.Death += OnDeath;
+            Game.CombatChanged += CheckStanceWarning;
             Stance.PropertyChanged += (_, __) => CheckStanceWarning(); // StanceTracker has only one prop
 
         }
@@ -55,21 +48,34 @@ namespace TCC.ViewModels
             DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
         }
 
-        public bool ShowEdge => Settings.SettingsHolder.WarriorShowEdge;
-        public bool ShowTraverseCut => Settings.SettingsHolder.WarriorShowTraverseCut;
-        public WarriorEdgeMode WarriorEdgeMode => Settings.SettingsHolder.WarriorEdgeMode;
+        public bool ShowEdge => App.Settings.ClassWindowSettings.WarriorShowEdge;
+        public bool ShowTraverseCut => App.Settings.ClassWindowSettings.WarriorShowTraverseCut;
+        public WarriorEdgeMode WarriorEdgeMode => App.Settings.ClassWindowSettings.WarriorEdgeMode;
 
         public sealed override void LoadSpecialSkills()
         {
             //Deadly gamble
-            SessionManager.DB.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
+            Game.DB.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
             DeadlyGamble = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(dg, false),
                 Cooldown = new Cooldown(dg, true) { CanFlash = true }
             };
-            var ab = SessionManager.DB.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
-            Swift = new Cooldown(new Skill(ab), false);
+
+            Game.DB.SkillsDatabase.TryGetSkill(170250, Class.Lancer, out var ar);
+            AdrenalineRush = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new Cooldown(ar, false),
+                Cooldown = new Cooldown(ar, false) { CanFlash = false }
+            };
+            var ab = Game.DB.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
+            //Swift = new Cooldown(new Skill(ab), false);
+            Swift = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new Cooldown(new Skill(ab), false),
+                Cooldown = new Cooldown(new Skill(ab), false) { CanFlash = false }
+            };
+
         }
 
         public override void Dispose()
@@ -79,17 +85,38 @@ namespace TCC.ViewModels
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
-            if (sk.Skill.IconName == DeadlyGamble.Cooldown.Skill.IconName)
-            {
-                DeadlyGamble.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+            if (sk.Skill.IconName != DeadlyGamble.Cooldown.Skill.IconName) return false;
+            DeadlyGamble.Cooldown.Start(sk.Duration);
+            return true;
         }
 
         private void CheckStanceWarning()
         {
-            WarningStance = Stance.CurrentStance == WarriorStance.None && SessionManager.Combat;
+            WarningStance = Stance.CurrentStance == WarriorStance.None && Game.Combat;
+        }
+
+        public void SetSwift(uint duration)
+        {
+            if (duration == 0)
+            {
+                Swift.Buff.Refresh(0, CooldownMode.Normal);
+                N(nameof(AtkSpeedProc));
+                return;
+            }
+            Swift.Buff.Start(duration);
+            N(nameof(AtkSpeedProc));
+        }
+
+        public void SetArush(uint duration)
+        {
+            if (duration == 0)
+            {
+                AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
+                N(nameof(AtkSpeedProc));
+                return;
+            }
+            AdrenalineRush.Buff.Start(duration);
+            N(nameof(AtkSpeedProc));
         }
     }
 }

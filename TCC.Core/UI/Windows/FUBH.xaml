@@ -1,0 +1,62 @@
+﻿<Window x:Class="TCC.UI.Windows.FUBH"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
+        xmlns:windows="clr-namespace:TCC.UI.Windows"
+
+        Topmost="True"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        mc:Ignorable="d"
+        Title="FUBH" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" d:DataContext="{d:DesignInstance windows:FUBHVM}">
+    <Grid MouseDown="UIElement_OnMouseDown" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource RevampBorderStyle}"  Grid.RowSpan="2" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"></Border>
+        <Border Style="{StaticResource RevampBorderStyle}" Margin="0"></Border>
+        <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
+                   VerticalAlignment="Center" Margin="50 0"
+                   FontSize="12" FontWeight="Normal"
+                   Foreground="#dfff">
+            <Run Text="Hello, Foglio here (who else?)."></Run>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="As you may have noticed, this game has been getting worse and worse with every recent patch."></Run>
+            <LineBreak/>
+            <Run Text="Excessive grind, unaddressed game issues, badly implemented systems like Adventure coins, full rng and paywall-locked systems like Relic/Haildom and Partners (just to mention some)."></Run>
+            <LineBreak/>
+            <Run Text="Current TERA state is pretty bad and, as latest KTera patches show, there seems to be no improvements coming soon."></Run>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="This is why many people stopped making ingame purchases and/or are canceling their monthly subscription."></Run>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="You can find more info about the topic in" FontWeight="DemiBold" FontSize="16"></Run>
+            <Hyperlink RequestNavigate="Hyperlink_OnRequestNavigate" NavigateUri="https://board.tera.gameforge.com/index.php?thread/75979-another-useless-ranting-about-tera-current-state/&amp;postID=923258#post923258" FontWeight="Bold" FontSize="16">this thread</Hyperlink><Run Text="."/>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="I joined those people who stopped spending money on this game and, if things don't get better, I might join the ones who already quit,"></Run><Run Text=" quitting the development of all my mods aswell." FontWeight="Bold"></Run>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="I thought the best I could do to help the community would be to add this message here, so that hopefully more people will put pressure on the developer for actual changes, since I've been playing this game for 6 years and it's really sad to see what it has become."></Run>
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="This message will be displayed at every server login." Foreground="#5fff"></Run>
+        </TextBlock>
+        <TextBlock VerticalAlignment="Center" 
+                   TextAlignment="Center" 
+                   Grid.Row="1"
+                   Margin="0"
+                   Foreground="#2fff"
+                   IsHitTestVisible="False"
+                   Text="{Binding CloseMessage}"/>
+        <settings:CheckboxSetting Grid.Row="1" VerticalAlignment="Center" Margin="0" SettingName="Don't show again" HorizontalAlignment="Right" 
+                                  IsOn="{Binding DontShowAgain, Mode=TwoWay}"/>
+    </Grid>
+</Window>

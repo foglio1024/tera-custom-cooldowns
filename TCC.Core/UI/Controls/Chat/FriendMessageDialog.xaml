@@ -1,0 +1,79 @@
+﻿<Window x:Class="TCC.UI.Controls.Chat.FriendMessageDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:chat="clr-namespace:TCC.UI.Controls.Chat"
+             mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
+            Background="Transparent" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Topmost="True"
+        WindowStartupLocation="CenterScreen">
+    <Border Background="White" CornerRadius="3" Margin="10" Width="300">
+        <Grid Margin="5" FocusManager.FocusedElement="{Binding ElementName=Box}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Foreground="#777" FontSize="13"  VerticalAlignment="Center">
+                <Run Text="Add"></Run>
+                <Run Text="{Binding TargetName, RelativeSource={RelativeSource AncestorType=chat:FriendMessageDialog}}"></Run>
+                <Run Text="as friend"></Run>
+            </TextBlock>
+            <TextBox Text="Friend me?" TextWrapping="Wrap" Grid.Row="1" Foreground="#333" Name="Box" Focusable="True"
+                     BorderBrush="#1000" TextChanged="TextBox_TextChanged" FontSize="14"/>
+            <UniformGrid Grid.Row="2" Rows="1" Margin="0,5,0,0" >
+                <UniformGrid.Resources>
+                    
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyFocusVisual}"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="8,0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsDefaulted" Value="true">
+                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Background" TargetName="border" Value="#1000"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Background" TargetName="border" Value="#2000"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Background" TargetName="border" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                </UniformGrid.Resources>
+
+                <Button Content="Ok" Foreground="#9000" HorizontalContentAlignment="Center" Click="OkClick"/>
+                <Button Content="Cancel" Foreground="#9000" HorizontalContentAlignment="Center" Click="CancelClick"/>
+
+
+
+
+            </UniformGrid>
+        </Grid>
+        <Border.Effect>
+            <DropShadowEffect Opacity=".6" BlurRadius="10"></DropShadowEffect>
+        </Border.Effect>
+    </Border>
+</Window>

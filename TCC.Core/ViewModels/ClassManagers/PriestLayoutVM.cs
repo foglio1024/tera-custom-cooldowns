@@ -1,6 +1,7 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -28,14 +29,14 @@ namespace TCC.ViewModels
         public sealed override void LoadSpecialSkills()
         {
             //Energy Stars
-            SessionManager.DB.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
+            Game.DB.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
             EnergyStars = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(es, false),
                 Cooldown = new Cooldown(es, true) {CanFlash = true}
             };
 
-            SessionManager.DB.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
+            Game.DB.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
             Grace = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(gr, false),
@@ -46,7 +47,7 @@ namespace TCC.ViewModels
             Grace.Buff.Ended += OnGraceBuffEnded;
 
             // Edict Of Judgment
-            SessionManager.DB.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
+            Game.DB.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
             EdictOfJudgment = new DurationCooldownIndicator(Dispatcher)
             {
                 Buff = new Cooldown(ed, false),
@@ -57,22 +58,22 @@ namespace TCC.ViewModels
             EdictOfJudgment.Buff.Ended += OnEdictBuffEnded;
 
             // Divine Charge
-            SessionManager.DB.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
+            Game.DB.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
             DivineCharge = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(dc, true) {CanFlash = true}
             };
 
             // Tripple Nenesis
-            SessionManager.DB.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
+            Game.DB.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
             TripleNemesis = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(tn, false) {CanFlash = true},
                 Buff = new Cooldown(tn, false)
             };
 
-            ClassAbnormalityTracker.MarkingExpired += OnTripleNemesisExpired;
-            ClassAbnormalityTracker.MarkingRefreshed += OnTripleNemesisRefreshed;
+            AbnormalityTracker.MarkingExpired += OnTripleNemesisExpired;
+            AbnormalityTracker.MarkingRefreshed += OnTripleNemesisRefreshed;
         }
 
         private void OnTripleNemesisRefreshed(ulong duration)
@@ -121,24 +122,18 @@ namespace TCC.ViewModels
                 return true;
             }
 
-            if (sk.Skill.IconName == TripleNemesis.Cooldown.Skill.IconName)
-            {
-                TripleNemesis.Cooldown.Start(sk.Duration);
-                return true;
-            }
+            if (sk.Skill.IconName != TripleNemesis.Cooldown.Skill.IconName) return false;
+            TripleNemesis.Cooldown.Start(sk.Duration);
+            return true;
 
-            return false;
         }
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)
         {
-            if (skill.IconName == EdictOfJudgment.Cooldown.Skill.IconName)
-            {
-                EdictOfJudgment.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
-                return true;
-            }
+            if (skill.IconName != EdictOfJudgment.Cooldown.Skill.IconName) return false;
+            EdictOfJudgment.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
+            return true;
 
-            return false;
         }
 
         public override void Dispose()

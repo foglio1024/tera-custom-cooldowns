@@ -1,0 +1,494 @@
+﻿<Window x:Class="TCC.UI.Controls.Chat.PlayerMenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:TCC.ViewModels"
+        xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+        xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+        xmlns:chat="clr-namespace:TCC.UI.Controls.Chat"
+        mc:Ignorable="d" MouseLeave="OnMouseLeave"
+        Topmost="True"
+        ShowInTaskbar="False"
+        BorderBrush="Red"
+        BorderThickness="0"
+        Background="Transparent"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        d:DataContext="{d:DesignInstance viewModels:PlayerMenuViewModel}">
+    <Grid>
+        <Border Name="RootBorder" 
+                Background="{StaticResource RevampBackground80Brush}" 
+                Margin="15"
+                BorderThickness="1" 
+                Width="Auto" >
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="BorderBrush" Value="{StaticResource TccYellowGradientBrush}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Class}" Value="Priest">
+                            <Setter Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Class}" Value="Mystic">
+                            <Setter Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Class}" Value="Brawler">
+                            <Setter Property="BorderBrush" Value="{StaticResource TccNormalGradientBrush}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Class}" Value="Lancer">
+                            <Setter Property="BorderBrush" Value="{StaticResource TccNormalGradientBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Border.Effect>
+                <DropShadowEffect Opacity=".5" ShadowDepth="5" Direction="-90" BlurRadius="14" />
+            </Border.Effect>
+            <Border.LayoutTransform>
+                <ScaleTransform ScaleY="1" />
+            </Border.LayoutTransform>
+
+            <Grid Margin="5" Height="Auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Margin" Value="0,3" />
+                    </Style>
+                </Grid.Resources>
+
+                <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#2000" Margin="-5" />
+                <!-- Class icon -->
+                <Border Background="#445" BorderThickness="1"
+                        CornerRadius="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="48"
+                        Height="48"
+                        Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" RenderTransformOrigin=".5 .5">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="BorderBrush" Value="{StaticResource TccYellowGradientBrush}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Class}" Value="None">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"
+                                                                 To="0" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Opacity"
+                                                                 To="1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Class}" Value="Priest">
+                                    <Setter Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Class}" Value="Mystic">
+                                    <Setter Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Class}" Value="Brawler">
+                                    <Setter Property="BorderBrush" Value="{StaticResource TccNormalGradientBrush}" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Class}" Value="Lancer">
+                                    <Setter Property="BorderBrush" Value="{StaticResource TccNormalGradientBrush}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45" />
+                            <TranslateTransform Y="-3" />
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="2" BlurRadius="10" Opacity=".5" />
+                    </Border.Effect>
+
+                    <Grid>
+                        <Rectangle Margin="5" Fill="#2fff" />
+                        <Rectangle Opacity=".2">
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Setter Property="Fill" Value="{StaticResource TccYellowGradientBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Class}" Value="Priest">
+                                            <Setter Property="Fill" Value="{StaticResource TccGreenGradientBrush}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Class}" Value="Mystic">
+                                            <Setter Property="Fill" Value="{StaticResource TccGreenGradientBrush}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Class}" Value="Brawler">
+                                            <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Class}" Value="Lancer">
+                                            <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <Path Width="30" Height="30" Fill="White"
+                              Data="{Binding Class, Converter={StaticResource ClassToSvg}}"
+                              Margin="0" VerticalAlignment="Center" RenderTransformOrigin=".5 .5">
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="-45" />
+                            </Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                </Border>
+
+                <!-- Info -->
+                <StackPanel Grid.Column="1" Grid.RowSpan="2" Margin="15 0 0 0">
+                    <TextBlock Foreground="#9fff" VerticalAlignment="Bottom"
+                               Margin="0 0 5 0">
+                        <Run Text="{Binding Name}" FontWeight="DemiBold" FontSize="14" Foreground="White" />
+                    </TextBlock>
+                    <TextBlock Margin="0 0 5 0" VerticalAlignment="Top"
+                               Foreground="#9fff" TextWrapping="Wrap" Width="100"
+                               TextAlignment="Left" FontSize="11">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Info}" Value="">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.2"
+                                                                     Storyboard.TargetProperty="Opacity"
+                                                                     To="0" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0:0:0.2"
+                                                                     Storyboard.TargetProperty="Opacity"
+                                                                     To="1" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run Text="lv." /><Run Text="{Binding Level}" FontWeight="DemiBold" Foreground="White" />
+                        <Run Text="{Binding Info}" />
+                    </TextBlock>
+                </StackPanel>
+                
+                <!-- Buttons -->
+                <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" Margin="-5,5,-5,-5">
+                    <StackPanel.Resources>
+                        <SolidColorBrush x:Key="Button.Static.Background" Color="#00DDDDDD" />
+                        <SolidColorBrush x:Key="Button.Static.Border" Color="#00707070" />
+                        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#1FFF" />
+                        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#003C7FB1" />
+                        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#2FFF" />
+                        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#002C628B" />
+                        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#00F4F4F4" />
+                        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#00ADB2B5" />
+                        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#00838383" />
+                        <!--TODO why-->
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyFocusVisual}" />
+                            <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Height" Value="30" />
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="8,0" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Grid>
+                                            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    SnapsToDevicePixels="true">
+                                                <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  Margin="{TemplateBinding Padding}"
+                                                                  RecognizesAccessKey="True"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                            </Border>
+                                            <controls:Ripple HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                             Color="{TemplateBinding extensions:ButtonExtensions.RippleBrush}"
+                                                             StaysVisible="{TemplateBinding extensions:ButtonExtensions.RippleStaysVisible}"
+                                                             Reversed="{TemplateBinding extensions:ButtonExtensions.RippleReversed}"
+                                                             Duration="{TemplateBinding extensions:ButtonExtensions.RippleDuration}"
+                                                             IsHitTestVisible="{TemplateBinding extensions:ButtonExtensions.RippleEnabled}">
+                                                <controls:Ripple.Clip>
+                                                    <MultiBinding Converter="{StaticResource RoundedClipConverter}">
+                                                        <Binding Path="ActualWidth" ElementName="border" />
+                                                        <Binding Path="ActualHeight" ElementName="border" />
+                                                        <Binding Path="CornerRadius" ElementName="border" />
+                                                    </MultiBinding>
+                                                </controls:Ripple.Clip>
+                                            </controls:Ripple>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsDefaulted" Value="true">
+                                                <Setter Property="BorderBrush" TargetName="border"
+                                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter Property="Background" TargetName="border"
+                                                        Value="{StaticResource Button.MouseOver.Background}" />
+                                                <Setter Property="BorderBrush" TargetName="border"
+                                                        Value="{StaticResource Button.MouseOver.Border}" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="true">
+                                                <Setter Property="Background" TargetName="border"
+                                                        Value="{StaticResource Button.Pressed.Background}" />
+                                                <Setter Property="BorderBrush" TargetName="border"
+                                                        Value="{StaticResource Button.Pressed.Border}" />
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="false">
+                                                <Setter Property="Background" TargetName="border"
+                                                        Value="{StaticResource Button.Disabled.Background}" />
+                                                <Setter Property="BorderBrush" TargetName="border"
+                                                        Value="{StaticResource Button.Disabled.Border}" />
+                                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter"
+                                                        Value="{StaticResource Button.Disabled.Foreground}" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Margin" Value="10,0,0,0" />
+                        </Style>
+                        <Style TargetType="{x:Type Path}">
+                            <Setter Property="Fill" Value="White" />
+                            <Setter Property="Width" Value="15" />
+                            <Setter Property="Height" Value="15" />
+                            <Setter Property="Margin" Value="3" />
+                            <Setter Property="Stretch" Value="Uniform" />
+                            <Setter Property="Opacity" Value=".9" />
+                        </Style>
+                    </StackPanel.Resources>
+
+                    <!-- Inspect -->
+                    <Button Click="InspectClick" Command="{Binding InspectCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource SvgEye}" />
+                            <TextBlock Text="Inspect" Margin="3" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Whisper -->
+                    <Button Click="WhisperClick" Command="{Binding WhisperCommand}"
+                            Visibility="{Binding ShowWhisper, Converter={StaticResource BoolToVisibility}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource SvgChatMessage}" />
+                            <TextBlock Text="Whisper" Margin="3" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Friend/Unfriend -->
+                    <Grid ClipToBounds="True" x:Name="FriendGrid"
+                          Visibility="{Binding ShowAddFriend, Converter={StaticResource BoolToVisibility}}">
+                        <controls:Ripple x:Name="UnfriendConfirmRipple"
+                                         Color="{StaticResource TccRedGradientBrush}"
+                                         StaysVisible="True"
+                                         IsHitTestVisible="False" />
+                        <Button Command="{Binding AddRemoveFriendCommand}"
+                                extensions:ButtonExtensions.RippleEnabled="False">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgStar}" />
+                                <TextBlock Text="{Binding FriendLabelText}" Margin="3" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                    <!-- Block/Unblock -->
+                    <Grid ClipToBounds="True" x:Name="BlockGrid"
+                          Visibility="{Binding ShowBlockUnblock, Converter={StaticResource BoolToVisibility}}">
+                        <controls:Ripple x:Name="BlockConfirmRipple"
+                                         Color="{StaticResource TccRedGradientBrush}"
+                                         StaysVisible="True"
+                                         IsHitTestVisible="False" />
+
+                        <Button Command="{Binding BlockUnblockCommand}"
+                                extensions:ButtonExtensions.RippleEnabled="False"
+                                >
+                            <StackPanel Orientation="Horizontal">
+                                <Path Fill="{StaticResource TccRedGradientBrush}" Data="{StaticResource SvgBlock}" />
+                                <TextBlock Text="{Binding BlockLabelText}" Margin="3" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Separator Margin="10 0" Background="#2fff"
+                               Visibility="{Binding ShowSeparator1, Converter={StaticResource BoolToVisibility}}" />
+
+                    <!-- Group invite -->
+                    <Button Click="PartyInviteClick" Command="{Binding GroupInviteCommand}"
+                            Visibility="{Binding ShowPartyInvite, Converter={StaticResource BoolToVisibility}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource SvgAddUser}" Fill="{StaticResource ChatPartyBrush}" />
+                            <TextBlock Text="Party invite" Margin="3" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Grant/revoke powers -->
+                    <Button Click="GrantInviteClick" Command="{Binding GrantInviteCommand}"
+                            Visibility="{Binding ShowGrantPowers, Converter={StaticResource BoolToVisibility}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource SvgAchievements}" />
+                            <TextBlock Text="{Binding PowersLabelText}" Margin="3" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Delegate leader -->
+                    <Button Click="DelegateLeaderClick" Command="{Binding DelegateLeaderCommand}"
+                            Visibility="{Binding ShowDelegateLeader, Converter={StaticResource BoolToVisibility}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Margin="4,3,2,3" Data="{StaticResource SvgDelegateLeader}" />
+                            <TextBlock Text="Delegate leader" Margin="3" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Group kick -->
+                    <Grid ClipToBounds="True" x:Name="KickGrid"
+                          Visibility="{Binding ShowKick, Converter={StaticResource BoolToVisibility}}">
+                        <controls:Ripple x:Name="KickConfirmRipple"
+                                         Color="{StaticResource TccRedGradientBrush}"
+                                         StaysVisible="True"
+                                         IsHitTestVisible="False" />
+
+                        <Button Command="{Binding GroupKickCommand}"
+                                extensions:ButtonExtensions.RippleEnabled="False">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgRemoveUser}" Fill="{StaticResource TccRedGradientBrush}" />
+                                <TextBlock Text="{Binding KickLabelText}" Margin="3" x:Name="KickText" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Separator Margin="10 0" Background="#2fff"
+                               Visibility="{Binding ShowSeparator2, Converter={StaticResource BoolToVisibility}}" />
+
+                    <!-- Guild invite -->
+                    <Button Click="GuildInviteClick" Command="{Binding GuildInviteCommand}"
+                            Visibility="{Binding ShowGuildInvite, Converter={StaticResource BoolToVisibility}}">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource SvgAddUsers}" Fill="{StaticResource ChatGuildBrush}" />
+                            <TextBlock Text="Guild invite" Margin="3" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Make guild master -->
+                    <Button Click="MakeGuildMasterClick" Command="{Binding MakeGuildMasterCommand}"
+                            Visibility="{Binding ShowMakeGuildMaster, Converter={StaticResource BoolToVisibility}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource SvgDelegateLeader}" />
+                            <TextBlock Text="Make guild master" Margin="3" />
+                        </StackPanel>
+                    </Button>
+                    <!-- Guild kick -->
+                    <Grid ClipToBounds="True" x:Name="GKickGrid"
+                          Visibility="{Binding ShowGuildKick, Converter={StaticResource BoolToVisibility}}">
+                        <controls:Ripple x:Name="GkickConfirmRipple"
+                                         Color="{StaticResource TccRedGradientBrush}"
+                                         StaysVisible="True"
+                                         IsHitTestVisible="False" />
+
+                        <Button Command="{Binding GuildKickCommand}"
+                                extensions:ButtonExtensions.RippleEnabled="False">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="{StaticResource SvgRemoveUser}"
+                                          Fill="{StaticResource TccRedGradientBrush}" />
+                                    <TextBlock Text="{Binding GKickLabelText}" Margin="3" x:Name="GKickText" />
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+
+
+                    </Grid>
+
+                    <Separator Margin="10 0" Background="#2fff" />
+
+                    <!-- Moongourd -->
+                    <Button Click="MoongourdClick" Margin="-1 0 -1 0" x:Name="MgButton" HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            Visibility="{Binding ShowMgButtons, Converter={StaticResource BoolToVisibility}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Popup Placement="Right" HorizontalOffset="5" VerticalOffset="-5" x:Name="MgPopup"
+                                   AllowsTransparency="True">
+                                <chat:MoongourdPopup />
+                            </Popup>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{StaticResource MoongourdLogo}" Margin="4 6 2 6" />
+                                <TextBlock Text="Moongourd info" Margin="3" />
+                            </StackPanel>
+                            <Path Data="{StaticResource SvgMenuRight}" HorizontalAlignment="Right"
+                                  Opacity=".5" Margin="3 10 0 10" Height="Auto" Grid.Column="1" />
+                        </Grid>
+                    </Button>
+                    <!-- Fps utils -->
+                    <Button Click="FpsUtilsClick" Margin="-1 0 -1 0" x:Name="FpsUtilsButton"
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                            Visibility="{Binding ShowFpsUtils, Converter={StaticResource BoolToVisibility}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Popup Placement="Right" HorizontalOffset="5" VerticalOffset="-5" x:Name="FpsUtilsPopup"
+                                   AllowsTransparency="True" MouseLeave="OnMouseLeave">
+                                <Border CornerRadius="1" Background="{StaticResource RevampBackground80Brush}"
+                                        Margin="0" BorderBrush="#8666"
+                                        BorderThickness="1" Width="Auto">
+                                    <StackPanel Margin="0">
+                                        <Button Command="{Binding HideShowPlayerCommand}"
+                                                CommandParameter="hide">
+                                            <StackPanel Orientation="Horizontal" Margin="0">
+                                                <Path Data="{StaticResource SvgHide}" />
+                                                <TextBlock Text="Hide player" Margin="3" />
+                                            </StackPanel>
+                                        </Button>
+                                        <Button Command="{Binding HideShowPlayerCommand}"
+                                                CommandParameter="show">
+                                            <StackPanel Orientation="Horizontal" Margin="0">
+                                                <Path Data="{StaticResource SvgEye}" />
+                                                <TextBlock Text="Show player" Margin="3" />
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgSettings}" Margin="4 6 3 6" />
+                                <TextBlock Text="fps-utils" Margin="3" />
+                            </StackPanel>
+                            <Path Data="{StaticResource SvgMenuRight}" HorizontalAlignment="Right"
+                                  Opacity=".5" Margin="3 10 0 10" Height="Auto" Grid.Column="1" />
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

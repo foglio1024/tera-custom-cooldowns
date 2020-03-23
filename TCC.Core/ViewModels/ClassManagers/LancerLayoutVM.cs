@@ -1,5 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -8,7 +9,7 @@ namespace TCC.ViewModels
         public LancerLayoutVM()
         {
             LH = new LancerLineHeldTracker();
-            SessionManager.CurrentPlayer.Death += OnDeath;
+            Game.Me.Death += OnDeath;
         }
 
         
@@ -36,19 +37,17 @@ namespace TCC.ViewModels
                 AdrenalineRush.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == Infuriate.Skill.IconName)
-            {
-                Infuriate.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != Infuriate.Skill.IconName) return false;
+            Infuriate.Start(sk.Duration);
+            return true;
         }
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
+            Game.DB.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
+            Game.DB.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
+            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
 
             GuardianShout = new DurationCooldownIndicator(Dispatcher)
             {

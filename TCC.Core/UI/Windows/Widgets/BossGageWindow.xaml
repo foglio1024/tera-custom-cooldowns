@@ -1,0 +1,30 @@
+﻿<widgets1:TccWidget x:Class="TCC.UI.Windows.Widgets.BossWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
+             xmlns:controls="clr-namespace:TCC.UI.Controls"
+             xmlns:widgets1="clr-namespace:TCC.UI.Windows.Widgets"
+             mc:Ignorable="d"
+        Title="TCC NPC" 
+        Style="{StaticResource BaseWindowStyle}"
+        MouseLeftButtonDown="Drag" d:DataContext="{d:DesignInstance widgets:NpcWindowViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
+
+        <Grid Grid.Row="1" Name="WindowContent">
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" 
+                                ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}"/>
+            </Grid.LayoutTransform>
+            <ContentControl Content="{Binding}" ContentTemplate="{Binding CurrentHHphase, Converter={StaticResource HarrowholdPhaseToLayout}}" />
+        </Grid>
+        <controls:WindowButtons WindowName="NPC window" x:Name="Buttons" DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets1:TccWidget}}" />
+    </Grid>
+</widgets1:TccWidget>

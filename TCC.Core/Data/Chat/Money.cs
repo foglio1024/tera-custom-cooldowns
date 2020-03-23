@@ -1,4 +1,5 @@
 ﻿using System;
+using Nostrum;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat
@@ -11,7 +12,7 @@ namespace TCC.Data.Chat
 
         public Money(long money)
         {
-            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatManager.Instance.GetDispatcher();
 
             Gold = Convert.ToInt64(money / 10000);
             Silver = Convert.ToInt64(money / 100) - Gold * 100;
@@ -19,7 +20,7 @@ namespace TCC.Data.Chat
         }
         public Money(int g, int s, int c)
         {
-            Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+            Dispatcher = ChatManager.Instance.GetDispatcher();
 
             Gold = g;
             Silver = s;
@@ -54,7 +55,7 @@ namespace TCC.Data.Chat
         {
             var goldString = Gold != 0 ? Gold + "g " : "";
             var silverString = Silver != 0 ? Silver + "s " : "";
-            var copperString = Copper != 0 ? Copper + "c " : "";
+            var copperString = Copper != 0 ? Copper + "c" : "";
 
             return $"{goldString}{silverString}{copperString}";
         }

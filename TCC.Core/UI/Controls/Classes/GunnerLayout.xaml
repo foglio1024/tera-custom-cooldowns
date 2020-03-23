@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="TCC.UI.Controls.Classes.GunnerLayout"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             mc:Ignorable="d" Loaded="GunnerLayout_OnLoaded" d:DataContext="{d:DesignInstance viewModels:GunnerLayoutVM}">
+    <Grid Width="Auto" Margin="50 30 50 90" Name="Root" ClipToBounds="False" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Center" Margin="0 0 0 0" ClipToBounds="False" Width="Auto" Height="Auto" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Width="101" Stretch="Uniform" x:Name="BgImage">
+                    <Image.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource WillpowerColor}" BlurRadius="35" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+
+                </Image>
+                <Grid x:Name="MainReArcGrid">
+                    <controls:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5"
+                               StrokeThickness="4" Stroke="{StaticResource WillpowerBrushLight}" HorizontalAlignment="Center"
+                               VerticalAlignment="Center" Rhomb="True"
+                               Margin="-20"
+                               Width="83" Height="83" x:Name="MainReArc">
+                        <controls:Arc.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="180"/>
+                            </TransformGroup>
+                        </controls:Arc.RenderTransform>
+                        <controls:Arc.Style>
+                            <Style TargetType="FrameworkElement">
+                                <Setter Property="Opacity" Value=".7"/>
+                                <Setter Property="Effect" >
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="{StaticResource WillpowerColor}" BlurRadius="10" ShadowDepth="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </controls:Arc.Style>
+                    </controls:Arc>
+
+                    <Grid.Style>
+                        <Style TargetType="FrameworkElement">
+                                    <Setter Property="Effect" >
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="{StaticResource WillpowerColor}" BlurRadius="35" ShadowDepth="0"/>
+                                        </Setter.Value>
+                                    </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                </Grid>
+                <Path Data="{StaticResource SvgClassGunner}" Margin="19" Opacity=".3"/>
+            </Grid>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51" Background="{StaticResource RevampBackgroundGradientBrush}"
+                    RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="45" Y="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="-45" Y="45" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
+                    Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                    Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"/>
+                        <TranslateTransform X="0" Y="88" />
+                    </TransformGroup>
+                </FrameworkElement.RenderTransform>
+            </Border>
+            <skills:RhombFixedSkillControl DataContext="{Binding Bombardment}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" IsHitTestVisible="False">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="45" Y="45" />
+                </FrameworkElement.RenderTransform>
+            </skills:RhombFixedSkillControl>
+            <skills:RhombFixedSkillControl DataContext="{Binding Balder}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" IsHitTestVisible="False">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="-45" Y="45" />
+                </FrameworkElement.RenderTransform>
+
+            </skills:RhombFixedSkillControl>
+            <skills:RhombSkillEffectControl DataContext="{Binding ModularSystem}" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center" IsHitTestVisible="False">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="88" />
+                </FrameworkElement.RenderTransform>
+            </skills:RhombSkillEffectControl>
+            <Polygon Fill="{StaticResource RevampBackgroundBrush}"
+                     Points="0 0 1 0 2 1 -1 1"
+                     Stroke="#89a"
+                     Visibility="Collapsed"
+                     StrokeThickness="1" Stretch="Uniform"
+                     Effect="{StaticResource DropShadow}"
+                     Opacity=".7">
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="70" />
+                </FrameworkElement.RenderTransform>
+            </Polygon>
+            <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="16" 
+                           FontWeight="DemiBold" Foreground="#afff" 
+                       Text="{Binding StaminaTracker.Val}" 
+                       Width="45" VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TranslateTransform X="0" Y="0" />
+                    </FrameworkElement.RenderTransform>
+            </TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

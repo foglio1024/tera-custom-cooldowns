@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Nostrum;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Net;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using FoglioUtils;
-using Newtonsoft.Json.Linq;
 using TCC.Interop.Proxy;
-using TCC.Settings;
-using FoglioUtils.Extensions;
+using TCC.Utils;
 
 namespace TCC.Interop
 {
@@ -16,28 +14,26 @@ namespace TCC.Interop
         public static async void RegisterWebhook(string webhook, bool online)
         {
             if (string.IsNullOrEmpty(webhook)) return;
-            if (string.IsNullOrEmpty(SessionManager.CurrentAccountName)) return;
+            if (string.IsNullOrEmpty(App.Settings.LastAccountNameHash)) return;
             var req = new JObject
             {
                 {"webhook", HashUtils.GenerateHash(webhook)},
-                {"user", HashUtils.GenerateHash(SessionManager.CurrentAccountName)},
+                {"user", App.Settings.LastAccountNameHash},
                 {"online", online }
             };
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using var c = MiscUtils.GetDefaultWebClient();
+            c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+            c.Encoding = Encoding.UTF8;
+            try
             {
-                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                c.Encoding = Encoding.UTF8;
-                try
-                {
-                    await c.UploadStringTaskAsync(
-                        new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook"),
-                        Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
-                }
-                catch
-                {
-                    Log.F($"Failed to register webhook.");
-                }
+                await c.UploadStringTaskAsync(
+                    new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook"),
+                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
+            }
+            catch
+            {
+                Log.F($"Failed to register webhook.");
             }
         }
         public static async Task<bool> RequestWebhookExecution(string webhook)
@@ -46,23 +42,22 @@ namespace TCC.Interop
             var req = new JObject
             {
                 { "webhook" , HashUtils.GenerateHash(webhook)},
-                { "user", HashUtils.GenerateHash(SessionManager.CurrentAccountName) }
+                { "user", App.Settings.LastAccountNameHash }
             };
-            using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
+            using (var c = MiscUtils.GetDefaultWebClient())
             {
                 c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                 c.Encoding = Encoding.UTF8;
                 try
                 {
-
                     var res = await c.UploadStringTaskAsync(
                         new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/fire_webhook"),
                         Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
 
                     var jRes = JObject.Parse(res);
                     canFire = jRes["canFire"].Value<bool>();
-                    Log.All($"Webhook fire requested, result: {canFire}");
+                    Log.CW($"Webhook fire requested, result: {canFire}");
 
                 }
                 catch (WebException e)
@@ -78,61 +73,59 @@ namespace TCC.Interop
 
         public static async void SendUsageStatAsync()
         {
-            if (SettingsHolder.StatSentVersion == App.AppVersion &&
-                SettingsHolder.StatSentTime.Month == DateTime.UtcNow.Month &&
-                SettingsHolder.StatSentTime.Day == DateTime.UtcNow.Day) return;
+            if (App.Settings.StatSentVersion == App.AppVersion &&
+                App.Settings.StatSentTime.Month == DateTime.UtcNow.Month &&
+                App.Settings.StatSentTime.Day == DateTime.UtcNow.Day) return;
 
             try
             {
-                using (var c = FoglioUtils.MiscUtils.GetDefaultWebClient())
-                {
-                    c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                    c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                    c.Encoding = Encoding.UTF8;
+                using var c = MiscUtils.GetDefaultWebClient();
+                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+                c.Encoding = Encoding.UTF8;
 
-                    var accountNameHash = SHA256.Create().ComputeHash(SessionManager.CurrentAccountName.ToByteArray())
-                        .ToStringEx();
-                    var js = new JObject
+                var js = new JObject
+                {
+                    {"region", Game.Server.Region},
+                    {"server", Game.Server.ServerId},
+                    {"account", App.Settings.LastAccountNameHash},
+                    {"tcc_version", App.AppVersion},
                     {
-                        {"region", SessionManager.Server.Region},
-                        {"server", SessionManager.Server.ServerId},
-                        {"account", accountNameHash},
-                        {"tcc_version", App.AppVersion},
+                        "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
+                                   App.Settings.StatSentTime.Day == DateTime.Now.Day &&
+                                   App.Settings.StatSentVersion != App.AppVersion
+                    },
+                    {
+                        "settings_summary", new JObject
                         {
-                            "updated", SettingsHolder.StatSentTime.Month == DateTime.Now.Month &&
-                                       SettingsHolder.StatSentTime.Day == DateTime.Now.Day &&
-                                       SettingsHolder.StatSentVersion != App.AppVersion
-                        },
-                        {
-                            "settings_summary", new JObject
                             {
+                                "windows", new JObject
                                 {
-                                    "windows", new JObject
-                                    {
-                                        {"cooldown", SettingsHolder.CooldownWindowSettings.Enabled},
-                                        {"buffs", SettingsHolder.BuffWindowSettings.Enabled},
-                                        {"character", SettingsHolder.CharacterWindowSettings.Enabled},
-                                        {"class", SettingsHolder.ClassWindowSettings.Enabled},
-                                        {"chat", SettingsHolder.ChatEnabled},
-                                        {"group", SettingsHolder.GroupWindowSettings.Enabled}
-                                    }
-                                },
+                                    { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
+                                    { "buffs", App.Settings.BuffWindowSettings.Enabled },
+                                    { "character", App.Settings.CharacterWindowSettings.Enabled },
+                                    { "class", App.Settings.ClassWindowSettings.Enabled },
+                                    { "chat", App.Settings.ChatEnabled },
+                                    { "group", App.Settings.GroupWindowSettings.Enabled }
+                                }
+                            },
+                            {
+                                "generic", new JObject
                                 {
-                                    "generic", new JObject
-                                    {
-                                        {"proxy_enabled", ProxyInterface.Instance.IsStubAvailable}
-                                    }
+                                    { "proxy_enabled", StubInterface.Instance.IsStubAvailable},
+                                    { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
                                 }
                             }
                         }
-                    };
+                    }
+                };
 
-                    await c.UploadStringTaskAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
-                        Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
+                await c.UploadStringTaskAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
+                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                    SettingsHolder.StatSentTime = DateTime.UtcNow;
-                    SettingsHolder.StatSentVersion = App.AppVersion;
-                }
+                App.Settings.StatSentTime = DateTime.UtcNow;
+                App.Settings.StatSentVersion = App.AppVersion;
+                App.Settings.Save();
             }
             catch
             {

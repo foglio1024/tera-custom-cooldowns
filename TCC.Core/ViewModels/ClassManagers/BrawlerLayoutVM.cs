@@ -1,5 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -40,20 +41,20 @@ namespace TCC.ViewModels
         {
             // Growing Fury
             GrowingFury = new DurationCooldownIndicator(Dispatcher);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
+            Game.DB.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
             GrowingFury.Cooldown = new Cooldown(gf,  true);
             GrowingFury.Buff = new Cooldown(gf, false);
 
             // Counter 
-            SessionManager.DB.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
+            Game.DB.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
             Counter = new Cooldown(c, false);
 
             // Rhythmic Blows
-            SessionManager.DB.SkillsDatabase.TryGetSkill(260100, Class.Brawler, out var rb);
+            Game.DB.SkillsDatabase.TryGetSkill(260100, Class.Brawler, out var rb);
             RhythmicBlows = new Cooldown(rb, true) { CanFlash = true };
 
             // Infuriate
-            SessionManager.DB.SkillsDatabase.TryGetSkill(140100, Class.Brawler, out var infu);
+            Game.DB.SkillsDatabase.TryGetSkill(140100, Class.Brawler, out var infu);
             Infuriate = new Cooldown(infu, true) { CanFlash = true };
         }
 
@@ -64,12 +65,10 @@ namespace TCC.ViewModels
                 RhythmicBlows.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == Infuriate.Skill.IconName)
-            {
-                Infuriate.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != Infuriate.Skill.IconName) return false;
+            Infuriate.Start(sk.Duration);
+            return true;
         }
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)
@@ -79,12 +78,10 @@ namespace TCC.ViewModels
                 RhythmicBlows.Refresh(skill.Id, cd, CooldownMode.Normal);
                 return true;
             }
-            if (skill.IconName == Infuriate.Skill.IconName)
-            {
-                Infuriate.Refresh(cd, CooldownMode.Normal);
-                return true;
-            }
-            return false;
+
+            if (skill.IconName != Infuriate.Skill.IconName) return false;
+            Infuriate.Refresh(cd, CooldownMode.Normal);
+            return true;
         }
 
         public override void Dispose()

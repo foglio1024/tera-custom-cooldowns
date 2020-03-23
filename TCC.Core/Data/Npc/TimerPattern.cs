@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using Nostrum;
 
 namespace TCC.Data.NPCs
 {
@@ -40,8 +41,10 @@ namespace TCC.Data.NPCs
 
         public void Dispose()
         {
+            _timer.Elapsed -= OnTimerElapsed;
             _timer.Stop();
             _timer.Dispose();
+
         }
     }
 }

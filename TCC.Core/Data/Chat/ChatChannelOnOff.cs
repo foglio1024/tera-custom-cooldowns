@@ -1,4 +1,5 @@
 ﻿using System.Windows.Threading;
+using Nostrum;
 
 namespace TCC.Data.Chat
 {

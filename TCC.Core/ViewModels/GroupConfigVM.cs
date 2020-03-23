@@ -1,13 +1,12 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
-using TCC.Data;
 using TCC.Data.Abnormalities;
-using TCC.Settings;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -16,19 +15,19 @@ namespace TCC.ViewModels
 
         public event Action ShowAllChanged;
 
-        public SynchronizedObservableCollection<GroupAbnormalityVM> GroupAbnormals;
-        public IEnumerable<Abnormality> Abnormalities => SessionManager.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public TSObservableCollection<GroupAbnormalityVM> GroupAbnormals;
+        public IEnumerable<Abnormality> Abnormalities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
 
         public bool ShowAll
         {
-            get => SettingsHolder.ShowAllGroupAbnormalities;
+            get => App.Settings.GroupWindowSettings.ShowAllAbnormalities;
             set
             {
-                if (SettingsHolder.ShowAllGroupAbnormalities == value) return;
-                SettingsHolder.ShowAllGroupAbnormalities = value;
+                if (App.Settings.GroupWindowSettings.ShowAllAbnormalities == value) return;
+                App.Settings.GroupWindowSettings.ShowAllAbnormalities = value;
                 Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
-                SettingsWriter.Save();
+                App.Settings.Save();
                 N();
             }
         }
@@ -44,7 +43,7 @@ namespace TCC.ViewModels
         public GroupConfigVM()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            GroupAbnormals = new SynchronizedObservableCollection<GroupAbnormalityVM>(Dispatcher);
+            GroupAbnormals = new TSObservableCollection<GroupAbnormalityVM>(Dispatcher);
             foreach (var abnormality in Abnormalities)
             {
                 var abVM = new GroupAbnormalityVM(abnormality);

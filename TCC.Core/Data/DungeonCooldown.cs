@@ -1,4 +1,7 @@
-﻿using System.Windows.Threading;
+﻿using System.ComponentModel;
+using System.Windows.Threading;
+using Nostrum;
+using Newtonsoft.Json;
 using TCC.Data.Pc;
 
 namespace TCC.Data
@@ -6,8 +9,9 @@ namespace TCC.Data
     public class DungeonCooldown : TSPropertyChanged
     {
         private int _entries;
-        private int _total;
+        private int _clears;
 
+        public uint Id { get; set; }
         public int Entries
         {
             get => _entries;
@@ -19,7 +23,18 @@ namespace TCC.Data
                 N(nameof(AvailableEntries));
             }
         }
+        public int Clears
+        {
+            get => _clears;
+            set
+            {
+                if (_clears == value) return;
+                _clears = value;
+                N();
+            }
+        }
 
+        [JsonIgnore]
         public int AvailableEntries
         {
             get
@@ -29,47 +44,60 @@ namespace TCC.Data
                 return res < Entries ? res : Entries;
             }
         }
+        [JsonIgnore]
         public int MaxAvailableEntries
         {
             get
             {
-                if (Dungeon.Cost == 0) return Dungeon.ActualRuns;
+                if (Dungeon.Cost == 0) return Dungeon.MaxEntries;
                 var res = (int)Owner.MaxCoins / Dungeon.Cost;
                 if (Dungeon.ResetMode == ResetMode.Daily)
                 {
-                    return res > Dungeon.ActualRuns ? Dungeon.ActualRuns : res;
+                    return res > Dungeon.MaxEntries ? Dungeon.MaxEntries : res;
                 }
                 return res;
             }
         }
-
-        public int Clears
-        {
-            get => _total;
-            set
-            {
-                if (_total == value) return;
-                _total = value;
-                N();
-            }
-        }
-        public Dungeon Dungeon { get; set; }
-
+        [JsonIgnore]
+        public Dungeon Dungeon => Game.DB.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
+            ? dg
+            : new Dungeon(0, "");
+        [JsonIgnore]
+        public int Runs => Dungeon.MaxEntries;
+        [JsonIgnore]
+        public Character Owner { get; set; }
         //used only for filtering
-        public ItemLevelTier RequiredIlvl => Dungeon.RequiredIlvl;
+        //[JsonIgnore]
+        //public ItemLevelTier RequiredIlvl => Dungeon.RequiredIlvl;
+        [JsonIgnore]
         public int Index => Dungeon.Index;
-
-        public DungeonCooldown(Dungeon dung, Dispatcher d, Character owner)
+        [JsonConstructor]
+        public DungeonCooldown(uint id, int entries, int clears)
+        {
+            Id = id;
+            Entries = entries;
+            Clears = clears;
+        }
+        public DungeonCooldown(uint id, Dispatcher d, Character owner)
         {
             Dispatcher = d;
-            Dungeon = dung;
+            Id = id;
             Entries = Runs;
             Owner = owner;
-            owner.PropertyChanged += (sender, args) =>
+            owner.PropertyChanged += OnOwnerPropertyChanged;
+        }
+
+        private void OnOwnerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
             {
-                if (args.PropertyName == nameof(Character.Coins)) N(nameof(AvailableEntries));
-                else if (args.PropertyName == nameof(Character.MaxCoins)) N(nameof(MaxAvailableEntries));
-            };
+                case nameof(Character.Coins):
+                    N(nameof(AvailableEntries));
+                    break;
+                case nameof(Character.MaxCoins):
+                    N(nameof(MaxAvailableEntries));
+                    break;
+            }
         }
 
         public void Reset()
@@ -77,7 +105,5 @@ namespace TCC.Data
             Entries = Runs;
         }
 
-        public int Runs => Dungeon.ActualRuns;
-        public Character Owner { get; set; }
     }
 }

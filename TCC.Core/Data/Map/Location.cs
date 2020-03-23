@@ -1,16 +1,18 @@
 ﻿using System.Windows;
+using Newtonsoft.Json;
 
 namespace TCC.Data.Map
 {
     public class Location
     {
-
         public uint World { get; }
         public uint Guard { get; }
         public uint Section { get; }
 
-        public string SectionName => SessionManager.DB.GetSectionName(Guard, Section);
+        [JsonIgnore]
+        public string SectionName => Game.DB.GetSectionName(Guard, Section);
 
+        [JsonIgnore]
         public Point Position { get; }
 
         public Location()

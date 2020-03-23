@@ -1,9 +1,13 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
+
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
-using TCC.Settings;
+using TCC.Interop.Proxy;
+using TCC.UI;
+using TeraDataLite;
 
 namespace TCC.Data.Pc
 {
@@ -23,8 +27,10 @@ namespace TCC.Data.Pc
         private string _name;
         private long _currentHp = 1;
         private int _currentMp = 1;
+        private int _currentSt = 1;
         private long _maxHp = 1;
         private int _maxMp = 1;
+        private int _maxSt = 1;
         private ReadyStatus _ready = ReadyStatus.None;
         private bool _alive = true;
         private int _rollResult;
@@ -39,6 +45,7 @@ namespace TCC.Data.Pc
         private GearItem _gloves;
         private GearItem _boots;
         private bool _visible = true;
+        private bool _inRange;
 
         public ulong EntityId
         {
@@ -67,24 +74,14 @@ namespace TCC.Data.Pc
             {
                 if (_userClass == value) return;
                 _userClass = value;
-                switch (value)
+                Role = value switch
                 {
-                    case Class.Lancer:
-                        Role = Role.Tank;
-                        break;
-                    case Class.Priest:
-                        Role = Role.Healer;
-                        break;
-                    case Class.Mystic:
-                        Role = Role.Healer;
-                        break;
-                    case Class.Brawler:
-                        Role = Role.Tank;
-                        break;
-                    default:
-                        Role = Role.Dps;
-                        break;
-                }
+                    Class.Lancer => Role.Tank,
+                    Class.Priest => Role.Healer,
+                    Class.Mystic => Role.Healer,
+                    Class.Brawler => Role.Tank,
+                    _ => Role.Dps
+                };
                 N(nameof(UserClass));
             }
         }
@@ -191,6 +188,16 @@ namespace TCC.Data.Pc
                 N(nameof(MpFactor));
             }
         }
+        public int CurrentSt
+        {
+            get => _currentSt;
+            set
+            {
+                if (_currentSt == value) return;
+                _currentSt = value;
+                N();
+            }
+        }
         public long MaxHp
         {
             get => _maxHp;
@@ -211,6 +218,16 @@ namespace TCC.Data.Pc
                 _maxMp = value;
                 N(nameof(MaxMp));
                 N(nameof(MpFactor));
+            }
+        }
+        public int MaxSt
+        {
+            get => _maxSt;
+            set
+            {
+                if (_maxSt == value) return;
+                _maxSt = value;
+                N();
             }
         }
         public double HpFactor => MathUtils.FactorCalc(CurrentHp, MaxHp);
@@ -276,7 +293,7 @@ namespace TCC.Data.Pc
                 N(nameof(IsLeader));
             }
         }
-        public bool IsPlayer => Name == SessionManager.CurrentPlayer.Name;
+        public bool IsPlayer => Name == Game.Me.Name;
         public bool IsDebuffed => _debuffList.Count != 0;
         public bool HasAggro
         {
@@ -337,30 +354,46 @@ namespace TCC.Data.Pc
                 N(nameof(Boots));
             }
         }
-        public SynchronizedObservableCollection<AbnormalityDuration> Buffs { get; }
-        public SynchronizedObservableCollection<AbnormalityDuration> Debuffs { get; }
+        public TSObservableCollection<AbnormalityDuration> Buffs { get; }
+        public TSObservableCollection<AbnormalityDuration> Debuffs { get; }
         public bool Awakened { get; set; }
-
+        public bool InCombat { get; set; } //make npc when needed
         public bool Visible
         {
             get => _visible;
             set
             {
-                if(_visible == value) return;
+                if (_visible == value) return;
                 _visible = value;
                 N();
             }
         }
+        public bool InRange
+        {
+            get => _inRange || IsPlayer;
+            set
+            {
+                if (_inRange == value) return;
+                _inRange = value;
+                N();
+            }
+        }
+
+        public ICommand RequestInteractiveCommand { get; }
+        public ICommand AcceptApplyCommand { get; set; }
+        public ICommand DeclineApplyCommand { get; set; }
+        public ICommand InspectCommand { get; set; }
+
 
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            if (!SettingsHolder.ShowAllGroupAbnormalities)
+            if (!App.Settings.GroupWindowSettings.ShowAllAbnormalities)
             {
-                if (SettingsHolder.GroupAbnormals.TryGetValue(Class.Common, out var commonList))
+                if (App.Settings.GroupWindowSettings.GroupAbnormals.TryGetValue(Class.Common, out var commonList))
                 {
                     if (!commonList.Contains(ab.Id))
                     {
-                        if (SettingsHolder.GroupAbnormals.TryGetValue(SessionManager.CurrentPlayer.Class, out var classList))
+                        if (App.Settings.GroupWindowSettings.GroupAbnormals.TryGetValue(Game.Me.Class, out var classList))
                         {
                             if (!classList.Contains(ab.Id)) return;
                         }
@@ -441,11 +474,60 @@ namespace TCC.Data.Pc
             });
         }
 
-        public User(Dispatcher d)
+        private User()
         {
-            Dispatcher = d;
-            Debuffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
-            Buffs = new SynchronizedObservableCollection<AbnormalityDuration>(d);
+            AcceptApplyCommand = new RelayCommand(_ =>
+            {
+                StubInterface.Instance.StubClient.GroupInviteUser(Name);
+            });
+            DeclineApplyCommand = new RelayCommand(_ =>
+            {
+                StubInterface.Instance.StubClient.DeclineUserGroupApply(PlayerId);
+                StubInterface.Instance.StubClient.RequestListingCandidates();
+            });
+            RequestInteractiveCommand = new RelayCommand(_ =>
+            {
+                WindowManager.ViewModels.PlayerMenuVM.Open(Name, ServerId, (int)Level);
+                //ProxyInterface.Instance.Stub.AskInteractive(ServerId, Name);
+            });
+            InspectCommand = new RelayCommand(_ =>
+            {
+                StubInterface.Instance.StubClient.InspectUser(Name);
+            });
+        }
+
+
+        public User(Dispatcher d) : this()
+        {
+            Dispatcher = d ?? Dispatcher.CurrentDispatcher;
+            Debuffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
+            Buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
+        }
+
+        public User(GroupMemberData applicant, Dispatcher d = null) : this(d)
+        {
+            PlayerId = applicant.PlayerId;
+            UserClass = applicant.Class;
+            Level = applicant.Level;
+            Order = applicant.Order;
+            Location = Game.DB.GetSectionName(applicant.GuardId, applicant.SectionId);
+            IsLeader = applicant.IsLeader;
+            Online = applicant.Online;
+            Name = applicant.Name;
+            ServerId = applicant.ServerId == 0 ? Game.Me.ServerId : applicant.ServerId;
+            EntityId = applicant.EntityId;
+            CanInvite = applicant.CanInvite;
+            Laurel = applicant.Laurel;
+            Awakened = applicant.Awakened;
+            Alive = applicant.Alive;
+            CurrentHp = applicant.CurrentHP;
+            CurrentMp = applicant.CurrentMP;
+            MaxHp = applicant.MaxHP;
+            MaxMp = applicant.MaxMP;
+            CurrentSt = applicant.CurrentST;
+            MaxSt = applicant.MaxST;
+            InCombat = applicant.InCombat;
+
         }
     }
 }

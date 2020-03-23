@@ -1,11 +1,11 @@
-﻿using TCC.Parsing.Messages;
+﻿using TCC.Utilities;
 
 namespace TCC.Data.Chat
 {
     public class BrokerChatMessage : ChatMessage
     {
-        private MessagePiece _startingPrice;
-        public MessagePiece StartingPrice
+        private MessagePieceBase _startingPrice;
+        public MessagePieceBase StartingPrice
         {
             get => _startingPrice;
             set
@@ -15,8 +15,8 @@ namespace TCC.Data.Chat
             }
         }
 
-        private MessagePiece _offeredPrice;
-        public MessagePiece OfferedPrice
+        private MessagePieceBase _offeredPrice;
+        public MessagePieceBase OfferedPrice
         {
             get => _offeredPrice;
             set
@@ -26,8 +26,8 @@ namespace TCC.Data.Chat
             }
         }
 
-        private MessagePiece _listing;
-        public MessagePiece Listing
+        private MessagePieceBase _listing;
+        public MessagePieceBase Listing
         {
             get => _listing;
             set
@@ -37,8 +37,8 @@ namespace TCC.Data.Chat
             }
         }
 
-        private MessagePiece _amount;
-        public MessagePiece Amount
+        private MessagePieceBase _amount;
+        public MessagePieceBase Amount
         {
             get => _amount;
             set
@@ -52,27 +52,25 @@ namespace TCC.Data.Chat
         public readonly uint PlayerId;
         public readonly uint ListingId;
 
-        public BrokerChatMessage(S_TRADE_BROKER_DEAL_SUGGESTED p)
+        public BrokerChatMessage(uint playerId, uint listing, int item, long amount, long sellerPrice, long offeredPrice, string name)
         {
             ContainsPlayerName = true;
             Channel = ChatChannel.Bargain;
-            Author = p.Name;
-            ListingId = p.Listing;
-            PlayerId = p.PlayerId;
+            Author = name;
+            ListingId = listing;
+            PlayerId = playerId;
 
-            Amount = new MessagePiece("Offer for " + p.Amount, MessagePieceType.Simple, Settings.SettingsHolder.FontSize, false) {Container = this};
-            OfferedPrice = new MessagePiece(new Money(p.OfferedPrice)){ Container = this };
-            StartingPrice = new MessagePiece(new Money(p.SellerPrice)) { Container = this };
-            Listing = new MessagePiece("") { Container = this };
-            
-            SessionManager.DB.ItemsDatabase.Items.TryGetValue((uint)p.Item, out var i);
-            if(i != null)
-            {
-                Listing.Text = "<"+ i.Name + ">";
-                Listing.ItemId = i.Id;
-                Listing.SetColor(ChatUtils.GradeToColorString(i.RareGrade));
-            }
-            Listing.Type = MessagePieceType.Item;
+            Amount = new SimpleMessagePiece("Offer for " + amount, App.Settings.FontSize, false) { Container = this };
+            OfferedPrice = new MoneyMessagePiece(new Money(offeredPrice)) { Container = this };
+            StartingPrice = new MoneyMessagePiece(new Money(sellerPrice)) { Container = this };
+            Listing = new SimpleMessagePiece("") { Container = this };
+
+            Game.DB.ItemsDatabase.Items.TryGetValue((uint)item, out var i);
+            if (i == null) return;
+            Listing.Text = "<" + i.Name + ">";
+            //TODO: //Listing.ItemId = i.Id;
+            Listing.Color = TccUtils.GradeToColorString(i.RareGrade);
+            //Listing.Type = MessagePieceType.Item;
         }
     }
 }

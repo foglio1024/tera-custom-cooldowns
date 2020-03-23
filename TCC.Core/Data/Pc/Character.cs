@@ -1,68 +1,39 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Threading;
-using TCC.Controls;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
+using TeraDataLite;
 
 namespace TCC.Data.Pc
 {
     //TODO: remove INPC from properties where it's not needed
+
     public class Character : TSPropertyChanged, IComparable
     {
         private string _name;
         private Class _class;
-        private Laurel _laurel;
-        private int _vanguardDailiesDone;
-        private int _vanguardWeekliesDone;
-        private int _vanguardCredits;
-        private int _guardianCredits;
+        private Laurel _laurel = Laurel.None;
         private bool _isLoggedIn;
         private bool _isSelected;
-        private int _claimedGuardianQuests;
-        private int _maxGuardianQuests = 40;
-        private int _clearedGuardianQuests;
         private int _elleonMarks;
         private int _dragonwingScales;
         private int _piecesOfDragonScroll;
-        private int _itemLevel;
+        private float _itemLevel;
         private int _level;
         private Location _lastLocation;
         private long _lastOnline;
         private string _serverName = "";
         private bool _hidden;
-
         private uint _coins;
-        public uint Coins
-        {
-            get { return _coins; }
-            set
-            {
-                if (_coins == value) return;
-                _coins = value;
-                N();
-            }
-        }
         private uint _maxCoins;
-        public uint MaxCoins
-        {
-            get { return _maxCoins; }
-            set
-            {
-                if (_maxCoins == value) return;
-                _maxCoins = value;
-                N();
-
-            }
-        }
-
 
         public uint Id { get; set; }
         public int Position { get; set; }
+        public string GuildName { get; set; } = "";
         public string Name
         {
             get => _name; set
@@ -100,92 +71,7 @@ namespace TCC.Data.Pc
                 N();
             }
         }
-        public int VanguardDailiesDone
-        {
-            get => _vanguardDailiesDone;
-            set
-            {
-                if (_vanguardDailiesDone == value) return;
-                _vanguardDailiesDone = value;
-                N(nameof(VanguardDailiesDone));
-                N(nameof(VanguardDailyCompletion));
-            }
-        }
-        public string GuildName { get; set; } = "";
-        public void UpdateDungeons(Dictionary<uint, short> dungeonCooldowns)
-        {
-            Dungeons.ToSyncList().ForEach(dung =>
-            {
-                if (dungeonCooldowns.TryGetValue(dung.Dungeon.Id, out var entries)) dung.Entries = entries;
-                else dung.Reset();
-            });
-        }
-        public void SetDungeonClears(uint dgId, int runs)
-        {
-            var dg = Dungeons.ToSyncList().FirstOrDefault(d => d.Dungeon.Id == dgId);
-            if (dg != null) dg.Clears = runs;
-        }
-        public int VanguardWeekliesDone
-        {
-            get => _vanguardWeekliesDone;
-            set
-            {
-                if (_vanguardWeekliesDone == value) return;
-                _vanguardWeekliesDone = value;
-                N(nameof(VanguardWeekliesDone));
-                N(nameof(VanguardWeeklyCompletion));
-
-            }
-        }
-        public int VanguardCredits
-        {
-            get => _vanguardCredits;
-            set
-            {
-                if (_vanguardCredits == value) return;
-                _vanguardCredits = value;
-                N(nameof(VanguardCredits));
-                N(nameof(VanguardCreditsFactor));
-            }
-        }
-        public int GuardianCredits
-        {
-            get => _guardianCredits;
-            set
-            {
-                if (_guardianCredits == value) return;
-                _guardianCredits = value;
-                N(nameof(GuardianCredits));
-                N(nameof(GuardianCreditsFactor));
-            }
-        }
-        public double VanguardCreditsFactor => VanguardCredits / 9000.0d;
-        public double GuardianCreditsFactor => GuardianCredits / 100000.0d;
-        public bool IsLoggedIn
-        {
-            get => _isLoggedIn;
-            set
-            {
-                if (_isLoggedIn == value) return;
-                _isLoggedIn = value;
-                N(nameof(IsLoggedIn));
-            }
-        }
-        public bool IsSelected
-        {
-            get => _isSelected; set
-            {
-                if (_isSelected == value) return;
-                _isSelected = value;
-                N(nameof(IsSelected));
-            }
-        }
-        public double VanguardWeeklyCompletion => VanguardWeekliesDone / (double)SessionManager.MaxWeekly;
-        public double VanguardDailyCompletion => VanguardDailiesDone / (double)SessionManager.MaxDaily;
-        public double ClaimedGuardianCompletion => ClaimedGuardianQuests / (double)MaxGuardianQuests;
-        public double ClearedGuardianCompletion => ClearedGuardianQuests / (double)MaxGuardianQuests;
-
-        public int ItemLevel  // 412 431 - 439 446 453 456
+        public float ItemLevel
         {
             get => _itemLevel;
             set
@@ -196,57 +82,28 @@ namespace TCC.Data.Pc
                 N(nameof(ItemLevelTier));
             }
         }
-        public ItemLevelTier ItemLevelTier
+        public uint Coins
         {
-            get
-            {
-                var tiers = Enum.GetValues(typeof(ItemLevelTier)).Cast<ItemLevelTier>().ToList();
-                var ret = ItemLevelTier.Tier0;
-                foreach (var t in tiers)
-                {
-                    if (_itemLevel >= (int)t) ret = t;
-                }
-
-                return ret;
-            }
-        }
-
-
-        public SynchronizedObservableCollection<DungeonCooldown> Dungeons { get; set; }
-        public List<DungeonCooldown> VisibleDungeons => Dungeons.Where(x => x.Dungeon.Show).ToList();
-        public ICollectionViewLiveShaping VisibleDungeonsView { get; set; }
-        public SynchronizedObservableCollection<GearItem> Gear { get; set; }
-
-        public GearItem Weapon => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Weapon) ?? new GearItem(0, GearTier.Low, GearPiece.Weapon, 0, 0);
-        public GearItem Chest => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Armor) ?? new GearItem(0, GearTier.Low, GearPiece.Armor, 0, 0);
-        public GearItem Hands => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Hands) ?? new GearItem(0, GearTier.Low, GearPiece.Hands, 0, 0);
-        public GearItem Feet => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Feet) ?? new GearItem(0, GearTier.Low, GearPiece.Feet, 0, 0);
-        public GearItem Belt => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Belt) ?? new GearItem(0, GearTier.Low, GearPiece.Belt, 0, 0);
-        public GearItem Circlet => Gear.ToSyncList().FirstOrDefault(x => x.Piece == GearPiece.Circlet) ?? new GearItem(0, GearTier.Low, GearPiece.Circlet, 0, 0);
-        public ICollectionView Jewels { get; set; }
-
-        public int ClaimedGuardianQuests
-        {
-            get => _claimedGuardianQuests;
+            get => _coins;
             set
             {
-                if (_claimedGuardianQuests == value) return;
-                _claimedGuardianQuests = value;
+                if (_coins == value) return;
+                _coins = value;
                 N();
-                N(nameof(ClaimedGuardianCompletion));
+                DungeonInfo.UpdateAvailableEntries(_coins, _maxCoins);
             }
         }
-        public int MaxGuardianQuests
+        public uint MaxCoins
         {
-            get => _maxGuardianQuests; set
+            get => _maxCoins;
+            set
             {
-                if (_maxGuardianQuests == value) return;
-                _maxGuardianQuests = value;
+                if (_maxCoins == value) return;
+                _maxCoins = value;
                 N();
-                N(nameof(ClaimedGuardianCompletion));
+                DungeonInfo.UpdateAvailableEntries(_coins, _maxCoins);
             }
         }
-
         public int ElleonMarks
         {
             get => _elleonMarks; set
@@ -257,21 +114,6 @@ namespace TCC.Data.Pc
                 N(nameof(ElleonMarksFactor));
             }
         }
-
-        public float ElleonMarksFactor => ElleonMarks / 1000f;
-        public int ClearedGuardianQuests
-        {
-            get => _clearedGuardianQuests;
-            set
-            {
-                if (_clearedGuardianQuests == value) return;
-                _clearedGuardianQuests = value;
-                N();
-                N(nameof(ClearedGuardianCompletion));
-            }
-
-        }
-
         public int DragonwingScales
         {
             get => _dragonwingScales;
@@ -294,9 +136,6 @@ namespace TCC.Data.Pc
                 N(nameof(PiecesOfDragonScrollFactor));
             }
         }
-        public float DragonwingScalesFactor => DragonwingScales > 10 ? 1 : DragonwingScales / 10f;
-        public float PiecesOfDragonScrollFactor => PiecesOfDragonScroll > 40 ? 1 : PiecesOfDragonScroll / 40f;
-
         public long LastOnline
         {
             get => _lastOnline;
@@ -307,7 +146,6 @@ namespace TCC.Data.Pc
                 N();
             }
         }
-
         public Location LastLocation
         {
             get => _lastLocation;
@@ -318,21 +156,6 @@ namespace TCC.Data.Pc
                 N();
             }
         }
-
-        public SynchronizedObservableCollection<AbnormalityData> Buffs { get; set; }
-        public SynchronizedObservableCollection<InventoryItem> Inventory { get; }
-
-        public string ServerName
-        {
-            get => _serverName;
-            set
-            {
-                if (_serverName == value) return;
-                _serverName = value;
-                N();
-            }
-        }
-
         public bool Hidden
         {
             get => _hidden; set
@@ -343,28 +166,76 @@ namespace TCC.Data.Pc
             }
         }
 
+        public GuardianInfo GuardianInfo { get; }
+        public VanguardInfo VanguardInfo { get; }
+        public DungeonInfo DungeonInfo { get; }
+
+        public TSObservableCollection<AbnormalityData> Buffs { get; }
+        public TSObservableCollection<InventoryItem> Inventory { get; }
+
+        [JsonIgnore]
+        public ICommand UnhideCommand { get; }
+
+        //[JsonIgnore]
+        public string ServerName
+        {
+            get => _serverName;
+            set
+            {
+                if (_serverName == value) return;
+                _serverName = value;
+                N();
+            }
+        }
+        [JsonIgnore]
+        public bool IsLoggedIn
+        {
+            get => _isLoggedIn;
+            set
+            {
+                if (_isLoggedIn == value) return;
+                _isLoggedIn = value;
+                N(nameof(IsLoggedIn));
+            }
+        }
+        [JsonIgnore]
+        public bool IsSelected
+        {
+            get => _isSelected; set
+            {
+                if (_isSelected == value) return;
+                _isSelected = value;
+                N(nameof(IsSelected));
+            }
+        }
+        [JsonIgnore]
+        public ItemLevelTier ItemLevelTier
+        {
+            get
+            {
+                var tiers = Enum.GetValues(typeof(ItemLevelTier)).Cast<ItemLevelTier>().ToList();
+                var ret = ItemLevelTier.Tier0;
+                foreach (var t in tiers)
+                {
+                    if (_itemLevel >= (int)t) ret = t;
+                }
+
+                return ret;
+            }
+        }
+        [JsonIgnore] public float ElleonMarksFactor => (float)MathUtils.FactorCalc(ElleonMarks, 1000);
+        [JsonIgnore] public float DragonwingScalesFactor => (float)MathUtils.FactorCalc(DragonwingScales, 10);
+        [JsonIgnore] public float PiecesOfDragonScrollFactor => (float)MathUtils.FactorCalc(PiecesOfDragonScroll, 40);
+
         public Character()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            Dungeons = new SynchronizedObservableCollection<DungeonCooldown>(Dispatcher);
-            Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
-            Buffs = new SynchronizedObservableCollection<AbnormalityData>(Dispatcher);
-            Inventory = new SynchronizedObservableCollection<InventoryItem>(Dispatcher);
-            VanguardDailiesDone = 0;
-            VanguardWeekliesDone = 0;
-            Laurel = Laurel.None;
-            MaxGuardianQuests = SessionManager.MaxGuardianQuests;
-            foreach (var dg in SessionManager.DB.DungeonDatabase.Dungeons.Values)
-            {
-                Dungeons.Add(new DungeonCooldown(dg, Dispatcher, this));
-            }
-            VisibleDungeonsView = CollectionViewUtils.InitLiveView(d => ((DungeonCooldown)d).Dungeon.Show, Dungeons, new string[] { },
-                new[]
-                    {new SortDescription(nameof(Dungeon.Index), ListSortDirection.Ascending)});
-            Jewels = new CollectionViewSource() { Source = Gear }.View;
-            Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
-            Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
-            UnhideCommand = new RelayCommand((o) => Dispatcher.Invoke(() => Hidden = false));
+            Buffs = new TSObservableCollection<AbnormalityData>(Dispatcher);
+            Inventory = new TSObservableCollection<InventoryItem>(Dispatcher);
+            GuardianInfo = new GuardianInfo();
+            VanguardInfo = new VanguardInfo();
+            DungeonInfo = new DungeonInfo();
+            UnhideCommand = new RelayCommand(_ => Hidden = false);
         }
         public Character(string name, Class c, uint id, int pos) : this()
         {
@@ -373,81 +244,30 @@ namespace TCC.Data.Pc
             Id = id;
             Position = pos;
         }
-
-        public int CompareTo(object obj)
+        public Character(CharacterData item) : this()
         {
-            var ch = (Character)obj;
-            return Position.CompareTo(ch.Position);
-        }
-
-        internal void EngageDungeon(uint dgId)
-        {
-            var dg = Dungeons.FirstOrDefault(x => x.Dungeon.Id == dgId);
-            if (dg != null)
-            {
-                dg.Entries = dg.Entries == 0
-                    ? dg.Runs - 1
-                    : dg.Entries - 1;
-            }
-        }
-
-        public void ClearGear()
-        {
-            //TODO: wut
-            Gear = new SynchronizedObservableCollection<GearItem>(Dispatcher);
-        }
-
-        public void UpdateGear(List<GearItem> gear)
-        {
-            foreach (var gearItem in gear)
-            {
-                if (!Gear.Contains(gearItem))
-                {
-                    Gear.Add(gearItem);
-                }
-            }
-        }
-
-        public RelayCommand UnhideCommand { get; }
-
-        public void ResetWeeklyDungeons()
-        {
-            Dungeons.Where(d => d.Dungeon.ResetMode == ResetMode.Weekly).ToList().ForEach(dg => dg.Reset());
+            Id = item.Id;
+            Class = item.CharClass;
+            Level = item.Level;
+            LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
+            LastOnline = item.LastOnline;
+            Laurel = item.Laurel;
+            Position = item.Position;
+            Name = item.Name;
+            GuildName = item.GuildName;
         }
 
         public void ResetDailyData()
         {
-            VanguardDailiesDone = 0;
-            ClaimedGuardianQuests = 0;
-            Dungeons.Where(d => d.Dungeon.ResetMode == ResetMode.Daily).ToList().ForEach(dg => dg.Reset());
-        }
-    }
-
-    public class InventoryItem : TSPropertyChanged
-    {
-        private int _amount;
-        private readonly uint _id;
-
-        public Item Item => SessionManager.DB.ItemsDatabase.Items.TryGetValue(_id, out var item)
-                            ? item
-                            : new Item(0, "", RareGrade.Common, 0, 0, "");
-        public uint Slot { get; }
-        public int Amount
-        {
-            get => _amount;
-            set
-            {
-                if (_amount == value) return;
-                _amount = value;
-                N();
-            }
+            VanguardInfo.DailiesDone = 0;
+            GuardianInfo.Claimed = 0;
+            DungeonInfo.ResetAll(ResetMode.Daily);
         }
 
-        public InventoryItem(uint slot, uint id, int amount)
+        int IComparable.CompareTo(object obj)
         {
-            _id = id;
-            Amount = amount;
-            Slot = slot;
+            var ch = (Character)obj;
+            return Position.CompareTo(ch.Position);
         }
     }
 }

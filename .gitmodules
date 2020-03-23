@@ -1,9 +1,9 @@
-[submodule "dependencies/WpfRB"]
-	path = dependencies/WpfRB
-	url = https://github.com/Foglio1024/WpfResourcesBuilder.git
+[submodule "dependencies/ReSource"]
+	path = dependencies/ReSource
+	url = https://github.com/Foglio1024/ReSource.git
 [submodule "dependencies/Dragablz"]
 	path = dependencies/Dragablz
 	url = https://github.com/Foglio1024/Dragablz.git
-[submodule "dependencies/FoglioUtils"]
-	path = dependencies/FoglioUtils
-	url = https://github.com/Foglio1024/FoglioUtils.git
+# [submodule "dependencies/Nostrum"]
+# 	path = dependencies/Nostrum
+# 	url = https://github.com/Foglio1024/Nostrum.git

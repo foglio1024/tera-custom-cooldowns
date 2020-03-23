@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="TCC.UI.Controls.Skills.RoundSkillEffectControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+             xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
+    <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
+        <controls:Arc Width="58" 
+                   Height="58" 
+                   StrokeThickness="7" 
+                   Stroke="#ffbd3d" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   EndAngle="0"
+                   x:Name="ExternalArc"
+                   Margin="0,0,0,0">
+        </controls:Arc>
+        <skills:RoundFixedSkillControl HorizontalAlignment="Center" 
+                                           IsHitTestVisible="False"
+                                 VerticalAlignment="Center" Padding="25" Margin="-25"
+                                 DataContext="{Binding Cooldown}" 
+                                    x:Name="FixedSkillControl"
+                                 >
+            <skills:RoundFixedSkillControl.LayoutTransform>
+                <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
+            </skills:RoundFixedSkillControl.LayoutTransform>
+        </skills:RoundFixedSkillControl>
+
+
+
+        <Border Style="{StaticResource DefaultBorderStyle}" 
+                Opacity="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RoundSkillEffectControl}, Converter={StaticResource BoolToVisibility}}"
+                BorderThickness="0"
+                Background="#ffbd3d"
+                MinWidth="20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                CornerRadius="5"
+                Margin="0,-4,2,0"
+                Padding="4,0">
+            <TextBlock Foreground="#d000" 
+                       Text="{Binding Buff.Seconds}"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="15"
+                       FontFamily="{StaticResource ArialMonoBold}"
+                       Margin="0,1,0,0"/>
+        </Border>
+        <!--<Grid.CacheMode>
+            <BitmapCache RenderAtScale="2"></BitmapCache>
+        </Grid.CacheMode>-->
+
+    </Grid>
+</UserControl>

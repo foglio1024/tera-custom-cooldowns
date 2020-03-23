@@ -1,5 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -82,9 +83,9 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
-            SessionManager.DB.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
-            SessionManager.DB.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
+            Game.DB.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
+            Game.DB.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
+            Game.DB.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
             Thunderbolt = new Cooldown(tb, true) { CanFlash = true };
             Windsong = new DurationCooldownIndicator(Dispatcher)
             {
@@ -101,22 +102,18 @@ namespace TCC.ViewModels
                 Thunderbolt.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == Windsong.Cooldown.Skill.IconName)
-            {
-                Windsong.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != Windsong.Cooldown.Skill.IconName) return false;
+
+            Windsong.Cooldown.Start(sk.Duration);
+            return true;
         }
 
         public override bool ResetSpecialSkill(Skill skill)
         {
-            if (skill.IconName == Thunderbolt.Skill.IconName)
-            {
-                Thunderbolt.Refresh(0, CooldownMode.Normal);
-                return true;
-            }
-            return false;
+            if (skill.IconName != Thunderbolt.Skill.IconName) return false;
+            Thunderbolt.Refresh(0, CooldownMode.Normal);
+            return true;
         }
 
         public override void Dispose()
@@ -127,12 +124,9 @@ namespace TCC.ViewModels
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)       // KR patch by HQ
         {
-            if (skill.IconName == Thunderbolt.Skill.IconName)
-            {
-                Thunderbolt.Refresh(Thunderbolt.Skill.Id, cd, CooldownMode.Normal);
-                return true;
-            }
-            return false;
+            if (skill.IconName != Thunderbolt.Skill.IconName) return false;
+            Thunderbolt.Refresh(Thunderbolt.Skill.Id, cd, CooldownMode.Normal);
+            return true;
         }
     }
 }

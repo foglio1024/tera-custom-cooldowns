@@ -1,11 +1,13 @@
-﻿namespace TCC.Data.Chat
+﻿using Nostrum;
+
+namespace TCC.Data.Chat
 {
     public class MessageLine : TSPropertyChanged
     {
-        public SynchronizedObservableCollection<MessagePiece> LinePieces { get; protected set; }
+        public TSObservableCollection<MessagePieceBase> LinePieces { get; protected set; }
         public MessageLine()
         {
-            LinePieces = new SynchronizedObservableCollection<MessagePiece>();
+            LinePieces = new TSObservableCollection<MessagePieceBase>();
         }
     }
 }

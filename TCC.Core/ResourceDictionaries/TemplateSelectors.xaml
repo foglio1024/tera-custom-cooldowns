@@ -1,62 +1,55 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ts="clr-namespace:TCC.TemplateSelectors">
+                    xmlns:templateSelectors="clr-namespace:TCC.UI.TemplateSelectors">
 
-    <ts:AbnormalityTemplateSelector x:Key="PlayerAbnormalityTemplateSelector"
+    <templateSelectors:AbnormalityTemplateSelector x:Key="PlayerAbnormalityTemplateSelector"
                                     RoundTemplate="{StaticResource RoundAbnormality}"
-                                    SquareTemplate="{StaticResource SquareAbnormality}"
-                                    />
-    <ts:AbnormalityTemplateSelector x:Key="BossAbnormalityTemplateSelector"
+                                    SquareTemplate="{StaticResource SquareAbnormality}" />
+    <templateSelectors:AbnormalityTemplateSelector x:Key="BossAbnormalityTemplateSelector"
                                     RoundTemplate="{StaticResource  RoundBossAbnormality}"
-                                    SquareTemplate="{StaticResource SquareBossAbnormality}"
-                                    />
-    <ts:AbnormalityTemplateSelector x:Key="PartyAbnormalityTemplateSelector"
+                                    SquareTemplate="{StaticResource SquareBossAbnormality}" />
+    <templateSelectors:AbnormalityTemplateSelector x:Key="PartyAbnormalityTemplateSelector"
                                     RoundTemplate="{StaticResource  RoundPartyAbnormality}"
-                                    SquareTemplate="{StaticResource SquarePartyAbnormality}"
-                                    />
-    <ts:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
-                                    SimpleTemplate="{StaticResource SimpleTemplate}"
-                                    MoneyTemplate="{StaticResource MoneyTemplate}"
-                                    QuestTemplate="{StaticResource SimpleTemplate}"
-                                    AchievementTemplate="{StaticResource SimpleTemplate}"
-                                    PointOfInterestTemplate="{StaticResource SimpleTemplate}"
-                                    ItemTemplate="{StaticResource SimpleTemplate}"
-                                    EmojiTemplate="{StaticResource EmojiTemplate}"
-                                    IconTemplate="{StaticResource IconTemplate}"
-                                    />
-    <ts:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
-                                    NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"
-                                    WhisperChannelDataTemplate="{StaticResource WhisperChannelLabelTemplate}" 
-                                    MegaphoneChannelDataTemplate="{StaticResource MegaphoneChannelLabelTemplate}"
-                                    EnchantChannelDataTemplate="{StaticResource EnchantChannelLabelTemplate}"
-                                    />
-    <ts:AuthorLabelTemplateSelector x:Key="AuthorTemplateSelector"
+                                    SquareTemplate="{StaticResource SquarePartyAbnormality}" />
+    <templateSelectors:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
+                                         SimpleTemplate="{StaticResource SimpleTemplate}"
+                                         MoneyTemplate="{StaticResource MoneyTemplate}"
+                                         ActionTemplate="{StaticResource ActionTemplate}"
+                                         IconTemplate="{StaticResource IconTemplate}" />
+    <templateSelectors:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
+                                         NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"
+                                         WhisperChannelDataTemplate="{StaticResource WhisperChannelLabelTemplate}"
+                                         MegaphoneChannelDataTemplate="{StaticResource MegaphoneChannelLabelTemplate}"
+                                         EnchantChannelDataTemplate="{StaticResource EnchantChannelLabelTemplate}" />
+    <templateSelectors:AuthorLabelTemplateSelector x:Key="AuthorTemplateSelector"
                                     DefaultAuthorTemplate="{StaticResource DefaultAuthorTemplate}"
-                                    SystemAuthorTemplate="{StaticResource SystemAuthorTemplate}"
-                                    />
-    <ts:EnemyTemplateSelector x:Key="EnemyTemplateSelector" 
-                                    BossDataTemplate="{StaticResource BossDataTemplate}"
-                                    MobDataTemplate="{StaticResource MobDataTemplate}"
-                                    />
-    <ts:MessageBodyDataTemplateSelector x:Key="BodyTemplateSelector"
-                                    BrokerBody="{StaticResource BrokerOfferBody}"
-                                    DefaultBody="{StaticResource DefaultBody}" 
-                                    ApplyBody="{StaticResource ApplyBody}"
-                                    LfgBody="{StaticResource LfgBody}"
-                                    />
-    <ts:AbnormalityTemplateSelector x:Key="RaidAbnormalityTemplateSelector"
+                                    SystemAuthorTemplate="{StaticResource SystemAuthorTemplate}" />
+    <templateSelectors:EnemyTemplateSelector x:Key="EnemyTemplateSelector"
+                              BossDataTemplate="{StaticResource BossDataTemplate}"
+                              MobDataTemplate="{StaticResource MobDataTemplate}" />
+    <templateSelectors:MessageBodyDataTemplateSelector x:Key="BodyTemplateSelector"
+                                        BrokerBody="{StaticResource BrokerOfferBody}"
+                                        DefaultBody="{StaticResource DefaultBody}"
+                                        ApplyBody="{StaticResource ApplyBody}"
+                                        LfgBody="{StaticResource LfgBody}" />
+    <templateSelectors:AbnormalityTemplateSelector x:Key="RaidAbnormalityTemplateSelector"
                                     RoundTemplate="{StaticResource  RoundRaidAbnormality}"
-                                    SquareTemplate="{StaticResource SquareRaidAbnormality}"
-                                    />
-    <ts:SkillTemplateSelector x:Key="NormalSkillTemplateSelector"
-                                    RoundTemplate="{StaticResource RoundNormalSkill}"
-                                    SquareTemplate="{StaticResource SquareNormalSkill}"/>
-    <ts:SkillTemplateSelector x:Key="FixedSkillTemplateSelector"
-                                    RoundTemplate="{StaticResource RoundFixedSkill}"
-                                    SquareTemplate="{StaticResource SquareFixedSkill}"/>
-    <ts:GroupWindowTemplateSelector x:Key="GroupWindowTemplateSelector"
+                                    SquareTemplate="{StaticResource SquareRaidAbnormality}" />
+    <templateSelectors:SkillTemplateSelector x:Key="NormalSkillTemplateSelector"
+                              RoundTemplate="{StaticResource RoundNormalSkill}"
+                              SquareTemplate="{StaticResource SquareNormalSkill}" />
+    <templateSelectors:SkillTemplateSelector x:Key="FixedSkillTemplateSelector"
+                              RoundTemplate="{StaticResource RoundFixedSkill}"
+                              SquareTemplate="{StaticResource SquareFixedSkill}" />
+    <templateSelectors:GroupWindowTemplateSelector x:Key="GroupWindowTemplateSelector"
                                     SingleColumn="{StaticResource SingleColumnGroupLayout}"
-                                    RoleColumns="{StaticResource RoleColumnsGroupLayout}"/>
+                                    RoleColumns="{StaticResource RoleColumnsGroupLayout}" />
+    <templateSelectors:NotificationTemplateSelector x:Key="NotificationTemplateSelector"
+                                     Default="{StaticResource DefaultNotificationTemplate}"
+                                     Progress="{StaticResource ProgressNotificationTemplate}" />
+    <templateSelectors:ListingTemplateSelector x:Key="ListingTemplateSelector"
+                                Default="{StaticResource ListingDt}"
+                                Temp="{StaticResource TempListingDt}" />
 
 
 </ResourceDictionary>

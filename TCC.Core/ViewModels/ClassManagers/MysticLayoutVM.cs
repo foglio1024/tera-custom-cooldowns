@@ -1,6 +1,7 @@
-﻿using TCC.ClassSpecific;
-using TCC.Data;
+﻿using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -21,6 +22,7 @@ namespace TCC.ViewModels
         public Cooldown AuraTenacious { get; private set; }
         public Cooldown AuraSwift { get; private set; }
         public Cooldown AuraUnyielding { get; private set; }
+        public string ElementalizeIcon { get; } = "icon_skills.spiritedness_tex";
         public bool Elementalize
         {
             get => _elementalize;
@@ -32,8 +34,9 @@ namespace TCC.ViewModels
                 N(nameof(ElementalizeWarning));
             }
         }
-        public bool ElementalizeWarning => !Elementalize && (SessionManager.Combat || SessionManager.Encounter);
-
+        public bool ElementalizeWarning => !Elementalize && (Game.Combat || Game.Encounter);
+        public bool OffenseAuraWarning => !Auras.OffenseAura && (Game.Combat || Game.Encounter);
+        public bool SupportAuraWarning => !Auras.SupportAura && (Game.Combat || Game.Encounter);
         public MysticLayoutVM()
         {
             Auras = new AurasTracker();
@@ -42,20 +45,20 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
+            Game.DB.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
+            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
+            Game.DB.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
 
-            SessionManager.DB.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(480100, Class.Mystic, out var kb);
+            Game.DB.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
+            Game.DB.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
+            Game.DB.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
+            Game.DB.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);
+            Game.DB.SkillsDatabase.TryGetSkill(480100, Class.Mystic, out var kb);
 
-            SessionManager.DB.SkillsDatabase.TryGetSkill(130500, Class.Mystic, out var am);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(140500, Class.Mystic, out var asw);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(150600, Class.Mystic, out var au);
+            Game.DB.SkillsDatabase.TryGetSkill(130500, Class.Mystic, out var am);
+            Game.DB.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
+            Game.DB.SkillsDatabase.TryGetSkill(140500, Class.Mystic, out var asw);
+            Game.DB.SkillsDatabase.TryGetSkill(150600, Class.Mystic, out var au);
 
             ThrallOfProtection = new Cooldown(top, false);
             ThrallOfLife = new Cooldown(tol, false);
@@ -84,11 +87,11 @@ namespace TCC.ViewModels
                 Cooldown = new Cooldown(voc, false) { CanFlash = true }
             };
 
-            ClassAbnormalityTracker.MarkingExpired += OnVocExpired;
-            ClassAbnormalityTracker.MarkingRefreshed += OnVocRefreshed;
+            AbnormalityTracker.MarkingExpired += OnVocExpired;
+            AbnormalityTracker.MarkingRefreshed += OnVocRefreshed;
 
-            SessionManager.CombatChanged += OnCombatChanged;
-            SessionManager.EncounterChanged += OnCombatChanged;
+            Game.CombatChanged += OnCombatChanged;
+            Game.EncounterChanged += OnCombatChanged;
             Auras.AuraChanged += CheckAurasWarning;
         }
 
@@ -115,10 +118,15 @@ namespace TCC.ViewModels
             AuraSwift.FlashOnAvailable = !Auras.CritAura && !Auras.SwiftAura;
             AuraTenacious.FlashOnAvailable = !Auras.ManaAura && !Auras.CritResAura;
             AuraUnyielding.FlashOnAvailable = !Auras.ManaAura && !Auras.CritResAura;
+
+            N(nameof(OffenseAuraWarning));
+            N(nameof(SupportAuraWarning));
         }
         private void OnCombatChanged()
         {
             N(nameof(ElementalizeWarning));
+            N(nameof(OffenseAuraWarning));
+            N(nameof(SupportAuraWarning));
             CheckAurasWarning();
         }
 
@@ -169,17 +177,14 @@ namespace TCC.ViewModels
             //    ThrallOfLife.Start(sk.Cooldown);
             //    return true;
             //}
-            if (sk.Skill.IconName == ThrallOfWrath.Skill.IconName)
-            {
-                ThrallOfWrath.Start(sk.Duration);
-                return true;
-            }
+            if (sk.Skill.IconName != ThrallOfWrath.Skill.IconName) return false;
+            ThrallOfWrath.Start(sk.Duration);
+            return true;
             //if (sk.Skill.IconName == KingBlob.Skill.IconName)
             //{
             //    KingBlob.Start(sk.Cooldown);
             //    return true;
             //}
-            return false;
         }
     }
 }

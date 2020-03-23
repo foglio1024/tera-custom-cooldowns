@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
+using Nostrum;
 using TCC.Data;
 using TCC.Data.Skills;
 
@@ -29,13 +30,13 @@ namespace TCC.ViewModels
 
         public void SetMaxST(int v)
         {
-            if (!Settings.SettingsHolder.ClassWindowSettings.Enabled) return;
+            if (!App.Settings.ClassWindowSettings.Enabled) return;
             StaminaTracker.Max = v;
         }
 
         public void SetST(int currentStamina)
         {
-            if (!Settings.SettingsHolder.ClassWindowSettings.Enabled) return;
+            if (!App.Settings.ClassWindowSettings.Enabled) return;
             StaminaTracker.Val = currentStamina;
         }
         public BaseClassLayoutVM()

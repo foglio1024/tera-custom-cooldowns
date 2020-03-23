@@ -1,0 +1,14 @@
+{
+  "notices": [
+    {
+      "Id" : "" ,
+      "Type": "MessageBoxNotice",
+      "Trigger": 2,
+      "TriggerOnDownload": false,
+      "Details": {
+        "Title": "Chat2.gpk update",
+        "Content": "Consider updating S1UI_Chat2.gpk mod if you're using it for Toolbox interaction, along with tcc-stub. These updates are automatic if you're using TCC in Toolbox mode."
+      }
+    }
+  ]
+}

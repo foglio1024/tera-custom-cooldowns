@@ -1,7 +1,4 @@
-﻿using TCC.Parsing.Messages;
-
-// ReSharper disable UnusedAutoPropertyAccessor.Global
-// ReSharper disable MemberCanBePrivate.Global
+﻿using TeraDataLite;
 
 namespace TCC.Data.Chat
 {
@@ -12,13 +9,13 @@ namespace TCC.Data.Chat
         public short PlayerLevel { get; }
 
         public bool Handled = false;
-        public ApplyMessage(S_OTHER_USER_APPLY_PARTY x)
+        public ApplyMessage(uint playerId, Class c, short level, string name)
         {
             Channel = ChatChannel.Apply;
-            Author = x.Name;
-            PlayerId = x.PlayerId;
-            PlayerLevel = x.Level;
-            UserClass = x.Class;
+            Author = name;
+            PlayerId = playerId;
+            PlayerLevel = level;
+            UserClass = c;
 
         }
     }

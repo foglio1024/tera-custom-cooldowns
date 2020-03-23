@@ -1,9 +1,108 @@
 ﻿<Application x:Class="TCC.Publisher.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml"
+             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+             xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+             StartupUri="Windows/PublisherWindow.xaml"
              Startup="Application_Startup">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TCC;component/ResourceDictionaries/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/TCC;component/ResourceDictionaries/Brushes.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:RoundedClipConverter x:Key="RoundedClipConverter" />
+
+
+            <Style x:Key="BigEllipseStyle" TargetType="Ellipse">
+                <Setter Property="Width" Value="34" />
+                <Setter Property="Height" Value="34" />
+                <Setter Property="StrokeThickness" Value="4" />
+                <Setter Property="Fill" Value="{StaticResource DarkGreenBrush}" />
+                <Setter Property="Stroke" Value="{StaticResource RevampBackgroundBrush}" />
+            </Style>
+            <Style x:Key="SmallEllipseStyle" TargetType="Ellipse" BasedOn="{StaticResource BigEllipseStyle}">
+                <Setter Property="Width" Value="16" />
+                <Setter Property="Height" Value="16" />
+            </Style>
+            <Style x:Key="LastEllipseStyle" TargetType="Path" >
+                <Setter Property="Data" Value="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12Z"></Setter>
+                <Setter Property="Width" Value="48" />
+                <Setter Property="Height" Value="48" />
+                <Setter Property="StrokeThickness" Value="4" />
+                <Setter Property="Stretch" Value="Uniform" />
+                <Setter Property="Stroke" Value="{StaticResource RevampBackgroundBrush}" />
+                <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
+                <Setter Property="RenderTransformOrigin" Value=".5 .5" />
+            </Style>
+            <Style TargetType="{x:Type Button}" x:Key="DefaultButtonStyle">
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Border x:Name="border" ClipToBounds="True"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="{TemplateBinding extensions:ButtonExtensions.CornerRadius}"
+                                Background="{TemplateBinding Background}">
+
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                </Border>
+                                <Border x:Name="hl" Background="Transparent"
+                                CornerRadius="{TemplateBinding extensions:ButtonExtensions.CornerRadius}" />
+                                <controls:Ripple HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                                     Color="{TemplateBinding extensions:ButtonExtensions.RippleBrush}"
+                                     StaysVisible="{TemplateBinding extensions:ButtonExtensions.RippleStaysVisible}"
+                                     Reversed="{TemplateBinding extensions:ButtonExtensions.RippleReversed}"
+                                     Duration="{TemplateBinding extensions:ButtonExtensions.RippleDuration}"
+                                     IsHitTestVisible="{TemplateBinding extensions:ButtonExtensions.RippleEnabled}">
+                                    <controls:Ripple.Clip>
+                                        <MultiBinding Converter="{StaticResource RoundedClipConverter}">
+                                            <Binding Path="ActualWidth" ElementName="border" />
+                                            <Binding Path="ActualHeight" ElementName="border" />
+                                            <Binding Path="CornerRadius" ElementName="border" />
+                                        </MultiBinding>
+                                    </controls:Ripple.Clip>
+                                </controls:Ripple>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="hl" Property="Background"
+                                    Value="#2fff" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity"
+                                    Value=".3" />
+                                    <Setter Property="Background" TargetName="border"
+                                    Value="SlateGray" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="PathButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Width" Value="140" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="Padding" Value="45 5 5 5" />
+                <Setter Property="extensions:ButtonExtensions.CornerRadius" Value="15" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="Background" Value="#1fff" />
+                <Setter Property="Margin" Value="30 0 0 0" />
+
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

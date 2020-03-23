@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Skills;
+﻿using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -15,14 +15,14 @@ namespace TCC.ViewModels
         public override void LoadSpecialSkills()
         {
             // In Cold Blood
-            SessionManager.DB.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
+            Game.DB.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
             InColdBlood = new DurationCooldownIndicator(Dispatcher) {
                 Buff = new Cooldown(icb, false),
                 Cooldown = new Cooldown(icb, true) { CanFlash = true }
             };
 
             // Overhand Strike
-            SessionManager.DB.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);
+            Game.DB.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);
             OverhandStrike = new Cooldown(ohs, false);
 
         }
@@ -39,13 +39,11 @@ namespace TCC.ViewModels
                 InColdBlood.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == OverhandStrike.Skill.IconName)
-            {
-                OverhandStrike.Start(sk.Duration);
-                return true;
-            }
-            
-            return false;
+
+            if (sk.Skill.IconName != OverhandStrike.Skill.IconName) return false;
+            OverhandStrike.Start(sk.Duration);
+            return true;
+
         }
     }
 }

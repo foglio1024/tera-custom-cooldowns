@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Nostrum;
 using TCC.Data.Skills;
+
+using TeraDataLite;
 
 namespace TCC.Data.Databases
 {
@@ -67,7 +70,7 @@ namespace TCC.Data.Databases
         public bool TryGetSkill(uint id, Class c, out Skill sk)
         {
             var result = false;
-            sk = new Skill(0, Class.None, String.Empty, String.Empty);
+            sk = new Skill(0, Class.None, string.Empty, string.Empty);
             if (Skills[c].TryGetValue(id, out sk))
             {
                 result = true;
@@ -94,9 +97,9 @@ namespace TCC.Data.Databases
         {
             get
             {
-                var list = new SynchronizedObservableCollection<Skill>();
-                var c = SessionManager.CurrentPlayer.Class;
-                var skillsForClass = SessionManager.DB.SkillsDatabase.Skills[c];
+                var list = new TSObservableCollection<Skill>();
+                var c = Game.Me.Class;
+                var skillsForClass = Game.DB.SkillsDatabase.Skills[c];
                 foreach (var skill in skillsForClass.Values)
                 {
                     if (list.All(x => x.IconName != skill.IconName) && !IsIgnoredSkill(skill))

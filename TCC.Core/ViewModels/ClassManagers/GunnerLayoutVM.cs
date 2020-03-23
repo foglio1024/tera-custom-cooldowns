@@ -1,5 +1,5 @@
-﻿using TCC.Data;
-using TCC.Data.Skills;
+﻿using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -13,10 +13,10 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(20600, Class.Gunner, out var bombard);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(410100, Class.Gunner, out var modSys);
+            Game.DB.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
+            Game.DB.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
+            Game.DB.SkillsDatabase.TryGetSkill(20600, Class.Gunner, out var bombard);
+            Game.DB.SkillsDatabase.TryGetSkill(410100, Class.Gunner, out var modSys);
 
 
             BurstFire = new Cooldown(bfire, true);
@@ -54,12 +54,11 @@ namespace TCC.ViewModels
                 Bombardment.Start(sk.Duration);
                 return true;
             }
-            if (ModularSystem.Cooldown.Skill != null && sk.Skill.IconName == ModularSystem.Cooldown.Skill.IconName)
-            {
-                ModularSystem.Cooldown.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (ModularSystem.Cooldown.Skill == null ||
+                sk.Skill.IconName != ModularSystem.Cooldown.Skill.IconName) return false;
+            ModularSystem.Cooldown.Start(sk.Duration);
+            return true;
         }
     }
 }

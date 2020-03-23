@@ -4,6 +4,8 @@
     <SolidColorBrush x:Key="MainBrush"                      Color="{StaticResource MainColor}"                                 />
     <SolidColorBrush x:Key="GreenBrush"                     Color="{StaticResource GreenColor}"                                />
     <SolidColorBrush x:Key="LightGreenBrush"                Color="{StaticResource LightGreenColor}"                           />
+    <SolidColorBrush x:Key="DarkGreenBrush"                 Color="{StaticResource DarkGreenColor}"                            />
+
     <SolidColorBrush x:Key="TwitchBrush"                    Color="{StaticResource TwitchColor}"                               />
     <SolidColorBrush x:Key="WeeklyBrush"                    Color="{StaticResource WeeklyColor}"                               />
     <SolidColorBrush x:Key="DailyBrush"                     Color="{StaticResource DailyColor}"                                />
@@ -29,6 +31,8 @@
     <SolidColorBrush x:Key="CardDarkBrush"                  Color="{StaticResource CardDarkColor}"                             />
     <SolidColorBrush x:Key="TooltipBrush"                   Color="{StaticResource TooltipColor}"                Opacity=".9"  />
     <SolidColorBrush x:Key="RevampBackgroundBrush"          Color="{StaticResource RevampBackgroundColor}"                     />
+    <SolidColorBrush x:Key="RevampBackground90Brush"        Color="{StaticResource RevampBackgroundColor}"       Opacity=".9"  />
+    <SolidColorBrush x:Key="RevampBackground80Brush"        Color="{StaticResource RevampBackgroundColor}"       Opacity=".8"  />
     <SolidColorBrush x:Key="RevampBackground70Brush"        Color="{StaticResource RevampBackgroundColor}"       Opacity=".7"  />
     <SolidColorBrush x:Key="RevampDarkBackgroundBrush"      Color="{StaticResource RevampDarkBackgroundColor}"                 />
     <SolidColorBrush x:Key="RevampDarkBackground70Brush"    Color="{StaticResource RevampDarkBackgroundColor}"   Opacity=".7"  />
@@ -39,10 +43,6 @@
     <SolidColorBrush x:Key="TeraRestylePanelBrush"          Color="{StaticResource TeraRestylePanelColor}"                     />
     <SolidColorBrush x:Key="TeraRestyleBorderBrush"         Color="{StaticResource TeraRestyleBorderColor}"                    />
     <SolidColorBrush x:Key="TeraRestyleBorderBrushLight"    Color="{StaticResource TeraRestyleBorderColorLight}"               />
-
-    <SolidColorBrush x:Key="SelectionBackgroundBrush"       Color="White"                                        Opacity=".04" />
-    <SolidColorBrush x:Key="SelectionBackgroundLightBrush"  Color="White"                                        Opacity=".08" />
-    <SolidColorBrush x:Key="SelectionBorderBrush"           Color="Transparent"                                                />
 
     <SolidColorBrush x:Key="HpBrush"                        Color="{StaticResource HpColor}"                                   />
     <SolidColorBrush x:Key="HpBrushLight"                   Color="{StaticResource HpColorLight}"                              />
@@ -92,6 +92,8 @@
     <SolidColorBrush x:Key="ItemRareBrush"                  Color="{StaticResource ItemRareColor}"                             />
     <SolidColorBrush x:Key="ItemSuperiorBrush"              Color="{StaticResource ItemSuperiorColor}"                         />
 
+    <SolidColorBrush x:Key="ToolboxBrush"                   Color="{StaticResource ToolboxColor}"                              />
+
     <SolidColorBrush x:Key="ChatSayBrush"                   Color="{StaticResource ChatSayColor}"                              />
     <SolidColorBrush x:Key="ChatPartyBrush"                 Color="{StaticResource ChatPartyColor}"                            />
     <SolidColorBrush x:Key="ChatGuildBrush"                 Color="{StaticResource ChatGuildColor}"                            />
@@ -104,6 +106,7 @@
     <SolidColorBrush x:Key="ChatGlobalBrush"                Color="{StaticResource ChatGlobalColor}"                           />
     <SolidColorBrush x:Key="ChatRaidBrush"                  Color="{StaticResource ChatRaidColor}"                             />
     <SolidColorBrush x:Key="ChatMegaphoneBrush"             Color="{StaticResource ChatMegaphoneColor}"                        />
+    <SolidColorBrush x:Key="ChatMegaphoneBrushDark"         Color="{StaticResource ChatMegaphoneColorDark}"                    />
     <SolidColorBrush x:Key="ChatGuildAdBrush"               Color="{StaticResource ChatGuildAdColor}"                          />
     <SolidColorBrush x:Key="ChatPrivateBrush"               Color="{StaticResource ChatPrivateColor}"                          />
     <SolidColorBrush x:Key="ChatProxyBrush"                 Color="{StaticResource ChatProxyColor}"                            />
@@ -124,12 +127,39 @@
     <SolidColorBrush x:Key="ChatSystemFriendBrush"          Color="{StaticResource ChatSystemFriendColor}"                     />
     <SolidColorBrush x:Key="ChatSystemWorldBossBrush"       Color="{StaticResource ChatSystemWorldBossColor}"                  />
                                                                                                                                
-                                                                                                                               
+    <SolidColorBrush x:Key="TccNormalGradient0Brush"        Color="{StaticResource TccNormalGradient0Color}"                   />
+    <SolidColorBrush x:Key="TccNormalGradient1Brush"        Color="{StaticResource TccNormalGradient1Color}"                   />
+    <SolidColorBrush x:Key="TccNormalLightGradient0Brush"   Color="{StaticResource TccNormalLightGradient0Color}"              />
+    <SolidColorBrush x:Key="TccNormalLightGradient1Brush"   Color="{StaticResource TccNormalLightGradient1Color}"              />
+    <SolidColorBrush x:Key="TccYellowGradient0Brush"        Color="{StaticResource TccYellowGradient0Color}"                   />
+    <SolidColorBrush x:Key="TccYellowGradient1Brush"        Color="{StaticResource TccYellowGradient1Color}"                   />
+    <SolidColorBrush x:Key="TccRedGradient0Brush"           Color="{StaticResource TccRedGradient0Color}"                      />
+    <SolidColorBrush x:Key="TccRedGradient1Brush"           Color="{StaticResource TccRedGradient1Color}"                      />
+
+    <!-- Gradients -->
     <LinearGradientBrush x:Key="RevampBackgroundGradientBrush" EndPoint="1 1" StartPoint="0 0" >                               
         <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="0.1"/>                                      
         <GradientStop Color="{StaticResource RevampDarkerBackgroundColor}" Offset="0.4"/>                                      
         <GradientStop Color="{StaticResource RevampDarkerBackgroundColor}" Offset="0.5"/>                                      
         <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="1.0"/>                                      
-    </LinearGradientBrush>                                                                                                     
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="TccNormalGradientBrush">
+        <GradientStop Color="{StaticResource TccNormalGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccNormalGradient1Color}" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TccGreenGradientBrush">
+        <GradientStop Color="{StaticResource TccGreenGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccGreenGradient1Color}" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TccYellowGradientBrush">
+        <GradientStop Color="{StaticResource TccYellowGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccYellowGradient1Color}" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TccRedGradientBrush">
+        <GradientStop Color="{StaticResource TccRedGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccRedGradient1Color}" Offset="1" />
+    </LinearGradientBrush>
+
 
 </ResourceDictionary>

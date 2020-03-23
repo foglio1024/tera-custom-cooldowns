@@ -1,0 +1,216 @@
+﻿<UserControl x:Class="TCC.UI.Controls.Dashboard.DungeonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
+             mc:Ignorable="d"
+             UseLayoutRounding="True"
+             d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance viewModels:DashboardViewModel}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ToolTip}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <DataTemplate x:Key="ColumnHeaderDataTemplate" DataType="dashboard:DungeonColumnViewModel">
+            <Grid Width="34" Margin="0 0 0 0">
+                <Grid.ToolTip>
+                    <Border Style="{StaticResource RevampBorderStyle}" Opacity="1">
+                        <Grid Margin="10 5 10 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Width="64" Height="64" Margin="0 5 10 0" VerticalAlignment="Top">
+                                <Rectangle.Fill>
+                                    <ImageBrush
+                                        ImageSource="{Binding Dungeon.IconName, Converter={StaticResource DungeonImageConverter}}"
+                                        RenderOptions.BitmapScalingMode="Fant" Stretch="Uniform" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock FontSize="16" Foreground="#4fff" FontWeight="DemiBold"
+                                           VerticalAlignment="Center">
+                                    <Run Text="{Binding Dungeon.Name, Mode=OneWay}"
+                                         Foreground="#9fff" />
+                                </TextBlock>
+                                <TextBlock Foreground="#4fff">
+                                    <Run Text="Item level requirement:" />
+                                    <Run Text="{Binding Dungeon.ItemLevel, Mode=OneWay}"
+                                         Foreground="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}" />
+                                </TextBlock>
+                                <Separator Margin="5 2"
+                                           Background="#2fff" />
+                                <TextBlock Foreground="#4fff">
+                                    <Run Text="Max runs:" />
+                                    <Run Text="{Binding Dungeon.MaxEntries, Mode=OneWay}" Foreground="#9fff" />
+                                    <Run Text="(" /><Run Text="{Binding Dungeon.ResetMode, Mode=OneWay}" /><Run Text=")" />
+                                </TextBlock>
+                                <TextBlock Foreground="#4fff">
+                                    <Run Text="Cost:" />
+                                    <Run Text="{Binding Dungeon.Cost, Mode=OneWay}" Foreground="#9fff" />
+                                </TextBlock>
+
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid.ToolTip>
+
+                <Rectangle Height="1"
+                           Visibility="{Binding Hilight, Converter={StaticResource BoolToVisibility}}"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Bottom"
+                           Margin="1 0"
+                           Fill="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}" />
+                <Rectangle Grid.RowSpan="1"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"
+                           Margin="1 0"
+                           Fill="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}"
+                           Opacity=".1" />
+                <TextBlock Text="{Binding Dungeon.ShortName}"
+                           Margin="0 4"
+                           HorizontalAlignment="Center"
+                           Foreground="{Binding Dungeon.ItemLevel, Converter={StaticResource IlvlTierToColor}}"
+                           TextAlignment="Center"
+                           FontSize="11"
+                           TextTrimming="CharacterEllipsis" />
+            </Grid>
+
+        </DataTemplate>
+        <DataTemplate x:Key="ColumnDataTemplate" DataType="dashboard:DungeonColumnViewModel">
+            <Grid Width="34" Margin="0">
+                <Rectangle x:Name="Hilight"
+                           Opacity=".6"
+                           Visibility="{Binding Hilight, Converter={StaticResource BoolToVisibility}}"
+                           Grid.ColumnSpan="10">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush Opacity=".06">
+                            <GradientStop Offset=".5" Color="White" />
+                            <GradientStop Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <ItemsControl ItemsSource="{Binding DungeonsListView}"
+                              HorizontalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="dashboard:DungeonCooldownViewModel">
+                            <Grid Height="30"
+                                  Margin="0 1"
+                                  MouseEnter="OnEntryMouseEnter"
+                                  MouseLeave="OnEntryMouseLeave">
+                                <Ellipse Opacity=".1" StrokeThickness="1" Margin="0" Width="22" Height="22">
+                                    <Ellipse.Fill>
+                                        <MultiBinding Converter="{StaticResource EntriesToColor}">
+                                            <Binding Path="Cooldown.AvailableEntries" />
+                                            <Binding Path="Cooldown.MaxAvailableEntries" />
+                                        </MultiBinding>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Text="{Binding Cooldown.AvailableEntries}"
+                                           FontWeight="DemiBold"
+                                           Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontSize="15">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource EntriesToColor}">
+                                            <Binding Path="Cooldown.AvailableEntries" />
+                                            <Binding Path="Cooldown.MaxAvailableEntries" />
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Style="{StaticResource RevampBorderStyle}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="{StaticResource RevampDarkerBackground70Brush}"
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                Margin="0 0 0 30" />
+        <ListBox ItemTemplate="{StaticResource NameClassCharDataTemplateWithVM}"
+                 ItemsSource="{Binding CharacterViewModelsView}"
+
+                 Grid.Row="1" Grid.ColumnSpan="2"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 x:Name="CharacterNames"
+                 Margin="0 0 0 48">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource NoHilightListItemStyleWithLines}">
+                    <Setter Property="Padding" Value="1" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <ListBox ItemTemplate="{StaticResource ColumnDataTemplate}"
+                 ItemsSource="{Binding SortedColumns}"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 Margin="0 0 0 30"
+                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 x:Name="DungeonColumns"
+                 ScrollViewer.ScrollChanged="DungeonColumns_OnScrollChanged">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource NoHilightListItemStyle}">
+                    <Setter Property="Padding" Value="0 0" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <Separator VerticalAlignment="Bottom"
+                   Margin="0"
+                   Background="#2ddf"
+                   Grid.ColumnSpan="2" />
+        <ListBox ItemTemplate="{StaticResource ColumnHeaderDataTemplate}"
+                 ItemsSource="{Binding SortedColumns}"
+                 Grid.Column="1"
+                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 x:Name="DungeonHeaders"
+                 Margin="0 0 18 0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem" BasedOn="{StaticResource NoHilightListItemStyle}">
+                    <Setter Property="Padding" Value="0 1" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Height="30"
+                Width="30"
+                Style="{StaticResource ButtonContentOpacityStyle}"
+                Click="OnDungeonEditButtonClick">
+            <Path Data="{StaticResource SvgPen}" Margin="7"></Path>
+        </Button>
+    </Grid>
+</UserControl>

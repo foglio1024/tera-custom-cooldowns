@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Threading;
+using Nostrum;
 
 namespace TCC.Data.Skills
 {
@@ -69,20 +70,13 @@ namespace TCC.Data.Skills
                 _canFlash = value;
                 if (value)
                 {
-                    SessionManager.CombatChanged += OnCombatStatusChanged;
-                    _ccSub++;
-                    SessionManager.EncounterChanged += OnCombatStatusChanged;
-                    _ecSub++;
-
+                    Game.CombatChanged += OnCombatStatusChanged;
+                    Game.EncounterChanged += OnCombatStatusChanged;
                 }
                 else
                 {
-                    SessionManager.CombatChanged -= OnCombatStatusChanged;
-                    _ccSub--;
-                    SessionManager.EncounterChanged -= OnCombatStatusChanged;
-                    _ecSub--;
-                    Log.CW($"CC: {_ccSub}\t\t-\t\tEC: {_ecSub}");
-
+                    Game.CombatChanged -= OnCombatStatusChanged;
+                    Game.EncounterChanged -= OnCombatStatusChanged;
                 }
 
             }
@@ -118,11 +112,9 @@ namespace TCC.Data.Skills
             Start(cooldown, mode);
         }
 
-        private static int _ccSub;
-        private static int _ecSub;
         private void OnCombatStatusChanged()
         {
-            if ((SessionManager.Encounter || SessionManager.Combat) && FlashOnAvailable)
+            if ((Game.Encounter || Game.Combat) && FlashOnAvailable)
                 ForceFlashing();
             else
                 ForceStopFlashing();
@@ -161,7 +153,7 @@ namespace TCC.Data.Skills
         public void Start(Cooldown sk)
         {
             if (sk != this) sk.Dispose();
-            if (sk.Duration >= Int32.MaxValue) return;
+            if (sk.Duration >= int.MaxValue) return;
             if (_mainTimer.IsEnabled)
             {
                 if (Mode == CooldownMode.Pre)
@@ -195,7 +187,7 @@ namespace TCC.Data.Skills
             _mainTimer.Stop();
             N(nameof(IsAvailable));
 
-            if (cd == 0 || cd >= Int32.MaxValue)
+            if (cd == 0 || cd >= int.MaxValue)
             {
                 Seconds = 0;
                 Duration = 0;
@@ -245,6 +237,10 @@ namespace TCC.Data.Skills
         public void Dispose()
         {
             CanFlash = false;
+            _mainTimer.Tick -= CooldownEnded;
+            _offsetTimer.Tick -= StartSecondsTimer;
+            _secondsTimer.Tick -= DecreaseSeconds;
+
             _mainTimer.Stop();
             _offsetTimer.Stop();
             _secondsTimer.Stop();

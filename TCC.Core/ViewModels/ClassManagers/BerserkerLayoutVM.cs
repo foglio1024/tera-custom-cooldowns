@@ -1,5 +1,6 @@
 ﻿using TCC.Data;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.ViewModels
 {
@@ -53,9 +54,9 @@ namespace TCC.ViewModels
 
         public override void LoadSpecialSkills()
         {
-            SessionManager.DB.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
+            Game.DB.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
+            Game.DB.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
+            Game.DB.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
             FieryRage = new DurationCooldownIndicator(Dispatcher)
             {
                 Cooldown = new Cooldown(fr,  true) { CanFlash = true },
@@ -72,10 +73,10 @@ namespace TCC.ViewModels
                 Buff = new Cooldown(ul, false)
             };
 
-            SessionManager.DB.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
-            SessionManager.DB.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
+            Game.DB.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
+            Game.DB.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
+            Game.DB.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
+            Game.DB.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
 
             Dexter = new Cooldown(dx, false);
             Sinister = new Cooldown(sx, false);
@@ -100,22 +101,17 @@ namespace TCC.ViewModels
                 Unleash.Cooldown.Start(sk.Duration);
                 return true;
             }
-            if (sk.Skill.IconName == BeastFury.Skill.IconName)
-            {
-                BeastFury.Start(sk.Duration);
-                return true;
-            }
-            return false;
+
+            if (sk.Skill.IconName != BeastFury.Skill.IconName) return false;
+            BeastFury.Start(sk.Duration);
+            return true;
         }
 
         public override bool ChangeSpecialSkill(Skill skill, uint cd)
         {
-            if (skill.IconName == Unleash.Cooldown.Skill.IconName)
-            {
-                Unleash.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
-                return true;
-            }
-            return false;
+            if (skill.IconName != Unleash.Cooldown.Skill.IconName) return false;
+            Unleash.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
+            return true;
         }
 
         public override void Dispose()

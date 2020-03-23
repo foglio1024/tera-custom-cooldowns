@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TCC.Data.Skills;
+using TeraDataLite;
 
 namespace TCC.Data.Databases
 {
@@ -11,7 +11,7 @@ namespace TCC.Data.Databases
         protected override string FolderName => "items";
         protected override string Extension => "tsv";
 
-        public Dictionary<uint, Item> Items;
+        public readonly Dictionary<uint, Item> Items;
         public ItemsDatabase(string lang) : base(lang)
         {
             Items = new Dictionary<uint, Item>();
@@ -23,15 +23,10 @@ namespace TCC.Data.Databases
         }
         public bool TryGetItemSkill(uint itemId, out Skill sk)
         {
-            var result = false;
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
-
-            if (Items.TryGetValue(itemId, out var item))
-            {
-                result = true;
-                sk = new Skill(itemId, Class.Common, item.Name, "") { IconName = item.IconName };
-            }
-            return result;
+            if (!Items.TryGetValue(itemId, out var item)) return false;
+            sk = new Skill(itemId, Class.Common, item.Name, "") { IconName = item.IconName };
+            return true;
 
         }
 
@@ -47,15 +42,15 @@ namespace TCC.Data.Databases
 
                 var s = line.Split('\t');
 
-                var id = Convert.ToUInt32(s[0]);
-                var grad = Convert.ToUInt32(s[1]);
+                var id = uint.Parse(s[0]); //Convert.ToUInt32(s[0]);
+                var grad = uint.Parse(s[1]);// Convert.ToUInt32(s[1]);
                 var name = s[2];
-                var expId = Convert.ToUInt32(s[3]);
-                var cd = Convert.ToUInt32(s[4]);
+                var expId = uint.Parse(s[3]); // Convert.ToUInt32(s[3]);
+                var cd = uint.Parse(s[4]); //Convert.ToUInt32(s[4]);
                 var icon = s[5];
 
                 var item = new Item(id, name, (RareGrade)grad, expId, cd, icon);
-                Items.Add(id, item);
+                Items[id] =  item;
             }
 
             AddOverride(new Item(149644, "Harrowhold Rejuvenation Potion", RareGrade.Uncommon, 0, 30, "icon_items.potion1_tex"));
@@ -84,7 +79,7 @@ namespace TCC.Data.Databases
                 //}
 
                 //return ret;
-                return Items.Values.Where(x => x.Cooldown > 0);
+                return Items.Values.Where(x => x.Cooldown > 0).ToList();
             }
         }
     }

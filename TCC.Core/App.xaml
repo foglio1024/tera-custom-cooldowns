@@ -5,13 +5,17 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/SVG.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/MiscResources.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/Converters.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/Styles.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/SVG.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Colors.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Brushes.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/MiscResources.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Converters.xaml"/>
-                <ResourceDictionary Source="ResourceDictionaries/DragablzMaterialDesign.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Styles.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/DragablzMaterialDesign.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/DataTemplates.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/TemplateSelectors.xaml"/>
             </ResourceDictionary.MergedDictionaries>

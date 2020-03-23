@@ -59,6 +59,7 @@ namespace TCC.Data.Databases
                     dg.Cost = int.Parse(s[2]);
                 }
                 Dungeons[id] = dg;
+
             }
         }
         private void ParseDungeonDefs()
@@ -83,6 +84,7 @@ namespace TCC.Data.Databases
 
                 if (!Dungeons.TryGetValue(id, out var dung)) continue;
                 dung.Show = true;
+                dung.HasDef = true;
                 dung.ShortName = shortName;
                 dung.DoublesOnElite = bool.Parse(sDobuleElite);
                 dung.Index = int.Parse(sIndex);
@@ -91,7 +93,7 @@ namespace TCC.Data.Databases
                 if (!int.TryParse(sReqIlvl, out var reqIlvl)) continue;
                 try
                 {
-                    dung.RequiredIlvl = (ItemLevelTier)reqIlvl;
+                    dung.ItemLevel = reqIlvl;
                 }
                 catch
                 {
@@ -138,7 +140,7 @@ namespace TCC.Data.Databases
                 sb.Append("\t");
                 sb.Append(d.MaxBaseRuns);
                 sb.Append("\t");
-                sb.Append((int)d.RequiredIlvl);
+                sb.Append(d.ItemLevel); 
                 sb.Append("\t");
                 sb.Append(d.DoublesOnElite);
                 sb.Append("\t");

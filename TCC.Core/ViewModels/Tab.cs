@@ -1,77 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Dragablz;
-using TCC.Controls;
+using Nostrum;
+using Newtonsoft.Json;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Utilities;
+using TCC.ViewModels.Widgets;
 
 namespace TCC.ViewModels
 {
-    public class TabViewModel : HeaderedItemViewModel
+    public class TabInfo
     {
-        public static event Action<Tab, ImportantRemovedArgs> ImportantRemoved;
-        public static event Action<TabViewModel> TabOpened;
+        public string Name { get; set; }
+        public List<string> ShowedAuthors { get; set; }
+        public List<string> HiddenAuthors { get; set; }
+        public List<ChatChannel> ShowedChannels { get; set; }
+        public List<ChatChannel> HiddenChannels { get; set; }
 
-        public static void InvokeImportantRemoved(Tab source, ImportantRemovedArgs e)
+        public TabInfo()
         {
-            ImportantRemoved?.Invoke(source, e);
+            ShowedAuthors = new List<string>();
+            HiddenAuthors = new List<string>();
+            ShowedChannels = new List<ChatChannel>();
+            HiddenChannels = new List<ChatChannel>();
+            
         }
-
-        private bool _showImportantPopup;
-        public bool ShowImportantPopup
+        public TabInfo(string name) : this()
         {
-            get => _showImportantPopup;
-            set
-            {
-                if (_showImportantPopup == value) return;
-                _showImportantPopup = value;
-                OnPropertyChanged();
-            }
+            Name = name;
         }
-
-        public ICommand TogglePopupCommand { get; }
-
-
-        public TabViewModel()
-        {
-            TogglePopupCommand = new RelayCommand(SetPopupStatus);
-            TabOpened += OnTabOpened;
-        }
-        public TabViewModel(object header, object content, bool isSelected = false) : base(header, content, isSelected)
-        {
-            TogglePopupCommand = new RelayCommand(SetPopupStatus);
-            TabOpened += OnTabOpened;
-        }
-
-        private void SetPopupStatus(object par)
-        {
-            var val = Convert.ToBoolean(par);
-            ShowImportantPopup = val;
-            if (val) TabOpened?.Invoke(this);
-        }
-        private void OnTabOpened(TabViewModel vm)
-        {
-            if (vm == this) return;
-            ShowImportantPopup = false;
-        }
-
-
     }
-    public class Tab : TSPropertyChanged
+    public class TabInfoVM : TSPropertyChanged
     {
-        // needed for combobox in settings
-        public List<ChatChannelOnOff> AllChannels => TccUtils.GetEnabledChannelsList();
-
-        private ICollectionView _messages;
-        private ChatMessage _pinnedMessage;
-        public ICommand ScrollToMessageCommand { get; }
-        public ICommand RemoveImportantMessageCommand { get; }
-        public ICommand ClearAllCommand { get; }
         private string _tabName;
         public string TabName
         {
@@ -84,15 +49,123 @@ namespace TCC.ViewModels
             }
         }
 
+        public TSObservableCollection<string> Authors { get; set; }
+
+        public TSObservableCollection<string> ExcludedAuthors { get; set; }
+
+        public TSObservableCollection<ChatChannel> ShowedChannels { get; set; }
+
+        public TSObservableCollection<ChatChannel> ExcludedChannels { get; set; }
+
+
+        public TabInfoVM()
+        {
+            Authors = new TSObservableCollection<string>(Dispatcher);
+            ExcludedAuthors = new TSObservableCollection<string>(Dispatcher);
+            ShowedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
+            ExcludedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
+        }
+
+        public TabInfoVM(string tabName) : this()
+        {
+            TabName = tabName;
+        }
+        public TabInfoVM(TabInfo info) : this()
+        {
+            TabName = info.Name;
+            info.ShowedAuthors.ForEach(Authors.Add);
+            info.HiddenAuthors.ForEach(ExcludedAuthors.Add);
+            info.ShowedChannels.ForEach(ShowedChannels.Add);
+            info.HiddenChannels.ForEach(ExcludedChannels.Add);
+
+            Authors.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.ShowedAuthors.AddRange(ev.NewItems.Cast<string>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.ShowedAuthors.Remove(i));
+                        break;
+                }
+            };
+            ExcludedAuthors.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.HiddenAuthors.AddRange(ev.NewItems.Cast<string>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.HiddenAuthors.Remove(i));
+                        break;
+                }
+            };
+            ShowedChannels.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.ShowedChannels.AddRange(ev.NewItems.Cast<ChatChannel>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<ChatChannel>().ToList().ForEach(i => info.ShowedChannels.Remove(i));
+                        break;
+                }
+            };
+            ExcludedChannels.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.HiddenChannels.AddRange(ev.NewItems.Cast<ChatChannel>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<ChatChannel>().ToList().ForEach(i => info.HiddenChannels.Remove(i));
+                        break;
+                }
+            };
+        }
+    }
+    public class Tab : TSPropertyChanged
+    {
+        public TabInfo TabInfo { get; }
+        public TabInfoVM TabInfoVM { get; set; }
+
+        private ICollectionView _messages;
+        private ChatMessage _pinnedMessage;
+
+
+        public string TabName
+        {
+            get => TabInfo?.Name;
+            set
+            {
+                if (TabInfo?.Name == value) return;
+                if (TabInfo != null) TabInfo.Name = value;
+                if (TabInfoVM != null) TabInfoVM.TabName = value;
+                N();
+            }
+        }
+
+        [JsonIgnore]
+        public List<ChatChannelOnOff> AllChannels => TccUtils.GetEnabledChannelsList(); // needed for combobox in settings
+        [JsonIgnore]
+        public ICommand ScrollToMessageCommand { get; }
+        [JsonIgnore]
+        public ICommand RemoveImportantMessageCommand { get; }
+        [JsonIgnore]
+        public ICommand ClearAllCommand { get; }
+        [JsonIgnore]
         public string ImportantMessagesLabel => ImportantMessages.Count > 9 ? "!" : ImportantMessages.Count.ToString();
 
+        [JsonIgnore]
         public bool Attention => ImportantMessages.Count > 0;
 
-        public SynchronizedObservableCollection<string> Authors { get; set; }
-        public SynchronizedObservableCollection<string> ExcludedAuthors { get; set; }
-        public SynchronizedObservableCollection<ChatChannel> Channels { get; set; }
-        public SynchronizedObservableCollection<ChatChannel> ExcludedChannels { get; set; }
-        public SynchronizedObservableCollection<ChatMessage> ImportantMessages { get; set; }
+        [JsonIgnore]
+        public TSObservableCollection<ChatMessage> ImportantMessages { get; set; }
+        [JsonIgnore]
         public ICollectionView Messages
         {
             get => _messages;
@@ -103,6 +176,7 @@ namespace TCC.ViewModels
                 N(nameof(Messages));
             }
         }
+        [JsonIgnore]
         public ChatMessage PinnedMessage
         {
             get => _pinnedMessage;
@@ -118,51 +192,55 @@ namespace TCC.ViewModels
             Messages.Refresh();
         }
 
-        public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa)
+        public Tab()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-            TabName = n;
-            Messages = new ListCollectionView(ChatWindowManager.Instance.ChatMessages);
-            Authors = new SynchronizedObservableCollection<string>(Dispatcher);
-            ExcludedAuthors = new SynchronizedObservableCollection<string>(Dispatcher);
-            Channels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
-            ExcludedChannels = new SynchronizedObservableCollection<ChatChannel>(Dispatcher);
-            ImportantMessages = new SynchronizedObservableCollection<ChatMessage>(Dispatcher);
+            Messages = new ListCollectionView(ChatManager.Instance.ChatMessages);
+            ImportantMessages = new TSObservableCollection<ChatMessage>(Dispatcher);
             RemoveImportantMessageCommand = new RelayCommand(msg =>
             {
-                RemoveImportantMessage((ChatMessage) msg);
-                TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Remove, (ChatMessage) msg));
+                RemoveImportantMessage((ChatMessage)msg);
+                TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Remove, (ChatMessage)msg));
             });
             ClearAllCommand = new RelayCommand(par =>
             {
                 ClearImportant();
                 TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Clear));
             });
-            ScrollToMessageCommand = new RelayCommand(msg => { ChatWindowManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
-            foreach (var auth in a)
-            {
-                Authors.Add(auth);
-            }
-            foreach (var auth in exa)
-            {
-                ExcludedAuthors.Add(auth);
-            }
-            foreach (var chan in ch)
-            {
-                Channels.Add(chan);
-            }
-            foreach (var chan in ex)
-            {
-                ExcludedChannels.Add(chan);
-            }
-            if (Channels.Count == 0 && Authors.Count == 0 && ExcludedChannels.Count == 0 && ExcludedAuthors.Count == 0)
-            {
-                Messages.Filter = null;
-                return;
-            }
-            ApplyFilter();
+            ScrollToMessageCommand = new RelayCommand(msg => { ChatManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
             TabViewModel.ImportantRemoved += SyncImportant;
+
         }
+
+        public Tab(TabInfo tabInfo) : this()
+        {
+            TabInfo = tabInfo;
+            TabInfoVM = new TabInfoVM(TabInfo);
+            ApplyFilter();
+        }
+        //public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa) : this()
+        //{
+        //    if (n == null || ch == null || ex == null || a == null || exa == null) return;
+        //    TabName = n;
+        //    foreach (var auth in a)
+        //    {
+        //        Authors.Add(auth);
+        //    }
+        //    foreach (var auth in exa)
+        //    {
+        //        ExcludedAuthors.Add(auth);
+        //    }
+        //    foreach (var chan in ch)
+        //    {
+        //        Channels.Add(chan);
+        //    }
+        //    foreach (var chan in ex)
+        //    {
+        //        ExcludedChannels.Add(chan);
+        //    }
+
+        //    ApplyFilter();
+        //}
 
         private void SyncImportant(Tab source, ImportantRemovedArgs e)
         {
@@ -180,19 +258,34 @@ namespace TCC.ViewModels
 
         public bool Filter(ChatMessage m)
         {
-            return (Authors.Count == 0 || Authors.Any(x => x == m.Author)) &&
-                   (Channels.Count == 0 || Channels.Any(x => x == m.Channel)) &&
-                   (ExcludedChannels.Count == 0 || ExcludedChannels.All(x => x != m.Channel)) &&
-                   (ExcludedAuthors.Count == 0 || ExcludedAuthors.All(x => x != m.Author));
+            if (TabInfoVM.Authors == null || TabInfoVM.ShowedChannels == null || TabInfoVM.ExcludedAuthors == null || TabInfoVM.ExcludedChannels == null)
+                return true;
+            return (TabInfoVM.Authors.Count == 0 || TabInfoVM.Authors.Any(x => x == m.Author)) &&
+                   (TabInfoVM.ShowedChannels.Count == 0 || TabInfoVM.ShowedChannels.Any(x => x == m.Channel)) &&
+                   (TabInfoVM.ExcludedChannels.Count == 0 || TabInfoVM.ExcludedChannels.All(x => x != m.Channel)) &&
+                   (TabInfoVM.ExcludedAuthors.Count == 0 || TabInfoVM.ExcludedAuthors.All(x => x != m.Author));
 
         }
         public void ApplyFilter()
         {
-            Messages.Filter = f =>
+            //if (Channels?.Count == 0 && 
+            //    Authors?.Count == 0 && 
+            //    ExcludedChannels?.Count == 0 && 
+            //    ExcludedAuthors?.Count == 0)
+            //{
+            //    Messages.Filter = null;
+            //}
+            //else
+            //{
+            //}
+            Dispatcher.Invoke(() =>
             {
-                var m = f as ChatMessage;
-                return Filter(m);
-            };
+                Messages.Filter = f =>
+                {
+                    var m = f as ChatMessage;
+                    return Filter(m);
+                };
+            });
         }
 
         public void AddImportantMessage(ChatMessage chatMessage)

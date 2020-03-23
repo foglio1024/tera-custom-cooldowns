@@ -1,17 +1,22 @@
-﻿using FoglioUtils;
+﻿using Nostrum;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows.Input;
 using TCC.Data.Abnormalities;
-using TCC.ViewModels;
+using TCC.UI;
+using TCC.Utilities;
+using TCC.ViewModels.Widgets;
+using TeraDataLite;
 
 namespace TCC.Data.NPCs
 {
     public class NPC : TSPropertyChanged, IDisposable
     {
         public bool HasGage { get; set; }
-
+        public ICommand Override { get; }
+        public ICommand Blacklist { get; }
         public ulong EntityId { get; }
         private string _name;
         public string Name
@@ -19,17 +24,25 @@ namespace TCC.Data.NPCs
             get => _name;
             set
             {
-                if (_name != value)
-                {
-                    _name = value;
-                    N(nameof(Name));
-                }
+                if (_name == value) return;
+                _name = value;
+                N(nameof(Name));
             }
         }
 
-        public bool IsBoss { get; set; }
-        private SynchronizedObservableCollection<AbnormalityDuration> _buffs;
-        public SynchronizedObservableCollection<AbnormalityDuration> Buffs
+        public bool IsBoss
+        {
+            get => _isBoss;
+            set
+            {
+                if (_isBoss == value) return;
+                _isBoss = value;
+                N();
+            }
+        }
+
+        private TSObservableCollection<AbnormalityDuration> _buffs;
+        public TSObservableCollection<AbnormalityDuration> Buffs
         {
             get => _buffs;
             set
@@ -58,12 +71,10 @@ namespace TCC.Data.NPCs
             get => _maxHP;
             set
             {
-                if (_maxHP != value)
-                {
-                    _maxHP = value;
-                    EnragePattern?.Update(value);
-                    N();
-                }
+                if (_maxHP == value) return;
+                _maxHP = value;
+                EnragePattern?.Update(value);
+                N();
             }
         }
 
@@ -73,13 +84,11 @@ namespace TCC.Data.NPCs
             get => _currentHP;
             set
             {
-                if (_currentHP != value)
-                {
-                    _currentHP = value;
-                    N(nameof(CurrentHP));
-                    N(nameof(CurrentPercentage));
-                    N(nameof(HPFactor));
-                }
+                if (_currentHP == value) return;
+                _currentHP = value;
+                N(nameof(CurrentHP));
+                N(nameof(CurrentPercentage));
+                N(nameof(HPFactor));
             }
         }
         private uint _maxShield;
@@ -88,12 +97,10 @@ namespace TCC.Data.NPCs
             get => _maxShield;
             set
             {
-                if (_maxShield != value)
-                {
-                    _maxShield = value;
-                    N(nameof(MaxShield));
-                    N(nameof(ShieldFactor));
-                }
+                if (_maxShield == value) return;
+                _maxShield = value;
+                N(nameof(MaxShield));
+                N(nameof(ShieldFactor));
             }
         }
         private float _currentShield;
@@ -151,23 +158,22 @@ namespace TCC.Data.NPCs
 
         public uint ZoneId { get; }
         public uint TemplateId { get; }
+        public Species Species { get; set; }
 
         public EnragePattern EnragePattern { get; set; }
         public TimerPattern TimerPattern { get; set; }
 
         public void AddorRefresh(Abnormality ab, uint duration, int stacks)
         {
-            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, _target, Dispatcher, true);
                 if (ab.Infinity) Buffs.Insert(0, newAb);
                 else Buffs.Add(newAb);
-                if (ab.IsShield)
-                {
-                    MaxShield = ab.ShieldSize;
-                    CurrentShield = ab.ShieldSize;
-                }
+                if (!ab.IsShield) return;
+                MaxShield = ab.ShieldSize;
+                CurrentShield = ab.ShieldSize;
                 return;
             }
             existing.Duration = duration;
@@ -203,14 +209,14 @@ namespace TCC.Data.NPCs
         {
             get
             {
-                WindowManager.BossWindow.VM.GuildIds.TryGetValue(EntityId, out var val);
+                WindowManager.ViewModels.NpcVM.GuildIds.TryGetValue(EntityId, out var val);
                 return val;
             }
         }
 
         //public NPC(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         //{
-        //    _dispatcher = WindowManager.BossWindow.VM.GetDispatcher();
+        //    _dispatcher = WindowManager.ViewModels.NPC.GetDispatcher();
         //    EntityId = eId;
         //    Name = EntityManager.MonsterDatabase.GetName(tId, zId);
         //    ZoneId = zId;
@@ -222,7 +228,7 @@ namespace TCC.Data.NPCs
 
         //    IsShieldPhase = false;
         //    IsSelected = false;
-        //    if (WindowManager.BossWindow.VM.CurrentHHphase == HarrowholdPhase.Phase1)
+        //    if (WindowManager.ViewModels.NPC.CurrentHHphase == HarrowholdPhase.Phase1)
         //    {
         //        ShieldDuration = new DispatcherTimer();
         //        ShieldDuration.Interval = TimeSpan.FromSeconds(13);
@@ -232,27 +238,38 @@ namespace TCC.Data.NPCs
         //}
         public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern ep = null, TimerPattern tp = null)
         {
-            Dispatcher = WindowManager.BossWindow.VM.GetDispatcher();
+            Dispatcher = WindowManager.ViewModels.NpcVM.GetDispatcher();
+            _buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
+            Game.DB.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
+            Name = monster.Name;
+            MaxHP = monster.MaxHP;
+            Species = monster.Species;
             EntityId = eId;
-            Name = SessionManager.DB.MonsterDatabase.GetName(tId, zId);
-            MaxHP = SessionManager.DB.MonsterDatabase.GetMaxHP(tId, zId);
             ZoneId = zId;
-            IsBoss = boss;
             TemplateId = tId;
-            CurrentHP = MaxHP;
-            _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(Dispatcher);
+            IsBoss = boss;
             Visible = visible;
-            Shield = ShieldStatus.Off;
-            IsSelected = true;
+            CurrentHP = MaxHP;
             EnragePattern = ep ?? new EnragePattern(10, 36);
             TimerPattern = tp;
             TimerPattern?.SetTarget(this);
             if (IsPhase1Dragon)
             {
-                _shieldDuration = new Timer { Interval = BossGageWindowViewModel.Ph1ShieldDuration * 1000 };
+                _shieldDuration = new Timer { Interval = NpcWindowViewModel.Ph1ShieldDuration * 1000 };
                 _shieldDuration.Elapsed += ShieldFailed;
             }
+            Override = new RelayCommand(ex =>
+            {
+                Game.DB.MonsterDatabase.ToggleOverride(ZoneId, TemplateId, !IsBoss);
+
+            }, ce => true);
+            Blacklist = new RelayCommand(ex =>
+            {
+                Game.DB.MonsterDatabase.Blacklist(ZoneId, TemplateId, true);
+
+            }, ce => true);
         }
+
 
         public override string ToString()
         {
@@ -276,7 +293,7 @@ namespace TCC.Data.NPCs
         //TODO: make this a separate class
         private readonly Timer _shieldDuration;
 
-        private ShieldStatus _shield;
+        private ShieldStatus _shield = ShieldStatus.Off;
         public ShieldStatus Shield
         {
             get => _shield;
@@ -288,7 +305,7 @@ namespace TCC.Data.NPCs
             }
         }
 
-        private bool _isSelected;
+        private bool _isSelected = true;
         public bool IsSelected
         {
             get => _isSelected;
@@ -301,6 +318,8 @@ namespace TCC.Data.NPCs
         }
 
         private int _remainingEnrageTime;
+        private bool _isBoss;
+
         public int RemainingEnrageTime
         {
             get => _remainingEnrageTime;
@@ -338,6 +357,64 @@ namespace TCC.Data.NPCs
             foreach (var buff in _buffs) buff.Dispose();
 
             DeleteEvent?.Invoke();
+        }
+
+        public void SetTimerPattern()
+        {
+            if (App.Settings.EthicalMode) return;
+
+            // vergos ph4
+            if (TemplateId == 4000 && ZoneId == 950) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            // nightmare kylos
+            if (TemplateId == 3000 && ZoneId == 982) TimerPattern = new HpTriggeredTimerPattern(9 * 60, .8f);
+            // nightmare antaroth
+            if (TemplateId == 3000 && ZoneId == 920) TimerPattern = new HpTriggeredTimerPattern(5 * 60, .5f);
+            // bahaar
+            if (TemplateId == 2000 && ZoneId == 444) TimerPattern = new HpTriggeredTimerPattern(5 * 60, .3f);
+            // dreadspire
+            if (TemplateId == 1000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 2000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 3000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 4000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 5000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 6000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 7000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 8000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 9000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            if (TemplateId == 10000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
+            // nightmare gossamer regent
+            if (TemplateId == 2000 && ZoneId == 3201) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 0.75f);
+
+            TimerPattern?.SetTarget(this);
+        }
+
+        public void SetEnragePattern()
+        {
+            if (App.Settings.EthicalMode)
+            {
+                EnragePattern = new EnragePattern(0, 0);
+                return;
+            }
+            if (IsPhase1Dragon) EnragePattern = new EnragePattern(14, 50);
+            if (ZoneId == 950 && !IsPhase1Dragon) EnragePattern = new EnragePattern(0, 0);
+            if (ZoneId == 450 && TemplateId == 1003) EnragePattern = new EnragePattern((long)MaxHP, 600000000, 72);
+
+            //ghilli
+            if (TemplateId == 81301 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 65, int.MaxValue) { StaysEnraged = true };
+            if (TemplateId == 81312 && ZoneId == 713) EnragePattern = new EnragePattern(0, 0);
+            if (TemplateId == 81398 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, int.MaxValue) { StaysEnraged = true };
+            if (TemplateId == 81399 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, int.MaxValue) { StaysEnraged = true };
+
+
+            if (ZoneId == 620 && TemplateId == 1000) EnragePattern = new EnragePattern((long)MaxHP, 420000000, 36);
+            if (ZoneId == 622 && TemplateId == 1000) EnragePattern = new EnragePattern((long)MaxHP, 480000000, 36);
+            if (ZoneId == 628)
+            {
+                if (TemplateId == 1000) EnragePattern = new EnragePattern(0, 0);
+                if (TemplateId == 3000 || TemplateId == 3001) EnragePattern = new EnragePattern(10, 36);
+            }
+
+            if (TccUtils.IsFieldBoss(ZoneId, TemplateId)) EnragePattern = new EnragePattern(0, 0);
         }
     }
 }
