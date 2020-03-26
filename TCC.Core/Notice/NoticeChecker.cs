@@ -19,6 +19,8 @@ namespace TCC.Notice
 
         public static void Init()
         {
+            App.ReadyEvent += Ready;
+
             _notices = new List<NoticeBase>();
             _checkTimer = new Timer(60 * 5 * 1000);
             _checkTimer.Elapsed += OnTimerElapsed;
@@ -51,7 +53,7 @@ namespace TCC.Notice
         {
             App.BaseDispatcher.Invoke(() =>
             {
-                var list = _notices.Where(n => !n.Fired && n.Trigger == trigger).ToList();
+                var list = _notices.Where(n => n.Enabled && !n.Fired && n.Trigger == trigger).ToList();
                 foreach (var n in list)
                 {
                     n.Fire();
@@ -78,13 +80,13 @@ namespace TCC.Notice
                 {
                     var type = jNotice["Type"].Value<string>();
                     var details = jNotice["Details"];
-
                     // todo: maybe use a factory
                     var notice = new NoticeBase
                     {
+                        Enabled = jNotice[nameof(NoticeBase.Enabled)].Value<bool>(),
+                        Trigger = (NoticeTrigger)jNotice[nameof(NoticeBase.Trigger)].Value<int>(),
                         Title = details[nameof(NoticeBase.Title)].Value<string>(),
-                        Content = details[nameof(NoticeBase.Content)].Value<string>(),
-                        Trigger = (NoticeTrigger)jNotice[nameof(NoticeBase.Trigger)].Value<int>()
+                        Content = details[nameof(NoticeBase.Content)].Value<string>()
                     };
 
                     notice = type switch
