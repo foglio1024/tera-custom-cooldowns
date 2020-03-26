@@ -61,6 +61,7 @@
                 </LinearGradientBrush>
             </Image.OpacityMask>
         </Image>
+        <TextBlock Text="#stayhome" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Foreground="#9ccc"/>
         <!-- Version text -->
         <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20">
             <StackPanel Orientation="Horizontal">
