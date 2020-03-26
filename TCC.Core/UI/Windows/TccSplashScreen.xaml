@@ -68,9 +68,9 @@
                     <Run Text="TCC" FontWeight="DemiBold" FontSize="36"/>
                     <Run Text="{Binding Version, Mode=OneWay}"/>
                 </TextBlock>
-                <TextBlock Text="-e"  HorizontalAlignment="Stretch" TextAlignment="Left" Margin="0 0 0 2" 
+                <TextBlock Text="-b"  HorizontalAlignment="Stretch" TextAlignment="Left" Margin="0 0 0 2" 
                            FontSize="26" Foreground="{StaticResource DpsRoleBrush}" FontWeight="Thin" VerticalAlignment="Bottom"
-                           Visibility="{Binding Experimental, Converter={StaticResource BoolToVisibility}}" 
+                           Visibility="{Binding Beta, Converter={StaticResource BoolToVisibility}}" 
                            />
             </StackPanel>
             <Separator Margin="0 -6 -20 3" Background="#3acf"></Separator>

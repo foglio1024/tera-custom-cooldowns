@@ -37,7 +37,7 @@ namespace TCC
         public static bool Beta { get; } = true;
 
         /// <summary>
-        ///     Version in the "TCC vX.Y.Z-e" format.
+        ///     Version in the "TCC vX.Y.Z-b" format.
         /// </summary>
         public static string AppVersion { get; private set; }
 
@@ -150,7 +150,7 @@ namespace TCC
             // ----------------------------
             ChatManager.Instance.AddTccMessage($"{AppVersion} ready.");
 
-            if (!Beta && Settings.BetaNotification && UpdateManager.IsExperimentalNewer())
+            if (!Beta && Settings.BetaNotification && UpdateManager.IsBetaNewer())
                 Log.N("TCC beta", "A beta version of TCC is available. Open System settings to download it or to disable this notification.",
                     NotificationType.Success,
                     10000);

@@ -20,8 +20,8 @@ namespace TCC.Update
     public static class UpdateManager
     {
         private const string AppVersionUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
-        private const string AppVersionExperimentalUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/experimental/version";
-        private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{ (App.Beta ? "experimental" : "master")}/database-hashes.json";
+        private const string AppVersionBetaUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/beta/version";
+        private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{ (App.Beta ? "beta" : "master")}/database-hashes.json";
 
         private static Timer _checkTimer;
         private static bool _waitingDownload = true;
@@ -67,12 +67,12 @@ namespace TCC.Update
                 if (App.SplashScreen.VM.AskUpdate("Failed to download database hashes. Try again?")) CheckDatabaseHash();
             }
         }
-        public static bool IsExperimentalNewer()
+        public static bool IsBetaNewer()
         {
             try
             {
                 using var c = MiscUtils.GetDefaultWebClient();
-                var st = c.OpenRead(AppVersionExperimentalUrl);
+                var st = c.OpenRead(AppVersionBetaUrl);
                 if (st == null) return false;
                 var newVersionInfo = new StreamReader(st).ReadLine();
                 if (newVersionInfo == null) return false;
@@ -80,7 +80,7 @@ namespace TCC.Update
             }
             catch (Exception e)
             {
-                Log.F($"[IsExperimentalNewer] Failed to check experimental version {e}");
+                Log.F($"[IsBetaNewer] Failed to check beta version {e}");
             }
             return false;
         }
@@ -113,7 +113,7 @@ namespace TCC.Update
             using var c = MiscUtils.GetDefaultWebClient();
             try
             {
-                var vp = new VersionParser(forceExperimental: true);
+                var vp = new VersionParser(forceBeta: true);
                 if (!vp.Valid) return;
 
                 Log.N("TCC update manager", "Download started", NotificationType.Success, 3000);
@@ -252,10 +252,11 @@ namespace TCC.Update
             public bool IsNewer => Version > Assembly.GetExecutingAssembly().GetName().Version;
             public bool Valid { get; }
 
-            public VersionParser(bool forceExperimental = false)
+            public VersionParser(bool forceBeta = false)
             {
                 using var c = MiscUtils.GetDefaultWebClient();
-                var st = c.OpenRead(App.Beta || forceExperimental ? AppVersionExperimentalUrl : AppVersionUrl);
+                var st = c.OpenRead(App.Beta || forceBeta ? AppVersionBetaUrl : AppVersionUrl);
+
                 if (st == null) return;
 
                 using var sr = new StreamReader(st);

@@ -141,11 +141,11 @@ namespace TCC.Utilities
         /// <summary>
         /// Retrieves TCC version from the executing assembly.
         /// </summary>
-        /// <returns>TCC version as "TCC vX.Y.Z-e"</returns>
+        /// <returns>TCC version as "TCC vX.Y.Z-b"</returns>
         public static string GetTccVersion()
         {
             var v = Assembly.GetExecutingAssembly().GetName().Version;
-            return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Beta ? "-e" : "")}";
+            return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Beta ? "-b" : "")}";
 
         }
 

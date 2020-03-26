@@ -49,8 +49,8 @@ namespace TCC.UI.Windows
             }
         }
 
-        public string Version => App.AppVersion.Replace("TCC ", "").Replace("-e", "");
-        public bool Experimental => App.Beta;
+        public string Version => App.AppVersion.Replace("TCC ", "").Replace("-b", "");
+        public bool Beta => App.Beta;
         public bool Toolbox => App.ToolboxMode;
 
         public bool Answer { get; private set; }

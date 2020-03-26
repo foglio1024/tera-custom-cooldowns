@@ -2021,8 +2021,8 @@
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
                             <settings:CheckboxSetting SettingName="Beta builds notification"
-                                                      IsOn="{Binding ExperimentalNotification, Mode=TwoWay}"
-                                                      IsEnabled="{Binding Experimental, Converter={StaticResource BoolInverter}}"
+                                                      IsOn="{Binding BetaNotification, Mode=TwoWay}"
+                                                      IsEnabled="{Binding Beta, Converter={StaticResource BoolInverter}}"
                                                       >
 
                             </settings:CheckboxSetting>
@@ -2031,7 +2031,7 @@
                                     Command="{Binding DownloadBetaCommand}"
                                     Background="{StaticResource TccRedGradientBrush}"
                                     Foreground="White"
-                                    IsEnabled="{Binding Experimental, Converter={StaticResource BoolInverter}}"
+                                    IsEnabled="{Binding Beta, Converter={StaticResource BoolInverter}}"
                                     />
                         </StackPanel>
 

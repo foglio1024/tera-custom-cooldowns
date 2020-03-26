@@ -32,17 +32,17 @@ namespace TCC.Publisher
         /// </summary>
         private static string _stringVersion = ""; // "X.Y.Z"
         /// <summary>
-        /// -e
+        /// -b
         /// </summary>
-        private static string _experimental = "";  // "-e"
+        private static string _beta = "";  // "-b"
         /// <summary>
-        /// TCC-X.Y.Z-e.zip
+        /// TCC-X.Y.Z-b.zip
         /// </summary>
-        private static string _zipName => $"TCC-{_stringVersion}{_experimental}.zip";
+        private static string _zipName => $"TCC-{_stringVersion}{_beta}.zip";
         /// <summary>
-        /// vX.Y.Z-e
+        /// vX.Y.Z-b
         /// </summary>
-        private static string _tag => $"v{_stringVersion}{_experimental}";
+        private static string _tag => $"v{_stringVersion}{_beta}";
 
         public static void Init()
         {
@@ -63,10 +63,10 @@ namespace TCC.Publisher
             var an = AssemblyName.GetAssemblyName(_exePath);
             var v = an.Version;
             _stringVersion = $"{v.Major}.{v.Minor}.{v.Build}";
-            _experimental = TCC.App.Beta ? "-e" : "";
-            Logger.WriteLine($"    TCC version is {_stringVersion}{_experimental}");
+            _beta = TCC.App.Beta ? "-b" : "";
+            Logger.WriteLine($"    TCC version is {_stringVersion}{_beta}");
             Logger.WriteLine("-------------");
-            return $"{_stringVersion}{_experimental}";
+            return $"{_stringVersion}{_beta}";
         }
 
         public static async Task CompressRelease()
@@ -114,7 +114,7 @@ namespace TCC.Publisher
         public static void UpdateVersionCheckFile()
         {
             Logger.WriteLine("    Building version file...");
-            var url = $"https://github.com/Foglio1024/Tera-custom-cooldowns/releases/download/v{_stringVersion}{_experimental}/{_zipName}";
+            var url = $"https://github.com/Foglio1024/Tera-custom-cooldowns/releases/download/v{ _stringVersion }{ _beta }/{_zipName}";
             var versionCheckFile = Path.Combine(_settings.LocalRepositoryPath, "version");
             var sb = new StringBuilder();
             sb.AppendLine(_stringVersion);
@@ -133,12 +133,12 @@ namespace TCC.Publisher
             }
             catch (NotFoundException)
             {
-                var newRelease = new NewRelease($"v{_stringVersion}{_experimental}")
+                var newRelease = new NewRelease($"v{_stringVersion}{_beta}")
                 {
-                    Name = $"v{_stringVersion}{_experimental}",
+                    Name = $"v{_stringVersion}{_beta}",
                     Body = changelog,
                     Prerelease = false,
-                    TargetCommitish = string.IsNullOrEmpty(_experimental) ? "master" : "experimental"
+                    TargetCommitish = string.IsNullOrEmpty(_beta) ? "master" : "beta"
                 };
                 await Task.Run(() => _client.Repository.Release.Create(_settings.RepositoryOwner, _settings.RepositoryName, newRelease));
                 ExecuteWebhook(changelog);
@@ -151,7 +151,7 @@ namespace TCC.Publisher
         {
             var msg = new JObject
             {
-                {"version", $"{_stringVersion}{_experimental}"},
+                {"version", $"{_stringVersion}{_beta}"},
                 {"hash", HashUtils.GenerateFileHash(_exePath) }
             };
 
@@ -166,7 +166,7 @@ namespace TCC.Publisher
         {
             var msg = new JObject
             {
-                {"username", $"TCC v{_stringVersion}{_experimental}" },
+                {"username", $"TCC v{_stringVersion}{_beta}" },
                 {"content", $"{changelog}"},
                 {"avatar_url", "https://i.imgur.com/jiWuveM.png" }
             };
@@ -179,7 +179,7 @@ namespace TCC.Publisher
 
         public static async Task Upload()
         {
-            var rls = await _client.Repository.Release.Get(owner: _settings.RepositoryOwner, name: _settings.RepositoryName, tag: $"v{_stringVersion}{_experimental}");
+            var rls = await _client.Repository.Release.Get(owner: _settings.RepositoryOwner, name: _settings.RepositoryName, tag: $"v{_stringVersion}{_beta}");
             if (rls.Assets.Any(x => x.Name == _zipName))
             {
                 Logger.WriteLine("ERROR: This release already contains an asset with the same name.");

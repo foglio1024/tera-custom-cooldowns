@@ -32,7 +32,7 @@ namespace TCC.ViewModels
         public static event Action SkillShapeChanged;
         public static event Action FontSizeChanged;
 
-        public bool Experimental => App.Beta;
+        public bool Beta => App.Beta;
         public bool ToolboxMode => App.ToolboxMode;
 
         public CooldownWindowSettings CooldownWindowSettings => App.Settings.CooldownWindowSettings;
@@ -219,7 +219,7 @@ namespace TCC.ViewModels
                 N();
             }
         }
-        public bool ExperimentalNotification
+        public bool BetaNotification
         {
             get => App.Settings.BetaNotification;
             set
