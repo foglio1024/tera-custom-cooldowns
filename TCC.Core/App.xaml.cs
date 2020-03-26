@@ -30,6 +30,8 @@ namespace TCC
 {
     public partial class App
     {
+        public static event Action ReadyEvent;
+
         private static bool _restarted;
         private static bool _running;
         private static Mutex _mutex;
@@ -148,7 +150,8 @@ namespace TCC
             SplashScreen.CloseWindowSafe();
 
             // ----------------------------
-            ChatManager.Instance.AddTccMessage($"{AppVersion} ready.");
+            Log.Chat($"{AppVersion} ready.");
+            ReadyEvent?.Invoke();
 
             if (!Beta && Settings.BetaNotification && UpdateManager.IsBetaNewer())
                 Log.N("TCC beta available", SR.BetaAvailable,
