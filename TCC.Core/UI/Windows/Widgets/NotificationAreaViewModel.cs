@@ -32,13 +32,18 @@ namespace TCC.UI.Windows.Widgets
 
         private void OnNewConnection(Server srv)
         {
-            Log.N("TCC", SR.ConnectedToServer(srv.Name), NotificationType.Success, forcedId: 10241024);
+            Enqueue("TCC", SR.ConnectedToServer(srv.Name), NotificationType.Success,
+                template: NotificationTemplate.Progress,
+                forcedId: 10241024);
+            //Log.N("TCC", SR.ConnectedToServer(srv.Name), NotificationType.Success, forcedId: 10241024);
         }
 
         private void OnLoginArbiter(C_LOGIN_ARBITER obj)
         {
-            var notif = GetNotification<NotificationInfoBase>(10241024);
+            var notif = GetNotification<ProgressNotificationInfo>(10241024);
+            if (notif == null) return;
             notif.Message += $"\nRelease Version: {PacketAnalyzer.Factory.ReleaseVersion / 100}.{PacketAnalyzer.Factory.ReleaseVersion % 100}"; //by HQ 20190209
+            notif.Dispose(3000);
         }
 
         private void CheckShow()
@@ -60,19 +65,19 @@ namespace TCC.UI.Windows.Widgets
             return Notifications.ToSyncList().All(n => n.Message != infoBase.Message);
         }
 
-        private int Enqueue(string title, string message, NotificationType type, int duration = -1, NotificationTemplate template = NotificationTemplate.Default, int forcedId = -1)
+        private int Enqueue(string title, string message, NotificationType type, int secDuration = -1, NotificationTemplate template = NotificationTemplate.Default, int forcedId = -1)
         {
             Dispatcher.Invoke(() =>
             {
                 var id = forcedId != -1 ? forcedId : _id;
-                if (duration == -1) duration = ((NotificationAreaSettings) Settings).DefaultNotificationDuration * 1000;
+                if (secDuration == -1) secDuration = ((NotificationAreaSettings)Settings).DefaultNotificationDuration * 1000;
                 switch (template)
                 {
                     case NotificationTemplate.Progress:
-                        _queue.Enqueue(new ProgressNotificationInfo(id, title, message, type, duration, template));
+                        _queue.Enqueue(new ProgressNotificationInfo(id, title, message, type, secDuration, template));
                         break;
                     default:
-                        _queue.Enqueue(new NotificationInfoBase(id, title, message, type, duration, template));
+                        _queue.Enqueue(new NotificationInfoBase(id, title, message, type, secDuration, template));
                         break;
                 }
                 CheckShow();
