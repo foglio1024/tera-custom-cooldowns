@@ -8,6 +8,7 @@ using Nostrum.Extensions;
 using TCC.Interop.Proxy;
 using TCC.UI.Converters;
 using TCC.UI.Windows;
+using TCC.Utils;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat
@@ -150,7 +151,7 @@ namespace TCC.Data.Chat
                 }
                 catch
                 {
-                    TccMessageBox.Show("Unable to open URL.", MessageBoxType.Error);
+                    TccMessageBox.Show(SR.UnableToOpenUrl(Text), MessageBoxType.Error);
                 }
             });
         }

@@ -227,7 +227,7 @@ namespace TCC.Sniffing
                     {
                         Connected = false;
                         client.Close();
-                        Log.F($"Disconnected: {e}");
+                        //Log.F($"Disconnected: {e}");
                     }
                 }
             }

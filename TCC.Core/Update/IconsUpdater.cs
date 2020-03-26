@@ -97,7 +97,7 @@ namespace TCC.Update
             {
                 if (args.Error != null)
                 {
-                    var res = TccMessageBox.Show("Failed to download icons, try again?", MessageBoxType.ConfirmationWithYesNo);
+                    var res = TccMessageBox.Show(SR.IconDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
                     if (res == System.Windows.MessageBoxResult.Yes) await DownloadArchive();
                 }
                 else
@@ -119,7 +119,7 @@ namespace TCC.Update
             }
             catch (Exception)
             {
-                var res = TccMessageBox.Show("Failed to download icons, try again?", MessageBoxType.ConfirmationWithYesNo);
+                var res = TccMessageBox.Show(SR.IconDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
                 if (res == System.Windows.MessageBoxResult.Yes) await DownloadArchive();
             }
         }
@@ -195,7 +195,7 @@ namespace TCC.Update
             }
             catch
             {
-                var res = TccMessageBox.Show("Error while extracting some icons (details in error.log). Try again?", MessageBoxType.ConfirmationWithYesNo);
+                var res = TccMessageBox.Show(SR.IconExtractFailed, MessageBoxType.ConfirmationWithYesNo);
                 if (res == System.Windows.MessageBoxResult.Yes)
                     Extract();
                 else

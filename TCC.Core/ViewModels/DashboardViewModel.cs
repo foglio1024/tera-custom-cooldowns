@@ -309,7 +309,7 @@ namespace TCC.ViewModels
             }
             catch (Exception e)
             {
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading characters file (more info in error.log). \nManually correct the error and press Ok to try again, else press Cancel to delete current data.", MessageBoxButton.OKCancel);
+                var res = TccMessageBox.Show("TCC", SR.CannotReadCharacters, MessageBoxButton.OKCancel);
                 Log.F($"Cannot read characters file: {e}");
                 if (res == MessageBoxResult.OK)
                 {
@@ -702,7 +702,7 @@ namespace TCC.ViewModels
             }
             catch (Exception)
             {
-                var res = TccMessageBox.Show("TCC", $"There was an error while reading events-{region}.xml. Manually correct the error and and press Ok to try again, else press Cancel to build a default config file.", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                var res = TccMessageBox.Show("TCC", SR.CannotReadEventsFile(region), MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
                 if (res == MessageBoxResult.Cancel) File.Delete(path);
                 LoadEventFile(today, region);

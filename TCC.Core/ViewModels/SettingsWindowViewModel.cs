@@ -546,8 +546,7 @@ namespace TCC.ViewModels
             set
             {
                 if (App.Settings.CaptureMode == value) return;
-                var res = TccMessageBox.Show("TCC", "TCC needs to be restarted to apply this setting. Restart now?",
-                    MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                var res = TccMessageBox.Show("TCC", SR.RestartToApplySetting, MessageBoxButton.OKCancel, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Cancel) return;
                 App.Settings.CaptureMode = value;
                 N();
@@ -734,8 +733,7 @@ namespace TCC.ViewModels
             });
             DownloadBetaCommand = new RelayCommand(async (_) =>
             {
-                if (TccMessageBox.Show("Warning: beta build could be unstable. Proceed?",
-                        MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
+                if (TccMessageBox.Show(SR.BetaUnstableWarning, MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
                 {
                     await Task.Factory.StartNew(UpdateManager.ForceUpdateToBeta);
                 }
@@ -749,7 +747,7 @@ namespace TCC.ViewModels
             });
             MakePositionsGlobalCommand = new RelayCommand(_ => WindowManager.MakeGlobal());
             ResetWindowPositionsCommand = new RelayCommand(_ => WindowManager.ResetToCenter());
-            OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(Path.Combine(App.BasePath, "resources/config")));
+            OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(Path.Combine(App.ResourcesPath, "config")));
             ClearChatCommand = new RelayCommand(_ => ChatManager.Instance.ClearMessages());
 
             MonsterDatabase.BlacklistChangedEvent += MonsterDatabase_BlacklistChangedEvent;

@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using TCC.Data;
 using TCC.UI.Windows;
+using TCC.Utils;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.Settings
@@ -34,7 +35,7 @@ namespace TCC.Settings
                 }
                 else
                 {
-                    var res = TccMessageBox.Show("Settings file not found. Do you want to import an existing one?", MessageBoxType.ConfirmationWithYesNo);
+                    var res = TccMessageBox.Show(SR.SettingsNotFoundImport, MessageBoxType.ConfirmationWithYesNo);
                     if (res == MessageBoxResult.No)
                     {
                         App.Settings = new SettingsContainer();
@@ -55,7 +56,7 @@ namespace TCC.Settings
             }
             catch
             {
-                var res = TccMessageBox.Show("TCC", "Cannot load settings file. Do you want TCC to delete it and recreate a default file?", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                var res = TccMessageBox.Show("TCC", SR.SettingsNotFoundDefault, MessageBoxButton.YesNo, MessageBoxImage.Error);
                 if (res == MessageBoxResult.Yes) File.Delete(path);
                 LoadSettings(path);
             }

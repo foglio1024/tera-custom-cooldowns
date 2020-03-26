@@ -98,7 +98,7 @@ namespace TCC.Update
             }
             catch
             {
-                var res = TccMessageBox.Show($"Failed to download database file {Path.GetFileNameWithoutExtension(relativePath)}. Try again?", MessageBoxType.ConfirmationWithYesNo);
+                var res = TccMessageBox.Show(SR.DbDownloadFailed(Path.GetFileNameWithoutExtension(relativePath)), MessageBoxType.ConfirmationWithYesNo);
                 if (res == System.Windows.MessageBoxResult.Yes) UpdateDatabase(relativePath);
             }
         }
@@ -133,7 +133,7 @@ namespace TCC.Update
             catch (Exception ex)
             {
                 Log.F($"Error while checking updates. \nException: {ex.Message}\n{ex.StackTrace}");
-                if (TccMessageBox.Show("Error while checking updates. Try again?", MessageBoxType.ConfirmationWithYesNo) != System.Windows.MessageBoxResult.Yes) return;
+                if (TccMessageBox.Show(SR.UpdateCheckFailed, MessageBoxType.ConfirmationWithYesNo) != System.Windows.MessageBoxResult.Yes) return;
                 ForceUpdateToBeta();
             }
         }
@@ -184,7 +184,7 @@ namespace TCC.Update
             catch (Exception e)
             {
                 Log.F($"Error while downloading update. \nException:\n{e.Message}\n{e.StackTrace}");
-                var res = TccMessageBox.Show("Error while downloading update. Try again? If the error perists download TCC manually.", MessageBoxType.ConfirmationWithYesNo);
+                var res = TccMessageBox.Show(SR.UpdateDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
                 if (res != System.Windows.MessageBoxResult.Yes) return;
                 await Update(url);
             }
@@ -199,7 +199,7 @@ namespace TCC.Update
             }
             catch
             {
-                var res = TccMessageBox.Show("Failed to download servers file. Try again?", MessageBoxType.ConfirmationWithYesNo);
+                var res = TccMessageBox.Show(SR.ServersFileDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
                 if (res == System.Windows.MessageBoxResult.Yes) DownloadServersFile();
             }
         }

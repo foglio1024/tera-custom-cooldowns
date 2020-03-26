@@ -2,6 +2,7 @@
 using System.Windows;
 using Newtonsoft.Json;
 using TCC.UI.Windows;
+using TCC.Utils;
 
 namespace TCC.Settings
 {
@@ -23,7 +24,7 @@ namespace TCC.Settings
             }
             catch (IOException ex)
             {
-                var res = TccMessageBox.Show("TCC", $"Failed to save settings: {ex.Message}\nTry again?", MessageBoxButton.YesNo);
+                var res = TccMessageBox.Show("TCC", SR.CannotSaveSettings(ex.Message), MessageBoxButton.YesNo);
                 if(res == MessageBoxResult.Yes) Save();
             }
         }

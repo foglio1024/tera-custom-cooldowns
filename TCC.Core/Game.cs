@@ -164,24 +164,16 @@ namespace TCC
             {
                 if (!App.Loading)
                 {
-                    Log.N("TCC",
-                        $"Some database files are out of date, updating... Contact the developer if you see this message at every login.",
-                        NotificationType.Warning, 5000);
-                    Log.Chat(ChatChannel.TCC, "System", "Some database files are out of date, updating...");
+                    Log.N("TCC", SR.UpdatingDatabase, NotificationType.Warning, 5000);
+                    Log.Chat(SR.UpdatingDatabase);
                 }
 
-                //var res = TccMessageBox.Show($"Some database files may be missing or out of date.\nDo you want to update them?", MessageBoxType.ConfirmationWithYesNo);
-                //if (res == MessageBoxResult.Yes)
-                //{
                 DB.DownloadOutdatedDatabases();
-                //}
             }
 
             if (!DB.Exists)
             {
-                var res = TccMessageBox.Show(
-                    $"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.",
-                    MessageBoxType.ConfirmationWithYesNoCancel);
+                var res = TccMessageBox.Show(SR.CannotLoadDbForLang(lang), MessageBoxType.ConfirmationWithYesNoCancel);
                 switch (res)
                 {
                     case MessageBoxResult.Yes:
@@ -378,14 +370,16 @@ namespace TCC
         {
             Group.SetGroup(p.Members, p.Raid);
         }
+        
         private static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
         {
-            Log.N("Instance Matching", "Battleground matching completed", NotificationType.Success);
+            // TODO: add discord notification after events revamp
+            Log.N("Instance Matching", SR.BgMatchingComplete, NotificationType.Success);
             Log.F($"Zone: {p.Zone}\nId: {p.Id}\nData: {p.Data.Array.ToStringEx()}", "S_BATTLE_FIELD_ENTRANCE_INFO.txt");
         }
         private static void OnFinInterPartyMatch(S_FIN_INTER_PARTY_MATCH p)
         {
-            Log.N("Instance Matching", "Dungeon matching completed", NotificationType.Success);
+            Log.N("Instance Matching", SR.DungMatchingComplete, NotificationType.Success);
             Log.F($"Zone: {p.Zone}\nData: {p.Data.Array.ToStringEx()}", "S_FIN_INTER_PARTY_MATCH.txt");
         }
         private static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
@@ -409,8 +403,9 @@ namespace TCC
         {
             #region Greet meme
             if ((ChatChannel)m.Channel == ChatChannel.Greet
-                && (m.AuthorName == "Foglio" || m.AuthorName == "Folyemi"))
-                Log.N("Foglio", "Nice TCC (° -°)", NotificationType.Success, 3000);
+                && (m.AuthorName == "Foglio" 
+                    || m.AuthorName == "Folyemi"))
+                Log.N("owo", SR.GreetMemeContent, NotificationType.Success, 3000);
             #endregion
 
             #region Global selling angery
@@ -421,7 +416,7 @@ namespace TCC
                 if (!(m.Message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                       m.Message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                       m.Message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0)) return;
-                Log.N("REEEEEEEEEEEEEEEEEEEEEE", "Stop selling stuff in global.\nYou nob.", NotificationType.Error);
+                Log.N("REEEEEEEEEEEEEEEEEEEEEE", SR.GlobalSellAngery, NotificationType.Error);
 
             }
             #endregion

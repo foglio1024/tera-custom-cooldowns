@@ -75,7 +75,7 @@ namespace TCC
             TccMessageBox.CreateAsync();
             if (IsAlreadyRunning() && !Debugger.IsAttached)
             {
-                if (!ToolboxMode) TccMessageBox.Show("Another instance of TCC is already running. Shutting down.", MessageBoxType.Information);
+                if (!ToolboxMode) TccMessageBox.Show(SR.AnotherInstanceRunning, MessageBoxType.Information);
                 Current.Shutdown();
                 return;
             }
@@ -151,7 +151,7 @@ namespace TCC
             ChatManager.Instance.AddTccMessage($"{AppVersion} ready.");
 
             if (!Beta && Settings.BetaNotification && UpdateManager.IsBetaNewer())
-                Log.N("TCC beta", "A beta version of TCC is available. Open System settings to download it or to disable this notification.",
+                Log.N("TCC beta available", SR.BetaAvailable,
                     NotificationType.Success,
                     10000);
 
@@ -217,12 +217,12 @@ namespace TCC
                 }
                 catch (FileLoadException fle)
                 {
-                    TccMessageBox.Show("TCC module loader", $"An error occured while loading {fle.FileName}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.", MessageBoxButton.OK, MessageBoxImage.Error);
+                    TccMessageBox.Show("TCC module loader", SR.ErrorWhileLoadingModule(fle.FileName) , MessageBoxButton.OK, MessageBoxImage.Error);
                     Close();
                 }
                 catch (FileNotFoundException fnfe)
                 {
-                    TccMessageBox.Show("TCC module loader", $"An error occured while loading {Path.GetFileName(fnfe.FileName)}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.", MessageBoxButton.OK, MessageBoxImage.Error);
+                    TccMessageBox.Show("TCC module loader", SR.ErrorWhileLoadingModule(Path.GetFileName(fnfe.FileName)), MessageBoxButton.OK, MessageBoxImage.Error);
                     Close();
                 }
             });

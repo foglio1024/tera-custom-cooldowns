@@ -51,7 +51,7 @@ namespace TCC.Analysis
         {
 
             await Task.Factory.StartNew(Init);
-            Log.N("TCC", "Ready to connect.", NotificationType.Normal);
+            Log.N("TCC", SR.ReadyToConnect, NotificationType.None);
         }
 
         private static void PacketAnalysisLoop()
@@ -91,7 +91,6 @@ namespace TCC.Analysis
             Game.Server = srv;
             WindowManager.TrayIcon.Connected = true;
             WindowManager.TrayIcon.Text = $"{App.AppVersion} - connected";
-            Log.N("TCC", $"Connected to {srv.Name}", NotificationType.Success);
 
             _ = StubInterface.Instance.Init();
 
@@ -106,7 +105,7 @@ namespace TCC.Analysis
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
 
-            Log.N("TCC", "Disconnected", NotificationType.Normal);
+            Log.N("TCC", SR.Disconnected, NotificationType.None);
             WindowManager.TrayIcon.Connected = false;
             WindowManager.TrayIcon.Text = $"{App.AppVersion} - not connected";
 
@@ -157,7 +156,7 @@ namespace TCC.Analysis
                         Directory.CreateDirectory(Path.Combine(App.DataPath, "opcodes"));
                     if (!await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
                     {
-                        TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
+                        TccMessageBox.Show(SR.UnknownClientVersion(p.Versions[0]), MessageBoxType.Error);
                         App.Close();
                         return;
                     }
@@ -165,7 +164,7 @@ namespace TCC.Analysis
                 else
                 {
                     if (OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"))) return;
-                    TccMessageBox.Show("Unknown client version: " + p.Versions[0], MessageBoxType.Error);
+                    TccMessageBox.Show(SR.UnknownClientVersion(p.Versions[0]), MessageBoxType.Error);
                     App.Close();
                     return;
                 }
@@ -182,9 +181,7 @@ namespace TCC.Analysis
                 {
                     case OverflowException _:
                     case ArgumentException _:
-                        TccMessageBox.Show(
-                            $"TCC encountered errors while reading opcodes file. This is probably caused by a manually mapped file containing wrong values. Error: {ex.Message}. TCC will now close.",
-                            MessageBoxType.Error);
+                        TccMessageBox.Show(SR.InvalidOpcodeFile(ex.Message), MessageBoxType.Error);
                         Log.F(ex.ToString());
                         App.Close();
                         break;
@@ -225,13 +222,12 @@ namespace TCC.Analysis
                     }
                 }
 
-                TccMessageBox.Show($"sysmsg.{Factory.ReleaseVersion / 100}.map or sysmsg.{Factory.Version}.map not found.\nWait for update or use tcc-stub to automatically retreive sysmsg files from game client.\nTCC will now close.", MessageBoxType.Error);
+                TccMessageBox.Show(SR.InvalidSysMsgFile(Factory.ReleaseVersion / 100, Factory.Version), MessageBoxType.Error);
                 App.Close();
                 return;
             }
             Factory.ReloadSysMsg(path);
-
-            Log.N("TCC", $"Release Version: {Factory.ReleaseVersion / 100}.{Factory.ReleaseVersion % 100}", NotificationType.Normal); //by HQ 20190209
+            
         }
     }
 }

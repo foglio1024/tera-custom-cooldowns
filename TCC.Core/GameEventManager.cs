@@ -80,9 +80,7 @@ namespace TCC
             {
                 CurrentRegion = RegionEnum.EU;
                 App.Settings.LastLanguage = "EU-EN";
-                TccMessageBox.Show("TCC",
-                    "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                TccMessageBox.Show("TCC", SR.CannotDetectCurrentRegion, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             var timezone = TimeZoneInfo.GetSystemTimeZones().FirstOrDefault(x => x.Id == _serverTimezones[CurrentRegion].Timezone);
             ResetHour = _serverTimezones[CurrentRegion].ResetHour;
@@ -144,8 +142,8 @@ namespace TCC
             catch
             {
 
-                ChatManager.Instance.AddTccMessage("Failed to retrieve guild BAM info.");
-                Log.N("Guild BAM", "Failed to retrieve guild BAM info.", NotificationType.Error);
+                Log.Chat(SR.CannotRetrieveGbamInfo);
+                Log.N("Guild BAM", SR.CannotRetrieveGbamInfo, NotificationType.Error);
 
                 return 0;
             }
@@ -160,8 +158,8 @@ namespace TCC
             }
             catch
             {
-                ChatManager.Instance.AddTccMessage("Failed to upload guild BAM info.");
-                Log.N("Guild BAM", "Failed to upload guild BAM info.", NotificationType.Error);
+                Log.Chat(SR.CannotUploadGbamInfo);
+                Log.N("Guild BAM", SR.CannotUploadGbamInfo, NotificationType.Error);
             }
 
         }
