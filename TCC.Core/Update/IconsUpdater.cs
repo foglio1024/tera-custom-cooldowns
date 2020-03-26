@@ -111,7 +111,7 @@ namespace TCC.Update
             {
                 if (_n == null)
                 {
-                    var notifId = Log.N("TCC update manager", "Downloading icons...", NotificationType.Normal, template: NotificationTemplate.Progress);
+                    var notifId = Log.N("TCC update manager", "Downloading icons...", NotificationType.Info, template: NotificationTemplate.Progress);
                     _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(notifId);
                 }
 

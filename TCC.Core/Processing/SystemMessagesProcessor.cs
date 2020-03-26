@@ -216,7 +216,7 @@ namespace TCC.Processing
         private static void HandleGuilBamSpawn(string parameters, SystemMessageData template)
         {
             var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
-            Log.N("Guild BAM", msg.ToString(), NotificationType.Normal, 2 * 60 * 1000);
+            Log.N("Guild BAM", msg.ToString(), NotificationType.Warning, 2 * 60 * 1000);
             ChatManager.Instance.AddChatMessage(msg);
 
             GameEventManager.Instance.UploadGuildBamTimestamp();
@@ -273,13 +273,13 @@ namespace TCC.Processing
         private static void HandleMerchantSpawn(string parameters, SystemMessageData template)
         {
             var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
-            Log.N("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
+            Log.N("Mystery Merchant", msg.ToString(), NotificationType.Info, 10000);
             ChatManager.Instance.AddChatMessage(msg);
         }
         private static void HandleMerchantDespawn(string parameters, SystemMessageData template)
         {
             var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
-            Log.N("Mystery Merchant", msg.ToString(), NotificationType.Normal, 10000);
+            Log.N("Mystery Merchant", msg.ToString(), NotificationType.Error, 10000);
             ChatManager.Instance.AddChatMessage(msg);
         }
         private static void HandleLfgNotListed(string parameters, SystemMessageData template)

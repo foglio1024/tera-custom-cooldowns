@@ -4,7 +4,8 @@ namespace TCC.Utils
 {
     public enum NotificationType
     {
-        Normal = 0,
+        None = 0,
+        Info,
         Success,
         Warning,
         Error

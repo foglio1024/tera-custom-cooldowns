@@ -17,7 +17,8 @@ namespace TCC.UI.Converters
                 NotificationType.Success => R.Brushes.TccGreenGradientBrush,
                 NotificationType.Warning => R.Brushes.TccYellowGradientBrush,
                 NotificationType.Error => R.Brushes.TccRedGradientBrush,
-                _ => R.Brushes.TccNormalGradientBrush
+                NotificationType.Info => R.Brushes.TccNormalGradientBrush,
+                _ => R.Brushes.TccWhiteGradientBrush
             };
         }
 

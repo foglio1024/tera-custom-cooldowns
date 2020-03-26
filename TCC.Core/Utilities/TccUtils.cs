@@ -193,7 +193,7 @@ namespace TCC.Utilities
             //var txt = GetPlainText(message).UnescapeHtml();
             //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
 
-            Log.N(title, message /*string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}"*/, NotificationType.Normal, 6000);
+            Log.N(title, message /*string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}"*/, NotificationType.None, 6000);
 
         }
 

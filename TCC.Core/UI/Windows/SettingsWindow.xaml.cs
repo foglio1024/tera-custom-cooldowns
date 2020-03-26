@@ -127,7 +127,7 @@ namespace TCC.UI.Windows
         {
             var msg = _lyrics[_testNotifIdx];
 
-            var type = NotificationType.Normal;
+            var type = NotificationType.None;
             if (_testNotifIdx == 2) type = NotificationType.Success;
             else if (_testNotifIdx > 9 && _testNotifIdx <= 17) type = NotificationType.Warning;
             else if (_testNotifIdx > 33 && _testNotifIdx <= 41) type = NotificationType.Error;

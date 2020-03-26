@@ -144,6 +144,10 @@
         <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="1.0"/>                                      
     </LinearGradientBrush>
 
+    <LinearGradientBrush x:Key="TccWhiteGradientBrush">
+        <GradientStop Color="{StaticResource TccWhiteGradient0Color}" Offset="0" />
+        <GradientStop Color="{StaticResource TccWhiteGradient1Color}" Offset="1" />
+    </LinearGradientBrush>
     <LinearGradientBrush x:Key="TccNormalGradientBrush">
         <GradientStop Color="{StaticResource TccNormalGradient0Color}" Offset="0" />
         <GradientStop Color="{StaticResource TccNormalGradient1Color}" Offset="1" />

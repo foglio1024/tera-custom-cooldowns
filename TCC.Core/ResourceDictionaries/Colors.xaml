@@ -135,6 +135,8 @@
 
     <Color x:Key="TccNormalLightGradient0Color"> #55CCFF   </Color>
     <Color x:Key="TccNormalLightGradient1Color"> #55ffCC   </Color>
+    <Color x:Key="TccWhiteGradient0Color">       #FFFFFF   </Color>
+    <Color x:Key="TccWhiteGradient1Color">       #CCCCCC   </Color>
     <Color x:Key="TccNormalGradient0Color">      #0099FF   </Color>
     <Color x:Key="TccNormalGradient1Color">      #00ffE1   </Color>
     <Color x:Key="TccGreenGradient0Color">       #00A35A   </Color>

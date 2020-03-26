@@ -617,7 +617,7 @@ namespace TCC.ViewModels
             if (App.Settings.ChatWindowsSettings.Count == 0) return;
             var msg =
                 $"Forcing chat clickable turned {(App.Settings.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";
-            Log.N("TCC", msg, NotificationType.Normal, 2000);
+            Log.N("TCC", msg, NotificationType.None, 2000);
             AddTccMessage(msg);
         }
 
