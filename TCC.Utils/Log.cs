@@ -8,7 +8,7 @@ namespace TCC.Utils
     public static class Log
     {
         public static event Action<ChatChannel, string, string> NewChatMessage;
-        public static event Func<string, string, NotificationType, int, NotificationTemplate, int> NewNotification;
+        public static event Func<string, string, NotificationType, int, NotificationTemplate, int, int> NewNotification;
 
         private static string _logPath = "logs";
         private static string _version = "";
@@ -56,9 +56,9 @@ namespace TCC.Utils
         /// <param name="duration"></param>
         /// <param name="template"></param>
         /// <returns></returns>
-        public static int N(string title, string line, NotificationType type, int duration = -1, NotificationTemplate template = NotificationTemplate.Default)
+        public static int N(string title, string line, NotificationType type, int duration = -1, NotificationTemplate template = NotificationTemplate.Default, int forcedId = -1)
         {
-            return NewNotification?.Invoke(title, line, type, duration, template) ?? -1;
+            return NewNotification?.Invoke(title, line, type, duration, template, forcedId) ?? -1;
         }
         /// <summary>
         /// Logs a message to chat. &lt;font/&gt; tags are added if missing.

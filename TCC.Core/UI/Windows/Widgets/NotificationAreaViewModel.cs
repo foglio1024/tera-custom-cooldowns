@@ -2,9 +2,12 @@
 using System.Linq;
 using System.Windows.Threading;
 using Nostrum;
+using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TCC.ViewModels;
+using TeraPacketParser.Messages;
+using TeraPacketParser.TeraCommon.Game;
 
 namespace TCC.UI.Windows.Widgets
 {
@@ -19,6 +22,23 @@ namespace TCC.UI.Windows.Widgets
             _queue = new ConcurrentQueue<NotificationInfoBase>();
             Notifications = new TSObservableCollection<NotificationInfoBase>(Dispatcher);
             Log.NewNotification += Enqueue;
+        }
+
+        protected override void InstallHooks()
+        {
+            PacketAnalyzer.Processor.Hook<C_LOGIN_ARBITER>(OnLoginArbiter);
+            PacketAnalyzer.Sniffer.NewConnection += OnNewConnection;
+        }
+
+        private void OnNewConnection(Server srv)
+        {
+            Log.N("TCC", SR.ConnectedToServer(srv.Name), NotificationType.Success, forcedId: 10241024);
+        }
+
+        private void OnLoginArbiter(C_LOGIN_ARBITER obj)
+        {
+            var notif = GetNotification<NotificationInfoBase>(10241024);
+            notif.Message += $"\nRelease Version: {PacketAnalyzer.Factory.ReleaseVersion / 100}.{PacketAnalyzer.Factory.ReleaseVersion % 100}"; //by HQ 20190209
         }
 
         private void CheckShow()
@@ -40,23 +60,24 @@ namespace TCC.UI.Windows.Widgets
             return Notifications.ToSyncList().All(n => n.Message != infoBase.Message);
         }
 
-        private int Enqueue(string title, string message, NotificationType type, int duration = -1, NotificationTemplate template = NotificationTemplate.Default)
+        private int Enqueue(string title, string message, NotificationType type, int duration = -1, NotificationTemplate template = NotificationTemplate.Default, int forcedId = -1)
         {
             Dispatcher.Invoke(() =>
             {
+                var id = forcedId != -1 ? forcedId : _id;
                 if (duration == -1) duration = ((NotificationAreaSettings) Settings).DefaultNotificationDuration * 1000;
                 switch (template)
                 {
                     case NotificationTemplate.Progress:
-                        _queue.Enqueue(new ProgressNotificationInfo(_id, title, message, type, duration, template));
+                        _queue.Enqueue(new ProgressNotificationInfo(id, title, message, type, duration, template));
                         break;
                     default:
-                        _queue.Enqueue(new NotificationInfoBase(_id, title, message, type, duration, template));
+                        _queue.Enqueue(new NotificationInfoBase(id, title, message, type, duration, template));
                         break;
                 }
                 CheckShow();
             });
-            return _id++;
+            return forcedId != -1 ? forcedId : _id++;
         }
 
         public void DeleteNotification(NotificationInfoBase dc)
