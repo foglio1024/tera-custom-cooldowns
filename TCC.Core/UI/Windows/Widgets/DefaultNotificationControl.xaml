@@ -40,20 +40,17 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border BorderThickness="1" Grid.RowSpan="2" Grid.Row="0"
+            <Border BorderThickness="1" Grid.Row="1"
                     BorderBrush="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}" />
-
-            <Rectangle Style="{StaticResource NotificationRectangle}" Grid.RowSpan="2" 
+            <Rectangle Style="{StaticResource NotificationRectangle}" Grid.Row="1" 
                        Fill="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}"/>
             <Rectangle Style="{StaticResource NotificationRectangle}"
                        Fill="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}"
-                       Grid.RowSpan="2" Grid.Row="0" x:Name="TimeRect">
+                       Grid.Row="1"  x:Name="TimeRect">
                 <Rectangle.RenderTransform>
                     <ScaleTransform ScaleX="1" />
                 </Rectangle.RenderTransform>
             </Rectangle>
-            <Separator Grid.Row="0" VerticalAlignment="Bottom"
-                       Margin="10 0 10 -1" Opacity=".2" />
             <TextBlock Style="{StaticResource NotificationTitle}"
                        Text="{Binding Title, Mode=OneWay}" />
             <TextBlock Grid.Row="1"

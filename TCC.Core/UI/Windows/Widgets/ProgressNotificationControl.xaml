@@ -19,20 +19,18 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border BorderThickness="1" Grid.RowSpan="2" Grid.Row="0"
+            <Border BorderThickness="1" Grid.Row="1"
                     BorderBrush="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}" />
-            <Rectangle Style="{StaticResource NotificationRectangle}" Grid.RowSpan="2"
+            <Rectangle Style="{StaticResource NotificationRectangle}" Grid.Row="1"
                        Fill="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}" />
 
-            <Separator Grid.Row="0" VerticalAlignment="Bottom"
-                       Margin="10 0 10 -1" Opacity=".2" />
-            <ProgressBar Grid.Row="0" Opacity=".1"
-                         Background="Transparent" Grid.RowSpan="2"
+            <ProgressBar Opacity=".1"
+                         Background="Transparent" Grid.Row="1"
                          BorderThickness="0" Value="{Binding Progress, Mode=OneWay}"
                          Foreground="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}" />
             <Rectangle Style="{StaticResource NotificationRectangle}"
                        Fill="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}"
-                       Grid.RowSpan="2" Grid.Row="0" x:Name="TimeRect">
+                       Grid.Row="1" x:Name="TimeRect">
                 <Rectangle.RenderTransform>
                     <ScaleTransform ScaleX="1" />
                 </Rectangle.RenderTransform>
