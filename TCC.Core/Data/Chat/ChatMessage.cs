@@ -257,6 +257,10 @@ namespace TCC.Data.Chat
             {
                 var customColor = ChatUtils.GetCustomColor(piece);
 
+                // heroic items bright magenta is ugly af
+                if (customColor == "F93ECE") 
+                    customColor = R.Colors.ItemHeroicColor.ToHex(sharp: false);
+
                 if (piece.HasChildNodes && piece.ChildNodes.Count == 1 && piece.ChildNodes[0].Name != "#text")
                 {
                     //parse ChatLinkAction
