@@ -559,8 +559,8 @@ namespace TCC.ViewModels.Widgets
                 //SkillManager.AddPassivitySkill(ab.Id, cdFromDb);
                 RouteSkill(new Cooldown(skill, cdFromDb * 1000, CooldownType.Passive));
             }
-            else if (MainSkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
-                  || SecondarySkills.Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
+            else if (MainSkills.ToSyncList().Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
+                  || SecondarySkills.ToSyncList().Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
             {
                 //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
                 //SkillManager.AddPassivitySkill(ab.Id, cd / 1000);

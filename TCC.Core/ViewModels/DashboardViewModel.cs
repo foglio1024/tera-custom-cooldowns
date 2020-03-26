@@ -275,7 +275,7 @@ namespace TCC.ViewModels
 
         public void SaveCharacters()
         {
-            foreach (var ch in Game.Account.Characters)
+            foreach (var ch in Game.Account.Characters.ToSyncList())
             {
                 var dungs = new Dictionary<uint, DungeonCooldownData>();
                 foreach (var dgcd in ch.DungeonInfo.DungeonList)
