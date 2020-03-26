@@ -630,9 +630,10 @@ namespace TCC.ViewModels
         {
             App.BaseDispatcher.InvokeAsync(() =>
             {
-                foreach (ChatWindow w in Application.Current.Windows.ToList()
+                foreach (var window in Application.Current.Windows.ToList()
                     .Where(x => x is ChatWindow c && c.VM.TabVMs.Count == 0))
                 {
+                    var w = (ChatWindow) window;
                     ChatWindows.Remove(w);
                     w.Close();
                 }
