@@ -1,7 +1,8 @@
 {
   "notices": [
     {
-      "Id" : "" ,
+      "Enabled": false,
+      "Id": "",
       "Type": "MessageBoxNotice",
       "Trigger": 2,
       "TriggerOnDownload": false,
