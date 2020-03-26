@@ -212,7 +212,7 @@ namespace TCC.Settings
         public static void Load()
         {
             var settingsPath = SettingsOverride == ""
-                ? Path.Combine(App.BasePath, SettingsGlobals.JsonFileName)
+                ? Path.Combine(App.BasePath, SettingsGlobals.SettingsFileName)
                 : SettingsOverride;
             new JsonSettingsReader().LoadSettings(settingsPath);
         }

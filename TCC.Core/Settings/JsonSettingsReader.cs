@@ -12,7 +12,7 @@ namespace TCC.Settings
     {
         public JsonSettingsReader()
         {
-            FileName = SettingsGlobals.JsonFileName;
+            FileName = SettingsGlobals.SettingsFileName;
         }
         public void LoadSettings(string path)
         {

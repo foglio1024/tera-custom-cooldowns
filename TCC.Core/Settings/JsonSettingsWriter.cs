@@ -9,7 +9,7 @@ namespace TCC.Settings
     {
         public JsonSettingsWriter()
         {
-            FileName = SettingsGlobals.JsonFileName;
+            FileName = SettingsGlobals.SettingsFileName;
         }
         public override void Save()
         {

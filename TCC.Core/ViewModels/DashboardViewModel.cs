@@ -20,6 +20,7 @@ using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Analysis;
+using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Controls.Dashboard;
@@ -288,23 +289,22 @@ namespace TCC.ViewModels
                 }
             }
             var json = JsonConvert.SerializeObject(Game.Account, Formatting.Indented);
-            File.WriteAllText(Path.Combine(App.ResourcesPath, "config/characters.json"), json);
-            if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml")))
-                File.Delete(Path.Combine(App.ResourcesPath, "config/characters.xml"));
+            File.WriteAllText(SettingsGlobals.CharacterJsonPath, json);
+            if (File.Exists(SettingsGlobals.CharacterXmlPath))
+                File.Delete(SettingsGlobals.CharacterXmlPath);
 
         }
         private void LoadCharacters()
         {
             try
             {
-                if (File.Exists(Path.Combine(App.ResourcesPath, "config/characters.xml"))) // remove after merge
+                if (File.Exists(SettingsGlobals.CharacterXmlPath)) // remove after merge
                     new CharactersXmlParser().Read(Game.Account.Characters);
                 else
                 {
-                    var path = Path.Combine(App.ResourcesPath, "config/characters.json");
-                    if (!File.Exists(path)) return;
-                    var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(path));
-                    Game.Account = account ?? throw new FileFormatException(new Uri(path));
+                    if (!File.Exists(SettingsGlobals.CharacterJsonPath)) return;
+                    var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath));
+                    Game.Account = account ?? throw new FileFormatException(new Uri(SettingsGlobals.CharacterJsonPath));
                 }
             }
             catch (Exception e)
@@ -317,8 +317,8 @@ namespace TCC.ViewModels
                 }
                 else
                 {
-                    File.Delete(Path.Combine(App.ResourcesPath, "config/characters.xml")); // todo: remove after merge
-                    File.Delete(Path.Combine(App.ResourcesPath, "config/characters.json"));
+                    File.Delete(SettingsGlobals.CharacterXmlPath); // todo: remove after merge
+                    File.Delete(SettingsGlobals.CharacterJsonPath);
                     LoadCharacters();
                 }
             }
