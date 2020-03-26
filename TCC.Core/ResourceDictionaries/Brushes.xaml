@@ -91,6 +91,7 @@
     <SolidColorBrush x:Key="ItemUncommonBrush"              Color="{StaticResource ItemUncommonColor}"                         />
     <SolidColorBrush x:Key="ItemRareBrush"                  Color="{StaticResource ItemRareColor}"                             />
     <SolidColorBrush x:Key="ItemSuperiorBrush"              Color="{StaticResource ItemSuperiorColor}"                         />
+    <SolidColorBrush x:Key="ItemHeroicBrush"                Color="{StaticResource ItemHeroicColor}"                           />
 
     <SolidColorBrush x:Key="ToolboxBrush"                   Color="{StaticResource ToolboxColor}"                              />
 

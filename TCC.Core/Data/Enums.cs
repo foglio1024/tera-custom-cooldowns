@@ -121,10 +121,11 @@ namespace TCC.Data
     }
     public enum RareGrade
     {
-        Common,
-        Uncommon,
-        Rare,
-        Superior
+        Common = 0,
+        Uncommon = 1,
+        Rare = 2,
+        Superior = 3,
+        Heroic = 4
     }
     public enum BoundType
     {

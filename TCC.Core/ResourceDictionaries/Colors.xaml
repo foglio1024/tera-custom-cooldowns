@@ -94,6 +94,7 @@
     <Color x:Key="ItemUncommonColor">            #4DCB30   </Color>
     <Color x:Key="ItemRareColor">                #009ED9   </Color>
     <Color x:Key="ItemSuperiorColor">            #EEBE00   </Color>
+    <Color x:Key="ItemHeroicColor">              #F28730   </Color>
 
     <Color x:Key="ToolboxColor">                 #5980FF   </Color>
                                                            

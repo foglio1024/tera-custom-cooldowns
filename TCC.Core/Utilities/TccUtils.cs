@@ -157,6 +157,7 @@ namespace TCC.Utilities
                 RareGrade.Uncommon => Colors.ItemUncommonColor.ToHex(),
                 RareGrade.Rare => Colors.ItemRareColor.ToHex(),
                 RareGrade.Superior => Colors.ItemSuperiorColor.ToHex(),
+                RareGrade.Heroic => Colors.ItemHeroicColor.ToHex(),
                 _ => ""
             };
         }
