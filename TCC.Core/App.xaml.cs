@@ -17,13 +17,13 @@ using TCC.Data;
 using TCC.Exceptions;
 using TCC.Interop.Proxy;
 using TCC.Loader;
+using TCC.Notice;
 using TCC.Settings;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
-using TCC.ViewModels;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
@@ -82,8 +82,6 @@ namespace TCC
                 return;
             }
             if (!Debugger.IsAttached) AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.HandleGlobalException;
-            
-            //NoticeChecker.Init();
 
             Loading = true;
             await Setup();
@@ -92,6 +90,8 @@ namespace TCC
 
         private static async Task Setup()
         {
+            NoticeChecker.Init();
+
             TccSplashScreen.InitOnNewThread();
 
             if (!ToolboxMode)
@@ -154,11 +154,8 @@ namespace TCC
             ReadyEvent?.Invoke();
 
             if (!Beta && Settings.BetaNotification && UpdateManager.IsBetaNewer())
-                Log.N("TCC beta available", SR.BetaAvailable,
-                    NotificationType.Success,
-                    10000);
+                Log.N("TCC beta available", SR.BetaAvailable, NotificationType.Success, 10000);
 
-            //NoticeChecker.Ready();
         }
         private static void ParseStartupArgs(IList<string> args)
         {
