@@ -35,34 +35,26 @@ namespace TCC
             var ex = (Exception)e.ExceptionObject;
             var js = BuildJsonDump(ex);//await App.BaseDispatcher.InvokeAsync(() => BuildJsonDump(ex));
             DumpCrashToFile(js, ex);
-            UploadCrashDump(js);
 
-
-            if (ex is COMException com && (com.HResult == 88980406 /*not sure if getting this value like this is correct*/
-                                        || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")))
+            switch (ex)
             {
-                TccMessageBox.Show("TCC",
-                    "An error in render thread occured. This is usually caused by outdated video card drivers. TCC will now close.",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (ex is ClientVersionDetectionException cvde)
-            {
-                Log.F($"Failed to detect client version from file: {cvde}");
-                var msg = "Failed to detect client version.";
-
-                msg += StubInterface.Instance.IsStubAvailable
-                    ? "\nSince you're already using TERA Toolbox, please consider installing TCC as a module (more info in the wiki)."
-                    : "\nPlease consider installing TCC as a TERA Toolbox module (more info in the wiki).";
-
-                msg += "\nTCC will now close.";
-                TccMessageBox.Show(msg, MessageBoxType.Error);
-
-            }
-            else
-            {
-                TccMessageBox.Show("TCC",
-                    "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                case COMException com when (com.HResult == 88980406 || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")):
+                {
+                    TccMessageBox.Show("TCC", SR.RenderThreadError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
+                case ClientVersionDetectionException cvde:
+                {
+                    Log.F($"Failed to detect client version from file: {cvde}");
+                    TccMessageBox.Show(SR.CannotDetectClientVersion(StubInterface.Instance.IsStubAvailable), MessageBoxType.Error);
+                    break;
+                }
+                default:
+                {
+                    UploadCrashDump(js);
+                    TccMessageBox.Show("TCC", SR.FatalError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
             }
 
             App.ReleaseMutex();
@@ -157,12 +149,12 @@ namespace TCC
             if (ex.InnerException != null)
             {
 
-                var innEx =BuildInnerExceptionJObject(ex.InnerException);
+                var innEx = BuildInnerExceptionJObject(ex.InnerException);
                 ret["inner_exception"] = innEx;
             }
 
             if (!(ex is PacketParseException ppe)) return ret;
-            
+
             ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
             ret.Add("packet_data", new JValue(ppe.RawData.ToStringEx()));
             return ret;
