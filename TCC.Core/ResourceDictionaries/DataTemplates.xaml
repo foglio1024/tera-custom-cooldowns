@@ -3,7 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
-                    xmlns:fogConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                    xmlns:nsConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                     xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:data="clr-namespace:TCC.Data"
@@ -273,7 +273,7 @@
 
             </ItemsControl>
             <Button Width="30" HorizontalContentAlignment="Center" Command="{Binding SpecialCommand}"
-                    Visibility="{Binding CanBeSpecial, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}"
+                    Visibility="{Binding CanBeSpecial, Converter={nsConv:BoolToVisibility Mode=Hidden}}"
                     VerticalContentAlignment="Center" Grid.Column="2"
                     ToolTip="Special buffs are displayed at the beginning of the list and have gold border.">
                 <Path Data="{StaticResource SvgStar}"
@@ -327,7 +327,7 @@
     <DataTemplate x:Key="ActionTemplate" DataType="chat:ActionMessagePiece">
         <Grid UseLayoutRounding="True">
             <Border BorderBrush="{Binding Color, Converter={StaticResource StringToFill}}"
-                    Visibility="{Binding IsHovered, Converter={StaticResource BoolToVisibility}}"
+                    Visibility="{Binding IsHovered, Converter={nsConv:BoolToVisibility}}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     BorderThickness="0 0 0 2" />
@@ -886,7 +886,7 @@
                 </TextBlock>
                 <Path Data="{StaticResource SvgDelegateLeader}" 
                       Fill="{StaticResource GoldBrush}" Height="8"
-                      Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding IsLeader, Converter={nsConv:BoolToVisibility}}"
                       HorizontalAlignment="Right" Margin="5 0 5 -1" />
             </StackPanel>
             <TextBlock Text="{Binding Location}" Grid.Column="2" Foreground="#6fff"
@@ -953,7 +953,7 @@
                     <Run Text="{Binding Name, Mode=OneWay}" />
                 </TextBlock>
                 <Path Data="{StaticResource SvgDelegateLeader}" Fill="{StaticResource GoldBrush}" Height="8"
-                      Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding IsLeader, Converter={nsConv:BoolToVisibility}}"
                       HorizontalAlignment="Right" Margin="5 0 5 1" />
             </StackPanel>
 
@@ -975,14 +975,14 @@
 
                 <Button Command="{Binding AcceptApplyCommand}"
                         ToolTip="Accept"
-                        Visibility="{Binding Path=DataContext.(vm:LfgListViewModel.AmILeader), RelativeSource={RelativeSource AncestorType=windows:LfgListWindow}, Converter={StaticResource BoolToVisibility}}">
+                        Visibility="{Binding Path=DataContext.(vm:LfgListViewModel.AmILeader), RelativeSource={RelativeSource AncestorType=windows:LfgListWindow}, Converter={nsConv:BoolToVisibility}}">
                     <Path Data="{StaticResource SvgConfirm}" 
                           Fill="{StaticResource GreenBrush}"/>
                 </Button>
 
                 <Button Command="{Binding DeclineApplyCommand}"
                         ToolTip="Decline"
-                        Visibility="{Binding Path=DataContext.(vm:LfgListViewModel.AmILeader), RelativeSource={RelativeSource AncestorType=windows:LfgListWindow}, Converter={StaticResource BoolToVisibility}}">
+                        Visibility="{Binding Path=DataContext.(vm:LfgListViewModel.AmILeader), RelativeSource={RelativeSource AncestorType=windows:LfgListWindow}, Converter={nsConv:BoolToVisibility}}">
                     <Path Data="{StaticResource SvgClose}" 
                           Fill="{StaticResource HpBrush}"/>
                 </Button>
@@ -1545,10 +1545,10 @@
                 <Border.Background>
                     <LinearGradientBrush>
                         <GradientStop
-                            Color="{Binding Path=., Source={StaticResource GreenColor}, Converter={StaticResource ColorToTransparent}, ConverterParameter=0.5}"
+                            Color="{Binding Path=., Source={StaticResource GreenColor}, Converter={nsConv:ColorToTransparent Opacity=0.5}}"
                             Offset="0" />
                         <GradientStop
-                            Color="{Binding Path=., Source={StaticResource GreenColor}, Converter={StaticResource ColorToTransparent}}"
+                            Color="{Binding Path=., Source={StaticResource GreenColor}, Converter={nsConv:ColorToTransparent}}"
                             Offset="1" />
                     </LinearGradientBrush>
                 </Border.Background>
@@ -1672,7 +1672,7 @@
             <TextBlock.Text>
                 <Binding Path=".">
                     <Binding.Converter>
-                        <fogConv:EnumDescriptionConverter />
+                        <nsConv:EnumDescriptionConverter />
                     </Binding.Converter>
                 </Binding>
             </TextBlock.Text>

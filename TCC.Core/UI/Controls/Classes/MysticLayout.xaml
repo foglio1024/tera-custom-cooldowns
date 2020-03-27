@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MysticLayoutVM}">
 
     <Grid Margin="20 100 20 100" ClipToBounds="False" Width="Auto">
@@ -124,7 +125,7 @@
         </Grid.Resources>
         <!--Elementalize bottom-->
         <controls:Arc StrokeThickness="10"
-                      Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding Elementalize, Converter={converters:BoolToVisibility}}"
                       Style="{StaticResource StanceArc}">
             <Shape.RenderTransform>
                 <TransformGroup>
@@ -135,7 +136,7 @@
 
         </controls:Arc>
         <controls:Arc StrokeThickness="10"
-                      Visibility="{Binding Auras.SupportAura, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding Auras.SupportAura, Converter={converters:BoolToVisibility}}"
                       Style="{StaticResource StanceArc}">
             <Shape.RenderTransform>
                 <TransformGroup>
@@ -147,7 +148,7 @@
 
         </controls:Arc>
         <controls:Arc StrokeThickness="10"
-                      Visibility="{Binding Auras.OffenseAura, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding Auras.OffenseAura, Converter={converters:BoolToVisibility}}"
                       Style="{StaticResource StanceArc}">
             <Shape.RenderTransform>
                 <TransformGroup>
@@ -208,7 +209,7 @@
         <!--<Rectangle HorizontalAlignment="Left" Opacity="1"
                    Width="35" VerticalAlignment="Stretch" Margin="-10 0 0 0"
                    Height="35"
-                   Visibility="{Binding Auras.CritAura, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Auras.CritAura, Converter={nsConv:BoolToVisibility}}"
         >
             <Rectangle.Effect>
                 <BlurEffect Radius="20"/>
@@ -229,7 +230,7 @@
         <Rectangle HorizontalAlignment="Left" Opacity="1"
                    Width="35" VerticalAlignment="Stretch" Margin="-5 0 0 0"
                    Height="35"
-                   Visibility="{Binding Auras.CritAura, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Auras.CritAura, Converter={converters:BoolToVisibility}}"
 
         >
             <Rectangle.OpacityMask>
@@ -250,7 +251,7 @@
         <!--<Rectangle HorizontalAlignment="Right" Opacity="1"
                    Width="35" VerticalAlignment="Stretch" Margin="0 0 -10 0"
                    Height="35"
-                   Visibility="{Binding Auras.ManaAura, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Auras.ManaAura, Converter={nsConv:BoolToVisibility}}"
                    >
             <Rectangle.Effect>
                 <BlurEffect Radius="20"/>
@@ -272,7 +273,7 @@
         <Rectangle HorizontalAlignment="Right" Opacity="1"
                    Width="35" VerticalAlignment="Stretch" Margin="0 0 -5 0"
                    Height="35"
-                   Visibility="{Binding Auras.ManaAura, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Auras.ManaAura, Converter={converters:BoolToVisibility}}"
                    >
             <Rectangle.OpacityMask>
                 <VisualBrush Stretch="Uniform">
@@ -291,7 +292,7 @@
         <!--<Rectangle HorizontalAlignment="Left" Opacity="1"
                    Width="35" VerticalAlignment="Stretch" Margin="-10 0 0 0"
                    Height="35"
-                   Visibility="{Binding Auras.SwiftAura, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Auras.SwiftAura, Converter={nsConv:BoolToVisibility}}"
         >
             <Rectangle.Effect>
                 <BlurEffect Radius="20"/>
@@ -313,7 +314,7 @@
         <Rectangle HorizontalAlignment="Left" Opacity="1"
                    Width="35" VerticalAlignment="Stretch" Margin="-5 0 0 0"
                    Height="35"
-                   Visibility="{Binding Auras.SwiftAura, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Auras.SwiftAura, Converter={converters:BoolToVisibility}}"
 
         >
             <Rectangle.OpacityMask>
@@ -333,7 +334,7 @@
         <!--<Rectangle HorizontalAlignment="Right" Opacity="1"
                    Width="35" VerticalAlignment="Stretch" Margin="0 0 -10 0"
                    Height="35"
-                   Visibility="{Binding Auras.CritResAura, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Auras.CritResAura, Converter={nsConv:BoolToVisibility}}"
                    >
             <Rectangle.Effect>
                 <BlurEffect Radius="20"/>
@@ -355,7 +356,7 @@
         <Rectangle HorizontalAlignment="Right" Opacity="1"
                    Width="35" VerticalAlignment="Stretch" Margin="0 0 -5 0"
                    Height="35"
-                   Visibility="{Binding Auras.CritResAura, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Auras.CritResAura, Converter={converters:BoolToVisibility}}"
                    >
 
             <Rectangle.OpacityMask>
@@ -375,7 +376,7 @@
         <Rectangle HorizontalAlignment="Center" Opacity="1"
                    Width="35" VerticalAlignment="Bottom" Margin="0 0 0 -6"
                    Height="35"
-                   Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding Elementalize, Converter={converters:BoolToVisibility}}"
 
         >
             <Rectangle.OpacityMask>
@@ -399,21 +400,21 @@
         </Image>
         <!--Elementalize top-->
         <controls:Arc StrokeThickness="1"
-                      Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding Elementalize, Converter={converters:BoolToVisibility}}"
                       Style="{StaticResource StanceArc}">
             <Shape.RenderTransform>
                 <RotateTransform Angle="90" />
             </Shape.RenderTransform>
         </controls:Arc>
         <controls:Arc StrokeThickness="1"
-                      Visibility="{Binding Auras.SupportAura, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding Auras.SupportAura, Converter={converters:BoolToVisibility}}"
                       Style="{StaticResource StanceArc}">
             <Shape.RenderTransform>
                 <RotateTransform Angle="0" />
             </Shape.RenderTransform>
         </controls:Arc>
         <controls:Arc StrokeThickness="1"
-                      Visibility="{Binding Auras.OffenseAura, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding Auras.OffenseAura, Converter={converters:BoolToVisibility}}"
                       Style="{StaticResource StanceArc}">
             <Shape.RenderTransform>
                 <RotateTransform Angle="-180" />
@@ -637,7 +638,7 @@
                                                LayoutTransform="{StaticResource Rotate45Inv}" />
             </UniformGrid>
             <Border Width="55" Height="55" BorderThickness="3" Grid.Row="0"
-                    Visibility="{Binding Elementalize, Converter={StaticResource BoolToVisibility}}"
+                    Visibility="{Binding Elementalize, Converter={nsConv:BoolToVisibility}}"
                     RenderTransformOrigin=".5 .5"
                     BorderBrush="{StaticResource GreenBrush}" Background="Transparent" Margin="0 4 0 0">
                 <Border.RenderTransform>

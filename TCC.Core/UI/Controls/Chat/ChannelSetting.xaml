@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" >
     <Grid Margin="4">
         <Grid.ColumnDefinitions>
@@ -11,7 +12,8 @@
         </Grid.ColumnDefinitions>
         <Ellipse ToolTip="{Binding Channel}" Fill="{Binding Channel, Converter={StaticResource ChatChannelToColor}}" 
                  Cursor="Hand" Height="24" Width="24" PreviewMouseLeftButtonDown="Ellipse_PreviewMouseLeftButtonDown"/>
-        <Path Grid.Column="0" Width="18" Height="18" Stretch="Uniform" Data="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" Fill="#9000" IsHitTestVisible="False" Visibility="{Binding Enabled, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}"></Path>
+        <Path Grid.Column="0" Width="18" Height="18" Stretch="Uniform" Data="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" Fill="#9000" IsHitTestVisible="False" 
+              Visibility="{Binding Enabled, Converter={converters:BoolToVisibility Mode=Hidden}}"></Path>
         <TextBlock Style="{StaticResource DefaultTextStyle}" 
                                        Text="{Binding Channel, Converter={StaticResource ChatChannelToName}}"
                                        Grid.Column="1"

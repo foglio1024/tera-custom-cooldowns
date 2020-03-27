@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" Loaded="OnLoaded" d:DataContext="{d:DesignInstance viewModels:ArcherLayoutVM}"
              Height="165">
             <!-- Add Height = "165" to fix windwalk UI cropping problem by HQ -->
@@ -110,7 +111,7 @@
                         <TranslateTransform X="0" Y="0" />
                     </FrameworkElement.RenderTransform>
             </TextBlock>
-            <Grid Visibility="{Binding WindWalkProc, Converter={StaticResource BoolToVisibility}}">
+            <Grid Visibility="{Binding WindWalkProc, Converter={converters:BoolToVisibility}}">
             <!--<Grid >-->
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"

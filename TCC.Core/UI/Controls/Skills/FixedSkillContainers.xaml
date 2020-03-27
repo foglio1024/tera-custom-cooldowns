@@ -9,6 +9,7 @@
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              PreviewMouseLeftButtonUp="UserControl_MouseLeftButtonUp"
              PreviewDragEnter="FixedSkillContainers_OnDragOver" 
              MouseEnter="MainSkillsGrid_MouseEnter"
@@ -355,7 +356,7 @@
                           Height="50" VerticalAlignment="Stretch"
                           HorizontalAlignment="Right" ItemsSource="{Binding ItemSkills}" BorderBrush="Red"
                           BorderThickness="00" Grid.Row="0"
-                          Visibility="{Binding ShowItems, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}">
+                          Visibility="{Binding ShowItems, Converter={converters:BoolToVisibility Mode=Hidden}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto"

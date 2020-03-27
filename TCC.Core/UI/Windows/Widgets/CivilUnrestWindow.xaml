@@ -5,11 +5,12 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
                  xmlns:widgets1="clr-namespace:TCC.UI.Windows.Widgets"
+                 xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                  mc:Ignorable="d"
                 Title="TCC Civil Unrest"
                  Style="{StaticResource BaseWindowStyle}"
         d:DataContext="{d:DesignInstance {x:Type widgets:CivilUnrestViewModel}}" MouseDoubleClick="OnMouseDoubleClick">
-    <Grid x:Name="ZoneBoundContent" Visibility="{Binding CivilUnrest, Converter={StaticResource BoolToVisibility}}">
+    <Grid x:Name="ZoneBoundContent" Visibility="{Binding CivilUnrest, Converter={converters:BoolToVisibility}}">
 
         <Grid Width="250" Margin="4" x:Name="WindowContent" Height="310">
             <Grid.RowDefinitions>

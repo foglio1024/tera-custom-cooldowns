@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" Loaded="BrawlerLayout_OnLoaded" d:DataContext="{d:DesignData BrawlerLayoutVM}">
     <Grid Width="Auto" Margin="50 20 55 75" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
@@ -197,7 +198,7 @@
                 </FrameworkElement.Style>
 
             </controls:OutlinedTextBlock>
-            <Grid Visibility="{Binding CounterProc, Converter={StaticResource BoolToVisibility}}">
+            <Grid Visibility="{Binding CounterProc, Converter={converters:BoolToVisibility}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="8"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7"

@@ -1771,7 +1771,7 @@
 
                         </StackPanel>
 
-                        <!--<StackPanel VerticalAlignment="Stretch" Grid.Row="3" Visibility="{Binding ShowDebugSettings, Converter= {StaticResource BoolToVisibility}}">
+                        <!--<StackPanel VerticalAlignment="Stretch" Grid.Row="3" Visibility="{Binding ShowDebugSettings, Converter= {BoolToVisibility}}">
                             <ContentControl Template="{StaticResource SectionHeaderTemplate}" 
                                             Content="Debug settings" />
                             <settings:CheckboxSetting SettingName="Show console"

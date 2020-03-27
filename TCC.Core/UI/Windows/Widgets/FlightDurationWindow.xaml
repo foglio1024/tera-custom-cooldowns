@@ -6,6 +6,7 @@
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:widgets1="clr-namespace:TCC.UI.Windows.Widgets"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" MouseLeftButtonDown="Drag"
              Style="{StaticResource BaseWindowStyle}"
              Title="TCC Flight" Height="300" Width="300" 
@@ -43,7 +44,7 @@
         <controls:Arc RenderTransformOrigin=".5 .5" StrokeThickness="1" StrokeEndLineCap="Round"
                StrokeStartLineCap="Flat" Stroke="#9fff" Height="288" Width="288" OriginRotationDegrees="-45">
         </controls:Arc>
-        <Grid x:Name="StacksContainer" RenderTransformOrigin=".5 .5" Visibility="{Binding FlyingMissionInProgress, Converter={StaticResource BoolToVisibility}}">
+        <Grid x:Name="StacksContainer" RenderTransformOrigin=".5 .5" Visibility="{Binding FlyingMissionInProgress, Converter={converters:BoolToVisibility}}">
             <Grid.RenderTransform>
                 <ScaleTransform ScaleY="-1"></ScaleTransform>
             </Grid.RenderTransform>

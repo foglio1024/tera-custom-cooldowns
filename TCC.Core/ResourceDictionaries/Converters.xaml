@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:fogConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                    xmlns:nsConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                     xmlns:converters="clr-namespace:TCC.UI.Converters">
 
     <converters:BoolToSvgSwitchConverter x:Key="BoolToSvgSwitchConverter"/>
@@ -33,18 +33,18 @@
     <converters:ClassToFillConverter x:Key="ClassToFill"/>
     <converters:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplate"/>
     <converters:RaidToColorConverter x:Key="RaidToColor"/>
-    <fogConv:ValueConverterGroup x:Key="ClassToTransparentFill" >
+    <nsConv:ValueConverterGroup x:Key="ClassToTransparentFill" >
         <converters:ClassToFillConverter/>
-        <fogConv:ColorToTransparent Opacity="0"/>
-    </fogConv:ValueConverterGroup>
-    <fogConv:ValueConverterGroup x:Key="IlvlTierToTransparentFill">
+        <nsConv:ColorToTransparent Opacity="0"/>
+    </nsConv:ValueConverterGroup>
+    <nsConv:ValueConverterGroup x:Key="IlvlTierToTransparentFill">
         <converters:ItemLevelTierToColorConverter/>
-        <fogConv:ColorToTransparent Opacity="0"/>
-    </fogConv:ValueConverterGroup>
-    <fogConv:ValueConverterGroup x:Key="IsRaidToTransparentFill">
+        <nsConv:ColorToTransparent Opacity="0"/>
+    </nsConv:ValueConverterGroup>
+    <nsConv:ValueConverterGroup x:Key="IsRaidToTransparentFill">
         <converters:RaidToColorConverter/>
-        <fogConv:ColorToTransparent Opacity="0"/>
-    </fogConv:ValueConverterGroup>
+        <nsConv:ColorToTransparent Opacity="0"/>
+    </nsConv:ValueConverterGroup>
 
     <converters:StringToFillConverter x:Key="StringToFill"/>
     <converters:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>

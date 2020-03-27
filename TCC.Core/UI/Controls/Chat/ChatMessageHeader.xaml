@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:chat="clr-namespace:TCC.Data.Chat"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance chat:ChatMessage}">
     <Grid Width="Auto" MinWidth="0" Margin="0,0,0,0"
           VerticalAlignment="Stretch" Height="Auto"
@@ -60,7 +61,7 @@
                         Width="42"
                         Margin="0,5,0,0"
                         Grid.Column="1"
-                        Visibility="{Binding ShowChannel, Converter={StaticResource BoolToVisibility}}" />
+                        Visibility="{Binding ShowChannel, Converter={converters:BoolToVisibility}}" />
         <!--Timestamp-->
         <TextBlock Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                    Width="Auto"
@@ -71,6 +72,6 @@
                    VerticalAlignment="Top"
                    Text="{Binding Timestamp}"
                    Grid.Column="0"
-                   Visibility="{Binding ShowTimestamp, Converter={StaticResource BoolToVisibility}}" />
+                   Visibility="{Binding ShowTimestamp, Converter={converters:BoolToVisibility}}" />
     </Grid>
 </UserControl>

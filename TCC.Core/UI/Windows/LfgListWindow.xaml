@@ -6,6 +6,7 @@
                    xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
                    xmlns:windows="clr-namespace:TCC.UI.Windows"
                    xmlns:vm="clr-namespace:TCC.ViewModels"
+                   xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                    UseLayoutRounding="True"
                    Style="{StaticResource BaseWindowStyle}"
                    mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
@@ -45,7 +46,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button HorizontalAlignment="Right"
                         VerticalAlignment="Stretch"
-                        Visibility="{Binding IsAutoPublicizeRunning, Converter={StaticResource BoolToVisibility}}"
+                        Visibility="{Binding IsAutoPublicizeRunning, Converter={converters:BoolToVisibility}}"
                         Command="{Binding ToggleAutoPublicizeCommand}">
                     <Button.Style>
                         <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">

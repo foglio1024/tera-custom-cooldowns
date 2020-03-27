@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              UseLayoutRounding="False"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
@@ -20,7 +21,7 @@
                    VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch"
                    Margin="8"
-                   Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BoolToVisibility}}"
+                   Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={converters:BoolToVisibility}}"
                    ></Rectangle>
             <controls:Arc Width="71" 
                        Height="71" 
@@ -41,7 +42,7 @@
 
 
         <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 -1 0 0" 
-              Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={StaticResource BoolToVisibility}}"
+              Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={converters:BoolToVisibility}}"
               >
 
             <Border BorderThickness="0"

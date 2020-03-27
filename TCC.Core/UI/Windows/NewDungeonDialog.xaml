@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:data="clr-namespace:TCC.Data"
         xmlns:local="clr-namespace:TCC.UI.Windows"
+        xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
         mc:Ignorable="d"
         Title="TCC New dungeon dialog" Height="350" Width="380"
         WindowStartupLocation="CenterOwner"
@@ -93,7 +94,7 @@
                                         VerticalAlignment="Center"
                                         Click="AddDungeon"
                                         Style="{StaticResource ButtonContentOpacityStyle}"
-                                        Visibility="{Binding Show, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}"
+                                        Visibility="{Binding Show, Converter={converters:BoolToVisibility Invert=True}}"
                                         >
                                     <Path Data="{StaticResource SvgAddCircle}" Margin="2"/>
                                 </Button>

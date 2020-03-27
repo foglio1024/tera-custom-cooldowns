@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" ClipToBounds="False" Background="Transparent" 
              MouseLeave="UserControl_MouseLeave" d:DataContext="{d:DesignData Cooldown}">
     <skills:FixedSkillControlBase.Resources>
@@ -138,7 +139,7 @@
               VerticalAlignment="Bottom"
               ClipToBounds="False"
               Margin="0 0 1 0"
-              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:SquareFixedSkillControl}, Converter={StaticResource BoolToVisibility}}">
+              Visibility="{Binding IsRunning, RelativeSource={RelativeSource AncestorType=skills:SquareFixedSkillControl}, Converter={converters:BoolToVisibility}}">
             <Border Background="{StaticResource RevampBackgroundBrush}" CornerRadius="0" RenderTransformOrigin=".5 .5"
                     Effect="{StaticResource FadedDropShadow}" BorderBrush="{StaticResource RevampBorderBrush}"
                     BorderThickness="1"

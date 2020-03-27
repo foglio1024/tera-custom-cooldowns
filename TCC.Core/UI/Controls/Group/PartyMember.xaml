@@ -5,6 +5,7 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:pc="clr-namespace:TCC.Data.Pc"
                      xmlns:group="clr-namespace:TCC.UI.Controls.Group"
+                     xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                      mc:Ignorable="d"
                      d:DataContext="{d:DesignInstance pc:User}">
     <group:GroupMemberBase.Resources>
@@ -166,7 +167,7 @@
                                     </StackPanel>-->
 
                                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0"
-                                                Visibility="{Binding Online, Converter={StaticResource BoolToVisibility}}">
+                                                Visibility="{Binding Online, Converter={converters:BoolToVisibility}}">
                                         <!--map marker icon-->
                                         <Path Data="{StaticResource SvgMapMarker}" Fill="#6fff" Stretch="Uniform"
                                               Height="12" Margin="3" />
@@ -192,7 +193,7 @@
                     Background="#5000" BorderThickness="2 1"
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     Margin="-2 -10 3 7" Padding="1"
-                    Visibility="{Binding Online, Converter={StaticResource BoolToVisibility}}">
+                    Visibility="{Binding Online, Converter={converters:BoolToVisibility}}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -203,7 +204,7 @@
                                HorizontalAlignment="Stretch"
                                Style="{StaticResource OnlineBoundVisibility}"
                                Visibility="{Binding ShowHp, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase}, 
-                                                            Converter={StaticResource BoolToVisibility}}">
+                                                            Converter={converters:BoolToVisibility}}">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
                                 <GradientStop Offset=".2"
@@ -225,7 +226,7 @@
                                Margin="0 1 0 0" Width="Auto" HorizontalAlignment="Stretch"
                                Style="{StaticResource OnlineBoundVisibility}"
                                Visibility="{Binding ShowMp, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase}, 
-                                                            Converter={StaticResource BoolToVisibility}}">
+                                                            Converter={converters:BoolToVisibility}}">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
                                 <GradientStop Color="{StaticResource MpColor}" Offset="0" />
@@ -243,7 +244,7 @@
                         RenderTransform="{StaticResource Skew45Inv}"
                         RenderTransformOrigin=".5 .5"
                         Margin="0 -20"
-                        Visibility="{Binding ShowHp, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase}}">
+                        Visibility="{Binding ShowHp, Converter={converters:BoolToVisibility}, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase}}">
                         <Grid.Resources>
                             <Style TargetType="Rectangle">
                                 <Setter Property="Fill" Value="#b000" />
@@ -284,7 +285,7 @@
                         <TextBlock Foreground="#9fff"
                                    Grid.RowSpan="1"
                                    Visibility="{Binding ShowHpPercentage, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase}, 
-                                                            Converter={StaticResource BoolToVisibility}}"
+                                                            Converter={converters:BoolToVisibility}}"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
 
@@ -294,7 +295,7 @@
                         <TextBlock Foreground="#afff"
                                    Grid.RowSpan="1"
                                    Visibility="{Binding ShowHpAmount, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase}, 
-                                                            Converter={StaticResource BoolToVisibility}}"
+                                                            Converter={converters:BoolToVisibility}}"
                                    FontWeight="DemiBold"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
@@ -319,7 +320,7 @@
             <!--Aggro indicator -->
             <Grid x:Name="AggroBorderGrid" RenderTransformOrigin=".5 .5">
                 <Border Name="AggroBorder"
-                        Visibility="{Binding HasAggro, Converter={StaticResource BoolToVisibility}}"
+                        Visibility="{Binding HasAggro, Converter={converters:BoolToVisibility}}"
                         Background="#40ffa500"
                         BorderBrush="Orange"
                         BorderThickness="3"
@@ -357,7 +358,7 @@
             <!--Death indicator -->
             <Grid x:Name="DeathBorderGrid" RenderTransformOrigin=".5 .5">
                 <Border x:Name="DeathBorder"
-                        Visibility="{Binding Alive, Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}"
+                        Visibility="{Binding Alive, Converter={converters:BoolToVisibility Invert=True}}"
                         Background="#600"
                         BorderBrush="Red"
                         BorderThickness="3"
@@ -401,7 +402,7 @@
                    Stretch="Uniform"
                    Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=half}"
                    Visibility="{Binding ShowLaurel, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase},
-                                                    Converter={StaticResource BoolToVisibility}}">
+                                                    Converter={converters:BoolToVisibility}}">
                 <Image.RenderTransform>
                     <TranslateTransform Y="1" X="-.6" />
                 </Image.RenderTransform>
@@ -410,10 +411,10 @@
                   HorizontalAlignment="Right" VerticalAlignment="Center"
                   Grid.Column="0" ToolTip="Awakened"
                   Visibility="{Binding ShowAwaken, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase},
-                                                   Converter={StaticResource BoolToVisibility}}">
+                                                   Converter={converters:BoolToVisibility}}">
                 <Border Background="Transparent"
                         BorderBrush="Transparent"
-                        Visibility="{Binding Awakened, Converter={StaticResource BoolToVisibility}}"
+                        Visibility="{Binding Awakened, Converter={converters:BoolToVisibility}}"
                         RenderTransformOrigin=".5 .5"
                         x:Name="AwakenBorder">
                     <Border.RenderTransform>
@@ -422,7 +423,7 @@
                 </Border>
                 <Path Stroke="Transparent" RenderOptions.BitmapScalingMode="Fant" Margin="3 0 0 0" Data="m0,1 1,-1 1,1"
                       StrokeThickness="3" Fill="Orange"
-                      Visibility="{Binding Awakened, Converter={StaticResource BoolToVisibility}}"
+                      Visibility="{Binding Awakened, Converter={converters:BoolToVisibility}}"
                       x:Name="AwakenIcon"
                       RenderTransformOrigin=".5 .5" Width="12">
                     <Path.RenderTransform>
@@ -478,7 +479,7 @@
         </Grid>
         <!--Leader icon-->
         <Grid Width="14" Height="14"
-              Visibility="{Binding IsLeader, Converter={StaticResource BoolToVisibility}}"
+              Visibility="{Binding IsLeader, Converter={converters:BoolToVisibility}}"
               HorizontalAlignment="Left" VerticalAlignment="Top"
               Grid.Column="0"
               Margin="0">

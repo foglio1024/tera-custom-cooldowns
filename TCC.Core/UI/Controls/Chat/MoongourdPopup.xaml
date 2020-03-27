@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:chat="clr-namespace:TCC.UI.Controls.Chat"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" >
     <Grid Margin="0 5 10 10" Effect="{StaticResource DropShadow}">
         <Grid.RowDefinitions>
@@ -24,7 +25,7 @@
                 <Run Text="{Binding PlayerName, RelativeSource={RelativeSource AncestorType=chat:MoongourdPopup}, Mode=OneWay}" Foreground="{StaticResource MoongourdAccentBrush}"/><Run Text="'s Moongourd parses"/>
             </TextBlock>
         </Grid>
-        <Grid Margin="6 0" Grid.Row="1" Visibility="{Binding ElementName=List, Path=HasItems,Converter={StaticResource BoolToVisibility}}"
+        <Grid Margin="6 0" Grid.Row="1" Visibility="{Binding ElementName=List, Path=HasItems,Converter={converters:BoolToVisibility}}"
               >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230"/>
@@ -48,7 +49,7 @@
             <TextBlock Text="Link" Grid.Column="3"></TextBlock>
         </Grid>
         <TextBlock Grid.Row="2" Text="No entries." HorizontalAlignment="Center" Foreground="#5fff" Margin="5" x:Name="EmptyInfo"
-                   Visibility="{Binding ElementName=List, Path=HasItems,Converter={StaticResource BoolToVisibility}, ConverterParameter=invert}"
+                   Visibility="{Binding ElementName=List, Path=HasItems, Converter={converters:BoolToVisibility Invert=True}}"
                    />
         <ListBox Background="Transparent" BorderThickness="0" Grid.Row="2" ItemTemplate="{StaticResource MoongourdEncounterDataTemplate}"
                  ItemContainerStyle="{StaticResource DefaultListItemStyle}" AlternationCount="2" x:Name="List">

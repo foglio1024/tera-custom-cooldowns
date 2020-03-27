@@ -4,6 +4,7 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
+                   xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                    mc:Ignorable="d"
                    Title="TCC Floating button"
                    Height="Auto" Width="Auto"
@@ -61,7 +62,7 @@
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     Margin="0 0 -42 0"
                     RenderTransformOrigin=".5,.5"
-                    Visibility="{Binding PendingNotifications, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}"
+                    Visibility="{Binding PendingNotifications, Converter={converters:BoolToVisibility Mode=Hidden}}"
                     ToolTip="There are events starting in few minutes.">
                 <Border.RenderTransform>
                     <ScaleTransform />

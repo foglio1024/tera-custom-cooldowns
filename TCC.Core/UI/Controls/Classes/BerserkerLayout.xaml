@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              UseLayoutRounding="True"
              mc:Ignorable="d" d:DataContext="{d:DesignData BerserkerLayoutVM}">
     <Grid Width="Auto" Margin="50 20 50 90" Name="Root" ClipToBounds="False">
@@ -23,7 +24,7 @@
             </Grid>
 
             <!-- Show if Unleash isn't active -->
-            <Grid Visibility="{Binding IsUnleashOff, Converter={StaticResource BoolToVisibility}}">
+            <Grid Visibility="{Binding IsUnleashOff, Converter={converters:BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
@@ -80,7 +81,7 @@
             </Grid>
 
             <!-- Show if Unleash is active -->
-            <Grid Visibility="{Binding IsUnleashOn, Converter={StaticResource BoolToVisibility}}">
+            <Grid Visibility="{Binding IsUnleashOn, Converter={converters:BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />

@@ -6,6 +6,7 @@
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              xmlns:controls="clr-namespace:TCC.UI.Controls"
              xmlns:widgets1="clr-namespace:TCC.UI.Windows.Widgets"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d"
              Title="TCC Group"
              MouseLeftButtonDown="Drag"
@@ -51,7 +52,7 @@
                         VerticalAlignment="Top" HorizontalAlignment="Left"
                         Padding="5,1"
                         Width="46"
-                        Visibility="{Binding ShowDetails, Converter={StaticResource BoolToVisibility}}">
+                        Visibility="{Binding ShowDetails, Converter={converters:BoolToVisibility}}">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Total members">
                             <Path Data="{StaticResource SvgUsers}"
@@ -66,7 +67,7 @@
                                        Margin="6,0,0,0" Foreground="#afff" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,2" ToolTip="Ready members"
-                                    Visibility="{Binding Raid,Converter={StaticResource BoolToVisibility}}">
+                                    Visibility="{Binding Raid,Converter={converters:BoolToVisibility}}">
                             <Path Data="{StaticResource SvgCheckCircle}"
                                   Fill="{StaticResource LightGreenBrush}" Stretch="Uniform" Width="15" Margin="0" />
                             <TextBlock Text="{Binding ReadyCount, Mode=OneWay}" FontWeight="DemiBold"
@@ -80,7 +81,7 @@
                         BorderBrush="{StaticResource RevampBorderBrush}"
                         Margin="4 0 0 0" CornerRadius="1"
                         Opacity="0"
-                        Visibility="{Binding Formed, Converter={StaticResource BoolToVisibility}}"
+                        Visibility="{Binding Formed, Converter={converters:BoolToVisibility}}"
                         x:Name="GroupButtonsSingle" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="SettingsButton"
@@ -90,7 +91,7 @@
                         <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"
                                 ToolTip="Leave party" Click="LeaveParty" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgRemoveCircle}" Fill="{StaticResource HpBrush}" Margin="3 3" Width="15" Height="15"
-                                  Visibility="{Binding ShowLeaveButton, Converter={StaticResource BoolToVisibility}}" />
+                                  Visibility="{Binding ShowLeaveButton, Converter={converters:BoolToVisibility}}" />
                         </Button>
                     </StackPanel>
                 </Border>
@@ -99,7 +100,7 @@
                         BorderBrush="{StaticResource RevampBorderBrush}"
                         Opacity="0"
                         Margin="4 0 0 0" CornerRadius="1"
-                        Visibility="{Binding ShowLeaderButtons, Converter={StaticResource BoolToVisibility}}"
+                        Visibility="{Binding ShowLeaderButtons, Converter={converters:BoolToVisibility}}"
                         x:Name="GroupButtons" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
 

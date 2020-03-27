@@ -9,6 +9,7 @@
                     xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
                     xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
                     xmlns:chat="clr-namespace:TCC.Data.Chat"
+                    xmlns:nsConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                     mc:Ignorable="d">
 
     <converters:ShowDefaultCloseButtonConverter x:Key="ShowDefaultCloseButtonConverter" />
@@ -503,7 +504,7 @@
                             <Grid x:Name="PART_ItemsHolder" />
                         </Border>
                         <Grid Grid.Column="0" Grid.Row="0" x:Name="HeaderContainerGrid"
-                              Visibility="{TemplateBinding IsHeaderPanelVisible, Converter={StaticResource BoolToVisibility}}">
+                              Visibility="{TemplateBinding IsHeaderPanelVisible, Converter={nsConv:BoolToVisibility}}">
                             <Grid.Resources>
                                 <Style TargetType="{x:Type Button}"
                                        BasedOn="{StaticResource StandardEmbeddedButtonStyle}" />
@@ -550,7 +551,7 @@
                                     x:Name="DefaultAddButton"
                                     Grid.Column="2"
                                     Command="{x:Static dragablz:TabablzControl.AddItemCommand}"
-                                    Visibility="{TemplateBinding ShowDefaultAddButton, Converter={StaticResource BoolToVisibility}}" />
+                                    Visibility="{TemplateBinding ShowDefaultAddButton, Converter={nsConv:BoolToVisibility}}" />
                             <ContentControl Grid.Column="3" x:Name="SuffixContentControl"
                                             Content="{TemplateBinding HeaderSuffixContent}"
                                             ContentStringFormat="{TemplateBinding HeaderSuffixContentStringFormat}"
@@ -604,7 +605,7 @@
                                     <Grid x:Name="PART_ItemsHolder" />
                                 </Border>
                                 <Grid Grid.Column="0" x:Name="HeaderContainerGrid"
-                                      Visibility="{TemplateBinding IsHeaderPanelVisible, Converter={StaticResource BoolToVisibility}}">
+                                      Visibility="{TemplateBinding IsHeaderPanelVisible, Converter={nsConv:BoolToVisibility}}">
                                     <Grid.Resources>
                                         <Style TargetType="{x:Type Button}"
                                                BasedOn="{StaticResource StandardEmbeddedButtonStyle}" />
@@ -653,7 +654,7 @@
                                             x:Name="DefaultAddButton"
                                             Grid.Row="2"
                                             Command="{x:Static dragablz:TabablzControl.AddItemCommand}"
-                                            Visibility="{TemplateBinding ShowDefaultAddButton, Converter={StaticResource BoolToVisibility}}" />
+                                            Visibility="{TemplateBinding ShowDefaultAddButton, Converter={nsConv:BoolToVisibility}}" />
                                     <ContentControl Grid.Row="3" x:Name="SuffixContentControl"
                                                     Content="{TemplateBinding HeaderSuffixContent}"
                                                     ContentStringFormat="{TemplateBinding HeaderSuffixContentStringFormat}"
@@ -761,7 +762,7 @@
                                        Style="{StaticResource MaterialDesignInvisibleThumbStyle}" />
                                 <Grid HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ImportantCounter"
                                       Background="Transparent"
-                                      Visibility="{Binding Content.Attention, Converter={StaticResource BoolToVisibility}}">
+                                      Visibility="{Binding Content.Attention, Converter={nsConv:BoolToVisibility}}">
                                     <TextBlock Text="{Binding Content.ImportantMessagesLabel}"
                                                Foreground="{StaticResource MainBrush}"
                                                HorizontalAlignment="Center" VerticalAlignment="Center"

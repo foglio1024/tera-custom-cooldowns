@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
         xmlns:windows="clr-namespace:TCC.UI.Windows"
+        xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
         ResizeMode="NoResize" 
         AllowsTransparency="True" 
         SizeToContent="Height" 
@@ -71,7 +72,7 @@
                 </TextBlock>
                 <TextBlock Text="-b"  HorizontalAlignment="Stretch" TextAlignment="Left" Margin="0 0 0 2" 
                            FontSize="26" Foreground="{StaticResource DpsRoleBrush}" FontWeight="Thin" VerticalAlignment="Bottom"
-                           Visibility="{Binding Beta, Converter={StaticResource BoolToVisibility}}" 
+                           Visibility="{Binding Beta, Converter={converters:BoolToVisibility}}" 
                            />
             </StackPanel>
             <Separator Margin="0 -6 -20 3" Background="#3acf"></Separator>

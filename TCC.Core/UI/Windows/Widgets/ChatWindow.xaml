@@ -14,6 +14,7 @@
                    xmlns:controls="clr-namespace:TCC.UI.Controls"
                    xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
                    xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
+                   xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                    mc:Ignorable="d"
                    Style="{StaticResource BaseWindowStyle}"
                    MouseEnter="OnWindowMouseEnter"
@@ -274,7 +275,7 @@
                           VerticalAlignment="Bottom" IsHitTestVisible="False"
                           HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
                           Margin="10"
-                          Visibility="{Binding Paused, Converter={StaticResource BoolToVisibility}}" 
+                          Visibility="{Binding Paused, Converter={converters:BoolToVisibility}}" 
                           />
 
                     <!-- LFG bar -->
@@ -285,7 +286,7 @@
                                   Width="Auto"
                                   Height="18"
                                   Style="{StaticResource LfgItemsControl}"
-                                  Visibility="{Binding WindowSettings.LfgOn, Converter={StaticResource BoolToVisibility}}">
+                                  Visibility="{Binding WindowSettings.LfgOn, Converter={converters:BoolToVisibility}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" />
@@ -399,7 +400,7 @@
                     <!-- Settings button-->
                     <Button Margin="0 0 10 64" HorizontalAlignment="Right" Click="OnSettingsButtonClick"
                             Opacity=".5"
-                            Visibility="{Binding ShowCollapsedSettingsButton, Converter={StaticResource BoolToVisibility}}"
+                            Visibility="{Binding ShowCollapsedSettingsButton, Converter={converters:BoolToVisibility}}"
                             Style="{StaticResource ButtonMainStyle}" Height="18"
                             Padding="2"
                             Background="{StaticResource RevampBackgroundBrush}"

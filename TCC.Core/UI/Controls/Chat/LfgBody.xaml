@@ -30,7 +30,7 @@
             <Run Text="{Binding RawMessage, Mode=OneWay}"/>
             <!--<Run Text="&gt;"/>-->
         </TextBlock>
-        <!--Visibility="{Binding ElementName=Players, Path=HasItems, Converter={StaticResource BoolToVisibility}}"-->
+        <!--Visibility="{Binding ElementName=Players, Path=HasItems, Converter={nsConv:BoolToVisibility}}"-->
         <Border CornerRadius="10" HorizontalAlignment="Stretch" Grid.Column="1"
                 Background="#2fff" Margin="5 0" Padding="3 0"
                 >

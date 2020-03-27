@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d"
              UseLayoutRounding="True"
              d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance viewModels:DashboardViewModel}">
@@ -58,7 +59,7 @@
                 </Grid.ToolTip>
 
                 <Rectangle Height="1"
-                           Visibility="{Binding Hilight, Converter={StaticResource BoolToVisibility}}"
+                           Visibility="{Binding Hilight, Converter={converters:BoolToVisibility}}"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom"
                            Margin="1 0"
@@ -83,7 +84,7 @@
             <Grid Width="34" Margin="0">
                 <Rectangle x:Name="Hilight"
                            Opacity=".6"
-                           Visibility="{Binding Hilight, Converter={StaticResource BoolToVisibility}}"
+                           Visibility="{Binding Hilight, Converter={converters:BoolToVisibility}}"
                            Grid.ColumnSpan="10">
                     <Rectangle.Fill>
                         <LinearGradientBrush Opacity=".06">

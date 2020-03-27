@@ -7,6 +7,7 @@
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
              xmlns:npc="clr-namespace:TCC.UI.Controls.NPCs"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" Loaded="OnLoaded" UseLayoutRounding="True"
              d:DataContext="{d:DesignInstance npCs:NPC}"
              MouseEnter="SmallMobControl_OnMouseEnter"
@@ -218,7 +219,7 @@
             </ItemsControl.Style>
         </ItemsControl>
         <Button Grid.Column="0"
-                Visibility="{Binding VM.ShowOverrideBtn, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
+                Visibility="{Binding VM.ShowOverrideBtn, Converter={converters:BoolToVisibility}, RelativeSource={RelativeSource AncestorType={x:Type npc:SmallMobControl}}}"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Left"
                 Margin="-2 -7 0 0"

@@ -6,6 +6,7 @@
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
         <controls:Arc Width="58" 
@@ -32,7 +33,7 @@
 
 
         <Border Style="{StaticResource DefaultBorderStyle}" 
-                Opacity="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RoundSkillEffectControl}, Converter={StaticResource BoolToVisibility}}"
+                Opacity="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RoundSkillEffectControl}, Converter={converters:BoolToVisibility}}"
                 BorderThickness="0"
                 Background="#ffbd3d"
                 MinWidth="20"

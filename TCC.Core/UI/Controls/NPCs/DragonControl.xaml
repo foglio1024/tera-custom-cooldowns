@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              Loaded="UserControl_Loaded"
              mc:Ignorable="d" d:DataContext="{d:DesignData Npc}">
     <UserControl.Resources>
@@ -104,7 +105,7 @@
 
             <controls:Arc Width="58" Height="58"
                        Stroke="Red"
-                       Visibility="{Binding Enraged, Converter={StaticResource BoolToVisibility}, ConverterParameter=hidden}"
+                       Visibility="{Binding Enraged, Converter={converters:BoolToVisibility Mode=Hidden}}"
                        StrokeThickness="3"
                        x:Name="EnrageArc"
                        EndAngle="359.9"
