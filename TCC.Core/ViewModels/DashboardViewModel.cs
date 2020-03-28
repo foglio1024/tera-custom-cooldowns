@@ -43,10 +43,13 @@ namespace TCC.ViewModels
         private ICollectionViewLiveShaping _sortedColumns;
         private ObservableCollection<DungeonColumnViewModel> _columns;
         private Character _selectedCharacter;
+        private object _lock = new object();
+        private readonly Timer _tabFlushTimer;
+        private readonly List<Dictionary<uint, ItemAmount>> _pendingTabs;
 
         /* -- Properties ------------------------------------------- */
 
-        public Character CurrentCharacter => Game.Account.Characters.FirstOrDefault(x => x.Id == Game.Me.PlayerId);
+        public Character CurrentCharacter => Game.Account.CurrentCharacter;
         public Character SelectedCharacter
         {
             get => _selectedCharacter;
@@ -243,25 +246,34 @@ namespace TCC.ViewModels
 
         private void OnTabFlushTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            Dispatcher.InvokeAsync(() =>
+            try
             {
-                CurrentCharacter.Inventory.Clear();
-                foreach (var pendingTab in _pendingTabs)
+                Dispatcher.InvokeAsync(() =>
                 {
-                    foreach (var keyVal in pendingTab)
+                    CurrentCharacter.Inventory.Clear();
+                    lock (_lock)
                     {
-                        var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
-                        if (existing != null)
+                        foreach (var pendingTab in _pendingTabs) //TODO: lock on list   
                         {
-                            existing.Amount = keyVal.Value.Amount;
-                            continue;
+                            foreach (var keyVal in pendingTab)
+                            {
+                                var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
+                                if (existing != null)
+                                {
+                                    existing.Amount = keyVal.Value.Amount;
+                                    continue;
+                                }
+                                CurrentCharacter.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
+                            }
                         }
-                        CurrentCharacter.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
+                        _pendingTabs.Clear();
                     }
-                }
+                });
+            }
+            catch (Exception)
+            {
 
-                _pendingTabs.Clear();
-            });
+            }
         }
 
         private void OnShowDashboardHotkeyPressed()
@@ -288,7 +300,8 @@ namespace TCC.ViewModels
                     ch.DungeonInfo.DungeonList.Add(dg);
                 }
             }
-            var json = JsonConvert.SerializeObject(Game.Account, Formatting.Indented);
+
+            var json = JsonConvert.SerializeObject(Game.Account.Clone(), Formatting.Indented);
             File.WriteAllText(SettingsGlobals.CharacterJsonPath, json);
             if (File.Exists(SettingsGlobals.CharacterXmlPath))
                 File.Delete(SettingsGlobals.CharacterXmlPath);
@@ -496,7 +509,10 @@ namespace TCC.ViewModels
         private void OnItemList(S_ITEMLIST m)
         {
             if (m.Failed || m.Container == 14) return;
-            _pendingTabs.Add(m.Items);
+            lock (_lock)
+            {
+                _pendingTabs.Add(m.Items);
+            }
             _tabFlushTimer.Stop();
             _tabFlushTimer.Start();
             //UpdateInventory(m.Items, m.Pocket, m.NumPockets);
@@ -532,8 +548,6 @@ namespace TCC.ViewModels
             }
         }
 
-        private readonly Timer _tabFlushTimer;
-        private readonly List<Dictionary<uint, ItemAmount>> _pendingTabs;
 
         /* -- TODO EVENTS: TO BE REFACTORED ------------------------- */
 
