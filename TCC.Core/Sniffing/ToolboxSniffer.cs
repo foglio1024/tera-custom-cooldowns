@@ -223,7 +223,7 @@ namespace TCC.Sniffing
                         MessageReceived?.Invoke(new Message(DateTime.Now, dataBuf));
 
                     }
-                    catch (Exception e)
+                    catch
                     {
                         Connected = false;
                         client.Close();
