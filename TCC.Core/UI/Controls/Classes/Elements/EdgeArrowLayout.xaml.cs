@@ -18,14 +18,19 @@ namespace TCC.UI.Controls.Classes.Elements
             get
             {
                 var ret = new List<FrameworkElement>();
-                for (var i = 4; i >= 0; i--)
+                Dispatcher.Invoke(() =>
                 {
-                    ret.Add(Edge5To1.Children[i] as FrameworkElement);
-                }
-                for (var i = 4; i >= 0; i--)
-                {
-                    ret.Add(Edge10To6.Children[i] as FrameworkElement);
-                }
+
+                    for (var i = 4; i >= 0; i--)
+                    {
+                        ret.Add(Edge5To1.Children[i] as FrameworkElement);
+                    }
+
+                    for (var i = 4; i >= 0; i--)
+                    {
+                        ret.Add(Edge10To6.Children[i] as FrameworkElement);
+                    }
+                });
                 return ret;
             }
         }

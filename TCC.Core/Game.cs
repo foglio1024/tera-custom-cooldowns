@@ -690,8 +690,6 @@ namespace TCC
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
             Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
-
-
         }
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {

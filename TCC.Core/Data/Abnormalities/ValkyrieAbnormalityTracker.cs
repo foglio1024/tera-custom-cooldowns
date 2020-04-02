@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TCC.Data.Skills;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -43,33 +42,40 @@ namespace TCC.Data.Abnormalities
         private static void CheckRagnarok(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
+
+            vm.Ragnarok.Buff.Start(p.Duration);
         }
         private static void CheckRagnarok(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
+            vm.Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
         }
         private static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != RagnarokId) return;
-            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
+            vm.Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
 
         private static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
+            vm.Godsfall.Buff.Start(p.Duration);
         }
         private static void CheckGodsfall(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
+            vm.Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckGodsfall(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GodsfallId) return;
-            TccUtils.CurrentClassVM<ValkyrieLayoutVM>().Godsfall.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
+            vm.Godsfall.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)

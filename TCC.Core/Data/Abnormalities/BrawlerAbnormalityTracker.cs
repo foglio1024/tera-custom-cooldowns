@@ -1,5 +1,4 @@
-﻿using TCC.Utilities;
-using TCC.ViewModels;
+﻿using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
 namespace TCC.Data.Abnormalities
@@ -12,6 +11,7 @@ namespace TCC.Data.Abnormalities
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             if (!Game.IsMe(p.TargetId)) return;
+
             CheckGrowingFury(p);
             CheckCounterProc(p);
         }
@@ -31,36 +31,48 @@ namespace TCC.Data.Abnormalities
         private static void CheckGrowingFury(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().IsGfOn = true;
+            if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+
+            vm.IsGfOn = true;
         }
         private static void CheckGrowingFury(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().IsGfOn = true;
+            if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+
+            vm.IsGfOn = true;
         }
         private static void CheckGrowingFury(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().IsGfOn = false;
+            if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+
+            vm.IsGfOn = false;
         }
 
         private static void CheckCounterProc(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().Counter.Start(p.Duration);
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().CounterProc = true;
+            if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+
+            vm.Counter.Start(p.Duration);
+            vm.CounterProc = true;
         }
         private static void CheckCounterProc(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().Counter.Start(p.Duration);
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().CounterProc = true;
+            if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+
+            vm.Counter.Start(p.Duration);
+            vm.CounterProc = true;
         }
         private static void CheckCounterProc(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().Counter.Refresh(0, CooldownMode.Normal);
-            TccUtils.CurrentClassVM<BrawlerLayoutVM>().CounterProc = false;
+            if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+
+            vm.Counter.Refresh(0, CooldownMode.Normal);
+            vm.CounterProc = false;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using TCC.UI;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -37,50 +36,68 @@ namespace TCC.Data.Abnormalities
         private static void CheckEnergyStars(S_ABNORMALITY_BEGIN p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.EnergyStars.Buff.Start(p.Duration);
         }
         private static void CheckEnergyStars(S_ABNORMALITY_REFRESH p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.EnergyStars.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckEnergyStars(S_ABNORMALITY_END p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().EnergyStars.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.EnergyStars.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGrace(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GraceId) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.Grace.Buff.Start(p.Duration);
         }
         private static void CheckGrace(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GraceId) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.Grace.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckGrace(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GraceId) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().Grace.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.Grace.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckEdict(S_ABNORMALITY_BEGIN p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.EdictOfJudgment.Buff.Start(p.Duration);
         }
         private static void CheckEdict(S_ABNORMALITY_REFRESH p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.EdictOfJudgment.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckEdict(S_ABNORMALITY_END p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<PriestLayoutVM>().EdictOfJudgment.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.EdictOfJudgment.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)

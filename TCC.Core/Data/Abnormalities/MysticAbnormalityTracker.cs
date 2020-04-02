@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using TCC.UI;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -31,94 +30,99 @@ namespace TCC.Data.Abnormalities
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
+            if (!IsViewModelAvailable<MysticLayoutVM>(out var vm)) return;
             CheckVoc(p);
             if (!Game.IsMe(p.TargetId)) return;
             if (CritAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = true;
+                vm.Auras.CritAura = true;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = true;
+                vm.Auras.ManaAura = true;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = true;
+                vm.Auras.CritResAura = true;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = true;
+                vm.Auras.SwiftAura = true;
             }
             else if (p.AbnormalityId == VowId)
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Start(p.Duration);
+                vm.Vow.Buff.Start(p.Duration);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Elementalize = true;
+                vm.Elementalize = true;
             }
 
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
+            if (!IsViewModelAvailable<MysticLayoutVM>(out var vm)) return;
+
             CheckVoc(p);
 
             if (!Game.IsMe(p.TargetId)) return;
 
             if (CritAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = true;
+                vm.Auras.CritAura = true;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = true;
+                vm.Auras.ManaAura = true;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = true;
+                vm.Auras.CritResAura = true;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = true;
+                vm.Auras.SwiftAura = true;
             }
             else if (p.AbnormalityId == VowId)
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                vm.Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Elementalize = true;
+                vm.Elementalize = true;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
+            if (!IsViewModelAvailable<MysticLayoutVM>(out var vm)) return;
+
             CheckVoc(p);
 
             if (!Game.IsMe(p.TargetId)) return;
 
             if (CritAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritAura = false;
+                vm.Auras.CritAura = false;
             }
             else if (ManaAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.ManaAura = false;
+                vm.Auras.ManaAura = false;
             }
             else if (CritResAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.CritResAura = false;
+                vm.Auras.CritResAura = false;
             }
             else if (SwiftAuraIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Auras.SwiftAura = false;
+                vm.Auras.SwiftAura = false;
             }
             else if (p.AbnormalityId == VowId)
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Vow.Buff.Refresh(0, CooldownMode.Normal);
+                vm.Vow.Buff.Refresh(0, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
-                TccUtils.CurrentClassVM<MysticLayoutVM>().Elementalize = false;
+                vm.Elementalize = false;
             }
         }
 

@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using TCC.Data.Skills;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -93,21 +92,25 @@ namespace TCC.Data.Abnormalities
         {
             if (p.AbnormalityId != 100801) return;
             //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+
+            vm.DeadlyGamble.Buff.Start(p.Duration);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != 100801) return;
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
             //if (!GambleIDs.Contains(p.AbnormalityId)) return;
             //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.DeadlyGamble.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != 100801) return;
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
             //if (!GambleIDs.Contains(p.AbnormalityId)) return;
             //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
+            vm.DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)
@@ -119,52 +122,60 @@ namespace TCC.Data.Abnormalities
         private static void CheckTraverseCut(S_ABNORMALITY_BEGIN p)
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.Val = p.Stacks;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.InvokeToZero(p.Duration);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.TraverseCut.Val = p.Stacks;
+            vm.TraverseCut.InvokeToZero(p.Duration);
         }
         private static void CheckTraverseCut(S_ABNORMALITY_REFRESH p)
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.Val = p.Stacks;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.InvokeToZero(p.Duration);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.TraverseCut.Val = p.Stacks;
+            vm.TraverseCut.InvokeToZero(p.Duration);
         }
         private static void CheckTraverseCut(S_ABNORMALITY_END p)
         {
             if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().TraverseCut.Val = 0;
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.TraverseCut.Val = 0;
         }
 
         private static void CheckSwiftGlyphs(S_ABNORMALITY_BEGIN p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetSwift(p.Duration);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.SetSwift(p.Duration);
         }
         private static void CheckSwiftGlyphs(S_ABNORMALITY_REFRESH p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetSwift(p.Duration);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.SetSwift(p.Duration);
         }
         private static void CheckSwiftGlyphs(S_ABNORMALITY_END p)
         {
             if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetSwift(0);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.SetSwift(0);
         }
         private static void CheckArush(S_ABNORMALITY_BEGIN p)
         {
             if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetArush(p.Duration);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.SetArush(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_REFRESH p)
         {
             if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetArush(p.Duration);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.SetArush(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_END p)
         {
             if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().SetArush(0);
+            if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+            vm.SetArush(0);
         }
-
     }
 }
 /*

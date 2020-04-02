@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using TCC.Data.Skills;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -47,18 +46,23 @@ namespace TCC.Data.Abnormalities
         private static void CheckLaserTargeting(S_ABNORMALITY_BEGIN p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<GunnerLayoutVM>(out var vm)) return;
+
+            vm.ModularSystem.Buff.Start(p.Duration);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_REFRESH p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<GunnerLayoutVM>(out var vm)) return;
+
+            vm.ModularSystem.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckLaserTargeting(S_ABNORMALITY_END p)
         {
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
+            if (!IsViewModelAvailable<GunnerLayoutVM>(out var vm)) return;
 
-            TccUtils.CurrentClassVM<GunnerLayoutVM>().ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
+            vm.ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

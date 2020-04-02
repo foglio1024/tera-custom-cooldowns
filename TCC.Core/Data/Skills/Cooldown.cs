@@ -40,7 +40,7 @@ namespace TCC.Data.Skills
         public CooldownMode Mode { get; private set; }
         public bool FlashOnAvailable
         {
-            get => _flashOnAvailable;
+            get => _flashOnAvailable && App.Settings.ClassWindowSettings.FlashAvailableSkills;
             set
             {
                 _flashOnAvailable = value;
@@ -98,7 +98,15 @@ namespace TCC.Data.Skills
             _offsetTimer.Tick += StartSecondsTimer;
             _secondsTimer.Tick += DecreaseSeconds;
 
+            App.Settings.ClassWindowSettings.FlashAvailableSkillsChanged += OnGlobalFlashChanged;
+
         }
+
+        private void OnGlobalFlashChanged()
+        {
+            OnCombatStatusChanged();
+        }
+
         public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher d = null) : this(d)
         {
             CooldownType = t;
@@ -236,7 +244,9 @@ namespace TCC.Data.Skills
         }
         public void Dispose()
         {
+            App.Settings.ClassWindowSettings.FlashAvailableSkillsChanged -= OnGlobalFlashChanged;
             CanFlash = false;
+
             _mainTimer.Tick -= CooldownEnded;
             _offsetTimer.Tick -= StartSecondsTimer;
             _secondsTimer.Tick -= DecreaseSeconds;
@@ -244,7 +254,9 @@ namespace TCC.Data.Skills
             _mainTimer.Stop();
             _offsetTimer.Stop();
             _secondsTimer.Stop();
+
         }
+
         public override string ToString()
         {
             return Skill.Name;

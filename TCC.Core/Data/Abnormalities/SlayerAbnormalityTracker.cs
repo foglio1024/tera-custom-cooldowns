@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -28,17 +27,23 @@ namespace TCC.Data.Abnormalities
         private static void CheckInColdBlood(S_ABNORMALITY_BEGIN p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<SlayerLayoutVM>().InColdBlood.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
+
+            vm.InColdBlood.Buff.Start(p.Duration);
         }
         private static void CheckInColdBlood(S_ABNORMALITY_REFRESH p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<SlayerLayoutVM>().InColdBlood.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
+
+            vm.InColdBlood.Buff.Start(p.Duration);
         }
         private static void CheckInColdBlood(S_ABNORMALITY_END p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<SlayerLayoutVM>().InColdBlood.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
+
+            vm.InColdBlood.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using TCC.Data.Skills;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraDataLite;
 using TeraPacketParser.Messages;
@@ -41,19 +40,25 @@ namespace TCC.Data.Abnormalities
         private static void CheckManaBoost(S_ABNORMALITY_BEGIN p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
+
+            vm.ManaBoost.Buff.Start(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_REFRESH p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
+
+            vm.ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_END p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
+
+            vm.ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckFusionBoost(S_ABNORMALITY_BEGIN p)
@@ -121,7 +126,9 @@ namespace TCC.Data.Abnormalities
         {
             if (FireIceFusionId == p.AbnormalityId)
             {
-                TccUtils.CurrentClassVM<SorcererLayoutVM>().EndFireIcePre();
+                if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
+
+                vm.EndFireIcePre();
             }
             //else if (FireArcaneFusionId == p.AbnormalityId)
             //{

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -38,51 +37,69 @@ namespace TCC.Data.Abnormalities
         {
             //if (!ARushIDs.Contains(p.AbnormalityId)) return;
             if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
-            TccUtils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.AdrenalineRush.Buff.Start(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_REFRESH p)
         {
             //if (!ARushIDs.Contains(p.AbnormalityId)) return;
             if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
-            TccUtils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.AdrenalineRush.Buff.Start(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_END p)
         {
             //if (!ARushIDs.Contains(p.AbnormalityId)) return;
             if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
-            TccUtils.CurrentClassVM<LancerLayoutVM>().AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGshout(S_ABNORMALITY_BEGIN p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<LancerLayoutVM>().GuardianShout.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.GuardianShout.Buff.Start(p.Duration);
         }
         private static void CheckGshout(S_ABNORMALITY_REFRESH p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<LancerLayoutVM>().GuardianShout.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.GuardianShout.Buff.Start(p.Duration);
         }
         private static void CheckGshout(S_ABNORMALITY_END p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<LancerLayoutVM>().GuardianShout.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.GuardianShout.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckLineHeld(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            TccUtils.CurrentClassVM<LancerLayoutVM>().LH.StartBaseBuff(p.Duration);
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.LH.StartBaseBuff(p.Duration);
         }
         private static void CheckLineHeld(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            TccUtils.CurrentClassVM<LancerLayoutVM>().LH.RefreshBaseBuff(p.Stacks, p.Duration);
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.LH.RefreshBaseBuff(p.Stacks, p.Duration);
         }
         private static void CheckLineHeld(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != LineHeldId) return;
-            TccUtils.CurrentClassVM<LancerLayoutVM>().LH.Stop();
+            if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
+
+            vm.LH.Stop();
         }
     }
 }

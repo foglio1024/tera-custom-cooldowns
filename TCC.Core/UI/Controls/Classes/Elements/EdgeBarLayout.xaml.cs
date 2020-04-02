@@ -17,10 +17,13 @@ namespace TCC.UI.Controls.Classes.Elements
             get
             {
                 var ret = new List<FrameworkElement>();
-                foreach (FrameworkElement child in EdgeContainer.Children)
+                Dispatcher.Invoke(() =>
                 {
-                    ret.Add(child);
-                }
+                    foreach (FrameworkElement child in EdgeContainer.Children)
+                    {
+                        ret.Add(child);
+                    }
+                });
                 return ret.ToList();
 
             }

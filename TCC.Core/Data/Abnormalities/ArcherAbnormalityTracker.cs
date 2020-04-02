@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using TCC.Utilities;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -15,7 +14,7 @@ namespace TCC.Data.Abnormalities
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
-            if (!Game.IsMe(p.TargetId)) return;       
+            if (!Game.IsMe(p.TargetId)) return;  
             CheckFocus(p);
             CheckFocusX(p);
             CheckWindsong(p);
@@ -42,70 +41,87 @@ namespace TCC.Data.Abnormalities
         {
             //if (!WindsongIds.Contains(p.AbnormalityId)) return;
             if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+            vm.Windsong.Buff.Start(p.Duration);
         }
         private static void CheckWindsong(S_ABNORMALITY_REFRESH p)
         {
             //if (!WindsongIds.Contains(p.AbnormalityId)) return;
             if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+
+            vm.Windsong.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckWindsong(S_ABNORMALITY_END p)
         {
             //if (!WindsongIds.Contains(p.AbnormalityId)) return;☺
             if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Windsong.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+
+            vm.Windsong.Buff.Refresh(0, CooldownMode.Normal);
         }
 
         private static void CheckGaleSteps(S_ABNORMALITY_BEGIN p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().WindWalk.Start(p.Duration);
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().WindWalkProc = true;
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+
+            vm.WindWalk.Start(p.Duration);
+            vm.WindWalkProc = true;
         }
         private static void CheckWindWalk(S_ABNORMALITY_REFRESH p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().WindWalk.Refresh(p.Duration, CooldownMode.Normal);
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().WindWalkProc = true;
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+
+            vm.WindWalk.Refresh(p.Duration, CooldownMode.Normal);
+            vm.WindWalkProc = true;
         }
         private static void CheckGaleSteps(S_ABNORMALITY_END p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().WindWalk.Refresh(0, CooldownMode.Normal);
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().WindWalkProc = false;
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+
+            vm.WindWalk.Refresh(0, CooldownMode.Normal);
+            vm.WindWalkProc = false;
         }
 
         private static void CheckFocus(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != FocusId) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Focus.StartFocus(p.Duration);
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+            vm.Focus.StartFocus(p.Duration);
         }
         private static void CheckFocus(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != FocusId) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Focus.SetFocusStacks(p.Stacks, p.Duration);
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+            vm.Focus.SetFocusStacks(p.Stacks, p.Duration);
         }
         private static void CheckFocus(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusId) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Focus.StopFocus();
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+            vm.Focus.StopFocus();
         }
 
         private static void CheckFocusX(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != FocusXId) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Focus.StartFocusX(p.Duration);
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+            vm.Focus.StartFocusX(p.Duration);
         }
         private static void CheckFocusX(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != FocusXId) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Focus.StartFocusX(p.Duration);
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+            vm.Focus.StartFocusX(p.Duration);
         }
         private static void CheckFocusX(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusXId) return;
-            TccUtils.CurrentClassVM<ArcherLayoutVM>().Focus.StopFocusX();
+            if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+            vm.Focus.StopFocusX();
         }
     }
 }

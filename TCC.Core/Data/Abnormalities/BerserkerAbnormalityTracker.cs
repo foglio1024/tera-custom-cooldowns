@@ -1,5 +1,4 @@
-﻿using TCC.Utilities;
-using TCC.ViewModels;
+﻿using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
 namespace TCC.Data.Abnormalities
@@ -17,100 +16,111 @@ namespace TCC.Data.Abnormalities
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             if (!Game.IsMe(p.TargetId)) return;
+            if (!IsViewModelAvailable<BerserkerLayoutVM>(out var vm)) return;
             CheckUnleashAbnormals(p);
 
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Start(p.Duration);
+                    vm.Bloodlust.Buff.Start(p.Duration);
                     break;
                 case FieryRageId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Start(p.Duration);
+                    vm.FieryRage.Buff.Start(p.Duration);
                     break;
                 case UnleashId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Start(p.Duration);
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = true;
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = false;
+                    vm.Unleash.Buff.Start(p.Duration);
+                    vm.IsUnleashOn = true;
+                    vm.IsUnleashOff = false;
                     break;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
             if (!Game.IsMe(p.TargetId)) return;
+            if (!IsViewModelAvailable<BerserkerLayoutVM>(out var vm)) return;
+
             CheckUnleashAbnormals(p);
 
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                    vm.Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
                     break;
                 case FieryRageId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                    vm.FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
                     break;
                 case UnleashId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = true;
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = false;
+                    vm.Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                    vm.IsUnleashOn = true;
+                    vm.IsUnleashOff = false;
                     break;
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
             if (!Game.IsMe(p.TargetId)) return;
+            if (!IsViewModelAvailable<BerserkerLayoutVM>(out var vm)) return;
+
             CheckUnleashAbnormals(p);
 
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
+                    vm.Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
                     break;
                 case FieryRageId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().FieryRage.Buff.Refresh(0, CooldownMode.Normal);
+                    vm.FieryRage.Buff.Refresh(0, CooldownMode.Normal);
                     break;
                 case UnleashId:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().Unleash.Buff.Refresh(0, CooldownMode.Normal);
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOn = false;
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().IsUnleashOff = true;
+                    vm.Unleash.Buff.Refresh(0, CooldownMode.Normal);
+                    vm.IsUnleashOn = false;
+                    vm.IsUnleashOff = true;
                     break;
             }
         }
 
         private static void CheckUnleashAbnormals(S_ABNORMALITY_BEGIN p)
         {
+            if (!IsViewModelAvailable<BerserkerLayoutVM>(out var vm)) return;
+
             switch (p.AbnormalityId)
             {
                 case SinisterDexter:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
+                    vm.SinisterTracker.Val = p.Stacks;
+                    vm.DexterTracker.Val = p.Stacks;
                     break;
                 case Rampage:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
+                    vm.RampageTracker.Val = p.Stacks;
                     break;
             }
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_REFRESH p)
         {
+            if (!IsViewModelAvailable<BerserkerLayoutVM>(out var vm)) return;
+
             switch (p.AbnormalityId)
             {
                 case SinisterDexter:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = p.Stacks;
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = p.Stacks;
+                    vm.SinisterTracker.Val = p.Stacks;
+                    vm.DexterTracker.Val = p.Stacks;
                     break;
                 case Rampage:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = p.Stacks;
+                    vm.RampageTracker.Val = p.Stacks;
                     break;
             }
         }
         private static void CheckUnleashAbnormals(S_ABNORMALITY_END p)
         {
+            if (!IsViewModelAvailable<BerserkerLayoutVM>(out var vm)) return;
+
             switch (p.AbnormalityId)
             {
                 case SinisterDexter:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().SinisterTracker.Val = 0;
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().DexterTracker.Val = 0;
+                    vm.SinisterTracker.Val = 0;
+                    vm.DexterTracker.Val = 0;
                     break;
                 case Rampage:
-                    TccUtils.CurrentClassVM<BerserkerLayoutVM>().RampageTracker.Val = 0;
+                    vm.RampageTracker.Val = 0;
                     break;
             }
         }

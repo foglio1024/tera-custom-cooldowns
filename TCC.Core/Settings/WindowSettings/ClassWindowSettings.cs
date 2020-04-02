@@ -10,10 +10,13 @@ namespace TCC.Settings.WindowSettings
         public event Action WarriorEdgeModeChanged;
         public event Action WarriorShowTraverseCutChanged;
         public event Action SorcererShowElementsChanged;
+        public event Action FlashAvailableSkillsChanged;
 
         private bool _warriorShowEdge;
         private bool _sorcererShowElements;
         private bool _warriorShowTraverseCut;
+        private bool _flashAvailableSkills;
+
         private WarriorEdgeMode _warriorEdgeMode;
 
         public bool WarriorShowEdge
@@ -50,6 +53,17 @@ namespace TCC.Settings.WindowSettings
 
             }
         }
+        public bool FlashAvailableSkills
+        {
+            get => _flashAvailableSkills;
+            set
+            {
+                if (_flashAvailableSkills == value) return;
+                _flashAvailableSkills = value;
+                N();
+                FlashAvailableSkillsChanged?.Invoke();
+            }
+        }
         public WarriorEdgeMode WarriorEdgeMode
         {
             get => _warriorEdgeMode;
@@ -75,6 +89,8 @@ namespace TCC.Settings.WindowSettings
             Positions = new ClassPositions(.25, .6, ButtonsPosition.Above);
 
             UndimOnFlyingGuardian = false;
+
+            FlashAvailableSkills = true;
 
             WarriorShowTraverseCut = true;
             WarriorShowEdge = true;

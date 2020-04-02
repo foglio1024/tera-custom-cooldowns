@@ -1,5 +1,4 @@
-﻿using TCC.Utilities;
-using TCC.ViewModels;
+﻿using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
 namespace TCC.Data.Abnormalities
@@ -32,29 +31,39 @@ namespace TCC.Data.Abnormalities
         private static void CheckFocus(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != FocusId) return;
-            TccUtils.CurrentClassVM<NinjaLayoutVM>().FocusOn = true;
+            if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+
+            vm.FocusOn = true;
         }
         private static void CheckFocus(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusId) return;
-            TccUtils.CurrentClassVM<NinjaLayoutVM>().FocusOn = false;
+            if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+
+            vm.FocusOn = false;
         }
 
         private static void CheckInnerHarmony(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
-            TccUtils.CurrentClassVM<NinjaLayoutVM>().InnerHarmony.Buff.Start(p.Duration);
+            if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+
+            vm.InnerHarmony.Buff.Start(p.Duration);
 
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
-            TccUtils.CurrentClassVM<NinjaLayoutVM>().InnerHarmony.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+
+            vm.InnerHarmony.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
-            TccUtils.CurrentClassVM<NinjaLayoutVM>().InnerHarmony.Buff.Refresh(0, CooldownMode.Normal);
+            if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+
+            vm.InnerHarmony.Buff.Refresh(0, CooldownMode.Normal);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using TCC.Data.Skills;
+using TCC.Utilities;
+using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
 namespace TCC.Data.Abnormalities
@@ -44,6 +46,12 @@ namespace TCC.Data.Abnormalities
         protected AbnormalityTracker()
         {
             ClearMarkedTargets();
+        }
+
+        public static bool IsViewModelAvailable<T>(out T vm) where T : BaseClassLayoutVM
+        {
+            vm = TccUtils.CurrentClassVM<T>();
+            return vm != null;
         }
     }
 }
