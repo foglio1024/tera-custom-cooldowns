@@ -644,6 +644,8 @@ namespace TCC.ViewModels
                 return ret;
             }
         }
+
+        //TODO: https://stackoverflow.com/a/17405771 (in Nostrum)
         public IEnumerable<CooldownBarMode> CooldownBarModes => EnumUtils.ListFromEnum<CooldownBarMode>();
         public IEnumerable<FlowDirection> FlowDirections => EnumUtils.ListFromEnum<FlowDirection>();
         public IEnumerable<EnrageLabelMode> EnrageLabelModes => EnumUtils.ListFromEnum<EnrageLabelMode>();
