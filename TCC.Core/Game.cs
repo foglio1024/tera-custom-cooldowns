@@ -684,30 +684,30 @@ namespace TCC
         }
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
+            CurrentAbnormalityTracker?.CheckAbnormality(p);
             if (!IsMe(p.TargetId)) return;
             if (!DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
-            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
         }
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
+            CurrentAbnormalityTracker?.CheckAbnormality(p);
             if (!IsMe(p.TargetId)) return;
             if (!DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
-            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
 
         }
         private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
+            CurrentAbnormalityTracker?.CheckAbnormality(p);
             if (!IsMe(p.TargetId)) return;
             if (!DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             FlyingGuardianDataProvider.HandleAbnormal(p);
             Me.EndAbnormality(ab);
-            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
 
         }
         private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
