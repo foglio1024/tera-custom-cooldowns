@@ -46,7 +46,7 @@ namespace TCC.Publisher
 
         public static void Init()
         {
-            _settings = JsonConvert.DeserializeObject<PublisherSettings>(File.ReadAllText("settings.json"));
+            _settings = JsonConvert.DeserializeObject<PublisherSettings>(File.ReadAllText("tcc_publisher_settings.json"));
 
             _releaseFolder = Path.Combine(_settings.LocalRepositoryPath, "release");
 
