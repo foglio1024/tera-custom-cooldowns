@@ -604,6 +604,9 @@
                             <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.SorcererShowElements, Mode=TwoWay}"
                                                       SettingName="Show Sorcerer elements" 
                                                       IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
+                            <settings:CheckboxSetting IsOn="{Binding CharacterWindowSettings.WarriorShowEdge, Mode=TwoWay}"
+                                                      SettingName="Show Warrior edge" 
+                                                      IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                         </StackPanel>
                         <!-- Actions -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">

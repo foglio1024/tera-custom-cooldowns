@@ -7,9 +7,11 @@ namespace TCC.Settings.WindowSettings
     public class CharacterWindowSettings : WindowSettingsBase
     {
         public event Action SorcererShowElementsChanged;
+        public event Action WarriorShowEdgeChanged;
         public event Action ShowStaminaChanged;
 
         private bool _sorcererShowElements;
+        private bool _warriorShowEdge;
         private bool _compactMode;
         private bool _showStamina;
 
@@ -31,6 +33,17 @@ namespace TCC.Settings.WindowSettings
                 if (_sorcererShowElements == value) return;
                 _sorcererShowElements = value;
                 SorcererShowElementsChanged?.Invoke();
+                N();
+            }
+        }
+        public bool WarriorShowEdge
+        {
+            get => _warriorShowEdge;
+            set
+            {
+                if (_warriorShowEdge == value) return;
+                _warriorShowEdge = value;
+                WarriorShowEdgeChanged?.Invoke();
                 N();
             }
         }

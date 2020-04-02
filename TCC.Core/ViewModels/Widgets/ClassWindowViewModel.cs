@@ -97,9 +97,6 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
             PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
             PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
-            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
-            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
-            PacketAnalyzer.Processor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
             PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
             PacketAnalyzer.Processor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
         }
@@ -110,9 +107,6 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
-            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
-            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
-            PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
             PacketAnalyzer.Processor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
             PacketAnalyzer.Processor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
         }
@@ -143,9 +137,9 @@ namespace TCC.ViewModels.Widgets
             // check enabled?
             switch (CurrentClass)
             {
-                case Class.Warrior when CurrentManager is WarriorLayoutVM wm:
-                    wm.EdgeCounter.Val = m.Edge;
-                    break;
+                //case Class.Warrior when CurrentManager is WarriorLayoutVM wm:
+                //    wm.EdgeCounter.Val = m.Edge;
+                //    break;
                 case Class.Sorcerer when CurrentManager is SorcererLayoutVM sm:
                     sm.NotifyElementChanged();
                     break;
@@ -163,22 +157,7 @@ namespace TCC.ViewModels.Widgets
             if (!(CurrentManager is ValkyrieLayoutVM vvm)) return;
             vvm.RunemarksCounter.Val = p.TotalRunemarks;
         }
-
-        private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
-        {
-            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
-        }
-
-        private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
-        {
-            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
-        }
-
-        private void OnAbnormalityEnd(S_ABNORMALITY_END p)
-        {
-            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
-        }
-
+        
         private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
             UpdateSkillCooldown(m.SkillId, m.Cooldown);

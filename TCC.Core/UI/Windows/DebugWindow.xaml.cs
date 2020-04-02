@@ -139,15 +139,15 @@ namespace TCC.UI.Windows
 
         private void SetStance(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).Content.ToString() == "Assault") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
-            else if (((Button)sender).Content.ToString() == "Defensive") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
-            else if (((Button)sender).Content.ToString() == "None") TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
+            if (((Button)sender).Content.ToString() == "Assault") Game.Me.WarriorStance.CurrentStance = WarriorStance.Assault;
+            else if (((Button)sender).Content.ToString() == "Defensive") Game.Me.WarriorStance.CurrentStance = WarriorStance.Defensive;
+            else if (((Button)sender).Content.ToString() == "None") Game.Me.WarriorStance.CurrentStance = WarriorStance.None;
         }
 
         private void IncreaseEdge(object sender, RoutedEventArgs e)
         {
-            if (TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.IsMaxed) TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val = 0;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().EdgeCounter.Val++;
+            if (Game.Me.StacksCounter.IsMaxed) Game.Me.StacksCounter.Val = 0;
+            Game.Me.StacksCounter.Val++;
 
         }
 

@@ -2,8 +2,6 @@
 using System.Threading;
 using System.Windows;
 using TCC.Data;
-using TCC.Utilities;
-using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Classes.Elements
 {
@@ -53,8 +51,8 @@ namespace TCC.UI.Controls.Classes.Elements
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             //lazy way of making sure that DataContext is not null
-            var classMgr = TccUtils.CurrentClassVM<WarriorLayoutVM>();
-            _context = classMgr?.EdgeCounter;
+            //var classMgr = TccUtils.CurrentClassVM<WarriorLayoutVM>();
+            _context = Game.Me.StacksCounter; // classMgr?.EdgeCounter;
             while (_context == null)
             {
                 _context = (Counter)DataContext;

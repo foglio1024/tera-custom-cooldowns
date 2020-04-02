@@ -60,33 +60,33 @@ namespace TCC.Data.Abnormalities
         private static void CheckAssaultStance(S_ABNORMALITY_BEGIN p)
         {
             if (!AstanceIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
+            Game.Me.WarriorStance.CurrentStance = WarriorStance.Assault;
         }
         private static void CheckAssaultStance(S_ABNORMALITY_REFRESH p)
         {
             if (!AstanceIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Assault;
+            Game.Me.WarriorStance.CurrentStance = WarriorStance.Assault;
         }
         private static void CheckAssaultStance(S_ABNORMALITY_END p)
         {
             if (!AstanceIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
+            Game.Me.WarriorStance.CurrentStance = WarriorStance.None;
         }
 
         private static void CheckDefensiveStance(S_ABNORMALITY_BEGIN p)
         {
             if (!DstanceIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
+            Game.Me.WarriorStance.CurrentStance = WarriorStance.Defensive;
         }
         private static void CheckDefensiveStance(S_ABNORMALITY_REFRESH p)
         {
             if (!DstanceIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.Defensive;
+            Game.Me.WarriorStance.CurrentStance = WarriorStance.Defensive;
         }
         private static void CheckDefensiveStance(S_ABNORMALITY_END p)
         {
             if (!DstanceIDs.Contains(p.AbnormalityId)) return;
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().Stance.CurrentStance = WarriorStance.None;
+            Game.Me.WarriorStance.CurrentStance = WarriorStance.None;
         }
 
         private static void CheckDeadlyGamble(S_ABNORMALITY_BEGIN p)

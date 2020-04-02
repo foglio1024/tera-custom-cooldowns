@@ -34,37 +34,6 @@
                 </FrameworkElement.RenderTransform>
             </elements:EdgeBarLayout>
         </ControlTemplate>
-        <Storyboard x:Key="Explode" >
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"  Duration="0:0:0.1" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}"/>
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" BeginTime="0:0:0.1" Duration="0:0:0.2" From="1" To=".2"/>
-        </Storyboard>
-        <Style x:Key="MaxGlowRhomb" TargetType="Rectangle">
-            <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
-            <Setter Property="Opacity" Value="0"/>
-            <Setter Property="RenderTransform" Value="{StaticResource Rotate45}"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <BlurEffect Radius="30" RenderingBias="Performance" />
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding EdgeCounter.IsMaxed}" Value="True">
-                    <DataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource Explode}"/>
-                    </DataTrigger.EnterActions>
-                    <DataTrigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                             Duration="0:0:0.3" To="0"  
-                                                             EasingFunction="{StaticResource QuadraticEase}"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </DataTrigger.ExitActions>
-                </DataTrigger>
-            </Style.Triggers>
-
-        </Style>
     </UserControl.Resources>
     <Grid Width="Auto" Name="Root" ClipToBounds="False" Margin="55 20 50 100" >
         <Grid.RowDefinitions>
@@ -166,22 +135,22 @@
                 <!--Class icon-->
                 <Path Data="{StaticResource SvgClassWarrior}" Margin="21" Opacity=".3"/>
             </Grid>
-            <!--Max edge glow outer-->
+            <!--Max edge glow outer--><!--
             <Rectangle Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
                        Fill="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}, ConverterParameter=false}" 
                        Margin="5"
                        Style="{StaticResource MaxGlowRhomb}">
             </Rectangle>
-            <!--Max edge glow inner-->
+            --><!--Max edge glow inner--><!--
             <Rectangle Margin="15" 
                        Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
                        Fill="{Binding Stance.CurrentStance, Converter={StaticResource StanceToColorConverter}, ConverterParameter=false}"
                        Style="{StaticResource MaxGlowRhomb}">
-            </Rectangle>
-            <TextBlock Style="{StaticResource DefaultTextStyle}" 
+            </Rectangle>-->
+            <!--<TextBlock Style="{StaticResource DefaultTextStyle}" 
                        TextAlignment="Center" FontSize="22" 
                        FontWeight="DemiBold" Foreground="#afff" 
-                       Text="{Binding EdgeCounter.Val}" VerticalAlignment="Center"/>
+                       Text="{Binding EdgeCounter.Val}" VerticalAlignment="Center"/>-->
             <ContentControl>
                 <ContentControl.Style>
                     <Style TargetType="ContentControl">

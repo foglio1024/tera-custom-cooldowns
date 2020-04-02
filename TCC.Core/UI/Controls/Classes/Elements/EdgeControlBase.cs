@@ -55,11 +55,14 @@ namespace TCC.UI.Controls.Classes.Elements
         {
             if (e.PropertyName != nameof(Counter.Val)) return;
             if (EdgeElements == null) return;
-            if (EdgeCounter == null) return;
-            for (var i = 0; i < EdgeCounter.MaxValue; i++)
+            Dispatcher.Invoke(() =>
             {
-                EdgeElements[i].Opacity = i < EdgeCounter.Val ? 1 : 0;
-            }
+                if (EdgeCounter == null) return;
+                for (var i = 0; i < EdgeCounter.MaxValue; i++)
+                {
+                    EdgeElements[i].Opacity = i < EdgeCounter.Val ? 1 : 0;
+                }
+            });
         }
     }
 }

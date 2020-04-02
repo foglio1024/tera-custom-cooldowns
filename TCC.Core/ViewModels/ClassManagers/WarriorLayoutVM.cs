@@ -1,4 +1,5 @@
-﻿using TCC.Data;
+﻿using System.ComponentModel;
+using TCC.Data;
 using TCC.Data.Skills;
 using TeraDataLite;
 
@@ -11,9 +12,10 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator DeadlyGamble { get; set; }
         public DurationCooldownIndicator AdrenalineRush { get; set; }
         public DurationCooldownIndicator Swift { get; set; }
-        public Counter EdgeCounter { get; set; }
-        public StanceTracker<WarriorStance> Stance { get; set; }
         public StatTracker TraverseCut { get; set; }
+        
+        public StanceTracker<WarriorStance> Stance => Game.Me.WarriorStance; //for binding
+        public Counter EdgeCounter => Game.Me.StacksCounter; //for binding
 
         private bool _warningStance;
         public bool WarningStance
@@ -33,13 +35,11 @@ namespace TCC.ViewModels
 
         public WarriorLayoutVM()
         {
-            EdgeCounter = new Counter(10, true);
             TraverseCut = new StatTracker { Max = 13, Val = 0 };
-            //TempestAura = new StatTracker { Max = 50, Val = 0 };
-            Stance = new StanceTracker<WarriorStance>();
+            //Stance = new StanceTracker<WarriorStance>();
             Game.Me.Death += OnDeath;
             Game.CombatChanged += CheckStanceWarning;
-            Stance.PropertyChanged += (_, __) => CheckStanceWarning(); // StanceTracker has only one prop
+            Stance.PropertyChanged += OnStanceOnPropertyChanged; // StanceTracker has only one prop
 
         }
 
@@ -80,7 +80,15 @@ namespace TCC.ViewModels
 
         public override void Dispose()
         {
+            Game.Me.Death -= OnDeath;
+            Game.CombatChanged -= CheckStanceWarning;
+            Stance.PropertyChanged -= OnStanceOnPropertyChanged;
             DeadlyGamble.Cooldown.Dispose();
+        }
+
+        private void OnStanceOnPropertyChanged(object _, PropertyChangedEventArgs __)
+        {
+            CheckStanceWarning();
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
@@ -92,7 +100,7 @@ namespace TCC.ViewModels
 
         private void CheckStanceWarning()
         {
-            WarningStance = Stance.CurrentStance == WarriorStance.None && Game.Combat;
+            WarningStance = Game.Me.WarriorStance.CurrentStance == WarriorStance.None && Game.Combat;
         }
 
         public void SetSwift(uint duration)

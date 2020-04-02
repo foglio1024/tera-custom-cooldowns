@@ -555,7 +555,6 @@
                             </Style.Triggers>
                         </Style>
                     </Grid.Style>
-
                     <Image Stretch="Uniform">
                         <Image.Style>
                             <Style TargetType="Image">
@@ -645,6 +644,10 @@
 
                         </controls:Arc.Style>
                     </controls:Arc>
+                    <Image Opacity="1"
+                           Source="{Binding Player.Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=big}"
+                           Margin="-3 -2 -3 -4"/>
+
                     <elements:SorcererElementsControl Fire="{Binding Player.Fire}"
                                                Ice="{Binding Player.Ice}"
                                                Arcane="{Binding Player.Arcane}"
@@ -670,10 +673,23 @@
                             </Style>
                         </FrameworkElement.Style>
                     </elements:SorcererElementsControl>
+                    <Grid>
+                        <elements:EdgeRhombControl EdgeCounter="{Binding Player.StacksCounter}"
+                                                   FillBrush="{Binding Player.WarriorStance.CurrentStance, Converter={StaticResource StanceToColorConverter}, ConverterParameter=light_fallback}"
+                                                   GlowColor="{Binding Player.WarriorStance.CurrentStance, Converter={StaticResource StanceToColorConverter}, ConverterParameter=color_fallback}"
+                                                   >
+                            <FrameworkElement.Style>
+                                <Style TargetType="FrameworkElement">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ShowEdge}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </FrameworkElement.Style>
+                        </elements:EdgeRhombControl>
 
-                    <Image Opacity="1"
-                        Source="{Binding Player.Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=big}"
-                           Margin="-3 -2 -3 -4"/>
+                    </Grid>
                     <Path Data="{Binding Player.Class, Converter={StaticResource ClassToSvg}}" 
                       HorizontalAlignment="Center" 
                       Fill="#eee" 
@@ -695,6 +711,10 @@
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
+                                    <DataTrigger Binding="{Binding ShowEdge}" Value="True">
+                                        <Setter Property="Opacity" Value=".2"/>
+                                    </DataTrigger>
+
                                 </Style.Triggers>
                             </Style>
                         </Path.Style>

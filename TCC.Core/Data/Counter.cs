@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
+using TeraDataLite;
 
 namespace TCC.Data
 {
@@ -10,7 +11,6 @@ namespace TCC.Data
         private int _val;
         private bool _isMaxed;
         private readonly DispatcherTimer _expire;
-        private readonly bool _autoexpire;
 
         public int Val
         {
@@ -24,7 +24,6 @@ namespace TCC.Data
                 N();
             }
         }
-
         public bool IsMaxed
         {
             get => _isMaxed;
@@ -35,14 +34,16 @@ namespace TCC.Data
                 N();
             }
         }
+        public int MaxValue { get; set; }
+        public bool AutoExpire { get; set; }
 
-        public int MaxValue { get; }
+
         public Counter(int max, bool autoexpire)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             MaxValue = max;
-            _autoexpire = autoexpire;
-            _expire = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(9000) };
+            AutoExpire = autoexpire;
+            _expire = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(9000) };
             _expire.Tick += OnExpireTick;
         }
 
@@ -55,8 +56,23 @@ namespace TCC.Data
         {
             _expire.Stop();
             if (_val == 0) return;
-            if (!_autoexpire) return;
+            if (!AutoExpire) return;
             _expire.Start();
+        }
+
+        public void SetClass(Class c)
+        {
+            switch (c)
+            {
+                case Class.Warrior: 
+                    MaxValue = 10;
+                    AutoExpire = true;
+                    break;
+                case Class.Valkyrie:
+                    MaxValue = 7;
+                    AutoExpire = false;
+                    break;
+            }
         }
     }
 }

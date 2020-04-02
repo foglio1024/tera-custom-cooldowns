@@ -20,10 +20,14 @@ namespace TCC.ViewModels.Widgets
         public bool ShowElements => Player.Class == Class.Sorcerer &&
                                     ((CharacterWindowSettings)Settings).SorcererShowElements;
 
+        public bool ShowEdge => Player.Class == Class.Warrior &&
+                                ((CharacterWindowSettings) Settings).WarriorShowEdge;
+
         public CharacterWindowViewModel(CharacterWindowSettings settings) : base(settings)
         {
             Game.Me.PropertyChanged += MePropertyChanged;
             settings.SorcererShowElementsChanged += () => N(nameof(ShowElements));
+            settings.WarriorShowEdgeChanged += () => N(nameof(ShowEdge));
             settings.ShowStaminaChanged += () => N(nameof(ShowRe));
         }
 
@@ -77,6 +81,7 @@ namespace TCC.ViewModels.Widgets
             Player.IsAlive = m.Alive;
         }
 
+        // TODO: move these to Game?
         private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
         {
             Player.ItemLevel = m.Ilvl;
@@ -103,6 +108,7 @@ namespace TCC.ViewModels.Widgets
             N(e.PropertyName);
             if (e.PropertyName != nameof(Data.Pc.Player.Class)) return;
             N(nameof(ShowRe));
+            N(nameof(ShowEdge));
             N(nameof(ShowElements));
         }
     }

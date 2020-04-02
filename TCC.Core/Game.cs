@@ -329,10 +329,17 @@ namespace TCC
 
         private static void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
         {
-            if (Me.Class != Class.Sorcerer) return;
-            Me.Fire = m.Fire;
-            Me.Ice = m.Ice;
-            Me.Arcane = m.Arcane;
+            switch (Me.Class)
+            {
+                case Class.Sorcerer:
+                    Me.Fire = m.Fire;
+                    Me.Ice = m.Ice;
+                    Me.Arcane = m.Arcane;
+                    break;
+                case Class.Warrior:
+                    Me.StacksCounter.Val = m.Edge;
+                    break;
+            }
         }
         private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
         {
@@ -661,6 +668,7 @@ namespace TCC
             Me.ServerId = m.ServerId;
             Me.Laurel = GetLaurel(Me.PlayerId);
             Me.ClearAbnormalities();
+            Me.StacksCounter.SetClass(m.CharacterClass);
 
             WindowManager.ReloadPositions();
             GameEventManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
@@ -681,6 +689,8 @@ namespace TCC
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
+            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
+
 
         }
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
@@ -690,6 +700,8 @@ namespace TCC
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
+            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
+
         }
         private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
@@ -697,6 +709,8 @@ namespace TCC
             if (!DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             FlyingGuardianDataProvider.HandleAbnormal(p);
             Me.EndAbnormality(ab);
+            Game.CurrentAbnormalityTracker?.CheckAbnormality(p);
+
         }
         private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
         {

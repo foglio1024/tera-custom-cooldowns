@@ -341,6 +341,11 @@ namespace TCC.Data.Pc
             }
         }
 
+        public Counter StacksCounter { get; set; }
+
+        // tracking only warrior stance for now
+        public StanceTracker<WarriorStance> WarriorStance { get; set; }
+
         public TSObservableCollection<AbnormalityDuration> Buffs { get; set; }
         public TSObservableCollection<AbnormalityDuration> Debuffs { get; set; }
         public TSObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
@@ -348,6 +353,8 @@ namespace TCC.Data.Pc
         public Player()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
+            StacksCounter = new Counter(10, true);
+            WarriorStance = new StanceTracker<WarriorStance>();
         }
 
 
