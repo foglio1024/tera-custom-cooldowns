@@ -104,7 +104,7 @@ namespace TCC.Data.Skills
 
         private void OnGlobalFlashChanged()
         {
-            OnCombatStatusChanged();
+            Dispatcher.InvokeAsync(OnCombatStatusChanged);
         }
 
         public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher d = null) : this(d)
