@@ -16,6 +16,7 @@ namespace TCC.Data.Chat
             PlayerId = playerId;
             PlayerLevel = level;
             UserClass = c;
+            PlainMessage = $"{Author} apply";
 
         }
     }

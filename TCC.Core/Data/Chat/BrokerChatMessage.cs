@@ -70,6 +70,8 @@ namespace TCC.Data.Chat
             Listing.Text = "<" + i.Name + ">";
             //TODO: //Listing.ItemId = i.Id;
             Listing.Color = TccUtils.GradeToColorString(i.RareGrade);
+
+            PlainMessage = Listing.Text;
             //Listing.Type = MessagePieceType.Item;
         }
     }

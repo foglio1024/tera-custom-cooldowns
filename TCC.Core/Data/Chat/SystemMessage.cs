@@ -44,6 +44,11 @@ namespace TCC.Data.Chat
                     }
                 }
 
+                foreach (var p in Pieces)
+                {
+                    PlainMessage += p.Text;
+                }
+
             }
             catch (Exception e)
             {

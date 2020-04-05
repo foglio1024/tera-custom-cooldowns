@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.ViewModels.Widgets;
 
 namespace TCC.ViewModels
@@ -19,6 +20,8 @@ namespace TCC.ViewModels
         public string Name { get; set; }
         public List<string> ShowedAuthors { get; set; }
         public List<string> HiddenAuthors { get; set; }
+        public List<string> ShowedKeywords { get; set; }
+        public List<string> HiddenKeywords { get; set; }
         public List<ChatChannel> ShowedChannels { get; set; }
         public List<ChatChannel> HiddenChannels { get; set; }
 
@@ -26,6 +29,8 @@ namespace TCC.ViewModels
         {
             ShowedAuthors = new List<string>();
             HiddenAuthors = new List<string>();
+            ShowedKeywords = new List<string>();
+            HiddenKeywords = new List<string>();
             ShowedChannels = new List<ChatChannel>();
             HiddenChannels = new List<ChatChannel>();
             
@@ -57,11 +62,16 @@ namespace TCC.ViewModels
 
         public TSObservableCollection<ChatChannel> ExcludedChannels { get; set; }
 
+        public TSObservableCollection<string> Keywords { get; set; }
+
+        public TSObservableCollection<string> ExcludedKeywords { get; set; }
 
         public TabInfoVM()
         {
             Authors = new TSObservableCollection<string>(Dispatcher);
             ExcludedAuthors = new TSObservableCollection<string>(Dispatcher);
+            Keywords = new TSObservableCollection<string>(Dispatcher);
+            ExcludedKeywords = new TSObservableCollection<string>(Dispatcher);
             ShowedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
             ExcludedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
         }
@@ -75,6 +85,8 @@ namespace TCC.ViewModels
             TabName = info.Name;
             info.ShowedAuthors.ForEach(Authors.Add);
             info.HiddenAuthors.ForEach(ExcludedAuthors.Add);
+            info.ShowedKeywords.ForEach(Keywords.Add);
+            info.HiddenKeywords.ForEach(ExcludedKeywords.Add);
             info.ShowedChannels.ForEach(ShowedChannels.Add);
             info.HiddenChannels.ForEach(ExcludedChannels.Add);
 
@@ -99,6 +111,30 @@ namespace TCC.ViewModels
                         break;
                     case NotifyCollectionChangedAction.Remove:
                         ev.OldItems.Cast<string>().ToList().ForEach(i => info.HiddenAuthors.Remove(i));
+                        break;
+                }
+            };
+            Keywords.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.ShowedKeywords.AddRange(ev.NewItems.Cast<string>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.ShowedKeywords.Remove(i));
+                        break;
+                }
+            };
+            ExcludedKeywords.CollectionChanged += (s, ev) =>
+            {
+                switch (ev.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        info.HiddenKeywords.AddRange(ev.NewItems.Cast<string>());
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.HiddenKeywords.Remove(i));
                         break;
                 }
             };
@@ -258,12 +294,20 @@ namespace TCC.ViewModels
 
         public bool Filter(ChatMessage m)
         {
-            if (TabInfoVM.Authors == null || TabInfoVM.ShowedChannels == null || TabInfoVM.ExcludedAuthors == null || TabInfoVM.ExcludedChannels == null)
+            if (TabInfoVM.Authors == null 
+                || TabInfoVM.ShowedChannels == null
+                || TabInfoVM.ExcludedAuthors == null 
+                || TabInfoVM.ExcludedChannels == null
+                || TabInfoVM.Keywords == null
+                || TabInfoVM.ExcludedKeywords == null)
                 return true;
+
             return (TabInfoVM.Authors.Count == 0 || TabInfoVM.Authors.Any(x => x == m.Author)) &&
                    (TabInfoVM.ShowedChannels.Count == 0 || TabInfoVM.ShowedChannels.Any(x => x == m.Channel)) &&
                    (TabInfoVM.ExcludedChannels.Count == 0 || TabInfoVM.ExcludedChannels.All(x => x != m.Channel)) &&
-                   (TabInfoVM.ExcludedAuthors.Count == 0 || TabInfoVM.ExcludedAuthors.All(x => x != m.Author));
+                   (TabInfoVM.ExcludedAuthors.Count == 0 || TabInfoVM.ExcludedAuthors.All(x => x != m.Author)) &&
+                   (TabInfoVM.Keywords.Count == 0 || TabInfoVM.Keywords.Any(x => m.PlainMessage.ToLower().Contains(x.ToLower()))) &&
+                   (TabInfoVM.ExcludedKeywords.Count == 0 || TabInfoVM.ExcludedKeywords.Any(x => !m.PlainMessage.ToLower().Contains(x.ToLower())));
 
         }
         public void ApplyFilter()

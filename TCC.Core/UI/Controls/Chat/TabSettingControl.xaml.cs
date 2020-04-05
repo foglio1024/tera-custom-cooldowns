@@ -82,23 +82,6 @@ namespace TCC.UI.Controls.Chat
                 // ignored
             }
         }
-
-        private void NewAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Enter) return;
-            var s = sender as TextBox;
-            if (string.IsNullOrEmpty(s?.Text) || string.Equals(s.Text, "New author...")) return;
-            if (_dc.TabInfoVM.Authors.Contains(s.Text)) return;
-            _dc.TabInfoVM.Authors.Add(s.Text);
-            _dc.ApplyFilter();
-
-        }
-
-        private void NewAuthorTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            ((TextBox)sender).Text = "New author...";
-        }
-
         private void NewExChannelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -122,6 +105,20 @@ namespace TCC.UI.Controls.Chat
             }
         }
 
+        private void NewAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            var s = sender as TextBox;
+            if (string.IsNullOrEmpty(s?.Text) || string.Equals(s.Text, "New author...")) return;
+            if (_dc.TabInfoVM.Authors.Contains(s.Text)) return;
+            _dc.TabInfoVM.Authors.Add(s.Text);
+            _dc.ApplyFilter();
+
+        }
+        private void NewAuthorTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).Text = "New author...";
+        }
         private void NewExAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
@@ -130,7 +127,6 @@ namespace TCC.UI.Controls.Chat
             _dc.TabInfoVM.ExcludedAuthors.Add(s.Text);
             _dc.ApplyFilter();
         }
-
         private void NewExAuthorTextBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((sender as TextBox)?.Text != "New author...") return;
@@ -149,6 +145,49 @@ namespace TCC.UI.Controls.Chat
                 App.Settings.ChatWindowsSettings.Remove((ChatWindowSettings)win.WindowSettings);
             }
             Window.GetWindow(this)?.Close();
+        }
+
+        private void NewExKeywordTextBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if ((sender as TextBox)?.Text != "New keyword...") return;
+            ((TextBox)sender).Text = "";
+        }
+
+        private void NewKeywordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).Text = "New keyword...";
+        }
+
+        private void NewKeywordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            var s = sender as TextBox;
+            if (string.IsNullOrEmpty(s?.Text) || string.Equals(s.Text, "New keyword...")) return;
+            if (_dc.TabInfoVM.Keywords.Contains(s.Text)) return;
+            _dc.TabInfoVM.Keywords.Add(s.Text);
+            _dc.ApplyFilter();
+        }
+
+        private void NewExKeywordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            if (!(sender is TextBox s) || string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New keyword...")) return;
+            if (_dc.TabInfoVM.ExcludedKeywords.Contains(s.Text)) return;
+            _dc.TabInfoVM.ExcludedKeywords.Add(s.Text);
+            _dc.ApplyFilter();
+
+
+        }
+
+        private void RemoveKeyword(object sender, RoutedEventArgs e)
+        {
+            _dc.TabInfoVM.Keywords.Remove(((FrameworkElement)sender).DataContext as string);
+            _dc.ApplyFilter();
+        }
+        private void RemoveExKeyword(object sender, RoutedEventArgs e)
+        {
+            _dc.TabInfoVM.ExcludedKeywords.Remove(((FrameworkElement)sender).DataContext as string);
+            _dc.ApplyFilter();
         }
     }
 }

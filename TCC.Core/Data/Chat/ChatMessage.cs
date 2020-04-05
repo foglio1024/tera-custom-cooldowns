@@ -64,6 +64,8 @@ namespace TCC.Data.Chat
             }
         }
         public int Size => App.Settings.FontSize;
+        public string PlainMessage { get; set; }
+
         #endregion
 
         public ChatMessage()
@@ -73,6 +75,7 @@ namespace TCC.Data.Chat
             Lines = new TSObservableCollection<MessageLine>(Dispatcher);
             Timestamp = App.Settings.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
+            PlainMessage = "";
         }
         public ChatMessage(ChatChannel ch) : this()
         {
@@ -103,6 +106,11 @@ namespace TCC.Data.Chat
                         //ParseFormattedMessage(msg);
                         ParseHtmlMessage(msg);
                         break;
+                }
+
+                foreach (var piece in Pieces)
+                {
+                    PlainMessage += piece.Text;
                 }
             }
             catch
