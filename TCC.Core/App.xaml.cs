@@ -19,6 +19,7 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Notice;
 using TCC.Settings;
+using TCC.Test;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Update;
@@ -86,6 +87,9 @@ namespace TCC
             Loading = true;
             await Setup();
             Loading = false;
+
+            //Tester.AddFakeGroupMembers(9);
+
         }
 
         private static async Task Setup()
