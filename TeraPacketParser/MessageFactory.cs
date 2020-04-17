@@ -48,6 +48,7 @@ namespace TeraPacketParser
             { nameof(S_BAN_PARTY),                             Contructor<Func<TeraMessageReader, S_BAN_PARTY>>() },
             { nameof(S_PARTY_MEMBER_CHANGE_HP),                Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_HP>>() },
             { nameof(S_PARTY_MEMBER_CHANGE_MP),                Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_MP>>() },
+            { nameof(S_PARTY_MEMBER_CHANGE_STAMINA),           Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_CHANGE_STAMINA>>() },
             { nameof(S_PARTY_MEMBER_STAT_UPDATE),              Contructor<Func<TeraMessageReader, S_PARTY_MEMBER_STAT_UPDATE>>() },
             { nameof(S_CHECK_TO_READY_PARTY),                  Contructor<Func<TeraMessageReader, S_CHECK_TO_READY_PARTY>>() },
             { nameof(S_CHECK_TO_READY_PARTY_FIN),              Contructor<Func<TeraMessageReader, S_CHECK_TO_READY_PARTY_FIN>>() },
@@ -114,30 +115,38 @@ namespace TeraPacketParser
             { nameof(S_FIN_INTER_PARTY_MATCH),                 Contructor<Func<TeraMessageReader, S_FIN_INTER_PARTY_MATCH>>() },
             { nameof(S_BATTLE_FIELD_ENTRANCE_INFO),            Contructor<Func<TeraMessageReader, S_BATTLE_FIELD_ENTRANCE_INFO>>() },
             { nameof(S_LEAVE_GUILD),                           Contructor<Func<TeraMessageReader, S_LEAVE_GUILD>>() },
-            { nameof(S_BEGIN_THROUGH_ARBITER_CONTRACT),                      Contructor<Func<TeraMessageReader, S_BEGIN_THROUGH_ARBITER_CONTRACT>>() },
+            { nameof(S_BEGIN_THROUGH_ARBITER_CONTRACT),        Contructor<Func<TeraMessageReader, S_BEGIN_THROUGH_ARBITER_CONTRACT>>() },
+            { nameof(S_FATIGABILITY_POINT),                    Contructor<Func<TeraMessageReader, S_FATIGABILITY_POINT>>() },
           //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
         };
-
+        public static readonly Dictionary<string, ushort> Extras = new Dictionary<string, ushort>();
         public uint Version { get; private set; }
-        public int ReleaseVersion { get;  set; }
+        public int ReleaseVersion { get; set; }
         public OpCodeNamer OpCodeNamer { get; private set; }
         public OpCodeNamer SystemMessageNamer { get; set; }
         public static bool NoGuildBamOpcode { get; private set; }    //by HQ 20190324
         public MessageFactory()
         {
             OpCodeNamer = new OpCodeNamer(new Dictionary<ushort, string> { { 19900, nameof(C_CHECK_VERSION) } });
+            foreach (var kv in Extras.ToList())
+            {
+                OpCodeNamer.Add(kv.Key, kv.Value);
+            }
             Version = 0;
         }
 
+        public void Refresh()
+        {
+            TeraMessages.ToList().ForEach(x => OpcodeNameToType[OpCodeNamer.GetCode(x.Key)] = x.Value);
+        }
         public void Set(uint version, OpCodeNamer opcNamer)
         {
             OpCodeNamer = opcNamer;
             OpcodeNameToType.Clear();
             Version = version;
-            TeraMessages.ToList().ForEach(x => OpcodeNameToType[OpCodeNamer.GetCode(x.Key)] = x.Value);
-
+            Refresh();
             // by HQ 20190324 ===================================
             NoGuildBamOpcode = OpCodeNamer.GetCode(nameof(S_NOTIFY_GUILD_QUEST_URGENT)) == 0;
             // ==================================================
@@ -147,11 +156,17 @@ namespace TeraPacketParser
             OpCodeNamer = opcNamer;
             OpcodeNameToType.Clear();
             Version = version;
-            TeraMessages.ToList().ForEach(x => OpcodeNameToType[OpCodeNamer.GetCode(x.Key)] = x.Value);
+            Refresh();
 
             // by HQ 20190324 ===================================
             NoGuildBamOpcode = OpCodeNamer.GetCode(nameof(S_NOTIFY_GUILD_QUEST_URGENT)) == 0;
             // ==================================================
+        }
+
+        public void InjectExtra(string name, ushort code)
+        {
+            Extras[name] = code;
+            OpCodeNamer.Add(name, code);
         }
 
 
