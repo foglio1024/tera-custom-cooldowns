@@ -19,7 +19,7 @@ namespace TCC.Sniffing
     /// Uses a <see cref="TcpListener"/> to receive TERA packets sent by <c>ttb-interface-data</c>.
     /// Uses a <see cref="ToolboxControlInterface"/> to interact with <c>ttb-interface-control</c>.
     /// </summary>
-    internal class ToolboxSniffer : ITeraSniffer
+    public class ToolboxSniffer : ITeraSniffer
     {
         /// <summary>
         /// Used to send HTTP requests to Toolbox.
@@ -88,9 +88,29 @@ namespace TCC.Sniffing
                 var jArray = new JArray();
                 opcodes.ForEach(opc => jArray.Add(opc));
                 var resp = await _client.CallAsync("addHooks", new JObject
+                {
+                    {"hooks", jArray}
+                });
+                return resp?.Result != null && resp.Result.Value<bool>();
+            }
+
+            public async Task<bool> AddDefinition(string opcodeName, uint version, string def)
             {
-                {"hooks", jArray}
-            });
+                var resp = await _client.CallAsync("addDefinition", new JObject
+                {
+                    {"opcodeName", opcodeName},
+                    {"version", version},
+                    {"def", def}
+                });
+                return resp?.Result != null && resp.Result.Value<bool>();
+            }
+            public async Task<bool> AddOpcode(string opcodeName, ushort opcode)
+            {
+                var resp = await _client.CallAsync("addOpcode", new JObject
+                {
+                    {"opcodeName", opcodeName},
+                    {"opcode", opcode}
+                });
                 return resp?.Result != null && resp.Result.Value<bool>();
             }
             /// <summary>
@@ -116,9 +136,9 @@ namespace TCC.Sniffing
             public async Task<JObject> Query(string query)
             {
                 var resp = await _client.CallAsync("query", new JObject
-            {
-                { "query" , query }
-            });
+                {
+                    { "query" , query }
+                });
 
                 return resp?.Result?.Value<JObject>();
             }
@@ -138,7 +158,7 @@ namespace TCC.Sniffing
         private readonly bool _failed;
         private bool _enabled;
         private bool _connected;
-        
+
         public bool Enabled
         {
             get => _enabled;
@@ -163,7 +183,7 @@ namespace TCC.Sniffing
         public event Action<Message> MessageReceived;
         public event Action<Server> NewConnection;
         public event Action EndConnection;
-        
+
         public ToolboxSniffer()
         {
             _dataConnection = new TcpListener(IPAddress.Parse("127.0.0.60"), 5200);
