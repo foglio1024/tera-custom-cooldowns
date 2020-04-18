@@ -74,5 +74,11 @@ namespace TeraPacketParser
             _opCodeNames = namesArray.ToDictionary(parts => parts.Key, parts => parts.Value);
             _opCodeCodes = namesArray.ToDictionary(parts => parts.Value, parts => parts.Key);
         }
+
+        public void Add(string name, ushort code)
+        {
+            _opCodeCodes[name] = code;
+            _opCodeNames[code] = name;
+        }
     }
 }
