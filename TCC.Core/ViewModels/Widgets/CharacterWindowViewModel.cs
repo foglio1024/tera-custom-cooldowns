@@ -87,8 +87,6 @@ namespace TCC.ViewModels.Widgets
             Player.ItemLevel = m.Ilvl;
             Player.Level = m.Level;
             Player.CritFactor = m.BonusCritFactor;
-            Player.Coins = m.Coins;
-            Player.MaxCoins = m.MaxCoins;
             Player.MaxHP = m.MaxHP;
             Player.MaxMP = m.MaxMP;
             Player.MaxST = m.MaxST + m.BonusST;

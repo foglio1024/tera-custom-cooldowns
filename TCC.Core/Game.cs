@@ -259,7 +259,10 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
             PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
             PacketAnalyzer.Processor.Hook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
+
+            PacketAnalyzer.Processor.Hook<S_FATIGABILITY_POINT>(OnFatigabilityPoint);
         }
+
 
         private static Laurel GetLaurel(uint pId)
         {
@@ -329,6 +332,9 @@ namespace TCC
 
         private static void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
         {
+            Me.MaxCoins = m.MaxCoins;
+            Me.Coins = m.Coins;
+
             switch (Me.Class)
             {
                 case Class.Sorcerer:
@@ -377,7 +383,7 @@ namespace TCC
         {
             Group.SetGroup(p.Members, p.Raid);
         }
-        
+
         private static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
         {
             // TODO: add discord notification after events revamp
@@ -410,7 +416,7 @@ namespace TCC
         {
             #region Greet meme
             if ((ChatChannel)m.Channel == ChatChannel.Greet
-                && (m.AuthorName == "Foglio" 
+                && (m.AuthorName == "Foglio"
                     || m.AuthorName == "Folyemi"))
                 Log.N("owo", SR.GreetMemeContent, NotificationType.Success, 3000);
             #endregion
@@ -762,6 +768,17 @@ namespace TCC
                 if (BlockList.Contains(u)) return;
                 BlockList.Add(u);
             });
+        }
+        private static void OnFatigabilityPoint(S_FATIGABILITY_POINT p)
+        {
+            var ppFactor = MathUtils.FactorCalc(p.CurrFatigability, p.MaxFatigability) * 100;
+
+            Log.Chat(ChatUtils.Font("PP: ", R.Colors.MainColor.ToHex())
+                   + ChatUtils.Font($"{p.CurrFatigability}", R.Colors.GoldColor.ToHex())
+                   + ChatUtils.Font($"/{p.MaxFatigability} (", "cccccc")
+                   + ChatUtils.Font($"{ppFactor:F}%", R.Colors.MainColor.ToHex())
+                   + ChatUtils.Font($").", "cccccc")
+                );
         }
 
         #endregion
