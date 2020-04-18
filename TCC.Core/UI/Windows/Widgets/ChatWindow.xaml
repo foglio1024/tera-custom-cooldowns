@@ -16,6 +16,7 @@
                    xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
                    xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                    mc:Ignorable="d"
+                   UseLayoutRounding="True"
                    Style="{StaticResource BaseWindowStyle}"
                    MouseEnter="OnWindowMouseEnter"
                    MouseLeave="OnWindowMouseLeave"

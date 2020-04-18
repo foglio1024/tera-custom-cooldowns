@@ -29,8 +29,7 @@
                               VerticalAlignment="Center" >
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                                        </WrapPanel>
+                                        <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemContainerStyle>

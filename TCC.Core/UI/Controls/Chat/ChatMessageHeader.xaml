@@ -8,7 +8,7 @@
              mc:Ignorable="d" d:DataContext="{d:DesignInstance chat:ChatMessage}">
     <Grid Width="Auto" MinWidth="0" Margin="0,0,0,0"
           VerticalAlignment="Stretch" Height="Auto"
-          UseLayoutRounding="True">
+          UseLayoutRounding="True" ShowGridLines="False">
         <Grid.Resources>
             <Style x:Key="MentionLitBorder" TargetType="Border">
                 <Setter Property="Background" Value="Black" />
@@ -34,7 +34,7 @@
                 VerticalAlignment="Stretch" />
         <!--Background tip-->
         <Border Style="{StaticResource MentionLitBorder}"
-                Width="3"
+                Width="1"
                 Grid.Column="3"
                 CornerRadius="0 1 1 0"
                 Opacity=".8" />
@@ -58,12 +58,13 @@
         <!--Channel-->
         <ContentControl ContentTemplateSelector="{StaticResource ChannelLabelTemplateSelector}"
                         Content="{Binding}"
+                        HorizontalContentAlignment="Center"
                         Width="42"
-                        Margin="0,5,0,0"
+                        Margin="0 5 0 0"
                         Grid.Column="1"
                         Visibility="{Binding ShowChannel, Converter={converters:BoolToVisibility}}" />
         <!--Timestamp-->
-        <TextBlock Margin="4,1,2,0" Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
+        <TextBlock Margin="4 2" Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                    Width="Auto"
                    Opacity=".8"
                    FontWeight="Normal"

@@ -426,12 +426,12 @@
                    Opacity=".5"
                    FontWeight="SemiBold"
                    FontSize="11"
-                   HorizontalAlignment="Right"
+                   HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    TextAlignment="Center"
                    Visibility="Visible"
                    MinWidth="33"
-                   Margin="0,-3,0,0"
+                   Margin="0 -3 0 0"
                    Text="{Binding Channel, Converter={StaticResource ChatChannelToName}}" />
         <!--TextTrimming="CharacterEllipsis"-->
 
@@ -443,7 +443,7 @@
                        FontWeight="DemiBold"
                        FontSize="11"
                        FontFamily="{StaticResource NotoSansMed}"
-                       HorizontalAlignment="Right"
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        TextAlignment="Center"
                        Visibility="Visible"
@@ -495,6 +495,7 @@
                    TextTrimming="CharacterEllipsis" />
 
     </DataTemplate>
+    
     <DataTemplate x:Key="SystemAuthorTemplate" DataType="chat:ChatMessage">
         <Grid>
             <Rectangle Width="7"
