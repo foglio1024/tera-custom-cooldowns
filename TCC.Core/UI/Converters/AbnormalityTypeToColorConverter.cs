@@ -10,7 +10,8 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = (AbnormalityType?)value ?? AbnormalityType.Buff;
+            if (value == null) value = AbnormalityType.Buff;
+            var val = (AbnormalityType)value;
             //string resName;
             Color ret;
             switch (val)
