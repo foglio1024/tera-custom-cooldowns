@@ -18,7 +18,6 @@
         MouseLeftButtonDown="Drag"
         >
     <widgets:TccWidget.Resources>
-        <converters:ClassToReColorConverter x:Key="ReColorConverter"/>
         <Style TargetType="Border">
             <Setter Property="BorderBrush"                Value="{StaticResource RevampBorderBrush}"/>
             <Setter Property="BorderThickness"            Value="2 1" />

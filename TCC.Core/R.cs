@@ -295,6 +295,7 @@ namespace TCC.R
 		public static DirectionToHorAlignConveter DirectionToHorAlignConveter => ((DirectionToHorAlignConveter)App.Current.FindResource("DirectionToHorAlignConveter"));
 		public static AbnormalityTypeToColorConverter AbnormalityTypeToStrokeColor => ((AbnormalityTypeToColorConverter)App.Current.FindResource("AbnormalityTypeToStrokeColor"));
 		public static MessageTextToIconConverter MessageTextToIcon => ((MessageTextToIconConverter)App.Current.FindResource("MessageTextToIcon"));
+		public static ClassToReColorConverter ReColorConverter => ((ClassToReColorConverter)App.Current.FindResource("ReColorConverter"));
 		public static EntityIdToNameConverter EntityIdToName => ((EntityIdToNameConverter)App.Current.FindResource("EntityIdToName"));
 		public static AggroTypeToFillConverter AggroTypeToFill => ((AggroTypeToFillConverter)App.Current.FindResource("AggroTypeToFill"));
 		public static DragonIdToColorConverter DragonIdToColor => ((DragonIdToColorConverter)App.Current.FindResource("DragonIdToColor"));

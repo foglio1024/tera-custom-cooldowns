@@ -21,6 +21,7 @@
     <converters:DirectionToHorAlignConveter x:Key="DirectionToHorAlignConveter"/>
     <converters:AbnormalityTypeToColorConverter x:Key="AbnormalityTypeToStrokeColor"/>
     <converters:MessageTextToIconConverter x:Key="MessageTextToIcon"/>
+    <converters:ClassToReColorConverter x:Key="ReColorConverter"/>
 
     <!--BossGage resources-->
     <converters:EntityIdToNameConverter x:Key="EntityIdToName"/>
