@@ -302,6 +302,8 @@ namespace TCC.ViewModels.Widgets
             user.Order = p.Order;
             user.Awakened = p.Awakened;
             user.Visible = visible;
+            user.MaxSt = p.MaxST;
+            user.CurrentSt = p.CurrentST;
             //}
         }
 
@@ -499,6 +501,16 @@ namespace TCC.ViewModels.Widgets
                 u.MaxMp = maxMp;
             });
         }
+        private void UpdateMemberStamina(uint playerId, uint serverId, int curSt, int maxSt)
+        {
+            Dispatcher.InvokeAsync(() =>
+            {
+                var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
+                if (u == null) return;
+                u.CurrentSt = curSt;
+                u.MaxSt = maxSt;
+            });
+        }
         private void SetRaid(bool raid)
         {
             Dispatcher.InvokeAsync(new Action(() => Raid = raid));
@@ -581,6 +593,8 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_LOGOUT_PARTY_MEMBER>(OnLogoutPartyMember);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_CHANGE_HP>(OnPartyMemberChangeHp);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_CHANGE_MP>(OnPartyMemberChangeMp);
+            PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_CHANGE_STAMINA>(OnPartyMemberChangeStamina);
+            PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_STAT_UPDATE>(OnPartyMemberStatUpdate);
             PacketAnalyzer.Processor.Hook<S_CHECK_TO_READY_PARTY>(OnCheckToReadyParty);
             PacketAnalyzer.Processor.Hook<S_CHECK_TO_READY_PARTY_FIN>(OnCheckToReadyPartyFin);
@@ -588,9 +602,6 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
         }
-
-
-
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_USER_EFFECT>(OnUserEffect);
@@ -624,6 +635,7 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
 
         }
+
         private void OnDisconnected()
         {
             ClearAllAbnormalities();
@@ -669,6 +681,10 @@ namespace TCC.ViewModels.Widgets
         private void OnPartyMemberChangeMp(S_PARTY_MEMBER_CHANGE_MP p)
         {
             UpdateMemberMp(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
+        }
+        private void OnPartyMemberChangeStamina(S_PARTY_MEMBER_CHANGE_STAMINA p)
+        {
+            UpdateMemberStamina(p.PlayerId, p.ServerId, p.CurrentST, p.MaxST);
         }
         private void OnPartyMemberChangeHp(S_PARTY_MEMBER_CHANGE_HP p)
         {
@@ -773,6 +789,9 @@ namespace TCC.ViewModels.Widgets
         {
             UpdateMemberLocation(p.PlayerId, p.ServerId, p.Channel, p.ContinentId);
         }
-
+        private void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
+        {
+            UpdateMemberStamina(Game.Me.PlayerId, Game.Me.ServerId, p.CurrentST, Game.Me.MaxST);
+        }
     }
 }

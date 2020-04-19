@@ -196,6 +196,7 @@ namespace TCC.Data.Pc
                 if (_currentSt == value) return;
                 _currentSt = value;
                 N();
+                N(nameof(StFactor));
             }
         }
         public long MaxHp
@@ -228,10 +229,12 @@ namespace TCC.Data.Pc
                 if (_maxSt == value) return;
                 _maxSt = value;
                 N();
+                N(nameof(StFactor));
             }
         }
         public double HpFactor => MathUtils.FactorCalc(CurrentHp, MaxHp);
         public double MpFactor => MathUtils.FactorCalc(CurrentMp, MaxMp);
+        public double StFactor => MathUtils.FactorCalc(CurrentSt, MaxSt);
         public ReadyStatus Ready
         {
             get => _ready;

@@ -1,13 +1,13 @@
 ﻿<group:GroupMemberBase x:Class="TCC.UI.Controls.Group.PartyMember"
-                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                     xmlns:pc="clr-namespace:TCC.Data.Pc"
-                     xmlns:group="clr-namespace:TCC.UI.Controls.Group"
-                     xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
-                     mc:Ignorable="d"
-                     d:DataContext="{d:DesignInstance pc:User}">
+                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       xmlns:pc="clr-namespace:TCC.Data.Pc"
+                       xmlns:group="clr-namespace:TCC.UI.Controls.Group"
+                       xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                       mc:Ignorable="d"
+                       d:DataContext="{d:DesignInstance pc:User}">
     <group:GroupMemberBase.Resources>
         <Style TargetType="FrameworkElement" x:Key="OnlineBoundVisibility">
             <Style.Triggers>
@@ -193,11 +193,13 @@
                     Background="#5000" BorderThickness="2 1"
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     Margin="-2 -10 3 7" Padding="1"
+                    VerticalAlignment="Top"
                     Visibility="{Binding Online, Converter={converters:BoolToVisibility}}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Rectangle x:Name="HpBar"
                                Height="7" Width="Auto"
@@ -209,7 +211,7 @@
                             <LinearGradientBrush EndPoint="1 0">
                                 <GradientStop Offset=".2"
                                               Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}" />
-                                <GradientStop Offset=".95"
+                                <GradientStop Offset=".98"
                                               Color="{Binding IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}" />
                                 <GradientStop Color="White" Offset="1" />
 
@@ -230,13 +232,31 @@
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
                                 <GradientStop Color="{StaticResource MpColor}" Offset="0" />
-                                <GradientStop Color="{StaticResource MpColorLight}" Offset=".95" />
+                                <GradientStop Color="{StaticResource MpColorLight}" Offset=".98" />
                                 <GradientStop Color="White" Offset="1" />
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                         <Rectangle.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="{Binding MpFactor}" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle x:Name="StBar"
+                               Grid.Row="2" Height="3"
+                               Margin="0 1 0 0" Width="Auto" HorizontalAlignment="Stretch"
+                               Style="{StaticResource OnlineBoundVisibility}"
+                               Visibility="{Binding ShowSt, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase}, 
+                                                            Converter={converters:BoolToVisibility}}">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="1 0">
+                                <GradientStop Color="{Binding UserClass, Converter={StaticResource ReColorConverter}, ConverterParameter=color}" Offset="0.98" />
+                                <GradientStop Color="White" Offset="1" />
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="{Binding StFactor}" />
                             </TransformGroup>
                         </Rectangle.RenderTransform>
                     </Rectangle>
@@ -492,7 +512,7 @@
                 </Border.RenderTransform>
             </Border>
             <Path Data="{StaticResource SvgCrown}"
-                  Fill="{StaticResource RevampBackgroundBrush}" RenderOptions.BitmapScalingMode="Fant" Margin="3 2 3 3"/>
+                  Fill="{StaticResource RevampBackgroundBrush}" RenderOptions.BitmapScalingMode="Fant" Margin="3 2 3 3" />
             <Grid.RenderTransform>
                 <TranslateTransform X="0" />
             </Grid.RenderTransform>
@@ -502,11 +522,11 @@
         </Grid>
 
         <!--Ready check grid-->
-        <ContentControl Content="{Binding}" 
+        <ContentControl Content="{Binding}"
                         ContentTemplate="{StaticResource ReadyCheckIndicator}"
                         Grid.ColumnSpan="2"
                         VerticalAlignment="Top"
-                        HorizontalAlignment="Left"/>
+                        HorizontalAlignment="Left" />
 
         <!--Roll result grid-->
         <ContentControl Content="{Binding}"

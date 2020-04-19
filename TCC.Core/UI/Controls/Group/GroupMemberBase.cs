@@ -8,6 +8,7 @@ using TCC.Data;
 using TCC.Data.Pc;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
+using TeraDataLite;
 
 namespace TCC.UI.Controls.Group
 {
@@ -36,6 +37,18 @@ namespace TCC.UI.Controls.Group
 
         public bool ShowHp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideHpThreshold;
         public bool ShowMp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideMpThreshold;
+
+        public bool ShowSt =>
+            (WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideStThreshold)
+            && Game.Server.Region == "EU"
+            && (DataContext is User u)
+            && (u.UserClass == Class.Valkyrie
+                || u.UserClass == Class.Archer
+                || u.UserClass == Class.Brawler
+                || u.UserClass == Class.Gunner
+                || u.UserClass == Class.Lancer
+                || u.UserClass == Class.Ninja
+                || u.UserClass == Class.Warrior);
         public bool ShowBuffs => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideBuffsThreshold;
         public bool ShowDebuffs => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideDebuffsThreshold;
         public bool ShowLaurel => App.Settings.GroupWindowSettings.ShowLaurels;
@@ -93,6 +106,7 @@ namespace TCC.UI.Controls.Group
         {
             NPC(nameof(ShowHp));
             NPC(nameof(ShowMp));
+            NPC(nameof(ShowSt));
             NPC(nameof(ShowBuffs));
             NPC(nameof(ShowDebuffs));
             NPC(nameof(BuffsSource));

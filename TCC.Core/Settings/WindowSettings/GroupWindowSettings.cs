@@ -19,6 +19,7 @@ namespace TCC.Settings.WindowSettings
         private uint _hideDebuffsThreshold;
         private uint _hideHpThreshold;
         private uint _hideMpThreshold;
+        private uint _hideStThreshold;
         private uint _disableAbnormalitiesThreshold;
         private uint _groupSizeThreshold;
         private GroupWindowLayout _layout;
@@ -89,6 +90,17 @@ namespace TCC.Settings.WindowSettings
             {
                 if (_hideMpThreshold == value) return;
                 _hideMpThreshold = value;
+                N();
+                SettingsUpdated?.Invoke();
+            }
+        }
+        public uint HideStThreshold
+        {
+            get => _hideStThreshold;
+            set
+            {
+                if (_hideStThreshold == value) return;
+                _hideStThreshold = value;
                 N();
                 SettingsUpdated?.Invoke();
             }

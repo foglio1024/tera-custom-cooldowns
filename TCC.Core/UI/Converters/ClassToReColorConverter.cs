@@ -10,7 +10,7 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var col = Colors.Transparent;
+            var col = Colors.White;
             var light = parameter != null && parameter.ToString().Contains("light");
             if (!(value is Class c))
                 return parameter != null && parameter.ToString().Contains("color")
