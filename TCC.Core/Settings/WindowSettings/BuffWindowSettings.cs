@@ -11,8 +11,10 @@ namespace TCC.Settings.WindowSettings
     public class BuffWindowSettings : WindowSettingsBase
     {
         public event Action DirectionChanged;
+        public event Action OverlapChanged;
 
         private FlowDirection _direction;
+        private double _overlap;
         public bool ShowAll { get; set; } // by HQ
 
         public FlowDirection Direction
@@ -26,9 +28,22 @@ namespace TCC.Settings.WindowSettings
                 DirectionChanged?.Invoke();
             }
         }
+        public double Overlap
+        {
+            get => _overlap;
+            set
+            {
+                if(_overlap == value) return;
+                _overlap = value;
+                N();
+                OverlapChanged?.Invoke();
+            }
+        }
 
         public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
         public List<uint> Specials { get; }
+
+
         public bool Pass(Abnormality ab) // by HQ
         {
             if (ShowAll) return true;

@@ -27,12 +27,13 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="ItemContainerDefaultStyle">
-            <Setter Property="Control.Margin" Value="2" />
+            <Setter Property="Control.Margin" Value="{Binding Margin, ElementName=DirectionGovernor}" />
         </Style>
         <Style x:Key="BuffBarItemsControlStyle" TargetType="ItemsControl">
             <Setter Property="ItemContainerStyle" Value="{StaticResource ItemContainerDefaultStyle}" />
             <Setter Property="ItemTemplateSelector" Value="{StaticResource PlayerAbnormalityTemplateSelector}" />
             <Setter Property="ItemsPanel" Value="{StaticResource DefaultPanelTemplate}" />
+            <Setter Property="Margin" Value="{Binding Margin, ElementName=ContainerMarginGovernor}" />
         </Style>
 
     </widgets:TccWidget.Resources>
@@ -44,7 +45,10 @@
         </Grid.RowDefinitions>
         <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary" />
 
-        <FrameworkElement FlowDirection="{Binding Direction}" x:Name="DirectionGovernor" VerticalAlignment="Top" />
+        <FrameworkElement Margin="{Binding ContainersMargin}"
+                          x:Name="ContainerMarginGovernor" VerticalAlignment="Top" />
+        <FrameworkElement FlowDirection="{Binding Direction}" Margin="{Binding GlobalMargin}"
+                          x:Name="DirectionGovernor" VerticalAlignment="Top" />
         <controls:WindowButtons WindowName="Buff bar" x:Name="Buttons"
                                 DataContext="{Binding WindowSettings, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}">
             <controls:WindowButtons.Style>
@@ -66,8 +70,8 @@
                     ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}"
                     ScaleY="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}" />
             </StackPanel.LayoutTransform>
+            <!-- Settings Button -->
             <Grid Style="{StaticResource GridRowStyle}" Margin="3">
-
                 <Button Style="{StaticResource ButtonMainStyle}"
                         BorderThickness="1" Padding="2"
                         BorderBrush="{StaticResource RevampBorderBrush}"
@@ -81,6 +85,7 @@
                 </Button>
             </Grid>
 
+            <!-- Inf buffs -->
             <Grid Width="Auto" Style="{StaticResource GridRowStyle}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -94,6 +99,7 @@
                               Style="{StaticResource BuffBarItemsControlStyle}"
                               ItemsSource="{Binding SpecInfBuffsView}" />
             </Grid>
+            <!-- Buffs -->
             <Grid Width="Auto" Style="{StaticResource GridRowStyle}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -108,6 +114,7 @@
                               Style="{StaticResource BuffBarItemsControlStyle}"
                               ItemsSource="{Binding SpecBuffsView}" />
             </Grid>
+            <!-- Debuffs -->
             <Grid Style="{StaticResource GridRowStyle}">
                 <ItemsControl Name="Debuffs"
                               Style="{StaticResource BuffBarItemsControlStyle}"

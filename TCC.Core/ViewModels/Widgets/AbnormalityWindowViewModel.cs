@@ -1,4 +1,5 @@
-﻿using Nostrum.Factories;
+﻿using System;
+using Nostrum.Factories;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
@@ -17,6 +18,24 @@ namespace TCC.ViewModels.Widgets
     {
         public Player Player => Game.Me;
         public FlowDirection Direction => ((BuffWindowSettings)Settings).Direction;
+
+        public Thickness GlobalMargin
+        {
+            get
+            {
+                switch (Direction)
+                {
+                    case FlowDirection.LeftToRight:
+                        return new Thickness(2, 2, 2 * (1 - ((BuffWindowSettings)Settings).Overlap), 2);
+                    case FlowDirection.RightToLeft:
+                        return new Thickness(2 * (1 - ((BuffWindowSettings)Settings).Overlap), 2, 2, 2);
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
+        public Thickness ContainersMargin => new Thickness(0, 0, ((BuffWindowSettings)Settings).Overlap * 2, 0);
         public ControlShape Shape => App.Settings.AbnormalityShape;
         public ICollectionViewLiveShaping BuffsView { get; }
         public ICollectionViewLiveShaping SpecBuffsView { get; }
@@ -28,6 +47,11 @@ namespace TCC.ViewModels.Widgets
             Player.InitAbnormalityCollections(Dispatcher);
 
             ((BuffWindowSettings)settings).DirectionChanged += () => ExN(nameof(Direction));
+            ((BuffWindowSettings)settings).OverlapChanged += () =>
+            {
+                ExN(nameof(GlobalMargin));
+                ExN(nameof(ContainersMargin));
+            };
 
             BuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs, a => a.Abnormality.Type != AbnormalityType.Special);
             SpecBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs, a => a.Abnormality.Type == AbnormalityType.Special);
