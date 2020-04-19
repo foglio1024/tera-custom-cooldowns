@@ -222,7 +222,7 @@ namespace TCC.Data.Pc
         }
         public uint Coins
         {
-            get { return _coins; }
+            get => _coins;
             set
             {
                 if (_coins == value) return;
@@ -234,20 +234,23 @@ namespace TCC.Data.Pc
                 }
 
                 N();
+                N(nameof(CoinsFactor));
 
             }
         }
         public uint MaxCoins
         {
-            get { return _maxCoins; }
+            get => _maxCoins;
             set
             {
                 if (_maxCoins == value) return;
                 _maxCoins = value;
                 N();
-
+                N(nameof(CoinsFactor));
             }
         }
+
+        public double CoinsFactor => MathUtils.FactorCalc(_coins, _maxCoins);
         public bool IsDebuffed => _debuffList?.Count != 0;
         public bool IsInCombat
         {
