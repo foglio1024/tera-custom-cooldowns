@@ -832,6 +832,11 @@
                                                        ChoicesType="{x:Type FlowDirection}"
                                                        Choices="{Binding FlowDirections, Mode=OneWay}"
                                                        SelectedItem="{Binding BuffWindowSettings.Direction, Mode=TwoWay}" />
+                            <settings:ValueSetting Value="{Binding BuffWindowSettings.Overlap, Mode=TwoWay}"
+                                                   IsEnabled="{Binding BuffWindowSettings.Enabled}" 
+                                                   Min="0" Max="6"
+                                                   SettingName="Overlap factor"/>
+
                         </StackPanel>
                         <!-- Actions -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">
@@ -1108,6 +1113,18 @@
                                         <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
                                         <TextBlock Foreground="LightGray"
                                                    Text="Disable party members' MP tracking to save performance (recommended). MP bars will be hidden."
+                                                   Margin="10" TextWrapping="Wrap" MaxWidth="200" />
+                                    </Grid>
+                                </settings:ValueSetting.ToolTip>
+                            </settings:ValueSetting>
+                            <settings:ValueSetting SettingName="Disable ST threshold"
+                                                   Value="{Binding GroupWindowSettings.HideStThreshold, Mode=TwoWay}" 
+                                                   IsEnabled="{Binding GroupWindowSettings.Enabled}" Max="30" Min="1">
+                                <settings:ValueSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                        <TextBlock Foreground="LightGray"
+                                                   Text="Disable party members' ST tracking to save performance. ST bars will be hidden."
                                                    Margin="10" TextWrapping="Wrap" MaxWidth="200" />
                                     </Grid>
                                 </settings:ValueSetting.ToolTip>
