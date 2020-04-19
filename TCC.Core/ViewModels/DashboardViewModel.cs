@@ -311,14 +311,9 @@ namespace TCC.ViewModels
         {
             try
             {
-                if (File.Exists(SettingsGlobals.CharacterXmlPath)) // remove after merge
-                    new CharactersXmlParser().Read(Game.Account.Characters);
-                else
-                {
-                    if (!File.Exists(SettingsGlobals.CharacterJsonPath)) return;
-                    var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath));
-                    Game.Account = account ?? throw new FileFormatException(new Uri(SettingsGlobals.CharacterJsonPath));
-                }
+                if (!File.Exists(SettingsGlobals.CharacterJsonPath)) return;
+                var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath));
+                Game.Account = account ?? throw new FileFormatException(new Uri(SettingsGlobals.CharacterJsonPath));
             }
             catch (Exception e)
             {

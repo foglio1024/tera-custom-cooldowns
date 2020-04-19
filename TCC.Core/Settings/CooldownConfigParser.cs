@@ -20,16 +20,7 @@ namespace TCC.Settings
                 Data = JsonConvert.DeserializeObject<CooldownConfigData>(File.ReadAllText(filePath));
                 return;
             }
-
-            // todo: remove after merge with master ----------------------
-            filePath = filePath.Replace(".json", ".xml");
-            if (File.Exists(filePath))
-            {
-                Data = ParseXML(filePath);
-                return;
-            }
-            // -----------------------------------------------------------
-
+            
             Data = GetDefaults(c);
         }
 
