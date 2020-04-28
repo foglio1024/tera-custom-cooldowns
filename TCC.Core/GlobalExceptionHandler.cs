@@ -6,9 +6,11 @@ using Nostrum.WinAPI;
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using TCC.Data;
 using TCC.Exceptions;
@@ -33,12 +35,13 @@ namespace TCC
         private static void HandleGlobalExceptionImpl(UnhandledExceptionEventArgs e)
         {
             var ex = (Exception)e.ExceptionObject;
-            var js = BuildJsonDump(ex);//await App.BaseDispatcher.InvokeAsync(() => BuildJsonDump(ex));
+            var js = BuildJsonDump(ex); //await App.BaseDispatcher.InvokeAsync(() => BuildJsonDump(ex));
             DumpCrashToFile(js, ex);
 
             switch (ex)
             {
-                case COMException com when (com.HResult == 88980406 || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")):
+                case COMException com
+                    when (com.HResult == 88980406 || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")):
                 {
                     TccMessageBox.Show("TCC", SR.RenderThreadError, MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
@@ -46,7 +49,8 @@ namespace TCC
                 case ClientVersionDetectionException cvde:
                 {
                     Log.F($"Failed to detect client version from file: {cvde}");
-                    TccMessageBox.Show(SR.CannotDetectClientVersion(StubInterface.Instance.IsStubAvailable), MessageBoxType.Error);
+                    TccMessageBox.Show(SR.CannotDetectClientVersion(StubInterface.Instance.IsStubAvailable),
+                        MessageBoxType.Error);
                     break;
                 }
                 default:
@@ -57,11 +61,15 @@ namespace TCC
                 }
             }
 
-            App.ReleaseMutex();
             StubInterface.Instance.Disconnect();
-            if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
 
-            try { WindowManager.Dispose(); } catch {/* ignored*/}
+            if (!(ex is DeadlockException))
+            {
+                // These actions require main thread to be alive
+                App.ReleaseMutex(); 
+                if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
+                try { WindowManager.Dispose(); } catch {/* ignored*/}
+            }
 
             try
             {
@@ -111,7 +119,6 @@ namespace TCC
                 { "exception_source", new JValue(ex.Source)},
                 { "stack_trace", new JValue(ex.StackTrace)},
                 { "full_exception", new JValue(FormatFullException(ex))},
-                { "thread_traces", GetThreadTraces() },
                 { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
                 { "region", new JValue(Game.Server != null ? Game.Server.Region : "")},
                 { "server_id", new JValue(Game.Server != null ? Game.Server.ServerId.ToString() : "")},
@@ -153,10 +160,17 @@ namespace TCC
                 ret["inner_exception"] = innEx;
             }
 
-            if (!(ex is PacketParseException ppe)) return ret;
+            if (ex is PacketParseException ppe)
+            {
+                ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
+                ret.Add("packet_data", new JValue(ppe.RawData.ToStringEx()));
+            }
 
-            ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
-            ret.Add("packet_data", new JValue(ppe.RawData.ToStringEx()));
+            if (ex is DeadlockException de)
+            {
+                ret.Add("thread_traces", GetThreadTraces(de));
+            }
+
             return ret;
         }
 
@@ -176,9 +190,15 @@ namespace TCC
         }
 
 #pragma warning disable 618
-        private static JObject /*Task<JObject>*/ GetThreadTraces()
+        private static JObject /*Task<JObject>*/ GetThreadTraces(DeadlockException de)
         {
             var ret = new JObject();
+            var threads = App.RunningDispatchers.Values.Append(App.BaseDispatcher).Where(d => de.ThreadNames.Contains(d.Thread.Name)).Select(d => d.Thread).Append(PacketAnalyzer.AnalysisThread);
+            foreach (var thread in threads)
+            {
+                if (thread?.Name == null) continue;
+                ret[thread.Name] = GetStackTrace(thread).ToString();
+            }
             //App.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
             //{
             //    var t = d.Thread;
@@ -196,6 +216,61 @@ namespace TCC
         }
 #pragma warning restore 618
 
+        private static StackTrace GetStackTrace(Thread targetThread)
+        {
+            using var fallbackThreadReady = new ManualResetEvent(false);
+            using var exitedSafely = new ManualResetEvent(false);
+            var fallbackThread = new Thread(delegate ()
+            {
+                fallbackThreadReady.Set();
+                while (!exitedSafely.WaitOne(200))
+                {
+                    try
+                    {
+                        targetThread.Resume();
+                    }
+                    catch (Exception)
+                    {
+                        /*Whatever happens, do never stop to resume the target-thread regularly until the main-thread has exited safely.*/
+                    }
+                }
+            })
+            { Name = "GetStackFallbackThread" };
+
+            try
+            {
+                fallbackThread.Start();
+                fallbackThreadReady.WaitOne();
+                //From here, you have about 200ms to get the stack-trace.
+                targetThread.Suspend();
+                StackTrace trace = null;
+                try
+                {
+                    trace = new StackTrace(targetThread, true);
+                }
+                catch (ThreadStateException)
+                {
+                    //failed to get stack trace, since the fallback-thread resumed the thread
+                    //possible reasons:
+                    //1.) This thread was just too slow (not very likely)
+                    //2.) The deadlock ocurred and the fallbackThread rescued the situation.
+                    //In both cases just return null.
+                }
+                try
+                {
+                    targetThread.Resume();
+                }
+                catch (ThreadStateException) {/*Thread is running again already*/}
+                return trace;
+            }
+            finally
+            {
+                //Just signal the backup-thread to stop.
+                exitedSafely.Set();
+                //Join the thread to avoid disposing "exited safely" too early. And also make sure that no leftover threads are cluttering iis by accident.
+                fallbackThread.Join();
+            }
+        }
 
         private static void DumpCrashToFile(JObject js, Exception ex)
         {

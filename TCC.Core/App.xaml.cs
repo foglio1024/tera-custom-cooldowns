@@ -19,7 +19,6 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Notice;
 using TCC.Settings;
-using TCC.Test;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Update;
@@ -87,9 +86,6 @@ namespace TCC
             Loading = true;
             await Setup();
             Loading = false;
-
-            //Tester.AddFakeGroupMembers(9);
-
         }
 
         private static async Task Setup()
@@ -159,7 +155,6 @@ namespace TCC
 
             if (!Beta && Settings.BetaNotification && UpdateManager.IsBetaNewer())
                 Log.N("TCC beta available", SR.BetaAvailable, NotificationType.Success, 10000);
-
         }
         private static void ParseStartupArgs(IList<string> args)
         {
@@ -284,7 +279,10 @@ namespace TCC
                         }
 
                         if (deadlockedDispatchers.Count > 1)
-                            throw new DeadlockException($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
+                        {
+                            var threadNames = deadlockedDispatchers.Select(d => d.Thread.Name).ToList();
+                            throw new DeadlockException($"The following threads didn't report in time: {threadNames.ToCSV()}", threadNames);
+                        }
                         //Log.F($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
                     }
                 })
