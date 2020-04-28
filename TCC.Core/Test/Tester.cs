@@ -34,11 +34,11 @@ namespace TCC.Test
 
         public static void Deadlock()
         {
-            WindowManager.CharacterWindow.Dispatcher?.Invoke(() =>
+            ChatManager.Instance.GetDispatcher().Invoke(() =>
             {
                 App.BaseDispatcher.Invoke(() =>
                 {
-                    WindowManager.CharacterWindow.Dispatcher.Invoke(() => { Console.WriteLine("Deadlock"); });
+                    ChatManager.Instance.GetDispatcher().Invoke(() => { Console.WriteLine("Deadlock"); });
                 });
             });
         }
