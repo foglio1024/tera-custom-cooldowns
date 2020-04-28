@@ -220,6 +220,8 @@ namespace TCC.Data.Pc
                 N();
             }
         }
+        public int MagicalResistance { get; set; }
+
         public uint Coins
         {
             get => _coins;
@@ -390,7 +392,14 @@ namespace TCC.Data.Pc
 
             uint GetShieldSize(Abnormality a)
             {
-                return Class != Class.Sorcerer ? a.ShieldSize : Convert.ToUInt32(EpDataProvider.ManaBarrierMult * a.ShieldSize);
+                return Class switch
+                {
+                    Class.Sorcerer => Convert.ToUInt32(EpDataProvider.ManaBarrierMult * a.ShieldSize),
+                    Class.Mystic when a.Id == 702001 => (a.ShieldSize + ((uint)MagicalResistance * 50 / 100)),
+                    Class.Priest when a.Id == 800304 => (a.ShieldSize + ((uint)MagicalResistance * 65 / 100)),
+                    _ when a.Id == 702001 || a.Id == 800304 => a.ShieldSize + 25000,
+                    _ => a.ShieldSize
+                };
             }
         }
         private void EndShield(Abnormality ab)

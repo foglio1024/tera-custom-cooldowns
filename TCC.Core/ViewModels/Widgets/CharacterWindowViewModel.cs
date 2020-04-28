@@ -86,13 +86,14 @@ namespace TCC.ViewModels.Widgets
         {
             Player.ItemLevel = m.Ilvl;
             Player.Level = m.Level;
-            Player.CritFactor = m.BonusCritFactor;
+            Player.CritFactor = m.TotalCritFactor;
             Player.MaxHP = m.MaxHP;
             Player.MaxMP = m.MaxMP;
             Player.MaxST = m.MaxST + m.BonusST;
             Player.CurrentHP = m.CurrentHP;
             Player.CurrentMP = m.CurrentMP;
             Player.CurrentST = m.CurrentST;
+            Player.MagicalResistance = m.TotalMagicalResistance;
 
             // moved to Game
             //if (Player.Class != Class.Sorcerer) return;
