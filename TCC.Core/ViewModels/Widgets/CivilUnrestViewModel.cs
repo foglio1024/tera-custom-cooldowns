@@ -67,7 +67,7 @@ namespace TCC.ViewModels.Widgets
                 var ret = CollectionViewFactory.CreateLiveCollectionView(_guilds,
                     sortFilters: new[]
                     {
-                        //new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
+                        new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
                         new SortDescription(nameof(CivilUnrestGuild.TowersDestroyed), ListSortDirection.Descending)
                     });
                 return ret;
