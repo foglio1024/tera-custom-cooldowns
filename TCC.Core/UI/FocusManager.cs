@@ -132,30 +132,30 @@ namespace TCC.UI
         }
         public static void MakeUnfocusable(IntPtr hwnd)
         {
-            var extendedStyle = User32.GetWindowLong(hwnd, User32.GWL_EXSTYLE);
-            User32.SetWindowLong(hwnd, User32.GWL_EXSTYLE, extendedStyle | User32.WS_EX_NOACTIVATE);
+            var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
+            User32.SetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE, extendedStyle | (int)User32.ExtendedWindowStyles.WS_EX_NOACTIVATE);
         }
         public static void UndoUnfocusable(IntPtr hwnd)
         {
-            var extendedStyle = User32.GetWindowLong(hwnd, User32.GWL_EXSTYLE);
-            User32.SetWindowLong(hwnd, User32.GWL_EXSTYLE, extendedStyle & ~User32.WS_EX_NOACTIVATE);
+            var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
+            User32.SetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE, extendedStyle & ~(uint)User32.ExtendedWindowStyles.WS_EX_NOACTIVATE);
         }
 
         public static void HideFromToolBar(IntPtr hwnd)
         {
-            var extendedStyle = User32.GetWindowLong(hwnd, User32.GWL_EXSTYLE);
-            User32.SetWindowLong(hwnd, User32.GWL_EXSTYLE, extendedStyle | User32.WS_EX_TOOLWINDOW);
+            var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
+            User32.SetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE, extendedStyle | (int)User32.ExtendedWindowStyles.WS_EX_TOOLWINDOW);
         }
 
         public static void MakeClickThru(IntPtr hwnd)
         {
-            var extendedStyle = User32.GetWindowLong(hwnd, User32.GWL_EXSTYLE);
-            User32.SetWindowLong(hwnd, User32.GWL_EXSTYLE, extendedStyle | User32.WS_EX_TRANSPARENT);
+            var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
+            User32.SetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE, extendedStyle | (int)User32.ExtendedWindowStyles.WS_EX_TRANSPARENT);
         }
         public static void UndoClickThru(IntPtr hwnd)
         {
-            var extendedStyle = User32.GetWindowLong(hwnd, User32.GWL_EXSTYLE);
-            User32.SetWindowLong(hwnd, User32.GWL_EXSTYLE, extendedStyle & ~User32.WS_EX_TRANSPARENT);
+            var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
+            User32.SetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE, extendedStyle & ~(uint)User32.ExtendedWindowStyles.WS_EX_TRANSPARENT);
         }
         public static void FocusTera()
         {
