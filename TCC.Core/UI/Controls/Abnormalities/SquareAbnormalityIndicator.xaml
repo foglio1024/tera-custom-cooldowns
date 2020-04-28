@@ -68,7 +68,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="6,3"
-                   Text="{Binding DurationLeft, Converter={StaticResource DurationToTimeFormat}}"/>
+                   Text="{Binding DurationLeft, Converter={abnormalities:DurationLabelConverter}}"/>
             </Viewbox>
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleY="1" ScaleX="1"/>
