@@ -13,7 +13,7 @@
     <OutputPath>..\TCC.Core\bin\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Nostrum" Version="1.1.0" />
+    <PackageReference Include="Nostrum" Version="1.2.2" />
     <PackageReference Include="PacketDotNet" Version="0.13.0" />
     <PackageReference Include="SharpPcap" Version="4.2.0" />
   </ItemGroup>
