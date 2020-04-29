@@ -109,6 +109,7 @@ namespace TCC.Data.Abnormalities
         {
             //DurationLeft -= 1000;
             DurationLeft = (_endTime - DateTime.Now).TotalMilliseconds;
+            if (DurationLeft < 0) DurationLeft = 0;
             //if (!(DurationLeft < DurationLeft - 1000)) return;
             if (DurationLeft > 0) return;
             _timer.Stop();
