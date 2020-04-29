@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TCC.Data.Skills;
+using TCC.Utils;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -11,7 +12,7 @@ namespace TCC.Data.Abnormalities
         private const uint GrugnirsBiteId = 10155530;
         private const uint GodsfallId = 10155512;
         private static readonly List<uint> GodsfallPreCdIds = new List<uint> { 10155510, 10155512 };
-        private static readonly List<uint> TwilightWaltzIds = new List<uint> { 10155540, 10155541, 10155542 };
+        private static readonly List<uint> TwilightWaltzIds = new List<uint> { 10155530, 10155540, 10155541, 10155542 };
 
         private readonly Skill _godsfall;
         private readonly Skill _twilightWaltz;
@@ -81,6 +82,8 @@ namespace TCC.Data.Abnormalities
         private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)
         {
             if (!TwilightWaltzIds.Contains(p.AbnormalityId)) return;
+            if (p.AbnormalityId == 10155530 && p.Duration == 7000) return; // ewww
+            Log.CW($"Starting TW {p.AbnormalityId} {p.Duration}");
             StartPrecooldown(_twilightWaltz, p.Duration);
         }
         private void CheckGodsfallPrecd(S_ABNORMALITY_BEGIN p)

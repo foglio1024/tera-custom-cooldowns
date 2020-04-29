@@ -224,19 +224,19 @@ namespace TCC.ViewModels.Widgets
             var skill = MainSkills.FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill != null)
             {
-                if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
-                {
-                    return false;
-                }
+                //if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode) //TODO: why this check?
+                //{
+                //    return false;
+                //}
                 skill.Start(sk);
                 return true;
             }
             skill = SecondarySkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (skill == null) return UpdateOther(sk);
-            if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode)
-            {
-                return false;
-            }
+            //if (skill.Duration == sk.Duration && !skill.IsAvailable && sk.Mode == skill.Mode) //TODO: why this check?
+            //{
+            //    return false;
+            //}
             skill.Start(sk);
             return true;
         }
@@ -631,6 +631,7 @@ namespace TCC.ViewModels.Widgets
             }
             else
             {
+                Log.CW($"Adding {skillCooldown.Skill.Id} {skillCooldown.Duration}");
                 AddOrRefresh(skillCooldown);
             }
         }
@@ -644,6 +645,7 @@ namespace TCC.ViewModels.Widgets
         private static bool Pass(Skill sk)
         {
             if (sk.Detail == "off") return false;
+            if (sk.Id == 245109 && Game.Me.Class == Class.Valkyrie) return false; // bad but idk
             return sk.Class != Class.Common && sk.Class != Class.None;
         }
     }

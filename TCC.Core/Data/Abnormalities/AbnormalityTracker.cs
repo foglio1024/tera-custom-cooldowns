@@ -48,7 +48,7 @@ namespace TCC.Data.Abnormalities
             ClearMarkedTargets();
         }
 
-        public static bool IsViewModelAvailable<T>(out T vm) where T : BaseClassLayoutVM
+        protected static bool IsViewModelAvailable<T>(out T vm) where T : BaseClassLayoutVM
         {
             vm = TccUtils.CurrentClassVM<T>();
             return vm != null;

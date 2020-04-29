@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using TCC.Utils;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -8,7 +9,7 @@ namespace TCC.Data.Abnormalities
     {
         private static readonly uint FocusId = 601400;
         private static readonly uint FocusXId = 601450;
-        //private static readonly uint[] WindsongIds = { 602101, 602107, 602108, 602221, 602227 };
+        private static readonly uint[] WindsongIds = { 602101/*, 602107, 602108, 602221, 602227*/ };
         private static readonly uint[] WindWalkIds = { 602102, 602103 };
         private const string WindsongIconName = "icon_skills.breeze_tex";
 
@@ -39,23 +40,21 @@ namespace TCC.Data.Abnormalities
 
         private static void CheckWindsong(S_ABNORMALITY_BEGIN p)
         {
-            //if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
+            if (!WindsongIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
             vm.Windsong.Buff.Start(p.Duration);
         }
         private static void CheckWindsong(S_ABNORMALITY_REFRESH p)
         {
-            //if (!WindsongIds.Contains(p.AbnormalityId)) return;
-            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
+            if (!WindsongIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
             vm.Windsong.Buff.Refresh(p.Duration, CooldownMode.Normal);
         }
         private static void CheckWindsong(S_ABNORMALITY_END p)
         {
-            //if (!WindsongIds.Contains(p.AbnormalityId)) return;☺
-            if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
+            if (!WindsongIds.Contains(p.AbnormalityId)) return;
+            //if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
             vm.Windsong.Buff.Refresh(0, CooldownMode.Normal);
