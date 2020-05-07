@@ -11,6 +11,9 @@
         Style="{StaticResource BaseWindowStyle}"
         Title="NotificationAreaWindow" Height="450" Width="300">
     <Grid >
+        <Grid.CacheMode>
+            <BitmapCache RenderAtScale="1"/>
+        </Grid.CacheMode>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
