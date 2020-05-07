@@ -16,7 +16,7 @@
         <Grid.CacheMode>
             <BitmapCache RenderAtScale="1"/>
         </Grid.CacheMode>
-        <Border Grid.RowSpan="2" Style="{StaticResource DefaultBorderStyle}" Effect="{x:Null}"/>
+        <Border Grid.RowSpan="2" Style="{StaticResource DefaultBorderStyle}" Effect="{x:Null}" Opacity=".95"/>
         <TextBlock Grid.Row="0"
                    Text="{Binding AbnormalityName, RelativeSource={RelativeSource AncestorType=abnormalities:AbnormalityToolTipControl}}" 
                    Foreground="White" Margin="10" />
