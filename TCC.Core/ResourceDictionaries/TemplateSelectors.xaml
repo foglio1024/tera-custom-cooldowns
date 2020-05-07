@@ -14,8 +14,8 @@
     <templateSelectors:MessagePieceDataTemplateSelector x:Key="PieceTemplateSelector"
                                          SimpleTemplate="{StaticResource SimpleTemplate}"
                                          MoneyTemplate="{StaticResource MoneyTemplate}"
-                                         ActionTemplate="{StaticResource ActionTemplate}"
-                                         IconTemplate="{StaticResource IconTemplate}" />
+                                         ActionTemplate="{StaticResource ClickableTemplate}"
+                                         IconTemplate="{StaticResource IconTemplate}"/>
     <templateSelectors:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
                                          NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"
                                          WhisperChannelDataTemplate="{StaticResource WhisperChannelLabelTemplate}"

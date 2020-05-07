@@ -341,7 +341,7 @@ namespace TCC.R
 		public static DataTemplate GroupAbnormalitySelectorDataTemplate => ((DataTemplate)App.Current.FindResource("GroupAbnormalitySelectorDataTemplate"));
 		public static DataTemplate MyAbnormalitySelectorDataTemplate => ((DataTemplate)App.Current.FindResource("MyAbnormalitySelectorDataTemplate"));
 		public static DataTemplate SimpleTemplate => ((DataTemplate)App.Current.FindResource("SimpleTemplate"));
-		public static DataTemplate ActionTemplate => ((DataTemplate)App.Current.FindResource("ActionTemplate"));
+		public static DataTemplate ClickableTemplate => ((DataTemplate)App.Current.FindResource("ClickableTemplate"));
 		public static DataTemplate MoneyTemplate => ((DataTemplate)App.Current.FindResource("MoneyTemplate"));
 		public static DataTemplate EmojiTemplate => ((DataTemplate)App.Current.FindResource("EmojiTemplate"));
 		public static DataTemplate IconTemplate => ((DataTemplate)App.Current.FindResource("IconTemplate"));
@@ -487,6 +487,7 @@ namespace TCC.R
 		public static Geometry SvgBuffIcon => ((Geometry)App.Current.FindResource("SvgBuffIcon"));
 		public static Geometry SvgCrown => ((Geometry)App.Current.FindResource("SvgCrown"));
 		public static Geometry SvgPauseCircle => ((Geometry)App.Current.FindResource("SvgPauseCircle"));
+		public static Geometry SvgHide => ((Geometry)App.Current.FindResource("SvgHide"));
 	}
 
 	// ResourceDictionaries/Styles.xaml
