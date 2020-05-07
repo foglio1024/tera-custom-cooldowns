@@ -34,7 +34,7 @@ namespace TCC.Interop.Proxy
             if (!IsStubAvailable) return;
             StubClient.Initialize();
             StubServer.Start();
-            IsFpsUtilsAvailable = await StubClient.GetIsModAvailable("fps-utils");
+            IsFpsUtilsAvailable = await StubClient.GetIsModAvailable("fps-utils") || await StubClient.GetIsModAvailable("fps-manager");
         }
 
         public void Disconnect()
