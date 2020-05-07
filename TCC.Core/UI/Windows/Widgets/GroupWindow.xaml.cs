@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using TCC.Interop.Proxy;
+using TCC.UI.Controls.Abnormalities;
 using TCC.ViewModels.Widgets;
 
 namespace TCC.UI.Windows.Widgets
@@ -36,16 +38,20 @@ namespace TCC.UI.Windows.Widgets
             StubInterface.Instance.StubClient.ResetInstance(); //ProxyOld.ResetInstance();
         }
 
-        //TODO: to commands in VM?
         private void GroupWindow_OnMouseEnter(object sender, MouseEventArgs e)
         {
+            AbnormalityIndicatorBase.InvokeVisibilityChanged(this, true);
             GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
             GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
         }
 
-        //TODO: to commands in VM?
         private void GroupWindow_OnMouseLeave(object sender, MouseEventArgs e)
         {
+            Task.Delay(1000).ContinueWith(t => Dispatcher.InvokeAsync(() =>
+            {
+                if (IsMouseOver) return;
+                AbnormalityIndicatorBase.InvokeVisibilityChanged(this, false);
+            }));
             GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)) { BeginTime = TimeSpan.FromMilliseconds(500) });
             GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)) { BeginTime = TimeSpan.FromMilliseconds(500) });
         }

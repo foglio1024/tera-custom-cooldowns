@@ -1,6 +1,9 @@
-﻿using System.Windows.Threading;
-using Nostrum;
+﻿using Nostrum;
+using System.Windows.Input;
+using System.Windows.Threading;
 using TCC.Data.Abnormalities;
+using TCC.UI;
+using TCC.UI.Controls.Abnormalities;
 using TCC.UI.Windows;
 using TeraDataLite;
 
@@ -8,6 +11,20 @@ namespace TCC.ViewModels
 {
     public class GroupAbnormalityVM : TSPropertyChanged
     {
+        private bool _hidden;
+
+        public bool Hidden
+        {
+            get => _hidden;
+            set
+            {
+                if (_hidden == value) return;
+                _hidden = value;
+                N();
+            }
+        }
+
+        public ICommand HiddenCommand { get; }
         public Abnormality Abnormality { get; }
         public TSObservableCollection<ClassToggle> Classes { get; }
 
@@ -15,6 +32,7 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Abnormality = ab;
+
             Classes = new TSObservableCollection<ClassToggle>(Dispatcher);
             for (var i = 0; i < 13; i++)
             {
@@ -27,6 +45,18 @@ namespace TCC.ViewModels
                 Selected = App.Settings.GroupWindowSettings.GroupAbnormals[Class.Common].Contains(ab.Id)
             });
 
+            HiddenCommand = new RelayCommand(_ =>
+            {
+                Hidden = !Hidden;
+                if (Hidden)
+                {
+                    App.Settings.GroupWindowSettings.Hidden.Add(Abnormality.Id);
+                }
+                else
+                {
+                    App.Settings.GroupWindowSettings.Hidden.Remove(Abnormality.Id);
+                }
+            });
         }
     }
 }

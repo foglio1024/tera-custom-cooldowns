@@ -142,7 +142,8 @@
         <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40" />
-                <ColumnDefinition Width="340" />
+                <ColumnDefinition Width="310" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="450" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -165,7 +166,7 @@
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Abnormality.Name}"
                        VerticalAlignment="Center" Margin="5 0" />
-            <ItemsControl ItemsSource="{Binding Classes}" Grid.Column="2"
+            <ItemsControl ItemsSource="{Binding Classes}" Grid.Column="3"
                           IsEnabled="{Binding DC.ShowAll, RelativeSource={RelativeSource AncestorType=windows:GroupAbnormalConfigWindow}, Converter={StaticResource BoolInverter}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -202,7 +203,36 @@
                 </ItemsControl.Style>
 
             </ItemsControl>
-            <TextBlock Grid.Column="3" Foreground="#3fff" Text="{Binding Abnormality.Id}"
+            <Button Width="30" HorizontalContentAlignment="Center" Command="{Binding HiddenCommand}"
+                    VerticalContentAlignment="Center" Grid.Column="2"
+                    ToolTip="Hidden buffs are displayed only when mouse hovers buff window.">
+                <Path Data="{StaticResource SvgHide}"
+                      Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
+                    <Path.Style>
+                        <Style BasedOn="{StaticResource {x:Type Path}}" TargetType="Path">
+                            <Setter Property="Fill" Value="#666" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Hidden}" Value="True">
+                                    <Setter Property="Fill" Value="{StaticResource HpBrush}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>
+                </Path>
+                <Button.Style>
+                    <Style BasedOn="{StaticResource ButtonContentOpacityStyle}" TargetType="Button">
+                        <Setter Property="Opacity" Value=".2" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Hidden}" Value="True">
+                                <Setter Property="Opacity" Value="1" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <TextBlock Grid.Column="4" Foreground="#3fff" Text="{Binding Abnormality.Id}"
                        VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Right" />
         </Grid>
     </DataTemplate>
@@ -211,7 +241,8 @@
         <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40" />
-                <ColumnDefinition Width="340" />
+                <ColumnDefinition Width="310" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="450" />
                 <ColumnDefinition Width="*" />
@@ -220,8 +251,8 @@
                 <ToolTip Background="Transparent" BorderBrush="Transparent">
                     <Grid>
                         <abnormalities1:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}"
-                                                                       AbnormalityToolTip="{Binding Abnormality.ToolTip}"
-                                                                       Id="{Binding Abnormality.Id}" />
+                                                                  AbnormalityToolTip="{Binding Abnormality.ToolTip}"
+                                                                  Id="{Binding Abnormality.Id}" />
                     </Grid>
                 </ToolTip>
             </Grid.ToolTip>
@@ -235,7 +266,7 @@
             </Ellipse>
             <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Abnormality.Name}"
                        VerticalAlignment="Center" Margin="5 0" />
-            <ItemsControl ItemsSource="{Binding Classes}" Grid.Column="3"
+            <ItemsControl ItemsSource="{Binding Classes}" Grid.Column="4"
                           IsEnabled="{Binding DC.ShowAll, RelativeSource={RelativeSource AncestorType=windows:MyAbnormalConfigWindow}, Converter={StaticResource BoolInverter}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -249,14 +280,13 @@
                                 Style="{StaticResource ButtonContentOpacityStyle}">
                             <Path Data="{StaticResource SvgCheckCircle}" Fill="#666"
                                   Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
-                                  HorizontalAlignment="Center" 
-                                  x:Name="btnContent">
-
-                            </Path>
+                                  HorizontalAlignment="Center"
+                                  x:Name="btnContent" />
                         </Button>
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding Selected}" Value="True">
-                                <Setter TargetName="btnContent" Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
+                                <Setter TargetName="btnContent" Property="Fill"
+                                        Value="{StaticResource TccNormalGradientBrush}" />
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>
@@ -274,7 +304,7 @@
             </ItemsControl>
             <Button Width="30" HorizontalContentAlignment="Center" Command="{Binding SpecialCommand}"
                     Visibility="{Binding CanBeSpecial, Converter={nsConv:BoolToVisibility Mode=Hidden}}"
-                    VerticalContentAlignment="Center" Grid.Column="2"
+                    VerticalContentAlignment="Center" Grid.Column="3"
                     ToolTip="Special buffs are displayed at the beginning of the list and have gold border.">
                 <Path Data="{StaticResource SvgStar}"
                       Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
@@ -301,8 +331,36 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <Button Width="30" HorizontalContentAlignment="Center" Command="{Binding HiddenCommand}"
+                    VerticalContentAlignment="Center" Grid.Column="2"
+                    ToolTip="Hidden buffs are displayed only when mouse hovers buff window.">
+                <Path Data="{StaticResource SvgHide}"
+                      Stretch="Uniform" Height="16" Width="16" VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
+                    <Path.Style>
+                        <Style BasedOn="{StaticResource {x:Type Path}}" TargetType="Path">
+                            <Setter Property="Fill" Value="#666" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Hidden}" Value="True">
+                                    <Setter Property="Fill" Value="{StaticResource HpBrush}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>
+                </Path>
+                <Button.Style>
+                    <Style BasedOn="{StaticResource ButtonContentOpacityStyle}" TargetType="Button">
+                        <Setter Property="Opacity" Value=".2" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Hidden}" Value="True">
+                                <Setter Property="Opacity" Value="1" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
-            <TextBlock Grid.Column="4" Foreground="#3fff" Text="{Binding Abnormality.Id}"
+            <TextBlock Grid.Column="5" Foreground="#3fff" Text="{Binding Abnormality.Id}"
                        VerticalAlignment="Center" Margin="5 0" HorizontalAlignment="Right" />
         </Grid>
     </DataTemplate>
@@ -324,7 +382,7 @@
                        TextTrimming="None" />
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="ActionTemplate" DataType="chat:ActionMessagePiece">
+    <DataTemplate x:Key="ClickableTemplate" DataType="chat:MessagePieceBase">
         <Grid UseLayoutRounding="True">
             <Border BorderBrush="{Binding Color, Converter={StaticResource StringToFill}}"
                     Visibility="{Binding IsHovered, Converter={nsConv:BoolToVisibility}}"

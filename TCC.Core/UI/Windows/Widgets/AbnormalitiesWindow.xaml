@@ -20,6 +20,7 @@
         </ItemsPanelTemplate>
         <Style x:Key="GridRowStyle" TargetType="Grid">
             <Setter Property="HorizontalAlignment" Value="Left" />
+            <!--<Setter Property="Background" Value="Red" />-->
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Direction}" Value="RightToLeft">
                     <Setter Property="HorizontalAlignment" Value="Right" />
@@ -30,10 +31,16 @@
             <Setter Property="Control.Margin" Value="{Binding Margin, ElementName=DirectionGovernor}" />
         </Style>
         <Style x:Key="BuffBarItemsControlStyle" TargetType="ItemsControl">
+            <!--<Setter Property="Background" Value="Blue" />-->
             <Setter Property="ItemContainerStyle" Value="{StaticResource ItemContainerDefaultStyle}" />
             <Setter Property="ItemTemplateSelector" Value="{StaticResource PlayerAbnormalityTemplateSelector}" />
             <Setter Property="ItemsPanel" Value="{StaticResource DefaultPanelTemplate}" />
             <Setter Property="Margin" Value="{Binding Margin, ElementName=ContainerMarginGovernor}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding (ItemsControl.Items).Count, RelativeSource={RelativeSource Self}}" Value="0">
+                    <Setter Property="Margin" Value="0"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
 
     </widgets:TccWidget.Resources>

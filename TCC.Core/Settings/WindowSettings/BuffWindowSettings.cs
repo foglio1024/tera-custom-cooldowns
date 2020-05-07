@@ -42,6 +42,7 @@ namespace TCC.Settings.WindowSettings
 
         public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
         public List<uint> Specials { get; }
+        public List<uint> Hidden { get; }
 
 
         public bool Pass(Abnormality ab) // by HQ
@@ -78,6 +79,7 @@ namespace TCC.Settings.WindowSettings
             Direction = FlowDirection.RightToLeft;
             ShowAll = true;
             Specials = new List<uint>();
+            Hidden = new List<uint>();
             MyAbnormals = new Dictionary<Class, List<uint>>()
             {
                 {       0, new List<uint>{ 100800, 100801 }},

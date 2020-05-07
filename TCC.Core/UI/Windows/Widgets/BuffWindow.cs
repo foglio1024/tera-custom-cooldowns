@@ -1,9 +1,11 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using Nostrum.Extensions;
 using Nostrum.Factories;
+using TCC.UI.Controls.Abnormalities;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 
@@ -67,12 +69,18 @@ namespace TCC.UI.Windows.Widgets
 
         private void OnWindowMouseEnter(object sender, MouseEventArgs e)
         {
+            AbnormalityIndicatorBase.InvokeVisibilityChanged(this, true);
             SettingsButton.BeginAnimation(OpacityProperty, _opacityUp);
         }
 
         private void OnWindowMouseLeave(object sender, MouseEventArgs e)
         {
             SettingsButton.BeginAnimation(OpacityProperty, _opacityDown);
+            Task.Delay(1000).ContinueWith(t => Dispatcher.InvokeAsync(() =>
+            {
+                if (IsMouseOver) return;
+                AbnormalityIndicatorBase.InvokeVisibilityChanged(this, false);
+            }));
         }
 
         private void OpenBuffSettings(object sender, RoutedEventArgs e)

@@ -10,6 +10,8 @@ using System.Windows.Threading;
 using Nostrum;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.UI;
+using TCC.UI.Controls.Abnormalities;
 using TCC.UI.Windows;
 using TeraDataLite;
 
@@ -18,8 +20,10 @@ namespace TCC.ViewModels
     public class MyAbnormalityVM : TSPropertyChanged
     {
         private bool _special;
+        private bool _hidden;
         public Abnormality Abnormality { get; }
         public ICommand SpecialCommand { get; }
+        public ICommand HiddenCommand { get; }
 
         public bool Special
         {
@@ -28,6 +32,16 @@ namespace TCC.ViewModels
             {
                 if (_special == value) return;
                 _special = value;
+                N();
+            }
+        }
+        public bool Hidden
+        {
+            get => _hidden;
+            set
+            {
+                if (_hidden == value) return;
+                _hidden = value;
                 N();
             }
         }
@@ -52,6 +66,7 @@ namespace TCC.ViewModels
             {
                 Selected = App.Settings.BuffWindowSettings.MyAbnormals[Class.Common].Contains(ab.Id)
             });
+
             SpecialCommand = new RelayCommand(_ =>
             {
                 if (!ab.IsBuff) return;
@@ -68,7 +83,18 @@ namespace TCC.ViewModels
                 }
             });
 
-
+            HiddenCommand = new RelayCommand(_ =>
+            {
+                Hidden = !Hidden;
+                if (Hidden)
+                {
+                    App.Settings.BuffWindowSettings.Hidden.Add(Abnormality.Id);
+                }
+                else
+                {
+                    App.Settings.BuffWindowSettings.Hidden.Remove(Abnormality.Id);
+                }
+            });
         }
     }
 }

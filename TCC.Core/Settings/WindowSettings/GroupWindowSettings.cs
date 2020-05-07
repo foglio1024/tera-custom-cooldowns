@@ -184,6 +184,7 @@ namespace TCC.Settings.WindowSettings
         public bool ShowAllAbnormalities { get; set; }
 
         public Dictionary<Class, List<uint>> GroupAbnormals { get; }
+        public List<uint> Hidden { get; set; }
 
         public GroupWindowSettings()
         {
@@ -196,6 +197,7 @@ namespace TCC.Settings.WindowSettings
             _enabled = true;
             _allowOffScreen = false;
             Positions = new ClassPositions(0, 0, ButtonsPosition.Above);
+            Hidden = new List<uint>();
 
             UndimOnFlyingGuardian = false;
             IgnoreSize = false;
@@ -211,6 +213,7 @@ namespace TCC.Settings.WindowSettings
             ShowAwakenIcon = true;
             HpLabelMode = GroupHpLabelMode.Percentage;
             Layout = GroupWindowLayout.RoleSeparated;
+
             GroupAbnormals = new Dictionary<Class, List<uint>>()
             {
                 {       0, new List<uint>()},
