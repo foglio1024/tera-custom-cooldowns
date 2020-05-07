@@ -35,6 +35,7 @@ namespace TCC.Settings
                 }
                 else
                 {
+#if false
                     var res = TccMessageBox.Show(SR.SettingsNotFoundImport, MessageBoxType.ConfirmationWithYesNo);
                     if (res == MessageBoxResult.No)
                     {
@@ -52,6 +53,9 @@ namespace TCC.Settings
                         LoadSettings(path);
                     }
                     else App.Settings = new SettingsContainer();
+#else
+                    App.Settings = new SettingsContainer();
+#endif
                 }
             }
             catch
