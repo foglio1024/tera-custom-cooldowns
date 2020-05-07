@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
         xmlns:windows="clr-namespace:TCC.UI.Windows"
-
         Topmost="True"
         WindowStyle="None"
         AllowsTransparency="True"

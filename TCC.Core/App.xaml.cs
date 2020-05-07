@@ -60,6 +60,7 @@ namespace TCC
 
         public static bool Loading { get; private set; }
         public static bool ToolboxMode { get; private set; }
+        public static bool FirstStart { get; set; }
         public static Random Random { get; } = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year +
                                                           DateTime.Now.Minute + DateTime.Now.Second +
                                                           DateTime.Now.Millisecond);
@@ -72,6 +73,8 @@ namespace TCC
             AppVersion = TccUtils.GetTccVersion();
             Log.Config(Path.Combine(BasePath, "logs"), AppVersion); // NLog when?
             ParseStartupArgs(e.Args.ToList());
+            if(!File.Exists(Path.Combine(BasePath, SettingsGlobals.SettingsFileName)))
+                FirstStart = true;
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
             TccMessageBox.CreateAsync();
@@ -86,6 +89,11 @@ namespace TCC
             Loading = true;
             await Setup();
             Loading = false;
+            
+            if (FirstStart)
+            {
+                new WelcomeWindow().Show();
+            }
         }
 
         private static async Task Setup()
