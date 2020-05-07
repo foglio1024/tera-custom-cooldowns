@@ -158,6 +158,9 @@
                 </Grid.Style>
                 <!-- Normal mode content -->
                 <Grid Margin="3" Width="Auto" Name="Root">
+                    <Grid.CacheMode>
+                        <BitmapCache RenderAtScale="1"/>
+                    </Grid.CacheMode>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -270,14 +273,45 @@
                                                          InterTabClient="{Binding InterTabClient}" />
                         </dragablz:TabablzControl.InterTabController>
                     </dragablz:TabablzControl>
+                    <Button VerticalAlignment="Bottom" Grid.Row="1" Style="{StaticResource ButtonMainStyle}"
+                            Opacity="1"
+                            Margin="20 1 1 1"
+                            Background="{StaticResource GreenBrush}"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            Command="{Binding JumpToPresentCommand}"
+                            Visibility="{Binding Paused, Converter={StaticResource BoolToVisibility}}">
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                    <!-- Pause icon -->
-                    <Path Data="{StaticResource SvgPauseCircle}"
-                          VerticalAlignment="Bottom" IsHitTestVisible="False"
-                          HorizontalAlignment="Right" Height="40" Width="40" Grid.Row="1" Opacity=".2"
-                          Margin="10"
-                          Visibility="{Binding Paused, Converter={converters:BoolToVisibility}}" 
-                          />
+                            <TextBlock Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="DemiBold"
+                                       Foreground="#bfff">
+                                <Run Text="Jump to present" Foreground="White"/>
+                                <Run Text="(" /><Run Text="{Binding Manager.QueuedMessagesCount, Mode=OneWay}"/><Run Text=")"/>
+                                <Path Data="{StaticResource SvgDownArrow}"
+                                      Fill="White"
+                                      Margin="1 5 1 0"
+                                      Height="Auto"
+                                      Width="11"/>
+
+                            </TextBlock>
+                            <!-- Pause icon -->
+                            <Path Data="{StaticResource SvgPauseCircle}"
+                                  VerticalAlignment="Center" IsHitTestVisible="False"
+                                  HorizontalAlignment="Center"  Grid.Column="0" Opacity=".8"
+                                  Margin="6 4"
+                                  Height="16"
+                            />
+                        </Grid>
+                    </Button>
+
 
                     <!-- LFG bar -->
                     <ItemsControl Grid.Row="0" ItemsSource="{Binding LFGs}"
@@ -313,6 +347,9 @@
 
                 <!-- Collapsed mode content -->
                 <Grid>
+                    <Grid.CacheMode>
+                        <BitmapCache RenderAtScale="1"/>
+                    </Grid.CacheMode>
                     <Grid.RenderTransform>
                         <TranslateTransform />
                     </Grid.RenderTransform>
@@ -340,7 +377,8 @@
                     </Grid.Style>
 
                     <!-- Blurred bg -->
-                    <Border Margin="21 10 10 6" Background="#000509" Height="64" VerticalAlignment="Bottom"
+                    <Border Margin="21 10 10 6" Background="#000509" VerticalAlignment="Bottom"
+                            Height="{Binding WindowSettings.CollapsedHeight}"
                             Opacity="{Binding WindowSettings.BackgroundOpacity}">
                         <Border.Effect>
                             <BlurEffect Radius="10" />
@@ -362,7 +400,7 @@
                         </Border>
                         <!-- Messages -->
                         <ItemsControl ItemsSource="{Binding CurrentTab.Messages}"
-                                      Height="64"
+                                      Height="{Binding WindowSettings.CollapsedHeight}"
                                       ScrollViewer.CanContentScroll="True"
                                       VirtualizingStackPanel.IsVirtualizing="True"
                                       VirtualizingStackPanel.VirtualizationMode="Recycling"
@@ -421,7 +459,7 @@
         <!-- Settings popup-->
         <controls:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup"
                            Focusable="True"
-                           HorizontalOffset="20"
+                           HorizontalOffset="16"
                            AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}"
                            StaysOpen="True" DataContext="{Binding}"
                            PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
@@ -460,6 +498,10 @@
                                               IsOn="{Binding WindowSettings.StaysCollapsed, Mode=TwoWay}"
                                               CheckBoxColor="{StaticResource DefensiveStanceBrush}"
                                               IsEnabled="{Binding WindowSettings.CanCollapse}" />
+                    <settings:ValueSetting SettingName="Collapsed height" Foreground="#9fff" TextBoxVisibility="Visible"
+                                           Value="{Binding WindowSettings.CollapsedHeight,  Mode=TwoWay}"
+                                           Min="64" Max="256" Visibility="Visible" />
+
                     <settings:SelectionSetting SettingName="Click thru" Foreground="#9fff"
                                                SelectedItem="{Binding WindowSettings.ClickThruMode, Mode=TwoWay}"
                                                Choices="{Binding ClickThruModes}"

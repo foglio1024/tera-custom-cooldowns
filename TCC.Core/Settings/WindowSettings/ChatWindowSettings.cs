@@ -15,12 +15,14 @@ namespace TCC.Settings.WindowSettings
         private bool _canCollapse = true;
         private bool _staysCollapsed;
         private bool _showImportant = true;
+        private int _collapsedHeight = 64;
 
         public event Action FadeoutChanged;
         public event Action OpacityChanged;
         public event Action TimeoutChanged;
         public event Action CanCollapseChanged;
         public event Action StaysCollapsedChanged;
+        public event Action CollapsedHeightChanged;
 
 
         public int HideTimeout
@@ -110,6 +112,20 @@ namespace TCC.Settings.WindowSettings
                 N();
             }
         }
+
+
+        public int CollapsedHeight
+        {
+            get => _collapsedHeight;
+            set
+            {
+                if (_collapsedHeight == value) return;
+                _collapsedHeight = value;
+                N();
+                CollapsedHeightChanged?.Invoke();
+            }
+        }
+
 
         public List<TabInfo> Tabs { get; set; }
 

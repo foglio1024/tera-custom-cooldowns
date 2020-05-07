@@ -106,6 +106,7 @@ namespace TCC.ViewModels.Widgets
             }
         }
 
+        
         public Tab CurrentTab
         {
             get => _currentTab;
@@ -118,6 +119,7 @@ namespace TCC.ViewModels.Widgets
         }
         public ICommand MakeGlobalCommand { get; }
         public ICommand OpenSysMsgSettingsCommand { get; }
+        public ICommand JumpToPresentCommand { get; }
 
         public ChatWindowSettings WindowSettings
         {
@@ -172,6 +174,7 @@ namespace TCC.ViewModels.Widgets
             }
         }
 
+        public ChatManager Manager => ChatManager.Instance;
         public ChatViewModel(ChatWindowSettings s)
         {
             WindowSettings = s;
@@ -180,6 +183,7 @@ namespace TCC.ViewModels.Widgets
 
             MakeGlobalCommand = new RelayCommand(_ => WindowSettings.MakePositionsGlobal());
             OpenSysMsgSettingsCommand = new RelayCommand(_ => new SystemMessagesConfigWindow { ShowActivated = true, Topmost = true }.Show());
+            JumpToPresentCommand = new RelayCommand(ex => ChatManager.Instance.ScrollToBottom());
 
             ChatManager.Instance.NewMessage += CheckAttention;
             Game.GameUiModeChanged += CheckCollapsed;

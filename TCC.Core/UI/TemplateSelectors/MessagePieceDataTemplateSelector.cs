@@ -10,6 +10,7 @@ namespace TCC.UI.TemplateSelectors
         public DataTemplate ActionTemplate { get; set; }
         public DataTemplate MoneyTemplate { get; set; }
         public DataTemplate IconTemplate { get; set; }
+        public DataTemplate UrlTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -18,6 +19,7 @@ namespace TCC.UI.TemplateSelectors
                 ActionMessagePiece _ => ActionTemplate,
                 IconMessagePiece _ => IconTemplate,
                 MoneyMessagePiece _ => MoneyTemplate,
+                UrlMessagePiece _ => ActionTemplate,
                 _ => SimpleTemplate
             };
         }

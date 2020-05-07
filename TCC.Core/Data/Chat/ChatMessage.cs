@@ -147,7 +147,7 @@ namespace TCC.Data.Chat
         //TODO: refactor
         public void SplitSimplePieces()
         {
-            var simplePieces = Pieces.ToSyncList().Where(item => item is SimpleMessagePiece);
+            var simplePieces = Pieces.ToSyncList().Where(item => item is SimpleMessagePiece && !(item is UrlMessagePiece));
 
             foreach (var simplePiece in simplePieces)
             {

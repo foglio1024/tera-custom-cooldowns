@@ -49,7 +49,8 @@ namespace TCC.ViewModels
         public LFG LastClickedLfg { get; set; }
 
         public int MessageCount => ChatMessages.Count;
-        public bool IsQueueEmpty => _pauseQueue.Count == 0;
+        public int QueuedMessagesCount => _pauseQueue.Count;
+        public bool IsQueueEmpty => QueuedMessagesCount == 0;
         public TSObservableCollection<ChatWindow> ChatWindows { get; }
 #if BATCH
         private readonly ConcurrentQueue<ChatMessage> _mainQueue;
@@ -221,10 +222,9 @@ namespace TCC.ViewModels
 
         private void OnChat(S_CHAT m)
         {
-            Dispatcher.InvokeAsync(() =>
+            Task.Run(() =>
             {
-                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : (ChatChannel)m.Channel,
-                    m.AuthorName, m.Message, m.AuthorId));
+                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : (ChatChannel)m.Channel, m.AuthorName, m.Message, m.AuthorId));
             });
         }
 
@@ -250,7 +250,7 @@ namespace TCC.ViewModels
 
         private void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
-            AddDamageReceivedMessage(m.Source, m.Target, m.Diff, m.MaxHP, m.Crit);
+            Task.Run(() => AddDamageReceivedMessage(m.Source, m.Target, m.Diff, m.MaxHP, m.Crit));
         }
 
         private void InitWindows()
@@ -311,6 +311,15 @@ namespace TCC.ViewModels
         public void ScrollToBottom()
         {
             //TODO?
+            foreach (var win in ChatWindows)
+            {
+                win.ScrollToBottom();
+            }
+
+            AddFromQueue();
+
+            SetPaused(false);
+
         }
 
         private bool Filtered(ChatMessage message)
@@ -365,23 +374,19 @@ namespace TCC.ViewModels
         public void AddSystemMessage(string template, SystemMessageData sysMsg, string authorOverride = "System")
         {
             if (!App.Settings.ChatEnabled) return;
-            AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, (ChatChannel)sysMsg.ChatChannel,
-                authorOverride));
+            Task.Run(() => AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, (ChatChannel) sysMsg.ChatChannel, authorOverride)));
         }
 
         public void AddSystemMessage(string template, SystemMessageData sysMsg, ChatChannel channelOverride, string authorOverride = "System")
         {
             if (!App.Settings.ChatEnabled) return;
-
-            AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, channelOverride, authorOverride));
+            Task.Run(() => AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, channelOverride, authorOverride)));
         }
 
         private void AddLfgMessage(uint id, string name, string msg)
         {
             if (!App.Settings.ChatEnabled) return;
-
-            Dispatcher.InvokeAsync(() => { AddChatMessage(Factory.CreateLfgMessage(id, name, msg)); },
-                DispatcherPriority.DataBind);
+            Task.Run(() => AddChatMessage(Factory.CreateLfgMessage(id, name, msg)));
         }
 
         public void AddChatMessage(ChatMessage chatMessage)
@@ -407,6 +412,8 @@ namespace TCC.ViewModels
                 else
                 {
                     _pauseQueue.Enqueue(chatMessage);
+                    N(nameof(QueuedMessagesCount));
+
                 }
 
                 NewMessage?.Invoke(chatMessage);
@@ -445,18 +452,20 @@ namespace TCC.ViewModels
                 : !crit ? "TCC_DAMAGE_RECEIVED" : "TCC_DAMAGE_RECEIVED_CRIT");
         }
 
-        public void AddFromQueue(int itemsToAdd)
+        public void AddFromQueue(int itemsToAdd = 0)
         {
             if (itemsToAdd == 0) itemsToAdd = _pauseQueue.Count;
             for (var i = 0; i < itemsToAdd; i++)
                 if (_pauseQueue.TryDequeue(out var msg))
                 {
+                    N(nameof(QueuedMessagesCount));
 #if BATCH
                     _mainQueue.Enqueue(msg);
 #else
                     ChatMessages.Insert(0, msg);
 #endif
-                    if (ChatMessages.Count > App.Settings.MaxMessages) ChatMessages.RemoveAt(ChatMessages.Count - 1);
+                    if (ChatMessages.Count > App.Settings.MaxMessages) 
+                        ChatMessages.RemoveAt(ChatMessages.Count - 1);
                 }
         }
 

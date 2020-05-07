@@ -121,6 +121,21 @@ namespace TCC.UI.Windows.Widgets
 
         }
 
+        public void ScrollToBottom()
+        {
+            if (VM.CurrentTab == null) 
+                TabControl.SelectedIndex = 0;
+            TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+            {
+                if (!x.IsVisible) return;
+                var host = x.GetChild<VirtualizingStackPanel>();
+                var sw = host?.FindVisualParent<ScrollViewer>();
+                if (sw == null) return;
+                sw.ScrollToTop();
+            });
+
+        }
+
         public void ScrollToMessage(Tab tab, ChatMessage msg)
         {
             if (VM.CurrentTab != tab) TabControl.SelectedIndex = VM.Tabs.IndexOf(tab);
