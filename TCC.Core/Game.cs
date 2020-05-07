@@ -583,8 +583,9 @@ namespace TCC
         {
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_LEAVE");
 
-            if (!StubInterface.Instance.IsStubAvailable || !StubInterface.Instance.IsFpsUtilsAvailable ||
-                !App.Settings.FpsAtGuardian) return;
+            if (!StubInterface.Instance.IsStubAvailable
+                || !StubInterface.Instance.IsFpsUtilsAvailable
+                || !App.Settings.FpsAtGuardian) return;
             StubInterface.Instance.StubClient.InvokeCommand("fps mode 1");
         }
         private static void OnFieldEventOnEnter(S_FIELD_EVENT_ON_ENTER p)
@@ -625,8 +626,7 @@ namespace TCC
         }
         private static void OnGuildMemberList(S_GUILD_MEMBER_LIST m)
         {
-            Guild.Set(m.Members, m.MasterId, m.MasterName);
-            //m.GuildMembersList.ToList().ForEach(g => { GuildMembersNames[g.Key] = g.Value; });
+            Task.Run(() => Guild.Set(m.Members, m.MasterId, m.MasterName));
         }
         private static void OnLoadEpInfo(S_LOAD_EP_INFO m)
         {
@@ -640,7 +640,8 @@ namespace TCC
         }
         private static void OnResetEpPerk(S_RESET_EP_PERK m)
         {
-            if (m.Success) EpDataProvider.SetManaBarrierPerkLevel(0);
+            if (m.Success) 
+                EpDataProvider.SetManaBarrierPerkLevel(0);
         }
         private static void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {

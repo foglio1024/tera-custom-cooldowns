@@ -250,9 +250,9 @@ namespace TCC.ViewModels
             {
                 Dispatcher.InvokeAsync(() =>
                 {
-                    CurrentCharacter.Inventory.Clear();
                     lock (_lock)
                     {
+                        CurrentCharacter.Inventory.Clear();
                         foreach (var pendingTab in _pendingTabs) //TODO: lock on list   
                         {
                             foreach (var keyVal in pendingTab)
