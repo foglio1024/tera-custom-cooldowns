@@ -16,6 +16,7 @@ namespace TCC.Data.Pc
     {
         public event Action Death;
         public event Action Ress;
+        public event Action CoinsUpdated;
 
         private string _name = "";
         private ulong _entityId;
@@ -237,6 +238,7 @@ namespace TCC.Data.Pc
 
                 N();
                 N(nameof(CoinsFactor));
+                CoinsUpdated?.Invoke();
 
             }
         }
@@ -249,6 +251,8 @@ namespace TCC.Data.Pc
                 _maxCoins = value;
                 N();
                 N(nameof(CoinsFactor));
+                CoinsUpdated?.Invoke();
+
             }
         }
 

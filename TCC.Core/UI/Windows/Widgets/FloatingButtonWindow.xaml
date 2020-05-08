@@ -5,6 +5,7 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
                    xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                   xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
                    mc:Ignorable="d"
                    Title="TCC Floating button"
                    Height="Auto" Width="Auto"
@@ -15,61 +16,150 @@
                    ShowInTaskbar="False"
                    AllowsTransparency="True"
                    Background="Transparent"
+                   UseLayoutRounding="True"
                    Topmost="True"
                    d:DataContext="{d:DesignInstance widgets:FloatingButtonViewModel}">
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" Margin="0 0 10 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RenderTransform>
-            <TranslateTransform X="-32" />
+            <TranslateTransform X="-288" />
         </Grid.RenderTransform>
 
         <Grid x:Name="WindowContent"
               MouseEnter="OnMouseEnter"
               MouseLeave="OnMouseLeave">
-            <Border Style="{StaticResource DefaultBorderStyle}" CornerRadius="0,2,2,0" x:Name="RootBorder"
-                    Margin="0,10"
+            <Border Style="{StaticResource RevampBorderStyle}" x:Name="RootBorder"
+                    Margin="0 10"
                     HorizontalAlignment="Stretch">
-                <StackPanel Width="35">
-                    <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}"
-                            Command="{Binding OpenLfgCommand}" ToolTip="LFG"
-                            Height="{Binding ElementName=InfoBtn, Path=ActualHeight}">
-                        <Path Data="{StaticResource SvgUsers}" Fill="White"
-                              Stretch="Uniform" Margin="5"
-                              IsHitTestVisible="False" />
-                    </Button>
-                    <Button Style="{StaticResource ButtonMainStyle}"
-                            x:Name="InfoBtn"
-                            Command="{Binding OpenDashboardCommand}">
-                        <Path Data="{StaticResource SvgInfo}" Fill="White" x:Name="InfoPath" Stretch="UniformToFill"
-                              Margin="5" IsHitTestVisible="False" />
-                    </Button>
-                    <Button Style="{StaticResource ButtonMainStyle}"
-                            Command="{Binding OpenSettingsCommand}">
-                        <Path Data="{StaticResource SvgSettings}" Fill="White" Stretch="UniformToFill" Margin="5"
-                              IsHitTestVisible="False" />
-                    </Button>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Style="{StaticResource RevampBorderStyle}"
+                            Background="{StaticResource RevampDarkerBackgroundBrush}" BorderThickness="0 0 1 0" />
+
+                    <StackPanel Grid.Column="1">
+                        <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}"
+                                Command="{Binding OpenLfgCommand}"
+                                Height="{Binding ElementName=InfoBtn, Path=ActualHeight}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Path Data="{StaticResource SvgUsers}" Fill="White"
+                                      Stretch="Uniform" Margin="6 5"
+                                      IsHitTestVisible="False" />
+                                <TextBlock Text="LFG" Foreground="White" VerticalAlignment="Center" Grid.Column="1"
+                                           Margin="0 0 5 0" />
+                            </Grid>
+                        </Button>
+                        <Button Style="{StaticResource ButtonMainStyle}"
+                                x:Name="InfoBtn"
+                                Command="{Binding OpenDashboardCommand}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Path Data="{StaticResource SvgInfo}" Fill="White" x:Name="InfoPath" Stretch="Uniform"
+                                      Margin="6 5" IsHitTestVisible="False" />
+                                <TextBlock Text="Dashboard" Foreground="White" VerticalAlignment="Center"
+                                           Grid.Column="1" Margin="0 0 5 0" />
+                            </Grid>
+                        </Button>
+                        <Button Style="{StaticResource ButtonMainStyle}"
+                                Command="{Binding OpenSettingsCommand}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Path Data="{StaticResource SvgSettings}" Fill="White" Stretch="Uniform" Margin="6 5"
+                                      IsHitTestVisible="False" />
+                                <TextBlock Text="Settings" Foreground="White" VerticalAlignment="Center"
+                                           Grid.Column="1" Margin="0 0 5 0" />
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                    <Grid Width="200" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Production Points"
+                                   VerticalAlignment="Bottom"
+                                   Foreground="#8fff"
+                                   Margin="12 0" />
+                        <TextBlock VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Right"
+                                   Foreground="#8fff"
+                                   Margin="12 0">
+                            <Run Text="{Binding CurrPP, Mode=OneWay}" 
+                                 Foreground="{StaticResource GreenBrush}"
+                                 FontWeight="DemiBold" /><Run Foreground="#4fff">/</Run><Run Text="{Binding MaxPP, Mode=OneWay}" />
+                        </TextBlock>
+
+                        <dashboard:RectangleBarGauge VerticalAlignment="Center"
+                                                     Height="4"
+                                                     Grid.Row="1"
+                                                     Factor="{Binding PPFactor}"
+                                                     Color="{StaticResource GreenBrush}"
+                                                     Skew="-45"
+                                                     Margin="12 2 12 16" />
+
+                        <TextBlock Text="Adventure Coins"
+                                   Grid.Row="2"
+                                   VerticalAlignment="Bottom"
+                                   Foreground="#8fff"
+                                   Margin="12 0" />
+                        <TextBlock Grid.Row="2"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Right"
+                                   Foreground="#8fff"
+                                   Margin="12 0">
+                            <Run Text="{Binding CurrCoins, Mode=OneWay}" 
+                                 Foreground="{StaticResource GoldBrush}"
+                                 FontWeight="DemiBold" /><Run Foreground="#4fff">/</Run><Run Text="{Binding MaxCoins, Mode=OneWay}" />
+                        </TextBlock>
+                        <dashboard:RectangleBarGauge VerticalAlignment="Center"
+                                                     Height="4"
+                                                     Grid.Row="3"
+                                                     Factor="{Binding CoinsFactor}"
+                                                     Color="{StaticResource GoldBrush}"
+                                                     Skew="-45"
+                                                     Margin="12 2" />
+
+                    </Grid>
+                </Grid>
             </Border>
             <Border x:Name="NotificationBubble"
-                    Width="Auto"
+                    Width="20"
                     Height="20"
                     Background="{StaticResource TccRedGradientBrush}"
-                    CornerRadius="3"
+                    CornerRadius="10"
                     UseLayoutRounding="True"
-                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                    Margin="0 0 -42 0"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                    Margin="0 0 -8 0"
                     RenderTransformOrigin=".5,.5"
                     Visibility="{Binding PendingNotifications, Converter={converters:BoolToVisibility Mode=Hidden}}"
                     ToolTip="There are events starting in few minutes.">
                 <Border.RenderTransform>
-                    <ScaleTransform />
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <TranslateTransform X="0" />
+                    </TransformGroup>
                 </Border.RenderTransform>
                 <TextBlock Foreground="White" FontSize="14" TextAlignment="Center" Margin="3 0"
                            Text="{Binding PendingNotificationsAmount}" />
-
             </Border>
         </Grid>
     </Grid>

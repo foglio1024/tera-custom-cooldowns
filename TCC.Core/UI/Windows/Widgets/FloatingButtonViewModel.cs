@@ -15,6 +15,7 @@ namespace TCC.UI.Windows.Widgets
         private bool _pendingNotifications;
         private int _pendingNotificationsAmount;
         private int _currPP;
+        private int _maxPP;
 
         public bool PendingNotifications
         {
@@ -50,9 +51,6 @@ namespace TCC.UI.Windows.Widgets
                 N();
             }
         }
-
-        private int _maxPP;
-
         public int MaxPP
         {
             get => _maxPP;
@@ -64,9 +62,11 @@ namespace TCC.UI.Windows.Widgets
             }
         }
 
+        public double CoinsFactor => Game.Me.CoinsFactor;
+        public double CurrCoins => Game.Me.Coins;
+        public double MaxCoins => Game.Me.MaxCoins;
+
         public double PPFactor => MathUtils.FactorCalc(_currPP, _maxPP);
-
-
 
         public FloatingButtonViewModel(FloatingButtonWindowSettings settings) : base(settings)
         {
@@ -79,6 +79,15 @@ namespace TCC.UI.Windows.Widgets
                 PendingNotificationsAmount = 0;
                 NotificationsCleared?.Invoke();
             });
+
+            Game.Me.CoinsUpdated += OnCoinsUpdated;
+        }
+
+        private void OnCoinsUpdated()
+        {
+            N(nameof(CoinsFactor));
+            N(nameof(CurrCoins));
+            N(nameof(MaxCoins));
         }
 
         protected override void InstallHooks()

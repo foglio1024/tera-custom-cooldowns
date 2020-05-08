@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -11,14 +12,21 @@ namespace TCC.UI.Windows.Widgets
         private readonly DoubleAnimation _slideInAnim;
         private readonly DoubleAnimation _slideOutAnim;
         private readonly DoubleAnimation _bubbleAnim;
+        private readonly DoubleAnimation _bubbleSlideIn;
+        private readonly DoubleAnimation _bubbleSlideOut;
         private Timer _animRepeatTimer;
+
+        private ScaleTransform _bubbleScaleTransform => (ScaleTransform)((TransformGroup)NotificationBubble?.RenderTransform)?.Children[0];
+        private TranslateTransform _bubbleTranslateTransform => (TranslateTransform)((TransformGroup)NotificationBubble?.RenderTransform)?.Children[1];
 
         public FloatingButtonWindow(FloatingButtonViewModel vm)
         {
             DataContext = vm;
 
-            _slideOutAnim = AnimationFactory.CreateDoubleAnimation(150, -32, -1, true);
-            _slideInAnim = AnimationFactory.CreateDoubleAnimation(150, -1, -32, true);
+            _slideOutAnim = AnimationFactory.CreateDoubleAnimation(250, to: -288, easing: true);
+            _slideInAnim = AnimationFactory.CreateDoubleAnimation(250, to: -1, easing: true);
+            _bubbleSlideIn = AnimationFactory.CreateDoubleAnimation(250, to: -77, easing: true);
+            _bubbleSlideOut = AnimationFactory.CreateDoubleAnimation(250, to: 0, easing: true);
             _bubbleAnim = AnimationFactory.CreateDoubleAnimation(800, 1, .75, true);
 
             vm.NotificationsCleared += OnNotificationsCleared;
@@ -61,24 +69,33 @@ namespace TCC.UI.Windows.Widgets
         {
             Dispatcher?.InvokeAsync(() =>
             {
-                NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
-                NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+                _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+                _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
                 _animRepeatTimer.Stop();
             });
         }
         private void AnimateBubble()
         {
-            NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _bubbleAnim);
-            NotificationBubble.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _bubbleAnim);
+            _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _bubbleAnim);
+            _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _bubbleAnim);
         }
 
         private void OnMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideInAnim);
+            _bubbleTranslateTransform.BeginAnimation(TranslateTransform.XProperty, _bubbleSlideIn);
         }
         private void OnMouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideOutAnim);
+            Task.Delay(1000).ContinueWith(t =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    if (IsMouseOver) return;
+                    RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideOutAnim);
+                    _bubbleTranslateTransform.BeginAnimation(TranslateTransform.XProperty, _bubbleSlideOut);
+                });
+            });
         }
     }
 }
