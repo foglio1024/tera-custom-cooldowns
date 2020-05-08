@@ -63,10 +63,36 @@ namespace TCC.UI.Windows.Widgets
         {
             if (!(sender is FrameworkElement s)) return;
             if (!(s.DataContext is HeaderedItemViewModel dc)) return;
+            var tab = ((Tab) dc.Content);
 
-            var sw = new ChatSettingsWindow((Tab) dc.Content);
-            sw.Show();
-            sw.Activate();
+            if (e.RightButton == MouseButtonState.Pressed)
+            {
+                var sw = new ChatSettingsWindow(tab);
+                sw.Show();
+                sw.Activate();
+            }
+            else if (e.MiddleButton == MouseButtonState.Pressed)
+            {
+                var currSel = TabControl.SelectedIndex;
+                VM.RemoveTab(tab);
+                UpdateSettings();
+                
+
+                if (VM.TabVMs.Count == 0)
+                {
+                    Close();
+                    App.Settings.ChatWindowsSettings.Remove((ChatWindowSettings)WindowSettings);
+                }
+                else
+                {
+                    TabControl.SelectedIndex = currSel == 0 ? 0 : currSel - 1;
+                }
+
+            }
+            else
+            {
+                e.Handled = false;
+            }
         }
         private void OnIsDraggingChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
         {
@@ -123,7 +149,7 @@ namespace TCC.UI.Windows.Widgets
 
         public void ScrollToBottom()
         {
-            if (VM.CurrentTab == null) 
+            if (VM.CurrentTab == null)
                 TabControl.SelectedIndex = 0;
             TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
             {
@@ -154,7 +180,7 @@ namespace TCC.UI.Windows.Widgets
         private void TabChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count == 0) return;
-            var tabVm = (TabViewModel) e.AddedItems[0];
+            var tabVm = (TabViewModel)e.AddedItems[0];
             var selectedTab = (Tab)tabVm.Content;
             //clickedTab.ClearImportant();
 
@@ -172,6 +198,24 @@ namespace TCC.UI.Windows.Widgets
                 if (ChatManager.Instance.IsQueueEmpty) ChatManager.Instance.SetPaused(false);
                 ChatManager.Instance.SetPaused(!_bottom);
             }
+
+            //foreach (var x in TabControl.GetVisualDescendents<ItemsControl>())
+            //{
+            //    var dg = x.GetChild<DragablzItem>();
+            //    if (dg != null)
+            //    {
+            //        SetTopBorder(dg as FrameworkElement);
+            //    }
+
+            //}
+            //TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+            //{
+            //    var dg = x.GetChild<DragablzItem>();
+            //    if (dg != null)
+            //    {
+            //        SetTopBorder(dg as FrameworkElement);
+            //    }
+            //});
         }
 
         private void SetLines(object sender, MouseButtonEventArgs e)
@@ -187,5 +231,9 @@ namespace TCC.UI.Windows.Widgets
             if (left + w - 6 >= 0) RightLine.Margin = new Thickness(left + w - 6, 0, 0, 0);
         }
 
+        private void TabOnMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+
+        }
     }
 }
