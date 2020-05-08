@@ -33,5 +33,15 @@ namespace TCC.UI.Controls.Chat
             //ProxyInterface.Instance.Stub.AskInteractive(Game.Server.ServerId, name); //ProxyOld.AskInteractive(SessionManager.Server.ServerId, name);
             WindowManager.ViewModels.PlayerMenuVM.Open(name, Game.Server.ServerId);
         }
+
+        private void OnMessageMouseEnter(object sender, MouseEventArgs e)
+        {
+            Underline.Visibility = Visibility.Visible;
+        }
+
+        private void OnMessageMouseLeave(object sender, MouseEventArgs e)
+        {
+            Underline.Visibility = Visibility.Collapsed;
+        }
     }
 }

@@ -13,8 +13,15 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Foreground="{StaticResource ChatSystemFriendBrush}"
-                   Cursor="Hand"
+        <Border BorderBrush="{StaticResource ChatSystemFriendBrush}"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="4 0 0 0"
+                x:Name="Underline"
+                Visibility="Collapsed"
+                BorderThickness="0 0 0 2" />
+
+        <TextBlock Cursor="Hand"
                    MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
                    FontSize="{Binding Size}"
                    FontFamily="{StaticResource NotoSansMed}"
@@ -25,10 +32,17 @@
                    Opacity="1"
                    Width="Auto"
                    HorizontalAlignment="Stretch"
-                   TextTrimming="CharacterEllipsis">
+                   TextTrimming="CharacterEllipsis"
+                   MouseEnter="OnMessageMouseEnter"
+                   MouseLeave="OnMessageMouseLeave">
             <!--<Run Text="&lt;"/>-->
             <Run Text="{Binding RawMessage, Mode=OneWay}"/>
             <!--<Run Text="&gt;"/>-->
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="{StaticResource ChatSystemFriendBrush}"></Setter>
+                </Style>
+            </TextBlock.Style>
         </TextBlock>
         <!--Visibility="{Binding ElementName=Players, Path=HasItems, Converter={nsConv:BoolToVisibility}}"-->
         <Border CornerRadius="10" HorizontalAlignment="Stretch" Grid.Column="1"
