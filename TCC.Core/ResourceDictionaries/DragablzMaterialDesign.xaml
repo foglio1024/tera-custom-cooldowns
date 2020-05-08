@@ -489,7 +489,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type dragablz:TabablzControl}">
-                    <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true"
+                    <Grid x:Name="templateRoot" ClipToBounds="False" SnapsToDevicePixels="true"
                           KeyboardNavigation.TabNavigation="Local">
                         <Grid.RowDefinitions>
                             <RowDefinition x:Name="RowDefinition0" Height="Auto" />
@@ -503,7 +503,7 @@
                                 Margin="0 -1 0 0">
                             <Grid x:Name="PART_ItemsHolder" />
                         </Border>
-                        <Grid Grid.Column="0" Grid.Row="0" x:Name="HeaderContainerGrid"
+                        <Grid Grid.Column="0" Margin="-1 0 0 0" Grid.Row="0" x:Name="HeaderContainerGrid"
                               Visibility="{TemplateBinding IsHeaderPanelVisible, Converter={nsConv:BoolToVisibility}}">
                             <Grid.Resources>
                                 <Style TargetType="{x:Type Button}"
@@ -634,7 +634,8 @@
                                                                    ItemsOrganiser="{TemplateBinding HeaderItemsOrganiser}"
                                                                    KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"
                                                                    ItemTemplate="{TemplateBinding HeaderItemTemplate}"
-                                                                   Style="{StaticResource TabablzDragablzItemsControlStyle}">
+                                                                   Style="{StaticResource TabablzDragablzItemsControlStyle}"
+                                                                   Margin="-1 0 0 0">
                                         <dragablz:DragablzItemsControl.MaxHeight>
                                             <MultiBinding>
                                                 <MultiBinding.Converter>
@@ -860,8 +861,10 @@
 
                                             </ItemsControl>
                                             <Button Grid.Row="2" Command="{Binding Content.ClearAllCommand}"
-                                                    Style="{StaticResource ButtonContentOpacityStyle}"
-                                                    Margin="10 0 10 10"
+                                                    Style="{StaticResource ButtonMainStyle}"
+                                                    Background="{StaticResource TccRedGradientBrush}"
+                                                    Margin="1"
+                                                    Padding="5"
                                                     HorizontalContentAlignment="Center"
                                                     VerticalContentAlignment="Center">
                                                 Clear all
@@ -924,6 +927,16 @@
                             <Setter TargetName="contentPresenter" Property="Opacity" Value="1" />
                             <Setter TargetName="contentPresenter2" Property="Opacity" Value="1" />
                             <Setter TargetName="SelBorder" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Effect" TargetName="contentPresenter">
+                                <Setter.Value>
+                                    <DropShadowEffect Opacity="1" Color="{StaticResource ClassGlowColor}"
+                                                      ShadowDepth="0" BlurRadius="3" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter  Property="Opacity" Value="1" TargetName="contentPresenter" />
+
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
