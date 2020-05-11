@@ -96,7 +96,6 @@ namespace TCC.UI.Controls.Abnormalities
 
         public static void InvokeVisibilityChanged(object sender, bool val)
         {
-            Log.Chat($"{nameof(InvokeVisibilityChanged)}({sender.GetType().Name}, {val})");
             VisibilityChanged?.Invoke(sender, val);
         }
         public double Size
