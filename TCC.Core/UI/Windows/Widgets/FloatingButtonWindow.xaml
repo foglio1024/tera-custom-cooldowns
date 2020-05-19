@@ -148,7 +148,7 @@
                     CornerRadius="10"
                     UseLayoutRounding="True"
                     VerticalAlignment="Center" HorizontalAlignment="Right"
-                    Margin="0 0 -8 0"
+                    Margin="0 -1 -8 0"
                     RenderTransformOrigin=".5,.5"
                     Visibility="{Binding PendingNotifications, Converter={converters:BoolToVisibility Mode=Hidden}}"
                     ToolTip="There are events starting in few minutes.">
