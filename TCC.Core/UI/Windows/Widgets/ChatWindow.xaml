@@ -263,7 +263,6 @@
                                 <Setter Property="extensions:DragablzHeaderExtensions.FrameOpacity"
                                         Value="{Binding Path=DataContext.WindowSettings.FrameOpacity, RelativeSource={RelativeSource AncestorType=widgets:ChatWindow}}" />
 
-                                <EventSetter Event="PreviewMouseDown" Handler="OpenTabSettings" />
                                 <EventSetter Event="MouseDown" Handler="OpenTabSettings" />
                                 <EventSetter Event="PreviewMouseLeftButtonUp" Handler="SetLines" />
                                 <EventSetter Event="Loaded" Handler="TabLoaded" />
@@ -277,12 +276,14 @@
                     <Button VerticalAlignment="Bottom" Grid.Row="1" Style="{StaticResource ButtonMainStyle}"
                             Opacity="1"
                             Margin="20 1 1 1"
-                            Background="{StaticResource GreenBrush}"
+                            Background="{StaticResource RevampBorderBrush}"
+                            BorderThickness="0 2 0 0"
+                            BorderBrush="{StaticResource TccWhiteGradientBrush}"
                             HorizontalContentAlignment="Stretch"
                             VerticalContentAlignment="Center"
                             Command="{Binding JumpToPresentCommand}"
                             Visibility="{Binding Paused, Converter={StaticResource BoolToVisibility}}">
-                        <Grid HorizontalAlignment="Center">
+                        <Grid HorizontalAlignment="Center" Margin="0 0 0 2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -311,6 +312,14 @@
                                   Height="16"
                             />
                         </Grid>
+                        <Button.OpacityMask>
+                            <LinearGradientBrush>
+                                <GradientStop Color="Transparent" Offset="0.02"/>
+                                <GradientStop Color="White" Offset=".3"/>
+                                <GradientStop Color="White" Offset=".7"/>
+                                <GradientStop Color="Transparent" Offset="0.98"/>
+                            </LinearGradientBrush>
+                        </Button.OpacityMask>
                     </Button>
 
 
@@ -501,7 +510,7 @@
                                               IsEnabled="{Binding WindowSettings.CanCollapse}" />
                     <settings:ValueSetting SettingName="Collapsed height" Foreground="#9fff" TextBoxVisibility="Visible"
                                            Value="{Binding WindowSettings.CollapsedHeight,  Mode=TwoWay}"
-                                           Min="64" Max="256" Visibility="Visible" />
+                                           Min="48" Max="256" Visibility="Visible" />
 
                     <settings:SelectionSetting SettingName="Click thru" Foreground="#9fff"
                                                SelectedItem="{Binding WindowSettings.ClickThruMode, Mode=TwoWay}"
