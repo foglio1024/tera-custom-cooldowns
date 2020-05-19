@@ -21,21 +21,21 @@ namespace TCC.UI.Controls.Abnormalities
             get => (string)GetValue(AbnormalityNameProperty);
             set => SetValue(AbnormalityNameProperty, value);
         }
-        public static readonly DependencyProperty AbnormalityNameProperty = DependencyProperty.Register("AbnormalityName", typeof(string), typeof(AbnormalityToolTipControl));
+        public static readonly DependencyProperty AbnormalityNameProperty = DependencyProperty.Register("AbnormalityName", typeof(string), typeof(AbnormalityToolTipControl), new PropertyMetadata("Abnormality Name"));
 
         public string AbnormalityToolTip
         {
             get => (string)GetValue(AbnormalityToolTipProperty);
             set => SetValue(AbnormalityToolTipProperty, value);
         }
-        public static readonly DependencyProperty AbnormalityToolTipProperty = DependencyProperty.Register("AbnormalityToolTip", typeof(string), typeof(AbnormalityToolTipControl));
+        public static readonly DependencyProperty AbnormalityToolTipProperty = DependencyProperty.Register("AbnormalityToolTip", typeof(string), typeof(AbnormalityToolTipControl), new PropertyMetadata("Abnormality tooltip."));
 
         public uint Id
         {
             get => (uint)GetValue(IdProperty);
             set => SetValue(IdProperty, value);
         }
-        public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(uint), typeof(AbnormalityToolTipControl));
+        public static readonly DependencyProperty IdProperty = DependencyProperty.Register("Id", typeof(uint), typeof(AbnormalityToolTipControl), new PropertyMetadata(0U));
 
         private const string Start = "$H_W_";
         private const string GoodStart = "$H_W_GOOD";
