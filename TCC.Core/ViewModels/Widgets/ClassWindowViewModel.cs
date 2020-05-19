@@ -94,7 +94,7 @@ namespace TCC.ViewModels.Widgets
         protected override void InstallHooks()
         {
             PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserList);
             PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
             PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
             PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
@@ -104,7 +104,7 @@ namespace TCC.ViewModels.Widgets
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
-            PacketAnalyzer.Processor.Unhook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
+            PacketAnalyzer.Processor.Unhook<S_GET_USER_LIST>(OnGetUserList);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
             PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
             PacketAnalyzer.Processor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
@@ -127,7 +127,7 @@ namespace TCC.ViewModels.Widgets
                 PacketAnalyzer.Processor.Unhook<S_WEAK_POINT>(OnWeakPoint);
         }
 
-        private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+        private void OnGetUserList(S_GET_USER_LIST m)
         {
             CurrentClass = Class.None;
         }
