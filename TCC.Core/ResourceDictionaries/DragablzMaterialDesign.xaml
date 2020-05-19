@@ -862,8 +862,8 @@
                                             </ItemsControl>
                                             <Button Grid.Row="2" Command="{Binding Content.ClearAllCommand}"
                                                     Style="{StaticResource ButtonMainStyle}"
-                                                    Background="{StaticResource TccRedGradientBrush}"
                                                     Margin="1"
+                                                    Background="#1fff"
                                                     Padding="5"
                                                     HorizontalContentAlignment="Center"
                                                     VerticalContentAlignment="Center">
