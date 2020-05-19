@@ -5,6 +5,7 @@ using Nostrum.Extensions;
 using Nostrum.WinAPI;
 using System;
 using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -12,11 +13,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using TCC.Analysis;
 using TCC.Data;
 using TCC.Exceptions;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Analysis;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Utils;
@@ -66,7 +67,7 @@ namespace TCC
             if (!(ex is DeadlockException))
             {
                 // These actions require main thread to be alive
-                App.ReleaseMutex(); 
+                App.ReleaseMutex();
                 if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
                 try { WindowManager.Dispose(); } catch {/* ignored*/}
             }
@@ -86,7 +87,14 @@ namespace TCC
             fullSb.AppendLine("---- Exception ----");
             fullSb.AppendLine(ex.GetType().FullName);
             fullSb.AppendLine("---- Message ----");
-            fullSb.AppendLine(ex.Message);
+            if (ex is Win32Exception w32ex)
+            {
+                fullSb.AppendLine($"{ex.Message} HRESULT:{w32ex.HResult} ErrorCode:{w32ex.ErrorCode} NativeCode:{w32ex.NativeErrorCode}");
+            }
+            else
+            {
+                fullSb.AppendLine(ex.Message);
+            }
             fullSb.AppendLine("---- Source ----");
             fullSb.AppendLine(ex.Source);
             fullSb.AppendLine("---- StackTrace ----");
@@ -107,6 +115,17 @@ namespace TCC
 
             return fullSb.ToString();
         }
+
+        private static JValue BuildExceptionMessage(Exception ex)
+        {
+            if (ex is Win32Exception w32ex)
+            {
+                return new JValue($"{ex.Message} HRESULT:{w32ex.HResult} ErrorCode:{w32ex.ErrorCode} NativeCode:{w32ex.NativeErrorCode}");
+            }
+
+            return new JValue(ex.Message);
+
+        }
         private static /*async*/ /*Task<JObject>*/ JObject BuildJsonDump(Exception ex)
         {
             var ret = new JObject
@@ -114,7 +133,7 @@ namespace TCC
                 { "tcc_version" , new JValue(App.AppVersion) },
                 { "id" , new JValue(App.Settings.LastAccountNameHash != null ? App.Settings.LastAccountNameHash: "") },
                 { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
-                { "exception", new JValue(ex.Message)},
+                { "exception", BuildExceptionMessage(ex)},
                 { "exception_type", new JValue(ex.GetType().FullName)},
                 { "exception_source", new JValue(ex.Source)},
                 { "stack_trace", new JValue(ex.StackTrace)},
@@ -178,7 +197,7 @@ namespace TCC
         {
             var ret = new JObject
             {
-                ["exception"] = new JValue(ex.Message),
+                ["exception"] = BuildExceptionMessage(ex),
                 ["exception_type"] = new JValue(ex.GetType().FullName),
                 ["exception_source"] = new JValue(ex.Source),
                 ["stack_trace"] = new JValue(ex.StackTrace)
