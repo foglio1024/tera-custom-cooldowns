@@ -22,7 +22,7 @@ namespace TCC.UI.Windows.Widgets
 
         public ProgressNotificationInfo(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template) : base(id, title, message, type, duration, template)
         {
-
+            CanClose = false;
         }
 
         public void Dispose(int msDelay)
@@ -34,6 +34,7 @@ namespace TCC.UI.Windows.Widgets
             }
             else
             {
+                CanClose = true;
                 Task.Delay(msDelay).ContinueWith(t => InvokeDisposed());
             }
         }
@@ -68,6 +69,19 @@ namespace TCC.UI.Windows.Widgets
                 N();
             }
         }
+        private bool _canClose;
+
+        public bool CanClose
+        {
+            get => _canClose;
+            set
+            {
+                if (_canClose == value) return;
+                _canClose = value;
+                N();
+            }
+        }
+
         public NotificationTemplate NotificationTemplate { get; }
         public int Duration { get; }
         public string TimeStamp { get; }
@@ -84,6 +98,7 @@ namespace TCC.UI.Windows.Widgets
             Duration = duration;
             TimeStamp = DateTime.Now.ToString("HH:mm:ss");
             NotificationTemplate = template;
+            CanClose = true;
 
             DismissCommand = new RelayCommand(_ => InvokeDisposed());
         }
