@@ -45,5 +45,9 @@
             ShieldSize = (uint)size;
         }
 
+        public override string ToString()
+        {
+            return $"{Id} | {Name}";
+        }
     }
 }
