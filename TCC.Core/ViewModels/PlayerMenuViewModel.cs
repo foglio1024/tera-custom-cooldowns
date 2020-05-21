@@ -151,7 +151,7 @@ namespace TCC.ViewModels
                               && Game.BlockList?.Contains(_name) == true;
         public bool IsFriend => !Game.FriendList.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
         public bool ShowFpsUtils => StubInterface.Instance.IsStubAvailable
-                                 && StubInterface.Instance.IsFpsUtilsAvailable;
+                                 && StubInterface.Instance.IsFpsModAvailable;
         public bool ShowMakeGuildMaster => Game.Guild.AmIMaster &&
                                            Game.Guild.Has(Name);
         public bool ShowGuildKick => Game.Guild.AmIMaster &&
@@ -358,7 +358,7 @@ namespace TCC.ViewModels
             HideShowPlayerCommand = new RelayCommand(cmd =>
             {
                 StubInterface.Instance.StubClient.InvokeCommand($"fps {cmd} {Name}");
-            }, ce => StubInterface.Instance.IsStubAvailable && StubInterface.Instance.IsFpsUtilsAvailable);
+            }, ce => StubInterface.Instance.IsStubAvailable && StubInterface.Instance.IsFpsModAvailable);
 
             _win = new PlayerMenuWindow(this);
 

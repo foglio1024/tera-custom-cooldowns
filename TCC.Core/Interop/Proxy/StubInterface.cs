@@ -11,7 +11,7 @@ namespace TCC.Interop.Proxy
         private readonly RpcServer StubServer;
         private readonly StubMessageHandler MessageHandler;
 
-        public bool IsFpsUtilsAvailable { get; set; }
+        public bool IsFpsModAvailable { get; set; }
         public bool IsStubAvailable { get; set; }
 
         private StubInterface()
@@ -34,7 +34,7 @@ namespace TCC.Interop.Proxy
             if (!IsStubAvailable) return;
             StubClient.Initialize();
             StubServer.Start();
-            IsFpsUtilsAvailable = await StubClient.GetIsModAvailable("fps-utils") || await StubClient.GetIsModAvailable("fps-manager");
+            IsFpsModAvailable = await StubClient.GetIsModAvailable("fps-utils") || await StubClient.GetIsModAvailable("fps-manager");
         }
 
         public void Disconnect()
