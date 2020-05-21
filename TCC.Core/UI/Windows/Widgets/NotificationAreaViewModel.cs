@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 using Nostrum;
 using TCC.Analysis;
@@ -35,9 +36,18 @@ namespace TCC.UI.Windows.Widgets
             Enqueue("TCC", SR.ConnectedToServer(srv.Name), NotificationType.Success,
                 template: NotificationTemplate.Progress,
                 forcedId: 10241024);
+
+            Task.Delay(10000).ContinueWith(t =>
+            {
+                var notif = GetNotification<ProgressNotificationInfo>(10241024);
+                if (notif == null) return;
+                notif.Message = $"Connection timed out. Reconnect or restart TCC if the issue persists.";
+                notif.NotificationType = NotificationType.Warning;
+                notif.Dispose(20000);
+
+            });
             //Log.N("TCC", SR.ConnectedToServer(srv.Name), NotificationType.Success, forcedId: 10241024);
         }
-
         private void OnLoginArbiter(C_LOGIN_ARBITER obj)
         {
             var notif = GetNotification<ProgressNotificationInfo>(10241024);
