@@ -84,25 +84,28 @@ namespace TCC.UI.Windows.Widgets
             FocusManager.MakeUnfocusable(_handle);
 
             if (BoundaryRef != null)
+            {
+                ShowBoundariesToggled += ShowHideBoundaries;
                 if (_canMove)
                     BoundaryRef.MouseLeftButtonDown += Drag;
+            }
             if (ButtonsRef == null)
             {
                 if (_canMove) MouseLeftButtonDown += Drag;
-                return;
             }
-
-            ButtonsRef.Opacity = 0;
-            _buttonsTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(2)};
-            _buttonsTimer.Tick += OnButtonsTimerTick;
-
-            MouseEnter += (_, __) =>
+            else
             {
-                if (!App.Settings.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtonsAnimation);
-            };
-            MouseLeave += (_, __) => _buttonsTimer.Start();
-            if (_canMove) ButtonsRef.MouseLeftButtonDown += Drag;
-            ShowBoundariesToggled += ShowHideBoundaries;
+                ButtonsRef.Opacity = 0;
+                _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+                _buttonsTimer.Tick += OnButtonsTimerTick;
+
+                MouseEnter += (_, __) =>
+                {
+                    if (!App.Settings.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtonsAnimation);
+                };
+                MouseLeave += (_, __) => _buttonsTimer.Start();
+                if (_canMove) ButtonsRef.MouseLeftButtonDown += Drag;
+            }
         }
 
         private void OnHiddenToggled()

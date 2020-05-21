@@ -128,6 +128,8 @@
     </widgets:TccWidget.Resources>
     <!-- Root -->
     <Grid>
+        <Border Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary" />
+
         <!-- Main content -->
         <dockablz:Layout Name="ChatContent">
             <Grid>

@@ -22,6 +22,7 @@ namespace TCC.UI.Windows.Widgets
         {
             InitializeComponent();
             MainContent = ChatContent;
+            BoundaryRef = Boundary;
             Init(ws);
             AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnIsDraggingChanged));
         }
