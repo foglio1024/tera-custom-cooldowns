@@ -106,6 +106,7 @@ namespace TCC.UI.Windows
 
         private void SkillSearch_OnTextChanged(object sender, TextChangedEventArgs e)
         {
+            if (VM.SkillsView == null) return;
             var view = (ICollectionView)VM.SkillsView;
             view.Filter = o => ((Skill)o).ShortName.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
