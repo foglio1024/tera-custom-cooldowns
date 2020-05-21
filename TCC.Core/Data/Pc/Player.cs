@@ -257,7 +257,7 @@ namespace TCC.Data.Pc
         }
 
         public double CoinsFactor => MathUtils.FactorCalc(_coins, _maxCoins);
-        public bool IsDebuffed => _debuffList?.Count != 0;
+        public bool IsDebuffed => _debuffList != null &&_debuffList.Count != 0;
         public bool IsInCombat
         {
             get => _isInCombat;
