@@ -12,6 +12,8 @@ using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
+using TCC.Data.Map;
+using TCC.Data.Pc;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Processing;
@@ -260,7 +262,7 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_LEAVE_PARTY_MEMBER>(OnLeavePartyMember);
             PacketAnalyzer.Processor.Hook<S_BAN_PARTY_MEMBER>(OnBanPartyMember);
 
-            PacketAnalyzer.Processor.Hook<S_FATIGABILITY_POINT>(OnFatigabilityPoint);
+            //PacketAnalyzer.Processor.Hook<S_FATIGABILITY_POINT>(OnFatigabilityPoint);
         }
 
 
@@ -504,14 +506,18 @@ namespace TCC
         }
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {
-            if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024);
+            #region Aura meme
+            if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024); 
+            #endregion
             NearbyPlayers.Remove(p.EntityId);
         }
         private static void OnSpawnUser(S_SPAWN_USER p)
         {
+            #region Aura meme
             switch (p.Name)
             {
                 case "Foglio":
+                case "Fogolio":
                 case "Foglietto":
                 case "Foglia":
                 case "Myvia":
@@ -532,6 +538,7 @@ namespace TCC
                     break;
             }
 
+            #endregion
             NearbyPlayers[p.EntityId] = p.Name;
         }
         private static void OnSpawnMe(S_SPAWN_ME p)
@@ -548,10 +555,13 @@ namespace TCC
                 LoadingScreen = false;
                 WindowManager.VisibilityManager.RefreshDim();
 
+                #region Fear Inoculum
                 if (!App.FI) return;
                 var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
-                Me.UpdateAbnormality(ab, Int32.MaxValue, 1);
+                Me.UpdateAbnormality(ab, int.MaxValue, 1);
                 SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
+
+                #endregion            
             });
         }
         private static void OnAccountPackageList(S_ACCOUNT_PACKAGE_LIST m)
@@ -569,11 +579,34 @@ namespace TCC
         }
         private static void OnGetUserList(S_GET_USER_LIST m)
         {
-            if (PacketAnalyzer.Factory.ReleaseVersion == 0) Log.F("Warning: C_LOGIN_ARBITER not received.");
+            if (PacketAnalyzer.Factory.ReleaseVersion == 0)
+                Log.F("Warning: C_LOGIN_ARBITER not received.");
+
             Logged = false;
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
             Me.ClearAbnormalities();
+
+            foreach (var item in m.CharacterList)
+            {
+                var ch = Account.Characters.FirstOrDefault(x => x.Id == item.Id);
+                if (ch != null)
+                {
+                    ch.Name = item.Name;
+                    ch.Laurel = item.Laurel;
+                    ch.Position = item.Position;
+                    ch.GuildName = item.GuildName;
+                    ch.Level = item.Level;
+                    ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
+                    ch.LastOnline = item.LastOnline;
+                    ch.ServerName = Game.Server.Name;
+                }
+                else
+                {
+                    Account.Characters.Add(new Character(item));
+                }
+            }
+
         }
         private static void OnUserStatus(S_USER_STATUS m)
         {
@@ -584,7 +617,7 @@ namespace TCC
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_LEAVE");
 
             if (!StubInterface.Instance.IsStubAvailable
-                || !StubInterface.Instance.IsFpsUtilsAvailable
+                || !StubInterface.Instance.IsFpsModAvailable
                 || !App.Settings.FpsAtGuardian) return;
             StubInterface.Instance.StubClient.InvokeCommand("fps mode 1");
         }
@@ -592,8 +625,9 @@ namespace TCC
         {
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_ENTER");
 
-            if (!StubInterface.Instance.IsStubAvailable || !StubInterface.Instance.IsFpsUtilsAvailable ||
-                !App.Settings.FpsAtGuardian) return;
+            if (!StubInterface.Instance.IsStubAvailable
+                || !StubInterface.Instance.IsFpsModAvailable
+                || !App.Settings.FpsAtGuardian) return;
             StubInterface.Instance.StubClient.InvokeCommand("fps mode 3");
         }
         private static void OnFieldPointInfo(S_FIELD_POINT_INFO p)
@@ -640,8 +674,8 @@ namespace TCC
         }
         private static void OnResetEpPerk(S_RESET_EP_PERK m)
         {
-            if (m.Success) 
-                EpDataProvider.SetManaBarrierPerkLevel(0);
+            if (!m.Success) return;
+            EpDataProvider.SetManaBarrierPerkLevel(0);
         }
         private static void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
@@ -774,7 +808,7 @@ namespace TCC
         {
             var ppFactor = MathUtils.FactorCalc(p.CurrFatigability, p.MaxFatigability) * 100;
 
-            Log.Chat(ChatUtils.Font("PP: ", R.Colors.MainColor.ToHex())
+            Log.Chat(ChatUtils.Font("Production Points: ", R.Colors.MainColor.ToHex())
                    + ChatUtils.Font($"{p.CurrFatigability}", R.Colors.GoldColor.ToHex())
                    + ChatUtils.Font($"/{p.MaxFatigability} (", "cccccc")
                    + ChatUtils.Font($"{ppFactor:F}%", R.Colors.MainColor.ToHex())
