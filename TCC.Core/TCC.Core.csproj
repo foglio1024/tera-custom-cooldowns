@@ -76,6 +76,7 @@
     <None Remove="resources\images\kr_boss_icon_full.png" />
     <None Remove="resources\images\kr_mob_icon.png" />
     <None Remove="resources\images\moongourd.png" />
+    <None Remove="resources\images\shinrameter.png" />
     <None Remove="resources\tcc_off.ico" />
     <None Remove="resources\tcc_on.ico" />
     <None Remove="resources\ttb.ico" />
@@ -143,6 +144,7 @@
     <Resource Include="resources\images\kr_boss_icon_full.png" />
     <Resource Include="resources\images\kr_mob_icon.png" />
     <Resource Include="resources\images\moongourd.png" />
+    <Resource Include="resources\images\shinrameter.png" />
     <Resource Include="resources\tcc.ico" Pack="True" />
     <Resource Include="resources\tcc_off.ico" />
     <Resource Include="resources\tcc_on.ico" />
