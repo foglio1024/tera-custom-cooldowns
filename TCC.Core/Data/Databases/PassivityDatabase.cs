@@ -14,6 +14,7 @@ namespace TCC.Data.Databases
             {6017,60}, {6018,60}, // drake
             {60029,120}, {60030,120}, { 60031,120}, { 60032,120},  //concentration
             {15162,60}, // insigna of the punisher
+            {6040, 60}, {6041,60},
 
             // bracing force
             {13000, 180},{13001, 180},{13002, 180},
@@ -57,7 +58,7 @@ namespace TCC.Data.Databases
             { 13107, 180 }, { 13108, 180 }, { 13109, 180 },
             { 13110, 180 }, { 13111, 180 }, { 13112, 180 },
             { 13113, 180 }, { 13114, 180 }, { 13115, 180 },
-            { 13116, 180 }, { 13117, 180 } 
+            { 13116, 180 }, { 13117, 180 }
 
     };
         public static bool TryGetPassivitySkill(uint id, out Skill sk)
