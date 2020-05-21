@@ -38,17 +38,17 @@ namespace TCC.UI.Windows.Widgets
         private void Create(WindowSettingsBase ws)
         {
             var thread = new Thread(() =>
-        {
-            SynchronizationContext.SetSynchronizationContext(
-                new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-            _vm = (TViewModel) Activator.CreateInstance(typeof(TViewModel), ws);
-            _window = (TWindow)Activator.CreateInstance(typeof(TWindow), _vm);
-            if (_vm.Settings.Enabled) _window.Show();
-            App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
-            Dispatcher.Run();
-            Log.CW($"[{typeof(TWindow).Name}] Dispatcher stopped.");
-            App.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
-        })
+            {
+                SynchronizationContext.SetSynchronizationContext(
+                    new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                _vm = (TViewModel)Activator.CreateInstance(typeof(TViewModel), ws);
+                _window = (TWindow)Activator.CreateInstance(typeof(TWindow), _vm);
+                if (_vm.Settings.Enabled) _window.Show();
+                App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
+                Dispatcher.Run();
+                Log.CW($"[{typeof(TWindow).Name}] Dispatcher stopped.");
+                App.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+            })
             {
                 Name = $"{typeof(TWindow).Name}Thread"
             };
