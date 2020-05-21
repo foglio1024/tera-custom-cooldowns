@@ -1,8 +1,9 @@
-﻿using System;
-using System.Windows.Input;
-using Dragablz;
+﻿using Dragablz;
 using Nostrum;
+using System;
+using System.Windows.Input;
 using TCC.ViewModels.Widgets;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels
 {
@@ -24,6 +25,7 @@ namespace TCC.ViewModels
             {
                 if (_showImportantPopup == value) return;
                 _showImportantPopup = value;
+                FocusManager.PauseTopmost = _showImportantPopup;
                 OnPropertyChanged();
             }
         }
