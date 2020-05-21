@@ -285,9 +285,10 @@ namespace TCC.ViewModels
 
         /* -- Methods ---------------------------------------------- */
 
-        public void SaveCharacters()
+        public static void SaveCharacters()
         {
-            foreach (var ch in Game.Account.Characters.ToSyncList())
+            var account = (Account)Game.Account.Clone();
+            foreach (var ch in account.Characters.ToSyncList())
             {
                 var dungs = new Dictionary<uint, DungeonCooldownData>();
                 foreach (var dgcd in ch.DungeonInfo.DungeonList)
@@ -301,7 +302,7 @@ namespace TCC.ViewModels
                 }
             }
 
-            var json = JsonConvert.SerializeObject(Game.Account.Clone(), Formatting.Indented);
+            var json = JsonConvert.SerializeObject(account, Formatting.Indented);
             File.WriteAllText(SettingsGlobals.CharacterJsonPath, json);
             if (File.Exists(SettingsGlobals.CharacterXmlPath))
                 File.Delete(SettingsGlobals.CharacterXmlPath);
@@ -363,16 +364,22 @@ namespace TCC.ViewModels
         }
         public void SetVanguardCredits(int pCredits)
         {
+            if (CurrentCharacter == null) return;
+
             CurrentCharacter.VanguardInfo.Credits = pCredits;
             N(nameof(TotalVanguardCredits));
         }
         public void SetGuardianCredits(int pCredits)
         {
+            if (CurrentCharacter == null) return;
+
             CurrentCharacter.GuardianInfo.Credits = pCredits;
             N(nameof(TotalGuardianCredits));
         }
         public void SetElleonMarks(int val)
         {
+            if (CurrentCharacter == null) return;
+
             CurrentCharacter.ElleonMarks = val;
             N(nameof(TotalElleonMarks));
         }
@@ -438,6 +445,7 @@ namespace TCC.ViewModels
 
         private void OnDungeonClearCountList(S_DUNGEON_CLEAR_COUNT_LIST m)
         {
+            if (CurrentCharacter == null) return;
             if (m.Failed) return;
             if (m.PlayerId != Game.Me.PlayerId) return;
             foreach (var dg in m.DungeonClears)
@@ -472,30 +480,12 @@ namespace TCC.ViewModels
             {
                 Log.F($"Failed to update buffs: {e.Message}");
             }
-            foreach (var item in m.CharacterList)
-            {
-                var ch = Game.Account.Characters.FirstOrDefault(x => x.Id == item.Id);
-                if (ch != null)
-                {
-                    ch.Name = item.Name;
-                    ch.Laurel = item.Laurel;
-                    ch.Position = item.Position;
-                    ch.GuildName = item.GuildName;
-                    ch.Level = item.Level;
-                    ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
-                    ch.LastOnline = item.LastOnline;
-                    ch.ServerName = Game.Server.Name;
-                }
-                else
-                {
-                    Game.Account.Characters.Add(new Character(item));
-                }
-            }
 
             SaveCharacters();
         }
         private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
         {
+            if (CurrentCharacter == null) return;
             CurrentCharacter.Coins = m.Coins;
             CurrentCharacter.MaxCoins = m.MaxCoins;
             CurrentCharacter.ItemLevel = m.Ilvl;
@@ -705,8 +695,6 @@ namespace TCC.ViewModels
                     if (eg.Events.Count != 0) AddEventGroup(eg);
                 }
                 SpecialEvents.Add(new DailyEvent("Reset", GameEventManager.Instance.ResetHour, 0, 0, "ff0000"));
-
-
 
             }
             catch (Exception)

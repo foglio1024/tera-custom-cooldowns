@@ -116,7 +116,7 @@ namespace TCC
             if (weeklyDungeonsReset) WindowManager.ViewModels.DashboardVM.ResetWeeklyDungeons();
             if (weeklyVanguardReset) WindowManager.ViewModels.DashboardVM.ResetVanguardWeekly();
 
-            WindowManager.ViewModels.DashboardVM.SaveCharacters();
+            DashboardViewModel.SaveCharacters();
             App.Settings.LastRun = DateTime.Now;
             App.Settings.Save();
         }

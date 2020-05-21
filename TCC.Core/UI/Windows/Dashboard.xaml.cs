@@ -26,7 +26,7 @@ namespace TCC.UI.Windows
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
             HideWindow();
-            VM.SaveCharacters();
+            DashboardViewModel.SaveCharacters();
         }
 
         private void OnDetailsMouseButtonDown(object sender, MouseButtonEventArgs e)
