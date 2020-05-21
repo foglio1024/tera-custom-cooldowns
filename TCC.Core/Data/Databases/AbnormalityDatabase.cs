@@ -81,6 +81,15 @@ namespace TCC.Data.Databases
             Abnormalities[777034].ToolTip = "Boss HP 100%~30%$BR - Increases Physical and Magic Amplification by $H_W_GOOD7k$COLOR_END$BR - Reduces HP by $H_W_BAD3%$COLOR_END per 1s$BR$BRBoss HP 30%~0%$BR - Increases Physical and Magic Amplification by $H_W_GOOD7k$COLOR_END$BR - Reduces HP by $H_W_BAD2%$COLOR_END per 1s$BR - $H_W_BADCannot be cleansed$COLOR_END";
             #endregion
 
+            #region Corrupted Skynest overrides
+
+            // Doomfire
+            Abnormalities[30260001].IsBuff = true;
+            // Doomchill
+            Abnormalities[30260002].IsBuff = true;
+
+            #endregion
+
         }
 
         public bool TryGetPassiveSkill(uint id, out Skill sk)
