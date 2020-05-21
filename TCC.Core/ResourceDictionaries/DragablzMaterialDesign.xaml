@@ -769,8 +769,8 @@
                                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                                FontWeight="DemiBold" FontSize="14" Margin="0 0 4 1" x:Name="ImpCount" />
                                     <Popup x:Name="ImportantPopup" Placement="Top" StaysOpen="True"
-                                           VerticalOffset="-10"
-                                           HorizontalOffset="-20"
+                                           VerticalOffset="0"
+                                           HorizontalOffset="-10"
                                            IsOpen="{Binding ShowImportantPopup}"
                                            AllowsTransparency="True"
                                            MinWidth="350"
