@@ -3,7 +3,9 @@ using Nostrum.Factories;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Nostrum.Extensions;
 using TCC.Analysis;
 using TCC.Annotations;
 using TCC.Data;
@@ -106,6 +108,7 @@ namespace TCC.ViewModels.Widgets
                 PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
             else
                 PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
+            Members.ToSyncList().ForEach(u => u.InRange = false);
         }
 
 
@@ -289,7 +292,7 @@ namespace TCC.ViewModels.Widgets
             var user = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == p.PlayerId && x.ServerId == p.ServerId);
             if (user == null)
             {
-                Members.Add(new User(p) {Visible =  visible, InRange = Game.NearbyPlayers.ContainsKey(p.EntityId)});
+                Members.Add(new User(p) { Visible = visible, InRange = Game.NearbyPlayers.ContainsKey(p.EntityId) });
                 SendAddMessage(p.Name);
                 return;
             }
@@ -643,28 +646,52 @@ namespace TCC.ViewModels.Widgets
 
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            if (!Game.IsMe(p.TargetId)) return;
-            if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
-            if (p.Duration == int.MaxValue) ab.Infinity = true;
+            if (Game.IsMe(p.TargetId))
+            {
+                if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
+                if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+                if (p.Duration == int.MaxValue) ab.Infinity = true;
 
-            BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
+                BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
+            }
+            else
+            {
+                // fix for missing warrior stances
+                //if (p.TargetId != p.CasterId) return;
+                if (p.AbnormalityId < 100101 || p.AbnormalityId > 100203) return;
+                Game.NearbyPlayers.TryGetValue(p.TargetId, out var name);
+                Log.CW($"Starting stance on {p.TargetId} ({name}), members: {(Members.ToSyncList().Select(i => $"{i.EntityId} ({i.Name})").ToList().ToCSV())}");
+                if (!TryGetUser(p.TargetId, out var u)) return;
+                UpdatePartyMemberAbnormality(u.PlayerId, u.ServerId, p.AbnormalityId, p.Duration, p.Stacks);
+            }
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            if (!Game.IsMe(p.TargetId)) return;
-            if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
-            if (p.Duration == int.MaxValue) ab.Infinity = true;
+            if (Game.IsMe(p.TargetId))
+            {
+                if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
+                if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+                if (p.Duration == int.MaxValue) ab.Infinity = true;
 
-            BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
+                BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
+            }
         }
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            if (!Game.IsMe(p.TargetId)) return;
             if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
-            EndAbnormality(ab, Game.Me.PlayerId, Game.Me.ServerId);
+            if (Game.IsMe(p.TargetId))
+            {
+                EndAbnormality(ab, Game.Me.PlayerId, Game.Me.ServerId);
+            }
+            else
+            {
+                if (p.AbnormalityId < 100101 || p.AbnormalityId > 100203) return;
+                Game.NearbyPlayers.TryGetValue(p.TargetId, out var name);
+                Log.CW($"Ending stance on {p.TargetId} ({name}), members: {(Members.ToSyncList().Select(i => $"{i.EntityId} ({i.Name})").ToList().ToCSV())}");
+                if (!TryGetUser(p.TargetId, out var u)) return;
+                EndAbnormality(ab, u.PlayerId, u.ServerId);
+            }
         }
         private void OnCheckToReadyPartyFin(S_CHECK_TO_READY_PARTY_FIN p)
         {
@@ -734,8 +761,9 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnSpawnUser(S_SPAWN_USER m)
         {
-            if (!TryGetUser(m.EntityId, out var u)) return;
+            if (!TryGetUser(m.PlayerId, m.ServerId, out var u)) return;
             u.InRange = true;
+            u.EntityId = m.EntityId;
             //UpdateMemberGear(m.PlayerId, m.ServerId, m.Weapon, m.Armor, m.Gloves, m.Boots);
         }
         private void OnDespawnUser(S_DESPAWN_USER m)
