@@ -475,6 +475,14 @@ namespace TCC.ViewModels.Widgets
             ((CooldownWindowSettings)settings).ModeChanged += NotifyModeChanged;
 
             AbnormalityTracker.PrecooldownStarted += OnPrecooldownStarted;
+
+            Game.CombatChanged += OnCombatChanged;
+        }
+
+        public bool Combat => Game.Combat;
+        private void OnCombatChanged()
+        {
+            N(nameof(Combat));
         }
 
 

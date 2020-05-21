@@ -187,26 +187,64 @@
         </Style>
         <!-- ReSharper restore Xaml.RedundantResource -->
     </UserControl.Resources>
-    <Grid Margin="4" UseLayoutRounding="True" HorizontalAlignment="Left">
+    <Grid Margin="4" HorizontalAlignment="Left">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
         <!--Main DefaultBorderStyle-->
         <Grid Grid.Row="1" Grid.RowSpan="2" Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}" >
+            <Grid.CacheMode>
+                <BitmapCache RenderAtScale="1"/>
+            </Grid.CacheMode>
+            <Grid.OpacityMask>
+                <LinearGradientBrush EndPoint="1 0">
+                    <GradientStop Offset="0.0"/>
+                    <GradientStop Color="White" Offset=".2"/>
+                    <GradientStop Color="White" Offset=".8"/>
+                    <GradientStop Offset="1.0"/>
+                </LinearGradientBrush>
+            </Grid.OpacityMask>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
-            <Border Style="{StaticResource DefaultBorderStyle}" Opacity=".5" Grid.Row="0" Margin="-4 0 0 0" CornerRadius="29"
-                    x:Name="MainBorder" Effect="{x:Null}" VerticalAlignment="Stretch"
-                    HorizontalAlignment="Stretch" />
-            <Border Style="{StaticResource DefaultBorderStyle}" Opacity=".3"  Margin="-2 0 2 26" CornerRadius="29"
+            <Border Opacity="1"  Margin="-4 59 0 26" CornerRadius="0"
+                    BorderThickness="0"
                     PreviewDragLeave="FixedSkillContainers_OnDragLeave" Grid.RowSpan="2" Grid.Row="0" Effect="{x:Null}"  
-                    x:Name="MainBorderSec" HorizontalAlignment="Stretch" />
+                    x:Name="MainBorderSec" HorizontalAlignment="Stretch" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0 1">
+                        <GradientStop Color="#b222" Offset="0"/>
+                        <GradientStop Color="#0222" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Border Opacity="1" Grid.Row="0" Margin="-4 0 0 1" CornerRadius="0"
+                    x:Name="MainBorder" Effect="{x:Null}" VerticalAlignment="Stretch"
+                    BorderThickness="0 0 0 1"
+                    UseLayoutRounding="True" 
+                    HorizontalAlignment="Stretch" >
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="{StaticResource TccWhiteGradientBrush}"/>
+                        <!--<Style.Triggers>
+                            <DataTrigger Binding="{Binding Combat}" Value="True">
+                                <Setter Property="BorderBrush" Value="{StaticResource TccYellowGradientBrush}"/>
+                            </DataTrigger>
+                        </Style.Triggers>-->
+                    </Style>
+                </Border.Style>
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0 1">
+                        <GradientStop Color="#0222" Offset="0"></GradientStop>
+                        <GradientStop Color="#0222" Offset=".2"></GradientStop>
+                        <GradientStop Color="#f222" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
 
         </Grid>
         <Button Style="{StaticResource ButtonMainStyle}"
@@ -214,9 +252,9 @@
                 BorderBrush="{StaticResource RevampBorderBrush}"
                 Background="{StaticResource RevampBackgroundBrush}"
                 HorizontalAlignment="Left"
-                Height="18"
+                Height="20"
                 extensions:ButtonExtensions.CornerRadius="1" 
-                Margin="0 0 0 5"
+                Margin="-4 0 0 5"
                 Opacity="0"
                 Click="OpenCooldownSettings" ToolTip="Configure skills" VerticalAlignment="Bottom" x:Name="SettingsButton">
             <Path Data="{StaticResource SvgSettings}"/>
@@ -250,7 +288,7 @@
             <dragablz:DragablzItemsControl Grid.Row="0" Grid.Column="0" Name="MainSkills"
                                            ItemsSource="{Binding MainSkills}" Background="Transparent"
                                            VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
-                                           BorderBrush="Red" Margin="0" MinWidth="60" MinHeight="60"
+                                           BorderBrush="Red" Margin="0 0 0 -1" MinWidth="60" MinHeight="60"
                                            dd:DragDrop.IsDropTarget="True"
                                            Drop="MainSkills_OnDrop"
                                            dd:DragDrop.DropHandler="{Binding DropHandler, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=skills:FixedSkillContainers}}"
@@ -286,7 +324,8 @@
         <!--Secondary + other skills grid-->
         <Grid Grid.Row="2" Width="Auto" Height="{Binding ElementName=MainSkills, Path=ActualHeight}"
               HorizontalAlignment="Left"
-              VerticalAlignment="Center" UseLayoutRounding="False" Opacity=".9"
+              Margin="-2 0"
+              VerticalAlignment="Center" UseLayoutRounding="False" 
               x:Name="SecSkillsGrid"
               >
             <Grid.ColumnDefinitions>
@@ -337,12 +376,12 @@
 
             <!--Other skills-->
             <ItemsControl Name="OtherSkills" ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}" Width="Auto"
-                          VerticalAlignment="Stretch"
+                          VerticalAlignment="Stretch" Margin="0 0 0 0"
                           Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}"
                           BorderBrush="Green" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto"
+                        <StackPanel IsItemsHost="True" Width="Auto" Height="Auto"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Left" VerticalAlignment="Center" />
                     </ItemsPanelTemplate>

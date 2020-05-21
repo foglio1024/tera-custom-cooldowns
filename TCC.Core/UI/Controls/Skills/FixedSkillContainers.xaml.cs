@@ -402,7 +402,7 @@ namespace TCC.UI.Controls.Skills
 
         private void OnSkillShapeChanged()
         {
-            RefreshBorder();
+            //RefreshBorder();
             OtherSkills.RefreshTemplate("NormalSkillTemplateSelector");
             ItemSkills.RefreshTemplate("NormalSkillTemplateSelector");
             // NOTE: the above can't be done for fixed skill ICs,

@@ -24,7 +24,7 @@
                     xmlns:vm="clr-namespace:TCC.ViewModels">
     <!--#region Skills -->
     <DataTemplate x:Key="RoundNormalSkill">
-        <skills1:RoundSkillControl />
+        <skills1:RoundSkillControl Margin="-2 -2 -2 0"/>
     </DataTemplate>
     <DataTemplate x:Key="SquareNormalSkill">
         <skills1:SquareSkillControl Margin="-2 -2 -2 0" />
@@ -549,7 +549,6 @@
                    UseLayoutRounding="True"
                    Opacity=".9"
                    Text="{Binding Author}"
-                   Cursor="Hand"
                    TextTrimming="CharacterEllipsis" />
 
     </DataTemplate>
