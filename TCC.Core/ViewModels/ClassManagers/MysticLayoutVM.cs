@@ -13,8 +13,8 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator Vow { get; private set; }
         public DurationCooldownIndicator VolleyOfCurse { get; private set; }
         public Cooldown ThrallOfProtection { get; private set; }
-        public Cooldown ThrallOfVengeance { get; private set; }
-        public Cooldown ThrallOfWrath { get; private set; }
+        public DurationCooldownIndicator ThrallOfVengeance { get; private set; }
+        public DurationCooldownIndicator ThrallOfWrath { get; private set; }
         public Cooldown ThrallOfLife { get; private set; }
         public Cooldown KingBlob { get; private set; }
 
@@ -62,8 +62,16 @@ namespace TCC.ViewModels
 
             ThrallOfProtection = new Cooldown(top, false);
             ThrallOfLife = new Cooldown(tol, false);
-            ThrallOfVengeance = new Cooldown(tov, true) { CanFlash = true };
-            ThrallOfWrath = new Cooldown(tow, true) { CanFlash = true };
+            ThrallOfVengeance = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new Cooldown(tov, true),
+                Cooldown = new Cooldown(tov, true) {CanFlash = true}
+            };
+            ThrallOfWrath = new DurationCooldownIndicator(Dispatcher)
+            {
+                Buff = new Cooldown(tow, true),
+                Cooldown = new Cooldown(tow, true) {CanFlash = true}
+            };
             KingBlob = new Cooldown(kb, true) { CanFlash = true };
 
             AuraTenacious = new Cooldown(at, false) { CanFlash = true };
@@ -97,8 +105,8 @@ namespace TCC.ViewModels
 
         public override void Dispose()
         {
-            ThrallOfVengeance.Dispose();
-            ThrallOfWrath.Dispose();
+            ThrallOfVengeance.Cooldown.Dispose();
+            ThrallOfWrath.Cooldown.Dispose();
             KingBlob.Dispose();
 
             AuraTenacious.Dispose();
@@ -167,9 +175,9 @@ namespace TCC.ViewModels
             //    ThrallOfProtection.Start(sk.Cooldown);
             //    return true;
             //}
-            if (sk.Skill.IconName == ThrallOfVengeance.Skill.IconName)
+            if (sk.Skill.IconName == ThrallOfVengeance.Cooldown.Skill.IconName)
             {
-                ThrallOfVengeance.Start(sk.Duration);
+                ThrallOfVengeance.Cooldown.Start(sk.Duration);
                 return true;
             }
             //if (sk.Skill.IconName == ThrallOfLife.Skill.IconName)
@@ -177,8 +185,8 @@ namespace TCC.ViewModels
             //    ThrallOfLife.Start(sk.Cooldown);
             //    return true;
             //}
-            if (sk.Skill.IconName != ThrallOfWrath.Skill.IconName) return false;
-            ThrallOfWrath.Start(sk.Duration);
+            if (sk.Skill.IconName != ThrallOfWrath.Cooldown.Skill.IconName) return false;
+            ThrallOfWrath.Cooldown.Start(sk.Duration);
             return true;
             //if (sk.Skill.IconName == KingBlob.Skill.IconName)
             //{

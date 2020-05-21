@@ -513,8 +513,8 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
-            <skills:RhombFixedSkillControl DataContext="{Binding ThrallOfWrath}"
-                                           IsHitTestVisible="False" />
+            <skills:RhombSkillEffectControl DataContext="{Binding ThrallOfWrath}"
+                                            IsHitTestVisible="False" />
         </Grid>
         <!--Vengeance-->
         <Grid Width="Auto" HorizontalAlignment="Center">
@@ -531,8 +531,8 @@
                     </TransformGroup>
                 </FrameworkElement.RenderTransform>
             </Border>
-            <skills:RhombFixedSkillControl DataContext="{Binding ThrallOfVengeance}"
-                                           IsHitTestVisible="False" />
+            <skills:RhombSkillEffectControl DataContext="{Binding ThrallOfVengeance}"
+                                            IsHitTestVisible="False" />
         </Grid>
 
 

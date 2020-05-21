@@ -14,6 +14,8 @@ namespace TCC.Data.Abnormalities
 
         private const int VowId = 700100;
         private const int VocId = 27160;
+        private const int TovId = 702003;
+        private const int TowId = 702004;
 
         private static readonly uint[] CritAuraIDs = { 700600, 700601, 700602, 700603 };
         private static readonly uint[] ManaAuraIDs = { 700300 };
@@ -57,7 +59,14 @@ namespace TCC.Data.Abnormalities
             {
                 vm.Elementalize = true;
             }
-
+            else if (p.AbnormalityId == TovId)
+            {
+                vm.ThrallOfVengeance.Buff.Start(p.Duration);
+            }
+            else if (p.AbnormalityId == TowId)
+            {
+                vm.ThrallOfWrath.Buff.Start(p.Duration);
+            }
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
@@ -86,6 +95,14 @@ namespace TCC.Data.Abnormalities
             else if (p.AbnormalityId == VowId)
             {
                 vm.Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            }
+            else if (p.AbnormalityId == TovId)
+            {
+                vm.ThrallOfVengeance.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            }
+            else if (p.AbnormalityId == TowId)
+            {
+                vm.ThrallOfWrath.Buff.Refresh(p.Duration, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
@@ -119,6 +136,14 @@ namespace TCC.Data.Abnormalities
             else if (p.AbnormalityId == VowId)
             {
                 vm.Vow.Buff.Refresh(0, CooldownMode.Normal);
+            }
+            else if (p.AbnormalityId == TovId)
+            {
+                vm.ThrallOfVengeance.Buff.Refresh(0, CooldownMode.Normal);
+            }
+            else if (p.AbnormalityId == TowId)
+            {
+                vm.ThrallOfWrath.Buff.Refresh(0, CooldownMode.Normal);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
