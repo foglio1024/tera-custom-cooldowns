@@ -8,7 +8,7 @@
                                mc:Ignorable="d" 
                                d:DataContext="{d:DesignInstance widgets:NotificationInfoBase}"
                                >
-    <Border x:Name="Root" MinWidth="200" MaxWidth="250" BorderThickness="0"
+    <Border x:Name="Root" MinWidth="200" MaxWidth="250" BorderThickness="1"
             HorizontalAlignment="Left" MinHeight="20" Margin="5">
         <Border.RenderTransform>
             <TranslateTransform />
@@ -18,8 +18,17 @@
         </Border.LayoutTransform>
         <Border.Style>
             <Style BasedOn="{StaticResource RevampBorderStyle}" TargetType="Border">
-                <Setter Property="BorderBrush" Value="{StaticResource TccNormalGradientBrush}" />
-                <Style.Triggers>
+                <Setter Property="BorderBrush" >
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource RevampBorderColor}" Opacity=".9"></SolidColorBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Background" >
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource RevampBackgroundColor}" Opacity=".9"></SolidColorBrush>
+                    </Setter.Value>
+                </Setter>
+                <!--<Style.Triggers>
                     <DataTrigger Binding="{Binding NotificationType}" Value="Success">
                         <Setter Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}" />
                     </DataTrigger>
@@ -30,11 +39,10 @@
                         <Setter Property="BorderBrush" Value="{StaticResource TccRedGradientBrush}" />
                     </DataTrigger>
 
-                </Style.Triggers>
+                </Style.Triggers>-->
             </Style>
-
         </Border.Style>
-        <Grid>
+        <Grid Margin="-1 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -62,12 +70,14 @@
             <TextBlock Grid.Row="2"
                        Style="{StaticResource NotificationTimestamp}"
                        Text="{Binding TimeStamp, Mode=OneWay}" />
-            <Button Style="{StaticResource ButtonContentOpacityStyle}"
+            <Button Style="{StaticResource ButtonMainStyle}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
+                    Cursor="Arrow"
                     Width="18"
                     Height="18"
+                    Visibility="{Binding CanClose, Converter={StaticResource BoolToVisibility}}"
                     Command="{Binding DismissCommand}">
                 <Path Data="{StaticResource SvgClose}" Margin="5 0"/>
             </Button>
