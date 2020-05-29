@@ -17,6 +17,7 @@
     <FontFamily x:Key="Frutiger">                  pack://application:,,,/resources/fonts/#Frutiger LT Pro 55 Roman              </FontFamily>
     <FontFamily x:Key="ArialMonoBold">             pack://application:,,,/resources/fonts/#Arial Monospaced MT                   </FontFamily>
     <FontFamily x:Key="NotoSansMed">               pack://application:,,,/resources/fonts/#Noto Sans Med                         </FontFamily>
+    <FontFamily x:Key="Inconsolata">               pack://application:,,,/resources/fonts/#Inconsolata SemiBold                  </FontFamily>
 
     <!-- Embedded images -->
     <ImageSource x:Key="DefaultGuildLogo">         pack://application:,,,/resources/images/default_guild_logo.png                </ImageSource>

@@ -137,6 +137,10 @@
     <SolidColorBrush x:Key="TccRedGradient0Brush"           Color="{StaticResource TccRedGradient0Color}"                      />
     <SolidColorBrush x:Key="TccRedGradient1Brush"           Color="{StaticResource TccRedGradient1Color}"                      />
 
+    <SolidColorBrush x:Key="SkillStrokeBrush"               Color="{StaticResource SkillStrokeColor}"                          />
+    <SolidColorBrush x:Key="CooldownArcBrush"               Color="{StaticResource CooldownArcColor}"                          />
+    <SolidColorBrush x:Key="PreCooldownArcBrush"            Color="{StaticResource PreCooldownArcColor}"                       />
+
     <!-- Gradients -->
     <LinearGradientBrush x:Key="RevampBackgroundGradientBrush" EndPoint="1 1" StartPoint="0 0" >                               
         <GradientStop Color="{StaticResource RevampDarkBackgroundColor}"   Offset="0.1"/>                                      

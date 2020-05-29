@@ -136,6 +136,9 @@ namespace TCC.R
 		public static SolidColorBrush TccYellowGradient1Brush => ((SolidColorBrush)App.Current.FindResource("TccYellowGradient1Brush"));
 		public static SolidColorBrush TccRedGradient0Brush => ((SolidColorBrush)App.Current.FindResource("TccRedGradient0Brush"));
 		public static SolidColorBrush TccRedGradient1Brush => ((SolidColorBrush)App.Current.FindResource("TccRedGradient1Brush"));
+		public static SolidColorBrush SkillStrokeBrush => ((SolidColorBrush)App.Current.FindResource("SkillStrokeBrush"));
+		public static SolidColorBrush CooldownArcBrush => ((SolidColorBrush)App.Current.FindResource("CooldownArcBrush"));
+		public static SolidColorBrush PreCooldownArcBrush => ((SolidColorBrush)App.Current.FindResource("PreCooldownArcBrush"));
 		public static LinearGradientBrush RevampBackgroundGradientBrush => ((LinearGradientBrush)App.Current.FindResource("RevampBackgroundGradientBrush"));
 		public static LinearGradientBrush TccWhiteGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccWhiteGradientBrush"));
 		public static LinearGradientBrush TccNormalGradientBrush => ((LinearGradientBrush)App.Current.FindResource("TccNormalGradientBrush"));
@@ -272,6 +275,9 @@ namespace TCC.R
 		public static Color TccYellowGradient1Color => ((Color)App.Current.FindResource("TccYellowGradient1Color"));
 		public static Color TccRedGradient0Color => ((Color)App.Current.FindResource("TccRedGradient0Color"));
 		public static Color TccRedGradient1Color => ((Color)App.Current.FindResource("TccRedGradient1Color"));
+		public static Color SkillStrokeColor => ((Color)App.Current.FindResource("SkillStrokeColor"));
+		public static Color CooldownArcColor => ((Color)App.Current.FindResource("CooldownArcColor"));
+		public static Color PreCooldownArcColor => ((Color)App.Current.FindResource("PreCooldownArcColor"));
 	}
 
 	// ResourceDictionaries/Converters.xaml
@@ -297,6 +303,7 @@ namespace TCC.R
 		public static MessageTextToIconConverter MessageTextToIcon => ((MessageTextToIconConverter)App.Current.FindResource("MessageTextToIcon"));
 		public static ClassToReColorConverter ReColorConverter => ((ClassToReColorConverter)App.Current.FindResource("ReColorConverter"));
 		public static EntityIdToNameConverter EntityIdToName => ((EntityIdToNameConverter)App.Current.FindResource("EntityIdToName"));
+		public static EntityIdToClassConverter EntityIdToClass => ((EntityIdToClassConverter)App.Current.FindResource("EntityIdToClass"));
 		public static AggroTypeToFillConverter AggroTypeToFill => ((AggroTypeToFillConverter)App.Current.FindResource("AggroTypeToFill"));
 		public static DragonIdToColorConverter DragonIdToColor => ((DragonIdToColorConverter)App.Current.FindResource("DragonIdToColor"));
 		public static HHphaseToEnemyWindowTemplate HarrowholdPhaseToLayout => ((HHphaseToEnemyWindowTemplate)App.Current.FindResource("HarrowholdPhaseToLayout"));
@@ -418,6 +425,7 @@ namespace TCC.R
 		public static FontFamily Frutiger => ((FontFamily)App.Current.FindResource("Frutiger"));
 		public static FontFamily ArialMonoBold => ((FontFamily)App.Current.FindResource("ArialMonoBold"));
 		public static FontFamily NotoSansMed => ((FontFamily)App.Current.FindResource("NotoSansMed"));
+		public static FontFamily Inconsolata => ((FontFamily)App.Current.FindResource("Inconsolata"));
 		public static ImageSource DefaultGuildLogo => ((ImageSource)App.Current.FindResource("DefaultGuildLogo"));
 		public static ImageSource MoongourdLogo => ((ImageSource)App.Current.FindResource("MoongourdLogo"));
 		public static ImageSource BlankImage => ((ImageSource)App.Current.FindResource("BlankImage"));
@@ -493,6 +501,13 @@ namespace TCC.R
 	// ResourceDictionaries/Styles.xaml
 	public static class Styles
 	{
+		public static Style BaseSkillArcStyle => ((Style)App.Current.FindResource("BaseSkillArcStyle"));
+		public static Style RoundSkillArcStyle => ((Style)App.Current.FindResource("RoundSkillArcStyle"));
+		public static Style SquareSkillArcStyle => ((Style)App.Current.FindResource("SquareSkillArcStyle"));
+		public static Style RhombSkillArcStyle => ((Style)App.Current.FindResource("RhombSkillArcStyle"));
+		public static Style SkillResetShapeStyle => ((Style)App.Current.FindResource("SkillResetShapeStyle"));
+		public static Style SkillDeleteButtonStyle => ((Style)App.Current.FindResource("SkillDeleteButtonStyle"));
+		public static Style CooldownSecondsTextStyle => ((Style)App.Current.FindResource("CooldownSecondsTextStyle"));
 		public static Style NotificationTitle => ((Style)App.Current.FindResource("NotificationTitle"));
 		public static Style NotificationBody => ((Style)App.Current.FindResource("NotificationBody"));
 		public static Style NotificationVersion => ((Style)App.Current.FindResource("NotificationVersion"));

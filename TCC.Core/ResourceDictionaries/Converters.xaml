@@ -25,6 +25,7 @@
 
     <!--BossGage resources-->
     <converters:EntityIdToNameConverter x:Key="EntityIdToName"/>
+    <converters:EntityIdToClassConverter x:Key="EntityIdToClass"/>
     <converters:AggroTypeToFillConverter x:Key="AggroTypeToFill"/>
     <converters:DragonIdToColorConverter x:Key="DragonIdToColor"/>
     <converters:HHphaseToEnemyWindowTemplate x:Key="HarrowholdPhaseToLayout"/>
