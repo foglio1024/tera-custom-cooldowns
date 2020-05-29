@@ -52,9 +52,12 @@ namespace TCC.UI.Windows.Widgets
         {
             base.OnVisibilityChanged();
             if (FocusManager.TeraScreen == null) return;
-            var teraScreenBounds = FocusManager.TeraScreen.Bounds;
-            Left = teraScreenBounds.X;
-            Top = teraScreenBounds.Y + teraScreenBounds.Height / 2;
+            Dispatcher.InvokeAsync(() =>
+            {
+                var teraScreenBounds = FocusManager.TeraScreen.Bounds;
+                Left = teraScreenBounds.X;
+                Top = teraScreenBounds.Y + teraScreenBounds.Height / 2;
+            });
         }
 
         private void OnNotificationsAdded()

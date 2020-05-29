@@ -48,7 +48,7 @@ namespace TCC.UI
             public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
 
             public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ??= new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings);
-            public static FloatingButtonViewModel FloatingButtonVM => _floatingButtonVm ??= new FloatingButtonViewModel(App.Settings.FloatingButtonSettings);
+            public static FloatingButtonViewModel FloatingButtonVM { get; set; } //=> _floatingButtonVm ??= new FloatingButtonViewModel(App.Settings.FloatingButtonSettings);
 
             public static GroupWindowViewModel GroupVM { get; set; }
         }
@@ -152,6 +152,9 @@ namespace TCC.UI
             NotificationArea = await b7.GetWindow();
             ViewModels.NotificationAreaVM = await b7.GetViewModel();
 
+            var b8 = new TccWidgetBuilder<FloatingButtonWindow, FloatingButtonViewModel>(App.Settings.FloatingButtonSettings);
+            FloatingButton = await b8.GetWindow();// new FloatingButtonWindow(ViewModels.FloatingButtonVM);
+            ViewModels.FloatingButtonVM = await b8.GetViewModel();
 
             FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGaugeVM);
             if (FlightDurationWindow.WindowSettings.Enabled) FlightDurationWindow.Show();
@@ -159,8 +162,6 @@ namespace TCC.UI
             CivilUnrestWindow = new CivilUnrestWindow(ViewModels.CivilUnrestVM);
             if (CivilUnrestWindow.WindowSettings.Enabled) CivilUnrestWindow.Show();
 
-            FloatingButton = new FloatingButtonWindow(ViewModels.FloatingButtonVM);
-            if (FloatingButton.WindowSettings.Enabled) FloatingButton.Show();
 
             DashboardWindow = new Dashboard(ViewModels.DashboardVM);
             LfgListWindow = new LfgListWindow(ViewModels.LfgVM);

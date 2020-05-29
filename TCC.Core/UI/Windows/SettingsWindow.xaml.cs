@@ -52,7 +52,10 @@ namespace TCC.UI.Windows
         public override void ShowWindow()
         {
             base.ShowWindow();
-            ((SettingsWindowViewModel)DataContext).ExN(nameof(SettingsWindowViewModel.BlacklistedMonsters));
+            Dispatcher.InvokeAsync(() =>
+            {
+                ((SettingsWindowViewModel) DataContext).ExN(nameof(SettingsWindowViewModel.BlacklistedMonsters));
+            });
         }
 
         // memeing
