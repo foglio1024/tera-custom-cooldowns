@@ -1,8 +1,6 @@
-﻿using Microsoft.Win32;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.IO;
 using System.Windows;
-using TCC.Data;
 using TCC.UI.Windows;
 using TCC.Utils;
 using MessageBoxImage = TCC.Data.MessageBoxImage;

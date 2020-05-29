@@ -231,10 +231,5 @@ namespace TCC.UI.Windows.Widgets
             if (left - 2 >= 0) LeftLine.Width = left - 2;
             if (left + w - 6 >= 0) RightLine.Margin = new Thickness(left + w - 6, 0, 0, 0);
         }
-
-        private void TabOnMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
     }
 }

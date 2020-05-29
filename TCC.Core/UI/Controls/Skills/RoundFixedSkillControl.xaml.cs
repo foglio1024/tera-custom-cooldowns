@@ -1,7 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-
-namespace TCC.UI.Controls.Skills
+﻿namespace TCC.UI.Controls.Skills
 {
     public partial class RoundFixedSkillControl 
     {

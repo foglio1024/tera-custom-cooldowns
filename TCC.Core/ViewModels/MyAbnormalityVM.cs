@@ -10,8 +10,6 @@ using System.Windows.Threading;
 using Nostrum;
 using TCC.Data;
 using TCC.Data.Abnormalities;
-using TCC.UI;
-using TCC.UI.Controls.Abnormalities;
 using TCC.UI.Windows;
 using TeraDataLite;
 

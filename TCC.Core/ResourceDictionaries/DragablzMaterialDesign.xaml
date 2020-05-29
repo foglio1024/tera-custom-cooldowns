@@ -888,6 +888,7 @@
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <!-- ReSharper disable once Xaml.BindingWithoutContextNotResolved -->
                         <DataTrigger Binding="{Binding Content.Attention}" Value="True">
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard x:Name="WarnAttention">

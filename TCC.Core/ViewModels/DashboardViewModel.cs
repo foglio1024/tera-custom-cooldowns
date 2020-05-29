@@ -17,7 +17,6 @@ using System.Xml.Linq;
 using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Abnormalities;
-using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Analysis;
 using TCC.Settings;

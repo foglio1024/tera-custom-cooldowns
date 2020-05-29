@@ -23,15 +23,12 @@ namespace TCC.ViewModels.Widgets
         {
             get
             {
-                switch (Direction)
+                return Direction switch
                 {
-                    case FlowDirection.LeftToRight:
-                        return new Thickness(2, 2, 2 * (1 - ((BuffWindowSettings)Settings).Overlap), 2);
-                    case FlowDirection.RightToLeft:
-                        return new Thickness(2 * (1 - ((BuffWindowSettings)Settings).Overlap), 2, 2, 2);
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                    FlowDirection.LeftToRight => new Thickness(2, 2, 2 * (1 - ((BuffWindowSettings) Settings).Overlap), 2),
+                    FlowDirection.RightToLeft => new Thickness(2 * (1 - ((BuffWindowSettings) Settings).Overlap), 2, 2, 2),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
             }
         }
 

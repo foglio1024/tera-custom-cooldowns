@@ -44,28 +44,25 @@ namespace TCC.Interop
                 { "webhook" , HashUtils.GenerateHash(webhook)},
                 { "user", App.Settings.LastAccountNameHash }
             };
-            using (var c = MiscUtils.GetDefaultWebClient())
+            using var c = MiscUtils.GetDefaultWebClient();
+            c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
+            c.Encoding = Encoding.UTF8;
+            try
             {
-                c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
-                c.Encoding = Encoding.UTF8;
-                try
-                {
-                    var res = await c.UploadStringTaskAsync(
-                        new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/fire_webhook"),
-                        Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
+                var res = await c.UploadStringTaskAsync(
+                    new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/fire_webhook"),
+                    Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
 
-                    var jRes = JObject.Parse(res);
-                    canFire = jRes["canFire"].Value<bool>();
-                    Log.CW($"Webhook fire requested, result: {canFire}");
+                var jRes = JObject.Parse(res);
+                canFire = jRes["canFire"].Value<bool>();
+                Log.CW($"Webhook fire requested, result: {canFire}");
 
-                }
-                catch (WebException e)
-                {
-                    Log.F($"Failed to request webhook execution. Webhook will be executed anyway: {e}");
-                    canFire = true;
-                }
-
+            }
+            catch (WebException e)
+            {
+                Log.F($"Failed to request webhook execution. Webhook will be executed anyway: {e}");
+                canFire = true;
             }
 
             return canFire;

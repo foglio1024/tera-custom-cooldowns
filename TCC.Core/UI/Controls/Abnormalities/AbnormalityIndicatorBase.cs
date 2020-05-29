@@ -2,13 +2,11 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
 using Nostrum.Controls;
 using Nostrum.Factories;
 using TCC.Data.Abnormalities;
 using TCC.UI.Windows.Widgets;
-using TCC.Utils;
 
 namespace TCC.UI.Controls.Abnormalities
 {
@@ -59,8 +57,8 @@ namespace TCC.UI.Controls.Abnormalities
 
                 var hidden = sender switch
                 {
-                    BuffWindow bw => App.Settings.BuffWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
-                    GroupWindow gw => App.Settings.GroupWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
+                    BuffWindow _ => App.Settings.BuffWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
+                    GroupWindow _ => App.Settings.GroupWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
                     _ => false
                 };
                 if(!myWindow) return;

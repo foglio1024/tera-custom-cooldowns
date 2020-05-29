@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using TCC.Data;
 
 namespace TCC.UI.Controls.Skills

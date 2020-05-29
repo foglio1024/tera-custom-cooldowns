@@ -1,7 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.IO;
-using System.Xml.Linq;
-using Newtonsoft.Json;
 using TCC.Data;
 using TeraDataLite;
 
@@ -258,38 +256,6 @@ namespace TCC.Settings
                         new CooldownData(205800, CooldownType.Skill),
                     });
                     break;
-            }
-
-            return ret;
-        }
-
-        [Obsolete("Remove after merge with master.")]
-        private CooldownConfigData ParseXML(string filePath)
-        {
-            var ret = new CooldownConfigData();
-            var skillsDoc = XDocument.Load(filePath);
-            foreach (var skillElement in Extensions.Descendants(skillsDoc.Descendants("Skills")))
-            {
-                var type = CooldownType.Skill;
-                if (skillElement.Name == "Item") type = CooldownType.Item;
-                if (skillElement.Name == "Passive") type = CooldownType.Passive;
-
-                var id = Convert.ToUInt32(skillElement.Attribute("id")?.Value);
-                var row = Convert.ToInt32(skillElement.Attribute("row")?.Value);
-
-                RouteToList(new CooldownData(id, type));
-
-                #region Local
-                void RouteToList(CooldownData d)
-                {
-                    switch (row)
-                    {
-                        case 1: ret.Main.Add(d); break;
-                        case 2: ret.Secondary.Add(d); break;
-                        case 3: ret.Hidden.Add(d); break;
-                    }
-                }
-                #endregion
             }
 
             return ret;

@@ -151,4 +151,8 @@
     <Color x:Key="CooldownArcColor">             #AA000000   </Color>
     <Color x:Key="PreCooldownArcColor">          #99FFAA00   </Color>
 
+    <Color x:Key="TooltipGoodColor">               #0099FF   </Color>
+    <Color x:Key="TooltipBadColor">                #FF5555   </Color>
+
+
 </ResourceDictionary>

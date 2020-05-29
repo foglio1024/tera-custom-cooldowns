@@ -31,7 +31,6 @@ namespace TCC.UI
             private static DashboardViewModel _dashboardVm;
             private static LfgListViewModel _lfgVm;
             private static FlightGaugeViewModel _flightGaugeVm;
-            private static FloatingButtonViewModel _floatingButtonVm;
 
             public static CooldownWindowViewModel CooldownsVM { get; set; }
             public static CharacterWindowViewModel CharacterVM { get; set; }

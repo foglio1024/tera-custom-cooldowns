@@ -798,17 +798,17 @@ namespace TCC
                 BlockList.Add(u);
             });
         }
-        private static void OnFatigabilityPoint(S_FATIGABILITY_POINT p)
-        {
-            var ppFactor = MathUtils.FactorCalc(p.CurrFatigability, p.MaxFatigability) * 100;
+        //private static void OnFatigabilityPoint(S_FATIGABILITY_POINT p)
+        //{
+        //    var ppFactor = MathUtils.FactorCalc(p.CurrFatigability, p.MaxFatigability) * 100;
 
-            Log.Chat(ChatUtils.Font("Production Points: ", R.Colors.MainColor.ToHex())
-                   + ChatUtils.Font($"{p.CurrFatigability}", R.Colors.GoldColor.ToHex())
-                   + ChatUtils.Font($"/{p.MaxFatigability} (", "cccccc")
-                   + ChatUtils.Font($"{ppFactor:F}%", R.Colors.MainColor.ToHex())
-                   + ChatUtils.Font($").", "cccccc")
-                );
-        }
+        //    Log.Chat(ChatUtils.Font("Production Points: ", R.Colors.MainColor.ToHex())
+        //           + ChatUtils.Font($"{p.CurrFatigability}", R.Colors.GoldColor.ToHex())
+        //           + ChatUtils.Font($"/{p.MaxFatigability} (", "cccccc")
+        //           + ChatUtils.Font($"{ppFactor:F}%", R.Colors.MainColor.ToHex())
+        //           + ChatUtils.Font($").", "cccccc")
+        //        );
+        //}
 
         #endregion
     }

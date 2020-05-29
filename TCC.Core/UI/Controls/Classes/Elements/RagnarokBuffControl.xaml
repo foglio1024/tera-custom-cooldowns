@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
+             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              Loaded="UserControl_Loaded"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
     <Grid Margin="0,0,0,0" Effect="{StaticResource DropShadow}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

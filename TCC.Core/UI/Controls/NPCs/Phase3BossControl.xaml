@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:TCC.UI.Controls"
+             xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
+             d:DataContext="{d:DesignInstance widgets:NpcWindowViewModel}"
              mc:Ignorable="d" >
     <Grid Width="Auto" Name="RootGrid" DataContext="{Binding Vergos}">
         <Grid.RowDefinitions>
@@ -80,7 +82,7 @@
                                VerticalAlignment="Center" 
                                Margin="0" 
                                FontSize="14"
-                               Text="{Binding HpFactor, StringFormat=##0.# %}"
+                               Text="{Binding HPFactor, StringFormat=##0.# %}"
                                Grid.Row="1"/>
                 </Grid>
                 <Grid Grid.Row="2" Margin="1,-2,1,1" Name="HpBarGrid" >

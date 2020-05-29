@@ -278,6 +278,8 @@ namespace TCC.R
 		public static Color SkillStrokeColor => ((Color)App.Current.FindResource("SkillStrokeColor"));
 		public static Color CooldownArcColor => ((Color)App.Current.FindResource("CooldownArcColor"));
 		public static Color PreCooldownArcColor => ((Color)App.Current.FindResource("PreCooldownArcColor"));
+		public static Color TooltipGoodColor => ((Color)App.Current.FindResource("TooltipGoodColor"));
+		public static Color TooltipBadColor => ((Color)App.Current.FindResource("TooltipBadColor"));
 	}
 
 	// ResourceDictionaries/Converters.xaml
