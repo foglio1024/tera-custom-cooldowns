@@ -148,7 +148,7 @@ namespace TCC.ViewModels
 
         private void OnVocExpired()
         {
-            VolleyOfCurse.Buff.Refresh(0, CooldownMode.Normal);
+            VolleyOfCurse.Buff.Stop();
             VolleyOfCurse.Cooldown.FlashOnAvailable = true;
         }
 

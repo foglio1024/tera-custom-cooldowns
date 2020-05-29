@@ -85,7 +85,7 @@ namespace TCC.ViewModels
 
         private void OnTripleNemesisExpired()
         {
-            TripleNemesis.Buff.Refresh(0, CooldownMode.Normal);
+            TripleNemesis.Buff.Stop();
             TripleNemesis.Cooldown.FlashOnAvailable = true;
 
         }

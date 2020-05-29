@@ -71,7 +71,7 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != CounterGlyphId) return;
             if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
 
-            vm.Counter.Refresh(0, CooldownMode.Normal);
+            vm.Counter.Stop();
             vm.CounterProc = false;
         }
     }

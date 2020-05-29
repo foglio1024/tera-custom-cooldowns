@@ -57,7 +57,7 @@ namespace TCC.Data.Abnormalities
             //if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.Windsong.Buff.Refresh(0, CooldownMode.Normal);
+            vm.Windsong.Buff.Stop();
         }
 
         private static void CheckGaleSteps(S_ABNORMALITY_BEGIN p)
@@ -81,7 +81,7 @@ namespace TCC.Data.Abnormalities
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.WindWalk.Refresh(0, CooldownMode.Normal);
+            vm.WindWalk.Stop();
             vm.WindWalkProc = false;
         }
 

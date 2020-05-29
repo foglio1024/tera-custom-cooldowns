@@ -110,7 +110,7 @@ namespace TCC.Data.Abnormalities
             if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
             //if (!GambleIDs.Contains(p.AbnormalityId)) return;
             //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-            vm.DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
+            vm.DeadlyGamble.Buff.Stop();
         }
 
         private void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)

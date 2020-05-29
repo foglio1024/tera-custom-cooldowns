@@ -135,15 +135,15 @@ namespace TCC.Data.Abnormalities
             }
             else if (p.AbnormalityId == VowId)
             {
-                vm.Vow.Buff.Refresh(0, CooldownMode.Normal);
+                vm.Vow.Buff.Stop();
             }
             else if (p.AbnormalityId == TovId)
             {
-                vm.ThrallOfVengeance.Buff.Refresh(0, CooldownMode.Normal);
+                vm.ThrallOfVengeance.Buff.Stop();
             }
             else if (p.AbnormalityId == TowId)
             {
-                vm.ThrallOfWrath.Buff.Refresh(0, CooldownMode.Normal);
+                vm.ThrallOfWrath.Buff.Stop();
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {

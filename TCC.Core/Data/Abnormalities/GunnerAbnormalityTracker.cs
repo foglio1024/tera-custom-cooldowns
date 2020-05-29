@@ -62,7 +62,7 @@ namespace TCC.Data.Abnormalities
             if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<GunnerLayoutVM>(out var vm)) return;
 
-            vm.ModularSystem.Buff.Refresh(0, CooldownMode.Normal);
+            vm.ModularSystem.Buff.Stop();
         }
     }
 }

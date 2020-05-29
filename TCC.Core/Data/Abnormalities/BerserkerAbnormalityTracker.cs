@@ -66,13 +66,13 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    vm.Bloodlust.Buff.Refresh(0, CooldownMode.Normal);
+                    vm.Bloodlust.Buff.Stop();
                     break;
                 case FieryRageId:
-                    vm.FieryRage.Buff.Refresh(0, CooldownMode.Normal);
+                    vm.FieryRage.Buff.Stop();
                     break;
                 case UnleashId:
-                    vm.Unleash.Buff.Refresh(0, CooldownMode.Normal);
+                    vm.Unleash.Buff.Stop();
                     vm.IsUnleashOn = false;
                     vm.IsUnleashOff = true;
                     break;

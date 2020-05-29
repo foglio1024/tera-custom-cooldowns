@@ -73,7 +73,7 @@ namespace TCC.Data.Abnormalities
             if (AssassinateId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShroudedEscape.Buff.Refresh(0, CooldownMode.Normal);
+            vm.ShroudedEscape.Buff.Stop();
         }
         private static void CheckShadowReaping(S_ABNORMALITY_BEGIN p)
         {
@@ -94,7 +94,7 @@ namespace TCC.Data.Abnormalities
             if (ShadowReapingId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShadowReaping.Buff.Refresh(0, CooldownMode.Normal);
+            vm.ShadowReaping.Buff.Stop();
         }
 
     }

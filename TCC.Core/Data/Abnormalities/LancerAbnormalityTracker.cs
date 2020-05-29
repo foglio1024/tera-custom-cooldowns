@@ -55,7 +55,7 @@ namespace TCC.Data.Abnormalities
             if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
             if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
 
-            vm.AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
+            vm.AdrenalineRush.Buff.Stop();
         }
 
         private static void CheckGshout(S_ABNORMALITY_BEGIN p)
@@ -77,7 +77,7 @@ namespace TCC.Data.Abnormalities
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
 
-            vm.GuardianShout.Buff.Refresh(0, CooldownMode.Normal);
+            vm.GuardianShout.Buff.Stop();
         }
 
         private static void CheckLineHeld(S_ABNORMALITY_BEGIN p)

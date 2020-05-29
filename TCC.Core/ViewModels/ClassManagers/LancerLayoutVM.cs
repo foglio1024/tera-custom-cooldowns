@@ -16,8 +16,8 @@ namespace TCC.ViewModels
         private void OnDeath()
         {
             LH.Stop();
-            GuardianShout.Buff.Refresh(0, CooldownMode.Normal);
-            AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
+            GuardianShout.Buff.Stop();
+            AdrenalineRush.Buff.Stop();
         }
 
         public DurationCooldownIndicator AdrenalineRush { get; set; }

@@ -112,7 +112,7 @@ namespace TCC.ViewModels
         public override bool ResetSpecialSkill(Skill skill)
         {
             if (skill.IconName != Thunderbolt.Skill.IconName) return false;
-            Thunderbolt.Refresh(0, CooldownMode.Normal);
+            Thunderbolt.Stop();
             return true;
         }
 

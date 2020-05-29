@@ -45,7 +45,7 @@ namespace TCC.ViewModels
 
         private void OnDeath()
         {
-            DeadlyGamble.Buff.Refresh(0, CooldownMode.Normal);
+            DeadlyGamble.Buff.Stop();
         }
 
         public bool ShowEdge => App.Settings.ClassWindowSettings.WarriorShowEdge;
@@ -107,7 +107,7 @@ namespace TCC.ViewModels
         {
             if (duration == 0)
             {
-                Swift.Buff.Refresh(0, CooldownMode.Normal);
+                Swift.Buff.Stop();
                 N(nameof(AtkSpeedProc));
                 return;
             }
@@ -119,7 +119,7 @@ namespace TCC.ViewModels
         {
             if (duration == 0)
             {
-                AdrenalineRush.Buff.Refresh(0, CooldownMode.Normal);
+                AdrenalineRush.Buff.Stop();
                 N(nameof(AtkSpeedProc));
                 return;
             }

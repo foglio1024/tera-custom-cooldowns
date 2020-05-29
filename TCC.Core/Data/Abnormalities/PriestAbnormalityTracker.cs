@@ -53,7 +53,7 @@ namespace TCC.Data.Abnormalities
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EnergyStars.Buff.Refresh(0, CooldownMode.Normal);
+            vm.EnergyStars.Buff.Stop();
         }
 
         private static void CheckGrace(S_ABNORMALITY_BEGIN p)
@@ -75,7 +75,7 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != GraceId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.Grace.Buff.Refresh(0, CooldownMode.Normal);
+            vm.Grace.Buff.Stop();
         }
 
         private static void CheckEdict(S_ABNORMALITY_BEGIN p)
@@ -97,7 +97,7 @@ namespace TCC.Data.Abnormalities
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EdictOfJudgment.Buff.Refresh(0, CooldownMode.Normal);
+            vm.EdictOfJudgment.Buff.Stop();
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)

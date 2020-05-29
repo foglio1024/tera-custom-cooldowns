@@ -190,6 +190,15 @@ namespace TCC.Data.Skills
 
             Dispatcher.Invoke(() => Started?.Invoke(Mode));
         }
+
+        public void Stop()
+        {
+            _mainTimer.Stop();
+            N(nameof(IsAvailable));
+            Seconds = 0;
+            Duration = 0;
+            Dispatcher?.Invoke(() => Ended?.Invoke(Mode));
+        }
         public void Refresh(ulong cd, CooldownMode mode)
         {
             _mainTimer.Stop();

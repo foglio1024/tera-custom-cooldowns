@@ -43,7 +43,7 @@ namespace TCC.Data.Abnormalities
             if (!IcbIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
 
-            vm.InColdBlood.Buff.Refresh(0, CooldownMode.Normal);
+            vm.InColdBlood.Buff.Stop();
         }
     }
 }

@@ -58,7 +58,7 @@ namespace TCC.Data.Abnormalities
             if (!IsManaBoost(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-            vm.ManaBoost.Buff.Refresh(0, CooldownMode.Normal);
+            vm.ManaBoost.Buff.Stop();
         }
 
         private static void CheckFusionBoost(S_ABNORMALITY_BEGIN p)

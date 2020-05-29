@@ -51,7 +51,7 @@ namespace TCC.Data.Abnormalities
         {
             if (p.AbnormalityId != RagnarokId) return;
             if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-            vm.Ragnarok.Buff.Refresh(0, CooldownMode.Normal);
+            vm.Ragnarok.Buff.Stop();
         }
         private static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
         {
@@ -76,7 +76,7 @@ namespace TCC.Data.Abnormalities
         {
             if (p.AbnormalityId != GodsfallId) return;
             if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-            vm.Godsfall.Buff.Refresh(0, CooldownMode.Normal);
+            vm.Godsfall.Buff.Stop();
         }
 
         private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)

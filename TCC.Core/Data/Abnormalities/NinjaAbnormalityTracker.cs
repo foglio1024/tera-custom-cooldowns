@@ -63,7 +63,7 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.InnerHarmony.Buff.Refresh(0, CooldownMode.Normal);
+            vm.InnerHarmony.Buff.Stop();
         }
     }
 }
