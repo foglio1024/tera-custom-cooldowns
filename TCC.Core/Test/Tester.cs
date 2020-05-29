@@ -30,7 +30,7 @@ namespace TCC.Test
 {
     public static class Tester
     {
-        public static bool Enabled = false;
+        public static bool Enabled { get; private set; }
 
         public static void Enable(bool forceFocused = true, bool forceVisible = true, bool forceUndim = true)
         {
