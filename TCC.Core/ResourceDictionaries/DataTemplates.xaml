@@ -24,10 +24,10 @@
                     xmlns:vm="clr-namespace:TCC.ViewModels">
     <!--#region Skills -->
     <DataTemplate x:Key="RoundNormalSkill">
-        <skills1:RoundSkillControl Margin="-2 -2 -2 0"/>
+        <skills1:RoundSkillControl />
     </DataTemplate>
     <DataTemplate x:Key="SquareNormalSkill">
-        <skills1:SquareSkillControl Margin="-2 -2 -2 0" />
+        <skills1:SquareSkillControl />
     </DataTemplate>
     <DataTemplate x:Key="RoundFixedSkill">
         <skills1:RoundFixedSkillControl />
