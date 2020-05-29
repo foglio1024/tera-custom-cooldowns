@@ -7,7 +7,7 @@ namespace TeraPacketParser.Messages
         public ulong EntityId { get; }
         public uint ServerId { get; }
         public uint PlayerId { get; }
-        public int TemplateId { get; }
+        public uint TemplateId { get; }
         public int Level { get; }
         public string Name { get; }
         public string GuildName { get; }
@@ -31,7 +31,7 @@ namespace TeraPacketParser.Messages
             reader.Skip(12);
             reader.Skip(2);
             reader.Skip(4);
-            TemplateId = reader.ReadInt32();
+            TemplateId = reader.ReadUInt32();
             reader.Skip(2 + 2 + 2 + 2 + 2 + 1 + 1 + 4 + 4);
 
             var weaponId = reader.ReadUInt32();
