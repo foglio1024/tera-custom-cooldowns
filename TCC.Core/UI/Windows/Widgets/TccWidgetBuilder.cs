@@ -8,7 +8,8 @@ using TCC.ViewModels;
 
 namespace TCC.UI.Windows.Widgets
 {
-    public class TccWidgetBuilder<TWindow, TViewModel> where TWindow : TccWidget where TViewModel : TccWindowViewModel
+    public class TccWidgetBuilder<TWindow, TViewModel> where TWindow : TccWidget 
+                                                       where TViewModel : TccWindowViewModel
     {
         private TWindow _window;
         private TViewModel _vm;
@@ -39,8 +40,7 @@ namespace TCC.UI.Windows.Widgets
         {
             var thread = new Thread(() =>
             {
-                SynchronizationContext.SetSynchronizationContext(
-                    new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+                SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 _vm = (TViewModel)Activator.CreateInstance(typeof(TViewModel), ws);
                 _window = (TWindow)Activator.CreateInstance(typeof(TWindow), _vm);
                 if (_vm.Settings.Enabled) _window.Show();

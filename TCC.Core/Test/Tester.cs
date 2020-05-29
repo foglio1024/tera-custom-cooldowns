@@ -32,6 +32,13 @@ namespace TCC.Test
     {
         public static bool Enabled = false;
 
+        public static void Enable(bool forceFocused = true, bool forceVisible = true, bool forceUndim = true)
+        {
+            Enabled = true;
+            FocusManager.ForceFocused = forceFocused;
+            WindowManager.VisibilityManager.ForceVisible = forceVisible;
+            WindowManager.VisibilityManager.ForceUndim = forceUndim;
+        }
         public static void Deadlock()
         {
             ChatManager.Instance.GetDispatcher().Invoke(() =>

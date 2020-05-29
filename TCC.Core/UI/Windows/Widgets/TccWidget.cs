@@ -161,7 +161,7 @@ namespace TCC.UI.Windows.Widgets
         private void OnFocusTick()
         {
             if (FocusManager.PauseTopmost) return;
-            if (WindowSettings.ShowAlways) RefreshTopmost();
+            if (WindowSettings.ShowAlways || WindowManager.VisibilityManager.ForceVisible) RefreshTopmost();
             if (WindowManager.VisibilityManager.Visible) RefreshTopmost();
         }
 
