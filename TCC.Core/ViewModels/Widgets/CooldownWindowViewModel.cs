@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Threading;
@@ -26,6 +27,19 @@ namespace TCC.ViewModels.Widgets
     [TccModule]
     public class CooldownWindowViewModel : TccWindowViewModel
     {
+        private bool _isDragging;
+
+        public bool IsDragging
+        {
+            get => _isDragging;
+            set
+            {
+                if (_isDragging == value) return;
+                _isDragging = value;
+                N();
+            }
+        }
+
         public bool ShowItems => App.Settings.CooldownWindowSettings.ShowItems;
 
         public event Action SkillsLoaded;
@@ -117,7 +131,7 @@ namespace TCC.ViewModels.Widgets
         private void NormalMode_Change(Skill skill, uint cd)
         {
             if (!App.Settings.CooldownWindowSettings.Enabled) return;
-            if (ClassManager.ChangeSpecialSkill(skill, cd)) return;
+            ClassManager.ChangeSpecialSkill(skill, cd);
 
             try
             {
@@ -243,7 +257,7 @@ namespace TCC.ViewModels.Widgets
         private void FixedMode_Change(Skill sk, uint cd)
         {
             if (!App.Settings.CooldownWindowSettings.Enabled) return;
-            if (App.Settings.ClassWindowSettings.Enabled && ClassManager.ChangeSpecialSkill(sk, cd)) return;
+            if(App.Settings.ClassWindowSettings.Enabled) ClassManager.ChangeSpecialSkill(sk, cd);
 
             var hSkill = HiddenSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
             if (hSkill != null) return;
@@ -486,13 +500,21 @@ namespace TCC.ViewModels.Widgets
         }
 
 
-        private void OnShowSkillConfigHotkeyPressed()
+        public void OnShowSkillConfigHotkeyPressed()
         {
-            if (!Game.Logged) return;
+            if (!Game.Logged && !Debugger.IsAttached) return;
             Dispatcher.InvokeAsync(() =>
             {
-                if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible) WindowManager.SkillConfigWindow.Close();
-                else new SkillConfigWindow().ShowWindow();
+                if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible)
+                {
+                    WindowManager.SkillConfigWindow.Close();
+                    IsDragging = false;
+                }
+                else
+                {
+                    new SkillConfigWindow().ShowWindow();
+                    IsDragging = true;
+                }
             }, DispatcherPriority.Background);
         }
 
