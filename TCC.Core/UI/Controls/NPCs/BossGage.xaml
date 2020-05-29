@@ -177,6 +177,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -235,14 +236,31 @@
                                FontWeight="Normal"
                                FontStretch="Condensed"
                                FontSize="13"
-                               Text="{Binding Target, Converter={StaticResource EntityIdToName}}"
-                               Grid.Column="2" 
+                               Grid.Column="3" 
                                TextTrimming="WordEllipsis" 
                                MaxWidth="200">
+                        <Run Text="{Binding Target, Mode=OneWay, Converter={StaticResource EntityIdToName}}"/>
+
                         <TextBlock.Effect>
                             <DropShadowEffect ShadowDepth="0" BlurRadius="15" />
                         </TextBlock.Effect>
+
                     </TextBlock>
+                    <Path Data="{Binding Target, Converter={StaticResource EntityIdToClass}}"
+                          Fill="#ccc"
+                          RenderOptions.BitmapScalingMode="Fant"
+                          Margin="0 0 4 0"
+                          Grid.Row="1"
+                          HorizontalAlignment="Left"
+                          Grid.Column="2"
+                          Width="14" Height="14">
+                        <Path.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="15" />
+                        </Path.Effect>
+
+
+                    </Path>
+
                 </Grid>
 
                 <!-- Top info grid-->

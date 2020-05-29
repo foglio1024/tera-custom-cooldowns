@@ -98,8 +98,15 @@ namespace TCC.Utilities
             return Game.NearbyNPC.ContainsKey(pSource)
                  ? Game.NearbyNPC[pSource]
                  : Game.NearbyPlayers.ContainsKey(pSource)
-                    ? Game.NearbyPlayers[pSource]
+                    ? Game.NearbyPlayers[pSource].Item1
                     : "unknown";
+        }
+
+        public static Class GetEntityClass(ulong pSource)
+        {
+            return Game.NearbyPlayers.ContainsKey(pSource)
+                    ? Game.NearbyPlayers[pSource].Item2
+                    : Class.None;
         }
 
         public static bool IsEntitySpawned(ulong pSource)

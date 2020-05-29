@@ -10,7 +10,7 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (AggroCircle?)value switch
+            return (value is AggroCircle ac ? ac : AggroCircle.None) switch
             {
                 AggroCircle.Main => R.Brushes.GoldBrush,
                 AggroCircle.Secondary => R.Brushes.TwitchBrush,

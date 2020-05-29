@@ -40,7 +40,7 @@ namespace TCC
         private static bool _inGameUiOn;
 
         public static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
-        public static readonly Dictionary<ulong, string> NearbyPlayers = new Dictionary<ulong, string>();
+        public static readonly Dictionary<ulong, Tuple<string, Class>> NearbyPlayers = new Dictionary<ulong, Tuple<string, Class>>();
         public static readonly GroupInfo Group = new GroupInfo();
         public static readonly GuildInfo Guild = new GuildInfo();
         public static Server Server { get; set; } = new Server("", "", "", 0);
@@ -533,7 +533,7 @@ namespace TCC
             }
 
             #endregion
-            NearbyPlayers[p.EntityId] = p.Name;
+            NearbyPlayers[p.EntityId] = new Tuple<string, Class>(p.Name, TccUtils.ClassFromModel(p.TemplateId));
         }
         private static void OnSpawnMe(S_SPAWN_ME p)
         {
