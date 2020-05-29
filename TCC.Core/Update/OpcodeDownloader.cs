@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Text;
+using Newtonsoft.Json.Linq;
 using Nostrum;
 
 namespace TCC.Update
@@ -54,14 +56,23 @@ namespace TCC.Update
             var ret = false;
             var filename = Path.Combine(directory, $"protocol.{version}.map");
             if (IsFileValid(filename)) return true;
+
+            try
+            {
+                DownloadJson("https://raw.githubusercontent.com/tera-toolbox/tera-toolbox/master/data/data.json", filename, version);
+                ret = IsFileValid(filename);
+            }
+            catch { /* ignored*/ }
+            if (ret) return true;
+
             try
             {
                 Download($"https://raw.githubusercontent.com/tera-toolbox/tera-data/master/map_base/protocol.{version}.map", filename);
                 ret = IsFileValid(filename);
             }
             catch { /* ignored*/ }
-
             if (ret) return true;
+
             try
             {
                 Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/protocol.{version}.map", filename);
@@ -105,6 +116,21 @@ namespace TCC.Update
         {
             using var client = MiscUtils.GetDefaultWebClient();
             client.DownloadFile(remote, local);
+        }
+
+        private static void DownloadJson(string remote, string filename, uint version)
+        {
+            using var client = MiscUtils.GetDefaultWebClient();
+            var data = client.DownloadString(remote);
+            var json = JObject.Parse(data);
+            var jMap = json["maps"];
+            var jVersion = jMap[version.ToString()];
+            var sb = new StringBuilder();
+            foreach (var jOpcode in jVersion.Children())
+            {
+                sb.AppendLine($"{((JProperty)jOpcode).Name} {((JProperty)jOpcode).Value}");
+            }
+            File.WriteAllText(filename, sb.ToString());
         }
     }
 }
