@@ -583,7 +583,7 @@ namespace TCC.ViewModels
                     });
 
                     lfg.LeaderId = m.Id;
-                    var leader = lfg.Players.FirstOrDefault(u => u.IsLeader);
+                    var leader = lfg.Players.ToSyncList().FirstOrDefault(u => u.IsLeader);
                     if (leader != null) lfg.LeaderName = leader.Name;
                     if (LastClicked != null && LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
                     lfg.PlayerCount = m.Members.Count;

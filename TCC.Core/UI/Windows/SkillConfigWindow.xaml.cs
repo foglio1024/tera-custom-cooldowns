@@ -77,6 +77,7 @@ namespace TCC.UI.Windows
             };
             BeginAnimation(OpacityProperty, an);
             VM.SaveConfig();
+            VM.IsDragging = false;
         }
 
         internal void ShowWindow()
