@@ -86,11 +86,17 @@ namespace TCC.ViewModels.Widgets
                 });
 
             Game.Teleported += OnTeleported;
-
+            Game.EncounterChanged += OnEncounterChanged;
             settings.SettingsUpdated += NotifySettingUpdated;
             settings.ThresholdChanged += NotifyThresholdChanged;
             settings.IgnoreMeChanged += ToggleMe;
             settings.LayoutChanged += OnLayoutChanged;
+        }
+
+        private void OnEncounterChanged()
+        {
+            if(!Game.Encounter)
+                SetAggro(0);
         }
 
         private void OnLayoutChanged()

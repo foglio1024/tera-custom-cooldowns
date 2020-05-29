@@ -497,12 +497,6 @@ namespace TCC
             NearbyNPC.Remove(p.Target);
             FlyingGuardianDataProvider.InvokeProgressChanged();
             AbnormalityTracker.CheckMarkingOnDespawn(p.Target);
-
-            // TODO: this shouldn't reference modules ------------------
-            if (WindowManager.ViewModels.NpcVM.VisibleBossesCount != 0) return;
-            Encounter = false;
-            WindowManager.ViewModels.GroupVM.SetAggro(0);
-            // ----------------------------------------------------
         }
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {

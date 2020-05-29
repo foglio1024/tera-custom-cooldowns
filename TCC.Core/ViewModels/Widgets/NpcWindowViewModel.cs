@@ -503,27 +503,38 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (!TryFindNPC(p.Target, out var boss)) return;
-                if (p.Type == DespawnType.OutOfView)
+                if (TryFindNPC(p.Target, out var boss))
                 {
-                    _savedHp[p.Target] = boss.CurrentHP;
-                }
-                else
-                {
-                    _savedHp.Remove(p.Target);
-                }
-                if (!boss.Visible || boss.IsTower)
-                {
-                    _npcList.Remove(boss);
-                    boss.Dispose();
-                }
-                else
-                {
-                    boss.Delete();
-                }
-                NpcListChanged?.Invoke();
+                    if (p.Type == DespawnType.OutOfView)
+                    {
+                        _savedHp[p.Target] = boss.CurrentHP;
+                    }
+                    else
+                    {
+                        _savedHp.Remove(p.Target);
+                    }
 
-                if (SelectedDragon != null && SelectedDragon.EntityId == p.Target) SelectedDragon = null;
+                    if (!boss.Visible || boss.IsTower)
+                    {
+                        _npcList.Remove(boss);
+                        boss.Dispose();
+                    }
+                    else
+                    {
+                        boss.Delete();
+                    }
+
+                    NpcListChanged?.Invoke();
+
+                    if (SelectedDragon != null && SelectedDragon.EntityId == p.Target) SelectedDragon = null;
+
+                    if (VisibleBossesCount == 0)
+                    {
+                        Game.Encounter = false;
+                    }
+
+                }
+
             });
         }
         private void OnBossGageInfo(S_BOSS_GAGE_INFO m)
