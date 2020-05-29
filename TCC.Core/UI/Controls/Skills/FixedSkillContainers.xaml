@@ -10,42 +10,148 @@
              xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
-             PreviewMouseLeftButtonUp="UserControl_MouseLeftButtonUp"
-             PreviewDragEnter="FixedSkillContainers_OnDragOver" 
+             PreviewDragEnter="FixedSkillContainers_OnDragOver"
              MouseEnter="MainSkillsGrid_MouseEnter"
              MouseLeave="MainSkillsGrid_MouseLeave"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance widgets:CooldownWindowViewModel}">
     <UserControl.Resources>
+        <dragablz:HorizontalOrganiser x:Key="HorizontalOrganiser" />
+
+        <Style TargetType="ContentPresenter" x:Key="ItemCooldownsItemContainerStyle">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX=".85"
+                                    ScaleY=".85" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FlowDirection" Value="LeftToRight" />
+        </Style>
+
+        <ItemsPanelTemplate x:Key="OtherCooldownPanelTemplate">
+            <StackPanel IsItemsHost="True"
+                        Width="Auto" Height="Auto"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left" VerticalAlignment="Center" />
+        </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="ItemCooldownPanelTemplate">
+            <StackPanel IsItemsHost="True"
+                        Width="Auto" Height="Auto"
+                        FlowDirection="RightToLeft"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" />
+        </ItemsPanelTemplate>
+
+        <LinearGradientBrush x:Key="TopBorderBackground" EndPoint="0 1">
+            <GradientStop Color="#0222" Offset="0" />
+            <GradientStop Color="#0222" Offset=".2" />
+            <GradientStop Color="#f222" Offset="1" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BottomBorderBackground" EndPoint="0 1">
+            <GradientStop Color="#b222" Offset="0" />
+            <GradientStop Color="#1222" Offset=".8" />
+            <GradientStop Color="#0222" Offset="1" />
+        </LinearGradientBrush>
+
+        <SineEase x:Key="Ease" EasingMode="EaseInOut" />
+
+        <ControlTemplate x:Key="RoundDragableSkill" TargetType="{x:Type dragablz:DragablzItem}">
+            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+            <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.ShortName}" Margin="0 0">
+                <skills:RoundFixedSkillControl />
+                <Rectangle x:Name="Activator"
+                           Fill="Transparent"
+                           Height="30"
+                           HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+                <Thumb x:Name="Thumb"
+                       Visibility="Collapsed"
+                       dragablz:DragablzItem.IsCustomThumb="True"
+                       Cursor="None"
+                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Thumb.Template>
+                        <ControlTemplate>
+                            <Rectangle Width="40" Height="20"
+                                       VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                       Cursor="SizeWE"
+                                       Fill="Transparent" />
+                        </ControlTemplate>
+                    </Thumb.Template>
+
+                </Thumb>
+                <Grid.RenderTransform>
+                    <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
+                </Grid.RenderTransform>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDragging" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
+                                                               Storyboard.TargetProperty="ScaleX">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.12"
+                                                          EasingFunction="{StaticResource Ease}" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
+                                                               Storyboard.TargetProperty="ScaleY">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.12"
+                                                          EasingFunction="{StaticResource Ease}" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
+                                                               Storyboard.TargetProperty="ScaleX">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"
+                                                          EasingFunction="{StaticResource Ease}" />
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
+                                                               Storyboard.TargetProperty="ScaleY">
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"
+                                                          EasingFunction="{StaticResource Ease}" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+                <Trigger SourceName="Activator" Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Thumb" Property="Visibility" Value="Visible" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True" SourceName="Thumb">
+                    <Setter TargetName="Thumb" Property="Visibility" Value="Visible" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
         <ControlTemplate x:Key="SquareDragableSkill" TargetType="{x:Type dragablz:DragablzItem}">
-            <ControlTemplate.Resources>
-                <SineEase x:Key="Ease" EasingMode="EaseInOut" />
-            </ControlTemplate.Resources>
-            <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.Name}" Margin="-2 0"
+            <Grid RenderTransformOrigin=".5 .5"
+                  ToolTip="{Binding Skill.ShortName}"
+                  Margin="0"
                   d:DataContext="{d:DesignInstance skills1:Cooldown}">
                 <skills:SquareFixedSkillControl />
-                <Rectangle Fill="#01000000" x:Name="Activator" Height="30" HorizontalAlignment="Stretch"
+                <Rectangle Fill="#01000000"
+                           x:Name="Activator"
+                           Height="30"
+                           HorizontalAlignment="Stretch"
                            VerticalAlignment="Bottom" />
-                <Thumb x:Name="Thumb" Visibility="Collapsed" dragablz:DragablzItem.IsCustomThumb="True" Cursor="None"
+                <Thumb x:Name="Thumb"
+                       Visibility="Collapsed"
+                       dragablz:DragablzItem.IsCustomThumb="True"
+                       Cursor="None"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Margin="0 0 0 0">
+                       VerticalAlignment="Center">
                     <Thumb.Template>
                         <ControlTemplate>
-                            <Grid Width="40" Height="20" Margin="0 0 0 0" VerticalAlignment="Center" Cursor="SizeWE"
-                                  HorizontalAlignment="Stretch" Background="#01000000">
-                                <!--<Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="20"/>
-                                                            <ColumnDefinition Width="15"/>
-                                                            <ColumnDefinition Width="20"/>
-                                                        </Grid.ColumnDefinitions>-->
-                                <!--<Rectangle RadiusX="10" RadiusY="10" Fill="White"  Margin="0" Effect="{StaticResource dropShadow}" Grid.Column="0"></Rectangle>
-                                                        <Rectangle RadiusX="10" RadiusY="10" Fill="White"  Margin="0" Effect="{StaticResource dropShadow}" Grid.Column="2"></Rectangle>-->
-                                <!--<Rectangle RadiusX="2" RadiusY="2" Fill="#01000000"  Grid.ColumnSpan="3"></Rectangle>-->
-                                <!--<Path Data="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" Fill="White"  Stretch="Uniform" Effect="{StaticResource dropShadow}" Margin="0 3 4 3" HorizontalAlignment="Left" Grid.Column="0"></Path>
-                                                        <Path Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" Fill="White" Stretch="Uniform" Effect="{StaticResource dropShadow}" Margin="4 3 0 3" HorizontalAlignment="Right" Grid.Column="2"></Path>-->
-                            </Grid>
+                            <Rectangle Width="40" Height="20" VerticalAlignment="Center" Cursor="SizeWE"
+                                       HorizontalAlignment="Stretch" Fill="Transparent" />
                         </ControlTemplate>
                     </Thumb.Template>
-
                 </Thumb>
                 <Grid.RenderTransform>
                     <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
@@ -95,175 +201,116 @@
 
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        <ControlTemplate x:Key="RoundDragableSkill" TargetType="{x:Type dragablz:DragablzItem}">
-            <ControlTemplate.Resources>
-                <SineEase x:Key="Ease" EasingMode="EaseInOut" />
-            </ControlTemplate.Resources>
-            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
-            <Grid RenderTransformOrigin=".5 .5" ToolTip="{Binding Skill.Name}" Margin="-2 0">
-                <skills:RoundFixedSkillControl />
-                <Rectangle Fill="#01000000" x:Name="Activator" Height="30" HorizontalAlignment="Stretch"
-                           VerticalAlignment="Bottom" />
-                <Thumb x:Name="Thumb" Visibility="Collapsed" dragablz:DragablzItem.IsCustomThumb="True" Cursor="None"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Margin="0 0 0 0">
-                    <Thumb.Template>
-                        <ControlTemplate>
-                            <Grid Width="40" Height="20" Margin="0 0 0 0" VerticalAlignment="Center" Cursor="SizeWE"
-                                  HorizontalAlignment="Stretch" Background="#01000000">
-                                <!--<Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="20"/>
-                                                            <ColumnDefinition Width="15"/>
-                                                            <ColumnDefinition Width="20"/>
-                                                        </Grid.ColumnDefinitions>-->
-                                <!--<Rectangle RadiusX="10" RadiusY="10" Fill="White"  Margin="0" Effect="{StaticResource dropShadow}" Grid.Column="0"></Rectangle>
-                                                        <Rectangle RadiusX="10" RadiusY="10" Fill="White"  Margin="0" Effect="{StaticResource dropShadow}" Grid.Column="2"></Rectangle>-->
-                                <!--<Rectangle RadiusX="2" RadiusY="2" Fill="#01000000"  Grid.ColumnSpan="3"></Rectangle>-->
-                                <!--<Path Data="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" Fill="White"  Stretch="Uniform" Effect="{StaticResource dropShadow}" Margin="0 3 4 3" HorizontalAlignment="Left" Grid.Column="0"></Path>
-                                                        <Path Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" Fill="White" Stretch="Uniform" Effect="{StaticResource dropShadow}" Margin="4 3 0 3" HorizontalAlignment="Right" Grid.Column="2"></Path>-->
-                            </Grid>
-                        </ControlTemplate>
-                    </Thumb.Template>
 
-                </Thumb>
-                <Grid.RenderTransform>
-                    <ScaleTransform x:Name="ScaleTransform" ScaleX="1" ScaleY="1" />
-                </Grid.RenderTransform>
-            </Grid>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsDragging" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
-                                                               Storyboard.TargetProperty="ScaleX">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.12"
-                                                          EasingFunction="{StaticResource Ease}" />
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
-                                                               Storyboard.TargetProperty="ScaleY">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1.12"
-                                                          EasingFunction="{StaticResource Ease}" />
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
-                                                               Storyboard.TargetProperty="ScaleX">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"
-                                                          EasingFunction="{StaticResource Ease}" />
-                                </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ScaleTransform"
-                                                               Storyboard.TargetProperty="ScaleY">
-                                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"
-                                                          EasingFunction="{StaticResource Ease}" />
-                                </DoubleAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
-                <Trigger SourceName="Activator" Property="IsMouseOver" Value="True">
-                    <Setter TargetName="Thumb" Property="Visibility" Value="Visible" />
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="True" SourceName="Thumb">
-                    <Setter TargetName="Thumb" Property="Visibility" Value="Visible" />
-                </Trigger>
-
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
         <!-- ReSharper disable Xaml.RedundantResource -->
-        <Style x:Key="RoundDragableStyle" TargetType="dragablz:DragablzItem">
-            <Setter Property="Padding" Value="0 4 0 4" />
-            <Setter Property="Margin" Value="0 0 0 0" />
+        <Style x:Key="DragableSkillStyle" TargetType="dragablz:DragablzItem">
+            <Setter Property="Padding" Value="0 4" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
+        <Style x:Key="RoundDragableStyle" TargetType="dragablz:DragablzItem"
+               BasedOn="{StaticResource DragableSkillStyle}">
             <Setter Property="Template" Value="{StaticResource RoundDragableSkill}" />
         </Style>
-        <Style x:Key="SquareDragableStyle" TargetType="dragablz:DragablzItem">
-            <Setter Property="Padding" Value="0 4 0 4" />
-            <Setter Property="Margin" Value="0 0 0 0" />
+
+        <Style x:Key="SquareDragableStyle" TargetType="dragablz:DragablzItem"
+               BasedOn="{StaticResource DragableSkillStyle}">
             <Setter Property="Template" Value="{StaticResource SquareDragableSkill}" />
         </Style>
         <!-- ReSharper restore Xaml.RedundantResource -->
+
+        <Style x:Key="FixedDragablzItemsControlStyle" TargetType="dragablz:DragablzItemsControl">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="ItemContainerStyle" Value="{StaticResource RoundDragableStyle}" />
+            <Setter Property="ItemsOrganiser" Value="{StaticResource HorizontalOrganiser}" />
+            <Setter Property="dd:DragDrop.DropHandler"
+                    Value="{Binding DropHandler, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=skills:FixedSkillContainers}}" />
+            <Setter Property="dd:DragDrop.IsDropTarget" Value="True" />
+            <Setter Property="dd:DragDrop.ItemsPanelOrientation" Value="Horizontal" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="dragablz:DragablzItemsControl">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{TemplateBinding BorderBrush}" />
+                            <ItemsPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
-    <Grid Margin="4" HorizontalAlignment="Left">
+
+    <Grid Margin="10 4" HorizontalAlignment="Left" x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Rectangle Fill="Black" RadiusX="20" RadiusY="20"
+                   Margin="0 0" Opacity=".3" Grid.Row="1">
+            <Shape.Effect>
+                <BlurEffect Radius="20" RenderingBias="Performance"/>
+            </Shape.Effect>
+        </Rectangle>
         <!--Main DefaultBorderStyle-->
-        <Grid Grid.Row="1" Grid.RowSpan="2" Width="{Binding ElementName=MainSkillsGrid, Path=ActualWidth}" >
+        <Grid Grid.Row="1" Grid.RowSpan="2"
+              HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <Grid.CacheMode>
-                <BitmapCache RenderAtScale="1"/>
+                <BitmapCache RenderAtScale="2" />
             </Grid.CacheMode>
             <Grid.OpacityMask>
                 <LinearGradientBrush EndPoint="1 0">
-                    <GradientStop Offset="0.0"/>
-                    <GradientStop Color="White" Offset=".2"/>
-                    <GradientStop Color="White" Offset=".8"/>
-                    <GradientStop Offset="1.0"/>
+                    <GradientStop Offset="0.0" />
+                    <GradientStop Color="White" Offset=".2" />
+                    <GradientStop Color="White" Offset=".8" />
+                    <GradientStop Offset="1.0" />
                 </LinearGradientBrush>
             </Grid.OpacityMask>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Border Opacity="1"  Margin="-4 59 0 26" CornerRadius="0"
+
+            <Border Margin="-4 -2 0 0" CornerRadius="0"
                     BorderThickness="0"
-                    PreviewDragLeave="FixedSkillContainers_OnDragLeave" Grid.RowSpan="2" Grid.Row="0" Effect="{x:Null}"  
-                    x:Name="MainBorderSec" HorizontalAlignment="Stretch" >
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0 1">
-                        <GradientStop Color="#b222" Offset="0"/>
-                        <GradientStop Color="#0222" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
-
-            <Border Opacity="1" Grid.Row="0" Margin="-4 0 0 1" CornerRadius="0"
-                    x:Name="MainBorder" Effect="{x:Null}" VerticalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Height="45"
+                    Background="{StaticResource BottomBorderBackground}"
+                    Grid.Row="1" Effect="{x:Null}"
+                    x:Name="MainBorderSec" HorizontalAlignment="Stretch" />
+            <Border x:Name="MainBorder"
+                    Margin="-4 0 0 2"
+                    BorderBrush="#555"
                     BorderThickness="0 0 0 1"
-                    UseLayoutRounding="True" 
-                    HorizontalAlignment="Stretch" >
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Setter Property="BorderBrush" Value="{StaticResource TccWhiteGradientBrush}"/>
-                        <!--<Style.Triggers>
-                            <DataTrigger Binding="{Binding Combat}" Value="True">
-                                <Setter Property="BorderBrush" Value="{StaticResource TccYellowGradientBrush}"/>
-                            </DataTrigger>
-                        </Style.Triggers>-->
-                    </Style>
-                </Border.Style>
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0 1">
-                        <GradientStop Color="#0222" Offset="0"></GradientStop>
-                        <GradientStop Color="#0222" Offset=".2"></GradientStop>
-                        <GradientStop Color="#f222" Offset="1"></GradientStop>
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
-
+                    Background="{StaticResource TopBorderBackground}"
+                    Effect="{x:Null}"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                    UseLayoutRounding="True" />
         </Grid>
-        <Button Style="{StaticResource ButtonMainStyle}"
-                BorderThickness="1" Padding="2"
+        <Button x:Name="SettingsButton"
+                Opacity="0"
+                HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                Height="20"
+                Margin="-4 0 0 5" Padding="2"
+                BorderThickness="1"
+                extensions:ButtonExtensions.CornerRadius="1"
+                Style="{StaticResource ButtonMainStyle}"
                 BorderBrush="{StaticResource RevampBorderBrush}"
                 Background="{StaticResource RevampBackgroundBrush}"
-                HorizontalAlignment="Left"
-                Height="20"
-                extensions:ButtonExtensions.CornerRadius="1" 
-                Margin="-4 0 0 5"
-                Opacity="0"
-                Click="OpenCooldownSettings" ToolTip="Configure skills" VerticalAlignment="Bottom" x:Name="SettingsButton">
-            <Path Data="{StaticResource SvgSettings}"/>
+                Click="OpenCooldownSettings"
+                ToolTip="Configure skills">
+            <Path Data="{StaticResource SvgSettings}" />
         </Button>
-        <!--<Button Width="20" Click="ButtonBase_OnClick"></Button>-->
         <!--Main skills grid-->
-        <Grid Grid.Row="1" Width="Auto" Height="Auto" HorizontalAlignment="Left" 
-              Background="#00000000" 
-              VerticalAlignment="Center" Margin="-2 0" x:Name="MainSkillsGrid">
+        <Grid x:Name="MainSkillsGrid"
+              Grid.Row="1"
+              Margin="-2 0 -2 2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -272,156 +319,91 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <!--<Popup IsOpen="False" Placement="Mouse" MinWidth="220" MaxHeight="300" AllowsTransparency="True"
-                   x:Name="SelectionPopup" MouseLeave="SelectionPopup_MouseLeave" Margin="10">
-                <Popup.Resources>
-                    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource NormalScrollBar}" />
-                </Popup.Resources>
-                <ListBox SelectionChanged="ListBox_SelectionChanged" SelectionMode="Single" Padding="5"
-                         ScrollViewer.CanContentScroll="True"
-                         Background="{StaticResource DefaultBackgroundBrush}" BorderThickness="0"
-                         Effect="{StaticResource DropShadow}" Margin="15" x:Name="ChoiceListBox"
-                         ItemTemplate="{StaticResource SkillDataTemplate}">
-                </ListBox>
-            </Popup>-->
-
-            <dragablz:DragablzItemsControl Grid.Row="0" Grid.Column="0" Name="MainSkills"
-                                           ItemsSource="{Binding MainSkills}" Background="Transparent"
-                                           VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
-                                           BorderBrush="Red" Margin="0 0 0 -1" MinWidth="60" MinHeight="60"
-                                           dd:DragDrop.IsDropTarget="True"
-                                           Drop="MainSkills_OnDrop"
-                                           dd:DragDrop.DropHandler="{Binding DropHandler, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=skills:FixedSkillContainers}}"
-                                           dd:DragDrop.ItemsPanelOrientation="Horizontal">
-                <dragablz:DragablzItemsControl.ItemContainerStyle>
-                    <Style TargetType="dragablz:DragablzItem">
-                        <Setter Property="Padding" Value="0 4 0 4" />
-                        <Setter Property="Margin" Value="0 0 0 0" />
+            <dragablz:DragablzItemsControl Name="MainSkills"
+                                           ItemsSource="{Binding MainSkills}"
+                                           MinWidth="59" MinHeight="59"
+                                           Drop="MainSkills_OnDrop">
+                <dragablz:DragablzItemsControl.Style>
+                    <Style BasedOn="{StaticResource FixedDragablzItemsControlStyle}"
+                           TargetType="dragablz:DragablzItemsControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDragging}" Value="True">
+                                <Setter Property="Background"
+                                        Value="{Binding Source={StaticResource TankRoleBrush}, Converter={converters:ColorToTransparent Opacity=.2}}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource TankRoleBrush}" />
+                                <Setter Property="Margin" Value="0" />
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
-                </dragablz:DragablzItemsControl.ItemContainerStyle>
-                <dragablz:DragablzItemsControl.ItemsOrganiser>
-                    <dragablz:HorizontalOrganiser />
-                </dragablz:DragablzItemsControl.ItemsOrganiser>
+                </dragablz:DragablzItemsControl.Style>
                 <dragablz:DragablzItemsControl.PositionMonitor>
-                    <dragablz:HorizontalPositionMonitor  OrderChanged="MainSkillOrderChanged" />
+                    <dragablz:HorizontalPositionMonitor OrderChanged="MainSkillOrderChanged" />
                 </dragablz:DragablzItemsControl.PositionMonitor>
-
             </dragablz:DragablzItemsControl>
-            <!--<Grid IsHitTestVisible="False" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand"
-                  Opacity="0" x:Name="AddButtonGrid" 
-                  MouseLeftButtonDown="AddButtonPressed">
-                <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Stretch="Uniform" Width="20" Fill="#9fff" />
-                <Ellipse Width="50" Margin="5 0 5 0" Height="50" Stroke="#3fff" Fill="#1fff" StrokeThickness="1" />
-            </Grid>-->
-            <Grid Grid.Row="0" Grid.Column="1" Width="58" x:Name="Spacer">
-                <Grid.LayoutTransform>
-                    <ScaleTransform ScaleX="0" />
-                </Grid.LayoutTransform>
-            </Grid>
-
         </Grid>
 
         <!--Secondary + other skills grid-->
-        <Grid Grid.Row="2" Width="Auto" Height="{Binding ElementName=MainSkills, Path=ActualHeight}"
-              HorizontalAlignment="Left"
-              Margin="-2 0"
-              VerticalAlignment="Center" UseLayoutRounding="False" 
-              x:Name="SecSkillsGrid"
-              >
+        <Grid x:Name="SecSkillsGrid"
+              Grid.Row="2"
+              Margin="-2 3 -2 0"
+              Width="Auto"
+              HorizontalAlignment="Left" VerticalAlignment="Stretch"
+              UseLayoutRounding="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Rectangle Fill="Black" RadiusX="20" RadiusY="20"
+                       Margin="0 0" Opacity=".3">
+                <Shape.Effect>
+                    <BlurEffect Radius="20" RenderingBias="Performance"/>
+                </Shape.Effect>
+            </Rectangle>
+
             <!--Secondary skills-->
-            <!--<ItemsControl Name="secSkills" ItemTemplate="{StaticResource FixedSkillIndicator}" Width="Auto" 
-                          VerticalAlignment="Stretch" ItemsSource="{Binding Instance.SecondarySkills}" BorderBrush="Orange" BorderThickness="0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="{Binding SecondarySkills.Count}" Rows="1" Margin="0,0,0,0" IsItemsHost="True" 
-                                     Width="Auto" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>-->
-            <dragablz:DragablzItemsControl Name="SecSkills" ItemsSource="{Binding SecondarySkills}" Grid.Column="0"
-                                           VerticalAlignment="Top" HorizontalAlignment="Left" BorderThickness="0"
-                                           BorderBrush="Red" Margin="0"
-                                           dd:DragDrop.IsDropTarget="True"
-                                           dd:DragDrop.DropHandler="{Binding DropHandler, RelativeSource={RelativeSource AncestorType=skills:FixedSkillContainers}}"
-                                           Background="Transparent" PreviewDrop="FixedSkillContainers_OnDragLeave">
-                <dragablz:DragablzItemsControl.ItemContainerStyle>
-                    <Style TargetType="dragablz:DragablzItem">
-                        <Setter Property="Padding" Value="0 4 0 4" />
-                        <Setter Property="Margin" Value="0 0 0 0" />
+            <dragablz:DragablzItemsControl Name="SecSkills"
+                                           MinHeight="59"
+                                           ItemsSource="{Binding SecondarySkills}"
+                                           Drop="FixedSkillContainers_OnDragLeave">
+                <dragablz:DragablzItemsControl.Style>
+                    <Style BasedOn="{StaticResource FixedDragablzItemsControlStyle}"
+                           TargetType="dragablz:DragablzItemsControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDragging}" Value="True">
+                                <Setter Property="Background"
+                                        Value="{Binding Source={StaticResource GoldBrush}, Converter={converters:ColorToTransparent Opacity=.2}}" />
+                                <Setter Property="BorderBrush" Value="{StaticResource GoldBrush}" />
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
-                </dragablz:DragablzItemsControl.ItemContainerStyle>
-                <dragablz:DragablzItemsControl.ItemsOrganiser>
-                    <dragablz:HorizontalOrganiser />
-                </dragablz:DragablzItemsControl.ItemsOrganiser>
+                </dragablz:DragablzItemsControl.Style>
+
                 <dragablz:DragablzItemsControl.PositionMonitor>
                     <dragablz:HorizontalPositionMonitor OrderChanged="SecondarySkillOrderChanged" />
                 </dragablz:DragablzItemsControl.PositionMonitor>
             </dragablz:DragablzItemsControl>
-            <!--<Grid Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" Cursor="Hand" Opacity="0" IsHitTestVisible="False"
-                  x:Name="AddButtonGrid2" Margin="0 0 0 0"
-                  MouseLeftButtonDown="AddButtonPressed">
-                <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Stretch="Uniform" Width="20" Fill="#9fff" />
-                <Ellipse Width="50" Margin="5 0 5 0" Height="50" Stroke="#3fff" Fill="#1fff" StrokeThickness="1" />
-            </Grid>-->
-            <Grid Grid.Column="1" Width="58" x:Name="Spacer2">
-                <Grid.LayoutTransform>
-                    <ScaleTransform ScaleX="0" />
-                </Grid.LayoutTransform>
-            </Grid>
 
             <!--Other skills-->
-            <ItemsControl Name="OtherSkills" ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}" Width="Auto"
-                          VerticalAlignment="Stretch" Margin="0 0 0 0"
-                          Grid.Column="2" HorizontalAlignment="Left" ItemsSource="{Binding OtherSkills}"
-                          BorderBrush="Green" BorderThickness="0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel IsItemsHost="True" Width="Auto" Height="Auto"
-                                    Orientation="Horizontal"
-                                    HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-
+            <ItemsControl Name="OtherSkills"
+                          Grid.Column="2"
+                          Width="Auto"
+                          VerticalAlignment="Top" HorizontalAlignment="Left"
+                          ItemsSource="{Binding OtherSkills}"
+                          ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}"
+                          ItemsPanel="{StaticResource OtherCooldownPanelTemplate}" />
         </Grid>
         <!--Item skills grid-->
-        <Grid Grid.Row="0" UseLayoutRounding="True" >
-            <ItemsControl Name="ItemSkills" ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}" Width="Auto"
-                          Height="50" VerticalAlignment="Stretch"
-                          HorizontalAlignment="Right" ItemsSource="{Binding ItemSkills}" BorderBrush="Red"
-                          BorderThickness="00" Grid.Row="0"
-                          Visibility="{Binding ShowItems, Converter={converters:BoolToVisibility Mode=Hidden}}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Margin="0,0,0,0" IsItemsHost="True" Width="Auto" Height="Auto"
-                                    FlowDirection="RightToLeft"
-                                    Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
-                        <Setter Property="LayoutTransform">
-                            <Setter.Value>
-                                <ScaleTransform ScaleX=".85" ScaleY=".85" />
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="FlowDirection" Value="LeftToRight" />
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-            </ItemsControl>
-            <!--<Grid.CacheMode>
-                <BitmapCache RenderAtScale="2"></BitmapCache>
-            </Grid.CacheMode>-->
+        <Grid UseLayoutRounding="True">
+            <ItemsControl Name="ItemSkills"
+                          ItemTemplateSelector="{StaticResource NormalSkillTemplateSelector}"
+                          ItemContainerStyle="{StaticResource ItemCooldownsItemContainerStyle}"
+                          ItemsPanel="{StaticResource ItemCooldownPanelTemplate}"
+                          Width="Auto" Height="50"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Right"
+                          ItemsSource="{Binding ItemSkills}"
+                          Visibility="{Binding ShowItems, Converter={converters:BoolToVisibility Mode=Hidden}}" />
         </Grid>
-
-        <!--<Grid.CacheMode>
-            <BitmapCache RenderAtScale="2"></BitmapCache>
-        </Grid.CacheMode>-->
     </Grid>
 </UserControl>
-

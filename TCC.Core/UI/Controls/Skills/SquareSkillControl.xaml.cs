@@ -12,6 +12,7 @@ namespace TCC.UI.Controls.Skills
             InitializeComponent();
             MainArcRef = Arc;
             PreArcRef = PreArc;
+            HideButtonRef = HideButton;
 
         }
 
@@ -29,33 +30,8 @@ namespace TCC.UI.Controls.Skills
         protected override void OnCooldownEnded(CooldownMode mode)
         {
             base.OnCooldownEnded(mode);
-            if(mode == CooldownMode.Normal) WindowManager.ViewModels.CooldownsVM.Remove(Context.Skill);
-        }
-
-        private void SkillIconControl_OnToolTipOpening(object sender, ToolTipEventArgs e)
-        {
-            FocusManager.PauseTopmost = true;
-        }
-
-        private void SkillIconControl_OnToolTipClosing(object sender, ToolTipEventArgs e)
-        {
-            FocusManager.PauseTopmost = false;
-        }
-
-        private void HideButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            WindowManager.ViewModels.CooldownsVM.AddHiddenSkill(Context);
-            OnCooldownEnded(Context.Mode);
-        }
-
-        private void Rectangle_MouseEnter(object sender, MouseEventArgs e)
-        {
-            HideButton.Visibility = Visibility.Visible;
-        }
-
-        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
-        {
-            HideButton.Visibility = Visibility.Collapsed;
+            if (mode != CooldownMode.Normal) return;
+            WindowManager.ViewModels.CooldownsVM.Remove(Context.Skill);
         }
     }
 }

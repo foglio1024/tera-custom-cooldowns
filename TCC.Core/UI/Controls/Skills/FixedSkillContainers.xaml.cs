@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +17,7 @@ using GongSolutions.Wpf.DragDrop;
 using Nostrum;
 using Nostrum.Extensions;
 using Nostrum.Factories;
+using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
@@ -24,29 +29,25 @@ using TeraDataLite;
 namespace TCC.UI.Controls.Skills
 {
     //TODO: refactor this
-    public partial class FixedSkillContainers
+    public partial class FixedSkillContainers : INotifyPropertyChanged
     {
         private object[] _mainOrder;
         private object[] _secondaryOrder;
-        //private readonly DispatcherTimer _mainButtonTimer;
-        //private readonly DispatcherTimer _secButtonTimer;
         private readonly DoubleAnimation _opacityUp;
         private readonly DoubleAnimation _opacityDown;
         private static readonly Action EmptyDelegate = delegate { };
-        //private string _lastSender = "";
 
-        private CooldownWindowViewModel VM { get; set; }//=> Dispatcher?.Invoke(() => WindowManager.CooldownWindow.DataContext as CooldownWindowViewModel);
+        private CooldownWindowViewModel VM { get; set; }
+        public SkillDropHandler DropHandler { get; private set; }
+
+
         public FixedSkillContainers()
         {
             DropHandler = new SkillDropHandler();
             InitializeComponent();
             AddHandler(DragablzItem.DragStarted, new DragablzDragStartedEventHandler(ItemDragStarted), true);
             AddHandler(DragablzItem.DragCompleted, new DragablzDragCompletedEventHandler(ItemDragCompleted), true);
-            //_mainButtonTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-            //_secButtonTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-            //_mainButtonTimer.Tick += MainButtonTimer_Tick;
-            //_secButtonTimer.Tick += SecButtonTimer_Tick;
-            _opacityUp = AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);               
+            _opacityUp = AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);
             _opacityDown = AnimationFactory.CreateDoubleAnimation(250, 0, easing: true, delay: 1000);
 
             Loaded += OnLoaded;
@@ -54,6 +55,18 @@ namespace TCC.UI.Controls.Skills
 
         }
 
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+
+            VM = WindowManager.ViewModels.CooldownsVM;
+            if (VM == null) return;
+            VM.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
+            VM.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
+            VM.SkillsLoaded += OnSkillsLoaded;
+
+            OnSkillShapeChanged();
+            SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
+        }
         private void OnUnloaded(object _, RoutedEventArgs __)
         {
             SettingsWindowViewModel.AbnormalityShapeChanged -= OnSkillShapeChanged;
@@ -65,243 +78,164 @@ namespace TCC.UI.Controls.Skills
 
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-
-            VM = (CooldownWindowViewModel)Window.GetWindow(this)?.DataContext;
-            if (VM == null) return;
-            VM.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
-            VM.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
-            VM.SkillsLoaded += OnSkillsLoaded;
-
-            OnSkillShapeChanged();
-            SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
-        }
-        //really absurd way of fixing order issue
         private void OnSkillsLoaded()
         {
+            //really absurd way of fixing order issue
             Dispatcher?.Invoke(() =>
             {
                 ReorderSkillContainer(MainSkills, VM.MainSkills);
                 ReorderSkillContainer(SecSkills, VM.SecondarySkills);
             });
-        }
 
-        //really absurd way of fixing order issue
-        private void ReorderSkillContainer(DragablzItemsControl container, TSObservableCollection<Cooldown> collection)
-        {
-            var positions = new Dictionary<int, double>(); //index, X
-            for (var i = 0; i < container.Items.Count; i++)
+            void ReorderSkillContainer(ItemsControl container, IEnumerable<Cooldown> collection)
             {
-                if (!(container.ItemContainerGenerator.ContainerFromIndex(i) is UIElement curr)) continue;
-                var p = curr.TransformToAncestor(this).Transform(new Point(0, 0));
-                positions.Add(i, p.X);
-            }
+                var positions = new Dictionary<int, double>(); //index, X
+                for (var i = 0; i < container.Items.Count; i++)
+                {
+                    if (!(container.ItemContainerGenerator.ContainerFromIndex(i) is UIElement curr)) continue;
+                    var p = curr.TransformToAncestor(this).Transform(new Point(0, 0));
+                    positions.Add(i, p.X);
+                }
 
-            var needsReorder = false;
-            for (var j = 0; j < positions.Count; j++)
-            {
-                if (j + 1 == positions.Count) continue;
-                if (!(positions[j] > positions[j + 1])) continue;
-                needsReorder = true;
-                break;
-            }
+                var needsReorder = false;
+                for (var j = 0; j < positions.Count; j++)
+                {
+                    if (j + 1 == positions.Count) continue;
+                    if (!(positions[j] > positions[j + 1])) continue;
+                    needsReorder = true;
+                    break;
+                }
 
-            if (!needsReorder) return;
-            container.ItemsSource = null;
-            container.ItemsSource = collection;
+                if (!needsReorder) return;
+                container.ItemsSource = null;
+                container.ItemsSource = collection;
+            }
         }
-
-        public SkillDropHandler DropHandler { get; private set; }
 
         private void MainSkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
-            MainSkills.InvalidateMeasure();
-            MainSkills.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            RefreshMeasure(MainSkills);
             VM.SaveConfig();
         }
-
         private void SecondarySkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                SecSkills.InvalidateMeasure();
-                SecSkills.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
-                VM.SaveConfig();
-            }
-
-            OtherSkills.Margin = ((TSObservableCollection<Cooldown>)sender).Count == 0
-                ? new Thickness(0, 0, 0, 0)
-                : new Thickness(0);
+            if (e.Action != NotifyCollectionChangedAction.Remove) return;
+            RefreshMeasure(SecSkills);
+            VM.SaveConfig();
         }
 
-        //private void SelectionPopup_Opened(object sender, EventArgs e)
-        //{
-        //    FocusManager.ForceVisible = true;
-        //}
-
-        //private void SelectionPopup_Closed(object sender, EventArgs e)
-        //{
-        //    _mainButtonTimer.Start();
-        //    _secButtonTimer.Start();
-        //    ChoiceListBox.UnselectAll();
-        //    FocusManager.ForceVisible = false;
-        //}
-
-        //private void SelectionPopup_MouseLeave(object sender, MouseEventArgs e)
-        //{
-        //    SelectionPopup.IsOpen = false;
-        //}
-
-        //private void MainButtonTimer_Tick(object sender, EventArgs e)
-        //{
-        //    _mainButtonTimer.Stop();
-        //    if (!MainSkillsGrid.IsMouseOver && !SelectionPopup.IsMouseOver)
-        //    {
-        //        if (SelectionPopup.IsOpen) SelectionPopup.IsOpen = false;
-        //        AnimateAddButton(false/*, Spacer, AddButtonGrid*/);
-        //    }
-        //}
-
-        //private void SecButtonTimer_Tick(object sender, EventArgs e)
-        //{
-        //    _secButtonTimer.Stop();
-        //    if (SecSkillsGrid.IsMouseOver || SelectionPopup.IsMouseOver) return;
-        //    if (SelectionPopup.IsOpen) SelectionPopup.IsOpen = false;
-        //    AnimateAddButton(false/*, Spacer2, AddButtonGrid2*/);
-        //}
-
-        private void AnimateAddButton(bool open/*, Grid targetspacer, Grid addButtonGrid*/)
-        {
-            SettingsButton.BeginAnimation(OpacityProperty, open ? _opacityUp : _opacityDown);
-            /*
-                        if (open && ((ScaleTransform)targetspacer.LayoutTransform).ScaleX == 1) return;
-                        if (!open && ((ScaleTransform)targetspacer.LayoutTransform).ScaleX == 0) return;
-                        var to = open ? 1 : 0;
-                        //var from = open ? 0 : 1;
-                        targetspacer.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty,
-                            new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
-                        addButtonGrid.BeginAnimation(OpacityProperty,
-                            new DoubleAnimation(to, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
-            */
-        }
-
-        private bool _isDragging;
         private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
         {
-            _isDragging = true;
-            //FocusManager.ForceVisible = true; // FocusTimer.Enabled = false;
-            //WindowManager.ForegroundManager.ForceUndim = true;
         }
-
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
         {
-            if (VM.MainSkills.Contains(e.DragablzItem.DataContext as Cooldown))
+            var cd = e.DragablzItem.DataContext as Cooldown;
+            if (VM.MainSkills.Contains(cd))
             {
-                if (_mainOrder == null) return;
-                for (var j = 0; j < VM.MainSkills.Count; j++)
-                {
-                    var newIndex = _mainOrder.ToList().IndexOf(VM.MainSkills[j]);
-                    var oldIndex = j;
-                    VM.MainSkills.Move(oldIndex, newIndex);
-                }
+                Reorder(VM.MainSkills, _mainOrder);
             }
-            else if (VM.SecondarySkills.Contains(e.DragablzItem.DataContext as Cooldown))
+            else if (VM.SecondarySkills.Contains(cd))
             {
-                if (_secondaryOrder == null) return;
-                for (var i = 0; i < VM.SecondarySkills.Count; i++)
-                {
-                    var newIndex = _secondaryOrder.ToList().IndexOf(VM.SecondarySkills[i]);
-                    var oldIndex = i;
-                    VM.SecondarySkills.Move(oldIndex, newIndex);
-                }
+                Reorder(VM.SecondarySkills, _secondaryOrder);
             }
+
             VM.SaveConfig();
-            //FocusManager.ForceVisible = false; // FocusTimer.Enabled = true;
-            //WindowManager.ForegroundManager.ForceVisible = false;
-            //WindowManager.ForegroundManager.ForceUndim = false;
-            _isDragging = false;
+
+            static void Reorder(ObservableCollection<Cooldown> list, object[] order)
+            {
+                if (order == null) return;
+                for (var j = 0; j < list.Count; j++)
+                {
+                    var newIndex = order.ToList().IndexOf(list[j]);
+                    var oldIndex = j;
+                    list.Move(oldIndex, newIndex);
+                }
+
+            }
         }
 
         private void MainSkillOrderChanged(object sender, OrderChangedEventArgs e)
         {
             _mainOrder = e.NewOrder;
-
-            if (_mainOrder.Length < 2) return;
-            if (!_isDragging)
-            {
-                //force it here
-                //InstanceOnRefreshItemSourcesEvent();
-            }
         }
-
         private void SecondarySkillOrderChanged(object sender, OrderChangedEventArgs e)
         {
             _secondaryOrder = e.NewOrder;
         }
 
-        private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-        }
-
-        //private void AddButtonPressed(object sender, MouseButtonEventArgs e)
-        //{
-        //    //_vm.MainSkills.Add(new FixedSkillCooldown(new Skill(181100, Class.Warrior, "", ""), CooldownType.Skill, _vm.GetDispatcher(), true));
-        //    SelectionPopup.IsOpen = true;
-        //    ChoiceListBox.ItemsSource = _vm.SkillChoiceList;
-        //    _lastSender = (sender as Grid)?.Name;
-        //}
-
         private void MainSkillsGrid_MouseEnter(object sender, MouseEventArgs e)
         {
-            AnimateAddButton(true/*, Spacer, AddButtonGrid*/);
+            AnimateSettingsButton(true);
         }
-
         private void MainSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            //_mainButtonTimer.Start();
-            AnimateAddButton(false/*, null, null*/);
+            AnimateSettingsButton(false);
             OnSkillsLoaded();
         }
 
-        //        private void SecondarySkillsGridMouseEnter(object sender, MouseEventArgs e)
-        //        {
-        //            AnimateAddButton(true/*, Spacer2, AddButtonGrid2*/);
-        //        }
+        private void FixedSkillContainers_OnDragOver(object sender, DragEventArgs e)
+        {
+            if (SecSkills.ActualWidth != 0) return;
+            SecSkills.MinWidth = 59;
+            //VM.IsDragging = true;
+        }
+        private void FixedSkillContainers_OnDragLeave(object sender, DragEventArgs e)
+        {
+            //Task.Delay(500).ContinueWith(t =>
+            //{
+            //    Dispatcher.InvokeAsync(() =>
+            //    {
 
-        /*
-                private void SecSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
-                {
-                    _secButtonTimer.Start();
-                }
-        */
+            //        VM.IsDragging = false;
 
-        //private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (sender is ListBox s && s.SelectedItems.Count > 0)
-        //    {
-        //        if (_lastSender == AddButtonGrid.Name)
-        //        {
-        //            if (_vm.MainSkills.Any(x =>
-        //                x.Skill.IconName == (s.SelectedItems[0] as Skill)?.IconName)) return;
-        //            _vm.MainSkills.Add(new Cooldown(s.SelectedItems[0] as Skill, false));
-        //        }
-        //        else if (_lastSender == AddButtonGrid2.Name)
-        //        {
-        //            if (_vm.SecondarySkills.Any(x =>
-        //                x.Skill.IconName == (s.SelectedItems[0] as Skill)?.IconName)) return;
-        //            _vm.SecondarySkills.Add(new Cooldown(
-        //                s.SelectedItems[0] as Skill,
-        //                 false));
-        //        }
+            //    });
+            //});
+            SecSkills.MinWidth = 0;
+        }
 
-        //        ChoiceListBox.ItemsSource = null;
-        //    }
+        private void MainSkills_OnDrop(object sender, DragEventArgs e)
+        {
+            MainSkills.InvalidateArrange();
+            RefreshMeasure(MainSkills);
+        }
 
-        //    SelectionPopup.IsOpen = false;
-        //    _vm.Save();
-        //}
+        private void OpenCooldownSettings(object sender, RoutedEventArgs e)
+        {
+            VM.OnShowSkillConfigHotkeyPressed();
+        }
+
+        private void OnSkillShapeChanged()
+        {
+            OtherSkills.RefreshTemplate("NormalSkillTemplateSelector");
+            ItemSkills.RefreshTemplate("NormalSkillTemplateSelector");
+            // NOTE: the above can't be done for fixed skill ICs,
+            // because they use ControlTemplate and not DataTemplate
+            RefreshControlTemplate(MainSkills);
+            RefreshControlTemplate(SecSkills);
+        }
+
+        private void RefreshControlTemplate(ItemsControl ic)
+        {
+            Dispatcher?.InvokeAsync(() =>
+            {
+                ic.ItemContainerStyle =
+                    FindResource(App.Settings.SkillShape == ControlShape.Round
+                        ? "RoundDragableStyle"
+                        : "SquareDragableStyle") as Style;
+            }, DispatcherPriority.Background);
+        }
+
+        private static void RefreshMeasure(UIElement ic)
+        {
+            ic.InvalidateMeasure();
+            ic.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
+        }
+
+        private void AnimateSettingsButton(bool open)
+        {
+            SettingsButton.BeginAnimation(OpacityProperty, open ? _opacityUp : _opacityDown);
+        }
 
         public class SkillDropHandler : IDropTarget
         {
@@ -375,60 +309,12 @@ namespace TCC.UI.Controls.Skills
             }
         }
 
-        private void FixedSkillContainers_OnDragOver(object sender, DragEventArgs e)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void N([CallerMemberName] string propertyName = null)
         {
-            if (SecSkills.ActualWidth == 0) SecSkills.MinWidth = 50;
-        }
-
-        private void FixedSkillContainers_OnDragLeave(object sender, DragEventArgs e)
-        {
-            SecSkills.MinWidth = 0;
-        }
-
-        private void OpenCooldownSettings(object sender, RoutedEventArgs e)
-        {
-            if (WindowManager.SkillConfigWindow != null) return;
-            new SkillConfigWindow().ShowWindow();
-        }
-
-        private void MainSkills_OnDrop(object sender, DragEventArgs e)
-        {
-            MainSkills.InvalidateArrange();
-            MainSkills.InvalidateMeasure();
-            MainSkills.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
-        }
-
-
-
-        private void OnSkillShapeChanged()
-        {
-            //RefreshBorder();
-            OtherSkills.RefreshTemplate("NormalSkillTemplateSelector");
-            ItemSkills.RefreshTemplate("NormalSkillTemplateSelector");
-            // NOTE: the above can't be done for fixed skill ICs,
-            // because they use ControlTemplate and not DataTemplate
-            RefreshControlTemplate(MainSkills);
-            RefreshControlTemplate(SecSkills);
-        }
-
-        private void RefreshBorder()
-        {
-            Dispatcher?.InvokeAsync(() =>
-            {
-
-                MainBorder.CornerRadius = new CornerRadius(App.Settings.SkillShape == ControlShape.Round ? 29 : 0);
-                MainBorderSec.CornerRadius = new CornerRadius(App.Settings.SkillShape == ControlShape.Round ? 29 : 0);
-            }, DispatcherPriority.Background);
-        }
-        private void RefreshControlTemplate(ItemsControl ic)
-        {
-            Dispatcher?.InvokeAsync(() =>
-            {
-                ic.ItemContainerStyle =
-                    FindResource(App.Settings.SkillShape == ControlShape.Round
-                        ? "RoundDragableStyle"
-                        : "SquareDragableStyle") as Style;
-            }, DispatcherPriority.Background);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

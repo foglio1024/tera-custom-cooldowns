@@ -48,6 +48,19 @@ namespace TCC.UI.Controls.Skills
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
         }
+
+        protected override void OnToolTipOpening(ToolTipEventArgs e)
+        {
+            base.OnToolTipOpening(e);
+            FocusManager.PauseTopmost = true;
+        }
+
+        protected override void OnToolTipClosing(ToolTipEventArgs e)
+        {
+            base.OnToolTipClosing(e);
+            FocusManager.PauseTopmost = false;
+        }
+
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
             if (DesignerProperties.GetIsInDesignMode(this) || !(DataContext is Cooldown)) return;
@@ -122,7 +135,6 @@ namespace TCC.UI.Controls.Skills
                 arc.BeginAnimation(Arc.EndAngleProperty, _arcAnimation);
             });
         }
-
         protected void StopArcAnimation(Arc arc)
         {
             Dispatcher?.Invoke(() =>
@@ -132,6 +144,5 @@ namespace TCC.UI.Controls.Skills
                 arc.EndAngle = 0.01;
             });
         }
-
     }
 }
