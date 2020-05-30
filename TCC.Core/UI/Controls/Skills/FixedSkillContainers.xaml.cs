@@ -20,6 +20,7 @@ using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
+using TCC.Utils;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 using TeraDataLite;
@@ -34,8 +35,8 @@ namespace TCC.UI.Controls.Skills
         private readonly DoubleAnimation _opacityUp;
         private readonly DoubleAnimation _opacityDown;
         private static readonly Action EmptyDelegate = delegate { };
-
         private CooldownWindowViewModel VM { get; set; }
+
         public SkillDropHandler DropHandler { get; private set; }
 
 
@@ -50,14 +51,16 @@ namespace TCC.UI.Controls.Skills
 
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
-
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-
-            VM = WindowManager.ViewModels.CooldownsVM;
-            if (VM == null) return;
+            VM = (CooldownWindowViewModel) Window.GetWindow(this)?.DataContext;
+            if (VM == null)
+            {
+                Log.F("OnLoaded - VM is null!");
+                return;
+            }
             VM.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
             VM.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
             VM.SkillsLoaded += OnSkillsLoaded;
@@ -65,15 +68,16 @@ namespace TCC.UI.Controls.Skills
             OnSkillShapeChanged();
             SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
         }
+
         private void OnUnloaded(object _, RoutedEventArgs __)
         {
             SettingsWindowViewModel.AbnormalityShapeChanged -= OnSkillShapeChanged;
             Loaded -= OnLoaded;
             Unloaded -= OnUnloaded;
+
             VM.SecondarySkills.CollectionChanged -= SecondarySkills_CollectionChanged;
             VM.MainSkills.CollectionChanged -= MainSkills_CollectionChanged;
             VM.SkillsLoaded -= OnSkillsLoaded;
-
         }
 
         private void OnSkillsLoaded()
@@ -84,30 +88,30 @@ namespace TCC.UI.Controls.Skills
                 ReorderSkillContainer(MainSkills, VM.MainSkills);
                 ReorderSkillContainer(SecSkills, VM.SecondarySkills);
             });
+        }
 
-            void ReorderSkillContainer(ItemsControl container, IEnumerable<Cooldown> collection)
+        private void ReorderSkillContainer(ItemsControl container, IEnumerable<Cooldown> collection)
+        {
+            var positions = new Dictionary<int, double>(); //index, X
+            for (var i = 0; i < container.Items.Count; i++)
             {
-                var positions = new Dictionary<int, double>(); //index, X
-                for (var i = 0; i < container.Items.Count; i++)
-                {
-                    if (!(container.ItemContainerGenerator.ContainerFromIndex(i) is UIElement curr)) continue;
-                    var p = curr.TransformToAncestor(this).Transform(new Point(0, 0));
-                    positions.Add(i, p.X);
-                }
-
-                var needsReorder = false;
-                for (var j = 0; j < positions.Count; j++)
-                {
-                    if (j + 1 == positions.Count) continue;
-                    if (!(positions[j] > positions[j + 1])) continue;
-                    needsReorder = true;
-                    break;
-                }
-
-                if (!needsReorder) return;
-                container.ItemsSource = null;
-                container.ItemsSource = collection;
+                if (!(container.ItemContainerGenerator.ContainerFromIndex(i) is UIElement curr)) continue;
+                var p = curr.TransformToAncestor(this).Transform(new Point(0, 0));
+                positions.Add(i, p.X);
             }
+
+            var needsReorder = false;
+            for (var j = 0; j < positions.Count; j++)
+            {
+                if (j + 1 == positions.Count) continue;
+                if (!(positions[j] > positions[j + 1])) continue;
+                needsReorder = true;
+                break;
+            }
+
+            if (!needsReorder) return;
+            container.ItemsSource = null;
+            container.ItemsSource = collection;
         }
 
         private void MainSkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -116,6 +120,7 @@ namespace TCC.UI.Controls.Skills
             RefreshMeasure(MainSkills);
             VM.SaveConfig();
         }
+
         private void SecondarySkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
@@ -126,30 +131,26 @@ namespace TCC.UI.Controls.Skills
         private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
         {
         }
+
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
         {
             var cd = e.DragablzItem.DataContext as Cooldown;
             if (VM.MainSkills.Contains(cd))
-            {
                 Reorder(VM.MainSkills, _mainOrder);
-            }
             else if (VM.SecondarySkills.Contains(cd))
-            {
                 Reorder(VM.SecondarySkills, _secondaryOrder);
-            }
 
             VM.SaveConfig();
+        }
 
-            static void Reorder(ObservableCollection<Cooldown> list, object[] order)
+        private void Reorder(ObservableCollection<Cooldown> list, object[] order)
+        {
+            if (order == null) return;
+            for (var j = 0; j < list.Count; j++)
             {
-                if (order == null) return;
-                for (var j = 0; j < list.Count; j++)
-                {
-                    var newIndex = order.ToList().IndexOf(list[j]);
-                    var oldIndex = j;
-                    list.Move(oldIndex, newIndex);
-                }
-
+                var newIndex = order.ToList().IndexOf(list[j]);
+                var oldIndex = j;
+                list.Move(oldIndex, newIndex);
             }
         }
 
@@ -157,6 +158,7 @@ namespace TCC.UI.Controls.Skills
         {
             _mainOrder = e.NewOrder;
         }
+
         private void SecondarySkillOrderChanged(object sender, OrderChangedEventArgs e)
         {
             _secondaryOrder = e.NewOrder;
@@ -166,6 +168,7 @@ namespace TCC.UI.Controls.Skills
         {
             AnimateSettingsButton(true);
         }
+
         private void MainSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
         {
             AnimateSettingsButton(false);
@@ -178,6 +181,7 @@ namespace TCC.UI.Controls.Skills
             SecSkills.MinWidth = 59;
             //VM.IsDragging = true;
         }
+
         private void FixedSkillContainers_OnDragLeave(object sender, DragEventArgs e)
         {
             //Task.Delay(500).ContinueWith(t =>
@@ -244,22 +248,18 @@ namespace TCC.UI.Controls.Skills
 
             public void Drop(IDropInfo dropInfo)
             {
-                var target = (TSObservableCollection<Cooldown>)dropInfo.TargetCollection;
+                var target = (TSObservableCollection<Cooldown>) dropInfo.TargetCollection;
                 switch (dropInfo.Data)
                 {
                     case Skill sk:
                         if (target.All(x => x.Skill.IconName != sk.IconName))
-                        {
                             target.Insert(dropInfo.InsertIndex, new Cooldown(sk, false));
-                        }
                         break;
                     case Abnormality ab:
                         if (target.All(x => x.Skill.IconName != ab.IconName))
-                        {
                             target.Insert(dropInfo.InsertIndex,
-                                new Cooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
+                                new Cooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) {IconName = ab.IconName},
                                     false, CooldownType.Passive));
-                        }
                         break;
                     case Item i:
                         if (target.All(x => x.Skill.IconName != i.IconName))
@@ -270,18 +270,12 @@ namespace TCC.UI.Controls.Skills
 
                         break;
                 }
-                var tmp = new List<Cooldown>();
+
+                var tmp = target.ToList();
 
                 //force correct order as it's not preserved
-                foreach (var fixedSkillCooldown in target)
-                {
-                    tmp.Add(fixedSkillCooldown);
-                }
                 target.Clear();
-                tmp.ForEach(x =>
-                {
-                    target.Add(x);
-                });
+                tmp.ForEach(x => target.Add(x));
 
                 const ulong delay = 500;
                 //wait a bit and restart any running skill
@@ -289,17 +283,11 @@ namespace TCC.UI.Controls.Skills
                 {
                     WindowManager.ViewModels.CooldownsVM.MainSkills.ToList().ForEach(x =>
                     {
-                        if (x.Seconds > 0)
-                        {
-                            x.Start(x.Seconds * 1000 - delay);
-                        }
+                        if (x.Seconds > 0) x.Start(x.Seconds * 1000 - delay);
                     });
                     WindowManager.ViewModels.CooldownsVM.SecondarySkills.ToList().ForEach(x =>
                     {
-                        if (x.Seconds > 0)
-                        {
-                            x.Start(x.Seconds * 1000 - delay);
-                        }
+                        if (x.Seconds > 0) x.Start(x.Seconds * 1000 - delay);
                     });
                 });
 
