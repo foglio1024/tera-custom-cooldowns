@@ -195,7 +195,7 @@ namespace TCC.ViewModels
             var isMe = m.Author == Game.Me.Name;
             var author = isMe ? m.Recipient : m.Author;
             var channel = isMe ? ChatChannel.SentWhisper : ChatChannel.ReceivedWhisper;
-            AddChatMessage(Factory.CreateMessage(channel, author, m.Message, m.GameId));
+            AddChatMessage(Factory.CreateMessage(channel, author, m.Message, m.IsGm, m.GameId));
         }
 
         private void OnLeavePrivateChannel(S_LEAVE_PRIVATE_CHANNEL m)
@@ -217,14 +217,14 @@ namespace TCC.ViewModels
             var ch = (ChatChannel) (PrivateChannels[i].Index + 11);
             if (ch == ChatChannel.Private8) return; // already sent by stub
 
-            AddChatMessage(Factory.CreateMessage(ch, m.AuthorName, m.Message, m.AuthorId));
+            AddChatMessage(Factory.CreateMessage(ch, m.AuthorName, m.Message, false, m.AuthorId));
         }
 
         private void OnChat(S_CHAT m)
         {
             Task.Run(() =>
             {
-                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : (ChatChannel)m.Channel, m.AuthorName, m.Message, m.AuthorId));
+                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : (ChatChannel)m.Channel, m.AuthorName, m.Message, m.IsGm, m.AuthorId));
             });
         }
 

@@ -537,7 +537,7 @@
                         Stroke="#9000"
                         StrokeThickness="3"                       
                         />-->
-        <TextBlock Margin="3,0,3,0"
+        <TextBlock Margin="3 0"
                    Foreground="{Binding Channel, Converter={StaticResource ChatChannelToColor}}"
                    FontSize="{Binding Size}"
                    HorizontalAlignment="Stretch"
@@ -548,8 +548,15 @@
                    MinWidth="0"
                    UseLayoutRounding="True"
                    Opacity=".9"
-                   Text="{Binding Author}"
-                   TextTrimming="CharacterEllipsis" />
+                   TextTrimming="CharacterEllipsis" >
+            <Run Text="{Binding Author, Mode=OneWay}"/><Path Data="{StaticResource SvgStar}" Fill="{StaticResource GoldBrush}"
+                                                             Visibility="{Binding IsGm, Converter={StaticResource BoolToVisibility}}" Width="12" Height="12"
+                                                             Margin="5 0 -1 -1">
+                <Path.Effect>
+                    <DropShadowEffect ShadowDepth="0" Color="{StaticResource GoldColor}" BlurRadius="10"></DropShadowEffect>
+                </Path.Effect>
+            </Path>
+        </TextBlock>
 
     </DataTemplate>
     

@@ -9,6 +9,7 @@ namespace TeraPacketParser.Messages
         public ulong AuthorId { get; }
         public string AuthorName { get; }
         public string Message { get; }
+        public bool IsGm { get; }
 
         public S_CHAT(TeraMessageReader reader) : base(reader)
         {
@@ -16,7 +17,9 @@ namespace TeraPacketParser.Messages
             var messageOffset = reader.ReadUInt16();
             Channel = reader.ReadUInt32();
             AuthorId = reader.ReadUInt64();
-            reader.Skip(3);
+            reader.Skip(1);
+            IsGm = reader.ReadBoolean();
+            reader.Skip(1);
             reader.BaseStream.Position = authorNameOffset - 4;
             AuthorName= reader.ReadTeraString();
             reader.BaseStream.Position = messageOffset - 4;

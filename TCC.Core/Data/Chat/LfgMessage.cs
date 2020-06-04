@@ -57,7 +57,7 @@ namespace TCC.Data.Chat
         public uint AuthorId { get; }
         public bool ShowMembers => LinkedListing != null && LinkedListing.Players.Count <= 7;
 
-        public LfgMessage(uint authorId, string author, string msg) : base(ChatChannel.LFG, author, msg, 0)
+        public LfgMessage(uint authorId, string author, string msg) : base(ChatChannel.LFG, author, msg, 0, false)
         {
             AuthorId = authorId;
             _members = new TSObservableCollection<User>();

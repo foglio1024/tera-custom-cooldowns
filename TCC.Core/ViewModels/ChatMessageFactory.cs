@@ -19,9 +19,9 @@ namespace TCC.ViewModels
         {
             return _dispatcher.InvokeAsync(() => new ChatMessage(ch)).Result;
         }
-        public ChatMessage CreateMessage(ChatChannel ch, string author, string msg, ulong authorGameId = 0)
+        public ChatMessage CreateMessage(ChatChannel ch, string author, string msg, bool isGm = false, ulong authorGameId = 0)
         {
-            return _dispatcher.InvokeAsync(() => new ChatMessage(ch, author, msg, authorGameId)).Result;
+            return _dispatcher.InvokeAsync(() => new ChatMessage(ch, author, msg, authorGameId, isGm)).Result;
         }
         public ChatMessage CreateSystemMessage(string template, SystemMessageData msg, ChatChannel ch, string authorOverride = "System")
         {

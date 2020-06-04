@@ -35,6 +35,7 @@ namespace TCC.Data.Chat
             set => _animate = value;
         }
         public bool ShowTimestamp => App.Settings.ShowTimestamp;
+        public bool IsGm { get; protected set; }
         public bool ShowChannel => App.Settings.ShowChannel;
         public TSObservableCollection<MessageLine> Lines { get; protected set; }
         public TSObservableCollection<MessagePieceBase> Pieces { get; }
@@ -81,10 +82,11 @@ namespace TCC.Data.Chat
         {
             Channel = ch;
         }
-        public ChatMessage(ChatChannel ch, string auth, string msg, ulong authorGameId) : this()
+        public ChatMessage(ChatChannel ch, string auth, string msg, ulong authorGameId, bool isGm) : this()
         {
             Channel = ch;
             RawMessage = msg;
+            IsGm = isGm;
             var authHtml = new HtmlDocument();
             authHtml.LoadHtml(auth);
             Author = authHtml.DocumentNode.InnerText;
