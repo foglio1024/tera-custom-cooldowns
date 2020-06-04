@@ -713,7 +713,7 @@ namespace TCC
         private static void OnLoginArbiter(C_LOGIN_ARBITER m)
         {
             CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
-            DB.ServerDatabase.Language = m.Language;
+            DB.ServerDatabase.Language = m.Language == LangEnum.EN && Server.Region == "RU" ? LangEnum.RU : LangEnum.EN;
             App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
             App.Settings.LastAccountNameHash = CurrentAccountNameHash;
         }
