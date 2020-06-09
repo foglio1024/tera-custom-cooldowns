@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
@@ -8,11 +9,11 @@ using TCC.ViewModels;
 
 namespace TCC.UI.Windows.Widgets
 {
-    public class TccWidgetBuilder<TWindow, TViewModel> where TWindow : TccWidget 
-                                                       where TViewModel : TccWindowViewModel
+    public class WindowBuilderBase<TWindow, TViewModel> where TWindow : Window
+                                                        where TViewModel : TccWindowViewModel
     {
-        private TWindow _window;
-        private TViewModel _vm;
+        protected TWindow _window;
+        protected TViewModel _vm;
 
         public async Task<TWindow> GetWindow()
         {
@@ -30,7 +31,43 @@ namespace TCC.UI.Windows.Widgets
                 return _vm;
             });
         }
+    }
 
+    //public class TccWindowBuildier<TWindow, TViewModel> : WindowBuilderBase<TWindow, TViewModel>
+    //where TWindow : TccWindow
+    //where TViewModel : TccWindowViewModel
+    //{
+    //    public TccWindowBuildier(bool canClose)
+    //    {
+    //        Create(canClose);
+    //    }
+
+    //    private void Create(bool canClose)
+    //    {
+    //        var thread = new Thread(() =>
+    //        {
+    //            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
+    //            _vm = (TViewModel)Activator.CreateInstance(typeof(TViewModel), canClose);
+    //            _window = (TWindow)Activator.CreateInstance(typeof(TWindow), _vm);
+    //            if (_vm.Settings.Enabled) _window.Show();
+    //            App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
+    //            Dispatcher.Run();
+    //            Log.CW($"[{typeof(TWindow).Name}] Dispatcher stopped.");
+    //            App.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
+    //        })
+    //        {
+    //            Name = $"{typeof(TWindow).Name}Thread"
+    //        };
+    //        thread.SetApartmentState(ApartmentState.STA);
+    //        thread.Start();
+    //    }
+
+    //}
+
+    public class TccWidgetBuilder<TWindow, TViewModel> : WindowBuilderBase<TWindow, TViewModel>
+    where TWindow : Window
+    where TViewModel : TccWindowViewModel
+    {
         public TccWidgetBuilder(WindowSettingsBase ws)
         {
             Create(ws);
@@ -43,7 +80,10 @@ namespace TCC.UI.Windows.Widgets
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 _vm = (TViewModel)Activator.CreateInstance(typeof(TViewModel), ws);
                 _window = (TWindow)Activator.CreateInstance(typeof(TWindow), _vm);
-                if (_vm.Settings.Enabled) _window.Show();
+                if (_vm.Settings != null && _vm.Settings.Enabled)
+                {
+                    _window.Show();
+                }
                 App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
                 Log.CW($"[{typeof(TWindow).Name}] Dispatcher stopped.");

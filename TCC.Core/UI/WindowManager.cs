@@ -28,7 +28,6 @@ namespace TCC.UI
         public static class ViewModels
         {
             private static CivilUnrestViewModel _civilUnrestVm;
-            private static DashboardViewModel _dashboardVm;
             private static LfgListViewModel _lfgVm;
             private static FlightGaugeViewModel _flightGaugeVm;
 
@@ -42,7 +41,7 @@ namespace TCC.UI
 
             public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ??= new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings);
 
-            public static DashboardViewModel DashboardVM => _dashboardVm ??= new DashboardViewModel(null);
+            public static DashboardViewModel DashboardVM { get; set; }//=> _dashboardVm ??= new DashboardViewModel(null);
 
             public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
 
@@ -152,8 +151,12 @@ namespace TCC.UI
             ViewModels.NotificationAreaVM = await b7.GetViewModel();
 
             var b8 = new TccWidgetBuilder<FloatingButtonWindow, FloatingButtonViewModel>(App.Settings.FloatingButtonSettings);
-            FloatingButton = await b8.GetWindow();// new FloatingButtonWindow(ViewModels.FloatingButtonVM);
+            FloatingButton = await b8.GetWindow();
             ViewModels.FloatingButtonVM = await b8.GetViewModel();
+
+            var b9 = new TccWidgetBuilder<Dashboard, DashboardViewModel>(null);
+            DashboardWindow = await b9.GetWindow();
+            ViewModels.DashboardVM= await b9.GetViewModel();
 
             FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGaugeVM);
             if (FlightDurationWindow.WindowSettings.Enabled) FlightDurationWindow.Show();
@@ -162,7 +165,7 @@ namespace TCC.UI
             if (CivilUnrestWindow.WindowSettings.Enabled) CivilUnrestWindow.Show();
 
 
-            DashboardWindow = new Dashboard(ViewModels.DashboardVM);
+            //DashboardWindow = new Dashboard(ViewModels.DashboardVM);
             LfgListWindow = new LfgListWindow(ViewModels.LfgVM);
 
             ViewModels.PlayerMenuVM = new PlayerMenuViewModel();
