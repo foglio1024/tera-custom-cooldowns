@@ -14,7 +14,7 @@ namespace TCC.UI.Windows
     public class TccWindow : Window
     {
 
-        private static List<TccWindow> _createdWindows = new List<TccWindow>();
+        private static readonly List<TccWindow> _createdWindows = new List<TccWindow>();
 
         public event Action Hidden;
         public event Action Showed;
@@ -26,7 +26,7 @@ namespace TCC.UI.Windows
         public IntPtr Handle { get; private set; }
 
 
-        public TccWindow(bool canClose)
+        protected TccWindow(bool canClose)
         {
             _createdWindows.Add(this);
             _canClose = canClose;
@@ -42,8 +42,12 @@ namespace TCC.UI.Windows
         }
 
         public virtual void HideWindow()
+
         {
-            BeginAnimation(OpacityProperty, _hideAnim);
+            Dispatcher?.InvokeAsync(() =>
+            {
+                BeginAnimation(OpacityProperty, _hideAnim);
+            });
         }
         public virtual void ShowWindow()
         {
