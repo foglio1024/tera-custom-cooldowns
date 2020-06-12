@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using Microsoft.Diagnostics.Runtime;
 using TCC.Analysis;
 using TCC.Data;
 using TCC.Exceptions;
@@ -27,6 +28,10 @@ namespace TCC
 {
     public static class GlobalExceptionHandler
     {
+        private static readonly int[] _excludedWin32codes =
+        {
+            1816  // "Not enough quota"
+        };
         public static void HandleGlobalException(object sender, UnhandledExceptionEventArgs e)
         {
             FocusManager.Dispose();
@@ -41,8 +46,7 @@ namespace TCC
 
             switch (ex)
             {
-                case COMException com
-                    when (com.HResult == 88980406 || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")):
+                case COMException com when (com.HResult == 88980406 || com.Message.Contains("UCEERR_RENDERTHREADFAILURE")):
                 {
                     TccMessageBox.Show("TCC", SR.RenderThreadError, MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
@@ -50,8 +54,13 @@ namespace TCC
                 case ClientVersionDetectionException cvde:
                 {
                     Log.F($"Failed to detect client version from file: {cvde}");
-                    TccMessageBox.Show(SR.CannotDetectClientVersion(StubInterface.Instance.IsStubAvailable),
-                        MessageBoxType.Error);
+                    TccMessageBox.Show(SR.CannotDetectClientVersion(StubInterface.Instance.IsStubAvailable), MessageBoxType.Error);
+                    break;
+                }
+                case Win32Exception w32ex when _excludedWin32codes.Contains(w32ex.NativeErrorCode):
+                {
+                    Log.F(w32ex.ToString());
+                    TccMessageBox.Show("TCC", SR.FatalError, MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
                 }
                 default:
@@ -62,7 +71,9 @@ namespace TCC
                 }
             }
 
+
             StubInterface.Instance.Disconnect();
+            Firebase.Dispose();
 
             if (!(ex is DeadlockException))
             {
@@ -72,12 +83,7 @@ namespace TCC
                 try { WindowManager.Dispose(); } catch {/* ignored*/}
             }
 
-            try
-            {
-                Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
-                Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
-            }
-            catch { }
+
             Environment.Exit(-1);
 
         }
@@ -211,12 +217,23 @@ namespace TCC
 #pragma warning disable 618
         private static JObject /*Task<JObject>*/ GetThreadTraces(DeadlockException de)
         {
+
+            using var dataTarget = DataTarget.CreateSnapshotAndAttach(Process.GetCurrentProcess().Id);
+
+            var version = dataTarget.ClrVersions[0];
+            var runtime = version.CreateRuntime();
+
             var ret = new JObject();
             var threads = App.RunningDispatchers.Values.Append(App.BaseDispatcher).Where(d => de.ThreadNames.Contains(d.Thread.Name)).Select(d => d.Thread).Append(PacketAnalyzer.AnalysisThread);
             foreach (var thread in threads)
             {
                 if (thread?.Name == null) continue;
-                ret[thread.Name] = GetStackTrace(thread).ToString();
+                var runtimeThread = runtime.Threads.FirstOrDefault(t => t.ManagedThreadId == thread?.ManagedThreadId);
+                if (runtimeThread != null)
+                {
+                    ret[thread.Name] = GetStackTraceClrmd(runtimeThread).ToString();
+                }
+                //ret[thread.Name] = GetStackTrace(thread).ToString();
             }
             //App.RunningDispatchers.Values.Append(App.BaseDispatcher).ToList().ForEach(d =>
             //{
@@ -233,8 +250,20 @@ namespace TCC
 
             return ret;
         }
-#pragma warning restore 618
 
+        private static string GetStackTraceClrmd(ClrThread runtimeThread)
+        {
+            var sb = new StringBuilder();
+            foreach (var frame in runtimeThread.EnumerateStackTrace())
+            {
+                if (frame?.Method == null) continue;
+                sb.AppendLine($"   in {frame.Method}");
+            }
+
+            return sb.ToString();
+        }
+#pragma warning restore 618
+#if false
         private static StackTrace GetStackTrace(Thread targetThread)
         {
             using var fallbackThreadReady = new ManualResetEvent(false);
@@ -290,7 +319,7 @@ namespace TCC
                 fallbackThread.Join();
             }
         }
-
+#endif
         private static void DumpCrashToFile(JObject js, Exception ex)
         {
             var sb = new StringBuilder();
