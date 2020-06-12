@@ -1,9 +1,12 @@
 ﻿using Nostrum;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using TCC.Interop.Proxy;
 using TCC.Utils;
 
@@ -11,6 +14,7 @@ namespace TCC.Interop
 {
     public static class Firebase
     {
+        private static readonly List<string> _registeredWebhooks = new List<string>();
         public static async void RegisterWebhook(string webhook, bool online)
         {
             if (string.IsNullOrEmpty(webhook)) return;
@@ -30,6 +34,10 @@ namespace TCC.Interop
                 await c.UploadStringTaskAsync(
                     new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook"),
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
+                if (online)
+                    _registeredWebhooks.Add(webhook);
+                else
+                    _registeredWebhooks.Remove(webhook);
             }
             catch
             {
@@ -130,5 +138,21 @@ namespace TCC.Interop
             }
         }
 
+        public static void Dispose()
+        {
+            try
+            {
+                var webhooks = new string[_registeredWebhooks.Count];
+                _registeredWebhooks.CopyTo(webhooks);
+                webhooks.ToList().ForEach(w =>
+                {
+                    RegisterWebhook(w, false);
+                });
+            }
+            catch (Exception e)
+            {
+                Log.F($"Failed to dispose Firebase webhooks: {e}");
+            }
+        }
     }
 }

@@ -15,10 +15,12 @@ using System.Windows.Threading;
 using TCC.Analysis;
 using TCC.Data;
 using TCC.Exceptions;
+using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Notice;
 using TCC.Settings;
+using TCC.Test;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Update;
@@ -73,7 +75,7 @@ namespace TCC
             AppVersion = TccUtils.GetTccVersion();
             Log.Config(Path.Combine(BasePath, "logs"), AppVersion); // NLog when?
             ParseStartupArgs(e.Args.ToList());
-            if(!File.Exists(Path.Combine(BasePath, SettingsGlobals.SettingsFileName)))
+            if (!File.Exists(Path.Combine(BasePath, SettingsGlobals.SettingsFileName)))
                 FirstStart = true;
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
@@ -89,11 +91,12 @@ namespace TCC
             Loading = true;
             await Setup();
             Loading = false;
-            
+
             if (FirstStart)
             {
                 new WelcomeWindow().Show();
             }
+
         }
 
         private static async Task Setup()
@@ -174,7 +177,7 @@ namespace TCC
 
             // --settings_override 'path'
             var settingsOverrideIdx = args.IndexOf("--settings_override");
-            if (settingsOverrideIdx != -1) 
+            if (settingsOverrideIdx != -1)
                 SettingsContainer.SettingsOverride = args[settingsOverrideIdx + 1];
 
             // --root_override 'path'
@@ -191,16 +194,20 @@ namespace TCC
             Process.Start("TCC.exe", $"--restart{(ToolboxMode ? " --toolbox" : "")}");
             Close();
         }
-        public static void Close(bool releaseMutex = true)
+        public static void Close(bool releaseMutex = true, int code = 0)
         {
             _running = false;
-            if (releaseMutex) BaseDispatcher.Invoke(ReleaseMutex);
             PacketAnalyzer.Sniffer.Enabled = false;
             Settings.Save();
             WindowManager.Dispose();
             StubInterface.Instance.Disconnect();
+            Firebase.Dispose();
             UpdateManager.StopTimer();
-            Environment.Exit(0);
+            if (releaseMutex)
+            {
+                BaseDispatcher.Invoke(ReleaseMutex);
+            }
+            Environment.Exit(code);
         }
         private static bool IsAlreadyRunning()
         {
@@ -224,7 +231,7 @@ namespace TCC
                 }
                 catch (FileLoadException fle)
                 {
-                    TccMessageBox.Show("TCC module loader", SR.ErrorWhileLoadingModule(fle.FileName) , MessageBoxButton.OK, MessageBoxImage.Error);
+                    TccMessageBox.Show("TCC module loader", SR.ErrorWhileLoadingModule(fle.FileName), MessageBoxButton.OK, MessageBoxImage.Error);
                     Close();
                 }
                 catch (FileNotFoundException fnfe)
@@ -257,7 +264,7 @@ namespace TCC
             while (tries > 0)
             {
                 if (RunningDispatchers.Count == 0) break;
-                Log.CW($"Waiting all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
+                Log.CW($"Waiting for all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
                 Thread.Sleep(100);
                 tries--;
             }
@@ -267,33 +274,39 @@ namespace TCC
 
         private static void StartDispatcherWatcher()
         {
+            const int limit = 60000;
             new Thread(() =>
+            {
+                while (_running)
                 {
-                    while (_running)
+                    var deadlockedDispatchers = new List<Dispatcher>();
+                    try
                     {
-                        var deadlockedDispatchers = new List<Dispatcher>();
-                        try
+                        Parallel.ForEach(RunningDispatchers.Values.Append(BaseDispatcher), dispatcher =>
                         {
-                            Parallel.ForEach(RunningDispatchers.Values.Append(BaseDispatcher), v =>
+                            //Log.CW($"{dispatcher.Thread.Name} checking...");
+                            if (dispatcher.IsAlive(limit).Result)
                             {
-                                if (v.IsAlive(60000).Result) return;
-                                Log.CW($"{v.Thread.Name} didn't respond in time!");
-                                deadlockedDispatchers.Add(v);
-                            });
-                            Thread.Sleep(1000);
-                        }
-                        catch
-                        {
-                        }
-
-                        if (deadlockedDispatchers.Count > 1)
-                        {
-                            var threadNames = deadlockedDispatchers.Select(d => d.Thread.Name).ToList();
-                            throw new DeadlockException($"The following threads didn't report in time: {threadNames.ToCSV()}", threadNames);
-                        }
-                        //Log.F($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
+                                //Log.CW($"{dispatcher.Thread.Name} is alive!");
+                                return;
+                            }
+                            Log.CW($"{dispatcher.Thread.Name} didn't respond in time!");
+                            deadlockedDispatchers.Add(dispatcher);
+                        });
+                        Thread.Sleep(1000);
                     }
-                })
+                    catch
+                    {
+                    }
+
+                    if (deadlockedDispatchers.Count > 1)
+                    {
+                        var threadNames = deadlockedDispatchers.Select(d => d.Thread.Name).ToList();
+                        throw new DeadlockException($"The following threads didn't report in time: {threadNames.ToCSV()}", threadNames);
+                    }
+                    //Log.F($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
+                }
+            })
             { Name = "Watcher" }.Start();
         }
         #endregion
