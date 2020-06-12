@@ -293,7 +293,8 @@ namespace TCC.Data.Databases
                     }
                     else
                     {
-                        monster.Attribute("isHidden").Value = true.ToString();
+                        monster.SetAttributeValue("isHidden", true.ToString());
+                        //monster.Attribute("isHidden").Value = true.ToString();
                     }
                 }
             }
