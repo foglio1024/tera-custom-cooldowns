@@ -31,6 +31,7 @@ namespace TCC.Utils
         public const string CannotUploadGbamInfo      = "Failed to upload guild BAM info.";
         public const string ReadyToConnect            = "Ready to connect.";
         public const string Disconnected              = "Disconnected.";
+
         public static string ErrorWhileLoadingModule(string filename)
         {
             return $"An error occured while loading {filename}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.";
