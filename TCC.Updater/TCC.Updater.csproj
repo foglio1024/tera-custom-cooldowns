@@ -5,7 +5,7 @@
     <RootNamespace>TCC.Updater</RootNamespace>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>netcoreapp31</TargetFramework>
     <UseWPF>true</UseWPF>
     <LangVersion>8</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

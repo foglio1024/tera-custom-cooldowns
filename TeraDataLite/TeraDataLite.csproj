@@ -2,7 +2,7 @@
   <PropertyGroup>
     <RootNamespace>TeraDataLite</RootNamespace>
     <AssemblyName>TeraDataLite</AssemblyName>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>netcoreapp31</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
