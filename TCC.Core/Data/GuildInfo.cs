@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Nostrum;
 using TeraDataLite;
 
@@ -45,7 +46,7 @@ namespace TCC.Data
 
         public void Clear()
         {
-            Members.Clear();
+            Task.Run(() => Members.Clear());
             InGuild = false;
             Master = default;
             AmIMaster = false;
