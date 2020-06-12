@@ -80,9 +80,9 @@ namespace TCC.UI.Windows.Widgets
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 _vm = (TViewModel)Activator.CreateInstance(typeof(TViewModel), ws);
                 _window = (TWindow)Activator.CreateInstance(typeof(TWindow), _vm);
-                if (_vm.Settings != null && _vm.Settings.Enabled)
+                if (ws != null && ws.Enabled)
                 {
-                    _window.Show();
+                    _window?.Show();
                 }
                 App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();

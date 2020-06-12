@@ -469,14 +469,14 @@
             </Grid>
         </dockablz:Layout>
         <!-- Settings popup-->
-        <controls:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Relative" x:Name="SettingsPopup"
+        <controls:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Left" x:Name="SettingsPopup"
                            Focusable="True"
-                           HorizontalOffset="16"
+                           HorizontalOffset="-10"
                            AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}"
                            StaysOpen="True" DataContext="{Binding}"
                            PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
             <Grid>
-                <Border Style="{StaticResource RevampBorderStyle}" Margin="3" Opacity=".6" />
+                <Border Style="{StaticResource RevampBorderStyle}" Margin="3" Opacity=".95" />
                 <StackPanel Width="350" Margin="3">
                     <settings:ValueSetting SettingName="Background opacity" Foreground="#9fff"
                                            TextBoxVisibility="Collapsed"

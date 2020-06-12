@@ -436,7 +436,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Popup Placement="Right" HorizontalOffset="5" VerticalOffset="-5" x:Name="MgPopup"
+                            <Popup Placement="Left" HorizontalOffset="5" VerticalOffset="-5" x:Name="MgPopup"
                                    AllowsTransparency="True">
                                 <chat:MoongourdPopup />
                             </Popup>
