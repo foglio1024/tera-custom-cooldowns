@@ -156,6 +156,7 @@ namespace TCC
                                 { "character", App.Settings.CharacterWindowSettings.Enabled },
                                 { "class", App.Settings.ClassWindowSettings.Enabled },
                                 { "chat", App.Settings.ChatEnabled},
+                                { "npc", App.Settings.NpcWindowSettings.Enabled},
                                 { "group", App.Settings.GroupWindowSettings.Enabled }
                             }
                         },
