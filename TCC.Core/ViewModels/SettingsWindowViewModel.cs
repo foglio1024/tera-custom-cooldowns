@@ -18,6 +18,7 @@ using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Update;
+using TCC.Utilities;
 using TCC.Utils;
 using CaptureMode = TCC.Data.CaptureMode;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
@@ -198,7 +199,7 @@ namespace TCC.ViewModels
                         break;
                     case 2:
                         Log.N("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
-                        Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                        TccUtils.OpenUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
                         break;
                 }
                 N();
@@ -724,7 +725,7 @@ namespace TCC.ViewModels
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
 
-            BrowseUrlCommand = new RelayCommand(url => Process.Start(url.ToString()));
+            BrowseUrlCommand = new RelayCommand(url => TccUtils.OpenUrl(url.ToString()));
             RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook.ToString(), true));
             OpenWindowCommand = new RelayCommand(winType =>
             {

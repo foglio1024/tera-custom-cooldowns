@@ -10,6 +10,7 @@ using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Processing;
 using TCC.UI;
+using TCC.Utilities;
 using TeraDataLite;
 using FocusManager = TCC.UI.FocusManager;
 
@@ -233,7 +234,7 @@ namespace TCC.Data
             BrowseTwitchCommand = new RelayCommand(_ =>
             {
                 if (!IsTwitch) return;
-                Process.Start(TwitchLink);
+                TccUtils.OpenUrl(TwitchLink);
             });
             PostCommand = new RelayCommand(_ =>
             {

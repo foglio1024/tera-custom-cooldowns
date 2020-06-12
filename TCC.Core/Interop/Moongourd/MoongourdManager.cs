@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
 using TCC.Interop.Moongourd;
+using TCC.Utilities;
 
 namespace TCC.Moongourd
 {
@@ -111,7 +112,7 @@ namespace TCC.Moongourd
             reg = reg.StartsWith("eu") ? "eu" : reg;
             reg = reg == "na" ? "" : reg;
             reg = reg == "" ? reg : reg + "/";
-            Process.Start($"https://" + $"moongourd.com/{reg}encounter?area={_encounter.AreaId}&boss={_encounter.BossId}&log={_encounter.LogId}");
+            TccUtils.OpenUrl($"https://" + $"moongourd.com/{reg}encounter?area={_encounter.AreaId}&boss={_encounter.BossId}&log={_encounter.LogId}");
         }
 
         public BrowseCommand(MoongourdEncounter enc)

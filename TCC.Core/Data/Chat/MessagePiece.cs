@@ -8,6 +8,7 @@ using Nostrum.Extensions;
 using TCC.Interop.Proxy;
 using TCC.UI.Converters;
 using TCC.UI.Windows;
+using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
 
@@ -147,7 +148,7 @@ namespace TCC.Data.Chat
             {
                 try
                 {
-                    Process.Start(Text);
+                    TccUtils.OpenUrl(Text);
                 }
                 catch
                 {

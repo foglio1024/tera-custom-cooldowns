@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using Nostrum.Extensions;
+using TCC.Utilities;
 
 namespace TCC.UI.Windows
 {
@@ -21,7 +22,7 @@ namespace TCC.UI.Windows
         {
             try
             {
-                Process.Start("https://github.com/Foglio1024/Tera-custom-cooldowns/wiki");
+                TccUtils.OpenUrl("https://github.com/Foglio1024/Tera-custom-cooldowns/wiki");
             }
             catch
             {
@@ -32,7 +33,7 @@ namespace TCC.UI.Windows
         {
             try
             {
-                Process.Start("https://discord.gg/anUXQTp");
+                TccUtils.OpenUrl("https://discord.gg/anUXQTp");
             }
             catch 
             {
@@ -43,7 +44,7 @@ namespace TCC.UI.Windows
         {
             try
             {
-                Process.Start("https://discord.gg/dUNDDtw");
+                TccUtils.OpenUrl("https://discord.gg/dUNDDtw");
             }
             catch 
             {

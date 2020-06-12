@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -227,6 +228,15 @@ namespace TCC.Utilities
             TextWriter writer = new StreamWriter(Console.OpenStandardOutput())
                 { AutoFlush = true };
             Console.SetOut(writer);
+        }
+
+        public static void OpenUrl(string url)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
         }
     }
 }

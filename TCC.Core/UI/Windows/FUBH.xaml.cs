@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Nostrum;
 using Nostrum.Extensions;
+using TCC.Utilities;
 
 namespace TCC.UI.Windows
 {
@@ -33,7 +34,7 @@ namespace TCC.UI.Windows
 
         private void Hyperlink_OnRequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            Process.Start(e.Uri.AbsoluteUri);
+            TccUtils.OpenUrl(e.Uri.AbsoluteUri);
         }
     }
 
