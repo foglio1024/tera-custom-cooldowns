@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Stretch="Uniform" x:Name="BgImage">
+                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Stretch="Uniform" x:Name="BgImage" Width="101">
                     <Image.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
@@ -43,7 +43,7 @@
                 <Grid x:Name="MainReArcGrid">
                     <controls:Arc StartAngle="42" EndAngle="318" RenderTransformOrigin=".5 .5" StrokeThickness="4"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Margin="-20" Width="81" Height="81" x:Name="MainReArc"
+                               Margin="-20" Width="83" Height="83" x:Name="MainReArc"
                                Rhomb="True">
                         <controls:Arc.RenderTransform>
                             <TransformGroup>
@@ -95,7 +95,7 @@
                     </Grid.Style>
                 </Grid>
                 <Image Source="{StaticResource CharWindowFg}" Margin="-14" Stretch="Uniform" x:Name="FgImage" />
-                <Path Data="{StaticResource SvgClassBrawler}" Margin="19" Opacity=".3" />
+                <Path Data="{StaticResource SvgClassBrawler}" Margin="18" Opacity=".3" />
 
                 <Grid>
                     <Grid ClipToBounds="False">
@@ -199,23 +199,24 @@
 
             </controls:OutlinedTextBlock>
             <Grid Visibility="{Binding CounterProc, Converter={converters:BoolToVisibility}}">
-                <Border BorderBrush="#89a" BorderThickness="1" Margin="8"
-                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                <Border BorderBrush="#89a" BorderThickness="1" Width="38" Height="38"
+                        Background="{StaticResource RevampBackgroundGradientBrush}" 
+                        RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                         Opacity=".7"
                         >
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="45" />
-                            <TranslateTransform X="0" Y="111" />
-                            <ScaleTransform ScaleX=".7" ScaleY=".7"/>
+                            <TranslateTransform X="0" Y="78" />
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>
-                <skills:RhombFixedSkillControl DataContext="{Binding Counter}" HorizontalAlignment="Center"
+                <skills:RhombFixedSkillControl DataContext="{Binding Counter}" 
+                                               HorizontalAlignment="Center"
                                               VerticalAlignment="Center" >
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
-                            <TranslateTransform X="15" Y="126" />
+                            <TranslateTransform X="14" Y="125" />
                             <ScaleTransform ScaleX=".7" ScaleY=".7" />
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
