@@ -56,6 +56,7 @@ namespace TCC.ViewModels
         public ICommand MakePositionsGlobalCommand { get; }
         public ICommand ResetWindowPositionsCommand { get; }
         public ICommand OpenResourcesFolderCommand { get; }
+        public ICommand OpenWelcomeWindowCommand { get; }
         public ICommand ClearChatCommand { get; }
 
         public bool EthicalMode
@@ -733,6 +734,10 @@ namespace TCC.ViewModels
                 if (TccWindow.IsCreated(t)) return;
                 var win = Activator.CreateInstance(t, null) as TccWindow;
                 win?.ShowWindow();
+            });
+            OpenWelcomeWindowCommand = new RelayCommand(_ =>
+            {
+                new WelcomeWindow().Show();
             });
             DownloadBetaCommand = new RelayCommand(async (_) =>
             {

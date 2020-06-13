@@ -2115,6 +2115,9 @@
                                     </Grid>
                                 </Button.ToolTip>
                             </Button>
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    Command="{Binding OpenWelcomeWindowCommand}"
+                                    Content="Open welcome window"/>
                         </StackPanel>
                     </Grid>
                 </TabItem>
