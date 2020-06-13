@@ -9,7 +9,7 @@
              xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MysticLayoutVM}">
 
-    <Grid Margin="20 100 20 100" ClipToBounds="False" Width="Auto">
+    <Grid Margin="60" ClipToBounds="False">
         <Grid.Resources>
             <Style TargetType="controls:Arc" x:Key="StanceArc">
                 <Setter Property="Height" Value="91" />
