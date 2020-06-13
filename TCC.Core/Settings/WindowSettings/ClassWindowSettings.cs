@@ -9,12 +9,16 @@ namespace TCC.Settings.WindowSettings
         public event Action WarriorShowEdgeChanged;
         public event Action WarriorEdgeModeChanged;
         public event Action WarriorShowTraverseCutChanged;
+        public event Action ValkyrieShowRagnarokChanged;
+        public event Action ValkyrieShowGodsfallChanged;
         public event Action SorcererShowElementsChanged;
         public event Action FlashAvailableSkillsChanged;
 
         private bool _warriorShowEdge;
-        private bool _sorcererShowElements;
         private bool _warriorShowTraverseCut;
+        private bool _sorcererShowElements;
+        private bool _valkyrieShowRagnarok;
+        private bool _valkyrieShowGodsfall;
         private bool _flashAvailableSkills;
 
         private WarriorEdgeMode _warriorEdgeMode;
@@ -28,6 +32,28 @@ namespace TCC.Settings.WindowSettings
                 _warriorShowEdge = value;
                 N();
                 WarriorShowEdgeChanged?.Invoke();
+            }
+        }
+        public bool ValkyrieShowRagnarok
+        {
+            get => _valkyrieShowRagnarok;
+            set
+            {
+                if (_valkyrieShowRagnarok == value) return;
+                _valkyrieShowRagnarok = value;
+                N();
+                ValkyrieShowRagnarokChanged?.Invoke();
+            }
+        }
+        public bool ValkyrieShowGodsfall
+        {
+            get => _valkyrieShowGodsfall;
+            set
+            {
+                if (_valkyrieShowGodsfall == value) return;
+                _valkyrieShowGodsfall = value;
+                N();
+                ValkyrieShowGodsfallChanged?.Invoke();
             }
         }
         public bool SorcererShowElements

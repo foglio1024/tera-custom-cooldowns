@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"  >
     <Border RenderTransform="{StaticResource Skew45}" 
-            Background="#a223" 
+            Background="{StaticResource RevampBackgroundBrush}" 
             BorderBrush="{StaticResource RevampBorderBrush}"
             BorderThickness="2 1"
             RenderTransformOrigin=".5 1"

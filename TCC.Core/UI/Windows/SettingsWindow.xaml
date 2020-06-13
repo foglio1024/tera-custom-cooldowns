@@ -950,6 +950,16 @@
                                     </Grid>
                                 </FrameworkElement.ToolTip>
                             </settings:CheckboxSetting>
+                            <ContentControl Template="{StaticResource ClassHeaderTemplate}" Content="Valkyrie" />
+                            <settings:CheckboxSetting SettingName="Show Godsfall"
+                                                      IsOn="{Binding ClassWindowSettings.ValkyrieShowGodsfall, Mode=TwoWay}"
+                                                      IsEnabled="{Binding ClassWindowSettings.Enabled}" 
+                                                      Margin="0 0 15 0" />
+                            <settings:CheckboxSetting SettingName="Show Ragnarok"
+                                                      IsOn="{Binding ClassWindowSettings.ValkyrieShowRagnarok, Mode=TwoWay}"
+                                                      IsEnabled="{Binding ClassWindowSettings.Enabled}" 
+                                                      Margin="0 0 15 0" />
+
                         </StackPanel>
                         <!-- Actions -->
                         <StackPanel VerticalAlignment="Stretch" Grid.Row="1">

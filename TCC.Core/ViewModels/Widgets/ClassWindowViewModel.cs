@@ -68,6 +68,18 @@ namespace TCC.ViewModels.Widgets
             settings.WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
             settings.WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
             settings.SorcererShowElementsChanged += OnSorcererShowElementsChanged;
+            settings.ValkyrieShowGodsfallChanged += OnValkyrieShowGodsfallChanged;
+            settings.ValkyrieShowRagnarokChanged += OnValkyrieShowRagnarokChanged;
+        }
+
+        private void OnValkyrieShowRagnarokChanged()
+        {
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>()?.ExN(nameof(ValkyrieLayoutVM.ShowRagnarok));
+        }
+
+        private void OnValkyrieShowGodsfallChanged()
+        {
+            TccUtils.CurrentClassVM<ValkyrieLayoutVM>()?.ExN(nameof(ValkyrieLayoutVM.ShowGodsfall));
         }
 
         private void OnWarriorEdgeModeChanged()

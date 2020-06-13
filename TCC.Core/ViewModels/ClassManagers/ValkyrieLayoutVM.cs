@@ -10,6 +10,9 @@ namespace TCC.ViewModels
         public DurationCooldownIndicator Ragnarok { get; private set; }
         public DurationCooldownIndicator Godsfall { get; private set; }
 
+        public bool ShowRagnarok => App.Settings.ClassWindowSettings.ValkyrieShowRagnarok;
+        public bool ShowGodsfall => App.Settings.ClassWindowSettings.ValkyrieShowGodsfall;
+
         public ValkyrieLayoutVM()
         {
             RunemarksCounter = new Counter(7, false);
