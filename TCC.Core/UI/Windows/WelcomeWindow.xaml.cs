@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
+﻿using Nostrum.Extensions;
 using System.Windows;
 using System.Windows.Input;
-using Nostrum.Extensions;
 using TCC.Utilities;
 
 namespace TCC.UI.Windows

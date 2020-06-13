@@ -62,6 +62,11 @@ namespace TCC.Publisher
             Logger.WriteLine("    Getting version...");
             var an = AssemblyName.GetAssemblyName(_exePath);
             var v = an.Version;
+            if (v == null)
+            {
+                Logger.WriteLine($"    Failed to get TCC version.");
+                return "";
+            }
             _stringVersion = $"{v.Major}.{v.Minor}.{v.Build}";
             _beta = TCC.App.Beta ? "-b" : "";
             Logger.WriteLine($"    TCC version is {_stringVersion}{_beta}");

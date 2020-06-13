@@ -20,7 +20,6 @@ using TCC.Interop.Proxy;
 using TCC.Loader;
 using TCC.Notice;
 using TCC.Settings;
-using TCC.Test;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Update;
@@ -96,6 +95,9 @@ namespace TCC
             {
                 new WelcomeWindow().Show();
             }
+
+            //Tester.Enable();
+            //Tester.ShowDebugWindow();
 
         }
 

@@ -153,6 +153,7 @@ namespace TCC.Utilities
         public static string GetTccVersion()
         {
             var v = Assembly.GetExecutingAssembly().GetName().Version;
+            if(v == null) throw new InvalidOperationException("Unable to retrieve TCC version.");
             return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Beta ? "-b" : "")}";
 
         }

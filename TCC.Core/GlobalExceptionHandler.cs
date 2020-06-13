@@ -11,7 +11,6 @@ using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading;
 using System.Windows;
 using Microsoft.Diagnostics.Runtime;
 using TCC.Analysis;
@@ -229,10 +228,10 @@ namespace TCC
             foreach (var thread in threads)
             {
                 if (thread?.Name == null) continue;
-                var runtimeThread = runtime.Threads.FirstOrDefault(t => t.ManagedThreadId == thread?.ManagedThreadId);
+                var runtimeThread = runtime.Threads.FirstOrDefault(t => t.ManagedThreadId == thread.ManagedThreadId);
                 if (runtimeThread != null)
                 {
-                    ret[thread.Name] = GetStackTraceClrmd(runtimeThread).ToString();
+                    ret[thread.Name] = GetStackTraceClrmd(runtimeThread);
                 }
                 //ret[thread.Name] = GetStackTrace(thread).ToString();
             }
@@ -257,7 +256,7 @@ namespace TCC
             var sb = new StringBuilder();
             foreach (var frame in runtimeThread.EnumerateStackTrace())
             {
-                if (frame?.Method == null) continue;
+                if (frame.Method == null) continue;
                 sb.AppendLine($"   in {frame.Method}");
             }
 

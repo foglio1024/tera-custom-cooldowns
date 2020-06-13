@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Nostrum;
 using Nostrum.Extensions;
 using TCC.Utilities;
