@@ -8,6 +8,7 @@
     <TargetFramework>netcoreapp31</TargetFramework>
     <UseWPF>true</UseWPF>
     <LangVersion>8</LangVersion>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

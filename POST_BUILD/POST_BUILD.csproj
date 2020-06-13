@@ -3,10 +3,12 @@
     <TargetFramework>netcoreapp31</TargetFramework>
     <LangVersion>8</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>
       del "$(SolutionDir)\release\*.xml"
+      del "$(SolutionDir)\release\*.dev.json"
       xcopy $(SolutionDir)\TCC.Core\Module\index.js $(SolutionDir)\release\ /y /i
       xcopy $(SolutionDir)\TCC.Core\Module\module.json $(SolutionDir)\release\ /y /i
       node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\

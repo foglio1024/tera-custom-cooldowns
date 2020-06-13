@@ -3,6 +3,7 @@
     <RootNamespace>TeraDataLite</RootNamespace>
     <AssemblyName>TeraDataLite</AssemblyName>
     <TargetFramework>netcoreapp31</TargetFramework>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>8</LangVersion>
   </PropertyGroup>

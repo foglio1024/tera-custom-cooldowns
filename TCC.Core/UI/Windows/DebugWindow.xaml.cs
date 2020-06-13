@@ -69,7 +69,7 @@ namespace TCC.UI.Windows
 
         private void SwitchClass(object sender, RoutedEventArgs e)
         {
-            Game.Me.Class = (Class)Enum.Parse(typeof(Class), (sender as Button).Content.ToString());
+            Game.Me.Class = (Class)Enum.Parse(typeof(Class), ((Button) sender).Content.ToString());
             WindowManager.ViewModels.ClassVM.CurrentClass = Game.Me.Class;
             WindowManager.ViewModels.CooldownsVM.ClearSkills();
             WindowManager.ViewModels.CooldownsVM.LoadConfig(Game.Me.Class);
