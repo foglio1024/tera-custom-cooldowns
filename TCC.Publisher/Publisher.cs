@@ -26,7 +26,7 @@ namespace TCC.Publisher
         /// <summary>
         /// TCC/release/TCC.exe
         /// </summary>
-        private static string _exePath => Path.Combine(_releaseFolder, "TCC.exe");
+        private static string _exePath => Path.Combine(_releaseFolder, "TCC.dll");
         /// <summary>
         /// X.Y.Z
         /// </summary>
