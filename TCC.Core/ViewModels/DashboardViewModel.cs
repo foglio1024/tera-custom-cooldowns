@@ -126,7 +126,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public ObservableCollection<CharacterViewModel> CharacterViewModels
+        public TSObservableCollection<CharacterViewModel> CharacterViewModels
         {
             get;
             //{
@@ -176,7 +176,7 @@ namespace TCC.ViewModels
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.DashboardHotkey, OnShowDashboardHotkeyPressed);
 
-            CharacterViewModels = new ObservableCollection<CharacterViewModel>();
+            CharacterViewModels = new TSObservableCollection<CharacterViewModel>();
             EventGroups = new TSObservableCollection<EventGroup>();
             Markers = new TSObservableCollection<TimeMarker>();
             SpecialEvents = new TSObservableCollection<DailyEvent>();
