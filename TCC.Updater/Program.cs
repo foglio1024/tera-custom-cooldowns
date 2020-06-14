@@ -10,13 +10,12 @@ namespace TCC.Updater
 {
     internal class Program
     {
-        private static readonly string SourcePath = Path.GetDirectoryName(typeof(Program).Assembly.Location)+ "/tmp";
-        private static readonly string DestinationPath = AppDomain.CurrentDomain.BaseDirectory;
+        private static string SourcePath = Path.GetDirectoryName(typeof(Program).Assembly.Location)+ "/tmp";
+        private static string DestinationPath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
 
         private static void Main(string[] args)
         {
             if (!HasUpdateArg(args)) return;
-
             WaitForTccExit();
 
             CreateDirectories();
