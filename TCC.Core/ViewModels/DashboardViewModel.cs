@@ -62,7 +62,7 @@ namespace TCC.ViewModels
 
         public bool ShowElleonMarks => App.Settings.LastLanguage.Contains("EU");
 
-
+        private TSObservableCollection<Character> _characters { get; }
         public ICollectionViewLiveShaping SortedCharacters { get; }
         public ICollectionViewLiveShaping HiddenCharacters { get; }
         public ICollectionViewLiveShaping SortedColumns// { get; }
@@ -147,15 +147,17 @@ namespace TCC.ViewModels
                 case NotifyCollectionChangedAction.Add:
                     foreach (Character item in e.NewItems)
                     {
-                        CharacterViewModels.Add(new CharacterViewModel() { Character = item });
+                        _characters.Add(item);
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (Character item in e.OldItems)
                     {
-                        var target = CharacterViewModels.FirstOrDefault(x => x.Character == item);
-                        CharacterViewModels.Remove(target);
+                        _characters.Remove(item);
                     }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    _characters.Clear();
                     break;
             }
         }
@@ -175,7 +177,7 @@ namespace TCC.ViewModels
         public DashboardViewModel(WindowSettingsBase settings) : base(settings)
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.DashboardHotkey, OnShowDashboardHotkeyPressed);
-
+            _characters = new TSObservableCollection<Character>();
             CharacterViewModels = new TSObservableCollection<CharacterViewModel>();
             EventGroups = new TSObservableCollection<EventGroup>();
             Markers = new TSObservableCollection<TimeMarker>();
@@ -209,18 +211,23 @@ namespace TCC.ViewModels
                 _loaded = true;
             }, c => !_loaded);
 
-            Game.Account.Characters.CollectionChanged += SyncViewModel;
 
             LoadCharacters();
 
-            Game.Account.Characters.ToList().ForEach(c => CharacterViewModels.Add(new CharacterViewModel { Character = c }));
+            Game.Account.Characters.ToList().ForEach(c =>
+            {
+                _characters.Add(c);
+                CharacterViewModels.Add(new CharacterViewModel {Character = c});
+            });
 
-            SortedCharacters = CollectionViewFactory.CreateLiveCollectionView(Game.Account.Characters,
+            Game.Account.Characters.CollectionChanged += SyncViewModel;
+
+            SortedCharacters = CollectionViewFactory.CreateLiveCollectionView(_characters,
                 character => !character.Hidden,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
 
-            HiddenCharacters = CollectionViewFactory.CreateLiveCollectionView(Game.Account.Characters,
+            HiddenCharacters = CollectionViewFactory.CreateLiveCollectionView(_characters,
                 character => character.Hidden,
                 new[] { nameof(Character.Hidden) },
                 new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
