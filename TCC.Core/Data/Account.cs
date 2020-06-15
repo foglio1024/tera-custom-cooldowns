@@ -3,7 +3,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using Nostrum;
 using TCC.Data.Pc;
-using TeraDataLite;
 
 namespace TCC.Data
 {
@@ -31,14 +30,6 @@ namespace TCC.Data
             var account = new Account {IsElite = IsElite};
             Characters.ToSyncList().ForEach(account.Characters.Add);
             return account;
-        }
-
-        public void AddCharacter(CharacterData item)
-        {
-            App.BaseDispatcher.InvokeAsync(() =>
-            {
-                Characters.Add(new Character(item));
-            });
         }
     }
 }

@@ -142,33 +142,21 @@ namespace TCC.ViewModels
 
         private void SyncViewModel(object sender, NotifyCollectionChangedEventArgs e)
         {
-            try
+            switch (e.Action)
             {
-                Dispatcher.InvokeAsync(() =>
-                {
-                    switch (e.Action)
+                case NotifyCollectionChangedAction.Add:
+                    foreach (Character item in e.NewItems)
                     {
-                        case NotifyCollectionChangedAction.Add:
-                            foreach (Character item in e.NewItems)
-                            {
-                                CharacterViewModels.Add(new CharacterViewModel() { Character = item });
-                            }
-                            break;
-                        case NotifyCollectionChangedAction.Remove:
-                            foreach (Character item in e.OldItems)
-                            {
-                                var target = CharacterViewModels.FirstOrDefault(x => x.Character == item);
-                                CharacterViewModels.Remove(target);
-                            }
-                            break;
+                        CharacterViewModels.Add(new CharacterViewModel() { Character = item });
                     }
-
-                });
-            }
-            catch (Exception ex)
-            {
-
-                Log.F($"Failed to sync ViewModel: {ex}");
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (Character item in e.OldItems)
+                    {
+                        var target = CharacterViewModels.FirstOrDefault(x => x.Character == item);
+                        CharacterViewModels.Remove(target);
+                    }
+                    break;
             }
         }
 
@@ -220,6 +208,8 @@ namespace TCC.ViewModels
                 });
                 _loaded = true;
             }, c => !_loaded);
+
+            Game.Account.Characters.CollectionChanged += SyncViewModel;
 
             LoadCharacters();
 
@@ -319,30 +309,27 @@ namespace TCC.ViewModels
         }
         private void LoadCharacters()
         {
-            App.BaseDispatcher.InvokeAsync(() =>
+            try
             {
-                try
+                if (!File.Exists(SettingsGlobals.CharacterJsonPath)) return;
+                var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath));
+                Game.Account = account ?? throw new FileFormatException(new Uri(SettingsGlobals.CharacterJsonPath));
+            }
+            catch (Exception e)
+            {
+                var res = TccMessageBox.Show("TCC", SR.CannotReadCharacters, MessageBoxButton.OKCancel);
+                Log.F($"Cannot read characters file: {e}");
+                if (res == MessageBoxResult.OK)
                 {
-                    if (!File.Exists(SettingsGlobals.CharacterJsonPath)) return;
-                    var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath));
-                    Game.Account = account ?? throw new FileFormatException(new Uri(SettingsGlobals.CharacterJsonPath));
+                    LoadCharacters();
                 }
-                catch (Exception e)
+                else
                 {
-                    var res = TccMessageBox.Show("TCC", SR.CannotReadCharacters, MessageBoxButton.OKCancel);
-                    Log.F($"Cannot read characters file: {e}");
-                    if (res == MessageBoxResult.OK)
-                    {
-                        LoadCharacters();
-                    }
-                    else
-                    {
-                        File.Delete(SettingsGlobals.CharacterXmlPath); // todo: remove after merge
-                        File.Delete(SettingsGlobals.CharacterJsonPath);
-                        LoadCharacters();
-                    }
+                    File.Delete(SettingsGlobals.CharacterXmlPath); // todo: remove after merge
+                    File.Delete(SettingsGlobals.CharacterJsonPath);
+                    LoadCharacters();
                 }
-            });
+            }
         }
         public void SetLoggedIn(uint id)
         {
@@ -484,27 +471,16 @@ namespace TCC.ViewModels
         }
         private void OnGetUserList(S_GET_USER_LIST m)
         {
-            Task.Delay(1000).ContinueWith(t =>
+            try
             {
-                Dispatcher.InvokeAsync(() =>
-                {
-                    CharacterViewModels.Clear();
-                    Game.Account.Characters.ToList().ForEach(c =>
-                    {
-                        CharacterViewModels.Add(new CharacterViewModel { Character = c });
-                    });
-                    try
-                    {
-                        UpdateBuffs();
-                    }
-                    catch (Exception e)
-                    {
-                        Log.F($"Failed to update buffs: {e.Message}");
-                    }
+                UpdateBuffs();
+            }
+            catch (Exception e)
+            {
+                Log.F($"Failed to update buffs: {e.Message}");
+            }
 
-                    SaveCharacters();
-                });
-            });
+            SaveCharacters();
         }
         private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
         {

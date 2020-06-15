@@ -577,7 +577,8 @@ namespace TCC
                 Log.F("Warning: C_LOGIN_ARBITER not received.");
 
             Logged = false;
-            Firebase.Dispose();
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
             Me.ClearAbnormalities();
 
             foreach (var item in m.CharacterList)
@@ -592,13 +593,14 @@ namespace TCC
                     ch.Level = item.Level;
                     ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
                     ch.LastOnline = item.LastOnline;
-                    ch.ServerName = Server.Name;
+                    ch.ServerName = Game.Server.Name;
                 }
                 else
                 {
-                    Account.AddCharacter(item);
+                    Account.Characters.Add(new Character(item));
                 }
             }
+
         }
         private static void OnUserStatus(S_USER_STATUS m)
         {
