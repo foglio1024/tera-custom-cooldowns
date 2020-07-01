@@ -17,7 +17,7 @@ namespace TCC.UI.Windows.Widgets
             MainContent = WindowContent;
             BoundaryRef = Boundary;
             DataContext = vm;
-            VM = DataContext as CivilUnrestViewModel;
+            VM = (CivilUnrestViewModel) DataContext;
 
             Init(App.Settings.CivilUnrestWindowSettings);
         }

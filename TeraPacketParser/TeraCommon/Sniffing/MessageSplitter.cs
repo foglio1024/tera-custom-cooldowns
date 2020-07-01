@@ -18,8 +18,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             _serverSplitter.Resync += ServerResync;
         }
 
-        public event Action<Message> MessageReceived;
-        public event Action<MessageDirection, int, int> Resync;
+        public event Action<Message> MessageReceived = null!;
+        public event Action<MessageDirection, int, int> Resync = null!;
 
         private void ClientResync(int skipped, int size)
         {

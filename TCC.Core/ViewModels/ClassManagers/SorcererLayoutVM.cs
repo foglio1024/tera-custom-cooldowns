@@ -11,7 +11,7 @@ namespace TCC.ViewModels
         private Stopwatch _sw;
         private long _latestCooldown;
 
-        public DurationCooldownIndicator ManaBoost { get; set; }
+        public SkillWithEffect ManaBoost { get; set; }
 
         public Cooldown Fusion { get; set; }
         public Skill PrimeFlame { get; set; }
@@ -39,18 +39,12 @@ namespace TCC.ViewModels
         public bool IsBoostFrost => Game.Me.IceBoost;
         public bool IsBoostArcane => Game.Me.ArcaneBoost;
 
+
+
         public SorcererLayoutVM()
         {
             SorcererAbnormalityTracker.BoostChanged += OnBoostChanged;
-        }
 
-        private void OnBoostChanged()
-        {
-            NotifyElementBoostChanged();
-        }
-
-        public override void LoadSpecialSkills()
-        {
             Game.DB.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
             Game.DB.SkillsDatabase.TryGetSkill(360100, Class.Sorcerer, out var fusion);
             Game.DB.SkillsDatabase.TryGetSkill(360200, Class.Sorcerer, out var primeFlame);
@@ -62,20 +56,20 @@ namespace TCC.ViewModels
             ArcaneStorm = arcaneStorm; //fire arcane
             FusionSkill = fusion;
 
-            ManaBoost = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(mb, true) { CanFlash = true },
-                Buff = new Cooldown(mb, false)
-            };
+            ManaBoost = new SkillWithEffect(Dispatcher, mb);
             Fusion = new Cooldown(fusion, false);
 
             _sw = new Stopwatch();
 
         }
 
+        private void OnBoostChanged()
+        {
+            NotifyElementBoostChanged();
+        }
         public override void Dispose()
         {
-            ManaBoost.Cooldown.Dispose();
+            ManaBoost.Dispose();
             SorcererAbnormalityTracker.BoostChanged -= OnBoostChanged;
         }
 
@@ -85,7 +79,7 @@ namespace TCC.ViewModels
 
             if (sk.Skill.IconName == ManaBoost.Cooldown.Skill.IconName)
             {
-                ManaBoost.Cooldown.Start(sk.Duration);
+                ManaBoost.StartCooldown(sk.Duration);
                 return true;
             }
 

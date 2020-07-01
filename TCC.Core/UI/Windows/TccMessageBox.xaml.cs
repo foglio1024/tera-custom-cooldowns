@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,13 +13,16 @@ namespace TCC.UI.Windows
     //TODO: refactor and make multiple messageboxes
     public partial class TccMessageBox
     {
+        private static TccMessageBox _messageBox;
+        private static MessageBoxResult _result = MessageBoxResult.No;
+        public static bool IsOpen { get; set; }
+
         private TccMessageBox()
         {
             InitializeComponent();
             Closing += OnClosing;
         }
 
-        public static bool IsOpen { get; set; }
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -28,9 +30,6 @@ namespace TCC.UI.Windows
             Hide();
             IsOpen = false;
         }
-
-        private static TccMessageBox _messageBox;
-        private static MessageBoxResult _result = MessageBoxResult.No;
 
         private static MessageBoxResult Show (string caption, string msg, MessageBoxType type)
         {
@@ -122,7 +121,6 @@ namespace TCC.UI.Windows
                     break;
             }
         }
-        [SuppressMessage("ReSharper", "PossibleUnintendedReferenceComparison")]
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (sender == BtnOk)
@@ -147,15 +145,7 @@ namespace TCC.UI.Windows
                 });
             });
         }
-        // ReSharper disable once UnusedMember.Local
-        private void SetImage(string imageName)
-        {
-            var uri = $"/Resources/images/{imageName}";
-            // ReSharper disable once UnusedVariable
-            var uriSource = new Uri(uri, UriKind.RelativeOrAbsolute);
-            //img.Source = new BitmapImage(uriSource);
-        }
-
+        
         private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if ((bool)e.NewValue != true) return;

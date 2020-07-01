@@ -10,7 +10,7 @@ namespace TCC.Data
         private int _val;
         private bool _status;
 
-        public event Action<uint> ToZero;
+        public event Action<uint> ToZero = null!;
         public int Val
         {
             get => _val;

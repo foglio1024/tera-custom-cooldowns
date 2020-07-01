@@ -8,7 +8,7 @@ namespace TeraPacketParser.Messages
     {
         public uint ZoneId { get; }
         public uint TemplateId { get; }
-        public string Quest { get; }
+        public string Quest { get; } = "";
         public GuildBamQuestType Type { get; }
         public enum GuildBamQuestType
         {

@@ -41,14 +41,14 @@ namespace TCC.Data.Abnormalities
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-            vm.Windsong.Buff.Start(p.Duration);
+            vm.Windsong.StartEffect(p.Duration);
         }
         private static void CheckWindsong(S_ABNORMALITY_REFRESH p)
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.Windsong.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.Windsong.RefreshEffect(p.Duration);
         }
         private static void CheckWindsong(S_ABNORMALITY_END p)
         {
@@ -56,7 +56,7 @@ namespace TCC.Data.Abnormalities
             //if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.Windsong.Buff.Stop();
+            vm.Windsong.StopEffect();
         }
 
         private static void CheckGaleSteps(S_ABNORMALITY_BEGIN p)

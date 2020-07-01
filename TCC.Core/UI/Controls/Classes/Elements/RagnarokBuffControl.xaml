@@ -7,7 +7,7 @@
              xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
              Loaded="UserControl_Loaded"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SkillWithEffect}">
     <Grid Margin="0,0,0,0" Effect="{StaticResource DropShadow}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,7 +20,7 @@
                  StrokeThickness="1"
                  x:Name="Icon">
             <Ellipse.Fill>
-                <ImageBrush ImageSource="{Binding Buff.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+                <ImageBrush ImageSource="{Binding Effect.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
             </Ellipse.Fill>
             <Ellipse.Effect>
                 <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" x:Name="IconGlow" Opacity="0"></DropShadowEffect>
@@ -69,7 +69,7 @@
                      Opacity="1" 
                      CornerRadius="9" 
                      Background="Orange"/>
-                <TextBlock Text="{Binding Buff.Seconds}" 
+                <TextBlock Text="{Binding Effect.Seconds}" 
                        Foreground="#d000" 
                        FontSize="15" 
                        HorizontalAlignment="Center" 

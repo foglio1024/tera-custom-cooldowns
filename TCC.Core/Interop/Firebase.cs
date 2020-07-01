@@ -14,7 +14,7 @@ namespace TCC.Interop
     public static class Firebase
     {
         private static readonly List<string> _registeredWebhooks = new List<string>();
-        public static async void RegisterWebhook(string webhook, bool online)
+        public static async void RegisterWebhook(string? webhook, bool online)
         {
             if (string.IsNullOrEmpty(webhook)) return;
             if (string.IsNullOrEmpty(App.Settings.LastAccountNameHash)) return;
@@ -62,11 +62,17 @@ namespace TCC.Interop
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
 
                 var jRes = JObject.Parse(res);
-                canFire = jRes["canFire"].Value<bool>();
+                canFire = (jRes["canFire"] ?? throw new InvalidOperationException("Invalid webhook response format"))
+                    .Value<bool>();
                 Log.CW($"Webhook fire requested, result: {canFire}");
 
             }
             catch (WebException e)
+            {
+                Log.F($"Failed to request webhook execution. Webhook will be executed anyway: {e}");
+                canFire = true;
+            }
+            catch (InvalidOperationException e)
             {
                 Log.F($"Failed to request webhook execution. Webhook will be executed anyway: {e}");
                 canFire = true;

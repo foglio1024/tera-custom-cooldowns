@@ -4,6 +4,7 @@
     <LangVersion>8</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PreserveCompilationContext>false</PreserveCompilationContext>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>

@@ -25,13 +25,13 @@ namespace TCC.Analysis
     {
         private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
 
-        public static event Action ProcessorReady;
+        public static event Action ProcessorReady = null!;
 
-        public static ITeraSniffer Sniffer { get; private set; }
-        public static MessageFactory Factory { get; private set; }
-        public static MessageProcessor Processor { get; private set; }
+        public static ITeraSniffer Sniffer { get; private set; } = null!;
+        public static MessageFactory Factory { get; private set; } = null!;
+        public static MessageProcessor Processor { get; private set; } = null!;
 
-        public static Thread AnalysisThread { get; private set; }
+        public static Thread AnalysisThread { get; private set; } = null!;
 
         private static void Init()
         {
@@ -69,7 +69,7 @@ namespace TCC.Analysis
                     continue;
                 }
 
-                ParsedMessage msg;
+                ParsedMessage? msg;
                 try
                 {
                     msg = Factory.Create(pkt);
@@ -94,7 +94,7 @@ namespace TCC.Analysis
 
             _ = StubInterface.Instance.Init();
 
-            if (!App.Settings.DontShowFUBH) App.FUBH();
+            if (App.Settings?.DontShowFUBH == false) App.FUBH();
 
             //if (Game.Server.Region == "EU")
             //    TccMessageBox.Show("WARNING",
@@ -102,8 +102,7 @@ namespace TCC.Analysis
         }
         private static void OnEndConnection()
         {
-            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
-            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
+            Firebase.Dispose();
 
             Log.N("TCC", SR.Disconnected, NotificationType.None);
             WindowManager.TrayIcon.Connected = false;
@@ -194,17 +193,20 @@ namespace TCC.Analysis
         }
         private static async void OnLoginArbiter(C_LOGIN_ARBITER p)
         {
-            var path = File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.ReleaseVersion / 100}.map"))
-                       ?
-                       Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.ReleaseVersion / 100}.map")
-                       :
-                       File.Exists(Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map"))
-                           ? Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map")
+            var rvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.ReleaseVersion / 100}.map");
+            var pvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map");
+
+            var path = File.Exists(rvSysMsgPath)
+                       ? rvSysMsgPath
+                       : File.Exists(pvSysMsgPath)
+                           ? pvSysMsgPath
                            : "";
 
             if (path == "")
             {
-                var destPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map").Replace("\\", "/");
+                var destPath = pvSysMsgPath.Replace("\\", "/");
+
+
                 if (Sniffer.Connected && Sniffer is ToolboxSniffer tbs)
                 {
                     if (await tbs.ControlConnection.DumpMap(destPath, "sysmsg"))

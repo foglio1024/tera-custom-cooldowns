@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using TCC.Annotations;
 using TCC.Data;
 using TCC.Test;
 using TCC.Utilities;
@@ -13,7 +11,6 @@ using Button = System.Windows.Controls.Button;
 
 namespace TCC.UI.Windows
 {
-    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public sealed partial class DebugWindow : INotifyPropertyChanged
     {
         public DebugWindow()
@@ -59,17 +56,16 @@ namespace TCC.UI.Windows
             _count++;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = null!;
 
-        [NotifyPropertyChangedInvocator]
-        private void NPC([CallerMemberName] string propertyName = null)
+        private void NPC([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void SwitchClass(object sender, RoutedEventArgs e)
         {
-            Game.Me.Class = (Class)Enum.Parse(typeof(Class), ((Button) sender).Content.ToString());
+            Game.Me.Class = (Class)Enum.Parse(typeof(Class), ((Button) sender).Content.ToString() ?? "None");
             WindowManager.ViewModels.ClassVM.CurrentClass = Game.Me.Class;
             WindowManager.ViewModels.CooldownsVM.ClearSkills();
             WindowManager.ViewModels.CooldownsVM.LoadConfig(Game.Me.Class);
@@ -77,7 +73,7 @@ namespace TCC.UI.Windows
 
         private void SetSorcElement(object sender, RoutedEventArgs e)
         {
-            var el = (sender as Button).Content.ToString();
+            var el = ((Button) sender).Content.ToString();
 
             var fire = el == "Fire";
             var ice = el == "Ice";
@@ -110,7 +106,7 @@ namespace TCC.UI.Windows
 
         private void SetSorcElementBoost(object sender, RoutedEventArgs e)
         {
-            var el = (sender as Button).Content.ToString().Split(' ')[0];
+            var el = ((Button) sender).Content.ToString()?.Split(' ')[0];
 
             var fire = el == "Fire";
             var ice = el == "Ice";
@@ -129,7 +125,7 @@ namespace TCC.UI.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.Buff.Start(10000);
+            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.StartEffect(10000);
 
             //SkillManager.AddSkill(100700, 20000);
             //SkillManager.AddSkill(400120, 20000);

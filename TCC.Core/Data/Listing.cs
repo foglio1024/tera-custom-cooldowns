@@ -19,15 +19,15 @@ namespace TCC.Data
     {
         private uint _playerId;
         private bool _isRaid;
-        private string _message;
-        private string _leaderName;
+        private string _message = "";
+        private string _leaderName = "";
         private bool _isExpanded;
         private bool _isPopupOpen;
         private int _playerCount;
         private bool _canApply = true;
         private bool _isMyLfg;
         private bool _temp;
-        private DateTime _createdOn;
+        private readonly DateTime _createdOn;
 
         public ICommand ExpandCollapseCommand { get; }
         public ICommand PostCommand { get; }
@@ -296,9 +296,7 @@ namespace TCC.Data
             _t.Stop();
             _listing.CanApply = true;
         }
-#pragma warning disable 0067
-        public event EventHandler CanExecuteChanged;
-#pragma warning restore 0067
+        public event EventHandler CanExecuteChanged = null!;
         public bool CanExecute(object parameter)
         {
             return _listing.CanApply;

@@ -12,7 +12,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         bool Connected { get; set; }
 
         event Action<Message> MessageReceived;
-        event Action<Server> NewConnection;
+        event Action<Server?> NewConnection;
         event Action EndConnection;
     }
 }

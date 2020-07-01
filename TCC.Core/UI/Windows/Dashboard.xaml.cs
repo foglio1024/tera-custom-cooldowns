@@ -41,19 +41,20 @@ namespace TCC.UI.Windows
             HideWindow();
             DashboardViewModel.SaveCharacters();
         }
-        private void OnDetailsMouseButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnDetailsMouseButtonDown(object? sender, MouseButtonEventArgs? e)
         {
             DetailsBorder.BeginAnimation(OpacityProperty, _detailsHideAnim);
         }
         private void FilterInventory(object sender, TextChangedEventArgs e)
         {
-            var view = (ICollectionView)_vm.SelectedCharacterInventory;
+            var view = (ICollectionView?)_vm.SelectedCharacterInventory;
+            if (view == null) return;
             view.Filter = o =>
             {
-                var item = ((InventoryItem)o).Item;
+                var item = ((InventoryItem) o).Item;
                 var name = item.Name;
-                return name.IndexOf(((TextBox)sender).Text,
-                           StringComparison.InvariantCultureIgnoreCase) != -1;
+                return name.IndexOf(((TextBox) sender).Text,
+                    StringComparison.InvariantCultureIgnoreCase) != -1;
             };
             view.Refresh();
         }
@@ -65,6 +66,7 @@ namespace TCC.UI.Windows
         private void RemoveCharacter(object sender, RoutedEventArgs e)
         {
             OnDetailsMouseButtonDown(null, null);
+            if (_vm.SelectedCharacter == null) return;
             _vm.SelectedCharacter.Hidden = true;
         }
         private void OpenMergedInventory(object sender, RoutedEventArgs e)

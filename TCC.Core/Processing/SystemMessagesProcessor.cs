@@ -18,7 +18,7 @@ namespace TCC.Processing
     {
         public static string Build(SystemMessageData template, params string[] parameters)
         {
-            var Pieces = new List<string>();
+            var pieces = new List<string>();
             var sb = new StringBuilder();
 
             var prm = ChatUtils.SplitDirectives(parameters);
@@ -32,35 +32,15 @@ namespace TCC.Processing
                 foreach (var htmlPiece in htmlPieces)
                 {
                     var content = htmlPiece.InnerText;
-                    AddPiece(content);
+                    pieces.Add(content);
                 }
             }
             else
             {
                 //more parameters
-                foreach (var htmlPiece in htmlPieces)
+                foreach (var piece in htmlPieces)
                 {
-                    ParseSysHtmlPiece(htmlPiece);
-                }
-            }
-
-            Pieces.ForEach(p => sb.Append(p));
-
-            return sb.ToString();
-
-            ///////////////////////////////////////////////////////////////
-
-            void AddPiece(string p)
-            {
-                Pieces.Add(p);
-            }
-            void ParseSysHtmlPiece(HtmlNode piece)
-            {
-                if (piece.Name == "img")
-                {
-                }
-                else
-                {
+                    if (piece.Name == "img") continue;
                     var content = ChatUtils.ReplaceParameters(piece.InnerText, prm, true);
                     var innerPieces = content.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
                     var plural = false;
@@ -77,9 +57,10 @@ namespace TCC.Processing
                             case 2:
                                 if (inPiece == "/s//s" && plural)
                                 {
-                                    Pieces[Pieces.Count - 1] = Pieces.Last() + "s";
+                                    pieces[^1] = pieces.Last() + "s";
                                     plural = false;
                                 }
+
                                 selectionStep = 0;
                                 continue;
                         }
@@ -90,6 +71,7 @@ namespace TCC.Processing
                             selectionStep++;
                             continue;
                         }
+
                         if (inPiece.StartsWith("@item"))
                         {
                             mp = SystemMessageParser.ParseSysMsgItem(inPiece);
@@ -97,7 +79,8 @@ namespace TCC.Processing
                         else if (inPiece.StartsWith("@abnormal"))
                         {
                             var abName = "Unknown";
-                            if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
+                            if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(uint.Parse(inPiece.Split(':')[1]),
+                                out var ab)) abName = ab.Name;
                             mp = abName;
                         }
                         else if (inPiece.StartsWith("@achievement"))
@@ -145,10 +128,15 @@ namespace TCC.Processing
                         {
                             mp = inPiece.UnescapeHtml();
                         }
-                        AddPiece(mp);
+
+                        pieces.Add(mp);
                     }
                 }
             }
+
+            pieces.ForEach(p => sb.Append(p));
+
+            return sb.ToString();
         }
 
         public static void AnalyzeMessage(string fullParameters)
@@ -191,11 +179,12 @@ namespace TCC.Processing
         private static void HandleClearedGuardianQuestsMessage(string parameters, SystemMessageData template)
         {
             var currChar = WindowManager.ViewModels.DashboardVM.CurrentCharacter;
+            if (currChar == null) return;
             var cleared = currChar.GuardianInfo.Cleared;
             var standardCountString = ChatUtils.Font($"({cleared}/40)", "cccccc");
             var maxedCountString = ChatUtils.Font("(", "cccccc")
-                                 + ChatUtils.Font($"{cleared}", "ff0000")
-                                 + ChatUtils.Font("/40)", "cccccc");
+                                   + ChatUtils.Font($"{cleared}", "ff0000")
+                                   + ChatUtils.Font("/40)", "cccccc");
             var newMsg = new SystemMessageData($"{template.Template} {(cleared == 40 ? maxedCountString : standardCountString)}", template.ChatChannel);
             var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, newMsg, ChatChannel.Guardian);
             if (currChar.GuardianInfo.Cleared == 40)
@@ -203,7 +192,6 @@ namespace TCC.Processing
                 msg.ContainsPlayerName = true;
             }
             ChatManager.Instance.AddChatMessage(msg);
-
         }
         private static void HandleNewGuildMasterMessage(string parameters, SystemMessageData template)
         {
@@ -228,7 +216,7 @@ namespace TCC.Processing
         {
             const string s = "dungeon:";
             var dgId = Convert.ToUInt32(parameters.Substring(parameters.IndexOf(s, StringComparison.Ordinal) + s.Length));
-            WindowManager.ViewModels.DashboardVM.CurrentCharacter.DungeonInfo.Engage(dgId);
+            WindowManager.ViewModels.DashboardVM.CurrentCharacter?.DungeonInfo.Engage(dgId);
 
             var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
             ChatManager.Instance.AddChatMessage(msg);
@@ -318,7 +306,7 @@ namespace TCC.Processing
             var regName = parameters.Split('\v')[2].Replace("@rgn:", "");
             var regId = uint.Parse(regName);
 
-            Game.DB.RegionsDatabase.Names.TryGetValue(regId, out var regionName);
+            var regionName = Game.DB.RegionsDatabase.GetZoneName(regId);
 
             GameEventManager.ExecuteFieldBossSpawnWebhook(monsterName, regionName, notificationText);
 

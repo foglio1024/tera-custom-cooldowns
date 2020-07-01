@@ -1,16 +1,7 @@
-﻿using TCC.Data.Abnormalities;
-
-namespace TCC.Data
+﻿namespace TCC.Data
 {
     public class ArcherFocusTracker : BaseStackBuffTracker
     {
-        public ArcherFocusTracker()
-        {
-            if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(601400, out var ab))
-            {
-                Icon = ab.IconName;
-            }
-        }
         public void StartFocus(long duration)
         {
             base.StartBaseBuff(duration);
@@ -37,9 +28,7 @@ namespace TCC.Data
     {
         public LancerLineHeldTracker()
         {
-            if (!Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(LancerAbnormalityTracker.LineHeldId, out var ab)) return;
-            Icon = ab.IconName;
-            BaseStacksChanged += (stacks) => { if (stacks == 0) Stop(); };
+            BaseStacksChanged += stacks => { if (stacks == 0) Stop(); };
         }
     }
 }

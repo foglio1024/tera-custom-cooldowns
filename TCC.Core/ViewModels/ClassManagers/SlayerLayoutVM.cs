@@ -6,20 +6,17 @@ namespace TCC.ViewModels
     public class SlayerLayoutVM : BaseClassLayoutVM
     {
 
-        public DurationCooldownIndicator InColdBlood { get; set; }
-        
-        public Cooldown OverhandStrike { get; set; }
-        
+        public SkillWithEffect InColdBlood { get; }
+
+        public Cooldown OverhandStrike { get; }
 
 
-        public override void LoadSpecialSkills()
+
+        public SlayerLayoutVM()
         {
             // In Cold Blood
             Game.DB.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
-            InColdBlood = new DurationCooldownIndicator(Dispatcher) {
-                Buff = new Cooldown(icb, false),
-                Cooldown = new Cooldown(icb, true) { CanFlash = true }
-            };
+            InColdBlood = new SkillWithEffect(Dispatcher, icb);
 
             // Overhand Strike
             Game.DB.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);
@@ -29,14 +26,14 @@ namespace TCC.ViewModels
 
         public override void Dispose()
         {
-            InColdBlood.Cooldown.Dispose();
+            InColdBlood.Dispose();
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == InColdBlood.Cooldown.Skill.IconName)
             {
-                InColdBlood.Cooldown.Start(sk.Duration);
+                InColdBlood.StartCooldown(sk.Duration);
                 return true;
             }
 

@@ -11,45 +11,20 @@ using TCC.UI.Windows.Widgets;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 using Application = System.Windows.Application;
+using Size = System.Drawing.Size;
 
 namespace TCC.UI
 {
     public static class WindowManager
     {
-        public static event Action RepositionRequestedEvent;
-        public static event Action ResetToCenterEvent;
-        public static event Action MakeGlobalEvent;
-        public static event Action DisposeEvent;
+        public static event Action RepositionRequestedEvent = null!;
+        public static event Action ResetToCenterEvent = null!;
+        public static event Action MakeGlobalEvent = null!;
+        public static event Action DisposeEvent = null!;
 
-        public static TccTrayIcon TrayIcon { get; private set; }
-        public static VisibilityManager VisibilityManager { get; set; }
-        public static System.Drawing.Size ScreenSize => FocusManager.TeraScreen.Bounds.Size;
-
-        public static class ViewModels
-        {
-            private static CivilUnrestViewModel _civilUnrestVm;
-            private static LfgListViewModel _lfgVm;
-            private static FlightGaugeViewModel _flightGaugeVm;
-
-            public static CooldownWindowViewModel CooldownsVM { get; set; }
-            public static CharacterWindowViewModel CharacterVM { get; set; }
-            public static NpcWindowViewModel NpcVM { get; set; }
-            public static AbnormalityWindowViewModel AbnormalVM { get; set; }
-            public static ClassWindowViewModel ClassVM { get; set; }
-            public static NotificationAreaViewModel NotificationAreaVM { get; set; }
-            public static PlayerMenuViewModel PlayerMenuVM { get; set; }
-
-            public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ??= new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings);
-
-            public static DashboardViewModel DashboardVM { get; set; }//=> _dashboardVm ??= new DashboardViewModel(null);
-
-            public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
-
-            public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ??= new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings);
-            public static FloatingButtonViewModel FloatingButtonVM { get; set; } //=> _floatingButtonVm ??= new FloatingButtonViewModel(App.Settings.FloatingButtonSettings);
-
-            public static GroupWindowViewModel GroupVM { get; set; }
-        }
+        public static TccTrayIcon TrayIcon { get; } = new TccTrayIcon();
+        public static VisibilityManager VisibilityManager { get; } = new VisibilityManager();
+        public static Size ScreenSize => FocusManager.TeraScreen.Bounds.Size;
 
 
         public static CooldownWindow CooldownWindow { get; private set; }
@@ -63,7 +38,7 @@ namespace TCC.UI
         public static FloatingButtonWindow FloatingButton { get; private set; }
         public static NotificationAreaWindow NotificationArea { get; private set; }
         public static FlightDurationWindow FlightDurationWindow { get; private set; }
-        public static SkillConfigWindow SkillConfigWindow { get; set; }
+        public static SkillConfigWindow? SkillConfigWindow { get; set; }
 
         public static Dashboard DashboardWindow { get; private set; }
 
@@ -72,13 +47,9 @@ namespace TCC.UI
 
         public static async Task Init()
         {
-            VisibilityManager = new VisibilityManager();
-
             FocusManager.Init();
 
             await LoadWindows();
-
-            TrayIcon = new TccTrayIcon();
 
 
             if (App.Settings.UseHotkeys) KeyboardHook.Instance.Enable();
@@ -91,7 +62,7 @@ namespace TCC.UI
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
         }
 
-        private static void SystemEventsOnDisplaySettingsChanged(object sender, EventArgs e)
+        private static void SystemEventsOnDisplaySettingsChanged(object? sender, EventArgs e)
         {
             ReloadPositions();
         }
@@ -164,8 +135,6 @@ namespace TCC.UI
             CivilUnrestWindow = new CivilUnrestWindow(ViewModels.CivilUnrestVM);
             if (CivilUnrestWindow.WindowSettings.Enabled) CivilUnrestWindow.Show();
 
-
-            //DashboardWindow = new Dashboard(ViewModels.DashboardVM);
             LfgListWindow = new LfgListWindow(ViewModels.LfgVM);
 
             ViewModels.PlayerMenuVM = new PlayerMenuViewModel();
@@ -194,5 +163,29 @@ namespace TCC.UI
             //if (App.Settings.ShowConsole) Kernel32.AllocConsole();
             SettingsWindow = new SettingsWindow();
         }
+
+        public static class ViewModels
+        {
+            private static CivilUnrestViewModel? _civilUnrestVm;
+            private static LfgListViewModel? _lfgVm;
+            private static FlightGaugeViewModel? _flightGaugeVm;
+
+            public static CooldownWindowViewModel CooldownsVM { get; set; }
+            public static CharacterWindowViewModel CharacterVM { get; set; }
+            public static NpcWindowViewModel NpcVM { get; set; }
+            public static AbnormalityWindowViewModel AbnormalVM { get; set; }
+            public static ClassWindowViewModel ClassVM { get; set; }
+            public static NotificationAreaViewModel NotificationAreaVM { get; set; }
+            public static PlayerMenuViewModel PlayerMenuVM { get; set; }
+            public static DashboardViewModel DashboardVM { get; set; }
+            public static FloatingButtonViewModel FloatingButtonVM { get; set; }
+            public static GroupWindowViewModel GroupVM { get; set; }
+
+            public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ??= new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings);
+            public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
+            public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ??= new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings);
+
+        }
+
     }
 }

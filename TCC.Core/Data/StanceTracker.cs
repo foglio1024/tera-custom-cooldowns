@@ -5,7 +5,7 @@ using Nostrum;
 namespace TCC.Data
 {
 
-    public class StanceTracker<T> : TSPropertyChanged where T : IComparable
+    public class StanceTracker<T> : TSPropertyChanged where T : struct, IComparable
     {
         private T _currentStance;
         public T CurrentStance
@@ -25,6 +25,8 @@ namespace TCC.Data
     }
     public class AurasTracker : TSPropertyChanged
     {
+        public event Action AuraChanged = null!;
+
         private bool _crit, _mp, _res, _swift;
         public bool CritAura
         {
@@ -74,7 +76,6 @@ namespace TCC.Data
         public bool AllMissing => !_crit && !_mp && !_res && !_swift;
         public bool OffenseAura => _crit || _swift;
         public bool SupportAura => _mp || _res;
-        public event Action AuraChanged;
 
         public AurasTracker()
         {

@@ -5,11 +5,9 @@ using TCC.Data;
 
 namespace TCC.UI.Controls.Classes.Elements
 {
-    /// <summary>
-    /// Logica di interazione per EdgeControl.xaml
-    /// </summary>
     public partial class EdgeControl
     {
+        private Counter? _context;
         public EdgeControl()
         {
             InitializeComponent();
@@ -26,7 +24,10 @@ namespace TCC.UI.Controls.Classes.Elements
             {
                 if (newEdge == 10)
                 {
-                    foreach (FrameworkElement child in EdgeContainer.Children) { child.Opacity = 1; }
+                    foreach (var child in EdgeContainer.Children)
+                    {
+                        if (child != null) ((FrameworkElement)child).Opacity = 1;
+                    }
                 }
                 for (var i = 0; i < diff; i++)
                 {
@@ -45,7 +46,6 @@ namespace TCC.UI.Controls.Classes.Elements
             _currentEdge = newEdge;
         }
 
-        private Counter _context;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -63,13 +63,15 @@ namespace TCC.UI.Controls.Classes.Elements
 
         private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (_context == null) return;
+
             switch (e.PropertyName)
             {
                 case nameof(Counter.Val):
                     SetEdge(_context.Val);
                     break;
                 case nameof(Counter.IsMaxed):
-                    MaxBorder.Opacity = _context.IsMaxed ? 1 :0;
+                    MaxBorder.Opacity = _context.IsMaxed ? 1 : 0;
                     break;
             }
         }

@@ -13,9 +13,9 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         public readonly IPEndPoint Source;
         internal readonly ConnectionId ConnectionId;
         public Action RemoveCallback;
-        public string SnifferType;
+        public string? SnifferType;
 
-        internal TcpConnection(ConnectionId connectionId, uint sequenceNumber, Action<TcpConnection>removeCallback, string snifferType)
+        internal TcpConnection(ConnectionId connectionId, uint sequenceNumber, Action<TcpConnection>removeCallback, string? snifferType)
         {
             ConnectionId = connectionId;
             Source = connectionId.Source;
@@ -43,7 +43,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static uint NextSequenceNumber { get; set; }
 
-        public event Action<TcpConnection, byte[], int> DataReceived;
+        public event Action<TcpConnection, byte[], int> DataReceived = null!;
 
         public long SequenceNumberToBytesReceived(uint sequenceNumber)
         {

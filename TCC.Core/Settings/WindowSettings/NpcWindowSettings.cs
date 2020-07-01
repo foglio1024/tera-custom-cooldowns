@@ -6,12 +6,12 @@ namespace TCC.Settings.WindowSettings
 {
     public class NpcWindowSettings : WindowSettingsBase
     {
+        public event Action AccurateHpChanged = null!;
+        public event Action HideAddsChanged = null!;
+
         private bool _accurateHp;
         private bool _hideAdds;
         private EnrageLabelMode _enrageLabelMode;
-
-        public event Action AccurateHpChanged;
-        public event Action HideAddsChanged;
 
         public bool HideAdds
         {
@@ -24,7 +24,6 @@ namespace TCC.Settings.WindowSettings
                 HideAddsChanged?.Invoke();
             }
         }
-
         public bool AccurateHp
         {
             get => _accurateHp;
@@ -36,7 +35,6 @@ namespace TCC.Settings.WindowSettings
                 AccurateHpChanged?.Invoke();
             }
         }
-
         public EnrageLabelMode EnrageLabelMode
         {
             get => _enrageLabelMode;

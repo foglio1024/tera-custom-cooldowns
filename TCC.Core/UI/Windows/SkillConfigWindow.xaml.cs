@@ -29,7 +29,7 @@ namespace TCC.UI.Windows
         {
             InitializeComponent();
             DataContext = WindowManager.ViewModels.CooldownsVM;
-            VM = DataContext as CooldownWindowViewModel;
+            VM = (CooldownWindowViewModel) DataContext;
 
             Closing += OnClosing;
             Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
@@ -58,7 +58,7 @@ namespace TCC.UI.Windows
 
         public static bool IsOpen { get; private set; }
 
-        private void ClosewWindow(object sender, RoutedEventArgs e)
+        private void ClosewWindow(object? sender, RoutedEventArgs? e)
         {
 
             var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
@@ -128,7 +128,7 @@ namespace TCC.UI.Windows
 
         private void RemoveHiddenSkill(object sender, RoutedEventArgs e)
         {
-            VM.RemoveHiddenSkill(((Button)sender).DataContext as Cooldown);
+            VM.RemoveHiddenSkill((Cooldown) ((Button)sender).DataContext);
         }
     }
     public class HiddenSKillsDragHandler : IDropTarget

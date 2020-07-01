@@ -7,17 +7,17 @@ namespace TCC.Data.Skills
     public class Skill
     {
 
-        private string _iconName;
+        private string _iconName = "";
         public string IconName
         {
             get => _iconName;
             set => _iconName = value.ToLower();
         }
 
-        public uint Id { get; set; }
-        public Class Class { get; set; }
-        public string Name { get; set; }
-        public string ToolTip { get; set; }
+        public uint Id { get; }
+        public Class Class { get; }
+        public string Name { get; }
+        public string ToolTip { get; }
         public string ShortName
         {
             get
@@ -37,7 +37,7 @@ namespace TCC.Data.Skills
             }
         }
 
-        public string Detail { get; set; }
+        public string Detail { get; set; } = "";
         //public ImageBrush IconBrush { get
         //    {
 

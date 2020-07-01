@@ -33,7 +33,7 @@ namespace TCC.Data.Databases
                 var id = uint.Parse(s[0]);
                 var isBuff = bool.Parse(s[3]);
                 var isShow = bool.Parse(s[14]);
-                var abType = (AbnormalityType) Enum.Parse(typeof(AbnormalityType), s[2]);
+                var abType = (AbnormalityType)Enum.Parse(typeof(AbnormalityType), s[2]);
                 var infinite = s[5] == "0";
                 var ab = new Abnormality(id, isShow, isBuff, infinite, abType, s[13], s[8], s[11]);
                 if (s[1].IndexOf("Absorb", StringComparison.Ordinal) > -1)
@@ -58,10 +58,10 @@ namespace TCC.Data.Databases
                 Abnormalities[id] = ab;
             }
 
-            var foglioAura = new Abnormality(10241024, true, true, true, AbnormalityType.Special,"icon_items.bloodchipa_tex", "Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
+            var foglioAura = new Abnormality(10241024, true, true, true, AbnormalityType.Special, "icon_items.bloodchipa_tex", "Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
             Abnormalities[foglioAura.Id] = foglioAura;
 
-            var fearInoculum = new Abnormality(30082019, true, true, true, AbnormalityType.Special,"icon_status.third_eye_ab","Fear Inoculum", "New $H_W_GOODTool$COLOR_END album release provides the following effects:$BR - increases attack speed by $H_W_GOOD25%$COLOR_END $BR - increases skill damage by $H_W_GOOD100%$COLOR_END $BR - decreases skill cooldowns by $H_W_GOOD80%$COLOR_END $BR - increases drop rate in dungeons by $H_W_GOOD800%$COLOR_END $BR$BREffect only applies while Tool music is playing.");
+            var fearInoculum = new Abnormality(30082019, true, true, true, AbnormalityType.Special, "icon_status.third_eye_ab", "Fear Inoculum", "New $H_W_GOODTool$COLOR_END album release provides the following effects:$BR - increases attack speed by $H_W_GOOD25%$COLOR_END $BR - increases skill damage by $H_W_GOOD100%$COLOR_END $BR - decreases skill cooldowns by $H_W_GOOD80%$COLOR_END $BR - increases drop rate in dungeons by $H_W_GOOD800%$COLOR_END $BR$BREffect only applies while Tool music is playing.");
             Abnormalities[fearInoculum.Id] = fearInoculum;
 
             #region Extreme overrides
@@ -106,7 +106,14 @@ namespace TCC.Data.Databases
 
         public bool GetAbnormality(uint id, out Abnormality ab)
         {
-            return Abnormalities.TryGetValue(id, out ab);
+            ab = new Abnormality(0, false, false, false, AbnormalityType.Buff, "", "", "");
+            if (Abnormalities.TryGetValue(id, out var found))
+            {
+                ab = found;
+                return true;
+            }
+
+            return false;
         }
     }
 

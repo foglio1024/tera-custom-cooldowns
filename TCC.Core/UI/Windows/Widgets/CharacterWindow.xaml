@@ -544,7 +544,7 @@
                                     <Setter Property="Effect">
                                         <Setter.Value>
                                             <DropShadowEffect ShadowDepth="0"  
-                                                              Color="{Binding Player.Class , Converter={StaticResource ReColorConverter}, ConverterParameter=color}"
+                                                              Color="{Binding Player.Class , Converter={converters:ClassToReColorConverter}}"
                                                               
                                                               BlurRadius="50"></DropShadowEffect>
                                         </Setter.Value>
@@ -612,7 +612,7 @@
                         </Rectangle>
                     </Grid>
                     <controls:Arc StrokeThickness="4" StrokeEndLineCap="Flat"
-                               Stroke="{Binding Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=light}"
+                               Stroke="{Binding Player.Class, Converter={converters:ClassToReColorConverter Light=True}}"
                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="ReArc"
                                Width="82" Height="82" StartAngle="42" EndAngle="318"  RenderTransformOrigin=".5 .5" Margin="0" 
                                Rhomb="True">
@@ -629,7 +629,7 @@
                                         <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect ShadowDepth="0" 
-                                                                  Color="{Binding Player.Class, Converter={StaticResource ReColorConverter}, ConverterParameter=color}"
+                                                                  Color="{Binding Player.Class, Converter={converters:ClassToReColorConverter}}"
                                                                   BlurRadius="10"/>
                                             </Setter.Value>
                                         </Setter>
@@ -644,7 +644,7 @@
                         </controls:Arc.Style>
                     </controls:Arc>
                     <Image Opacity="1"
-                           Source="{Binding Player.Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=big}"
+                           Source="{Binding Player.Laurel, Converter={converters:LaurelImageConverter LaurelType=RhombBig}}"
                            Margin="-3 -2 -3 -4"/>
 
                     <elements:SorcererElementsControl Fire="{Binding Player.Fire}"
@@ -674,8 +674,8 @@
                     </elements:SorcererElementsControl>
                     <Grid>
                         <elements:EdgeRhombControl EdgeCounter="{Binding Player.StacksCounter}"
-                                                   FillBrush="{Binding Player.WarriorStance.CurrentStance, Converter={StaticResource StanceToColorConverter}, ConverterParameter=light_fallback}"
-                                                   GlowColor="{Binding Player.WarriorStance.CurrentStance, Converter={StaticResource StanceToColorConverter}, ConverterParameter=color_fallback}"
+                                                   FillBrush="{Binding Player.WarriorStance.CurrentStance, Converter={converters:WarriorStanceToColorConverter Light=True, Fallback=True}}"
+                                                   GlowColor="{Binding Player.WarriorStance.CurrentStance, Converter={converters:WarriorStanceToColorConverter Fallback=True}}"
                                                    >
                             <FrameworkElement.Style>
                                 <Style TargetType="FrameworkElement">

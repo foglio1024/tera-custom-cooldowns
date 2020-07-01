@@ -24,7 +24,7 @@ namespace TCC.Data.Pc
         private int _order;
         private bool _canInvite;
         private Laurel _laurel;
-        private string _name;
+        private string _name = "";
         private long _currentHp = 1;
         private int _currentMp = 1;
         private int _currentSt = 1;
@@ -38,12 +38,12 @@ namespace TCC.Data.Pc
         private bool _isWinning;
         private bool _isLeader;
         private bool _hasAggro;
-        private string _location;
+        private string _location = "";
         private readonly List<uint> _debuffList = new List<uint>();
-        private GearItem _weapon;
-        private GearItem _armor;
-        private GearItem _gloves;
-        private GearItem _boots;
+        private GearItem? _weapon;
+        private GearItem? _armor;
+        private GearItem? _gloves;
+        private GearItem? _boots;
         private bool _visible = true;
         private bool _inRange;
 
@@ -317,7 +317,7 @@ namespace TCC.Data.Pc
                 N(nameof(Location));
             }
         }
-        public GearItem Weapon
+        public GearItem? Weapon
         {
             get => _weapon;
             set
@@ -327,7 +327,7 @@ namespace TCC.Data.Pc
                 N(nameof(Weapon));
             }
         }
-        public GearItem Armor
+        public GearItem? Armor
         {
             get => _armor;
             set
@@ -337,7 +337,7 @@ namespace TCC.Data.Pc
                 N(nameof(Armor));
             }
         }
-        public GearItem Gloves
+        public GearItem? Gloves
         {
             get => _gloves;
             set
@@ -347,7 +347,7 @@ namespace TCC.Data.Pc
                 N(nameof(Gloves));
             }
         }
-        public GearItem Boots
+        public GearItem? Boots
         {
             get => _boots;
             set
@@ -477,8 +477,12 @@ namespace TCC.Data.Pc
             });
         }
 
-        private User()
+        public User(Dispatcher? d)
         {
+            Dispatcher = d ?? Dispatcher.CurrentDispatcher;
+            Debuffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
+            Buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
+
             AcceptApplyCommand = new RelayCommand(_ =>
             {
                 StubInterface.Instance.StubClient.GroupInviteUser(Name);
@@ -497,39 +501,32 @@ namespace TCC.Data.Pc
             {
                 StubInterface.Instance.StubClient.InspectUser(Name);
             });
+
         }
 
-
-        public User(Dispatcher d) : this()
+        public User(GroupMemberData other, Dispatcher? d = null) : this(d)
         {
-            Dispatcher = d ?? Dispatcher.CurrentDispatcher;
-            Debuffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
-            Buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
-        }
-
-        public User(GroupMemberData applicant, Dispatcher d = null) : this(d)
-        {
-            PlayerId = applicant.PlayerId;
-            UserClass = applicant.Class;
-            Level = applicant.Level;
-            Order = applicant.Order;
-            Location = Game.DB.GetSectionName(applicant.GuardId, applicant.SectionId);
-            IsLeader = applicant.IsLeader;
-            Online = applicant.Online;
-            Name = applicant.Name;
-            ServerId = applicant.ServerId == 0 ? Game.Me.ServerId : applicant.ServerId;
-            EntityId = applicant.EntityId;
-            CanInvite = applicant.CanInvite;
-            Laurel = applicant.Laurel;
-            Awakened = applicant.Awakened;
-            Alive = applicant.Alive;
-            CurrentHp = applicant.CurrentHP;
-            CurrentMp = applicant.CurrentMP;
-            MaxHp = applicant.MaxHP;
-            MaxMp = applicant.MaxMP;
-            CurrentSt = applicant.CurrentST;
-            MaxSt = applicant.MaxST;
-            InCombat = applicant.InCombat;
+            PlayerId = other.PlayerId;
+            UserClass = other.Class;
+            Level = other.Level;
+            Order = other.Order;
+            Location = Game.DB.GetSectionName(other.GuardId, other.SectionId);
+            IsLeader = other.IsLeader;
+            Online = other.Online;
+            Name = other.Name;
+            ServerId = other.ServerId == 0 ? Game.Me.ServerId : other.ServerId;
+            EntityId = other.EntityId;
+            CanInvite = other.CanInvite;
+            Laurel = other.Laurel;
+            Awakened = other.Awakened;
+            Alive = other.Alive;
+            CurrentHp = other.CurrentHP;
+            CurrentMp = other.CurrentMP;
+            MaxHp = other.MaxHP;
+            MaxMp = other.MaxMP;
+            CurrentSt = other.CurrentST;
+            MaxSt = other.MaxST;
+            InCombat = other.InCombat;
 
         }
     }

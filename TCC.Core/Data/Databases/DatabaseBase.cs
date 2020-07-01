@@ -18,23 +18,23 @@ namespace TCC.Data.Databases
         protected int outdatedCount;
 
         public abstract void Load();
-        public virtual void CheckVersion(string customAbsPath = null, string customRelPath = null)
+        public virtual void CheckVersion(string customAbsPath = "", string customRelPath = "")
         {
             if (!Exists)
             {
-                Log.F($"{customAbsPath ?? FullPath} not found. Skipping hash check.");
+                Log.F($"{(string.IsNullOrEmpty(customAbsPath) ? FullPath : customAbsPath)} not found. Skipping hash check.");
                 return;
             }
-            var localHash = HashUtils.GenerateFileHash(customAbsPath ?? FullPath);
+            var localHash = HashUtils.GenerateFileHash((string.IsNullOrEmpty(customAbsPath) ? FullPath : customAbsPath));
             if (UpdateManager.DatabaseHashes.Count == 0)
             {
                 Log.F($"No database hashes in update manager. Skipping hash check.");
                 return;
             }
 
-            if (!UpdateManager.DatabaseHashes.TryGetValue(customRelPath ?? RelativePath, out var remoteHash))
+            if (!UpdateManager.DatabaseHashes.TryGetValue(string.IsNullOrEmpty(customRelPath) ? RelativePath : customRelPath, out var remoteHash))
             {
-                Log.F($"No entry found in update manager for {customAbsPath ?? FullPath}. Skipping hash check.");
+                Log.F($"No entry found in update manager for {(string.IsNullOrEmpty(customAbsPath) ? FullPath : customAbsPath)}. Skipping hash check.");
                 return;
             }
 
@@ -46,15 +46,16 @@ namespace TCC.Data.Databases
             outdatedCount++;
 
         }
-        public DatabaseBase(string lang)
+
+        protected DatabaseBase(string lang)
         {
             Language = lang;
             FullPath = Path.Combine(App.DataPath, RelativePath);
         }
 
-        public virtual void Update(string custom = null)
+        public virtual void Update(string custom = "")
         {
-            UpdateManager.UpdateDatabase(custom ?? RelativePath);
+            UpdateManager.UpdateDatabase(string.IsNullOrEmpty(custom) ? RelativePath : custom);
         }
     }
 }

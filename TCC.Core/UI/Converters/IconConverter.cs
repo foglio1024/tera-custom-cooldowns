@@ -7,14 +7,9 @@ namespace TCC.UI.Converters
 {
     public class IconConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
-            var iconName = "unknown";
-            if (string.IsNullOrEmpty(value?.ToString())) 
-                return Path.Combine(App.ResourcesPath, "images/" + iconName + ".png");
-
-            iconName = value.ToString();
-            iconName = iconName.Replace(".", "/");
+            var iconName = value?.ToString()?.Replace(".", "/") ?? "unknown";
 
             return Path.Combine(App.ResourcesPath, "images/" + iconName + ".png");
         }

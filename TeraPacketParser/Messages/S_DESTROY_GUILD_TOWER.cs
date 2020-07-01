@@ -25,7 +25,9 @@ namespace TeraPacketParser.Messages
             }
             catch
             {
-                // ignored
+                SourceGuildName = "";
+                PlayerName = "";
+                TargetGuildName = "";
             }
         }
     }

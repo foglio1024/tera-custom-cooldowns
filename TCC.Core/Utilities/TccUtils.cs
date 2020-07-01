@@ -17,6 +17,7 @@ using TCC.UI;
 using TCC.Utils;
 using TCC.ViewModels;
 using TeraDataLite;
+using Brushes = TCC.R.Brushes;
 using Colors = TCC.R.Colors;
 
 namespace TCC.Utilities
@@ -132,7 +133,7 @@ namespace TCC.Utilities
 
         public static TClassLayoutVM CurrentClassVM<TClassLayoutVM>() where TClassLayoutVM : BaseClassLayoutVM
         {
-            return WindowManager.ViewModels.ClassVM.CurrentManager as TClassLayoutVM;
+            return (TClassLayoutVM) WindowManager.ViewModels.ClassVM.CurrentManager;
         }
 
         public static Race RaceFromTemplateId(int templateId)
@@ -231,13 +232,105 @@ namespace TCC.Utilities
             Console.SetOut(writer);
         }
 
-        public static void OpenUrl(string url)
+        public static void OpenUrl(string? url)
         {
             Process.Start(new ProcessStartInfo
             {
                 FileName = url,
                 UseShellExecute = true
             });
+        }
+
+        public static SolidColorBrush ChatChannelToBrush(ChatChannel ch)
+        {
+            return ch switch
+            {
+                ChatChannel.Say => Brushes.ChatSayBrush,
+                ChatChannel.Party => Brushes.ChatPartyBrush,
+                ChatChannel.Guild => Brushes.ChatGuildBrush,
+                ChatChannel.Area => Brushes.ChatAreaBrush,
+                ChatChannel.Trade => Brushes.ChatTradeBrush,
+                ChatChannel.Greet => Brushes.ChatGreetBrush,
+                ChatChannel.Angler => Brushes.ChatGreetBrush,
+                ChatChannel.PartyNotice => Brushes.ChatPartyNoticeBrush,
+                ChatChannel.RaidNotice => Brushes.ChatRaidNoticeBrush,
+                ChatChannel.Emote => Brushes.ChatEmoteBrush,
+                ChatChannel.Global => Brushes.ChatGlobalBrush,
+                ChatChannel.Raid => Brushes.ChatRaidBrush,
+                ChatChannel.GuildAdvertising => Brushes.ChatGuildAdBrush,
+                ChatChannel.Private1 => Brushes.ChatPrivateBrush,
+                ChatChannel.Private2 => Brushes.ChatPrivateBrush,
+                ChatChannel.Private3 => Brushes.ChatPrivateBrush,
+                ChatChannel.Private4 => Brushes.ChatPrivateBrush,
+                ChatChannel.Private5 => Brushes.ChatPrivateBrush,
+                ChatChannel.Private6 => Brushes.ChatPrivateBrush,
+                ChatChannel.Private7 => Brushes.ChatProxyBrush,
+                ChatChannel.Private8 => Brushes.ChatProxyBrush,
+                ChatChannel.SentWhisper => Brushes.ChatWhisperBrush,
+                ChatChannel.ReceivedWhisper => Brushes.ChatWhisperBrush,
+                ChatChannel.System => Brushes.ChatSystemGenericBrush,
+                ChatChannel.Notify => Brushes.ChatSystemNotifyBrush,
+                ChatChannel.Event => Brushes.ChatSystemEventBrush,
+                ChatChannel.Error => Brushes.ChatSystemErrorBrush,
+                ChatChannel.Group => Brushes.ChatSystemGroupBrush,
+                ChatChannel.GuildNotice => Brushes.ChatGuildBrush,
+                ChatChannel.Deathmatch => Brushes.ChatSystemDeathmatchBrush,
+                ChatChannel.ContractAlert => Brushes.ChatSystemContractAlertBrush,
+                ChatChannel.GroupAlerts => Brushes.ChatSystemGroupAlertBrush,
+                ChatChannel.Loot => Brushes.ChatSystemLootBrush,
+                ChatChannel.Exp => Brushes.ChatSystemExpBrush,
+                ChatChannel.Money => Brushes.ChatSystemMoneyBrush,
+                ChatChannel.TradeRedirect => Brushes.ChatTradeBrush,
+                ChatChannel.Enchant => Brushes.EnchantLowBrush,
+                ChatChannel.Laurel => Brushes.EnchantHighBrush,
+                ChatChannel.RaidLeader => Brushes.ChatRaidNoticeBrush,
+                ChatChannel.TCC => Brushes.MainBrush,
+                ChatChannel.Bargain => Brushes.ChatSystemBargainBrush,
+                ChatChannel.Apply => Brushes.ChatMegaphoneBrush,
+                ChatChannel.LFG => Brushes.ChatMegaphoneBrush,
+                ChatChannel.Megaphone => Brushes.ChatMegaphoneBrush,
+                ChatChannel.Death => Brushes.HpBrush,
+                ChatChannel.Damage => Brushes.HpBrush,
+                ChatChannel.Ress => Brushes.GreenBrush,
+                ChatChannel.Quest => Brushes.ChatSystemQuestBrush,
+                ChatChannel.Friend => Brushes.ChatSystemFriendBrush,
+                ChatChannel.Twitch => Brushes.TwitchBrush,
+                ChatChannel.WorldBoss => Brushes.ChatSystemWorldBossBrush,
+                ChatChannel.Guardian => Brushes.GuardianBrush,
+                _ => Brushes.ChatSystemGenericBrush
+            };
+        }
+        public static string ChatChannelToName(ChatChannel ch)
+        {
+            return ch switch
+            {
+                ChatChannel.PartyNotice => "Notice",
+                ChatChannel.RaidNotice => "Notice",
+                ChatChannel.GuildAdvertising => "G. Ad",
+                ChatChannel.Megaphone => "Megaphone",
+                ChatChannel.Private1 => (ChatManager.Instance.PrivateChannels[0].Name ?? ch.ToString()),
+                ChatChannel.Private2 => (ChatManager.Instance.PrivateChannels[1].Name ?? ch.ToString()),
+                ChatChannel.Private3 => (ChatManager.Instance.PrivateChannels[2].Name ?? ch.ToString()),
+                ChatChannel.Private4 => (ChatManager.Instance.PrivateChannels[3].Name ?? ch.ToString()),
+                ChatChannel.Private5 => (ChatManager.Instance.PrivateChannels[4].Name ?? ch.ToString()),
+                ChatChannel.Private6 => (ChatManager.Instance.PrivateChannels[5].Name ?? ch.ToString()),
+                ChatChannel.Private7 => (ChatManager.Instance.PrivateChannels[6].Name ?? ch.ToString()),
+                ChatChannel.Private8 => (ChatManager.Instance.PrivateChannels[7].Name ?? ch.ToString()),
+                ChatChannel.Notify => "Info",
+                ChatChannel.Error => "Alert",
+                ChatChannel.GuildNotice => "Guild",
+                ChatChannel.GroupAlerts => "Group",
+                ChatChannel.TradeRedirect => "Global",
+                ChatChannel.Enchant => "Gear",
+                ChatChannel.RaidLeader => "Leader",
+                ChatChannel.Bargain => "Offer",
+                ChatChannel.WorldBoss => "W.B.",
+                ChatChannel.SystemDefault => "System",
+                ChatChannel.Damage => "Dmg",
+                ChatChannel.Guardian => "G.L.",
+                ChatChannel.ReceivedWhisper => "Whisper",
+                _ => ch.ToString()
+            };
         }
     }
 }

@@ -66,7 +66,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         }
 
 
-        public event Action<string> Warning;
+        public event Action<string> Warning = null!;
 
         protected virtual void OnWarning(string obj)
         {

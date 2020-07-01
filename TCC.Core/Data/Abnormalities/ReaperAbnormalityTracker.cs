@@ -59,42 +59,42 @@ namespace TCC.Data.Abnormalities
             if (AssassinateId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShroudedEscape.Buff.Start(p.Duration);
+            vm.ShroudedEscape.StartEffect(p.Duration);
         }
         private static void CheckAssassinate(S_ABNORMALITY_REFRESH p)
         {
             if (AssassinateId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShroudedEscape.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.ShroudedEscape.RefreshEffect(p.Duration);
         }
         private static void CheckAssassinate(S_ABNORMALITY_END p)
         {
             if (AssassinateId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShroudedEscape.Buff.Stop();
+            vm.ShroudedEscape.StopEffect();
         }
         private static void CheckShadowReaping(S_ABNORMALITY_BEGIN p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShadowReaping.Buff.Start(p.Duration);
+            vm.ShadowReaping.StartEffect(p.Duration);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_REFRESH p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShadowReaping.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.ShadowReaping.RefreshEffect(p.Duration);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_END p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShadowReaping.Buff.Stop();
+            vm.ShadowReaping.StopEffect();
         }
 
     }

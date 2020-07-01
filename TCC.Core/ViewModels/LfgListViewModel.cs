@@ -27,10 +27,10 @@ namespace TCC.ViewModels
     public class LfgListViewModel : TccWindowViewModel
     {
         #region Events
-        public event Action<int> Publicized;
-        public event Action CreatingStateChanged;
-        public event Action TempLfgCreated;
-        public event Action MyLfgStateChanged;
+        public event Action<int> Publicized = null!;
+        public event Action CreatingStateChanged = null!;
+        public event Action TempLfgCreated = null!;
+        public event Action MyLfgStateChanged = null!;
 
         #endregion
 
@@ -41,11 +41,11 @@ namespace TCC.ViewModels
         private bool _creating;
         private bool _creatingRaid;
         private int _lastGroupSize;
-        public Listing LastClicked;
-        private string _newMessage;
+        public Listing? LastClicked;
+        private string _newMessage = "";
         private bool _isPopupOpen;
 
-        public string LastSortDescr { get; set; } = "Message";
+        public string? LastSortDescr { get; set; } = "Message";
         public int PublicizeCooldown => 5;
         public int AutoPublicizeCooldown => 20;
 
@@ -158,11 +158,11 @@ namespace TCC.ViewModels
 
         public bool HideTradeListings
         {
-            get => ((LfgWindowSettings) Settings).HideTradeListings;
+            get => ((LfgWindowSettings)Settings).HideTradeListings;
             set
             {
-                if (((LfgWindowSettings) Settings).HideTradeListings == value) return;
-                ((LfgWindowSettings) Settings).HideTradeListings = value;
+                if (((LfgWindowSettings)Settings).HideTradeListings == value) return;
+                ((LfgWindowSettings)Settings).HideTradeListings = value;
                 N();
             }
         }
@@ -200,7 +200,6 @@ namespace TCC.ViewModels
             KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
 
             RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
-            //PublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(PublicizeCooldown), DispatcherPriority.Background, OnPublicizeTimerTick, Dispatcher) { IsEnabled = false };
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
 
             SortCommand = new SortCommand(ListingsView);
@@ -262,7 +261,7 @@ namespace TCC.ViewModels
             else WindowManager.LfgListWindow.HideWindow();
         }
 
-        private void OnAutoPublicizeTimerTick(object sender, EventArgs e)
+        private void OnAutoPublicizeTimerTick(object? sender, EventArgs e)
         {
             if (Game.IsInDungeon || !AmIinLfg) _stopAuto = true;
 
@@ -348,7 +347,7 @@ namespace TCC.ViewModels
             }
         }
 
-        private void RequestNextLfg(object sender, EventArgs e)
+        private void RequestNextLfg(object? sender, EventArgs e)
         {
             if (!App.Settings.LfgWindowSettings.Enabled) return;
             if (RequestQueue.Count == 0) return;
@@ -382,6 +381,7 @@ namespace TCC.ViewModels
 
         internal void RemoveDeadLfg()
         {
+            if (LastClicked == null) return;
             Listings.Remove(LastClicked);
         }
 
@@ -464,11 +464,6 @@ namespace TCC.ViewModels
                 var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
                 if (target != null) Listings.Remove(target);
             });
-        }
-
-        public void RefreshSorting()
-        {
-            SortCommand.Refresh(LastSortDescr);
         }
 
         private void NotifyMyLfg()
@@ -673,9 +668,7 @@ namespace TCC.ViewModels
         private readonly ICollectionViewLiveShaping _view;
         private bool _refreshing;
         private ListSortDirection _direction = ListSortDirection.Ascending;
-#pragma warning disable 0067
-        public event EventHandler CanExecuteChanged;
-#pragma warning restore 0067
+        public event EventHandler CanExecuteChanged = null!;
         public bool CanExecute(object parameter)
         {
             return true;
@@ -683,7 +676,7 @@ namespace TCC.ViewModels
 
         public void Execute(object parameter)
         {
-            var f = (string) parameter;
+            var f = (string)parameter;
             if (!_refreshing)
                 _direction = _direction == ListSortDirection.Ascending
                     ? ListSortDirection.Descending

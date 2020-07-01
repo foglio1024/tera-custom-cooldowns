@@ -4,7 +4,7 @@ namespace TCC.Publisher.ViewModels.Steps
 {
     public class CreateReleaseStepVM : StepVM
     {
-        private string _releaseCreatedLabel;
+        private string _releaseCreatedLabel = "";
         public string ReleaseCreatedLabel
         {
             get => _releaseCreatedLabel;
@@ -28,7 +28,7 @@ namespace TCC.Publisher.ViewModels.Steps
                 if (emptyNotesConf != MessageBoxResult.Yes) return;
             }
 
-            await Publisher.CreateRelease(VM.ReleaseNotes);
+            await Publisher.Instance.CreateRelease(VM.ReleaseNotes);
 
             ReleaseCreatedLabel = "Release created";
             VM.Progress = 6 / 0.07;

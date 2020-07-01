@@ -1,4 +1,7 @@
-﻿namespace TCC.Data.Map
+﻿using System.Linq;
+using System.Xml.Linq;
+
+namespace TCC.Data.Map
 {
     public class Section
     {
@@ -23,17 +26,34 @@
             //Height = height;
             IsDungeon = dg;
         }
-
-/*
-        public bool ContainsPoint(float x, float y)
+        public static Section FromXElement(XElement sectionElem)
         {
-            var matchesY = y > Left && y < Width + Left;
-            var matchesX = x < Top && x > Top - Height;
-            if (matchesX & matchesY)
+            var sectionId = 0U;
+            var sectionNameId = 0U;
+            var sectionMapId = "";
+            var isDungeon = false;
+
+            sectionElem.Attributes().ToList().ForEach(a =>
             {
-            }
-            return matchesX && matchesY;
+                if (a.Name == "id") sectionId = uint.Parse(a.Value);
+                if (a.Name == "nameId") sectionNameId = uint.Parse(a.Value);
+                if (a.Name == "mapId") sectionMapId = a.Value;
+                if (a.Name == "type") isDungeon = a.Value == "dungeon";
+            });
+            return new Section(sectionId, sectionNameId, sectionMapId, isDungeon);
         }
-*/
+
+
+        /*
+                public bool ContainsPoint(float x, float y)
+                {
+                    var matchesY = y > Left && y < Width + Left;
+                    var matchesX = x < Top && x > Top - Height;
+                    if (matchesX & matchesY)
+                    {
+                    }
+                    return matchesX && matchesY;
+                }
+        */
     }
 }

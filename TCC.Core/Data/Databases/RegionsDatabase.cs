@@ -9,7 +9,7 @@ namespace TCC.Data.Databases
         protected override string FolderName => "regions";
         protected override string Extension => "tsv";
 
-        public Dictionary<uint, string> Names { get; }
+        private Dictionary<uint, string> Names { get; }
 
         public RegionsDatabase(string lang) : base(lang)
         {
@@ -36,7 +36,7 @@ namespace TCC.Data.Databases
         }
         public string GetZoneName(uint zoneId)
         {
-            return Names.TryGetValue(zoneId, out var name) ? name : "Unknown";
+            return Names.TryGetValue(zoneId, out var name) ? name : $"Unknown ({zoneId})";
         }
 
     }

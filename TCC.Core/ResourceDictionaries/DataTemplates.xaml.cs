@@ -14,7 +14,9 @@ namespace TCC.ResourceDictionaries
     {
         private void OnCharacterNameMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            WindowManager.ViewModels.DashboardVM.SelectCharacter((sender as FrameworkElement)?.DataContext as Character);
+            var dc = ((FrameworkElement) sender)?.DataContext;
+            if (dc != null)
+                WindowManager.ViewModels.DashboardVM.SelectCharacter((Character) dc);
         }
 
         private void LfgMessage_OnKeyDown(object sender, KeyEventArgs e)

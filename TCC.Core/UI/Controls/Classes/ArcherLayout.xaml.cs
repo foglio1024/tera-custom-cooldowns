@@ -9,21 +9,20 @@ namespace TCC.UI.Controls.Classes
 {
     public partial class ArcherLayout
     {
-        private ArcherLayoutVM _context;
-        private DoubleAnimation _an;
-        private DoubleAnimation _an2;
+        private ArcherLayoutVM? _context;
+        private readonly DoubleAnimation _an;
+        private readonly DoubleAnimation _an2;
 
         public ArcherLayout()
         {
+            _an = AnimationFactory.CreateDoubleAnimation(150, 42, 318, framerate: 20);
+            _an2 = AnimationFactory.CreateDoubleAnimation(150, 0, framerate: 30);
             InitializeComponent();
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             _context = (ArcherLayoutVM)DataContext;
-            _an = AnimationFactory.CreateDoubleAnimation(150, 42, 318, framerate: 20);
-            _an2 = AnimationFactory.CreateDoubleAnimation(150, 0, framerate: 30);
-
             _context.Focus.EmpoweredBuffStarted += OnFocusXStarted;
             _context.Focus.BaseStacksChanged += OnStacksChanged;
         }

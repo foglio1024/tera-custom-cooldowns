@@ -7,27 +7,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public class TcpSniffer
     {
-        private readonly ConcurrentDictionary<ConnectionId, TcpConnection> _connections =
-            new ConcurrentDictionary<ConnectionId, TcpConnection>();
+        private readonly ConcurrentDictionary<ConnectionId, TcpConnection> _connections = new ConcurrentDictionary<ConnectionId, TcpConnection>();
 
         private readonly object _lock = new object();
-        private string _snifferType;
-        //internal struct QPacket
-        //{
-        //    internal TcpConnection Connection;
-        //    internal uint SequenceNumber;
-        //    internal ArraySegment<byte> Packet;
-
-        //    internal QPacket(TcpConnection connection, uint sequenceNumber, ArraySegment<byte> packet)
-        //    {
-        //        Connection = connection;
-        //        SequenceNumber = sequenceNumber;
-        //        var data = new byte[packet.Count];
-        //        Array.Copy(packet.Array, packet.Offset, data, 0, packet.Count);
-        //        Packet = new ArraySegment<byte>(data,0,data.Length);
-        //    }
-        //}
-        //private ConcurrentQueue<QPacket> _buffer = new ConcurrentQueue<QPacket>();
+        private readonly string? _snifferType;
         public TcpSniffer(IpSniffer ipSniffer)
         {
             ipSniffer.PacketReceived += Receive;
@@ -35,17 +18,16 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             //Task.Run(()=>ParsePacketsLoop());
         }
 
-        public string TcpLogFile { get; set; }
 
-        public event Action<TcpConnection> NewConnection;
-        public event Action<TcpConnection> EndConnection;
+        public event Action<TcpConnection?> NewConnection = null!;
+        public event Action<TcpConnection?> EndConnection = null!;
 
         protected void OnNewConnection(TcpConnection connection)
         {
             var handler = NewConnection;
             handler?.Invoke(connection);
         }
-        protected void OnEndConnection(TcpConnection connection)
+        protected void OnEndConnection(TcpConnection? connection)
         {
             var handler = EndConnection;
             handler?.Invoke(connection);
@@ -78,7 +60,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 tcpPacket.DestinationPort);
 
 
-            TcpConnection connection;
+            TcpConnection? connection;
             bool isInterestingConnection;
             if (isFirstPacket)
             {
@@ -99,7 +81,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 lock (_lock)
                 {
                     if (tcpPacket.Fin || tcpPacket.Rst) {OnEndConnection(connection); return;}
-                    connection.HandleTcpReceived(tcpPacket.SequenceNumber, payload);
+                    connection?.HandleTcpReceived(tcpPacket.SequenceNumber, payload);
                 }
                 //if (!string.IsNullOrEmpty(TcpLogFile))
                 //    File.AppendAllText(TcpLogFile,

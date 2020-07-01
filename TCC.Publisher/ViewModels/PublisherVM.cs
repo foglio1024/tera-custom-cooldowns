@@ -8,10 +8,10 @@ namespace TCC.Publisher.ViewModels
     {
         private double _progress;
         private bool _completed;
-        private string _releaseNotes;
+        private string _releaseNotes = "";
 
-        public event Action ProgressChanged;
-        public event Action Finished;
+        public event Action ProgressChanged = null!;
+        public event Action Finished = null!;
 
         public double Progress
         {
@@ -21,7 +21,6 @@ namespace TCC.Publisher.ViewModels
                 if (_progress == value) return;
                 _progress = value;
                 ProgressChanged?.Invoke();
-                //N();
             }
         }
         public bool Completed

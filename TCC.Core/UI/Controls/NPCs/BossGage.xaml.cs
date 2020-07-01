@@ -13,11 +13,10 @@ namespace TCC.UI.Controls.NPCs
     {
         private bool _firstLoad = true;
 
-        public BossViewModel VM { get; set; }
+        public BossViewModel? VM { get; set; }
 
         private readonly DoubleAnimation _enrageArcAnimation;
         private readonly DoubleAnimation _hpAnim;
-        //private readonly DoubleAnimation _flash;
         private readonly DoubleAnimation _slideAnim;
         private readonly DoubleAnimation _timerAnim;
         private readonly DoubleAnimation _fadeAnim;
@@ -32,7 +31,7 @@ namespace TCC.UI.Controls.NPCs
             _slideAnim= AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);
             _hpAnim = AnimationFactory.CreateDoubleAnimation(150, 1, easing: true);
             _timerAnim = AnimationFactory.CreateDoubleAnimation(1, 0, framerate: 20);
-            _enrageArcAnimation = AnimationFactory.CreateDoubleAnimation(1, 0, 1, framerate: 30, completed: _enrageArcAnimation_Completed);
+            _enrageArcAnimation = AnimationFactory.CreateDoubleAnimation(1, 0, 1, framerate: 30, completed: EnrageArcAnimation_Completed);
             _fadeAnim = AnimationFactory.CreateDoubleAnimation(250, 0, 1, framerate: 30);
 
             SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
@@ -40,7 +39,8 @@ namespace TCC.UI.Controls.NPCs
 
         private void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue is NPC npc) VM = new BossViewModel(npc);
+            if (!(e.NewValue is NPC npc)) return;
+            VM = new BossViewModel(npc);
         }
 
         private void RefreshAbnormalityTemplate()
@@ -53,6 +53,7 @@ namespace TCC.UI.Controls.NPCs
         {
             Dispatcher?.Invoke(() =>
             {
+                if(VM?.NPC?.TimerPattern == null) return;
                 _timerAnim.From = VM.NPC.TimerPattern is HpTriggeredTimerPattern hptp ? hptp.StartAt : 1;
                 _timerAnim.Duration = TimeSpan.FromSeconds(VM.NPC.TimerPattern.Duration);
                 TimerDotPusher.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _timerAnim);
@@ -62,14 +63,15 @@ namespace TCC.UI.Controls.NPCs
         private void OnHpChanged()
         {
             AnimateHp();
+            if (VM?.NPC == null) return;
             if (VM.NPC.Enraged) SlideEnrageIndicator(VM.CurrentPercentage);
         }
         private void OnEnragedChanged()
         {
+            if (VM?.NPC == null) return;
             if (VM.NPC.Enraged)
             {
                 SlideEnrageIndicator(VM.CurrentPercentage);
-                //EnrageBorder.BeginAnimation(OpacityProperty, _flash);
                 if (VM.NPC.EnragePattern.StaysEnraged) return;
                 _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
                 EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
@@ -86,7 +88,7 @@ namespace TCC.UI.Controls.NPCs
 
         private void AnimateHp()
         {
-            if (VM.NPC == null) return; //weird but could happen 
+            if (VM?.NPC == null) return; //weird but could happen 
             _hpAnim.To = VM.NPC.HPFactor; //still crashing here ffs
             DotPusher.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
             HpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
@@ -95,6 +97,7 @@ namespace TCC.UI.Controls.NPCs
         {
             if (!_firstLoad) return;
             _firstLoad = false;
+            if (VM == null) return;
             VM.HpFactorChanged += OnHpChanged;
             VM.EnragedChanged += OnEnragedChanged;
             VM.ReEnraged += OnReEnraged;
@@ -110,6 +113,7 @@ namespace TCC.UI.Controls.NPCs
 
         private void OnReEnraged()
         {
+            if (VM == null) return;
             _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
             EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
         }
@@ -118,6 +122,7 @@ namespace TCC.UI.Controls.NPCs
         {
             DataContextChanged -= OnDataContextChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged -= RefreshAbnormalityTemplate;
+            if (VM == null) return;
             VM.HpFactorChanged -= OnHpChanged;
             VM.EnragedChanged -= OnEnragedChanged;
             VM.ReEnraged -= OnReEnraged;
@@ -129,20 +134,15 @@ namespace TCC.UI.Controls.NPCs
         private void AnimateFadeOut()
         {
             _fadeAnim.Duration = TimeSpan.FromMilliseconds(500);
-            //LayoutTransform = new ScaleTransform { ScaleY = 1 };
-            //LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _fadeAnim);
-            //this.BeginAnimation(OpacityProperty, _fadeAnim);            
-            //BossNameGrid.BeginAnimation(OpacityProperty, _fadeAnim);
-            //HpBarGrid.BeginAnimation(OpacityProperty, _fadeAnim);
-            //TopInfoGrid.BeginAnimation(OpacityProperty, _fadeAnim);
             BeginAnimation(OpacityProperty, _fadeAnim);
         }
 
-        private void _enrageArcAnimation_Completed(object sender, EventArgs e)
+        private void EnrageArcAnimation_Completed(object? sender, EventArgs e)
         {
             EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
             try
             {
+                if (VM == null) return;
                 ((ScaleTransform)EnrageBar.RenderTransform).ScaleX = VM.NPC.Enraged ? 1 : 0;
             }
             catch
@@ -162,11 +162,13 @@ namespace TCC.UI.Controls.NPCs
 
         private void BossGage_OnMouseEnter(object sender, MouseEventArgs e)
         {
+            if (VM == null) return;
             VM.ShowOverrideBtn = true;
         }
 
         private void BossGage_OnMouseLeave(object sender, MouseEventArgs e)
         {
+            if (VM == null) return;
             VM.ShowOverrideBtn = false;
         }
     }

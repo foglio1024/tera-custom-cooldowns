@@ -14,15 +14,13 @@ namespace TCC.Notice
     public static class NoticeChecker
     {
         private const string Url = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/messages.json";
-        private static List<NoticeBase> _notices;
-        private static Timer _checkTimer;
+        private static List<NoticeBase> _notices = new List<NoticeBase>();
+        private static readonly Timer _checkTimer = new Timer(60 * 5 * 1000);
 
         public static void Init()
         {
             App.ReadyEvent += Ready;
-
-            _notices = new List<NoticeBase>();
-            _checkTimer = new Timer(60 * 5 * 1000);
+            
             _checkTimer.Elapsed += OnTimerElapsed;
             _checkTimer.Start();
 
@@ -76,25 +74,41 @@ namespace TCC.Notice
 
                 var newNotices = new List<NoticeBase>();
 
-                foreach (var jNotice in jMsg["notices"])
+                var jNotices = jMsg["notices"];
+                if (jNotices == null) return;
+                foreach (var jNotice in jNotices)
                 {
-                    var type = jNotice["Type"].Value<string>();
-                    var details = jNotice["Details"];
+                    var jType = jNotice["Type"];
+                    if(jType == null) continue;
+                    var type = jType.Value<string>();
+
+                    var jDetails = jNotice["Details"];
+                    if(jDetails == null) continue;
+
                     // todo: maybe use a factory
+                    var jEnabled = jNotice[nameof(NoticeBase.Enabled)];
+                    var jTrigger = jNotice[nameof(NoticeBase.Trigger)];
+                    var jTitle = jDetails[nameof(NoticeBase.Title)];
+                    var jContent = jDetails[nameof(NoticeBase.Content)];
+
+                    if (jEnabled == null || jTrigger == null || jTitle == null || jContent == null) continue;
                     var notice = new NoticeBase
                     {
-                        Enabled = jNotice[nameof(NoticeBase.Enabled)].Value<bool>(),
-                        Trigger = (NoticeTrigger)jNotice[nameof(NoticeBase.Trigger)].Value<int>(),
-                        Title = details[nameof(NoticeBase.Title)].Value<string>(),
-                        Content = details[nameof(NoticeBase.Content)].Value<string>()
+                        Enabled = jEnabled.Value<bool>(),
+                        Trigger = (NoticeTrigger)jTrigger.Value<int>(),
+                        Title = jTitle.Value<string>(),
+                        Content = jContent.Value<string>()
                     };
 
+                    var jDuration = jDetails[nameof(NotificationNotice.Duration)];
+                    var jNotifType = jDetails[nameof(NotificationNotice.NotificationType)];
+                    if(jDuration  == null || jNotifType == null) continue;
                     notice = type switch
                     {
                         nameof(NotificationNotice) => new NotificationNotice(notice)
                         {
-                            Duration = details[nameof(NotificationNotice.Duration)].Value<int>(),
-                            NotificationType = (NotificationType)details[nameof(NotificationNotice.NotificationType)].Value<int>()
+                            Duration = jDuration.Value<int>(),
+                            NotificationType = (NotificationType)jNotifType.Value<int>()
                         },
                         nameof(MessageBoxNotice) => new MessageBoxNotice(notice),
                         _ => notice

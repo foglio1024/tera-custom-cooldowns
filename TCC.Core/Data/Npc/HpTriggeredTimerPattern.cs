@@ -16,14 +16,15 @@
         public override void SetTarget(NPC target)
         {
             base.SetTarget(target);
-            Target.PropertyChanged += OnTargetPropertyChanged;
+            target.PropertyChanged += OnTargetPropertyChanged;
         }
 
         private void OnTargetPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (Running) return;
             if (e.PropertyName != nameof(NPC.HPFactor)) return;
-            if (Target.HPFactor < StartAt) Start();
+            if (!(sender is NPC npc) || !(npc.HPFactor < StartAt)) return;
+            Start();
         }
     }
 }

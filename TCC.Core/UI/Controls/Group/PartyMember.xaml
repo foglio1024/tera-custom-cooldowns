@@ -6,6 +6,7 @@
                        xmlns:pc="clr-namespace:TCC.Data.Pc"
                        xmlns:group="clr-namespace:TCC.UI.Controls.Group"
                        xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                       xmlns:converters1="clr-namespace:TCC.UI.Converters"
                        mc:Ignorable="d"
                        d:DataContext="{d:DesignInstance pc:User}">
     <group:GroupMemberBase.Resources>
@@ -250,7 +251,7 @@
                                                             Converter={converters:BoolToVisibility}}">
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="1 0">
-                                <GradientStop Color="{Binding UserClass, Converter={StaticResource ReColorConverter}, ConverterParameter=color}" Offset="0.98" />
+                                <GradientStop Color="{Binding UserClass, Converter={converters1:ClassToReColorConverter}}" Offset="0.98" />
                                 <GradientStop Color="White" Offset="1" />
                             </LinearGradientBrush>
                         </Rectangle.Fill>
@@ -420,7 +421,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Stretch"
                    Stretch="Uniform"
-                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=half}"
+                   Source="{Binding Laurel, Converter={converters1:LaurelImageConverter LaurelType=RhombBottom}}"
                    Visibility="{Binding ShowLaurel, RelativeSource={RelativeSource AncestorType=group:GroupMemberBase},
                                                     Converter={converters:BoolToVisibility}}">
                 <Image.RenderTransform>

@@ -18,7 +18,6 @@ using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Processing;
 using TCC.UI;
-using TCC.UI.Converters;
 using TCC.UI.Windows;
 using TCC.Update;
 using TCC.Utilities;
@@ -37,13 +36,13 @@ namespace TCC
         private static bool _loadingScreen = true;
         private static bool _encounter;
         private static bool _inGameChatOpen;
-        private static bool _inGameUiOn;
+        private static bool _inGameUiOn = true;
 
         public static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
         public static readonly Dictionary<ulong, Tuple<string, Class>> NearbyPlayers = new Dictionary<ulong, Tuple<string, Class>>();
         public static readonly GroupInfo Group = new GroupInfo();
         public static readonly GuildInfo Guild = new GuildInfo();
-        public static Server Server { get; set; } = new Server("", "", "", 0);
+        public static Server Server { get; set; } = new Server("Unknown", "Unknown", "0.0.0.0", 0);
         public static Account Account { get; set; } = new Account();
         public static string Language => DB.ServerDatabase.StringLanguage;
 
@@ -116,29 +115,29 @@ namespace TCC
         public static int CurrentZoneId { get; private set; }
         public static List<FriendData> FriendList { get; private set; } = new List<FriendData>();
         public static List<string> BlockList { get; } = new List<string>();
-        public static AbnormalityTracker CurrentAbnormalityTracker { get; private set; }
+        public static AbnormalityTracker CurrentAbnormalityTracker { get; private set; } = new AbnormalityTracker();
 
         public static bool IsMe(ulong eid)
         {
             return eid == Me.EntityId;
         }
 
-        public static event Action ChatModeChanged;
-        public static event Action GameUiModeChanged;
-        public static event Action EncounterChanged;
-        public static event Action CombatChanged;
-        public static event Action LoadingScreenChanged;
-        public static event Action LoggedChanged;
-        public static event Action DatabaseLoaded;
-        public static event Action Teleported;
-        public static event Action SkillStarted;
+        public static event Action ChatModeChanged = null!;
+        public static event Action GameUiModeChanged = null!;
+        public static event Action EncounterChanged = null!;
+        public static event Action CombatChanged = null!;
+        public static event Action LoadingScreenChanged = null!;
+        public static event Action LoggedChanged = null!;
+        public static event Action DatabaseLoaded = null!;
+        public static event Action Teleported = null!;
+        public static event Action SkillStarted = null!;
 
         public static Player Me { get; } = new Player();
-        public static TccDatabase DB { get; private set; }
+        public static TccDatabase DB { get; private set; } = null!;
 
         public static bool CivilUnrestZone => CurrentZoneId == 152;
         public static bool IsInDungeon => CurrentZoneId >= 8999; // TODO: this doesn't apply anymore
-        public static string CurrentAccountNameHash { get; private set; }
+        public static string CurrentAccountNameHash { get; private set; } = "";
 
 
         public static async Task InitAsync()
@@ -326,7 +325,7 @@ namespace TCC
                 Class.Brawler => new BrawlerAbnormalityTracker(),
                 Class.Ninja => new NinjaAbnormalityTracker(),
                 Class.Valkyrie => new ValkyrieAbnormalityTracker(),
-                _ => CurrentAbnormalityTracker
+                _ => new AbnormalityTracker() 
             };
         }
 
@@ -410,8 +409,8 @@ namespace TCC
         {
             if (p.Recipient != Me.Name) return;
             var txt = ChatUtils.GetPlainText(p.Message).UnescapeHtml();
-            var chStr = new ChatChannelToName().Convert(ChatChannel.ReceivedWhisper, null, null, null);
-            TccUtils.CheckWindowNotify(txt, $"{p.Author} - {(string)chStr}");
+            var chStr = TccUtils.ChatChannelToName(ChatChannel.ReceivedWhisper);
+            TccUtils.CheckWindowNotify(txt, $"{p.Author} - {chStr}");
             TccUtils.CheckDiscordNotify($"`{chStr}` {txt}", p.Author);
         }
         private static void OnChat(S_CHAT m)
@@ -440,9 +439,9 @@ namespace TCC
             if (!TccUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
 
             var txt = ChatUtils.GetPlainText(m.Message).UnescapeHtml();
-            var chStr = new ChatChannelToName().Convert((ChatChannel)m.Channel, null, null, null);
+            var chStr = TccUtils.ChatChannelToName((ChatChannel)m.Channel);
 
-            TccUtils.CheckWindowNotify(txt, $"{m.AuthorName} {(string)chStr}");
+            TccUtils.CheckWindowNotify(txt, $"{m.AuthorName} {chStr}");
             TccUtils.CheckDiscordNotify($"`{chStr}` {txt}", m.AuthorName);
 
         }
@@ -693,7 +692,7 @@ namespace TCC
             FriendList.Clear();
             BlockList.Clear();
 
-            Server = DB.ServerDatabase.GetServer(m.ServerId);
+            Server = DB.ServerDatabase.GetServer(m.ServerId) ?? Server;
 
             Me.Name = m.Name;
             Me.Class = m.CharacterClass;
@@ -777,7 +776,7 @@ namespace TCC
             var areaName = x.SectionId.ToString();
             try
             {
-                areaName = DB.RegionsDatabase.Names[DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId];
+                areaName = DB.RegionsDatabase.GetZoneName(DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId);
             }
             catch (Exception)
             {

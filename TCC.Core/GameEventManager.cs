@@ -21,7 +21,7 @@ namespace TCC
     //TODO: big refactor here
     public class GameEventManager : TSPropertyChanged
     {
-        private static GameEventManager _instance;
+        private static GameEventManager? _instance;
         public static GameEventManager Instance => _instance ??= new GameEventManager();
 
         // TODO: not sure about other regions reset days

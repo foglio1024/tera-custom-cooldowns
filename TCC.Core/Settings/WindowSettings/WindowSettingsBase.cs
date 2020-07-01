@@ -6,7 +6,6 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Nostrum;
-using TCC.Annotations;
 using TCC.Data;
 using TCC.UI;
 using TCC.UI.Windows.Widgets;
@@ -32,18 +31,15 @@ namespace TCC.Settings.WindowSettings
         private bool _forcedVisible;
 
 
-        public event Action ResetToCenter;
-        public event Action<bool> EnabledChanged;
-        public event Action ClickThruModeChanged;
-        public event Action<bool> VisibilityChanged;
+        public event Action ResetToCenter = null!;
+        public event Action<bool> EnabledChanged = null!;
+        public event Action ClickThruModeChanged = null!;
+        public event Action<bool> VisibilityChanged = null!;
 
-        [JsonIgnore]
-        public string Name { [UsedImplicitly] get; }
-        [JsonIgnore]
-        protected List<string> GpkNames { get; }
+        [JsonIgnore] public string Name { get; } = "";
+        [JsonIgnore] protected List<string> GpkNames { get; }
 
-        [JsonIgnore]
-        public bool ForcedClickable
+        [JsonIgnore] public bool ForcedClickable
         {
             get => _forcedClickable;
             set
@@ -54,9 +50,7 @@ namespace TCC.Settings.WindowSettings
                 N(nameof(ClickThruMode));
             }
         }
-
-        [JsonIgnore]
-        public bool ForcedVisible
+        [JsonIgnore] public bool ForcedVisible
         {
             get => _forcedVisible;
             set
@@ -68,8 +62,7 @@ namespace TCC.Settings.WindowSettings
             }
         }
 
-        [JsonIgnore]
-        public double X
+        [JsonIgnore] public double X
         {
             get => Positions.Position(!PerClassPosition ? Class.Common : CurrentClass()).X;
             set
@@ -83,8 +76,7 @@ namespace TCC.Settings.WindowSettings
                 N(nameof(X));
             }
         }
-        [JsonIgnore]
-        public double Y
+        [JsonIgnore] public double Y
         {
             get => Positions.Position(!PerClassPosition ? Class.Common : CurrentClass()).Y;
             set
@@ -98,24 +90,15 @@ namespace TCC.Settings.WindowSettings
                 N(nameof(Y));
             }
         }
-        [JsonIgnore]
-        public bool IgnoreSize { get; set; } = true;
-        [JsonIgnore]
-        public bool UndimOnFlyingGuardian { get; set; } = true;
-        [JsonIgnore]
-        public bool PerClassPosition { get; set; } = true;
-        [JsonIgnore]
-        public ICommand ResetPositionCommand { get; }
-        [JsonIgnore]
-        public ICommand HideCommand { get; }
-        [JsonIgnore]
-        public ICommand PinCommand { get; }
-        [JsonIgnore]
-        public ICommand AutoDimCommand { get; }
-        [JsonIgnore]
-        public ICommand MakeGlobalCommand { get; }
-        [JsonIgnore]
-        public ICommand CloseCommand { get; }
+        [JsonIgnore] public bool IgnoreSize { get; set; } = true;
+        [JsonIgnore] public bool UndimOnFlyingGuardian { get; set; } = true;
+        [JsonIgnore] public bool PerClassPosition { get; set; } = true;
+        [JsonIgnore] public ICommand ResetPositionCommand { get; }
+        [JsonIgnore] public ICommand HideCommand { get; }
+        [JsonIgnore] public ICommand PinCommand { get; }
+        [JsonIgnore] public ICommand AutoDimCommand { get; }
+        [JsonIgnore] public ICommand MakeGlobalCommand { get; }
+        [JsonIgnore] public ICommand CloseCommand { get; }
 
         public bool Enabled
         {
@@ -289,7 +272,7 @@ namespace TCC.Settings.WindowSettings
             CloseCommand = new RelayCommand(_ => Enabled = false);
             //Game.LoadingScreenChanged += () => OnEnabledChanged(!Game.LoadingScreen && Enabled);
         }
-        public WindowSettingsBase(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above) : this()
+        public WindowSettingsBase(double x, double y, double h, double w, bool visible, ClickThruMode ctm, double scale, bool autoDim, double dimOpacity, bool showAlways, bool enabled, bool allowOffscreen, ClassPositions? positions = null, string name = "", bool perClassPosition = true, ButtonsPosition buttonsPosition = ButtonsPosition.Above) : this()
         {
             Name = name;
             _w = w;
@@ -391,7 +374,7 @@ namespace TCC.Settings.WindowSettings
         }
         protected Class CurrentClass()
         {
-            var cc = Game.Me == null || Game.Me?.Class == Class.None ? Class.Common : Game.Me.Class;
+            var cc = Game.Me == null || Game.Me?.Class == Class.None ? Class.Common : Game.Me!.Class;
             cc = PerClassPosition ? cc : Class.Common;
             return cc;
         }

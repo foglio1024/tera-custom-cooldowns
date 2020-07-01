@@ -29,7 +29,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             return this == other;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is ConnectionId)
                 return Equals((ConnectionId) obj);

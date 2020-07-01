@@ -18,7 +18,7 @@ namespace TCC.UI.Controls.NPCs
             NPC.PropertyChanged += OnPropertyChanged;
         }
 
-        protected override void OnDeleteTimerTick(object s, EventArgs ev)
+        protected override void OnDeleteTimerTick(object? s, EventArgs ev)
         {
             WindowManager.ViewModels.NpcVM.NpcListChanged -= OnNpcVMOnNpcListChanged;
             NPC.PropertyChanged -= OnPropertyChanged;

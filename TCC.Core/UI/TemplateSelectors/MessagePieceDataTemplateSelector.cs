@@ -6,13 +6,13 @@ namespace TCC.UI.TemplateSelectors
 {
     public class MessagePieceDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate SimpleTemplate { get; set; }
-        public DataTemplate ActionTemplate { get; set; }
-        public DataTemplate MoneyTemplate { get; set; }
-        public DataTemplate IconTemplate { get; set; }
-        public DataTemplate UrlTemplate { get; set; }
+        public DataTemplate? SimpleTemplate { get; set; }
+        public DataTemplate? ActionTemplate { get; set; }
+        public DataTemplate? MoneyTemplate { get; set; }
+        public DataTemplate? IconTemplate { get; set; }
+        public DataTemplate? UrlTemplate { get; set; }
 
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             return item switch
             {

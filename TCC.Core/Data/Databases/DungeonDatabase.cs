@@ -22,13 +22,13 @@ namespace TCC.Data.Databases
                                     && File.Exists(_defaultDefsFullPath)
                                     && File.Exists(_imagesFullPath);
 
-        public override void CheckVersion(string customAbsPath = null, string customRelPath = null)
+        public override void CheckVersion(string customAbsPath = "", string customRelPath = "")
         {
             base.CheckVersion(FullPath, RelativePath);
             base.CheckVersion(_defaultDefsFullPath, _defaultDefsRelativePath);
             base.CheckVersion(_imagesFullPath, _imagesRelativePath);
         }
-        public override void Update(string custom = null)
+        public override void Update(string custom = "")
         {
             base.Update(RelativePath);
             base.Update(_defaultDefsRelativePath);

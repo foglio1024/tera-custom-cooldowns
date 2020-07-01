@@ -31,23 +31,23 @@ namespace TCC
 {
     public partial class App
     {
-        public static event Action ReadyEvent;
+        public static event Action ReadyEvent = null!;
 
         private static bool _restarted;
         private static bool _running;
-        private static Mutex _mutex;
+        private static Mutex? _mutex;
 
         public static bool Beta { get; } = false;
 
         /// <summary>
         ///     Version in the "TCC vX.Y.Z-b" format.
         /// </summary>
-        public static string AppVersion { get; private set; }
+        public static string AppVersion { get; private set; } = null!;
 
         /// <summary>
         ///     'TCC.exe' folder
         /// </summary>
-        public static string BasePath { get; private set; } = Path.GetDirectoryName(typeof(App).Assembly.Location);
+        public static string BasePath { get; private set; } = Path.GetDirectoryName(typeof(App).Assembly.Location)!;
 
         /// <summary>
         ///     'TCC/resources' folder
@@ -65,8 +65,9 @@ namespace TCC
         public static Random Random { get; } = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year +
                                                           DateTime.Now.Minute + DateTime.Now.Second +
                                                           DateTime.Now.Millisecond);
-        public static TccSplashScreen SplashScreen { get; set; }
-        public static SettingsContainer Settings { get; set; }
+        public static TccSplashScreen SplashScreen { get; set; } = null!;
+        public static SettingsContainer Settings { get; set; } = null!;
+
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
@@ -78,6 +79,8 @@ namespace TCC
                 FirstStart = true;
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
+            RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
+
             TccMessageBox.CreateAsync();
             if (IsAlreadyRunning() && !Debugger.IsAttached)
             {
@@ -118,7 +121,7 @@ namespace TCC
             // ----------------------------
             SplashScreen.VM.Progress = 10;
             SplashScreen.VM.BottomText = "Loading settings...";
-            SettingsContainer.Load();
+            Settings = SettingsContainer.Load();
             WindowManager.InitSettingsWindow(); // need it in case language is not correct
 
             SplashScreen.VM.Progress = 20;
@@ -137,7 +140,6 @@ namespace TCC
             // ----------------------------
             SplashScreen.VM.Progress = 50;
             SplashScreen.VM.BottomText = "Initializing widgets...";
-            RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
             await WindowManager.Init();
             SplashScreen.VM.Progress = 60;
             StartDispatcherWatcher();
@@ -161,6 +163,7 @@ namespace TCC
 
             SplashScreen.VM.Progress = 100;
             SplashScreen.CloseWindowSafe();
+
 
             // ----------------------------
             Log.Chat($"{AppVersion} ready.");
@@ -192,7 +195,7 @@ namespace TCC
         }
         public static void Restart()
         {
-            Settings.Save();
+            Settings?.Save();
             Process.Start("TCC.exe", $"--restart{(ToolboxMode ? " --toolbox" : "")}");
             Close();
         }
@@ -200,7 +203,7 @@ namespace TCC
         {
             _running = false;
             PacketAnalyzer.Sniffer.Enabled = false;
-            Settings.Save();
+            Settings?.Save();
             WindowManager.Dispose();
             StubInterface.Instance.Disconnect();
             Firebase.Dispose();
@@ -221,7 +224,17 @@ namespace TCC
         public static void ReleaseMutex()
         {
             _running = false;
-            BaseDispatcher.Invoke(() => _mutex.ReleaseMutex());
+            BaseDispatcher.Invoke(() =>
+            {
+                try
+                {
+                    _mutex?.ReleaseMutex();
+                }
+                catch (Exception e)
+                {
+                    Log.F($"Failed to release mutex: {e}");
+                }
+            });
         }
         private static void LoadModules()
         {
@@ -245,9 +258,9 @@ namespace TCC
         }
 
         #region Dispatchers
-        public static Dispatcher BaseDispatcher { get; private set; }
+        public static Dispatcher BaseDispatcher { get; private set; } = null!;
 
-        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; private set; }
+        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; private set; } = null!;
 
         public static void AddDispatcher(int threadId, Dispatcher d)
         {
@@ -301,11 +314,9 @@ namespace TCC
                     {
                     }
 
-                    if (deadlockedDispatchers.Count > 1)
-                    {
-                        var threadNames = deadlockedDispatchers.Select(d => d.Thread.Name).ToList();
-                        throw new DeadlockException($"The following threads didn't report in time: {threadNames.ToCSV()}", threadNames);
-                    }
+                    if (deadlockedDispatchers.Count <= 1) continue;
+                    var threadNames = deadlockedDispatchers.Select(d => d.Thread.Name).ToList();
+                    throw new DeadlockException($"The following threads didn't report in time: {threadNames.ToCSV()}", threadNames);
                     //Log.F($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
                 }
             })
@@ -315,7 +326,7 @@ namespace TCC
 
         #region Misc
 
-        private static FUBH _fubh;
+        private static FUBH? _fubh;
 
         public static bool FI { get; } = DateTime.Now >= TimeUtils.FromUnixTime(1567123200) &&
                                          DateTime.Now < TimeUtils.FromUnixTime(1567209600);
@@ -324,7 +335,7 @@ namespace TCC
         {
             BaseDispatcher.InvokeAsync(() =>
             {
-                if (_fubh == null) _fubh = new FUBH();
+                _fubh ??= new FUBH();
                 _fubh.Show();
             });
         }

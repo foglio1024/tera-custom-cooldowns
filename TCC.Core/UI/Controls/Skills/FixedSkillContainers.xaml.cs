@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Dragablz;
+using GongSolutions.Wpf.DragDrop;
+using Nostrum;
+using Nostrum.Extensions;
+using Nostrum.Factories;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -11,16 +16,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using Dragablz;
-using GongSolutions.Wpf.DragDrop;
-using Nostrum;
-using Nostrum.Extensions;
-using Nostrum.Factories;
-using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
-using TCC.Utils;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 using TeraDataLite;
@@ -30,12 +28,12 @@ namespace TCC.UI.Controls.Skills
     //TODO: refactor this
     public partial class FixedSkillContainers : INotifyPropertyChanged
     {
-        private object[] _mainOrder;
-        private object[] _secondaryOrder;
+        private object[] _mainOrder = { };
+        private object[] _secondaryOrder = { };
         private readonly DoubleAnimation _opacityUp;
         private readonly DoubleAnimation _opacityDown;
         private static readonly Action EmptyDelegate = delegate { };
-        private CooldownWindowViewModel VM { get; set; }
+        private CooldownWindowViewModel? VM { get; set; }
 
         public SkillDropHandler DropHandler { get; private set; }
 
@@ -55,12 +53,8 @@ namespace TCC.UI.Controls.Skills
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            VM = (CooldownWindowViewModel) Window.GetWindow(this)?.DataContext;
-            if (VM == null)
-            {
-                Log.F("OnLoaded - VM is null!");
-                return;
-            }
+            VM = (CooldownWindowViewModel?)Window.GetWindow(this)?.DataContext;
+            if (VM == null) return;
             VM.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
             VM.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
             VM.SkillsLoaded += OnSkillsLoaded;
@@ -75,6 +69,7 @@ namespace TCC.UI.Controls.Skills
             Loaded -= OnLoaded;
             Unloaded -= OnUnloaded;
 
+            if (VM == null) return;
             VM.SecondarySkills.CollectionChanged -= SecondarySkills_CollectionChanged;
             VM.MainSkills.CollectionChanged -= MainSkills_CollectionChanged;
             VM.SkillsLoaded -= OnSkillsLoaded;
@@ -83,6 +78,7 @@ namespace TCC.UI.Controls.Skills
         private void OnSkillsLoaded()
         {
             //really absurd way of fixing order issue
+            if (VM == null) return;
             Dispatcher?.Invoke(() =>
             {
                 ReorderSkillContainer(MainSkills, VM.MainSkills);
@@ -118,14 +114,14 @@ namespace TCC.UI.Controls.Skills
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             RefreshMeasure(MainSkills);
-            VM.SaveConfig();
+            VM?.SaveConfig();
         }
 
         private void SecondarySkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             RefreshMeasure(SecSkills);
-            VM.SaveConfig();
+            VM?.SaveConfig();
         }
 
         private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
@@ -134,12 +130,16 @@ namespace TCC.UI.Controls.Skills
 
         private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
         {
-            var cd = e.DragablzItem.DataContext as Cooldown;
+            var cd = (Cooldown)e.DragablzItem.DataContext;
+            if (VM == null) return;
             if (VM.MainSkills.Contains(cd))
+            {
                 Reorder(VM.MainSkills, _mainOrder);
+            }
             else if (VM.SecondarySkills.Contains(cd))
+            {
                 Reorder(VM.SecondarySkills, _secondaryOrder);
-
+            }
             VM.SaveConfig();
         }
 
@@ -204,7 +204,7 @@ namespace TCC.UI.Controls.Skills
 
         private void OpenCooldownSettings(object sender, RoutedEventArgs e)
         {
-            VM.OnShowSkillConfigHotkeyPressed();
+            VM?.OnShowSkillConfigHotkeyPressed();
         }
 
         private void OnSkillShapeChanged()
@@ -248,7 +248,7 @@ namespace TCC.UI.Controls.Skills
 
             public void Drop(IDropInfo dropInfo)
             {
-                var target = (TSObservableCollection<Cooldown>) dropInfo.TargetCollection;
+                var target = (TSObservableCollection<Cooldown>)dropInfo.TargetCollection;
                 switch (dropInfo.Data)
                 {
                     case Skill sk:
@@ -258,7 +258,7 @@ namespace TCC.UI.Controls.Skills
                     case Abnormality ab:
                         if (target.All(x => x.Skill.IconName != ab.IconName))
                             target.Insert(dropInfo.InsertIndex,
-                                new Cooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) {IconName = ab.IconName},
+                                new Cooldown(new Skill(ab.Id, Class.None, ab.Name, ab.ToolTip) { IconName = ab.IconName },
                                     false, CooldownType.Passive));
                         break;
                     case Item i:
@@ -295,10 +295,9 @@ namespace TCC.UI.Controls.Skills
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = null!;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void N([CallerMemberName] string propertyName = null)
+        protected void N([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

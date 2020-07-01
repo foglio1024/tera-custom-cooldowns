@@ -21,7 +21,7 @@ namespace TCC.Interop.Proxy
             _client = new HttpClient();
         }
 
-        private async Task<Response> Send(JObject obj)
+        private async Task<Response?> Send(JObject obj)
         {
             var req = new StringContent(obj.ToString(), Encoding.UTF8, "application/json");
 
@@ -36,11 +36,11 @@ namespace TCC.Interop.Proxy
                 return null;
             }
         }
-        public async Task<Response> CallAsync(string methodName, JObject parameters = null)
+        public async Task<Response?> CallAsync(string methodName, JObject? parameters = null)
         {
             return await CallAsync(new Request(methodName, parameters));
         }
-        private async Task<Response> CallAsync(Request req)
+        private async Task<Response?> CallAsync(Request req)
         {
             var resp = await Send(req);
             if (resp?.Error != null)

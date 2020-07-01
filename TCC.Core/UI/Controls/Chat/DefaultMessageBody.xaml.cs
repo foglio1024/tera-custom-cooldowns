@@ -24,7 +24,7 @@ namespace TCC.UI.Controls.Chat
                 if (!w.IsMouseOver) continue;
                 var currTabVm = w.TabControl.SelectedItem as HeaderedItemViewModel;
                 var currTab = currTabVm?.Content as Tab;
-                // ReSharper disable once PossibleNullReferenceException
+                if (currTab == null) continue;
                 currTab.PinnedMessage = currTab.PinnedMessage == dc ? null : dc;
             }
         }

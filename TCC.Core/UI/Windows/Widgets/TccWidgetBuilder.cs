@@ -12,8 +12,8 @@ namespace TCC.UI.Windows.Widgets
     public class WindowBuilderBase<TWindow, TViewModel> where TWindow : Window
                                                         where TViewModel : TccWindowViewModel
     {
-        protected TWindow _window;
-        protected TViewModel _vm;
+        protected TWindow? _window;
+        protected TViewModel? _vm;
 
         public async Task<TWindow> GetWindow()
         {
@@ -68,18 +68,18 @@ namespace TCC.UI.Windows.Widgets
     where TWindow : Window
     where TViewModel : TccWindowViewModel
     {
-        public TccWidgetBuilder(WindowSettingsBase ws)
+        public TccWidgetBuilder(WindowSettingsBase? ws)
         {
             Create(ws);
         }
 
-        private void Create(WindowSettingsBase ws)
+        private void Create(WindowSettingsBase? ws)
         {
             var thread = new Thread(() =>
             {
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
-                _vm = (TViewModel)Activator.CreateInstance(typeof(TViewModel), ws);
-                _window = (TWindow)Activator.CreateInstance(typeof(TWindow), _vm);
+                _vm = (TViewModel?)Activator.CreateInstance(typeof(TViewModel), ws);
+                _window = (TWindow?)Activator.CreateInstance(typeof(TWindow), _vm);
                 if (ws != null && ws.Enabled)
                 {
                     _window?.Show();

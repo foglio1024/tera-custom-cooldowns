@@ -14,25 +14,26 @@ namespace TCC.UI.Windows.Widgets
         private readonly DoubleAnimation _bubbleAnim;
         private readonly DoubleAnimation _bubbleSlideIn;
         private readonly DoubleAnimation _bubbleSlideOut;
-        private Timer _animRepeatTimer;
-
-        private ScaleTransform _bubbleScaleTransform => (ScaleTransform)((TransformGroup)NotificationBubble?.RenderTransform)?.Children[0];
-        private TranslateTransform _bubbleTranslateTransform => (TranslateTransform)((TransformGroup)NotificationBubble?.RenderTransform)?.Children[1];
+        private readonly ScaleTransform _bubbleScaleTransform;
+        private readonly TranslateTransform _bubbleTranslateTransform;
+        private readonly Timer _animRepeatTimer;
 
         public FloatingButtonWindow(FloatingButtonViewModel vm)
         {
             DataContext = vm;
-
+            _animRepeatTimer = new Timer { Interval = 2000 };
             _slideOutAnim = AnimationFactory.CreateDoubleAnimation(250, to: -288, easing: true);
             _slideInAnim = AnimationFactory.CreateDoubleAnimation(250, to: -1, easing: true);
             _bubbleSlideIn = AnimationFactory.CreateDoubleAnimation(250, to: -77, easing: true);
             _bubbleSlideOut = AnimationFactory.CreateDoubleAnimation(250, to: 0, easing: true);
             _bubbleAnim = AnimationFactory.CreateDoubleAnimation(800, 1, .75, true);
-
             vm.NotificationsCleared += OnNotificationsCleared;
             vm.NotificationsAdded += OnNotificationsAdded;
 
             InitializeComponent();
+
+            _bubbleScaleTransform = (ScaleTransform) ((TransformGroup) NotificationBubble.RenderTransform).Children[0];
+            _bubbleTranslateTransform = (TranslateTransform)((TransformGroup)NotificationBubble.RenderTransform).Children[1];
 
             MainContent = WindowContent;
             ButtonsRef = null;
@@ -45,7 +46,6 @@ namespace TCC.UI.Windows.Widgets
             base.OnLoaded(sender, e);
             Left = 0;
             Top = Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
-            _animRepeatTimer = new Timer { Interval = 2000 };
             _animRepeatTimer.Tick += (_, __) => AnimateBubble();
         }
         protected override void OnVisibilityChanged()

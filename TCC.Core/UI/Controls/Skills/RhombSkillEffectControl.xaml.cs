@@ -5,15 +5,20 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using Nostrum;
 using Nostrum.Controls;
-using TCC.Properties;
+using Nostrum.Factories;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Skills
 {
     public partial class RhombSkillEffectControl : INotifyPropertyChanged
     {
+        private SkillWithEffect? _context;
+        private readonly DoubleAnimation _anim;
+
         public RhombSkillEffectControl()
         {
+            _anim = AnimationFactory.CreateDoubleAnimation(0, from: 328, to: 32, framerate: 20);
+
             InitializeComponent();
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
@@ -23,28 +28,23 @@ namespace TCC.UI.Controls.Skills
         {
             Loaded -= OnLoaded;
             Unloaded -= OnUnloaded;
-            if (_context?.Buff == null) return;
-            _context.Buff.Started -= OnBuffStarted;
-            _context.Buff.SecondsUpdated -= OnSecondsUpdated;
-            _context.Buff.Ended -= OnBuffEnded;
+            if (_context?.Effect == null) return;
+            _context.Effect.Started -= OnBuffStarted;
+            _context.Effect.SecondsUpdated -= OnSecondsUpdated;
+            _context.Effect.Ended -= OnBuffEnded;
 
         }
 
-        private DurationCooldownIndicator _context;
-        private DoubleAnimation _anim;
-        public string DurationLabel => _context == null ? "" : TimeUtils.FormatTime(_context.Buff.Seconds);
-        public bool ShowEffectSeconds => _context?.Buff != null && _context.Buff.Seconds > 0;
+        public string DurationLabel => _context == null ? "" : TimeUtils.FormatTime(_context.Effect.Seconds);
+        public bool ShowEffectSeconds => _context?.Effect != null && _context.Effect.Seconds > 0;
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            //externalArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(50000)));
-            if (DesignerProperties.GetIsInDesignMode(this) || !( DataContext is DurationCooldownIndicator)) return;
-            _context = (DurationCooldownIndicator)DataContext;
+            if (DesignerProperties.GetIsInDesignMode(this) || !(DataContext is SkillWithEffect swe)) return;
+            _context = swe;
             RhombFixedSkillControl.DataContext = _context.Cooldown;
-            _context.Buff.Started += OnBuffStarted;
-            _context.Buff.SecondsUpdated += OnSecondsUpdated;
-            _context.Buff.Ended += OnBuffEnded;
-            _anim = new DoubleAnimation(328, 32, TimeSpan.FromMilliseconds(_context.Buff.Duration));
-            Timeline.SetDesiredFrameRate(_anim, 20);
+            _context.Effect.Started += OnBuffStarted;
+            _context.Effect.SecondsUpdated += OnSecondsUpdated;
+            _context.Effect.Ended += OnBuffEnded;
         }
 
         private void OnBuffEnded(Data.CooldownMode obj)
@@ -59,19 +59,18 @@ namespace TCC.UI.Controls.Skills
             NPC(nameof(ShowEffectSeconds));
         }
 
-        private void OnBuffStarted(Data.CooldownMode obj)
+        private void OnBuffStarted(ulong duration, Data.CooldownMode mode)
         {
-            _anim.Duration = TimeSpan.FromMilliseconds(_context.Buff.Duration);
+            _anim.Duration = TimeSpan.FromMilliseconds(duration);
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
 
         }
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = null!;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void NPC([CallerMemberName] string propertyName = null)
+        protected  void NPC([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

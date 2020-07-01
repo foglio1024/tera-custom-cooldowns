@@ -24,6 +24,7 @@ namespace TCC.Interop.Moongourd
         public BrowseCommand Browse { get; set; }
         // ReSharper restore UnusedAutoPropertyAccessor.Global
         // ReSharper restore MemberCanBePrivate.Global
+#pragma warning disable 8601
         public MoongourdEncounter(JObject jEncounter)
         {
             Browse = new BrowseCommand(this);
@@ -49,6 +50,7 @@ namespace TCC.Interop.Moongourd
             BossId = jEncounter["bossId"].Value<int>();
             AreaId = jEncounter["areaId"].Value<int>();
         }
+#pragma warning restore 8601
 
 /*
         public MoongourdEncounter()

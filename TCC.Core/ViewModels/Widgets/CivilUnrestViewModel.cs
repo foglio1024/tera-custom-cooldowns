@@ -20,6 +20,14 @@ namespace TCC.ViewModels.Widgets
         private uint _towersDestroyed;
         private string _name;
 
+        public CivilUnrestGuild(uint id, string name, float towerHp, uint towersDestroyed)
+        {
+            _towerHp = towerHp;
+            _towersDestroyed = towersDestroyed;
+            _name = name;
+            Id = id;
+        }
+
         public string Name
         {
             get => _name;
@@ -168,14 +176,17 @@ namespace TCC.ViewModels.Widgets
             {
                 g.TowerHp = guildInfo.TowerHp;
                 if (g.Name != "") return;
-                if (guildInfo.Self) g.Name = WindowManager.ViewModels.DashboardVM.CurrentCharacter?.GuildName;
+                if (!guildInfo.Self) return;
+                if (WindowManager.ViewModels.DashboardVM.CurrentCharacter != null)
+                    g.Name = WindowManager.ViewModels.DashboardVM.CurrentCharacter.GuildName;
                 //TODO: add kills and deaths?
             }
             else
             {
                 var name = "";
-                if (guildInfo.Self) name = WindowManager.ViewModels.DashboardVM.CurrentCharacter?.GuildName;
-                _guilds.Add(new CivilUnrestGuild() { Id = guildInfo.Id, Name = name, TowerHp = guildInfo.TowerHp, TowersDestroyed = 0 });
+                if (guildInfo.Self && WindowManager.ViewModels.DashboardVM.CurrentCharacter != null) 
+                    name = WindowManager.ViewModels.DashboardVM.CurrentCharacter.GuildName;
+                _guilds.Add(new CivilUnrestGuild(guildInfo.Id, name, guildInfo.TowerHp, 0));
             }
         }
         public void SetGuildName(uint id, string name)

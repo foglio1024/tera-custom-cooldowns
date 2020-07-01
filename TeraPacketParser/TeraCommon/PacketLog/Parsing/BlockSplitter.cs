@@ -8,12 +8,13 @@ namespace TeraPacketParser.TeraCommon.PacketLog.Parsing
 {
     internal class BlockSplitter
     {
+        public event Action<int, int> Resync = null!;
+        public event Action<byte[]> BlockFinished = null!;
+
         private readonly MemoryStream _buffer = new MemoryStream();
-        public event Action<byte[]> BlockFinished;
         private volatile int _last;
         private volatile int _prev;
         private volatile int _pPrev;
-        public event Action<int, int> Resync;
 
         protected virtual void OnBlockFinished(byte[] block)
         {
@@ -27,7 +28,7 @@ namespace TeraPacketParser.TeraCommon.PacketLog.Parsing
             stream.SetLength(stream.Length - count);
         }
 
-        private static byte[] PopBlock(MemoryStream stream)
+        private static byte[]? PopBlock(MemoryStream stream)
         {
             if (stream.Length < 2)
                 return null;
@@ -41,7 +42,7 @@ namespace TeraPacketParser.TeraCommon.PacketLog.Parsing
             return block;
         }
 
-        public byte[] PopBlock()
+        public byte[]? PopBlock()
         {
             var block = PopBlock(_buffer);
             if (block != null)

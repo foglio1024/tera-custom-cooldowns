@@ -53,7 +53,7 @@ namespace TCC.Data.Abnormalities
             }
             else if (p.AbnormalityId == VowId)
             {
-                vm.Vow.Buff.Start(p.Duration);
+                vm.Vow.StartEffect(p.Duration);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
@@ -61,11 +61,11 @@ namespace TCC.Data.Abnormalities
             }
             else if (p.AbnormalityId == TovId)
             {
-                vm.ThrallOfVengeance.Buff.Start(p.Duration);
+                vm.ThrallOfVengeance.StartEffect(p.Duration);
             }
             else if (p.AbnormalityId == TowId)
             {
-                vm.ThrallOfWrath.Buff.Start(p.Duration);
+                vm.ThrallOfWrath.StartEffect(p.Duration);
             }
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
@@ -94,15 +94,15 @@ namespace TCC.Data.Abnormalities
             }
             else if (p.AbnormalityId == VowId)
             {
-                vm.Vow.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                vm.Vow.RefreshEffect(p.Duration);
             }
             else if (p.AbnormalityId == TovId)
             {
-                vm.ThrallOfVengeance.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                vm.ThrallOfVengeance.RefreshEffect(p.Duration);
             }
             else if (p.AbnormalityId == TowId)
             {
-                vm.ThrallOfWrath.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                vm.ThrallOfWrath.RefreshEffect(p.Duration);
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {
@@ -135,15 +135,15 @@ namespace TCC.Data.Abnormalities
             }
             else if (p.AbnormalityId == VowId)
             {
-                vm.Vow.Buff.Stop();
+                vm.Vow.StopEffect();
             }
             else if (p.AbnormalityId == TovId)
             {
-                vm.ThrallOfVengeance.Buff.Stop();
+                vm.ThrallOfVengeance.StopEffect();
             }
             else if (p.AbnormalityId == TowId)
             {
-                vm.ThrallOfWrath.Buff.Stop();
+                vm.ThrallOfWrath.StopEffect();
             }
             else if (ElementalizeIDs.Contains(p.AbnormalityId))
             {

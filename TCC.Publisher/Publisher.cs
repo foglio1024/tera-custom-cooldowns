@@ -13,51 +13,58 @@ using SevenZip;
 
 namespace TCC.Publisher
 {
-    public static class Publisher
+    public class Publisher
     {
-        private static GitHubClient _client;
+        private static Publisher? _instance;
+        public static Publisher Instance => _instance ??= new Publisher();
 
-        private static PublisherSettings _settings;
+        private readonly GitHubClient _client;
+
+        private readonly PublisherSettings _settings;
 
         /// <summary>
         /// TCC/release/
         /// </summary>
-        private static string _releaseFolder;
+        private readonly string _releaseFolder;
         /// <summary>
         /// TCC/release/TCC.exe
         /// </summary>
-        private static string _exePath => Path.Combine(_releaseFolder, "TCC.dll");
+        private string _exePath => Path.Combine(_releaseFolder, "TCC.dll");
         /// <summary>
         /// X.Y.Z
         /// </summary>
-        private static string _stringVersion = ""; // "X.Y.Z"
+        private string _stringVersion = ""; // "X.Y.Z"
         /// <summary>
         /// -b
         /// </summary>
-        private static string _beta = "";  // "-b"
+        private string _beta = "";  // "-b"
         /// <summary>
         /// TCC-X.Y.Z-b.zip
         /// </summary>
-        private static string _zipName => $"TCC-{_stringVersion}{_beta}.zip";
+        private string _zipName => $"TCC-{_stringVersion}{_beta}.zip";
         /// <summary>
         /// vX.Y.Z-b
         /// </summary>
-        private static string _tag => $"v{_stringVersion}{_beta}";
+        private string _tag => $"v{_stringVersion}{_beta}";
 
-        public static void Init()
+        private Publisher()
         {
             _settings = JsonConvert.DeserializeObject<PublisherSettings>(File.ReadAllText("tcc_publisher_settings.json"));
-
             _releaseFolder = Path.Combine(_settings.LocalRepositoryPath, "release");
-
             _client = new GitHubClient(new ProductHeaderValue("TCC.Publisher"))
             {
                 Credentials = new Credentials(_settings.GithubToken)
             };
+            
+        }
+
+        public static void Init()
+        {
+            _instance = new Publisher();
         }
 
 
-        public static string GetVersion()
+        public string GetVersion()
         {
             Logger.WriteLine("    Getting version...");
             var an = AssemblyName.GetAssemblyName(_exePath);
@@ -74,7 +81,7 @@ namespace TCC.Publisher
             return $"{_stringVersion}{_beta}";
         }
 
-        public static async Task CompressRelease()
+        public async Task CompressRelease()
         {
             // delete old release zip
             foreach (var f in Directory.GetFiles(_releaseFolder))
@@ -88,7 +95,7 @@ namespace TCC.Publisher
             Logger.WriteLine("    Starting compression...");
             await Task.Factory.StartNew(() =>
             {
-                var files = new Dictionary<int, string>();
+                var files = new Dictionary<int, string?>();
                 var comp = new SevenZipCompressor
                 {
                     CompressionLevel = CompressionLevel.Ultra,
@@ -116,7 +123,7 @@ namespace TCC.Publisher
             Logger.Write(" Done\n");
 
         }
-        public static void UpdateVersionCheckFile()
+        public void UpdateVersionCheckFile()
         {
             Logger.WriteLine("    Building version file...");
             var url = $"https://github.com/Foglio1024/Tera-custom-cooldowns/releases/download/v{ _stringVersion }{ _beta }/{_zipName}";
@@ -129,7 +136,7 @@ namespace TCC.Publisher
             File.WriteAllText(versionCheckFile, sb.ToString());
             Logger.WriteLine("    File saved.");
         }
-        public static async Task CreateRelease(string changelog)
+        public async Task CreateRelease(string changelog)
         {
             try
             {
@@ -152,7 +159,7 @@ namespace TCC.Publisher
             }
         }
 
-        private static void UpdateFirestoreVersion()
+        private void UpdateFirestoreVersion()
         {
             var msg = new JObject
             {
@@ -167,7 +174,7 @@ namespace TCC.Publisher
             c.UploadString(_settings.FirestoreUrl, msg.ToString());
         }
 
-        private static void ExecuteWebhook(string changelog)
+        private void ExecuteWebhook(string changelog)
         {
             var msg = new JObject
             {
@@ -182,7 +189,7 @@ namespace TCC.Publisher
             client.UploadString(_settings.DiscordWebhook, msg.ToString());
         }
 
-        public static async Task Upload()
+        public async Task Upload()
         {
             var rls = await _client.Repository.Release.Get(owner: _settings.RepositoryOwner, name: _settings.RepositoryName, tag: $"v{_stringVersion}{_beta}");
             if (rls.Assets.Any(x => x.Name == _zipName))

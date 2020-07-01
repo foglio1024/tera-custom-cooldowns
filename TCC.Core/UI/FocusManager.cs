@@ -18,13 +18,13 @@ namespace TCC.UI
         private static bool _disposed;
         private static bool _pauseTopmost;
         private static readonly object _lock = new object();
-        private static Screen _teraScreen;
-        private static Timer _focusTimer;
+        private static Screen? _teraScreen;
+        private static Timer? _focusTimer;
 
         // events
-        public static event Action<Point, Point, Size> TeraScreenChanged;
-        public static event Action ForegroundChanged;
-        public static event Action FocusTick;
+        public static event Action<Point, Point, Size> TeraScreenChanged = null!;
+        public static event Action ForegroundChanged = null!;
+        public static event Action FocusTick = null!;
 
         // properties
         public static bool ForceFocused
@@ -99,7 +99,8 @@ namespace TCC.UI
                     var old = _teraScreen;
                     _teraScreen = ret;
 
-                    TeraScreenChanged?.Invoke(old.Bounds.Location, _teraScreen.Bounds.Location, _teraScreen.Bounds.Size);
+                    if (old != null)
+                        TeraScreenChanged?.Invoke(old.Bounds.Location, _teraScreen.Bounds.Location, _teraScreen.Bounds.Size);
                     return _teraScreen;
                 }
             }

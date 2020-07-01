@@ -94,7 +94,7 @@ namespace TCC.Test
             var msg = new Message(DateTime.Now, MessageDirection.ServerToClient, new ArraySegment<byte>(hex.ToByteArrayHex()));
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, "opcodes", $"protocol.{version}.map"));
             var fac = new MessageFactory(version, opcNamer) {ReleaseVersion = 9901};
-            var del = MessageFactory.Contructor<Func<TeraMessageReader, PacketType>>();
+            var del = MessageFactory.Constructor<Func<TeraMessageReader, PacketType>>();
             var reader = new TeraMessageReader(msg, opcNamer, fac, null);
             del.DynamicInvoke(reader);
         }
@@ -113,7 +113,7 @@ namespace TCC.Test
         }
         public static void StartDeadlyGambleCooldown(uint cd)
         {
-            TccUtils.CurrentClassVM<WarriorLayoutVM>()?.DeadlyGamble.Cooldown.Start(cd);
+            TccUtils.CurrentClassVM<WarriorLayoutVM>()?.DeadlyGamble.StartCooldown(cd);
         }
         public static void AddFakeGroupMember(int id, Class c, Laurel l, bool leader = false)
         {
@@ -361,7 +361,7 @@ namespace TCC.Test
                                                 Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
 
                     var jRes = JObject.Parse(res);
-                    canFire = jRes["canFire"].Value<bool>();
+                    canFire = jRes["canFire"]!.Value<bool>();
                 }
                 catch (WebException)
                 {
@@ -429,7 +429,7 @@ namespace TCC.Test
             }
         }
 
-        private static Timer _t;
+        private static Timer? _t;
         public static void AddMobs()
         {
             _t = new Timer { Interval = 1 };
@@ -456,7 +456,7 @@ namespace TCC.Test
             SpawnNPC(9, 700, _eid++, true, false, 0);
             if (_eid != 10000) return;
             WindowManager.ViewModels.NpcVM.Clear();
-            _t.Stop();
+            _t?.Stop();
         }
 
 

@@ -42,7 +42,7 @@
                     <Image.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
+                                <DataTrigger Binding="{Binding Ragnarok.Effect.IsAvailable}" Value="False">
                                     <Setter Property="Effect">
                                         <Setter.Value>
                                             <DropShadowEffect Color="DarkOrange" BlurRadius="15" ShadowDepth="0" />
@@ -94,7 +94,7 @@
                                 <Setter Property="Opacity" Value="0" />
                                 <Setter Property="Stroke" Value="DarkOrange" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="False">
+                                    <DataTrigger Binding="{Binding Ragnarok.Effect.IsAvailable}" Value="False">
                                         <Setter Property="Stroke" Value="DarkOrange" />
                                         <Setter Property="Opacity" Value="1" />
                                     </DataTrigger>
@@ -160,7 +160,7 @@
                             </Rectangle.OpacityMask>
                             <Rectangle.Fill>
                                 <ImageBrush
-                                    ImageSource="{Binding Ragnarok.Buff.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+                                    ImageSource="{Binding Ragnarok.Effect.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
                             </Rectangle.Fill>
                             <FrameworkElement.RenderTransform>
                                 <TranslateTransform X="0" />
@@ -169,7 +169,7 @@
                         </Rectangle>
                     </Grid>
 
-                    <controls:OutlinedTextBlock Text="{Binding Ragnarok.Buff.Seconds}" HorizontalAlignment="Center"
+                    <controls:OutlinedTextBlock Text="{Binding Ragnarok.Effect.Seconds}" HorizontalAlignment="Center"
                                                 VerticalAlignment="Center" TextAlignment="Center"
                                                 FontFamily="{StaticResource NotoSansMed}"
                                                 FontSize="19" Fill="White" StrokeThickness="3" Stroke="#5000"
@@ -178,7 +178,7 @@
                     <FrameworkElement.Style>
                         <Style TargetType="FrameworkElement">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Ragnarok.Buff.IsAvailable}" Value="True">
+                                <DataTrigger Binding="{Binding Ragnarok.Effect.IsAvailable}" Value="True">
                                     <Setter Property="Visibility" Value="Collapsed" />
                                 </DataTrigger>
                             </Style.Triggers>

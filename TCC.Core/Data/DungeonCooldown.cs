@@ -39,7 +39,7 @@ namespace TCC.Data
         {
             get
             {
-                if (Dungeon.Cost == 0) return Entries;
+                if (Dungeon.Cost == 0 || Owner == null) return Entries;
                 var res = (int)Owner.Coins / Dungeon.Cost;
                 return res < Entries ? res : Entries;
             }
@@ -49,7 +49,8 @@ namespace TCC.Data
         {
             get
             {
-                if (Dungeon.Cost == 0) return Dungeon.MaxEntries;
+                if (Dungeon.Cost == 0 || Owner == null) return Dungeon.MaxEntries;
+
                 var res = (int)Owner.MaxCoins / Dungeon.Cost;
                 if (Dungeon.ResetMode == ResetMode.Daily)
                 {
@@ -64,8 +65,8 @@ namespace TCC.Data
             : new Dungeon(0, "");
         [JsonIgnore]
         public int Runs => Dungeon.MaxEntries;
-        [JsonIgnore]
-        public Character Owner { get; set; }
+        [JsonIgnore] 
+        public Character? Owner { get; }
         //used only for filtering
         //[JsonIgnore]
         //public ItemLevelTier RequiredIlvl => Dungeon.RequiredIlvl;

@@ -17,7 +17,7 @@ namespace TCC.Data
         public void SetGroup(List<GroupMemberData> members, bool raid)
         {
             Members = members;
-            Leader = members.Find(m => m.IsLeader);
+            Leader = members.FirstOrDefault(m => m.IsLeader);
             IsRaid = raid;
             InGroup = true;
             Size = Members.Count;
@@ -29,7 +29,7 @@ namespace TCC.Data
         }
         public void Remove(uint playerId, uint serverId)
         {
-            var target = Members.Find(m => m.PlayerId == playerId && m.ServerId == serverId);
+            var target = Members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
             Members.Remove(target);
             Size = Members.Count;
         }

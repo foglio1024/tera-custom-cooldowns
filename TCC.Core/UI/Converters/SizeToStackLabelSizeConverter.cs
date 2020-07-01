@@ -6,7 +6,7 @@ namespace TCC.UI.Converters
 {
     public class SizeToStackLabelSizeConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var size = (double?)value;
             return size / 1.7;

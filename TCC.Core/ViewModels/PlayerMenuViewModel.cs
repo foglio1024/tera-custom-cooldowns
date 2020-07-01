@@ -16,8 +16,8 @@ namespace TCC.ViewModels
 {
     public class PlayerMenuViewModel : TSPropertyChanged
     {
-        private string _name;
-        private string _info;
+        private string _name = "";
+        private string _info = "";
         private int _level;
         private Class _class = Class.Warrior;
         private uint _serverId;
@@ -33,10 +33,10 @@ namespace TCC.ViewModels
         private string _gkickLabelText = "Kick from guild";
         private readonly PlayerMenuWindow _win;
 
-        public event Action UnfriendConfirmationRequested;
-        public event Action BlockConfirmationRequested;
-        public event Action KickConfirmationRequested;
-        public event Action GKickConfirmationRequested;
+        public event Action UnfriendConfirmationRequested = null!;
+        public event Action BlockConfirmationRequested = null!;
+        public event Action KickConfirmationRequested = null!;
+        public event Action GKickConfirmationRequested = null!;
 
         public string Name
         {

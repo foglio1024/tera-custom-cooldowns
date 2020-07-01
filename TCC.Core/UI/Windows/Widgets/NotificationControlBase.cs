@@ -16,11 +16,11 @@ namespace TCC.UI.Windows.Widgets
         protected readonly DoubleAnimation _fadeInAnimation;
         protected readonly DoubleAnimation _fadeOutAnimation;
         protected readonly DoubleAnimation _shrinkAnimation;
-        protected Effect _rootEffect;
-        protected FrameworkElement _root;
-        protected NotificationInfoBase _dc;
+        protected Effect? _rootEffect;
+        protected FrameworkElement? _root;
+        protected NotificationInfoBase? _dc;
 
-        public NotificationControlBase()
+        protected NotificationControlBase()
         {
             Loaded += OnLoaded;
             _slideInAnimation = AnimationFactory.CreateDoubleAnimation(250, 0, 20, true, OnSlideInCompleted);
@@ -31,7 +31,7 @@ namespace TCC.UI.Windows.Widgets
             _shrinkAnimation = AnimationFactory.CreateDoubleAnimation(250, 0, 1, true, OnShrinkFinished);
 
         }
-        
+
         protected void Init(FrameworkElement root)
         {
             _root = root;
@@ -45,26 +45,28 @@ namespace TCC.UI.Windows.Widgets
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
             _dc = (NotificationInfoBase)DataContext;
-            if (_dc == null) return;
+            if (_dc == null || _root == null) return;
 
             _root.BeginAnimation(OpacityProperty, _fadeInAnimation);
             _root.RenderTransform.BeginAnimation(TranslateTransform.YProperty, _slideInAnimation);
         }
-        protected virtual void OnSlideInCompleted(object sender, EventArgs e)
+        protected virtual void OnSlideInCompleted(object? sender, EventArgs e)
         {
+            if (_root == null) return;
             _root.Effect = _rootEffect;
         }
 
-        private void OnShrinkFinished(object sender, EventArgs e)
+        private void OnShrinkFinished(object? sender, EventArgs e)
         {
             if (_dc == null) return;
             WindowManager.ViewModels.NotificationAreaVM.DeleteNotification(_dc);
         }
 
-        private void OnFadeFinished(object sender, EventArgs e)
+        private void OnFadeFinished(object? sender, EventArgs e)
         {
             Dispatcher?.InvokeAsync(() =>
             {
+                if (_root == null) return;
                 var h = _root.ActualHeight;
                 _root.Height = h;
                 _root.Style = null;

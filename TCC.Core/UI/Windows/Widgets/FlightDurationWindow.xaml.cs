@@ -22,7 +22,7 @@ namespace TCC.UI.Windows.Widgets
             DataContext = VM;
 
             ButtonsRef = null;
-            MainContent = Content as UIElement;
+            MainContent = (UIElement) Content;
 
             //FlyingGuardianDataProvider.StackTypeChanged += (t) => NPC(nameof(Type));
             //FlyingGuardianDataProvider.IsInProgressChanged += OnFlyingGuardianInProgressChanged;

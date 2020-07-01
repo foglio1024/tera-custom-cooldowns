@@ -4,8 +4,8 @@ namespace TCC.Publisher
 {
     public static class Logger
     {
-        public static event Action<string> NewLine;
-        public static event Action<string> AppendedLine;
+        public static event Action<string> NewLine = null!;
+        public static event Action<string> AppendedLine = null!;
 
         public static void WriteLine(string msg)
         {

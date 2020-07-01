@@ -39,7 +39,7 @@ namespace TCC.Data.Abnormalities
             if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
             if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
 
-            vm.AdrenalineRush.Buff.Start(p.Duration);
+            vm.AdrenalineRush.StartEffect(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_REFRESH p)
         {
@@ -47,7 +47,7 @@ namespace TCC.Data.Abnormalities
             if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
             if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
 
-            vm.AdrenalineRush.Buff.Start(p.Duration);
+            vm.AdrenalineRush.StartEffect(p.Duration);
         }
         private static void CheckArush(S_ABNORMALITY_END p)
         {
@@ -55,7 +55,7 @@ namespace TCC.Data.Abnormalities
             if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
             if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
 
-            vm.AdrenalineRush.Buff.Stop();
+            vm.AdrenalineRush.StopEffect();
         }
 
         private static void CheckGshout(S_ABNORMALITY_BEGIN p)
@@ -63,21 +63,21 @@ namespace TCC.Data.Abnormalities
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
 
-            vm.GuardianShout.Buff.Start(p.Duration);
+            vm.GuardianShout.StartEffect(p.Duration);
         }
         private static void CheckGshout(S_ABNORMALITY_REFRESH p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
 
-            vm.GuardianShout.Buff.Start(p.Duration);
+            vm.GuardianShout.StartEffect(p.Duration);
         }
         private static void CheckGshout(S_ABNORMALITY_END p)
         {
             if (!GShoutIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<LancerLayoutVM>(out var vm)) return;
 
-            vm.GuardianShout.Buff.Stop();
+            vm.GuardianShout.StopEffect();
         }
 
         private static void CheckLineHeld(S_ABNORMALITY_BEGIN p)

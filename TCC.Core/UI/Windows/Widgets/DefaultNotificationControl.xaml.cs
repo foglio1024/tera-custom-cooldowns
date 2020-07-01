@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Nostrum.Factories;
 
@@ -8,14 +9,17 @@ namespace TCC.UI.Windows.Widgets
     public partial class DefaultNotificationControl
     {
         private readonly DispatcherTimer _duration;
+        private readonly DoubleAnimation _anim;
+
         public DefaultNotificationControl()
         {
             _duration = new DispatcherTimer();
+            _anim = AnimationFactory.CreateDoubleAnimation(0, 0, 1);
             InitializeComponent();
             Init(Root);
         }
 
-        protected override void OnSlideInCompleted(object sender, EventArgs e)
+        protected override void OnSlideInCompleted(object? sender, EventArgs e)
         {
             base.OnSlideInCompleted(sender, e);
             if (_dc == null) return;
@@ -24,8 +28,8 @@ namespace TCC.UI.Windows.Widgets
             _duration.Tick += OnTimeExpired;
             _duration.Start();
             Root.Effect = _rootEffect;
-            TimeRect.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty,
-                AnimationFactory.CreateDoubleAnimation(_dc.Duration, 0, 1));
+            _anim.Duration = TimeSpan.FromMilliseconds(_dc.Duration);
+            TimeRect.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _anim);
 
         }
 
@@ -34,7 +38,7 @@ namespace TCC.UI.Windows.Widgets
             OnTimeExpired(null, null);
         }
 
-        private void OnTimeExpired(object sender, EventArgs e)
+        private void OnTimeExpired(object? sender, EventArgs? e)
         {
             _duration.Stop();
             _duration.Tick -= OnTimeExpired;

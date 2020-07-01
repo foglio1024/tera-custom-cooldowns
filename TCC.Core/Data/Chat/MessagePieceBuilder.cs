@@ -104,8 +104,7 @@ namespace TCC.Data.Chat
         {
             var dictionary = Utils.ChatUtils.BuildParametersDictionary(inPiece);
             var regId = dictionary["rgn"];
-            var msgText = regId;
-            if (Game.DB.RegionsDatabase.Names.TryGetValue(Convert.ToUInt32(regId), out var regName)) msgText = regName;
+            var msgText = Game.DB.RegionsDatabase.GetZoneName(Convert.ToUInt32(regId));
             return msgText;
         }
     }
@@ -118,7 +117,7 @@ namespace TCC.Data.Chat
         }
         public static SimpleMessagePiece BuildSysMsgCreature(string msgText)
         {
-            return new SimpleMessagePiece (SystemMessageParser.ParseSysMsgCreature(msgText));
+            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgCreature(msgText));
         }
         public static SimpleMessagePiece BuildSysMsgItem(string msgText)
         {
@@ -144,13 +143,12 @@ namespace TCC.Data.Chat
                 grade = i.RareGrade;
             }
 
-            var enchant = dictionary.TryGetValue("enchantCount", out var enchCount) 
+            var enchant = dictionary.TryGetValue("enchantCount", out var enchCount)
                             ? $"+{enchCount} "
                             : "";
 
-            return new ActionMessagePiece($"<{enchant}{name}>")
+            return new ActionMessagePiece($"<{enchant}{name}>", rawLink.ToString())
             {
-                ChatLinkAction = rawLink.ToString(),
                 Color = TccUtils.GradeToColorString(grade)
             };
         }
@@ -183,7 +181,7 @@ namespace TCC.Data.Chat
                 _ => col
             };
 
-            return new SimpleMessagePiece (txt)
+            return new SimpleMessagePiece(txt)
             {
                 Color = col
             };
@@ -221,24 +219,15 @@ namespace TCC.Data.Chat
         }
         private static ActionMessagePiece ParseHtmlAchievement(HtmlNode node)
         {
-            return new ActionMessagePiece(node.InnerText.UnescapeHtml())
-            {
-                ChatLinkAction = node.GetAttributeValue("param", "")
-            };
+            return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
         }
         private static ActionMessagePiece ParseHtmlItem(HtmlNode node)
         {
-            return new ActionMessagePiece(node.InnerText.UnescapeHtml())
-            {
-                ChatLinkAction = node.GetAttributeValue("param", "")
-            };
+            return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
         }
         private static ActionMessagePiece ParseHtmlQuest(HtmlNode node)
         {
-            return new ActionMessagePiece(node.InnerText.UnescapeHtml())
-            {
-                ChatLinkAction = node.GetAttributeValue("param", "")
-            };
+            return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
         }
         private static ActionMessagePiece ParseHtmlLocation(HtmlNode node)
         {
@@ -260,8 +249,8 @@ namespace TCC.Data.Chat
             var section = guard.Sections[sectionId];
             var sb = new StringBuilder();
 
-            var guardName = guard.NameId != 0 ? Game.DB.RegionsDatabase.Names[guard.NameId] : "";
-            var sectionName = Game.DB.RegionsDatabase.Names[section.NameId];
+            var guardName = guard.NameId != 0 ? Game.DB.RegionsDatabase.GetZoneName(guard.NameId) : "";
+            var sectionName = Game.DB.RegionsDatabase.GetZoneName(section.NameId);
 
             sb.Append("<");
             sb.Append(guardName);
@@ -273,10 +262,7 @@ namespace TCC.Data.Chat
 
             sb.Append(">");
 
-            return new ActionMessagePiece(sb.ToString())
-            {
-                ChatLinkAction = linkData
-            };
+            return new ActionMessagePiece(sb.ToString(), linkData);
         }
     }
 }

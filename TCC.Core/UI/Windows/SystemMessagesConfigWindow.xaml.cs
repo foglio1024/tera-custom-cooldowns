@@ -40,13 +40,17 @@ namespace TCC.UI.Windows
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
                         foreach (var item in args.NewItems)
                         {
-                            App.Settings.UserExcludedSysMsg.Add((item as SystemMessageViewModel)?.Opcode);
+                            var opcode = ((SystemMessageViewModel?) item)?.Opcode;
+                            if (opcode != null)
+                                App.Settings.UserExcludedSysMsg.Add(opcode);
                         }
                         break;
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
                         foreach (var item in args.OldItems)
                         {
-                            App.Settings.UserExcludedSysMsg.Remove((item as SystemMessageViewModel)?.Opcode);
+                            var opcode = ((SystemMessageViewModel?) item)?.Opcode;
+                            if (opcode != null)
+                                App.Settings.UserExcludedSysMsg.Remove(opcode);
                         }
                         break;
                 }
@@ -66,16 +70,17 @@ namespace TCC.UI.Windows
         {
             Close();
         }
+        //TODO: use commands
         private void ExcludeMessage(object sender, RoutedEventArgs e)
         {
-            var msgVm = (sender as FrameworkElement)?.DataContext as SystemMessageViewModel;
+            var msgVm = (SystemMessageViewModel) ((FrameworkElement) sender).DataContext;
             if (HiddenMessages.Any(x => x.Opcode == msgVm?.Opcode)) return;
             HiddenMessages.Add(msgVm);
             ShowedMessages.Remove(msgVm);
         }
         private void RestoreMessage(object sender, RoutedEventArgs e)
         {
-            var msgVm = (sender as FrameworkElement)?.DataContext as SystemMessageViewModel;
+            var msgVm = (SystemMessageViewModel) ((FrameworkElement) sender).DataContext;
             if (HiddenMessages.All(x => x.Opcode != msgVm?.Opcode)) return;
             ShowedMessages.Add(msgVm);
             HiddenMessages.Remove(msgVm);

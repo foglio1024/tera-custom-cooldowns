@@ -1,27 +1,24 @@
-﻿using System;
+﻿using Nostrum.Controls;
+using Nostrum.Factories;
 using System.Windows;
 using System.Windows.Media.Animation;
-using Nostrum.Controls;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Classes
 {
-    /// <summary>
-    /// Logica di interazione per GunnerLayout.xaml
-    /// </summary>
     public partial class GunnerLayout
     {
+        private GunnerLayoutVM? _dc;
+        private readonly DoubleAnimation _an;
         public GunnerLayout()
         {
+            _an = AnimationFactory.CreateDoubleAnimation(150, to: 400);
             InitializeComponent();
         }
-
-        private GunnerLayoutVM _dc;
-        private DoubleAnimation _an;
         private void GunnerLayout_OnLoaded(object sender, RoutedEventArgs e)
         {
             _dc = (GunnerLayoutVM) DataContext;
-            _an = new DoubleAnimation(_dc.StaminaTracker.Factor * 359.99 + 40, TimeSpan.FromMilliseconds(150));
+            _an.To = _dc.StaminaTracker.Factor * 359.99 + 40;
             _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
 
         }
@@ -29,6 +26,7 @@ namespace TCC.UI.Controls.Classes
         private void ST_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
+            if (_dc == null) return;
             _an.To = _dc.StaminaTracker.Factor*(359.99 - MainReArc.StartAngle*2) + MainReArc.StartAngle;
             MainReArc.BeginAnimation(Arc.EndAngleProperty, _an);
         }

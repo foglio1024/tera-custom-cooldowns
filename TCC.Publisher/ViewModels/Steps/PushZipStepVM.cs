@@ -12,7 +12,7 @@ namespace TCC.Publisher.ViewModels.Steps
             if (confirm != MessageBoxResult.Yes) return;
 
             VM.Progress = 7 / 0.07;
-            await Publisher.Upload();
+            await Publisher.Instance.Upload();
             Completed = true;
             VM.InvokeFinished();
         }

@@ -7,23 +7,23 @@ namespace TCC.ViewModels
 {
     public class ClassWindowTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate Warrior { get; set; }
-        public DataTemplate Archer { get; set; }
-        public DataTemplate Ninja { get; set; }
-        public DataTemplate Mystic { get; set; }
-        public DataTemplate Priest { get; set; }
-        public DataTemplate Lancer { get; set; }
-        public DataTemplate Brawler { get; set; }
-        public DataTemplate Sorcerer { get; set; }
-        public DataTemplate Slayer { get; set; }
-        public DataTemplate Berserker { get; set; }
-        public DataTemplate Gunner { get; set; }
-        public DataTemplate Valkyrie { get; set; }
-        public DataTemplate Reaper { get; set; }
+        public DataTemplate? Warrior { get; set; }
+        public DataTemplate? Archer { get; set; }
+        public DataTemplate? Ninja { get; set; }
+        public DataTemplate? Mystic { get; set; }
+        public DataTemplate? Priest { get; set; }
+        public DataTemplate? Lancer { get; set; }
+        public DataTemplate? Brawler { get; set; }
+        public DataTemplate? Sorcerer { get; set; }
+        public DataTemplate? Slayer { get; set; }
+        public DataTemplate? Berserker { get; set; }
+        public DataTemplate? Gunner { get; set; }
+        public DataTemplate? Valkyrie { get; set; }
+        public DataTemplate? Reaper { get; set; }
 
-        public DataTemplate None { get; set; }
+        public DataTemplate? None { get; set; }
 
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             if (App.Loading) return None;
             return WindowManager.ViewModels.ClassVM.CurrentClass switch

@@ -32,7 +32,7 @@ namespace TCC.ViewModels
     [TccModule]
     public class ChatManager : TccWindowViewModel
     {
-        private static ChatManager _instance;
+        private static ChatManager? _instance;
 
         public static ChatManager Instance => _instance ??= new ChatManager(App.Settings.ChatSettings);
 
@@ -43,10 +43,10 @@ namespace TCC.ViewModels
         public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
         private readonly object _lock = new object();
 
-        public event Action<ChatMessage> NewMessage;
-        public event Action<int> PrivateChannelJoined;
+        public event Action<ChatMessage> NewMessage = null!;
+        public event Action<int> PrivateChannelJoined = null!;
 
-        public LFG LastClickedLfg { get; set; }
+        public LFG? LastClickedLfg { get; set; }
 
         public int MessageCount => ChatMessages.Count;
         public int QueuedMessagesCount => _pauseQueue.Count;
@@ -260,7 +260,7 @@ namespace TCC.ViewModels
             {
                 if (s.Tabs.Count == 0) return;
                 var m = new ChatViewModel(s);
-                var w = new ChatWindow(s, m);
+                var w = new ChatWindow(m);
                 ChatWindows.Add(w);
                 m.LoadTabs(s.Tabs);
             });
@@ -272,10 +272,10 @@ namespace TCC.ViewModels
                     false)
                 {HideTimeout = 10, FadeOut = true, LfgOn = false};
                 var m = new ChatViewModel(ws);
-                var w = new ChatWindow(ws, m);
+                var w = new ChatWindow(m);
                 App.BaseDispatcher.InvokeAsync(() =>
                 {
-                    App.Settings.ChatWindowsSettings.Add(w.WindowSettings as ChatWindowSettings);
+                    App.Settings.ChatWindowsSettings.Add((ChatWindowSettings) w.WindowSettings);
                 });
                 ChatWindows.Add(w);
                 m.LoadTabs();
@@ -555,8 +555,9 @@ namespace TCC.ViewModels
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             if (e.OldItems.Count == 0) return;
-            App.Settings.ChatWindowsSettings.Remove(
-                (e.OldItems[0] as ChatWindow)?.WindowSettings as ChatWindowSettings);
+            var ws = (ChatWindowSettings?) ((ChatWindow?) e.OldItems[0])?.WindowSettings;
+            if(ws == null) return;
+            App.Settings.ChatWindowsSettings.Remove(ws);
         }
 
         private void OnChatMessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

@@ -10,6 +10,7 @@ namespace TCC.Data.Abnormalities
         private static readonly uint[] EnergyStarsIDs = { 801500, 801501, 801502, 801503, 98000107 };
         private const int GraceId = 801700;
         private const int TripleNemesisId = 28090;
+        private const int DivineId = 805713;
         private static readonly uint[] EdictIDs = { 805800 };
 
         private static void CheckTripleNemesis(S_ABNORMALITY_BEGIN p)
@@ -38,14 +39,14 @@ namespace TCC.Data.Abnormalities
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EnergyStars.Buff.Start(p.Duration);
+            vm.EnergyStars.StartEffect(p.Duration);
         }
         private static void CheckEnergyStars(S_ABNORMALITY_REFRESH p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EnergyStars.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.EnergyStars.RefreshEffect(p.Duration);
 
         }
         private static void CheckEnergyStars(S_ABNORMALITY_END p)
@@ -53,7 +54,7 @@ namespace TCC.Data.Abnormalities
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EnergyStars.Buff.Stop();
+            vm.EnergyStars.StopEffect();
         }
 
         private static void CheckGrace(S_ABNORMALITY_BEGIN p)
@@ -61,21 +62,21 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != GraceId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.Grace.Buff.Start(p.Duration);
+            vm.Grace.StartEffect(p.Duration);
         }
         private static void CheckGrace(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GraceId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.Grace.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.Grace.RefreshEffect(p.Duration);
         }
         private static void CheckGrace(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GraceId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.Grace.Buff.Stop();
+            vm.Grace.StopEffect();
         }
 
         private static void CheckEdict(S_ABNORMALITY_BEGIN p)
@@ -83,44 +84,69 @@ namespace TCC.Data.Abnormalities
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EdictOfJudgment.Buff.Start(p.Duration);
+            vm.EdictOfJudgment.StartEffect(p.Duration);
         }
         private static void CheckEdict(S_ABNORMALITY_REFRESH p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EdictOfJudgment.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.EdictOfJudgment.RefreshEffect(p.Duration);
         }
         private static void CheckEdict(S_ABNORMALITY_END p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EdictOfJudgment.Buff.Stop();
+            vm.EdictOfJudgment.StopEffect();
+        }
+
+        private static void CheckDivine(S_ABNORMALITY_BEGIN p)
+        {
+            if (p.AbnormalityId != DivineId) return;
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.DivineCharge.StartEffect(p.Duration);
+        }
+        private static void CheckDivine(S_ABNORMALITY_REFRESH p)
+        {
+            if (p.AbnormalityId != DivineId) return;
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.DivineCharge.RefreshEffect(p.Duration);
+        }
+        private static void CheckDivine(S_ABNORMALITY_END p)
+        {
+            if (p.AbnormalityId != DivineId) return;
+            if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
+
+            vm.DivineCharge.StopEffect();
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
             CheckTripleNemesis(p);
-            if (!Game.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
+            CheckDivine(p);
+            if (!Game.IsMe(p.TargetId)) return;
             CheckGrace(p);
             CheckEdict(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
         {
             CheckTripleNemesis(p);
-            if (!Game.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
+            CheckDivine(p);
+            if (!Game.IsMe(p.TargetId)) return;
             CheckGrace(p);
             CheckEdict(p);
         }
         public override void CheckAbnormality(S_ABNORMALITY_END p)
         {
             CheckTripleNemesis(p);
-            if (!Game.IsMe(p.TargetId)) return;
             CheckEnergyStars(p);
+            CheckDivine(p);
+            if (!Game.IsMe(p.TargetId)) return;
             CheckGrace(p);
             CheckEdict(p);
         }

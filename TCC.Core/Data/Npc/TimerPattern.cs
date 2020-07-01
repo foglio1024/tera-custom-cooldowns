@@ -8,11 +8,11 @@ namespace TCC.Data.NPCs
     {
         private readonly Timer _timer;
         protected bool Running => _timer.Enabled;
-        protected NPC Target { get; set; }
+        protected NPC? Target { get; set; }
         public int Duration { get; }
 
-        public event Action Started;
-        public event Action Ended;
+        public event Action Started = null!;
+        public event Action Ended = null!;
         //public event Action Reset;
 
         public void Start()
@@ -26,7 +26,7 @@ namespace TCC.Data.NPCs
             Target = target;
         }
 
-        public TimerPattern(int duration)
+        protected TimerPattern(int duration)
         {
             Duration = duration;
             _timer = new Timer(Duration * 1000);

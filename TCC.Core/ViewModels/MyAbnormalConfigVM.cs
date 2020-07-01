@@ -19,7 +19,7 @@ namespace TCC.ViewModels
 {
     public class MyAbnormalConfigVM : TSPropertyChanged, IDisposable
     {
-        public event Action ShowAllChanged;
+        public event Action ShowAllChanged = null!;
 
         public ICollectionView AbnormalitiesView { get; set; }
 

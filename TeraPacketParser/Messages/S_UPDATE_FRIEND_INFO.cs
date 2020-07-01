@@ -5,8 +5,8 @@ namespace TeraPacketParser.Messages
 {
     public class S_UPDATE_FRIEND_INFO : ParsedMessage
     {
-        public bool Online { get; private set; }
-        public string Name { get; private set; }
+        public bool Online { get; }
+        public string Name { get; } = "";
         public S_UPDATE_FRIEND_INFO(TeraMessageReader reader) : base(reader)
         {
             reader.BaseStream.Position = 0;

@@ -15,14 +15,17 @@ namespace TCC.UI.Controls.Group
     public class GroupMemberBase : UserControl, INotifyPropertyChanged
     {
         #region INPC
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void NPC([CallerMemberName] string propertyName = null)
+        public event PropertyChangedEventHandler PropertyChanged = null!;
+        protected virtual void NPC([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 
-        protected DataTemplateSelector InitialAbnormalityDataTemplateSelector
+
+        private DataTemplateSelector? _currentAbnormalityTemplateSelector;
+        private DataTemplateSelector? _initialAbnormalityDataTemplateSelector;
+        protected DataTemplateSelector? InitialAbnormalityDataTemplateSelector
         {
             private get => _initialAbnormalityDataTemplateSelector;
             set
@@ -31,9 +34,16 @@ namespace TCC.UI.Controls.Group
                 _currentAbnormalityTemplateSelector = value;
             }
         }
-
-        private DataTemplateSelector _currentAbnormalityTemplateSelector;
-        private DataTemplateSelector _initialAbnormalityDataTemplateSelector;
+        public DataTemplateSelector? CurrentAbnormalityTemplateSelector
+        {
+            get => _currentAbnormalityTemplateSelector;
+            protected set
+            {
+                if (_currentAbnormalityTemplateSelector == value) return;
+                _currentAbnormalityTemplateSelector = value;
+                NPC();
+            }
+        }
 
         public bool ShowHp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideHpThreshold;
         public bool ShowMp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideMpThreshold;
@@ -55,20 +65,10 @@ namespace TCC.UI.Controls.Group
         public bool ShowAwaken => App.Settings.GroupWindowSettings.ShowAwakenIcon;
         public bool ShowHpAmount => App.Settings.GroupWindowSettings.HpLabelMode == GroupHpLabelMode.Amount && ShowHp;
         public bool ShowHpPercentage => App.Settings.GroupWindowSettings.HpLabelMode == GroupHpLabelMode.Percentage && ShowHp;
-        public DataTemplateSelector CurrentAbnormalityTemplateSelector
-        {
-            get => _currentAbnormalityTemplateSelector;
-            protected set
-            {
-                if (_currentAbnormalityTemplateSelector == value) return;
-                _currentAbnormalityTemplateSelector = value;
-                NPC();
-            }
-        }
-        public IEnumerable BuffsSource => ShowBuffs ? (DataContext as User)?.Buffs : null;
-        public IEnumerable DebuffsSource => ShowDebuffs ? (DataContext as User)?.Debuffs : null;
+        public IEnumerable? BuffsSource => ShowBuffs ? (DataContext as User)?.Buffs : null;
+        public IEnumerable? DebuffsSource => ShowDebuffs ? (DataContext as User)?.Debuffs : null;
 
-        public GroupMemberBase()
+        protected GroupMemberBase()
         {
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
@@ -85,7 +85,6 @@ namespace TCC.UI.Controls.Group
             WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupVmPropertyChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         }
-
         private void OnUnloaded(object _, RoutedEventArgs __)
         {
             Loaded -= OnLoaded;

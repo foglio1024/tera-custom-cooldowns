@@ -20,7 +20,7 @@ namespace TCC.Update
         private static string DownloadedIconsDir => Path.Combine(App.BasePath, "tera-used-icons-master");
         private const string IconsUrl = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
 
-        private ProgressNotificationInfo _n;
+        private ProgressNotificationInfo? _n;
 
         public async Task CheckForUpdates()
         {
@@ -90,8 +90,10 @@ namespace TCC.Update
                 var total = ev.TotalBytesToReceive;
                 if (total == -1) total = 71000000;
                 var perc = ev.BytesReceived * 100 / (double)total;
+                if (_n == null) return;
                 _n.Progress = perc;
-                _n.Message = $"Downloading icons...\n({ev.BytesReceived / (1024 * 1024D):N1}/{total / (1024 * 1024D):N1}MB)";
+                _n.Message =
+                    $"Downloading icons...\n({ev.BytesReceived / (1024 * 1024D):N1}/{total / (1024 * 1024D):N1}MB)";
             };
             c.DownloadFileCompleted += async (_, args) =>
             {
@@ -102,8 +104,11 @@ namespace TCC.Update
                 }
                 else
                 {
-                    _n.Message = "Download completed.";
-                    _n.Progress = 0;
+                    if (_n != null)
+                    {
+                        _n.Message = "Download completed.";
+                        _n.Progress = 0;
+                    }
                     Extract();
                 }
             };
@@ -137,6 +142,7 @@ namespace TCC.Update
                     var url = $"https://github.com/Foglio1024/tera-used-icons/raw/master/{dir}/{iconName}";
                     using var c = MiscUtils.GetDefaultWebClient();
                     c.DownloadFile(new Uri(url), Path.Combine(App.ResourcesPath, "images", dir, iconName));
+                    if (_n == null) continue;
                     _n.Progress = idx * 100 / (double)missing.Count;
                     _n.Message = $"Updating icons... ({idx}/{missing.Count})";
                 }
@@ -151,26 +157,31 @@ namespace TCC.Update
                 }
             }
 
+            if (_n == null) return;
             _n.NotificationType = fails > 0 ? NotificationType.Warning : NotificationType.Success;
-            _n.Message = fails > 0 ? $"{missing.Count} icons successfully updated ({fails} failed)" : $"{missing.Count} icons successfully updated.";
+            _n.Message = fails > 0
+                ? $"{missing.Count} icons successfully updated ({fails} failed)"
+                : $"{missing.Count} icons successfully updated.";
             _n.Dispose(2000);
         }
         private void Extract()
         {
             try
             {
-                _n.Message = "Extracting icons...";
+                if (_n != null) _n.Message = "Extracting icons...";
                 if (Directory.Exists(DownloadedIconsDir)) Directory.Delete(DownloadedIconsDir, true);
                 var imagesPath = Path.Combine(App.ResourcesPath, "images");
                 if (!Directory.Exists(imagesPath)) Directory.CreateDirectory(imagesPath);
                 ZipFile.ExtractToDirectory(Path.Combine(App.BasePath, "icons.zip"), App.BasePath);
-                _n.Message = "Creating directories...";
-                Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).ToList().ForEach(dirPath =>
-                {
-                    var dir = Path.GetFileName(dirPath);
-                    Directory.CreateDirectory(Path.Combine(imagesPath, dir ?? throw new InvalidOperationException()));
-                });
-                _n.Message = "Copying icons...";
+                if (_n != null) _n.Message = "Creating directories...";
+                Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).ToList().ForEach(
+                    dirPath =>
+                    {
+                        var dir = Path.GetFileName(dirPath);
+                        Directory.CreateDirectory(Path.Combine(imagesPath,
+                            dir ?? throw new InvalidOperationException()));
+                    });
+                if (_n != null) _n.Message = "Copying icons...";
                 var paths = Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories).ToList();
                 var count = 0;
                 var total = paths.Count;
@@ -178,20 +189,27 @@ namespace TCC.Update
                 {
                     try
                     {
-                        File.Copy(newPath.Replace("\\", "/"), Path.Combine(App.ResourcesPath, "images", newPath.Replace(DownloadedIconsDir + "\\", "").Replace("\\", "/")), true);
+                        File.Copy(newPath.Replace("\\", "/"),
+                            Path.Combine(App.ResourcesPath, "images",
+                                newPath.Replace(DownloadedIconsDir + "\\", "").Replace("\\", "/")), true);
                     }
                     catch (Exception e)
                     {
                         Log.F("Failed to copy icon " + newPath + "\n" + e);
                     }
+
+                    if (_n == null) return;
                     _n.Message = $"Copying icons...\n({++count}/{total})";
                     _n.Progress = count * 100 / (double)total;
                 });
-                _n.Progress = 0;
-                _n.NotificationType = NotificationType.Success;
-                _n.Message = "Icons update completed successfully.";
+                if (_n != null)
+                {
+                    _n.Progress = 0;
+                    _n.NotificationType = NotificationType.Success;
+                    _n.Message = "Icons update completed successfully.";
+                }
                 CleanTempIcons();
-                _n.Dispose(4000);
+                _n?.Dispose(4000);
             }
             catch
             {
@@ -200,8 +218,11 @@ namespace TCC.Update
                     Extract();
                 else
                 {
-                    _n.Message = "Icons update aborted.";
-                    _n.Dispose(4000);
+                    if (_n != null)
+                    {
+                        _n.Message = "Icons update aborted.";
+                        _n.Dispose(4000);
+                    }
                 }
             }
         }

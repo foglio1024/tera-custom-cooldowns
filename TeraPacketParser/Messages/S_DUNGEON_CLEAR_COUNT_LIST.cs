@@ -11,12 +11,12 @@ namespace TeraPacketParser.Messages
         public uint PlayerId { get; }
         public S_DUNGEON_CLEAR_COUNT_LIST(TeraMessageReader reader) : base(reader)
         {
+            DungeonClears = new Dictionary<uint, int>();
             try
             {
                 var count = reader.ReadUInt16();
                 reader.Skip(2); //var offset = reader.ReadUInt16();
                 PlayerId = reader.ReadUInt32();
-                DungeonClears = new Dictionary<uint, int>();
                 for (var i = 0; i < count; i++)
                 {
                     //reader.BaseStream.Position = 8;

@@ -14,9 +14,9 @@ namespace TCC.Moongourd
     {
         private const string RecentUploadsUrl = "https://moongourd.com/api/bot/recent_uploads_tcc";
         private bool _asking;
-        private static JArray LastResponse { get; set; } = new JArray();
-        public event Action<List<MoongourdEncounter>> Done;
-        public event Action Started;
+        private static JArray? LastResponse { get; set; } = new JArray();
+        public event Action<List<MoongourdEncounter>> Done = null!;
+        public event Action Started = null!;
 
         private JObject BuildRequest(string playerName, string region, string playerServer = "", int areaId = 0, int bossId = 0)
         {
@@ -119,7 +119,7 @@ namespace TCC.Moongourd
             _encounter = enc;
         }
 #pragma warning disable 0067
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged = null!;
 #pragma warning restore 0067
     }
 }

@@ -3,7 +3,6 @@
                     xmlns:nsConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                     xmlns:converters="clr-namespace:TCC.UI.Converters">
 
-    <converters:BoolToSvgSwitchConverter x:Key="BoolToSvgSwitchConverter"/>
     <converters:RollToStringConverter x:Key="RollToString"/>
     <converters:IconConverter x:Key="IconNameToPath"/>
     <converters:ClassSvgConverter x:Key="ClassToSvg"/>
@@ -21,7 +20,7 @@
     <converters:DirectionToHorAlignConveter x:Key="DirectionToHorAlignConveter"/>
     <converters:AbnormalityTypeToColorConverter x:Key="AbnormalityTypeToStrokeColor"/>
     <converters:MessageTextToIconConverter x:Key="MessageTextToIcon"/>
-    <converters:ClassToReColorConverter x:Key="ReColorConverter"/>
+    <!--<converters:ClassToReColorConverter x:Key="ReColorConverter"/>-->
 
     <!--BossGage resources-->
     <converters:EntityIdToNameConverter x:Key="EntityIdToName"/>
@@ -31,7 +30,7 @@
     <converters:HHphaseToEnemyWindowTemplate x:Key="HarrowholdPhaseToLayout"/>
 
     <!--Party/raid member resources-->
-    <converters:LaurelImageConverter x:Key="LaurelToImage"/>
+    <!--<converters:LaurelImageConverter x:Key="LaurelToImage"/>-->
     <converters:ClassToFillConverter x:Key="ClassToFill"/>
     <converters:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplate"/>
     <converters:RaidToColorConverter x:Key="RaidToColor"/>
@@ -57,6 +56,6 @@
     <converters:DungeonImageConverter x:Key="DungeonImageConverter" />
     <converters:MoneyAmountToVisibilityConverter x:Key="AmountToVisibilityConv" />
     <converters:NotificationTypeToBrush x:Key="NotificationTypeToBrush"/>
-    <converters:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>
+    <!--<converters:WarriorStanceToColorConverter x:Key="StanceToColorConverter"/>-->
 
 </ResourceDictionary>

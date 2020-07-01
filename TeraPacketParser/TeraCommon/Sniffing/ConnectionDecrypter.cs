@@ -13,7 +13,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         private readonly string _region;
         private MemoryStream _client = new MemoryStream();
         private MemoryStream _server = new MemoryStream();
-        private Session _session;
+        private Session _session = null!;
 
         public ConnectionDecrypter(string region = "Unknown")
         {
@@ -22,8 +22,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
         private bool Initialized => _session != null;
 
-        public event Action<byte[]> ClientToServerDecrypted;
-        public event Action<byte[]> ServerToClientDecrypted;
+        public event Action<byte[]> ClientToServerDecrypted = null!;
+        public event Action<byte[]> ServerToClientDecrypted = null!;
 
         protected void OnClientToServerDecrypted(byte[] data)
         {
@@ -72,8 +72,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
             ClientToServer(_client.ReadBytes((int) (_client.Length - _client.Position)));
             ServerToClient(_server.ReadBytes((int) (_server.Length - _server.Position)));
-            _client = null;
-            _server = null;
+            _client = null!;
+            _server = null!;
         }
 
         public void Skip(MessageDirection direction, int needToSkip)

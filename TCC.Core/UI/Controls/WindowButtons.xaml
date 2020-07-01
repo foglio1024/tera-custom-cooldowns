@@ -48,13 +48,36 @@
         </Button>
         <Button Command="{Binding PinCommand}"
                 Grid.Column="1" ToolTip="Show always">
-            <Path Data="{Binding ShowAlways, Converter={StaticResource BoolToSvgSwitchConverter}, ConverterParameter=SvgPin:SvgUnpin}"/>
+            <Path>
+                <Path.Style>
+                    <Style BasedOn="{StaticResource {x:Type Path}}" TargetType="Path">
+                        <Setter Property="Data" Value="{StaticResource SvgPin}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ShowAlways}" Value="False">
+                                <Setter Property="Data" Value="{StaticResource SvgUnpin}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Path.Style>
+            </Path>
         </Button>
         <Button Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=controls:WindowButtons}}"
                 Command="{Binding AutoDimCommand}"
                 Grid.Column="2" 
                 ToolTip="Auto dim">
-            <Path Data="{Binding AutoDim, Converter={StaticResource BoolToSvgSwitchConverter}, ConverterParameter=SvgBlurOn:SvgBlurOff}"/>
+            <Path>
+                <Path.Style>
+                    <Style BasedOn="{StaticResource {x:Type Path}}" TargetType="Path">
+                        <Setter Property="Data" Value="{StaticResource SvgBlurOn}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AutoDim}" Value="False">
+                                <Setter Property="Data" Value="{StaticResource SvgBlurOff}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Path.Style>
+            </Path>
+
         </Button>
         <Button Command="{Binding MakeGlobalCommand}"
                 Grid.Column="3" 

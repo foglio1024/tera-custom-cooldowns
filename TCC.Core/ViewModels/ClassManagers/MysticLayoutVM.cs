@@ -8,20 +8,19 @@ namespace TCC.ViewModels
     internal class MysticLayoutVM : BaseClassLayoutVM
     {
         private bool _elementalize;
-        public AurasTracker Auras { get; private set; }
-        public Cooldown Contagion { get; private set; }
-        public DurationCooldownIndicator Vow { get; private set; }
-        public DurationCooldownIndicator VolleyOfCurse { get; private set; }
-        public Cooldown ThrallOfProtection { get; private set; }
-        public DurationCooldownIndicator ThrallOfVengeance { get; private set; }
-        public DurationCooldownIndicator ThrallOfWrath { get; private set; }
-        public Cooldown ThrallOfLife { get; private set; }
-        public Cooldown KingBlob { get; private set; }
+        public AurasTracker Auras { get; }
+        public Cooldown Contagion { get; }
+        public SkillWithEffect Vow { get; }
+        public SkillWithEffect VolleyOfCurse { get; }
+        public Cooldown ThrallOfProtection { get; }
+        public SkillWithEffect ThrallOfVengeance { get; }
+        public SkillWithEffect ThrallOfWrath { get; }
+        public Cooldown ThrallOfLife { get; }
 
-        public Cooldown AuraMerciless { get; private set; }
-        public Cooldown AuraTenacious { get; private set; }
-        public Cooldown AuraSwift { get; private set; }
-        public Cooldown AuraUnyielding { get; private set; }
+        public Cooldown AuraMerciless { get; }
+        public Cooldown AuraTenacious { get; }
+        public Cooldown AuraSwift { get; }
+        public Cooldown AuraUnyielding { get; }
         public string ElementalizeIcon { get; } = "icon_skills.spiritedness_tex";
         public bool Elementalize
         {
@@ -37,63 +36,48 @@ namespace TCC.ViewModels
         public bool ElementalizeWarning => !Elementalize && (Game.Combat || Game.Encounter);
         public bool OffenseAuraWarning => !Auras.OffenseAura && (Game.Combat || Game.Encounter);
         public bool SupportAuraWarning => !Auras.SupportAura && (Game.Combat || Game.Encounter);
+
         public MysticLayoutVM()
         {
             Auras = new AurasTracker();
-        }
-
-
-        public override void LoadSpecialSkills()
-        {
-            Game.DB.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
-            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
-            Game.DB.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
-
             Game.DB.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
-            Game.DB.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
-            Game.DB.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
-            Game.DB.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);
-            Game.DB.SkillsDatabase.TryGetSkill(480100, Class.Mystic, out var kb);
-
-            Game.DB.SkillsDatabase.TryGetSkill(130500, Class.Mystic, out var am);
-            Game.DB.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
-            Game.DB.SkillsDatabase.TryGetSkill(140500, Class.Mystic, out var asw);
-            Game.DB.SkillsDatabase.TryGetSkill(150600, Class.Mystic, out var au);
-
             ThrallOfProtection = new Cooldown(top, false);
+            
+            Game.DB.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);
             ThrallOfLife = new Cooldown(tol, false);
-            ThrallOfVengeance = new DurationCooldownIndicator(Dispatcher)
-            {
-                Buff = new Cooldown(tov, true),
-                Cooldown = new Cooldown(tov, true) {CanFlash = true}
-            };
-            ThrallOfWrath = new DurationCooldownIndicator(Dispatcher)
-            {
-                Buff = new Cooldown(tow, true),
-                Cooldown = new Cooldown(tow, true) {CanFlash = true}
-            };
-            KingBlob = new Cooldown(kb, true) { CanFlash = true };
+            
+            Game.DB.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
+            ThrallOfVengeance = new SkillWithEffect(Dispatcher, tov);
+            
+            Game.DB.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
+            ThrallOfWrath = new SkillWithEffect(Dispatcher, tow);
 
+
+            Game.DB.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
             AuraTenacious = new Cooldown(at, false) { CanFlash = true };
+            
+            Game.DB.SkillsDatabase.TryGetSkill(130500, Class.Mystic, out var am);
             AuraMerciless = new Cooldown(am, false) { CanFlash = true };
+            
+            Game.DB.SkillsDatabase.TryGetSkill(140500, Class.Mystic, out var asw);
             AuraSwift = new Cooldown(asw, false) { CanFlash = true };
+            
+            Game.DB.SkillsDatabase.TryGetSkill(150600, Class.Mystic, out var au);
             AuraUnyielding = new Cooldown(au, false) { CanFlash = true };
 
+
+            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
+            Vow = new SkillWithEffect(Dispatcher, vow);
+            Vow.Cooldown.FlashOnAvailable = false;
+            Vow.Effect.Ended += OnVowBuffEnded;
+            Vow.Effect.Started += OnVowBuffStarted;
+
+            Game.DB.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
+            VolleyOfCurse = new SkillWithEffect(Dispatcher, voc);
+
+            Game.DB.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
             Contagion = new Cooldown(cont, true) { CanFlash = true };
 
-            Vow = new DurationCooldownIndicator(Dispatcher)
-            {
-                Buff = new Cooldown(vow, false),
-                Cooldown = new Cooldown(vow, false) { CanFlash = true }
-            };
-            Vow.Buff.Ended += OnVowBuffEnded;
-            Vow.Buff.Started += OnVowBuffStarted;
-
-            VolleyOfCurse = new DurationCooldownIndicator(Dispatcher)
-            {
-                Buff = new Cooldown(voc, false),
-                Cooldown = new Cooldown(voc, false) { CanFlash = true }
-            };
 
             AbnormalityTracker.MarkingExpired += OnVocExpired;
             AbnormalityTracker.MarkingRefreshed += OnVocRefreshed;
@@ -105,9 +89,8 @@ namespace TCC.ViewModels
 
         public override void Dispose()
         {
-            ThrallOfVengeance.Cooldown.Dispose();
-            ThrallOfWrath.Cooldown.Dispose();
-            KingBlob.Dispose();
+            ThrallOfVengeance.Dispose();
+            ThrallOfWrath.Dispose();
 
             AuraTenacious.Dispose();
             AuraMerciless.Dispose();
@@ -116,8 +99,8 @@ namespace TCC.ViewModels
 
             Contagion.Dispose();
 
-            Vow.Cooldown.Dispose();
-            VolleyOfCurse.Cooldown.Dispose();
+            Vow.Dispose();
+            VolleyOfCurse.Dispose();
         }
 
         private void CheckAurasWarning()
@@ -138,17 +121,17 @@ namespace TCC.ViewModels
             CheckAurasWarning();
         }
 
-        private void OnVowBuffStarted(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
+        private void OnVowBuffStarted(ulong cd, CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
         private void OnVowBuffEnded(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
         private void OnVocRefreshed(ulong duration)
         {
-            VolleyOfCurse.Buff.Refresh(duration, CooldownMode.Normal);
+            VolleyOfCurse.RefreshEffect(duration);
             VolleyOfCurse.Cooldown.FlashOnAvailable = false;
         }
 
         private void OnVocExpired()
         {
-            VolleyOfCurse.Buff.Stop();
+            VolleyOfCurse.StopEffect();
             VolleyOfCurse.Cooldown.FlashOnAvailable = true;
         }
 
@@ -162,12 +145,12 @@ namespace TCC.ViewModels
             }
             if (sk.Skill.IconName == VolleyOfCurse.Cooldown.Skill.IconName)
             {
-                VolleyOfCurse.Cooldown.Start(sk.Duration);
+                VolleyOfCurse.StartCooldown(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == Vow.Cooldown.Skill.IconName)
             {
-                Vow.Cooldown.Start(sk.Duration);
+                Vow.StartCooldown(sk.Duration);
                 return true;
             }
             //if (sk.Skill.IconName == ThrallOfProtection.Skill.IconName)
@@ -177,7 +160,7 @@ namespace TCC.ViewModels
             //}
             if (sk.Skill.IconName == ThrallOfVengeance.Cooldown.Skill.IconName)
             {
-                ThrallOfVengeance.Cooldown.Start(sk.Duration);
+                ThrallOfVengeance.StartCooldown(sk.Duration);
                 return true;
             }
             //if (sk.Skill.IconName == ThrallOfLife.Skill.IconName)
@@ -186,7 +169,7 @@ namespace TCC.ViewModels
             //    return true;
             //}
             if (sk.Skill.IconName != ThrallOfWrath.Cooldown.Skill.IconName) return false;
-            ThrallOfWrath.Cooldown.Start(sk.Duration);
+            ThrallOfWrath.StartCooldown(sk.Duration);
             return true;
             //if (sk.Skill.IconName == KingBlob.Skill.IconName)
             //{

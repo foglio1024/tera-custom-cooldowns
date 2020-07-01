@@ -22,9 +22,15 @@
     <Copyright>MIT</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoWin32Manifest>true</NoWin32Manifest>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
+    <OutputPath>D:\TERA\TeraToolbox\mods\TCC</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -34,6 +40,9 @@
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
     <Reference Include="PresentationFramework.Aero" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Properties\Annotations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="resources\fonts\ArialMono-Bold.ttf" />

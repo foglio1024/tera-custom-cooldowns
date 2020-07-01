@@ -6,35 +6,35 @@ namespace TCC.ViewModels
 {
     internal class LancerLayoutVM : BaseClassLayoutVM
     {
+        public SkillWithEffect AdrenalineRush { get;  }
+        public SkillWithEffect GuardianShout { get; }
+        public Cooldown Infuriate { get; }
+        public LancerLineHeldTracker LH { get; }
         public LancerLayoutVM()
         {
             LH = new LancerLineHeldTracker();
             Game.Me.Death += OnDeath;
-        }
+            Game.DB.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
+            GuardianShout = new SkillWithEffect(Dispatcher, gshout);
 
-        
-        private void OnDeath()
-        {
-            LH.Stop();
-            GuardianShout.Buff.Stop();
-            AdrenalineRush.Buff.Stop();
-        }
+            Game.DB.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
+            AdrenalineRush = new SkillWithEffect(Dispatcher, arush);
 
-        public DurationCooldownIndicator AdrenalineRush { get; set; }
-        public DurationCooldownIndicator GuardianShout { get; set; }
-        public Cooldown Infuriate { get; set; }
-        public LancerLineHeldTracker LH { get; set; }
+            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
+            Infuriate = new Cooldown(infu, true) { CanFlash = true };
+
+        }
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == GuardianShout.Cooldown.Skill.IconName)
             {
-                GuardianShout.Cooldown.Start(sk.Duration);
+                GuardianShout.StartCooldown(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == AdrenalineRush.Cooldown.Skill.IconName)
             {
-                AdrenalineRush.Cooldown.Start(sk.Duration);
+                AdrenalineRush.StartCooldown(sk.Duration);
                 return true;
             }
 
@@ -43,30 +43,17 @@ namespace TCC.ViewModels
             return true;
         }
 
-        public override void LoadSpecialSkills()
+        private void OnDeath()
         {
-            Game.DB.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
-            Game.DB.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
-            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
-
-            GuardianShout = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(gshout, true) { CanFlash = true },
-                Buff = new Cooldown(gshout, false)
-            };
-            AdrenalineRush = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(arush, true) { CanFlash = true },
-                Buff = new Cooldown(arush, false)
-            };
-
-            Infuriate = new Cooldown(infu, true) { CanFlash = true };
+            LH.Stop();
+            GuardianShout.StopEffect();
+            AdrenalineRush.StopEffect();
         }
 
         public override void Dispose()
         {
-            GuardianShout.Cooldown.Dispose();
-            AdrenalineRush.Cooldown.Dispose();
+            GuardianShout.Dispose();
+            AdrenalineRush.Dispose();
             Infuriate.Dispose();
         }
     }

@@ -15,7 +15,7 @@ namespace TCC.UI.Controls.NPCs
         private readonly DoubleAnimation _hpAnim;
         private readonly DoubleAnimation _shrinkAnim;
 
-        public SmallMobViewModel VM { get; set; }
+        public SmallMobViewModel? VM { get; private set; }
 
         public SmallMobControl()
         {
@@ -28,7 +28,8 @@ namespace TCC.UI.Controls.NPCs
 
         private void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue is NPC npc) VM = new SmallMobViewModel(npc);
+            if (!(e.NewValue is NPC npc)) return;
+            VM = new SmallMobViewModel(npc);
         }
 
 
@@ -36,24 +37,31 @@ namespace TCC.UI.Controls.NPCs
         {
             if (!_firstLoad) return;
             _firstLoad = false;
-            VM.HpFactorChanged += OnHpChanged;
-            VM.Disposed += OnDispose;
+            if (VM != null)
+            {
+                VM.HpFactorChanged += OnHpChanged;
+                VM.Disposed += OnDispose;
+            }
 
             SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
-
         }
 
         private void OnDispose()
         {
-            VM.Disposed -= OnDispose;
-            VM.HpFactorChanged -= OnHpChanged;
+            if (VM != null)
+            {
+                VM.Disposed -= OnDispose;
+                VM.HpFactorChanged -= OnHpChanged;
+            }
             DataContextChanged -= OnDataContextChanged;
             SettingsWindowViewModel.AbnormalityShapeChanged -= RefreshAbnormalityTemplate;
-            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty,_shrinkAnim);
+            RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _shrinkAnim);
         }
 
         private void OnHpChanged()
         {
+            if (VM == null) return;
+
             if (VM.Compact)
             {
                 _hpAnim.To = VM.NPC.HPFactor * 359.9;
@@ -69,16 +77,18 @@ namespace TCC.UI.Controls.NPCs
         private void RefreshAbnormalityTemplate()
         {
             Abnormalities.ItemTemplateSelector = null;
-            Abnormalities.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector; 
+            Abnormalities.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector;
         }
 
         private void SmallMobControl_OnMouseEnter(object sender, MouseEventArgs e)
         {
+            if (VM == null) return;
             VM.ShowOverrideBtn = true;
         }
 
         private void SmallMobControl_OnMouseLeave(object sender, MouseEventArgs e)
         {
+            if (VM == null) return;
             VM.ShowOverrideBtn = false;
         }
     }

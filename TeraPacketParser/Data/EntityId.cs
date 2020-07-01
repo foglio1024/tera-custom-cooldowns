@@ -39,7 +39,7 @@ namespace TeraPacketParser.Data
             return this == other;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (!(obj is EntityId))
                 return false;

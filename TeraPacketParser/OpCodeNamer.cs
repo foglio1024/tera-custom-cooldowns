@@ -13,7 +13,6 @@ namespace TeraPacketParser
     {
         private Dictionary<string, ushort> _opCodeCodes;
         private Dictionary<ushort, string> _opCodeNames;
-        private readonly string _path;
 
         public OpCodeNamer(IEnumerable<KeyValuePair<ushort, string>> names)
         {
@@ -22,18 +21,13 @@ namespace TeraPacketParser
             _opCodeCodes = namesArray.ToDictionary(parts => parts.Value, parts => parts.Key);
         }
 
-        public OpCodeNamer(string filename)
-            : this(ReadOpCodeFile(filename).Result)
+        public OpCodeNamer(string filename) : this(ReadOpCodeFile(filename).Result)
         {
-            _path = Path.GetDirectoryName(filename);
         }
 
         public string GetName(ushort opCode)
         {
-            string name;
-            if (_opCodeNames.TryGetValue(opCode, out name))
-                return name;
-            return opCode.ToString("X4");
+            return _opCodeNames.TryGetValue(opCode, out var name) ? name : opCode.ToString("X4");
         }
 
         private static async Task<IEnumerable<KeyValuePair<ushort, string>>> ReadOpCodeFile(string filename)
@@ -65,10 +59,11 @@ namespace TeraPacketParser
             //throw new ArgumentException($"Unknown name '{name}'");
         }
 
-        public void Reload(uint version, int releaseVersion)
+        public void Reload(uint version, int releaseVersion, string path)
         {
-            var filename = _path + "/sysmsg." + version + ".map";
-            if (!File.Exists(filename)) filename = _path + "/sysmsg." + releaseVersion / 100 + ".map";
+            var p = Path.GetDirectoryName(path) ?? "";
+            var filename = p + "/sysmsg." + version + ".map";
+            if (!File.Exists(filename)) filename = p + "/sysmsg." + releaseVersion / 100 + ".map";
             if (!File.Exists(filename)) return;
             var namesArray = ReadOpCodeFile(filename).Result.ToArray();
             _opCodeNames = namesArray.ToDictionary(parts => parts.Key, parts => parts.Value);

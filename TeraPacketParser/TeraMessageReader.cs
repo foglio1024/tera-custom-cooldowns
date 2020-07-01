@@ -27,8 +27,9 @@ namespace TeraPacketParser
         public MessageFactory Factory { get; set; }
         private static MemoryStream GetStream(Message message)
         {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            return new MemoryStream(message.Payload.Array, message.Payload.Offset, message.Payload.Count, false, true);
+            return message.Payload.Array != null 
+                ? new MemoryStream(message.Payload.Array, message.Payload.Offset, message.Payload.Count, false, true) 
+                : new MemoryStream();
         }
 
         public EntityId ReadEntityId()
@@ -37,7 +38,6 @@ namespace TeraPacketParser
             return new EntityId(id);
         }
 
-        // ReSharper disable once InconsistentNaming
         public Vector3f ReadVector3f()
         {
             Vector3f result;

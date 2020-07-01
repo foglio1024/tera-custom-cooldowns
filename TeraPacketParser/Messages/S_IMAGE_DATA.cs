@@ -12,17 +12,8 @@ namespace TeraPacketParser.Messages
 {
     public class S_IMAGE_DATA : ParsedMessage
     {
-        private static Dictionary<uint, Bitmap> _database;
-        public static Dictionary<uint, Bitmap> Database => _database ?? (_database = new Dictionary<uint, Bitmap>());
-
-        public static void LoadCachedImages()
-        {
-            if (!Directory.Exists("resources/images/guilds")) return;
-            foreach (var file in Directory.EnumerateFiles("resources/images/guilds"))
-            {
-                Database[Convert.ToUInt32(file.Split('_')[2])] = new Bitmap(file);
-            }
-        }
+        private static Dictionary<uint, Bitmap>? _database;
+        public static Dictionary<uint, Bitmap> Database => _database ??= new Dictionary<uint, Bitmap>();
 
         public S_IMAGE_DATA(TeraMessageReader reader) : base(reader)
         {
@@ -83,6 +74,15 @@ namespace TeraPacketParser.Messages
             //if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
             //image.Save("resources/images/guilds/" + imageName + ".bmp", ImageFormat.Bmp);
 
+        }
+
+        public static void LoadCachedImages()
+        {
+            if (!Directory.Exists("resources/images/guilds")) return;
+            foreach (var file in Directory.EnumerateFiles("resources/images/guilds"))
+            {
+                Database[Convert.ToUInt32(file.Split('_')[2])] = new Bitmap(file);
+            }
         }
     }
 }

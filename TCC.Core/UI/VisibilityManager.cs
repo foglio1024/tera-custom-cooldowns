@@ -9,9 +9,9 @@ namespace TCC.UI
         private bool _forceVisible;
         private bool _forceUndim;
 
-        public event Action VisibilityChanged;
-        public event Action DimChanged;
-        public event Action ClickThruChanged;
+        public event Action VisibilityChanged = null!;
+        public event Action DimChanged = null!;
+        public event Action ClickThruChanged = null!;
 
         public bool Dim => !_dimTimer.IsEnabled &&
                                 !Game.Encounter &&

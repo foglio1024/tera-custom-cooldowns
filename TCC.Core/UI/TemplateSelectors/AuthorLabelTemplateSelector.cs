@@ -7,10 +7,10 @@ namespace TCC.UI.TemplateSelectors
 {
     public class AuthorLabelTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate DefaultAuthorTemplate { get; set; }
-        public DataTemplate SystemAuthorTemplate { get; set; }
+        public DataTemplate? DefaultAuthorTemplate { get; set; }
+        public DataTemplate? SystemAuthorTemplate { get; set; }
 
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             if(!(item is ChatMessage m) ) return DefaultAuthorTemplate;
 

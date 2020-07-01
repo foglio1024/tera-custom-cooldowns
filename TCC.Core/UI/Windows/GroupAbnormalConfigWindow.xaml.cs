@@ -18,7 +18,7 @@ namespace TCC.UI.Windows
     {
         private Class _currentFilter;
         private readonly DispatcherTimer _searchCooldown;
-        private string _searchText;
+        private string _searchText = "";
 
         public GroupConfigVM DC { get; private set; }
 
@@ -26,11 +26,11 @@ namespace TCC.UI.Windows
         {
             InitializeComponent();
             Dispatcher?.Invoke(() => DataContext = new GroupConfigVM());
-            DC = (GroupConfigVM) DataContext;
+            DC = (GroupConfigVM)DataContext;
             _searchCooldown = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, OnSearchTriggered, Dispatcher ?? throw new InvalidOperationException());
 
         }
-        private void OnSearchTriggered(object sender, EventArgs e)
+        private void OnSearchTriggered(object? sender, EventArgs e)
         {
             _searchCooldown.Stop();
             if (_searchText == null) return;
@@ -139,7 +139,7 @@ namespace TCC.UI.Windows
             else App.Settings.GroupWindowSettings.GroupAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
         }
 #pragma warning disable 0067
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged = null!;
 #pragma warning restore 0067
         public ToggleCommand(ClassToggle t)
         {

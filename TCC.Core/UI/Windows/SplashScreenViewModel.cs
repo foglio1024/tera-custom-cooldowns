@@ -14,7 +14,7 @@ namespace TCC.UI.Windows
         private bool _waiting;
         private string _bottomText = "TCC";
 
-        public event Action ProgressChangedEvent;
+        public event Action ProgressChangedEvent = null!;
 
         public int Progress
         {
@@ -33,7 +33,7 @@ namespace TCC.UI.Windows
             get => _waiting;
             private set
             {
-                if(_waiting == value) return;
+                if (_waiting == value) return;
                 _waiting = value;
                 N();
             }
@@ -62,17 +62,17 @@ namespace TCC.UI.Windows
 
         public SplashScreenViewModel()
         {
+            var bm = new BitmapImage();
             try
             {
                 var path = Path.Combine(App.ResourcesPath, $"images/splash/{App.Random.Next(1, 15)}.jpg");
-                var bm = new BitmapImage();
                 bm.BeginInit();
                 bm.UriSource = new Uri(App.FI ? "pack://application:,,,/resources/images/10kdays.jpg" : path, UriKind.Absolute);
                 bm.CacheOption = BitmapCacheOption.OnLoad;
                 bm.EndInit();
-                Image = bm;
             }
             catch { }
+            Image = bm;
 
             OkCommand = new RelayCommand(args =>
             {

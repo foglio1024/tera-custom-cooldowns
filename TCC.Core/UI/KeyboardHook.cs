@@ -10,7 +10,7 @@ namespace TCC.UI
 {
     public sealed class KeyboardHook : IDisposable
     {
-        private static KeyboardHook _instance;
+        private static KeyboardHook? _instance;
         public static KeyboardHook Instance => _instance ??= new KeyboardHook();
 
         private readonly Window _window;
@@ -19,7 +19,7 @@ namespace TCC.UI
         private bool _isRegistered;
         private bool _isInitialized;
 
-        public event Action<HotKey> KeyPressed;
+        public event Action<HotKey> KeyPressed = null!;
 
         private KeyboardHook()
         {
@@ -105,7 +105,7 @@ namespace TCC.UI
             _currentId++;
 
             // register the hot key.
-            User32.RegisterHotKey(_window.Handle, _currentId, (uint) modifier, (uint) key);
+            User32.RegisterHotKey(_window.Handle, _currentId, (uint)modifier, (uint)key);
         }
 
         private void RegisterHotKey(HotKey hk)
@@ -157,14 +157,14 @@ namespace TCC.UI
                 // check if we got a hot key pressed.
                 if (m.Msg != WmHotkey) return;
                 // get the keys.
-                var key = (Keys) (((int) m.LParam >> 16) & 0xFFFF);
-                var modifier = (ModifierKeys) ((int) m.LParam & 0xFFFF);
+                var key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
+                var modifier = (ModifierKeys)((int)m.LParam & 0xFFFF);
 
                 // invoke the event to notify the parent.
                 KeyPressed?.Invoke(new HotKey(key, modifier));
             }
 
-            public event Action<HotKey> KeyPressed;
+            public event Action<HotKey> KeyPressed = null!;
         }
 
         #endregion

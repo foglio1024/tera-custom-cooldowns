@@ -46,7 +46,9 @@ namespace TCC.ViewModels
                 }
 
                 var prm = ChatUtils.SplitDirectives(systemMessage);
+                if (prm == null) return msg;
 
+                
                 msg.Author = prm["UserName"];
                 var txt = "{ItemName}";
                 txt = ChatUtils.ReplaceParameters(txt, prm, true);

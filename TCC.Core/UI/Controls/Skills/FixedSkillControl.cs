@@ -10,8 +10,8 @@ namespace TCC.UI.Controls.Skills
 {
     public class FixedSkillControl : SkillControlBase
     {
-        protected FrameworkElement GlowRef;
-        protected FrameworkElement DeleteButtonRef;
+        protected FrameworkElement? GlowRef;
+        protected FrameworkElement? DeleteButtonRef;
         private readonly DoubleAnimation _resetAnimation;
         private readonly DoubleAnimation _glowAnimation;
         private bool _warning;
@@ -31,9 +31,9 @@ namespace TCC.UI.Controls.Skills
             _glowAnimation = AnimationFactory.CreateDoubleAnimation(200, to: 0, @from: 1, framerate: 30); // new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
         }
 
-        protected override void OnCooldownStarted(CooldownMode mode)
+        protected override void OnCooldownStarted(ulong duration, CooldownMode mode)
         {
-            base.OnCooldownStarted(mode);
+            base.OnCooldownStarted(duration, mode);
             Warning = false;
         }
 
@@ -56,7 +56,7 @@ namespace TCC.UI.Controls.Skills
             Context.FlashingStopForced += OnForceStopFlashing;
             Context.Reset += OnReset;
 
-            if (!Context.IsAvailable) OnCooldownStarted(Context.Mode);
+            if (!Context.IsAvailable) OnCooldownStarted(Context.Duration, Context.Mode);
 
         }
         protected override void OnUnloaded(object sender, RoutedEventArgs e)
@@ -74,6 +74,7 @@ namespace TCC.UI.Controls.Skills
         }
         protected void OnForceFlashing()
         {
+            if (Context == null) return;
             if (!Context.IsAvailable) Warning = false;
             else AnimateAvailableSkill();
         }
@@ -83,31 +84,36 @@ namespace TCC.UI.Controls.Skills
         }
         private void OnReset()
         {
-            ResetArcRef.BeginAnimation(Shape.StrokeThicknessProperty, _resetAnimation);
+            ResetArcRef?.BeginAnimation(Shape.StrokeThicknessProperty, _resetAnimation);
         }
 
         private void AnimateAvailableSkill()
         {
+
             StopArcAnimation(MainArcRef); //stop any arc animations
             StopArcAnimation(PreArcRef); //stop any arc animations
-            GlowRef.BeginAnimation(OpacityProperty, _glowAnimation);
+            GlowRef?.BeginAnimation(OpacityProperty, _glowAnimation);
+            if (Context == null) return;
             if (Context.FlashOnAvailable && (Game.Combat || Game.Encounter)) Warning = true;
 
         }
 
         protected void ActivatorMouseEnter(object sender, MouseEventArgs e)
         {
+            if (DeleteButtonRef == null) return;
             DeleteButtonRef.Visibility = Visibility.Visible;
         }
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
             base.OnMouseLeave(e);
+            if (DeleteButtonRef == null) return;
             DeleteButtonRef.Visibility = Visibility.Collapsed;
         }
 
         protected void DeleteButtonClicked(object sender, RoutedEventArgs e)
         {
+            if (Context == null) return;
             WindowManager.ViewModels.CooldownsVM.DeleteFixedSkill(Context);
         }
     }

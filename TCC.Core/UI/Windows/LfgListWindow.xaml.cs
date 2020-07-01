@@ -80,7 +80,7 @@ namespace TCC.UI.Windows
             _keepPopupOpen = false;
         }
 
-        private void OnBgMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnBgMouseLeftButtonDown(object sender, MouseButtonEventArgs? e)
         {
             Keyboard.ClearFocus();
             _keepPopupOpen = false;

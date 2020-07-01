@@ -7,12 +7,13 @@ namespace TCC.UI.Controls.Classes.Elements
 {
     public partial class MysticAurasIndicator
     {
+        private AurasTracker? _context;
+
         public MysticAurasIndicator()
         {
             InitializeComponent();
         }
 
-        private AurasTracker _context;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -29,6 +30,8 @@ namespace TCC.UI.Controls.Classes.Elements
 
         private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (_context == null) return;
+
             if (e.PropertyName != "AuraChanged") return;
             Crit.Visibility = _context.CritAura ? Visibility.Visible : Visibility.Hidden;
             Mp.Visibility = _context.ManaAura ? Visibility.Visible : Visibility.Hidden;

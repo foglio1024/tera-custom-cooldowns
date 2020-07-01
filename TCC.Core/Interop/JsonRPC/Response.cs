@@ -7,8 +7,8 @@ namespace TCC.Interop.JsonRPC
         public const string ResultKey = "result";
         public const string ErrorKey = "error";
 
-        public JToken Result => this[ResultKey];
-        public JToken Error => this[ErrorKey];
+        public JToken? Result => this[ResultKey];
+        public JToken? Error => this[ErrorKey];
 
         public Response(JObject jObj)
         {

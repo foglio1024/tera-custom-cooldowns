@@ -1,27 +1,20 @@
-﻿using System;
-using System.Windows;
+﻿using Nostrum.Factories;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    /// <summary>
-    /// Interaction logic for DungeonInfoControl.xaml
-    /// </summary>
     public partial class DungeonInfoControl
     {
-        private DoubleAnimation _bubbleScale;
-        private DoubleAnimation _fadeIn;
+        private readonly DoubleAnimation _bubbleScale;
+        private readonly DoubleAnimation _fadeIn;
 
         public DungeonInfoControl()
         {
+            _bubbleScale = AnimationFactory.CreateDoubleAnimation(1000, from: .1, to: .9);
+            _bubbleScale.EasingFunction = new ElasticEase();
+            _fadeIn = AnimationFactory.CreateDoubleAnimation(200, from: 0, to: 1);
             InitializeComponent();
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            _bubbleScale = new DoubleAnimation(.9, 1, TimeSpan.FromMilliseconds(1000)) { EasingFunction = new ElasticEase() };
-            _fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
         }
 
         public void AnimateIn()

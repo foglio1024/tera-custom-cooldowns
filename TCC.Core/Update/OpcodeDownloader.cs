@@ -124,12 +124,14 @@ namespace TCC.Update
             var data = client.DownloadString(remote);
             var json = JObject.Parse(data);
             var jMap = json["maps"];
-            var jVersion = jMap[version.ToString()];
+            var jVersion = jMap?[version.ToString()];
             var sb = new StringBuilder();
+            if (jVersion == null) return;
             foreach (var jOpcode in jVersion.Children())
             {
                 sb.AppendLine($"{((JProperty)jOpcode).Name} {((JProperty)jOpcode).Value}");
             }
+
             File.WriteAllText(filename, sb.ToString());
         }
     }

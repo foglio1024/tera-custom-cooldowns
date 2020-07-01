@@ -94,7 +94,7 @@ namespace TCC.Data.Abnormalities
             //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
             if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
 
-            vm.DeadlyGamble.Buff.Start(p.Duration);
+            vm.DeadlyGamble.StartEffect(p.Duration);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_REFRESH p)
         {
@@ -102,7 +102,7 @@ namespace TCC.Data.Abnormalities
             if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
             //if (!GambleIDs.Contains(p.AbnormalityId)) return;
             //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-            vm.DeadlyGamble.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.DeadlyGamble.RefreshEffect(p.Duration);
         }
         private static void CheckDeadlyGamble(S_ABNORMALITY_END p)
         {
@@ -110,7 +110,7 @@ namespace TCC.Data.Abnormalities
             if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
             //if (!GambleIDs.Contains(p.AbnormalityId)) return;
             //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-            vm.DeadlyGamble.Buff.Stop();
+            vm.DeadlyGamble.StopEffect();
         }
 
         private void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)

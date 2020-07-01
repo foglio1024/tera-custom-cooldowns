@@ -22,13 +22,13 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    vm.Bloodlust.Buff.Start(p.Duration);
+                    vm.Bloodlust.StartEffect(p.Duration);
                     break;
                 case FieryRageId:
-                    vm.FieryRage.Buff.Start(p.Duration);
+                    vm.FieryRage.StartEffect(p.Duration);
                     break;
                 case UnleashId:
-                    vm.Unleash.Buff.Start(p.Duration);
+                    vm.Unleash.StartEffect(p.Duration);
                     vm.IsUnleashOn = true;
                     vm.IsUnleashOff = false;
                     break;
@@ -44,13 +44,13 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    vm.Bloodlust.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                    vm.Bloodlust.RefreshEffect(p.Duration);
                     break;
                 case FieryRageId:
-                    vm.FieryRage.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                    vm.FieryRage.RefreshEffect(p.Duration);
                     break;
                 case UnleashId:
-                    vm.Unleash.Buff.Refresh(p.Duration, CooldownMode.Normal);
+                    vm.Unleash.RefreshEffect(p.Duration);
                     vm.IsUnleashOn = true;
                     vm.IsUnleashOff = false;
                     break;
@@ -66,13 +66,13 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    vm.Bloodlust.Buff.Stop();
+                    vm.Bloodlust.StopEffect();
                     break;
                 case FieryRageId:
-                    vm.FieryRage.Buff.Stop();
+                    vm.FieryRage.StopEffect();
                     break;
                 case UnleashId:
-                    vm.Unleash.Buff.Stop();
+                    vm.Unleash.StopEffect();
                     vm.IsUnleashOn = false;
                     vm.IsUnleashOff = true;
                     break;

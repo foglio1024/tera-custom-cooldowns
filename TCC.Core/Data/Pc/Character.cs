@@ -14,7 +14,7 @@ namespace TCC.Data.Pc
 
     public class Character : TSPropertyChanged, IComparable
     {
-        private string _name;
+        private string _name = "";
         private Class _class;
         private Laurel _laurel = Laurel.None;
         private bool _isLoggedIn;
@@ -24,7 +24,7 @@ namespace TCC.Data.Pc
         private int _piecesOfDragonScroll;
         private float _itemLevel;
         private int _level;
-        private Location _lastLocation;
+        private Location _lastLocation = new Location();
         private long _lastOnline;
         private string _serverName = "";
         private bool _hidden;
@@ -264,10 +264,11 @@ namespace TCC.Data.Pc
             DungeonInfo.ResetAll(ResetMode.Daily);
         }
 
-        int IComparable.CompareTo(object obj)
+        int IComparable.CompareTo(object? obj)
         {
-            var ch = (Character)obj;
-            return Position.CompareTo(ch.Position);
+            var ch = (Character?)obj;
+            var pos = ch?.Position ?? 0;
+            return Position.CompareTo(pos);
         }
     }
 }

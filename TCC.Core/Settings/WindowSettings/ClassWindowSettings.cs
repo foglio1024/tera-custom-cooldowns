@@ -6,13 +6,13 @@ namespace TCC.Settings.WindowSettings
 {
     public class ClassWindowSettings : WindowSettingsBase
     {
-        public event Action WarriorShowEdgeChanged;
-        public event Action WarriorEdgeModeChanged;
-        public event Action WarriorShowTraverseCutChanged;
-        public event Action ValkyrieShowRagnarokChanged;
-        public event Action ValkyrieShowGodsfallChanged;
-        public event Action SorcererShowElementsChanged;
-        public event Action FlashAvailableSkillsChanged;
+        public event Action WarriorShowEdgeChanged = null!;
+        public event Action WarriorEdgeModeChanged = null!;
+        public event Action WarriorShowTraverseCutChanged = null!;
+        public event Action ValkyrieShowRagnarokChanged = null!;
+        public event Action ValkyrieShowGodsfallChanged = null!;
+        public event Action SorcererShowElementsChanged = null!;
+        public event Action FlashAvailableSkillsChanged = null!;
 
         private bool _warriorShowEdge;
         private bool _warriorShowTraverseCut;

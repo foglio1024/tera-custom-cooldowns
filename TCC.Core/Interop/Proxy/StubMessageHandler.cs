@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
+using TCC.Analysis;
 using TCC.Data;
 using TCC.Interop.JsonRPC;
-using TCC.Analysis;
-using Nostrum.Extensions;
 using TCC.ViewModels;
 using TeraPacketParser;
 using TeraPacketParser.Data;
@@ -27,17 +27,30 @@ namespace TCC.Interop.Proxy
 
         private static void HandleRawPacket(JObject parameters)
         {
-            //Log.CW("[ProxyMessageHandler] Handling raw packet");
-            var direction = (MessageDirection)parameters["direction"].Value<uint>();
-            var content = new Message(DateTime.UtcNow, direction, parameters["content"].Value<string>().Substring(4));
+            var jDir = parameters["direction"];
+            if (jDir == null) return;
+
+            var jContent = parameters["content"];
+            if (jContent == null) return;
+
+            var direction = (MessageDirection)jDir.Value<uint>();
+            var content = new Message(DateTime.UtcNow, direction, jContent.Value<string>().Substring(4));
             PacketAnalyzer.EnqueuePacket(content);
         }
         private static void HandleChatMessage(JObject parameters)
         {
-            var author = parameters["author"].Value<string>();
-            var channel = parameters["channel"].Value<uint>();
-            var message = parameters["message"].Value<string>().AddFontTagsIfMissing();
+            var jAuthor = parameters["author"];
+            if (jAuthor == null) return;
+            var author = jAuthor.Value<string>();
             if (author == "undefined") author = "System";
+
+            var jChannel = parameters["channel"];
+            if (jChannel == null) return;
+            var channel = jChannel.Value<uint>();
+
+            var jMessage = parameters["message"];
+            if (jMessage == null) return;
+            var message = jMessage.Value<string>().AddFontTagsIfMissing();
 
             if (!ChatManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
                 ChatManager.Instance.CachePrivateMessage(channel, author, message);
@@ -48,11 +61,15 @@ namespace TCC.Interop.Proxy
         }
         private static void SetUiMode(JObject parameters)
         {
-            Game.InGameUiOn = parameters["uiMode"].Value<bool>();
+            var jMode = parameters["uiMode"];
+            if (jMode == null) return;
+            Game.InGameUiOn = jMode.Value<bool>();
         }
         private static void SetChatMode(JObject parameters)
         {
-            Game.InGameChatOpen = parameters["chatMode"].Value<bool>();
+            var jMode = parameters["chatMode"];
+            if (jMode == null) return;
+            Game.InGameChatOpen = jMode.Value<bool>();
         }
 
         public void HandleRequest(Request req)

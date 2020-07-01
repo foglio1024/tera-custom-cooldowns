@@ -1,11 +1,9 @@
 ﻿using Nostrum;
+using Nostrum.Extensions;
 using System;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Media;
-using Nostrum.Extensions;
 using TCC.Interop.Proxy;
-using TCC.UI.Converters;
 using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
@@ -18,9 +16,9 @@ namespace TCC.Data.Chat
         protected bool _customSize;
         protected int _fontSize = 18;
         private bool _isVisible;
-        protected ChatMessage _container;
+        private ChatMessage? _container;
 
-        public string Text { get; set; }
+        public string Text { get; set; } = "";
         public int Size
         {
             get => _customSize ? _fontSize : App.Settings.FontSize;
@@ -32,11 +30,12 @@ namespace TCC.Data.Chat
                 N(nameof(Size));
             }
         }
-        public string Color { get; set; }
+
+        public string Color { get; set; } = "";
         public virtual bool IsHovered { get; set; }
         public virtual ICommand ClickCommand { get; }
 
-        public ChatMessage Container
+        public ChatMessage? Container
         {
             protected get => _container;
             set
@@ -45,7 +44,7 @@ namespace TCC.Data.Chat
                 _container = value;
                 if (string.IsNullOrEmpty(Color))
                 {
-                    Color = ((SolidColorBrush)new ChatChannelToColorConverter().Convert(Container.Channel, null, null, null))?.Color.ToHex();
+                    Color = TccUtils.ChatChannelToBrush(Container?.Channel ?? ChatChannel.Say).Color.ToHex();
                 }
             }
         }
@@ -63,10 +62,10 @@ namespace TCC.Data.Chat
             }
         }
 
-        public MessagePieceBase()
+        protected MessagePieceBase()
         {
             Dispatcher = ChatManager.Instance.GetDispatcher();
-            ClickCommand = new RelayCommand(_ => {});
+            ClickCommand = new RelayCommand(_ => { });
         }
 
         private void OnFontSizeChanged()
@@ -112,18 +111,20 @@ namespace TCC.Data.Chat
                 N();
             }
         }
-        public string ChatLinkAction { get; set; }
+
+        public string ChatLinkAction { get; }
 
         public override ICommand ClickCommand { get; }
 
-        public ActionMessagePiece(string text) : base(text)
+        public ActionMessagePiece(string text, string action) : base(text)
         {
             ClickCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.ChatLinkAction(ChatLinkAction));
+            ChatLinkAction = action;
         }
-        public ActionMessagePiece(string text, int fontSize, bool customSize, string col = "") : base(text, fontSize, customSize, col)
-        {
+        //public ActionMessagePiece(string text, int fontSize, bool customSize, string col = "") : base(text, fontSize, customSize, col)
+        //{
 
-        }
+        //}
     }
 
     public class UrlMessagePiece : SimpleMessagePiece

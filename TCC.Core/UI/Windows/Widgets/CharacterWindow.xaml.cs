@@ -13,10 +13,10 @@ namespace TCC.UI.Windows.Widgets
     //TODO: refactor more?
     public partial class CharacterWindow
     {
-        private DoubleAnimation _hpAnim;
-        private DoubleAnimation _mpAnim;
-        private DoubleAnimation _stAnim;
-        private DoubleAnimation _shAnim;
+        private readonly DoubleAnimation _hpAnim;
+        private readonly DoubleAnimation _mpAnim;
+        private readonly DoubleAnimation _stAnim;
+        private readonly DoubleAnimation _shAnim;
 
         private CharacterWindowViewModel _vm { get; }
 
@@ -31,18 +31,15 @@ namespace TCC.UI.Windows.Widgets
             MainContent = WindowContent;
             Init(App.Settings.CharacterWindowSettings); //TODO: us vm.Settings
 
-            InitAnimations();
-
-            _vm.Player.PropertyChanged += OnPropertyChanged;
-        }
-
-        private void InitAnimations()
-        {
             _hpAnim = AnimationFactory.CreateDoubleAnimation(200, 0, easing: true, framerate: 30);
             _mpAnim = AnimationFactory.CreateDoubleAnimation(200, 0, easing: true, framerate: 30);
             _stAnim = AnimationFactory.CreateDoubleAnimation(200, 0, easing: true, framerate: 30);
             _shAnim = AnimationFactory.CreateDoubleAnimation(200, 0, easing: true, framerate: 30);
+
+            _vm.Player.PropertyChanged += OnPropertyChanged;
         }
+
+
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Action action;

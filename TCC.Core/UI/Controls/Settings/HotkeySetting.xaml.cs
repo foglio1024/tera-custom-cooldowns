@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
-using TCC.Annotations;
 using TCC.Data;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ModifierKeys = TCC.Data.ModifierKeys;
@@ -104,10 +103,9 @@ namespace TCC.UI.Controls.Settings
             UpdateValue();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = null!;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void N([CallerMemberName] string propertyName = null)
+        protected void N([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

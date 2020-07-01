@@ -25,7 +25,7 @@ namespace TCC.Data.Chat
 
         public string RawMessage { get; protected set; }
 
-        public string Author { get; set; }
+        public string Author { get; set; } = "";
         public ulong AuthorGameId { get; set; }
 
         public bool ContainsPlayerName { get; set; }
@@ -69,7 +69,7 @@ namespace TCC.Data.Chat
 
         #endregion
 
-        public ChatMessage()
+        protected ChatMessage()
         {
             Dispatcher = ChatManager.Instance.GetDispatcher();
             Pieces = new TSObservableCollection<MessagePieceBase>(Dispatcher);
@@ -171,9 +171,8 @@ namespace TCC.Data.Chat
                     }
                     else if (simplePiece is ActionMessagePiece amp)
                     {
-                        mp = new ActionMessagePiece(word)
+                        mp = new ActionMessagePiece(word, amp.ChatLinkAction)
                         {
-                            ChatLinkAction = amp.ChatLinkAction,
                             Color = amp.Color,
                             Size = amp.Size
                         };

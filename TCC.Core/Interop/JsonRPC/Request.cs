@@ -8,12 +8,12 @@ namespace TCC.Interop.JsonRPC
         public const string IdKey = "id";
         public const string ParametersKey = "params";
 
-        public string Method => ContainsKey(MethodKey) ? this[MethodKey].Value<string>() : null;
-        public string Id => ContainsKey(IdKey) ? this[IdKey].Value<string>() : null;
-        public JObject Parameters => ContainsKey(ParametersKey) ? this[ParametersKey] as JObject : null;
+        public string Id => ContainsKey(IdKey) ? this[IdKey]?.Value<string>() ?? "" : "";
+        public string Method => ContainsKey(MethodKey) ? this[MethodKey]?.Value<string>() ?? "" : "";
+        public JObject? Parameters => ContainsKey(ParametersKey) ? this[ParametersKey] as JObject : null;
 
         private static uint _nextId;
-        public Request(string methodName, JObject parameters = null)
+        public Request(string methodName, JObject? parameters = null)
         {
             this["jsonrpc"] = "2.0";
             this[MethodKey] = methodName;

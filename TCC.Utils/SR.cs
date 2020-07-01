@@ -32,11 +32,11 @@ namespace TCC.Utils
         public const string ReadyToConnect            = "Ready to connect.";
         public const string Disconnected              = "Disconnected.";
 
-        public static string ErrorWhileLoadingModule(string filename)
+        public static string ErrorWhileLoadingModule(string? filename)
         {
-            return $"An error occured while loading {filename}. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.";
+            return $"An error occured while loading '{filename}'. TCC will now close. You can find more info about this error in TERA Dps discord #known-issues channel.";
         }
-        public static string CannotLoadDbForLang(string lang)
+        public static string CannotLoadDbForLang(string? lang)
         {
             return $"Unable to load database for language '{lang}'. \nThis could be caused by a wrong Language override value or corrupted TCC download.\n\n Do you want to open settings and change it?\n\n Choosing 'No' will load EU-EN database,\nchoosing 'Cancel' will close TCC.";
         }

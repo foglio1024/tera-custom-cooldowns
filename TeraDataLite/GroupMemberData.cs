@@ -10,7 +10,7 @@
         public uint SectionId { get; set; }
         public bool IsLeader { get; set; }
         public bool Online { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public uint ServerId { get; set; }
         public ulong EntityId { get; set; }
         public bool CanInvite { get; set; }

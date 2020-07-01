@@ -6,11 +6,11 @@ namespace TCC.Exceptions
     public class DeadlockException : Exception
     {
 
-        public DeadlockException(string msg, List<string> threadNames) : base(msg)
+        public DeadlockException(string msg, List<string?> threadNames) : base(msg)
         {
             ThreadNames = threadNames;
         }
 
-        public List<string> ThreadNames { get; }
+        public List<string?> ThreadNames { get; }
     }
 }

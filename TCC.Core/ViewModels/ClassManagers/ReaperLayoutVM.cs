@@ -6,41 +6,34 @@ namespace TCC.ViewModels
     public class ReaperLayoutVM : BaseClassLayoutVM
     {
 
-        public DurationCooldownIndicator ShadowReaping { get; set; }
-        public DurationCooldownIndicator ShroudedEscape { get; set; }
+        public SkillWithEffect ShadowReaping { get; }
+        public SkillWithEffect ShroudedEscape { get; }
 
-        public override void LoadSpecialSkills()
+        public ReaperLayoutVM()
         {
             Game.DB.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
+            ShadowReaping = new SkillWithEffect(Dispatcher, sr);
+
             Game.DB.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
-            ShadowReaping = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(sr, true) { CanFlash = true },
-                Buff = new Cooldown(sr, true)
-            };
-            ShroudedEscape = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(se, true) { CanFlash = true },
-                Buff = new Cooldown(se, true)
-            };
+            ShroudedEscape = new SkillWithEffect(Dispatcher, se);
         }
 
         public override void Dispose()
         {
-            ShadowReaping.Cooldown.Dispose();
-            ShroudedEscape.Cooldown.Dispose();
+            ShadowReaping.Dispose();
+            ShroudedEscape.Dispose();
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == ShadowReaping.Cooldown.Skill.IconName)
             {
-                ShadowReaping.Cooldown.Start(sk.Duration);
+                ShadowReaping.StartCooldown(sk.Duration);
                 return true;
             }
 
             if (sk.Skill.IconName != ShroudedEscape.Cooldown.Skill.IconName) return false;
-            ShroudedEscape.Cooldown.Start(sk.Duration);
+            ShroudedEscape.StartCooldown(sk.Duration);
             return true;
         }
     }

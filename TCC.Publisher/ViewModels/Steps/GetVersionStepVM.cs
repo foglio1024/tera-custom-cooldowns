@@ -2,7 +2,7 @@
 {
     public class GetVersionStepVM : StepVM
     {
-        private string _tccVersion;
+        private string _tccVersion = "";
         public string TccVersion
         {
             get => _tccVersion;
@@ -31,7 +31,7 @@
         protected override void Execute()
         {
             VM.Progress = 2 / 0.07;
-            var ver = Publisher.GetVersion();
+            var ver = Publisher.Instance.GetVersion();
             TccVersion = $"TCC version is {ver}";
             Printed = true;
             Completed = true;

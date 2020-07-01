@@ -14,7 +14,7 @@ namespace TCC.UI.Controls.Chat
     //TODO: rework when?
     public partial class LFGcontrol
     {
-        private LFG _dc;
+        private LFG? _dc;
         public LFGcontrol()
         {
             InitializeComponent();
@@ -26,6 +26,7 @@ namespace TCC.UI.Controls.Chat
         {
             Loaded -= OnLoaded;
             Unloaded -= OnUnloaded;
+            if (_dc == null) return;
             _dc.PropertyChanged -= _dc_PropertyChanged;
         }
 
@@ -37,9 +38,10 @@ namespace TCC.UI.Controls.Chat
 
         private void _dc_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == "Refresh")
+            if (e.PropertyName == "Refresh")
             {
-                Root.Background.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Color.FromArgb(0xff, 0x00, 0xaa, 0xff), Color.FromArgb(0x55,0,0xaa,0xff), TimeSpan.FromMilliseconds(500))); //TODO: resources
+                //TODO: ewww
+                Root.Background.BeginAnimation(SolidColorBrush.ColorProperty, new ColorAnimation(Color.FromArgb(0xff, 0x00, 0xaa, 0xff), Color.FromArgb(0x55, 0, 0xaa, 0xff), TimeSpan.FromMilliseconds(500))); //TODO: resources
             }
         }
 
@@ -48,10 +50,15 @@ namespace TCC.UI.Controls.Chat
             if (App.Settings.LfgWindowSettings.Enabled)
             {
                 StubInterface.Instance.StubClient.RequestListings(); //ProxyOld.RequestLfgList();
-                Task.Delay(1000).ContinueWith(t => 
-                WindowManager.ViewModels.LfgVM.Listings.ToList().ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id)
-                    );
+                Task.Delay(1000).ContinueWith(t =>
+                {
+                    if (_dc == null) return;
+                    WindowManager.ViewModels.LfgVM.Listings.ToList()
+                            .ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id);
+                });
             }
+
+            if (_dc == null) return;
             ChatManager.Instance.LastClickedLfg = _dc;
             StubInterface.Instance.StubClient.RequestPartyInfo(_dc.Id); //ProxyOld.RequestPartyInfo(_dc.Id);
         }
@@ -63,7 +70,7 @@ namespace TCC.UI.Controls.Chat
 
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
-            Label.Foreground = new SolidColorBrush(Color.FromArgb(0xff,0x00,0xaa,0xff));
+            Label.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xaa, 0xff));
         }
     }
 }

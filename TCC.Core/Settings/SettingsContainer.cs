@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Nostrum;
+using Nostrum.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Nostrum;
-using Newtonsoft.Json;
-using Nostrum.Converters;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
@@ -23,13 +23,13 @@ namespace TCC.Settings
         public DateTime LastRun { get; set; }
         public string LastLanguage
         {
-            get => LanguageOverride != LanguageOverride.None ? new EnumDescriptionConverter().Convert(LanguageOverride, null, null, null)?.ToString() : _lastLanguage;
+            get => LanguageOverride != LanguageOverride.None ? LanguageOverride.GetDescription() : _lastLanguage;
             set => _lastLanguage = value;
         }
         public System.Drawing.Size LastScreenSize { get; set; }
         public DateTime StatSentTime { get; set; }
         public string StatSentVersion { get; set; }
-        public LanguageOverride LanguageOverride { get; set; } 
+        public LanguageOverride LanguageOverride { get; set; }
         public bool ShowTradeLfg { get; set; }
         public bool UseHotkeys { get; set; }
         public bool EthicalMode { get; set; }
@@ -135,7 +135,7 @@ namespace TCC.Settings
         #endregion
 
         public static string SettingsOverride { get; set; } = "";
-        public string LastAccountNameHash { get; set; }
+        public string LastAccountNameHash { get; set; } = "";
         public bool BackgroundNotifications { get; set; }
         public bool EnablePlayerMenu { get; set; }
         //public bool ShowConsole { get; set; }
@@ -209,12 +209,12 @@ namespace TCC.Settings
             WebhookUrlMentions = "";
         }
 
-        public static void Load()
+        public static SettingsContainer Load()
         {
             var settingsPath = SettingsOverride == ""
                 ? Path.Combine(App.BasePath, SettingsGlobals.SettingsFileName)
                 : SettingsOverride;
-            new JsonSettingsReader().LoadSettings(settingsPath);
+            return new JsonSettingsReader().LoadSettings(settingsPath);
         }
         public void Save()
         {

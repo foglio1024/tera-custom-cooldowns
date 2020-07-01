@@ -8,6 +8,9 @@ ClassToggle                 -> MyClassToggle
 ToggleCommand               -> MyToggleCommand
 */
 
+using Nostrum;
+using Nostrum.Extensions;
+using Nostrum.Factories;
 using System;
 using System.Linq;
 using System.Windows;
@@ -16,9 +19,6 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Nostrum;
-using Nostrum.Extensions;
-using Nostrum.Factories;
 using TCC.ViewModels;
 using TeraDataLite;
 
@@ -26,7 +26,7 @@ namespace TCC.UI.Windows
 {
     public partial class MyAbnormalConfigWindow
     {
-        private static MyAbnormalConfigWindow _instance;
+        private static MyAbnormalConfigWindow? _instance;
         public static MyAbnormalConfigWindow Instance => _instance ?? new MyAbnormalConfigWindow();
         private Class _currentFilter;
 
@@ -35,7 +35,7 @@ namespace TCC.UI.Windows
         
 
         private readonly DispatcherTimer _searchCooldown;
-        private string _searchText;
+        private string _searchText = "";
 
         public MyAbnormalConfigWindow() : base(true)
         {
@@ -46,7 +46,7 @@ namespace TCC.UI.Windows
             _searchCooldown = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, OnSearchTriggered, Dispatcher ?? throw new InvalidOperationException());
         }
 
-        private void OnSearchTriggered(object sender, EventArgs e)
+        private void OnSearchTriggered(object? sender, EventArgs e)
         {
             _searchCooldown.Stop();
             if (_searchText == null) return;

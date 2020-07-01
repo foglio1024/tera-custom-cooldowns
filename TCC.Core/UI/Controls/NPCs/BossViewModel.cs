@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Threading;
 using Nostrum;
 using Nostrum.Extensions;
-using TCC.Annotations;
 using TCC.Data;
 
 namespace TCC.UI.Controls.NPCs
@@ -19,8 +18,8 @@ namespace TCC.UI.Controls.NPCs
 
         private readonly DispatcherTimer _numberTimer;
 
-        public event Action EnragedChanged;
-        public event Action ReEnraged;
+        public event Action EnragedChanged = null!;
+        public event Action ReEnraged = null!;
 
         public ObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
         public string MainPercInt => ShowHP ? Convert.ToInt32(Math.Floor(NPC.HPFactor * 100)).ToString() : "?";
@@ -35,7 +34,6 @@ namespace TCC.UI.Controls.NPCs
 
             }
         }
-        [UsedImplicitly]
         public double TotalEnrage
         {
             get
@@ -123,30 +121,6 @@ namespace TCC.UI.Controls.NPCs
             }
         }
 
-        //private double _prevHpPerc;
-        //private DateTime _prevTimestamp;
-        //private double _nextEnrageTime;
-        //public double NextEnrageTime
-        //{
-        //    get
-        //    {
-        //        var diff = _prevHpPerc - CurrentPercentage;
-        //        _prevHpPerc = CurrentPercentage;
-        //        if (diff < 0) { return _nextEnrageTime; }
-        //        var now = DateTime.Now;
-        //        var timeDiff = now - _prevTimestamp;
-        //        _prevTimestamp = now;
-        //        var percLeft = CurrentPercentage - NextEnragePercentage;
-
-        //        var dps = (diff / timeDiff.TotalMilliseconds) * 1000;
-        //        if (dps == 0) return _nextEnrageTime;
-
-        //        var newVal = (.7 * _nextEnrageTime + .3 * percLeft / dps);
-        //        if (!double.IsNaN(newVal)) _nextEnrageTime = newVal;
-        //        return _nextEnrageTime;
-        //    }
-        //}
-
         public BossViewModel(Data.NPCs.NPC npc) : base(npc)
         {
 
@@ -178,7 +152,7 @@ namespace TCC.UI.Controls.NPCs
             IsTimerRunning = true;
         }
 
-        private void OnNumberTimerTick(object _, EventArgs __)
+        private void OnNumberTimerTick(object? _, EventArgs __)
         {
             if (!NPC.EnragePattern.StaysEnraged) CurrentEnrageTime--;
         }

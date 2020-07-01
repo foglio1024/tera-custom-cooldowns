@@ -59,7 +59,7 @@ namespace TCC.UI.Windows
                         {
                             Dispatcher.InvokeAsync(() =>
                             {
-                                var existing = MergedInventory.FirstOrDefault(x => x.Item.Item.Id == item.Item.Id);
+                                var existing = MergedInventory.FirstOrDefault(x => x.Item?.Item.Id == item.Item.Id);
                                 if (existing == null)
                                 {
                                     var newItem = new MergedInventoryItem();
@@ -99,7 +99,7 @@ namespace TCC.UI.Windows
     }
     public class MergedInventoryItem : TSPropertyChanged
     {
-        public InventoryItem Item => Items.Count > 0 ? Items[0].Item : null;
+        public InventoryItem? Item => Items.Count > 0 ? Items[0].Item : null;
         public TSObservableCollection<InventoryItemWithOwner> Items { get; }
         public int TotalAmount
         {
@@ -150,10 +150,9 @@ namespace TCC.UI.Windows
                 var view = (ICollectionView)((MergedInventoryViewModel) DataContext).MergedInventoryView;
                 view.Filter = o =>
                 {
-                    var item = ((MergedInventoryItem)o).Item.Item;
-                    var name = item.Name;
-                    return name.IndexOf(((TextBox)sender).Text,
-                               StringComparison.InvariantCultureIgnoreCase) != -1;
+                    var item = ((MergedInventoryItem)o).Item?.Item;
+                    var name = item?.Name;
+                    return name != null && name.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
                 };
                 view.Refresh();
             }, DispatcherPriority.DataBind);

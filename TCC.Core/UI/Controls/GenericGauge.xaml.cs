@@ -23,7 +23,7 @@ namespace TCC.UI.Controls
 
         }
 
-        private void CurValWatcher_PropertyChanged(object sender, EventArgs e)
+        private void CurValWatcher_PropertyChanged(object? sender, EventArgs e)
         {
             Factor = MaxVal > 0 ? _curValwatcher.Value / MaxVal : 0;
         }
@@ -105,7 +105,7 @@ namespace TCC.UI.Controls
         }
         public static readonly DependencyProperty ShowNameProperty = DependencyProperty.Register("ShowName", typeof(bool), typeof(GenericGauge));
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = null!;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

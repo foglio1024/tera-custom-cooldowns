@@ -17,24 +17,15 @@ namespace TCC.Data.Chat
     {
         private int _tries = 10;
         private readonly TSObservableCollection<User> _members;
-        private Timer _timer;
-        private ICollectionView _membersView;
+        private readonly Timer _timer;
 
-        private Listing _linkedListing;
-        public ICollectionView MembersView
-        {
-            get => _membersView;
-            private set
-            {
-                if (_membersView == value) return;
-                _membersView = value;
-                N();
-            }
-        }
-        public Listing LinkedListing
+        private Listing? _linkedListing;
+        public ICollectionView MembersView { get; }
+
+        public Listing? LinkedListing
         {
             get => _linkedListing;
-            set
+            private set
             {
                 if (_linkedListing == value) return;
                 if (value == null)
@@ -61,16 +52,16 @@ namespace TCC.Data.Chat
         {
             AuthorId = authorId;
             _members = new TSObservableCollection<User>();
+            _timer = new Timer(1500);
+            _timer.Elapsed += OnTimerTick;
+
             MembersView = CollectionViewFactory.CreateCollectionView(_members, null, new List<SortDescription>());
         }
 
         protected override void DisposeImpl()
         {
-            if (_timer != null)
-            {
-                _timer.Elapsed -= OnTimerTick;
-                _timer.Dispose();
-            }
+            _timer.Elapsed -= OnTimerTick;
+            _timer.Dispose();
             if (_linkedListing != null)
             {
                 _linkedListing.Players.CollectionChanged -= OnMembersChanged;
@@ -130,8 +121,6 @@ namespace TCC.Data.Chat
                 if (LinkedListing != null) return;
                 //Log.CW($"Linked listing ({Author}/{AuthorId}) is null! Requesting list.");
                 WindowManager.ViewModels.LfgVM.EnqueueListRequest();
-                _timer = new Timer(1500);
-                _timer.Elapsed += OnTimerTick;
                 _timer.Start();
             });
         }

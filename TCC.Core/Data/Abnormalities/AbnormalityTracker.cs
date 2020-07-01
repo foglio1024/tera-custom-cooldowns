@@ -10,9 +10,9 @@ namespace TCC.Data.Abnormalities
     public class AbnormalityTracker
     {
         protected static readonly List<ulong> MarkedTargets = new List<ulong>();
-        public static event Action<ulong> MarkingRefreshed;
-        public static event Action MarkingExpired;
-        public static event Action<Skill, uint> PrecooldownStarted;
+        public static event Action<ulong> MarkingRefreshed = null!;
+        public static event Action MarkingExpired = null!;
+        public static event Action<Skill, uint> PrecooldownStarted = null!;
 
         public virtual void CheckAbnormality(S_ABNORMALITY_BEGIN p) { }
         public virtual void CheckAbnormality(S_ABNORMALITY_REFRESH p) { }
@@ -43,7 +43,7 @@ namespace TCC.Data.Abnormalities
             PrecooldownStarted?.Invoke(sk, duration);
             //SkillManager.AddSkillDirectly(sk, duration, CooldownType.Skill, CooldownMode.Pre); 
         }
-        protected AbnormalityTracker()
+        public AbnormalityTracker()
         {
             ClearMarkedTargets();
         }

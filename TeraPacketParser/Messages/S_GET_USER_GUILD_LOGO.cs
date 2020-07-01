@@ -10,8 +10,13 @@ namespace TeraPacketParser.Messages
 {
     public class S_GET_USER_GUILD_LOGO : ParsedMessage
     {
+        public uint GuildId { get; }
+        public uint PlayerId { get; }
+        public Bitmap GuildLogo { get; }
+
         internal S_GET_USER_GUILD_LOGO(TeraMessageReader reader) : base(reader)
         {
+            GuildLogo = new Bitmap(64, 64, PixelFormat.Format8bppIndexed);
             try
             {
                 reader.ReadUInt16();
@@ -22,7 +27,6 @@ namespace TeraPacketParser.Messages
 
                 var logo = reader.ReadBytes(size);
 
-                GuildLogo = new Bitmap(64, 64, PixelFormat.Format8bppIndexed);
                 var paletteSize = (size - 0x1018) / 3;
                 if (paletteSize > 0x100 || paletteSize < 1)
                 {
@@ -44,13 +48,8 @@ namespace TeraPacketParser.Messages
             }
             catch (Exception)
             {
-
                 Console.WriteLine("Failed to parse guild logo.");
             }
         }
-
-        public uint GuildId { get; }
-        public uint PlayerId { get; }
-        public Bitmap GuildLogo { get; }
     }
 }

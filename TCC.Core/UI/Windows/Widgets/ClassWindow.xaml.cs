@@ -9,7 +9,7 @@ namespace TCC.UI.Windows.Widgets
         public ClassWindow(ClassWindowViewModel vm)
         {
             DataContext = vm;
-            VM = DataContext as ClassWindowViewModel;
+            VM = (ClassWindowViewModel) DataContext;
             InitializeComponent();
             ButtonsRef = Buttons;
             BoundaryRef = Boundary;

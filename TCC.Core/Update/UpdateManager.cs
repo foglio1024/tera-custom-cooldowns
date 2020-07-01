@@ -23,10 +23,10 @@ namespace TCC.Update
         private const string AppVersionBetaUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/beta/version";
         private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{ (App.Beta ? "beta" : "master")}/database-hashes.json";
 
-        private static Timer _checkTimer;
+        private static readonly Timer _checkTimer = new Timer((App.ToolboxMode ? 2 : 10) * 60 * 1000);
         private static bool _waitingDownload = true;
 
-        public static Dictionary<string, string> DatabaseHashes { get; private set; }
+        public static Dictionary<string, string> DatabaseHashes { get; } = new Dictionary<string, string>();
         public static bool UpdateAvailable { get; private set; }
         public static async Task CheckAppVersion()
         {
@@ -55,8 +55,7 @@ namespace TCC.Update
         }
         public static void CheckDatabaseHash()
         {
-            DatabaseHashes = new Dictionary<string, string>();
-
+            DatabaseHashes.Clear();
             try
             {
                 DownloadDatabaseHashes();
@@ -104,7 +103,6 @@ namespace TCC.Update
         }
         public static void StartPeriodicCheck()
         {
-            _checkTimer = new Timer((App.ToolboxMode ? 2 : 10) * 60 * 1000);
             _checkTimer.Elapsed += CheckTimer_Elapsed;
             _checkTimer.Start();
         }
@@ -145,6 +143,7 @@ namespace TCC.Update
         {
             try
             {
+                //TODO: update for netcore
                 File.Delete(Path.Combine(App.BasePath, "TCCupdater.exe"));
             }
             catch
@@ -178,6 +177,7 @@ namespace TCC.Update
                 File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
 
                 App.SplashScreen.VM.BottomText = "Starting updater...";
+                //TODO: update for netcore
                 Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update");
                 Environment.Exit(0);
             }
@@ -207,7 +207,7 @@ namespace TCC.Update
         {
             _checkTimer.Stop();
             CheckAppVersionPeriodic();
-            if(!UpdateAvailable) _checkTimer.Start();
+            if (!UpdateAvailable) _checkTimer.Start();
         }
         private static void CheckAppVersionPeriodic()
         {
@@ -254,14 +254,24 @@ namespace TCC.Update
 
             public VersionParser(bool forceBeta = false)
             {
+                NewVersionNumber = "";
+                NewVersionUrl = "";
+
                 using var c = MiscUtils.GetDefaultWebClient();
                 var st = c.OpenRead(App.Beta || forceBeta ? AppVersionBetaUrl : AppVersionUrl);
 
                 if (st == null) return;
 
                 using var sr = new StreamReader(st);
-                NewVersionNumber = sr.ReadLine();
-                NewVersionUrl = sr.ReadLine();
+                var nv = sr.ReadLine();
+                var url = sr.ReadLine();
+
+                if (nv == null || url == null)
+                {
+                    return;
+                }
+                NewVersionNumber = nv;
+                NewVersionUrl = url;
                 Valid = true;
             }
         }

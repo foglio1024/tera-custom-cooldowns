@@ -10,7 +10,7 @@ namespace TCC.Data
     {
         public bool IsElite { get; set; }
         [JsonIgnore]
-        public Character CurrentCharacter { get; private set; }
+        public Character? CurrentCharacter { get; private set; }
         public TSObservableCollection<Character> Characters { get; }
 
         public void LoginCharacter(uint id)

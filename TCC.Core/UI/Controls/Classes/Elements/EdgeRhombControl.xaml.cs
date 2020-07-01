@@ -21,14 +21,8 @@ namespace TCC.UI.Controls.Classes.Elements
             get
             {
                 var ret = new List<FrameworkElement>();
-                Dispatcher.Invoke(() =>
-                {
-                    foreach (FrameworkElement child in Container.Children)
-                    {
-                        ret.Add(child);
-                    }
-                });
-                return ret.ToList();
+                Dispatcher.Invoke(() => ret.AddRange(Container.Children.Cast<FrameworkElement>()));
+                return ret;
             }
         }
     }

@@ -1,79 +1,60 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Markup;
 using TeraDataLite;
 
 namespace TCC.UI.Converters
 {
-    public class LaurelImageConverter : IValueConverter
+    public enum LaurelType
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        Old,
+        Rhomb,
+        RhombBig,
+        RhombBottom
+    }
+    public class LaurelImageConverter : MarkupExtension, IValueConverter
+    {
+        public LaurelType LaurelType { get; set; }
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is Laurel l)) l = Laurel.None;
-            bool kr = false, big = false, half = false;
-            if (parameter != null)
-            {
-                kr = parameter.ToString().Contains("kr");
-                big = parameter.ToString().Contains("big");
-                half = parameter.ToString().Contains("half");
-            }
 
-            if (half)
-            {
-                return l switch
-                {
-                    Laurel.Bronze => R.MiscResources.BronzeLaurelNewBottom,
-                    Laurel.Silver => R.MiscResources.SilverLaurelNewBottom,
-                    Laurel.Gold => R.MiscResources.GoldLaurelNewBottom,
-                    Laurel.Diamond => R.MiscResources.DiamondLaurelNewBottom,
-                    Laurel.Champion => R.MiscResources.ChampionLaurelNewBottom,
-                    _ => null
-                };
-            }
+            var laurel = (Laurel?) value ?? Laurel.None;
 
-            if (big)
+            return (LaurelType, l: laurel) switch
             {
-                return l switch
-                {
-                    Laurel.Bronze => R.MiscResources.BronzeLaurelNewBig,
-                    Laurel.Silver => R.MiscResources.SilverLaurelNewBig,
-                    Laurel.Gold => R.MiscResources.GoldLaurelNewBig,
-                    Laurel.Diamond => R.MiscResources.DiamondLaurelNewBig,
-                    Laurel.Champion => R.MiscResources.ChampionLaurelNewBig,
-                    _ => null
-                };
-
-            }
-
-            if (!kr)
-            {
-                return l switch
-                {
-                    Laurel.Bronze => R.MiscResources.BronzeLaurel,
-                    Laurel.Silver => R.MiscResources.SilverLaurel,
-                    Laurel.Gold => R.MiscResources.GoldLaurel,
-                    Laurel.Diamond => R.MiscResources.DiamondLaurel,
-                    Laurel.Champion => R.MiscResources.ChampionLaurel,
-                    _ => null
-                };
-            }
-
-            return l switch
-            {
-                Laurel.Bronze => R.MiscResources.BronzeLaurelNew,
-                Laurel.Silver => R.MiscResources.SilverLaurelNew,
-                Laurel.Gold => R.MiscResources.GoldLaurelNew,
-                Laurel.Diamond => R.MiscResources.DiamondLaurelNew,
-                Laurel.Champion => R.MiscResources.ChampionLaurelNew,
+                (LaurelType.Old,     Laurel.Bronze)   => R.MiscResources.BronzeLaurel, 
+                (LaurelType.Old,     Laurel.Silver)   => R.MiscResources.SilverLaurel, 
+                (LaurelType.Old,     Laurel.Gold)     => R.MiscResources.GoldLaurel, 
+                (LaurelType.Old,     Laurel.Diamond)  => R.MiscResources.DiamondLaurel, 
+                (LaurelType.Old,     Laurel.Champion) => R.MiscResources.ChampionLaurel, 
+                (LaurelType.Rhomb,     Laurel.Bronze)   => R.MiscResources.BronzeLaurelRhomb, 
+                (LaurelType.Rhomb,     Laurel.Silver)   => R.MiscResources.SilverLaurelRhomb, 
+                (LaurelType.Rhomb,     Laurel.Gold)     => R.MiscResources.GoldLaurelRhomb, 
+                (LaurelType.Rhomb,     Laurel.Diamond)  => R.MiscResources.DiamondLaurelRhomb, 
+                (LaurelType.Rhomb,     Laurel.Champion) => R.MiscResources.ChampionLaurelRhomb, 
+                (LaurelType.RhombBig,  Laurel.Bronze)   => R.MiscResources.BronzeLaurelRhombBig, 
+                (LaurelType.RhombBig,  Laurel.Silver)   => R.MiscResources.SilverLaurelRhombBig, 
+                (LaurelType.RhombBig,  Laurel.Gold)     => R.MiscResources.GoldLaurelRhombBig, 
+                (LaurelType.RhombBig,  Laurel.Diamond)  => R.MiscResources.DiamondLaurelRhombBig, 
+                (LaurelType.RhombBig,  Laurel.Champion) => R.MiscResources.ChampionLaurelRhombBig,
+                (LaurelType.RhombBottom, Laurel.Bronze)   => R.MiscResources.BronzeLaurelRhombBottom, 
+                (LaurelType.RhombBottom, Laurel.Silver)   => R.MiscResources.SilverLaurelRhombBottom, 
+                (LaurelType.RhombBottom, Laurel.Gold)     => R.MiscResources.GoldLaurelRhombBottom, 
+                (LaurelType.RhombBottom, Laurel.Diamond)  => R.MiscResources.DiamondLaurelRhombBottom, 
+                (LaurelType.RhombBottom, Laurel.Champion) => R.MiscResources.ChampionLaurelRhombBottom, 
                 _ => null
             };
-
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
     }
 }

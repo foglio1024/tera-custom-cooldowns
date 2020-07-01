@@ -26,7 +26,7 @@ namespace TCC.UI.Converters
     }
     public class EntityIdToClassConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return null;
             var id = (ulong)value;

@@ -19,11 +19,11 @@ namespace TCC.Data.Abnormalities
         //private const int FireArcaneFusionId = 502030;
         //private const int IceArcaneFusionId = 502040;
 
-        private static Skill _fireIceFusion;
+        private readonly Skill _fireIceFusion;
         //private static Skill _fireArcaneFusion;
         //private static Skill _iceArcaneFusion;
 
-        public static event Action BoostChanged;
+        public static event Action BoostChanged = null!;
 
         private static bool IsManaBoost(uint id)
         {
@@ -32,17 +32,15 @@ namespace TCC.Data.Abnormalities
 
         public SorcererAbnormalityTracker()
         {
-            if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab))
-            {
-                _fireIceFusion = new Skill(ab, Class.Sorcerer);
-            }
+            Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab);
+            _fireIceFusion = new Skill(ab ?? throw new NullReferenceException("Skill not found"), Class.Sorcerer);
         }
         private static void CheckManaBoost(S_ABNORMALITY_BEGIN p)
         {
             if (!IsManaBoost(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-            vm.ManaBoost.Buff.Start(p.Duration);
+            vm.ManaBoost.StartEffect(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_REFRESH p)
@@ -50,7 +48,7 @@ namespace TCC.Data.Abnormalities
             if (!IsManaBoost(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-            vm.ManaBoost.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.ManaBoost.RefreshEffect(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_END p)
@@ -58,7 +56,7 @@ namespace TCC.Data.Abnormalities
             if (!IsManaBoost(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-            vm.ManaBoost.Buff.Stop();
+            vm.ManaBoost.StopEffect();
         }
 
         private static void CheckFusionBoost(S_ABNORMALITY_BEGIN p)
@@ -107,7 +105,7 @@ namespace TCC.Data.Abnormalities
             BoostChanged?.Invoke();
 
         }
-        private static void CheckFusions(S_ABNORMALITY_BEGIN p)
+        private void CheckFusions(S_ABNORMALITY_BEGIN p)
         {
             if (FireIceFusionId == p.AbnormalityId && _fireIceFusion != null)
             {

@@ -12,11 +12,10 @@ namespace TCC.UI.Controls.Chat
 {
     public partial class TabSettingControl
     {
-        private Tab _dc;
+        private Tab? _dc;
         public TabSettingControl()
         {
             InitializeComponent();
-
         }
 
         private void TabSettingControl_OnLoaded(object sender, RoutedEventArgs e)
@@ -26,15 +25,16 @@ namespace TCC.UI.Controls.Chat
 
         private void RemoveAuthor(object sender, RoutedEventArgs e)
         {
-            _dc.TabInfoVM.Authors.Remove(((FrameworkElement)sender).DataContext as string);
-            _dc.ApplyFilter();
+            var author = (string)((FrameworkElement)sender).DataContext;
+            _dc?.TabInfoVM.Authors.Remove(author);
+            _dc?.ApplyFilter();
 
         }
 
         private void RemoveChannel(object sender, RoutedEventArgs e)
         {
-            _dc.TabInfoVM.ShowedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
-            _dc.ApplyFilter();
+            _dc?.TabInfoVM.ShowedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+            _dc?.ApplyFilter();
 
         }
 
@@ -48,15 +48,15 @@ namespace TCC.UI.Controls.Chat
 
         private void RemoveExAuthor(object sender, RoutedEventArgs e)
         {
-            _dc.TabInfoVM.ExcludedAuthors.Remove(((FrameworkElement)sender).DataContext as string);
-            _dc.ApplyFilter();
+            _dc?.TabInfoVM.ExcludedAuthors.Remove((string)((FrameworkElement)sender).DataContext);
+            _dc?.ApplyFilter();
 
         }
 
         private void RemoveExChannel(object sender, RoutedEventArgs e)
         {
-            _dc.TabInfoVM.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
-            _dc.ApplyFilter();
+            _dc?.TabInfoVM.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
+            _dc?.ApplyFilter();
 
         }
 
@@ -64,6 +64,7 @@ namespace TCC.UI.Controls.Chat
         {
             try
             {
+                if (_dc == null) return;
                 if (e.AddedItems.Count == 0) return;
                 if (e.AddedItems[0] is ChatChannelOnOff i)
                 {
@@ -86,6 +87,8 @@ namespace TCC.UI.Controls.Chat
         {
             try
             {
+                if (_dc == null) return;
+
                 if (e.AddedItems.Count == 0) return;
                 if (e.AddedItems[0] is ChatChannelOnOff i)
                 {
@@ -108,6 +111,7 @@ namespace TCC.UI.Controls.Chat
         private void NewAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
+            if (_dc == null) return;
             var s = sender as TextBox;
             if (string.IsNullOrEmpty(s?.Text) || string.Equals(s.Text, "New author...")) return;
             if (_dc.TabInfoVM.Authors.Contains(s.Text)) return;
@@ -122,6 +126,7 @@ namespace TCC.UI.Controls.Chat
         private void NewExAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
+            if (_dc == null) return;
             if (!(sender is TextBox s) || string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New author...")) return;
             if (_dc.TabInfoVM.ExcludedAuthors.Contains(s.Text)) return;
             _dc.TabInfoVM.ExcludedAuthors.Add(s.Text);
@@ -135,6 +140,8 @@ namespace TCC.UI.Controls.Chat
 
         private void DeleteTab(object sender, RoutedEventArgs e)
         {
+            if (_dc == null) return;
+
             var win = ChatManager.Instance.ChatWindows.FirstOrDefault(w => w.VM.Tabs.Contains(_dc));
             win?.VM.RemoveTab(_dc);
             win?.UpdateSettings();
@@ -161,6 +168,7 @@ namespace TCC.UI.Controls.Chat
         private void NewKeywordTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
+            if (_dc == null) return;
             var s = sender as TextBox;
             if (string.IsNullOrEmpty(s?.Text) || string.Equals(s.Text, "New keyword...")) return;
             if (_dc.TabInfoVM.Keywords.Contains(s.Text)) return;
@@ -171,6 +179,7 @@ namespace TCC.UI.Controls.Chat
         private void NewExKeywordTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter) return;
+            if (_dc == null) return;
             if (!(sender is TextBox s) || string.IsNullOrEmpty(s.Text) || string.Equals(s.Text, "New keyword...")) return;
             if (_dc.TabInfoVM.ExcludedKeywords.Contains(s.Text)) return;
             _dc.TabInfoVM.ExcludedKeywords.Add(s.Text);
@@ -181,13 +190,13 @@ namespace TCC.UI.Controls.Chat
 
         private void RemoveKeyword(object sender, RoutedEventArgs e)
         {
-            _dc.TabInfoVM.Keywords.Remove(((FrameworkElement)sender).DataContext as string);
-            _dc.ApplyFilter();
+            _dc?.TabInfoVM.Keywords.Remove((string)((FrameworkElement)sender).DataContext);
+            _dc?.ApplyFilter();
         }
         private void RemoveExKeyword(object sender, RoutedEventArgs e)
         {
-            _dc.TabInfoVM.ExcludedKeywords.Remove(((FrameworkElement)sender).DataContext as string);
-            _dc.ApplyFilter();
+            _dc?.TabInfoVM.ExcludedKeywords.Remove((string)((FrameworkElement)sender).DataContext);
+            _dc?.ApplyFilter();
         }
     }
 }

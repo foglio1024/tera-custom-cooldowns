@@ -9,7 +9,7 @@ namespace TCC.UI.Converters
     // todo: reintroduce this
     public class BossToLaurelConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is NPC npc)) return null;
             var laurel = "";

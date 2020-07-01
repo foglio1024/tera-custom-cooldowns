@@ -6,7 +6,7 @@ namespace TCC.UI.Controls.Chat
 {
     public partial class MessagePieceBodyControl
     {
-        private MessagePieceBase _context;
+        private MessagePieceBase? _context;
 
         public MessagePieceBodyControl()
         {
@@ -27,6 +27,7 @@ namespace TCC.UI.Controls.Chat
         }
         private void UserControl_MouseLeave(object sender, MouseEventArgs e)
         {
+            if (_context == null) return;
             _context.IsHovered = false;
         }
     }

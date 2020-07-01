@@ -1,40 +1,51 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Markup;
 using System.Windows.Media;
 using TCC.Data;
 
 namespace TCC.UI.Converters
 {
-    public class WarriorStanceToColorConverter : IValueConverter
+    public class WarriorStanceToColorConverter : MarkupExtension, IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public bool Light { get; set; }
+        public bool Fallback { get; set; }
+
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var col = parameter != null && parameter.ToString().IndexOf("color", StringComparison.Ordinal) != -1;
-            var light = parameter != null && parameter.ToString().IndexOf("light", StringComparison.Ordinal) != -1;
-            var fallback = parameter != null && parameter.ToString().IndexOf("fallback", StringComparison.Ordinal) != -1;
+            var col = targetType == typeof(Color);
+            var stance = (WarriorStance?)value ?? WarriorStance.None;
+
             var lightFback = Colors.DarkGray;
             lightFback.A = 170;
-            var color = fallback ? light ?  Colors.White : lightFback : Colors.Transparent;
 
-            if (value != null)
+            return (stance, col, Light) switch
             {
-                var s = (WarriorStance)value;
-                color = s switch
-                {
-                    WarriorStance.Assault => (light ? R.Colors.AssaultStanceColorLight : R.Colors.AssaultStanceColor),
-                    WarriorStance.Defensive => (light ? R.Colors.DefensiveStanceColorLight : R.Colors.DefensiveStanceColor),
-                    _ => color
-                };
-            }
-
-            if (col) return color;
-            return new SolidColorBrush(color);
+                (WarriorStance.Assault, false, false) => R.Brushes.AssaultStanceBrush,
+                (WarriorStance.Assault, true, false) => R.Colors.AssaultStanceColor,
+                (WarriorStance.Assault, false, true) => R.Brushes.AssaultStanceBrushLight,
+                (WarriorStance.Assault, true, true) => R.Colors.AssaultStanceColorLight,
+                (WarriorStance.Defensive, false, false) => R.Brushes.DefensiveStanceBrush,
+                (WarriorStance.Defensive, true, false) => R.Colors.DefensiveStanceColor,
+                (WarriorStance.Defensive, false, true) => R.Brushes.DefensiveStanceBrushLight,
+                (WarriorStance.Defensive, true, true) => R.Colors.DefensiveStanceColorLight,
+                (WarriorStance.None, false, false) => new SolidColorBrush(lightFback),
+                (WarriorStance.None, true, false) => lightFback,
+                (WarriorStance.None, false, true) => Brushes.White,
+                (WarriorStance.None, true, true) => Colors.White,
+                _ => null
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return this;
         }
     }
 }

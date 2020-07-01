@@ -16,8 +16,8 @@ namespace TCC.UI.Windows
 
         private static readonly List<TccWindow> _createdWindows = new List<TccWindow>();
 
-        public event Action Hidden;
-        public event Action Showed;
+        public event Action Hidden = null!;
+        public event Action Showed = null!;
 
         private readonly bool _canClose;
         private readonly DoubleAnimation _showAnim;

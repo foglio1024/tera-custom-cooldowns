@@ -42,21 +42,20 @@ namespace TCC.ViewModels.Widgets
 
         public bool ShowItems => App.Settings.CooldownWindowSettings.ShowItems;
 
-        public event Action SkillsLoaded;
+        public event Action SkillsLoaded = null!;
         private const int LongSkillTreshold = 40000; //TODO: make configurable?
 
-        public TSObservableCollection<Cooldown> ShortSkills { get; set; }
-        public TSObservableCollection<Cooldown> LongSkills { get; set; }
-        public TSObservableCollection<Cooldown> MainSkills { get; set; }
-        public TSObservableCollection<Cooldown> SecondarySkills { get; set; }
-        public TSObservableCollection<Cooldown> OtherSkills { get; set; }
-        public TSObservableCollection<Cooldown> ItemSkills { get; set; }
+        public TSObservableCollection<Cooldown> ShortSkills { get; }
+        public TSObservableCollection<Cooldown> LongSkills { get; }
+        public TSObservableCollection<Cooldown> MainSkills { get; }
+        public TSObservableCollection<Cooldown> SecondarySkills { get; }
+        public TSObservableCollection<Cooldown> OtherSkills { get;  }
+        public TSObservableCollection<Cooldown> ItemSkills { get; }
         public TSObservableCollection<Cooldown> HiddenSkills { get; }
 
-        public ICollectionViewLiveShaping SkillsView { get; set; }
-        public ICollectionViewLiveShaping ItemsView { get; set; }
-        public ICollectionViewLiveShaping AbnormalitiesView { get; set; }
-        public TSObservableCollection<Skill> SkillChoiceList { get; set; }
+        public ICollectionViewLiveShaping? SkillsView { get; private set; }
+        public ICollectionViewLiveShaping ItemsView { get; }
+        public ICollectionViewLiveShaping AbnormalitiesView { get; }
         public IEnumerable<Item> Items => Game.DB.ItemsDatabase.ItemSkills;
         public IEnumerable<Abnormality> Passivities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
 
@@ -481,7 +480,8 @@ namespace TCC.ViewModels.Widgets
 
             HiddenSkills = new TSObservableCollection<Cooldown>(Dispatcher);
 
-            InitViews();
+            ItemsView = CollectionViewFactory.CreateLiveCollectionView(Items);
+            AbnormalitiesView = CollectionViewFactory.CreateLiveCollectionView(Passivities);
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.SkillSettingsHotkey, OnShowSkillConfigHotkeyPressed);
 
@@ -518,12 +518,7 @@ namespace TCC.ViewModels.Widgets
             }, DispatcherPriority.Background);
         }
 
-        private void InitViews()
-        {
-            if (ItemsView != null && AbnormalitiesView != null) return;
-            ItemsView = CollectionViewFactory.CreateLiveCollectionView(Items);
-            AbnormalitiesView = CollectionViewFactory.CreateLiveCollectionView(Passivities);
-        }
+
         public void NotifyItemsDisplay()
         {
             N(nameof(ShowItems));

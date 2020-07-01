@@ -9,7 +9,7 @@ namespace TCC.ViewModels
 
         public Cooldown BurningHeart { get; set; }
         public Cooldown FireAvalanche { get; set; }
-        public DurationCooldownIndicator InnerHarmony { get; set; }
+        public SkillWithEffect InnerHarmony { get; set; }
 
         public bool FocusOn
         {
@@ -30,7 +30,7 @@ namespace TCC.ViewModels
             FireAvalanche.FlashOnAvailable = StaminaTracker.Maxed;
         }
 
-        public override void LoadSpecialSkills()
+        public NinjaLayoutVM()
         {
             Game.DB.SkillsDatabase.TryGetSkill(150700, Class.Ninja, out var bh);
             Game.DB.SkillsDatabase.TryGetSkill(80200, Class.Ninja, out var fa);
@@ -38,12 +38,7 @@ namespace TCC.ViewModels
 
             BurningHeart = new Cooldown(bh,  false) { CanFlash = true };
             FireAvalanche = new Cooldown(fa,  false) { CanFlash = true };
-
-            InnerHarmony = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(ih, true) {CanFlash = true},
-                Buff = new Cooldown(ih, false)
-            };
+            InnerHarmony = new SkillWithEffect(Dispatcher, ih);
 
             StaminaTracker.PropertyChanged += FlashOnMaxSt;
 
@@ -53,7 +48,7 @@ namespace TCC.ViewModels
         {
             BurningHeart.Dispose();
             FireAvalanche.Dispose();
-            InnerHarmony.Cooldown.Dispose();
+            InnerHarmony.Dispose();
             
         }
 
@@ -71,7 +66,7 @@ namespace TCC.ViewModels
             }
 
             if (sk.Skill.IconName != InnerHarmony.Cooldown.Skill.IconName) return false;
-            InnerHarmony.Cooldown.Start(sk.Duration);
+            InnerHarmony.StartCooldown(sk.Duration);
             return true;
         }
     }

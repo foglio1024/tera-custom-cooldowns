@@ -6,12 +6,12 @@ namespace TCC.ViewModels
     public class GunnerLayoutVM : BaseClassLayoutVM
     {
 
-        public Cooldown BurstFire { get; set; }
-        public Cooldown Balder { get; set; }
-        public Cooldown Bombardment { get; set; }
-        public DurationCooldownIndicator ModularSystem { get; set; }
+        public Cooldown BurstFire { get;  }
+        public Cooldown Balder { get; }
+        public Cooldown Bombardment { get; }
+        public SkillWithEffect ModularSystem { get; }
 
-        public override void LoadSpecialSkills()
+        public GunnerLayoutVM()
         {
             Game.DB.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
             Game.DB.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
@@ -19,18 +19,15 @@ namespace TCC.ViewModels
             Game.DB.SkillsDatabase.TryGetSkill(410100, Class.Gunner, out var modSys);
 
 
-            BurstFire = new Cooldown(bfire, true);
-            Bombardment = new Cooldown(bombard, false) { CanFlash = true };
-            Balder = new Cooldown(balder, false) { CanFlash = true };
+            BurstFire = new Cooldown(bfire, false);
+            Bombardment = new Cooldown(bombard, true) { CanFlash = true };
+            Balder = new Cooldown(balder, true) { CanFlash = true };
 
-            ModularSystem = new DurationCooldownIndicator(Dispatcher)
-            {
-                Buff = new Cooldown(modSys, false),
-                Cooldown = new Cooldown(modSys, true) { CanFlash = true }
-            };
-            Balder.FlashOnAvailable = true;
-            Bombardment.FlashOnAvailable = true;
-            ModularSystem.Cooldown.FlashOnAvailable = true;
+            ModularSystem = new SkillWithEffect(Dispatcher, modSys);
+            // ????
+            //Balder.FlashOnAvailable = true;
+            //Bombardment.FlashOnAvailable = true;
+            //ModularSystem.Cooldown.FlashOnAvailable = true;
 
             //StaminaTracker.PropertyChanged += FlashBfIfFullWp;
         }
@@ -39,7 +36,7 @@ namespace TCC.ViewModels
         {
             Bombardment.Dispose();
             Balder.Dispose();
-            ModularSystem.Cooldown.Dispose();
+            ModularSystem.Dispose();
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
@@ -57,7 +54,7 @@ namespace TCC.ViewModels
 
             if (ModularSystem.Cooldown.Skill == null ||
                 sk.Skill.IconName != ModularSystem.Cooldown.Skill.IconName) return false;
-            ModularSystem.Cooldown.Start(sk.Duration);
+            ModularSystem.StartCooldown(sk.Duration);
             return true;
         }
     }

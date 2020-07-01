@@ -18,7 +18,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         private readonly IPAddress _localIp;
 
         private bool _isInit;
-        private Socket _socket;
+        private Socket? _socket;
 
         public IpSnifferRawSocketSingleInterface(IPAddress localIp)
         {
@@ -107,11 +107,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
         public SocketAwaitable(SocketAsyncEventArgs eventArgs)
         {
-            MEventArgs = eventArgs ?? throw new ArgumentNullException("eventArgs");
+            MEventArgs = eventArgs ?? throw new ArgumentNullException(nameof(eventArgs));
             eventArgs.Completed += delegate
             {
-                (_mContinuation ?? Interlocked.CompareExchange(
-                    ref _mContinuation, Sentinel, null))?.Invoke();
+                (_mContinuation ?? Interlocked.CompareExchange(ref _mContinuation, Sentinel, null))?.Invoke();
             };
         }
 
@@ -127,9 +126,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
         public void OnCompleted(Action continuation)
         {
-            if (_mContinuation == Sentinel ||
-                Interlocked.CompareExchange(
-                    ref _mContinuation, continuation, null) == Sentinel)
+            if (_mContinuation == Sentinel || Interlocked.CompareExchange(ref _mContinuation, continuation, null) == Sentinel)
             {
                 Task.Run(continuation);
             }

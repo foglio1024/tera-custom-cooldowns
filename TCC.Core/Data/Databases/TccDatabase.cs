@@ -83,7 +83,7 @@ namespace TCC.Data.Databases
 
             if (!openWorld.Guards.TryGetValue(guard.Id, out var grd)) return ret;
 
-            if (RegionsDatabase.Names.TryGetValue(grd.NameId, out var value)) ret = value;
+            ret = RegionsDatabase.GetZoneName(grd.NameId);
             return ret;
         }
         /// <summary>
@@ -102,7 +102,7 @@ namespace TCC.Data.Databases
                     if (!w.Value.Guards.TryGetValue(guardId, out var g)) return;
                     if (!g.Sections.TryGetValue(sectionId, out var s)) return;
                     var nameId = s.NameId;
-                    ret = RegionsDatabase.Names[nameId];
+                    ret = RegionsDatabase.GetZoneName(nameId);
                 });
             }
             catch
@@ -114,7 +114,7 @@ namespace TCC.Data.Databases
 
         public bool GetSkillFromId(uint id, Class c, CooldownType t, out Skill sk)
         {
-            sk = null;
+            sk = new Skill(0, Class.None, "", "");
             switch (t)
             {
                 case CooldownType.Skill:
@@ -156,10 +156,10 @@ namespace TCC.Data.Databases
         {
             get
             {
-                return GetType()
-                       .GetProperties()
-                       .Where(p => p.PropertyType.IsSubclassOf(typeof(DatabaseBase)))
-                       .Select(prop => prop.GetValue(this) as DatabaseBase).ToList();
+                var type = GetType();
+                var props = type.GetProperties().Where(p => p.PropertyType.IsSubclassOf(typeof(DatabaseBase)));
+                var dbs = props.Select(prop => (DatabaseBase)prop.GetValue(this)!).Where(x => x != null).ToList();
+                return dbs;
             }
         }
         public void CheckVersion()
@@ -186,7 +186,7 @@ namespace TCC.Data.Databases
                 name = "Unknown";
                 return false;
             }
-            name = RegionsDatabase.Names[guard.Value.NameId];
+            name = RegionsDatabase.GetZoneName(guard.Value.NameId);
             return true;
 
         }

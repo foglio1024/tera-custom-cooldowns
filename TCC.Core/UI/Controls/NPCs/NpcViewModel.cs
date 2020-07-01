@@ -8,14 +8,15 @@ namespace TCC.UI.Controls.NPCs
 {
     public class NpcViewModel : TSPropertyChanged
     {
+        public event Action Disposed = null!;
+        public event Action HpFactorChanged = null!;
+
         protected const uint Delay = 5000;
         protected readonly DispatcherTimer DeleteTimer;
         protected readonly DispatcherTimer ShowMenuButtonTimer;
 
         private bool _showOverrideBtn;
 
-        public event Action Disposed;
-        public event Action HpFactorChanged;
 
 
         public bool ShowHP => !TccUtils.IsFieldBoss(NPC.ZoneId, NPC.TemplateId);
@@ -58,13 +59,12 @@ namespace TCC.UI.Controls.NPCs
             DeleteTimer.Start();
         }
 
-        private void OnShowMenuButtonTimerTick(object _, EventArgs __)
+        private void OnShowMenuButtonTimerTick(object? _, EventArgs __)
         {
             N(nameof(ShowOverrideBtn));
             ShowMenuButtonTimer.Stop();
         }
-
-        protected virtual void OnDeleteTimerTick(object s, EventArgs ev)
+        protected virtual void OnDeleteTimerTick(object? s, EventArgs ev)
         {
             DeleteTimer.Stop();
             InvokeDisposed();

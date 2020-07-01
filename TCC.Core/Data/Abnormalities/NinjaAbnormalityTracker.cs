@@ -48,7 +48,7 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.InnerHarmony.Buff.Start(p.Duration);
+            vm.InnerHarmony.StartEffect(p.Duration);
 
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_REFRESH p)
@@ -56,14 +56,14 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.InnerHarmony.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.InnerHarmony.RefreshEffect(p.Duration);
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.InnerHarmony.Buff.Stop();
+            vm.InnerHarmony.StopEffect();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace TCC.UI.Windows.Widgets
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
             base.OnLoaded(sender, e);
+            if (_dc == null) return;
             ((ProgressNotificationInfo)_dc).Disposed += OnNotificationDisposed;
             ((ProgressNotificationInfo)_dc).Disposing += OnNotificationDisposing;
         }
@@ -33,6 +34,8 @@ namespace TCC.UI.Windows.Widgets
         {
             Dispatcher?.InvokeAsync(() =>
             {
+                if (_dc == null) return;
+
                 ((ProgressNotificationInfo)_dc).Disposed -= OnNotificationDisposed;
                 Root.Effect = null;
                 Root.BeginAnimation(OpacityProperty, _fadeOutAnimation);

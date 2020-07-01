@@ -9,10 +9,10 @@ namespace TCC.ViewModels
         private bool _isGfOn;
         private bool _counterProc;
 
-        public DurationCooldownIndicator GrowingFury { get; set; }
-        public Cooldown Counter { get; set; }
-        public Cooldown RhythmicBlows { get; set; }
-        public Cooldown Infuriate { get; set; }
+        public SkillWithEffect GrowingFury { get;  }
+        public Cooldown Counter { get;  }
+        public Cooldown RhythmicBlows { get; }
+        public Cooldown Infuriate { get;  }
 
 
         public bool IsGfOn
@@ -37,13 +37,12 @@ namespace TCC.ViewModels
             }
         }
 
-        public override void LoadSpecialSkills()
+
+        public BrawlerLayoutVM()
         {
             // Growing Fury
-            GrowingFury = new DurationCooldownIndicator(Dispatcher);
             Game.DB.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
-            GrowingFury.Cooldown = new Cooldown(gf,  true);
-            GrowingFury.Buff = new Cooldown(gf, false);
+            GrowingFury = new SkillWithEffect(Dispatcher, gf);
 
             // Counter 
             Game.DB.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);
@@ -56,6 +55,7 @@ namespace TCC.ViewModels
             // Infuriate
             Game.DB.SkillsDatabase.TryGetSkill(140100, Class.Brawler, out var infu);
             Infuriate = new Cooldown(infu, true) { CanFlash = true };
+
         }
 
         public override bool StartSpecialSkill(Cooldown sk)

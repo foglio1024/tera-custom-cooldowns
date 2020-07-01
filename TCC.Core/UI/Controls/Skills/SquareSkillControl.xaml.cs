@@ -28,6 +28,7 @@ namespace TCC.UI.Controls.Skills
         protected override void OnCooldownEnded(CooldownMode mode)
         {
             base.OnCooldownEnded(mode);
+            if (Context == null) return;
             if (mode != CooldownMode.Normal) return;
             WindowManager.ViewModels.CooldownsVM.Remove(Context.Skill);
         }

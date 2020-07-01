@@ -13,7 +13,7 @@ namespace TCC.Settings
         {
             FileName = SettingsGlobals.SettingsFileName;
         }
-        public void LoadSettings(string path)
+        public SettingsContainer LoadSettings(string path)
         {
             try
             {
@@ -27,34 +27,34 @@ namespace TCC.Settings
                                .Replace("\"Channels\"", "\"ShowedChannels\"")
                                .Replace("\"Authors\"", "\"ShowedAuthors\"")
                                .Replace("\"LanguageOverride\": \"\"", "\"LanguageOverride\" : 0");
-                    
+
                     #endregion
-                    App.Settings = JsonConvert.DeserializeObject<SettingsContainer>(file);
+                    return JsonConvert.DeserializeObject<SettingsContainer>(file);
                 }
-                else
-                {
-#if false
-                    var res = TccMessageBox.Show(SR.SettingsNotFoundImport, MessageBoxType.ConfirmationWithYesNo);
-                    if (res == MessageBoxResult.No)
-                    {
-                        App.Settings = new SettingsContainer();
-                        return;
-                    }
-                    var diag = new OpenFileDialog
-                    {
-                        Title = $"Import TCC settings file ({FileName})",
-                        Filter = $"{FileName} (*.json)|*.json"
-                    };
-                    if (diag.ShowDialog() == true)
-                    {
-                        path = diag.FileName;
-                        LoadSettings(path);
-                    }
-                    else App.Settings = new SettingsContainer();
-#else
-                    App.Settings = new SettingsContainer();
-#endif
-                }
+//                else
+//                {
+//#if false
+//                    var res = TccMessageBox.Show(SR.SettingsNotFoundImport, MessageBoxType.ConfirmationWithYesNo);
+//                    if (res == MessageBoxResult.No)
+//                    {
+//                        App.Settings = new SettingsContainer();
+//                        return;
+//                    }
+//                    var diag = new OpenFileDialog
+//                    {
+//                        Title = $"Import TCC settings file ({FileName})",
+//                        Filter = $"{FileName} (*.json)|*.json"
+//                    };
+//                    if (diag.ShowDialog() == true)
+//                    {
+//                        path = diag.FileName;
+//                        LoadSettings(path);
+//                    }
+//                    else App.Settings = new SettingsContainer();
+//#else
+//                    return new SettingsContainer();
+//#endif
+//                }
             }
             catch
             {
@@ -62,6 +62,7 @@ namespace TCC.Settings
                 if (res == MessageBoxResult.Yes) File.Delete(path);
                 LoadSettings(path);
             }
+            return new SettingsContainer();
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using Nostrum;
+using Nostrum.Extensions;
 using Nostrum.Factories;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Nostrum.Extensions;
 using TCC.Analysis;
-using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
@@ -30,15 +29,15 @@ namespace TCC.ViewModels.Widgets
         private bool _leaderOverride;
         private ulong _aggroHolder;
 
-        public event Action SettingsUpdated;
+        public event Action SettingsUpdated = null!;
 
         public TSObservableCollection<User> Members { get; }
         public GroupWindowLayout GroupWindowLayout => ((GroupWindowSettings)Settings).Layout;
 
         public ICollectionViewLiveShaping All { get; }
-        public ICollectionViewLiveShaping Dps { [UsedImplicitly] get; }
-        public ICollectionViewLiveShaping Tanks { [UsedImplicitly] get; }
-        public ICollectionViewLiveShaping Healers { [UsedImplicitly] get; }
+        public ICollectionViewLiveShaping Dps {  get; }
+        public ICollectionViewLiveShaping Tanks { get; }
+        public ICollectionViewLiveShaping Healers { get; }
         public bool Raid
         {
             get => _raid;
@@ -94,7 +93,7 @@ namespace TCC.ViewModels.Widgets
 
         private void OnEncounterChanged()
         {
-            if(!Game.Encounter)
+            if (!Game.Encounter)
                 SetAggro(0);
         }
 
@@ -152,18 +151,22 @@ namespace TCC.ViewModels.Widgets
 
         public bool TryGetUser(string name, out User u)
         {
-            u = Exists(name) ? Members.ToSyncList().FirstOrDefault(x => x.Name == name) : null;
-            return Exists(name);
+            var exists = Exists(name);
+            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.Name == name) : new User(Dispatcher);
+            return exists;
         }
         public bool TryGetUser(ulong id, out User u)
         {
-            u = Exists(id) ? Members.ToSyncList().FirstOrDefault(x => x.EntityId == id) : null;
+            var exists = Exists(id);
+
+            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.EntityId == id) : new User(Dispatcher);
             return u != null;
         }
         public bool TryGetUser(uint pId, uint sId, out User u)
         {
-            u = Exists(pId, sId) ? Members.ToSyncList().FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : null;
-            return Exists(pId, sId);
+            var exists = Exists(pId, sId);
+            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : new User(Dispatcher);
+            return exists;
         }
 
         public bool IsLeader(string name)

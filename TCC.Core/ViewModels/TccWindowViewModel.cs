@@ -17,17 +17,11 @@ namespace TCC.ViewModels
             else RemoveHooks();
         }
 
-        private TccWindowViewModel()
+        protected TccWindowViewModel(WindowSettingsBase settings)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
-        }
 
-        protected TccWindowViewModel(WindowSettingsBase settings) : this()
-        {
             Settings = settings;
-            //App.BaseDispatcher.Invoke(() =>
-            //{
-            //});
             if (settings != null)
             {
                 settings.EnabledChanged += OnEnabledChanged;

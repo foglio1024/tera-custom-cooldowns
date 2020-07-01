@@ -25,6 +25,7 @@ namespace TCC.UI.Controls.Skills
         {
             base.OnCooldownEnded(mode);
             if (mode != CooldownMode.Normal) return;
+            if (Context == null) return;
             WindowManager.ViewModels.CooldownsVM.Remove(Context.Skill);
         }
     }

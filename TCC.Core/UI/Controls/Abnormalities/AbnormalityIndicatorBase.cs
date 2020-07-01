@@ -12,11 +12,11 @@ namespace TCC.UI.Controls.Abnormalities
 {
     public class AbnormalityIndicatorBase : UserControl
     {
-        private static event Action<object, bool> VisibilityChanged;
+        private static event Action<object, bool> VisibilityChanged = null!;
         private readonly DoubleAnimation _an;
-        private AbnormalityDuration _context;
-        protected FrameworkElement DurationLabelRef;
-        protected FrameworkElement MainArcRef;
+        private AbnormalityDuration? _context;
+        protected FrameworkElement? DurationLabelRef;
+        protected FrameworkElement? MainArcRef;
 
         protected AbnormalityIndicatorBase()
         {
@@ -32,7 +32,10 @@ namespace TCC.UI.Controls.Abnormalities
             _context.Refreshed += OnRefreshed;
             OnVisibilityChanged(Window.GetWindow(this), false);
             //if (_context.Abnormality.Hidden) Visibility = Visibility.Collapsed;
-            if (_context.Abnormality.Infinity || _context.Duration == uint.MaxValue) DurationLabelRef.Visibility = Visibility.Hidden;
+            if ((_context.Abnormality.Infinity || _context.Duration == uint.MaxValue) && DurationLabelRef != null)
+            {
+                DurationLabelRef.Visibility = Visibility.Hidden;
+            }
             if (_context.Duration != uint.MaxValue && _context.Animated) AnimateCooldown();
             BeginAnimation(OpacityProperty, AnimationFactory.CreateDoubleAnimation(100, from: 0, to: 1));
             VisibilityChanged += OnVisibilityChanged;
@@ -55,7 +58,7 @@ namespace TCC.UI.Controls.Abnormalities
             {
                 var myWindow = ReferenceEquals(sender, Window.GetWindow(this));
 
-                var hidden = sender switch
+                var hidden = _context != null && sender switch
                 {
                     BuffWindow _ => App.Settings.BuffWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
                     GroupWindow _ => App.Settings.GroupWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
@@ -88,7 +91,7 @@ namespace TCC.UI.Controls.Abnormalities
             _an.Duration = TimeSpan.FromMilliseconds(_context.DurationLeft);
             var fps = _context.DurationLeft > 20000 ? 1 : 10;
             Timeline.SetDesiredFrameRate(_an, fps);
-            MainArcRef.BeginAnimation(Arc.EndAngleProperty, _an);
+            MainArcRef?.BeginAnimation(Arc.EndAngleProperty, _an);
 
         }
 

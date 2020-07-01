@@ -27,11 +27,9 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             return this == other;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj is EndpointIpv4)
-                return Equals((EndpointIpv4) obj);
-            return false;
+            return obj is EndpointIpv4 ipv4 && Equals(ipv4);
         }
 
         public override int GetHashCode()

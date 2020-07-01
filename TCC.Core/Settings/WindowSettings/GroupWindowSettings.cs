@@ -8,10 +8,10 @@ namespace TCC.Settings.WindowSettings
 {
     public class GroupWindowSettings : WindowSettingsBase
     {
-        public event Action SettingsUpdated;
-        public event Action IgnoreMeChanged;
-        public event Action ThresholdChanged;
-        public event Action LayoutChanged;
+        public event Action SettingsUpdated = null!;
+        public event Action IgnoreMeChanged = null!;
+        public event Action ThresholdChanged = null!;
+        public event Action LayoutChanged = null!;
 
         private GroupHpLabelMode _hpLabelMode;
         private bool _ignoreMe;

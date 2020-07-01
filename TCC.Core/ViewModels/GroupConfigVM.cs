@@ -13,7 +13,7 @@ namespace TCC.ViewModels
     public class GroupConfigVM : TSPropertyChanged
     {
 
-        public event Action ShowAllChanged;
+        public event Action ShowAllChanged = null!;
 
         public TSObservableCollection<GroupAbnormalityVM> GroupAbnormals;
         public IEnumerable<Abnormality> Abnormalities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
@@ -47,7 +47,6 @@ namespace TCC.ViewModels
             foreach (var abnormality in Abnormalities)
             {
                 var abVM = new GroupAbnormalityVM(abnormality);
-
                 GroupAbnormals.Add(abVM);
             }
             AbnormalitiesView = new CollectionViewSource { Source = GroupAbnormals }.View;
@@ -55,7 +54,7 @@ namespace TCC.ViewModels
             AbnormalitiesView.Filter = null;
         }
         //to keep view referenced
-        private void OnAbnormalitiesViewOnCurrentChanged(object s, EventArgs ev)
+        private void OnAbnormalitiesViewOnCurrentChanged(object? s, EventArgs ev)
         {
         }
     }

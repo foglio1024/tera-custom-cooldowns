@@ -3,15 +3,16 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Nostrum.Factories;
 using TCC.Data;
 
 namespace TCC.UI.Controls.Classes.Elements
 {
     public partial class TraverseCutControl
     {
-        private DoubleAnimation _toZeroAnimation;
-        private DoubleAnimation _anim;
-        private StatTracker _dc;
+        private readonly DoubleAnimation _toZeroAnimation;
+        private readonly DoubleAnimation _anim;
+        private StatTracker? _dc;
         private bool _isAnimating;
         private DispatcherTimer _delay;
         private uint _lastDuration;
@@ -19,6 +20,19 @@ namespace TCC.UI.Controls.Classes.Elements
 
         public TraverseCutControl()
         {
+            _anim = AnimationFactory.CreateDoubleAnimation(100, 0, completed: (_, __) => _isAnimating = false, framerate: 20);
+            _toZeroAnimation = AnimationFactory.CreateDoubleAnimation(0, 0,  framerate: 20);
+
+            _delay = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMilliseconds(_anim.Duration.TimeSpan.Milliseconds + 10)
+            };
+            _delay.Tick += (_, __) =>
+            {
+                _delay.Stop();
+                OnToZero(_lastDuration);
+            };
+
             InitializeComponent();
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
@@ -34,22 +48,6 @@ namespace TCC.UI.Controls.Classes.Elements
         {
             _dc = (StatTracker)DataContext;
 
-            _anim = new DoubleAnimation(0, TimeSpan.FromMilliseconds(100));
-            _anim.Completed += (_, __) => _isAnimating = false;
-            Timeline.SetDesiredFrameRate(_anim, 20);
-
-            _toZeroAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(0));
-            Timeline.SetDesiredFrameRate(_toZeroAnimation, 20);
-
-            _delay = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromMilliseconds(_anim.Duration.TimeSpan.Milliseconds + 10)
-            };
-            _delay.Tick += (_, __) =>
-            {
-                _delay.Stop();
-                OnToZero(_lastDuration);
-            };
             if (_dc == null) return;
             _dc.ToZero += OnToZero;
             _dc.PropertyChanged += OnPropertyChanged;
@@ -64,12 +62,14 @@ namespace TCC.UI.Controls.Classes.Elements
                 _delay.Start();
                 return;
             }
+
             Dispatcher?.Invoke(() =>
             {
-                //var delay = _anim.Duration.TimeSpan.Milliseconds + 10;
-                //_toZeroAnimation.BeginTime = TimeSpan.FromMilliseconds(_isAnimating ? delay : 0);
                 _toZeroAnimation.Duration = TimeSpan.FromMilliseconds(duration);
-                _toZeroAnimation.From = _dc.Factor * 359.9;
+                if (_dc != null)
+                {
+                    _toZeroAnimation.From = _dc.Factor * 359.9;
+                }
                 ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _toZeroAnimation);
             });
         }
@@ -77,8 +77,11 @@ namespace TCC.UI.Controls.Classes.Elements
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(StatTracker.Factor)) return;
-            _anim.To = _dc.Factor * 359.9;
-            ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _anim);
+            if (_dc != null)
+            {
+                _anim.To = _dc.Factor * 359.9;
+                ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _anim);
+            }
             _isAnimating = true;
         }
     }

@@ -45,38 +45,38 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != RagnarokId) return;
             if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
 
-            vm.Ragnarok.Buff.Start(p.Duration);
+            vm.Ragnarok.StartEffect(p.Duration);
         }
         private static void CheckRagnarok(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != RagnarokId) return;
             if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-            vm.Ragnarok.Buff.Stop();
+            vm.Ragnarok.StopEffect();
         }
         private static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != RagnarokId) return;
             if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-            vm.Ragnarok.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.Ragnarok.RefreshEffect(p.Duration);
         }
 
         private static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != GodsfallId) return;
             if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-            vm.Godsfall.Buff.Start(p.Duration);
+            vm.Godsfall.StartEffect(p.Duration);
         }
         private static void CheckGodsfall(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GodsfallId) return;
             if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-            vm.Godsfall.Buff.Refresh(p.Duration, CooldownMode.Normal);
+            vm.Godsfall.RefreshEffect(p.Duration);
         }
         private static void CheckGodsfall(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GodsfallId) return;
             if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-            vm.Godsfall.Buff.Stop();
+            vm.Godsfall.StopEffect();
         }
 
         private  void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)

@@ -71,10 +71,10 @@ namespace TCC.Data.Databases
         {
             var result = false;
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
-            if (Skills[c].TryGetValue(id, out sk))
-            {
-                result = true;
-            }
+            if (!Skills[c].TryGetValue(id, out var skRet)) return result;
+            sk = skRet;
+            result = true;
+
             return result;
 
         }

@@ -13,7 +13,7 @@ namespace TCC.ViewModels
             return false;
         }
 
-        public abstract void LoadSpecialSkills();
+        //public abstract void LoadSpecialSkills();
 
         public virtual bool ChangeSpecialSkill(Skill skill, uint cd)
         {

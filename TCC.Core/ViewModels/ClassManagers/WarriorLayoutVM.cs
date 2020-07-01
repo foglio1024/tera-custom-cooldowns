@@ -9,9 +9,9 @@ namespace TCC.ViewModels
     public class WarriorLayoutVM : BaseClassLayoutVM
     {
 
-        public DurationCooldownIndicator DeadlyGamble { get; set; }
-        public DurationCooldownIndicator AdrenalineRush { get; set; }
-        public DurationCooldownIndicator Swift { get; set; }
+        public SkillWithEffect DeadlyGamble { get; set; }
+        public SkillWithEffect AdrenalineRush { get; set; }
+        public SkillWithEffect Swift { get; set; }
         public StatTracker TraverseCut { get; set; }
         
         public StanceTracker<WarriorStance> Stance => Game.Me.WarriorStance; //for binding
@@ -29,61 +29,43 @@ namespace TCC.ViewModels
             }
         }
 
-        //public StatTracker TempestAura { get; set; }
 
-        public bool AtkSpeedProc => !(Swift.Buff.IsAvailable && AdrenalineRush.Buff.IsAvailable);
+        public bool AtkSpeedProc => !(Swift.Effect.IsAvailable && AdrenalineRush.Effect.IsAvailable);
 
         public WarriorLayoutVM()
         {
             TraverseCut = new StatTracker { Max = 13, Val = 0 };
-            //Stance = new StanceTracker<WarriorStance>();
             Game.Me.Death += OnDeath;
             Game.CombatChanged += CheckStanceWarning;
             Stance.PropertyChanged += OnStanceOnPropertyChanged; // StanceTracker has only one prop
+
+            Game.DB.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
+            DeadlyGamble = new SkillWithEffect(Dispatcher, dg);
+
+            Game.DB.SkillsDatabase.TryGetSkill(170250, Class.Lancer, out var ar);
+            AdrenalineRush = new SkillWithEffect(Dispatcher, ar, false);
+
+            var ab = Game.DB.AbnormalityDatabase.Abnormalities[21010];
+            Swift = new SkillWithEffect(Dispatcher, new Skill(ab), false);
 
         }
 
         private void OnDeath()
         {
-            DeadlyGamble.Buff.Stop();
+            DeadlyGamble.StopEffect();
         }
 
         public bool ShowEdge => App.Settings.ClassWindowSettings.WarriorShowEdge;
         public bool ShowTraverseCut => App.Settings.ClassWindowSettings.WarriorShowTraverseCut;
         public WarriorEdgeMode WarriorEdgeMode => App.Settings.ClassWindowSettings.WarriorEdgeMode;
 
-        public sealed override void LoadSpecialSkills()
-        {
-            //Deadly gamble
-            Game.DB.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
-            DeadlyGamble = new DurationCooldownIndicator(Dispatcher)
-            {
-                Buff = new Cooldown(dg, false),
-                Cooldown = new Cooldown(dg, true) { CanFlash = true }
-            };
-
-            Game.DB.SkillsDatabase.TryGetSkill(170250, Class.Lancer, out var ar);
-            AdrenalineRush = new DurationCooldownIndicator(Dispatcher)
-            {
-                Buff = new Cooldown(ar, false),
-                Cooldown = new Cooldown(ar, false) { CanFlash = false }
-            };
-            var ab = Game.DB.AbnormalityDatabase.Abnormalities[21010];//21070 dfa
-            //Swift = new Cooldown(new Skill(ab), false);
-            Swift = new DurationCooldownIndicator(Dispatcher)
-            {
-                Buff = new Cooldown(new Skill(ab), false),
-                Cooldown = new Cooldown(new Skill(ab), false) { CanFlash = false }
-            };
-
-        }
 
         public override void Dispose()
         {
             Game.Me.Death -= OnDeath;
             Game.CombatChanged -= CheckStanceWarning;
             Stance.PropertyChanged -= OnStanceOnPropertyChanged;
-            DeadlyGamble.Cooldown.Dispose();
+            DeadlyGamble.Dispose();
         }
 
         private void OnStanceOnPropertyChanged(object _, PropertyChangedEventArgs __)
@@ -94,7 +76,7 @@ namespace TCC.ViewModels
         public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName != DeadlyGamble.Cooldown.Skill.IconName) return false;
-            DeadlyGamble.Cooldown.Start(sk.Duration);
+            DeadlyGamble.StartCooldown(sk.Duration);
             return true;
         }
 
@@ -107,11 +89,11 @@ namespace TCC.ViewModels
         {
             if (duration == 0)
             {
-                Swift.Buff.Stop();
+                Swift.StopEffect();
                 N(nameof(AtkSpeedProc));
                 return;
             }
-            Swift.Buff.Start(duration);
+            Swift.StartEffect(duration);
             N(nameof(AtkSpeedProc));
         }
 
@@ -119,11 +101,11 @@ namespace TCC.ViewModels
         {
             if (duration == 0)
             {
-                AdrenalineRush.Buff.Stop();
+                AdrenalineRush.StopEffect();
                 N(nameof(AtkSpeedProc));
                 return;
             }
-            AdrenalineRush.Buff.Start(duration);
+            AdrenalineRush.StartEffect(duration);
             N(nameof(AtkSpeedProc));
         }
     }

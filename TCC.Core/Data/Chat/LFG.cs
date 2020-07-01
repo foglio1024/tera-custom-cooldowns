@@ -7,12 +7,12 @@ namespace TCC.Data.Chat
     public class LFG : TSPropertyChanged
     {
         private uint _id;
-        private string _name;
-        private string _message;
+        private string _name = "";
+        private string _message = "";
         private bool _raid;
-        private string _dungeonName;
+        private string _dungeonName = "";
         private int _membersCount;
-        private Timer _removeTimer;
+        private readonly Timer _removeTimer;
 
         public uint Id
         {

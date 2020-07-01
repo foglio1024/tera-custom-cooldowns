@@ -22,10 +22,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         private readonly ConcurrentDictionary<TcpConnection, byte> _isNew = new ConcurrentDictionary<TcpConnection, byte>();
 
         private readonly Dictionary<string, Server> _serversByIp;
-        private TcpConnection _clientToServer;
-        private ConnectionDecrypter _decrypter;
-        private MessageSplitter _messageSplitter;
-        private TcpConnection _serverToClient;
+        private TcpConnection? _clientToServer;
+        private ConnectionDecrypter? _decrypter;
+        private MessageSplitter? _messageSplitter;
+        private TcpConnection? _serverToClient;
         public int ClientProxyOverhead;
         private bool _connected;
 
@@ -78,10 +78,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             set => _ipSniffer.Enabled = value;
         }
 
-        public event Action<Server> NewConnection;
-        public event Action<Message> MessageReceived;
-        public event Action EndConnection;
-        public event Action<string> Warning;
+        public event Action<Server> NewConnection = null!;
+        public event Action<Message> MessageReceived = null!;
+        public event Action EndConnection = null!;
+        public event Action<string> Warning = null!;
 
         protected virtual void OnNewConnection(Server server)
         {
@@ -196,13 +196,13 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         // called indirectly from HandleTcpDataReceived, so the current thread already holds the lock
         private void HandleServerToClientDecrypted(byte[] data)
         {
-            _messageSplitter.ServerToClient(DateTime.UtcNow, data);
+            _messageSplitter?.ServerToClient(DateTime.UtcNow, data);
         }
 
         // called indirectly from HandleTcpDataReceived, so the current thread already holds the lock
         private void HandleClientToServerDecrypted(byte[] data)
         {
-            _messageSplitter.ClientToServer(DateTime.UtcNow, data);
+            _messageSplitter?.ClientToServer(DateTime.UtcNow, data);
         }
     }
 }

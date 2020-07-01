@@ -6,8 +6,8 @@ namespace TCC.Settings.WindowSettings
 {
     public class CooldownWindowSettings : WindowSettingsBase
     {
-        public event Action ShowItemsChanged;
-        public event Action ModeChanged;
+        public event Action ShowItemsChanged = null!;
+        public event Action ModeChanged = null!;
 
         private bool _showItems;
         private CooldownBarMode _mode;

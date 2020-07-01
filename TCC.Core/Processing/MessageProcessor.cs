@@ -34,10 +34,11 @@ namespace TCC.Processing
                 handlers.Remove(action);
             }
         }
-        public void Handle(ParsedMessage msg)
+        public void Handle(ParsedMessage? msg)
         {
             lock (_lock)
             {
+                if (msg == null) return;
                 if (!_hooks.TryGetValue(msg.GetType(), out var handlers) || handlers == null) return;
                 handlers.ForEach(del =>
                 {

@@ -17,14 +17,14 @@ namespace TCC.ViewModels
     public class TabInfo
     {
         public string Name { get; set; }
-        public List<string> ShowedAuthors { get; set; }
-        public List<string> HiddenAuthors { get; set; }
-        public List<string> ShowedKeywords { get; set; }
-        public List<string> HiddenKeywords { get; set; }
-        public List<ChatChannel> ShowedChannels { get; set; }
-        public List<ChatChannel> HiddenChannels { get; set; }
+        public List<string> ShowedAuthors { get; }
+        public List<string> HiddenAuthors { get; }
+        public List<string> ShowedKeywords { get; }
+        public List<string> HiddenKeywords { get; }
+        public List<ChatChannel> ShowedChannels { get; }
+        public List<ChatChannel> HiddenChannels { get;  }
 
-        public TabInfo()
+        public TabInfo(string name) 
         {
             ShowedAuthors = new List<string>();
             HiddenAuthors = new List<string>();
@@ -32,16 +32,13 @@ namespace TCC.ViewModels
             HiddenKeywords = new List<string>();
             ShowedChannels = new List<ChatChannel>();
             HiddenChannels = new List<ChatChannel>();
-            
-        }
-        public TabInfo(string name) : this()
-        {
+
             Name = name;
         }
     }
     public class TabInfoVM : TSPropertyChanged
     {
-        private string _tabName;
+        private string _tabName = "";
         public string TabName
         {
             get => _tabName;
@@ -75,10 +72,6 @@ namespace TCC.ViewModels
             ExcludedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
         }
 
-        public TabInfoVM(string tabName) : this()
-        {
-            TabName = tabName;
-        }
         public TabInfoVM(TabInfo info) : this()
         {
             TabName = info.Name;
@@ -168,13 +161,12 @@ namespace TCC.ViewModels
         public TabInfo TabInfo { get; }
         public TabInfoVM TabInfoVM { get; set; }
 
-        private ICollectionView _messages;
-        private ChatMessage _pinnedMessage;
+        private ChatMessage? _pinnedMessage;
 
 
         public string TabName
         {
-            get => TabInfo?.Name;
+            get => TabInfo?.Name ?? "";
             set
             {
                 if (TabInfo?.Name == value) return;
@@ -201,18 +193,10 @@ namespace TCC.ViewModels
         [JsonIgnore]
         public TSObservableCollection<ChatMessage> ImportantMessages { get; set; }
         [JsonIgnore]
-        public ICollectionView Messages
-        {
-            get => _messages;
-            set
-            {
-                if (_messages == value) return;
-                _messages = value;
-                N(nameof(Messages));
-            }
-        }
+        public ICollectionView Messages { get; }
+
         [JsonIgnore]
-        public ChatMessage PinnedMessage
+        public ChatMessage? PinnedMessage
         {
             get => _pinnedMessage;
             set
@@ -227,7 +211,7 @@ namespace TCC.ViewModels
             Messages.Refresh();
         }
 
-        public Tab()
+        public Tab(TabInfo tabInfo) 
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             Messages = new ListCollectionView(ChatManager.Instance.ChatMessages);
@@ -245,14 +229,11 @@ namespace TCC.ViewModels
             ScrollToMessageCommand = new RelayCommand(msg => { ChatManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
             TabViewModel.ImportantRemoved += SyncImportant;
 
-        }
-
-        public Tab(TabInfo tabInfo) : this()
-        {
             TabInfo = tabInfo;
             TabInfoVM = new TabInfoVM(TabInfo);
             ApplyFilter();
         }
+
         //public Tab(string n, ChatChannel[] ch, ChatChannel[] ex, string[] a, string[] exa) : this()
         //{
         //    if (n == null || ch == null || ex == null || a == null || exa == null) return;
@@ -325,7 +306,7 @@ namespace TCC.ViewModels
             {
                 Messages.Filter = f =>
                 {
-                    var m = f as ChatMessage;
+                    var m = (ChatMessage) f;
                     return Filter(m);
                 };
             });
@@ -338,9 +319,9 @@ namespace TCC.ViewModels
             N(nameof(ImportantMessagesLabel));
         }
 
-        public void RemoveImportantMessage(ChatMessage msg)
+        public void RemoveImportantMessage(ChatMessage? msg)
         {
-            ImportantMessages.Remove(msg);
+            if(msg != null) ImportantMessages.Remove(msg);
             N(nameof(Attention));
             N(nameof(ImportantMessagesLabel));
         }

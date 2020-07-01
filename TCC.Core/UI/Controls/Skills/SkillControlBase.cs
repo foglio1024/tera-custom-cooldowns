@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using Nostrum;
 using Nostrum.Controls;
-using TCC.Annotations;
 using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Utils;
@@ -16,20 +15,19 @@ namespace TCC.UI.Controls.Skills
     public class SkillControlBase : UserControl, INotifyPropertyChanged
     {
         #region INPC
-        public event PropertyChangedEventHandler PropertyChanged;
-        [NotifyPropertyChangedInvocator]
-        protected virtual void NPC([CallerMemberName] string propertyName = null)
+        public event PropertyChangedEventHandler PropertyChanged = null!;
+        protected  void NPC([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-        protected Cooldown Context;
-        protected Arc MainArcRef;
-        protected Arc PreArcRef;
-        protected FrameworkElement ResetArcRef;
+        protected Cooldown? Context;
+        protected Arc? MainArcRef;
+        protected Arc? PreArcRef;
+        protected FrameworkElement? ResetArcRef;
         private readonly DoubleAnimation _arcAnimation;
-
         private bool _isRunning;
+
         public bool IsRunning
         {
             get => _isRunning;
@@ -42,7 +40,7 @@ namespace TCC.UI.Controls.Skills
         }
         public string SecondsText => Context == null ? "0" : TimeUtils.FormatTime(Convert.ToUInt32(Context.Seconds > uint.MaxValue ? 0 : Context.Seconds));
 
-        public SkillControlBase()
+        protected SkillControlBase()
         {
             _arcAnimation = new DoubleAnimation(359.9, 0, TimeSpan.FromMilliseconds(1));
             Loaded += OnLoaded;
@@ -68,7 +66,7 @@ namespace TCC.UI.Controls.Skills
             OnSecondsUpdated();
             if (!Context.IsAvailable)
             {
-                OnCooldownStarted(Context.Mode);
+                OnCooldownStarted(Context.Duration, Context.Mode);
             }
             Context.Ended += OnCooldownEnded;
             Context.Started += OnCooldownStarted;
@@ -80,7 +78,7 @@ namespace TCC.UI.Controls.Skills
             Unloaded -= OnUnloaded;
             if (Context == null)
             {
-                Log.CW($"[SkillControlBase.OnUnloaded] Context is null!");
+                Log.CW("[SkillControlBase.OnUnloaded] Context is null!");
                 return;
             }
             Context.Ended -= OnCooldownEnded;
@@ -92,20 +90,23 @@ namespace TCC.UI.Controls.Skills
         {
             NPC(nameof(SecondsText));
         }
-        protected virtual void OnCooldownStarted(CooldownMode mode)
+        protected virtual void OnCooldownStarted(ulong duration, CooldownMode mode)
         {
             IsRunning = true;
             switch (mode)
             {
                 case CooldownMode.Normal:
                     StopArcAnimation(PreArcRef);
-                    var newVal = Context.Duration / (double)Context.OriginalDuration;
-                    newVal = newVal > 1 ? 1 : newVal;
-                    //if (Context.Duration == 0) newVal = 0; //TODO: check this
-                    StartArcAnimation(MainArcRef, newVal);
+                    if (Context != null)
+                    {
+                        var newVal = duration / (double)Context.OriginalDuration;
+                        newVal = newVal > 1 ? 1 : newVal;
+                        //if (Context.Duration == 0) newVal = 0; //TODO: check this
+                        StartArcAnimation(duration, MainArcRef, newVal);
+                    }
                     break;
                 case CooldownMode.Pre:
-                    StartArcAnimation(PreArcRef);
+                    StartArcAnimation(duration, PreArcRef);
                     break;
             }
         }
@@ -123,19 +124,19 @@ namespace TCC.UI.Controls.Skills
             }
         }
 
-        private void StartArcAnimation(Arc arc, double val = 1)
+        private void StartArcAnimation(ulong duration, Arc? arc, double val = 1)
         {
             Dispatcher?.Invoke(() =>
             {
                 if (arc == null) return;
-                _arcAnimation.Duration = TimeSpan.FromMilliseconds(Context.Duration);
-                _arcAnimation.From = 359.9 *( double.IsNaN(val) ? 0 : val);
-                var fps = Context.Duration > 30000 ? 1 : 20;
+                _arcAnimation.Duration = TimeSpan.FromMilliseconds(duration);
+                _arcAnimation.From = 359.9 * (double.IsNaN(val) ? 0 : val);
+                var fps = duration > 30000 ? 1 : 20;
                 Timeline.SetDesiredFrameRate(_arcAnimation, fps);
                 arc.BeginAnimation(Arc.EndAngleProperty, _arcAnimation);
             });
         }
-        protected void StopArcAnimation(Arc arc)
+        protected void StopArcAnimation(Arc? arc)
         {
             Dispatcher?.Invoke(() =>
             {

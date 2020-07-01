@@ -7,9 +7,6 @@ using System.Windows.Media;
 
 namespace TCC.UI.Controls.Settings
 {
-    /// <summary>
-    /// Logica di interazione per SelectionSetting.xaml
-    /// </summary>
     public partial class SelectionSetting
     {
         public string SettingName
@@ -17,16 +14,14 @@ namespace TCC.UI.Controls.Settings
             get => (string)GetValue(SettingNameProperty);
             set => SetValue(SettingNameProperty, value);
         }
-        public static readonly DependencyProperty SettingNameProperty =
-            DependencyProperty.Register("SettingName", typeof(string), typeof(SelectionSetting));
+        public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register("SettingName", typeof(string), typeof(SelectionSetting));
 
         public Geometry SvgIcon
         {
             get => (Geometry)GetValue(SvgIconProperty);
             set => SetValue(SvgIconProperty, value);
         }
-        public static readonly DependencyProperty SvgIconProperty =
-            DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(SelectionSetting));
+        public static readonly DependencyProperty SvgIconProperty = DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(SelectionSetting));
 
 
         public IEnumerable Choices
@@ -34,16 +29,14 @@ namespace TCC.UI.Controls.Settings
             get => (IEnumerable)GetValue(ChoicesProperty);
             set => SetValue(ChoicesProperty, value);
         }
-        public static readonly DependencyProperty ChoicesProperty =
-            DependencyProperty.Register("Choices", typeof(IEnumerable), typeof(SelectionSetting));
+        public static readonly DependencyProperty ChoicesProperty = DependencyProperty.Register("Choices", typeof(IEnumerable), typeof(SelectionSetting));
 
-        public string SelectedItem
+        public string? SelectedItem
         {
-            get => (string)GetValue(SelectedItemProperty);
+            get => (string?)GetValue(SelectedItemProperty);
             set => SetValue(SelectedItemProperty, value);
         }
-        public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register("SelectedItem", typeof(string), typeof(SelectionSetting));
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register("SelectedItem", typeof(string), typeof(SelectionSetting));
 
         public Type ChoicesType
         {
@@ -76,7 +69,7 @@ namespace TCC.UI.Controls.Settings
             if(Choices == null) return;
             foreach (var choice in Choices)
             {
-                if (choice.ToString() == SelectedItem)
+                if (choice?.ToString() == SelectedItem)
                 {
                     Cbox.SelectedIndex = i;
                 }

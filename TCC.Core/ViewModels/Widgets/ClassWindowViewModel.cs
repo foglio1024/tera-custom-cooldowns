@@ -58,7 +58,6 @@ namespace TCC.ViewModels.Widgets
                 _currentManager = value;
                 CurrentManager = _currentManager;
                 N();
-                CurrentManager.LoadSpecialSkills();
             }
         }
 
@@ -132,7 +131,10 @@ namespace TCC.ViewModels.Widgets
 
         private void OnLogin(S_LOGIN m)
         {
-            CurrentClass = m.CharacterClass;
+            Dispatcher.InvokeAsync(() =>
+            {
+                CurrentClass = m.CharacterClass;
+            });
             if (m.CharacterClass == Class.Valkyrie)
                 PacketAnalyzer.Processor.Hook<S_WEAK_POINT>(OnWeakPoint);
             else
@@ -169,7 +171,7 @@ namespace TCC.ViewModels.Widgets
             if (!(CurrentManager is ValkyrieLayoutVM vvm)) return;
             vvm.RunemarksCounter.Val = p.TotalRunemarks;
         }
-        
+
         private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
             UpdateSkillCooldown(m.SkillId, m.Cooldown);

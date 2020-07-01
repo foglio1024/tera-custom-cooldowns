@@ -8,62 +8,11 @@ namespace TCC.ViewModels
     {
         private bool _windWalkProc;
 
-        private ArcherFocusTracker _focus;
-        //private StanceTracker<ArcherStance> _stance;
-        private Cooldown _thunderbolt;
-        private DurationCooldownIndicator _windsong;
-        private Cooldown _windWalk;
+        public ArcherFocusTracker Focus { get; private set; }
+        public Cooldown Thunderbolt { get; set; }
+        public SkillWithEffect Windsong { get; set; }
+        public Cooldown WindWalk { get; set; }
 
-        public ArcherFocusTracker Focus
-        {
-            get => _focus;
-            private set
-            {
-                if (_focus == value) return;
-                _focus = value;
-                N();
-            }
-        }
-        //public StanceTracker<ArcherStance> Stance
-        //{
-        //    get => _stance;
-        //    set
-        //    {
-        //        if(_stance== value) return;
-        //        _stance = value;
-        //        NPC();
-        //    }
-        //}
-        public Cooldown Thunderbolt
-        {
-            get => _thunderbolt;
-            set
-            {
-                if (_thunderbolt == value) return;
-                _thunderbolt = value;
-                N();
-            }
-        }
-        public DurationCooldownIndicator Windsong
-        {
-            get => _windsong;
-            set
-            {
-                if (_windsong == value) return;
-                _windsong = value;
-                N();
-            }
-        }
-        public Cooldown WindWalk
-        {
-            get => _windWalk;
-            set
-            {
-                if (_windWalk == value) return;
-                _windWalk = value;
-                N();
-            }
-        }
         public bool WindWalkProc
         {
             get => _windWalkProc;
@@ -78,20 +27,11 @@ namespace TCC.ViewModels
         public ArcherLayoutVM()
         {
             Focus = new ArcherFocusTracker();
-            //Stance = new StanceTracker<ArcherStance>();
-        }
-
-        public override void LoadSpecialSkills()
-        {
             Game.DB.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
             Game.DB.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
             Game.DB.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
             Thunderbolt = new Cooldown(tb, true) { CanFlash = true };
-            Windsong = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(ws, true) { CanFlash = true },
-                Buff = new Cooldown(ws, false)
-            };
+            Windsong = new SkillWithEffect(Dispatcher, ws);
             WindWalk = new Cooldown(ww, false);
         }
 
@@ -105,7 +45,7 @@ namespace TCC.ViewModels
 
             if (sk.Skill.IconName != Windsong.Cooldown.Skill.IconName) return false;
 
-            Windsong.Cooldown.Start(sk.Duration);
+            Windsong.StartCooldown(sk.Duration);
             return true;
         }
 
@@ -118,7 +58,7 @@ namespace TCC.ViewModels
 
         public override void Dispose()
         {
-            Windsong.Cooldown.Dispose();
+            Windsong.Dispose();
             Thunderbolt.Dispose();
         }
 

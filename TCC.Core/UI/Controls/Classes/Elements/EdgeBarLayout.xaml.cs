@@ -17,13 +17,7 @@ namespace TCC.UI.Controls.Classes.Elements
             get
             {
                 var ret = new List<FrameworkElement>();
-                Dispatcher.Invoke(() =>
-                {
-                    foreach (FrameworkElement child in EdgeContainer.Children)
-                    {
-                        ret.Add(child);
-                    }
-                });
+                Dispatcher.Invoke(() => ret.AddRange(EdgeContainer.Children.Cast<FrameworkElement>()));
                 return ret.ToList();
 
             }

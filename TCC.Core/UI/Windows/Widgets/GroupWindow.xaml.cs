@@ -16,7 +16,7 @@ namespace TCC.UI.Windows.Widgets
         public GroupWindow(GroupWindowViewModel vm)
         {
             DataContext = vm;
-            VM = DataContext as GroupWindowViewModel;
+            VM = vm;
             InitializeComponent();
             BoundaryRef = Boundary;
             ButtonsRef = Buttons;

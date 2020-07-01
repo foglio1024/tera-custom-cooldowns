@@ -23,14 +23,12 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets
 {
+
+    // TODO: move HH stuff to own class
     [TccModule]
     public class NpcWindowViewModel : TccWindowViewModel
     {
         private readonly TSObservableCollection<NPC> _npcList;
-
-        private ICollectionViewLiveShaping _bams;
-        private ICollectionViewLiveShaping _mobs;
-        private ICollectionViewLiveShaping _guildTowers;
 
         private readonly Dictionary<ulong, string> _towerNames = new Dictionary<ulong, string>();
         private readonly Dictionary<ulong, float> _savedHp = new Dictionary<ulong, float>();
@@ -42,46 +40,27 @@ namespace TCC.ViewModels.Widgets
         public int VisibleMobsCount => _npcList.ToSyncList().Count(x => x.Visible/* && x.CurrentHP > 0 */&& !x.IsBoss);
         public bool IsCompact => VisibleMobsCount > 6;
 
-        public ICollectionViewLiveShaping Bams
-        {
-            get
-            {
-                if (_bams != null) return _bams;
-                _bams = CollectionViewFactory.CreateLiveCollectionView(_npcList,
-                    npc => npc.IsBoss && !npc.IsTower && npc.Visible,
-                    new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
-                    new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
-                return _bams;
-            }
-        }
-        public ICollectionViewLiveShaping Mobs
-        {
-            get
-            {
-                if (_mobs != null) return _mobs;
-                _mobs = CollectionViewFactory.CreateLiveCollectionView(_npcList,
-                    npc => !npc.IsBoss && !npc.IsTower && npc.Visible,
-                    new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
-                    new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
-                return _mobs;
-            }
-        }
-        public ICollectionViewLiveShaping GuildTowers
-        {
-            get
-            {
-                if (_guildTowers != null) return _guildTowers;
-                _guildTowers = CollectionViewFactory.CreateLiveCollectionView(_npcList,
-                        npc => npc.IsTower,
-                        sortFilters: new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
-                return _guildTowers;
-            }
-        }
+        public ICollectionViewLiveShaping Bams { get; }
+        public ICollectionViewLiveShaping Mobs { get; }
+        public ICollectionViewLiveShaping GuildTowers { get; }
+
         public Dictionary<ulong, uint> GuildIds { get; } = new Dictionary<ulong, uint>();
 
         public NpcWindowViewModel(NpcWindowSettings settings) : base(settings)
         {
             _npcList = new TSObservableCollection<NPC>(Dispatcher);
+            Bams = CollectionViewFactory.CreateLiveCollectionView(_npcList,
+                npc => npc.IsBoss && !npc.IsTower && npc.Visible,
+                new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
+                new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
+            Mobs = CollectionViewFactory.CreateLiveCollectionView(_npcList,
+                npc => !npc.IsBoss && !npc.IsTower && npc.Visible,
+                new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
+                new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
+            GuildTowers = CollectionViewFactory.CreateLiveCollectionView(_npcList,
+                npc => npc.IsTower,
+                sortFilters: new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
+
             PendingAbnormalities = new List<PendingAbnormality>();
             InitFlushTimer();
             NpcListChanged += FlushCache;
@@ -117,8 +96,7 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (!TryFindNPC(entityId, out var boss)) boss = AddNPC(entityId, zoneId, templateId, isBoss, visibility);
-                if (boss == null) return;
+                var boss = GetOrAddNpc(entityId, zoneId, templateId, isBoss, visibility);
                 SetHP(boss, maxHp, curHp, src);
                 SetEnrageTime(entityId, remainingEnrageTime);
                 if (boss.Visible == visibility) return;
@@ -180,10 +158,10 @@ namespace TCC.ViewModels.Widgets
                 });
                 return;
             }
-            boss.AddorRefresh(ab, duration, stacks);
+            boss!.AddorRefresh(ab, duration, stacks);
         }
 
-        public List<PendingAbnormality> PendingAbnormalities { get; set; }
+        public List<PendingAbnormality> PendingAbnormalities { get; }
 
         public struct PendingAbnormality
         {
@@ -197,7 +175,7 @@ namespace TCC.ViewModels.Widgets
         public void EndAbnormality(ulong target, Abnormality ab)
         {
             if (!TryFindNPC(target, out var boss)) return;
-            boss.EndBuff(ab);
+            boss!.EndBuff(ab);
         }
         public void Clear()
         {
@@ -233,8 +211,14 @@ namespace TCC.ViewModels.Widgets
         }
         public bool TryFindNPC(ulong entityId, out NPC found)
         {
-            found = _npcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
-            return found != null;
+            found = new NPC(0, 0, 0, false, false);
+            var f = _npcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
+            if (f != null)
+            {
+                found = f;
+                return true;
+            }
+            return false;
         }
 
         private void RefreshOverride(uint zoneId, uint templateId, bool b)
@@ -244,14 +228,24 @@ namespace TCC.ViewModels.Widgets
                     .ToList()
                     .ForEach(n => n.IsBoss = b);
         }
+
+        private NPC GetOrAddNpc(ulong eid, uint zone, uint template, bool isBoss, bool visible)
+        {
+            if (TryFindNPC(eid, out var npc))
+            {
+                return npc;
+            }
+
+            AddNPC(eid, zone, template, isBoss, visible);
+            TryFindNPC(eid, out npc);
+            return npc;
+        }
         private void AddOrUpdateNpc(S_SPAWN_NPC spawn, Monster npcData)
         {
             Dispatcher.InvokeAsync(() =>
             {
-                var visibility = npcData.IsBoss && TccUtils.IsFieldBoss(spawn.HuntingZoneId, spawn.TemplateId);
-                if (!TryFindNPC(spawn.EntityId, out var boss))
-                    boss = AddNPC(spawn.EntityId, spawn.HuntingZoneId, spawn.TemplateId, npcData.IsBoss, visibility);
-                if (boss == null) return;
+                var visibility = npcData.IsBoss && TccUtils.IsFieldBoss(npcData.ZoneId, npcData.TemplateId);
+                var boss = GetOrAddNpc(spawn.EntityId, npcData.ZoneId, npcData.TemplateId, npcData.IsBoss, visibility);
                 SetHP(boss, npcData.MaxHP, npcData.MaxHP, HpChangeSource.CreatureChangeHp);
                 SetEnrageTime(spawn.EntityId, spawn.RemainingEnrageTime);
                 if (boss.Visible == visibility) return;
@@ -297,11 +291,11 @@ namespace TCC.ViewModels.Widgets
             if (!TryFindNPC(hpcEntityId, out var npc)) return;
             npc.CurrentHP = hpcCurrentHp;
         }
-        private NPC AddNPC(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
+        private void AddNPC(ulong entityId, uint zoneId, uint templateId, bool isBoss, bool visibility)
         {
-            if (App.Settings.NpcWindowSettings.HideAdds && !isBoss) return null;
-            if (templateId == 0 || zoneId == 0) return null;
-            if (zoneId == 1023) return null;
+            if (App.Settings.NpcWindowSettings.HideAdds && !isBoss) return;
+            if (templateId == 0 || zoneId == 0) return;
+            if (zoneId == 1023) return;
 
             var boss = new NPC(entityId, zoneId, templateId, isBoss, visibility);
 
@@ -322,7 +316,6 @@ namespace TCC.ViewModels.Widgets
             boss.SetTimerPattern();
             boss.SetEnragePattern();
             NpcListChanged?.Invoke();
-            return boss;
         }
         private void AddNormalNPC(NPC boss)
         {
@@ -581,13 +574,13 @@ namespace TCC.ViewModels.Widgets
         #region HH
         public const int Ph1ShieldDuration = 16;
 
-        private NPC _selectedDragon;
-        private NPC _vergos;
+        private NPC? _selectedDragon;
+        private NPC? _vergos;
         private readonly List<NPC> _holdedDragons = new List<NPC>();
         private HarrowholdPhase _currentHHphase;
-        private ICollectionView _dragons;
+        private ICollectionView? _dragons;
 
-        public NPC SelectedDragon
+        public NPC? SelectedDragon
         {
             get => _selectedDragon;
             set
@@ -597,7 +590,7 @@ namespace TCC.ViewModels.Widgets
                 N(nameof(SelectedDragon));
             }
         }
-        public NPC Vergos
+        public NPC? Vergos
         {
             get => _vergos;
             set
@@ -628,7 +621,7 @@ namespace TCC.ViewModels.Widgets
                 N(nameof(CurrentHHphase));
             }
         }
-        public ICollectionView Dragons
+        public ICollectionView? Dragons
         {
             get
             {

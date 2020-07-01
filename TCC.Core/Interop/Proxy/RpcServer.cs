@@ -13,8 +13,8 @@ namespace TCC.Interop.Proxy
     /// </summary>
     public class RpcServer
     {
-        public event Action<Response> ResponseReceived;
-        public event Action<Request> RequestReceived;
+        public event Action<Response> ResponseReceived = null!;
+        public event Action<Request> RequestReceived = null!;
 
         private readonly HttpListener _server;
         private bool _listening;

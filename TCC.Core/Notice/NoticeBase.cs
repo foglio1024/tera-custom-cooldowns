@@ -5,8 +5,8 @@ namespace TCC.Notice
     public class NoticeBase
     {
         public bool Enabled { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
+        public string Title { get; set; } = "";
+        public string Content { get; set; } = "";
         public NoticeTrigger Trigger { get; set; }
         public bool Fired { get; private set; }
 

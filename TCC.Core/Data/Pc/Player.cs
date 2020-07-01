@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Nostrum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
-using Nostrum;
 using TCC.Data.Abnormalities;
 using TCC.Utils;
 using TCC.ViewModels;
@@ -14,9 +14,9 @@ namespace TCC.Data.Pc
 
     public class Player : TSPropertyChanged
     {
-        public event Action Death;
-        public event Action Ress;
-        public event Action CoinsUpdated;
+        public event Action Death = null!;
+        public event Action Ress = null!;
+        public event Action CoinsUpdated = null!;
 
         private string _name = "";
         private ulong _entityId;
@@ -45,8 +45,8 @@ namespace TCC.Data.Pc
         private bool _isAlive;
         private uint _coins;
         private uint _maxCoins;
-        private List<uint> _debuffList;
-        private Dictionary<uint, uint> _shields;
+        private readonly List<uint> _debuffList = new List<uint>();
+        private readonly Dictionary<uint, uint> _shields = new Dictionary<uint, uint>();
 
         public string Name
         {
@@ -257,7 +257,7 @@ namespace TCC.Data.Pc
         }
 
         public double CoinsFactor => MathUtils.FactorCalc(_coins, _maxCoins);
-        public bool IsDebuffed => _debuffList != null &&_debuffList.Count != 0;
+        public bool IsDebuffed => _debuffList != null && _debuffList.Count != 0;
         public bool IsInCombat
         {
             get => _isInCombat;
@@ -355,9 +355,9 @@ namespace TCC.Data.Pc
         // tracking only warrior stance for now
         public StanceTracker<WarriorStance> WarriorStance { get; set; }
 
-        public TSObservableCollection<AbnormalityDuration> Buffs { get; set; }
-        public TSObservableCollection<AbnormalityDuration> Debuffs { get; set; }
-        public TSObservableCollection<AbnormalityDuration> InfBuffs { get; set; }
+        public TSObservableCollection<AbnormalityDuration>? Buffs { get; private set; }
+        public TSObservableCollection<AbnormalityDuration>? Debuffs { get; private set; }
+        public TSObservableCollection<AbnormalityDuration>? InfBuffs { get; private set; }
 
         public Player()
         {
@@ -374,7 +374,7 @@ namespace TCC.Data.Pc
             {
                 if (_shields.Count == 0) return;
                 var firstShield = _shields.First();
-                if (_shields[firstShield.Key] >= damage)
+                if (firstShield.Value >= damage)
                 {
                     _shields[firstShield.Key] -= damage;
                 }
@@ -445,8 +445,8 @@ namespace TCC.Data.Pc
             Buffs = new TSObservableCollection<AbnormalityDuration>(disp);
             Debuffs = new TSObservableCollection<AbnormalityDuration>(disp);
             InfBuffs = new TSObservableCollection<AbnormalityDuration>(disp);
-            _shields = new Dictionary<uint, uint>();
-            _debuffList = new List<uint>();
+            //_shields = new Dictionary<uint, uint>();
+            //_debuffList = new List<uint>();
 
         }
 
@@ -511,13 +511,13 @@ namespace TCC.Data.Pc
 
         public void ClearAbnormalities()
         {
-            Buffs.ToSyncList().ForEach(item => item.Dispose());
-            Debuffs.ToSyncList().ForEach(item => item.Dispose());
-            InfBuffs.ToSyncList().ForEach(item => item.Dispose());
+            Buffs?.ToSyncList().ForEach(item => item.Dispose());
+            Debuffs?.ToSyncList().ForEach(item => item.Dispose());
+            InfBuffs?.ToSyncList().ForEach(item => item.Dispose());
 
-            Buffs.Clear();
-            Debuffs.Clear();
-            InfBuffs.Clear();
+            Buffs?.Clear();
+            Debuffs?.Clear();
+            InfBuffs?.Clear();
 
             _debuffList.Clear();
 
@@ -535,8 +535,11 @@ namespace TCC.Data.Pc
                 AbnormalityType.Stun => Debuffs,
                 AbnormalityType.Buff => (ab.Infinity ? InfBuffs : Buffs),
                 AbnormalityType.Special => (ab.Infinity ? InfBuffs : Buffs),
-                _ => null
+                _ => throw new ArgumentOutOfRangeException()
             };
+
+            if (list == null) 
+                throw new InvalidOperationException("Invalid list type requested");
 
             return list;
         }
@@ -551,7 +554,7 @@ namespace TCC.Data.Pc
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
-                Buffs.Add(newAb);
+                Buffs?.Add(newAb);
                 if (ab.IsShield)
                 {
                     AddShield(ab);
@@ -573,7 +576,7 @@ namespace TCC.Data.Pc
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
-                Debuffs.Add(newAb);
+                Debuffs?.Add(newAb);
                 return;
             }
             existing.Duration = duration;
@@ -589,7 +592,7 @@ namespace TCC.Data.Pc
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
-                InfBuffs.Add(newAb);
+                InfBuffs?.Add(newAb);
                 return;
             }
             existing.Duration = duration;
@@ -604,7 +607,7 @@ namespace TCC.Data.Pc
             var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
 
-            Buffs.Remove(buff);
+            Buffs?.Remove(buff);
             buff.Dispose();
 
             if (ab.IsShield)
@@ -619,7 +622,7 @@ namespace TCC.Data.Pc
 
             var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
-            Debuffs.Remove(buff);
+            Debuffs?.Remove(buff);
             buff.Dispose();
         }
         [Obsolete]
@@ -627,7 +630,7 @@ namespace TCC.Data.Pc
         {
             var buff = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
-            InfBuffs.Remove(buff);
+            InfBuffs?.Remove(buff);
             buff.Dispose();
         }
 

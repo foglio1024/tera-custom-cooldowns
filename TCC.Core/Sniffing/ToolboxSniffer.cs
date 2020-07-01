@@ -133,7 +133,7 @@ namespace TCC.Sniffing
             /// </summary>
             /// <param name="query">query string</param>
             /// <returns>json object containing query result</returns>
-            public async Task<JObject> Query(string query)
+            public async Task<JObject?> Query(string query)
             {
                 var resp = await _client.CallAsync("query", new JObject
                 {
@@ -180,17 +180,22 @@ namespace TCC.Sniffing
             }
         }
 
-        public event Action<Message> MessageReceived;
-        public event Action<Server> NewConnection;
-        public event Action EndConnection;
+        public event Action<Message> MessageReceived = null!;
+        public event Action<Server?> NewConnection = null!;
+        public event Action EndConnection = null!;
+        public async Task<bool> RetrieveSysMsgIfNeeded(string destPath)
+        {
+            if (!Connected) return false;
+            return await ControlConnection.DumpMap(destPath, "sysmsg");
+        }
 
         public ToolboxSniffer()
         {
             _dataConnection = new TcpListener(IPAddress.Parse("127.0.0.60"), 5200);
+            ControlConnection = new ToolboxControlInterface("http://127.0.0.61:5200");
             try
             {
                 _dataConnection.Start();
-                ControlConnection = new ToolboxControlInterface("http://127.0.0.61:5200");
             }
             catch (Exception e)
             {

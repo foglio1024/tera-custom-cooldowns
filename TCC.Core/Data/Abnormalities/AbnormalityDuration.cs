@@ -19,7 +19,7 @@ namespace TCC.Data.Abnormalities
             var hours = Math.Floor(minutes / 60);
             var days = Math.Floor(hours / 24);
 
-            if (minutes < 3) return seconds.ToString();
+            if (minutes < 3) return seconds.ToString(CultureInfo.InvariantCulture);
             if (hours < 3) return $"{minutes}m";
             if (days < 1) return $"{hours}h";
             return $"{days}d";
@@ -38,9 +38,9 @@ namespace TCC.Data.Abnormalities
     }
     public class AbnormalityDuration : TSPropertyChanged, IDisposable
     {
-        public event Action Refreshed;
+        public event Action Refreshed = null!;
 
-        public ulong Target { get; set; }
+        public ulong Target { get; }
         public Abnormality Abnormality { get; set; }
 
         private readonly Timer _timer;
@@ -82,16 +82,17 @@ namespace TCC.Data.Abnormalities
             }
         }
         public bool Animated { get; private set; }
-        public AbnormalityDuration()
+
+        private AbnormalityDuration(Abnormality b)
         {
+            Abnormality = b;
             _timer = new Timer { Interval = 900 };
             _isTimerDisposed = false;
         }
-        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated) : this()
+        public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated) : this(b)
         {
             Dispatcher = disp;
             Animated = animated;
-            Abnormality = b;
             Duration = d;
             Stacks = s;
             Target = t;
@@ -125,12 +126,9 @@ namespace TCC.Data.Abnormalities
         }
         public void Dispose()
         {
-            if (_timer != null && !_isTimerDisposed)
-            {
-                _timer?.Stop();
-                _timer.Elapsed -= DecreaseDuration;
-                _timer?.Dispose();
-            }
+            _timer.Stop();
+            _timer.Elapsed -= DecreaseDuration;
+            _timer.Dispose();
             _isTimerDisposed = true;
         }
     }

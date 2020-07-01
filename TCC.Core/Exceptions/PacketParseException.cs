@@ -6,10 +6,10 @@ namespace TCC.Exceptions
     {
         public string OpcodeName { get; }
         public byte[] RawData { get; }
-        public PacketParseException(string msg, Exception inner, string opcodeName, byte[] data) : base(msg, inner)
+        public PacketParseException(string msg, Exception inner, string opcodeName, byte[]? data) : base(msg, inner)
         {
             OpcodeName = opcodeName;
-            RawData = data;
+            RawData = data ?? new byte[]{};
         }
     }
 }

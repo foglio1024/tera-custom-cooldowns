@@ -20,12 +20,12 @@ namespace TCC.Utils
             return d.TryGetValue("dbid", out var value) ? long.Parse(value) : 0;
         }
 
-        public static Dictionary<string, string> SplitDirectives(string m)
+        public static Dictionary<string, string>? SplitDirectives(string m)
         {
             var parameters = m.Split('\v');
             return SplitDirectives(parameters);
         }
-        public static Dictionary<string, string> SplitDirectives(params string[] parameters)
+        public static Dictionary<string, string>? SplitDirectives(params string[] parameters)
         {
             if (parameters.Length == 1) return null;
             var retDict = new Dictionary<string, string>();

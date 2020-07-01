@@ -6,6 +6,7 @@
                      xmlns:pc="clr-namespace:TCC.Data.Pc"
                      xmlns:group="clr-namespace:TCC.UI.Controls.Group"
                      xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                     xmlns:converters1="clr-namespace:TCC.UI.Converters"
                      UseLayoutRounding="True"
                      mc:Ignorable="d"
                      d:DataContext="{d:DesignInstance pc:User}">
@@ -325,7 +326,7 @@
 
             <Image Opacity="1" x:Name="LaurelImage"
                    Margin="-3"
-                   Source="{Binding Laurel, Converter={StaticResource LaurelToImage}, ConverterParameter=half}"
+                   Source="{Binding Laurel, Converter={converters1:LaurelImageConverter LaurelType=RhombBottom}}"
                    RenderOptions.BitmapScalingMode="Linear"
                    UseLayoutRounding="True"
                    HorizontalAlignment="Center"

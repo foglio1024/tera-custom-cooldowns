@@ -10,9 +10,9 @@ namespace TCC.ViewModels
         private bool _isUnleashOn;
         private bool _isUnleashOff = true;
 
-        public DurationCooldownIndicator FieryRage { get; set; }
-        public DurationCooldownIndicator Bloodlust { get; set; }
-        public DurationCooldownIndicator Unleash { get; set; }
+        public SkillWithEffect FieryRage { get; set; }
+        public SkillWithEffect Bloodlust { get; set; }
+        public SkillWithEffect Unleash { get; set; }
 
         public Cooldown Dexter { get; set; }
         public Cooldown Sinister { get; set; }
@@ -50,55 +50,40 @@ namespace TCC.ViewModels
             SinisterTracker = new StatTracker();
             DexterTracker = new StatTracker();
             RampageTracker = new StatTracker();
-        }
 
-        public override void LoadSpecialSkills()
-        {
             Game.DB.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
+            FieryRage = new SkillWithEffect(Dispatcher, fr);
             Game.DB.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
+            Bloodlust = new SkillWithEffect(Dispatcher, bl);
             Game.DB.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
-            FieryRage = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(fr,  true) { CanFlash = true },
-                Buff = new Cooldown(fr,  true)
-            };
-            Bloodlust = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(bl,  true) { CanFlash = true },
-                Buff = new Cooldown(bl,  true)
-            };
-            Unleash = new DurationCooldownIndicator(Dispatcher)
-            {
-                Cooldown = new Cooldown(ul, false) { CanFlash = true },
-                Buff = new Cooldown(ul, false)
-            };
+            Unleash = new SkillWithEffect(Dispatcher, ul);
 
             Game.DB.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
-            Game.DB.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
-            Game.DB.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
-            Game.DB.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
-
             Dexter = new Cooldown(dx, false);
+            Game.DB.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
             Sinister = new Cooldown(sx, false);
+            Game.DB.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
             Rampage = new Cooldown(rp, false);
+            Game.DB.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
             BeastFury = new Cooldown(bf, false);
+
         }
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
             if (sk.Skill.IconName == FieryRage.Cooldown.Skill.IconName)
             {
-                FieryRage.Cooldown.Start(sk.Duration);
+                FieryRage.StartCooldown(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == Bloodlust.Cooldown.Skill.IconName)
             {
-                Bloodlust.Cooldown.Start(sk.Duration);
+                Bloodlust.StartCooldown(sk.Duration);
                 return true;
             }
             if (sk.Skill.IconName == Unleash.Cooldown.Skill.IconName)
             {
-                Unleash.Cooldown.Start(sk.Duration);
+                Unleash.StartCooldown(sk.Duration);
                 return true;
             }
 
@@ -110,15 +95,16 @@ namespace TCC.ViewModels
         public override bool ChangeSpecialSkill(Skill skill, uint cd)
         {
             if (skill.IconName != Unleash.Cooldown.Skill.IconName) return false;
-            Unleash.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
+            Unleash.RefreshCooldown(cd, skill.Id);
+            //Unleash.Cooldown.Refresh(skill.Id, cd, CooldownMode.Normal);
             return true;
         }
 
         public override void Dispose()
         {
-            FieryRage.Cooldown.Dispose();
-            Bloodlust.Cooldown.Dispose();
-            Unleash.Cooldown.Dispose();
+            FieryRage.Dispose();
+            Bloodlust.Dispose();
+            Unleash.Dispose();
         }
     }
 }

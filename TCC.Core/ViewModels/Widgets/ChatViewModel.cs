@@ -22,14 +22,14 @@ namespace TCC.ViewModels.Widgets
     public class ImportantRemovedArgs : EventArgs
     {
         public ActionType Action { get; }
-        public ChatMessage Item { get; }
+        public ChatMessage? Item { get; }
         public enum ActionType
         {
             Remove,
             Clear
         }
 
-        public ImportantRemovedArgs(ActionType action, ChatMessage item = null)
+        public ImportantRemovedArgs(ActionType action, ChatMessage? item = null)
         {
             Action = action;
             Item = item;
@@ -38,15 +38,14 @@ namespace TCC.ViewModels.Widgets
     }
     public class ChatViewModel : TSPropertyChanged
     {
-        public event Action ForceSizePosUpdateEvent;
+        public event Action ForceSizePosUpdateEvent = null!;
 
         private bool _paused;
         private bool _visible = true;
-        private DispatcherTimer _hideTimer;
-        private ChatWindowSettings _windowSettings;
+        private readonly DispatcherTimer _hideTimer;
         private bool _collapsed;
         private bool _mouseOver;
-        private Tab _currentTab;
+        private Tab? _currentTab;
         private bool _showCollapsedSettingsButton;
 
         public bool Paused
@@ -107,7 +106,7 @@ namespace TCC.ViewModels.Widgets
         }
 
         
-        public Tab CurrentTab
+        public Tab? CurrentTab
         {
             get => _currentTab;
             set
@@ -121,24 +120,7 @@ namespace TCC.ViewModels.Widgets
         public ICommand OpenSysMsgSettingsCommand { get; }
         public ICommand JumpToPresentCommand { get; }
 
-        public ChatWindowSettings WindowSettings
-        {
-            get => _windowSettings;
-            set
-            {
-                if (_windowSettings == value) return;
-                if (_windowSettings != null)
-                {
-                    _windowSettings.TimeoutChanged -= ChangeTimerInterval;
-                }
-                _windowSettings = value;
-                if (_windowSettings == null) return;
-                _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout) };
-                _hideTimer.Tick += OnHideTimerTick;
-                _hideTimer.Start();
-                _windowSettings.TimeoutChanged += ChangeTimerInterval;
-            }
-        }
+        public ChatWindowSettings WindowSettings { get; }
 
         public TSObservableCollection<TabViewModel> TabVMs { get; set; }
         public TSObservableCollection<LFG> LFGs => ChatManager.Instance.LFGs;
@@ -148,7 +130,7 @@ namespace TCC.ViewModels.Widgets
             get
             {
                 var ret = new List<Tab>();
-                TabVMs.ToList().ForEach(x => ret.Add(x.Content as Tab));
+                TabVMs.ToList().ForEach(x => ret.Add((Tab) x.Content));
                 return ret;
             }
         }
@@ -178,6 +160,9 @@ namespace TCC.ViewModels.Widgets
         public ChatViewModel(ChatWindowSettings s)
         {
             WindowSettings = s;
+            _hideTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout) };
+            _hideTimer.Tick += OnHideTimerTick;
+            WindowSettings.TimeoutChanged += ChangeTimerInterval;
             InterTabClient = new ChatTabClient();
             TabVMs = new TSObservableCollection<TabViewModel>();
 
@@ -203,9 +188,9 @@ namespace TCC.ViewModels.Widgets
             _hideTimer.Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout);
             _hideTimer.Refresh();
         }
-        private void OnHideTimerTick(object sender, EventArgs e)
+        private void OnHideTimerTick(object? sender, EventArgs e)
         {
-            if (!_windowSettings.FadeOut)
+            if (!WindowSettings.FadeOut)
             {
                 if (!Visible) Visible = true;
                 return;
@@ -260,16 +245,16 @@ namespace TCC.ViewModels.Widgets
         }
         public void UpdateSettings(double left, double top)
         {
-            _windowSettings.Tabs.Clear();
+            WindowSettings.Tabs.Clear();
             //_windowSettings.Tabs.AddRange(Tabs);
-            Tabs.ForEach(t => _windowSettings.Tabs.Add(t.TabInfo));
-            _windowSettings.X = (left + FocusManager.TeraScreen.Bounds.Left) / WindowManager.ScreenSize.Width;
-            _windowSettings.Y = (top + FocusManager.TeraScreen.Bounds.Top) / WindowManager.ScreenSize.Height;
+            Tabs.ForEach(t => WindowSettings.Tabs.Add(t.TabInfo));
+            WindowSettings.X = (left + FocusManager.TeraScreen.Bounds.Left) / WindowManager.ScreenSize.Width;
+            WindowSettings.Y = (top + FocusManager.TeraScreen.Bounds.Top) / WindowManager.ScreenSize.Height;
             Task.Run(() =>
             {
                 var v = App.Settings.ChatWindowsSettings;
-                var s = v.FirstOrDefault(x => x == _windowSettings);
-                if (s == null) v.Add(_windowSettings);
+                var s = v.FirstOrDefault(x => x == WindowSettings);
+                if (s == null) v.Add(WindowSettings);
             });
         }
         public void RefreshHideTimer()
@@ -281,7 +266,7 @@ namespace TCC.ViewModels.Widgets
             _hideTimer.Stop();
             Visible = true;
         }
-        public void LoadTabs(IEnumerable<TabInfo> tabs = null)
+        public void LoadTabs(IEnumerable<TabInfo>? tabs = null)
         {
             if (tabs != null)
             {
@@ -338,13 +323,12 @@ namespace TCC.ViewModels.Widgets
         }
         public void CheckVisibility(IList newItems)
         {
-            if (CurrentTab == null)
-            {
-                CurrentTab = TabVMs[0].Content as Tab;
-            }
-            if (CurrentTab != null && !CurrentTab.Filter(newItems[0] as ChatMessage)) return;
+            CurrentTab ??= TabVMs[0].Content as Tab;
+
+            var chatMessage = (ChatMessage?) newItems[0];
+            if (chatMessage == null) return;
+            if (CurrentTab != null && !CurrentTab.Filter(chatMessage)) return;
             RefreshHideTimer();
-            //VisibilityChanged?.Invoke(true);  // IsChatVisible = true;
             Visible = true;
 
         }

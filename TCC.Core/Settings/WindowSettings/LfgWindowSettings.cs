@@ -5,9 +5,11 @@ namespace TCC.Settings.WindowSettings
 {
     public class LfgWindowSettings : WindowSettingsBase
     {
+        public event Action HideTradeListingsChangedEvent = null!;
+
         private bool _hideTradeListings;
-        public event Action HideTradeListingsChangedEvent;
         private int _minLevel;
+        private int _maxLevel;
 
         public int MinLevel
         {
@@ -21,8 +23,6 @@ namespace TCC.Settings.WindowSettings
                 if (value > _maxLevel) MaxLevel = value;
             }
         }
-        private int _maxLevel;
-
         public int MaxLevel
         {
             get => _maxLevel;
@@ -35,7 +35,6 @@ namespace TCC.Settings.WindowSettings
                 if (value < _minLevel) MinLevel = value;
             }
         }
-
         public bool HideTradeListings
         {
             get => _hideTradeListings;

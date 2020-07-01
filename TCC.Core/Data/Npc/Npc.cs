@@ -2,12 +2,10 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Input;
 using TCC.Data.Abnormalities;
 using TCC.UI;
 using TCC.Utilities;
-using TCC.ViewModels.Widgets;
 using TeraDataLite;
 
 namespace TCC.Data.NPCs
@@ -18,7 +16,7 @@ namespace TCC.Data.NPCs
         public ICommand Override { get; }
         public ICommand Blacklist { get; }
         public ulong EntityId { get; }
-        private string _name;
+        private string _name = "";
         public string Name
         {
             get => _name;
@@ -161,7 +159,7 @@ namespace TCC.Data.NPCs
         public Species Species { get; set; }
 
         public EnragePattern EnragePattern { get; set; }
-        public TimerPattern TimerPattern { get; set; }
+        public TimerPattern? TimerPattern { get; set; }
 
         public void AddorRefresh(Abnormality ab, uint duration, int stacks)
         {
@@ -236,7 +234,7 @@ namespace TCC.Data.NPCs
         //    }
 
         //}
-        public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern ep = null, TimerPattern tp = null)
+        public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern? ep = null, TimerPattern? tp = null)
         {
             Dispatcher = WindowManager.ViewModels.NpcVM.GetDispatcher();
             _buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
@@ -253,11 +251,11 @@ namespace TCC.Data.NPCs
             EnragePattern = ep ?? new EnragePattern(10, 36);
             TimerPattern = tp;
             TimerPattern?.SetTarget(this);
-            if (IsPhase1Dragon)
-            {
-                _shieldDuration = new Timer { Interval = NpcWindowViewModel.Ph1ShieldDuration * 1000 };
-                _shieldDuration.Elapsed += ShieldFailed;
-            }
+            //if (IsPhase1Dragon)
+            //{
+            //    _shieldDuration = new Timer { Interval = NpcWindowViewModel.Ph1ShieldDuration * 1000 };
+            //    _shieldDuration.Elapsed += ShieldFailed;
+            //}
             Override = new RelayCommand(ex =>
             {
                 Game.DB.MonsterDatabase.ToggleOverride(ZoneId, TemplateId, !IsBoss);
@@ -279,9 +277,9 @@ namespace TCC.Data.NPCs
         public void Dispose()
         {
             foreach (var buff in _buffs) buff.Dispose();
-            if (_shieldDuration != null) _shieldDuration.Elapsed -= ShieldFailed;
+            //if (_shieldDuration != null) _shieldDuration.Elapsed -= ShieldFailed;
 
-            _shieldDuration?.Dispose();
+            //_shieldDuration?.Dispose();
             TimerPattern?.Dispose();
             DeleteEvent?.Invoke();
         }
@@ -291,7 +289,7 @@ namespace TCC.Data.NPCs
 
         //////////////////SHIELD////////////////////////
         //TODO: make this a separate class
-        private readonly Timer _shieldDuration;
+        //private readonly Timer _shieldDuration;
 
         private ShieldStatus _shield = ShieldStatus.Off;
         public ShieldStatus Shield
@@ -331,14 +329,16 @@ namespace TCC.Data.NPCs
             }
         }
 
+/*
         private void ShieldFailed(object sender, EventArgs e)
         {
-            _shieldDuration.Stop();
+            //_shieldDuration.Stop();
             Shield = ShieldStatus.Failed;
         }
+*/
         public void BreakShield()
         {
-            _shieldDuration.Stop();
+            //_shieldDuration.Stop();
             Shield = ShieldStatus.Broken;
             Task.Delay(5000).ContinueWith(t =>
             {
@@ -347,11 +347,11 @@ namespace TCC.Data.NPCs
         }
         public void StartShield()
         {
-            _shieldDuration.Start();
+            //_shieldDuration.Start();
             Shield = ShieldStatus.On;
         }
 
-        public event Action DeleteEvent;
+        public event Action DeleteEvent = null!;
         public void Delete()
         {
             foreach (var buff in _buffs) buff.Dispose();

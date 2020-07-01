@@ -41,10 +41,10 @@ namespace TCC.UI.Windows.Widgets
     }
     public class NotificationInfoBase : TSPropertyChanged
     {
-        public event Action Disposed;
-        public event Action<int> Disposing;
+        public event Action Disposed = null!;
+        public event Action<int> Disposing = null!;
 
-        private string _message;
+        private string _message = "";
         private NotificationType _notificationType;
 
         public int Id { get; }

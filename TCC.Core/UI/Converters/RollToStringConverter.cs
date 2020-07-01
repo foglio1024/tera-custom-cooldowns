@@ -6,7 +6,7 @@ namespace TCC.UI.Converters
 {
     public class RollToStringConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return (int?) value switch
             {

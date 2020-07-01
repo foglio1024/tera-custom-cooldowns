@@ -16,7 +16,7 @@ namespace TCC.Publisher.ViewModels.Steps
             }
         }
 
-        private string _versionCheckLabel;
+        private string _versionCheckLabel = "";
         public string VersionCheckLabel
         {
             get => _versionCheckLabel;
@@ -52,7 +52,7 @@ namespace TCC.Publisher.ViewModels.Steps
             }
         }
 
-        private string _compressionLabel;
+        private string _compressionLabel = "";
         public string CompressionLabel
         {
             get => _compressionLabel;
@@ -75,7 +75,7 @@ namespace TCC.Publisher.ViewModels.Steps
             Logger.WriteLine("    Compressing release...");
             var sw = new Stopwatch();
             sw.Start();
-            await Publisher.CompressRelease();
+            await Publisher.Instance.CompressRelease();
             sw.Stop();
             Logger.WriteLine("    Release compressed.");
             Logger.WriteLine("-------------");
@@ -84,7 +84,7 @@ namespace TCC.Publisher.ViewModels.Steps
             CompressionDone = true;
             VM.Progress = 3.8 / 0.07;
             Logger.WriteLine("    Updating version check file...");
-            Publisher.UpdateVersionCheckFile();
+            Publisher.Instance.UpdateVersionCheckFile();
             Logger.WriteLine("    Version check file updated.");
             Logger.WriteLine("-------------");
 

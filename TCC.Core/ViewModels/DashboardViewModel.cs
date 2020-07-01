@@ -39,17 +39,17 @@ namespace TCC.ViewModels
         /* -- Fields ----------------------------------------------- */
 
         private bool _discardFirstVanguardPacket = true;
-        private ICollectionViewLiveShaping _sortedColumns;
-        private ObservableCollection<DungeonColumnViewModel> _columns;
-        private Character _selectedCharacter;
-        private object _lock = new object();
+        private ICollectionViewLiveShaping? _sortedColumns;
+        private ObservableCollection<DungeonColumnViewModel>? _columns;
+        private Character? _selectedCharacter;
+        private readonly object _lock = new object();
         private readonly Timer _tabFlushTimer;
         private readonly List<Dictionary<uint, ItemAmount>> _pendingTabs;
 
         /* -- Properties ------------------------------------------- */
 
-        public Character CurrentCharacter => Game.Account.CurrentCharacter;
-        public Character SelectedCharacter
+        public Character? CurrentCharacter => Game.Account.CurrentCharacter;
+        public Character? SelectedCharacter
         {
             get => _selectedCharacter;
             set
@@ -75,7 +75,7 @@ namespace TCC.ViewModels
                     new[] { new SortDescription($"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
             }
         }
-        public ICollectionViewLiveShaping SelectedCharacterInventory { get; set; }
+        public ICollectionViewLiveShaping? SelectedCharacterInventory { get; set; }
         public ICollectionViewLiveShaping CharacterViewModelsView { get; set; }
 
         public ObservableCollection<InventoryItem> InventoryViewList
@@ -145,15 +145,15 @@ namespace TCC.ViewModels
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (Character item in e.NewItems)
+                    foreach (Character? item in e.NewItems)
                     {
-                        _characters.Add(item);
+                        if (item != null) _characters.Add(item);
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (Character item in e.OldItems)
+                    foreach (Character? item in e.OldItems)
                     {
-                        _characters.Remove(item);
+                        if (item != null) _characters.Remove(item);
                     }
                     break;
                 case NotifyCollectionChangedAction.Reset:
@@ -192,19 +192,14 @@ namespace TCC.ViewModels
                     {
                         App.BaseDispatcher.InvokeAsync(() =>
                         {
-                            var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
+                            var dvc = new DungeonColumnViewModel(dungeon);
                             CharacterViewModels?.ToList().ForEach(charVm =>
                             {
-                                //if (charVm.Character.Hidden) return;
-                                dvc.DungeonsList.Add(
-                                    new DungeonCooldownViewModel
-                                    {
-                                        Owner = charVm.Character,
-                                        Cooldown = charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x =>
-                                            x.Dungeon.Id == dungeon.Id)
-                                    });
+                                dvc.DungeonsList.Add(new DungeonCooldownViewModel(
+                                    charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id),
+                                    charVm.Character));
                             });
-                            _columns.Add(dvc);
+                            _columns?.Add(dvc);
                         }, DispatcherPriority.Background);
                     });
                 });
@@ -217,7 +212,7 @@ namespace TCC.ViewModels
             Game.Account.Characters.ToList().ForEach(c =>
             {
                 _characters.Add(c);
-                CharacterViewModels.Add(new CharacterViewModel {Character = c});
+                CharacterViewModels.Add(new CharacterViewModel(c));
             });
 
             Game.Account.Characters.CollectionChanged += SyncViewModel;
@@ -254,7 +249,7 @@ namespace TCC.ViewModels
         {
             try
             {
-                CurrentCharacter.Inventory.Clear();
+                CurrentCharacter?.Inventory.Clear();
                 Dispatcher.InvokeAsync(() =>
                 {
                     lock (_lock)
@@ -263,13 +258,13 @@ namespace TCC.ViewModels
                         {
                             foreach (var keyVal in pendingTab)
                             {
-                                var existing = CurrentCharacter.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
+                                var existing = CurrentCharacter?.Inventory.FirstOrDefault(x => x.Item.Id == keyVal.Value.Id);
                                 if (existing != null)
                                 {
                                     existing.Amount = keyVal.Value.Amount;
                                     continue;
                                 }
-                                CurrentCharacter.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
+                                CurrentCharacter?.Inventory.Add(new InventoryItem(keyVal.Key, keyVal.Value.Id, keyVal.Value.Amount));
                             }
                         }
                         _pendingTabs.Clear();
@@ -394,7 +389,7 @@ namespace TCC.ViewModels
         {
             try
             {
-                ((ICollectionView)SelectedCharacterInventory)?.Free();
+                ((ICollectionView?)SelectedCharacterInventory)?.Free();
 
                 SelectedCharacter = character;
                 SelectedCharacterInventory = CollectionViewFactory.CreateLiveCollectionView(character.Inventory,
@@ -736,11 +731,11 @@ namespace TCC.ViewModels
                 CurrentCharacter.Buffs?.Clear();
                 Game.Me.Buffs?.ToList().ForEach(b =>
                 {
-                    CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
+                    CurrentCharacter?.Buffs?.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
                 });
                 Game.Me.Debuffs?.ToList().ForEach(b =>
                 {
-                    CurrentCharacter.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
+                    CurrentCharacter?.Buffs?.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
                 });
             });
         }
@@ -765,40 +760,38 @@ namespace TCC.ViewModels
 
         public void RefreshDungeons()
         {
-            _columns.Clear();
+            _columns?.Clear();
             Task.Factory.StartNew(() =>
             {
                 Game.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
                 {
                     App.BaseDispatcher.InvokeAsync(() =>
                     {
-                        var dvc = new DungeonColumnViewModel() { Dungeon = dungeon };
+                        var dvc = new DungeonColumnViewModel(dungeon);
                         CharacterViewModels?.ToList().ForEach(charVm =>
                         {
-                            //if (charVm.Character.Hidden) return;
-                            dvc.DungeonsList.Add(
-                                new DungeonCooldownViewModel
-                                {
-                                    Owner = charVm.Character,
-                                    Cooldown = charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x =>
-                                        x.Dungeon.Id == dungeon.Id)
-                                });
-                        });
-                        _columns.Add(dvc);
-                    }, DispatcherPriority.Background);
-                });
+                        //if (charVm.Character.Hidden) return;
+                        dvc.DungeonsList.Add(
+                            new DungeonCooldownViewModel(
+                                charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id),
+                                charVm.Character
+                        ));
+                    });
+                    _columns?.Add(dvc);
+                }, DispatcherPriority.Background);
             });
+        });
         }
 
-        public void SetGuildBamTime(bool force)
+    public void SetGuildBamTime(bool force)
+    {
+        foreach (var eg in EventGroups.ToSyncList().Where(x => x.RemoteCheck))
         {
-            foreach (var eg in EventGroups.ToSyncList().Where(x => x.RemoteCheck))
+            foreach (var ev in eg.Events.ToSyncList())
             {
-                foreach (var ev in eg.Events.ToSyncList())
-                {
-                    ev.UpdateFromServer(force);
-                }
+                ev.UpdateFromServer(force);
             }
         }
     }
+}
 }

@@ -10,7 +10,7 @@ namespace TCC.UI.Controls.Chat
     public partial class ChatMessageControl
     {
         private readonly DoubleAnimation _anim;
-        private ChatMessage _dc;
+        private ChatMessage? _dc;
         public ChatMessageControl()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace TCC.UI.Controls.Chat
             _dc = null;
         }
 
-        private void AnimCompleted(object sender, EventArgs e)
+        private void AnimCompleted(object? sender, EventArgs e)
         {
             SetAnimated();
         }

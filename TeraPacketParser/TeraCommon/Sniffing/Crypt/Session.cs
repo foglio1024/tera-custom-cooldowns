@@ -6,14 +6,14 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
 {
     public class Session
     {
-        private static Session _instance;
+        private static Session? _instance;
         public byte[] ClientKey1 = new byte[128];
         public byte[] ClientKey2 = new byte[128];
         public byte[] DecryptKey = new byte[128];
-        protected Cryptor Decryptor;
+        protected Cryptor? Decryptor;
 
         public byte[] EncryptKey = new byte[128];
-        protected Cryptor Encryptor;
+        protected Cryptor? Encryptor;
         public byte[] ServerKey1 = new byte[128];
         public byte[] ServerKey2 = new byte[128];
 
@@ -21,17 +21,15 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
         public byte[] TmpKey2 = new byte[128];
 
 
-        private Session()
-        {
-        }
+        private Session() { }
 
-        public static Session Instance => _instance ?? (_instance = new Session());
+        public static Session Instance => _instance ??= new Session();
 
         public void Init(string region)
         {
             //if (region == "KR" || region == "JP" || region == "RU" || region == "EU" || region == "NA")
             //{
-                TmpKey1 = Utils.ShiftKey(ServerKey1, 67);
+            TmpKey1 = Utils.ShiftKey(ServerKey1, 67);
             //}
             //else
             //{
@@ -42,7 +40,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
 
             //if (region == "KR" || region == "JP" || region == "RU" || region == "EU" || region == "NA")
             //{
-                TmpKey1 = Utils.ShiftKey(ClientKey2, 29, false);
+            TmpKey1 = Utils.ShiftKey(ClientKey2, 29, false);
             //}
             //else
             //{
@@ -55,7 +53,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
 
             //if(region == "KR" || region == "JP" || region == "RU" || region == "EU" || region == "NA")
             //{
-                TmpKey1 = Utils.ShiftKey(ServerKey2, 41);
+            TmpKey1 = Utils.ShiftKey(ServerKey2, 41);
             //}
             //else
             //{
@@ -71,12 +69,12 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
 
         public void Encrypt(byte[] data)
         {
-            Encryptor.ApplyCryptor(data, data.Length);
+            Encryptor?.ApplyCryptor(data, data.Length);
         }
 
         public void Decrypt(byte[] data)
         {
-            Decryptor.ApplyCryptor(data, data.Length);
+            Decryptor?.ApplyCryptor(data, data.Length);
         }
     }
 }

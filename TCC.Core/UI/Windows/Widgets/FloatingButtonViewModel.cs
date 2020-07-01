@@ -10,8 +10,8 @@ namespace TCC.UI.Windows.Widgets
 {
     public class FloatingButtonViewModel : TccWindowViewModel
     {
-        public event Action NotificationsAdded;
-        public event Action NotificationsCleared;
+        public event Action NotificationsAdded = null!;
+        public event Action NotificationsCleared = null!;
         private bool _pendingNotifications;
         private int _pendingNotificationsAmount;
         private int _currPP;

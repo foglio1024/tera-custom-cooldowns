@@ -21,7 +21,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         //    (MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly string _filter;
-        private WinPcapDeviceList _devices;
+        private WinPcapDeviceList? _devices;
         private volatile uint _droppedPackets;
         private volatile uint _interfaceDroppedPackets;
         private DateTime _nextCheck;
@@ -113,7 +113,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             _devices = null;
         }
 
-        public event Action<string> Warning;
+        public event Action<string> Warning = null!;
 
         protected virtual void OnWarning(string obj)
         {
@@ -123,13 +123,13 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
         private void device_OnPacketArrival(object sender, CaptureEventArgs e)
         {
-            IPv4Packet ipPacket;
+            IPv4Packet? ipPacket;
             try
             {
                 if (e.Packet.LinkLayerType != LinkLayers.Null)
                 {
                     var linkPacket = Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
-                    ipPacket = linkPacket.PayloadPacket as IPv4Packet;
+                    ipPacket = (IPv4Packet) linkPacket.PayloadPacket;
                 }
                 else
                 {

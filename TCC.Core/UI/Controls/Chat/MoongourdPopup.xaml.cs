@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using TCC.Annotations;
 using TCC.Moongourd;
 
 namespace TCC.UI.Controls.Chat
 {
     public partial class MoongourdPopup : INotifyPropertyChanged
     {
-        private string _playerName;
+        private string _playerName = "";
 
         public MoongourdPopup()
         {
@@ -44,10 +43,9 @@ namespace TCC.UI.Controls.Chat
             mg.GetEncounters(name, region);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged = null!;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void NPC([CallerMemberName] string propertyName = null)
+        protected virtual void NPC([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

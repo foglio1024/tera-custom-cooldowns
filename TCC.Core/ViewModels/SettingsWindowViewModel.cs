@@ -27,11 +27,11 @@ namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : TSPropertyChanged
     {
-        public static event Action ChatShowChannelChanged;
-        public static event Action ChatShowTimestampChanged;
-        public static event Action AbnormalityShapeChanged;
-        public static event Action SkillShapeChanged;
-        public static event Action FontSizeChanged;
+        public static event Action ChatShowChannelChanged = null!;
+        public static event Action ChatShowTimestampChanged = null!;
+        public static event Action AbnormalityShapeChanged = null!;
+        public static event Action SkillShapeChanged = null!;
+        public static event Action FontSizeChanged = null!;
 
         public bool Beta => App.Beta;
         public bool ToolboxMode => App.ToolboxMode;
@@ -660,15 +660,15 @@ namespace TCC.ViewModels
         public IEnumerable<LanguageOverride> LanguageOverrides => EnumUtils.ListFromEnum<LanguageOverride>();
 
 
-        private TSObservableCollection<BlacklistedMonsterVM> _blacklistedMonsters;
+        private TSObservableCollection<BlacklistedMonsterVM>? _blacklistedMonsters;
         private bool _showDebugSettings;
 
         public TSObservableCollection<BlacklistedMonsterVM> BlacklistedMonsters
         {
             get
             {
-                if (_blacklistedMonsters == null) _blacklistedMonsters = new TSObservableCollection<BlacklistedMonsterVM>(Dispatcher);
-                if (Game.DB == null) return null;
+                _blacklistedMonsters ??= new TSObservableCollection<BlacklistedMonsterVM>(Dispatcher);
+                if (Game.DB == null) return _blacklistedMonsters;
                  var bl =Game.DB.MonsterDatabase.GetBlacklistedMonsters();
                 bl.ForEach(m =>
                 {
@@ -726,7 +726,10 @@ namespace TCC.ViewModels
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
 
-            BrowseUrlCommand = new RelayCommand(url => TccUtils.OpenUrl(url.ToString()));
+            BrowseUrlCommand = new RelayCommand(url =>
+            {
+                TccUtils.OpenUrl(url.ToString());
+            });
             RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook.ToString(), true));
             OpenWindowCommand = new RelayCommand(winType =>
             {

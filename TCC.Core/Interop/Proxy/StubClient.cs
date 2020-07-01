@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using TCC.Annotations;
 using TCC.Analysis;
 using TCC.UI;
 
@@ -21,7 +21,7 @@ namespace TCC.Interop.Proxy
         public async Task<bool> PingStub()
         {
             var resp = await TccStub.CallAsync("pingStub");
-            return resp != null && resp.Result.Value<bool>();
+            return resp?.Result != null && resp.Result.Value<bool>();
         }
         public async Task<bool> GetIsModAvailable([NotNull] string modName)
         {
@@ -29,7 +29,7 @@ namespace TCC.Interop.Proxy
             {
                 { "modName", modName }
             });
-            return resp != null && resp.Result.Value<bool>();
+            return resp?.Result != null && resp.Result.Value<bool>();
         }
         public async void RequestPartyInfo(uint id)
         {
@@ -45,7 +45,7 @@ namespace TCC.Interop.Proxy
             {
                 { "listingId", id }
             });
-            return resp != null && resp.Result.Value<bool>();
+            return resp?.Result != null && resp.Result.Value<bool>();
         }
         public async void FriendUser([NotNull] string userName, [NotNull] string message)
         {

@@ -10,8 +10,13 @@
     <LangVersion>8</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>..\TCC.Core\bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>..\TCC.Core\bin\Debug\</OutputPath>
   </PropertyGroup>
@@ -20,7 +25,7 @@
     <OutputPath>..\release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" Visible="False"/>
+    <None Include="App.config" Visible="False" />
   </ItemGroup>
 
 </Project>

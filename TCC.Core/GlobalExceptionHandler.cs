@@ -331,7 +331,7 @@ namespace TCC
             sb.AppendLine($"settings_summary: {js["settings_summary"]}");
             sb.AppendLine($"stats: {js["stats"]}");
             sb.AppendLine($"exception: {js["exception_type"]} {js["exception"]}");
-            sb.AppendLine($"{js["full_exception"].ToString().Replace("\\n", "\n")}");
+            sb.AppendLine($"{js["full_exception"]?.ToString().Replace("\\n", "\n")}");
             if (ex is PacketParseException)
             {
                 sb.AppendLine($"opcode: {js["packet_opcode_name"]}");

@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:DurationCooldownIndicator}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SkillWithEffect}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
         <controls:Arc Width="58" 
                    Height="58" 
@@ -43,7 +43,7 @@
                 Margin="0,-4,2,0"
                 Padding="4,0">
             <TextBlock Foreground="#d000" 
-                       Text="{Binding Buff.Seconds}"
+                       Text="{Binding Effect.Seconds}"
                        TextAlignment="Center"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"

@@ -6,15 +6,13 @@ namespace TCC.Data
 {
     public class BaseStackBuffTracker : TSPropertyChanged
     {
-        public event Action BuffEnded;
-        public event Action<int> BaseStacksChanged;
-        public event Action<long> BaseBuffStarted;
-        public event Action<long> BaseBuffRefreshed;
-        public event Action<long> EmpoweredBuffStarted;
+        public event Action BuffEnded = null!;
+        public event Action<int> BaseStacksChanged = null!;
+        public event Action<long> BaseBuffStarted = null!;
+        public event Action<long> BaseBuffRefreshed = null!;
+        public event Action<long> EmpoweredBuffStarted = null!;
 
         public static bool IsEmpoweredBuffRunning { get; set; }
-
-        public string Icon { get; protected set; }
 
         private int _stacks;
         public int Stacks
@@ -29,7 +27,7 @@ namespace TCC.Data
             }
         }
 
-        public BaseStackBuffTracker()
+        protected BaseStackBuffTracker()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
         }

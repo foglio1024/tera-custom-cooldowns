@@ -14,7 +14,7 @@ namespace TCC.Data
         public Keys Key { get; set; }
         public ModifierKeys Modifier { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (!(obj is HotKey other)) return false;
             return other.Key == Key && other.Modifier == Modifier;

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Nostrum.Controls;
+using Nostrum.Factories;
 using TCC.Data;
 using TCC.ViewModels.Widgets;
 
@@ -11,14 +12,15 @@ namespace TCC.UI.Controls.NPCs
 {
     public partial class DragonControl
     {
-        private Data.NPCs.NPC _dc;
-        private DoubleAnimation _shieldArcAn;
+        private Data.NPCs.NPC? _dc;
+        private readonly DoubleAnimation _shieldArcAn;
+        private readonly DoubleAnimation _enrageEndAnim;
 
         public DragonControl()
         {
             InitializeComponent();
-            _shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(NpcWindowViewModel.Ph1ShieldDuration));
-
+            _shieldArcAn = AnimationFactory.CreateDoubleAnimation(NpcWindowViewModel.Ph1ShieldDuration, from:0, to: 359.99);
+            _enrageEndAnim = AnimationFactory.CreateDoubleAnimation(0, from: 359.99, to: 0);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -26,10 +28,10 @@ namespace TCC.UI.Controls.NPCs
             _dc = (Data.NPCs.NPC)DataContext;
             _dc.PropertyChanged += Dc_PropertyChanged;
             _dc.DeleteEvent += Dc_DeleteEvent;
-            EnrageLine.LayoutTransform = _dc.CurrentPercentage > _dc.EnragePattern.Percentage ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);
-
+            EnrageLine.LayoutTransform = _dc.CurrentPercentage > _dc.EnragePattern.Percentage 
+                ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) 
+                : new RotateTransform(0);
         }
-
         private void Dc_DeleteEvent()
         {
             if (_dc == null) return;
@@ -38,7 +40,6 @@ namespace TCC.UI.Controls.NPCs
 
             Dispatcher?.Invoke(() =>
             {
-
                 try
                 {
                     WindowManager.ViewModels.NpcVM.RemoveNPC(_dc, 0);
@@ -49,38 +50,33 @@ namespace TCC.UI.Controls.NPCs
                 }
             });
         }
-
         private void Dc_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_dc.Shield))
+            if (_dc == null) return;
+            switch (e.PropertyName)
             {
-                if (_dc.Shield == ShieldStatus.On)
-                {
-                    _shieldArcAn = new DoubleAnimation(0, 359.99, TimeSpan.FromSeconds(NpcWindowViewModel.Ph1ShieldDuration));
+                case nameof(_dc.Shield) when _dc.Shield == ShieldStatus.On:
                     ShieldArc.BeginAnimation(Arc.EndAngleProperty, _shieldArcAn);
-                }
-                else
-                {
+                    break;
+                case nameof(_dc.Shield):
                     _shieldArcAn.BeginTime = null;
                     ShieldArc.BeginAnimation(Arc.EndAngleProperty, _shieldArcAn);
-                }
-            }
-            else if (e.PropertyName == nameof(_dc.Enraged))
-            {
-                if (_dc.Enraged)
-                {
-                    EnrageArc.BeginAnimation(Arc.EndAngleProperty, new DoubleAnimation(359.99, 0, TimeSpan.FromSeconds(_dc.EnragePattern.Duration)));
-                }
-                else
-                {
+                    break;
+                case nameof(_dc.Enraged) when _dc.Enraged:
+                    _enrageEndAnim.Duration = TimeSpan.FromMilliseconds(_dc.EnragePattern.Duration);
+                    EnrageArc.BeginAnimation(Arc.EndAngleProperty, _enrageEndAnim);
+                    break;
+                case nameof(_dc.Enraged):
                     EnrageLine.LayoutTransform = _dc.CurrentPercentage > _dc.EnragePattern.Percentage ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);
-                }
-            }
-            else if (e.PropertyName == nameof(_dc.CurrentHP))
-            {
-                if (_dc.Enraged)
+                    break;
+                case nameof(_dc.CurrentHP):
                 {
-                    EnrageLine.LayoutTransform = new RotateTransform(_dc.HPFactor * 359.9);
+                    if (_dc.Enraged)
+                    {
+                        EnrageLine.LayoutTransform = new RotateTransform(_dc.HPFactor * 359.9);
+                    }
+
+                    break;
                 }
             }
         }

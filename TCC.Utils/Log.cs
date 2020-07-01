@@ -7,8 +7,8 @@ namespace TCC.Utils
 {
     public static class Log
     {
-        public static event Action<ChatChannel, string, string> NewChatMessage;
-        public static event Func<string, string, NotificationType, int, NotificationTemplate, int, int> NewNotification;
+        public static event Action<ChatChannel, string, string>? NewChatMessage;
+        public static event Func<string, string, NotificationType, int, NotificationTemplate, int, int>? NewNotification;
 
         private static string _logPath = "logs";
         private static string _version = "";

@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              MouseEnter="UserControl_MouseEnter"
              MouseLeave="UserControl_MouseLeave"
-             Loaded="ControlLoaded" d:DataContext="{d:DesignData DailyEvent}">
+             d:DataContext="{d:DesignData DailyEvent}">
     <StackPanel Orientation="Horizontal" Margin="1,1,0,1" Opacity="1">
         <FrameworkElement Width="1100" >
             <FrameworkElement.LayoutTransform>

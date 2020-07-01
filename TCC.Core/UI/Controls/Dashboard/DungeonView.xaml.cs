@@ -1,21 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Nostrum.Extensions;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Nostrum;
-using Nostrum.Extensions;
-using Nostrum.Factories;
-using TCC.Data;
-using TCC.Data.Pc;
 using TCC.UI.Windows;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    /// <summary>
-    /// Logica di interazione per DungeonView.xaml
-    /// </summary>
     public partial class DungeonView
     {
         public DungeonView()
@@ -62,78 +54,4 @@ namespace TCC.UI.Controls.Dashboard
             new DungeonEditWindow() { Topmost = true, Owner = WindowManager.DashboardWindow }.ShowDialog();
         }
     }
-
-    public class DungeonColumnViewModel : TSPropertyChanged
-    {
-        private bool _hilight;
-        private Dungeon _dungeon;
-
-        public Dungeon Dungeon
-        {
-            get => _dungeon;
-            set
-            {
-                if(_dungeon == value)return;
-                if(_dungeon != null) _dungeon.PropertyChanged -= OnDungeonPropertyChanged;
-                _dungeon = value;
-                _dungeon.PropertyChanged += OnDungeonPropertyChanged;
-            }
-        }
-
-        private void OnDungeonPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if(e.PropertyName == nameof(Dungeon.Show)) N(nameof(IsVisible));
-        }
-
-        public TSObservableCollection<DungeonCooldownViewModel> DungeonsList { get; private set; }
-        public ICollectionViewLiveShaping DungeonsListView { get; }
-        public ICommand RemoveDungeonCommand { get; }
-        public bool IsVisible => Dungeon.Show;
-        public bool Hilight
-        {
-            get => _hilight;
-            set
-            {
-                if (_hilight == value) return;
-                _hilight = value;
-                N();
-            }
-        }
-
-        public DungeonColumnViewModel()
-        {
-            DungeonsList = new TSObservableCollection<DungeonCooldownViewModel>();
-            DungeonsListView = CollectionViewFactory.CreateLiveCollectionView(DungeonsList,
-                o => !o.Owner.Hidden,
-                new[] { $"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}" }, 
-                new[] { new SortDescription($"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
-            RemoveDungeonCommand = new RelayCommand(_ => Dungeon.Show = false);
-        }
-    }
-
-    public class DungeonCooldownViewModel : TSPropertyChanged
-    {
-        public DungeonCooldownData Cooldown { get; set; }
-        public Character Owner { get; set; }
-    }
-
-    public class CharacterViewModel : TSPropertyChanged
-    {
-        private bool _hilight;
-
-        public bool Hilight
-        {
-            get => _hilight;
-            set
-            {
-                if (_hilight == value) return;
-                _hilight = value;
-                N();
-            }
-        }
-        public Character Character { get; set; }
-
-    }
-
-
 }

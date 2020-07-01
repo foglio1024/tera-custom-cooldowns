@@ -7,14 +7,13 @@ namespace TCC.UI.Converters
 {
     public class MoneyAmountToVisibilityConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
-            // ReSharper disable once PossibleNullReferenceException
-            var amount = (long)value;
+            var amount = (long)(value ?? 0);
             return amount == 0 ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }

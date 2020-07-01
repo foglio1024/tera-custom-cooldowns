@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:data="clr-namespace:TCC.Data"
-             mc:Ignorable="d" Loaded="UserControl_Loaded" Opacity="1" d:DataContext="{d:DesignInstance data:DungeonCooldown}">
+             mc:Ignorable="d" 
+             Opacity="1" d:DataContext="{d:DesignInstance data:DungeonCooldown}">
     <Border  Margin="2" Padding="0" CornerRadius="2" Width="Auto" Height="Auto" x:Name="RootBorder">
         <Grid >
             <Grid.RowDefinitions>

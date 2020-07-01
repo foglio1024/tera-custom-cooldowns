@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using TCC.Utils;
 
 namespace TCC.Interop.Proxy
 {
     public class StubInterface
     {
-        private static StubInterface _instance;
+        private static StubInterface? _instance;
         public static StubInterface Instance => _instance ?? new StubInterface();
 
         public readonly StubClient StubClient;
@@ -31,7 +32,11 @@ namespace TCC.Interop.Proxy
 
             if (!App.Settings.EnableProxy) return;
             IsStubAvailable = await StubClient.PingStub();
-            if (!IsStubAvailable) return;
+            if (!IsStubAvailable)
+            {
+                Log.F("Stub not found");
+                return;
+            }
             StubClient.Initialize();
             StubServer.Start();
             IsFpsModAvailable = await StubClient.GetIsModAvailable("fps-utils") || await StubClient.GetIsModAvailable("fps-manager");
