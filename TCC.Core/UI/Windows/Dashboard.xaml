@@ -200,7 +200,8 @@
                         <MenuItem Header="Unhide character" ItemsSource="{Binding HiddenCharacters}">
                             <MenuItem.ItemContainerStyle>
                                 <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
-                                    <Setter Property="Command" Value="{Binding CurrentCharacter.UnhideCommand}" />
+                                    <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                                    <Setter Property="Command" Value="{Binding UnhideCommand}" />
                                 </Style>
                             </MenuItem.ItemContainerStyle>
                             <MenuItem.ItemTemplate>
