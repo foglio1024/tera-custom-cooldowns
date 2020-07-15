@@ -106,6 +106,8 @@ namespace TCC
 
         private static async Task Setup()
         {
+            TccUtils.SetAlignment();
+
             NoticeChecker.Init();
 
             TccSplashScreen.InitOnNewThread();

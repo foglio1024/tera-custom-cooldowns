@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Media;
 using Nostrum;
 using Nostrum.Extensions;
@@ -331,6 +332,15 @@ namespace TCC.Utilities
                 ChatChannel.ReceivedWhisper => "Whisper",
                 _ => ch.ToString()
             };
+        }
+
+        public static void SetAlignment()
+        {
+            var ifLeft = SystemParameters.MenuDropAlignment;
+            if (!ifLeft) return;
+            var t = typeof(SystemParameters);
+            var field = t.GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
+            if (field != null) field.SetValue(null, false);
         }
     }
 }
