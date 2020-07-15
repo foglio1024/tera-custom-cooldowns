@@ -23,8 +23,6 @@ namespace TCC.UI.Controls
                 _connected = value;
 
                 _trayIcon.Icon = _connected ? _connectedIcon : _defaultIcon;
-
-
             }
         }
         public string Text

@@ -1,6 +1,7 @@
-﻿using Nostrum;
+﻿using Newtonsoft.Json;
+using Nostrum;
 using Nostrum.Extensions;
-using Newtonsoft.Json;
+using Nostrum.Factories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,13 +13,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using Nostrum.Factories;
+using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
-using TCC.Analysis;
 using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
@@ -45,6 +46,8 @@ namespace TCC.ViewModels
         private readonly object _lock = new object();
         private readonly Timer _tabFlushTimer;
         private readonly List<Dictionary<uint, ItemAmount>> _pendingTabs;
+        private bool _showDetails;
+
 
         /* -- Properties ------------------------------------------- */
 
@@ -171,9 +174,54 @@ namespace TCC.ViewModels
                 return _columns;
             }
         }
-        public RelayCommand LoadDungeonsCommand { get; }
+        public ICommand LoadDungeonsCommand { get; }
+        public ICommand OpenMergedInventoryCommand { get; }
+        public ICommand RemoveCharacterCommand { get; }
+        public ICommand HideDetailsCommand { get; }
+
+        public bool ShowDetails
+        {
+            get => _showDetails;
+            set
+            {
+                if (_showDetails == value) return;
+                _showDetails = value;
+                if (!value)
+                {
+                    InventoryFilter = "";
+                }
+                N();
+            }
+        }
+
+        public string InventoryFilter
+        {
+            get => _inventoryFilter;
+            set
+            {
+                if(_inventoryFilter == value) return;
+                _inventoryFilter = value;
+                FilterInventory();
+                N();
+            }
+        }
+        private void FilterInventory()
+        {
+            var view = (ICollectionView?)SelectedCharacterInventory;
+            if (view == null) return;
+            view.Filter = o =>
+            {
+                var item = ((InventoryItem)o).Item;
+                var name = item.Name;
+                return name.IndexOf(InventoryFilter, StringComparison.InvariantCultureIgnoreCase) != -1;
+            };
+            view.Refresh();
+        }
+
         /* -- Constructor ------------------------------------------ */
         bool _loaded;
+        private string _inventoryFilter;
+
         public DashboardViewModel(WindowSettingsBase settings) : base(settings)
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.DashboardHotkey, OnShowDashboardHotkeyPressed);
@@ -205,7 +253,25 @@ namespace TCC.ViewModels
                 });
                 _loaded = true;
             }, c => !_loaded);
-
+            OpenMergedInventoryCommand = new RelayCommand(_ =>
+            {
+                new MergedInventoryWindow
+                {
+                    Topmost = true,
+                    Owner = WindowManager.DashboardWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                }.ShowDialog();
+            });
+            RemoveCharacterCommand = new RelayCommand(_ =>
+            {
+                ShowDetails = false;
+                if (SelectedCharacter == null) return;
+                SelectedCharacter.Hidden = true;
+            });
+            HideDetailsCommand = new RelayCommand(_ =>
+            {
+                ShowDetails = false;
+            });
 
             LoadCharacters();
 
@@ -399,7 +465,8 @@ namespace TCC.ViewModels
                         new SortDescription($"{nameof(Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending)
                     });
 
-                WindowManager.DashboardWindow.ShowDetails();
+                //WindowManager.DashboardWindow.ShowDetails();
+                ShowDetails = true;
                 Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
             }
             catch (Exception e)
@@ -540,6 +607,7 @@ namespace TCC.ViewModels
         public TSObservableCollection<EventGroup> EventGroups { get; }
         public TSObservableCollection<TimeMarker> Markers { get; }
         public TSObservableCollection<DailyEvent> SpecialEvents { get; }
+
 
         public void LoadEvents(DayOfWeek today, string region)
         {
@@ -770,28 +838,28 @@ namespace TCC.ViewModels
                         var dvc = new DungeonColumnViewModel(dungeon);
                         CharacterViewModels?.ToList().ForEach(charVm =>
                         {
-                        //if (charVm.Character.Hidden) return;
-                        dvc.DungeonsList.Add(
-                            new DungeonCooldownViewModel(
-                                charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id),
-                                charVm.Character
-                        ));
-                    });
-                    _columns?.Add(dvc);
-                }, DispatcherPriority.Background);
+                            //if (charVm.Character.Hidden) return;
+                            dvc.DungeonsList.Add(
+                                new DungeonCooldownViewModel(
+                                    charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id),
+                                    charVm.Character
+                            ));
+                        });
+                        _columns?.Add(dvc);
+                    }, DispatcherPriority.Background);
+                });
             });
-        });
         }
 
-    public void SetGuildBamTime(bool force)
-    {
-        foreach (var eg in EventGroups.ToSyncList().Where(x => x.RemoteCheck))
+        public void SetGuildBamTime(bool force)
         {
-            foreach (var ev in eg.Events.ToSyncList())
+            foreach (var eg in EventGroups.ToSyncList().Where(x => x.RemoteCheck))
             {
-                ev.UpdateFromServer(force);
+                foreach (var ev in eg.Events.ToSyncList())
+                {
+                    ev.UpdateFromServer(force);
+                }
             }
         }
     }
-}
 }
