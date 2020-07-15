@@ -11,7 +11,7 @@
     <LangVersion>8</LangVersion>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <Version>1.4.97</Version>
+    <Version>1.4.98</Version>
     <Description>TERA Custom Cooldowns</Description>
     <PackageIcon>tcc.ico</PackageIcon>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
