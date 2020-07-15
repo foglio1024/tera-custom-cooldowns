@@ -132,9 +132,9 @@ namespace TCC.Utilities
             return RegionEnum.EU;
         }
 
-        public static TClassLayoutVM CurrentClassVM<TClassLayoutVM>() where TClassLayoutVM : BaseClassLayoutVM
+        public static TClassLayoutVM? CurrentClassVM<TClassLayoutVM>() where TClassLayoutVM : BaseClassLayoutVM
         {
-            return (TClassLayoutVM) WindowManager.ViewModels.ClassVM.CurrentManager;
+            return WindowManager.ViewModels.ClassVM.CurrentManager is TClassLayoutVM ret ? ret : null;
         }
 
         public static Race RaceFromTemplateId(int templateId)
@@ -155,7 +155,7 @@ namespace TCC.Utilities
         public static string GetTccVersion()
         {
             var v = Assembly.GetExecutingAssembly().GetName().Version;
-            if(v == null) throw new InvalidOperationException("Unable to retrieve TCC version.");
+            if (v == null) throw new InvalidOperationException("Unable to retrieve TCC version.");
             return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Beta ? "-b" : "")}";
 
         }
@@ -229,7 +229,7 @@ namespace TCC.Utilities
 
             // reopen stdout
             TextWriter writer = new StreamWriter(Console.OpenStandardOutput())
-                { AutoFlush = true };
+            { AutoFlush = true };
             Console.SetOut(writer);
         }
 
