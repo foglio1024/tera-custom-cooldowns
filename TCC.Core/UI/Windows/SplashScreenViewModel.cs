@@ -55,24 +55,31 @@ namespace TCC.UI.Windows
 
         public bool Answer { get; private set; }
 
-        public ImageSource Image { get; }
+        public ImageSource Image { get; } = new BitmapImage();
 
         public ICommand OkCommand { get; }
         public ICommand NoCommand { get; }
 
         public SplashScreenViewModel()
         {
-            var bm = new BitmapImage();
             try
             {
+                var bm = new BitmapImage();
                 var path = Path.Combine(App.ResourcesPath, $"images/splash/{App.Random.Next(1, 15)}.jpg");
-                bm.BeginInit();
-                bm.UriSource = new Uri(App.FI ? "pack://application:,,,/resources/images/10kdays.jpg" : path, UriKind.Absolute);
-                bm.CacheOption = BitmapCacheOption.OnLoad;
-                bm.EndInit();
+                if (File.Exists(path))
+                {
+                    bm.BeginInit();
+                    bm.UriSource = new Uri(App.FI ? "pack://application:,,,/resources/images/10kdays.jpg" : path,
+                        UriKind.Absolute);
+                    bm.CacheOption = BitmapCacheOption.OnLoad;
+                    bm.EndInit();
+                    Image = bm;
+                }
             }
-            catch { }
-            Image = bm;
+            catch
+            {
+
+            }
 
             OkCommand = new RelayCommand(args =>
             {
