@@ -1325,7 +1325,7 @@
                    PopupAnimation="Slide"
                    AllowsTransparency="True"
                    MouseLeave="LfgPopup_OnMouseLeave"
-                   Placement="Left"
+                   Placement="Right"
                    HorizontalOffset="15">
                 <Grid Margin="10">
                     <Border Background="{StaticResource RevampDarkerBackgroundBrush}"

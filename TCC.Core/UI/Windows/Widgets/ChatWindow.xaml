@@ -469,7 +469,7 @@
             </Grid>
         </dockablz:Layout>
         <!-- Settings popup-->
-        <controls:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Left" x:Name="SettingsPopup"
+        <controls:TccPopup MouseLeaveTolerance="30" Grid.Row="0" Placement="Right" x:Name="SettingsPopup"
                            Focusable="True"
                            HorizontalOffset="-10"
                            AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}"
