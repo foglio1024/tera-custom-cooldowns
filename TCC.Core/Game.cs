@@ -23,6 +23,7 @@ using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
+using TeraPacketParser;
 using TeraPacketParser.Messages;
 using Player = TCC.Data.Pc.Player;
 using Server = TeraPacketParser.TeraCommon.Game.Server;
@@ -245,6 +246,7 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_FRIEND_LIST>(OnFriendList);
             PacketAnalyzer.Processor.Hook<S_USER_BLOCK_LIST>(OnUserBlockList);
             PacketAnalyzer.Processor.Hook<S_CHAT>(OnChat);
+            PacketAnalyzer.Processor.Hook<S_PRIVATE_CHAT>(OnPrivateChat);
             PacketAnalyzer.Processor.Hook<S_WHISPER>(OnWhisper);
             PacketAnalyzer.Processor.Hook<S_BOSS_GAGE_INFO>(OnBossGageInfo);
             PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
@@ -328,6 +330,38 @@ namespace TCC
                 _ => new AbnormalityTracker() 
             };
         }
+        private static void CheckChatMention(ParsedMessage m)
+        {
+
+            string author = "", txt = "", strCh = "";
+
+            switch (m)
+            {
+                case S_WHISPER w:
+                    txt = ChatUtils.GetPlainText(w.Message).UnescapeHtml();
+                    if (!TccUtils.CheckMention(txt)) return;
+                    author = w.Author;
+                    strCh = TccUtils.ChatChannelToName(ChatChannel.ReceivedWhisper);
+                    break;
+                case S_CHAT c:
+                    txt = ChatUtils.GetPlainText(c.Message).UnescapeHtml();
+                    if (!TccUtils.CheckMention(txt)) return;
+                    author = c.AuthorName;
+                    strCh = TccUtils.ChatChannelToName((ChatChannel)c.Channel);
+                    break;
+                case S_PRIVATE_CHAT p:
+                    txt = ChatUtils.GetPlainText(p.Message).UnescapeHtml();
+                    if (!TccUtils.CheckMention(txt)) return;
+                    author = p.AuthorName;
+                    strCh = TccUtils.ChatChannelToName((ChatChannel)p.Channel);
+                    break;
+
+            }
+
+
+            TccUtils.CheckWindowNotify(txt, $"{author} - {strCh}");
+            TccUtils.CheckDiscordNotify($"`{strCh}` {txt}", author);
+        }
 
         #region Hooks
 
@@ -408,11 +442,9 @@ namespace TCC
         private static void OnWhisper(S_WHISPER p)
         {
             if (p.Recipient != Me.Name) return;
-            var txt = ChatUtils.GetPlainText(p.Message).UnescapeHtml();
-            var chStr = TccUtils.ChatChannelToName(ChatChannel.ReceivedWhisper);
-            TccUtils.CheckWindowNotify(txt, $"{p.Author} - {chStr}");
-            TccUtils.CheckDiscordNotify($"`{chStr}` {txt}", p.Author);
+            CheckChatMention(p);
         }
+
         private static void OnChat(S_CHAT m)
         {
             #region Greet meme
@@ -422,7 +454,7 @@ namespace TCC
                 Log.N("owo", SR.GreetMemeContent, NotificationType.Success, 3000);
             #endregion
 
-            #region Global selling angery
+            #region Global trade angery
             if (m.AuthorName == Me.Name)
             {
                 if ((ChatChannel)m.Channel != ChatChannel.Global) return;
@@ -436,14 +468,14 @@ namespace TCC
             #endregion
 
             if (BlockList.Contains(m.AuthorName)) return;
-            if (!TccUtils.CheckMention(ChatUtils.GetPlainText(m.Message))) return;
 
-            var txt = ChatUtils.GetPlainText(m.Message).UnescapeHtml();
-            var chStr = TccUtils.ChatChannelToName((ChatChannel)m.Channel);
+            CheckChatMention(m);
+        }
 
-            TccUtils.CheckWindowNotify(txt, $"{m.AuthorName} {chStr}");
-            TccUtils.CheckDiscordNotify($"`{chStr}` {txt}", m.AuthorName);
-
+        private static void OnPrivateChat(S_PRIVATE_CHAT m)
+        {
+            if (BlockList.Contains(m.AuthorName)) return;
+            CheckChatMention(m);
         }
         private static void OnSpawnNpc(S_SPAWN_NPC p)
         {
