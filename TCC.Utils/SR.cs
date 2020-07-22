@@ -26,7 +26,7 @@ namespace TCC.Utils
         public const string BgMatchingComplete        = "Battleground matching completed";
         public const string DungMatchingComplete      = "Dungeon matching completed";
         public const string GreetMemeContent          = "Nice TCC (° -°)";
-        public const string GlobalSellAngery          = "Stop selling stuff in global.\nYou nob.";
+        public const string GlobalSellAngery          = "Stop selling and buying stuff in global.\nYou nob.";
         public const string CannotRetrieveGbamInfo    = "Failed to retrieve guild BAM info.";
         public const string CannotUploadGbamInfo      = "Failed to upload guild BAM info.";
         public const string ReadyToConnect            = "Ready to connect.";
