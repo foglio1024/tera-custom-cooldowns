@@ -136,7 +136,7 @@ namespace TCC
         public static TccDatabase DB { get; private set; } = null!;
 
         public static bool CivilUnrestZone => CurrentZoneId == 152;
-        public static bool IsInDungeon => CurrentZoneId >= 8999; // TODO: this doesn't apply anymore
+        public static bool IsInDungeon => DB.MapDatabase.IsDungeon(CurrentZoneId);
         public static string CurrentAccountNameHash { get; private set; } = "";
 
 

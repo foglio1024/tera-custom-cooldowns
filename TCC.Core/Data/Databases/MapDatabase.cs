@@ -18,6 +18,13 @@ namespace TCC.Data.Databases
             Worlds = new Dictionary<uint, World>();
         }
 
+        public bool IsDungeon(int zoneId)
+        {
+            return Worlds.Values.Any(world => 
+                world.Guards.Values.Any(guard => 
+                    guard.Sections.Values.Any(section 
+                        => section.Id == zoneId && section.IsDungeon)));
+        }
         public bool IsDungeon(Location loc)
         {
             return loc.World == 9999 || Worlds[loc.World].Guards[loc.Guard].Sections[loc.Section].IsDungeon;
