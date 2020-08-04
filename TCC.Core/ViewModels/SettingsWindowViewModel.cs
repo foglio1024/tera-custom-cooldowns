@@ -396,7 +396,17 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.HideHandles == value) return;
                 App.Settings.HideHandles = value;
-                N(nameof(HideHandles));
+                N();
+            }
+        }
+        public bool ShowDecimalsInCooldowns
+        {
+            get => App.Settings.ShowDecimalsInCooldowns;
+            set
+            {
+                if (App.Settings.ShowDecimalsInCooldowns == value) return;
+                App.Settings.ShowDecimalsInCooldowns = value;
+                N();
             }
         }
         public bool AnimateChatMessages

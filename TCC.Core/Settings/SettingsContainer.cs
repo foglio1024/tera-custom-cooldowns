@@ -5,9 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
+using TCC.UI.Windows;
+using TCC.Utils;
+using TeraPacketParser;
 using Key = System.Windows.Forms.Keys;
 
 namespace TCC.Settings
@@ -138,6 +142,7 @@ namespace TCC.Settings
         public string LastAccountNameHash { get; set; } = "";
         public bool BackgroundNotifications { get; set; }
         public bool EnablePlayerMenu { get; set; }
+        public bool ShowDecimalsInCooldowns { get; set; }
         //public bool ShowConsole { get; set; }
 
 

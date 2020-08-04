@@ -18,10 +18,12 @@ namespace TCC.Data.Skills
         private readonly DispatcherTimer _mainTimer;
         private readonly DispatcherTimer _offsetTimer;
         private readonly DispatcherTimer _secondsTimer;
-        private ulong _seconds;
+        private double _seconds;
         private bool _flashOnAvailable;
         private bool _canFlash;
         private Skill _skill;
+        private DateTime _endTime;
+        public double Interval { get; private set; }
 
         // properties
         public Skill Skill
@@ -49,7 +51,7 @@ namespace TCC.Data.Skills
                 else ForceStopFlashing();
             }
         }
-        public ulong Seconds
+        public double Seconds
         {
             get => _seconds;
             set
@@ -83,20 +85,13 @@ namespace TCC.Data.Skills
         }
 
         // ctors
-        public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher? d = null) 
+        public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher? d = null, double intervalMs = 100)
         {
+            Interval = intervalMs;
             Dispatcher = d ?? Dispatcher.CurrentDispatcher;
             _mainTimer = Dispatcher.Invoke(() => new DispatcherTimer());
             _offsetTimer = Dispatcher.Invoke(() => new DispatcherTimer());
-            _secondsTimer = Dispatcher.Invoke(() => new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) });
-
-            //Dispatcher.Invoke(() =>
-            //{
-            //    _mainTimer = new DispatcherTimer();
-            //    _offsetTimer = new DispatcherTimer();
-            //    _secondsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-            //});
-
+            _secondsTimer = Dispatcher.Invoke(() => new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(Interval) });
 
             _mainTimer.Tick += CooldownEnded;
             _offsetTimer.Tick += StartSecondsTimer;
@@ -104,15 +99,14 @@ namespace TCC.Data.Skills
 
             App.Settings.ClassWindowSettings.FlashAvailableSkillsChanged += OnGlobalFlashChanged;
 
-
             _skill = sk;
             CooldownType = t;
             FlashOnAvailable = flashOnAvailable;
         }
-        public Cooldown(Skill sk, ulong cooldown, CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal, Dispatcher? d = null) : this(sk, false, type, d)
+        public Cooldown(Skill sk, ulong cooldown, CooldownType type = CooldownType.Skill, CooldownMode mode = CooldownMode.Normal, Dispatcher? d = null, double intervalMs = 100) : this(sk, false, type, d, intervalMs)
         {
             if (cooldown == 0) return;
-            if (type == CooldownType.Item) cooldown = cooldown * 1000;
+            if (type == CooldownType.Item) cooldown *= 1000;
             Start(cooldown, mode);
         }
         private void OnGlobalFlashChanged()
@@ -145,7 +139,13 @@ namespace TCC.Data.Skills
         }
         private void DecreaseSeconds(object? sender, EventArgs? e)
         {
-            if (Seconds > 0) Seconds = Seconds - 1;
+            if (Seconds > 0)
+            {
+                var now = DateTime.Now;
+
+                //Seconds -= Interval;
+                Seconds = (_endTime - now).TotalMilliseconds/ 1000D;
+            }
             else _secondsTimer.Stop();
         }
 
@@ -154,7 +154,11 @@ namespace TCC.Data.Skills
         {
             Duration = cd;
             OriginalDuration = cd;
-            Seconds = Duration / 1000;
+            //Seconds = Duration - (Duration % Interval);
+            var now = DateTime.Now;
+            _endTime = now.AddMilliseconds(Duration);
+            Seconds = (_endTime - now).TotalMilliseconds  / 1000D;
+
             Mode = mode;
             Start(this);
         }
@@ -177,15 +181,19 @@ namespace TCC.Data.Skills
             }
 
             Mode = sk.Mode;
-            Seconds = sk.Seconds;
             Duration = sk.Duration;
+            var now = DateTime.Now;
+            //Seconds = sk.Seconds - (Duration % Interval);
+            _endTime = now.AddMilliseconds(Duration);
+            Seconds = (_endTime - now).TotalMilliseconds / 1000D;
+
             OriginalDuration = sk.OriginalDuration;
 
             _mainTimer.Interval = TimeSpan.FromMilliseconds(Duration);
             _mainTimer.Start();
             N(nameof(IsAvailable));
 
-            _offsetTimer.Interval = TimeSpan.FromMilliseconds(Duration % 1000);
+            _offsetTimer.Interval = TimeSpan.FromMilliseconds(Duration % Interval);
             _offsetTimer.Start();
 
             Dispatcher.Invoke(() => Started?.Invoke(Duration, Mode));
@@ -213,9 +221,12 @@ namespace TCC.Data.Skills
             }
             Mode = mode;
             Duration = cd;
-            Seconds = Duration / 1000;
+            //Seconds = Duration / Interval;
+            var now = DateTime.Now;
+            _endTime = now.AddMilliseconds(Duration);
+            Seconds = (_endTime - now).TotalMilliseconds / 1000D;
 
-            _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % 1000);
+            _offsetTimer.Interval = TimeSpan.FromMilliseconds(cd % Interval);
             _offsetTimer.Start();
 
             _mainTimer.Interval = TimeSpan.FromMilliseconds(cd);
