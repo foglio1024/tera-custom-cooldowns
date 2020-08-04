@@ -88,7 +88,6 @@ namespace TCC.Analysis
         {
             if (Sniffer is TeraSniffer) DetectClientVersionFromFile();
 
-            Game.Server = srv;
             WindowManager.TrayIcon.Connected = true;
             WindowManager.TrayIcon.Text = $"{App.AppVersion} - connected";
 
