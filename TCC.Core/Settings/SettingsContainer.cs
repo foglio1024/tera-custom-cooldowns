@@ -143,6 +143,8 @@ namespace TCC.Settings
 
         public SettingsContainer()
         {
+            MessageFactory.ReleaseVersionChanged += OnReleaseVersionChanged;
+
             StatSentVersion = App.AppVersion;
             _lastLanguage = "";
             StatSentTime = DateTime.MinValue;
@@ -207,6 +209,38 @@ namespace TCC.Settings
             WebhookMessageGuildBam = "@here Guild BAM will spawn soon!";
             WebhookEnabledMentions = false;
             WebhookUrlMentions = "";
+            ShowDecimalsInCooldowns = true;
+        }
+
+        private void OnReleaseVersionChanged(int v)
+        {
+            var major = v / 100;
+            if (major >= 97)
+            {
+                var settings = new List<WindowSettingsBase>
+                {
+                    CooldownWindowSettings,
+                    CharacterWindowSettings,
+                    NpcWindowSettings,
+                    BuffWindowSettings,
+                    ClassWindowSettings,
+                    GroupWindowSettings,
+                    FlightGaugeWindowSettings,
+                    FloatingButtonSettings,
+                    CivilUnrestWindowSettings,
+                    NotificationAreaSettings
+                }.Concat(ChatWindowsSettings).Where(s => s.ClickThruMode == ClickThruMode.GameDriven);
+
+                if (settings.Any())
+                {
+                    foreach (var ws in settings)
+                    {
+                        ws.ClickThruMode = ClickThruMode.Always;
+                    }
+
+                    TccMessageBox.Show("TCC", SR.ForcingGameDrivenClickThruOff, MessageBoxButton.OK);
+                }
+            }
         }
 
         public static SettingsContainer Load()
