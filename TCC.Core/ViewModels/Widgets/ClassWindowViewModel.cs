@@ -14,7 +14,7 @@ namespace TCC.ViewModels.Widgets
     public class ClassWindowViewModel : TccWindowViewModel
     {
         private Class _currentClass = Class.None;
-        private BaseClassLayoutVM _currentManager = new NullClassManager();
+        private BaseClassLayoutVM _currentManager = new NullClassLayoutVM();
 
         public Class CurrentClass
         {
@@ -42,7 +42,7 @@ namespace TCC.ViewModels.Widgets
                         Class.Gunner => new GunnerLayoutVM(),
                         Class.Brawler => new BrawlerLayoutVM(),
                         Class.Ninja => new NinjaLayoutVM(),
-                        _ => new NullClassManager()
+                        _ => new NullClassLayoutVM()
                     };
                 });
                 N();
@@ -88,12 +88,12 @@ namespace TCC.ViewModels.Widgets
 
         private void OnWarriorShowTraverseCutChanged()
         {
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
+            TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
         }
 
         private void OnWarriorShowEdgeChanged()
         {
-            TccUtils.CurrentClassVM<WarriorLayoutVM>().ExN(nameof(WarriorLayoutVM.ShowEdge));
+            TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowEdge));
         }
 
         private void OnSorcererShowElementsChanged()
