@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;
@@ -20,6 +21,7 @@ using TCC.UI.Windows;
 using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
+using TeraPacketParser;
 using CaptureMode = TCC.Data.CaptureMode;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
@@ -652,7 +654,7 @@ namespace TCC.ViewModels
             get
             {
                 var ret = EnumUtils.ListFromEnum<ClickThruMode>();
-                if (!App.Settings.EnableProxy) ret.Remove(ClickThruMode.GameDriven);
+                if (!App.Settings.EnableProxy || PacketAnalyzer.Factory?.ReleaseVersion/100 >= 97) ret.Remove(ClickThruMode.GameDriven);
                 return ret;
             }
         }
@@ -744,7 +746,7 @@ namespace TCC.ViewModels
             OpenWindowCommand = new RelayCommand(winType =>
             {
                 var t = (Type) winType;
-                if (TccWindow.IsCreated(t)) return;
+                if (TccWindow.Exists(t)) return;
                 var win = Activator.CreateInstance(t, null) as TccWindow;
                 win?.ShowWindow();
             });
@@ -772,6 +774,12 @@ namespace TCC.ViewModels
             ClearChatCommand = new RelayCommand(_ => ChatManager.Instance.ClearMessages());
 
             MonsterDatabase.BlacklistChangedEvent += MonsterDatabase_BlacklistChangedEvent;
+            MessageFactory.ReleaseVersionChanged += OnReleaseVersionChanged;
+        }
+
+        private void OnReleaseVersionChanged(int obj)
+        {
+            N(nameof(ClickThruModes));
         }
 
         private void MonsterDatabase_BlacklistChangedEvent(uint arg1, uint arg2, bool arg3)
