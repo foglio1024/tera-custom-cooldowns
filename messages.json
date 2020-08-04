@@ -10,6 +10,17 @@
         "Title": "Chat2.gpk update",
         "Content": "Consider updating S1UI_Chat2.gpk mod if you're using it for Toolbox interaction, along with tcc-stub. These updates are automatic if you're using TCC in Toolbox mode."
       }
+    },
+    {
+      "Enabled": true,
+      "Id": "",
+      "Type": "MessageBoxNotice",
+      "Trigger": 0,
+      "TriggerOnDownload": false,
+      "Details": {
+        "Title": "TERA 64bit update",
+        "Content": "64bit update will bring big structural changes in the game client, with the result of breaking gpk mods like tcc-chat-link and UI-Removers. Because of this, some TCC functionalities will be limited (eg. Game-driven clickthru mode, automatic detection of ingame chat being open, etc). Some other functionalities, like TCC LFG, will remain untouched, but will probably cause annoying behaviors (like ingame windows popping up when not requested) due to missing UI-Removers."
+      }
     }
   ]
 }
