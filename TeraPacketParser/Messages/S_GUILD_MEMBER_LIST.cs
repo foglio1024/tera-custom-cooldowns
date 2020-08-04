@@ -50,7 +50,7 @@ namespace TeraPacketParser.Messages
             }
             catch (Exception e)
             {
-                Console.WriteLine($"[{nameof(S_GUILD_MEMBER_LIST)}] Failed to parse packet. \nContent:\n{Payload.Array.ToStringEx()}\nException:\n{e.Message}\n{e.StackTrace}");
+                Console.WriteLine($"[{nameof(S_GUILD_MEMBER_LIST)}] Failed to parse packet. \nContent:\n{Payload.Array.ToHexString()}\nException:\n{e.Message}\n{e.StackTrace}");
                 //WindowManager.ViewModels.NotificationArea.Enqueue("Warning", "A non-fatal error occured. More detailed info has been written to error.log. Please report this to the developer on Discord or Github.", NotificationType.Warning, 10000);
             }
         }

@@ -35,7 +35,7 @@ namespace TCC.UI.Controls.Skills
 
         }
 
-        public string DurationLabel => _context == null ? "" : TimeUtils.FormatTime(_context.Effect.Seconds);
+        public string DurationLabel => _context == null ? "" : TimeUtils.FormatSeconds(Convert.ToInt64(_context.Effect.Seconds));
         public bool ShowEffectSeconds => _context?.Effect != null && _context.Effect.Seconds > 0;
         private void OnLoaded(object sender, RoutedEventArgs e)
         {

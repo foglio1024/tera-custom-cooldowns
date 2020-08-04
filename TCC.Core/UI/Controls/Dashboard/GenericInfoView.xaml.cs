@@ -15,12 +15,12 @@ namespace TCC.UI.Controls.Dashboard
 
         private void ContentListOnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            CharNames.GetChild<ScrollViewer>().ScrollToVerticalOffset(e.VerticalOffset);
+            CharNames.FindVisualChild<ScrollViewer>().ScrollToVerticalOffset(e.VerticalOffset);
         }
 
         private void CharNames_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            ContentList.GetChild<ScrollViewer>().ScrollToVerticalOffset(e.VerticalOffset);
+            ContentList.FindVisualChild<ScrollViewer>().ScrollToVerticalOffset(e.VerticalOffset);
         }
     }
 }

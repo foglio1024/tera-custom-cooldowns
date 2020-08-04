@@ -129,7 +129,7 @@ namespace TCC.UI.Windows.Widgets
 
         private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            var sw = ((ItemsControl)sender).GetChild<ScrollViewer>();
+            var sw = ((ItemsControl)sender).FindVisualChild<ScrollViewer>();
             var lines = sw.VerticalOffset + e.Delta >= sw.ScrollableHeight ? 1 : App.Settings.ChatScrollAmount;
             sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? lines : -lines));
 
@@ -155,7 +155,7 @@ namespace TCC.UI.Windows.Widgets
             TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
             {
                 if (!x.IsVisible) return;
-                var host = x.GetChild<VirtualizingStackPanel>();
+                var host = x.FindVisualChild<VirtualizingStackPanel>();
                 var sw = host?.FindVisualParent<ScrollViewer>();
                 if (sw == null) return;
                 sw.ScrollToTop();
@@ -170,7 +170,7 @@ namespace TCC.UI.Windows.Widgets
             {
                 if (!x.IsVisible) return;
 
-                var host = x.GetChild<VirtualizingStackPanel>();
+                var host = x.FindVisualChild<VirtualizingStackPanel>();
                 if (host == null) return;
                 var idx = x.Items.IndexOf(msg);
                 if (idx == -1) return;
@@ -194,7 +194,7 @@ namespace TCC.UI.Windows.Widgets
                 // scroll all tabs to bottom if the same has been clicked
                 TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
                 {
-                    var sw = x.GetChild<ScrollViewer>();
+                    var sw = x.FindVisualChild<ScrollViewer>();
                     sw?.ScrollToVerticalOffset(0);
                 });
                 _bottom = true;

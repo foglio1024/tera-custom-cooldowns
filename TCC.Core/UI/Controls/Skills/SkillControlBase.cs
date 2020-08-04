@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Nostrum;
+using Nostrum.Controls;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using Nostrum;
-using Nostrum.Controls;
 using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Utils;
@@ -38,7 +38,7 @@ namespace TCC.UI.Controls.Skills
                 NPC();
             }
         }
-        public string SecondsText => Context == null ? "0" : TimeUtils.FormatTime(Convert.ToUInt32(Context.Seconds > uint.MaxValue ? 0 : Context.Seconds));
+        public string SecondsText => Context == null ? "0" : TimeUtils.FormatMilliseconds(Convert.ToInt64((Context.Seconds > uint.MaxValue ? 0 : Context.Seconds) * 1000), App.Settings.ShowDecimalsInCooldowns);
 
         protected SkillControlBase()
         {

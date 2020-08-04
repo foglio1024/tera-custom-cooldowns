@@ -6,6 +6,7 @@
                                             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
                                             xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
                                             xmlns:abnormCtrl="clr-namespace:TCC.UI.Controls.Abnormalities"
+                                            xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                                             mc:Ignorable="d" 
              Width="Auto" Height="Auto" FlowDirection="LeftToRight"
              d:DataContext="{d:DesignInstance abnormalities:AbnormalityDuration}">
@@ -68,7 +69,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="6,3"
-                   Text="{Binding DurationLeft, Converter={abnormalities:DurationLabelConverter}}"/>
+                   Text="{Binding DurationLeft, Converter={converters:DurationToStringConverter}}"/>
             </Viewbox>
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleY="1" ScaleX="1"/>

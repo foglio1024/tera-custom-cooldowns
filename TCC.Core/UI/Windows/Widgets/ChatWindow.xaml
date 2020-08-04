@@ -5,16 +5,16 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                   xmlns:viewModels="clr-namespace:TCC.ViewModels"
+                   xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
                    xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
                    xmlns:data="clr-namespace:TCC.Data"
-                   xmlns:widgets1="clr-namespace:TCC.ViewModels.Widgets"
                    xmlns:chat="clr-namespace:TCC.Data.Chat"
-                   xmlns:chat1="clr-namespace:TCC.UI.Controls.Chat"
                    xmlns:controls="clr-namespace:TCC.UI.Controls"
+                   xmlns:chatCtrl="clr-namespace:TCC.UI.Controls.Chat"
                    xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
                    xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
-                   xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                   xmlns:viewModels="clr-namespace:TCC.ViewModels"
+                   xmlns:widgetsVm="clr-namespace:TCC.ViewModels.Widgets"
                    mc:Ignorable="d"
                    UseLayoutRounding="True"
                    Style="{StaticResource BaseWindowStyle}"
@@ -25,7 +25,7 @@
                    MinWidth="350" MinHeight="84"
                    ResizeMode="CanResize"
                    SizeToContent="Manual"
-                   Loaded="OnLoaded" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
+                   Loaded="OnLoaded" d:DataContext="{d:DesignInstance widgetsVm:ChatViewModel}">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0" 
                       ResizeBorderThickness="7 12 7 7" 
@@ -34,14 +34,14 @@
     </WindowChrome.WindowChrome>
     <widgets:TccWidget.Resources>
         <DataTemplate x:Key="ChatMessageTemplate">
-            <chat1:ChatMessageControl VerticalAlignment="Top">
-                <chat1:ChatMessageControl.LayoutTransform>
+            <chatCtrl:ChatMessageControl VerticalAlignment="Top">
+                <chatCtrl:ChatMessageControl.LayoutTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1" />
                         <RotateTransform Angle="0" />
                     </TransformGroup>
-                </chat1:ChatMessageControl.LayoutTransform>
-            </chat1:ChatMessageControl>
+                </chatCtrl:ChatMessageControl.LayoutTransform>
+            </chatCtrl:ChatMessageControl>
         </DataTemplate>
         <Style TargetType="ItemsControl" x:Key="LfgItemsControl">
             <Setter Property="Height" Value="Auto" />
@@ -73,7 +73,7 @@
 
                 <!-- Pinned message -->
                 <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf" Margin="1 3 2 0"
-                        Visibility="{Binding Path=Content.(viewModels:Tab.PinnedMessage), Converter={StaticResource NullToVisibleCollapsed}}">
+                        Visibility="{Binding Path=Content.(viewModels:Tab.PinnedMessage), Converter={converters:NullToVisibilityConverter}}">
                     <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}"
                                     Content="{Binding Path=Content.(viewModels:Tab.PinnedMessage)}"
                                     Margin="10 3 4 2">
@@ -401,7 +401,7 @@
                     <StackPanel VerticalAlignment="Bottom">
                         <!-- Pinned message -->
                         <Border Background="#3adf" BorderThickness="0 0 0 1" BorderBrush="#adf" Margin="20 0 10 12"
-                                Visibility="{Binding Path=CurrentTab.PinnedMessage, Converter={StaticResource NullToVisibleCollapsed}}">
+                                Visibility="{Binding Path=CurrentTab.PinnedMessage, Converter={converters:NullToVisibilityConverter}}">
                             <ContentControl ContentTemplate="{StaticResource ChatMessageTemplate}"
                                             Content="{Binding Path=CurrentTab.PinnedMessage}"
                                             Margin="10 3 4 2">
@@ -422,7 +422,7 @@
                             </ItemsControl.LayoutTransform>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="chat:ChatMessage">
-                                    <chat1:ChatMessageControl VerticalAlignment="Top" />
+                                    <chatCtrl:ChatMessageControl VerticalAlignment="Top" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                             <ItemsControl.ItemsPanel>
@@ -474,7 +474,7 @@
                            HorizontalOffset="-10"
                            AllowsTransparency="True" PlacementTarget="{Binding ElementName=SettingsButton}"
                            StaysOpen="True" DataContext="{Binding}"
-                           PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgets1:ChatViewModel}">
+                           PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgetsVm:ChatViewModel}">
             <Grid>
                 <Border Style="{StaticResource RevampBorderStyle}" Margin="3" Opacity=".95" />
                 <StackPanel Width="350" Margin="3">

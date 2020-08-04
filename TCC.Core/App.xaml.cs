@@ -1,5 +1,4 @@
-﻿using Nostrum;
-using Nostrum.Extensions;
+﻿using Nostrum.Extensions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -330,8 +329,8 @@ namespace TCC
 
         private static FUBH? _fubh;
 
-        public static bool FI { get; } = DateTime.Now >= TimeUtils.FromUnixTime(1567123200) &&
-                                         DateTime.Now < TimeUtils.FromUnixTime(1567209600);
+        public static bool FI { get; } = DateTime.Now >= Nostrum.TimeUtils.FromUnixTime(1567123200) &&
+                                         DateTime.Now < Nostrum.TimeUtils.FromUnixTime(1567209600);
 
         public static void FUBH()
         {

@@ -125,7 +125,7 @@ namespace TCC.UI.Windows
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            TccUtils.CurrentClassVM<SorcererLayoutVM>().ManaBoost.StartEffect(10000);
+            TccUtils.CurrentClassVM<SorcererLayoutVM>()?.ManaBoost.StartEffect(10000);
 
             //SkillManager.AddSkill(100700, 20000);
             //SkillManager.AddSkill(400120, 20000);
@@ -190,8 +190,8 @@ namespace TCC.UI.Windows
 
         private void SetAtkSpeed(object sender, RoutedEventArgs e)
         {
-            if (((Button)sender).Content.ToString() == "Swift") TccUtils.CurrentClassVM<WarriorLayoutVM>().SetSwift(1000);
-            else if (((Button)sender).Content.ToString() == "Arush") TccUtils.CurrentClassVM<WarriorLayoutVM>().SetArush(1000);
+            if (((Button)sender).Content.ToString() == "Swift") TccUtils.CurrentClassVM<WarriorLayoutVM>()?.SetSwift(1000);
+            else if (((Button)sender).Content.ToString() == "Arush") TccUtils.CurrentClassVM<WarriorLayoutVM>()?.SetArush(1000);
 
         }
     }

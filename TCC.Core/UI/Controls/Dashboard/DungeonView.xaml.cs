@@ -18,8 +18,8 @@ namespace TCC.UI.Controls.Dashboard
 
         private void DungeonColumns_OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            var headerSw = DungeonHeaders.GetChild<ScrollViewer>();
-            var namesSw = CharacterNames.GetChild<ScrollViewer>();
+            var headerSw = DungeonHeaders.FindVisualChild<ScrollViewer>();
+            var namesSw = CharacterNames.FindVisualChild<ScrollViewer>();
 
             headerSw.ScrollToHorizontalOffset(e.HorizontalOffset);
             namesSw.ScrollToVerticalOffset(e.VerticalOffset);

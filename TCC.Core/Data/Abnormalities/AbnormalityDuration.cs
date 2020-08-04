@@ -1,41 +1,10 @@
-﻿using System;
-using System.Globalization;
+﻿using Nostrum;
+using System;
 using System.Timers;
-using System.Windows.Data;
-using System.Windows.Markup;
 using System.Windows.Threading;
-using Nostrum;
 
 namespace TCC.Data.Abnormalities
 {
-    public class DurationLabelConverter : MarkupExtension, IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var val = 0D;
-            if (value != null) val = System.Convert.ToDouble(value);
-            var seconds = Math.Floor(val / 1000);
-            var minutes = Math.Floor(seconds / 60);
-            var hours = Math.Floor(minutes / 60);
-            var days = Math.Floor(hours / 24);
-
-            if (minutes < 3) return seconds.ToString(CultureInfo.InvariantCulture);
-            if (hours < 3) return $"{minutes}m";
-            if (days < 1) return $"{hours}h";
-            return $"{days}d";
-
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
-    }
     public class AbnormalityDuration : TSPropertyChanged, IDisposable
     {
         public event Action Refreshed = null!;

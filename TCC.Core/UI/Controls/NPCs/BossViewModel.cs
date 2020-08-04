@@ -70,7 +70,7 @@ namespace TCC.UI.Controls.NPCs
             {
                 if (NPC.Enraged)
                 {
-                    return NPC.EnragePattern.StaysEnraged ? "∞" : $"{TimeUtils.FormatTime(CurrentEnrageTime)}";
+                    return NPC.EnragePattern.StaysEnraged ? "∞" : $"{TimeUtils.FormatSeconds(CurrentEnrageTime)}";
                 }
                 else
                 {
@@ -91,7 +91,7 @@ namespace TCC.UI.Controls.NPCs
                         ? NPC.EnragePattern.StaysEnraged
                             ? "∞"
                             : NPC.EnragePattern.Duration != 0
-                                ? $"{TimeUtils.FormatTime(CurrentEnrageTime)}"
+                                ? $"{TimeUtils.FormatSeconds(CurrentEnrageTime)}"
                                 : "-"
                         : "";
             }

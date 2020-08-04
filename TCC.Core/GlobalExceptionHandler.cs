@@ -188,7 +188,7 @@ namespace TCC
             if (ex is PacketParseException ppe)
             {
                 ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
-                ret.Add("packet_data", new JValue(ppe.RawData.ToStringEx()));
+                ret.Add("packet_data", new JValue(ppe.RawData.ToHexString()));
             }
 
             if (ex is DeadlockException de)

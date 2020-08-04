@@ -43,7 +43,7 @@ namespace TCC
         public static readonly Dictionary<ulong, Tuple<string, Class>> NearbyPlayers = new Dictionary<ulong, Tuple<string, Class>>();
         public static readonly GroupInfo Group = new GroupInfo();
         public static readonly GuildInfo Guild = new GuildInfo();
-        public static Server Server { get; set; } = new Server("Unknown", "Unknown", "0.0.0.0", 0);
+        public static Server Server { get; private set; } = new Server("Unknown", "Unknown", "0.0.0.0", 0);
         public static Account Account { get; set; } = new Account();
         public static string Language => DB.ServerDatabase.StringLanguage;
 
@@ -195,6 +195,7 @@ namespace TCC
 
         private static void InstallHooks()
         {
+            PacketAnalyzer.Sniffer.NewConnection += OnConnected;
             PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
 
             // db stuff
@@ -266,6 +267,10 @@ namespace TCC
             //PacketAnalyzer.Processor.Hook<S_FATIGABILITY_POINT>(OnFatigabilityPoint);
         }
 
+        private static void OnConnected(Server server)
+        {
+            Server = server;
+        }
 
         private static Laurel GetLaurel(uint pId)
         {
@@ -423,12 +428,12 @@ namespace TCC
         {
             // TODO: add discord notification after events revamp
             Log.N("Instance Matching", SR.BgMatchingComplete, NotificationType.Success);
-            Log.F($"Zone: {p.Zone}\nId: {p.Id}\nData: {p.Data.Array.ToStringEx()}", "S_BATTLE_FIELD_ENTRANCE_INFO.txt");
+            Log.F($"Zone: {p.Zone}\nId: {p.Id}\nData: {p.Data.Array.ToHexString()}", "S_BATTLE_FIELD_ENTRANCE_INFO.txt");
         }
         private static void OnFinInterPartyMatch(S_FIN_INTER_PARTY_MATCH p)
         {
             Log.N("Instance Matching", SR.DungMatchingComplete, NotificationType.Success);
-            Log.F($"Zone: {p.Zone}\nData: {p.Data.Array.ToStringEx()}", "S_FIN_INTER_PARTY_MATCH.txt");
+            Log.F($"Zone: {p.Zone}\nData: {p.Data.Array.ToHexString()}", "S_FIN_INTER_PARTY_MATCH.txt");
         }
         private static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
