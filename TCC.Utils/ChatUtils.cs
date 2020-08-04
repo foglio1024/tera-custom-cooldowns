@@ -1,6 +1,5 @@
 ﻿using HtmlAgilityPack;
 using Nostrum.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -60,23 +59,23 @@ namespace TCC.Utils
             var result = "";
             if (!all)
             {
-                foreach (var keyVal in pars)
+                foreach (var (key, value) in pars)
                 {
-                    var regex = new Regex(Regex.Escape($"{{{keyVal.Key}}}"));
-                    result = regex.Replace(txt, $"{{{keyVal.Value}}}", 1);
-                    if (txt == result) result = txt.ReplaceFirstOccurrenceCaseInsensitive($"{{{keyVal.Key}}}", $"{{{keyVal.Value}}}");
-                    if (txt == result) result = txt.ReplaceFirstOccurrenceCaseInsensitive($"{{{keyVal.Key}", $"{{{keyVal.Value}");
+                    var regex = new Regex(Regex.Escape($"{{{key}}}"));
+                    result = regex.Replace(txt, $"{{{value}}}", 1);
+                    if (txt == result) result = txt.ReplaceFirstOccurrenceCaseInsensitive($"{{{key}}}", $"{{{value}}}");
+                    if (txt == result) result = txt.ReplaceFirstOccurrenceCaseInsensitive($"{{{key}", $"{{{value}");
                     txt = result;
                 }
             }
             else
             {
-                foreach (var keyVal in pars)
+                foreach (var (key, value) in pars)
                 {
-                    var regex = new Regex(Regex.Escape($"{{{keyVal.Key}}}"));
-                    result = regex.Replace(txt, $"{{{keyVal.Value}}}", Int32.MaxValue);
-                    if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{keyVal.Key}}}", $"{{{keyVal.Value}}}");
-                    if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{keyVal.Key}", $"{{{keyVal.Value}");
+                    var regex = new Regex(Regex.Escape($"{{{key}}}"));
+                    result = regex.Replace(txt, $"{{{value}}}", int.MaxValue);
+                    if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{key}}}", $"{{{value}}}");
+                    if (txt == result) result = txt.ReplaceCaseInsensitive($"{{{key}", $"{{{value}");
                     txt = result;
                 }
             }

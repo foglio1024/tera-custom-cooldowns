@@ -181,7 +181,7 @@ namespace TCC.Sniffing
         }
 
         public event Action<Message> MessageReceived = null!;
-        public event Action<Server?> NewConnection = null!;
+        public event Action<Server> NewConnection = null!;
         public event Action EndConnection = null!;
         public async Task<bool> RetrieveSysMsgIfNeeded(string destPath)
         {

@@ -25,12 +25,12 @@ namespace TCC.UI.Windows.Widgets
         private static bool _hidden;
         private static event Action ShowBoundariesToggled = null!;
         private static event Action HiddenToggled = null!;
+        private static List<TccWidget> _activeWidgets = new List<TccWidget>();
 
         private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, 0);
         private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, 0);
         private readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, 1);
         private readonly DispatcherTimer _buttonsTimer;
-        private IntPtr _handle;
         protected bool _canMove = true;
         private Point WindowCenter => new Point(Left + ActualWidth / 2, Top + ActualHeight / 2);
 
@@ -38,11 +38,12 @@ namespace TCC.UI.Windows.Widgets
         protected UIElement? MainContent;
         protected UIElement? BoundaryRef;
         public WindowSettingsBase WindowSettings { get; private set; } = null!;
-        public IntPtr Handle => _handle;
+        public IntPtr Handle { get; private set; }
 
         protected TccWidget()
         {
             _buttonsTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            _activeWidgets.Add(this);
         }
 
 
@@ -87,7 +88,7 @@ namespace TCC.UI.Windows.Widgets
             OnVisibilityChanged();
             OnWindowVisibilityChanged(WindowSettings.Visible);
 
-            FocusManager.MakeUnfocusable(_handle);
+            FocusManager.MakeUnfocusable(Handle);
 
             if (BoundaryRef != null)
             {
@@ -197,9 +198,9 @@ namespace TCC.UI.Windows.Widgets
 
         protected virtual void OnLoaded(object sender, RoutedEventArgs e)
         {
-            _handle = new WindowInteropHelper(this).Handle;
-            FocusManager.MakeUnfocusable(_handle);
-            FocusManager.HideFromToolBar(_handle);
+            Handle = new WindowInteropHelper(this).Handle;
+            FocusManager.MakeUnfocusable(Handle);
+            FocusManager.HideFromToolBar(Handle);
             if (!WindowSettings.Enabled) Hide();
         }
 
@@ -255,7 +256,7 @@ namespace TCC.UI.Windows.Widgets
         {
             if (_showBoundaries)
             {
-                FocusManager.UndoClickThru(_handle);
+                FocusManager.UndoClickThru(Handle);
                 return;
             }
 
@@ -263,22 +264,22 @@ namespace TCC.UI.Windows.Widgets
             switch (WindowSettings.ClickThruMode)
             {
                 case ClickThruMode.Never:
-                    FocusManager.UndoClickThru(_handle);
+                    FocusManager.UndoClickThru(Handle);
                     break;
                 case ClickThruMode.Always:
-                    FocusManager.MakeClickThru(_handle);
+                    FocusManager.MakeClickThru(Handle);
                     break;
                 case ClickThruMode.WhenDim:
-                    if (WindowManager.VisibilityManager.Dim) FocusManager.MakeClickThru(_handle);
-                    else FocusManager.UndoClickThru(_handle);
+                    if (WindowManager.VisibilityManager.Dim) FocusManager.MakeClickThru(Handle);
+                    else FocusManager.UndoClickThru(Handle);
                     break;
                 case ClickThruMode.WhenUndim:
-                    if (WindowManager.VisibilityManager.Dim) FocusManager.UndoClickThru(_handle);
-                    else FocusManager.MakeClickThru(_handle);
+                    if (WindowManager.VisibilityManager.Dim) FocusManager.UndoClickThru(Handle);
+                    else FocusManager.MakeClickThru(Handle);
                     break;
                 case ClickThruMode.GameDriven:
-                    if (Game.InGameUiOn) FocusManager.UndoClickThru(_handle);
-                    else FocusManager.MakeClickThru(_handle);
+                    if (Game.InGameUiOn) FocusManager.UndoClickThru(Handle);
+                    else FocusManager.MakeClickThru(Handle);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -489,6 +490,7 @@ namespace TCC.UI.Windows.Widgets
                 Loaded -= OnLoaded;
                 SizeChanged -= OnSizeChanged;
                 Close();
+                _activeWidgets.Remove(this);
             });
 
             if (Dispatcher == App.BaseDispatcher) return;
@@ -507,6 +509,11 @@ namespace TCC.UI.Windows.Widgets
         {
             _hidden = !_hidden;
             HiddenToggled?.Invoke();
+        }
+
+        public static bool Exists(IntPtr handle)
+        {
+            return _activeWidgets.Any(w => w.Handle == handle && w.Handle != IntPtr.Zero);
         }
     }
 }

@@ -123,25 +123,22 @@ namespace TCC.UI.Windows
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (sender == BtnOk)
+            if (ReferenceEquals(sender, BtnOk))
                 _result = MessageBoxResult.OK;
-            else if (sender == BtnYes)
+            else if (ReferenceEquals(sender, BtnYes))
                 _result = MessageBoxResult.Yes;
-            else if (sender == BtnNo)
+            else if (ReferenceEquals(sender, BtnNo))
                 _result = MessageBoxResult.No;
-            else if (sender == BtnCancel)
+            else if (ReferenceEquals(sender, BtnCancel))
                 _result = MessageBoxResult.Cancel;
             else
                 _result = MessageBoxResult.None;
             BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() });
-            //RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, new DoubleAnimation(1, .8, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
-            //RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(1, .8, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() });
             Task.Delay(250).ContinueWith(t =>
             {
                 Dispatcher?.Invoke(() =>
                 {
                     _messageBox.Hide();
-                    //_messageBox = null;
                 });
             });
         }

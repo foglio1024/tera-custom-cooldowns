@@ -17,29 +17,31 @@ using TeraDataLite;
 
 namespace TCC.UI.Windows
 {
-    /// <summary>
-    /// Logica di interazione per SkillConfigWindow.xaml
-    /// </summary>
+    //TODO: make this inherit from TccWindow
     public partial class SkillConfigWindow
     {
 
-        public IntPtr Handle { get; private set; }
+        private static SkillConfigWindow? _instance;
+        public static SkillConfigWindow Instance => _instance ?? new SkillConfigWindow();
+
+
         private CooldownWindowViewModel VM { get; }
-        public SkillConfigWindow()
+        public SkillConfigWindow() : base(true)
         {
+            _instance = this;
+
             InitializeComponent();
             DataContext = WindowManager.ViewModels.CooldownsVM;
             VM = (CooldownWindowViewModel) DataContext;
 
-            Closing += OnClosing;
-            Loaded += (_, __) => Handle = new WindowInteropHelper(this).Handle;
+            //Closing += OnClosing;
         }
 
-        private void OnClosing(object sender, CancelEventArgs e)
-        {
-            if (Opacity != 0) e.Cancel = true;
-            ClosewWindow(null, null);
-        }
+        //private void OnClosing(object sender, CancelEventArgs e)
+        //{
+        //    if (Opacity != 0) e.Cancel = true;
+        //    ClosewWindow(null, null);
+        //}
 
         public class GenericDragHandler : IDropTarget
         {
@@ -56,48 +58,58 @@ namespace TCC.UI.Windows
         public GenericDragHandler DragHandler => new GenericDragHandler();
         public HiddenSKillsDragHandler HiddenSkillsDropHandler => new HiddenSKillsDragHandler();
 
-        public static bool IsOpen { get; private set; }
-
-        private void ClosewWindow(object? sender, RoutedEventArgs? e)
+        public override void HideWindow()
         {
-
-            var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
             FocusManager.ForceFocused = false;
-            //WindowManager.VisibilityManager.ForceUndim = false;
             VM.Settings.ForcedClickable = false;
             VM.Settings.ForcedVisible = false;
 
-            WindowManager.SkillConfigWindow = null;
+            base.HideWindow();
 
-            an.Completed += (s, ev) =>
-            {
-                Close();
-                IsOpen = false;
-                if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
-            };
-            BeginAnimation(OpacityProperty, an);
             VM.SaveConfig();
             VM.IsDragging = false;
+
         }
 
-        internal void ShowWindow()
+        private void ClosewWindow(object? sender, RoutedEventArgs? e)
         {
-            if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
+            //var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
+            //FocusManager.ForceFocused = false;
+            //VM.Settings.ForcedClickable = false;
+            //VM.Settings.ForcedVisible = false;
+
+            HideWindow();
+
+            //WindowManager.SkillConfigWindow = null;
+
+            //an.Completed += (s, ev) =>
+            //{
+            //    Close();
+            //    if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            //};
+            //BeginAnimation(OpacityProperty, an);
+            //VM.SaveConfig();
+            //VM.IsDragging = false;
+        }
+
+        public override void ShowWindow()
+        {
+            //if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             FocusManager.ForceFocused = true;
-            //WindowManager.VisibilityManager.ForceUndim = true;
             VM.Settings.ForcedClickable = true;
             VM.Settings.ForcedVisible = true;
-            WindowManager.SkillConfigWindow = this;
-            Dispatcher?.Invoke(() =>
-            {
-                IsOpen = true;
-                var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
-                if (IsVisible) return;
-                Opacity = 0;
-                Show();
-                Activate();
-                BeginAnimation(OpacityProperty, animation);
-            });
+            //WindowManager.SkillConfigWindow = this;
+
+            base.ShowWindow();
+            //Dispatcher?.Invoke(() =>
+            //{
+            //    var animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200));
+            //    if (IsVisible) return;
+            //    Opacity = 0;
+            //    Show();
+            //    Activate();
+            //    BeginAnimation(OpacityProperty, animation);
+            //});
         }
 
         private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

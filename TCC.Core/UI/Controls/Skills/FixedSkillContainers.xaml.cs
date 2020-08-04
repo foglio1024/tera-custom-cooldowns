@@ -283,11 +283,11 @@ namespace TCC.UI.Controls.Skills
                 {
                     WindowManager.ViewModels.CooldownsVM.MainSkills.ToList().ForEach(x =>
                     {
-                        if (x.Seconds > 0) x.Start(x.Seconds * 1000 - delay);
+                        if (x.Seconds > 0) x.Start(Convert.ToUInt64(x.Seconds * 1000 - delay));
                     });
                     WindowManager.ViewModels.CooldownsVM.SecondarySkills.ToList().ForEach(x =>
                     {
-                        if (x.Seconds > 0) x.Start(x.Seconds * 1000 - delay);
+                        if (x.Seconds > 0) x.Start(Convert.ToUInt64(x.Seconds * 1000 - delay));
                     });
                 });
 

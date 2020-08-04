@@ -38,7 +38,7 @@ namespace TCC.UI
         public static FloatingButtonWindow FloatingButton { get; private set; }
         public static NotificationAreaWindow NotificationArea { get; private set; }
         public static FlightDurationWindow FlightDurationWindow { get; private set; }
-        public static SkillConfigWindow? SkillConfigWindow { get; set; }
+        //public static SkillConfigWindow? SkillConfigWindow { get; set; }
 
         public static Dashboard DashboardWindow { get; private set; }
 

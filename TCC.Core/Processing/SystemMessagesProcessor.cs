@@ -174,7 +174,7 @@ namespace TCC.Processing
         //}
         private static void HandleFriendLogin(string parameters, SystemMessageData template)
         {
-            ChatManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Friend, ChatUtils.SplitDirectives(parameters)["UserName"]);
+            ChatManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Friend, ChatUtils.SplitDirectives(parameters)?["UserName"] ?? "");
         }
         private static void HandleClearedGuardianQuestsMessage(string parameters, SystemMessageData template)
         {

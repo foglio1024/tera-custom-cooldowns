@@ -42,7 +42,6 @@ namespace TCC.UI.Windows
         }
 
         public virtual void HideWindow()
-
         {
             Dispatcher?.InvokeAsync(() =>
             {
@@ -96,9 +95,14 @@ namespace TCC.UI.Windows
             });
         }
 
-        public static bool IsCreated(Type type)
+        public static bool Exists(Type type)
         {
             return _createdWindows.Any(w => w.GetType() == type);
         }
+        public static bool Exists(IntPtr handle)
+        {
+            return _createdWindows.Any(w => w.Handle == handle && w.Handle != IntPtr.Zero);
+        }
+
     }
 }

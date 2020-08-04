@@ -86,10 +86,10 @@ namespace TeraPacketParser.TeraCommon.Game.Services
         {
             return _serverlist.GroupBy(x => x.Ip).ToDictionary(x => x.Key, x => x.First());
         }
-        public Server? GetServer(uint serverId, Server? oldServer = null)
+        public Server GetServer(uint serverId)
         {
             var servers = _servers.Where(x => x.ServerId == serverId).ToList();
-            if (!servers.Any()) return oldServer;
+            if (!servers.Any()) return new Server($"Unknown [{serverId}]", "Unknown", "0.0.0.0", serverId);
             return servers.FirstOrDefault(x => x.Region == Region) ?? servers.First();
         }
         public string GetServerName(uint serverId, Server? oldServer = null)

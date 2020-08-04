@@ -85,7 +85,7 @@ namespace TCC.UI.Windows.Widgets
 
         private void OpenBuffSettings(object sender, RoutedEventArgs e)
         {
-            if (TccWindow.IsCreated(typeof(MyAbnormalConfigWindow))) return;
+            if (TccWindow.Exists(typeof(MyAbnormalConfigWindow))) return;
             new MyAbnormalConfigWindow().Show();
         }
     }

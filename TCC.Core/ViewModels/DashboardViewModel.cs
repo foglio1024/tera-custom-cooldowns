@@ -220,7 +220,7 @@ namespace TCC.ViewModels
 
         /* -- Constructor ------------------------------------------ */
         bool _loaded;
-        private string _inventoryFilter;
+        private string _inventoryFilter = "";
 
         public DashboardViewModel(WindowSettingsBase settings) : base(settings)
         {
