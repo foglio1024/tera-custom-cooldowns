@@ -493,6 +493,12 @@ namespace TCC.ViewModels.Widgets
             Game.CombatChanged += OnCombatChanged;
         }
 
+        protected override void OnEnabledChanged(bool enabled)
+        {
+            base.OnEnabledChanged(enabled);
+            LoadConfig(Game.Me.Class);
+        }
+
         public bool Combat => Game.Combat;
         private void OnCombatChanged()
         {
@@ -505,16 +511,23 @@ namespace TCC.ViewModels.Widgets
             if (!Game.Logged && !Debugger.IsAttached) return;
             Dispatcher.InvokeAsync(() =>
             {
-                if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible)
-                {
-                    WindowManager.SkillConfigWindow.Close();
-                    IsDragging = false;
-                }
+                //if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible)
+                //{
+                    //WindowManager.SkillConfigWindow.Close();
+                    //IsDragging = false;
+                //}
+                //else
+                //{
+                //    new SkillConfigWindow().ShowWindow();
+                //    IsDragging = true;
+                //}
+
+                if(SkillConfigWindow.Instance.IsVisible)
+                    SkillConfigWindow.Instance.HideWindow();
                 else
-                {
-                    new SkillConfigWindow().ShowWindow();
-                    IsDragging = true;
-                }
+                    SkillConfigWindow.Instance.HideWindow();
+
+
             }, DispatcherPriority.Background);
         }
 
