@@ -34,10 +34,9 @@ namespace TCC.ViewModels
 
         #endregion
 
-        public static DispatcherTimer RequestTimer;
-        //private readonly DispatcherTimer PublicizeTimer;
+        private DispatcherTimer _requestTimer;
         private readonly DispatcherTimer AutoPublicizeTimer;
-        public static Queue<uint> RequestQueue = new Queue<uint>();
+        private static readonly Queue<uint> _requestQueue = new Queue<uint>();
         private bool _creating;
         private bool _creatingRaid;
         private int _lastGroupSize;
@@ -50,7 +49,6 @@ namespace TCC.ViewModels
         public int AutoPublicizeCooldown => 20;
 
 
-        //public bool IsPublicizeEnabled => !PublicizeTimer.IsEnabled;
         private bool _isAutoPublicizeEnabled;
 
         public bool IsAutoPublicizeEnabled
@@ -199,7 +197,7 @@ namespace TCC.ViewModels
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
 
-            RequestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
+            _requestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
             AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
 
             SortCommand = new SortCommand(ListingsView);
@@ -350,9 +348,9 @@ namespace TCC.ViewModels
         private void RequestNextLfg(object? sender, EventArgs e)
         {
             if (!App.Settings.LfgWindowSettings.Enabled) return;
-            if (RequestQueue.Count == 0) return;
+            if (_requestQueue.Count == 0) return;
 
-            var req = RequestQueue.Dequeue();
+            var req = _requestQueue.Dequeue();
             if (req == 0)
             {
                 StayClosed = true;
@@ -369,8 +367,8 @@ namespace TCC.ViewModels
             if ((Game.IsInDungeon || Game.CivilUnrestZone) && Game.Combat) return;
             Dispatcher.InvokeAsyncIfRequired(() =>
             {
-                if (RequestQueue.Count > 0 && RequestQueue.Last() == id) return;
-                RequestQueue.Enqueue(id);
+                if (_requestQueue.Count > 0 && _requestQueue.Last() == id) return;
+                _requestQueue.Enqueue(id);
             }, DispatcherPriority.Background);
         }
 
@@ -389,8 +387,8 @@ namespace TCC.ViewModels
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (RequestQueue.Count > 0 && RequestQueue.Last() == 0) return;
-                RequestQueue.Enqueue(0);
+                if (_requestQueue.Count > 0 && _requestQueue.Last() == 0) return;
+                _requestQueue.Enqueue(0);
             });
         }
 
