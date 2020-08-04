@@ -13,6 +13,7 @@ namespace TCC.Notice
 
         public MessageBoxNotice(NoticeBase b)
         {
+            Enabled = b.Enabled;
             Title = b.Title;
             Content = b.Content;
             Trigger = b.Trigger;

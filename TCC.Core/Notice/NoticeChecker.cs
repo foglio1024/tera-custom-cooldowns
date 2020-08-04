@@ -100,15 +100,16 @@ namespace TCC.Notice
                         Content = jContent.Value<string>()
                     };
 
-                    var jDuration = jDetails[nameof(NotificationNotice.Duration)];
-                    var jNotifType = jDetails[nameof(NotificationNotice.NotificationType)];
-                    if(jDuration  == null || jNotifType == null) continue;
+                    var duration = jDetails[nameof(NotificationNotice.Duration)]?.Value<int>() ?? 0;
+                    var intNotifType = jDetails[nameof(NotificationNotice.NotificationType)]?.Value<int>() ?? 0;
+                    var notifType = (NotificationType) intNotifType;
+
                     notice = type switch
                     {
                         nameof(NotificationNotice) => new NotificationNotice(notice)
                         {
-                            Duration = jDuration.Value<int>(),
-                            NotificationType = (NotificationType)jNotifType.Value<int>()
+                            Duration = duration,
+                            NotificationType = notifType
                         },
                         nameof(MessageBoxNotice) => new MessageBoxNotice(notice),
                         _ => notice
