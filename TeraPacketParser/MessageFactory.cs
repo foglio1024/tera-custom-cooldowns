@@ -10,6 +10,8 @@ namespace TeraPacketParser
 {
     public class MessageFactory
     {
+        public static event Action<int> ReleaseVersionChanged;
+
         private static readonly Delegate? UnknownMessageDelegate = Constructor<Func<TeraMessageReader, UnknownMessage>>();
         private static readonly Dictionary<ushort, Delegate?> OpcodeNameToType = new Dictionary<ushort, Delegate?> { { 19900, Constructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
         private static readonly Dictionary<string, Delegate?> TeraMessages = new Dictionary<string, Delegate?>
@@ -123,7 +125,19 @@ namespace TeraPacketParser
         };
         public static readonly Dictionary<string, ushort> Extras = new Dictionary<string, ushort>();
         public uint Version { get; private set; }
-        public int ReleaseVersion { get; set; }
+
+        private int _releaseVersion;
+        public int ReleaseVersion
+        {
+            get => _releaseVersion;
+            set
+            {
+                if (_releaseVersion == value) return;
+                _releaseVersion = value;
+                ReleaseVersionChanged?.Invoke(value);
+            }
+        }
+
         public OpCodeNamer OpCodeNamer { get; private set; }
         public OpCodeNamer SystemMessageNamer { get; set; }
         public static bool NoGuildBamOpcode { get; private set; }    //by HQ 20190324
@@ -134,6 +148,7 @@ namespace TeraPacketParser
             {
                 OpCodeNamer.Add(key, val);
             }
+            SystemMessageNamer = new OpCodeNamer(new KeyValuePair<ushort, string>[0]);
             Version = 0;
         }
 
@@ -151,7 +166,9 @@ namespace TeraPacketParser
             NoGuildBamOpcode = OpCodeNamer.GetCode(nameof(S_NOTIFY_GUILD_QUEST_URGENT)) == 0;
             // ==================================================
         }
-        public MessageFactory(uint version, OpCodeNamer opcNamer)
+#pragma warning disable 8618
+        public MessageFactory(uint version, OpCodeNamer opcNamer) // only for testing
+#pragma warning restore 8618
         {
             OpCodeNamer = opcNamer;
             OpcodeNameToType.Clear();
