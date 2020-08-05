@@ -5,9 +5,9 @@
   "author": "Foglio",
   "description": "UI replacement with some extra features.",
   "disableAutoUpdate": false,
-  "category": "client",
+  "keywords": ["client"],
   "options": {
-    "niceName": "TCC",
+    "cliName": "TCC",
     "guiName": "TCC (TERA Custom Cooldowns)"
   },
   "dependencies": {
