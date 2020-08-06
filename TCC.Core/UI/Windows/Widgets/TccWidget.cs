@@ -446,18 +446,27 @@ namespace TCC.UI.Windows.Widgets
 
         protected void Drag(object sender, MouseButtonEventArgs e)
         {
-            if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
             var currOp = Opacity;
-            if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _showButtonsAnimation);
+            if (WindowSettings != null)
+            {
+                if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.NoResize;
+                if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _showButtonsAnimation);
+            }
             Opacity = .7;
             this.TryDragMove();
-            if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
+            if (WindowSettings != null)
+            {
+                if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
+            }
             Opacity = currOp;
-            UpdateButtons();
-            CheckBounds();
-            if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
-            SetRelativeCoordinates();
-            App.Settings.Save();
+            if (WindowSettings != null)
+            {
+                UpdateButtons();
+                CheckBounds();
+                if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
+                SetRelativeCoordinates();
+                App.Settings.Save();
+            }
         }
 
         private void SetRelativeCoordinates()
