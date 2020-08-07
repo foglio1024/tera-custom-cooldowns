@@ -468,20 +468,24 @@ namespace TCC.Data.Pc
         }
         private void FindAndUpdate(Abnormality ab, uint duration, int stacks)
         {
-            var list = GetList(ab);
-            var existing = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (existing == null)
+            Dispatcher.InvokeAsync(() =>
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true);
-                list.Add(newAb);
-                if (ab.IsShield) AddShield(ab);
-                if (ab.IsDebuff) AddToDebuffList(ab);
-                return;
-            }
-            existing.Duration = duration;
-            existing.DurationLeft = duration;
-            existing.Stacks = stacks;
-            existing.Refresh();
+                var list = GetList(ab);
+                var existing = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+                if (existing == null)
+                {
+                    var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true);
+                    list.Add(newAb);
+                    if (ab.IsShield) AddShield(ab);
+                    if (ab.IsDebuff) AddToDebuffList(ab);
+                    return;
+                }
+
+                existing.Duration = duration;
+                existing.DurationLeft = duration;
+                existing.Stacks = stacks;
+                existing.Refresh();
+            });
         }
         private void FindAndRemove(Abnormality ab)
         {

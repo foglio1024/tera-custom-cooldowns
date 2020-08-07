@@ -116,10 +116,14 @@ namespace TCC.Data.Skills
 
         private void OnCombatStatusChanged()
         {
-            if ((Game.Encounter || Game.Combat) && FlashOnAvailable)
-                ForceFlashing();
-            else
-                ForceStopFlashing();
+            Dispatcher.InvokeAsync(() =>
+            {
+
+                if ((Game.Encounter || Game.Combat) && FlashOnAvailable)
+                    ForceFlashing();
+                else
+                    ForceStopFlashing();
+            });
         }
 
         // timers tick handlers
@@ -248,11 +252,11 @@ namespace TCC.Data.Skills
         }
         private void ForceFlashing()
         {
-            Dispatcher.Invoke(() => FlashingForced?.Invoke());
+            Dispatcher.InvokeAsync(() => FlashingForced?.Invoke());
         }
         public void ForceStopFlashing()
         {
-            Dispatcher.Invoke(() => FlashingStopForced?.Invoke());
+            Dispatcher.InvokeAsync(() => FlashingStopForced?.Invoke());
         }
         public void ForceEnded()
         {
