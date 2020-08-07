@@ -496,6 +496,7 @@ namespace TCC.ViewModels.Widgets
         protected override void OnEnabledChanged(bool enabled)
         {
             base.OnEnabledChanged(enabled);
+            ClearSkills();
             LoadConfig(Game.Me.Class);
         }
 
@@ -525,7 +526,7 @@ namespace TCC.ViewModels.Widgets
                 if(SkillConfigWindow.Instance.IsVisible)
                     SkillConfigWindow.Instance.HideWindow();
                 else
-                    SkillConfigWindow.Instance.HideWindow();
+                    SkillConfigWindow.Instance.ShowWindow();
 
 
             }, DispatcherPriority.Background);
