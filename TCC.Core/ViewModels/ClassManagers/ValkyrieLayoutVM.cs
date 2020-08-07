@@ -1,4 +1,6 @@
-﻿using TCC.Data;
+﻿using System;
+using Nostrum;
+using TCC.Data;
 using TCC.Data.Skills;
 using TeraDataLite;
 
@@ -13,6 +15,8 @@ namespace TCC.ViewModels
         public bool ShowRagnarok => App.Settings.ClassWindowSettings.ValkyrieShowRagnarok;
         public bool ShowGodsfall => App.Settings.ClassWindowSettings.ValkyrieShowGodsfall;
 
+        public string RagnarokEffectSecondsText => TimeUtils.FormatMilliseconds(Convert.ToInt64((Ragnarok.Effect.Seconds > uint.MaxValue ? 0 : Ragnarok.Effect.Seconds) * 1000), App.Settings.ShowDecimalsInCooldowns);
+
         public ValkyrieLayoutVM()
         {
             RunemarksCounter = new Counter(7, false);
@@ -22,10 +26,18 @@ namespace TCC.ViewModels
 
             Game.DB.SkillsDatabase.TryGetSkill(250100, Class.Valkyrie, out var gf);
             Godsfall = new SkillWithEffect(Dispatcher, gf);
+
+            Ragnarok.Effect.SecondsUpdated += OnEffectSecondsUpdated;
+        }
+
+        private void OnEffectSecondsUpdated()
+        {
+            N(nameof(RagnarokEffectSecondsText));
         }
 
         public override void Dispose()
         {
+            Ragnarok.Effect.SecondsUpdated -= OnEffectSecondsUpdated;
             Ragnarok.Dispose();
             Godsfall.Dispose();
         }

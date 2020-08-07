@@ -169,7 +169,7 @@
                         </Rectangle>
                     </Grid>
 
-                    <controls:OutlinedTextBlock Text="{Binding Ragnarok.Effect.Seconds}" HorizontalAlignment="Center"
+                    <controls:OutlinedTextBlock Text="{Binding RagnarokEffectSecondsText}" HorizontalAlignment="Center"
                                                 VerticalAlignment="Center" TextAlignment="Center"
                                                 FontFamily="{StaticResource NotoSansMed}"
                                                 FontSize="19" Fill="White" StrokeThickness="3" Stroke="#5000"
