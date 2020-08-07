@@ -5,6 +5,8 @@ namespace TCC.Settings.WindowSettings
 {
     public class CivilUnrestWindowSettings : WindowSettingsBase
     {
+        public override bool Enabled { get => false; set { } }
+
         public CivilUnrestWindowSettings()
         {
             _visible = true;
@@ -13,7 +15,7 @@ namespace TCC.Settings.WindowSettings
             _autoDim = true;
             _dimOpacity = .5;
             _showAlways = false;
-            _enabled = true;
+            _enabled = false;
             _allowOffScreen = false;
             Positions = new ClassPositions(1, .45, ButtonsPosition.Above);
 

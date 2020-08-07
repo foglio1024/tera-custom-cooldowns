@@ -100,7 +100,7 @@ namespace TCC.Settings.WindowSettings
         [JsonIgnore] public ICommand MakeGlobalCommand { get; }
         [JsonIgnore] public ICommand CloseCommand { get; }
 
-        public bool Enabled
+        public virtual bool Enabled
         {
             get => _enabled;
             set

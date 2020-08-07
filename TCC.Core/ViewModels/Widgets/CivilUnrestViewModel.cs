@@ -62,7 +62,7 @@ namespace TCC.ViewModels.Widgets
         }
     }
 
-    [TccModule]
+    [TccModule(false)]
     public class CivilUnrestViewModel : TccWindowViewModel
     {
         public bool CivilUnrest => Game.CivilUnrestZone;
