@@ -7,9 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +24,7 @@ using TeraDataLite;
 namespace TCC.UI.Controls.Skills
 {
     //TODO: refactor this
-    public partial class FixedSkillContainers : INotifyPropertyChanged
+    public partial class FixedSkillContainers 
     {
         private object[] _mainOrder = { };
         private object[] _secondaryOrder = { };
@@ -295,11 +293,6 @@ namespace TCC.UI.Controls.Skills
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged = null!;
 
-        protected void N([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
