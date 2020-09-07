@@ -159,10 +159,14 @@ namespace TCC
         private static void InitDatabases(string lang)
         {
             UpdateManager.CheckServersFile();
-
-            DB = new TccDatabase(lang);
-            DB.CheckVersion();
-            if (!DB.IsUpToDate)
+            var samedb = DB?.Language == lang;
+            var updated = false;
+            if (!samedb)
+            {
+                DB = new TccDatabase(lang);
+            }
+            DB?.CheckVersion();
+            if (DB?.IsUpToDate == false)
             {
                 if (!App.Loading)
                 {
@@ -171,9 +175,10 @@ namespace TCC
                 }
 
                 DB.DownloadOutdatedDatabases();
+                updated = true;
             }
 
-            if (!DB.Exists)
+            if (DB?.Exists == false)
             {
                 var res = TccMessageBox.Show(SR.CannotLoadDbForLang(lang), MessageBoxType.ConfirmationWithYesNoCancel);
                 switch (res)
@@ -190,7 +195,13 @@ namespace TCC
                         break;
                 }
             }
-            else DB.Load();
+            else
+            {
+                if (!samedb || updated)
+                {
+                    DB?.Load();
+                }
+            }
         }
 
         private static void InstallHooks()
@@ -332,7 +343,7 @@ namespace TCC
                 Class.Brawler => new BrawlerAbnormalityTracker(),
                 Class.Ninja => new NinjaAbnormalityTracker(),
                 Class.Valkyrie => new ValkyrieAbnormalityTracker(),
-                _ => new AbnormalityTracker() 
+                _ => new AbnormalityTracker()
             };
         }
         private static void CheckChatMention(ParsedMessage m)
@@ -537,7 +548,7 @@ namespace TCC
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {
             #region Aura meme
-            if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024); 
+            if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024);
             #endregion
             NearbyPlayers.Remove(p.EntityId);
         }

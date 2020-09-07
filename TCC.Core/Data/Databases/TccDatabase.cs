@@ -37,9 +37,11 @@ namespace TCC.Data.Databases
 
         public bool IsUpToDate => Databases.All(db => db.IsUpToDate);
 
+        public string Language { get; }
 
         public TccDatabase(string lang)
         {
+            Language = lang;
             ServerDatabase = new ServerDatabase(App.DataPath, Path.Combine(App.ResourcesPath, "config/server-overrides.txt")) { Language = (LangEnum)Enum.Parse(typeof(LangEnum), lang.Replace("EU-", "")) };
             MonsterDatabase = new MonsterDatabase(lang);
             AccountBenefitDatabase = new AccountBenefitDatabase(lang);
