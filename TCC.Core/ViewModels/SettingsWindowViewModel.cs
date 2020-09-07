@@ -49,6 +49,7 @@ namespace TCC.ViewModels
         public CivilUnrestWindowSettings CuWindowSettings => App.Settings.CivilUnrestWindowSettings;
         public LfgWindowSettings LfgWindowSettings => App.Settings.LfgWindowSettings;
         public NotificationAreaSettings NotificationAreaSettings => App.Settings.NotificationAreaSettings;
+        public WindowSettingsBase PerfMonitorSettings => App.Settings.PerfMonitorSettings;
 
         public ICommand BrowseUrlCommand { get; }
         public ICommand RegisterWebhookCommand { get; }

@@ -1,0 +1,91 @@
+﻿<local:TccWidget x:Class="TCC.UI.Windows.Widgets.PerfMonitorWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:local="clr-namespace:TCC.UI.Windows.Widgets"
+                 xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
+                 mc:Ignorable="d"
+                 Style="{StaticResource BaseWindowStyle}"
+                 d:DataContext="{d:DesignInstance widgets:PerfMonitorViewModel}"
+                 MouseLeftButtonDown="Drag"
+                 UseLayoutRounding="True"
+                 Title="PerfMonitorWindow"
+                 MouseEnter="PerfMonitorWindow_OnMouseEnter"
+                 MouseLeave="PerfMonitorWindow_OnMouseLeave"
+                 >
+    <Grid>
+        <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary" />
+
+        <Border Style="{StaticResource RevampBorderStyle}" BorderThickness="0" x:Name="WindowContent"
+                Background="{StaticResource RevampBackground70Brush}" Effect="{x:Null}">
+            <Grid VerticalAlignment="Center" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Text="CPU" Width="30" Foreground="#5fff" VerticalAlignment="Center" />
+                <TextBlock Text="RAM" Width="30" Foreground="#5fff" VerticalAlignment="Center" Grid.Row="1" />
+                <TextBlock Foreground="#5fff" VerticalAlignment="Center" Grid.Column="1">
+                    <Run Foreground="White" Text="{Binding CPU, Mode=OneWay, StringFormat={}{0:N2}}" />
+                    <Run Text="%" />
+                </TextBlock>
+                <TextBlock Foreground="#5fff" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1">
+                    <Run Text="{Binding Memory, Mode=OneWay, StringFormat={}{0:N0}}">
+                        <Run.Style>
+                            <Style TargetType="Run">
+                                <Setter Property="Foreground" Value="White" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding MemoryWarning}" Value="True">
+                                        <Setter Property="Foreground" Value="Yellow" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding MemoryCritical}" Value="True">
+                                        <Setter Property="Foreground" Value="Orange" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding MemoryAAAAAAAAAAAAAAA}" Value="True">
+                                        <Setter Property="Foreground" Value="Red" />
+                                        <Setter Property="FontWeight" Value="DemiBold" />
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </Run.Style>
+                    </Run>
+                    <Run Text="MB" />
+                </TextBlock>
+                <Button Grid.Column="2" Grid.RowSpan="2"
+                        x:Name="DumpBtn"
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5 -5 -5 -5"
+                        VerticalContentAlignment="Center"
+                        Command="{Binding DumpThreadAllocationCommand}">
+                    <TextBlock Text="Dump details" Width="40" FontSize="10" TextWrapping="Wrap" TextAlignment="Center"
+                               Foreground="#5fff" />
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource ButtonMainStyle}" TargetType="Button">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MemoryWarning}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding MemoryCritical}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding MemoryAAAAAAAAAAAAAAA}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ShowDumpButton}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</local:TccWidget>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using TCC.Settings.WindowSettings;
 using TCC.UI.Controls;
 using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
@@ -39,6 +40,7 @@ namespace TCC.UI
         public static NotificationAreaWindow NotificationArea { get; private set; }
         public static FlightDurationWindow FlightDurationWindow { get; private set; }
         //public static SkillConfigWindow? SkillConfigWindow { get; set; }
+        public static PerfMonitorWindow PerfMonitor { get; private set; }
 
         public static Dashboard DashboardWindow { get; private set; }
 
@@ -129,6 +131,10 @@ namespace TCC.UI
             DashboardWindow = await b9.GetWindow();
             ViewModels.DashboardVM= await b9.GetViewModel();
 
+            var b10 = new TccWidgetBuilder<PerfMonitorWindow, PerfMonitorViewModel>(App.Settings.PerfMonitorSettings);
+            PerfMonitor = await b10.GetWindow();
+            ViewModels.PervMonitorVM = await b10.GetViewModel();
+
             FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGaugeVM);
             if (FlightDurationWindow.WindowSettings.Enabled) FlightDurationWindow.Show();
 
@@ -141,6 +147,7 @@ namespace TCC.UI
 
             ChatManager.Start();
         }
+
 
         public static void ReloadPositions()
         {
@@ -180,11 +187,11 @@ namespace TCC.UI
             public static DashboardViewModel DashboardVM { get; set; }
             public static FloatingButtonViewModel FloatingButtonVM { get; set; }
             public static GroupWindowViewModel GroupVM { get; set; }
+            public static PerfMonitorViewModel PervMonitorVM { get; set; }
 
             public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ??= new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings);
             public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
             public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ??= new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings);
-
         }
 
     }

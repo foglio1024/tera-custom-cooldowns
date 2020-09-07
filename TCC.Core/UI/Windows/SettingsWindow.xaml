@@ -2123,6 +2123,60 @@
                         </StackPanel>
                     </Grid>
                 </TabItem>
+                <!--Debug settings-->
+                <TabItem>
+                    <TabItem.Header>
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Path Margin="6" Data="{StaticResource SvgWarning}" />
+                            <TextBlock Text="Debug"
+                                       Style="{StaticResource TabItemHeaderTextStyle}"
+                                       Grid.Column="1" />
+                        </Grid>
+                    </TabItem.Header>
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource TabContentBackgroundBorder}" />
+                        <Path Style="{StaticResource BigPathStyle}" Data="{StaticResource SvgWarning}" />
+                        <!-- General -->
+                        <StackPanel VerticalAlignment="Stretch">
+                            <ContentControl Template="{StaticResource SectionHeaderTemplate}"
+                                            Content="Performance monitor widget settings" />
+                            <settings:CheckboxSetting IsOn="{Binding PerfMonitorSettings.Visible, Mode=TwoWay}"
+                                                      Style="{StaticResource VisibilitySettingStyle}" 
+                                                      IsEnabled="{Binding PerfMonitorSettings.Enabled}" />
+                            <settings:CheckboxSetting IsOn="{Binding PerfMonitorSettings.ShowAlways, Mode=TwoWay}"
+                                                      Style="{StaticResource ShowAlwaysSettingStyle}" 
+                                                      IsEnabled="{Binding PerfMonitorSettings.Enabled}"/>
+                            <settings:CheckboxSetting IsOn="{Binding PerfMonitorSettings.AutoDim, Mode=TwoWay}"
+                                                      Style="{StaticResource AutoDimSettingStyle}" 
+                                                      IsEnabled="{Binding PerfMonitorSettings.Enabled}"/>
+                            <settings:SelectionSetting
+                                SelectedItem="{Binding PerfMonitorSettings.ClickThruMode, Mode=TwoWay}"
+                                Style="{StaticResource ClickThruSettingStyle}" 
+                                IsEnabled="{Binding PerfMonitorSettings.Enabled}"/>
+                            <settings:ValueSetting Value="{Binding PerfMonitorSettings.MaxOpacity, Mode=TwoWay}"
+                                                   Style="{StaticResource MaxOpacitySettingStyle}"
+                                                   IsEnabled="{Binding PerfMonitorSettings.Enabled}" />
+                            <settings:ValueSetting Value="{Binding PerfMonitorSettings.DimOpacity, Mode=TwoWay}"
+                                                   Style="{StaticResource DimOpacitySettingStyle}"
+                                                   IsEnabled="{Binding PerfMonitorSettings.Enabled}" />
+                        </StackPanel>
+
+                    </Grid>
+                </TabItem>
                 <!-- P2W settings -->
                 <TabItem Visibility="Collapsed">
                     <TabItem.Header>
