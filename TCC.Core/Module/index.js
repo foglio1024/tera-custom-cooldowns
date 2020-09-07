@@ -12,8 +12,11 @@ exports.ClientMod = class
             m.log("TCC chat link is not installed. Advanced functionality won't be available.");
         }
 
-        m.log('Starting TCC...');
-        const tcc = spawn(tccPath, ['--toolbox'], { stdio: 'ignore' });
-        tcc.on('exit', () => m.log('TCC exited because it closed or it is already running.'));
+        m.clientInterface.once('ready', () => 
+        {
+		    m.log('Starting TCC...');
+		    const tcc = spawn(tccPath, ['--toolbox'], { stdio: 'ignore' });
+		    tcc.on('exit', () => m.log('TCC exited because it closed or it is already running.'));
+	    });
     }
 }
