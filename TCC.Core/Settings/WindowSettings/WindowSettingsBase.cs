@@ -156,6 +156,7 @@ namespace TCC.Settings.WindowSettings
             {
                 _showAlways = value;
                 N(nameof(ShowAlways));
+                VisibilityChanged?.Invoke(value);
                 WindowManager.VisibilityManager?.RefreshVisible();
             }
         }

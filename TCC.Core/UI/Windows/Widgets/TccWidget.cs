@@ -235,7 +235,7 @@ namespace TCC.UI.Windows.Widgets
 
         protected virtual void OnVisibilityChanged()
         {
-            if (WindowManager.VisibilityManager.Visible && !_hidden)
+            if (WindowManager.VisibilityManager.Visible && !_hidden || WindowSettings.ShowAlways)
             {
 
                 if (WindowManager.VisibilityManager.Dim && WindowSettings.AutoDim && !WindowSettings.ForcedVisible)
