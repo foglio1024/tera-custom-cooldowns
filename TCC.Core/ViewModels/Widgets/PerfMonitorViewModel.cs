@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Nostrum;
+using TCC.Debug;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 
@@ -21,7 +23,7 @@ namespace TCC.ViewModels.Widgets
         public double Memory
         {
             get => _memory;
-            set
+            private set
             {
                 if (_memory == value) return;
                 _memory = value;
@@ -34,7 +36,7 @@ namespace TCC.ViewModels.Widgets
         public double CPU
         {
             get => _cpu;
-            set
+            private set
             {
                 if (_cpu == value) return;
                 _cpu = value;
@@ -74,15 +76,8 @@ namespace TCC.ViewModels.Widgets
                     {
                         lock (DumpThreadAllocationCommand)
                         {
-                            var name = $"- {dispatcher.Thread.Name} ";
-                            while (name.Length < 33)
-                            {
-                                name += "-";
-                            }
 
-                            sb += ($"{name} {GC.GetAllocatedBytesForCurrentThread() / (1024 * 1024D):N0} MB\n");
-                            Interlocked.Increment(ref count);
-                            Debug.WriteLine($"{dispatcher.Thread.Name} {count}");
+                            sb += BuildThreadString(dispatcher, ref count);
                         }
                     });
                 }
@@ -90,16 +85,7 @@ namespace TCC.ViewModels.Widgets
                 {
                     lock (DumpThreadAllocationCommand)
                     {
-                        var name = $"- {App.BaseDispatcher.Thread.Name} ";
-                        while (name.Length < 33)
-                        {
-                            name += "-";
-                        }
-
-
-                        sb += ($"{name} {GC.GetAllocatedBytesForCurrentThread() / (1024 * 1024D):N0} MB\n");
-                        Interlocked.Increment(ref count);
-                        Debug.WriteLine($"{App.BaseDispatcher.Thread.Name} {count}");
+                        sb += BuildThreadString(App.BaseDispatcher, ref count);
                     }
                 });
                 var max = App.RunningDispatchers.Count;
@@ -110,9 +96,26 @@ namespace TCC.ViewModels.Widgets
 
                 Log.F(sb, "threads_mem.log");
 
+                ObjectTracker.DumpToFile();
             });
 
             Task.Run(OnTick);
+        }
+
+        private string BuildThreadString(Dispatcher dispatcher, ref int count)
+        {
+            var ret = "";
+                var name = $"- {dispatcher.Thread.Name} ";
+                while (name.Length < 33)
+                {
+                    name += "-";
+                }
+
+                ret += ($"{name} {GC.GetAllocatedBytesForCurrentThread() / (1024 * 1024D):N0} MB\n");
+                Interlocked.Increment(ref count);
+                System.Diagnostics.Debug.WriteLine($"{dispatcher.Thread.Name} {count}");
+
+            return ret;
         }
 
         private void OnTick()
