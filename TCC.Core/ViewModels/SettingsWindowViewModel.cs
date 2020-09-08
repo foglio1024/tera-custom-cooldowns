@@ -771,7 +771,7 @@ namespace TCC.ViewModels
             });
             MakePositionsGlobalCommand = new RelayCommand(_ => WindowManager.MakeGlobal());
             ResetWindowPositionsCommand = new RelayCommand(_ => WindowManager.ResetToCenter());
-            OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(Path.Combine(App.ResourcesPath, "config")));
+            OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(new ProcessStartInfo(Path.Combine(App.ResourcesPath, "config"))));
             ClearChatCommand = new RelayCommand(_ => ChatManager.Instance.ClearMessages());
 
             MonsterDatabase.BlacklistChangedEvent += MonsterDatabase_BlacklistChangedEvent;

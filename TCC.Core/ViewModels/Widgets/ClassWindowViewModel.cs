@@ -63,12 +63,37 @@ namespace TCC.ViewModels.Widgets
 
         public ClassWindowViewModel(ClassWindowSettings settings) : base(settings)
         {
+            if (!settings.Enabled) return;
             settings.WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
             settings.WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
             settings.WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
             settings.SorcererShowElementsChanged += OnSorcererShowElementsChanged;
             settings.ValkyrieShowGodsfallChanged += OnValkyrieShowGodsfallChanged;
             settings.ValkyrieShowRagnarokChanged += OnValkyrieShowRagnarokChanged;
+        }
+
+        protected override void OnEnabledChanged(bool enabled)
+        {
+            base.OnEnabledChanged(enabled);
+            if (!enabled)
+            {
+                CurrentClass = Class.None;
+                ((ClassWindowSettings)Settings).WarriorShowEdgeChanged -= OnWarriorShowEdgeChanged;
+                ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged -= OnWarriorShowTraverseCutChanged;
+                ((ClassWindowSettings)Settings).WarriorEdgeModeChanged -= OnWarriorEdgeModeChanged;
+                ((ClassWindowSettings)Settings).SorcererShowElementsChanged -= OnSorcererShowElementsChanged;
+                ((ClassWindowSettings)Settings).ValkyrieShowGodsfallChanged -= OnValkyrieShowGodsfallChanged;
+                ((ClassWindowSettings)Settings).ValkyrieShowRagnarokChanged -= OnValkyrieShowRagnarokChanged;
+            }
+            else
+            {
+                ((ClassWindowSettings)Settings).WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
+                ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
+                ((ClassWindowSettings)Settings).WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
+                ((ClassWindowSettings)Settings).SorcererShowElementsChanged += OnSorcererShowElementsChanged;
+                ((ClassWindowSettings)Settings).ValkyrieShowGodsfallChanged += OnValkyrieShowGodsfallChanged;
+                ((ClassWindowSettings)Settings).ValkyrieShowRagnarokChanged += OnValkyrieShowRagnarokChanged;
+            }
         }
 
         private void OnValkyrieShowRagnarokChanged()
