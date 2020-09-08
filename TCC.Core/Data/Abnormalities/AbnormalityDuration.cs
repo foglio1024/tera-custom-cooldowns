@@ -2,6 +2,7 @@
 using System;
 using System.Timers;
 using System.Windows.Threading;
+using TCC.Debug;
 
 namespace TCC.Data.Abnormalities
 {
@@ -60,6 +61,7 @@ namespace TCC.Data.Abnormalities
         }
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated) : this(b)
         {
+            ObjectTracker.Register(this.GetType());
             Dispatcher = disp;
             Animated = animated;
             Duration = d;
@@ -74,6 +76,10 @@ namespace TCC.Data.Abnormalities
             _timer.Start();
         }
 
+        ~AbnormalityDuration()
+        {
+            ObjectTracker.Unregister(this.GetType());
+        }
 
         private void DecreaseDuration(object sender, EventArgs e)
         {

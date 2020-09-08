@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Nostrum;
 using Nostrum.Extensions;
+using TCC.Debug;
 using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
@@ -71,6 +72,7 @@ namespace TCC.Data.Chat
 
         protected ChatMessage()
         {
+            ObjectTracker.Register(GetType());
             Dispatcher = ChatManager.Instance.GetDispatcher();
             Pieces = new TSObservableCollection<MessagePieceBase>(Dispatcher);
             Lines = new TSObservableCollection<MessageLine>(Dispatcher);
@@ -130,6 +132,11 @@ namespace TCC.Data.Chat
             //{
             //}, DispatcherPriority.DataBind);
             Pieces.Add(mp);
+        }
+
+        ~ChatMessage()
+        {
+            ObjectTracker.Unregister(GetType());
         }
         protected void InsertPiece(MessagePieceBase mp, int index)
         {

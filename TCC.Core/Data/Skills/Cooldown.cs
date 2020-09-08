@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
+using TCC.Debug;
 
 namespace TCC.Data.Skills
 {
@@ -87,6 +88,7 @@ namespace TCC.Data.Skills
         // ctors
         public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher? d = null, double intervalMs = 100)
         {
+            ObjectTracker.Register(GetType());
             Interval = intervalMs;
             Dispatcher = d ?? Dispatcher.CurrentDispatcher;
             _mainTimer = Dispatcher.Invoke(() => new DispatcherTimer());
@@ -108,6 +110,11 @@ namespace TCC.Data.Skills
             if (cooldown == 0) return;
             if (type == CooldownType.Item) cooldown *= 1000;
             Start(cooldown, mode);
+        }
+
+        ~Cooldown()
+        {
+            ObjectTracker.Unregister(GetType());
         }
         private void OnGlobalFlashChanged()
         {
@@ -270,6 +277,9 @@ namespace TCC.Data.Skills
         {
             App.Settings.ClassWindowSettings.FlashAvailableSkillsChanged -= OnGlobalFlashChanged;
             CanFlash = false;
+
+            Game.CombatChanged -= OnCombatStatusChanged;
+            Game.EncounterChanged -= OnCombatStatusChanged;
 
             _mainTimer.Tick -= CooldownEnded;
             _offsetTimer.Tick -= StartSecondsTimer;

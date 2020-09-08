@@ -49,7 +49,7 @@ namespace TCC.UI.Controls.Abnormalities
                     if (ParseGood(piece)) continue;
                     if (ParseBad(piece)) continue;
                     if (ParseCustom(piece)) continue;
-                    Debug.WriteLine("Failed to parse piece");
+                    System.Diagnostics.Debug.WriteLine("Failed to parse piece");
                 }
             }
 

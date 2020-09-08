@@ -3,6 +3,7 @@ using Nostrum.Extensions;
 using System;
 using System.Linq;
 using System.Windows.Input;
+using TCC.Debug;
 using TCC.Interop.Proxy;
 using TCC.UI.Windows;
 using TCC.Utilities;
@@ -64,8 +65,14 @@ namespace TCC.Data.Chat
 
         protected MessagePieceBase()
         {
+            ObjectTracker.Register(GetType());
             Dispatcher = ChatManager.Instance.GetDispatcher();
             ClickCommand = new RelayCommand(_ => { });
+        }
+
+        ~MessagePieceBase()
+        {
+            ObjectTracker.Unregister(GetType());
         }
 
         private void OnFontSizeChanged()

@@ -48,7 +48,7 @@ namespace TCC.UI.Controls.Abnormalities
                 ParseToolTip(AbnormalityToolTip);
                 if (ToolTipTb.Text != "") return;
                 ToolTipTb.Text = Id.ToString();
-                Debug.WriteLine("Unknown abnoramlity: {0}", Id.ToString());
+                System.Diagnostics.Debug.WriteLine("Unknown abnoramlity: {0}", Id.ToString());
             }
             catch
             {
