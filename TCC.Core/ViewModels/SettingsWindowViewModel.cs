@@ -655,7 +655,11 @@ namespace TCC.ViewModels
             get
             {
                 var ret = EnumUtils.ListFromEnum<ClickThruMode>();
-                if (!App.Settings.EnableProxy || PacketAnalyzer.Factory?.ReleaseVersion/100 >= 97) ret.Remove(ClickThruMode.GameDriven);
+                if (!App.Settings.EnableProxy
+#if TERA_X64
+                    || PacketAnalyzer.Factory?.ReleaseVersion/100 >= 97
+#endif
+                    ) ret.Remove(ClickThruMode.GameDriven);
                 return ret;
             }
         }
