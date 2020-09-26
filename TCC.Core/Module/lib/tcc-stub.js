@@ -1,25 +1,15 @@
-const path = require('path');
-const fs = require('fs');
+const { TccInterface } = require("./tcc-interface");
+const { Globals } = require("./globals")
 
 // const BadGui = require('../badGui');
-
 class TccStub
 {
     constructor(mod)
     {
         this.mod = mod;
-        this.useLfg = false;
-        this.EnablePlayerMenu = false;
-        this.EnableProxy = false;
-        this.ShowIngameChat = true;
-        if (mod.isClassic)
-        {
-            mod.log('TCC does not support classic servers.');
-            return;
-        }
-        this.tcc = mod.globalMod.tcc;
+
+        this.tcc = new TccInterface(mod);
         this.installHooks();
-        this.debug = mod.globalMod.debug;
 
         // soon (TM)
         //this.gui = new BadGui(mod);
@@ -42,7 +32,6 @@ class TccStub
             {
                 this.memeA();
             }
-
         });
 
         this.mod.command.add('tcc', (arg) =>
@@ -72,27 +61,23 @@ class TccStub
 
     notifyShowIngameChatChanged()
     {
-        if (!this.isChatLinkAvailable())
-        {
-            this.debug("tcc-chat-link not found.");
-            return;
-        }
-
+        if(!Globals.EnableProxy || !Globals.TccChatEnabled) return;
         this.mod.send('S_CHAT', 3, {
             channel: 18,
             name: 'tccChatLink',
-            message: this.ShowIngameChat ? ':tcc-chatOn:' : ':tcc-chatOff:'
+            message: Globals.ShowIngameChat ? ':tcc-chatOn:' : ':tcc-chatOff:'
         })
     }
 
     installHooks()
     {
         // block ingame player menu
-        this.mod.hook('S_ANSWER_INTERACTIVE', 2, () => { return !this.EnablePlayerMenu; });
+        this.mod.hook('S_ANSWER_INTERACTIVE', "raw", () => { return !Globals.EnablePlayerMenu; });
         // block ingame lfg list
-        this.mod.hook("S_SHOW_PARTY_MATCH_INFO", 1, () => { return !this.useLfg; });
+        this.mod.hook("S_SHOW_PARTY_MATCH_INFO", "raw", () => { return !Globals.useLfg; });
         // block ingame lfg details
-        this.mod.hook("S_PARTY_MEMBER_INFO", 3, () => { return !this.useLfg; });
+        this.mod.hook("S_PARTY_MEMBER_INFO", "raw", () => { return !Globals.useLfg; });
+        this.mod.hook("S_SHOW_CANDIDATE_LIST", "raw", () => { return !Globals.useLfg; });
         // block tcc messages from gpk file
         this.mod.hook('S_CHAT', 3, (p) => { return p.authorName != 'tccChatLink'; });
         // hook Command messages to display them in tcc {order: 999, filter:{fake:true}}
@@ -152,15 +137,14 @@ class TccStub
         // notify to Chat2 that proxy is active
         this.mod.hook('C_LOAD_TOPO_FIN', 'raw', () =>
         {
-            if (!this.EnableProxy) return true;
-            if (!this.isChatLinkAvailable())
+            if (!Globals.EnableProxy || !Globals.TccChatEnabled)
             {
-                this.debug("tcc-chat-link not found.");
+                this.debug("Globals.EnableProxy is false, returning")
                 return true;
             }
-
             this.mod.setTimeout(() =>
             {
+                this.debug("Sending tcc-proxyOn to Chat2.gpk");
                 this.mod.send('S_CHAT', 3, {
                     channel: 18,
                     name: 'tccChatLink',
@@ -179,15 +163,7 @@ class TccStub
 
     isChatLinkAvailable()
     {
-        return this.mod.clientMod.isInstalled;
-
-        // const p = path.join(__dirname, '..', 'tcc-chat-link');
-        // this.debug(`Path is :${p}`);
-        // return this.mod.manager.isLoaded("tcc-chat-link")
-        //     ||
-        //     fs.existsSync(p); // workaround
-
-        // return this.mod.clientInterface.moduleManager.isInstalled('tcc-chat-link');
+        return true;
     }
 
     memeA()
@@ -209,8 +185,17 @@ class TccStub
         }, 10000);
     }
 
+    debug(msg)
+    {
+        if (!this.mod.settings.debug) return;
+        this.mod.command.message(`<font color="#fff1b5">${msg}</font>`);
+        this.mod.log(`${msg}`);
+    }
 
+    destructor()
+    {
+        this.tcc.stopServer();
+    }
 }
-
 
 exports.TccStub = TccStub;

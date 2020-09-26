@@ -51,5 +51,10 @@ class TccInterface
             this.mod.log(`Error in TCC interface: ${err}`);
         }
     }
+
+    stopServer()
+    {
+        this.server.stop();
+    }
 }
 exports.TccInterface = TccInterface;

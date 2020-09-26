@@ -1,10 +1,17 @@
 const fs = require('fs');
+const { Globals } = require("./globals")
 
 class RpcHandler
 {
     constructor(mod)
     {
         this.mod = mod;
+    }
+
+    debug(msg)
+    {
+        if (!this.mod.settings.debug) return;
+        this.mod.command.message(`<font color="#fff1b5">${msg}</font>`);
     }
 
     handle(request)
@@ -17,7 +24,7 @@ class RpcHandler
         this.debug(`Dumping sysmsg`);
 
         let ret = true;
-        let sysmsg = '';
+        let sysmsg = "";
         let names = Object.keys(this.mod.clientInterface.info.sysmsg);
         names.forEach(name =>
         {
@@ -192,7 +199,7 @@ class RpcHandler
     }
     requestListings(params)
     {
-        this.mod.send('C_PARTY_MATCH_WINDOW_CLOSED', 1, {});
+        this.mod.send("C_PARTY_MATCH_WINDOW_CLOSED", 1, {});
         this.debug(`Sent C_PARTY_MATCH_WINDOW_CLOSED`);
 
         let min = params.minLevel;
@@ -201,7 +208,7 @@ class RpcHandler
             min = max;
         if (min < 1)
             min = 1;
-        this.mod.send('C_REQUEST_PARTY_MATCH_INFO', 1, {
+        this.mod.send("C_REQUEST_PARTY_MATCH_INFO", 1, {
             minlvl: min,
             maxlvl: max,
             unk2: 3
@@ -269,7 +276,7 @@ class RpcHandler
     }
     forceSystemMessage(params)
     {
-        this.mod.send('S_SYSTEM_MESSAGE', 1, {
+        this.mod.send("S_SYSTEM_MESSAGE", 1, {
             message: params.message
         });
         this.debug(`Sent S_SYSTEM_MESSAGE`);
@@ -281,7 +288,7 @@ class RpcHandler
     }
     returnToLobby(params)
     {
-        this.mod.send('C_RETURN_TO_LOBBY', 1, {});
+        this.mod.send("C_RETURN_TO_LOBBY", 1, {});
         this.debug(`Sent C_RETURN_TO_LOBBY`);
     }
     chatLinkAction(params)
@@ -295,34 +302,39 @@ class RpcHandler
     }
     updateSetting(params) // bool only, send type if needed for other setting
     {
-        let value = params.value == 'True'; // JS PLS
+        let value = params.value == "True"; // JS PLS
         let name = params.name;
-        this.mod.networkMod[name] = value; 
+        Globals[name] = value; 
         let msg = `${name} set to ${value}`;
-        if (name == 'useLfg')
+        if (name == "useLfg")
         {
             msg = `TCC LFG window ${(value ? 'enabled' : 'disabled')}. Ingame LFG ${(value ? 'will' : "won't")} be blocked.`;
         }
-        else if (name == 'EnablePlayerMenu')
+        else if (name == "EnablePlayerMenu")
         {
-            msg = `TCC player menu ${(value ? 'enabled' : 'disabled')}. Ingame player menu ${(value ? 'will' : "won't")} be blocked.`;
+            msg = `TCC player menu ${(value ? "enabled" : "disabled")}. Ingame player menu ${(value ? "will" : "won't")} be blocked.`;
         }
-        else if (name == 'ShowIngameChat')
+        else if (name == "ShowIngameChat")
         {
             this.mod.networkMod.notifyShowIngameChatChanged();
+        }
+        else if (name == "TccChatEnabled"){
+            // do nothing
         }
         this.mod.log(msg);
 
     }
     initialize(params)
     {
-        this.mod.networkMod.useLfg = params.useLfg;
-        this.mod.networkMod.EnablePlayerMenu = params.EnablePlayerMenu;
+        Globals.useLfg = params.useLfg;
+        Globals.EnablePlayerMenu = params.EnablePlayerMenu;
         // this.mod.networkMod.EnableProxy = params.EnableProxy;
-        this.mod.networkMod.EnableProxy = params.EnableProxy;
-        this.mod.networkMod.ShowIngameChat = params.ShowIngameChat;
-        if (this.mod.networkMod.useLfg) this.mod.log('TCC LFG window enabled. Ingame LFG listings will be blocked.');
-        if (this.mod.networkMod.EnablePlayerMenu) this.mod.log('TCC player menu enabled. Ingame player menu will be blocked.');
+        Globals.EnableProxy = params.EnableProxy;
+        Globals.ShowIngameChat = params.ShowIngameChat;
+        Globals.TccChatEnabled = params.TccChatEnabled;
+        if (Globals.useLfg) this.mod.log("TCC LFG window enabled. Ingame LFG listings will be blocked.");
+        if (Globals.EnablePlayerMenu) this.mod.log("TCC player menu enabled. Ingame player menu will be blocked.");
+        if (Globals.TccChatEnabled) this.mod.log("TCC chat enabled. Advanced Chat2.gpk functionalities won't be available.");
         return true;
     }
 }
