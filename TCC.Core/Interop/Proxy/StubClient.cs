@@ -282,7 +282,8 @@ namespace TCC.Interop.Proxy
                 { "useLfg", App.Settings.LfgWindowSettings.Enabled },
                 { "EnablePlayerMenu", App.Settings.EnablePlayerMenu },
                 { "EnableProxy", App.Settings.EnableProxy },
-                { "ShowIngameChat", App.Settings.ShowIngameChat}
+                { "ShowIngameChat", App.Settings.ShowIngameChat},
+                { "TccChatEnabled", App.Settings.ChatEnabled}
             });
         }
     }

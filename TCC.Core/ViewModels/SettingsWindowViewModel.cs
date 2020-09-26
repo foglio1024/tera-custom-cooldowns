@@ -605,6 +605,8 @@ namespace TCC.ViewModels
                 //}
                 App.Settings.ChatEnabled = value;
                 ChatManager.Instance.NotifyEnabledChanged(value);
+                StubInterface.Instance.StubClient.UpdateSetting("TccChatEnabled", value);
+
                 //StubInterface.Instance.StubClient.UpdateSetting("ChatEnabled", App.Settings.ChatEnabled);
                 N();
             }
