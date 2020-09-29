@@ -324,6 +324,7 @@ namespace TCC
             Me.ClearAbnormalities();
             Logged = false;
             LoadingScreen = true;
+            App.Settings.Save();
         }
 
         private static void SetAbnormalityTracker(Class c)
