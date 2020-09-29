@@ -47,20 +47,32 @@ class TccLauncher
                 m.log("Installed S1UI_CharacterWindow remover.");
             }
 
-            if (settings.NpcWindowSettings.Enabled === true)
+            let hideNpcWin = true;
+            if (settings.NpcWindowSettings.HideIngameUI !== undefined)
+	            hideNpcWin = settings.NpcWindowSettings.HideIngameUI;
+
+            if (settings.NpcWindowSettings.Enabled === true && hideNpcWin === true)
             {
                 installer.gpk('gpk/S1UI_TargetInfo.gpk');
                 installer.gpk('gpk/S1UI_GageBoss.gpk');
                 m.log("Installed S1UI_TargetInfo and S1UI_GageBoss remover.");
             }
 
-            if (settings.BuffWindowSettings.Enabled === true)
+            let hideBuffWin = true;
+            if (settings.BuffWindowSettings.HideIngameUI !== undefined)
+	            hideBuffWin = settings.BuffWindowSettings.HideIngameUI;
+
+            if (settings.BuffWindowSettings.Enabled === true && hideBuffWin === true)
             {
                 installer.gpk('gpk/S1UI_Abnormality.gpk');
                 m.log("Installed S1UI_Abnormality remover.");
             }
 
-            if (settings.GroupWindowSettings.Enabled === true)
+            let hideGroupWin = true;
+            if (settings.GroupWindowSettings.HideIngameUI !== undefined)
+	            hideGroupWin = settings.GroupWindowSettings.HideIngameUI;
+
+            if (settings.GroupWindowSettings.Enabled === true && hideGroupWin === true)
             {
                 installer.gpk("gpk/S1UI_PartyWindow.gpk");
                 installer.gpk("gpk/S1UI_PartyWindowRaidInfo.gpk");

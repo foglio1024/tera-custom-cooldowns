@@ -29,6 +29,7 @@ namespace TCC.Settings.WindowSettings
         protected bool _allowOffScreen;
         private bool _forcedClickable;
         private bool _forcedVisible;
+        private bool _hideIngameUI = true;
 
 
         public event Action ResetToCenter = null!;
@@ -138,6 +139,18 @@ namespace TCC.Settings.WindowSettings
                 N(nameof(Enabled));
             }
         }
+
+        public virtual bool HideIngameUI
+        {
+            get => _hideIngameUI;
+            set
+            {
+                if(_hideIngameUI == value) return;
+                _hideIngameUI = value;
+                N();
+            }
+        }
+
         public bool Visible
         {
             get => _visible;
