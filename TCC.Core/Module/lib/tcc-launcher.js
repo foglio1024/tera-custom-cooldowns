@@ -14,6 +14,19 @@ class TccLauncher
             tcc.on('exit', () => m.log('TCC exited because it closed or it is already running.'));
         });
 
+        this.tryInstallRemover = function(removerGpkName, installer, removerNiceName)
+        {
+            try
+            {
+                installer.gpk(`gpk/${removerGpkName}`);
+                m.log(`Installed ${removerNiceName} remover (${removerGpkName})`);
+            } 
+            catch (error)
+            {
+                m.error(`${removerGpkName} has been already installed by another mod. ${removerNiceName} remover won't be installed.`);
+            }
+        }
+
         this.install = function (installer)
         {
             const tccSettingsPath = Path.join(__dirname, '../tcc-settings.json');
@@ -24,59 +37,54 @@ class TccLauncher
             if (noSettings)
             {
                 // no settings, remove everything by default
-                m.log("No settings found, installing all removers by default.")
-                installer.gpk('gpk/S1UI_CharacterWindow.gpk');
-                installer.gpk('gpk/S1UI_TargetInfo.gpk');
-                installer.gpk('gpk/S1UI_GageBoss.gpk');
-                installer.gpk('gpk/S1UI_Abnormality.gpk');
-                installer.gpk("gpk/S1UI_PartyWindow.gpk");
-                installer.gpk("gpk/S1UI_PartyWindowRaidInfo.gpk");
+                m.log("No settings found, installing all removers by default.");
+                this.tryInstallRemover('S1UI_CharacterWindow.gpk', installer, 'Character window');
+                this.tryInstallRemover('S1UI_TargetInfo.gpk', installer, 'Mob HP bar');
+                this.tryInstallRemover('S1UI_GageBoss.gpk', installer, 'Boss HP bar');
+                this.tryInstallRemover('S1UI_Abnormality.gpk', installer, 'Buff bar');
+                this.tryInstallRemover('S1UI_PartyWindow.gpk', installer, 'Party windows');
+                this.tryInstallRemover('S1UI_PartyWindowRaidInfo.gpk', installer, 'Raid windows');
+                this.tryInstallRemover('S1UI_PartyBoard.gpk', installer, 'LFG window');
+                this.tryInstallRemover('S1UI_PartyBoardMemberInfo.gpk', installer, 'LFG details info');
+                this.tryInstallRemover('S1UI_Chat2.gpk', installer, 'Chat');
                 // installer.gpk('gpk/S1UI_ProgressBar.gpk');
-                installer.gpk("gpk/S1UI_PartyBoard.gpk");
-                installer.gpk("gpk/S1UI_PartyBoardMemberInfo.gpk");
-                installer.gpk("gpk/S1UI_Chat2.gpk");
                 return;
             }
 
-            m.log("Reading TCC settings.")
             let settings = JSON.parse(FS.readFileSync(tccSettingsPath));
 
             if (settings.CharacterWindowSettings.Enabled === true)
             {
-                installer.gpk('gpk/S1UI_CharacterWindow.gpk');
-                m.log("Installed S1UI_CharacterWindow remover.");
+                this.tryInstallRemover('S1UI_CharacterWindow.gpk', installer, 'Character window');
             }
 
             let hideNpcWin = true;
             if (settings.NpcWindowSettings.HideIngameUI !== undefined)
-	            hideNpcWin = settings.NpcWindowSettings.HideIngameUI;
+                hideNpcWin = settings.NpcWindowSettings.HideIngameUI;
 
             if (settings.NpcWindowSettings.Enabled === true && hideNpcWin === true)
             {
-                installer.gpk('gpk/S1UI_TargetInfo.gpk');
-                installer.gpk('gpk/S1UI_GageBoss.gpk');
-                m.log("Installed S1UI_TargetInfo and S1UI_GageBoss remover.");
+                this.tryInstallRemover('S1UI_TargetInfo.gpk', installer, 'Mob HP bar');
+                this.tryInstallRemover('S1UI_GageBoss.gpk', installer, 'Boss HP bar');
             }
 
             let hideBuffWin = true;
             if (settings.BuffWindowSettings.HideIngameUI !== undefined)
-	            hideBuffWin = settings.BuffWindowSettings.HideIngameUI;
+                hideBuffWin = settings.BuffWindowSettings.HideIngameUI;
 
             if (settings.BuffWindowSettings.Enabled === true && hideBuffWin === true)
             {
-                installer.gpk('gpk/S1UI_Abnormality.gpk');
-                m.log("Installed S1UI_Abnormality remover.");
+                this.tryInstallRemover('S1UI_Abnormality.gpk', installer, 'Buff bar');
             }
 
             let hideGroupWin = true;
             if (settings.GroupWindowSettings.HideIngameUI !== undefined)
-	            hideGroupWin = settings.GroupWindowSettings.HideIngameUI;
+                hideGroupWin = settings.GroupWindowSettings.HideIngameUI;
 
             if (settings.GroupWindowSettings.Enabled === true && hideGroupWin === true)
             {
-                installer.gpk("gpk/S1UI_PartyWindow.gpk");
-                installer.gpk("gpk/S1UI_PartyWindowRaidInfo.gpk");
-                m.log("Installed S1UI_PartyWindow and S1UI_PartyWindowRaidInfo remover.");
+                this.tryInstallRemover('S1UI_PartyWindow.gpk', installer, 'Party windows');
+                this.tryInstallRemover('S1UI_PartyWindowRaidInfo.gpk', installer, 'Raid windows');
             }
 
             // if (settings.FlightGaugeWindowSettings.Enabled === true)
@@ -87,15 +95,13 @@ class TccLauncher
 
             if (settings.LfgWindowSettings.Enabled === true)
             {
-                installer.gpk("gpk/S1UI_PartyBoard.gpk");
-                installer.gpk("gpk/S1UI_PartyBoardMemberInfo.gpk");
-                m.log("Installed S1UI_PartyBoard and S1UI_PartyBoardMemberInfo remover.");
+                this.tryInstallRemover('S1UI_PartyBoard.gpk', installer, 'LFG window');
+                this.tryInstallRemover('S1UI_PartyBoardMemberInfo.gpk', installer, 'LFG details info');
             }
 
             if (settings.ChatEnabled === true)
             {
-                installer.gpk("gpk/S1UI_Chat2.gpk");
-                m.log("Installed S1UI_Chat2.");
+                this.tryInstallRemover('S1UI_Chat2.gpk', installer, 'Chat');
             }
         };
     }
