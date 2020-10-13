@@ -59,7 +59,7 @@ namespace TeraPacketParser.Messages
             reader.Skip(2);
             Level = reader.ReadInt16();
             reader.Skip(58);
-            if (reader.Factory.ReleaseVersion >= 8600 && reader.Factory.ReleaseVersion < 9901)
+            if (reader.Factory.ReleaseVersion >= 8600)
             {
 
                 RestCurr = reader.ReadInt64();

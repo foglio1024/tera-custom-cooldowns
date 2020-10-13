@@ -93,7 +93,7 @@ namespace TCC.Debug
 
             var msg = new Message(DateTime.Now, MessageDirection.ServerToClient, new ArraySegment<byte>(hex.ToByteArrayHex()));
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, "opcodes", $"protocol.{version}.map"));
-            var fac = new MessageFactory(version, opcNamer) {ReleaseVersion = 9901};
+            var fac = new MessageFactory(version, opcNamer) {ReleaseVersion = 0};
             var del = MessageFactory.Constructor<Func<TeraMessageReader, PacketType>>();
             var reader = new TeraMessageReader(msg, opcNamer, fac, null);
             del.DynamicInvoke(reader);

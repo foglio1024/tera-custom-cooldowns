@@ -28,7 +28,7 @@ namespace TeraPacketParser.Messages
 
         public S_PLAYER_STAT_UPDATE(TeraMessageReader reader) : base(reader)
         {
-            if (reader.Factory.ReleaseVersion >= 9300 && reader.Factory.ReleaseVersion < 9901)
+            if (reader.Factory.ReleaseVersion >= 9300)
             {
                 reader.BaseStream.Position = 0;
                 CurrentHP = reader.ReadInt64();
@@ -83,7 +83,7 @@ namespace TeraPacketParser.Messages
                 MaxCoins = reader.ReadUInt32();
 
             }
-            else if (reader.Factory.ReleaseVersion >= 8600 && reader.Factory.ReleaseVersion < 9901)
+            else if (reader.Factory.ReleaseVersion >= 8600)
             {
                 CurrentHP = reader.ReadInt32();
                 reader.Skip(4);

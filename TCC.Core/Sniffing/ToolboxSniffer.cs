@@ -49,7 +49,7 @@ namespace TCC.Sniffing
             public async Task<int> GetReleaseVersion()
             {
                 var resp = await _client.CallAsync("getReleaseVersion");
-                return resp?.Result?.Value<int>() ?? 9901;
+                return resp?.Result?.Value<int>() ?? 0;
             }
             /// <summary>
             /// Requests <c>ttb-interface-control</c> to dump a map to file.

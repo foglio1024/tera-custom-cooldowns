@@ -45,7 +45,7 @@ namespace TeraPacketParser.Messages
                 c.LastGuardId = reader.ReadUInt32();
                 c.LastSectionId = reader.ReadUInt32();
                 c.LastOnline = reader.ReadInt64();
-                reader.Skip(reader.Factory.ReleaseVersion >= 8600 && reader.Factory.ReleaseVersion < 9901 ? 367 : 359);
+                reader.Skip(reader.Factory.ReleaseVersion >= 8600 ? 367 : 359);
                 c.Laurel = (Laurel)reader.ReadInt32();
                 c.Position = reader.ReadInt32();
                 c.GuildId = reader.ReadUInt32();
