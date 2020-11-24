@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp31</TargetFramework>
+    <TargetFramework>net5-windows</TargetFramework>
     <RootNamespace>TeraPacketParser</RootNamespace>
     <AssemblyName>TeraPacketParser</AssemblyName>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <LangVersion>8</LangVersion>
+    <LangVersion>9</LangVersion>
     <Configurations>Debug;Release;DebugToolbox</Configurations>
     <Nullable>enable</Nullable>
   </PropertyGroup>

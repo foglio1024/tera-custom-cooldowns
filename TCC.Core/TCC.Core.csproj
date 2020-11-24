@@ -1,17 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
     <AssemblyName>TCC</AssemblyName>
     <IncludeSymbolsInSingleFile>true</IncludeSymbolsInSingleFile>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TCC</RootNamespace>
-    <TargetFramework>netcoreapp31</TargetFramework>
+    <TargetFramework>net5-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
-    <LangVersion>8</LangVersion>
+    <LangVersion>9</LangVersion>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <Version>1.4.107</Version>
+    <Version>1.4.108</Version>
     <Description>TERA Custom Cooldowns</Description>
     <PackageIcon>tcc.ico</PackageIcon>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

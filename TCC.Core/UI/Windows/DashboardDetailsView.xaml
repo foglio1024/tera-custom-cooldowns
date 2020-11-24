@@ -11,6 +11,7 @@
              xmlns:abnormalities1="clr-namespace:TCC.UI.Controls.Abnormalities"
              xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1220" d:DataContext="{d:DesignInstance viewModels:DashboardViewModel}">
     <Border x:Name="DetailsBorder"
@@ -395,10 +396,9 @@
                                                         Padding="4 0 4 0"
                                                         UseLayoutRounding="False"
                                                         BorderBrush="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}">
-                                                <!--BorderBrush="{StaticResource RevampBorderBrush}"-->
                                                 <Viewbox VerticalAlignment="Center" Margin="0 0 0 0">
                                                     <TextBlock FontWeight="DemiBold"
-                                                                   Text="{Binding Duration, Converter={StaticResource DurationToTimeFormat}}"
+                                                                   Text="{Binding Duration, Converter={converters:DurationToStringConverter Mode=Single}}"
                                                                    Foreground="#9fff"
                                                                    VerticalAlignment="Center" />
                                                 </Viewbox>

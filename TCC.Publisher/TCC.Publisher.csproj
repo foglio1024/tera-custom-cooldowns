@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <RootNamespace>TCC.Publisher</RootNamespace>
     <AssemblyName>TCC.Publisher</AssemblyName>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <TargetFramework>netcoreapp31</TargetFramework>
+    <TargetFramework>net5-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <LangVersion>8</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>

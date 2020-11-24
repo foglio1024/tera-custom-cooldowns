@@ -7,7 +7,7 @@
     <Company>Foglio</Company>
     <TargetFramework>net48</TargetFramework>
     <UseWPF>true</UseWPF>
-    <LangVersion>8</LangVersion>
+    <LangVersion>9</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release;DebugToolbox</Configurations>
