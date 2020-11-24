@@ -18,6 +18,7 @@
     <OutputPath>D:\TERA\TeraToolbox\mods\TCC</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>..\release\</OutputPath>
   </PropertyGroup>
