@@ -10,6 +10,9 @@ namespace TeraPacketParser.Messages
         public ushort HuntingZoneId { get; }
         public bool Villager { get; }
         public int RemainingEnrageTime { get; }
+        public long MaxHP { get; set; }
+        public long EnrageThreshold { get; set; }
+        public int Level { get; set; }
 
         public S_SPAWN_NPC(TeraMessageReader reader) : base(reader)
         {
@@ -44,6 +47,9 @@ namespace TeraPacketParser.Messages
             //var unk25 = reader.ReadUInt32();
 
             reader.Skip(10);
+            Level = reader.Factory.ReleaseVersion >= 10100 ? reader.ReadInt32() : 0;
+            MaxHP = reader.Factory.ReleaseVersion >= 10100 ? reader.ReadInt64() : 0;
+            EnrageThreshold = reader.Factory.ReleaseVersion >= 10100 ? reader.ReadInt64() : 0;
             EntityId = reader.ReadUInt64();
             reader.Skip(8); //var target = reader.ReadUInt64();
             reader.Skip(12); //var loc = reader.ReadVector3f();
@@ -66,5 +72,6 @@ namespace TeraPacketParser.Messages
 
             //Console.WriteLine("[S_SPAWN NPC] id:{0} tId:{1} hzId:{2}", id, templateId, huntingZoneId);
         }
+
     }
 }
