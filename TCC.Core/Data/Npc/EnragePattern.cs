@@ -27,7 +27,7 @@
         }
 
 
-        internal void Update(float maxHp)
+        internal void Update(double maxHp)
         {
             if (_flatHp == -1) return;
             Percentage = _flatHp / maxHp * 100;

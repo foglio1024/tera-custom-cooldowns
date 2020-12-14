@@ -47,7 +47,7 @@ namespace TCC.Data.Databases
             return TryGetMonster(templateId, zoneId, out var m) ? m.Name : "Unknown";
         }
 
-        public ulong GetMaxHP(uint templateId, uint zoneId)
+        public long GetMaxHP(uint templateId, uint zoneId)
         {
             return TryGetMonster(templateId, zoneId, out var m) ? m.MaxHP : 1;
         }
@@ -70,7 +70,7 @@ namespace TCC.Data.Databases
                     var id = Convert.ToUInt32(monster.Attribute("id")?.Value);
                     var name = monster.Attribute("name")?.Value ?? "Unknown";
                     var isBoss = monster.Attribute("isBoss")?.Value == "True";
-                    var maxHP = Convert.ToUInt64(monster.Attribute("hp")?.Value);
+                    var maxHP = Convert.ToInt64(monster.Attribute("hp")?.Value);
                     var species = (Species) int.Parse(monster.Attribute("speciesId")?.Value ?? "0");
 
                     var m = new Monster(id, zoneId, name, maxHP, isBoss, false, species);
@@ -103,7 +103,7 @@ namespace TCC.Data.Databases
                         var name = monst.Attribute("name")?.Value ?? $"Unknown {zoneId}.{mId}";
                         var isBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
                         var isHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
-                        var maxHp = ulong.Parse(monst.Attribute("hp")?.Value ?? "0");
+                        var maxHp = long.Parse(monst.Attribute("hp")?.Value ?? "0");
                         var species = int.Parse(monst.Attribute("speciesId")?.Value ?? "0");
                         z.Monsters.Add(mId, new Monster(mId, zoneId, name, maxHp, isBoss, isHidden, (Species) species));
                     }
@@ -287,12 +287,12 @@ namespace TCC.Data.Databases
         public uint TemplateId { get; }
         public uint ZoneId { get; }
         public string Name { get; set; }
-        public ulong MaxHP { get; }
+        public long MaxHP { get; }
         public bool IsBoss { get; set; }
         public bool IsHidden { get; set; }
         public Species Species { get; set; }
 
-        public Monster(uint npc, uint zoneId, string name, ulong maxHp, bool isBoss, bool isHidden, Species sp)
+        public Monster(uint npc, uint zoneId, string name, long maxHp, bool isBoss, bool isHidden, Species sp)
         {
             TemplateId = npc;
             Name = name;

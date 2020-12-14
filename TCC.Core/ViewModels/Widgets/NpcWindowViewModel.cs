@@ -31,8 +31,8 @@ namespace TCC.ViewModels.Widgets
         private readonly TSObservableCollection<NPC> _npcList;
 
         private readonly Dictionary<ulong, string> _towerNames = new Dictionary<ulong, string>();
-        private readonly Dictionary<ulong, float> _savedHp = new Dictionary<ulong, float>();
-        private readonly Dictionary<ulong, float> _cache = new Dictionary<ulong, float>();
+        private readonly Dictionary<ulong, double> _savedHp = new Dictionary<ulong, double>();
+        private readonly Dictionary<ulong, double> _cache = new Dictionary<ulong, double>();
 
         public event Action NpcListChanged;
 
@@ -246,7 +246,7 @@ namespace TCC.ViewModels.Widgets
             {
                 var visibility = npcData.IsBoss && TccUtils.IsFieldBoss(npcData.ZoneId, npcData.TemplateId);
                 var boss = GetOrAddNpc(spawn.EntityId, npcData.ZoneId, npcData.TemplateId, npcData.IsBoss, visibility);
-                SetHP(boss, npcData.MaxHP, npcData.MaxHP, HpChangeSource.CreatureChangeHp);
+                SetHP(boss, spawn.MaxHP != 0 ? spawn.MaxHP : npcData.MaxHP, spawn.MaxHP != 0 ? spawn.MaxHP : npcData.MaxHP, HpChangeSource.CreatureChangeHp);
                 SetEnrageTime(spawn.EntityId, spawn.RemainingEnrageTime);
                 if (boss.Visible == visibility) return;
                 boss.Visible = visibility;
@@ -286,7 +286,7 @@ namespace TCC.ViewModels.Widgets
 
             }, DispatcherPriority.Background);
         }
-        private void SetFromCache(ulong hpcEntityId, float hpcCurrentHp)
+        private void SetFromCache(ulong hpcEntityId, double hpcCurrentHp)
         {
             if (!TryFindNPC(hpcEntityId, out var npc)) return;
             npc.CurrentHP = hpcCurrentHp;
@@ -335,7 +335,7 @@ namespace TCC.ViewModels.Widgets
             if (_savedHp.TryGetValue(entityId, out var hp)) tower.CurrentHP = hp;
 
         }
-        private void SetHP(NPC boss, float maxHp, float curHp, HpChangeSource src)
+        private void SetHP(NPC boss, double maxHp, double curHp, HpChangeSource src)
         {
             boss.MaxHP = maxHp;
 
@@ -349,7 +349,7 @@ namespace TCC.ViewModels.Widgets
             CacheHP(boss.EntityId, curHp);
             if (src == HpChangeSource.Me) FlushCache();
         }
-        private void CacheHP(ulong entityId, float curHp)
+        private void CacheHP(ulong entityId, double curHp)
         {
             _cache[entityId] = curHp;
         }

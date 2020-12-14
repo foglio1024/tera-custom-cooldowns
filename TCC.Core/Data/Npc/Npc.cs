@@ -63,8 +63,8 @@ namespace TCC.Data.NPCs
             }
         }
 
-        private float _maxHP;
-        public float MaxHP
+        private double _maxHP;
+        public double MaxHP
         {
             get => _maxHP;
             set
@@ -76,8 +76,8 @@ namespace TCC.Data.NPCs
             }
         }
 
-        private float _currentHP;
-        public float CurrentHP
+        private double _currentHP;
+        public double CurrentHP
         {
             get => _currentHP;
             set
@@ -101,8 +101,8 @@ namespace TCC.Data.NPCs
                 N(nameof(ShieldFactor));
             }
         }
-        private float _currentShield;
-        public float CurrentShield
+        private double _currentShield;
+        public double CurrentShield
         {
             get => _currentShield;
             set
@@ -116,8 +116,8 @@ namespace TCC.Data.NPCs
 
         public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
 
-        public float HPFactor => (float)MathUtils.FactorCalc(_currentHP, _maxHP); //_maxHP == 0 ? 0 : (_currentHP / _maxHP);
-        public float CurrentPercentage => HPFactor * 100;
+        public double HPFactor => MathUtils.FactorCalc(_currentHP, _maxHP); //_maxHP == 0 ? 0 : (_currentHP / _maxHP);
+        public double CurrentPercentage => HPFactor * 100;
         private bool _visible;
         public bool Visible
         {
