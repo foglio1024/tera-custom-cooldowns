@@ -50,15 +50,15 @@ namespace TCC.ViewModels.Widgets
         {
             _npcList = new TSObservableCollection<NPC>(Dispatcher);
             Bams = CollectionViewFactory.CreateLiveCollectionView(_npcList,
-                npc => npc.IsBoss && !npc.IsTower && npc.Visible,
+                npc => npc != null && npc.IsBoss && !npc.IsTower && npc.Visible,
                 new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
                 new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
             Mobs = CollectionViewFactory.CreateLiveCollectionView(_npcList,
-                npc => !npc.IsBoss && !npc.IsTower && npc.Visible,
+                npc => npc != null && !npc.IsBoss && !npc.IsTower && npc.Visible,
                 new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
                 new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
             GuildTowers = CollectionViewFactory.CreateLiveCollectionView(_npcList,
-                npc => npc.IsTower,
+                npc => npc != null && npc.IsTower,
                 sortFilters: new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
 
             PendingAbnormalities = new List<PendingAbnormality>();
@@ -183,7 +183,7 @@ namespace TCC.ViewModels.Widgets
             {
                 foreach (var npc in _npcList.ToSyncList())
                 {
-                    npc.Dispose();
+                    npc?.Dispose();
                 }
                 _npcList.Clear();
             });
@@ -212,7 +212,7 @@ namespace TCC.ViewModels.Widgets
         public bool TryFindNPC(ulong entityId, out NPC found)
         {
             found = new NPC(0, 0, 0, false, false);
-            var f = _npcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
+            var f = _npcList.ToSyncList().FirstOrDefault(x => x?.EntityId == entityId);
             if (f != null)
             {
                 found = f;
@@ -626,7 +626,7 @@ namespace TCC.ViewModels.Widgets
             get
             {
                 _dragons = new CollectionViewSource { Source = _npcList }.View;
-                _dragons.Filter = p => ((NPC)p).TemplateId > 1099 && ((NPC)p).TemplateId < 1104;
+                _dragons.Filter = p => p!=null && ((NPC)p).TemplateId > 1099 && ((NPC)p).TemplateId < 1104;
                 return _dragons;
             }
         }
@@ -634,7 +634,7 @@ namespace TCC.ViewModels.Widgets
         private void SelectDragon(float x, float y)
         {
             var dragon = CheckCurrentDragon(new Point(x, y));
-            foreach (var item in _npcList.ToSyncList().Where(d => d.TemplateId > 1099 && d.TemplateId < 1104))
+            foreach (var item in _npcList.ToSyncList().Where(d => d!= null&& d.TemplateId > 1099 && d.TemplateId < 1104))
             {
                 if (item.TemplateId == (uint)dragon) { item.IsSelected = true; SelectedDragon = item; }
                 else item.IsSelected = false;
@@ -642,10 +642,15 @@ namespace TCC.ViewModels.Widgets
         }
         private void AddSortedDragons()
         {
-            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1102));
-            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1100));
-            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1101));
-            _npcList.Add(_holdedDragons.FirstOrDefault(x => x.TemplateId == 1103));
+            var umbradrax = _holdedDragons.FirstOrDefault(x => x.TemplateId == 1102);
+            var ignidrax = _holdedDragons.FirstOrDefault(x => x.TemplateId == 1100);
+            var terradrax = _holdedDragons.FirstOrDefault(x => x.TemplateId == 1101);
+            var aquadrax = _holdedDragons.FirstOrDefault(x => x.TemplateId == 1103);
+            System.Diagnostics.Debug.Assert(umbradrax != null && ignidrax != null && terradrax != null && aquadrax != null);
+            _npcList.Add(umbradrax);
+            _npcList.Add(ignidrax);
+            _npcList.Add(terradrax);
+            _npcList.Add(aquadrax);
             _holdedDragons.Clear();
         }
         private void OnDungeonEventMessage(S_DUNGEON_EVENT_MESSAGE p)
@@ -690,7 +695,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void HandleNewPh1Dragon(NPC boss, ulong entityId)
         {
-            var d = _holdedDragons.FirstOrDefault(x => x.EntityId == entityId);
+            var d = _holdedDragons.FirstOrDefault(x => x.TemplateId == boss.TemplateId && x.ZoneId == boss.ZoneId);
             if (d != null) return;
             _holdedDragons.Add(boss);
             if (_holdedDragons.Count != 4) return;
