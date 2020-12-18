@@ -1,4 +1,6 @@
 ﻿using System.Threading;
+using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -17,6 +19,16 @@ namespace TCC.UI.Windows
             DataContext = VM;
             _progressAnimation = AnimationFactory.CreateDoubleAnimation(250, VM.ProgressPerc, easing: true);
             VM.ProgressChangedEvent += OnProgressChanged;
+            Loaded += OnLoaded;
+        }
+
+        protected override void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BeginAnimation(TopProperty, AnimationFactory.CreateDoubleAnimation(500, Screen.FromRectangle(new System.Drawing.Rectangle((int)Left, (int)Top, (int)Width, (int)Height)).Bounds.Height / 2 - ActualHeight / 2 - 40, easing: true));
+            }
+            catch { }
         }
 
         private void OnProgressChanged()
