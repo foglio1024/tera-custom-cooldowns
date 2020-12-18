@@ -153,7 +153,11 @@ namespace TCC.Sniffing
             }
         }
 
+#if SERVER
         private readonly TcpListener _dataConnection;
+#else
+        private TcpClient _dataConnection;
+#endif
         public readonly ToolboxControlInterface ControlConnection;
         private readonly bool _failed;
         private bool _enabled;
@@ -164,8 +168,16 @@ namespace TCC.Sniffing
             get => _enabled;
             set
             {
+                if (_enabled == value) return;
                 _enabled = value;
-                if (_enabled) new Thread(Listen).Start();
+                if (_enabled)
+                {
+#if SERVER
+                    new Thread(Listen).Start();
+#else
+                    Task.Run(ReceiveAsync);
+#endif
+                }
             }
         }
         public bool Connected
@@ -191,11 +203,17 @@ namespace TCC.Sniffing
 
         public ToolboxSniffer()
         {
+#if SERVER
             _dataConnection = new TcpListener(IPAddress.Parse("127.0.0.60"), 5200);
-            ControlConnection = new ToolboxControlInterface("http://127.0.0.61:5200");
+#else
+            _dataConnection = new TcpClient();
+#endif
+            ControlConnection = new ToolboxControlInterface("http://127.0.0.61:5300");
             try
             {
+#if SERVER
                 _dataConnection.Start();
+#endif
             }
             catch (Exception e)
             {
@@ -203,6 +221,7 @@ namespace TCC.Sniffing
                 _failed = true;
             }
         }
+#if SERVER
 
         private async void Listen()
         {
@@ -245,7 +264,7 @@ namespace TCC.Sniffing
                             progress += stream.Read(dataBuf, progress, length - progress);
                         }
 
-                        MessageReceived?.Invoke(new Message(DateTime.Now, dataBuf));
+                        MessageReceived?.Invoke(new Message(DateTime.UtcNow, dataBuf));
 
                     }
                     catch
@@ -257,5 +276,66 @@ namespace TCC.Sniffing
                 }
             }
         }
+#else
+        private async Task ReceiveAsync()
+        {
+            if (_failed) return;
+
+            while (Enabled)
+            {
+                var resp = await ControlConnection.GetServerId();
+                if (resp != 0)
+                {
+                    Connected = true;
+                    await ControlConnection.AddHooks(PacketAnalyzer.Factory.OpcodesList);
+                    PacketAnalyzer.Factory.ReleaseVersion = await ControlConnection.GetReleaseVersion();
+                    NewConnection?.Invoke(Game.DB.ServerDatabase.GetServer(resp));
+                    _dataConnection = new TcpClient();
+                    await _dataConnection.ConnectAsync("127.0.0.60", 5301);
+                }
+                else
+                {
+                    await Task.Delay(100);
+                    continue;
+                }
+                var stream = _dataConnection.GetStream();
+
+                Connected = true;
+                while (Connected)
+                {
+                    try
+                    {
+                        var lenBuf = new byte[2];
+                        stream.Read(lenBuf, 0, 2);
+                        var len = BitConverter.ToUInt16(lenBuf, 0);
+                        if (len <= 2)
+                        {
+                            if (!_dataConnection.IsConnected())
+                            {
+                                _dataConnection.Close();
+                                Connected = false;
+                            }
+                            continue;
+                        }
+                        var length = len - 2;
+                        var dataBuf = new byte[length];
+
+                        var progress = 0;
+                        while (progress < length)
+                        {
+                            progress += stream.Read(dataBuf, progress, length - progress);
+                        }
+                        MessageReceived?.Invoke(new Message(DateTime.UtcNow, dataBuf));
+
+                    }
+                    catch
+                    {
+                        _dataConnection.Close();
+                        Connected = false;
+                    }
+                }
+            }
+        }
+#endif
     }
 }
