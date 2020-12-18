@@ -14,7 +14,6 @@
 		"settingsVersion" : 1
   },
   "dependencies": {
-    "ttb-interface-control": "https://raw.githubusercontent.com/Foglio1024/ttb-interface/master/ttb-interface-control/module.json",
-    "ttb-interface-data": "https://raw.githubusercontent.com/Foglio1024/ttb-interface/master/ttb-interface-data/module.json"
+    "external-interface": "https://raw.githubusercontent.com/Foglio1024/external-interface/master/module.json"
   }
 }
