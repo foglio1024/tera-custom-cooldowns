@@ -32,6 +32,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
     <OutputPath>D:\TERA\TeraToolbox\mods\TCC</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\release\</OutputPath>
