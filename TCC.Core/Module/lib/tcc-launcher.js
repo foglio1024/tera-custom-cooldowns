@@ -19,7 +19,7 @@ class TccLauncher
             try
             {
                 installer.gpk(`gpk/${removerGpkName}`);
-                m.log(`Installed ${removerNiceName} remover (${removerGpkName})`);
+                //m.log(`Installed ${removerNiceName} remover (${removerGpkName})`);
             } 
             catch (error)
             {
