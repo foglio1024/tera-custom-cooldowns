@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -598,12 +599,39 @@ namespace TCC
                 WindowManager.VisibilityManager.RefreshDim();
 
                 #region Fear Inoculum
-                if (!App.FI) return;
-                var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
-                Me.UpdateAbnormality(ab, int.MaxValue, 1);
-                SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
 
-                #endregion            
+                if (App.FI)
+                {
+                    var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
+                    Me.UpdateAbnormality(ab, int.MaxValue, 1);
+                    SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
+                }
+
+                #endregion
+                if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "it")
+                {
+                    var zg = DB.AbnormalityDatabase.Abnormalities[10240001];
+                    var za = DB.AbnormalityDatabase.Abnormalities[10240002];
+                    var zr = DB.AbnormalityDatabase.Abnormalities[10240003];
+
+                    var zone = DateTime.Now.Month switch
+                    {
+                        12 when DateTime.Now.Year == 2020 => DateTime.Now.Day switch
+                        {
+                            >= 24 and <= 27 => zr,
+                            31 => zr,
+                            >= 28 and <= 30 => za,
+                            _ => zg
+                        },
+                        1 when DateTime.Now.Year == 2021 && DateTime.Now.Day < 7 => DateTime.Now.Day == 4 ? za : zr,
+                        _ => null!
+                    };
+
+                    if (zone == null) return;
+                    Me.UpdateAbnormality(zone, int.MaxValue, 1);
+                    SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{zone.Name}", "SMT_BATTLE_BUFF_DEBUFF");
+                }
+
             });
         }
         private static void OnAccountPackageList(S_ACCOUNT_PACKAGE_LIST m)

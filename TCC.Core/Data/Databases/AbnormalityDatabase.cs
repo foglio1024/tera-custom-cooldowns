@@ -64,6 +64,13 @@ namespace TCC.Data.Databases
             var fearInoculum = new Abnormality(30082019, true, true, true, AbnormalityType.Special, "icon_status.third_eye_ab", "Fear Inoculum", "New $H_W_GOODTool$COLOR_END album release provides the following effects:$BR - increases attack speed by $H_W_GOOD25%$COLOR_END $BR - increases skill damage by $H_W_GOOD100%$COLOR_END $BR - decreases skill cooldowns by $H_W_GOOD80%$COLOR_END $BR - increases drop rate in dungeons by $H_W_GOOD800%$COLOR_END $BR$BREffect only applies while Tool music is playing.");
             Abnormalities[fearInoculum.Id] = fearInoculum;
 
+            var zonaGialla = new Abnormality(10240001, true, true, true, AbnormalityType.Buff, "icon_status.yellowaura_tex", "Zona Terradrax", "Sei in <font color='#fcee49'>zona gialla</font>. $BRPuoi andare in dungeon che consentono il mantenimento della distanza minima di $H_W_GOODun metro$COLOR_END tra le persone. Permane l'obbligo di indossare Annihilation Mask o Dark Light Mask. $BR$BR<font color='#777777'>Questo è un friendly reminder per invitare le persone ad essere più responsabili. Se lo stai leggendo probabilmente stai già rimanendo a casa, bravo bimbo.</font>");
+            Abnormalities[zonaGialla.Id] = zonaGialla;
+            var zonaArancione = new Abnormality(10240002, true, true, true, AbnormalityType.Buff, "icon_status.orangeaura_tex", "Zona Ignidrax", "Sei in <font color='#ffa047'>zona arancione</font>. $BRSono consentiti gli spostamenti solo all'interno del proprio villaggio. Divieto di andare in $H_W_BADraid da 10$COLOR_END o più per evitare assembramenti. I merchant e gli speciality store sono aperti fino alle 21. $BR$BR<font color='#777777'>Questo è un friendly reminder per invitare le persone ad essere più responsabili. Se lo stai leggendo probabilmente stai già rimanendo a casa, bravo bimbo.</font>");
+            Abnormalities[zonaArancione.Id] = zonaArancione;
+            var zonaRossa = new Abnormality(10240003, true, true, true, AbnormalityType.Buff, "icon_status.redaura_tex", "Zona Umbradrax", "Sei in <font color='#f24141'>zona rossa</font>. $BRSono consentiti gli spostamenti solo per motivi di necessità. Si può andare in dungeon al massimo in $H_W_GOOD3 persone$COLOR_END. I merchant e gli speciality store restano chiusi, ma possono effettuare consegne a domicilio. $BR$BR<font color='#777777'>Questo è un friendly reminder per invitare le persone ad essere più responsabili. Se lo stai leggendo probabilmente stai già rimanendo a casa, bravo bimbo.</font>");
+            Abnormalities[zonaRossa.Id] = zonaRossa;
+            
             #region Extreme overrides
             // Twisted Fate
             Abnormalities[781066].ToolTip = Abnormalities[781066].ToolTip.Replace("60", "3");
