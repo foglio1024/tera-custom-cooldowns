@@ -549,126 +549,126 @@ namespace TCC.R
 	// pack://application:,,,/Nostrum;component/Resources/Converters.xaml
 	public static class Nostrum_Converters
 	{
-		public static MillisecondsToStringConverter MillisecondsToString => ((MillisecondsToStringConverter)App.Current.FindResource("MillisecondsToString"));
 		public static ListBoxItemIndexConverter ListBoxItemIndex => ((ListBoxItemIndexConverter)App.Current.FindResource("ListBoxItemIndex"));
-		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
-		public static BoolToVisibility BoolToVisibility => ((BoolToVisibility)App.Current.FindResource("BoolToVisibility"));
 		public static EnumDescriptionConverter EnumDescriptionConverter => ((EnumDescriptionConverter)App.Current.FindResource("EnumDescriptionConverter"));
-		public static FactorToAngleConverter FactorToAngle => ((FactorToAngleConverter)App.Current.FindResource("FactorToAngle"));
-		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
-		public static DurationToStringConverter DurationToString => ((DurationToStringConverter)App.Current.FindResource("DurationToString"));
-		public static RoundedClipConverter RoundedClipConverter => ((RoundedClipConverter)App.Current.FindResource("RoundedClipConverter"));
-		public static ValueToFactorConverter ValueToFactor => ((ValueToFactorConverter)App.Current.FindResource("ValueToFactor"));
-		public static NullToVisibleCollapsedConverter NullToVisibleCollapsed => ((NullToVisibleCollapsedConverter)App.Current.FindResource("NullToVisibleCollapsed"));
-		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
-		public static NullToVisibilityConverter NullToVisibilty => ((NullToVisibilityConverter)App.Current.FindResource("NullToVisibilty"));
 		public static ColorToTransparent ColorToTransparent => ((ColorToTransparent)App.Current.FindResource("ColorToTransparent"));
+		public static RoundedClipConverter RoundedClipConverter => ((RoundedClipConverter)App.Current.FindResource("RoundedClipConverter"));
+		public static BooleanInverter BoolInverter => ((BooleanInverter)App.Current.FindResource("BoolInverter"));
+		public static FactorToAngleConverter FactorToAngle => ((FactorToAngleConverter)App.Current.FindResource("FactorToAngle"));
+		public static MathMultiplicationConverter MathMultiplication => ((MathMultiplicationConverter)App.Current.FindResource("MathMultiplication"));
+		public static NullToVisibilityConverter NullToVisibilty => ((NullToVisibilityConverter)App.Current.FindResource("NullToVisibilty"));
+		public static NullToVisibleCollapsedConverter NullToVisibleCollapsed => ((NullToVisibleCollapsedConverter)App.Current.FindResource("NullToVisibleCollapsed"));
+		public static MillisecondsToStringConverter MillisecondsToString => ((MillisecondsToStringConverter)App.Current.FindResource("MillisecondsToString"));
+		public static ValueToFactorConverter ValueToFactor => ((ValueToFactorConverter)App.Current.FindResource("ValueToFactor"));
+		public static BoolToVisibility BoolToVisibility => ((BoolToVisibility)App.Current.FindResource("BoolToVisibility"));
+		public static DurationToStringConverter DurationToString => ((DurationToStringConverter)App.Current.FindResource("DurationToString"));
+		public static EpochConverter EpochConverter => ((EpochConverter)App.Current.FindResource("EpochConverter"));
 	}
 
 	// pack://application:,,,/Nostrum;component/Resources/MiscResources.xaml
 	public static class Nostrum_MiscResources
 	{
-		public static ScaleTransform DefaultScaleTransform => ((ScaleTransform)App.Current.FindResource("DefaultScaleTransform"));
-		public static QuadraticEase QuadraticEase => ((QuadraticEase)App.Current.FindResource("QuadraticEase"));
-		public static TranslateTransform DefaultTranslateTransform => ((TranslateTransform)App.Current.FindResource("DefaultTranslateTransform"));
-		public static RotateTransform Rotate45 => ((RotateTransform)App.Current.FindResource("Rotate45"));
-		public static RotateTransform DefaultRotateTransform => ((RotateTransform)App.Current.FindResource("DefaultRotateTransform"));
 		public static SkewTransform Skew45 => ((SkewTransform)App.Current.FindResource("Skew45"));
+		public static RotateTransform DefaultRotateTransform => ((RotateTransform)App.Current.FindResource("DefaultRotateTransform"));
+		public static ScaleTransform DefaultScaleTransform => ((ScaleTransform)App.Current.FindResource("DefaultScaleTransform"));
 		public static RotateTransform Rotate45Inv => ((RotateTransform)App.Current.FindResource("Rotate45Inv"));
+		public static QuadraticEase QuadraticEase => ((QuadraticEase)App.Current.FindResource("QuadraticEase"));
 		public static SkewTransform Skew45Inv => ((SkewTransform)App.Current.FindResource("Skew45Inv"));
+		public static RotateTransform Rotate45 => ((RotateTransform)App.Current.FindResource("Rotate45"));
+		public static TranslateTransform DefaultTranslateTransform => ((TranslateTransform)App.Current.FindResource("DefaultTranslateTransform"));
 	}
 
 	// pack://application:,,,/Nostrum;component/Resources/SVG.xaml
 	public static class Nostrum_SVG
 	{
-		public static StreamGeometry SvgHeart => ((StreamGeometry)App.Current.FindResource("SvgHeart"));
-		public static StreamGeometry SvgReload => ((StreamGeometry)App.Current.FindResource("SvgReload"));
-		public static StreamGeometry SvgCheckCircle => ((StreamGeometry)App.Current.FindResource("SvgCheckCircle"));
-		public static StreamGeometry SvgCheckAll => ((StreamGeometry)App.Current.FindResource("SvgCheckAll"));
-		public static StreamGeometry SvgMatching => ((StreamGeometry)App.Current.FindResource("SvgMatching"));
-		public static StreamGeometry SvgDownArrow => ((StreamGeometry)App.Current.FindResource("SvgDownArrow"));
-		public static StreamGeometry SvgAdd => ((StreamGeometry)App.Current.FindResource("SvgAdd"));
-		public static StreamGeometry SvgUpArrow => ((StreamGeometry)App.Current.FindResource("SvgUpArrow"));
-		public static StreamGeometry SvgRemoveUser => ((StreamGeometry)App.Current.FindResource("SvgRemoveUser"));
-		public static StreamGeometry SvgGuild => ((StreamGeometry)App.Current.FindResource("SvgGuild"));
+		public static StreamGeometry SvgQuestionMark => ((StreamGeometry)App.Current.FindResource("SvgQuestionMark"));
 		public static StreamGeometry SvgStar => ((StreamGeometry)App.Current.FindResource("SvgStar"));
-		public static StreamGeometry SvgCopy => ((StreamGeometry)App.Current.FindResource("SvgCopy"));
-		public static StreamGeometry SvgTwitch => ((StreamGeometry)App.Current.FindResource("SvgTwitch"));
-		public static StreamGeometry SvgExpandAll => ((StreamGeometry)App.Current.FindResource("SvgExpandAll"));
-		public static StreamGeometry SvgBlurOff => ((StreamGeometry)App.Current.FindResource("SvgBlurOff"));
-		public static StreamGeometry SvgSettings => ((StreamGeometry)App.Current.FindResource("SvgSettings"));
-		public static StreamGeometry SvgRemoveCircle => ((StreamGeometry)App.Current.FindResource("SvgRemoveCircle"));
-		public static StreamGeometry SvgWarning => ((StreamGeometry)App.Current.FindResource("SvgWarning"));
-		public static StreamGeometry SvgDiscord => ((StreamGeometry)App.Current.FindResource("SvgDiscord"));
-		public static StreamGeometry SvgPin => ((StreamGeometry)App.Current.FindResource("SvgPin"));
-		public static StreamGeometry SvgHide => ((StreamGeometry)App.Current.FindResource("SvgHide"));
-		public static StreamGeometry SvgDisband => ((StreamGeometry)App.Current.FindResource("SvgDisband"));
-		public static StreamGeometry SvgAddUser => ((StreamGeometry)App.Current.FindResource("SvgAddUser"));
-		public static StreamGeometry SvgShop => ((StreamGeometry)App.Current.FindResource("SvgShop"));
-		public static StreamGeometry SvgAddCircle => ((StreamGeometry)App.Current.FindResource("SvgAddCircle"));
-		public static StreamGeometry SvgClose => ((StreamGeometry)App.Current.FindResource("SvgClose"));
-		public static StreamGeometry SvgMail => ((StreamGeometry)App.Current.FindResource("SvgMail"));
-		public static StreamGeometry SvgMapMarker => ((StreamGeometry)App.Current.FindResource("SvgMapMarker"));
-		public static StreamGeometry SvgUserAdd => ((StreamGeometry)App.Current.FindResource("SvgUserAdd"));
-		public static StreamGeometry SvgCrossedSwords => ((StreamGeometry)App.Current.FindResource("SvgCrossedSwords"));
-		public static StreamGeometry SvgMove => ((StreamGeometry)App.Current.FindResource("SvgMove"));
-		public static StreamGeometry SvgOpenLink => ((StreamGeometry)App.Current.FindResource("SvgOpenLink"));
-		public static StreamGeometry SvgCollapseAll => ((StreamGeometry)App.Current.FindResource("SvgCollapseAll"));
-		public static StreamGeometry SvgMoney => ((StreamGeometry)App.Current.FindResource("SvgMoney"));
-		public static StreamGeometry SvgGitHub => ((StreamGeometry)App.Current.FindResource("SvgGitHub"));
 		public static StreamGeometry SvgTrophy => ((StreamGeometry)App.Current.FindResource("SvgTrophy"));
-		public static StreamGeometry SvgAuto => ((StreamGeometry)App.Current.FindResource("SvgAuto"));
-		public static StreamGeometry SvgShare => ((StreamGeometry)App.Current.FindResource("SvgShare"));
-		public static StreamGeometry SvgChatMessage => ((StreamGeometry)App.Current.FindResource("SvgChatMessage"));
-		public static StreamGeometry SvgAchievements => ((StreamGeometry)App.Current.FindResource("SvgAchievements"));
-		public static StreamGeometry SvgMinimize => ((StreamGeometry)App.Current.FindResource("SvgMinimize"));
-		public static StreamGeometry SvgShirt => ((StreamGeometry)App.Current.FindResource("SvgShirt"));
-		public static StreamGeometry SvgDelegateLeader => ((StreamGeometry)App.Current.FindResource("SvgDelegateLeader"));
-		public static StreamGeometry SvgUnpin => ((StreamGeometry)App.Current.FindResource("SvgUnpin"));
-		public static StreamGeometry SvgSearch => ((StreamGeometry)App.Current.FindResource("SvgSearch"));
-		public static StreamGeometry SvgBasket => ((StreamGeometry)App.Current.FindResource("SvgBasket"));
+		public static StreamGeometry SvgGitHub => ((StreamGeometry)App.Current.FindResource("SvgGitHub"));
 		public static StreamGeometry SvgBlurOn => ((StreamGeometry)App.Current.FindResource("SvgBlurOn"));
-		public static StreamGeometry SvgConfirm => ((StreamGeometry)App.Current.FindResource("SvgConfirm"));
-		public static StreamGeometry SvgAddUsers => ((StreamGeometry)App.Current.FindResource("SvgAddUsers"));
-		public static StreamGeometry SvgAwaken => ((StreamGeometry)App.Current.FindResource("SvgAwaken"));
+		public static StreamGeometry SvgMenuRight => ((StreamGeometry)App.Current.FindResource("SvgMenuRight"));
+		public static StreamGeometry SvgMoney => ((StreamGeometry)App.Current.FindResource("SvgMoney"));
+		public static StreamGeometry SvgSocial => ((StreamGeometry)App.Current.FindResource("SvgSocial"));
+		public static StreamGeometry SvgUser => ((StreamGeometry)App.Current.FindResource("SvgUser"));
+		public static StreamGeometry SvgHide => ((StreamGeometry)App.Current.FindResource("SvgHide"));
+		public static StreamGeometry SvgAuto => ((StreamGeometry)App.Current.FindResource("SvgAuto"));
 		public static StreamGeometry SvgUsers => ((StreamGeometry)App.Current.FindResource("SvgUsers"));
+		public static StreamGeometry SvgFolder => ((StreamGeometry)App.Current.FindResource("SvgFolder"));
+		public static StreamGeometry SvgHeart => ((StreamGeometry)App.Current.FindResource("SvgHeart"));
+		public static StreamGeometry SvgEye => ((StreamGeometry)App.Current.FindResource("SvgEye"));
+		public static StreamGeometry SvgDelegateLeader => ((StreamGeometry)App.Current.FindResource("SvgDelegateLeader"));
+		public static StreamGeometry SvgReload => ((StreamGeometry)App.Current.FindResource("SvgReload"));
+		public static StreamGeometry SvgChatMessage => ((StreamGeometry)App.Current.FindResource("SvgChatMessage"));
+		public static StreamGeometry SvgDotsVertical => ((StreamGeometry)App.Current.FindResource("SvgDotsVertical"));
+		public static StreamGeometry SvgUserAdd => ((StreamGeometry)App.Current.FindResource("SvgUserAdd"));
+		public static StreamGeometry SvgCheckAll => ((StreamGeometry)App.Current.FindResource("SvgCheckAll"));
+		public static StreamGeometry SvgDrag => ((StreamGeometry)App.Current.FindResource("SvgDrag"));
+		public static StreamGeometry SvgShirt => ((StreamGeometry)App.Current.FindResource("SvgShirt"));
+		public static StreamGeometry SvgCheckCircle => ((StreamGeometry)App.Current.FindResource("SvgCheckCircle"));
+		public static StreamGeometry SvgMapMarker => ((StreamGeometry)App.Current.FindResource("SvgMapMarker"));
 		public static StreamGeometry SvgBlock => ((StreamGeometry)App.Current.FindResource("SvgBlock"));
-		public static StreamGeometry SvgInfo => ((StreamGeometry)App.Current.FindResource("SvgInfo"));
+		public static StreamGeometry SvgAddUsers => ((StreamGeometry)App.Current.FindResource("SvgAddUsers"));
+		public static StreamGeometry SvgClose => ((StreamGeometry)App.Current.FindResource("SvgClose"));
+		public static StreamGeometry SvgPen => ((StreamGeometry)App.Current.FindResource("SvgPen"));
+		public static StreamGeometry SvgGuild => ((StreamGeometry)App.Current.FindResource("SvgGuild"));
+		public static StreamGeometry SvgAddCircle => ((StreamGeometry)App.Current.FindResource("SvgAddCircle"));
+		public static StreamGeometry SvgAddUser => ((StreamGeometry)App.Current.FindResource("SvgAddUser"));
+		public static StreamGeometry SvgBlurOff => ((StreamGeometry)App.Current.FindResource("SvgBlurOff"));
+		public static StreamGeometry SvgUpArrow => ((StreamGeometry)App.Current.FindResource("SvgUpArrow"));
+		public static StreamGeometry SvgSettings => ((StreamGeometry)App.Current.FindResource("SvgSettings"));
+		public static StreamGeometry SvgWarning => ((StreamGeometry)App.Current.FindResource("SvgWarning"));
+		public static StreamGeometry SvgCopy => ((StreamGeometry)App.Current.FindResource("SvgCopy"));
 		public static StreamGeometry SvgQuestLog => ((StreamGeometry)App.Current.FindResource("SvgQuestLog"));
 		public static StreamGeometry SvgPaypal => ((StreamGeometry)App.Current.FindResource("SvgPaypal"));
-		public static StreamGeometry SvgQuestionMark => ((StreamGeometry)App.Current.FindResource("SvgQuestionMark"));
-		public static StreamGeometry SvgSocial => ((StreamGeometry)App.Current.FindResource("SvgSocial"));
-		public static StreamGeometry SvgEye => ((StreamGeometry)App.Current.FindResource("SvgEye"));
-		public static StreamGeometry SvgUser => ((StreamGeometry)App.Current.FindResource("SvgUser"));
-		public static StreamGeometry SvgDrag => ((StreamGeometry)App.Current.FindResource("SvgDrag"));
-		public static StreamGeometry SvgPen => ((StreamGeometry)App.Current.FindResource("SvgPen"));
-		public static StreamGeometry SvgFolder => ((StreamGeometry)App.Current.FindResource("SvgFolder"));
+		public static StreamGeometry SvgUnpin => ((StreamGeometry)App.Current.FindResource("SvgUnpin"));
+		public static StreamGeometry SvgRemoveUser => ((StreamGeometry)App.Current.FindResource("SvgRemoveUser"));
+		public static StreamGeometry SvgAchievements => ((StreamGeometry)App.Current.FindResource("SvgAchievements"));
+		public static StreamGeometry SvgDiscord => ((StreamGeometry)App.Current.FindResource("SvgDiscord"));
+		public static StreamGeometry SvgExpandAll => ((StreamGeometry)App.Current.FindResource("SvgExpandAll"));
+		public static StreamGeometry SvgDownArrow => ((StreamGeometry)App.Current.FindResource("SvgDownArrow"));
+		public static StreamGeometry SvgConfirm => ((StreamGeometry)App.Current.FindResource("SvgConfirm"));
+		public static StreamGeometry SvgShop => ((StreamGeometry)App.Current.FindResource("SvgShop"));
+		public static StreamGeometry SvgMove => ((StreamGeometry)App.Current.FindResource("SvgMove"));
 		public static StreamGeometry SvgGift => ((StreamGeometry)App.Current.FindResource("SvgGift"));
-		public static StreamGeometry SvgMenuRight => ((StreamGeometry)App.Current.FindResource("SvgMenuRight"));
-		public static StreamGeometry SvgDotsVertical => ((StreamGeometry)App.Current.FindResource("SvgDotsVertical"));
+		public static StreamGeometry SvgShare => ((StreamGeometry)App.Current.FindResource("SvgShare"));
+		public static StreamGeometry SvgCrossedSwords => ((StreamGeometry)App.Current.FindResource("SvgCrossedSwords"));
+		public static StreamGeometry SvgAdd => ((StreamGeometry)App.Current.FindResource("SvgAdd"));
+		public static StreamGeometry SvgAwaken => ((StreamGeometry)App.Current.FindResource("SvgAwaken"));
+		public static StreamGeometry SvgBasket => ((StreamGeometry)App.Current.FindResource("SvgBasket"));
+		public static StreamGeometry SvgMail => ((StreamGeometry)App.Current.FindResource("SvgMail"));
+		public static StreamGeometry SvgMatching => ((StreamGeometry)App.Current.FindResource("SvgMatching"));
+		public static StreamGeometry SvgOpenLink => ((StreamGeometry)App.Current.FindResource("SvgOpenLink"));
+		public static StreamGeometry SvgDisband => ((StreamGeometry)App.Current.FindResource("SvgDisband"));
+		public static StreamGeometry SvgPin => ((StreamGeometry)App.Current.FindResource("SvgPin"));
+		public static StreamGeometry SvgRemoveCircle => ((StreamGeometry)App.Current.FindResource("SvgRemoveCircle"));
+		public static StreamGeometry SvgCollapseAll => ((StreamGeometry)App.Current.FindResource("SvgCollapseAll"));
+		public static StreamGeometry SvgMinimize => ((StreamGeometry)App.Current.FindResource("SvgMinimize"));
+		public static StreamGeometry SvgInfo => ((StreamGeometry)App.Current.FindResource("SvgInfo"));
+		public static StreamGeometry SvgSearch => ((StreamGeometry)App.Current.FindResource("SvgSearch"));
+		public static StreamGeometry SvgTwitch => ((StreamGeometry)App.Current.FindResource("SvgTwitch"));
 	}
 
 	// pack://application:,,,/Nostrum;component/Resources/Styles.xaml
 	public static class Nostrum_Styles
 	{
-		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
-		public static DropShadowEffect BigDropShadow => ((DropShadowEffect)App.Current.FindResource("BigDropShadow"));
-		public static Style ComboBoxEditableTextBox => ((Style)App.Current.FindResource("ComboBoxEditableTextBox"));
-		public static Style EmptyFocusVisual => ((Style)App.Current.FindResource("EmptyFocusVisual"));
-		public static Style NoHilightListItemStyleWithLines => ((Style)App.Current.FindResource("NoHilightListItemStyleWithLines"));
-		public static Style NoHilightListItemStyle => ((Style)App.Current.FindResource("NoHilightListItemStyle"));
-		public static Style ComboBoxMainStyle => ((Style)App.Current.FindResource("ComboBoxMainStyle"));
-		public static Style ComboBoxToggleButton => ((Style)App.Current.FindResource("ComboBoxToggleButton"));
-		public static Style ButtonContentOpacityStyle => ((Style)App.Current.FindResource("ButtonContentOpacityStyle"));
 		public static ControlTemplate MenuItemControlTemplate1 => ((ControlTemplate)App.Current.FindResource("MenuItemControlTemplate1"));
+		public static SolidColorBrush SelectionBorderBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBorderBrush"));
+		public static Style ComboBoxToggleButton => ((Style)App.Current.FindResource("ComboBoxToggleButton"));
+		public static Style ComboBoxMainStyle => ((Style)App.Current.FindResource("ComboBoxMainStyle"));
 		public static Style DefaultListItemStyle => ((Style)App.Current.FindResource("DefaultListItemStyle"));
-		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
-		public static Style ButtonMainStyle => ((Style)App.Current.FindResource("ButtonMainStyle"));
 		public static DropShadowEffect FadedDropShadow => ((DropShadowEffect)App.Current.FindResource("FadedDropShadow"));
-		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
+		public static Style ButtonMainStyle => ((Style)App.Current.FindResource("ButtonMainStyle"));
+		public static ControlTemplate ComboBoxTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxTemplate"));
 		public static SolidColorBrush SelectionBackgroundLightBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundLightBrush"));
 		public static ControlTemplate ComboBoxEditableTemplate => ((ControlTemplate)App.Current.FindResource("ComboBoxEditableTemplate"));
-		public static SolidColorBrush SelectionBorderBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBorderBrush"));
+		public static DropShadowEffect BigDropShadow => ((DropShadowEffect)App.Current.FindResource("BigDropShadow"));
+		public static SolidColorBrush SelectionBackgroundBrush => ((SolidColorBrush)App.Current.FindResource("SelectionBackgroundBrush"));
+		public static Style ButtonContentOpacityStyle => ((Style)App.Current.FindResource("ButtonContentOpacityStyle"));
+		public static Style NoHilightListItemStyleWithLines => ((Style)App.Current.FindResource("NoHilightListItemStyleWithLines"));
+		public static DropShadowEffect DropShadow => ((DropShadowEffect)App.Current.FindResource("DropShadow"));
+		public static Style NoHilightListItemStyle => ((Style)App.Current.FindResource("NoHilightListItemStyle"));
+		public static Style ComboBoxEditableTextBox => ((Style)App.Current.FindResource("ComboBoxEditableTextBox"));
+		public static Style EmptyFocusVisual => ((Style)App.Current.FindResource("EmptyFocusVisual"));
 	}
 
 }
