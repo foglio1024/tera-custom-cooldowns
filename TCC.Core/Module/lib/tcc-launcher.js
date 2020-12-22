@@ -1,17 +1,17 @@
-const { spawn } = require('child_process');
-const Path = require('path');
-const FS = require('fs');
+const { spawn } = require("child_process");
+const Path = require("path");
+const FS = require("fs");
 
 class TccLauncher
 {
     constructor(m)
     {
-        const tccPath = Path.join(__dirname, '../TCC.exe');
-        m.clientInterface.once('ready', () => 
+        const tccPath = Path.join(__dirname, "../TCC.exe");
+        m.clientInterface.once("ready", () => 
         {
-            m.log('Starting TCC...');
-            const tcc = spawn(tccPath, ['--toolbox'], { stdio: 'ignore' });
-            tcc.on('exit', () => m.log('TCC exited because it closed or it is already running.'));
+            m.log("Starting TCC...");
+            const tcc = spawn(tccPath, ["--toolbox"], { stdio: "ignore" });
+            tcc.on("exit", () => m.log("TCC exited because it closed or it is already running."));
         });
 
         this.tryInstallRemover = function(removerGpkName, installer, removerNiceName)
@@ -29,7 +29,7 @@ class TccLauncher
 
         this.install = function (installer)
         {
-            const tccSettingsPath = Path.join(__dirname, '../tcc-settings.json');
+            const tccSettingsPath = Path.join(__dirname, "../tcc-settings.json");
             let noSettings = false;
             if (!FS.existsSync(tccSettingsPath))
                 noSettings = true;;
@@ -38,15 +38,15 @@ class TccLauncher
             {
                 // no settings, remove everything by default
                 m.log("No settings found, installing all removers by default.");
-                this.tryInstallRemover('S1UI_CharacterWindow.gpk', installer, 'Character window');
-                this.tryInstallRemover('S1UI_TargetInfo.gpk', installer, 'Mob HP bar');
-                this.tryInstallRemover('S1UI_GageBoss.gpk', installer, 'Boss HP bar');
-                this.tryInstallRemover('S1UI_Abnormality.gpk', installer, 'Buff bar');
-                this.tryInstallRemover('S1UI_PartyWindow.gpk', installer, 'Party windows');
-                this.tryInstallRemover('S1UI_PartyWindowRaidInfo.gpk', installer, 'Raid windows');
-                this.tryInstallRemover('S1UI_PartyBoard.gpk', installer, 'LFG window');
-                this.tryInstallRemover('S1UI_PartyBoardMemberInfo.gpk', installer, 'LFG details info');
-                this.tryInstallRemover('S1UI_Chat2.gpk', installer, 'Chat');
+                this.tryInstallRemover("S1UI_CharacterWindow.gpk", installer, "Character window");
+                this.tryInstallRemover("S1UI_TargetInfo.gpk", installer, "Mob HP bar");
+                this.tryInstallRemover("S1UI_GageBoss.gpk", installer, "Boss HP bar");
+                this.tryInstallRemover("S1UI_Abnormality.gpk", installer, "Buff bar");
+                this.tryInstallRemover("S1UI_PartyWindow.gpk", installer, "Party windows");
+                this.tryInstallRemover("S1UI_PartyWindowRaidInfo.gpk", installer, "Raid windows");
+                this.tryInstallRemover("S1UI_PartyBoard.gpk", installer, "LFG window");
+                this.tryInstallRemover("S1UI_PartyBoardMemberInfo.gpk", installer, "LFG details info");
+                this.tryInstallRemover("S1UI_Chat2.gpk", installer, "Chat");
                 // installer.gpk('gpk/S1UI_ProgressBar.gpk');
                 return;
             }
@@ -55,7 +55,7 @@ class TccLauncher
 
             if (settings.CharacterWindowSettings.Enabled === true)
             {
-                this.tryInstallRemover('S1UI_CharacterWindow.gpk', installer, 'Character window');
+                this.tryInstallRemover("S1UI_CharacterWindow.gpk", installer, "Character window");
             }
 
             let hideNpcWin = true;
@@ -64,8 +64,8 @@ class TccLauncher
 
             if (settings.NpcWindowSettings.Enabled === true && hideNpcWin === true)
             {
-                this.tryInstallRemover('S1UI_TargetInfo.gpk', installer, 'Mob HP bar');
-                this.tryInstallRemover('S1UI_GageBoss.gpk', installer, 'Boss HP bar');
+                this.tryInstallRemover("S1UI_TargetInfo.gpk", installer, "Mob HP bar");
+                this.tryInstallRemover("S1UI_GageBoss.gpk", installer, "Boss HP bar");
             }
 
             let hideBuffWin = true;
@@ -74,7 +74,7 @@ class TccLauncher
 
             if (settings.BuffWindowSettings.Enabled === true && hideBuffWin === true)
             {
-                this.tryInstallRemover('S1UI_Abnormality.gpk', installer, 'Buff bar');
+                this.tryInstallRemover("S1UI_Abnormality.gpk", installer, "Buff bar");
             }
 
             let hideGroupWin = true;
@@ -83,8 +83,8 @@ class TccLauncher
 
             if (settings.GroupWindowSettings.Enabled === true && hideGroupWin === true)
             {
-                this.tryInstallRemover('S1UI_PartyWindow.gpk', installer, 'Party windows');
-                this.tryInstallRemover('S1UI_PartyWindowRaidInfo.gpk', installer, 'Raid windows');
+                this.tryInstallRemover("S1UI_PartyWindow.gpk", installer, "Party windows");
+                this.tryInstallRemover("S1UI_PartyWindowRaidInfo.gpk", installer, "Raid windows");
             }
 
             // if (settings.FlightGaugeWindowSettings.Enabled === true)
@@ -95,13 +95,13 @@ class TccLauncher
 
             if (settings.LfgWindowSettings.Enabled === true)
             {
-                this.tryInstallRemover('S1UI_PartyBoard.gpk', installer, 'LFG window');
-                this.tryInstallRemover('S1UI_PartyBoardMemberInfo.gpk', installer, 'LFG details info');
+                this.tryInstallRemover("S1UI_PartyBoard.gpk", installer, "LFG window");
+                this.tryInstallRemover("S1UI_PartyBoardMemberInfo.gpk", installer, "LFG details info");
             }
 
             if (settings.ChatEnabled === true)
             {
-                this.tryInstallRemover('S1UI_Chat2.gpk', installer, 'Chat');
+                this.tryInstallRemover("S1UI_Chat2.gpk", installer, "Chat");
             }
         };
     }

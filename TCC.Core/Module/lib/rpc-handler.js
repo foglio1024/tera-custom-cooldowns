@@ -1,5 +1,5 @@
-const fs = require('fs');
-const { Globals } = require("./globals")
+const fs = require("fs");
+const { Globals } = require("./globals");
 
 class RpcHandler
 {
@@ -28,7 +28,7 @@ class RpcHandler
         let names = Object.keys(this.mod.clientInterface.info.sysmsg);
         names.forEach(name =>
         {
-            sysmsg += `${name} ${this.mod.clientInterface.info.sysmsg[name]}${(names.indexOf(name) != names.length - 1 ? '\n' : '')}`;
+            sysmsg += `${name} ${this.mod.clientInterface.info.sysmsg[name]}${(names.indexOf(name) != names.length - 1 ? "\n" : "")}`;
         });
         fs.writeFile(params.path, sysmsg, function (err)
         {
@@ -53,19 +53,19 @@ class RpcHandler
     }
     resetInstance(params)
     {
-        this.mod.send('C_RESET_ALL_DUNGEON', 1, {});
-        this.debug('Sent C_RESET_ALL_DUNGEON');
+        this.mod.send("C_RESET_ALL_DUNGEON", 1, {});
+        this.debug("Sent C_RESET_ALL_DUNGEON");
     }
     requestPartyInfo(params)
     {
-        this.mod.send('C_REQUEST_PARTY_INFO', 2, {
+        this.mod.send("C_REQUEST_PARTY_INFO", 2, {
             playerId: params.listingId
         });
-        this.debug('Sent C_REQUEST_PARTY_INFO');
+        this.debug("Sent C_REQUEST_PARTY_INFO");
     }
     applyToGroup(params)
     {
-        this.mod.send('C_APPLY_PARTY', 1, {
+        this.mod.send("C_APPLY_PARTY", 1, {
             playerId: params.listingId
         });
         this.debug(`Sent C_APPLY_PARTY { playerId : ${params.listingId}}`);
@@ -73,7 +73,7 @@ class RpcHandler
     }
     friendUser(params)
     {
-        this.mod.send('C_ADD_FRIEND', 1, {
+        this.mod.send("C_ADD_FRIEND", 1, {
             name: params.userName,
             message: params.message
         });
@@ -81,28 +81,28 @@ class RpcHandler
     }
     unfriendUser(params)
     {
-        this.mod.send('C_DELETE_FRIEND', 1, {
+        this.mod.send("C_DELETE_FRIEND", 1, {
             name: params.userName
         });
         this.debug(`Sent C_DELETE_FRIEND`);
     }
     blockUser(params)
     {
-        this.mod.send('C_BLOCK_USER', 1, {
+        this.mod.send("C_BLOCK_USER", 1, {
             name: params.userName
         });
         this.debug(`Sent C_BLOCK_USER`);
     }
     unblockUser(params)
     {
-        this.mod.send('C_REMOVE_BLOCKED_USER', 1, {
+        this.mod.send("C_REMOVE_BLOCKED_USER", 1, {
             name: params.userName
         });
         this.debug(`Sent C_REMOVE_BLOCKED_USER`);
     }
     setInvitePower(params)
     {
-        this.mod.send('C_CHANGE_PARTY_MEMBER_AUTHORITY', 1, {
+        this.mod.send("C_CHANGE_PARTY_MEMBER_AUTHORITY", 1, {
             serverId: params.serverId,
             playerId: params.playerId,
             canInvite: params.canInvite
@@ -111,7 +111,7 @@ class RpcHandler
     }
     delegateLeader(params)
     {
-        this.mod.send('C_CHANGE_PARTY_MANAGER', 2, {
+        this.mod.send("C_CHANGE_PARTY_MANAGER", 2, {
             serverId: params.serverId,
             playerId: params.playerId
         });
@@ -119,7 +119,7 @@ class RpcHandler
     }
     kickUser(params)
     {
-        this.mod.send('C_BAN_PARTY_MEMBER', 1, {
+        this.mod.send("C_BAN_PARTY_MEMBER", 1, {
             serverId: params.serverId,
             playerId: params.playerId
         });
@@ -127,14 +127,14 @@ class RpcHandler
     }
     inspectUser(params)
     {
-        this.mod.send('C_REQUEST_USER_PAPERDOLL_INFO', 3, {
+        this.mod.send("C_REQUEST_USER_PAPERDOLL_INFO", 3, {
             name: params.userName
         });
         this.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO`);
     }
     inspectUserWithGameId(params)
     {
-        this.mod.send('C_REQUEST_USER_PAPERDOLL_INFO_WITH_GAMEID', 3, {
+        this.mod.send("C_REQUEST_USER_PAPERDOLL_INFO_WITH_GAMEID", 3, {
             gameId: params.gameId
         });
         this.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO`);
@@ -142,7 +142,7 @@ class RpcHandler
     groupInviteUser(params)
     {
         var dataArray = new Buffer.alloc(1, Number(params.isRaid));
-        this.mod.send('C_REQUEST_CONTRACT', 1, {
+        this.mod.send("C_REQUEST_CONTRACT", 1, {
             type: 4,
             name: params.userName,
             data: dataArray
@@ -151,7 +151,7 @@ class RpcHandler
     }
     guildInviteUser(params)
     {
-        this.mod.send('C_INVITE_USER_TO_GUILD', 1, {
+        this.mod.send("C_INVITE_USER_TO_GUILD", 1, {
             name: params.userName
         });
         this.debug(`Sent C_INVITE_USER_TO_GUILD`);
@@ -161,7 +161,7 @@ class RpcHandler
         const data = Buffer.alloc(30);
         data.writeUInt32LE(params.playerId, 0);
         data.writeUInt32LE(params.listingId, 4);
-        this.mod.send('C_REQUEST_CONTRACT', 1, {
+        this.mod.send("C_REQUEST_CONTRACT", 1, {
             type: 35,
             data
         });
@@ -169,7 +169,7 @@ class RpcHandler
     }
     declineBrokerOffer(params)
     {
-        this.mod.send('C_TRADE_BROKER_REJECT_SUGGEST', 1, {
+        this.mod.send("C_TRADE_BROKER_REJECT_SUGGEST", 1, {
             playerId: params.playerId,
             listing: params.listingId
         });
@@ -177,19 +177,19 @@ class RpcHandler
     }
     declineUserGroupApply(params)
     {
-        this.mod.send('C_PARTY_APPLICATION_DENIED', 1, {
+        this.mod.send("C_PARTY_APPLICATION_DENIED", 1, {
             pid: params.playerId
         });
         this.debug(`Sent C_PARTY_APPLICATION_DENIED`);
     }
     publicizeListing(params)
     {
-        this.mod.send('C_REQUEST_PARTY_MATCH_LINK', 1, {});
+        this.mod.send("C_REQUEST_PARTY_MATCH_LINK", 1, {});
         this.debug(`Sent C_REQUEST_PARTY_MATCH_LINK`);
     }
     removeListing(params)
     {
-        this.mod.send('C_UNREGISTER_PARTY_INFO', 1, {
+        this.mod.send("C_UNREGISTER_PARTY_INFO", 1, {
             unk1: 20,
             minLevel: 1,
             maxLevel: 65,
@@ -218,7 +218,7 @@ class RpcHandler
     }
     requestListingsPage(params)
     {
-        this.mod.send('C_REQUEST_PARTY_MATCH_INFO_PAGE', 1, {
+        this.mod.send("C_REQUEST_PARTY_MATCH_INFO_PAGE", 1, {
             page: params.page,
             unk1: 3
         });
@@ -226,7 +226,7 @@ class RpcHandler
     }
     askInteractive(params)
     {
-        this.mod.send('C_ASK_INTERACTIVE', 2, {
+        this.mod.send("C_ASK_INTERACTIVE", 2, {
             unk: 1,
             serverId: params.serverId,
             name: params.userName
@@ -235,7 +235,7 @@ class RpcHandler
     }
     requestExTooltip(params)
     {
-        this.mod.send('C_SHOW_ITEM_TOOLTIP_EX', 3, {
+        this.mod.send("C_SHOW_ITEM_TOOLTIP_EX", 3, {
             type: 17,
             id: params.itemUid,
             playerId: -1,
@@ -246,14 +246,14 @@ class RpcHandler
     }
     requestNonDbItemInfo(params)
     {
-        this.mod.send('C_REQUEST_NONDB_ITEM_INFO', 2, {
+        this.mod.send("C_REQUEST_NONDB_ITEM_INFO", 2, {
             item: params.itemId
         });
         this.debug(`Sent C_REQUEST_NONDB_ITEM_INFO`);
     }
     registerListing(params)
     {
-        this.mod.send('C_REGISTER_PARTY_INFO', 1, {
+        this.mod.send("C_REGISTER_PARTY_INFO", 1, {
             isRaid: params.isRaid,
             message: params.message
         });
@@ -261,17 +261,17 @@ class RpcHandler
     }
     disbandGroup(params)
     {
-        this.mod.send('C_DISMISS_PARTY', 1, {});
+        this.mod.send("C_DISMISS_PARTY", 1, {});
         this.debug(`Sent C_DISMISS_PARTY`);
     }
     leaveGroup(params)
     {
-        this.mod.send('C_LEAVE_PARTY', 1, {});
+        this.mod.send("C_LEAVE_PARTY", 1, {});
         this.debug(`Sent C_LEAVE_PARTY`);
     }
     requestListingCandidates(params)
     {
-        this.mod.send('C_REQUEST_CANDIDATE_LIST', 1, {});
+        this.mod.send("C_REQUEST_CANDIDATE_LIST", 1, {});
         this.debug(`Sent C_REQUEST_CANDIDATE_LIST`);
     }
     forceSystemMessage(params)
@@ -293,9 +293,9 @@ class RpcHandler
     }
     chatLinkAction(params)
     {
-        this.mod.send('S_CHAT', 3, {
+        this.mod.send("S_CHAT", 3, {
             channel: 18,
-            name: 'tccChatLink',
+            name: "tccChatLink",
             message: params.linkData
         });
         this.debug(`Calling chatLinkAction: ${params.linkData}`);
@@ -308,7 +308,7 @@ class RpcHandler
         let msg = `${name} set to ${value}`;
         if (name == "useLfg")
         {
-            msg = `TCC LFG window ${(value ? 'enabled' : 'disabled')}. Ingame LFG ${(value ? 'will' : "won't")} be blocked.`;
+            msg = `TCC LFG window ${(value ? "enabled" : "disabled")}. Ingame LFG ${(value ? "will" : "won't")} be blocked.`;
         }
         else if (name == "EnablePlayerMenu")
         {

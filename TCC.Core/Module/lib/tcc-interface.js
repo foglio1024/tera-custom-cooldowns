@@ -1,8 +1,8 @@
-const http = require('http');
-const net = require('net');
+const http = require("http");
+const net = require("net");
 const { RpcServer } = require("./rpc-server");
 // TODO: move these to settings ------
-const address = '127.0.0.51';
+const address = "127.0.0.51";
 const port = 9551;
 // -----------------------------------
 
@@ -24,7 +24,7 @@ class TccInterface
 
             this.mod.log("[tcc-stub] " + socket.remoteAddress + ":" + socket.remotePort + " connected!");
             socket.on("end", () => {
-                this.mod.log("[tcc-stub] " + socket.remoteAddress + ":" + socket.remotePort + " disconnected!")
+                this.mod.log("[tcc-stub] " + socket.remoteAddress + ":" + socket.remotePort + " disconnected!");
                 connectedClients.splice(connectedClients.indexOf(socket), 1);
             });
             socket.on("error", (err) => {
@@ -37,7 +37,7 @@ class TccInterface
     call(method, params)
     {
         const request = {
-            'jsonrpc': '2.0',
+            'jsonrpc': "2.0",
             'method': method,
             'params': params,
             'id': this.nextId++
@@ -49,7 +49,7 @@ class TccInterface
         const data = Buffer.alloc(len + 2);
         data.writeUInt16LE(len);
         data.write(strReq,2);
-        this.mod.log("Sending " + data.length + " bytes: " + strReq + "\n" + data);
+        //this.mod.log("Sending " + data.length + " bytes: " + strReq + "\n" + data);
         connectedClients.forEach(socket => {
             socket.write(data);
         });
