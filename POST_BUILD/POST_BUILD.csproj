@@ -16,4 +16,9 @@
       node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
     </PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
+    <PostBuildEvent>
+      xcopy $(SolutionDir)\TCC.Core\Module\ "D:\TERA\TERAToolbox\mods\TCC\" /y /s
+    </PostBuildEvent>
+    </PropertyGroup>
 </Project>
