@@ -44,8 +44,9 @@ namespace TeraPacketParser.Messages
                 c.LastWorldId = reader.ReadUInt32();
                 c.LastGuardId = reader.ReadUInt32();
                 c.LastSectionId = reader.ReadUInt32();
+                reader.Skip(4); // dungeon gauntlet difficulty id
                 c.LastOnline = reader.ReadInt64();
-                reader.Skip(reader.Factory.ReleaseVersion >= 8600 ? 367 : 359);
+                reader.Skip(367);
                 c.Laurel = (Laurel)reader.ReadInt32();
                 c.Position = reader.ReadInt32();
                 c.GuildId = reader.ReadUInt32();
