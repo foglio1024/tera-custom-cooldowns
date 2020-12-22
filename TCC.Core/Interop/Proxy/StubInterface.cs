@@ -9,7 +9,7 @@ namespace TCC.Interop.Proxy
         public static StubInterface Instance => _instance ?? new StubInterface();
 
         public readonly StubClient StubClient;
-        private readonly RpcServer StubServer;
+        private readonly RpcServer2 StubServer;
         private readonly StubMessageHandler MessageHandler;
 
         public bool IsFpsModAvailable { get; set; }
@@ -19,7 +19,7 @@ namespace TCC.Interop.Proxy
         {
             _instance = this;
 
-            StubServer = new RpcServer();
+            StubServer = new RpcServer2();
             StubClient = new StubClient();
             MessageHandler = new StubMessageHandler();
             

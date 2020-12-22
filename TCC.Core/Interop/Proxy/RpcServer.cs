@@ -1,8 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Nostrum.Extensions;
 using TCC.Interop.JsonRPC;
 using TCC.Utils;
 
@@ -39,7 +43,7 @@ namespace TCC.Interop.Proxy
             }
             catch (ObjectDisposedException ex)
             {
-                Log.F($"[ObjectDisposedException] {ex.ObjectName} disposed, skipping Stop()..."); 
+                Log.F($"[ObjectDisposedException] {ex.ObjectName} disposed, skipping Stop()...");
             }
             _listening = false;
         }
@@ -71,6 +75,112 @@ namespace TCC.Interop.Proxy
                 catch (Exception e)
                 {
                     Log.F($"Error while parsing request: {e}", "http_server.log");
+                }
+            }
+            _listening = false;
+        }
+    }
+    /// <summary>
+    /// Listens to tcc-stub commands using a <see cref="HttpListener"/> and fires related events.
+    /// </summary>
+    public class RpcServer2
+    {
+        public event Action<Response> ResponseReceived = null!;
+        public event Action<Request> RequestReceived = null!;
+
+        private TcpClient _socket;
+        private bool _listening;
+        private bool _connected;
+        public RpcServer2()
+        {
+            _socket = new TcpClient();
+        }
+
+        public void Start()
+        {
+            if (_listening) return;
+            _listening = true;
+            Task.Run(Listen);
+        }
+
+        public void Stop()
+        {
+            try
+            {
+                _socket.Dispose();
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Log.F($"[ObjectDisposedException] {ex.ObjectName} disposed, skipping Stop()...");
+            }
+            _listening = false;
+        }
+        private async Task Listen()
+        {
+            _socket = new TcpClient();
+
+            while (_listening)
+            {
+                try
+                {
+                    if (_socket.Client == null)
+                    {
+                        Stop();
+                        continue;
+                    }
+                    
+                    await _socket.ConnectAsync("127.0.0.51", 9551);
+
+                    var stream = _socket.GetStream();
+
+                    _connected = true;
+
+                    while (_connected)
+                    {
+                        var lenBuf = new byte[2];
+                        stream.Read(lenBuf, 0, 2);
+                        var len = BitConverter.ToUInt16(lenBuf, 0);
+                        if (len <= 2)
+                        {
+                            if (!_socket.IsConnected())
+                            {
+                                _socket.Close();
+                                _connected = false;
+                            }
+                            continue;
+                        }
+                        var dataBuf = new byte[len];
+                        var progress = 0;
+                        while (progress < len)
+                        {
+                            progress += stream.Read(dataBuf, progress, len - progress);
+                        }
+
+                        try
+                        {
+                            var jsonReq = JObject.Parse(Encoding.UTF8.GetString(dataBuf));
+                            if (jsonReq.ContainsKey(Request.MethodKey))
+                            {
+                                RequestReceived?.Invoke(new Request(jsonReq));
+                            }
+                            else if (jsonReq.ContainsKey(Response.ErrorKey) || jsonReq.ContainsKey(Response.ResultKey))
+                            {
+                                ResponseReceived?.Invoke(new Response(jsonReq));
+                            }
+                            else
+                            {
+                                Log.F($"Received unknown message type: \n{jsonReq}", "http_server.log");
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Log.CW($"Error while parsing request: {e}");
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.CW($"Socket error: {e}");
                 }
             }
             _listening = false;
