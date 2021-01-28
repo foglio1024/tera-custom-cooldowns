@@ -32,7 +32,7 @@ namespace TCC.Interop.Proxy
             }
             catch (Exception e)
             {
-                Log.F($"Error while sending data to Toolbox: {e}");
+                Log.CW($"Error while sending data to Toolbox: {e}");
                 return null;
             }
         }
@@ -45,7 +45,7 @@ namespace TCC.Interop.Proxy
             var resp = await Send(req);
             if (resp?.Error != null)
             {
-                Log.F($"Toolbox RPC call generated an error: {resp.Error["message"]}");
+                Log.CW($"Toolbox RPC call generated an error: {resp.Error["message"]}");
             }
             return resp;
         }

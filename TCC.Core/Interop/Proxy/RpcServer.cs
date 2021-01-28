@@ -169,7 +169,7 @@ namespace TCC.Interop.Proxy
                             }
                             else
                             {
-                                Log.F($"Received unknown message type: \n{jsonReq}", "http_server.log");
+                                Log.CW($"Received unknown message type: \n{jsonReq}");
                             }
                         }
                         catch (Exception e)
