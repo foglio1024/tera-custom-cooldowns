@@ -670,7 +670,7 @@ namespace TCC.ViewModels.Widgets
             }
             else
             {
-                Log.CW($"Adding {skillCooldown.Skill.Id} {skillCooldown.Duration}");
+                //Log.CW($"Adding {skillCooldown.Skill.Id} {skillCooldown.Duration}");
                 AddOrRefresh(skillCooldown);
             }
         }
