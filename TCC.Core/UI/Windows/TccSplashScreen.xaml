@@ -13,7 +13,6 @@
         mc:Ignorable="d" 
         WindowStyle="None" 
         WindowStartupLocation="CenterScreen" 
-        Topmost="True"
         Opacity="1"
         Title="TCC" 
         Height="Auto" Width="520" 
