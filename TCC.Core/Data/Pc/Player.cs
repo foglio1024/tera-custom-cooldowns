@@ -468,7 +468,7 @@ namespace TCC.Data.Pc
         }
         private void FindAndUpdate(Abnormality ab, uint duration, int stacks)
         {
-            Dispatcher.InvokeAsync(() =>
+            Dispatcher.Invoke(() =>
             {
                 var list = GetList(ab);
                 var existing = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -542,7 +542,7 @@ namespace TCC.Data.Pc
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            if (list == null) 
+            if (list == null)
                 throw new InvalidOperationException("Invalid list type requested");
 
             return list;
