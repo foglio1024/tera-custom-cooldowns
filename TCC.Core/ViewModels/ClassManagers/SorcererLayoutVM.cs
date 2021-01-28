@@ -18,6 +18,7 @@ namespace TCC.ViewModels
         public Skill Iceberg { get; set; }
         public Skill ArcaneStorm { get; set; }
         public Skill FusionSkill { get; set; }
+        public Skill FusionSkillBoost { get; set; }
 
         private Skill CurrentFusionSkill
         {
@@ -47,6 +48,7 @@ namespace TCC.ViewModels
 
             Game.DB.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
             Game.DB.SkillsDatabase.TryGetSkill(360100, Class.Sorcerer, out var fusion);
+            Game.DB.SkillsDatabase.TryGetSkill(360600, Class.Sorcerer, out var fusionBoost);
             Game.DB.SkillsDatabase.TryGetSkill(360200, Class.Sorcerer, out var primeFlame);
             Game.DB.SkillsDatabase.TryGetSkill(360400, Class.Sorcerer, out var iceberg);
             Game.DB.SkillsDatabase.TryGetSkill(360300, Class.Sorcerer, out var arcaneStorm);
@@ -55,6 +57,7 @@ namespace TCC.ViewModels
             Iceberg = iceberg; //ice arcane
             ArcaneStorm = arcaneStorm; //fire arcane
             FusionSkill = fusion;
+            FusionSkillBoost = fusionBoost;
 
             ManaBoost = new SkillWithEffect(Dispatcher, mb);
             Fusion = new Cooldown(fusion, false);
@@ -76,7 +79,6 @@ namespace TCC.ViewModels
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
-
             if (sk.Skill.IconName == ManaBoost.Cooldown.Skill.IconName)
             {
                 ManaBoost.StartCooldown(sk.Duration);
@@ -94,10 +96,16 @@ namespace TCC.ViewModels
                 return true;
             }
 
-            if (sk.Skill.IconName != Fusion.Skill.IconName) return false;
-            _latestCooldown = (long)sk.OriginalDuration;
-            Fusion.Start(sk.Duration, sk.Mode);
-            _sw.Restart();
+            var fusion = ManaBoost.Effect.IsAvailable ? FusionSkill : FusionSkillBoost;
+
+            if (sk.Skill.IconName == fusion.IconName)
+            {
+                _latestCooldown = (long)sk.OriginalDuration;
+                Fusion.Start(sk.Duration, sk.Mode);
+                _sw.Restart();
+                return false;
+            }
+
             return false;
         }
 
@@ -121,6 +129,5 @@ namespace TCC.ViewModels
             N(nameof(IsBoostFrost));
             N(nameof(IsBoostArcane));
         }
-
     }
 }
