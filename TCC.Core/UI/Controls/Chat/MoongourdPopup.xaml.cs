@@ -1,18 +1,15 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using TCC.Moongourd;
+﻿using Nostrum;
+using System.Collections.Generic;
+using System.Windows.Threading;
+using TCC.Interop.Moongourd;
 
 namespace TCC.UI.Controls.Chat
 {
-    public partial class MoongourdPopup : INotifyPropertyChanged
+    public class MoongourdPopupViewModel : TSPropertyChanged
     {
-        private string _playerName = "";
+        private readonly IMoongourdManager _manager;
 
-        public MoongourdPopup()
-        {
-            InitializeComponent();
-            MouseLeave += (s, ev) => WindowManager.ViewModels.PlayerMenuVM.Close();
-        }
+        private string _playerName = "";
 
         public string PlayerName
         {
@@ -21,33 +18,82 @@ namespace TCC.UI.Controls.Chat
             {
                 if (_playerName == value) return;
                 _playerName = value;
-                NPC();
+                N();
             }
         }
 
-        public void SetInfo(string name, string region)
+        private string _emptyText = "No data.";
+
+        public string EmptyText
+        {
+            get => _emptyText;
+            set
+            {
+                if (_emptyText == value) return;
+                _emptyText = value;
+                N();
+            }
+        }
+
+        public TSObservableCollection<MoongourdEncounter> Encounters { get; }
+
+        public MoongourdPopupViewModel()
+        {
+            Dispatcher = Dispatcher.CurrentDispatcher;
+
+            Encounters = new TSObservableCollection<MoongourdEncounter>(Dispatcher);
+
+            _manager = new KabedonManager();
+            _manager.Started += OnSearchStarted;
+            _manager.Finished += OnSearchFinished;
+            _manager.Failed += OnSearchFailed;
+        }
+
+        private void OnSearchStarted()
+        {
+            Dispatcher?.Invoke(() => EmptyText = "Loading...");
+        }
+
+        private void OnSearchFinished(List<MoongourdEncounter> list)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                EmptyText = "No entries.";
+                Encounters.Clear();
+                list.ForEach(Encounters.Add);
+            });
+        }
+
+        private void OnSearchFailed(string error)
+        {
+            Dispatcher?.Invoke(() =>
+            {
+                EmptyText = $"Failed to retrieve data.\n{error}";
+            });
+        }
+
+        public void RequestInfo(string name, string region)
         {
             Dispatcher?.Invoke(() =>
             {
                 PlayerName = name;
-                return List.ItemsSource = null;
+                Encounters.Clear();
             });
-            if (region.StartsWith("EU")) region = "EU";
-            var mg = new MoongourdManager();
-            mg.Started += () => Dispatcher?.Invoke(() => { EmptyInfo.Text = "Loading..."; });
-            mg.Done += (list) => Dispatcher?.Invoke(() =>
+
+            if (region.StartsWith("EU"))
             {
-                EmptyInfo.Text = "No entries";
-                List.ItemsSource = list;
-            });
-            mg.GetEncounters(name, region);
+                region = "EU";
+            }
+            _manager.GetEncounters(name, region, Game.Server.Name);
         }
+    }
 
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-
-        protected virtual void NPC([CallerMemberName] string? propertyName = null)
+    public partial class MoongourdPopup
+    {
+        public MoongourdPopup()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            MouseLeave += (_, __) => WindowManager.ViewModels.PlayerMenuVM.Close();
+            InitializeComponent();
         }
     }
 }

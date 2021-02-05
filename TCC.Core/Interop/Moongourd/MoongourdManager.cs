@@ -1,22 +1,24 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Newtonsoft.Json.Linq;
-using TCC.Interop.Moongourd;
-using TCC.Utilities;
 
-namespace TCC.Moongourd
+namespace TCC.Interop.Moongourd
 {
-    public class MoongourdManager
+    [Obsolete]
+    public class MoongourdManager : IMoongourdManager
     {
         private const string RecentUploadsUrl = "https://moongourd.com/api/bot/recent_uploads_tcc";
         private bool _asking;
         private static JArray? LastResponse { get; set; } = new JArray();
-        public event Action<List<MoongourdEncounter>> Done = null!;
-        public event Action Started = null!;
+
+        public event Action<List<MoongourdEncounter>>? Finished;
+
+        public event Action? Started;
+
+        public event Action<string>? Failed;
 
         private JObject BuildRequest(string playerName, string region, string playerServer = "", int areaId = 0, int bossId = 0)
         {
@@ -33,6 +35,7 @@ namespace TCC.Moongourd
 
             return req;
         }
+
         private void DownloadEncountersJson(JObject request)
         {
             if (request == null) return;
@@ -63,15 +66,16 @@ namespace TCC.Moongourd
                             var encounter = new MoongourdEncounter(jEncounter);
                             ret.Add(encounter);
                         }
-                        Done?.Invoke(ret);
+                        Finished?.Invoke(ret);
                     }
                     catch
                     {
                         LastResponse = null;
                     }
                 }
-                catch
+                catch (Exception e)
                 {
+                    Failed?.Invoke(e.ToString());
                     // ignored
                 }
 
@@ -94,32 +98,5 @@ namespace TCC.Moongourd
             //}
             //return ret;
         }
-
-    }
-
-    public class BrowseCommand : ICommand
-    {
-        private readonly MoongourdEncounter _encounter;
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object parameter)
-        {
-            var reg = App.Settings.LastLanguage.ToLower();
-            reg = reg.StartsWith("eu") ? "eu" : reg;
-            reg = reg == "na" ? "" : reg;
-            reg = reg == "" ? reg : reg + "/";
-            TccUtils.OpenUrl($"https://" + $"moongourd.com/{reg}encounter?area={_encounter.AreaId}&boss={_encounter.BossId}&log={_encounter.LogId}");
-        }
-
-        public BrowseCommand(MoongourdEncounter enc)
-        {
-            _encounter = enc;
-        }
-#pragma warning disable 0067
-        public event EventHandler CanExecuteChanged = null!;
-#pragma warning restore 0067
     }
 }

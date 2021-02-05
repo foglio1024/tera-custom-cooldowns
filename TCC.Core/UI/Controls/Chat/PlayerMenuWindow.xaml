@@ -430,6 +430,7 @@
                     <!-- Moongourd -->
                     <Button Click="MoongourdClick" Margin="-1 0 -1 0" x:Name="MgButton" HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
+                            Command="{Binding OpenMoongourdPopupCommand}"
                             Visibility="{Binding ShowMgButtons, Converter={converters:BoolToVisibility}}">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -438,7 +439,7 @@
                             </Grid.ColumnDefinitions>
                             <Popup Placement="Right" HorizontalOffset="5" VerticalOffset="-5" x:Name="MgPopup"
                                    AllowsTransparency="True">
-                                <chat:MoongourdPopup />
+                                <chat:MoongourdPopup DataContext="{Binding MoongourdPopupViewModel}"/>
                             </Popup>
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="{StaticResource MoongourdLogo}" Margin="4 6 2 6" />

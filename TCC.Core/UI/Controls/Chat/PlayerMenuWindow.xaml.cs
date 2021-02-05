@@ -137,8 +137,8 @@ namespace TCC.UI.Controls.Chat
 
         private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            var p = MgPopup.Child as MoongourdPopup;
-            p?.SetInfo(_vm.Name, App.Settings.LastLanguage);
+            //var p = MgPopup.Child as MoongourdPopup;
+            //p?.SetInfo(_vm.Name, App.Settings.LastLanguage);
             MgPopup.IsOpen = true;
         }
 

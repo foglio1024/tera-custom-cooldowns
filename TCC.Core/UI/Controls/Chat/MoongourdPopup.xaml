@@ -3,56 +3,59 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:chat="clr-namespace:TCC.UI.Controls.Chat"
              xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
-             mc:Ignorable="d" >
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignData MoongourdPopupViewModel}">
     <Grid Margin="0 5 10 10" Effect="{StaticResource DropShadow}">
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border Background="{StaticResource MoongourdBackgroundBrush}" Grid.RowSpan="3" CornerRadius="2"/>
-        <Border Background="{StaticResource MoongourdHeaderBrush}"  BorderThickness="0 2 0 0" Grid.Row="1" BorderBrush="{StaticResource MoongourdAccentBrush}" />
+        <Border Background="{StaticResource MoongourdBackgroundBrush}" Grid.RowSpan="3" CornerRadius="2" />
+        <Border Background="{StaticResource MoongourdHeaderBrush}" BorderThickness="0 2 0 0" Grid.Row="1"
+                BorderBrush="{StaticResource MoongourdAccentBrush}" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Image Source="{StaticResource MoongourdLogo}" Margin="5" Width="20"></Image>
-            <TextBlock Grid.Column="1" Foreground="#7fff" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Margin="0 0 5 0">
-                <Run Text="Five most recent"/>
-                <Run Text="{Binding PlayerName, RelativeSource={RelativeSource AncestorType=chat:MoongourdPopup}, Mode=OneWay}" Foreground="{StaticResource MoongourdAccentBrush}"/><Run Text="'s Moongourd parses"/>
+            <Image Source="{StaticResource MoongourdLogo}" Margin="5" Width="20" />
+            <TextBlock Grid.Column="1" Foreground="#7fff" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       TextAlignment="Center" Margin="0 0 5 0">
+                <Run Text="Five most recent" />
+                <Run Text="{Binding PlayerName, Mode=OneWay}"
+                     Foreground="{StaticResource MoongourdAccentBrush}" /><Run Text="'s Moongourd parses" />
             </TextBlock>
         </Grid>
-        <Grid Margin="6 0" Grid.Row="1" Visibility="{Binding ElementName=List, Path=HasItems,Converter={converters:BoolToVisibility}}"
-              >
+        <Grid Margin="6 0" Grid.Row="1"
+              Visibility="{Binding ElementName=List, Path=HasItems,Converter={converters:BoolToVisibility}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="230"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="40" />
             </Grid.ColumnDefinitions>
             <Grid.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="TextAlignment" Value="Center"></Setter>
-                    <Setter Property="Foreground" Value="#afff"></Setter>
-                    <Setter Property="Margin" Value="3"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="TextAlignment" Value="Center" />
+                    <Setter Property="Foreground" Value="#afff" />
+                    <Setter Property="Margin" Value="3" />
                 </Style>
-
             </Grid.Resources>
-            <TextBlock Text="Dungeon" HorizontalAlignment="Left"></TextBlock>
-            <TextBlock Text="DPS" Grid.Column="1"></TextBlock>
-            <TextBlock Text="Deaths" Grid.Column="2"></TextBlock>
-            <TextBlock Text="Link" Grid.Column="3"></TextBlock>
+            <TextBlock Text="Dungeon" HorizontalAlignment="Left" />
+            <TextBlock Text="DPS" Grid.Column="1" />
+            <TextBlock Text="Deaths" Grid.Column="2" />
+            <TextBlock Text="Link" Grid.Column="3" />
         </Grid>
-        <TextBlock Grid.Row="2" Text="No entries." HorizontalAlignment="Center" Foreground="#5fff" Margin="5" x:Name="EmptyInfo"
-                   Visibility="{Binding ElementName=List, Path=HasItems, Converter={converters:BoolToVisibility Invert=True}}"
-                   />
-        <ListBox Background="Transparent" BorderThickness="0" Grid.Row="2" ItemTemplate="{StaticResource MoongourdEncounterDataTemplate}"
-                 ItemContainerStyle="{StaticResource DefaultListItemStyle}" AlternationCount="2" x:Name="List">
-        </ListBox>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center" Foreground="#5fff" Margin="5"
+                   Text="{Binding EmptyText, Mode=OneWay}"
+                   Visibility="{Binding ElementName=List, Path=HasItems, Converter={converters:BoolToVisibility Invert=True}}" />
+        <ListBox Background="Transparent" BorderThickness="0" Grid.Row="2"
+                 ItemTemplate="{StaticResource MoongourdEncounterDataTemplate}"
+                 ItemContainerStyle="{StaticResource DefaultListItemStyle}" AlternationCount="2" x:Name="List"
+                 ItemsSource="{Binding Encounters}"/>
     </Grid>
 </UserControl>
