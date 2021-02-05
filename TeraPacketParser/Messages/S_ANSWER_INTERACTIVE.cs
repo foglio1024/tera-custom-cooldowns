@@ -1,24 +1,29 @@
-﻿
-
-
-namespace TeraPacketParser.Messages
+﻿namespace TeraPacketParser.Messages
 {
     public class S_ANSWER_INTERACTIVE : ParsedMessage
     {
-        public string Name { get; private set; }
-        public bool HasGuild { get; private set; }
-        public bool HasParty { get; private set; }
-        public uint Level { get; private set; }
-        public uint Model { get; private set; }
+        public string Name { get; }
+        public uint PlayerId { get; }
+        public uint ServerId { get; }
+        public bool HasGuild { get; }
+        public bool HasParty { get; }
+        public int Level { get; }
+        public int TemplateId { get; }
 
         public S_ANSWER_INTERACTIVE(TeraMessageReader reader) : base(reader)
         {
-            reader.Skip(2+4);
-            Model = reader.ReadUInt32();
-            Level = reader.ReadUInt32();
+            var nameOffset = reader.ReadUInt16();
+            reader.Skip(4); // type
+            if (reader.Factory.ReleaseVersion / 100 >= 103)
+            {
+                PlayerId = reader.ReadUInt32();
+            }
+            TemplateId = reader.ReadInt32();
+            Level = reader.ReadInt32();
             HasParty = reader.ReadBoolean();
             HasGuild = reader.ReadBoolean();
-            reader.Skip(4); //server ID
+            ServerId = reader.ReadUInt32();
+            reader.RepositionAt(nameOffset);
             Name = reader.ReadTeraString();
         }
     }
