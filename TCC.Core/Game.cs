@@ -843,7 +843,7 @@ namespace TCC
                  gq.Title
                     : "Defeat Guild BAM";
             var zone = DB.MonsterDatabase.GetZoneName(p.ZoneId);
-            var name = DB.MonsterDatabase.GetName(p.TemplateId, p.ZoneId);
+            var name = DB.MonsterDatabase.GetMonsterName(p.TemplateId, p.ZoneId);
             SystemMessagesProcessor.AnalyzeMessage($"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}", "SMT_GQUEST_URGENT_NOTIFY");
         }
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)

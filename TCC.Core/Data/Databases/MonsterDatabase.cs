@@ -42,7 +42,7 @@ namespace TCC.Data.Databases
             return z != null ? z.Name : "Unknown zone";
         }
 
-        public string GetName(uint templateId, uint zoneId)
+        public string GetMonsterName(uint templateId, uint zoneId)
         {
             return TryGetMonster(templateId, zoneId, out var m) ? m.Name : "Unknown";
         }

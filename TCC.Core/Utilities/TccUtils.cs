@@ -119,7 +119,7 @@ namespace TCC.Utilities
 
         public static bool IsEntitySpawned(uint zoneId, uint templateId)
         {
-            var name = Game.DB.MonsterDatabase.GetName(templateId, zoneId);
+            var name = Game.DB.MonsterDatabase.GetMonsterName(templateId, zoneId);
             return name != "Unknown" && Game.NearbyNPC.ContainsValue(name);
         }
 
