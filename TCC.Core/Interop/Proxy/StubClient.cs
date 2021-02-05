@@ -62,6 +62,13 @@ namespace TCC.Interop.Proxy
                 { "userName", userName },
             });
         }
+        public async void UnfriendUser([NotNull] uint playerId)
+        {
+            await TccStub.CallAsync("unfriendUser", new JObject
+            {
+                { "playerId", playerId},
+            });
+        }
         public async void BlockUser([NotNull] string userName)
         {
             await TccStub.CallAsync("blockUser", new JObject

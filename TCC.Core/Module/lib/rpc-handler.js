@@ -81,9 +81,18 @@ class RpcHandler
     }
     unfriendUser(params)
     {
-        this.mod.send("C_DELETE_FRIEND", 1, {
-            name: params.userName
-        });
+        if (this.mod.majorPatchVersion >= 103)
+        {
+            this.mod.send("C_DELETE_FRIEND", 2, {
+                playerId: params.playerId
+            });
+        }
+        else
+        {
+            this.mod.send("C_DELETE_FRIEND", 1, {
+                name: params.userName
+            });
+        }
         this.debug(`Sent C_DELETE_FRIEND`);
     }
     blockUser(params)
@@ -304,7 +313,7 @@ class RpcHandler
     {
         let value = params.value == "True"; // JS PLS
         let name = params.name;
-        Globals[name] = value; 
+        Globals[name] = value;
         let msg = `${name} set to ${value}`;
         if (name == "useLfg")
         {
@@ -318,7 +327,8 @@ class RpcHandler
         {
             this.mod.networkMod.notifyShowIngameChatChanged();
         }
-        else if (name == "TccChatEnabled"){
+        else if (name == "TccChatEnabled")
+        {
             // do nothing
         }
         this.mod.log(msg);
