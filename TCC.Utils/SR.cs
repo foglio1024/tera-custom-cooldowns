@@ -11,6 +11,7 @@ namespace TCC.Utils
         public const string CannotDetectCurrentRegion     = "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.";
         public const string RenderThreadError             = "An error in render thread occured. This is usually caused by outdated video card drivers. TCC will now close.";
         public const string FatalError                    = "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.";
+        public const string OutOfMemoryError              = "TCC doesn't have enough available RAM to keep running and will now close.";
         public const string SettingsNotFoundImport        = "Settings file not found. Do you want to import an existing one?";
         public const string SettingsNotFoundDefault       = "Cannot load settings file. Do you want TCC to delete it and recreate a default file?";
         public const string IconDownloadFailed            = "Failed to download icons, try again?";
@@ -32,6 +33,7 @@ namespace TCC.Utils
         public const string ReadyToConnect                = "Ready to connect.";
         public const string Disconnected                  = "Disconnected.";
         public const string ForcingGameDrivenClickThruOff = "TERA client architecture is 64bit. This means that gpk mods will not work at the moment. Widgets having clickthru mode set to Game-driven have been set to be always clickthru. Adjust your setting according to the desired behavior.";
+
 
         public static string ErrorWhileLoadingModule(string? filename)
         {

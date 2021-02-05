@@ -62,6 +62,11 @@ namespace TCC
                     TccMessageBox.Show("TCC", SR.FatalError, MessageBoxButton.OK, MessageBoxImage.Error);
                     break;
                 }
+                case OutOfMemoryException:
+                {
+                    TccMessageBox.Show("TCC", SR.OutOfMemoryError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
                 default:
                 {
                     UploadCrashDump(js);
