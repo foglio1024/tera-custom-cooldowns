@@ -49,7 +49,7 @@ namespace TCC.Publisher
 
         private Publisher()
         {
-            _settings = JsonConvert.DeserializeObject<PublisherSettings>(File.ReadAllText("tcc_publisher_settings.json"));
+            _settings = JsonConvert.DeserializeObject<PublisherSettings>(File.ReadAllText("tcc_publisher_settings.json"))!;
             _releaseFolder = Path.Combine(_settings.LocalRepositoryPath, "release");
             _client = new GitHubClient(new ProductHeaderValue("TCC.Publisher"))
             {

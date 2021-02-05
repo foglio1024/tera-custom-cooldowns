@@ -8,6 +8,7 @@ using System.Linq;
 using PacketDotNet;
 using PacketDotNet.Utils;
 using SharpPcap;
+using SharpPcap.Npcap;
 using SharpPcap.WinPcap;
 
 //using log4net;
@@ -21,7 +22,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         //    (MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly string _filter;
-        private WinPcapDeviceList? _devices;
+        private NpcapDeviceList? _devices;
         private volatile uint _droppedPackets;
         private volatile uint _interfaceDroppedPackets;
         private DateTime _nextCheck;
@@ -30,7 +31,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         {
             _filter = filter;
             BufferSize = 1<<24;
-            _devices = WinPcapDeviceList.New();
+            _devices = NpcapDeviceList.New();
             //BasicTeraData.LogError(string.Join("\r\n",_devices.Select(x=>x.Description)),true,true);
             //check for winpcap installed if not - exception to fallback to rawsockets
             _devices = null;
@@ -40,8 +41,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
         public IEnumerable<string> Status()
         {
-            return _devices.Select(device =>
-                $"Device {device.LinkType} {(device.Opened ? "Open" : "Closed")} {device.LastError}\r\n{device}");
+                return _devices!.Select(device =>
+                    $"Device {device.LinkType} {(device.Opened ? "Open" : "Closed")} {device.LastError}\r\n{device}");
         }
 
         protected override void SetEnabled(bool value)
@@ -52,7 +53,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 Finish();
         }
 
-        private static bool IsInteresting(WinPcapDevice device)
+        private static bool IsInteresting(NpcapDevice device)
         {
             return true;
         }
@@ -60,7 +61,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         private void Start()
         {
             Debug.Assert(_devices == null);
-            _devices = WinPcapDeviceList.New();
+            _devices = NpcapDeviceList.New();
             var interestingDevices = _devices.Where(IsInteresting);
             foreach (var device in interestingDevices)
             {
@@ -149,7 +150,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             var now = DateTime.UtcNow;
             if (now <= _nextCheck) return;
             _nextCheck = now + TimeSpan.FromSeconds(20);
-            var device = (WinPcapDevice) sender;
+            var device = (NpcapDevice) sender;
             if (device.Statistics.DroppedPackets == _droppedPackets &&
                 device.Statistics.InterfaceDroppedPackets == _interfaceDroppedPackets)
             {

@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PacketDotNet;
 using PacketDotNet.Utils;
+using ProtocolType = System.Net.Sockets.ProtocolType;
 
 namespace TeraPacketParser.TeraCommon.Sniffing
 {
@@ -53,7 +54,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 var bytesRead = args.BytesTransferred;
                 if (bytesRead <= 0) throw new Exception("Raw socket is disconnected");
                 var ipPacket = new IPv4Packet(new ByteArraySegment(args.Buffer, 0, bytesRead));
-                if (ipPacket.Version != IpVersion.IPv4 || ipPacket.Protocol!=IPProtocolType.TCP)
+                if (ipPacket.Version != IPVersion.IPv4|| ipPacket.Protocol!= PacketDotNet.ProtocolType.Tcp)
                     continue;
                 OnPacketReceived(ipPacket);
             }
@@ -102,7 +103,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         private static readonly Action Sentinel = () => { };
 
         internal bool MWasCompleted;
-        private Action _mContinuation;
+        private Action? _mContinuation;
         internal readonly SocketAsyncEventArgs MEventArgs;
 
         public SocketAwaitable(SocketAsyncEventArgs eventArgs)

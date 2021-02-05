@@ -105,7 +105,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         }
 
 
-        private void HandleEndConnection(TcpConnection connection)
+        private void HandleEndConnection(TcpConnection? connection)
         {
             if (connection == _clientToServer || connection == _serverToClient)
             {
@@ -114,15 +114,15 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 Connected = false;
                 OnEndConnection();
             }
-            else connection.RemoveCallback();
-            connection.DataReceived -= HandleTcpDataReceived;
+            else connection!.RemoveCallback();
+            connection!.DataReceived -= HandleTcpDataReceived;
         }
 
         // called from the tcp sniffer, so it needs to lock
-        private void HandleNewConnection(TcpConnection connection)
+        private void HandleNewConnection(TcpConnection? connection)
         {
             {
-                if (Connected || !_serversByIp.ContainsKey(connection.Destination.Address.ToString()) &&
+                if (Connected || !_serversByIp.ContainsKey(connection!.Destination.Address.ToString()) &&
                     !_serversByIp.ContainsKey(connection.Source.Address.ToString())) { return; }
                 _isNew.TryAdd(connection, 1);
                 connection.DataReceived += HandleTcpDataReceived;

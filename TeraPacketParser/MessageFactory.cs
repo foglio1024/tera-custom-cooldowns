@@ -10,7 +10,7 @@ namespace TeraPacketParser
 {
     public class MessageFactory
     {
-        public static event Action<int> ReleaseVersionChanged;
+        public static event Action<int>? ReleaseVersionChanged;
 
         private static readonly Delegate? UnknownMessageDelegate = Constructor<Func<TeraMessageReader, UnknownMessage>>();
         private static readonly Dictionary<ushort, Delegate?> OpcodeNameToType = new Dictionary<ushort, Delegate?> { { 19900, Constructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };

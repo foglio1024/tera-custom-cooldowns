@@ -55,7 +55,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             var tcpPacket = ipData.PayloadPacket as TcpPacket;
             if (tcpPacket == null || tcpPacket.DataOffset*4 > ipData.PayloadLength) return;
             //if (tcpPacket.Checksum!=0 && !tcpPacket.ValidTCPChecksum) return;
-            var isFirstPacket = tcpPacket.Syn;
+            var isFirstPacket = tcpPacket.Synchronize;
             var connectionId = new ConnectionId(ipData.SourceAddress, tcpPacket.SourcePort, ipData.DestinationAddress,
                 tcpPacket.DestinationPort);
 
@@ -80,7 +80,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 //_buffer.Enqueue(new QPacket(connection, tcpPacket.SequenceNumber, tcpPacket.Payload));
                 lock (_lock)
                 {
-                    if (tcpPacket.Fin || tcpPacket.Rst) {OnEndConnection(connection); return;}
+                    if (tcpPacket.Finished|| tcpPacket.Reset) {OnEndConnection(connection); return;}
                     connection?.HandleTcpReceived(tcpPacket.SequenceNumber, payload);
                 }
                 //if (!string.IsNullOrEmpty(TcpLogFile))

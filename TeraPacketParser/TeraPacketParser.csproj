@@ -20,9 +20,9 @@
     <OutputPath>D:\TERA\TeraToolbox\mods\TCC</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Nostrum" Version="1.2.6" />
-    <PackageReference Include="PacketDotNet" Version="0.13.0" />
-    <PackageReference Include="SharpPcap" Version="4.2.0" />
+    <PackageReference Include="Nostrum" Version="1.2.13" />
+    <PackageReference Include="PacketDotNet" Version="1.2.0" />
+    <PackageReference Include="SharpPcap" Version="5.4.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeraDataLite\TeraDataLite.csproj" />
