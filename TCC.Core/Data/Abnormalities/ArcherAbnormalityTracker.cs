@@ -8,7 +8,7 @@ namespace TCC.Data.Abnormalities
     {
         private static readonly uint FocusId = 601400;
         private static readonly uint FocusXId = 601450;
-        private static readonly uint[] WindsongIds = { 602101/*, 602107, 602108, 602221, 602227*/ };
+        private static readonly uint[] WindsongIds = { 602101, 602221 /*, 602107, 602108, 602227*/ };
         private static readonly uint[] WindWalkIds = { 602102, 602103 };
         //private const string WindsongIconName = "icon_skills.breeze_tex";
 
