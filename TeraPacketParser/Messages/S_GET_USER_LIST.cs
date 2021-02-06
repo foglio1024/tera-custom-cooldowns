@@ -50,7 +50,7 @@ namespace TeraPacketParser.Messages
                 c.Laurel = (Laurel)reader.ReadInt32();
                 c.Position = reader.ReadInt32();
                 c.GuildId = reader.ReadUInt32();
-
+                //TODO: use adventureCoins and itemLevel from here (added in p103)
                 reader.RepositionAt(nameOffset);
                 c.Name = reader.ReadTeraString();
                 try
