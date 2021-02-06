@@ -5,7 +5,7 @@ namespace TCC.Settings.WindowSettings
 {
     public class LfgWindowSettings : WindowSettingsBase
     {
-        public event Action HideTradeListingsChangedEvent = null!;
+        public event Action? HideTradeListingsChangedEvent;
 
         private bool _hideTradeListings;
         private int _minLevel;

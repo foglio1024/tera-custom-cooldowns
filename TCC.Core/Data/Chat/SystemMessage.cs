@@ -106,7 +106,7 @@ namespace TCC.Data.Chat
                     else if (inPiece.StartsWith("@abnormal"))
                     {
                         var abName = "Unknown";
-                        if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(
+                        if (Game.DB!.AbnormalityDatabase.Abnormalities.TryGetValue(
                             uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
                         mp = new SimpleMessagePiece(abName, App.Settings.FontSize, false) { Color = col };
                     }

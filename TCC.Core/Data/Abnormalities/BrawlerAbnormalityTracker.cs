@@ -33,21 +33,21 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != GrowingFuryId) return;
             if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
 
-            vm.IsGfOn = true;
+            vm!.IsGfOn = true;
         }
         private static void CheckGrowingFury(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
             if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
 
-            vm.IsGfOn = true;
+            vm!.IsGfOn = true;
         }
         private static void CheckGrowingFury(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GrowingFuryId) return;
             if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
 
-            vm.IsGfOn = false;
+            vm!.IsGfOn = false;
         }
 
         private static void CheckCounterProc(S_ABNORMALITY_BEGIN p)
@@ -55,24 +55,24 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != CounterGlyphId) return;
             if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
 
-            vm.Counter.Start(p.Duration);
-            vm.CounterProc = true;
+            vm!.Counter.Start(p.Duration);
+            vm!.CounterProc = true;
         }
         private static void CheckCounterProc(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
             if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
 
-            vm.Counter.Start(p.Duration);
-            vm.CounterProc = true;
+            vm!.Counter.Start(p.Duration);
+            vm!.CounterProc = true;
         }
         private static void CheckCounterProc(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != CounterGlyphId) return;
             if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
 
-            vm.Counter.Stop();
-            vm.CounterProc = false;
+            vm!.Counter.Stop();
+            vm!.CounterProc = false;
         }
     }
 }

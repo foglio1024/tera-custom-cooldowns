@@ -7,9 +7,9 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public class TcpSniffer
     {
-        private readonly ConcurrentDictionary<ConnectionId, TcpConnection> _connections = new ConcurrentDictionary<ConnectionId, TcpConnection>();
+        private readonly ConcurrentDictionary<ConnectionId, TcpConnection> _connections = new();
 
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
         private readonly string? _snifferType;
         public TcpSniffer(IpSniffer ipSniffer)
         {
@@ -19,8 +19,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         }
 
 
-        public event Action<TcpConnection?> NewConnection = null!;
-        public event Action<TcpConnection?> EndConnection = null!;
+        public event Action<TcpConnection?>? NewConnection;
+        public event Action<TcpConnection?>? EndConnection;
 
         protected void OnNewConnection(TcpConnection connection)
         {

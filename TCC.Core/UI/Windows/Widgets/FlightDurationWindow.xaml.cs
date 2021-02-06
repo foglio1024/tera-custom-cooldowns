@@ -39,7 +39,7 @@ namespace TCC.UI.Windows.Widgets
                 Duration = TimeSpan.FromMilliseconds(250),
                 EasingFunction = new QuadraticEase()
             };
-            _arcAn.Completed += (s, ev) =>
+            _arcAn.Completed += (_, _) =>
             {
                 if (Arc.EndAngle >= 87 &&
                 _arcAn.From < _arcAn.To &&

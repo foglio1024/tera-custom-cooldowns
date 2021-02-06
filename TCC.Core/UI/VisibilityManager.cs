@@ -9,9 +9,9 @@ namespace TCC.UI
         private bool _forceVisible;
         private bool _forceUndim;
 
-        public event Action VisibilityChanged = null!;
-        public event Action DimChanged = null!;
-        public event Action ClickThruChanged = null!;
+        public event Action? VisibilityChanged;
+        public event Action? DimChanged;
+        public event Action? ClickThruChanged;
 
         public bool Dim => !_dimTimer.IsEnabled &&
                                 !Game.Encounter &&
@@ -52,7 +52,7 @@ namespace TCC.UI
             FocusManager.ForegroundChanged += NotifyVisibilityChanged;
 
             _dimTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
-            _dimTimer.Tick += (_, __) =>
+            _dimTimer.Tick += (_, _) =>
             {
                 _dimTimer.Stop();
                 NotifyDimChanged();
@@ -71,18 +71,18 @@ namespace TCC.UI
         }
         private void NotifyVisibilityChanged()
         {
-            App.BaseDispatcher?.InvokeAsync(() =>
+            App.BaseDispatcher.InvokeAsync(() =>
                 VisibilityChanged?.Invoke(), DispatcherPriority.Background);
         }
         private void NotifyDimChanged()
         {
-            App.BaseDispatcher?.InvokeAsync(() =>
+            App.BaseDispatcher.InvokeAsync(() =>
                 DimChanged?.Invoke(), DispatcherPriority.Background);
         }
         public void RefreshDim()
         {
             if (App.Loading) return;
-            App.BaseDispatcher?.Invoke(() =>
+            App.BaseDispatcher.Invoke(() =>
         {
             ForceUndim = true;
             DimChanged?.Invoke();
@@ -92,7 +92,7 @@ namespace TCC.UI
         }
         public void RefreshVisible()
         {
-            App.BaseDispatcher?.InvokeAsync(() =>
+            App.BaseDispatcher.InvokeAsync(() =>
             {
                 _forceVisible = true;
                 VisibilityChanged?.Invoke();

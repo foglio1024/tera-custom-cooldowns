@@ -9,9 +9,9 @@ namespace TCC.UI.TemplateSelectors
         public DataTemplate? Default { get; set; }
         public DataTemplate? Temp { get; set; }
 
-        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object? item, DependencyObject container)
         {
-            var lfg = (Listing) item;
+            var lfg = (Listing?) item;
             return lfg != null && lfg.Temp ? Temp : Default;
         }
     }

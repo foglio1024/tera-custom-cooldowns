@@ -10,7 +10,7 @@ namespace TCC.Data.Databases
     public class SystemMessagesDatabase : DatabaseBase
     {
         public Dictionary<string, SystemMessageData> Messages { get; }
-        private List<string> _handledInternally = new List<string>{ "SMT_FIELD_EVENT_REWARD_AVAILABLE"};
+        private List<string> _handledInternally = new() { "SMT_FIELD_EVENT_REWARD_AVAILABLE"};
         protected override string FolderName => "sys_msg";
         protected override string Extension => "tsv";
 
@@ -27,7 +27,7 @@ namespace TCC.Data.Databases
             foreach (var line in lines)
             {
                 //var line = f.ReadLine();
-                if (line == null) break;
+                if (string.IsNullOrWhiteSpace(line)) break;
 
                 var s = line.Split('\t');
 
@@ -119,7 +119,7 @@ namespace TCC.Data.Databases
             {
                 var pars = msg.Split('\v');
                 var opc = ushort.Parse(pars[0].Substring(1));
-                var opcName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opc);
+                var opcName = PacketAnalyzer.Factory!.SystemMessageNamer.GetName(opc);
                 return _handledInternally.Contains(opcName);
             }
             catch { }

@@ -25,14 +25,14 @@ namespace TCC.ViewModels.Widgets
     {
         private bool _raid;
         private bool _firstCheck = true;
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
         private bool _leaderOverride;
         private ulong _aggroHolder;
 
-        public event Action SettingsUpdated = null!;
+        public event Action? SettingsUpdated;
 
         public TSObservableCollection<User> Members { get; }
-        public GroupWindowLayout GroupWindowLayout => ((GroupWindowSettings)Settings).Layout;
+        public GroupWindowLayout GroupWindowLayout => ((GroupWindowSettings)Settings!).Layout;
 
         public ICollectionViewLiveShaping All { get; }
         public ICollectionViewLiveShaping Dps {  get; }
@@ -52,7 +52,7 @@ namespace TCC.ViewModels.Widgets
         public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
         public int AliveCount => Members.Count(x => x.Alive);
         public bool Formed => Size > 0;
-        public bool ShowDetails => Formed && ((GroupWindowSettings)Settings).ShowDetails;
+        public bool ShowDetails => Formed && ((GroupWindowSettings)Settings!).ShowDetails;
         public bool ShowLeaveButton => Formed && StubInterface.Instance.IsStubAvailable;
         public bool ShowLeaderButtons => Formed && StubInterface.Instance.IsStubAvailable && AmILeader;
         public bool Rolling { get; set; }
@@ -149,20 +149,20 @@ namespace TCC.ViewModels.Widgets
             return Members.ToSyncList().Any(x => x.PlayerId == pId && x.ServerId == sId);
         }
 
-        public bool TryGetUser(string name, out User u)
+        public bool TryGetUser(string name, out User? u)
         {
             var exists = Exists(name);
             u = exists ? Members.ToSyncList().FirstOrDefault(x => x.Name == name) : new User(Dispatcher);
             return exists;
         }
-        public bool TryGetUser(ulong id, out User u)
+        public bool TryGetUser(ulong id, out User? u)
         {
             var exists = Exists(id);
 
             u = exists ? Members.ToSyncList().FirstOrDefault(x => x.EntityId == id) : new User(Dispatcher);
             return u != null;
         }
-        public bool TryGetUser(uint pId, uint sId, out User u)
+        public bool TryGetUser(uint pId, uint sId, out User? u)
         {
             var exists = Exists(pId, sId);
             u = exists ? Members.ToSyncList().FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : new User(Dispatcher);
@@ -224,7 +224,7 @@ namespace TCC.ViewModels.Widgets
                     // -- show only aggro stacks if we are in HH -- //
                     if (WindowManager.ViewModels.NpcVM.CurrentHHphase >= HarrowholdPhase.Phase2)
                     {
-                        if (ab.Id != 950023 && ((GroupWindowSettings)Settings).ShowOnlyAggroStacks) return;
+                        if (ab.Id != 950023 && ((GroupWindowSettings)Settings!).ShowOnlyAggroStacks) return;
                     }
                     // -------------------------------------------- //
                     u.AddOrRefreshDebuff(ab, duration, stacks);
@@ -264,7 +264,7 @@ namespace TCC.ViewModels.Widgets
         [Obsolete]
         public void AddOrUpdateMember(User p)
         {
-            if (((GroupWindowSettings)Settings).IgnoreMe && p.IsPlayer)
+            if (((GroupWindowSettings)Settings!).IgnoreMe && p.IsPlayer)
             {
                 _leaderOverride = p.IsLeader;
             }
@@ -292,7 +292,7 @@ namespace TCC.ViewModels.Widgets
         private void AddOrUpdateMember(GroupMemberData p)
         {
             var visible = true;
-            if (((GroupWindowSettings)Settings).IgnoreMe && p.Name == Game.Me.Name)
+            if (((GroupWindowSettings)Settings!).IgnoreMe && p.Name == Game.Me.Name)
             {
                 _leaderOverride = p.IsLeader;
                 visible = false;
@@ -372,7 +372,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void ClearAll()
         {
-            if (!((GroupWindowSettings)Settings).Enabled || !Dispatcher.Thread.IsAlive) return;
+            if (!((GroupWindowSettings)Settings!).Enabled || !Dispatcher.Thread.IsAlive) return;
             Members.ToSyncList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;
@@ -389,7 +389,7 @@ namespace TCC.ViewModels.Widgets
         {
             var me = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
             if (me == null) return;
-            me.Visible = !((GroupWindowSettings)Settings).IgnoreMe;
+            me.Visible = !((GroupWindowSettings)Settings!).IgnoreMe;
         }
         private void ClearAllAbnormalities()
         {
@@ -482,7 +482,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void EndReadyCheck()
         {
-            Task.Delay(4000).ContinueWith(t =>
+            Task.Delay(4000).ContinueWith(_ =>
             {
                 //Members.ToList().ForEach(x => x.Ready = ReadyStatus.None);
                 foreach (var u in Members.ToSyncList())
@@ -557,13 +557,13 @@ namespace TCC.ViewModels.Widgets
             var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
             var ch = channel > 1000 ? "" : " ch." + channel;
-            u.Location = Game.DB.TryGetGuardOrDungeonNameFromContinentId(continentId, out var l) ? l + ch : "Unknown";
+            u.Location = Game.DB!.TryGetGuardOrDungeonNameFromContinentId(continentId, out var l) ? l + ch : "Unknown";
         }
         private void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
+                if (!Game.DB!.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
                 BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
             });
         }
@@ -571,7 +571,7 @@ namespace TCC.ViewModels.Widgets
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
+                if (!Game.DB!.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
                 EndAbnormality(ab, playerId, serverId);
             });
         }
@@ -656,8 +656,8 @@ namespace TCC.ViewModels.Widgets
         {
             if (Game.IsMe(p.TargetId))
             {
-                if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
-                if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+                if (Size > ((GroupWindowSettings)Settings!).DisableAbnormalitiesThreshold) return;
+                if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
                 if (p.Duration == int.MaxValue) ab.Infinity = true;
 
                 BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
@@ -670,15 +670,15 @@ namespace TCC.ViewModels.Widgets
                 Game.NearbyPlayers.TryGetValue(p.TargetId, out var name);
                 Log.CW($"Starting stance on {p.TargetId} ({name}), members: {(Members.ToSyncList().Select(i => $"{i.EntityId} ({i.Name})").ToList().ToCSV())}");
                 if (!TryGetUser(p.TargetId, out var u)) return;
-                UpdatePartyMemberAbnormality(u.PlayerId, u.ServerId, p.AbnormalityId, p.Duration, p.Stacks);
+                UpdatePartyMemberAbnormality(u!.PlayerId, u!.ServerId, p.AbnormalityId, p.Duration, p.Stacks);
             }
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (Game.IsMe(p.TargetId))
             {
-                if (Size > ((GroupWindowSettings)Settings).DisableAbnormalitiesThreshold) return;
-                if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+                if (Size > ((GroupWindowSettings)Settings!).DisableAbnormalitiesThreshold) return;
+                if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
                 if (p.Duration == int.MaxValue) ab.Infinity = true;
 
                 BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
@@ -686,7 +686,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             if (Game.IsMe(p.TargetId))
             {
@@ -698,7 +698,7 @@ namespace TCC.ViewModels.Widgets
                 Game.NearbyPlayers.TryGetValue(p.TargetId, out var name);
                 Log.CW($"Ending stance on {p.TargetId} ({name}), members: {(Members.ToSyncList().Select(i => $"{i.EntityId} ({i.Name})").ToList().ToCSV())}");
                 if (!TryGetUser(p.TargetId, out var u)) return;
-                EndAbnormality(ab, u.PlayerId, u.ServerId);
+                EndAbnormality(ab, u!.PlayerId, u!.ServerId);
             }
         }
         private void OnCheckToReadyPartyFin(S_CHECK_TO_READY_PARTY_FIN p)
@@ -770,14 +770,14 @@ namespace TCC.ViewModels.Widgets
         private void OnSpawnUser(S_SPAWN_USER m)
         {
             if (!TryGetUser(m.PlayerId, m.ServerId, out var u)) return;
-            u.InRange = true;
-            u.EntityId = m.EntityId;
+            u!.InRange = true;
+            u!.EntityId = m.EntityId;
             //UpdateMemberGear(m.PlayerId, m.ServerId, m.Weapon, m.Armor, m.Gloves, m.Boots);
         }
         private void OnDespawnUser(S_DESPAWN_USER m)
         {
             if (!TryGetUser(m.EntityId, out var u)) return;
-            u.InRange = false;
+            u!.InRange = false;
         }
         private void OnResultItemBidding(S_RESULT_ITEM_BIDDING m)
         {

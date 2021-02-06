@@ -60,7 +60,7 @@ namespace TCC.Data
             }
         }
         [JsonIgnore]
-        public Dungeon Dungeon => Game.DB.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
+        public Dungeon Dungeon => Game.DB!.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
             ? dg
             : new Dungeon(0, "");
         [JsonIgnore]
@@ -88,7 +88,7 @@ namespace TCC.Data
             owner.PropertyChanged += OnOwnerPropertyChanged;
         }
 
-        private void OnOwnerPropertyChanged(object sender, PropertyChangedEventArgs args)
+        private void OnOwnerPropertyChanged(object? sender, PropertyChangedEventArgs args)
         {
             switch (args.PropertyName)
             {

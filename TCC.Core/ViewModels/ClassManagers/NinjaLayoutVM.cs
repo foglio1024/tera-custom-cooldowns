@@ -32,7 +32,7 @@ namespace TCC.ViewModels
 
         public NinjaLayoutVM()
         {
-            Game.DB.SkillsDatabase.TryGetSkill(150700, Class.Ninja, out var bh);
+            Game.DB!.SkillsDatabase.TryGetSkill(150700, Class.Ninja, out var bh);
             Game.DB.SkillsDatabase.TryGetSkill(80200, Class.Ninja, out var fa);
             Game.DB.SkillsDatabase.TryGetSkill(230100, Class.Ninja, out var ih);
 

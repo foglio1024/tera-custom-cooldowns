@@ -8,7 +8,7 @@ namespace TeraPacketParser.Messages
 {
     public class S_GUILD_MEMBER_LIST : ParsedMessage
     {
-        public List<GuildMemberData> Members { get; } = new List<GuildMemberData>();
+        public List<GuildMemberData> Members { get; } = new();
         public uint MasterId { get; }
         public string MasterName { get; }
 

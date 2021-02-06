@@ -2,7 +2,7 @@
 using System.Timers;
 using Nostrum;
 
-namespace TCC.Data.NPCs
+namespace TCC.Data.Npc
 {
     public class TimerPattern : TSPropertyChanged, IDisposable
     {
@@ -11,8 +11,8 @@ namespace TCC.Data.NPCs
         protected NPC? Target { get; set; }
         public int Duration { get; }
 
-        public event Action Started = null!;
-        public event Action Ended = null!;
+        public event Action? Started;
+        public event Action? Ended;
         //public event Action Reset;
 
         public void Start()

@@ -6,7 +6,7 @@ namespace TCC.UI.Converters
 {
     public class GroupSizeToTemplateConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (int?)value ?? 0;
             return val > App.Settings.GroupWindowSettings.GroupSizeThreshold

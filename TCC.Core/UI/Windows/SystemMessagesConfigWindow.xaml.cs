@@ -25,9 +25,9 @@ namespace TCC.UI.Windows
 
             App.Settings.UserExcludedSysMsg.ForEach(opc =>
             {
-                HiddenMessages.Add(new SystemMessageViewModel(opc, Game.DB.SystemMessagesDatabase.Messages[opc]));
+                HiddenMessages.Add(new SystemMessageViewModel(opc, Game.DB!.SystemMessagesDatabase.Messages[opc]));
             });
-            Game.DB.SystemMessagesDatabase.Messages.ToList().ForEach(keyVal =>
+            Game.DB!.SystemMessagesDatabase.Messages.ToList().ForEach(keyVal =>
             {
                 if (App.Settings.UserExcludedSysMsg.Contains(keyVal.Key)) return;
                 ShowedMessages.Add(new SystemMessageViewModel(keyVal.Key, keyVal.Value));
@@ -38,7 +38,7 @@ namespace TCC.UI.Windows
                 switch (args.Action)
                 {
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-                        foreach (var item in args.NewItems)
+                        foreach (var item in args.NewItems!)
                         {
                             var opcode = ((SystemMessageViewModel?) item)?.Opcode;
                             if (opcode != null)
@@ -46,7 +46,7 @@ namespace TCC.UI.Windows
                         }
                         break;
                     case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
-                        foreach (var item in args.OldItems)
+                        foreach (var item in args.OldItems!)
                         {
                             var opcode = ((SystemMessageViewModel?) item)?.Opcode;
                             if (opcode != null)

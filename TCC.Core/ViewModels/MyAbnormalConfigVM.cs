@@ -19,7 +19,7 @@ namespace TCC.ViewModels
 {
     public class MyAbnormalConfigVM : TSPropertyChanged, IDisposable
     {
-        public event Action ShowAllChanged = null!;
+        public event Action? ShowAllChanged;
 
         public ICollectionView AbnormalitiesView { get; set; }
 
@@ -48,7 +48,7 @@ namespace TCC.ViewModels
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
             var myAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
-            foreach (var abnormality in Game.DB.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
+            foreach (var abnormality in Game.DB!.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
             {
                 var abVM = new MyAbnormalityVM(abnormality);
 

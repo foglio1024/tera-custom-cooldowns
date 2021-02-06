@@ -15,7 +15,7 @@ namespace TCC.UI.Controls.Skills
     public class SkillControlBase : UserControl, INotifyPropertyChanged
     {
         #region INPC
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected  void NPC([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

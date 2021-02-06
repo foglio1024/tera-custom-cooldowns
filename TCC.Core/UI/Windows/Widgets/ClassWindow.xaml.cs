@@ -16,9 +16,9 @@ namespace TCC.UI.Windows.Widgets
             MainContent = WindowContent;
             Init(App.Settings.ClassWindowSettings);
 
-            if (!Game.Logged) return;
-            if (VM.CurrentManager != null) return;
-            VM.CurrentClass = Game.Me.Class;
+            //if (!Game.Logged) return;
+            //if (VM.CurrentManager != null) return;
+            //VM.CurrentClass = Game.Me.Class;
 
         }
 

@@ -82,75 +82,75 @@ namespace TCC.ViewModels
             info.ShowedChannels.ForEach(ShowedChannels.Add);
             info.HiddenChannels.ForEach(ExcludedChannels.Add);
 
-            Authors.CollectionChanged += (s, ev) =>
+            Authors.CollectionChanged += (_, ev) =>
             {
                 switch (ev.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        info.ShowedAuthors.AddRange(ev.NewItems.Cast<string>());
+                        info.ShowedAuthors.AddRange(ev.NewItems!.Cast<string>());
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.ShowedAuthors.Remove(i));
+                        ev.OldItems!.Cast<string>().ToList().ForEach(i => info.ShowedAuthors.Remove(i));
                         break;
                 }
             };
-            ExcludedAuthors.CollectionChanged += (s, ev) =>
+            ExcludedAuthors.CollectionChanged += (_, ev) =>
             {
                 switch (ev.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        info.HiddenAuthors.AddRange(ev.NewItems.Cast<string>());
+                        info.HiddenAuthors.AddRange(ev.NewItems!.Cast<string>());
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.HiddenAuthors.Remove(i));
+                        ev.OldItems!.Cast<string>().ToList().ForEach(i => info.HiddenAuthors.Remove(i));
                         break;
                 }
             };
-            Keywords.CollectionChanged += (s, ev) =>
+            Keywords.CollectionChanged += (_, ev) =>
             {
                 switch (ev.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        info.ShowedKeywords.AddRange(ev.NewItems.Cast<string>());
+                        info.ShowedKeywords.AddRange(ev.NewItems!.Cast<string>());
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.ShowedKeywords.Remove(i));
+                        ev.OldItems!.Cast<string>().ToList().ForEach(i => info.ShowedKeywords.Remove(i));
                         break;
                 }
             };
-            ExcludedKeywords.CollectionChanged += (s, ev) =>
+            ExcludedKeywords.CollectionChanged += (_, ev) =>
             {
                 switch (ev.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        info.HiddenKeywords.AddRange(ev.NewItems.Cast<string>());
+                        info.HiddenKeywords.AddRange(ev.NewItems!.Cast<string>());
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        ev.OldItems.Cast<string>().ToList().ForEach(i => info.HiddenKeywords.Remove(i));
+                        ev.OldItems!.Cast<string>().ToList().ForEach(i => info.HiddenKeywords.Remove(i));
                         break;
                 }
             };
-            ShowedChannels.CollectionChanged += (s, ev) =>
+            ShowedChannels.CollectionChanged += (_, ev) =>
             {
                 switch (ev.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        info.ShowedChannels.AddRange(ev.NewItems.Cast<ChatChannel>());
+                        info.ShowedChannels.AddRange(ev.NewItems!.Cast<ChatChannel>());
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        ev.OldItems.Cast<ChatChannel>().ToList().ForEach(i => info.ShowedChannels.Remove(i));
+                        ev.OldItems!.Cast<ChatChannel>().ToList().ForEach(i => info.ShowedChannels.Remove(i));
                         break;
                 }
             };
-            ExcludedChannels.CollectionChanged += (s, ev) =>
+            ExcludedChannels.CollectionChanged += (_, ev) =>
             {
                 switch (ev.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        info.HiddenChannels.AddRange(ev.NewItems.Cast<ChatChannel>());
+                        info.HiddenChannels.AddRange(ev.NewItems!.Cast<ChatChannel>());
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        ev.OldItems.Cast<ChatChannel>().ToList().ForEach(i => info.HiddenChannels.Remove(i));
+                        ev.OldItems!.Cast<ChatChannel>().ToList().ForEach(i => info.HiddenChannels.Remove(i));
                         break;
                 }
             };
@@ -166,12 +166,12 @@ namespace TCC.ViewModels
 
         public string TabName
         {
-            get => TabInfo?.Name ?? "";
+            get => TabInfo.Name;
             set
             {
-                if (TabInfo?.Name == value) return;
-                if (TabInfo != null) TabInfo.Name = value;
-                if (TabInfoVM != null) TabInfoVM.TabName = value;
+                if (TabInfo.Name == value) return;
+                TabInfo.Name = value;
+                TabInfoVM.TabName = value;
                 N();
             }
         }
@@ -221,7 +221,7 @@ namespace TCC.ViewModels
                 RemoveImportantMessage((ChatMessage)msg);
                 TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Remove, (ChatMessage)msg));
             });
-            ClearAllCommand = new RelayCommand(par =>
+            ClearAllCommand = new RelayCommand(_ =>
             {
                 ClearImportant();
                 TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Clear));
@@ -274,14 +274,6 @@ namespace TCC.ViewModels
 
         public bool Filter(ChatMessage m)
         {
-            if (TabInfoVM.Authors == null 
-                || TabInfoVM.ShowedChannels == null
-                || TabInfoVM.ExcludedAuthors == null 
-                || TabInfoVM.ExcludedChannels == null
-                || TabInfoVM.Keywords == null
-                || TabInfoVM.ExcludedKeywords == null)
-                return true;
-
             return (TabInfoVM.Authors.Count == 0 || TabInfoVM.Authors.Any(x => x == m.Author)) &&
                    (TabInfoVM.ShowedChannels.Count == 0 || TabInfoVM.ShowedChannels.Any(x => x == m.Channel)) &&
                    (TabInfoVM.ExcludedChannels.Count == 0 || TabInfoVM.ExcludedChannels.All(x => x != m.Channel)) &&

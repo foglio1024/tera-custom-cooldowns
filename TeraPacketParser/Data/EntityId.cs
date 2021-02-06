@@ -51,6 +51,6 @@ namespace TeraPacketParser.Data
             return Id.GetHashCode();
         }
 
-        public static readonly EntityId Empty = new EntityId(0);
+        public static readonly EntityId Empty = new(0);
     }
 }

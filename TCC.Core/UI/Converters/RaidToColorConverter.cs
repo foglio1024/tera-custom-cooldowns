@@ -8,7 +8,7 @@ namespace TCC.UI.Converters
 {
     public class RaidToColorConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var color = R.Colors.ChatPartyColor;
             if ((bool?)value ?? false) color = R.Colors.Tier5DungeonColor;

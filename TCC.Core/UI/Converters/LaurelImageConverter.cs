@@ -16,7 +16,7 @@ namespace TCC.UI.Converters
     public class LaurelImageConverter : MarkupExtension, IValueConverter
     {
         public LaurelType LaurelType { get; set; }
-        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
 
             var laurel = (Laurel?) value ?? Laurel.None;

@@ -11,7 +11,7 @@ namespace TCC.Processing
     {
         private readonly ConcurrentDictionary<Type, List<Delegate>> _hooks;
 
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
 
         public MessageProcessor()
         {
@@ -39,7 +39,7 @@ namespace TCC.Processing
             lock (_lock)
             {
                 if (msg == null) return;
-                if (!_hooks.TryGetValue(msg.GetType(), out var handlers) || handlers == null) return;
+                if (!_hooks.TryGetValue(msg.GetType(), out var handlers)) return;
                 handlers.ForEach(del =>
                 {
                     try

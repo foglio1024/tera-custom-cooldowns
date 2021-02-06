@@ -29,7 +29,7 @@ namespace TCC.Settings
                                .Replace("\"LanguageOverride\": \"\"", "\"LanguageOverride\" : 0");
 
                     #endregion
-                    return JsonConvert.DeserializeObject<SettingsContainer>(file);
+                    return JsonConvert.DeserializeObject<SettingsContainer>(file)!;
                 }
 //                else
 //                {

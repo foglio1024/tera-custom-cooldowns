@@ -13,7 +13,7 @@ namespace TCC.UI.Windows
 
         public ChatSettingsWindow(Tab dataContext)
         {
-            _closeAnimation = AnimationFactory.CreateDoubleAnimation(200, 0, completed: (_, __) => Close());
+            _closeAnimation = AnimationFactory.CreateDoubleAnimation(200, 0, completed: (_, _) => Close());
             _openAnimation = AnimationFactory.CreateDoubleAnimation(500, 1);
 
             InitializeComponent();

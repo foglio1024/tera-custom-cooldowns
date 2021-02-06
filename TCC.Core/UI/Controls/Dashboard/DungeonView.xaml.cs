@@ -13,7 +13,7 @@ namespace TCC.UI.Controls.Dashboard
         public DungeonView()
         {
             InitializeComponent();
-            IsVisibleChanged += (_, __) => { (DataContext as DashboardViewModel)?.LoadDungeonsCommand.Execute(null); };
+            IsVisibleChanged += (_, _) => { (DataContext as DashboardViewModel)?.LoadDungeonsCommand.Execute(null); };
         }
 
         private void DungeonColumns_OnScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -27,10 +27,9 @@ namespace TCC.UI.Controls.Dashboard
         }
         private void OnEntryMouseEnter(object sender, MouseEventArgs e)
         {
-            if (!((sender as FrameworkElement)?.DataContext is DungeonCooldownViewModel cd)) return;
+            if ((sender as FrameworkElement)?.DataContext is not DungeonCooldownViewModel cd) return;
             var chara = cd.Owner;
-            var dung = cd.Cooldown?.Dungeon;
-            if (dung == null) return;
+            var dung = cd.Cooldown.Dungeon;
 
             var dng = WindowManager.ViewModels.DashboardVM.Columns.FirstOrDefault(x => x.Dungeon.Id == dung.Id);
             if (dng != null) dng.Hilight = true;
@@ -42,7 +41,7 @@ namespace TCC.UI.Controls.Dashboard
         {
             var cd = (sender as FrameworkElement)?.DataContext as DungeonCooldownViewModel;
             var chara = cd?.Owner;
-            var dung = cd?.Cooldown?.Dungeon;
+            var dung = cd?.Cooldown.Dungeon;
             if (dung == null) return;
             var col = WindowManager.ViewModels.DashboardVM.Columns.FirstOrDefault(x => x.Dungeon.Id == dung.Id);
             if (col != null) col.Hilight = false;

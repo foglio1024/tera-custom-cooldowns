@@ -78,7 +78,7 @@ namespace TCC.ViewModels.Widgets
             if (!enabled)
             {
                 CurrentClass = Class.None;
-                ((ClassWindowSettings)Settings).WarriorShowEdgeChanged -= OnWarriorShowEdgeChanged;
+                ((ClassWindowSettings)Settings!).WarriorShowEdgeChanged -= OnWarriorShowEdgeChanged;
                 ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged -= OnWarriorShowTraverseCutChanged;
                 ((ClassWindowSettings)Settings).WarriorEdgeModeChanged -= OnWarriorEdgeModeChanged;
                 ((ClassWindowSettings)Settings).SorcererShowElementsChanged -= OnSorcererShowElementsChanged;
@@ -87,7 +87,7 @@ namespace TCC.ViewModels.Widgets
             }
             else
             {
-                ((ClassWindowSettings)Settings).WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
+                ((ClassWindowSettings)Settings!).WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
                 ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
                 ((ClassWindowSettings)Settings).WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
                 ((ClassWindowSettings)Settings).SorcererShowElementsChanged += OnSorcererShowElementsChanged;
@@ -150,7 +150,7 @@ namespace TCC.ViewModels.Widgets
         private void UpdateSkillCooldown(uint skillId, uint cooldown)
         {
             if (!App.Settings.ClassWindowSettings.Enabled) return;
-            if (!Game.DB.SkillsDatabase.TryGetSkill(skillId, Game.Me.Class, out var skill)) return;
+            if (!Game.DB!.SkillsDatabase.TryGetSkill(skillId, Game.Me.Class, out var skill)) return;
             CurrentManager.StartSpecialSkill(new Cooldown(skill, cooldown));
         }
 

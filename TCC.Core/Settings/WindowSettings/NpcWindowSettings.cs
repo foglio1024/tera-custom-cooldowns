@@ -6,8 +6,8 @@ namespace TCC.Settings.WindowSettings
 {
     public class NpcWindowSettings : WindowSettingsBase
     {
-        public event Action AccurateHpChanged = null!;
-        public event Action HideAddsChanged = null!;
+        public event Action? AccurateHpChanged;
+        public event Action? HideAddsChanged;
 
         private bool _accurateHp;
         private bool _hideAdds;

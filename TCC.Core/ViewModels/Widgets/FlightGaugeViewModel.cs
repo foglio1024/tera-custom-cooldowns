@@ -11,11 +11,11 @@ namespace TCC.ViewModels.Widgets
     [TccModule]
     public class FlightGaugeViewModel : TccWindowViewModel
     {
-        public event Action<double> EnergyChanged = null!;
+        public event Action<double>? EnergyChanged;
 
         public FlightStackType Type => FlyingGuardianDataProvider.StackType;
-        public double FlightGaugeRotation => ((FlightWindowSettings)Settings).Rotation;
-        public bool FlipFlightGauge => ((FlightWindowSettings)Settings).Flip;
+        public double FlightGaugeRotation => ((FlightWindowSettings)Settings!).Rotation;
+        public bool FlipFlightGauge => ((FlightWindowSettings)Settings!).Flip;
         public bool FlyingMissionInProgress => FlyingGuardianDataProvider.IsInProgress;
 
         public FlightGaugeViewModel(FlightWindowSettings settings) : base(settings)

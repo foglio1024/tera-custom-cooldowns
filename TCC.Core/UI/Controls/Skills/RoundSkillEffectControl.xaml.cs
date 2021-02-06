@@ -64,7 +64,7 @@ namespace TCC.UI.Controls.Skills
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected  void NPC([CallerMemberName] string? propertyName = null)
         {

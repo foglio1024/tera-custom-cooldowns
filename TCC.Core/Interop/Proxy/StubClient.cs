@@ -240,7 +240,7 @@ namespace TCC.Interop.Proxy
         }
         public async void ForceSystemMessage([NotNull] string message, [NotNull] string opcode)
         {
-            var opc = PacketAnalyzer.Factory.SystemMessageNamer.GetCode(opcode);
+            var opc = PacketAnalyzer.Factory!.SystemMessageNamer.GetCode(opcode);
             var badOpc = message.Split('\v')[0];
             if (badOpc == "@0") message = message.Replace(badOpc, "@" + opc);
 

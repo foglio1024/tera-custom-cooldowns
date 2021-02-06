@@ -6,7 +6,7 @@ namespace TeraPacketParser.Messages
 {
     public class S_VIEW_WARE_EX : ParsedMessage
     {
-        public static List<BankPage> Pages = new List<BankPage>
+        public static List<BankPage> Pages = new()
         {
             {new BankPage(0)},
             {new BankPage(1)},

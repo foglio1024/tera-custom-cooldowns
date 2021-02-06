@@ -40,13 +40,13 @@ namespace TCC
         private static bool _inGameChatOpen;
         private static bool _inGameUiOn = true;
 
-        public static readonly Dictionary<ulong, string> NearbyNPC = new Dictionary<ulong, string>();
-        public static readonly Dictionary<ulong, Tuple<string, Class>> NearbyPlayers = new Dictionary<ulong, Tuple<string, Class>>();
-        public static readonly GroupInfo Group = new GroupInfo();
-        public static readonly GuildInfo Guild = new GuildInfo();
-        public static Server Server { get; private set; } = new Server("Unknown", "Unknown", "0.0.0.0", 0);
-        public static Account Account { get; set; } = new Account();
-        public static string Language => DB.ServerDatabase.StringLanguage;
+        public static readonly Dictionary<ulong, string> NearbyNPC = new();
+        public static readonly Dictionary<ulong, Tuple<string, Class>> NearbyPlayers = new();
+        public static readonly GroupInfo Group = new();
+        public static readonly GuildInfo Guild = new();
+        public static Server Server { get; private set; } = new("Unknown", "Unknown", "0.0.0.0", 0);
+        public static Account Account { get; set; } = new();
+        public static string Language => DB!.ServerDatabase.StringLanguage;
 
         public static bool LoadingScreen
         {
@@ -72,7 +72,7 @@ namespace TCC
 
         public static bool Combat
         {
-            get => Me?.IsInCombat ?? false;
+            get => Me.IsInCombat;
             set
             {
                 if (Combat == value) return;
@@ -115,30 +115,30 @@ namespace TCC
         }
 
         public static int CurrentZoneId { get; private set; }
-        public static List<FriendData> FriendList { get; private set; } = new List<FriendData>();
-        public static List<string> BlockList { get; } = new List<string>();
-        public static AbnormalityTracker CurrentAbnormalityTracker { get; private set; } = new AbnormalityTracker();
+        public static List<FriendData> FriendList { get; private set; } = new();
+        public static List<string> BlockList { get; } = new();
+        public static AbnormalityTracker CurrentAbnormalityTracker { get; private set; } = new();
 
         public static bool IsMe(ulong eid)
         {
             return eid == Me.EntityId;
         }
 
-        public static event Action ChatModeChanged = null!;
-        public static event Action GameUiModeChanged = null!;
-        public static event Action EncounterChanged = null!;
-        public static event Action CombatChanged = null!;
-        public static event Action LoadingScreenChanged = null!;
-        public static event Action LoggedChanged = null!;
-        public static event Action DatabaseLoaded = null!;
-        public static event Action Teleported = null!;
-        public static event Action SkillStarted = null!;
+        public static event Action? ChatModeChanged;
+        public static event Action? GameUiModeChanged;
+        public static event Action? EncounterChanged;
+        public static event Action? CombatChanged;
+        public static event Action? LoadingScreenChanged;
+        public static event Action? LoggedChanged;
+        public static event Action? DatabaseLoaded;
+        public static event Action? Teleported;
+        public static event Action? SkillStarted;
 
-        public static Player Me { get; } = new Player();
-        public static TccDatabase DB { get; private set; } = null!;
+        public static Player Me { get; } = new();
+        public static TccDatabase? DB { get; private set; }
 
         public static bool CivilUnrestZone => CurrentZoneId == 152;
-        public static bool IsInDungeon => DB.MapDatabase.IsDungeon(CurrentZoneId);
+        public static bool IsInDungeon => DB!.MapDatabase.IsDungeon(CurrentZoneId);
         public static string CurrentAccountNameHash { get; private set; } = "";
 
 
@@ -166,8 +166,8 @@ namespace TCC
             {
                 DB = new TccDatabase(lang);
             }
-            DB?.CheckVersion();
-            if (DB?.IsUpToDate == false)
+            DB!.CheckVersion();
+            if (DB.IsUpToDate == false)
             {
                 if (!App.Loading)
                 {
@@ -179,7 +179,7 @@ namespace TCC
                 updated = true;
             }
 
-            if (DB?.Exists == false)
+            if (DB.Exists == false)
             {
                 var res = TccMessageBox.Show(SR.CannotLoadDbForLang(lang), MessageBoxType.ConfirmationWithYesNoCancel);
                 switch (res)
@@ -200,7 +200,7 @@ namespace TCC
             {
                 if (!samedb || updated)
                 {
-                    DB?.Load();
+                    DB.Load();
                 }
             }
         }
@@ -402,7 +402,7 @@ namespace TCC
         }
         private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
         {
-            DB.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
+            DB!.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
             TccUtils.CheckWindowNotify($"New broker offer for {m.Amount} <{i?.Name ?? m.Item.ToString()}> from {m.Name}", "Broker offer");
             TccUtils.CheckDiscordNotify($"New broker offer for {m.Amount} **<{i?.Name ?? m.Item.ToString()}>**", m.Name);
         }
@@ -497,7 +497,7 @@ namespace TCC
         }
         private static void OnSpawnNpc(S_SPAWN_NPC p)
         {
-            if (!DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
+            if (!DB!.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
             NearbyNPC[p.EntityId] = m.Name;
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
@@ -527,7 +527,7 @@ namespace TCC
         }
         private static void OnSystemMessage(S_SYSTEM_MESSAGE x)
         {
-            if (DB.SystemMessagesDatabase.IsHandledInternally(x.Message)) return;
+            if (DB!.SystemMessagesDatabase.IsHandledInternally(x.Message)) return;
             App.BaseDispatcher.InvokeAsync(() =>
             {
                 try
@@ -575,7 +575,7 @@ namespace TCC
                     if (p.ServerId != 27) break;
                     if (CivilUnrestZone) break;
                     _foglioEid = p.EntityId;
-                    var ab = DB.AbnormalityDatabase.Abnormalities[10241024];
+                    var ab = DB!.AbnormalityDatabase.Abnormalities[10241024];
                     Me.UpdateAbnormality(ab, int.MaxValue, 1);
                     SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
                     break;
@@ -593,7 +593,7 @@ namespace TCC
             FlyingGuardianDataProvider.StackType = FlightStackType.None;
             FlyingGuardianDataProvider.InvokeProgressChanged();
             // was done with timer before, test it
-            Task.Delay(2000).ContinueWith(t =>
+            Task.Delay(2000).ContinueWith(_ =>
             {
                 LoadingScreen = false;
                 WindowManager.VisibilityManager.RefreshDim();
@@ -602,7 +602,7 @@ namespace TCC
 
                 if (App.FI)
                 {
-                    var ab = DB.AbnormalityDatabase.Abnormalities[30082019];
+                    var ab = DB!.AbnormalityDatabase.Abnormalities[30082019];
                     Me.UpdateAbnormality(ab, int.MaxValue, 1);
                     SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
                 }
@@ -610,9 +610,9 @@ namespace TCC
                 #endregion
                 if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "it")
                 {
-                    var zg = DB.AbnormalityDatabase.Abnormalities[10240001];
-                    var za = DB.AbnormalityDatabase.Abnormalities[10240002];
-                    var zr = DB.AbnormalityDatabase.Abnormalities[10240003];
+                    var zg = DB!.AbnormalityDatabase.Abnormalities[10240001];
+                    var za = DB!.AbnormalityDatabase.Abnormalities[10240002];
+                    var zr = DB!.AbnormalityDatabase.Abnormalities[10240003];
 
                     var zone = DateTime.Now.Month switch
                     {
@@ -649,7 +649,7 @@ namespace TCC
         }
         private static void OnGetUserList(S_GET_USER_LIST m)
         {
-            if (PacketAnalyzer.Factory.ReleaseVersion == 0)
+            if (PacketAnalyzer.Factory!.ReleaseVersion == 0)
                 Log.F("Warning: C_LOGIN_ARBITER not received.");
 
             Logged = false;
@@ -711,7 +711,6 @@ namespace TCC
         }
         private static void OnGetUserGuildLogo(S_GET_USER_GUILD_LOGO p)
         {
-            if (p.GuildLogo == null) return;
             S_IMAGE_DATA.Database[p.GuildId] = p.GuildLogo;
 
             if (!Directory.Exists("resources/images/guilds")) Directory.CreateDirectory("resources/images/guilds");
@@ -769,7 +768,7 @@ namespace TCC
             FriendList.Clear();
             BlockList.Clear();
 
-            Server = DB.ServerDatabase.GetServer(m.ServerId) ?? Server;
+            Server = DB!.ServerDatabase.GetServer(m.ServerId);
 
             Me.Name = m.Name;
             Me.Class = m.CharacterClass;
@@ -789,24 +788,24 @@ namespace TCC
         private static void OnLoginArbiter(C_LOGIN_ARBITER m)
         {
             CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
-            DB.ServerDatabase.Language = m.Language == LangEnum.EN && Server.Region == "RU" ? LangEnum.RU : LangEnum.EN;
+            DB!.ServerDatabase.Language = m.Language == LangEnum.EN && Server.Region == "RU" ? LangEnum.RU : LangEnum.EN;
             App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
             App.Settings.LastAccountNameHash = CurrentAccountNameHash;
         }
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            CurrentAbnormalityTracker?.CheckAbnormality(p);
+            CurrentAbnormalityTracker.CheckAbnormality(p);
             if (!IsMe(p.TargetId)) return;
-            if (!DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
         }
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            CurrentAbnormalityTracker?.CheckAbnormality(p);
+            CurrentAbnormalityTracker.CheckAbnormality(p);
             if (!IsMe(p.TargetId)) return;
-            if (!DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
@@ -814,9 +813,9 @@ namespace TCC
         }
         private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            CurrentAbnormalityTracker?.CheckAbnormality(p);
+            CurrentAbnormalityTracker.CheckAbnormality(p);
             if (!IsMe(p.TargetId)) return;
-            if (!DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             FlyingGuardianDataProvider.HandleAbnormal(p);
             Me.EndAbnormality(ab);
 
@@ -838,7 +837,7 @@ namespace TCC
         {
             if (p.Type != S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce) return;
 
-            var questName = DB.GuildQuestDatabase.GuildQuests.TryGetValue(p.QuestId, out var gq)
+            var questName = DB!.GuildQuestDatabase.GuildQuests.TryGetValue(p.QuestId, out var gq)
                 ?
                  gq.Title
                     : "Defeat Guild BAM";
@@ -853,7 +852,7 @@ namespace TCC
             var areaName = x.SectionId.ToString();
             try
             {
-                areaName = DB.RegionsDatabase.GetZoneName(DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId);
+                areaName = DB!.RegionsDatabase.GetZoneName(DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId);
             }
             catch (Exception)
             {

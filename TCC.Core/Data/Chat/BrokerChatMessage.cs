@@ -27,7 +27,7 @@ namespace TCC.Data.Chat
             StartingPrice = new MoneyMessagePiece(new Money(sellerPrice)) { Container = this };
             Listing = new SimpleMessagePiece("") { Container = this };
 
-            Game.DB.ItemsDatabase.Items.TryGetValue((uint)item, out var i);
+            Game.DB!.ItemsDatabase.Items.TryGetValue((uint)item, out var i);
             if (i == null) return;
             Listing.Text = "<" + i.Name + ">";
             //TODO: //Listing.ItemId = i.Id;

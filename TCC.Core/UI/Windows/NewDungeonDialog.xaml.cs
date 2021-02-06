@@ -6,9 +6,6 @@ using TCC.Data;
 
 namespace TCC.UI.Windows
 {
-    /// <summary>
-    /// Logica di interazione per NewDungeonDialog.xaml
-    /// </summary>
     public partial class NewDungeonDialog
     {
         public NewDungeonDialog()
@@ -16,7 +13,7 @@ namespace TCC.UI.Windows
             InitializeComponent();
         }
 
-        public ICollectionView Dungeons => CollectionViewFactory.CreateCollectionView(Game.DB.DungeonDatabase.Dungeons.Values, d => d != null, new[]
+        public ICollectionView Dungeons => CollectionViewFactory.CreateCollectionView(Game.DB!.DungeonDatabase.Dungeons.Values, d => d != null, new[]
         {
             new SortDescription(nameof(Dungeon.Name), ListSortDirection.Ascending)
         });

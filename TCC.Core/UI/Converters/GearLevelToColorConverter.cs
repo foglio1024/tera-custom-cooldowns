@@ -7,7 +7,7 @@ namespace TCC.UI.Converters
 {
     public class GearLevelToColorConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var val = (GearTier? ) value ?? GearTier.Low;
             return val switch

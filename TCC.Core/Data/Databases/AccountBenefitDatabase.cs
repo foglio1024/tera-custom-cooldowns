@@ -23,8 +23,7 @@ namespace TCC.Data.Databases
             //var f = File.OpenText(FullPath);
             foreach (var line in lines)
             {
-                if (line == null) return;
-                if (line == "") continue;
+                if (string.IsNullOrWhiteSpace(line)) continue;
                 var s = line.Split('\t');
                 if (!uint.TryParse(s[0], out var val)) continue;
                 Benefits.Add(val, s[1]);

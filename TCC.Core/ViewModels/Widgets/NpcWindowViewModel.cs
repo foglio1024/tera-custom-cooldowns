@@ -12,8 +12,8 @@ using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
-using TCC.Data.NPCs;
 using TCC.Analysis;
+using TCC.Data.Npc;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.Utilities;
@@ -30,11 +30,11 @@ namespace TCC.ViewModels.Widgets
     {
         private readonly TSObservableCollection<NPC> _npcList;
 
-        private readonly Dictionary<ulong, string> _towerNames = new Dictionary<ulong, string>();
-        private readonly Dictionary<ulong, double> _savedHp = new Dictionary<ulong, double>();
-        private readonly Dictionary<ulong, double> _cache = new Dictionary<ulong, double>();
+        private readonly Dictionary<ulong, string> _towerNames = new();
+        private readonly Dictionary<ulong, double> _savedHp = new();
+        private readonly Dictionary<ulong, double> _cache = new();
 
-        public event Action NpcListChanged;
+        public event Action? NpcListChanged;
 
         public int VisibleBossesCount => _npcList.ToSyncList().Count(x => x.Visible && x.CurrentHP > 0);
         public int VisibleMobsCount => _npcList.ToSyncList().Count(x => x.Visible/* && x.CurrentHP > 0 */&& !x.IsBoss);
@@ -44,7 +44,7 @@ namespace TCC.ViewModels.Widgets
         public ICollectionViewLiveShaping Mobs { get; }
         public ICollectionViewLiveShaping GuildTowers { get; }
 
-        public Dictionary<ulong, uint> GuildIds { get; } = new Dictionary<ulong, uint>();
+        public Dictionary<ulong, uint> GuildIds { get; } = new();
 
         public NpcWindowViewModel(NpcWindowSettings settings) : base(settings)
         {
@@ -72,7 +72,7 @@ namespace TCC.ViewModels.Widgets
             void InitFlushTimer()
             {
                 var flushTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
-                flushTimer.Tick += (_, __) => FlushCache();
+                flushTimer.Tick += (_, _) => FlushCache();
                 flushTimer.Start();
             }
         }
@@ -88,7 +88,7 @@ namespace TCC.ViewModels.Widgets
 
         private void OnHideAddsChanged()
         {
-            if (!((NpcWindowSettings)Settings).HideAdds) return;
+            if (!((NpcWindowSettings)Settings!).HideAdds) return;
             _npcList.ToSyncList().Where(x => !x.IsBoss).ToList().ForEach(RemoveAndDisposeNPC);
         }
 
@@ -131,7 +131,7 @@ namespace TCC.ViewModels.Widgets
                 if (delay != 0)
                 {
                     Task.Delay(TimeSpan.FromMilliseconds(delay))
-                        .ContinueWith(t => Dispatcher.Invoke(() => RemoveAndDisposeNPC(npc)));
+                        .ContinueWith(_ => Dispatcher.Invoke(() => RemoveAndDisposeNPC(npc)));
                 }
                 else
                 {
@@ -306,7 +306,7 @@ namespace TCC.ViewModels.Widgets
             }
             else if (boss.IsPhase1Dragon)
             {
-                HandleNewPh1Dragon(boss, entityId);
+                HandleNewPh1Dragon(boss);
             }
             else
             {
@@ -453,7 +453,7 @@ namespace TCC.ViewModels.Widgets
         {
             if (p.Villager) return;
             CheckHarrowholdPhase(p.HuntingZoneId, p.TemplateId);
-            if (!Game.DB.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
+            if (!Game.DB!.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
             if (App.Settings.NpcWindowSettings.HideAdds && !m.IsBoss) return;
             AddOrUpdateNpc(p, m);
         }
@@ -550,7 +550,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             if (p.Duration == int.MaxValue) ab.Infinity = true;
 
 
@@ -558,14 +558,14 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             if (p.Duration == Int32.MaxValue) ab.Infinity = true;
 
             UpdateAbnormality(ab, p.Stacks, p.Duration, p.TargetId);
         }
         private void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             EndAbnormality(p.TargetId, ab);
         }
 
@@ -576,7 +576,7 @@ namespace TCC.ViewModels.Widgets
 
         private NPC? _selectedDragon;
         private NPC? _vergos;
-        private readonly List<NPC> _holdedDragons = new List<NPC>();
+        private readonly List<NPC> _holdedDragons = new();
         private HarrowholdPhase _currentHHphase;
         private ICollectionView? _dragons;
 
@@ -693,7 +693,7 @@ namespace TCC.ViewModels.Widgets
                 ? boss
                 : null;
         }
-        private void HandleNewPh1Dragon(NPC boss, ulong entityId)
+        private void HandleNewPh1Dragon(NPC boss)
         {
             var d = _holdedDragons.FirstOrDefault(x => x.TemplateId == boss.TemplateId && x.ZoneId == boss.ZoneId);
             if (d != null) return;

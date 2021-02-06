@@ -13,7 +13,7 @@ namespace TCC.ViewModels
 
         public GunnerLayoutVM()
         {
-            Game.DB.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
+            Game.DB!.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
             Game.DB.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);
             Game.DB.SkillsDatabase.TryGetSkill(20600, Class.Gunner, out var bombard);
             Game.DB.SkillsDatabase.TryGetSkill(410100, Class.Gunner, out var modSys);
@@ -41,19 +41,18 @@ namespace TCC.ViewModels
 
         public override bool StartSpecialSkill(Cooldown sk)
         {
-            if (Balder.Skill != null && sk.Skill.IconName == Balder.Skill.IconName)
+            if (sk.Skill.IconName == Balder.Skill.IconName)
             {
                 Balder.Start(sk.Duration);
                 return true;
             }
-            if (Bombardment.Skill != null && sk.Skill.IconName == Bombardment.Skill.IconName)
+            if (sk.Skill.IconName == Bombardment.Skill.IconName)
             {
                 Bombardment.Start(sk.Duration);
                 return true;
             }
 
-            if (ModularSystem.Cooldown.Skill == null ||
-                sk.Skill.IconName != ModularSystem.Cooldown.Skill.IconName) return false;
+            if (sk.Skill.IconName != ModularSystem.Cooldown.Skill.IconName) return false;
             ModularSystem.StartCooldown(sk.Duration);
             return true;
         }

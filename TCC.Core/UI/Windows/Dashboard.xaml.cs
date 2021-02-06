@@ -14,7 +14,7 @@ namespace TCC.UI.Windows
             DataContext = vm;
             _vm = vm;
             Showed += _vm.UpdateBuffs;
-            Hidden += Game.DB.DungeonDatabase.SaveCustomDefs;
+            Hidden += Game.DB!.DungeonDatabase.SaveCustomDefs;
         }
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)

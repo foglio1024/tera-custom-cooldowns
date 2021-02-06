@@ -24,7 +24,7 @@ namespace TCC.Data.Pc
         private int _piecesOfDragonScroll;
         private float _itemLevel;
         private int _level;
-        private Location _lastLocation = new Location();
+        private Location _lastLocation = new();
         private long _lastOnline;
         private string _serverName = "";
         private bool _hidden;

@@ -3,6 +3,7 @@ using Nostrum;
 using Nostrum.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using TCC.Data;
@@ -27,7 +28,7 @@ namespace TCC.Settings
             get => LanguageOverride != LanguageOverride.None ? LanguageOverride.GetDescription() : _lastLanguage;
             set => _lastLanguage = value;
         }
-        public System.Drawing.Size LastScreenSize { get; set; }
+        public Size LastScreenSize { get; set; }
         public DateTime StatSentTime { get; set; }
         public string StatSentVersion { get; set; }
         public LanguageOverride LanguageOverride { get; set; }

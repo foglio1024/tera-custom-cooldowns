@@ -10,7 +10,7 @@ namespace TCC.UI.Converters
 {
     public class LogoInfoToImageConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var guildId = (uint?) value ?? 0;
             if (!S_IMAGE_DATA.Database.ContainsKey(guildId)) return R.MiscResources.DefaultGuildLogo; 

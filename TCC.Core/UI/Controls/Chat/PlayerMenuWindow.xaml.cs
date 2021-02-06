@@ -15,33 +15,30 @@ namespace TCC.UI.Controls.Chat
 {
     public partial class PlayerMenuWindow
     {
-        private readonly PlayerMenuViewModel _vm;
-
         private readonly DoubleAnimation _openAnim;
         private readonly DoubleAnimation _closeAnim;
 
         public PlayerMenuWindow([NotNull] PlayerMenuViewModel vm)
         {
             _openAnim = AnimationFactory.CreateDoubleAnimation(150, 1);
-            _closeAnim = AnimationFactory.CreateDoubleAnimation(150, 0, completed: (_, __) =>
+            _closeAnim = AnimationFactory.CreateDoubleAnimation(150, 0, completed: (_, _) =>
             {
                 UnfriendConfirmRipple.Reset();
                 BlockConfirmRipple.Reset();
                 KickConfirmRipple.Reset();
                 GkickConfirmRipple.Reset();
-                _vm.Reset();
+                vm.Reset();
                 Hide();
             });
 
-            _vm = vm;
-            _vm.UnfriendConfirmationRequested += () => UnfriendConfirmRipple.Trigger();
-            _vm.BlockConfirmationRequested += () => BlockConfirmRipple.Trigger();
-            _vm.KickConfirmationRequested += () => KickConfirmRipple.Trigger();
-            _vm.GKickConfirmationRequested += () => GkickConfirmRipple.Trigger();
+            vm.UnfriendConfirmationRequested += () => UnfriendConfirmRipple.Trigger();
+            vm.BlockConfirmationRequested += () => BlockConfirmRipple.Trigger();
+            vm.KickConfirmationRequested += () => KickConfirmRipple.Trigger();
+            vm.GKickConfirmationRequested += () => GkickConfirmRipple.Trigger();
 
-            DataContext = _vm;
+            DataContext = vm;
 
-            Loaded += (_, __) =>
+            Loaded += (_, _) =>
             {
                 var handle = new WindowInteropHelper(this).Handle;
                 FocusManager.MakeUnfocusable(handle);

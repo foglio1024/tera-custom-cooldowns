@@ -1,4 +1,4 @@
-﻿namespace TCC.Data.NPCs
+﻿namespace TCC.Data.Npc
 {
     public class HpTriggeredTimerPattern : TimerPattern
     {
@@ -19,7 +19,7 @@
             target.PropertyChanged += OnTargetPropertyChanged;
         }
 
-        private void OnTargetPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void OnTargetPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (Running) return;
             if (e.PropertyName != nameof(NPC.HPFactor)) return;

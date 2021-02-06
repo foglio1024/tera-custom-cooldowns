@@ -149,7 +149,7 @@ namespace TCC.UI.Controls.Chat
             if (win?.VM.TabVMs.Count == 0)
             {
                 win.Close();
-                App.Settings.ChatWindowsSettings.Remove((ChatWindowSettings)win.WindowSettings);
+                App.Settings.ChatWindowsSettings.Remove((ChatWindowSettings?)win.WindowSettings ?? throw new NullReferenceException("WindowSettings is null!"));
             }
             Window.GetWindow(this)?.Close();
         }

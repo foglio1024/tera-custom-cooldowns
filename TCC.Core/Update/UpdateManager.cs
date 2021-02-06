@@ -23,10 +23,10 @@ namespace TCC.Update
         private const string AppVersionBetaUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/beta/version";
         private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{ (App.Beta ? "beta" : "master")}/database-hashes.json";
 
-        private static readonly Timer _checkTimer = new Timer((App.ToolboxMode ? 2 : 10) * 60 * 1000);
+        private static readonly Timer _checkTimer = new((App.ToolboxMode ? 2 : 10) * 60 * 1000);
         private static bool _waitingDownload = true;
 
-        public static Dictionary<string, string> DatabaseHashes { get; } = new Dictionary<string, string>();
+        public static Dictionary<string, string> DatabaseHashes { get; } = new();
         public static bool UpdateAvailable { get; private set; }
         public static async Task CheckAppVersion()
         {
@@ -72,7 +72,6 @@ namespace TCC.Update
             {
                 using var c = MiscUtils.GetDefaultWebClient();
                 var st = c.OpenRead(AppVersionBetaUrl);
-                if (st == null) return false;
                 var newVersionInfo = new StreamReader(st).ReadLine();
                 if (newVersionInfo == null) return false;
                 if (Version.Parse(newVersionInfo) > Assembly.GetExecutingAssembly().GetName().Version) return true;
@@ -125,7 +124,7 @@ namespace TCC.Update
                 File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
 
                 Log.N("TCC update manager", "Starting updater", NotificationType.Success, 1000);
-                await Task.Delay(1000).ContinueWith(t => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
+                await Task.Delay(1000).ContinueWith(_ => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
                 Environment.Exit(0);
             }
             catch (Exception ex)
@@ -137,7 +136,7 @@ namespace TCC.Update
         }
         public static void StopTimer()
         {
-            _checkTimer?.Stop();
+            _checkTimer.Stop();
         }
         public static void TryDeleteUpdater()
         {
@@ -159,8 +158,8 @@ namespace TCC.Update
             try
             {
                 App.SplashScreen.VM.BottomText = "Downloading update...";
-                c.DownloadFileCompleted += (s, ev) => _waitingDownload = false;
-                c.DownloadProgressChanged += (s, ev) => App.SplashScreen.VM.Progress = ev.ProgressPercentage;
+                c.DownloadFileCompleted += (_, _) => _waitingDownload = false;
+                c.DownloadProgressChanged += (_, ev) => App.SplashScreen.VM.Progress = ev.ProgressPercentage;
                 // ReSharper disable once PossibleNullReferenceException
                 await App.SplashScreen.Dispatcher.InvokeAsync(() =>
                 {
@@ -231,7 +230,6 @@ namespace TCC.Update
             DatabaseHashes.Clear();
             using var c = MiscUtils.GetDefaultWebClient();
             var f = c.OpenRead(DatabaseHashFileUrl);
-            if (f == null) return;
             using var sr = new StreamReader(f);
             var sHashes = sr.ReadToEnd();
             var jHashes = JObject.Parse(sHashes);
@@ -259,8 +257,6 @@ namespace TCC.Update
 
                 using var c = MiscUtils.GetDefaultWebClient();
                 var st = c.OpenRead(App.Beta || forceBeta ? AppVersionBetaUrl : AppVersionUrl);
-
-                if (st == null) return;
 
                 using var sr = new StreamReader(st);
                 var nv = sr.ReadLine();

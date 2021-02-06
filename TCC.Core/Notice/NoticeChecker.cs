@@ -14,8 +14,8 @@ namespace TCC.Notice
     public static class NoticeChecker
     {
         private const string Url = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/messages.json";
-        private static List<NoticeBase> _notices = new List<NoticeBase>();
-        private static readonly Timer _checkTimer = new Timer(60 * 5 * 1000);
+        private static List<NoticeBase> _notices = new();
+        private static readonly Timer _checkTimer = new(60 * 5 * 1000);
 
         public static void Init()
         {
@@ -96,8 +96,8 @@ namespace TCC.Notice
                     {
                         Enabled = jEnabled.Value<bool>(),
                         Trigger = (NoticeTrigger)jTrigger.Value<int>(),
-                        Title = jTitle.Value<string>(),
-                        Content = jContent.Value<string>()
+                        Title = jTitle.Value<string>()!,
+                        Content = jContent.Value<string>()!
                     };
 
                     var duration = jDetails[nameof(NotificationNotice.Duration)]?.Value<int>() ?? 0;

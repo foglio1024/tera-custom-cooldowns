@@ -51,7 +51,7 @@ namespace TCC.ViewModels
             DexterTracker = new StatTracker();
             RampageTracker = new StatTracker();
 
-            Game.DB.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
+            Game.DB!.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
             FieryRage = new SkillWithEffect(Dispatcher, fr);
             Game.DB.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
             Bloodlust = new SkillWithEffect(Dispatcher, bl);

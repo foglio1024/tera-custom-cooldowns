@@ -43,7 +43,7 @@ namespace TCC.ViewModels
         private ICollectionViewLiveShaping? _sortedColumns;
         private ObservableCollection<DungeonColumnViewModel>? _columns;
         private Character? _selectedCharacter;
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
         private readonly Timer _tabFlushTimer;
         private readonly List<Dictionary<uint, ItemAmount>> _pendingTabs;
         private bool _showDetails;
@@ -148,13 +148,13 @@ namespace TCC.ViewModels
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (Character? item in e.NewItems)
+                    foreach (Character? item in e.NewItems!)
                     {
                         if (item != null) _characters.Add(item);
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (Character? item in e.OldItems)
+                    foreach (Character? item in e.OldItems!)
                     {
                         if (item != null) _characters.Remove(item);
                     }
@@ -222,7 +222,7 @@ namespace TCC.ViewModels
         bool _loaded;
         private string _inventoryFilter = "";
 
-        public DashboardViewModel(WindowSettingsBase settings) : base(settings)
+        public DashboardViewModel(WindowSettingsBase? settings) : base(settings)
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.DashboardHotkey, OnShowDashboardHotkeyPressed);
             _characters = new TSObservableCollection<Character>();
@@ -230,21 +230,21 @@ namespace TCC.ViewModels
             EventGroups = new TSObservableCollection<EventGroup>();
             Markers = new TSObservableCollection<TimeMarker>();
             SpecialEvents = new TSObservableCollection<DailyEvent>();
-            LoadDungeonsCommand = new RelayCommand(o =>
+            LoadDungeonsCommand = new RelayCommand(_ =>
             {
                 if (_loaded) return;
 
                 Task.Factory.StartNew(() =>
                 {
-                    Game.DB.DungeonDatabase.Dungeons.Values/*.Where(d => d.HasDef)*/.ToList().ForEach(dungeon =>
+                    Game.DB!.DungeonDatabase.Dungeons.Values/*.Where(d => d.HasDef)*/.ToList().ForEach(dungeon =>
                     {
                         App.BaseDispatcher.InvokeAsync(() =>
                         {
                             var dvc = new DungeonColumnViewModel(dungeon);
-                            CharacterViewModels?.ToList().ForEach(charVm =>
+                            CharacterViewModels.ToList().ForEach(charVm =>
                             {
                                 dvc.DungeonsList.Add(new DungeonCooldownViewModel(
-                                    charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id),
+                                    charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id) ?? throw new NullReferenceException("Dungeon not found!"),
                                     charVm.Character));
                             });
                             _columns?.Add(dvc);
@@ -252,7 +252,7 @@ namespace TCC.ViewModels
                     });
                 });
                 _loaded = true;
-            }, c => !_loaded);
+            }, _ => !_loaded);
             OpenMergedInventoryCommand = new RelayCommand(_ =>
             {
                 new MergedInventoryWindow
@@ -467,7 +467,7 @@ namespace TCC.ViewModels
 
                 //WindowManager.DashboardWindow.ShowDetails();
                 ShowDetails = true;
-                Task.Delay(300).ContinueWith(t => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
+                Task.Delay(300).ContinueWith(_ => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
             }
             catch (Exception e)
             {
@@ -612,12 +612,6 @@ namespace TCC.ViewModels
         public void LoadEvents(DayOfWeek today, string region)
         {
             ClearEvents();
-            if (region == null)
-            {
-                Log.N("Info window", "No region specified; cannot load events.", NotificationType.Error);
-                ChatManager.Instance.AddTccMessage("Unable to load events.");
-                return;
-            }
             LoadEventFile(today, region);
             if (Game.Logged) SetGuildBamTime(false);
 
@@ -663,13 +657,13 @@ namespace TCC.ViewModels
                 var d = XDocument.Load(path);
                 foreach (var egElement in d.Descendants().Where(x => x.Name == "EventGroup"))
                 {
-                    var egName = egElement.Attribute("name").Value;
-                    var egRc = egElement.Attribute("remote") != null && bool.Parse(egElement.Attribute("remote").Value);
+                    var egName = egElement.Attribute("name")?.Value ?? "Event";
+                    var egRc = egElement.Attribute("remote") != null && bool.Parse(egElement.Attribute("remote")!.Value);
                     var egStart = egElement.Attribute("start") != null
-                        ? DateTime.Parse(egElement.Attribute("start").Value)
+                        ? DateTime.Parse(egElement.Attribute("start")!.Value)
                         : DateTime.MinValue;
                     var egEnd = egElement.Attribute("end") != null
-                        ? DateTime.Parse(egElement.Attribute("end").Value).AddDays(1)
+                        ? DateTime.Parse(egElement.Attribute("end")!.Value).AddDays(1)
                         : DateTime.MaxValue;
 
                     if (GameEventManager.Instance.CurrentServerTime < egStart ||
@@ -681,11 +675,11 @@ namespace TCC.ViewModels
                         var isYesterday = false;
                         var isToday = false;
 
-                        if (evElement.Attribute("days").Value != "*")
+                        if (evElement.Attribute("days")!.Value != "*")
                         {
-                            if (evElement.Attribute("days").Value.Contains(','))
+                            if (evElement.Attribute("days")!.Value.Contains(','))
                             {
-                                var days = evElement.Attribute("days").Value.Split(',');
+                                var days = evElement.Attribute("days")!.Value.Split(',');
                                 foreach (var dayString in days)
                                 {
                                     var day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), dayString);
@@ -695,7 +689,7 @@ namespace TCC.ViewModels
                             }
                             else
                             {
-                                var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days").Value);
+                                var eventDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), evElement.Attribute("days")!.Value);
                                 isToday = eventDay == today;
                                 isYesterday = eventDay == yesterday;
                             }
@@ -708,19 +702,19 @@ namespace TCC.ViewModels
 
                         if (!isToday && !isYesterday) continue;
 
-                        var name = evElement.Attribute("name").Value;
-                        var parsedStart = DateTime.Parse(evElement.Attribute("start").Value, CultureInfo.InvariantCulture);
+                        var name = evElement.Attribute("name")!.Value;
+                        var parsedStart = DateTime.Parse(evElement.Attribute("start")!.Value, CultureInfo.InvariantCulture);
                         var parsedDuration = TimeSpan.Zero;
                         var parsedEnd = DateTime.Now;
                         bool isDuration;
                         if (evElement.Attribute("duration") != null)
                         {
-                            parsedDuration = TimeSpan.Parse(evElement.Attribute("duration").Value, CultureInfo.InvariantCulture);
+                            parsedDuration = TimeSpan.Parse(evElement.Attribute("duration")!.Value, CultureInfo.InvariantCulture);
                             isDuration = true;
                         }
                         else if (evElement.Attribute("end") != null)
                         {
-                            parsedEnd = DateTime.Parse(evElement.Attribute("end").Value, CultureInfo.InvariantCulture);
+                            parsedEnd = DateTime.Parse(evElement.Attribute("end")!.Value, CultureInfo.InvariantCulture);
                             isDuration = false;
                         }
                         else
@@ -737,7 +731,7 @@ namespace TCC.ViewModels
 
                         if (evElement.Attribute("color") != null)
                         {
-                            color = evElement.Attribute("color").Value;
+                            color = evElement.Attribute("color")!.Value;
                         }
                         if (isYesterday)
                         {
@@ -793,17 +787,16 @@ namespace TCC.ViewModels
         public void UpdateBuffs()
         {
             if (CurrentCharacter == null) return;
-            //if (!Game.Logged) return;
             Task.Run(() =>
             {
-                CurrentCharacter.Buffs?.Clear();
+                CurrentCharacter.Buffs.Clear();
                 Game.Me.Buffs?.ToList().ForEach(b =>
                 {
-                    CurrentCharacter?.Buffs?.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
+                    CurrentCharacter?.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
                 });
                 Game.Me.Debuffs?.ToList().ForEach(b =>
                 {
-                    CurrentCharacter?.Buffs?.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
+                    CurrentCharacter?.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
                 });
             });
         }
@@ -831,17 +824,16 @@ namespace TCC.ViewModels
             _columns?.Clear();
             Task.Factory.StartNew(() =>
             {
-                Game.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
+                Game.DB!.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
                 {
                     App.BaseDispatcher.InvokeAsync(() =>
                     {
                         var dvc = new DungeonColumnViewModel(dungeon);
-                        CharacterViewModels?.ToList().ForEach(charVm =>
+                        CharacterViewModels.ToList().ForEach(charVm =>
                         {
-                            //if (charVm.Character.Hidden) return;
                             dvc.DungeonsList.Add(
                                 new DungeonCooldownViewModel(
-                                    charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id),
+                                    charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id) ?? throw new NullReferenceException("Dungeon not found!"),
                                     charVm.Character
                             ));
                         });

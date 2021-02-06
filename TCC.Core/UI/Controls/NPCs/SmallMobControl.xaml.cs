@@ -4,7 +4,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Nostrum.Controls;
 using Nostrum.Factories;
-using TCC.Data.NPCs;
+using TCC.Data.Npc;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.NPCs

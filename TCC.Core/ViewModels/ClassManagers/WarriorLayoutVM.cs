@@ -39,7 +39,7 @@ namespace TCC.ViewModels
             Game.CombatChanged += CheckStanceWarning;
             Stance.PropertyChanged += OnStanceOnPropertyChanged; // StanceTracker has only one prop
 
-            Game.DB.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
+            Game.DB!.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
             DeadlyGamble = new SkillWithEffect(Dispatcher, dg);
 
             Game.DB.SkillsDatabase.TryGetSkill(170250, Class.Lancer, out var ar);

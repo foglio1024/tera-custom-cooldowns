@@ -8,7 +8,7 @@ namespace TCC.UI.Converters
 {
     public class ClassToNameConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) value = Class.Common;
             var ret = TccUtils.ClassEnumToString((Class) value);

@@ -9,8 +9,8 @@ namespace TCC.ViewModels
 {
     public class TabViewModel : HeaderedItemViewModel
     {
-        public static event Action<Tab, ImportantRemovedArgs> ImportantRemoved = null!;
-        public static event Action<TabViewModel> TabOpened = null!;
+        public static event Action<Tab, ImportantRemovedArgs>? ImportantRemoved;
+        public static event Action<TabViewModel>? TabOpened;
 
         public static void InvokeImportantRemoved(Tab source, ImportantRemovedArgs e)
         {

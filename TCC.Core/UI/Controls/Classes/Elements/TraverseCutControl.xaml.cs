@@ -20,14 +20,14 @@ namespace TCC.UI.Controls.Classes.Elements
 
         public TraverseCutControl()
         {
-            _anim = AnimationFactory.CreateDoubleAnimation(100, 0, completed: (_, __) => _isAnimating = false, framerate: 20);
+            _anim = AnimationFactory.CreateDoubleAnimation(100, 0, completed: (_, _) => _isAnimating = false, framerate: 20);
             _toZeroAnimation = AnimationFactory.CreateDoubleAnimation(0, 0,  framerate: 20);
 
             _delay = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(_anim.Duration.TimeSpan.Milliseconds + 10)
             };
-            _delay.Tick += (_, __) =>
+            _delay.Tick += (_, _) =>
             {
                 _delay.Stop();
                 OnToZero(_lastDuration);

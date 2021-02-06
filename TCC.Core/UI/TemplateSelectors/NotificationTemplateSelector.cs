@@ -10,9 +10,9 @@ namespace TCC.UI.TemplateSelectors
         public DataTemplate? Default { get; set; }
         public DataTemplate? Progress { get; set; }
 
-        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object? item, DependencyObject container)
         {
-            var n = (NotificationInfoBase) item;
+            var n = (NotificationInfoBase?) item;
 
             return n != null
                 ? n.NotificationTemplate switch

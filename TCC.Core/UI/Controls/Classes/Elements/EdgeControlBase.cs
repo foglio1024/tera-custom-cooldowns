@@ -23,7 +23,7 @@ namespace TCC.UI.Controls.Classes.Elements
         }
         public static readonly DependencyProperty FillBrushProperty = DependencyProperty.Register("FillBrush", typeof(Brush), typeof(EdgeControlBase));
 
-        public Counter EdgeCounter
+        public Counter? EdgeCounter
         {
             get => (Counter)GetValue(EdgeCounterProperty);
             set => SetValue(EdgeCounterProperty, value);
@@ -51,10 +51,9 @@ namespace TCC.UI.Controls.Classes.Elements
             EdgeCounter.PropertyChanged -= OnEdgeChanged;
         }
 
-        protected virtual void OnEdgeChanged(object sender, PropertyChangedEventArgs e)
+        protected virtual void OnEdgeChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(Counter.Val)) return;
-            if (EdgeElements == null) return;
             Dispatcher.Invoke(() =>
             {
                 if (EdgeCounter == null) return;

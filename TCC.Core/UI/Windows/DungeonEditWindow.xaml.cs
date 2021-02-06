@@ -22,7 +22,7 @@ namespace TCC.UI.Windows
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
-            Game.DB.DungeonDatabase.SaveCustomDefs();
+            Game.DB!.DungeonDatabase.SaveCustomDefs();
             Close();
 
         }

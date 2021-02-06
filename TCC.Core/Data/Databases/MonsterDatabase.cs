@@ -10,8 +10,8 @@ namespace TCC.Data.Databases
 {
     public class MonsterDatabase : DatabaseBase
     {
-        public static event Action<uint, uint, bool> OverrideChangedEvent = null!;
-        public static event Action<uint, uint, bool> BlacklistChangedEvent = null!;
+        public static event Action<uint, uint, bool>? OverrideChangedEvent;
+        public static event Action<uint, uint, bool>? BlacklistChangedEvent;
 
         private readonly Dictionary<uint, Zone> _zones;
 
@@ -39,12 +39,12 @@ namespace TCC.Data.Databases
         public string GetZoneName(uint zoneId)
         {
             _zones.TryGetValue(zoneId, out var z);
-            return z != null ? z.Name : "Unknown zone";
+            return z != null ? z.Name : $"Unknown zone ({zoneId})";
         }
 
         public string GetMonsterName(uint templateId, uint zoneId)
         {
-            return TryGetMonster(templateId, zoneId, out var m) ? m.Name : "Unknown";
+            return TryGetMonster(templateId, zoneId, out var m) ? m.Name : $"Unknown npc ({zoneId}, {templateId})";
         }
 
         public long GetMaxHP(uint templateId, uint zoneId)
@@ -194,7 +194,9 @@ namespace TCC.Data.Databases
                 var monster = zone.Descendants("Monster")
                     .FirstOrDefault(x => uint.Parse(x.Attribute("id")?.Value ?? "0") == templateId);
                 if (monster != null)
-                    monster.Attribute("isBoss").Value = b.ToString();
+                {
+                    monster.Attribute("isBoss")!.Value = b.ToString();
+                }
                 else
                     zone.Add(new XElement("Monster", new XAttribute("id", templateId),
                         new XAttribute("isBoss", b.ToString())));
@@ -212,8 +214,6 @@ namespace TCC.Data.Databases
             overrideDoc.Save(OverrideFileFullPath);
         }
 
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
-        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public void Blacklist(uint zoneId, uint templateId, bool b)
         {
             if (TryGetMonster(templateId, zoneId, out var m)) m.IsHidden = b;
@@ -223,7 +223,7 @@ namespace TCC.Data.Databases
             if (zone != null)
             {
                 var monster = zone.Descendants("Monster")
-                    .FirstOrDefault(x => uint.Parse(x.Attribute("id").Value) == templateId);
+                    .FirstOrDefault(x => uint.Parse(x.Attribute("id")!.Value) == templateId);
                 if (monster != null)
                 {
                     if (!b)

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using TCC.Data.NPCs;
+using TCC.Data.Npc;
 
 namespace TCC.UI.TemplateSelectors
 {
@@ -8,7 +8,7 @@ namespace TCC.UI.TemplateSelectors
     {
         public DataTemplate? BossDataTemplate { get; set; }
         public DataTemplate? MobDataTemplate { get; set; }
-        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
+        public override DataTemplate? SelectTemplate(object? item, DependencyObject container)
         {
             if (item == null) return null;
 

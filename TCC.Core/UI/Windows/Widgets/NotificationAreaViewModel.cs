@@ -37,7 +37,7 @@ namespace TCC.UI.Windows.Widgets
                 template: NotificationTemplate.Progress,
                 forcedId: 10241024);
 
-            Task.Delay(10000).ContinueWith(t =>
+            Task.Delay(10000).ContinueWith(_ =>
             {
                 var notif = GetNotification<ProgressNotificationInfo>(10241024);
                 if (notif == null) return;
@@ -52,7 +52,7 @@ namespace TCC.UI.Windows.Widgets
         {
             var notif = GetNotification<ProgressNotificationInfo>(10241024);
             if (notif == null) return;
-            notif.Message += $"\nRelease Version: {PacketAnalyzer.Factory.ReleaseVersion / 100}.{PacketAnalyzer.Factory.ReleaseVersion % 100}"; //by HQ 20190209
+            notif.Message += $"\nRelease Version: {PacketAnalyzer.Factory!.ReleaseVersion / 100}.{PacketAnalyzer.Factory!.ReleaseVersion % 100}"; //by HQ 20190209
             notif.Dispose(3000);
         }
 
@@ -60,7 +60,7 @@ namespace TCC.UI.Windows.Widgets
         {
             Dispatcher.Invoke(() =>
             {
-                while (Notifications.Count < ((NotificationAreaSettings)Settings).MaxNotifications)
+                while (Notifications.Count < ((NotificationAreaSettings)Settings!).MaxNotifications)
                 {
                     if (_queue.IsEmpty) break;
                     if (!_queue.TryDequeue(out var next)) continue;
@@ -80,7 +80,7 @@ namespace TCC.UI.Windows.Widgets
             Dispatcher.Invoke(() =>
             {
                 var id = forcedId != -1 ? forcedId : _id;
-                if (secDuration == -1) secDuration = ((NotificationAreaSettings)Settings).DefaultNotificationDuration * 1000;
+                if (secDuration == -1) secDuration = ((NotificationAreaSettings)Settings!).DefaultNotificationDuration * 1000;
                 switch (template)
                 {
                     case NotificationTemplate.Progress:
@@ -104,12 +104,12 @@ namespace TCC.UI.Windows.Widgets
             }, DispatcherPriority.Background);
         }
 
-        public T GetNotification<T>(int notifId) where T : NotificationInfoBase
+        public T? GetNotification<T>(int notifId) where T : NotificationInfoBase
         {
             var ret = Notifications.ToSyncList().FirstOrDefault(x => x.Id == notifId);
             if (ret != null) return (T)ret;
             ret = _queue.ToArray().FirstOrDefault(x => x.Id == notifId);
-            return (T)ret;
+            return (T?)ret;
         }
     }
 }

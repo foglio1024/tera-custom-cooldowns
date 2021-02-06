@@ -6,9 +6,9 @@ namespace TCC.Settings.WindowSettings
 {
     public class CharacterWindowSettings : WindowSettingsBase
     {
-        public event Action SorcererShowElementsChanged = null!;
-        public event Action WarriorShowEdgeChanged = null!;
-        public event Action ShowStaminaChanged = null!;
+        public event Action? SorcererShowElementsChanged;
+        public event Action? WarriorShowEdgeChanged;
+        public event Action? ShowStaminaChanged;
 
         private bool _sorcererShowElements;
         private bool _warriorShowEdge;

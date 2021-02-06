@@ -32,10 +32,10 @@ namespace TCC.Settings.WindowSettings
         private bool _hideIngameUI = true;
 
 
-        public event Action ResetToCenter = null!;
-        public event Action<bool> EnabledChanged = null!;
-        public event Action ClickThruModeChanged = null!;
-        public event Action<bool> VisibilityChanged = null!;
+        public event Action? ResetToCenter;
+        public event Action? ClickThruModeChanged;
+        public event Action<bool>? EnabledChanged;
+        public event Action<bool>? VisibilityChanged;
 
         [JsonIgnore] public string Name { get; } = "";
         [JsonIgnore] protected List<string> GpkNames { get; }
@@ -59,7 +59,7 @@ namespace TCC.Settings.WindowSettings
                 if(_forcedVisible == value) return;
                 _forcedVisible = value;
                 N();
-                WindowManager.VisibilityManager?.RefreshDim();
+                WindowManager.VisibilityManager.RefreshDim();
             }
         }
 
@@ -170,7 +170,7 @@ namespace TCC.Settings.WindowSettings
                 _showAlways = value;
                 N(nameof(ShowAlways));
                 VisibilityChanged?.Invoke(value);
-                WindowManager.VisibilityManager?.RefreshVisible();
+                WindowManager.VisibilityManager.RefreshVisible();
             }
         }
         public bool AllowOffScreen
@@ -190,7 +190,7 @@ namespace TCC.Settings.WindowSettings
             {
                 _autoDim = value;
                 N(nameof(AutoDim));
-                WindowManager.VisibilityManager?.RefreshDim();
+                WindowManager.VisibilityManager.RefreshDim();
             }
         }
         public double DimOpacity
@@ -201,7 +201,7 @@ namespace TCC.Settings.WindowSettings
                 if (_dimOpacity == value) return;
                 _dimOpacity = value;
                 N();
-                WindowManager.VisibilityManager?.RefreshDim();
+                WindowManager.VisibilityManager.RefreshDim();
             }
         }
         public double MaxOpacity
@@ -212,7 +212,7 @@ namespace TCC.Settings.WindowSettings
                 if (_maxOpacity == value) return;
                 _maxOpacity = value;
                 N();
-                WindowManager.VisibilityManager?.RefreshDim();
+                WindowManager.VisibilityManager.RefreshDim();
             }
         }
         public double Scale
@@ -388,7 +388,7 @@ namespace TCC.Settings.WindowSettings
         }
         protected Class CurrentClass()
         {
-            var cc = Game.Me == null || Game.Me?.Class == Class.None ? Class.Common : Game.Me!.Class;
+            var cc = Game.Me.Class == Class.None ? Class.Common : Game.Me!.Class;
             cc = PerClassPosition ? cc : Class.Common;
             return cc;
         }

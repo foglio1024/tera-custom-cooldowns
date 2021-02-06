@@ -8,9 +8,9 @@ namespace TCC.UI.Converters
 {
     public class AbnormalityTypeToColorConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null) value = AbnormalityType.Buff;
+            value ??= AbnormalityType.Buff;
             var val = (AbnormalityType)value;
             //string resName;
             Color ret;

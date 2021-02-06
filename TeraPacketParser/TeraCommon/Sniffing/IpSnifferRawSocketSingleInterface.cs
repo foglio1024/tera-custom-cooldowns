@@ -31,10 +31,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             Debug.Assert(_socket == null);
             _socket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
 
-            if (_localIp != null)
-            {
-                _socket.Bind(new IPEndPoint(_localIp, 0));
-            }
+            _socket.Bind(new IPEndPoint(_localIp, 0));
             _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
             var receiveAllIp = BitConverter.GetBytes(3);
             _socket.IOControl(IOControlCode.ReceiveAll, receiveAllIp, null);

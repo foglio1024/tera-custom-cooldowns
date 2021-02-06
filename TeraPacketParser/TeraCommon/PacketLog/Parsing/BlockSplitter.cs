@@ -8,10 +8,10 @@ namespace TeraPacketParser.TeraCommon.PacketLog.Parsing
 {
     internal class BlockSplitter
     {
-        public event Action<int, int> Resync = null!;
-        public event Action<byte[]> BlockFinished = null!;
+        public event Action<int, int>? Resync;
+        public event Action<byte[]>? BlockFinished;
 
-        private readonly MemoryStream _buffer = new MemoryStream();
+        private readonly MemoryStream _buffer = new();
         private volatile int _last;
         private volatile int _prev;
         private volatile int _pPrev;

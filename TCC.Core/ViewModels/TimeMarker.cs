@@ -6,7 +6,7 @@ namespace TCC.ViewModels
 {
     public class TimeMarker : TSPropertyChanged
     {
-        private readonly DispatcherTimer _t = new DispatcherTimer();
+        private readonly DispatcherTimer _t = new();
         private DateTime _dateTime;
         private readonly int _hourOffset;
         public string TimeString => _dateTime.ToShortTimeString();

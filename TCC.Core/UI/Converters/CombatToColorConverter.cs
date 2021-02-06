@@ -7,7 +7,7 @@ namespace TCC.UI.Converters
 {
     public class CombatToColorConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var c = (bool?)value ?? false;
 

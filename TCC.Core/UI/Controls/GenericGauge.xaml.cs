@@ -105,7 +105,7 @@ namespace TCC.UI.Controls
         }
         public static readonly DependencyProperty ShowNameProperty = DependencyProperty.Register("ShowName", typeof(bool), typeof(GenericGauge));
 
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {

@@ -39,7 +39,7 @@ namespace TCC.Data.Pc
         private bool _isLeader;
         private bool _hasAggro;
         private string _location = "";
-        private readonly List<uint> _debuffList = new List<uint>();
+        private readonly List<uint> _debuffList = new();
         private GearItem? _weapon;
         private GearItem? _armor;
         private GearItem? _gloves;
@@ -510,7 +510,7 @@ namespace TCC.Data.Pc
             UserClass = other.Class;
             Level = other.Level;
             Order = other.Order;
-            Location = Game.DB.GetSectionName(other.GuardId, other.SectionId);
+            Location = Game.DB!.GetSectionName(other.GuardId, other.SectionId);
             IsLeader = other.IsLeader;
             Online = other.Online;
             Name = other.Name;

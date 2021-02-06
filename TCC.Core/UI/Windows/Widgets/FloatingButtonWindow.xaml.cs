@@ -46,12 +46,11 @@ namespace TCC.UI.Windows.Widgets
             base.OnLoaded(sender, e);
             Left = 0;
             Top = Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
-            _animRepeatTimer.Tick += (_, __) => AnimateBubble();
+            _animRepeatTimer.Tick += (_, _) => AnimateBubble();
         }
         protected override void OnVisibilityChanged()
         {
             base.OnVisibilityChanged();
-            if (FocusManager.TeraScreen == null) return;
             Dispatcher.InvokeAsync(() =>
             {
                 var teraScreenBounds = FocusManager.TeraScreen.Bounds;
@@ -90,7 +89,7 @@ namespace TCC.UI.Windows.Widgets
         }
         private void OnMouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Task.Delay(1000).ContinueWith(t =>
+            Task.Delay(1000).ContinueWith(_ =>
             {
                 Dispatcher.Invoke(() =>
                 {

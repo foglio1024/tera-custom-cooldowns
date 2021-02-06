@@ -3,8 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:npc="clr-namespace:TCC.Data.NPCs"
              xmlns:controls="clr-namespace:TCC.UI.Controls"
+             xmlns:npc="clr-namespace:TCC.Data.Npc"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance npc:NPC}">
 <Border Style="{StaticResource DefaultBorderStyle}" Padding="0" Margin="5" 
         CornerRadius="0,10,0,0" UseLayoutRounding="True" >

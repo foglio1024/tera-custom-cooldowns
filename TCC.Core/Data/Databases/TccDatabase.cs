@@ -13,22 +13,22 @@ namespace TCC.Data.Databases
     /// </summary>
     public class TccDatabase
     {
-        public AccountBenefitDatabase AccountBenefitDatabase { get; private set; }
-        public MonsterDatabase MonsterDatabase { get; private set; }
-        public ItemsDatabase ItemsDatabase { get; private set; }
-        public ItemExpDatabase ItemExpDatabase { get; private set; }
-        public SkillsDatabase SkillsDatabase { get; private set; }
-        public SystemMessagesDatabase SystemMessagesDatabase { get; private set; }
-        public GuildQuestDatabase GuildQuestDatabase { get; private set; }
-        public AchievementDatabase AchievementDatabase { get; private set; }
-        public AchievementGradeDatabase AchievementGradeDatabase { get; private set; }
-        public MapDatabase MapDatabase { get; private set; }
-        public RegionsDatabase RegionsDatabase { get; private set; }
-        public QuestDatabase QuestDatabase { get; private set; }
-        public AbnormalityDatabase AbnormalityDatabase { get; private set; }
-        public DungeonDatabase DungeonDatabase { get; private set; }
-        public SocialDatabase SocialDatabase { get; private set; }
-        public ServerDatabase ServerDatabase { get; private set; }
+        public AccountBenefitDatabase AccountBenefitDatabase { get; }
+        public MonsterDatabase MonsterDatabase { get; }
+        public ItemsDatabase ItemsDatabase { get; }
+        public ItemExpDatabase ItemExpDatabase { get; }
+        public SkillsDatabase SkillsDatabase { get; }
+        public SystemMessagesDatabase SystemMessagesDatabase { get; }
+        public GuildQuestDatabase GuildQuestDatabase { get; }
+        public AchievementDatabase AchievementDatabase { get; }
+        public AchievementGradeDatabase AchievementGradeDatabase { get; }
+        public MapDatabase MapDatabase { get; }
+        public RegionsDatabase RegionsDatabase { get; }
+        public QuestDatabase QuestDatabase { get; }
+        public AbnormalityDatabase AbnormalityDatabase { get; }
+        public DungeonDatabase DungeonDatabase { get; }
+        public SocialDatabase SocialDatabase { get; }
+        public ServerDatabase ServerDatabase { get; }
 
         /// <summary>
         /// True if all database files are found.
@@ -120,13 +120,13 @@ namespace TCC.Data.Databases
             switch (t)
             {
                 case CooldownType.Skill:
-                    if (!Game.DB.SkillsDatabase.TryGetSkill(id, c, out sk)) return false;
+                    if (!Game.DB!.SkillsDatabase.TryGetSkill(id, c, out sk)) return false;
                     break;
                 case CooldownType.Item:
-                    if (!Game.DB.ItemsDatabase.TryGetItemSkill(id, out sk)) return false;
+                    if (!Game.DB!.ItemsDatabase.TryGetItemSkill(id, out sk)) return false;
                     break;
                 case CooldownType.Passive:
-                    if (!Game.DB.AbnormalityDatabase.TryGetPassiveSkill(id, out sk)) return false;
+                    if (!Game.DB!.AbnormalityDatabase.TryGetPassiveSkill(id, out sk)) return false;
                     break;
             }
 
@@ -160,7 +160,7 @@ namespace TCC.Data.Databases
             {
                 var type = GetType();
                 var props = type.GetProperties().Where(p => p.PropertyType.IsSubclassOf(typeof(DatabaseBase)));
-                var dbs = props.Select(prop => (DatabaseBase)prop.GetValue(this)!).Where(x => x != null).ToList();
+                var dbs = props.Select(prop => (DatabaseBase)prop.GetValue(this)!).ToList();
                 return dbs;
             }
         }
@@ -182,13 +182,13 @@ namespace TCC.Data.Databases
                 name = dung.Name;
                 return true;
             }
-            var guard = MapDatabase.Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continentId);
-            if (guard.Value == null)
+            var (_, guard) = MapDatabase.Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continentId);
+            if (guard == null)
             {
                 name = "Unknown";
                 return false;
             }
-            name = RegionsDatabase.GetZoneName(guard.Value.NameId);
+            name = RegionsDatabase.GetZoneName(guard.NameId);
             return true;
 
         }

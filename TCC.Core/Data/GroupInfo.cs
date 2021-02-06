@@ -11,13 +11,13 @@ namespace TCC.Data
         public bool AmILeader => Game.Me.Name == Leader.Name;
         public int Size { get; private set; }
 
-        public GroupMemberData Leader { get; private set; } = new GroupMemberData();
-        private List<GroupMemberData> Members { get; set; } = new List<GroupMemberData>();
+        public GroupMemberData Leader { get; private set; } = new();
+        private List<GroupMemberData> Members { get; set; } = new();
 
         public void SetGroup(List<GroupMemberData> members, bool raid)
         {
             Members = members;
-            Leader = members.FirstOrDefault(m => m.IsLeader);
+            Leader = members.FirstOrDefault(m => m.IsLeader)!;
             IsRaid = raid;
             InGroup = true;
             Size = Members.Count;
@@ -25,11 +25,12 @@ namespace TCC.Data
         public void ChangeLeader(string name)
         {
             Members.ForEach(x => x.IsLeader = x.Name == name);
-            Leader = Members.FirstOrDefault(m => m.Name == name);
+            Leader = Members.FirstOrDefault(m => m.Name == name)!;
         }
         public void Remove(uint playerId, uint serverId)
         {
             var target = Members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
+            if (target == null) return;
             Members.Remove(target);
             Size = Members.Count;
         }
@@ -54,12 +55,12 @@ namespace TCC.Data
             return Has(name) && Members.FirstOrDefault(x => x.Name == name)?.CanInvite == true;
         }
 
-        public bool TryGetMember(uint playerId, uint serverId, out GroupMemberData member)
+        public bool TryGetMember(uint playerId, uint serverId, out GroupMemberData? member)
         {
             member = Members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
             return member != null;
         }
-        public bool TryGetMember(string name, out GroupMemberData member)
+        public bool TryGetMember(string name, out GroupMemberData? member)
         {
             member = Members.FirstOrDefault(m => m.Name == name);
             return member != null;

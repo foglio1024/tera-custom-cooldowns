@@ -7,7 +7,7 @@ namespace TCC.UI.Converters
 {
     internal class ContractedToColWidthConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var b = (bool?)value ?? false;
             return !b ? new GridLength(1, GridUnitType.Star) : new GridLength(1, GridUnitType.Auto);

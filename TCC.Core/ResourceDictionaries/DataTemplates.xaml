@@ -1714,7 +1714,7 @@
                            Foreground="{StaticResource MoongourdFadedAccentBrush}" VerticalAlignment="Center"
                            Margin="5 0" />
             </StackPanel>
-            <TextBlock Text="{Binding PlayerDps, StringFormat={}{0:#,#}}" Grid.Column="1" Margin="5 0"
+            <TextBlock Text="{Binding PlayerDps, StringFormat='{}{0:#,#}'}" Grid.Column="1" Margin="5 0"
                        VerticalAlignment="Center" Foreground="#fff" HorizontalAlignment="Center" />
             <TextBlock Text="{Binding PlayerDeaths}" Grid.Column="2" VerticalAlignment="Center"
                        HorizontalAlignment="Center"

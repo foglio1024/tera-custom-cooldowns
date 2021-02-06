@@ -10,8 +10,8 @@ namespace TCC.Publisher.ViewModels
         private bool _completed;
         private string _releaseNotes = "";
 
-        public event Action ProgressChanged = null!;
-        public event Action Finished = null!;
+        public event Action? ProgressChanged;
+        public event Action? Finished;
 
         public double Progress
         {

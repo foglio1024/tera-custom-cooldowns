@@ -12,8 +12,8 @@ namespace TCC.Data.Databases
     public class AbnormalityDatabase : DatabaseBase
     {
         public Dictionary<uint, Abnormality> Abnormalities { get; }
-        public static readonly List<uint> NoctIds = new List<uint> { 902, 910, 911, 912, 913, 916, 917, 999010000 };
-        public static List<uint> BlueNoctIds = new List<uint> { 920, 921, 922 };
+        public static readonly List<uint> NoctIds = new() { 902, 910, 911, 912, 913, 916, 917, 999010000 };
+        public static List<uint> BlueNoctIds = new() { 920, 921, 922 };
 
         protected override string FolderName => "hotdot";
         protected override string Extension => "tsv";

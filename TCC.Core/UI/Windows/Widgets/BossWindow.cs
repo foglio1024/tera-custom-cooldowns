@@ -12,7 +12,7 @@ namespace TCC.UI.Windows.Widgets
             BoundaryRef = Boundary;
             MainContent = WindowContent;
             Init(App.Settings.NpcWindowSettings);
-            MouseDoubleClick += (_, __) => vm.CopyToClipboard();
+            MouseDoubleClick += (_, _) => vm.CopyToClipboard();
         }
     }
 }

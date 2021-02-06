@@ -15,7 +15,7 @@ namespace TCC.Settings
 
             if (File.Exists(filePath))
             {
-                Data = JsonConvert.DeserializeObject<CooldownConfigData>(File.ReadAllText(filePath));
+                Data = JsonConvert.DeserializeObject<CooldownConfigData>(File.ReadAllText(filePath))!;
                 return;
             }
             

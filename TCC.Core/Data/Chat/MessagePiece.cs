@@ -125,13 +125,9 @@ namespace TCC.Data.Chat
 
         public ActionMessagePiece(string text, string action) : base(text)
         {
-            ClickCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.ChatLinkAction(ChatLinkAction));
             ChatLinkAction = action;
+            ClickCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.ChatLinkAction(ChatLinkAction));
         }
-        //public ActionMessagePiece(string text, int fontSize, bool customSize, string col = "") : base(text, fontSize, customSize, col)
-        //{
-
-        //}
     }
 
     public class UrlMessagePiece : SimpleMessagePiece

@@ -33,14 +33,14 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != FocusId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.FocusOn = true;
+            vm!.FocusOn = true;
         }
         private static void CheckFocus(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.FocusOn = false;
+            vm!.FocusOn = false;
         }
 
         private static void CheckInnerHarmony(S_ABNORMALITY_BEGIN p)
@@ -48,7 +48,7 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.InnerHarmony.StartEffect(p.Duration);
+            vm!.InnerHarmony.StartEffect(p.Duration);
 
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_REFRESH p)
@@ -56,14 +56,14 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.InnerHarmony.RefreshEffect(p.Duration);
+            vm!.InnerHarmony.RefreshEffect(p.Duration);
         }
         private static void CheckInnerHarmony(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != InnerHarmonyBuffId) return;
             if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
 
-            vm.InnerHarmony.StopEffect();
+            vm!.InnerHarmony.StopEffect();
         }
     }
 }

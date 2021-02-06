@@ -38,7 +38,7 @@ namespace TCC.ViewModels.Widgets
     }
     public class ChatViewModel : TSPropertyChanged
     {
-        public event Action ForceSizePosUpdateEvent = null!;
+        public event Action? ForceSizePosUpdateEvent;
 
         private bool _paused;
         private bool _visible = true;
@@ -168,7 +168,7 @@ namespace TCC.ViewModels.Widgets
 
             MakeGlobalCommand = new RelayCommand(_ => WindowSettings.MakePositionsGlobal());
             OpenSysMsgSettingsCommand = new RelayCommand(_ => new SystemMessagesConfigWindow { ShowActivated = true, Topmost = true }.Show());
-            JumpToPresentCommand = new RelayCommand(ex => ChatManager.Instance.ScrollToBottom());
+            JumpToPresentCommand = new RelayCommand(_ => ChatManager.Instance.ScrollToBottom());
 
             ChatManager.Instance.NewMessage += CheckAttention;
             Game.GameUiModeChanged += CheckCollapsed;
@@ -239,7 +239,8 @@ namespace TCC.ViewModels.Widgets
             TabVMs.Clear();
             foreach (var tab in items)
             {
-                TabVMs.Add(old.FirstOrDefault(x => x.Header == tab.Content));
+                var foundTab = old.FirstOrDefault(x => x.Header == tab.Content);
+                if (foundTab != null) TabVMs.Add(foundTab);
             }
             FocusManager.ForceFocused = false;
         }
@@ -272,8 +273,6 @@ namespace TCC.ViewModels.Widgets
             {
                 foreach (var tabInfo in tabs)
                 {
-                    //chatTabsSetting.ApplyFilter();
-                    if (tabInfo.Name == null) continue;
                     TabVMs.Add(new TabViewModel(tabInfo.Name, new Tab(tabInfo)));
                 }
             }

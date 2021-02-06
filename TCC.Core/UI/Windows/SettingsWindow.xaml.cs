@@ -60,7 +60,7 @@ namespace TCC.UI.Windows
 
         // memeing
         private int _testNotifIdx;
-        List<string> _lyrics = new List<string>
+        List<string> _lyrics = new()
         {
             "This was a triumph",
             "I'm making a note here:",

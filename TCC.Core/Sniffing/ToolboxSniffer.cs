@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Sockets;
-using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Nostrum.Extensions;
@@ -192,9 +190,10 @@ namespace TCC.Sniffing
             }
         }
 
-        public event Action<Message> MessageReceived = null!;
-        public event Action<Server> NewConnection = null!;
-        public event Action EndConnection = null!;
+        public event Action<Message>? MessageReceived;
+        public event Action<Server>? NewConnection;
+        public event Action? EndConnection;
+
         public async Task<bool> RetrieveSysMsgIfNeeded(string destPath)
         {
             if (!Connected) return false;
@@ -287,9 +286,9 @@ namespace TCC.Sniffing
                 if (resp != 0)
                 {
                     Connected = true;
-                    await ControlConnection.AddHooks(PacketAnalyzer.Factory.OpcodesList);
+                    await ControlConnection.AddHooks(PacketAnalyzer.Factory!.OpcodesList);
                     PacketAnalyzer.Factory.ReleaseVersion = await ControlConnection.GetReleaseVersion();
-                    NewConnection?.Invoke(Game.DB.ServerDatabase.GetServer(resp));
+                    NewConnection?.Invoke(Game.DB!.ServerDatabase.GetServer(resp));
                     _dataConnection = new TcpClient();
                     await _dataConnection.ConnectAsync("127.0.0.60", 5301);
                 }

@@ -3,13 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:npCs="clr-namespace:TCC.Data.NPCs"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
              xmlns:npc="clr-namespace:TCC.UI.Controls.NPCs"
              xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+             xmlns:npc1="clr-namespace:TCC.Data.Npc"
              mc:Ignorable="d" Loaded="OnLoaded" UseLayoutRounding="True"
-             d:DataContext="{d:DesignInstance npCs:NPC}"
+             d:DataContext="{d:DesignInstance npc1:NPC}"
              MouseEnter="SmallMobControl_OnMouseEnter"
              MouseLeave="SmallMobControl_OnMouseLeave">
 

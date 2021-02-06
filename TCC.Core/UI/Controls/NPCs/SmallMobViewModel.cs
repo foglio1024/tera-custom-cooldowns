@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using TCC.Data.NPCs;
+using TCC.Data.Npc;
 
 namespace TCC.UI.Controls.NPCs
 {

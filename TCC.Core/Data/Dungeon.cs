@@ -98,7 +98,7 @@ namespace TCC.Data
 
         public int MaxEntries => MaxBaseRuns * (Game.Account.IsElite && DoublesOnElite ? 2 : 1);
         public string IconName { get; set; } = "";
-        public string Region => Game.DB.GetDungeonGuardName(Id);
+        public string Region => Game.DB!.GetDungeonGuardName(Id);
         public bool HasDef { get; set; }
         public Dungeon(uint id, string name)
         {

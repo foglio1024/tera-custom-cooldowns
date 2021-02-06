@@ -12,7 +12,7 @@ namespace TCC.Data.Pc
         public int Clears { get; set; }
 
         [JsonIgnore]
-        public Dungeon Dungeon => Game.DB.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
+        public Dungeon Dungeon => Game.DB!.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
                                 ? dg
                                 : new Dungeon(Id, "");
         [JsonIgnore]

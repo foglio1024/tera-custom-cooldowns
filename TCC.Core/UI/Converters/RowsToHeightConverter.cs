@@ -6,7 +6,7 @@ namespace TCC.UI.Converters
 {
     public class RowsToHeightConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var rows = (int?)value ?? 0;
             if (rows == 0) return double.NaN;

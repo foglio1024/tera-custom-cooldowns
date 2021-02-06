@@ -14,7 +14,7 @@ namespace TCC.UI.Windows
         private bool _waiting;
         private string _bottomText = "TCC";
 
-        public event Action ProgressChangedEvent = null!;
+        public event Action? ProgressChangedEvent;
 
         public int Progress
         {
@@ -81,12 +81,12 @@ namespace TCC.UI.Windows
 
             }
 
-            OkCommand = new RelayCommand(args =>
+            OkCommand = new RelayCommand(_ =>
             {
                 Answer = true;
                 Waiting = false;
             });
-            NoCommand = new RelayCommand(args =>
+            NoCommand = new RelayCommand(_ =>
             {
                 Answer = false;
                 Waiting = false;

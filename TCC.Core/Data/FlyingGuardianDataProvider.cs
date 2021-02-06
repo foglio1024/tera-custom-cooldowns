@@ -14,9 +14,9 @@ namespace TCC.Data
         private static FlightStackType _stackType;
         private static bool _ignoreNextEnd;
 
-        public static event Action StacksChanged = null!;
-        public static event Action StackTypeChanged = null!;
-        public static event Action IsInProgressChanged = null!;
+        public static event Action? StacksChanged;
+        public static event Action? StackTypeChanged;
+        public static event Action? IsInProgressChanged;
 
         public static int Stacks
         {

@@ -8,12 +8,12 @@ namespace TCC.Data.Skills
     public class Cooldown : TSPropertyChanged, IDisposable
     {
         // events
-        public event Action<ulong, CooldownMode> Started = null!;
-        public event Action<CooldownMode> Ended = null!;
-        public event Action FlashingForced = null!;
-        public event Action FlashingStopForced = null!;
-        public event Action SecondsUpdated = null!;
-        public event Action Reset = null!;
+        public event Action<ulong, CooldownMode>? Started;
+        public event Action<CooldownMode>? Ended;
+        public event Action? FlashingForced;
+        public event Action? FlashingStopForced;
+        public event Action? SecondsUpdated;
+        public event Action? Reset;
 
         // fields
         private readonly DispatcherTimer _mainTimer;
@@ -24,7 +24,7 @@ namespace TCC.Data.Skills
         private bool _canFlash;
         private Skill _skill;
         private DateTime _endTime;
-        public double Interval { get; private set; }
+        public double Interval { get; }
 
         // properties
         public Skill Skill

@@ -7,7 +7,7 @@ namespace TCC.ViewModels
 {
     public class TccWindowViewModel : TSPropertyChanged
     {
-        public WindowSettingsBase Settings { get; }
+        public WindowSettingsBase? Settings { get; }
         
         /// <summary>
         /// Called from <see cref="OnEnabledChanged"/> or when <see cref="PacketAnalyzer.ProcessorReady"/> is raised.
@@ -27,16 +27,17 @@ namespace TCC.ViewModels
             else RemoveHooks();
         }
 
-        protected TccWindowViewModel(WindowSettingsBase settings)
+        protected TccWindowViewModel(WindowSettingsBase? settings)
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
 
-            Settings = settings;
             if (settings != null)
             {
+                Settings = settings;
                 settings.EnabledChanged += OnEnabledChanged;
                 if (!settings.Enabled) return;
             }
+
             PacketAnalyzer.ProcessorReady += InstallHooks;
         }
     }

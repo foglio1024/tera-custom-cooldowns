@@ -57,7 +57,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         [Pure]
         public IPEndPoint ToIpEndpoint()
         {
-            return new IPEndPoint(ToIpAddress(_ip), _port);
+            return new(ToIpAddress(_ip), _port);
         }
 
         public override string ToString()

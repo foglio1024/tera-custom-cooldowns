@@ -37,7 +37,7 @@ namespace TeraPacketParser.Data
 
         public Angle GetHeading(Vector3f target)
         {
-            return new Angle((short) (Math.Atan2(target.Y - Y, target.X - X)*0x8000/Math.PI));
+            return new((short) (Math.Atan2(target.Y - Y, target.X - X)*0x8000/Math.PI));
         }
     }
 }

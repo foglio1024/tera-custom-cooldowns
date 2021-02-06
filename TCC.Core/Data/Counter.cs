@@ -47,7 +47,7 @@ namespace TCC.Data
             _expire.Tick += OnExpireTick;
         }
 
-        private void OnExpireTick(object s, EventArgs ev)
+        private void OnExpireTick(object? s, EventArgs ev)
         {
             Val = 0;
         }

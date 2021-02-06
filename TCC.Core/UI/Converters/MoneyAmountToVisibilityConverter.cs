@@ -7,7 +7,7 @@ namespace TCC.UI.Converters
 {
     public class MoneyAmountToVisibilityConverter : IValueConverter
     {
-        public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var amount = (long)(value ?? 0);
             return amount == 0 ? Visibility.Collapsed : Visibility.Visible;

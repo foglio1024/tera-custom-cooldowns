@@ -63,7 +63,7 @@ namespace TCC.UI.Windows
         {
             _keepPopupOpen = true;
             FocusManager.UndoUnfocusable(Handle);
-            var src = (HwndSource) PresentationSource.FromVisual(ActionsPopup.Child);
+            var src = (HwndSource?) PresentationSource.FromVisual(ActionsPopup.Child);
             if (src != null)
             {
                 User32.SetForegroundWindow(src.Handle);

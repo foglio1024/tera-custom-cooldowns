@@ -15,7 +15,7 @@ namespace TCC.ViewModels
         public SlayerLayoutVM()
         {
             // In Cold Blood
-            Game.DB.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
+            Game.DB!.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
             InColdBlood = new SkillWithEffect(Dispatcher, icb);
 
             // Overhand Strike

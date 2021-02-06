@@ -78,28 +78,15 @@ namespace TCC.Data.Databases
             return result;
 
         }
-        public bool TryGetSkillByName(string name, Class c, out Skill sk)
-        {
-            var classSkills = Skills[c];
-            sk = classSkills.FirstOrDefault(x => x.Value.Name.Contains(name) || x.Value.Name.Equals(name)).Value;
-            if (sk != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
         //TODO do this better one day
-        public static IEnumerable<Skill> SkillsForClass
+        public IEnumerable<Skill> SkillsForClass
         {
             get
             {
                 var list = new TSObservableCollection<Skill>();
                 var c = Game.Me.Class;
-                var skillsForClass = Game.DB.SkillsDatabase.Skills[c];
+                var skillsForClass = Skills[c];
                 foreach (var skill in skillsForClass.Values)
                 {
                     if (list.All(x => x.IconName != skill.IconName) && !IsIgnoredSkill(skill))
@@ -119,7 +106,7 @@ namespace TCC.Data.Databases
             return IgnoredSkills[skill.Class].Any(x => x == skill.IconName);
         }
 
-        public static readonly Dictionary<Class, List<string>> IgnoredSkills = new Dictionary<Class, List<string>>()
+        public static readonly Dictionary<Class, List<string>> IgnoredSkills = new()
         {
             {
                 Class.Archer, new List<string>()
@@ -229,10 +216,10 @@ namespace TCC.Data.Databases
             },
         };
 
-        public bool TryGetSkillByIconName(string iconName, Class c, out Skill sk)
+        public bool TryGetSkillByIconName(string iconName, Class c, out Skill? sk)
         {
             var result = false;
-            sk = Skills[c].Values.ToList().FirstOrDefault(x => x.IconName == iconName);
+            sk = Skills[c]?.Values.ToList().FirstOrDefault(x => x.IconName == iconName);
             if (sk != null) result = true;
             return result;
         }
@@ -253,7 +240,7 @@ namespace TCC.Data.Databases
             foreach (var line in lines)
             {
                 //var line = f.ReadLine();
-                if (line == null) break;
+                if (string.IsNullOrWhiteSpace(line)) break;
                 var s = line.Split('\t');
                 var id = Convert.ToUInt32(s[0]);
                 Enum.TryParse(s[3], out Class c);

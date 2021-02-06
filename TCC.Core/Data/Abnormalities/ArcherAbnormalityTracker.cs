@@ -41,14 +41,14 @@ namespace TCC.Data.Abnormalities
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-            vm.Windsong.StartEffect(p.Duration);
+            vm!.Windsong.StartEffect(p.Duration);
         }
         private static void CheckWindsong(S_ABNORMALITY_REFRESH p)
         {
             if (!WindsongIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.Windsong.RefreshEffect(p.Duration);
+            vm!.Windsong.RefreshEffect(p.Duration);
         }
         private static void CheckWindsong(S_ABNORMALITY_END p)
         {
@@ -56,7 +56,7 @@ namespace TCC.Data.Abnormalities
             //if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.Windsong.StopEffect();
+            vm!.Windsong.StopEffect();
         }
 
         private static void CheckGaleSteps(S_ABNORMALITY_BEGIN p)
@@ -64,62 +64,62 @@ namespace TCC.Data.Abnormalities
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.WindWalk.Start(p.Duration);
-            vm.WindWalkProc = true;
+            vm!.WindWalk.Start(p.Duration);
+            vm!.WindWalkProc = true;
         }
         private static void CheckWindWalk(S_ABNORMALITY_REFRESH p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.WindWalk.Refresh(p.Duration, CooldownMode.Normal);
-            vm.WindWalkProc = true;
+            vm!.WindWalk.Refresh(p.Duration, CooldownMode.Normal);
+            vm!.WindWalkProc = true;
         }
         private static void CheckGaleSteps(S_ABNORMALITY_END p)
         {
             if (!WindWalkIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
 
-            vm.WindWalk.Stop();
-            vm.WindWalkProc = false;
+            vm!.WindWalk.Stop();
+            vm!.WindWalkProc = false;
         }
 
         private static void CheckFocus(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != FocusId) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-            vm.Focus.StartFocus(p.Duration);
+            vm!.Focus.StartFocus(p.Duration);
         }
         private static void CheckFocus(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != FocusId) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-            vm.Focus.SetFocusStacks(p.Stacks, p.Duration);
+            vm!.Focus.SetFocusStacks(p.Stacks, p.Duration);
         }
         private static void CheckFocus(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusId) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-            vm.Focus.StopFocus();
+            vm!.Focus.StopFocus();
         }
 
         private static void CheckFocusX(S_ABNORMALITY_BEGIN p)
         {
             if (p.AbnormalityId != FocusXId) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-            vm.Focus.StartFocusX(p.Duration);
+            vm!.Focus.StartFocusX(p.Duration);
         }
         private static void CheckFocusX(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != FocusXId) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-            vm.Focus.StartFocusX(p.Duration);
+            vm!.Focus.StartFocusX(p.Duration);
         }
         private static void CheckFocusX(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != FocusXId) return;
             if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-            vm.Focus.StopFocusX();
+            vm!.Focus.StopFocusX();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TCC.Interop
 {
     public static class Firebase
     {
-        private static readonly List<string> _registeredWebhooks = new List<string>();
+        private static readonly List<string> _registeredWebhooks = new();
         public static async void RegisterWebhook(string? webhook, bool online)
         {
             if (string.IsNullOrEmpty(webhook)) return;

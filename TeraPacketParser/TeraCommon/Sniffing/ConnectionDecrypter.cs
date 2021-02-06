@@ -11,9 +11,9 @@ namespace TeraPacketParser.TeraCommon.Sniffing
     public class ConnectionDecrypter
     {
         private readonly string _region;
-        private MemoryStream _client = new MemoryStream();
-        private MemoryStream _server = new MemoryStream();
-        private Session _session = null!;
+        private MemoryStream _client = new();
+        private MemoryStream _server = new();
+        private Session? _session;
 
         public ConnectionDecrypter(string region = "Unknown")
         {
@@ -22,8 +22,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 
         private bool Initialized => _session != null;
 
-        public event Action<byte[]> ClientToServerDecrypted = null!;
-        public event Action<byte[]> ServerToClientDecrypted = null!;
+        public event Action<byte[]>? ClientToServerDecrypted;
+        public event Action<byte[]>? ServerToClientDecrypted;
 
         protected void OnClientToServerDecrypted(byte[] data)
         {
@@ -82,12 +82,12 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             if (direction == MessageDirection.ServerToClient)
             {
                 var skip = new byte[needToSkip];
-                _session.Encrypt(skip);
+                _session?.Encrypt(skip);
             }
             else
             {
                 var skip = new byte[needToSkip];
-                _session.Decrypt(skip);
+                _session?.Decrypt(skip);
             }
         }
 
@@ -98,10 +98,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 if (needToSkip > 0)
                 {
                     var skip = new byte[needToSkip];
-                    _session.Decrypt(skip);
+                    _session?.Decrypt(skip);
                 }
                 var result = data.ToArray();
-                _session.Decrypt(result);
+                _session?.Decrypt(result);
 
                 OnClientToServerDecrypted(result);
             }
@@ -119,10 +119,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 if (needToSkip > 0)
                 {
                     var skip = new byte[needToSkip];
-                    _session.Encrypt(skip);
+                    _session?.Encrypt(skip);
                 }
                 var result = data.ToArray();
-                _session.Encrypt(result);
+                _session?.Encrypt(result);
                 OnServerToClientDecrypted(result);
             }
             else

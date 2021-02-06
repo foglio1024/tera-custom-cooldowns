@@ -12,7 +12,7 @@ namespace TCC.UI.Controls.Abnormalities
 {
     public class AbnormalityIndicatorBase : UserControl
     {
-        private static event Action<object, bool> VisibilityChanged = null!;
+        private static event Action<object, bool>? VisibilityChanged;
         private readonly DoubleAnimation _an;
         private AbnormalityDuration? _context;
         protected FrameworkElement? DurationLabelRef;
@@ -52,7 +52,7 @@ namespace TCC.UI.Controls.Abnormalities
 
 
         }
-        private void OnVisibilityChanged(object sender, bool mouseEnter)
+        private void OnVisibilityChanged(object? sender, bool mouseEnter)
         {
             Dispatcher.InvokeAsync(() =>
             {

@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Nostrum.Factories;
-using TCC.Data.NPCs;
+using TCC.Data.Npc;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.NPCs
@@ -28,7 +28,7 @@ namespace TCC.UI.Controls.NPCs
 
             DataContextChanged += OnDataContextChanged;
 
-            _slideAnim= AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);
+            _slideAnim = AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);
             _hpAnim = AnimationFactory.CreateDoubleAnimation(150, 1, easing: true);
             _timerAnim = AnimationFactory.CreateDoubleAnimation(1, 0, framerate: 20);
             _enrageArcAnimation = AnimationFactory.CreateDoubleAnimation(1, 0, 1, framerate: 30, completed: EnrageArcAnimation_Completed);
@@ -53,7 +53,7 @@ namespace TCC.UI.Controls.NPCs
         {
             Dispatcher?.Invoke(() =>
             {
-                if(VM?.NPC?.TimerPattern == null) return;
+                if (VM?.NPC.TimerPattern == null) return;
                 _timerAnim.From = VM.NPC.TimerPattern is HpTriggeredTimerPattern hptp ? hptp.StartAt : 1;
                 _timerAnim.Duration = TimeSpan.FromSeconds(VM.NPC.TimerPattern.Duration);
                 TimerDotPusher.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _timerAnim);
@@ -72,6 +72,7 @@ namespace TCC.UI.Controls.NPCs
             if (VM.NPC.Enraged)
             {
                 SlideEnrageIndicator(VM.CurrentPercentage);
+                if (VM.NPC.EnragePattern == null) return;
                 if (VM.NPC.EnragePattern.StaysEnraged) return;
                 _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
                 EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
@@ -113,7 +114,7 @@ namespace TCC.UI.Controls.NPCs
 
         private void OnReEnraged()
         {
-            if (VM == null) return;
+            if (VM?.NPC.EnragePattern == null) return;
             _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
             EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
         }

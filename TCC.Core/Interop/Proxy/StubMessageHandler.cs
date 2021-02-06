@@ -17,7 +17,7 @@ namespace TCC.Interop.Proxy
     /// </summary>
     public class StubMessageHandler
     {
-        private readonly Dictionary<string, Delegate> Methods = new Dictionary<string, Delegate>
+        private readonly Dictionary<string, Delegate> Methods = new()
         {
             { "setUiMode", new Action<JObject>(SetUiMode) },
             { "setChatMode", new Action<JObject>(SetChatMode) },
@@ -34,14 +34,14 @@ namespace TCC.Interop.Proxy
             if (jContent == null) return;
 
             var direction = (MessageDirection)jDir.Value<uint>();
-            var content = new Message(DateTime.UtcNow, direction, jContent.Value<string>().Substring(4));
+            var content = new Message(DateTime.UtcNow, direction, jContent.Value<string>()![4..]);
             PacketAnalyzer.EnqueuePacket(content);
         }
         private static void HandleChatMessage(JObject parameters)
         {
             var jAuthor = parameters["author"];
             if (jAuthor == null) return;
-            var author = jAuthor.Value<string>();
+            var author = jAuthor.Value<string>()!;
             if (author == "undefined") author = "System";
 
             var jChannel = parameters["channel"];

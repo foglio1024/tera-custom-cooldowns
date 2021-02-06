@@ -56,7 +56,7 @@ namespace TCC.Debug
             _count++;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NPC([CallerMemberName] string? propertyName = null)
         {

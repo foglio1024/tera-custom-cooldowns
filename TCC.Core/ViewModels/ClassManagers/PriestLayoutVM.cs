@@ -17,7 +17,7 @@ namespace TCC.ViewModels
         public PriestLayoutVM()
         {
             //Energy Stars
-            Game.DB.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
+            Game.DB!.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
             EnergyStars = new SkillWithEffect(Dispatcher, es);
 
             // Grace

@@ -7,7 +7,7 @@ namespace TCC.Data.Databases
     public static class PassivityDatabase
     {
         //TODO: maybe move this to a TeraData tsv file (or merge in hotdot.tsv)
-        public static Dictionary<uint, uint> Passivities { get; } = new Dictionary<uint, uint>
+        public static Dictionary<uint, uint> Passivities { get; } = new()
         {
             {6001,60}, {6002,60}, {6003,60}, {6004,60}, // dragon
             {6012,60}, {6013,60}, // phoenix
@@ -65,7 +65,7 @@ namespace TCC.Data.Databases
         {
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
 
-            if (!Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+            if (!Game.DB!.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
             sk = new Skill(id, Class.Common, ab.Name, "") { IconName = ab.IconName };
             return true;
 

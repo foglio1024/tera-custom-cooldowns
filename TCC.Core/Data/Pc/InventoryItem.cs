@@ -9,7 +9,7 @@ namespace TCC.Data.Pc
         public uint Id { get; }
 
         [JsonIgnore]
-        public Item Item => Game.DB.ItemsDatabase.Items.TryGetValue(Id, out var item)
+        public Item Item => Game.DB!.ItemsDatabase.Items.TryGetValue(Id, out var item)
             ? item
             : new Item(0, "", RareGrade.Common, 0, 0, "");
         public uint Slot { get; }

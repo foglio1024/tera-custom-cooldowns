@@ -12,7 +12,7 @@ namespace TCC.UI.Converters
         public bool Light { get; set; }
         public bool Fallback { get; set; }
 
-        public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var col = targetType == typeof(Color);
             var stance = (WarriorStance?)value ?? WarriorStance.None;

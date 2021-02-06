@@ -5,7 +5,7 @@ namespace TeraPacketParser.Messages
 {
     public class S_SHOW_PARTY_MATCH_INFO : ParsedMessage
     {
-        public static List<ListingData> Listings { get; } = new List<ListingData>();
+        public static List<ListingData> Listings { get; } = new();
         public bool IsLast => Pages == Page;
         public S_SHOW_PARTY_MATCH_INFO(TeraMessageReader reader) : base(reader)
         {

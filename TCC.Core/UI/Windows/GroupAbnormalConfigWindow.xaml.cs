@@ -33,7 +33,7 @@ namespace TCC.UI.Windows
         private void OnSearchTriggered(object? sender, EventArgs e)
         {
             _searchCooldown.Stop();
-            if (_searchText == null) return;
+            if (string.IsNullOrWhiteSpace(_searchText)) return;
             var view = DC.AbnormalitiesView;
             view.Filter = o => ((GroupAbnormalityVM)o).Abnormality.Name.IndexOf(_searchText, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
@@ -52,7 +52,7 @@ namespace TCC.UI.Windows
         private void Close(object sender, RoutedEventArgs e)
         {
             App.Settings.Save();
-            var anim = AnimationFactory.CreateDoubleAnimation(200, 1, completed: (_, __) =>
+            var anim = AnimationFactory.CreateDoubleAnimation(200, 1, completed: (_, _) =>
              {
                  Close();
                  if (App.Settings.ForceSoftwareRendering)
@@ -113,7 +113,7 @@ namespace TCC.UI.Windows
             }
         }
         public Class Class { get; }
-        public ToggleCommand ToggleCommand { get; set; }
+        public ToggleCommand ToggleCommand { get; }
         public uint AbnormalityId { get; }
         public ClassToggle(Class c, uint abId)
         {
@@ -127,19 +127,19 @@ namespace TCC.UI.Windows
     public class ToggleCommand : ICommand
     {
         private readonly ClassToggle _toggle;
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             _toggle.Selected = !_toggle.Selected;
             if (_toggle.Selected) App.Settings.GroupWindowSettings.GroupAbnormals[_toggle.Class].Add(_toggle.AbnormalityId);
             else App.Settings.GroupWindowSettings.GroupAbnormals[_toggle.Class].Remove(_toggle.AbnormalityId);
         }
 #pragma warning disable 0067
-        public event EventHandler CanExecuteChanged = null!;
+        public event EventHandler? CanExecuteChanged;
 #pragma warning restore 0067
         public ToggleCommand(ClassToggle t)
         {

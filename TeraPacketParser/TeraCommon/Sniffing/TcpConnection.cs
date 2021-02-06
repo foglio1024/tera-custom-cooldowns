@@ -8,7 +8,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public class TcpConnection
     {
-        private readonly SortedDictionary<long, byte[]> _bufferedPackets = new SortedDictionary<long, byte[]>();
+        private readonly SortedDictionary<long, byte[]> _bufferedPackets = new();
         public readonly IPEndPoint Destination;
         public readonly IPEndPoint Source;
         internal readonly ConnectionId ConnectionId;
@@ -43,7 +43,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         private static uint NextSequenceNumber { get; set; }
 
-        public event Action<TcpConnection, byte[], int> DataReceived = null!;
+        public event Action<TcpConnection, byte[], int>? DataReceived;
 
         public long SequenceNumberToBytesReceived(uint sequenceNumber)
         {

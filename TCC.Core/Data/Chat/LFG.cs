@@ -99,8 +99,8 @@ namespace TCC.Data.Chat
         {
             try
             {
-                _removeTimer?.Stop();
-                _removeTimer?.Start();
+                _removeTimer.Stop();
+                _removeTimer.Start();
                 N();
             }
             catch

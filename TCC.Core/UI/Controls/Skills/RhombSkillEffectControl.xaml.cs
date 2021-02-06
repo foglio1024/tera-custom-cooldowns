@@ -68,7 +68,7 @@ namespace TCC.UI.Controls.Skills
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected  void NPC([CallerMemberName] string? propertyName = null)
         {

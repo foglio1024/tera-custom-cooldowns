@@ -36,13 +36,10 @@ namespace TCC.ViewModels
         private readonly PlayerMenuWindow _win;
         public MoongourdPopupViewModel MoongourdPopupViewModel { get; }
 
-        public event Action UnfriendConfirmationRequested = null!;
-
-        public event Action BlockConfirmationRequested = null!;
-
-        public event Action KickConfirmationRequested = null!;
-
-        public event Action GKickConfirmationRequested = null!;
+        public event Action? UnfriendConfirmationRequested;
+        public event Action? BlockConfirmationRequested;
+        public event Action? KickConfirmationRequested;
+        public event Action? GKickConfirmationRequested;
 
         public string Name
         {
@@ -167,8 +164,7 @@ namespace TCC.ViewModels
                                        && Game.Group.Has(Name)
                                        && Game.Me.Name != Name;
 
-        public bool IsBlocked => _name != ""
-                              && Game.BlockList?.Contains(_name) == true;
+        public bool IsBlocked => _name != "" && Game.BlockList.Contains(_name);
 
         public bool IsFriend => !Game.FriendList.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
 
@@ -275,7 +271,7 @@ namespace TCC.ViewModels
                     if (Unfriending)
                     {
                         Close();
-                        if (PacketAnalyzer.Factory.ReleaseVersion / 100 >= 103)
+                        if (PacketAnalyzer.Factory!.ReleaseVersion / 100 >= 103)
                         {
                             StubInterface.Instance.StubClient.UnfriendUser(_playerId);
                         }
@@ -342,13 +338,13 @@ namespace TCC.ViewModels
             GrantInviteCommand = new RelayCommand(_ =>
             {
                 if (!Game.Group.TryGetMember(Name, out var u)) return;
-                StubInterface.Instance.StubClient.SetInvitePower(u.ServerId, u.PlayerId, !u.CanInvite);
+                StubInterface.Instance.StubClient.SetInvitePower(u!.ServerId, u!.PlayerId, !u!.CanInvite);
                 u.CanInvite = !u.CanInvite;
             });
             DelegateLeaderCommand = new RelayCommand(_ =>
             {
                 if (!Game.Group.TryGetMember(Name, out var u)) return;
-                StubInterface.Instance.StubClient.DelegateLeader(u.ServerId, u.PlayerId);
+                StubInterface.Instance.StubClient.DelegateLeader(u!.ServerId, u!.PlayerId);
             });
             GroupKickCommand = new RelayCommand(_ =>
             {
@@ -356,7 +352,7 @@ namespace TCC.ViewModels
                 {
                     if (Game.Group.TryGetMember(Name, out var u))
                     {
-                        StubInterface.Instance.StubClient.KickUser(u.ServerId, u.PlayerId);
+                        StubInterface.Instance.StubClient.KickUser(u!.ServerId, u!.PlayerId);
                     }
                     Close();
                 }
@@ -394,7 +390,7 @@ namespace TCC.ViewModels
             HideShowPlayerCommand = new RelayCommand(cmd =>
             {
                 StubInterface.Instance.StubClient.InvokeCommand($"fps {cmd} {Name}");
-            }, ce => StubInterface.Instance.IsStubAvailable && StubInterface.Instance.IsFpsModAvailable);
+            }, _ => StubInterface.Instance.IsStubAvailable && StubInterface.Instance.IsFpsModAvailable);
             OpenMoongourdPopupCommand = new RelayCommand(_ =>
             {
                 MoongourdPopupViewModel.RequestInfo(Name, App.Settings.LastLanguage);
@@ -462,11 +458,11 @@ namespace TCC.ViewModels
 
             Dispatcher.InvokeAsync(() =>
             {
-                Game.DB.MonsterDatabase.TryGetMonster((uint)x.TemplateId, 0, out var m);
+                Game.DB!.MonsterDatabase.TryGetMonster((uint)x.TemplateId, 0, out var m);
                 Name = x.Name;
                 _playerId = x.PlayerId;
                 Info = m.Name;
-                Level = (int)x.Level;
+                Level = x.Level;
                 Class = TccUtils.ClassFromModel((uint)x.TemplateId);
                 ShowGuildInvite = x.Name != Game.Me.Name && !x.HasGuild;
                 ShowPartyInvite = x.Name != Game.Me.Name && !x.HasParty;

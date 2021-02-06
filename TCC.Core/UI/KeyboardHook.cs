@@ -19,7 +19,7 @@ namespace TCC.UI
         private bool _isRegistered;
         private bool _isInitialized;
 
-        public event Action<HotKey> KeyPressed = null!;
+        public event Action<HotKey>? KeyPressed;
 
         private KeyboardHook()
         {
@@ -117,7 +117,7 @@ namespace TCC.UI
         {
             if (!_callbacks.TryGetValue(hk, out var cb)) return;
             Console.WriteLine($"Executing callback for {hk}");
-            cb?.DynamicInvoke();
+            cb.DynamicInvoke();
         }
 
 
@@ -164,7 +164,7 @@ namespace TCC.UI
                 KeyPressed?.Invoke(new HotKey(key, modifier));
             }
 
-            public event Action<HotKey> KeyPressed = null!;
+            public event Action<HotKey>? KeyPressed;
         }
 
         #endregion

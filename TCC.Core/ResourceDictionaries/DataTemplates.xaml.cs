@@ -12,9 +12,9 @@ namespace TCC.ResourceDictionaries
 {
     public partial class DataTemplates
     {
-        private void OnCharacterNameMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void OnCharacterNameMouseLeftButtonDown(object? sender, MouseButtonEventArgs e)
         {
-            var dc = ((FrameworkElement) sender)?.DataContext;
+            var dc = (sender as FrameworkElement)?.DataContext;
             if (dc != null)
                 WindowManager.ViewModels.DashboardVM.SelectCharacter((Character) dc);
         }
@@ -33,7 +33,7 @@ namespace TCC.ResourceDictionaries
             Keyboard.ClearFocus();
             FocusManager.MakeUnfocusable(WindowManager.LfgListWindow.Handle);
 
-            Task.Delay(200).ContinueWith(t => StubInterface.Instance.StubClient.RequestListings());
+            Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings());
         }
 
         private void LfgMessage_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

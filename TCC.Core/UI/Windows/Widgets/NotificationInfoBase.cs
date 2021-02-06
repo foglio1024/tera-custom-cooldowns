@@ -35,14 +35,14 @@ namespace TCC.UI.Windows.Widgets
             else
             {
                 CanClose = true;
-                Task.Delay(msDelay).ContinueWith(t => InvokeDisposed());
+                Task.Delay(msDelay).ContinueWith(_ => InvokeDisposed());
             }
         }
     }
     public class NotificationInfoBase : TSPropertyChanged
     {
-        public event Action Disposed = null!;
-        public event Action<int> Disposing = null!;
+        public event Action? Disposed;
+        public event Action<int>? Disposing;
 
         private string _message = "";
         private NotificationType _notificationType;

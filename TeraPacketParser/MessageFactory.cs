@@ -13,8 +13,8 @@ namespace TeraPacketParser
         public static event Action<int>? ReleaseVersionChanged;
 
         private static readonly Delegate? UnknownMessageDelegate = Constructor<Func<TeraMessageReader, UnknownMessage>>();
-        private static readonly Dictionary<ushort, Delegate?> OpcodeNameToType = new Dictionary<ushort, Delegate?> { { 19900, Constructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
-        private static readonly Dictionary<string, Delegate?> TeraMessages = new Dictionary<string, Delegate?>
+        private static readonly Dictionary<ushort, Delegate?> OpcodeNameToType = new() { { 19900, Constructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
+        private static readonly Dictionary<string, Delegate?> TeraMessages = new()
         {
             { nameof(C_CHECK_VERSION),                         Constructor<Func<TeraMessageReader, C_CHECK_VERSION>>()},
             { nameof(C_LOGIN_ARBITER),                         Constructor<Func<TeraMessageReader, C_LOGIN_ARBITER>>()},
@@ -123,7 +123,7 @@ namespace TeraPacketParser
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
         };
-        public static readonly Dictionary<string, ushort> Extras = new Dictionary<string, ushort>();
+        public static readonly Dictionary<string, ushort> Extras = new();
         public uint Version { get; private set; }
 
         private int _releaseVersion;
@@ -215,7 +215,7 @@ namespace TeraPacketParser
 
         public void ReloadSysMsg(string path)
         {
-            SystemMessageNamer ??= new OpCodeNamer(path);
+            //SystemMessageNamer ??= new OpCodeNamer(path);
             SystemMessageNamer.Reload(Version, ReleaseVersion, path);
         }
 

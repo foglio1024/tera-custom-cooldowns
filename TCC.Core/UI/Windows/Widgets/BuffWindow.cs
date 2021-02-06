@@ -76,7 +76,7 @@ namespace TCC.UI.Windows.Widgets
         private void OnWindowMouseLeave(object sender, MouseEventArgs e)
         {
             SettingsButton.BeginAnimation(OpacityProperty, _opacityDown);
-            Task.Delay(1000).ContinueWith(t => Dispatcher.InvokeAsync(() =>
+            Task.Delay(1000).ContinueWith(_ => Dispatcher.InvokeAsync(() =>
             {
                 if (IsMouseOver) return;
                 AbnormalityIndicatorBase.InvokeVisibilityChanged(this, false);

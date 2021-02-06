@@ -5,9 +5,6 @@ using TCC.Data;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    /// <summary>
-    /// Logica di interazione per GearItemControl.xaml
-    /// </summary>
     public partial class GearItemControl
     {
         private readonly DoubleAnimation _anim;
@@ -23,7 +20,7 @@ namespace TCC.UI.Controls.Dashboard
 
         private void GearItemControl_OnLoaded(object sender, RoutedEventArgs e)
         {
-            var dc = (GearItem)DataContext;
+            var dc = (GearItem?)DataContext;
             if (dc == null) return;
             _anim.To = dc.LevelFactor * 359.9;
             //MainArc.BeginAnimation(Arc.EndAngleProperty, _anim);

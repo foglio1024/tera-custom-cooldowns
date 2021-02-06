@@ -55,7 +55,7 @@ namespace TCC.Interop.Moongourd
                     {
                         if (count >= MAX_ENCOUNTERS) break;
                         if (jEntry["playerName"]!.Value<string>() != playerName) continue;
-                        var logId = long.Parse((jEntry["logId"]!).Value<string>());
+                        var logId = long.Parse((jEntry["logId"])!.Value<string>()!);
                         var logZoneId = jEntry["zoneId"]!.Value<int>();
                         var logBossId = jEntry["bossId"]!.Value<int>();
 
@@ -64,8 +64,8 @@ namespace TCC.Interop.Moongourd
                         var strLog = webClient.DownloadString(logUrl);
                         var jLog = JObject.Parse(strLog);
 
-                        var dps = int.Parse(jLog["members"]!.FirstOrDefault(y => y["playerName"]!.Value<string>() == playerName)!["playerDps"]!.Value<string>());
-                        var deaths = int.Parse(jLog["members"]!.FirstOrDefault(y => y["playerName"]!.Value<string>() == playerName)!["playerDeaths"]!.Value<string>());
+                        var dps = int.Parse(jLog["members"]!.FirstOrDefault(y => y["playerName"]!.Value<string>() == playerName)!["playerDps"]!.Value<string>()!);
+                        var deaths = int.Parse(jLog["members"]!.FirstOrDefault(y => y["playerName"]!.Value<string>() == playerName)!["playerDeaths"]!.Value<string>()!);
 
                         var encounter = new MoongourdEncounter
                         {

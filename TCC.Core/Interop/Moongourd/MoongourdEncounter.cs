@@ -3,7 +3,6 @@ using Nostrum;
 using System;
 using System.Windows.Input;
 using TCC.Utilities;
-using TeraDataLite;
 
 namespace TCC.Interop.Moongourd
 {
@@ -15,8 +14,8 @@ namespace TCC.Interop.Moongourd
         public int PlayerDeaths { get; set; }
         public int AreaId { get; set; }
         public int BossId { get; set; }
-        public string DungeonName => Game.DB.RegionsDatabase.GetZoneName((uint)AreaId);
-        public string BossName => Game.DB.MonsterDatabase.GetMonsterName((uint)BossId, (uint)AreaId);
+        public string DungeonName => Game.DB!.RegionsDatabase.GetZoneName((uint)AreaId);
+        public string BossName => Game.DB!.MonsterDatabase.GetMonsterName((uint)BossId, (uint)AreaId);
         public ICommand Browse { get; }
         //public Class PlayerClass { get; }
         //public string PlayerServer { get; } = "";
@@ -37,11 +36,11 @@ namespace TCC.Interop.Moongourd
         [Obsolete]
         public MoongourdEncounter(JObject jEncounter) : this()
         {
-            PlayerName = jEncounter["playerName"]!.Value<string>();
-            Enum.TryParse<Class>(jEncounter["playerClass"]!.Value<string>(), out var cl);
+            PlayerName = jEncounter["playerName"]!.Value<string>()!;
+            //Enum.TryParse<Class>(jEncounter["playerClass"]!.Value<string>(), out var cl);
             //PlayerClass = cl;
             //PlayerServer = jEncounter["playerServer"]!.Value<string>();
-            LogId = long.Parse(jEncounter["logId"]!.Value<string>());
+            LogId = long.Parse(jEncounter["logId"]!.Value<string>()!);
             //Timestamp = jEncounter["timestamp"]!.Value<int>();
             PlayerDps = jEncounter["playerDps"]!.Value<int>();
             //PartyDps = jEncounter["partyDps"]!.Value<int>();

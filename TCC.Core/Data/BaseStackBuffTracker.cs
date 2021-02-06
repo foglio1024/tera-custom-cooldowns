@@ -6,12 +6,13 @@ namespace TCC.Data
 {
     public class BaseStackBuffTracker : TSPropertyChanged
     {
-        public event Action BuffEnded = null!;
-        public event Action<int> BaseStacksChanged = null!;
-        public event Action<long> BaseBuffStarted = null!;
-        public event Action<long> BaseBuffRefreshed = null!;
-        public event Action<long> EmpoweredBuffStarted = null!;
+        public event Action? BuffEnded;
+        public event Action<int>? BaseStacksChanged;
+        public event Action<long>? BaseBuffStarted;
+        public event Action<long>? BaseBuffRefreshed;
+        public event Action<long>? EmpoweredBuffStarted;
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public static bool IsEmpoweredBuffRunning { get; set; }
 
         private int _stacks;

@@ -6,7 +6,7 @@ namespace TCC.UI.Converters
 {
     public class MessageTextToIconConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var icConv = new IconConverter();
             var val = value?.ToString();

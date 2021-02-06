@@ -12,7 +12,7 @@ namespace TCC.UI.TemplateSelectors
     {
         public DataTemplate? SingleColumn { get; set; }
         public DataTemplate? RoleColumns { get; set; }
-        public override DataTemplate? SelectTemplate(object item, DependencyObject? container)
+        public override DataTemplate? SelectTemplate(object? item, DependencyObject? container)
         {
             return item != null && (GroupWindowLayout) item == GroupWindowLayout.SingleColumn ? SingleColumn : RoleColumns;
         }

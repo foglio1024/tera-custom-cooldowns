@@ -19,7 +19,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         //private readonly object _eventLock = new object();
         private readonly IpSniffer _ipSniffer;
 
-        private readonly ConcurrentDictionary<TcpConnection, byte> _isNew = new ConcurrentDictionary<TcpConnection, byte>();
+        private readonly ConcurrentDictionary<TcpConnection, byte> _isNew = new();
 
         private readonly Dictionary<string, Server> _serversByIp;
         private TcpConnection? _clientToServer;
@@ -40,7 +40,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             }
         }
 
-        public ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
+        public ConcurrentQueue<Message> Packets = new();
         public int ServerProxyOverhead;
 
         public TeraSniffer(bool useNpcap, Dictionary<string, Server> serversByIp)
@@ -78,10 +78,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             set => _ipSniffer.Enabled = value;
         }
 
-        public event Action<Server> NewConnection = null!;
-        public event Action<Message> MessageReceived = null!;
-        public event Action EndConnection = null!;
-        public event Action<string> Warning = null!;
+        public event Action<Server>? NewConnection;
+        public event Action<Message>? MessageReceived;
+        public event Action? EndConnection;
+        public event Action<string>? Warning;
 
         protected virtual void OnNewConnection(Server server)
         {

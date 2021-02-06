@@ -14,7 +14,7 @@ namespace TCC.Data.Pc
 
         public DungeonInfo()
         {
-            DungeonList = Game.DB.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).Select(d => new DungeonCooldownData(d.Id)).ToList();
+            DungeonList = Game.DB!.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).Select(d => new DungeonCooldownData(d.Id)).ToList();
             VisibleDungeonsView = CollectionViewFactory.CreateLiveCollectionView(DungeonList,
                 sortFilters: new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
 

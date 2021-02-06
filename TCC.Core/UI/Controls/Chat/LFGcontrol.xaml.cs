@@ -50,7 +50,7 @@ namespace TCC.UI.Controls.Chat
             if (App.Settings.LfgWindowSettings.Enabled)
             {
                 StubInterface.Instance.StubClient.RequestListings(); //ProxyOld.RequestLfgList();
-                Task.Delay(1000).ContinueWith(t =>
+                Task.Delay(1000).ContinueWith(_ =>
                 {
                     if (_dc == null) return;
                     WindowManager.ViewModels.LfgVM.Listings.ToList()

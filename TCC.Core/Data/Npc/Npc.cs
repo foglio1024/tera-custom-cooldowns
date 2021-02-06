@@ -1,14 +1,14 @@
-﻿using Nostrum;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Nostrum;
 using TCC.Data.Abnormalities;
 using TCC.UI;
 using TCC.Utilities;
 using TeraDataLite;
 
-namespace TCC.Data.NPCs
+namespace TCC.Data.Npc
 {
     public class NPC : TSPropertyChanged, IDisposable
     {
@@ -158,7 +158,7 @@ namespace TCC.Data.NPCs
         public uint TemplateId { get; }
         public Species Species { get; set; }
 
-        public EnragePattern EnragePattern { get; set; }
+        public EnragePattern? EnragePattern { get; set; }
         public TimerPattern? TimerPattern { get; set; }
 
         public void AddorRefresh(Abnormality ab, uint duration, int stacks)
@@ -238,7 +238,7 @@ namespace TCC.Data.NPCs
         {
             Dispatcher = WindowManager.ViewModels.NpcVM.GetDispatcher();
             _buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
-            Game.DB.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
+            Game.DB!.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
             Name = monster.Name;
             MaxHP = monster.MaxHP;
             Species = monster.Species;
@@ -256,16 +256,16 @@ namespace TCC.Data.NPCs
             //    _shieldDuration = new Timer { Interval = NpcWindowViewModel.Ph1ShieldDuration * 1000 };
             //    _shieldDuration.Elapsed += ShieldFailed;
             //}
-            Override = new RelayCommand(ex =>
+            Override = new RelayCommand(_ =>
             {
                 Game.DB.MonsterDatabase.ToggleOverride(ZoneId, TemplateId, !IsBoss);
 
-            }, ce => true);
-            Blacklist = new RelayCommand(ex =>
+            }, _ => true);
+            Blacklist = new RelayCommand(_ =>
             {
                 Game.DB.MonsterDatabase.Blacklist(ZoneId, TemplateId, true);
 
-            }, ce => true);
+            }, _ => true);
         }
 
 
@@ -340,7 +340,7 @@ namespace TCC.Data.NPCs
         {
             //_shieldDuration.Stop();
             Shield = ShieldStatus.Broken;
-            Task.Delay(5000).ContinueWith(t =>
+            Task.Delay(5000).ContinueWith(_ =>
             {
                 Shield = ShieldStatus.Off;
             });
@@ -351,7 +351,7 @@ namespace TCC.Data.NPCs
             Shield = ShieldStatus.On;
         }
 
-        public event Action DeleteEvent = null!;
+        public event Action? DeleteEvent;
         public void Delete()
         {
             foreach (var buff in _buffs) buff.Dispose();

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
-using TCC.Data.NPCs;
+using TCC.Data.Npc;
 using TCC.Utilities;
 
 namespace TCC.UI.Controls.NPCs
 {
     public class NpcViewModel : TSPropertyChanged
     {
-        public event Action Disposed = null!;
-        public event Action HpFactorChanged = null!;
+        public event Action? Disposed;
+        public event Action? HpFactorChanged;
 
         protected const uint Delay = 5000;
         protected readonly DispatcherTimer DeleteTimer;

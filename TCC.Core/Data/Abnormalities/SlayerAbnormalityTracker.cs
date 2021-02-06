@@ -29,21 +29,21 @@ namespace TCC.Data.Abnormalities
             if (!IcbIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
 
-            vm.InColdBlood.StartEffect(p.Duration);
+            vm!.InColdBlood.StartEffect(p.Duration);
         }
         private static void CheckInColdBlood(S_ABNORMALITY_REFRESH p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
 
-            vm.InColdBlood.StartEffect(p.Duration);
+            vm!.InColdBlood.StartEffect(p.Duration);
         }
         private static void CheckInColdBlood(S_ABNORMALITY_END p)
         {
             if (!IcbIds.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
 
-            vm.InColdBlood.StopEffect();
+            vm!.InColdBlood.StopEffect();
         }
     }
 }

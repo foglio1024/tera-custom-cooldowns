@@ -31,6 +31,6 @@ namespace TeraPacketParser.Messages
 
         public ushort Count { get; }
 
-        public List<ReadyPartyMember> Party { get; } = new List<ReadyPartyMember>();
+        public List<ReadyPartyMember> Party { get; } = new();
     }
 }

@@ -40,7 +40,7 @@ namespace TCC.ViewModels
         public MysticLayoutVM()
         {
             Auras = new AurasTracker();
-            Game.DB.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
+            Game.DB!.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
             ThrallOfProtection = new Cooldown(top, false);
             
             Game.DB.SkillsDatabase.TryGetSkill(271600, Class.Mystic, out var tol);

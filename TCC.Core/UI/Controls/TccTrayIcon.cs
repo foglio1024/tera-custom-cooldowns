@@ -42,7 +42,7 @@ namespace TCC.UI.Controls
                 Visible = true
             };
             _trayIcon.MouseDown += OnMouseDown;
-            _trayIcon.MouseDoubleClick += (_, __) => WindowManager.SettingsWindow.ShowWindow();
+            _trayIcon.MouseDoubleClick += (_, _) => WindowManager.SettingsWindow.ShowWindow();
             _trayIcon.Text = $"{App.AppVersion} - not connected";
 
             _contextMenu = new ContextMenu();
@@ -51,9 +51,9 @@ namespace TCC.UI.Controls
             _contextMenu.Items.Add(new MenuItem
             {
                 Header = "Close",
-                Command = new RelayCommand(o =>
+                Command = new RelayCommand(_ =>
                 {
-                    _contextMenu.Closed += (_, __) => App.Close();
+                    _contextMenu.Closed += (_, _) => App.Close();
                     _contextMenu.IsOpen = false;
                 })
             });

@@ -9,7 +9,6 @@ using PacketDotNet;
 using PacketDotNet.Utils;
 using SharpPcap;
 using SharpPcap.Npcap;
-using SharpPcap.WinPcap;
 
 //using log4net;
 
@@ -114,7 +113,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             _devices = null;
         }
 
-        public event Action<string> Warning = null!;
+        public event Action<string>? Warning;
 
         protected virtual void OnWarning(string obj)
         {
@@ -136,8 +135,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
                 {
                     ipPacket = new IPv4Packet(new ByteArraySegment(e.Packet.Data,4,e.Packet.Data.Length-4));
                 }
-                if (ipPacket == null)
-                    return;
+                //if (ipPacket == null)
+                //    return;
             }
             catch
             {

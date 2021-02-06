@@ -25,7 +25,7 @@ namespace TCC
         public static GameEventManager Instance => _instance ??= new GameEventManager();
 
         // TODO: not sure about other regions reset days
-        private readonly Dictionary<RegionEnum, TeraServerTimeInfo> _serverTimezones = new Dictionary<RegionEnum, TeraServerTimeInfo>
+        private readonly Dictionary<RegionEnum, TeraServerTimeInfo> _serverTimezones = new()
         {
             { RegionEnum.EU,  new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
             { RegionEnum.NA,  new TeraServerTimeInfo("Central Standard Time",        6, DayOfWeek.Tuesday,   DayOfWeek.Thursday) },
@@ -62,7 +62,7 @@ namespace TCC
 
         }
 
-        private void CheckNewDay(object sender, EventArgs e)
+        private void CheckNewDay(object? sender, EventArgs e)
         {
             if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
                 WindowManager.ViewModels.DashboardVM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());

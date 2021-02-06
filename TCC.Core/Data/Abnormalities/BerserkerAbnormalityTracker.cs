@@ -22,15 +22,15 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    vm.Bloodlust.StartEffect(p.Duration);
+                    vm!.Bloodlust.StartEffect(p.Duration);
                     break;
                 case FieryRageId:
-                    vm.FieryRage.StartEffect(p.Duration);
+                    vm!.FieryRage.StartEffect(p.Duration);
                     break;
                 case UnleashId:
-                    vm.Unleash.StartEffect(p.Duration);
-                    vm.IsUnleashOn = true;
-                    vm.IsUnleashOff = false;
+                    vm!.Unleash.StartEffect(p.Duration);
+                    vm!.IsUnleashOn = true;
+                    vm!.IsUnleashOff = false;
                     break;
             }
         }
@@ -44,15 +44,15 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    vm.Bloodlust.RefreshEffect(p.Duration);
+                    vm!.Bloodlust.RefreshEffect(p.Duration);
                     break;
                 case FieryRageId:
-                    vm.FieryRage.RefreshEffect(p.Duration);
+                    vm!.FieryRage.RefreshEffect(p.Duration);
                     break;
                 case UnleashId:
-                    vm.Unleash.RefreshEffect(p.Duration);
-                    vm.IsUnleashOn = true;
-                    vm.IsUnleashOff = false;
+                    vm!.Unleash.RefreshEffect(p.Duration);
+                    vm!.IsUnleashOn = true;
+                    vm!.IsUnleashOff = false;
                     break;
             }
         }
@@ -66,15 +66,15 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case BloodlustId:
-                    vm.Bloodlust.StopEffect();
+                    vm!.Bloodlust.StopEffect();
                     break;
                 case FieryRageId:
-                    vm.FieryRage.StopEffect();
+                    vm!.FieryRage.StopEffect();
                     break;
                 case UnleashId:
-                    vm.Unleash.StopEffect();
-                    vm.IsUnleashOn = false;
-                    vm.IsUnleashOff = true;
+                    vm!.Unleash.StopEffect();
+                    vm!.IsUnleashOn = false;
+                    vm!.IsUnleashOff = true;
                     break;
             }
         }
@@ -86,11 +86,11 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case SinisterDexter:
-                    vm.SinisterTracker.Val = p.Stacks;
-                    vm.DexterTracker.Val = p.Stacks;
+                    vm!.SinisterTracker.Val = p.Stacks;
+                    vm!.DexterTracker.Val = p.Stacks;
                     break;
                 case Rampage:
-                    vm.RampageTracker.Val = p.Stacks;
+                    vm!.RampageTracker.Val = p.Stacks;
                     break;
             }
         }
@@ -101,11 +101,11 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case SinisterDexter:
-                    vm.SinisterTracker.Val = p.Stacks;
-                    vm.DexterTracker.Val = p.Stacks;
+                    vm!.SinisterTracker.Val = p.Stacks;
+                    vm!.DexterTracker.Val = p.Stacks;
                     break;
                 case Rampage:
-                    vm.RampageTracker.Val = p.Stacks;
+                    vm!.RampageTracker.Val = p.Stacks;
                     break;
             }
         }
@@ -116,11 +116,11 @@ namespace TCC.Data.Abnormalities
             switch (p.AbnormalityId)
             {
                 case SinisterDexter:
-                    vm.SinisterTracker.Val = 0;
-                    vm.DexterTracker.Val = 0;
+                    vm!.SinisterTracker.Val = 0;
+                    vm!.DexterTracker.Val = 0;
                     break;
                 case Rampage:
-                    vm.RampageTracker.Val = 0;
+                    vm!.RampageTracker.Val = 0;
                     break;
             }
         }

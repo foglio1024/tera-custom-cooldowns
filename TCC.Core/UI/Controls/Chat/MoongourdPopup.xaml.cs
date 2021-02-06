@@ -92,7 +92,7 @@ namespace TCC.UI.Controls.Chat
     {
         public MoongourdPopup()
         {
-            MouseLeave += (_, __) => WindowManager.ViewModels.PlayerMenuVM.Close();
+            MouseLeave += (_, _) => WindowManager.ViewModels.PlayerMenuVM.Close();
             InitializeComponent();
         }
     }

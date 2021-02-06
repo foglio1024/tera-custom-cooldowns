@@ -11,7 +11,7 @@ namespace TCC.ViewModels
 
         public ReaperLayoutVM()
         {
-            Game.DB.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
+            Game.DB!.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
             ShadowReaping = new SkillWithEffect(Dispatcher, sr);
 
             Game.DB.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);

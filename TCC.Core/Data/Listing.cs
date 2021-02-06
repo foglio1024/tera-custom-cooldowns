@@ -244,10 +244,10 @@ namespace TCC.Data
 
                 StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
 
-                Task.Delay(200).ContinueWith(t => StubInterface.Instance.StubClient.RequestListings());
+                Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings());
 
             },
-            ce => Temp && !string.IsNullOrEmpty(Message));
+            _ => Temp && !string.IsNullOrEmpty(Message));
             RemoveCommand = new RelayCommand(_ =>
             {
                 if (Temp)
@@ -296,13 +296,13 @@ namespace TCC.Data
             _t.Stop();
             _listing.CanApply = true;
         }
-        public event EventHandler CanExecuteChanged = null!;
-        public bool CanExecute(object parameter)
+        public event EventHandler? CanExecuteChanged;
+        public bool CanExecute(object? parameter)
         {
             return _listing.CanApply;
         }
 
-        public async void Execute(object parameter)
+        public async void Execute(object? parameter)
         {
             var success = await StubInterface.Instance.StubClient.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
             if (!success) return;

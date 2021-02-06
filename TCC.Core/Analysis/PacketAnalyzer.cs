@@ -23,12 +23,12 @@ namespace TCC.Analysis
 {
     public static class PacketAnalyzer
     {
-        private static readonly ConcurrentQueue<Message> Packets = new ConcurrentQueue<Message>();
+        private static readonly ConcurrentQueue<Message> Packets = new();
 
-        public static event Action ProcessorReady = null!;
+        public static event Action? ProcessorReady;
 
         public static ITeraSniffer Sniffer { get; private set; } = null!;
-        public static MessageFactory Factory { get; private set; } = null!;
+        public static MessageFactory? Factory { get; private set; }
         public static MessageProcessor Processor { get; private set; } = null!;
 
         public static Thread AnalysisThread { get; private set; } = null!;
@@ -72,11 +72,11 @@ namespace TCC.Analysis
                 ParsedMessage? msg;
                 try
                 {
-                    msg = Factory.Create(pkt);
+                    msg = Factory!.Create(pkt);
                 }
                 catch (Exception ex)
                 {
-                    var opcName = Factory.OpCodeNamer.GetName(pkt.OpCode);
+                    var opcName = Factory!.OpCodeNamer.GetName(pkt.OpCode);
                     throw new PacketParseException($"Failed to parse packet {opcName}", ex, opcName, pkt.Data.Array);
                 }
                 Processor.Handle(msg);
@@ -93,7 +93,7 @@ namespace TCC.Analysis
 
             _ = StubInterface.Instance.Init();
 
-            if (App.Settings?.DontShowFUBH == false) App.FUBH();
+            if (App.Settings.DontShowFUBH == false) App.FUBH();
 
             //if (Game.Server.Region == "EU")
             //    TccMessageBox.Show("WARNING",
@@ -122,7 +122,7 @@ namespace TCC.Analysis
             try
             {
                 var process = Process.GetProcessesByName("TERA")[0];
-                var fullPath = process?.MainModule?.FileName.Replace("TERA.exe", "ReleaseRevision.txt");
+                var fullPath = process.MainModule?.FileName?.Replace("TERA.exe", "ReleaseRevision.txt");
                 if (fullPath == null) throw new FileNotFoundException("TERA.exe not found.");
 
                 var txt = File.ReadAllLines(fullPath);
@@ -134,7 +134,7 @@ namespace TCC.Analysis
                     var idx2 = v.IndexOf(' ');
                     v = v.Substring(0, idx2);
                     v = v.Replace(".", "");
-                    Factory.ReleaseVersion = int.Parse(v);
+                    Factory!.ReleaseVersion = int.Parse(v);
                 }
             }
             catch (Exception e)
@@ -177,8 +177,8 @@ namespace TCC.Analysis
             {
                 switch (ex)
                 {
-                    case OverflowException _:
-                    case ArgumentException _:
+                    case OverflowException:
+                    case ArgumentException:
                         TccMessageBox.Show(SR.InvalidOpcodeFile(ex.Message), MessageBoxType.Error);
                         Log.F(ex.ToString());
                         App.Close();
@@ -187,13 +187,13 @@ namespace TCC.Analysis
                 return;
             }
 
-            Factory.Set(p.Versions[0], opcNamer);
+            Factory!.Set(p.Versions[0], opcNamer);
             Sniffer.Connected = true;
         }
         private static async void OnLoginArbiter(C_LOGIN_ARBITER p)
         {
-            var rvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.ReleaseVersion / 100}.map");
-            var pvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory.Version}.map");
+            var rvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory!.ReleaseVersion / 100}.map");
+            var pvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{Factory!.Version}.map");
 
             var path = File.Exists(rvSysMsgPath)
                        ? rvSysMsgPath

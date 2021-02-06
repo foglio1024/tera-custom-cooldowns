@@ -24,7 +24,7 @@ namespace TCC.UI.Controls.Settings
         public static readonly DependencyProperty SvgIconProperty = DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(SelectionSetting));
 
 
-        public IEnumerable Choices
+        public IEnumerable? Choices
         {
             get => (IEnumerable)GetValue(ChoicesProperty);
             set => SetValue(ChoicesProperty, value);

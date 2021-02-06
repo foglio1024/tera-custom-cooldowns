@@ -14,7 +14,7 @@ namespace TCC.UI.Windows.Widgets
             BoundaryRef = Boundary;
             MainContent = WindowContent;
 
-            Init(vm.Settings);
+            Init(vm.Settings!);
         }
 
         private void PerfMonitorWindow_OnMouseEnter(object sender, MouseEventArgs e)

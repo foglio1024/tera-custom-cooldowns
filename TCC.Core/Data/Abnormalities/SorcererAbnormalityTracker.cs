@@ -23,7 +23,7 @@ namespace TCC.Data.Abnormalities
         //private static Skill _fireArcaneFusion;
         //private static Skill _iceArcaneFusion;
 
-        public static event Action BoostChanged = null!;
+        public static event Action? BoostChanged;
 
         private static bool IsManaBoost(uint id)
         {
@@ -32,7 +32,7 @@ namespace TCC.Data.Abnormalities
 
         public SorcererAbnormalityTracker()
         {
-            Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab);
+            Game.DB!.AbnormalityDatabase.Abnormalities.TryGetValue(FireIceFusionId, out var ab);
             _fireIceFusion = new Skill(ab ?? throw new NullReferenceException("Skill not found"), Class.Sorcerer);
         }
         private static void CheckManaBoost(S_ABNORMALITY_BEGIN p)
@@ -40,7 +40,7 @@ namespace TCC.Data.Abnormalities
             if (!IsManaBoost(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-            vm.ManaBoost.StartEffect(p.Duration);
+            vm!.ManaBoost.StartEffect(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_REFRESH p)
@@ -48,7 +48,7 @@ namespace TCC.Data.Abnormalities
             if (!IsManaBoost(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-            vm.ManaBoost.RefreshEffect(p.Duration);
+            vm!.ManaBoost.RefreshEffect(p.Duration);
 
         }
         private static void CheckManaBoost(S_ABNORMALITY_END p)
@@ -56,7 +56,7 @@ namespace TCC.Data.Abnormalities
             if (!IsManaBoost(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-            vm.ManaBoost.StopEffect();
+            vm!.ManaBoost.StopEffect();
         }
 
         private static void CheckFusionBoost(S_ABNORMALITY_BEGIN p)
@@ -107,7 +107,7 @@ namespace TCC.Data.Abnormalities
         }
         private void CheckFusions(S_ABNORMALITY_BEGIN p)
         {
-            if (FireIceFusionId == p.AbnormalityId && _fireIceFusion != null)
+            if (FireIceFusionId == p.AbnormalityId)
             {
                 StartPrecooldown(_fireIceFusion, p.Duration);
             }
@@ -126,7 +126,7 @@ namespace TCC.Data.Abnormalities
             {
                 if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-                vm.EndFireIcePre();
+                vm!.EndFireIcePre();
             }
             //else if (FireArcaneFusionId == p.AbnormalityId)
             //{

@@ -21,7 +21,7 @@ namespace TCC.UI.Windows.Widgets
             BoundaryRef = Boundary;
             ButtonsRef = Buttons;
             MainContent = WindowContent;
-            Init(VM.Settings);
+            Init(VM.Settings!);
         }
 
         //TODO: to commands in VM
@@ -47,7 +47,7 @@ namespace TCC.UI.Windows.Widgets
 
         private void GroupWindow_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            Task.Delay(1000).ContinueWith(t => Dispatcher.InvokeAsync(() =>
+            Task.Delay(1000).ContinueWith(_ => Dispatcher.InvokeAsync(() =>
             {
                 if (IsMouseOver) return;
                 AbnormalityIndicatorBase.InvokeVisibilityChanged(this, false);

@@ -23,21 +23,21 @@ namespace TCC.UI.Windows.Widgets
     {
         private static bool _showBoundaries;
         private static bool _hidden;
-        private static event Action ShowBoundariesToggled = null!;
-        private static event Action HiddenToggled = null!;
-        private static List<TccWidget> _activeWidgets = new List<TccWidget>();
+        private static event Action? ShowBoundariesToggled;
+        private static event Action? HiddenToggled;
+        private static List<TccWidget> _activeWidgets = new();
 
         private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, 0);
         private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, 0);
         private readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, 1);
         private readonly DispatcherTimer _buttonsTimer;
         protected bool _canMove = true;
-        private Point WindowCenter => new Point(Left + ActualWidth / 2, Top + ActualHeight / 2);
+        private Point WindowCenter => new(Left + ActualWidth / 2, Top + ActualHeight / 2);
 
         protected WindowButtons? ButtonsRef;
         protected UIElement? MainContent;
         protected UIElement? BoundaryRef;
-        public WindowSettingsBase WindowSettings { get; private set; } = null!;
+        public WindowSettingsBase? WindowSettings { get; private set; }
         public IntPtr Handle { get; private set; }
 
         protected TccWidget()
@@ -105,11 +105,11 @@ namespace TCC.UI.Windows.Widgets
                 ButtonsRef.Opacity = 0;
                 _buttonsTimer.Tick += OnButtonsTimerTick;
 
-                MouseEnter += (_, __) =>
+                MouseEnter += (_, _) =>
                 {
                     if (!App.Settings.HideHandles) ButtonsRef.BeginAnimation(OpacityProperty, _showButtonsAnimation);
                 };
-                MouseLeave += (_, __) => _buttonsTimer.Start();
+                MouseLeave += (_, _) => _buttonsTimer.Start();
                 if (_canMove) ButtonsRef.MouseLeftButtonDown += Drag;
             }
         }
@@ -125,7 +125,7 @@ namespace TCC.UI.Windows.Widgets
             var np = new Point(newPos.X, newPos.Y); //sigh
             var s = new System.Windows.Size(size.Width, size.Height); //sigh
 
-            WindowSettings.ApplyScreenOffset(op, np, s);
+            WindowSettings?.ApplyScreenOffset(op, np, s);
             ReloadPosition();
         }
 
@@ -142,9 +142,9 @@ namespace TCC.UI.Windows.Widgets
 
         protected void ReloadPosition()
         {
+            if (WindowSettings == null) return;
             Dispatcher?.InvokeAsync(() =>
             {
-
                 var left = WindowSettings.X * WindowManager.ScreenSize.Width;
                 Left = left >= int.MaxValue ? 0 : left;
 
@@ -169,7 +169,7 @@ namespace TCC.UI.Windows.Widgets
         private void OnFocusTick()
         {
             if (FocusManager.PauseTopmost) return;
-            if (WindowSettings.ShowAlways || WindowManager.VisibilityManager.ForceVisible) RefreshTopmost();
+            if (WindowSettings?.ShowAlways == true || WindowManager.VisibilityManager.ForceVisible) RefreshTopmost();
             if (WindowManager.VisibilityManager.Visible) RefreshTopmost();
         }
 
@@ -187,7 +187,7 @@ namespace TCC.UI.Windows.Widgets
 
         private void OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            if(WindowSettings == null) return;
             if (!WindowSettings.AllowOffScreen) CheckBounds();
             if (WindowSettings.IgnoreSize) return;
             if (WindowSettings.W == ActualWidth && WindowSettings.H == ActualHeight) return;
@@ -201,12 +201,13 @@ namespace TCC.UI.Windows.Widgets
             Handle = new WindowInteropHelper(this).Handle;
             FocusManager.MakeUnfocusable(Handle);
             FocusManager.HideFromToolBar(Handle);
-            if (!WindowSettings.Enabled) Hide();
+            if (WindowSettings?.Enabled == false) Hide();
         }
 
         private void OnDimChanged()
         {
             if (!WindowManager.VisibilityManager.Visible) return;
+            if (WindowSettings == null) return;
             if (_hidden)
             {
                 AnimateContentOpacity(0);
@@ -235,6 +236,8 @@ namespace TCC.UI.Windows.Widgets
 
         protected virtual void OnVisibilityChanged()
         {
+            if (WindowSettings == null) return;
+
             if (WindowManager.VisibilityManager.Visible && !_hidden || WindowSettings.ShowAlways)
             {
 
@@ -260,6 +263,7 @@ namespace TCC.UI.Windows.Widgets
                 return;
             }
 
+            if (WindowSettings == null) return;
 
             switch (WindowSettings.ClickThruMode)
             {
@@ -292,7 +296,7 @@ namespace TCC.UI.Windows.Widgets
             {
                 Dispatcher?.Invoke(() =>
                 {
-                    if (WindowSettings.Enabled) Show();
+                    if (WindowSettings!.Enabled) Show();
                     else Hide();
                 });
             }
@@ -334,6 +338,8 @@ namespace TCC.UI.Windows.Widgets
 
         private void CheckBounds()
         {
+            if (WindowSettings == null) return;
+
             if (WindowSettings.AllowOffScreen) return;
             if (Left + ActualWidth > SystemParameters.VirtualScreenWidth)
                 Left = SystemParameters.VirtualScreenWidth - ActualWidth;
@@ -358,21 +364,18 @@ namespace TCC.UI.Windows.Widgets
 
         private Screen FindNearestScreen()
         {
-            if (ScreenFromWindowCenter() != null) return ScreenFromWindowCenter();
-            var distances = new List<Vector>();
-            foreach (var screen in Screen.AllScreens)
-            {
-                var screenCenter = new Point(screen.Bounds.X + screen.Bounds.Size.Width / 2,
-                    screen.Bounds.Y + screen.Bounds.Size.Height / 2);
+            var screenFromWinCenter = ScreenFromWindowCenter();
+            if (screenFromWinCenter != null) return screenFromWinCenter;
 
-                var dist = screenCenter - WindowCenter;
-                distances.Add(dist);
-            }
+            var distances = Screen.AllScreens.Select(screen => new Point(screen.Bounds.X + screen.Bounds.Size.Width / 2, screen.Bounds.Y + screen.Bounds.Size.Height / 2))
+                                             .Select(screenCenter => screenCenter - WindowCenter)
+                                             .ToList();
 
             var min = new Vector(double.MaxValue, double.MaxValue);
-            foreach (var distance in distances)
-                if (distance.Length < min.Length)
-                    min = distance;
+            foreach (var distance in distances.Where(distance => distance.Length < min.Length))
+            {
+                min = distance;
+            }
             var index = distances.IndexOf(min);
             return Screen.AllScreens[index != -1 ? index : 0];
         }
@@ -415,7 +418,7 @@ namespace TCC.UI.Windows.Widgets
             return screen.Bounds.Contains(Convert.ToInt32(Left), Convert.ToInt32(Top + ActualHeight));
         }
 
-        private Screen ScreenFromWindowCenter()
+        private Screen? ScreenFromWindowCenter()
         {
             return Screen.AllScreens.FirstOrDefault(x =>
                 x.Bounds.Contains(Convert.ToInt32(WindowCenter.X), Convert.ToInt32(WindowCenter.Y)));
@@ -431,6 +434,8 @@ namespace TCC.UI.Windows.Widgets
             var distance = Math.Abs(screenMiddle - middle);
 
             if (!(distance > deadzone)) return;
+            if (WindowSettings == null) return;
+
             if (middle >= screenMiddle)
             {
 
@@ -471,6 +476,8 @@ namespace TCC.UI.Windows.Widgets
 
         private void SetRelativeCoordinates()
         {
+            if (WindowSettings == null) return;
+
             WindowSettings.X = Left / WindowManager.ScreenSize.Width;
             WindowSettings.Y = Top / WindowManager.ScreenSize.Height;
         }

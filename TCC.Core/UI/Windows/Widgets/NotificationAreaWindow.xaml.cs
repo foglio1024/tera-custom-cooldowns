@@ -9,7 +9,7 @@
             ButtonsRef = Buttons;
             MainContent = WindowContent;
             BoundaryRef = Boundary;
-            Init(vm.Settings);
+            Init(vm.Settings!);
             MainContent.Opacity = 1;
         }
     }

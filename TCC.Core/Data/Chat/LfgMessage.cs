@@ -69,17 +69,17 @@ namespace TCC.Data.Chat
             base.DisposeImpl();
         }
 
-        private void OnMembersChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnMembersChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             Task.Run(() =>
             {
                 switch (e.Action)
                 {
                     case NotifyCollectionChangedAction.Add:
-                        e.NewItems.Cast<User>().ToList().ForEach(item => _members.Add(item));
+                        e.NewItems?.Cast<User>().ToList().ForEach(item => _members.Add(item));
                         break;
                     case NotifyCollectionChangedAction.Remove:
-                        e.OldItems.Cast<User>().ToList().ForEach(item => _members.Remove(item));
+                        e.OldItems?.Cast<User>().ToList().ForEach(item => _members.Remove(item));
                         break;
                     case NotifyCollectionChangedAction.Reset:
                         _members.Clear();
@@ -106,7 +106,7 @@ namespace TCC.Data.Chat
             WindowManager.ViewModels.LfgVM.EnqueueRequest(LinkedListing.LeaderId);
 
         }
-        private Listing FindListing()
+        private Listing? FindListing()
         {
             return WindowManager.ViewModels.LfgVM.Listings.ToSyncList().FirstOrDefault(x =>
                 x.Players.ToSyncList().Any(p => p.Name == Author) ||

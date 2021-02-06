@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Threading;
 using TCC.Utils;
 
 namespace TCC.Debug
 {
     public static class ObjectTracker
     {
-        private static ConcurrentDictionary<Type, long> Instances { get; } = new ConcurrentDictionary<Type, long>();
-        private static readonly object _lock = new object();
+        private static ConcurrentDictionary<Type, long> Instances { get; } = new();
+        private static readonly object _lock = new();
         public static void Register(Type t)
         {
             lock (_lock)

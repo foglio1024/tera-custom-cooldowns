@@ -6,7 +6,7 @@ namespace TCC.UI.Converters
 {
     public class HPbarColorConverter2 : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             return (bool?) value ?? false
                 ? R.Colors.HpDebuffColorLight //Application.Current.FindResource("HpDebuffColorLight")

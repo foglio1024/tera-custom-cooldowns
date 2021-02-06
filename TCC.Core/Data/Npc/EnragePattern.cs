@@ -1,4 +1,4 @@
-﻿namespace TCC.Data.NPCs
+﻿namespace TCC.Data.Npc
 {
     public class EnragePattern
     {

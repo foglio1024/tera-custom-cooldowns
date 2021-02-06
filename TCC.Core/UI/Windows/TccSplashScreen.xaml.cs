@@ -44,7 +44,7 @@ namespace TCC.UI.Windows
         {
             Dispatcher?.Invoke(() =>
             {
-                var an = AnimationFactory.CreateDoubleAnimation(300, 0, easing: true, completed: (s, ev) =>
+                var an = AnimationFactory.CreateDoubleAnimation(300, 0, easing: true, completed: (_, _) =>
                 {
                     Close();
                     Dispatcher?.InvokeShutdown();

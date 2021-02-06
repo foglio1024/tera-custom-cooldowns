@@ -4,9 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 using GongSolutions.Wpf.DragDrop;
 using GongSolutions.Wpf.DragDrop.Utilities;
 using TCC.Data;
@@ -55,14 +52,17 @@ namespace TCC.UI.Windows
         }
 
 
-        public GenericDragHandler DragHandler => new GenericDragHandler();
-        public HiddenSKillsDragHandler HiddenSkillsDropHandler => new HiddenSKillsDragHandler();
+        public GenericDragHandler DragHandler => new();
+        public HiddenSKillsDragHandler HiddenSkillsDropHandler => new();
 
         public override void HideWindow()
         {
             FocusManager.ForceFocused = false;
-            VM.Settings.ForcedClickable = false;
-            VM.Settings.ForcedVisible = false;
+            if (VM.Settings != null)
+            {
+                VM.Settings.ForcedClickable = false;
+                VM.Settings.ForcedVisible = false;
+            }
 
             base.HideWindow();
 
@@ -96,8 +96,12 @@ namespace TCC.UI.Windows
         {
             //if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.Default;
             FocusManager.ForceFocused = true;
-            VM.Settings.ForcedClickable = true;
-            VM.Settings.ForcedVisible = true;
+            if (VM.Settings != null)
+            {
+                VM.Settings.ForcedClickable = true;
+                VM.Settings.ForcedVisible = true;
+            }
+
             //WindowManager.SkillConfigWindow = this;
 
             base.ShowWindow();
@@ -172,7 +176,7 @@ namespace TCC.UI.Windows
                     l.Add(new Cooldown(s, false));
                     break;
                 case Item i:
-                    Game.DB.ItemsDatabase.TryGetItemSkill(i.Id, out var itemSkill);
+                    Game.DB!.ItemsDatabase.TryGetItemSkill(i.Id, out var itemSkill);
                     l.Add(new Cooldown(itemSkill, false, CooldownType.Item));
                     break;
                 case Abnormality a:

@@ -83,7 +83,7 @@ namespace TCC
             {
                 // These actions require main thread to be alive
                 App.ReleaseMutex();
-                if (WindowManager.TrayIcon != null) WindowManager.TrayIcon.Dispose();
+                WindowManager.TrayIcon.Dispose();
                 try { WindowManager.Dispose(); } catch {/* ignored*/}
             }
 
@@ -141,7 +141,7 @@ namespace TCC
             var ret = new JObject
             {
                 { "tcc_version" , new JValue(App.AppVersion) },
-                { "id" , new JValue(App.Settings.LastAccountNameHash != null ? App.Settings.LastAccountNameHash: "") },
+                { "id" , new JValue(App.Settings.LastAccountNameHash) },
                 { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
                 { "exception", BuildExceptionMessage(ex)},
                 { "exception_type", new JValue(ex.GetType().FullName)},
@@ -149,8 +149,8 @@ namespace TCC
                 { "stack_trace", new JValue(ex.StackTrace)},
                 { "full_exception", new JValue(FormatFullException(ex))},
                 { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
-                { "region", new JValue(Game.Server != null ? Game.Server.Region : "")},
-                { "server_id", new JValue(Game.Server != null ? Game.Server.ServerId.ToString() : "")},
+                { "region", new JValue(Game.Server.Region)},
+                { "server_id", new JValue(Game.Server.ServerId.ToString())},
                 { "settings_summary", new JObject
                     {
                         { "windows", new JObject

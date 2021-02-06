@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using Nostrum;
 using Nostrum.Extensions;
 using TCC.Data;
+using TCC.Data.Npc;
 
 namespace TCC.UI.Controls.NPCs
 {
@@ -18,8 +19,8 @@ namespace TCC.UI.Controls.NPCs
 
         private readonly DispatcherTimer _numberTimer;
 
-        public event Action EnragedChanged = null!;
-        public event Action ReEnraged = null!;
+        public event Action? EnragedChanged;
+        public event Action? ReEnraged;
 
         public ObservableCollection<EnragePeriodItem> EnrageHistory { get; set; }
         public string MainPercInt => ShowHP ? Convert.ToInt32(Math.Floor(NPC.HPFactor * 100)).ToString() : "?";
@@ -38,20 +39,23 @@ namespace TCC.UI.Controls.NPCs
         {
             get
             {
-                var sum = 0D;
-                if (EnrageHistory == null) return 0;
                 if (EnrageHistory.Count == 0) return 0;
-                foreach (var enragePeriodItem in EnrageHistory)
-                {
-                    sum += enragePeriodItem.Duration;
-                }
-                return sum;
+                return EnrageHistory.Sum(enragePeriodItem => enragePeriodItem.Duration);
             }
         }
         public double CurrentPercentage => NPC.HPFactor * 100;
-        public double RemainingPercentage => (CurrentPercentage - NextEnragePercentage) / NPC.EnragePattern.Percentage > 0
-                                           ? (CurrentPercentage - NextEnragePercentage) / NPC.EnragePattern.Percentage
-                                           : 0;
+        public double RemainingPercentage
+        {
+            get
+            {
+                var percentage = NPC.EnragePattern?.Percentage;
+                if (percentage == null) return 0;
+                return (CurrentPercentage - NextEnragePercentage) / percentage.Value > 0
+                    ? (CurrentPercentage - NextEnragePercentage) / percentage.Value
+                    : 0;
+            }
+        }
+
         public double NextEnragePercentage
         {
             get => _nextEnragePerc;
@@ -70,7 +74,7 @@ namespace TCC.UI.Controls.NPCs
             {
                 if (NPC.Enraged)
                 {
-                    return NPC.EnragePattern.StaysEnraged ? "∞" : $"{TimeUtils.FormatSeconds(CurrentEnrageTime)}";
+                    return NPC.EnragePattern?.StaysEnraged == true ? "∞" : $"{TimeUtils.FormatSeconds(CurrentEnrageTime)}";
                 }
                 else
                 {
@@ -88,9 +92,9 @@ namespace TCC.UI.Controls.NPCs
             get
             {
                 return NPC.Enraged
-                        ? NPC.EnragePattern.StaysEnraged
+                        ? NPC.EnragePattern?.StaysEnraged == true
                             ? "∞"
-                            : NPC.EnragePattern.Duration != 0
+                            : NPC.EnragePattern?.Duration != 0
                                 ? $"{TimeUtils.FormatSeconds(CurrentEnrageTime)}"
                                 : "-"
                         : "";
@@ -121,7 +125,7 @@ namespace TCC.UI.Controls.NPCs
             }
         }
 
-        public BossViewModel(Data.NPCs.NPC npc) : base(npc)
+        public BossViewModel(NPC npc) : base(npc)
         {
 
             _numberTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
@@ -130,8 +134,11 @@ namespace TCC.UI.Controls.NPCs
 
             EnrageHistory = new TSObservableCollection<EnragePeriodItem>();
 
-            NextEnragePercentage = 100 - NPC.EnragePattern.Percentage;
-            CurrentEnrageTime = NPC.EnragePattern.StaysEnraged ? int.MaxValue : NPC.EnragePattern.Duration;
+            if (NPC.EnragePattern != null)
+            {
+                NextEnragePercentage = 100 - NPC.EnragePattern.Percentage;
+                CurrentEnrageTime = NPC.EnragePattern.StaysEnraged ? int.MaxValue : NPC.EnragePattern.Duration;
+            }
 
 
             NPC.PropertyChanged += OnPropertyChanged;
@@ -154,7 +161,7 @@ namespace TCC.UI.Controls.NPCs
 
         private void OnNumberTimerTick(object? _, EventArgs __)
         {
-            if (!NPC.EnragePattern.StaysEnraged) CurrentEnrageTime--;
+            if (NPC.EnragePattern?.StaysEnraged == false) CurrentEnrageTime--;
         }
 
         protected override void OnNpcDelete()
@@ -199,7 +206,10 @@ namespace TCC.UI.Controls.NPCs
                     N(nameof(MainPercInt));
                     break;
                 case nameof(NPC.MaxHP):
-                    if (NPC.HPFactor == 1) NextEnragePercentage = 100 - NPC.EnragePattern.Percentage;
+                    if (NPC.HPFactor == 1 && NPC.EnragePattern != null)
+                    {
+                        NextEnragePercentage = 100 - NPC.EnragePattern.Percentage;
+                    }
                     break;
                 case nameof(NPC.Enraged):
                     if (NPC.Enraged)
@@ -214,17 +224,23 @@ namespace TCC.UI.Controls.NPCs
                     {
                         _addEnrageItem = true;
                         _serverSentEnrage = false;
-                        _numberTimer?.Stop();
-                        NextEnragePercentage = CurrentPercentage - NPC.EnragePattern.Percentage;
-                        CurrentEnrageTime = NPC.EnragePattern.StaysEnraged ? int.MaxValue : NPC.EnragePattern.Duration;
+                        _numberTimer.Stop();
+                        if (NPC.EnragePattern != null)
+                        {
+                            NextEnragePercentage = CurrentPercentage - NPC.EnragePattern.Percentage;
+                            CurrentEnrageTime = NPC.EnragePattern.StaysEnraged
+                                ? int.MaxValue
+                                : NPC.EnragePattern.Duration;
+                        }
+
                         N(nameof(RemainingPercentage));
                     }
                     EnragedChanged?.Invoke();
                     break;
                 case nameof(NPC.RemainingEnrageTime):
-                    if (!_serverSentEnrage && NPC.RemainingEnrageTime/1000 != 0)
+                    if (!_serverSentEnrage && NPC.RemainingEnrageTime / 1000 != 0)
                     {
-                        NPC.EnragePattern.Duration = NPC.RemainingEnrageTime / 1000;
+                        if (NPC.EnragePattern != null) NPC.EnragePattern.Duration = NPC.RemainingEnrageTime / 1000;
                         _serverSentEnrage = true;
                     }
                     if (CurrentEnrageTime < NPC.RemainingEnrageTime / 1000) ReEnraged?.Invoke();

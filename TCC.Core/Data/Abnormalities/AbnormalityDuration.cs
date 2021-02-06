@@ -83,21 +83,19 @@ namespace TCC.Data.Abnormalities
 
         private void DecreaseDuration(object sender, EventArgs e)
         {
-            //DurationLeft -= 1000;
             DurationLeft = (_endTime - DateTime.Now).TotalMilliseconds;
             if (DurationLeft < 0) DurationLeft = 0;
-            //if (!(DurationLeft < DurationLeft - 1000)) return;
             if (DurationLeft > 0) return;
             _timer.Stop();
         }
         public void Refresh()
         {
-            if (/*_timer == null || */_isTimerDisposed) return;
-            _timer?.Stop();
+            if (_isTimerDisposed) return;
+            _timer.Stop();
             _startTime = DateTime.Now;
             _endTime = _startTime.AddMilliseconds(Duration);
-            if (Duration != 0) _timer?.Start();
-            Refreshed?.Invoke();
+            if (Duration != 0) _timer.Start();
+            Refreshed.Invoke();
         }
         public void Dispose()
         {

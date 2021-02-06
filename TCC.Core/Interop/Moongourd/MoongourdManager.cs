@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+// ReSharper disable All
 
 namespace TCC.Interop.Moongourd
 {
@@ -12,7 +13,7 @@ namespace TCC.Interop.Moongourd
     {
         private const string RecentUploadsUrl = "https://moongourd.com/api/bot/recent_uploads_tcc";
         private bool _asking;
-        private static JArray? LastResponse { get; set; } = new JArray();
+        private static JArray? LastResponse { get; set; } = new();
 
         public event Action<List<MoongourdEncounter>>? Finished;
 

@@ -21,7 +21,7 @@ namespace TCC.ViewModels
         {
             RunemarksCounter = new Counter(7, false);
 
-            Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Valkyrie, out var rag);
+            Game.DB!.SkillsDatabase.TryGetSkill(120100, Class.Valkyrie, out var rag);
             Ragnarok = new SkillWithEffect(Dispatcher, rag);
 
             Game.DB.SkillsDatabase.TryGetSkill(250100, Class.Valkyrie, out var gf);

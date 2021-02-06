@@ -7,7 +7,7 @@ namespace TCC.UI.Converters
 {
     public class SizeToDurationLabelMarginConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var size = (double?)value ?? 0;
             return new Thickness(0, 0, 0, -size * 1.25);

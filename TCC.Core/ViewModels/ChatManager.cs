@@ -41,10 +41,10 @@ namespace TCC.ViewModels
         private readonly ConcurrentQueue<ChatMessage> _pauseQueue;
         private readonly List<TempPrivateMessage> _privateMessagesCache;
         public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
 
-        public event Action<ChatMessage> NewMessage = null!;
-        public event Action<int> PrivateChannelJoined = null!;
+        public event Action<ChatMessage>? NewMessage;
+        public event Action<int>? PrivateChannelJoined;
 
         public LFG? LastClickedLfg { get; set; }
 
@@ -275,6 +275,7 @@ namespace TCC.ViewModels
                 var w = new ChatWindow(m);
                 App.BaseDispatcher.InvokeAsync(() =>
                 {
+                    if (w.WindowSettings == null) return;
                     App.Settings.ChatWindowsSettings.Add((ChatWindowSettings) w.WindowSettings);
                 });
                 ChatWindows.Add(w);
@@ -293,17 +294,14 @@ namespace TCC.ViewModels
 
         public void SetPaused(bool v)
         {
-            ChatWindows.ToList().ForEach(w =>
-            {
-                if (w.VM != null) w.VM.Paused = v;
-            });
+            ChatWindows.ToList().ForEach(w => w.VM.Paused = v);
         }
 
         public void SetPaused(bool v, ChatMessage dc)
         {
             ChatWindows.ToList().ForEach(w =>
             {
-                if (w.VM?.CurrentTab?.Messages == null) return;
+                if (w.VM.CurrentTab?.Messages == null) return;
                 if (w.VM.CurrentTab.Messages.Contains(dc)) w.VM.Paused = v;
             });
         }
@@ -551,28 +549,31 @@ namespace TCC.ViewModels
             _privateMessagesCache.Add(new TempPrivateMessage { Channel = channel, Author = author, Message = message });
         }
 
-        private static void OnChatWindowsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private static void OnChatWindowsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
-            if (e.OldItems.Count == 0) return;
-            var ws = (ChatWindowSettings?) ((ChatWindow?) e.OldItems[0])?.WindowSettings;
+            if (e.OldItems?.Count == 0) return;
+            var ws = (ChatWindowSettings?) ((ChatWindow?) e.OldItems?[0])?.WindowSettings;
             if(ws == null) return;
             App.Settings.ChatWindowsSettings.Remove(ws);
         }
 
-        private void OnChatMessagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnChatMessagesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Add) return;
             //TODO
-            foreach (var chatWindow in ChatWindows) chatWindow.VM.CheckVisibility(e.NewItems);
+            foreach (var chatWindow in ChatWindows)
+            {
+                if (e.NewItems != null) chatWindow.VM.CheckVisibility(e.NewItems);
+            }
         }
 
         private void AddOrRefreshLfg(ListingData x)
         {
             if (TryGetLfg(x.LeaderId, x.Message, x.LeaderName, out var lfg))
             {
-                lfg.Message = x.Message;
-                lfg.Refresh();
+                lfg!.Message = x.Message;
+                lfg!.Refresh();
             }
             else
             {
@@ -593,7 +594,7 @@ namespace TCC.ViewModels
             LastClickedLfg = null;
         }
 
-        private bool TryGetLfg(uint id, string msg, string name, out LFG lfg)
+        private bool TryGetLfg(uint id, string msg, string name, out LFG? lfg)
         {
             lfg = LFGs.ToSyncList().FirstOrDefault(x => x.Id == id);
             if (lfg != null) return true;
@@ -605,7 +606,8 @@ namespace TCC.ViewModels
 
         private void UpdateLfgMembers(uint id, int count)
         {
-            if (TryGetLfg(id, "", "", out var lfg)) lfg.MembersCount = count;
+            if (!TryGetLfg(id, "", "", out var lfg)) return;
+            lfg!.MembersCount = count;
         }
 
         public void ForceHideTimerRefresh()

@@ -199,11 +199,6 @@ namespace TCC.Data.Chat
             Lines.Add(new MessageLine());
             foreach (var item in Pieces)
             {
-                if (item.Text == null)
-                {
-                    Log.F("Piece has null text!");
-                    continue;
-                }
                 if (item.Text.Contains("\r\n") || item.Text.Contains("\n\t") || item.Text.Contains("\n"))
                 {
                     item.Text = item.Text.Replace("\r\n", "").Replace("\n\t", "").Replace("\n", "");
@@ -253,7 +248,7 @@ namespace TCC.Data.Chat
             }
             start += header.Length;
             var id = uint.Parse(msg.Substring(start));
-            var text = Game.DB.SocialDatabase.Social[id].Replace("{Name}", Author);
+            var text = Game.DB!.SocialDatabase.Social[id].Replace("{Name}", Author);
             AddPiece(new SimpleMessagePiece(text, App.Settings.FontSize, false));
         }
         private void ParseHtmlMessage(string msg)

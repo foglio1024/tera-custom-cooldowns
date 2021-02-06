@@ -10,8 +10,8 @@ namespace TCC.Settings.WindowSettings
 {
     public class BuffWindowSettings : WindowSettingsBase
     {
-        public event Action DirectionChanged = null!;
-        public event Action OverlapChanged = null!;
+        public event Action? DirectionChanged;
+        public event Action? OverlapChanged;
 
         private FlowDirection _direction;
         private double _overlap;

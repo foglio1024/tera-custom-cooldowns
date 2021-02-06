@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -27,18 +28,22 @@ namespace TCC.UI.Windows.Widgets
             Init(vm.WindowSettings);
             AddHandler(DragablzItem.IsDraggingChangedEvent, new RoutedPropertyChangedEventHandler<bool>(OnIsDraggingChanged));
 
+            VM = vm;
             DataContext = vm;
-            VM = (ChatViewModel)DataContext;
-            if (VM == null) return;
-
-            ((ChatWindowSettings)WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
+            if (VM == null) throw new NullReferenceException("Window DataContext is null!");
 
             VM.RefreshHideTimer();
             VM.ForceSizePosUpdateEvent += OnForceSizePosUpdate;
+
+            if (WindowSettings == null) return;
+
+            ((ChatWindowSettings)WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
         }
 
         private void OnForceSizePosUpdate()
         {
+            if (WindowSettings == null) return;
+
             Dispatcher?.InvokeAsync(() =>
             {
                 ReloadPosition();
@@ -82,6 +87,7 @@ namespace TCC.UI.Windows.Widgets
                 if (VM.TabVMs.Count == 0)
                 {
                     Close();
+                    if (WindowSettings == null) return;
                     App.Settings.ChatWindowsSettings.Remove((ChatWindowSettings)WindowSettings);
                 }
                 else

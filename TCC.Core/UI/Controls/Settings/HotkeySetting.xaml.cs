@@ -103,7 +103,7 @@ namespace TCC.UI.Controls.Settings
             UpdateValue();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void N([CallerMemberName] string? propertyName = null)
         {

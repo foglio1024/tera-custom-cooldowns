@@ -6,8 +6,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
 {
     public class MessageSplitter
     {
-        private readonly BlockSplitter _clientSplitter = new BlockSplitter();
-        private readonly BlockSplitter _serverSplitter = new BlockSplitter();
+        private readonly BlockSplitter _clientSplitter = new();
+        private readonly BlockSplitter _serverSplitter = new();
         private DateTime _time;
 
         public MessageSplitter()
@@ -18,8 +18,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             _serverSplitter.Resync += ServerResync;
         }
 
-        public event Action<Message> MessageReceived = null!;
-        public event Action<MessageDirection, int, int> Resync = null!;
+        public event Action<Message>? MessageReceived;
+        public event Action<MessageDirection, int, int>? Resync;
 
         private void ClientResync(int skipped, int size)
         {

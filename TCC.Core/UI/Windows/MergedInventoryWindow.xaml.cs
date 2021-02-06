@@ -114,7 +114,7 @@ namespace TCC.UI.Windows
         public MergedInventoryItem()
         {
             Items = new TSObservableCollection<InventoryItemWithOwner>();
-            Items.CollectionChanged += (_, __) => N(nameof(TotalAmount));
+            Items.CollectionChanged += (_, _) => N(nameof(TotalAmount));
         }
     }
     public partial class MergedInventoryWindow

@@ -27,5 +27,4 @@
   <ItemGroup>
     <None Include="App.config" Visible="False" />
   </ItemGroup>
-
 </Project>

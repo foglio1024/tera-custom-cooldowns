@@ -16,12 +16,12 @@ namespace TCC.ViewModels.Widgets
         public bool ShowRe =>
             (Player.Class == Class.Brawler || Player.Class == Class.Gunner ||
              Player.Class == Class.Ninja || Player.Class == Class.Valkyrie) &&
-            ((CharacterWindowSettings)Settings).ShowStamina;
+            ((CharacterWindowSettings)Settings!).ShowStamina;
         public bool ShowElements => Player.Class == Class.Sorcerer &&
-                                    ((CharacterWindowSettings)Settings).SorcererShowElements;
+                                    ((CharacterWindowSettings)Settings!).SorcererShowElements;
 
         public bool ShowEdge => Player.Class == Class.Warrior &&
-                                ((CharacterWindowSettings) Settings).WarriorShowEdge;
+                                ((CharacterWindowSettings) Settings!).WarriorShowEdge;
 
         public CharacterWindowViewModel(CharacterWindowSettings settings) : base(settings)
         {
@@ -102,7 +102,7 @@ namespace TCC.ViewModels.Widgets
             //Player.Arcane = m.Arcane;
         }
 
-        private void MePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             N(e.PropertyName);
             if (e.PropertyName != nameof(Data.Pc.Player.Class)) return;

@@ -30,7 +30,7 @@ namespace TCC
 {
     public partial class App
     {
-        public static event Action ReadyEvent = null!;
+        public static event Action? ReadyEvent;
 
         private static bool _restarted;
         private static bool _running;
@@ -61,9 +61,9 @@ namespace TCC
         public static bool Loading { get; private set; }
         public static bool ToolboxMode { get; private set; }
         public static bool FirstStart { get; set; }
-        public static Random Random { get; } = new Random(DateTime.Now.DayOfYear + DateTime.Now.Year +
-                                                          DateTime.Now.Minute + DateTime.Now.Second +
-                                                          DateTime.Now.Millisecond);
+        public static Random Random { get; } = new(DateTime.Now.DayOfYear + DateTime.Now.Year +
+                                                   DateTime.Now.Minute + DateTime.Now.Second +
+                                                   DateTime.Now.Millisecond);
         public static TccSplashScreen SplashScreen { get; set; } = null!;
         public static SettingsContainer Settings { get; set; } = null!;
 
@@ -78,7 +78,7 @@ namespace TCC
                 FirstStart = true;
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
-            RunningDispatchers = new ConcurrentDictionary<int, Dispatcher>();
+
 
             TccMessageBox.CreateAsync();
             if (IsAlreadyRunning() && !Debugger.IsAttached)
@@ -196,7 +196,7 @@ namespace TCC
         }
         public static void Restart()
         {
-            Settings?.Save();
+            Settings.Save();
             Process.Start("TCC.exe", $"--restart{(ToolboxMode ? " --toolbox" : "")}");
             Close();
         }
@@ -204,7 +204,7 @@ namespace TCC
         {
             _running = false;
             PacketAnalyzer.Sniffer.Enabled = false;
-            Settings?.Save();
+            Settings.Save();
             WindowManager.Dispose();
             StubInterface.Instance.Disconnect();
             Firebase.Dispose();
@@ -261,7 +261,7 @@ namespace TCC
         #region Dispatchers
         public static Dispatcher BaseDispatcher { get; private set; } = null!;
 
-        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; private set; } = null!;
+        public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; } = new();
 
         public static void AddDispatcher(int threadId, Dispatcher d)
         {
@@ -275,7 +275,6 @@ namespace TCC
 
         public static void WaitDispatchersShutdown()
         {
-            if (RunningDispatchers == null) return;
             var tries = 50;
             while (tries > 0)
             {

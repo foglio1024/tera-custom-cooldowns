@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using TCC.Settings.WindowSettings;
 using TCC.UI.Controls;
 using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
@@ -18,33 +17,33 @@ namespace TCC.UI
 {
     public static class WindowManager
     {
-        public static event Action RepositionRequestedEvent = null!;
-        public static event Action ResetToCenterEvent = null!;
-        public static event Action MakeGlobalEvent = null!;
-        public static event Action DisposeEvent = null!;
+        public static event Action? RepositionRequestedEvent;
+        public static event Action? ResetToCenterEvent;
+        public static event Action? MakeGlobalEvent;
+        public static event Action? DisposeEvent;
 
-        public static TccTrayIcon TrayIcon { get; } = new TccTrayIcon();
-        public static VisibilityManager VisibilityManager { get; } = new VisibilityManager();
+        public static TccTrayIcon TrayIcon { get; } = new();
+        public static VisibilityManager VisibilityManager { get; } = new();
         public static Size ScreenSize => FocusManager.TeraScreen.Bounds.Size;
 
 
-        public static CooldownWindow CooldownWindow { get; private set; }
-        public static CharacterWindow CharacterWindow { get; private set; }
-        public static BossWindow BossWindow { get; private set; }
-        public static BuffWindow BuffWindow { get; private set; }
-        public static GroupWindow GroupWindow { get; private set; }
-        public static ClassWindow ClassWindow { get; private set; }
-        public static SettingsWindow SettingsWindow { get; private set; }
-        public static CivilUnrestWindow CivilUnrestWindow { get; private set; }
-        public static FloatingButtonWindow FloatingButton { get; private set; }
-        public static NotificationAreaWindow NotificationArea { get; private set; }
-        public static FlightDurationWindow FlightDurationWindow { get; private set; }
+        public static CooldownWindow CooldownWindow { get; private set; } = null!;
+        public static CharacterWindow CharacterWindow { get; private set; } = null!;
+        public static BossWindow BossWindow { get; private set; } = null!;
+        public static BuffWindow BuffWindow { get; private set; } = null!;
+        public static GroupWindow GroupWindow { get; private set; } = null!;
+        public static ClassWindow ClassWindow { get; private set; } = null!;
+        public static SettingsWindow SettingsWindow { get; private set; } = null!;
+        public static CivilUnrestWindow CivilUnrestWindow { get; private set; } = null!;
+        public static FloatingButtonWindow FloatingButton { get; private set; } = null!;
+        public static NotificationAreaWindow NotificationArea { get; private set; } = null!;
+        public static FlightDurationWindow FlightDurationWindow { get; private set; } = null!;
         //public static SkillConfigWindow? SkillConfigWindow { get; set; }
-        public static PerfMonitorWindow PerfMonitor { get; private set; }
+        public static PerfMonitorWindow PerfMonitor { get; private set; } = null!;
 
-        public static Dashboard DashboardWindow { get; private set; }
+        public static Dashboard DashboardWindow { get; private set; } = null!;
 
-        public static LfgListWindow LfgListWindow { get; private set; }
+        public static LfgListWindow LfgListWindow { get; private set; } = null!;
 
 
         public static async Task Init()
@@ -78,7 +77,7 @@ namespace TCC.UI
 
             App.BaseDispatcher.Invoke(() =>
             {
-                TrayIcon?.Dispose();
+                TrayIcon.Dispose();
                 CloseOtherWindows();
             });
 
@@ -129,17 +128,17 @@ namespace TCC.UI
 
             var b9 = new TccWidgetBuilder<Dashboard, DashboardViewModel>(null);
             DashboardWindow = await b9.GetWindow();
-            ViewModels.DashboardVM= await b9.GetViewModel();
+            ViewModels.DashboardVM = await b9.GetViewModel();
 
             var b10 = new TccWidgetBuilder<PerfMonitorWindow, PerfMonitorViewModel>(App.Settings.PerfMonitorSettings);
             PerfMonitor = await b10.GetWindow();
-            ViewModels.PervMonitorVM = await b10.GetViewModel();
+            ViewModels.PerfMonitorVM = await b10.GetViewModel();
 
             FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGaugeVM);
-            if (FlightDurationWindow.WindowSettings.Enabled) FlightDurationWindow.Show();
+            if (FlightDurationWindow.WindowSettings?.Enabled == true) FlightDurationWindow.Show();
 
             CivilUnrestWindow = new CivilUnrestWindow(ViewModels.CivilUnrestVM);
-            if (CivilUnrestWindow.WindowSettings.Enabled) CivilUnrestWindow.Show();
+            if (CivilUnrestWindow.WindowSettings?.Enabled == true) CivilUnrestWindow.Show();
 
             LfgListWindow = new LfgListWindow(ViewModels.LfgVM);
 
@@ -177,17 +176,17 @@ namespace TCC.UI
             private static LfgListViewModel? _lfgVm;
             private static FlightGaugeViewModel? _flightGaugeVm;
 
-            public static CooldownWindowViewModel CooldownsVM { get; set; }
-            public static CharacterWindowViewModel CharacterVM { get; set; }
-            public static NpcWindowViewModel NpcVM { get; set; }
-            public static AbnormalityWindowViewModel AbnormalVM { get; set; }
-            public static ClassWindowViewModel ClassVM { get; set; }
-            public static NotificationAreaViewModel NotificationAreaVM { get; set; }
-            public static PlayerMenuViewModel PlayerMenuVM { get; set; }
-            public static DashboardViewModel DashboardVM { get; set; }
-            public static FloatingButtonViewModel FloatingButtonVM { get; set; }
-            public static GroupWindowViewModel GroupVM { get; set; }
-            public static PerfMonitorViewModel PervMonitorVM { get; set; }
+            public static CooldownWindowViewModel CooldownsVM { get; set; } = null!;
+            public static CharacterWindowViewModel CharacterVM { get; set; } = null!;
+            public static NpcWindowViewModel NpcVM { get; set; } = null!;
+            public static AbnormalityWindowViewModel AbnormalVM { get; set; } = null!;
+            public static ClassWindowViewModel ClassVM { get; set; } = null!;
+            public static NotificationAreaViewModel NotificationAreaVM { get; set; } = null!;
+            public static PlayerMenuViewModel PlayerMenuVM { get; set; } = null!;
+            public static DashboardViewModel DashboardVM { get; set; } = null!;
+            public static FloatingButtonViewModel FloatingButtonVM { get; set; } = null!;
+            public static GroupWindowViewModel GroupVM { get; set; } = null!;
+            public static PerfMonitorViewModel PerfMonitorVM { get; set; } = null!;
 
             public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ??= new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings);
             public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);

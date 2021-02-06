@@ -119,7 +119,7 @@ namespace TCC.Utilities
 
         public static bool IsEntitySpawned(uint zoneId, uint templateId)
         {
-            var name = Game.DB.MonsterDatabase.GetMonsterName(templateId, zoneId);
+            var name = Game.DB!.MonsterDatabase.GetMonsterName(templateId, zoneId);
             return name != "Unknown" && Game.NearbyNPC.ContainsValue(name);
         }
 
@@ -233,7 +233,7 @@ namespace TCC.Utilities
             Console.SetOut(writer);
         }
 
-        public static void OpenUrl(string? url)
+        public static void OpenUrl(string url)
         {
             Process.Start(new ProcessStartInfo
             {
@@ -309,14 +309,14 @@ namespace TCC.Utilities
                 ChatChannel.RaidNotice => "Notice",
                 ChatChannel.GuildAdvertising => "G. Ad",
                 ChatChannel.Megaphone => "Megaphone",
-                ChatChannel.Private1 => (ChatManager.Instance.PrivateChannels[0].Name ?? ch.ToString()),
-                ChatChannel.Private2 => (ChatManager.Instance.PrivateChannels[1].Name ?? ch.ToString()),
-                ChatChannel.Private3 => (ChatManager.Instance.PrivateChannels[2].Name ?? ch.ToString()),
-                ChatChannel.Private4 => (ChatManager.Instance.PrivateChannels[3].Name ?? ch.ToString()),
-                ChatChannel.Private5 => (ChatManager.Instance.PrivateChannels[4].Name ?? ch.ToString()),
-                ChatChannel.Private6 => (ChatManager.Instance.PrivateChannels[5].Name ?? ch.ToString()),
-                ChatChannel.Private7 => (ChatManager.Instance.PrivateChannels[6].Name ?? ch.ToString()),
-                ChatChannel.Private8 => (ChatManager.Instance.PrivateChannels[7].Name ?? ch.ToString()),
+                ChatChannel.Private1 => (ChatManager.Instance.PrivateChannels[0].Name),
+                ChatChannel.Private2 => (ChatManager.Instance.PrivateChannels[1].Name),
+                ChatChannel.Private3 => (ChatManager.Instance.PrivateChannels[2].Name),
+                ChatChannel.Private4 => (ChatManager.Instance.PrivateChannels[3].Name),
+                ChatChannel.Private5 => (ChatManager.Instance.PrivateChannels[4].Name),
+                ChatChannel.Private6 => (ChatManager.Instance.PrivateChannels[5].Name),
+                ChatChannel.Private7 => (ChatManager.Instance.PrivateChannels[6].Name),
+                ChatChannel.Private8 => (ChatManager.Instance.PrivateChannels[7].Name),
                 ChatChannel.Notify => "Info",
                 ChatChannel.Error => "Alert",
                 ChatChannel.GuildNotice => "Guild",

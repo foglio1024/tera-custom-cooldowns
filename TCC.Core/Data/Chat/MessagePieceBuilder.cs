@@ -12,10 +12,7 @@ namespace TCC.Data.Chat
         {
             var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
             var zoneId = uint.Parse(dictionary["zoneName"]);
-            var zoneName = Game.DB.MonsterDatabase.GetZoneName(zoneId);
-            var txt = zoneId.ToString();
-            if (zoneName != null) txt = zoneName;
-            return txt;
+            return Game.DB!.MonsterDatabase.GetZoneName(zoneId);
         }
         public static string ParseSysMsgCreature(string msgText)
         {
@@ -28,7 +25,7 @@ namespace TCC.Data.Chat
 
             var txt = creatureId;
 
-            if (Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
+            if (Game.DB!.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
             {
                 txt = m.Name;
             }
@@ -40,7 +37,7 @@ namespace TCC.Data.Chat
             var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
             var id = Utils.ChatUtils.GetId(dictionary, "item");
             var name = $"Unknown item [{id}]";
-            if (Game.DB.ItemsDatabase.Items.TryGetValue(id, out var i)) name = i.Name;
+            if (Game.DB!.ItemsDatabase.Items.TryGetValue(id, out var i)) name = i.Name;
             return $"<{name}>";
         }
         public static string ParseSysMsgAchi(string msgText)
@@ -49,7 +46,7 @@ namespace TCC.Data.Chat
 
             var id = Utils.ChatUtils.GetId(dictionary, "achievement");
             var achiName = id.ToString();
-            if (Game.DB.AchievementDatabase.Achievements.TryGetValue(id * 1000 + 1, out var g2))
+            if (Game.DB!.AchievementDatabase.Achievements.TryGetValue(id * 1000 + 1, out var g2))
             {
                 achiName = $"[{g2}]";
             }
@@ -61,7 +58,7 @@ namespace TCC.Data.Chat
             var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
             var id = Utils.ChatUtils.GetId(dictionary, "quest");
             var txt = id.ToString();
-            if (Game.DB.QuestDatabase.Quests.TryGetValue(id, out var q)) txt = q;
+            if (Game.DB!.QuestDatabase.Quests.TryGetValue(id, out var q)) txt = q;
             return txt;
         }
         public static string ParseSysMsgAchiGrade(string msgText)
@@ -69,7 +66,7 @@ namespace TCC.Data.Chat
             var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
             var id = Utils.ChatUtils.GetId(dictionary, "AchievementGradeInfo");
             var txt = id.ToString();
-            if (Game.DB.AchievementGradeDatabase.Grades.TryGetValue(id, out var g)) txt = g;
+            if (Game.DB!.AchievementGradeDatabase.Grades.TryGetValue(id, out var g)) txt = g;
             return txt;
         }
         public static string ParseSysMsgDungeon(string msgText)
@@ -77,7 +74,7 @@ namespace TCC.Data.Chat
             var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
             var id = Utils.ChatUtils.GetId(dictionary, "dungeon");
             var txt = id.ToString();
-            if (Game.DB.DungeonDatabase.Dungeons.TryGetValue(id, out var dung)) txt = dung.Name;
+            if (Game.DB!.DungeonDatabase.Dungeons.TryGetValue(id, out var dung)) txt = dung.Name;
             return txt;
         }
         public static string ParseSysMsgAccBenefit(string msgText)
@@ -85,7 +82,7 @@ namespace TCC.Data.Chat
             var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
             var id = Utils.ChatUtils.GetId(dictionary, "accountBenefit");
             var txt = id.ToString();
-            if (Game.DB.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab)) txt = ab;
+            if (Game.DB!.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab)) txt = ab;
             return txt;
         }
         public static string ParseSysMsgGuildQuest(string msgText)
@@ -94,7 +91,7 @@ namespace TCC.Data.Chat
 
             var id = Utils.ChatUtils.GetId(dictionary, "GuildQuest");
             var questName = id.ToString();
-            if (Game.DB.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
+            if (Game.DB!.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
             {
                 questName = q.Title;
             }
@@ -104,7 +101,7 @@ namespace TCC.Data.Chat
         {
             var dictionary = Utils.ChatUtils.BuildParametersDictionary(inPiece);
             var regId = dictionary["rgn"];
-            var msgText = Game.DB.RegionsDatabase.GetZoneName(Convert.ToUInt32(regId));
+            var msgText = Game.DB!.RegionsDatabase.GetZoneName(Convert.ToUInt32(regId));
             return msgText;
         }
     }
@@ -113,11 +110,11 @@ namespace TCC.Data.Chat
     {
         public static SimpleMessagePiece BuildSysMsgZone(string msgText)
         {
-            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgZone(msgText));
+            return new(SystemMessageParser.ParseSysMsgZone(msgText));
         }
         public static SimpleMessagePiece BuildSysMsgCreature(string msgText)
         {
-            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgCreature(msgText));
+            return new(SystemMessageParser.ParseSysMsgCreature(msgText));
         }
         public static SimpleMessagePiece BuildSysMsgItem(string msgText)
         {
@@ -137,7 +134,7 @@ namespace TCC.Data.Chat
 
             var name = $"Unknown item [{id}]";
             var grade = RareGrade.Common;
-            if (Game.DB.ItemsDatabase.Items.TryGetValue(id, out var i))
+            if (Game.DB!.ItemsDatabase.Items.TryGetValue(id, out var i))
             {
                 name = i.Name;
                 grade = i.RareGrade;
@@ -154,11 +151,11 @@ namespace TCC.Data.Chat
         }
         public static SimpleMessagePiece BuildSysMsgAchi(string msgText)
         {
-            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgAchi(msgText));
+            return new(SystemMessageParser.ParseSysMsgAchi(msgText));
         }
         public static SimpleMessagePiece BuildSysMsgQuest(string msgText)
         {
-            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgQuest(msgText));
+            return new(SystemMessageParser.ParseSysMsgQuest(msgText));
         }
         public static SimpleMessagePiece BuildSysMsgAchiGrade(string msgText)
         {
@@ -168,7 +165,7 @@ namespace TCC.Data.Chat
             var txt = id.ToString();
             var col = "fcb06f";
 
-            if (!Game.DB.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
+            if (!Game.DB!.AchievementGradeDatabase.Grades.TryGetValue(id, out var g))
                 return new SimpleMessagePiece(txt)
                 {
                     Color = col
@@ -188,19 +185,19 @@ namespace TCC.Data.Chat
         }
         public static SimpleMessagePiece BuildSysMsgDungeon(string msgText)
         {
-            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgDungeon(msgText));
+            return new(SystemMessageParser.ParseSysMsgDungeon(msgText));
         }
         public static SimpleMessagePiece BuildSysMsgAccBenefit(string msgText)
         {
-            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgAccBenefit(msgText));
+            return new(SystemMessageParser.ParseSysMsgAccBenefit(msgText));
         }
         public static SimpleMessagePiece BuildSysMsgGuildQuest(string msgText)
         {
-            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgGuildQuest(msgText));
+            return new(SystemMessageParser.ParseSysMsgGuildQuest(msgText));
         }
         public static SimpleMessagePiece BuildSysMsgRegion(string inPiece)
         {
-            return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgRegion(inPiece));
+            return new(SystemMessageParser.ParseSysMsgRegion(inPiece));
         }
         public static SimpleMessagePiece ParseChatLinkAction(HtmlNode chatLinkAction)
         {
@@ -219,15 +216,15 @@ namespace TCC.Data.Chat
         }
         private static ActionMessagePiece ParseHtmlAchievement(HtmlNode node)
         {
-            return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
+            return new(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
         }
         private static ActionMessagePiece ParseHtmlItem(HtmlNode node)
         {
-            return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
+            return new(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
         }
         private static ActionMessagePiece ParseHtmlQuest(HtmlNode node)
         {
-            return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
+            return new(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
         }
         private static ActionMessagePiece ParseHtmlLocation(HtmlNode node)
         {
@@ -244,7 +241,7 @@ namespace TCC.Data.Chat
             //var x = double.Parse(coords[0], CultureInfo.InvariantCulture);
             //var y = double.Parse(coords[1], CultureInfo.InvariantCulture);
 
-            var world = Game.DB.MapDatabase.Worlds[worldId];
+            var world = Game.DB!.MapDatabase.Worlds[worldId];
             var guard = world.Guards[guardId];
             var section = guard.Sections[sectionId];
             var sb = new StringBuilder();

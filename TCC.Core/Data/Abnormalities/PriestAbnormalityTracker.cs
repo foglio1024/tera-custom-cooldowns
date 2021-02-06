@@ -39,14 +39,14 @@ namespace TCC.Data.Abnormalities
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EnergyStars.StartEffect(p.Duration);
+            vm!.EnergyStars.StartEffect(p.Duration);
         }
         private static void CheckEnergyStars(S_ABNORMALITY_REFRESH p)
         {
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EnergyStars.RefreshEffect(p.Duration);
+            vm!.EnergyStars.RefreshEffect(p.Duration);
 
         }
         private static void CheckEnergyStars(S_ABNORMALITY_END p)
@@ -54,7 +54,7 @@ namespace TCC.Data.Abnormalities
             if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EnergyStars.StopEffect();
+            vm!.EnergyStars.StopEffect();
         }
 
         private static void CheckGrace(S_ABNORMALITY_BEGIN p)
@@ -62,21 +62,21 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != GraceId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.Grace.StartEffect(p.Duration);
+            vm!.Grace.StartEffect(p.Duration);
         }
         private static void CheckGrace(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != GraceId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.Grace.RefreshEffect(p.Duration);
+            vm!.Grace.RefreshEffect(p.Duration);
         }
         private static void CheckGrace(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != GraceId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.Grace.StopEffect();
+            vm!.Grace.StopEffect();
         }
 
         private static void CheckEdict(S_ABNORMALITY_BEGIN p)
@@ -84,21 +84,21 @@ namespace TCC.Data.Abnormalities
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EdictOfJudgment.StartEffect(p.Duration);
+            vm!.EdictOfJudgment.StartEffect(p.Duration);
         }
         private static void CheckEdict(S_ABNORMALITY_REFRESH p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EdictOfJudgment.RefreshEffect(p.Duration);
+            vm!.EdictOfJudgment.RefreshEffect(p.Duration);
         }
         private static void CheckEdict(S_ABNORMALITY_END p)
         {
             if (!EdictIDs.Contains(p.AbnormalityId)) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.EdictOfJudgment.StopEffect();
+            vm!.EdictOfJudgment.StopEffect();
         }
 
         private static void CheckDivine(S_ABNORMALITY_BEGIN p)
@@ -106,21 +106,21 @@ namespace TCC.Data.Abnormalities
             if (p.AbnormalityId != DivineId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.DivineCharge.StartEffect(p.Duration);
+            vm!.DivineCharge.StartEffect(p.Duration);
         }
         private static void CheckDivine(S_ABNORMALITY_REFRESH p)
         {
             if (p.AbnormalityId != DivineId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.DivineCharge.RefreshEffect(p.Duration);
+            vm!.DivineCharge.RefreshEffect(p.Duration);
         }
         private static void CheckDivine(S_ABNORMALITY_END p)
         {
             if (p.AbnormalityId != DivineId) return;
             if (!IsViewModelAvailable<PriestLayoutVM>(out var vm)) return;
 
-            vm.DivineCharge.StopEffect();
+            vm!.DivineCharge.StopEffect();
         }
 
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)

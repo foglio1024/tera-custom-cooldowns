@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;
@@ -29,11 +28,11 @@ namespace TCC.ViewModels
 {
     public class SettingsWindowViewModel : TSPropertyChanged
     {
-        public static event Action ChatShowChannelChanged = null!;
-        public static event Action ChatShowTimestampChanged = null!;
-        public static event Action AbnormalityShapeChanged = null!;
-        public static event Action SkillShapeChanged = null!;
-        public static event Action FontSizeChanged = null!;
+        public static event Action? ChatShowChannelChanged;
+        public static event Action? ChatShowTimestampChanged;
+        public static event Action? AbnormalityShapeChanged;
+        public static event Action? SkillShapeChanged;
+        public static event Action? FontSizeChanged;
 
         public bool Beta => App.Beta;
         public bool ToolboxMode => App.ToolboxMode;
@@ -190,6 +189,7 @@ namespace TCC.ViewModels
         public bool KylosHelper
         {
             get => _kh;
+            // ReSharper disable once ValueParameterNotUsed
             set
             {
                 _kh = true;
@@ -687,16 +687,15 @@ namespace TCC.ViewModels
             get
             {
                 _blacklistedMonsters ??= new TSObservableCollection<BlacklistedMonsterVM>(Dispatcher);
-                if (Game.DB == null) return _blacklistedMonsters;
-                 var bl =Game.DB.MonsterDatabase.GetBlacklistedMonsters();
-                bl.ForEach(m =>
+                var bl =Game.DB?.MonsterDatabase.GetBlacklistedMonsters();
+                bl?.ForEach(m =>
                 {
                     if (_blacklistedMonsters.Any(x => x.Monster == m)) return;
                     _blacklistedMonsters.Add(new BlacklistedMonsterVM(m));
                 });
                 _blacklistedMonsters.ToSyncList().ForEach(vm =>
                 {
-                    if (bl.Contains(vm.Monster)) return;
+                    if (bl?.Contains(vm.Monster) == true) return;
                     _blacklistedMonsters.Remove(vm);
                 });
                 return _blacklistedMonsters;
@@ -747,7 +746,9 @@ namespace TCC.ViewModels
 
             BrowseUrlCommand = new RelayCommand(url =>
             {
-                TccUtils.OpenUrl(url.ToString());
+                var strUrl = url.ToString();
+                if (strUrl == null) return;
+                TccUtils.OpenUrl(strUrl);
             });
             RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook.ToString(), true));
             OpenWindowCommand = new RelayCommand(winType =>
@@ -820,7 +821,7 @@ namespace TCC.ViewModels
             {
                 if (Monster.IsHidden == value) return;
                 Monster.IsHidden = value;
-                if (!value) Game.DB.MonsterDatabase.Blacklist(Monster, false);
+                if (!value) Game.DB?.MonsterDatabase.Blacklist(Monster, false);
                 N();
             }
         }

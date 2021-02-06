@@ -13,8 +13,8 @@ namespace TCC.Sniffing
         {
             return (App.Settings.CaptureMode, App.ToolboxMode) switch
             {
-                (CaptureMode.Npcap,      false) => new TeraSniffer(true,  Game.DB.ServerDatabase.GetServersByIp()),
-                (CaptureMode.RawSockets, false) => new TeraSniffer(false, Game.DB.ServerDatabase.GetServersByIp()),
+                (CaptureMode.Npcap,      false) => new TeraSniffer(true,  Game.DB!.ServerDatabase.GetServersByIp()),
+                (CaptureMode.RawSockets, false) => new TeraSniffer(false, Game.DB!.ServerDatabase.GetServersByIp()),
                 _ => new ToolboxSniffer()
             };
         }

@@ -49,7 +49,7 @@ namespace TCC.UI.Windows
         private void OnSearchTriggered(object? sender, EventArgs e)
         {
             _searchCooldown.Stop();
-            if (_searchText == null) return;
+            if (string.IsNullOrWhiteSpace(_searchText)) return;
             var view = DC.AbnormalitiesView;
             view.Filter = o => ((MyAbnormalityVM)o).Abnormality.Name.IndexOf(_searchText, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
@@ -66,7 +66,7 @@ namespace TCC.UI.Windows
         private void Close(object sender, RoutedEventArgs e)
         {
             App.Settings.Save();
-            var an = AnimationFactory.CreateDoubleAnimation(200, 0, completed: (s, ev) =>
+            var an = AnimationFactory.CreateDoubleAnimation(200, 0, completed: (_, _) =>
             {
                 DC.Dispose();
                 _instance = null;

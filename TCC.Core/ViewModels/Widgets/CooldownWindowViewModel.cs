@@ -42,7 +42,7 @@ namespace TCC.ViewModels.Widgets
 
         public bool ShowItems => App.Settings.CooldownWindowSettings.ShowItems;
 
-        public event Action SkillsLoaded = null!;
+        public event Action? SkillsLoaded;
         private const int LongSkillTreshold = 40000; //TODO: make configurable?
 
         public TSObservableCollection<Cooldown> ShortSkills { get; }
@@ -56,8 +56,8 @@ namespace TCC.ViewModels.Widgets
         public ICollectionViewLiveShaping? SkillsView { get; private set; }
         public ICollectionViewLiveShaping ItemsView { get; }
         public ICollectionViewLiveShaping AbnormalitiesView { get; }
-        public IEnumerable<Item> Items => Game.DB.ItemsDatabase.ItemSkills;
-        public IEnumerable<Abnormality> Passivities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public IEnumerable<Item> Items => Game.DB!.ItemsDatabase.ItemSkills;
+        public IEnumerable<Abnormality> Passivities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
 
         //TODO: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         private static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.ClassVM.CurrentManager;
@@ -426,7 +426,7 @@ namespace TCC.ViewModels.Widgets
                 data.Secondary.ForEach(cdData => TryAddToList(cdData, SecondarySkills));
                 data.Hidden.ForEach(cdData => TryAddToList(cdData, HiddenSkills));
 
-                Dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(SkillsDatabase.SkillsForClass));
+                Dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(Game.DB!.SkillsDatabase.SkillsForClass));
 
                 N(nameof(SkillsView));
                 N(nameof(MainSkills));
@@ -438,7 +438,7 @@ namespace TCC.ViewModels.Widgets
 
                 void TryAddToList(CooldownData cdData, TSObservableCollection<Cooldown> list)
                 {
-                    if (!Game.DB.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)) return;
+                    if (!Game.DB!.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)) return;
                     list.Add(new Cooldown(sk, false, cdData.Type, Dispatcher));
                 }
                 #endregion
@@ -610,14 +610,14 @@ namespace TCC.ViewModels.Widgets
         private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             if (App.Settings.EthicalMode) return;
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             if (Game.IsMe(p.CasterId) || Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }
         private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             if (App.Settings.EthicalMode) return;
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+            if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
             if (Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
         }
@@ -637,25 +637,25 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
         {
-            if (!Game.DB.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+            if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
             if (!Pass(skill)) return;
             Change(skill, m.Cooldown);
         }
         private void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
         {
-            if (!Game.DB.ItemsDatabase.TryGetItemSkill(m.ItemId, out var itemSkill)) return;
+            if (!Game.DB!.ItemsDatabase.TryGetItemSkill(m.ItemId, out var itemSkill)) return;
             RouteSkill(new Cooldown(itemSkill, m.Cooldown, CooldownType.Item));
         }
         private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
-            if (!Game.DB.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+            if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
             if (!Pass(skill)) return;
             RouteSkill(new Cooldown(skill, m.Cooldown));
         }
         private void OnCrestMessage(S_CREST_MESSAGE m)
         {
             if (m.Type != 6) return;
-            if (!Game.DB.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+            if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
             if (!Pass(skill)) return;
             ResetSkill(skill);
         }

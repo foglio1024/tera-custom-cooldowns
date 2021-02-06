@@ -49,6 +49,7 @@ namespace TCC.ViewModels.Widgets
         public bool MemoryAAAAAAAAAAAAAAA => _memory > 3000;
 
         public ICommand DumpThreadAllocationCommand { get; }
+        private object _lock = new();
         private bool _showDumpButton;
 
         public bool ShowDumpButton
@@ -69,12 +70,12 @@ namespace TCC.ViewModels.Widgets
                 var sb = "Thread allocation\n";
                 var count = 0;
 
-                foreach (var (key, dispatcher) in App.RunningDispatchers)
+                foreach (var (_, dispatcher) in App.RunningDispatchers)
                 {
                     if (dispatcher == Dispatcher) continue;
                     dispatcher.InvokeAsync(() =>
                     {
-                        lock (DumpThreadAllocationCommand)
+                        lock (_lock)
                         {
 
                             sb += BuildThreadString(dispatcher, ref count);
@@ -83,7 +84,7 @@ namespace TCC.ViewModels.Widgets
                 }
                 App.BaseDispatcher.InvokeAsync(() =>
                 {
-                    lock (DumpThreadAllocationCommand)
+                    lock (_lock)
                     {
                         sb += BuildThreadString(App.BaseDispatcher, ref count);
                     }

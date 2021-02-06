@@ -6,13 +6,14 @@ using System.Windows.Media.Animation;
 using Nostrum.Controls;
 using Nostrum.Factories;
 using TCC.Data;
+using TCC.Data.Npc;
 using TCC.ViewModels.Widgets;
 
 namespace TCC.UI.Controls.NPCs
 {
     public partial class DragonControl
     {
-        private Data.NPCs.NPC? _dc;
+        private NPC? _dc;
         private readonly DoubleAnimation _shieldArcAn;
         private readonly DoubleAnimation _enrageEndAnim;
 
@@ -25,10 +26,10 @@ namespace TCC.UI.Controls.NPCs
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            _dc = (Data.NPCs.NPC)DataContext;
+            _dc = (NPC)DataContext;
             _dc.PropertyChanged += Dc_PropertyChanged;
             _dc.DeleteEvent += Dc_DeleteEvent;
-            EnrageLine.LayoutTransform = _dc.CurrentPercentage > _dc.EnragePattern.Percentage 
+            EnrageLine.LayoutTransform = _dc.EnragePattern != null && _dc.CurrentPercentage > _dc.EnragePattern.Percentage 
                 ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) 
                 : new RotateTransform(0);
         }
@@ -63,11 +64,14 @@ namespace TCC.UI.Controls.NPCs
                     ShieldArc.BeginAnimation(Arc.EndAngleProperty, _shieldArcAn);
                     break;
                 case nameof(_dc.Enraged) when _dc.Enraged:
-                    _enrageEndAnim.Duration = TimeSpan.FromMilliseconds(_dc.EnragePattern.Duration);
+                    if (_dc.EnragePattern != null)
+                        _enrageEndAnim.Duration = TimeSpan.FromMilliseconds(_dc.EnragePattern.Duration);
                     EnrageArc.BeginAnimation(Arc.EndAngleProperty, _enrageEndAnim);
                     break;
                 case nameof(_dc.Enraged):
-                    EnrageLine.LayoutTransform = _dc.CurrentPercentage > _dc.EnragePattern.Percentage ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) : new RotateTransform(0);
+                    EnrageLine.LayoutTransform = _dc.EnragePattern != null && _dc.CurrentPercentage > _dc.EnragePattern.Percentage 
+                        ? new RotateTransform((_dc.CurrentPercentage - _dc.EnragePattern.Percentage) * 3.6) 
+                        : new RotateTransform(0);
                     break;
                 case nameof(_dc.CurrentHP):
                 {

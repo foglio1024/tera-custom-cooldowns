@@ -1,4 +1,5 @@
-﻿using TCC.Data.Skills;
+﻿using System;
+using TCC.Data.Skills;
 using TCC.ViewModels;
 using TeraPacketParser.Messages;
 
@@ -16,9 +17,11 @@ namespace TCC.Data.Abnormalities
 
         public ReaperAbnormalityTracker()
         {
-            Game.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", Game.Me.Class, out _deathSpiral);
-            Game.DB.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", Game.Me.Class, out _shadowStep);
+            Game.DB!.SkillsDatabase.TryGetSkillByIconName("icon_skills.chainbrandish_tex", Game.Me.Class, out var ds);
+            Game.DB!.SkillsDatabase.TryGetSkillByIconName("icon_skills.instantleap_tex", Game.Me.Class, out var ss);
 
+            _deathSpiral = ds ?? throw new NullReferenceException("Skill not found!");
+            _shadowStep = ss ?? throw new NullReferenceException("Skill not found!");
         }
         public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
         {
@@ -59,42 +62,42 @@ namespace TCC.Data.Abnormalities
             if (AssassinateId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShroudedEscape.StartEffect(p.Duration);
+            vm!.ShroudedEscape.StartEffect(p.Duration);
         }
         private static void CheckAssassinate(S_ABNORMALITY_REFRESH p)
         {
             if (AssassinateId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShroudedEscape.RefreshEffect(p.Duration);
+            vm!.ShroudedEscape.RefreshEffect(p.Duration);
         }
         private static void CheckAssassinate(S_ABNORMALITY_END p)
         {
             if (AssassinateId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShroudedEscape.StopEffect();
+            vm!.ShroudedEscape.StopEffect();
         }
         private static void CheckShadowReaping(S_ABNORMALITY_BEGIN p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShadowReaping.StartEffect(p.Duration);
+            vm!.ShadowReaping.StartEffect(p.Duration);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_REFRESH p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShadowReaping.RefreshEffect(p.Duration);
+            vm!.ShadowReaping.RefreshEffect(p.Duration);
         }
         private static void CheckShadowReaping(S_ABNORMALITY_END p)
         {
             if (ShadowReapingId != p.AbnormalityId) return;
             if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
 
-            vm.ShadowReaping.StopEffect();
+            vm!.ShadowReaping.StopEffect();
         }
 
     }

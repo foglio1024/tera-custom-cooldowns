@@ -14,10 +14,10 @@ namespace TCC.UI.Windows
     public class TccWindow : Window
     {
 
-        private static readonly List<TccWindow> _createdWindows = new List<TccWindow>();
+        private static readonly List<TccWindow> _createdWindows = new();
 
-        public event Action Hidden = null!;
-        public event Action Showed = null!;
+        public event Action? Hidden;
+        public event Action? Showed;
 
         private readonly bool _canClose;
         private readonly DoubleAnimation _showAnim;
@@ -33,7 +33,7 @@ namespace TCC.UI.Windows
             Closing += OnClosing;
             Loaded += OnLoaded;
             _showAnim = AnimationFactory.CreateDoubleAnimation(150, 1);
-            _hideAnim = AnimationFactory.CreateDoubleAnimation(150, 0, completed: (_, __) =>
+            _hideAnim = AnimationFactory.CreateDoubleAnimation(150, 0, completed: (_, _) =>
             {
                 Hide();
                 if (App.Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;

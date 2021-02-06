@@ -23,7 +23,7 @@ namespace TCC.Data.Databases
             foreach (var line in lines)
             {
                 //var line = f.ReadLine();
-                if (line == null) break;
+                if (string.IsNullOrWhiteSpace(line)) break;
                 var s = line.Split('\t');
                 if (!uint.TryParse(s[0], out var id)) continue;
                 var name = s[1];

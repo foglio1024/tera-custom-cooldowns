@@ -49,7 +49,7 @@ namespace TCC.Data.Databases
             foreach (var line in lines)
             {
                 //var line = f.ReadLine();
-                if (line == null) break;
+                if (string.IsNullOrWhiteSpace(line)) break;
                 var s = line.Split('\t');
                 var id = uint.Parse(s[0]);
                 var name = s[1];
@@ -70,7 +70,7 @@ namespace TCC.Data.Databases
             foreach (var line in lines)
             {
                 //var line = def.ReadLine();
-                if (line == null) break;
+                if (string.IsNullOrWhiteSpace(line)) break;
                 if (line.StartsWith("#")) continue;
                 var s = line.Split('\t');
                 var id = uint.Parse(s[0]);
@@ -109,7 +109,7 @@ namespace TCC.Data.Databases
             foreach (var line in lines)
             {
                 //var line = f.ReadLine();
-                if (line == null) break;
+                if (string.IsNullOrWhiteSpace(line)) break;
                 var split = line.Split('\t');
 
                 var id = Convert.ToUInt32(split[2]);

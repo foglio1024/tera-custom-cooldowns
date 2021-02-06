@@ -7,7 +7,7 @@ namespace TCC.UI.Converters
 {
     public class BoolToVisibleHidden : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value != null && (bool)value) return Visibility.Visible;
             return Visibility.Hidden;

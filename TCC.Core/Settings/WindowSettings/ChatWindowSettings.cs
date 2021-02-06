@@ -17,12 +17,12 @@ namespace TCC.Settings.WindowSettings
         private bool _showImportant = true;
         private int _collapsedHeight = 64;
 
-        public event Action FadeoutChanged = null!;
-        public event Action OpacityChanged = null!;
-        public event Action TimeoutChanged = null!;
-        public event Action CanCollapseChanged = null!;
-        public event Action StaysCollapsedChanged = null!;
-        public event Action CollapsedHeightChanged = null!;
+        public event Action? FadeoutChanged;
+        public event Action? OpacityChanged;
+        public event Action? TimeoutChanged;
+        public event Action? CanCollapseChanged;
+        public event Action? StaysCollapsedChanged;
+        public event Action? CollapsedHeightChanged;
 
 
         public int HideTimeout

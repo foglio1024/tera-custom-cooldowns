@@ -49,7 +49,7 @@ namespace TeraPacketParser
 
         public Angle ReadAngle()
         {
-            return new Angle(ReadInt16());
+            return new(ReadInt16());
         }
 
         public void Skip(int count)

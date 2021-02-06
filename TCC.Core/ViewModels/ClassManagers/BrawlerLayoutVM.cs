@@ -41,7 +41,7 @@ namespace TCC.ViewModels
         public BrawlerLayoutVM()
         {
             // Growing Fury
-            Game.DB.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
+            Game.DB!.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
             GrowingFury = new SkillWithEffect(Dispatcher, gf);
 
             // Counter 

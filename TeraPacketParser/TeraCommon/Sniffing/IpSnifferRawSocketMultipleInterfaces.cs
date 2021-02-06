@@ -13,7 +13,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
     public class IpSnifferRawSocketMultipleInterfaces : IpSniffer
     {
         private readonly List<IpSnifferRawSocketSingleInterface> _individualSniffers =
-            new List<IpSnifferRawSocketSingleInterface>();
+            new();
 
         private readonly IEnumerable<IPAddress> _ipAddresses;
 
@@ -66,7 +66,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
         }
 
 
-        public event Action<string> Warning = null!;
+        public event Action<string>? Warning;
 
         protected virtual void OnWarning(string obj)
         {

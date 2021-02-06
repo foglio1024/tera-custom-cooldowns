@@ -33,7 +33,7 @@ namespace TCC.UI.Controls.Classes
             RagArc.BeginAnimation(Arc.EndAngleProperty, _rag);
         }
 
-        private void ST_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ST_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (_dc == null) return;
             if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;

@@ -14,9 +14,9 @@ namespace TCC.Data.Pc
 
     public class Player : TSPropertyChanged
     {
-        public event Action Death = null!;
-        public event Action Ress = null!;
-        public event Action CoinsUpdated = null!;
+        public event Action? Death;
+        public event Action? Ress;
+        public event Action? CoinsUpdated;
 
         private string _name = "";
         private ulong _entityId;
@@ -45,8 +45,8 @@ namespace TCC.Data.Pc
         private bool _isAlive;
         private uint _coins;
         private uint _maxCoins;
-        private readonly List<uint> _debuffList = new List<uint>();
-        private readonly Dictionary<uint, uint> _shields = new Dictionary<uint, uint>();
+        private readonly List<uint> _debuffList = new();
+        private readonly Dictionary<uint, uint> _shields = new();
 
         public string Name
         {
@@ -257,7 +257,7 @@ namespace TCC.Data.Pc
         }
 
         public double CoinsFactor => MathUtils.FactorCalc(_coins, _maxCoins);
-        public bool IsDebuffed => _debuffList != null && _debuffList.Count != 0;
+        public bool IsDebuffed => _debuffList.Count != 0;
         public bool IsInCombat
         {
             get => _isInCombat;
@@ -462,7 +462,7 @@ namespace TCC.Data.Pc
         }
         public void EndAbnormality(uint id)
         {
-            if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
+            if (!Game.DB!.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
             if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
             FindAndRemove(ab);
         }
@@ -553,7 +553,7 @@ namespace TCC.Data.Pc
         [Obsolete]
         public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
         {
-            var existing = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var existing = Buffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
@@ -575,7 +575,7 @@ namespace TCC.Data.Pc
         [Obsolete]
         public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
         {
-            var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var existing = Debuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
@@ -591,7 +591,7 @@ namespace TCC.Data.Pc
         [Obsolete]
         public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks)
         {
-            var existing = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var existing = InfBuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
@@ -608,7 +608,7 @@ namespace TCC.Data.Pc
         [Obsolete]
         public void RemoveBuff(Abnormality ab)
         {
-            var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var buff = Buffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
 
             Buffs?.Remove(buff);
@@ -624,7 +624,7 @@ namespace TCC.Data.Pc
         public void RemoveDebuff(Abnormality ab)
         {
 
-            var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var buff = Debuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
             Debuffs?.Remove(buff);
             buff.Dispose();
@@ -632,7 +632,7 @@ namespace TCC.Data.Pc
         [Obsolete]
         public void RemoveInfBuff(Abnormality ab)
         {
-            var buff = InfBuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            var buff = InfBuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (buff == null) return;
             InfBuffs?.Remove(buff);
             buff.Dispose();

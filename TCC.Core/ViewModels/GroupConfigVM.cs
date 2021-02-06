@@ -13,10 +13,10 @@ namespace TCC.ViewModels
     public class GroupConfigVM : TSPropertyChanged
     {
 
-        public event Action ShowAllChanged = null!;
+        public event Action? ShowAllChanged;
 
         public TSObservableCollection<GroupAbnormalityVM> GroupAbnormals;
-        public IEnumerable<Abnormality> Abnormalities => Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList();
+        public IEnumerable<Abnormality> Abnormalities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
 
         public bool ShowAll

@@ -8,9 +8,9 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt
     {
         private readonly CryptorKey[] _key =
         {
-            new CryptorKey(55, 31),
-            new CryptorKey(57, 50),
-            new CryptorKey(58, 39)
+            new(55, 31),
+            new(57, 50),
+            new(58, 39)
         };
 
         private int _changeData;

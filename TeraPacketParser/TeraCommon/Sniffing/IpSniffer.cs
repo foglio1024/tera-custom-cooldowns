@@ -21,7 +21,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing
             }
         }
 
-        public event Action<IPv4Packet> PacketReceived = null!;
+        public event Action<IPv4Packet>? PacketReceived;
 
         protected void OnPacketReceived(IPv4Packet data)
         {

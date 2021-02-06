@@ -15,7 +15,7 @@ namespace TCC.UI.Controls.Classes.Elements
         private SkillWithEffect? _context;
         private DoubleAnimation _an;
 
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public string SecondsText => WindowManager.ViewModels.ClassVM.CurrentManager.StaminaTracker.Val.ToString();
         public bool Running
@@ -40,7 +40,7 @@ namespace TCC.UI.Controls.Classes.Elements
 
         public RagnarokBuffControl()
         {
-            _an = AnimationFactory.CreateDoubleAnimation(from: 0, to: 359.9, ms: 1, completed: (_, __) => Running = false);
+            _an = AnimationFactory.CreateDoubleAnimation(from: 0, to: 359.9, ms: 1, completed: (_, _) => Running = false);
             InitializeComponent();
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

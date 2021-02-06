@@ -17,7 +17,7 @@ namespace TCC.ViewModels.Widgets
     public class AbnormalityWindowViewModel : TccWindowViewModel
     {
         public Player Player => Game.Me;
-        public FlowDirection Direction => ((BuffWindowSettings)Settings).Direction;
+        public FlowDirection Direction => ((BuffWindowSettings)Settings!).Direction;
 
         public Thickness GlobalMargin
         {
@@ -25,14 +25,14 @@ namespace TCC.ViewModels.Widgets
             {
                 return Direction switch
                 {
-                    FlowDirection.LeftToRight => new Thickness(2, 2, 2 * (1 - ((BuffWindowSettings) Settings).Overlap), 2),
-                    FlowDirection.RightToLeft => new Thickness(2 * (1 - ((BuffWindowSettings) Settings).Overlap), 2, 2, 2),
+                    FlowDirection.LeftToRight => new Thickness(2, 2, 2 * (1 - ((BuffWindowSettings) Settings!).Overlap), 2),
+                    FlowDirection.RightToLeft => new Thickness(2 * (1 - ((BuffWindowSettings) Settings!).Overlap), 2, 2, 2),
                     _ => throw new ArgumentOutOfRangeException()
                 };
             }
         }
 
-        public Thickness ContainersMargin => new Thickness(0, 0, ((BuffWindowSettings)Settings).Overlap * 2, 0);
+        public Thickness ContainersMargin => new(0, 0, ((BuffWindowSettings)Settings!).Overlap * 2, 0);
         public ControlShape Shape => App.Settings.AbnormalityShape;
         public ICollectionViewLiveShaping BuffsView { get; }
         public ICollectionViewLiveShaping SpecBuffsView { get; }

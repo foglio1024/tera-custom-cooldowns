@@ -13,7 +13,7 @@ namespace TCC.UI.Windows
     //TODO: refactor and make multiple messageboxes
     public partial class TccMessageBox
     {
-        private static TccMessageBox _messageBox;
+        private static TccMessageBox _messageBox = null!;
         private static MessageBoxResult _result = MessageBoxResult.No;
         public static bool IsOpen { get; set; }
 
@@ -61,9 +61,7 @@ namespace TCC.UI.Windows
         }
         public static MessageBoxResult Show (string caption, string text, MessageBoxButton button, MessageBoxImage image)
         {
-            if (_messageBox == null) App.BaseDispatcher.Invoke(Create); //TODO: remove
-
-            _messageBox?.Dispatcher?.Invoke(() =>
+            _messageBox.Dispatcher?.Invoke(() =>
             {
                 _messageBox.TxtMsg.Text = text;
                 _messageBox.MessageTitle.Text = caption;
@@ -134,7 +132,7 @@ namespace TCC.UI.Windows
             else
                 _result = MessageBoxResult.None;
             BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() });
-            Task.Delay(250).ContinueWith(t =>
+            Task.Delay(250).ContinueWith(_ =>
             {
                 Dispatcher?.Invoke(() =>
                 {

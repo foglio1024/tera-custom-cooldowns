@@ -25,7 +25,7 @@ namespace TCC.Data
     }
     public class AurasTracker : TSPropertyChanged
     {
-        public event Action AuraChanged = null!;
+        public event Action? AuraChanged;
 
         private bool _crit, _mp, _res, _swift;
         public bool CritAura

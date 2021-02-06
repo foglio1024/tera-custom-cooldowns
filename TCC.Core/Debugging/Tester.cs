@@ -15,7 +15,6 @@ using TCC.Data.Databases;
 using TCC.Data.Pc;
 using TCC.Processing;
 using TCC.UI;
-using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
@@ -24,7 +23,8 @@ using TeraPacketParser;
 using TeraPacketParser.Data;
 using TeraPacketParser.Messages;
 // ReSharper disable All
-#pragma warning disable 612
+
+
 
 namespace TCC.Debug
 {
@@ -95,8 +95,8 @@ namespace TCC.Debug
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, "opcodes", $"protocol.{version}.map"));
             var fac = new MessageFactory(version, opcNamer) {ReleaseVersion = 0};
             var del = MessageFactory.Constructor<Func<TeraMessageReader, PacketType>>();
-            var reader = new TeraMessageReader(msg, opcNamer, fac, null);
-            del.DynamicInvoke(reader);
+            var reader = new TeraMessageReader(msg, opcNamer, fac, null!);
+            del?.DynamicInvoke(reader);
         }
         public static void Login(Class c)
         {
@@ -117,7 +117,9 @@ namespace TCC.Debug
         }
         public static void AddFakeGroupMember(int id, Class c, Laurel l, bool leader = false)
         {
+#pragma warning disable 612
             WindowManager.ViewModels.GroupVM?.AddOrUpdateMember(new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
+#pragma warning restore 612
             {
                 Alive = true,
                 Awakened = true,
@@ -245,23 +247,27 @@ namespace TCC.Debug
         }
         public static void UpdateFakeMember(ulong eid)
         {
+#pragma warning disable CS8600 
             WindowManager.ViewModels.GroupVM.TryGetUser(eid, out User l);
+#pragma warning restore CS8600 
             var ut = new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
             {
-                Name = l.Name,
-                PlayerId = l.PlayerId,
-                ServerId = l.ServerId,
-                EntityId = l.EntityId,
+                Name = l!.Name,
+                PlayerId = l!.PlayerId,
+                ServerId = l!.ServerId,
+                EntityId = l!.EntityId,
                 Online = true,
-                Laurel = l.Laurel,
-                HasAggro = l.HasAggro,
-                Alive = l.Alive,
-                UserClass = l.UserClass,
-                Awakened = l.Awakened,
+                Laurel = l!.Laurel,
+                HasAggro = l!.HasAggro,
+                Alive = l!.Alive,
+                UserClass = l!.UserClass,
+                Awakened = l!.Awakened,
                 CurrentHp = 120000,
                 MaxHp = 120000
             };
-            Task.Delay(2000).ContinueWith(t => WindowManager.ViewModels.GroupVM.AddOrUpdateMember(ut));
+#pragma warning disable CS0612 // Type or member is obsolete
+            Task.Delay(2000).ContinueWith(t => WindowManager.ViewModels.GroupVM?.AddOrUpdateMember(ut));
+#pragma warning restore CS0612 // Type or member is obsolete
         }
         //public static void ProfileThreadsUsage()
         //{

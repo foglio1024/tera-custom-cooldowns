@@ -15,7 +15,7 @@ namespace TCC.UI.Controls.Group
     public class GroupMemberBase : UserControl, INotifyPropertyChanged
     {
         #region INPC
-        public event PropertyChangedEventHandler PropertyChanged = null!;
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void NPC([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -79,7 +79,7 @@ namespace TCC.Processing
                         else if (inPiece.StartsWith("@abnormal"))
                         {
                             var abName = "Unknown";
-                            if (Game.DB.AbnormalityDatabase.Abnormalities.TryGetValue(uint.Parse(inPiece.Split(':')[1]),
+                            if (Game.DB!.AbnormalityDatabase.Abnormalities.TryGetValue(uint.Parse(inPiece.Split(':')[1]),
                                 out var ab)) abName = ab.Name;
                             mp = abName;
                         }
@@ -143,12 +143,12 @@ namespace TCC.Processing
         {
             var opcodeStr = fullParameters.Split('\v')[0]; // "@opcode \v parameters"
             var opcode = ushort.Parse(opcodeStr.Substring(1));
-            var opcodeName = PacketAnalyzer.Factory.SystemMessageNamer.GetName(opcode);
+            var opcodeName = PacketAnalyzer.Factory!.SystemMessageNamer.GetName(opcode);
             AnalyzeMessage(fullParameters, opcodeName);
         }
         public static void AnalyzeMessage(string parameters, string opcodeName)
         {
-            if (!Game.DB.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var template)) return;
+            if (!Game.DB!.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var template)) return;
             AnalyzeMessage(parameters, template, opcodeName);
         }
 
@@ -306,7 +306,7 @@ namespace TCC.Processing
             var regName = parameters.Split('\v')[2].Replace("@rgn:", "");
             var regId = uint.Parse(regName);
 
-            var regionName = Game.DB.RegionsDatabase.GetZoneName(regId);
+            var regionName = Game.DB!.RegionsDatabase.GetZoneName(regId);
 
             GameEventManager.ExecuteFieldBossSpawnWebhook(monsterName, regionName, notificationText);
 
@@ -350,7 +350,7 @@ namespace TCC.Processing
             var npcName = srvMsgSplit.Last().Replace("@creature:", "");
             var zoneId = uint.Parse(npcName.Split('#')[0]);
             var templateId = uint.Parse(npcName.Split('#')[1]);
-            Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
+            Game.DB!.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
             return m.Name;
         }
         private static string GetFieldBossKillerName(string parameters)
@@ -374,7 +374,7 @@ namespace TCC.Processing
 
         #region Factory
 
-        private static readonly Dictionary<string, Delegate> Processor = new Dictionary<string, Delegate>
+        private static readonly Dictionary<string, Delegate> Processor = new()
         {
             { "SMT_FRIEND_IS_CONNECTED",                    new Action<string, SystemMessageData>(HandleFriendLogin) },
             { "SMT_FRIEND_WALK_INTO_SAME_AREA",             new Action<string, SystemMessageData>(HandleFriendInAreaMessage) },
@@ -450,7 +450,7 @@ namespace TCC.Processing
 
         private static bool Process(string parameters, SystemMessageData template, string opcodeName)
         {
-            if (!Processor.TryGetValue(opcodeName, out var type) || type == null) return false;
+            if (!Processor.TryGetValue(opcodeName, out var type)) return false;
             App.BaseDispatcher.InvokeAsync(() => type.DynamicInvoke(parameters, template));
             return true;
         }

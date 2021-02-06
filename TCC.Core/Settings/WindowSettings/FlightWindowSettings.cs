@@ -6,8 +6,8 @@ namespace TCC.Settings.WindowSettings
 {
     public class FlightWindowSettings : WindowSettingsBase
     {
-        public event Action RotationChanged = null!;
-        public event Action FlipChanged = null!;
+        public event Action? RotationChanged;
+        public event Action? FlipChanged;
 
         private bool _flip;
         private double _rotation;

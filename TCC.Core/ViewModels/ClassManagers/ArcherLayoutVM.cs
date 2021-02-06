@@ -27,9 +27,9 @@ namespace TCC.ViewModels
         public ArcherLayoutVM()
         {
             Focus = new ArcherFocusTracker();
-            Game.DB.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
-            Game.DB.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
-            Game.DB.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
+            Game.DB!.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt
+            Game.DB!.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
+            Game.DB!.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
             Thunderbolt = new Cooldown(tb, true) { CanFlash = true };
             Windsong = new SkillWithEffect(Dispatcher, ws);
             WindWalk = new Cooldown(ww, false);

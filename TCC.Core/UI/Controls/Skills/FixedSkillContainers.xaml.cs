@@ -26,8 +26,8 @@ namespace TCC.UI.Controls.Skills
     //TODO: refactor this
     public partial class FixedSkillContainers 
     {
-        private object[] _mainOrder = { };
-        private object[] _secondaryOrder = { };
+        private object[] _mainOrder = Array.Empty<object>();
+        private object[] _secondaryOrder = Array.Empty<object>();
         private readonly DoubleAnimation _opacityUp;
         private readonly DoubleAnimation _opacityDown;
         private static readonly Action EmptyDelegate = delegate { };
@@ -143,7 +143,6 @@ namespace TCC.UI.Controls.Skills
 
         private void Reorder(ObservableCollection<Cooldown> list, object[] order)
         {
-            if (order == null) return;
             for (var j = 0; j < list.Count; j++)
             {
                 var newIndex = order.ToList().IndexOf(list[j]);
@@ -262,7 +261,7 @@ namespace TCC.UI.Controls.Skills
                     case Item i:
                         if (target.All(x => x.Skill.IconName != i.IconName))
                         {
-                            Game.DB.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
+                            Game.DB!.ItemsDatabase.TryGetItemSkill(i.Id, out var s);
                             target.Insert(dropInfo.InsertIndex, new Cooldown(s, false, CooldownType.Item));
                         }
 
@@ -277,7 +276,7 @@ namespace TCC.UI.Controls.Skills
 
                 const ulong delay = 500;
                 //wait a bit and restart any running skill
-                Task.Delay(TimeSpan.FromMilliseconds(delay)).ContinueWith(t =>
+                Task.Delay(TimeSpan.FromMilliseconds(delay)).ContinueWith(_ =>
                 {
                     WindowManager.ViewModels.CooldownsVM.MainSkills.ToList().ForEach(x =>
                     {

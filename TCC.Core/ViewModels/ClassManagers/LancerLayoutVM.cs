@@ -14,7 +14,7 @@ namespace TCC.ViewModels
         {
             LH = new LancerLineHeldTracker();
             Game.Me.Death += OnDeath;
-            Game.DB.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
+            Game.DB!.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
             GuardianShout = new SkillWithEffect(Dispatcher, gshout);
 
             Game.DB.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);

@@ -27,16 +27,17 @@ namespace TCC.ViewModels
     public class LfgListViewModel : TccWindowViewModel
     {
         #region Events
-        public event Action<int> Publicized = null!;
-        public event Action CreatingStateChanged = null!;
-        public event Action TempLfgCreated = null!;
-        public event Action MyLfgStateChanged = null!;
+        public event Action<int>? Publicized;
+        public event Action? CreatingStateChanged;
+        public event Action? TempLfgCreated;
+        public event Action? MyLfgStateChanged;
 
         #endregion
 
+        // ReSharper disable once NotAccessedField.Local
         private DispatcherTimer _requestTimer;
         private readonly DispatcherTimer AutoPublicizeTimer;
-        private static readonly Queue<uint> _requestQueue = new Queue<uint>();
+        private static readonly Queue<uint> _requestQueue = new();
         private bool _creating;
         private bool _creatingRaid;
         private int _lastGroupSize;
@@ -44,7 +45,7 @@ namespace TCC.ViewModels
         private string _newMessage = "";
         private bool _isPopupOpen;
 
-        public string? LastSortDescr { get; set; } = "Message";
+        public string LastSortDescr { get; set; } = "Message";
         public int PublicizeCooldown => 5;
         public int AutoPublicizeCooldown => 20;
 
@@ -123,7 +124,7 @@ namespace TCC.ViewModels
 
         public bool AmILeader => Game.Group.AmILeader || (MyLfg != null && MyLfg?.LeaderId == Game.Me.PlayerId);
 
-        public Listing MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing =>
+        public Listing? MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing =>
                 listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
                 || listing.LeaderId == Game.Me.PlayerId
                 || Game.Group.Has(listing.LeaderId)
@@ -132,10 +133,10 @@ namespace TCC.ViewModels
 
         public int MinLevel
         {
-            get => ((LfgWindowSettings)Settings).MinLevel;
+            get => ((LfgWindowSettings)Settings!).MinLevel;
             set
             {
-                if (((LfgWindowSettings)Settings).MinLevel == value) return;
+                if (((LfgWindowSettings)Settings!).MinLevel == value) return;
                 ((LfgWindowSettings)Settings).MinLevel = value;
                 N();
                 N(nameof(MaxLevel));
@@ -144,10 +145,10 @@ namespace TCC.ViewModels
 
         public int MaxLevel
         {
-            get => ((LfgWindowSettings)Settings).MaxLevel;
+            get => ((LfgWindowSettings)Settings!).MaxLevel;
             set
             {
-                if (((LfgWindowSettings)Settings).MaxLevel == value) return;
+                if (((LfgWindowSettings)Settings!).MaxLevel == value) return;
                 ((LfgWindowSettings)Settings).MaxLevel = value;
                 N();
                 N(nameof(MinLevel));
@@ -156,10 +157,10 @@ namespace TCC.ViewModels
 
         public bool HideTradeListings
         {
-            get => ((LfgWindowSettings)Settings).HideTradeListings;
+            get => ((LfgWindowSettings)Settings!).HideTradeListings;
             set
             {
-                if (((LfgWindowSettings)Settings).HideTradeListings == value) return;
+                if (((LfgWindowSettings)Settings!).HideTradeListings == value) return;
                 ((LfgWindowSettings)Settings).HideTradeListings = value;
                 N();
             }
@@ -374,7 +375,7 @@ namespace TCC.ViewModels
 
         private void ListingsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Task.Delay(500).ContinueWith(t => Dispatcher.Invoke(NotifyMyLfg));
+            Task.Delay(500).ContinueWith(_ => Dispatcher.Invoke(NotifyMyLfg));
         }
 
         internal void RemoveDeadLfg()
@@ -443,7 +444,7 @@ namespace TCC.ViewModels
             }
             else
             {
-                if (l.IsTrade && ((LfgWindowSettings)Settings).HideTradeListings) return;
+                if (l.IsTrade && ((LfgWindowSettings)Settings!).HideTradeListings) return;
                 Listings.Add(l);
                 EnqueueRequest(l.LeaderId);
             }
@@ -455,7 +456,7 @@ namespace TCC.ViewModels
 
         private void OnHideTradeChanged()
         {
-            if (!((LfgWindowSettings)Settings).HideTradeListings) return;
+            if (!((LfgWindowSettings)Settings!).HideTradeListings) return;
             var toRemove = Listings.ToSyncList().Where(l => l.IsTrade).Select(s => s.LeaderId).ToList();
             toRemove.ForEach(r =>
             {
@@ -545,7 +546,7 @@ namespace TCC.ViewModels
                             if (target == null) return;
                             target.IsLeader = member.IsLeader;
                             target.Online = member.Online;
-                            target.Location = Game.DB.GetSectionName(member.GuardId, member.SectionId);
+                            target.Location = Game.DB!.GetSectionName(member.GuardId, member.SectionId);
                             if (!member.IsLeader) return;
                             lfg.LeaderId = member.PlayerId;
                             lfg.LeaderName = member.Name;
@@ -572,7 +573,7 @@ namespace TCC.ViewModels
                     {
                         var target = lfg.Players.ToSyncList()
                             .FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId);
-                        lfg.Players.Remove(target);
+                        if (target != null) lfg.Players.Remove(target);
                     });
 
                     lfg.LeaderId = m.Id;
@@ -606,7 +607,7 @@ namespace TCC.ViewModels
             if (!StubInterface.Instance.IsStubAvailable || !App.Settings.LfgWindowSettings.Enabled ||
                 !Game.InGameUiOn) return;
             StubInterface.Instance.StubClient.RequestListingCandidates();
-            if (WindowManager.LfgListWindow == null || !WindowManager.LfgListWindow.IsVisible) return;
+            if (!WindowManager.LfgListWindow.IsVisible) return;
             StubInterface.Instance.StubClient.RequestListings();
         }
 
@@ -666,14 +667,15 @@ namespace TCC.ViewModels
         private readonly ICollectionViewLiveShaping _view;
         private bool _refreshing;
         private ListSortDirection _direction = ListSortDirection.Ascending;
-        public event EventHandler CanExecuteChanged = null!;
-        public bool CanExecute(object parameter)
+        public event EventHandler? CanExecuteChanged;
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
+            parameter ??= "Message";
             var f = (string)parameter;
             if (!_refreshing)
                 _direction = _direction == ListSortDirection.Ascending
@@ -684,7 +686,7 @@ namespace TCC.ViewModels
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsTrade), ListSortDirection.Ascending));
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending));
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(f, _direction));
-            WindowManager.ViewModels.LfgVM.LastSortDescr = parameter.ToString();
+            WindowManager.ViewModels.LfgVM.LastSortDescr = parameter!.ToString()!;
         }
 
         public SortCommand(ICollectionViewLiveShaping view)

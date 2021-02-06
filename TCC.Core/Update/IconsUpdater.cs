@@ -85,7 +85,7 @@ namespace TCC.Update
         private async Task DownloadArchive()
         {
             using var c = MiscUtils.GetDefaultWebClient();
-            c.DownloadProgressChanged += (s, ev) =>
+            c.DownloadProgressChanged += (_, ev) =>
             {
                 var total = ev.TotalBytesToReceive;
                 if (total == -1) total = 71000000;

@@ -4,7 +4,7 @@ namespace TeraPacketParser.Messages
 {
     public class C_CHECK_VERSION : ParsedMessage
     {
-        public Dictionary<uint, uint> Versions { get; } = new Dictionary<uint, uint>();
+        public Dictionary<uint, uint> Versions { get; } = new();
 
         internal C_CHECK_VERSION(TeraMessageReader reader) : base(reader)
         {

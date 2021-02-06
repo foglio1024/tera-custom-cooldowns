@@ -46,7 +46,7 @@ namespace TCC.ViewModels
         {
             SorcererAbnormalityTracker.BoostChanged += OnBoostChanged;
 
-            Game.DB.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
+            Game.DB!.SkillsDatabase.TryGetSkill(340200, Class.Sorcerer, out var mb);
             Game.DB.SkillsDatabase.TryGetSkill(360100, Class.Sorcerer, out var fusion);
             Game.DB.SkillsDatabase.TryGetSkill(360600, Class.Sorcerer, out var fusionBoost);
             Game.DB.SkillsDatabase.TryGetSkill(360200, Class.Sorcerer, out var primeFlame);
