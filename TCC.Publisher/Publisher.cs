@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -154,7 +155,14 @@ namespace TCC.Publisher
                 };
                 await Task.Run(() => _client.Repository.Release.Create(_settings.RepositoryOwner, _settings.RepositoryName, newRelease));
                 ExecuteWebhook(changelog);
-                UpdateFirestoreVersion();
+                try
+                {
+                    UpdateFirestoreVersion();
+                }
+                catch (Exception e)
+                {
+                    Logger.WriteLine($"Errors while updating Firestore version: {e}");
+                }
                 Logger.WriteLine($"Release created");
             }
         }

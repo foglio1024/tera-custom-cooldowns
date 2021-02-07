@@ -8,7 +8,7 @@ namespace TCC.Data.Abnormalities
 {
     public class AbnormalityDuration : TSPropertyChanged, IDisposable
     {
-        public event Action Refreshed = null!;
+        public event Action? Refreshed;
 
         public ulong Target { get; }
         public Abnormality Abnormality { get; set; }
@@ -95,7 +95,8 @@ namespace TCC.Data.Abnormalities
             _startTime = DateTime.Now;
             _endTime = _startTime.AddMilliseconds(Duration);
             if (Duration != 0) _timer.Start();
-            Refreshed.Invoke();
+            Refreshed?.Invoke();
+            throw new Exception();
         }
         public void Dispose()
         {

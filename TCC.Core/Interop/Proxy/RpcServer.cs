@@ -17,8 +17,8 @@ namespace TCC.Interop.Proxy
     /// </summary>
     public class RpcServer
     {
-        public event Action<Response> ResponseReceived = null!;
-        public event Action<Request> RequestReceived = null!;
+        public event Action<Response>? ResponseReceived;
+        public event Action<Request>? RequestReceived;
 
         private readonly HttpListener _server;
         private bool _listening;
@@ -85,8 +85,8 @@ namespace TCC.Interop.Proxy
     /// </summary>
     public class RpcServer2
     {
-        public event Action<Response> ResponseReceived = null!;
-        public event Action<Request> RequestReceived = null!;
+        public event Action<Response>? ResponseReceived;
+        public event Action<Request>? RequestReceived;
 
         private TcpClient _socket;
         private bool _listening;
