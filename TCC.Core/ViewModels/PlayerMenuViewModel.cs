@@ -393,7 +393,7 @@ namespace TCC.ViewModels
             }, _ => StubInterface.Instance.IsStubAvailable && StubInterface.Instance.IsFpsModAvailable);
             OpenMoongourdPopupCommand = new RelayCommand(_ =>
             {
-                MoongourdPopupViewModel.RequestInfo(Name, App.Settings.LastLanguage);
+                MoongourdPopupViewModel.RequestInfo(Name, Game.Server.Region);
             });
 
             _win = new PlayerMenuWindow(this);
