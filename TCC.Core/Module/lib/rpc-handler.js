@@ -246,7 +246,7 @@ class RpcHandler
     {
         this.mod.send("C_SHOW_ITEM_TOOLTIP_EX", this.mod.majorPatchVersion >= 103 ? 5 : 4, {
             type: 17,
-            id: params.itemUid,
+            dbid: params.itemUid,
             playerId: -1,
             owner: params.ownerName
         });
