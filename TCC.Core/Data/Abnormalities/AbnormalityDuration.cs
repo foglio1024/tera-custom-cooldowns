@@ -96,7 +96,6 @@ namespace TCC.Data.Abnormalities
             _endTime = _startTime.AddMilliseconds(Duration);
             if (Duration != 0) _timer.Start();
             Refreshed?.Invoke();
-            throw new Exception();
         }
         public void Dispose()
         {
