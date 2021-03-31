@@ -1,5 +1,5 @@
-const { TccInterface } = require("./tcc-interface");
-const { Globals } = require("./globals");
+const { TccInterface } = require("../client/lib/tcc-interface");
+const { Globals } = require("../client/lib/globals");
 
 // const BadGui = require('../badGui');
 class TccStub
@@ -8,17 +8,10 @@ class TccStub
     {
         this.mod = mod;
 
-        this.tcc = new TccInterface(mod);
+        // this.tcc = new TccInterface(mod);
+        this.tcc = mod.globalMod.tccInterface;
         this.installHooks();
-
-        // soon (TM)
-        //this.gui = new BadGui(mod);
-        //this.mod.command.add('tcc-toggle-gpk', (guiName, bMode) => {
-        //    this.gui.parse([{
-        //        gpk: `OnGameEventShowUI,${guiName},${bMode}`
-        //    }],"HideCharWindow");
-        //});
-
+        
         //memes
         this.mod.hook("S_SYSTEM_MESSAGE", 1, ev =>
         {
@@ -34,11 +27,33 @@ class TccStub
             }
         });
 
-        this.mod.command.add("tcc", (arg) =>
+        this.mod.command.add("tcc", (cmd, a1, a2, a3, a4) =>
         {
-            if (arg !== "debug") return;
-            mod.settings.debug = !mod.settings.debug;
-            mod.command.message(`<font color="#cccccc">Debug mode </font><font color="#${(mod.settings.debug ? "42F5AD" : "F05164")}">${(mod.settings.debug ? "en" : "dis")}abled</font>`);
+	        switch (cmd) {
+	        case "debug":
+	        {
+				mod.settings.debug = !mod.settings.debug;
+				mod.command.message(`<font color="#cccccc">Debug mode </font><font color="#${(mod.settings.debug ? "42F5AD" : "F05164")}">${(mod.settings.debug ? "en" : "dis")}abled</font>`);
+				break;
+	        }
+            case "notify":
+            {
+	            this.tcc.call("enqueueNotification",
+		            {
+                        'title' : a1,
+                        'message' : a2,
+                        'notificationType' : a3,
+                        'secDuration' : a4
+		            });
+	            mod.command.message(`<font color="#cccccc">Sending notification: </font><font color="#42F5AD">${a1} ${a2} ${a3} ${a4}</font>`);
+
+	            break;
+            }
+	        default:
+		        break;
+	        }
+
+
         });
 
         this.mod.command.add(":tcc-chatmode", (arg) =>

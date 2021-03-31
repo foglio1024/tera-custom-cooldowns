@@ -1,11 +1,14 @@
 const { spawn } = require("child_process");
 const Path = require("path");
 const FS = require("fs");
+//const { TccInterface } = require("./lib/tcc-interface");
 
 class TccLauncher
 {
     constructor(m)
     {
+        //this.tccInterface = new TccInterface(m, this.networkMod);
+
         const tccPath = Path.join(__dirname, "../TCC.exe");
         m.clientInterface.once("ready", () => 
         {
