@@ -5,10 +5,10 @@ namespace TCC.Utils
     public enum NotificationType
     {
         None = 0,
-        Info,
-        Success,
-        Warning,
-        Error
+        Info = 1,
+        Success = 2,
+        Warning = 3,
+        Error = 4
     }
 
     public enum NotificationTemplate
