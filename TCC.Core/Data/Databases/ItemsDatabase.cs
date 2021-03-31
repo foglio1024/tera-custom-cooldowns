@@ -42,15 +42,33 @@ namespace TCC.Data.Databases
 
                 var s = line.Split('\t');
 
-                var id = uint.Parse(s[0]); //Convert.ToUInt32(s[0]);
-                var grad = uint.Parse(s[1]);// Convert.ToUInt32(s[1]);
-                var name = s[2];
-                var expId = uint.Parse(s[3]); // Convert.ToUInt32(s[3]);
-                var cd = uint.Parse(s[4]); //Convert.ToUInt32(s[4]);
-                var icon = s[5];
+                uint id; 
+                uint grad;
+                string name;
+                uint expId = 0; 
+                uint cd; 
+                string icon;
+                
+                if (s.Length == 6)
+                {
+                    id = uint.Parse(s[0]);
+                    grad = uint.Parse(s[1]);
+                    name = s[2];
+                    expId = uint.Parse(s[3]);
+                    cd = uint.Parse(s[4]);
+                    icon = s[5];
+                }
+                else // removed itemExp
+                {
+                    id = uint.Parse(s[0]);
+                    grad = uint.Parse(s[1]);
+                    name = s[2];
+                    cd = uint.Parse(s[3]);
+                    icon = s[4];
+                }
 
                 var item = new Item(id, name, (RareGrade)grad, expId, cd, icon);
-                Items[id] =  item;
+                Items[id] = item;
             }
 
             AddOverride(new Item(149644, "Harrowhold Rejuvenation Potion", RareGrade.Uncommon, 0, 30, "icon_items.potion1_tex"));

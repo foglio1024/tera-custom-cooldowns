@@ -96,7 +96,7 @@ namespace TCC.UI.Controls.Group
             WindowManager.ViewModels.GroupVM.SettingsUpdated -= UpdateSettings;
             WindowManager.ViewModels.GroupVM.PropertyChanged -= OnGroupVmPropertyChanged;
         }
-        private void OnGroupVmPropertyChanged(object ___, PropertyChangedEventArgs args)
+        private void OnGroupVmPropertyChanged(object? sender, PropertyChangedEventArgs args)
         {
             if (args.PropertyName == nameof(GroupWindowViewModel.Size)) UpdateSettings();
         }
