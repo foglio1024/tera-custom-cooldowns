@@ -21,6 +21,7 @@ node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
 </PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Nostrum" Version="1.2.14" />
     <PackageReference Include="Octokit" Version="0.48.0" />
     <PackageReference Include="SevenZipSharp" Version="0.64.0">
@@ -28,11 +29,9 @@ node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TCC.Core\TCC.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" Visible="False" />
     <None Include="packages.config" Visible="False" />
+    <ProjectReference Include="..\TCC.Utils\TCC.Utils.csproj" />
     <None Update="D:\Repos\tcc_publisher_settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

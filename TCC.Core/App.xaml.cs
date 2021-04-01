@@ -36,7 +36,7 @@ namespace TCC
         private static bool _running;
         private static Mutex? _mutex;
 
-        public static bool Beta { get; } = false;
+        public static bool Beta => GlobalFlags.IsBeta;
 
         /// <summary>
         ///     Version in the "TCC vX.Y.Z-b" format.

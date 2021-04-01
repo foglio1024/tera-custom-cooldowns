@@ -11,6 +11,7 @@ using Nostrum;
 using Newtonsoft.Json.Linq;
 using Octokit;
 using SevenZip;
+using TCC.Utils;
 
 namespace TCC.Publisher
 {
@@ -76,7 +77,7 @@ namespace TCC.Publisher
                 return "";
             }
             _stringVersion = $"{v.Major}.{v.Minor}.{v.Build}";
-            _beta = TCC.App.Beta ? "-b" : "";
+            _beta = GlobalFlags.IsBeta ? "-b" : "";
             Logger.WriteLine($"    TCC version is {_stringVersion}{_beta}");
             Logger.WriteLine("-------------");
             return $"{_stringVersion}{_beta}";

@@ -9,8 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/TCC;component/ResourceDictionaries/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/TCC;component/ResourceDictionaries/Brushes.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/TCC.Utils;component/ResourceDictionaries/Brushes.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <converters:RoundedClipConverter x:Key="RoundedClipConverter" />
