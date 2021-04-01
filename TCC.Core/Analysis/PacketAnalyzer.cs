@@ -43,8 +43,12 @@ namespace TCC.Analysis
             Sniffer.MessageReceived += EnqueuePacket;
             Sniffer.Enabled = true;
 
+            _ = StubInterface.Instance.Init();
+
             AnalysisThread = new Thread(PacketAnalysisLoop) { Name = "Analysis" };
             AnalysisThread.Start();
+
+
         }
 
         public static async Task InitAsync()
@@ -91,7 +95,6 @@ namespace TCC.Analysis
             WindowManager.TrayIcon.Connected = true;
             WindowManager.TrayIcon.Text = $"{App.AppVersion} - connected";
 
-            _ = StubInterface.Instance.Init();
 
             if (App.Settings.DontShowFUBH == false) App.FUBH();
 
@@ -107,7 +110,7 @@ namespace TCC.Analysis
             WindowManager.TrayIcon.Connected = false;
             WindowManager.TrayIcon.Text = $"{App.AppVersion} - not connected";
 
-            StubInterface.Instance.Disconnect();
+            //StubInterface.Instance.Disconnect();
 
             if (App.ToolboxMode && UpdateManager.UpdateAvailable) App.Close();
         }
