@@ -33,6 +33,11 @@ class TccInterface {
         });
     }
 
+    setNetworkMod(networkMod) {
+        this.currNetworkMod = networkMod.mod;
+        this.server.setNetworkMod(networkMod);
+    }
+
     call(method, params) {
         const request = {
             'jsonrpc': "2.0",

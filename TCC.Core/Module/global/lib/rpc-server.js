@@ -6,9 +6,13 @@ class RpcServer
 {
     debug(msg)
     {
-        if (!this.mod.settings.debug) return;
-        this.mod.command.message(`<font color="#fff1b5">${msg}</font>`);
-        this.mod.log(`${msg}`);
+        //if (!this.mod.settings.debug) return;
+        //this.mod.command.message(`<font color="#fff1b5">${msg}</font>`);
+        //this.mod.log(`${msg}`);
+    }
+
+    setNetworkMod(networkMod) {
+        this.handler.setNetworkMod(networkMod);
     }
 
     constructor(mod)
