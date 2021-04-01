@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Nostrum;
 using TCC.Update;
 using TCC.Utils;
@@ -54,6 +55,20 @@ namespace TCC.Data.Databases
         }
 
         public virtual void Update(string custom = "")
+        {
+#if TOOLBOX
+            UpdateFromToolbox(custom);
+#else
+            UpdateFromRemote(custom);
+#endif
+        }
+
+        protected virtual void UpdateFromToolbox(string custom)
+        {
+
+        }
+
+        private void UpdateFromRemote(string custom)
         {
             UpdateManager.UpdateDatabase(string.IsNullOrEmpty(custom) ? RelativePath : custom);
         }

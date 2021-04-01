@@ -1,6 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using TCC.Analysis;
 using TCC.UI;
 
@@ -270,6 +271,17 @@ namespace TCC.Interop.Proxy
         public async void ResetInstance()
         {
             await TccStub.CallAsync("resetInstance");
+        }
+        public async Task<string> QuerySingleValue(string path, IEnumerable<string> arguments, string attribute)
+        {
+            var resp = await TccStub.CallAsync("querySingleValue", new JObject
+            {
+                { "path", path },
+                { "arguments", new JArray(arguments) },
+                { "attribute", attribute }
+            });
+
+            return resp?.Result?.Value<string>() ?? string.Empty;
         }
 
         // bool only, send type if needed for other settings
