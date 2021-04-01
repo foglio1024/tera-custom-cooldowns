@@ -162,6 +162,7 @@ namespace TCC.Interop.Proxy
                             if (jsonReq.ContainsKey(Request.MethodKey))
                             {
                                 RequestReceived?.Invoke(new Request(jsonReq));
+                                Log.CW("Received request: " + jsonReq.ToString());
                             }
                             else if (jsonReq.ContainsKey(Response.ErrorKey) || jsonReq.ContainsKey(Response.ResultKey))
                             {
