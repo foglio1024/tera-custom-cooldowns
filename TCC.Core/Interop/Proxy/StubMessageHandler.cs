@@ -6,9 +6,11 @@ using System.Linq;
 using TCC.Analysis;
 using TCC.Data;
 using TCC.Interop.JsonRPC;
+using TCC.Utils;
 using TCC.ViewModels;
 using TeraPacketParser;
 using TeraPacketParser.Data;
+using Log = TCC.Utils.Log;
 
 namespace TCC.Interop.Proxy
 {
@@ -23,7 +25,32 @@ namespace TCC.Interop.Proxy
             { "setChatMode", new Action<JObject>(SetChatMode) },
             { "handleChatMessage", new Action<JObject>(HandleChatMessage) },
             { "handleRawPacket", new Action<JObject>(HandleRawPacket) },
+            { "enqueueNotification", new Action<JObject>(HandleEnqueueNotification) },
         };
+
+        private static void HandleEnqueueNotification(JObject parameters)
+        {
+            var jTitle = parameters["title"];
+            var message = parameters["message"]?.Value<string>();
+            if (message == null) return;
+            var jNotificationType = parameters["notificationType"];
+            var jSecDuration = parameters["secDuration"];
+
+            var title = jTitle?.Value<string>() ?? "TCC";
+            var type = NotificationType.None;
+            try
+            {
+                type = (NotificationType)(jNotificationType?.Value<int>() ?? 0);
+            }
+            catch
+            {
+                // ignored, just too lazy to check
+            }
+
+            var duration = jSecDuration?.Value<int>() ?? -1;
+
+            Log.N(title, message, type, duration);
+        }
 
         private static void HandleRawPacket(JObject parameters)
         {
