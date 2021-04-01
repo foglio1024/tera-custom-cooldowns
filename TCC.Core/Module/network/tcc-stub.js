@@ -1,4 +1,3 @@
-const { TccInterface } = require("../client/lib/tcc-interface");
 const { Globals } = require("../client/lib/globals");
 
 // const BadGui = require('../badGui');
