@@ -77,6 +77,7 @@ namespace TCC.Publisher
                 return "";
             }
             _stringVersion = $"{v.Major}.{v.Minor}.{v.Build}";
+            // ReSharper disable once UnreachableCode
             _beta = GlobalFlags.IsBeta ? "-b" : "";
             Logger.WriteLine($"    TCC version is {_stringVersion}{_beta}");
             Logger.WriteLine("-------------");
