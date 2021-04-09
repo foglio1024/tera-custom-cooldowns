@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA1816: I metodi Dispose devono chiamare SuppressFinalize
+dotnet_diagnostic.CA1816.severity = silent

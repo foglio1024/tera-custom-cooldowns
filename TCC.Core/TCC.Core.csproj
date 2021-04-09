@@ -1,29 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
+    <RootNamespace>TCC</RootNamespace>
     <AssemblyName>TCC</AssemblyName>
+    <TargetFramework>net5-windows</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9</LangVersion>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
+    <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
     <IncludeSymbolsInSingleFile>true</IncludeSymbolsInSingleFile>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>TCC</RootNamespace>
-    <TargetFramework>net5-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
-    <LangVersion>9</LangVersion>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
     <Version>1.4.118</Version>
     <Description>TERA Custom Cooldowns</Description>
     <PackageIcon>tcc.ico</PackageIcon>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <PreserveCompilationContext>false</PreserveCompilationContext>
     <PackageIconUrl />
     <PackageProjectUrl>https://github.com/Foglio1024/Tera-custom-cooldowns</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Foglio1024/Tera-custom-cooldowns</RepositoryUrl>
     <Copyright>MIT</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoWin32Manifest>true</NoWin32Manifest>
-    <Nullable>enable</Nullable>
-    <Configurations>Debug;Release;DebugToolbox</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
@@ -180,6 +179,6 @@
     </Page>
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="D:\Repos\ReSource\src\bin\Release\netcoreapp3.1\ReSource.exe &quot;D:\Repos\TCC\TCC.Core\\TCC.Core.csproj&quot; &quot;D:\Repos\TCC\TCC.Core\bin\Debug\TCC.dll&quot; &quot;D:\Repos\TCC\TCC.Core\\R.cs&quot; TCC.R" />
+    <Exec Command="D:\Repos\ReSource\src\bin\Release\net5-windows\ReSource.exe &quot;D:\Repos\TCC\TCC.Core\\TCC.Core.csproj&quot; &quot;D:\Repos\TCC\TCC.Core\bin\Debug\TCC.dll&quot; &quot;D:\Repos\TCC\TCC.Core\\R.cs&quot; TCC.R" />
   </Target>
 </Project>
