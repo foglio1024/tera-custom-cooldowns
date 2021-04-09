@@ -169,7 +169,7 @@ namespace TCC.Settings.WindowSettings
             {
                 _showAlways = value;
                 N(nameof(ShowAlways));
-                VisibilityChanged?.Invoke(value);
+                VisibilityChanged?.Invoke(Visible);
                 WindowManager.VisibilityManager.RefreshVisible();
             }
         }
