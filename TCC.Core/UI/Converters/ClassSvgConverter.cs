@@ -13,7 +13,7 @@ namespace TCC.UI.Converters
             var c = value switch
             {
                 Class cl => cl,
-                string s => (Class) Enum.Parse(typeof(Class), s),
+                string s => Enum.Parse<Class>(s),
                 _ => Class.Common
             };
 
