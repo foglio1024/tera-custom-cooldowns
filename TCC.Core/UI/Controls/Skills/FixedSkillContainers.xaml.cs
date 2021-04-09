@@ -108,25 +108,25 @@ namespace TCC.UI.Controls.Skills
             container.ItemsSource = collection;
         }
 
-        private void MainSkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void MainSkills_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             RefreshMeasure(MainSkills);
             VM?.SaveConfig();
         }
 
-        private void SecondarySkills_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void SecondarySkills_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action != NotifyCollectionChangedAction.Remove) return;
             RefreshMeasure(SecSkills);
             VM?.SaveConfig();
         }
 
-        private void ItemDragStarted(object sender, DragablzDragStartedEventArgs e)
+        private void ItemDragStarted(object? sender, DragablzDragStartedEventArgs e)
         {
         }
 
-        private void ItemDragCompleted(object sender, DragablzDragCompletedEventArgs e)
+        private void ItemDragCompleted(object? sender, DragablzDragCompletedEventArgs e)
         {
             var cd = (Cooldown)e.DragablzItem.DataContext;
             if (VM == null) return;

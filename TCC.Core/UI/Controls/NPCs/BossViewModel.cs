@@ -180,7 +180,7 @@ namespace TCC.UI.Controls.NPCs
         }
 
         private bool _addEnrageItem = true;
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {

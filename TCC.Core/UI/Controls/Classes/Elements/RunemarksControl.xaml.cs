@@ -26,7 +26,7 @@ namespace TCC.UI.Controls.Classes.Elements
             _dc.RunemarksCounter.PropertyChanged += OnRunemarksPropertyChanged;
         }
 
-        private void OnRunemarksPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnRunemarksPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(Counter.Val)) return;
             if (_dc == null) return;

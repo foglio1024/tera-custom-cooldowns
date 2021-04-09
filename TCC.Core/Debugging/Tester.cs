@@ -480,7 +480,9 @@ namespace TCC.Debug
 
         public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager, int remainingEnrageTime)
         {
+#pragma warning disable CS8602 // Dereferenziamento di un possibile riferimento Null.
             if (Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
+#pragma warning restore CS8602 // Dereferenziamento di un possibile riferimento Null.
             {
                 if (TccUtils.IsWorldBoss(zoneId, templateId))
                 {
@@ -509,7 +511,9 @@ namespace TCC.Debug
 
         public static void AddAbnormality(uint id)
         {
+#pragma warning disable CS8602 // Dereferenziamento di un possibile riferimento Null.
             if (!Game.DB.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
+#pragma warning restore CS8602 // Dereferenziamento di un possibile riferimento Null.
             //ab.Infinity = false;
             Game.Me.UpdateAbnormality(ab, int.MaxValue, 2);
 

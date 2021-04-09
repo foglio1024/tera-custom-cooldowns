@@ -36,7 +36,7 @@ namespace TCC.UI.Controls.NPCs
             N(nameof(Compact));
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {

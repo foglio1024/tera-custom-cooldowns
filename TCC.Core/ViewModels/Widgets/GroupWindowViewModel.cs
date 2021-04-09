@@ -116,7 +116,7 @@ namespace TCC.ViewModels.Widgets
         }
 
 
-        private void Members_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Members_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //Task.Delay(0).ContinueWith(t =>
             //{

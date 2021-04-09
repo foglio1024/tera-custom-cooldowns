@@ -23,7 +23,7 @@ namespace TCC.UI.Controls.Classes
 
         }
 
-        private void ST_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void ST_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
             if (_dc == null) return;

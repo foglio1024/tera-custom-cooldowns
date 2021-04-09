@@ -51,7 +51,7 @@ namespace TCC.UI.Controls.NPCs
                 }
             });
         }
-        private void Dc_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Dc_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_dc == null) return;
             switch (e.PropertyName)

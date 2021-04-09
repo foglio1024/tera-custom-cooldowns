@@ -40,7 +40,7 @@ namespace TCC.UI.Windows.Widgets
         }
 
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             Action action;
             switch (e.PropertyName)

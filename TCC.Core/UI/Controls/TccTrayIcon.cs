@@ -60,7 +60,7 @@ namespace TCC.UI.Controls
 
         }
 
-        private void OnMouseDown(object sender, MouseEventArgs e)
+        private void OnMouseDown(object? sender, MouseEventArgs e)
         {
             _contextMenu.IsOpen = e.Button switch
             {

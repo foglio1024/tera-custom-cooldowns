@@ -13,7 +13,7 @@ namespace TCC.UI.Controls.Dashboard
 
         public Dungeon Dungeon { get; }
 
-        private void OnDungeonPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnDungeonPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(Dungeon.Show)) return;
             N(nameof(IsVisible));

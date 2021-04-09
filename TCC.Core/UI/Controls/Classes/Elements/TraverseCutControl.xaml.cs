@@ -44,7 +44,7 @@ namespace TCC.UI.Controls.Classes.Elements
             _dc.ToZero -= OnToZero;
             _dc.PropertyChanged -= OnPropertyChanged;
         }
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object? sender, RoutedEventArgs e)
         {
             _dc = (StatTracker)DataContext;
 
@@ -74,7 +74,7 @@ namespace TCC.UI.Controls.Classes.Elements
             });
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(StatTracker.Factor)) return;
             if (_dc != null)

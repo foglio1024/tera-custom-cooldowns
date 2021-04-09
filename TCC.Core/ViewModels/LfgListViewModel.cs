@@ -373,7 +373,7 @@ namespace TCC.ViewModels
             }, DispatcherPriority.Background);
         }
 
-        private void ListingsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void ListingsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             Task.Delay(500).ContinueWith(_ => Dispatcher.Invoke(NotifyMyLfg));
         }
@@ -667,7 +667,9 @@ namespace TCC.ViewModels
         private readonly ICollectionViewLiveShaping _view;
         private bool _refreshing;
         private ListSortDirection _direction = ListSortDirection.Ascending;
+#pragma warning disable CS0067
         public event EventHandler? CanExecuteChanged;
+#pragma warning restore CS0067
         public bool CanExecute(object? parameter)
         {
             return true;

@@ -23,7 +23,7 @@ namespace TCC.ViewModels
 
         }
 
-        private void FlashOnMaxSt(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void FlashOnMaxSt(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(StaminaTracker.Maxed)) return;
             BurningHeart.FlashOnAvailable = StaminaTracker.Maxed;

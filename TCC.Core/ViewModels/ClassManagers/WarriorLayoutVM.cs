@@ -68,7 +68,7 @@ namespace TCC.ViewModels
             DeadlyGamble.Dispose();
         }
 
-        private void OnStanceOnPropertyChanged(object _, PropertyChangedEventArgs __)
+        private void OnStanceOnPropertyChanged(object? _, PropertyChangedEventArgs __)
         {
             CheckStanceWarning();
         }

@@ -27,16 +27,16 @@ namespace TCC.UI.Controls.Chat
             Loaded -= OnLoaded;
             Unloaded -= OnUnloaded;
             if (_dc == null) return;
-            _dc.PropertyChanged -= _dc_PropertyChanged;
+            _dc.PropertyChanged -= DC_PropertyChanged;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             _dc = (LFG)DataContext;
-            _dc.PropertyChanged += _dc_PropertyChanged;
+            _dc.PropertyChanged += DC_PropertyChanged;
         }
 
-        private void _dc_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void DC_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Refresh")
             {

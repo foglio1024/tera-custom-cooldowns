@@ -25,10 +25,10 @@ namespace TCC.UI.Controls.Classes.Elements
                 _context = (AurasTracker)DataContext;
                 Thread.Sleep(500);
             }
-            _context.PropertyChanged += _context_PropertyChanged;
+            _context.PropertyChanged += OnContextPropertyChanged;
         }
 
-        private void _context_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnContextPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_context == null) return;
 

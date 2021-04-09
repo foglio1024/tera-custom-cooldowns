@@ -143,7 +143,7 @@ namespace TCC.ViewModels
             //}
         }
 
-        private void SyncViewModel(object sender, NotifyCollectionChangedEventArgs e)
+        private void SyncViewModel(object? sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {

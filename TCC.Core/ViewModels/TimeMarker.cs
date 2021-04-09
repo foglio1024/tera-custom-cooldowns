@@ -26,7 +26,7 @@ namespace TCC.ViewModels
             _t.Start();
         }
 
-        private void T_Tick(object sender, EventArgs e)
+        private void T_Tick(object? sender, EventArgs e)
         {
             _dateTime = DateTime.Now.AddHours(_hourOffset);
             N(nameof(TimeString));

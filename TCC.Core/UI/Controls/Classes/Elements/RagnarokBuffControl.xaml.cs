@@ -59,7 +59,7 @@ namespace TCC.UI.Controls.Classes.Elements
         }
 
 
-        private void ST_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "Val") return;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SecondsText)));

@@ -20,7 +20,7 @@ namespace TCC.UI.Controls.Dashboard
             _dc.PropertyChanged += Dc_PropertyChanged;
         }
 
-        private void Dc_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Dc_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (_dc == null) return;
             if (e.PropertyName != nameof(_dc.TimeFactor)) return;
