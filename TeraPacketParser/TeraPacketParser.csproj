@@ -20,7 +20,7 @@
     <OutputPath>D:\TERA\TeraToolbox\mods\TCC</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Nostrum" Version="1.2.14" />
+    <PackageReference Include="Nostrum" Version="1.2.15" />
     <PackageReference Include="PacketDotNet" Version="1.2.0" />
     <PackageReference Include="SharpPcap" Version="5.4.0" />
   </ItemGroup>

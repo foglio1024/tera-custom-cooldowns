@@ -22,7 +22,7 @@ node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Nostrum" Version="1.2.14" />
+    <PackageReference Include="Nostrum" Version="1.2.15" />
     <PackageReference Include="Octokit" Version="0.48.0" />
     <PackageReference Include="SevenZipSharp" Version="0.64.0">
       <NoWarn>NU1701</NoWarn>
