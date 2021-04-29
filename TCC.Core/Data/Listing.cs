@@ -28,6 +28,7 @@ namespace TCC.Data
         private bool _isMyLfg;
         private bool _temp;
         private readonly DateTime _createdOn;
+        private bool _isFullOffline;
 
         public ICommand ExpandCollapseCommand { get; }
         public ICommand PostCommand { get; }
@@ -177,6 +178,17 @@ namespace TCC.Data
         }
 
         public bool IsTwitch => _message.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1;
+
+        public bool IsFullOffline
+        {
+            get => _isFullOffline;
+            set
+            {
+                if(_isFullOffline == value) return;
+                _isFullOffline = value;
+                N();
+            }
+        }
 
         public void UpdateIsMyLfg()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TCC.Interop.Proxy;
 
 namespace TCC.Settings.WindowSettings
@@ -47,8 +48,12 @@ namespace TCC.Settings.WindowSettings
             }
         }
 
+        public List<string> BlacklistedWords { get; }
+
         public LfgWindowSettings()
         {
+            BlacklistedWords = new List<string>();
+
             HideTradeListings = true;
             MinLevel = 60;
             MaxLevel = 70;

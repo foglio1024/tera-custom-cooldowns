@@ -1,21 +1,23 @@
-﻿using System;
+﻿using Nostrum;
+using Nostrum.Extensions;
+using Nostrum.Factories;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Nostrum;
-using Nostrum.Extensions;
-using Nostrum.Factories;
+using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
-using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
+using TCC.UI.Windows;
 using TCC.Utils;
 using TeraDataLite;
 using TeraPacketParser.Messages;
@@ -27,15 +29,20 @@ namespace TCC.ViewModels
     public class LfgListViewModel : TccWindowViewModel
     {
         #region Events
+
         public event Action<int>? Publicized;
+
         public event Action? CreatingStateChanged;
+
         public event Action? TempLfgCreated;
+
         public event Action? MyLfgStateChanged;
 
-        #endregion
+        #endregion Events
 
         // ReSharper disable once NotAccessedField.Local
         private DispatcherTimer _requestTimer;
+
         private readonly DispatcherTimer AutoPublicizeTimer;
         private static readonly Queue<uint> _requestQueue = new();
         private bool _creating;
@@ -44,28 +51,17 @@ namespace TCC.ViewModels
         public Listing? LastClicked;
         private string _newMessage = "";
         private bool _isPopupOpen;
+        private bool _isAutoPublicizeEnabled;
+        private bool _stopAuto;
+        private int _actualListingsAmount;
 
         public string LastSortDescr { get; set; } = "Message";
         public int PublicizeCooldown => 5;
         public int AutoPublicizeCooldown => 20;
 
-
-        private bool _isAutoPublicizeEnabled;
-
-        public bool IsAutoPublicizeEnabled
-        {
-            get => _isAutoPublicizeEnabled;
-            set
-            {
-                if (_isAutoPublicizeEnabled == value) return;
-                _isAutoPublicizeEnabled = value;
-                N();
-            }
-        }
-
         public bool IsAutoPublicizeRunning => AutoPublicizeTimer.IsEnabled;
-        private bool _stopAuto;
         public TSObservableCollection<Listing> Listings { get; }
+        public TSObservableCollection<string> BlacklistedWords { get; }
         public SortCommand SortCommand { get; }
         public ICommand PublicizeCommand { get; }
         public ICommand ToggleAutoPublicizeCommand { get; }
@@ -77,8 +73,20 @@ namespace TCC.ViewModels
         public ICommand OpenPopupCommand { get; }
         public ICommand OpenSettingsCommand { get; }
         public ICommand ToggleShowTradeListingsCommand { get; }
+        public ICommand ConfigureBlacklistCommand { get; }
 
         public ICollectionViewLiveShaping ListingsView { get; }
+
+        public bool IsAutoPublicizeEnabled
+        {
+            get => _isAutoPublicizeEnabled;
+            set
+            {
+                if (_isAutoPublicizeEnabled == value) return;
+                _isAutoPublicizeEnabled = value;
+                N();
+            }
+        }
 
         public bool Creating
         {
@@ -120,7 +128,6 @@ namespace TCC.ViewModels
             || listing.LeaderName == Game.Me.Name
             || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
             || Game.Group.Has(listing.LeaderId)));
-
 
         public bool AmILeader => Game.Group.AmILeader || (MyLfg != null && MyLfg?.LeaderId == Game.Me.PlayerId);
 
@@ -178,22 +185,38 @@ namespace TCC.ViewModels
             }
         }
 
-
         public bool StayClosed { get; set; }
+
+        public int ActualListingsAmount
+        {
+            get => _actualListingsAmount;
+            set
+            {
+                if (_actualListingsAmount == value) return;
+                _actualListingsAmount = value;
+                N();
+            }
+        }
 
         public LfgListViewModel(LfgWindowSettings settings) : base(settings)
         {
-
             Listings = new TSObservableCollection<Listing>(Dispatcher);
-            ListingsView = CollectionViewFactory.CreateLiveCollectionView(Listings, sortFilters: new[]
+            BlacklistedWords = new TSObservableCollection<string>(Dispatcher);
+            settings.BlacklistedWords.ForEach(w => BlacklistedWords.Add(w));
+            ListingsView = CollectionViewFactory.CreateLiveCollectionView(Listings,
+            //l => !l.IsFullOffline,
+            filters: new[] { nameof(Listing.IsFullOffline) },
+            sortFilters: new[]
             {
+                new SortDescription(LastSortDescr, ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsTwitch), ListSortDirection.Ascending),
+                new SortDescription(nameof(Listing.IsFullOffline), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsTrade), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending),
-                new SortDescription(LastSortDescr, ListSortDirection.Ascending),
             });
 
             Listings.CollectionChanged += ListingsOnCollectionChanged;
+            BlacklistedWords.CollectionChanged += OnBlacklistedWordsCollectionChanged;
             settings.HideTradeListingsChangedEvent += OnHideTradeChanged;
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
@@ -212,6 +235,61 @@ namespace TCC.ViewModels
             OpenPopupCommand = new RelayCommand(_ => IsPopupOpen = true);
             OpenSettingsCommand = new RelayCommand(_ => WindowManager.SettingsWindow.ShowDialogAtPage(11));
             ToggleShowTradeListingsCommand = new RelayCommand(_ => HideTradeListings = !HideTradeListings);
+            ConfigureBlacklistCommand = new RelayCommand(_ => ConfigureBlacklist());
+        }
+
+        private void ConfigureBlacklist()
+        {
+            FocusManager.PauseTopmost = true;
+            new LfgFilterConfigWindow(this)
+            {
+                Owner = WindowManager.LfgListWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            }.ShowDialog();
+            FocusManager.PauseTopmost = false;
+
+            var listingsToRemove = Listings.ToSyncList().Where(l =>
+            {
+                foreach (var word in BlacklistedWords)
+                {
+                    if (l.Message.Contains(word)) return true;
+                }
+
+                return false;
+            });
+
+            foreach (var listing in listingsToRemove)
+            {
+                Listings.Remove(listing);
+            }
+
+            StubInterface.Instance.StubClient.RequestListings();
+
+        }
+
+        private void OnBlacklistedWordsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    if (e.NewItems != null)
+                    {
+                        ((LfgWindowSettings)Settings!).BlacklistedWords.AddRange(e.NewItems.Cast<string>());
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    if (e.OldItems != null)
+                    {
+                        foreach (var oldItem in e.OldItems.Cast<string>())
+                        {
+                            ((LfgWindowSettings)Settings!).BlacklistedWords.Remove(oldItem);
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    ((LfgWindowSettings)Settings!).BlacklistedWords.Clear();
+                    break;
+            }
         }
 
         private void CollapseAll()
@@ -307,7 +385,6 @@ namespace TCC.ViewModels
                 {
                     _stopAuto = false;
                     IsAutoPublicizeEnabled = true;
-
                 }
             }
             else
@@ -333,7 +410,6 @@ namespace TCC.ViewModels
         {
             if (!IsAutoPublicizeEnabled)
             {
-
                 return StubInterface.Instance.IsStubAvailable &&
                        !Game.LoadingScreen &&
                        Game.Logged &&
@@ -342,7 +418,6 @@ namespace TCC.ViewModels
             else
             {
                 return StubInterface.Instance.IsStubAvailable;
-
             }
         }
 
@@ -405,10 +480,10 @@ namespace TCC.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
+                Dispatcher.InvokeAsync(() => ActualListingsAmount = listings.Count);
                 RemoveMissingListings();
                 listings.ForEach(l => Dispatcher.InvokeAsync(() => AddOrRefreshListing(l)));
             });
-
 
             void RemoveMissingListings()
             {
@@ -429,6 +504,7 @@ namespace TCC.ViewModels
             }
         }
 
+
         public void AddOrRefreshListing(Listing l)
         {
             if (Listings.ToSyncList().Any(toFind => toFind.LeaderId == l.LeaderId))
@@ -445,10 +521,20 @@ namespace TCC.ViewModels
             else
             {
                 if (l.IsTrade && ((LfgWindowSettings)Settings!).HideTradeListings) return;
+                if (IsMessageBlacklisted(l.Message.ToLowerInvariant())) return;
                 Listings.Add(l);
                 EnqueueRequest(l.LeaderId);
             }
         }
+
+        private bool IsMessageBlacklisted(string lMessage)
+        {
+            var words = lMessage.Split(" ");
+            return words.Any(w =>
+                BlacklistedWords.Any(b =>
+                    w.ToLowerInvariant().Contains(b.ToLowerInvariant())));
+        }
+
         private void AddOrRefreshListing(ListingData l)
         {
             AddOrRefreshListing(new Listing(l));
@@ -488,6 +574,7 @@ namespace TCC.ViewModels
             PacketAnalyzer.Processor.Hook<S_SHOW_CANDIDATE_LIST>(OnShowCandidateList);
             PacketAnalyzer.Processor.Hook<S_CHANGE_PARTY_MANAGER>(OnChangePartyManager);
         }
+
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_LOGIN>(OnLogin);
@@ -503,6 +590,7 @@ namespace TCC.ViewModels
         }
 
         #region Hooks
+
         private void OnLogin(S_LOGIN m)
         {
             //Listings.Clear();
@@ -553,7 +641,7 @@ namespace TCC.ViewModels
                         }
                         else
                         {
-                            Dispatcher.InvokeAsync(() =>
+                            Dispatcher.Invoke(() =>
                             {
                                 lfg.Players.Add(new User(member));
                                 if (!member.IsLeader) return;
@@ -575,6 +663,8 @@ namespace TCC.ViewModels
                             .FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId);
                         if (target != null) lfg.Players.Remove(target);
                     });
+
+                    lfg.IsFullOffline = lfg.Players.Count > 0 && lfg.Players.All(p => !p.Online);
 
                     lfg.LeaderId = m.Id;
                     var leader = lfg.Players.ToSyncList().FirstOrDefault(u => u.IsLeader);
@@ -646,6 +736,9 @@ namespace TCC.ViewModels
             else Log.CW("No listings to show.");
 
             NotifyMyLfg();
+
+            Dispatcher.Invoke(() => SortCommand.Refresh(LastSortDescr));
+            //Dispatcher.Invoke(() => ((ICollectionView)ListingsView).Refresh());
             //Dispatcher?.InvokeAsync(RefreshSorting, DispatcherPriority.Background);
         }
 
@@ -659,7 +752,7 @@ namespace TCC.ViewModels
             ForceStopPublicize();
         }
 
-        #endregion    
+        #endregion Hooks
     }
 
     public class SortCommand : ICommand
@@ -668,8 +761,11 @@ namespace TCC.ViewModels
         private bool _refreshing;
         private ListSortDirection _direction = ListSortDirection.Ascending;
 #pragma warning disable CS0067
+
         public event EventHandler? CanExecuteChanged;
+
 #pragma warning restore CS0067
+
         public bool CanExecute(object? parameter)
         {
             return true;
@@ -685,6 +781,7 @@ namespace TCC.ViewModels
                     : ListSortDirection.Ascending;
             ((CollectionView)_view).SortDescriptions.Clear();
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsTwitch), ListSortDirection.Ascending));
+            ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsFullOffline), ListSortDirection.Ascending));
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsTrade), ListSortDirection.Ascending));
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending));
             ((CollectionView)_view).SortDescriptions.Add(new SortDescription(f, _direction));

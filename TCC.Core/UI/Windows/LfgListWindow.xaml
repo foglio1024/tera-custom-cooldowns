@@ -10,16 +10,16 @@
                    UseLayoutRounding="True"
                    Style="{StaticResource BaseWindowStyle}"
                    mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
-                   Title="TCC LFG" Height="800" Width="612"
+                   Title="TCC LFG" Height="810" Width="622"
                    WindowStartupLocation="Manual">
-    <Grid>
+    <Grid Margin="5">
         <Border Background="{StaticResource RevampBackgroundBrush}"
                 CornerRadius="1" Effect="{StaticResource DropShadow}"
-                BorderThickness="1" BorderBrush="{StaticResource RevampBorderBrush}"
+                BorderThickness="1" BorderBrush="{StaticResource TccNormalGradientBrush}"
                 Margin="6" Width="600" HorizontalAlignment="Stretch" Opacity=".75" />
         <Grid HorizontalAlignment="Stretch" Margin="6" MouseLeftButtonDown="OnBgMouseLeftButtonDown">
             <Grid.RowDefinitions>
-                <RowDefinition Height="38" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -34,13 +34,41 @@
                     HorizontalAlignment="Stretch" />
 
             <!--Title-->
-            <Path Data="{StaticResource SvgUsers}" HorizontalAlignment="Left" Margin="8 9 5 7"
-                  VerticalAlignment="Center" Fill="#9fff" />
+            <Border Width="40" Height="40" Style="{StaticResource RevampBorderStyle}"
+                    BorderBrush="{StaticResource TccNormalGradientBrush}"
+                    RenderTransformOrigin=".5 .5"
+                    HorizontalAlignment="Left" Margin="-20">
+                <Grid>
+                    <Rectangle Margin="5" Fill="#2fff" />
+                    <Rectangle Opacity=".2" Fill="{StaticResource TccNormalGradientBrush}"/>
+                    <Path Width="30" Height="30" Fill="White" Data="{StaticResource SvgUsers}"
+                              Margin="0" VerticalAlignment="Center" RenderTransformOrigin=".5 .5">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="0" Y="-2"></TranslateTransform>
+                                <RotateTransform Angle="-45" />
+
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                    </Path>
+                </Grid>
+
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="45"></RotateTransform>
+                        <TranslateTransform X="20" Y="-3"></TranslateTransform>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+
             <TextBlock VerticalAlignment="Center" Opacity=".8" FontSize="24"
-                       FontWeight="Thin" IsHitTestVisible="False" Foreground="#eee" Grid.Row="0" Margin="50 0">
+                       FontWeight="Thin" IsHitTestVisible="False" Foreground="#eee" Grid.Row="0" 
+                       Margin="55 -8 0 0">
                 <Run Text="Looking for group " />
                 <Run Text="{Binding ListingsView.(CollectionView.Count), Mode=OneWay}" Foreground="#5fff"
-                     FontWeight="Normal" FontSize="20" />
+                     FontWeight="Normal" FontSize="20" 
+                /><Run Text="/"  FontWeight="Normal" FontSize="20" Foreground="#3fff"
+                /><Run Text="{Binding ActualListingsAmount, Mode=OneWay}" FontWeight="Normal" FontSize="20" Foreground="#3fff"/>
             </TextBlock>
             <Rectangle MouseLeftButtonDown="Drag" Fill="Transparent" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -60,7 +88,7 @@
                         </Style>
                     </Button.Style>
                     <Path Data="{StaticResource SvgAuto}" RenderTransformOrigin=".5 .5" Stretch="Uniform" Fill="#fff"
-                          Margin="12">
+                          Margin="12 17">
                         <Path.Style>
                             <Style TargetType="Path" BasedOn="{StaticResource {x:Type Path}}">
                                 <Setter Property="RenderTransform"
@@ -97,20 +125,20 @@
                         VerticalAlignment="Stretch" x:Name="CreateBtn"
                         ToolTip="Create new LFG message."
                         Command="{Binding CreateMessageCommand}">
-                    <Path Data="{StaticResource SvgAdd}" Stretch="Uniform" Fill="#fff" Margin="12" />
+                    <Path Data="{StaticResource SvgAdd}" Stretch="Uniform" Fill="#fff" Margin="12 17" />
                 </Button>
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
                         VerticalAlignment="Stretch" x:Name="RefreshBtn"
                         ToolTip="Refresh LFG list (same as pressing LFG hotkey)"
                         Command="{Binding ReloadCommand}">
-                    <Path Data="{StaticResource SvgReload}" Stretch="Uniform" Fill="#fff" Margin="12" />
+                    <Path Data="{StaticResource SvgReload}" Stretch="Uniform" Fill="#fff" Margin="12 17" />
                 </Button>
                 <Rectangle Margin="0 8 0 8" Fill="#1fff" Width="1" VerticalAlignment="Stretch" />
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
                         VerticalAlignment="Stretch" x:Name="ActionsBtn"
                         ToolTip="More actions..."
                         Command="{Binding OpenPopupCommand}">
-                    <Path Data="{StaticResource SvgDotsVertical}" Stretch="Uniform" Fill="#fff" Margin="12" />
+                    <Path Data="{StaticResource SvgDotsVertical}" Stretch="Uniform" Fill="#fff" Margin="12 17" />
                 </Button>
                 <Rectangle Margin="0 8 0 8" Fill="#1fff" Width="1" VerticalAlignment="Stretch" />
                 <Popup PlacementTarget="{Binding ElementName=ActionsBtn}"
@@ -224,13 +252,26 @@
                                                Foreground="White" />
                                 </Grid>
                             </Button>
+                            <Button x:Name="ConfigBlacklistButton"
+                                extensions:ButtonExtensions.CornerRadius="3"
+                                Command="{Binding ConfigureBlacklistCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Path Data="{StaticResource SvgSettings}" />
+                                    <TextBlock Text="Configure filter" Grid.Column="1"
+                                           VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
                         </StackPanel>
                     </Grid>
                 </Popup>
                 <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
-                        VerticalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
                         Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=windows:LfgListWindow}, Path=HideWindowCommand}">
-                    <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12" />
+                    <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12 17" />
                 </Button>
             </StackPanel>
             <!--Header-->

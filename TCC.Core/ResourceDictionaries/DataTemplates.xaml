@@ -1099,7 +1099,7 @@
             </Style>
         </DataTemplate.Resources>
         <Grid HorizontalAlignment="Stretch" Height="Auto" Background="Transparent"
-              ShowGridLines="False">
+              ShowGridLines="False" x:Name="MainGrid">
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="MouseLeftButtonDown">
                     <b:InvokeCommandAction Command="{Binding ExpandCollapseCommand}" CommandParameter="True" />
@@ -1517,6 +1517,11 @@
                         <SolidColorBrush Color="{StaticResource GreenColor}" Opacity=".5" />
                     </Setter.Value>
                 </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsFullOffline}" Value="True">
+                <Setter TargetName="MainGrid" Property="Opacity" Value=".5"></Setter>
+                <Setter TargetName="Ell" Property="BorderBrush" Value="SlateGray" />
+                <Setter TargetName="hover" Property="Background" Value="SlateGray" />
             </DataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
