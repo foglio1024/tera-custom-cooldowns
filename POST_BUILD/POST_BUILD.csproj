@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp31</TargetFramework>
-    <LangVersion>8</LangVersion>
+    <TargetFramework>net5</TargetFramework>
+    <LangVersion>9</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <Configurations>Debug;Release;DebugToolbox</Configurations>
   </PropertyGroup>
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PostBuildEvent>
       del "$(SolutionDir)\release\*.xml"
       del "$(SolutionDir)\release\*.dev.json"
