@@ -232,7 +232,7 @@ namespace TCC
             var threads = App.RunningDispatchers.Values.Append(App.BaseDispatcher).Where(d => de.ThreadNames.Contains(d.Thread.Name)).Select(d => d.Thread).Append(PacketAnalyzer.AnalysisThread);
             foreach (var thread in threads)
             {
-                if (thread?.Name == null) continue;
+                if (thread.Name == null) continue;
                 var runtimeThread = runtime.Threads.FirstOrDefault(t => t.ManagedThreadId == thread.ManagedThreadId);
                 if (runtimeThread != null)
                 {

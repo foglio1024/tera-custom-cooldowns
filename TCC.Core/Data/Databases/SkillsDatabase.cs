@@ -219,7 +219,7 @@ namespace TCC.Data.Databases
         public bool TryGetSkillByIconName(string iconName, Class c, out Skill? sk)
         {
             var result = false;
-            sk = Skills[c]?.Values.ToList().FirstOrDefault(x => x.IconName == iconName);
+            sk = Skills[c].Values.ToList().FirstOrDefault(x => x.IconName == iconName);
             if (sk != null) result = true;
             return result;
         }

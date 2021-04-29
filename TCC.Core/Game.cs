@@ -624,7 +624,7 @@ namespace TCC
                             _ => zg
                         },
                         1 when DateTime.Now.Year == 2021 && DateTime.Now.Day < 7 => DateTime.Now.Day == 4 ? za : zr,
-                        _ => null!
+                        _ => null
                     };
 
                     if (zone == null) return;
