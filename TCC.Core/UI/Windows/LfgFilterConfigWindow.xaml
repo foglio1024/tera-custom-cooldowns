@@ -1,0 +1,94 @@
+﻿<Window x:Class="TCC.UI.Windows.LfgFilterConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:local="clr-namespace:TCC.UI.Windows"
+        xmlns:viewModels="clr-namespace:TCC.ViewModels"
+        Style="{StaticResource BaseWindowStyle}"
+        SizeToContent="Manual"
+        mc:Ignorable="d"
+        Title="LfgFilterConfigWindow" Height="450" Width="800" d:DataContext="{d:DesignInstance viewModels:LfgListViewModel}">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource RevampBorderStyle}"
+                Opacity="0.95"
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="2" />
+        <!-- Title bar -->
+        <Grid x:Name="TitleBarGrid" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" VerticalAlignment="Top"
+              MouseLeftButtonDown="OnTitleBarMouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Path Style="{StaticResource WindowLogo}" />
+            <TextBlock Style="{StaticResource DefaultTextStyle}"
+                       Foreground="#999"
+                       Text="LFG filter config"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Grid.Column="1"
+                       Margin="2 0" />
+            <Button Style="{StaticResource ButtonContentOpacityStyle}"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Opacity=".9"
+                    Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Click="OnCloseButtonClick"
+                    VerticalContentAlignment="Center"
+                    Grid.Column="2">
+                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"></Path>
+            </Button>
+        </Grid>
+        <Path Data="{StaticResource SvgPen}" Grid.Row="1" Margin="0 0 10 10" Height="15" VerticalAlignment="Bottom"
+              HorizontalAlignment="Right" />
+        <Border Style="{StaticResource RevampBorderStyle}" Grid.Row="1"
+        Margin="5" Background="{StaticResource RevampDarkerBackground70Brush}" Opacity=".6"></Border>
+        <TextBox Grid.Row="1"
+                 Height="24"
+                 VerticalAlignment="Bottom"
+                 VerticalContentAlignment="Center"
+                 BorderThickness="0"
+                 Foreground="#bfff" Background="#1ddf"
+                 CaretBrush="#8fff"
+                 Margin="6 0 6 6"
+                 KeyUp="OnTextBoxKeyUp" />
+        <ItemsControl Grid.Row="1" Margin="10 10 10 34" ItemsSource="{Binding BlacklistedWords}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="system:String">
+                    <Grid Margin="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Border CornerRadius="11" Grid.ColumnSpan="2" Background="#2fff" />
+                        <Button Command="{Binding RemoveEntryCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:LfgFilterConfigWindow}}"
+                                CommandParameter="{Binding}"
+                                Margin="4"
+                                VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Style="{StaticResource ButtonContentOpacityStyle}">
+                            <Path Data="{StaticResource SvgRemoveCircle}" Width="14" />
+                        </Button>
+                        <TextBlock Grid.Column="1" Text="{Binding}" Foreground="White" VerticalAlignment="Center"
+                                   Margin="0 0 6 0" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <TextBlock Grid.Row="2" Text="Write something and press Enter to add it to the filtered expressions list. Changes are saved when closing this window."
+                   HorizontalAlignment="Center" Margin="7" Foreground="#2fff"></TextBlock>
+    </Grid>
+</Window>
