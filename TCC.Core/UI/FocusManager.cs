@@ -73,13 +73,16 @@ namespace TCC.UI
                 return false;
             }
         }
+
+        private static int _pausedCount = 0;
         public static bool PauseTopmost
         {
-            get => _pauseTopmost;
+            get => _pausedCount > 0;
             set
             {
-                Log.CW($"Setting PauseTopmost to {value}");
-                _pauseTopmost = value;
+                if (value) _pausedCount++;
+                else _pausedCount--;
+                Log.CW($"TopMost paused {_pausedCount}");
             }
         }
 
