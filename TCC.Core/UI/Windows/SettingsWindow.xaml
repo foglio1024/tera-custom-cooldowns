@@ -2019,6 +2019,9 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
+                            <Button Style="{StaticResource SettingsButton}" 
+                                    Command="{Binding OpenConfigureLfgWindowCommand}"
+                                    Content="Configure LFG filter"/>
                         </StackPanel>
 
                         <StackPanel VerticalAlignment="Stretch" Grid.Column="1">

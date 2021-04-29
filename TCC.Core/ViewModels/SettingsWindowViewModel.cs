@@ -59,6 +59,7 @@ namespace TCC.ViewModels
         public ICommand ResetWindowPositionsCommand { get; }
         public ICommand OpenResourcesFolderCommand { get; }
         public ICommand OpenWelcomeWindowCommand { get; }
+        public ICommand OpenConfigureLfgWindowCommand { get; }
         public ICommand ClearChatCommand { get; }
 
         public bool EthicalMode
@@ -780,7 +781,14 @@ namespace TCC.ViewModels
             ResetWindowPositionsCommand = new RelayCommand(_ => WindowManager.ResetToCenter());
             OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(new ProcessStartInfo(Path.Combine(App.ResourcesPath, "config")){UseShellExecute = true}));
             ClearChatCommand = new RelayCommand(_ => ChatManager.Instance.ClearMessages());
-
+            OpenConfigureLfgWindowCommand = new RelayCommand(_ =>
+            {
+                new LfgFilterConfigWindow(WindowManager.ViewModels.LfgVM)
+                {
+                    Owner = WindowManager.SettingsWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                }.ShowDialog();
+            });
             MonsterDatabase.BlacklistChangedEvent += MonsterDatabase_BlacklistChangedEvent;
             MessageFactory.ReleaseVersionChanged += OnReleaseVersionChanged;
         }
