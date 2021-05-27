@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using TCC.Exceptions;
 using TCC.Utils;
-using TeraPacketParser;
+using TCC.Utils.Exceptions;
 
-namespace TCC.Processing
+namespace TeraPacketParser.Processing
 {
     public class MessageProcessor
     {
@@ -26,6 +25,7 @@ namespace TCC.Processing
                 if (!_hooks[typeof(T)].Contains(action)) _hooks[typeof(T)].Add(action);
             }
         }
+        
         public void Unhook<T>(Action<T> action)
         {
             lock (_lock)

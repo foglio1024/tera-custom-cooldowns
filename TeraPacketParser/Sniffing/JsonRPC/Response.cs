@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace TCC.Interop.JsonRPC
+namespace TeraPacketParser.Sniffing.JsonRPC
 {
     public class Response : JObject
     {

@@ -3,10 +3,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using TCC.Interop.JsonRPC;
 using TCC.Utils;
+using TeraPacketParser.Sniffing.JsonRPC;
 
-namespace TCC.Interop.Proxy
+namespace TeraPacketParser.Sniffing
 {
     /// <summary>
     /// Uses an <see cref="T:System.Net.Http.HttpClient" /> to send RPC requests to Toolbox.

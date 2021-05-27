@@ -23,8 +23,10 @@
     <PackageReference Include="Nostrum" Version="1.2.15" />
     <PackageReference Include="PacketDotNet" Version="1.2.0" />
     <PackageReference Include="SharpPcap" Version="5.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TCC.Utils\TCC.Utils.csproj" />
     <ProjectReference Include="..\TeraDataLite\TeraDataLite.csproj" />
   </ItemGroup>
   <ItemGroup>

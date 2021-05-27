@@ -4,14 +4,12 @@ using System.Net.Sockets;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Nostrum.Extensions;
-using TCC.Analysis;
-using TCC.Interop.Proxy;
 using TCC.Utils;
-using TeraPacketParser;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.TeraCommon.Sniffing;
 using Server = TeraPacketParser.TeraCommon.Game.Server;
 
-namespace TCC.Sniffing
+namespace TeraPacketParser.Sniffing
 {
     /// <summary>
     /// Uses a <see cref="TcpListener"/> to receive TERA packets sent by <c>ttb-interface-data</c>.
@@ -38,7 +36,7 @@ namespace TCC.Sniffing
             public async Task<uint> GetServerId()
             {
                 var resp = await _client.CallAsync("getServer");
-                return resp?.Result?.Value<uint>() ?? 0;
+                return resp?.Result?.Value<uint>() ?? 0U;
             }
             /// <summary>
             /// Requests <c>ttb-interface-control</c> to return current release version.
@@ -147,7 +145,7 @@ namespace TCC.Sniffing
             public async Task<uint> GetProtocolVersion()
             {
                 var resp = await _client.CallAsync("getProtocolVersion");
-                return resp?.Result?.Value<uint>() ?? 0;
+                return resp?.Result?.Value<uint>() ?? 0U;
             }
         }
 
@@ -288,7 +286,7 @@ namespace TCC.Sniffing
                     Connected = true;
                     await ControlConnection.AddHooks(PacketAnalyzer.Factory!.OpcodesList);
                     PacketAnalyzer.Factory.ReleaseVersion = await ControlConnection.GetReleaseVersion();
-                    NewConnection?.Invoke(Game.DB!.ServerDatabase.GetServer(resp));
+                    NewConnection?.Invoke(PacketAnalyzer.ServerDatabase.GetServer(resp));
                     _dataConnection = new TcpClient();
                     await _dataConnection.ConnectAsync("127.0.0.60", 5301);
                 }
