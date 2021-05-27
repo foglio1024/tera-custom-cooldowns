@@ -4,7 +4,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using TCC.Data;
-using TCC.ViewModels;
+using TCC.ViewModels.ClassManagers;
 
 namespace TCC.UI.Controls.Classes.Elements
 {

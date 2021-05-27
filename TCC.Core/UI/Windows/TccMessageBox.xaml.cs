@@ -159,6 +159,9 @@ namespace TCC.UI.Windows
         public static void Create()
         {
             _messageBox = new TccMessageBox();
+
+            Utils.Log.NewMessageBox += (msg) => TccMessageBox.Show(msg);
+
         }
 
         public static void CreateAsync()

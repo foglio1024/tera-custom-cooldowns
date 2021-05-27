@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using Nostrum;
-using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TCC.ViewModels;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 using TeraPacketParser.TeraCommon.Game;
 

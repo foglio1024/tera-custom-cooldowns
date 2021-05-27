@@ -5,16 +5,16 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
-using TCC.Processing;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.Utils;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets
@@ -343,7 +343,6 @@ namespace TCC.ViewModels.Widgets
         {
             var msg = Raid ? $"@0\vPartyPlayerName\v{name}" : $"@0\vPartyPlayerName\v{name}\vparty\vparty";
             SystemMessagesProcessor.AnalyzeMessage(msg, "SMT_BATTLE_PARTY_DIE");
-            //if (ProxyInterface.Instance.IsStubAvailable) ProxyInterface.Instance.Stub.ForceSystemMessage(msg, opcode);
         }
         private void SendLeaveMessage(string name)
         {

@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
+using TCC.R;
 using TeraDataLite;
 
 namespace TCC.UI.Converters
@@ -23,26 +24,26 @@ namespace TCC.UI.Converters
 
             return (LaurelType, l: laurel) switch
             {
-                (LaurelType.Old,     Laurel.Bronze)   => R.MiscResources.BronzeLaurel, 
-                (LaurelType.Old,     Laurel.Silver)   => R.MiscResources.SilverLaurel, 
-                (LaurelType.Old,     Laurel.Gold)     => R.MiscResources.GoldLaurel, 
-                (LaurelType.Old,     Laurel.Diamond)  => R.MiscResources.DiamondLaurel, 
-                (LaurelType.Old,     Laurel.Champion) => R.MiscResources.ChampionLaurel, 
-                (LaurelType.Rhomb,     Laurel.Bronze)   => R.MiscResources.BronzeLaurelRhomb, 
-                (LaurelType.Rhomb,     Laurel.Silver)   => R.MiscResources.SilverLaurelRhomb, 
-                (LaurelType.Rhomb,     Laurel.Gold)     => R.MiscResources.GoldLaurelRhomb, 
-                (LaurelType.Rhomb,     Laurel.Diamond)  => R.MiscResources.DiamondLaurelRhomb, 
-                (LaurelType.Rhomb,     Laurel.Champion) => R.MiscResources.ChampionLaurelRhomb, 
-                (LaurelType.RhombBig,  Laurel.Bronze)   => R.MiscResources.BronzeLaurelRhombBig, 
-                (LaurelType.RhombBig,  Laurel.Silver)   => R.MiscResources.SilverLaurelRhombBig, 
-                (LaurelType.RhombBig,  Laurel.Gold)     => R.MiscResources.GoldLaurelRhombBig, 
-                (LaurelType.RhombBig,  Laurel.Diamond)  => R.MiscResources.DiamondLaurelRhombBig, 
-                (LaurelType.RhombBig,  Laurel.Champion) => R.MiscResources.ChampionLaurelRhombBig,
-                (LaurelType.RhombBottom, Laurel.Bronze)   => R.MiscResources.BronzeLaurelRhombBottom, 
-                (LaurelType.RhombBottom, Laurel.Silver)   => R.MiscResources.SilverLaurelRhombBottom, 
-                (LaurelType.RhombBottom, Laurel.Gold)     => R.MiscResources.GoldLaurelRhombBottom, 
-                (LaurelType.RhombBottom, Laurel.Diamond)  => R.MiscResources.DiamondLaurelRhombBottom, 
-                (LaurelType.RhombBottom, Laurel.Champion) => R.MiscResources.ChampionLaurelRhombBottom, 
+                (LaurelType.Old,     Laurel.Bronze)   => MiscResources.BronzeLaurel, 
+                (LaurelType.Old,     Laurel.Silver)   => MiscResources.SilverLaurel, 
+                (LaurelType.Old,     Laurel.Gold)     => MiscResources.GoldLaurel, 
+                (LaurelType.Old,     Laurel.Diamond)  => MiscResources.DiamondLaurel, 
+                (LaurelType.Old,     Laurel.Champion) => MiscResources.ChampionLaurel, 
+                (LaurelType.Rhomb,     Laurel.Bronze)   => MiscResources.BronzeLaurelRhomb, 
+                (LaurelType.Rhomb,     Laurel.Silver)   => MiscResources.SilverLaurelRhomb, 
+                (LaurelType.Rhomb,     Laurel.Gold)     => MiscResources.GoldLaurelRhomb, 
+                (LaurelType.Rhomb,     Laurel.Diamond)  => MiscResources.DiamondLaurelRhomb, 
+                (LaurelType.Rhomb,     Laurel.Champion) => MiscResources.ChampionLaurelRhomb, 
+                (LaurelType.RhombBig,  Laurel.Bronze)   => MiscResources.BronzeLaurelRhombBig, 
+                (LaurelType.RhombBig,  Laurel.Silver)   => MiscResources.SilverLaurelRhombBig, 
+                (LaurelType.RhombBig,  Laurel.Gold)     => MiscResources.GoldLaurelRhombBig, 
+                (LaurelType.RhombBig,  Laurel.Diamond)  => MiscResources.DiamondLaurelRhombBig, 
+                (LaurelType.RhombBig,  Laurel.Champion) => MiscResources.ChampionLaurelRhombBig,
+                (LaurelType.RhombBottom, Laurel.Bronze)   => MiscResources.BronzeLaurelRhombBottom, 
+                (LaurelType.RhombBottom, Laurel.Silver)   => MiscResources.SilverLaurelRhombBottom, 
+                (LaurelType.RhombBottom, Laurel.Gold)     => MiscResources.GoldLaurelRhombBottom, 
+                (LaurelType.RhombBottom, Laurel.Diamond)  => MiscResources.DiamondLaurelRhombBottom, 
+                (LaurelType.RhombBottom, Laurel.Champion) => MiscResources.ChampionLaurelRhombBottom, 
                 _ => null
             };
         }

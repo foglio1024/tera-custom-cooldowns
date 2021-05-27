@@ -2,8 +2,8 @@
 using System.IO;
 using Nostrum.Extensions;
 using TCC.Data.Chat;
-using TCC.Analysis;
 using TCC.Utils;
+using TeraPacketParser.Analysis;
 
 namespace TCC.Data.Databases
 {

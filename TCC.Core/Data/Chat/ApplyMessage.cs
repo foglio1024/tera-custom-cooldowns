@@ -1,4 +1,5 @@
-﻿using TeraDataLite;
+﻿using TCC.Utils;
+using TeraDataLite;
 
 namespace TCC.Data.Chat
 {

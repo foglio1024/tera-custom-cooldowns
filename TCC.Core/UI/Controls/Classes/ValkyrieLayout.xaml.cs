@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using Nostrum.Controls;
 using Nostrum.Factories;
-using TCC.ViewModels;
+using TCC.ViewModels.ClassManagers;
 
 namespace TCC.UI.Controls.Classes
 {

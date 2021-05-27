@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Nostrum;
-using TCC.Debug;
+using TCC.Debugging;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 

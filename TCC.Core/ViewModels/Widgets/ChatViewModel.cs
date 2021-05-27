@@ -13,6 +13,7 @@ using TCC.Data.Chat;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows;
+using TCC.Utils;
 using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels.Widgets

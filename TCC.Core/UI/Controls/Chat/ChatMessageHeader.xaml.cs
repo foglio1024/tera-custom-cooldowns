@@ -1,8 +1,8 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Effects;
-using TCC.Data;
 using TCC.Data.Chat;
+using TCC.Utils;
 
 namespace TCC.UI.Controls.Chat
 {

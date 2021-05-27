@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
-using TCC.Debug;
+using TCC.Debugging;
 
 namespace TCC.Data.Skills
 {

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using Nostrum.WinAPI;
+using TCC.R;
 using TeraPacketParser.Messages;
 
 namespace TCC.UI.Converters
@@ -13,7 +14,7 @@ namespace TCC.UI.Converters
         public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             var guildId = (uint?) value ?? 0;
-            if (!S_IMAGE_DATA.Database.ContainsKey(guildId)) return R.MiscResources.DefaultGuildLogo; 
+            if (!S_IMAGE_DATA.Database.ContainsKey(guildId)) return MiscResources.DefaultGuildLogo; 
 
 
             var ip = S_IMAGE_DATA.Database[guildId].GetHbitmap();

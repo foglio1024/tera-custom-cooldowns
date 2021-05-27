@@ -13,13 +13,14 @@ using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
 using TCC.Data.Skills;
-using TCC.Analysis;
 using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Utils;
+using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets

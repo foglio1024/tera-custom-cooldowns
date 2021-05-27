@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
+using Colors = TCC.R.Colors;
 
 namespace TCC.UI.Converters
 {
@@ -17,26 +18,26 @@ namespace TCC.UI.Converters
             switch (val)
             {
                 case AbnormalityType.Stun:
-                    ret = R.Colors.AbnormalityStunColor;
+                    ret = Colors.AbnormalityStunColor;
                     //resName = "Stun";
                     break;
                 case AbnormalityType.DOT:
-                    ret = R.Colors.AbnormalityDotColor;
+                    ret = Colors.AbnormalityDotColor;
                     //resName = "Dot";
                     break;
                 case AbnormalityType.Debuff:
-                    ret = R.Colors.AbnormalityDebuffColor;
+                    ret = Colors.AbnormalityDebuffColor;
                     //resName = "Debuff";
                     break;
                 case AbnormalityType.Buff:
-                    ret = R.Colors.AbnormalityBuffColor;
+                    ret = Colors.AbnormalityBuffColor;
                     //resName = "Buff";
                     break;
                 case AbnormalityType.Special:
-                    ret = R.Colors.GoldColor;
+                    ret = Colors.GoldColor;
                     break;
                 default:
-                    return new SolidColorBrush(Colors.White);
+                    return new SolidColorBrush(System.Windows.Media.Colors.White);
             }
 
             // ReSharper disable once PossibleNullReferenceException

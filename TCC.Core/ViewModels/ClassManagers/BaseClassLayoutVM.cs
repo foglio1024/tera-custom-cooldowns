@@ -4,7 +4,7 @@ using Nostrum;
 using TCC.Data;
 using TCC.Data.Skills;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels.ClassManagers
 {
     public abstract class BaseClassLayoutVM : TSPropertyChanged, IDisposable
     {

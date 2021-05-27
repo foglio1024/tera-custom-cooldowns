@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TCC.Data.Skills;
 using TeraDataLite;
-using TeraPacketParser.TeraCommon.Game.Services;
 
 namespace TCC.Data.Databases
 {
@@ -28,7 +25,6 @@ namespace TCC.Data.Databases
         public AbnormalityDatabase AbnormalityDatabase { get; }
         public DungeonDatabase DungeonDatabase { get; }
         public SocialDatabase SocialDatabase { get; }
-        public ServerDatabase ServerDatabase { get; }
 
         /// <summary>
         /// True if all database files are found.
@@ -42,7 +38,6 @@ namespace TCC.Data.Databases
         public TccDatabase(string lang)
         {
             Language = lang;
-            ServerDatabase = new ServerDatabase(App.DataPath, Path.Combine(App.ResourcesPath, "config/server-overrides.txt")) { Language = (LangEnum)Enum.Parse(typeof(LangEnum), lang.Replace("EU-", "")) };
             MonsterDatabase = new MonsterDatabase(lang);
             AccountBenefitDatabase = new AccountBenefitDatabase(lang);
             ItemsDatabase = new ItemsDatabase(lang);
@@ -183,11 +178,11 @@ namespace TCC.Data.Databases
                 return true;
             }
             var (_, guard) = MapDatabase.Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continentId);
-            if (guard == null)
-            {
-                name = "Unknown";
-                return false;
-            }
+            //if (guard == null)
+            //{
+            //    name = "Unknown";
+            //    return false;
+            //}
             name = RegionsDatabase.GetZoneName(guard.NameId);
             return true;
 

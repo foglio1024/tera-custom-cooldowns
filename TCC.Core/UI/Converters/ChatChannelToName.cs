@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using TCC.Data;
 using TCC.Utilities;
+using TCC.Utils;
 
 namespace TCC.UI.Converters
 {

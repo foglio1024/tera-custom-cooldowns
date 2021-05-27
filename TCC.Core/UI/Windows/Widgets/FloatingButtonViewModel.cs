@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
 using Nostrum;
-using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.ViewModels;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 
 namespace TCC.UI.Windows.Widgets

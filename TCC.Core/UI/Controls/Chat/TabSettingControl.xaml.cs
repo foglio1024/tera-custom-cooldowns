@@ -3,9 +3,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings.WindowSettings;
+using TCC.Utils;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Chat

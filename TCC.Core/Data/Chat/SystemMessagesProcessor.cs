@@ -1,18 +1,15 @@
-﻿using HtmlAgilityPack;
-using Nostrum.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TCC.Analysis;
-using TCC.Data;
-using TCC.Data.Chat;
+using HtmlAgilityPack;
+using Nostrum.Extensions;
 using TCC.UI;
 using TCC.Utils;
 using TCC.ViewModels;
+using TeraPacketParser.Analysis;
 
-
-namespace TCC.Processing
+namespace TCC.Data.Chat
 {
     public static class SystemMessagesProcessor
     {

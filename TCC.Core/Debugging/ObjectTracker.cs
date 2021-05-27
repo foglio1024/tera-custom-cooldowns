@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using TCC.Utils;
 
-namespace TCC.Debug
+namespace TCC.Debugging
 {
     public static class ObjectTracker
     {

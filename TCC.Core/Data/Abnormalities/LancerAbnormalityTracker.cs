@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using TCC.ViewModels;
+using TCC.ViewModels.ClassManagers;
 using TeraPacketParser.Messages;
 
 namespace TCC.Data.Abnormalities

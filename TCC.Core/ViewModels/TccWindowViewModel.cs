@@ -1,7 +1,7 @@
 ﻿using System.Windows.Threading;
 using Nostrum;
-using TCC.Analysis;
 using TCC.Settings.WindowSettings;
+using TeraPacketParser.Analysis;
 
 namespace TCC.ViewModels
 {

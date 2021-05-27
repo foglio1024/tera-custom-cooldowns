@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Nostrum;
+using Nostrum.Extensions;
+using Nostrum.WinAPI;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
-using Nostrum;
-using Nostrum.Extensions;
-using Nostrum.WinAPI;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Interop;
@@ -17,6 +16,7 @@ using TCC.R;
 using TCC.UI;
 using TCC.Utils;
 using TCC.ViewModels;
+using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
 using Brushes = TCC.R.Brushes;
 using Colors = TCC.R.Colors;
@@ -45,6 +45,7 @@ namespace TCC.Utilities
                 _ => SVG.SvgClassCommon
             };
         }
+
         public static string ClassEnumToString(Class c)
         {
             return c switch
@@ -66,26 +67,29 @@ namespace TCC.Utilities
                 _ => ""
             };
         }
+
         public static List<ChatChannelOnOff> GetEnabledChannelsList()
         {
             return EnumUtils.ListFromEnum<ChatChannel>().Select(c => new ChatChannelOnOff(c)).ToList();
         }
 
-
         public static bool IsPhase1Dragon(uint zoneId, uint templateId)
         {
             return zoneId == 950 && templateId >= 1100 && templateId <= 1103;
         }
+
         public static bool IsGuildTower(uint zoneId, uint templateId)
         {
             return zoneId == 152 && templateId == 5001;
         }
+
         public static bool IsFieldBoss(uint zone, uint template)
         {
             return (zone == 39 && template == 501) ||
                    (zone == 26 && template == 5001) ||
                    (zone == 51 && template == 4001);
         }
+
         public static bool IsWorldBoss(ushort zoneId, uint templateId)
         {
             return zoneId == 10 && templateId == 99 ||
@@ -157,7 +161,6 @@ namespace TCC.Utilities
             var v = Assembly.GetExecutingAssembly().GetName().Version;
             if (v == null) throw new InvalidOperationException("Unable to retrieve TCC version.");
             return $"TCC v{v.Major}.{v.Minor}.{v.Build}{(App.Beta ? "-b" : "")}";
-
         }
 
         public static string GradeToColorString(RareGrade g)
@@ -194,8 +197,7 @@ namespace TCC.Utilities
             //var txt = GetPlainText(message).UnescapeHtml();
             //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
 
-            Discord.FireWebhook(App.Settings.WebhookUrlMentions, message, discordUsername); //string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
-
+            Discord.FireWebhook(App.Settings.WebhookUrlMentions, message, discordUsername, App.Settings.LastAccountNameHash); //string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
         }
 
         public static void CheckWindowNotify(string message, string title)
@@ -206,15 +208,17 @@ namespace TCC.Utilities
             //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
 
             Log.N(title, message /*string.IsNullOrEmpty(titleOverride) ? $"{chStr} - {author}" : titleOverride, $"{txt}"*/, NotificationType.None, 6000);
-
         }
 
         // TODO: move to nostrum
         private const uint StdOutputHandle = 0xFFFFFFF5;
+
         [DllImport("kernel32.dll")]
         private static extern IntPtr GetStdHandle(uint nStdHandle);
+
         [DllImport("kernel32.dll")]
         private static extern void SetStdHandle(uint nStdHandle, IntPtr handle);
+
         public static void CreateConsole()
         {
             Kernel32.AllocConsole();
@@ -231,15 +235,6 @@ namespace TCC.Utilities
             TextWriter writer = new StreamWriter(Console.OpenStandardOutput())
             { AutoFlush = true };
             Console.SetOut(writer);
-        }
-
-        public static void OpenUrl(string url)
-        {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = url,
-                UseShellExecute = true
-            });
         }
 
         public static SolidColorBrush ChatChannelToBrush(ChatChannel ch)
@@ -301,6 +296,7 @@ namespace TCC.Utilities
                 _ => Brushes.ChatSystemGenericBrush
             };
         }
+
         public static string ChatChannelToName(ChatChannel ch)
         {
             return ch switch

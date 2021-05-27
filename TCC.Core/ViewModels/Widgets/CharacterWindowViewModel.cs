@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using TCC.Data.Pc;
-using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets

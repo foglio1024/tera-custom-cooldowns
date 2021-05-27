@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Nostrum;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Nostrum;
-using Newtonsoft.Json;
-using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Utilities;
+using TCC.Utils;
 using TCC.ViewModels.Widgets;
 
 namespace TCC.ViewModels

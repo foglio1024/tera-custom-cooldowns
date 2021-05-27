@@ -3,13 +3,14 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using TCC.Data;
+using TCC.Debug;
 using TCC.UI;
 using TCC.Utilities;
-using TCC.ViewModels;
+using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
 using Button = System.Windows.Controls.Button;
 
-namespace TCC.Debug
+namespace TCC.Debugging
 {
     public sealed partial class DebugWindow : INotifyPropertyChanged
     {

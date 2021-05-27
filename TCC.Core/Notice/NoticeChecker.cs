@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
-using TCC.Analysis;
 using TCC.Data;
 using TCC.Utils;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.TeraCommon.Game;
 
 namespace TCC.Notice

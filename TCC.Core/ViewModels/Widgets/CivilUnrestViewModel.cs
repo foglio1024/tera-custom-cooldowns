@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using Nostrum;
 using Nostrum.Factories;
-using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.Utils;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets

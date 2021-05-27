@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using TCC.Data;
 using TCC.Utilities;
+using TCC.Utils;
 
 namespace TCC.UI.Converters
 {
@@ -10,7 +10,7 @@ namespace TCC.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is ChatChannel ch)) ch = ChatChannel.Say;
+            if (value is not ChatChannel ch) ch = ChatChannel.Say;
 
             return TccUtils.ChatChannelToBrush(ch);
         }

@@ -16,7 +16,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
@@ -28,6 +27,7 @@ using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 

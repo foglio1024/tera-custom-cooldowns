@@ -9,6 +9,7 @@ using System.Linq;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
+using TCC.Utils;
 using TeraPacketParser;
 using Key = System.Windows.Forms.Keys;
 

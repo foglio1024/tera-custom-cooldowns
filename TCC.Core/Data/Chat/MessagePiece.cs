@@ -3,7 +3,7 @@ using Nostrum.Extensions;
 using System;
 using System.Linq;
 using System.Windows.Input;
-using TCC.Debug;
+using TCC.Debugging;
 using TCC.Interop.Proxy;
 using TCC.UI.Windows;
 using TCC.Utilities;
@@ -151,7 +151,7 @@ namespace TCC.Data.Chat
             {
                 try
                 {
-                    TccUtils.OpenUrl(Text);
+                    Utils.Utilities.OpenUrl(Text);
                 }
                 catch
                 {

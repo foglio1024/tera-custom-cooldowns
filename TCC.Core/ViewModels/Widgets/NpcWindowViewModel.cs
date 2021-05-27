@@ -12,13 +12,13 @@ using Nostrum.Factories;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
-using TCC.Analysis;
 using TCC.Data.Npc;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets

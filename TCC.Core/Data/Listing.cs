@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
-using TCC.Processing;
 using TCC.UI;
-using TCC.Utilities;
 using TeraDataLite;
 using FocusManager = TCC.UI.FocusManager;
 
@@ -245,7 +244,7 @@ namespace TCC.Data
             BrowseTwitchCommand = new RelayCommand(_ =>
             {
                 if (!IsTwitch) return;
-                TccUtils.OpenUrl(TwitchLink);
+                Utils.Utilities.OpenUrl(TwitchLink);
             });
             PostCommand = new RelayCommand(_ =>
             {
@@ -256,7 +255,7 @@ namespace TCC.Data
 
                 StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
 
-                Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings());
+                Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
 
             },
             _ => Temp && !string.IsNullOrEmpty(Message));

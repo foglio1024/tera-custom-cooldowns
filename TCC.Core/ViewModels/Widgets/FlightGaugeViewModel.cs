@@ -1,8 +1,8 @@
 ﻿using System;
 using TCC.Data;
-using TCC.Analysis;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets

@@ -12,11 +12,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
-using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Chat;
-using TCC.Processing;
-using TCC.R;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows.Widgets;
@@ -24,6 +21,7 @@ using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels.Widgets;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 using TeraPacketParser.TeraCommon.Game;
 
@@ -233,16 +231,16 @@ namespace TCC.ViewModels
             if (Game.Me.Level == 70) return;
 
             var msg = ChatUtils.Font("You gained ")
-                    + ChatUtils.Font($"{m.GainedTotalExp - m.GainedRestedExp:N0}", Colors.GoldColor.ToHex());
+                    + ChatUtils.Font($"{m.GainedTotalExp - m.GainedRestedExp:N0}", R.Colors.GoldColor.ToHex());
 
             if (m.GainedRestedExp > 0)
                 msg += ChatUtils.Font(" + ") +
-                       ChatUtils.Font($"{m.GainedRestedExp:N0}", Colors.ChatMegaphoneColor.ToHex());
+                       ChatUtils.Font($"{m.GainedRestedExp:N0}", R.Colors.ChatMegaphoneColor.ToHex());
 
             msg += ChatUtils.Font($" (");
-            msg += ChatUtils.Font($"{m.GainedTotalExp / (double)m.NextLevelExp:P3}", Colors.GoldColor.ToHex());
+            msg += ChatUtils.Font($"{m.GainedTotalExp / (double)m.NextLevelExp:P3}", R.Colors.GoldColor.ToHex());
             msg += ChatUtils.Font($") XP. Total: ");
-            msg += ChatUtils.Font($"{m.LevelExp / (double)m.NextLevelExp:P3}", Colors.GoldColor.ToHex());
+            msg += ChatUtils.Font($"{m.LevelExp / (double)m.NextLevelExp:P3}", R.Colors.GoldColor.ToHex());
             msg += ChatUtils.Font($".");
 
             AddChatMessage(Factory.CreateMessage(ChatChannel.Exp, "System", msg));

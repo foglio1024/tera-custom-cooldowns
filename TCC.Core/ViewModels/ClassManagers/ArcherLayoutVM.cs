@@ -2,7 +2,7 @@
 using TCC.Data.Skills;
 using TeraDataLite;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels.ClassManagers
 {
     public class ArcherLayoutVM : BaseClassLayoutVM
     {

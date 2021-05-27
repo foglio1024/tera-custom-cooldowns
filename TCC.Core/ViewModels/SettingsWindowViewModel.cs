@@ -18,10 +18,9 @@ using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Update;
-using TCC.Utilities;
 using TCC.Utils;
 using TeraPacketParser;
-using CaptureMode = TCC.Data.CaptureMode;
+using CaptureMode = TeraPacketParser.CaptureMode;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
@@ -204,7 +203,7 @@ namespace TCC.ViewModels
                         break;
                     case 2:
                         Log.N("omegalul", "There's actually no Kylos helper lol. Just memeing. Have fun o/", NotificationType.Warning, 6000);
-                        TccUtils.OpenUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                        Utils.Utilities.OpenUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
                         break;
                 }
                 N();
@@ -749,9 +748,9 @@ namespace TCC.ViewModels
             {
                 var strUrl = url.ToString();
                 if (strUrl == null) return;
-                TccUtils.OpenUrl(strUrl);
+                Utils.Utilities.OpenUrl(strUrl);
             });
-            RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook.ToString(), true));
+            RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook.ToString(), true, App.Settings.LastAccountNameHash));
             OpenWindowCommand = new RelayCommand(winType =>
             {
                 var t = (Type) winType;

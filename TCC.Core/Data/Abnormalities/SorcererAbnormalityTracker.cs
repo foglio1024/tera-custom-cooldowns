@@ -1,6 +1,6 @@
 ﻿using System;
 using TCC.Data.Skills;
-using TCC.ViewModels;
+using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
 using TeraPacketParser.Messages;
 
