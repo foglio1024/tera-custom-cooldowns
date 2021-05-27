@@ -18,14 +18,16 @@ namespace TCC.UI
     public static class WindowManager
     {
         public static event Action? RepositionRequestedEvent;
+
         public static event Action? ResetToCenterEvent;
+
         public static event Action? MakeGlobalEvent;
+
         public static event Action? DisposeEvent;
 
         public static TccTrayIcon TrayIcon { get; } = new();
         public static VisibilityManager VisibilityManager { get; } = new();
         public static Size ScreenSize => FocusManager.TeraScreen.Bounds.Size;
-
 
         public static CooldownWindow CooldownWindow { get; private set; } = null!;
         public static CharacterWindow CharacterWindow { get; private set; } = null!;
@@ -38,6 +40,7 @@ namespace TCC.UI
         public static FloatingButtonWindow FloatingButton { get; private set; } = null!;
         public static NotificationAreaWindow NotificationArea { get; private set; } = null!;
         public static FlightDurationWindow FlightDurationWindow { get; private set; } = null!;
+
         //public static SkillConfigWindow? SkillConfigWindow { get; set; }
         public static PerfMonitorWindow PerfMonitor { get; private set; } = null!;
 
@@ -45,13 +48,11 @@ namespace TCC.UI
 
         public static LfgListWindow LfgListWindow { get; private set; } = null!;
 
-
         public static async Task Init()
         {
             FocusManager.Init();
 
             await LoadWindows();
-
 
             if (App.Settings.UseHotkeys) KeyboardHook.Instance.Enable();
 
@@ -61,6 +62,7 @@ namespace TCC.UI
             SystemEvents.DisplaySettingsChanged += SystemEventsOnDisplaySettingsChanged;
 
             ToolTipService.ShowDurationProperty.OverrideMetadata(typeof(DependencyObject), new FrameworkPropertyMetadata(int.MaxValue));
+
         }
 
         private static void SystemEventsOnDisplaySettingsChanged(object? sender, EventArgs e)
@@ -80,7 +82,6 @@ namespace TCC.UI
                 TrayIcon.Dispose();
                 CloseOtherWindows();
             });
-
         }
 
         private static void CloseOtherWindows()
@@ -92,7 +93,6 @@ namespace TCC.UI
 
         private static async Task LoadWindows()
         {
-
             // TODO: TccModules should define and create their own windows
             var b1 = new TccWidgetBuilder<CharacterWindow, CharacterWindowViewModel>(App.Settings.CharacterWindowSettings);
             CharacterWindow = await b1.GetWindow();
@@ -147,7 +147,6 @@ namespace TCC.UI
             ChatManager.Start();
         }
 
-
         public static void ReloadPositions()
         {
             RepositionRequestedEvent?.Invoke();
@@ -192,6 +191,5 @@ namespace TCC.UI
             public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
             public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ??= new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings);
         }
-
     }
 }

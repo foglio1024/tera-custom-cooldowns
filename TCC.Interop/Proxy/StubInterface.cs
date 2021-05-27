@@ -25,7 +25,7 @@ namespace TCC.Interop.Proxy
             
         }
 
-        public async Task Init(bool useLfg, bool enablePlayerMenu, bool enableProxy, bool showIngameChat, bool tccChatEnabled)
+        public async Task InitAsync(bool useLfg, bool enablePlayerMenu, bool enableProxy, bool showIngameChat, bool tccChatEnabled)
         {
             StubServer.RequestReceived += _messageParser.HandleRequest;
             StubServer.ResponseReceived += _messageParser.HandleResponse;

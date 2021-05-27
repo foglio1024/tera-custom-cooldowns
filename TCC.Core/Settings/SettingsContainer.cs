@@ -22,7 +22,7 @@ namespace TCC.Settings
         private bool _enableProxy;
 
         #region Misc
-        // Misc
+
         public DateTime LastRun { get; set; }
         public string LastLanguage
         {
@@ -50,16 +50,16 @@ namespace TCC.Settings
             get => _enableProxy || App.ToolboxMode;
             set => _enableProxy = value;
         }
-
         public bool DontShowFUBH { get; set; }
         public ControlShape AbnormalityShape { get; set; }
         public ControlShape SkillShape { get; set; }
         public CaptureMode CaptureMode { get; set; }
         public MentionMode MentionMode { get; set; }
 
-        #endregion
+        #endregion Misc
 
         #region Hotkeys
+
         public HotKey LfgHotkey { get; set; }
         public HotKey DashboardHotkey { get; set; }
         public HotKey SettingsHotkey { get; set; }
@@ -70,9 +70,10 @@ namespace TCC.Settings
         public HotKey ToggleHideAllHotkey { get; set; }
         public HotKey AbnormalSettingsHotkey { get; set; }
 
-        #endregion
+        #endregion Hotkeys
 
         #region Webhooks
+
         public bool WebhookEnabledFieldBoss { get; set; }
         public string WebhookUrlFieldBoss { get; set; }
         public string WebhookMessageFieldBossSpawn { get; set; }
@@ -82,7 +83,8 @@ namespace TCC.Settings
         public string WebhookMessageGuildBam { get; set; }
         public bool WebhookEnabledMentions { get; set; }
         public string WebhookUrlMentions { get; set; }
-        #endregion
+
+        #endregion Webhooks
 
         public CooldownWindowSettings CooldownWindowSettings { get; set; }
         public CharacterWindowSettings CharacterWindowSettings { get; set; }
@@ -98,6 +100,7 @@ namespace TCC.Settings
         public PerfMonitorSettings PerfMonitorSettings { get; set; }
 
         #region Chat
+
         public TSObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; }
         public WindowSettingsBase ChatSettings { get; private set; } // added to have the EnabledChanged event
         public bool ChatEnabled
@@ -127,42 +130,43 @@ namespace TCC.Settings
         public int FontSize { get; set; }
         public int ChatScrollAmount { get; set; }
         public List<string> UserExcludedSysMsg { get; set; }
-        #endregion
+
+        #endregion Chat
 
         #region Twitch
+
         [JsonIgnore]
         public string TwitchName { get; set; } //TODO: re-add this
+
         [JsonIgnore]
         public string TwitchToken { get; set; } //TODO: re-add this
+
         [JsonIgnore]
-        public string TwitchChannelName { get; set; } //TODO: re-add this 
-        #endregion
+        public string TwitchChannelName { get; set; } //TODO: re-add this
+
+        #endregion Twitch
 
         public static string SettingsOverride { get; set; } = "";
         public string LastAccountNameHash { get; set; } = "";
         public bool BackgroundNotifications { get; set; }
         public bool EnablePlayerMenu { get; set; }
-        public bool ShowDecimalsInCooldowns { get; set; }
-        //public bool ShowConsole { get; set; }
-
+        public bool ShowDecimalsInCooldowns { get; set; } //TODO: move to CooldownWindowSettings
 
         public SettingsContainer()
         {
-            MessageFactory.ReleaseVersionChanged += OnReleaseVersionChanged;
-
             StatSentVersion = App.AppVersion;
             _lastLanguage = "";
             StatSentTime = DateTime.MinValue;
             LastScreenSize = FocusManager.TeraScreen.Bounds.Size;
-            CooldownWindowSettings = new CooldownWindowSettings(/*.4, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CooldownWindowSettings)*/);
-            CharacterWindowSettings = new CharacterWindowSettings(/*.4, 1, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CharacterWindowSettings)*/);
-            NpcWindowSettings = new NpcWindowSettings(/*.4, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(NpcWindowSettings)*/);
-            BuffWindowSettings = new BuffWindowSettings(/*1, .7, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(BuffWindowSettings)*/);
-            ClassWindowSettings = new ClassWindowSettings(/*.25, .6, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(ClassWindowSettings)*/);
-            GroupWindowSettings = new GroupWindowSettings(/*0, 0, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(GroupWindowSettings)*/);
-            FlightGaugeWindowSettings = new FlightWindowSettings(/*0, 0, 0, 0, true, ClickThruMode.Always, 1, false, 1, false, true, false*/);
-            FloatingButtonSettings = new FloatingButtonWindowSettings(/*0, 0, 0, 0, true, ClickThruMode.Never, 1, false, 1, false, true, true*/);
-            CivilUnrestWindowSettings = new CivilUnrestWindowSettings(/*1, .45, 0, 0, true, ClickThruMode.Never, 1, true, .5, false, true, false, null, nameof(CivilUnrestWindowSettings)*/);
+            CooldownWindowSettings = new CooldownWindowSettings();
+            CharacterWindowSettings = new CharacterWindowSettings();
+            NpcWindowSettings = new NpcWindowSettings();
+            BuffWindowSettings = new BuffWindowSettings();
+            ClassWindowSettings = new ClassWindowSettings();
+            GroupWindowSettings = new GroupWindowSettings();
+            FlightGaugeWindowSettings = new FlightWindowSettings();
+            FloatingButtonSettings = new FloatingButtonWindowSettings();
+            CivilUnrestWindowSettings = new CivilUnrestWindowSettings();
             ChatWindowsSettings = new TSObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
             PerfMonitorSettings = new PerfMonitorSettings();
             ChatSettings = new WindowSettingsBase();
@@ -218,39 +222,6 @@ namespace TCC.Settings
             ShowDecimalsInCooldowns = true;
         }
 
-        private void OnReleaseVersionChanged(int v)
-        {
-#if TERA_X64
-            var major = v / 100;
-            if (major >= 97)
-            {
-                var settings = new List<WindowSettingsBase>
-                {
-                    CooldownWindowSettings,
-                    CharacterWindowSettings,
-                    NpcWindowSettings,
-                    BuffWindowSettings,
-                    ClassWindowSettings,
-                    GroupWindowSettings,
-                    FlightGaugeWindowSettings,
-                    FloatingButtonSettings,
-                    CivilUnrestWindowSettings,
-                    NotificationAreaSettings
-                }.Concat(ChatWindowsSettings).Where(s => s.ClickThruMode == ClickThruMode.GameDriven);
-
-                if (settings.Any())
-                {
-                    foreach (var ws in settings)
-                    {
-                        ws.ClickThruMode = ClickThruMode.Always;
-                    }
-
-                    TccMessageBox.Show("TCC", SR.ForcingGameDrivenClickThruOff, MessageBoxButton.OK);
-                }
-            }
-#endif
-        }
-
         public static SettingsContainer Load()
         {
             var settingsPath = SettingsOverride == ""
@@ -258,12 +229,12 @@ namespace TCC.Settings
                 : SettingsOverride;
             return new JsonSettingsReader().LoadSettings(settingsPath);
         }
+
         public void Save()
         {
             var toRemove = ChatWindowsSettings.Where(s => s.Tabs.Count == 0).ToList();
             toRemove.ForEach(s => ChatWindowsSettings.Remove(s));
             new JsonSettingsWriter().Save();
         }
-
     }
 }

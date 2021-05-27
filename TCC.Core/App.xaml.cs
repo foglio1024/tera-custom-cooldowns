@@ -11,9 +11,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using TCC.Analysis;
 using TCC.Data;
-using TCC.Exceptions;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Loader;
@@ -24,6 +22,8 @@ using TCC.UI.Windows;
 using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
+using TCC.Utils.Exceptions;
+using TeraPacketParser.Analysis;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC
@@ -61,12 +61,13 @@ namespace TCC
         public static bool Loading { get; private set; }
         public static bool ToolboxMode { get; private set; }
         public static bool FirstStart { get; set; }
+
         public static Random Random { get; } = new(DateTime.Now.DayOfYear + DateTime.Now.Year +
                                                    DateTime.Now.Minute + DateTime.Now.Second +
                                                    DateTime.Now.Millisecond);
+
         public static TccSplashScreen SplashScreen { get; set; } = null!;
         public static SettingsContainer Settings { get; set; } = null!;
-
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
@@ -74,20 +75,28 @@ namespace TCC
             AppVersion = TccUtils.GetTccVersion();
             Log.Config(Path.Combine(BasePath, "logs"), AppVersion); // NLog when?
             ParseStartupArgs(e.Args.ToList());
-            if (!File.Exists(Path.Combine(BasePath, SettingsGlobals.SettingsFileName)))
-                FirstStart = true;
+
+            FirstStart = !File.Exists(Path.Combine(BasePath, SettingsGlobals.SettingsFileName));
+
             BaseDispatcher = Dispatcher.CurrentDispatcher;
             BaseDispatcher.Thread.Name = "Main";
-
+            Utils.Utilities.CloseRequested += () => Close();
 
             TccMessageBox.CreateAsync();
             if (IsAlreadyRunning() && !Debugger.IsAttached)
             {
-                if (!ToolboxMode) TccMessageBox.Show(SR.AnotherInstanceRunning, MessageBoxType.Information);
+                if (!ToolboxMode)
+                {
+                    TccMessageBox.Show(SR.AnotherInstanceRunning, MessageBoxType.Information);
+                }
                 Current.Shutdown();
                 return;
             }
-            if (!Debugger.IsAttached) AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.HandleGlobalException;
+
+            if (!Debugger.IsAttached)
+            {
+                AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.OnGlobalException;
+            }
 
             Loading = true;
             await Setup();
@@ -98,9 +107,9 @@ namespace TCC
                 new WelcomeWindow().Show();
             }
 
+
             //Tester.Enable();
             //Tester.ShowDebugWindow();
-
         }
 
         private static async Task Setup()
@@ -124,12 +133,14 @@ namespace TCC
             SplashScreen.VM.BottomText = "Loading settings...";
             Settings = SettingsContainer.Load();
             WindowManager.InitSettingsWindow(); // need it in case language is not correct
-
             SplashScreen.VM.Progress = 20;
             Process.GetCurrentProcess().PriorityClass = Settings.HighPriority
                 ? ProcessPriorityClass.High
                 : ProcessPriorityClass.Normal;
-            if (Settings.ForceSoftwareRendering) RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            if (Settings.ForceSoftwareRendering)
+            {
+                RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            }
 
             // ----------------------------
             SplashScreen.VM.Progress = 30;
@@ -151,10 +162,18 @@ namespace TCC
             _ = Task.Run(() => new IconsUpdater().CheckForUpdates());
 
             // ----------------------------
-            SplashScreen.VM.BottomText = "Initializing packet processor...";
             SplashScreen.VM.Progress = 80;
+            SplashScreen.VM.BottomText = "Initializing packet processor...";
             PacketAnalyzer.ProcessorReady += LoadModules;
-            await PacketAnalyzer.InitAsync();
+            await PacketAnalyzer.InitAsync(Settings.CaptureMode, ToolboxMode);
+            PacketAnalyzer.InitServerDatabase(DataPath, Path.Combine(ResourcesPath, "config/server-overrides.txt"), string.IsNullOrEmpty(Settings.LastLanguage)
+                ? "EU-EN"
+                : Settings.LastLanguage);
+            _ = StubInterface.Instance.InitAsync(Settings.LfgWindowSettings.Enabled,
+                                                 Settings.EnablePlayerMenu,
+                                                 Settings.EnableProxy,
+                                                 Settings.ShowIngameChat,
+                                                 Settings.ChatEnabled);
 
             // ----------------------------
             SplashScreen.VM.Progress = 90;
@@ -165,14 +184,16 @@ namespace TCC
             SplashScreen.VM.Progress = 100;
             SplashScreen.CloseWindowSafe();
 
-
             // ----------------------------
             Log.Chat($"{AppVersion} ready.");
             ReadyEvent?.Invoke();
 
             if (!Beta && Settings.BetaNotification && UpdateManager.IsBetaNewer())
+            {
                 Log.N("TCC beta available", SR.BetaAvailable, NotificationType.Success, 10000);
+            }
         }
+
         private static void ParseStartupArgs(IList<string> args)
         {
             // --toolbox
@@ -194,12 +215,14 @@ namespace TCC
             ResourcesPath = Path.Combine(BasePath, "resources");
             DataPath = Path.Combine(ResourcesPath, "data");
         }
+
         public static void Restart()
         {
             Settings.Save();
             Process.Start("TCC.exe", $"--restart{(ToolboxMode ? " --toolbox" : "")}");
             Close();
         }
+
         public static void Close(bool releaseMutex = true, int code = 0)
         {
             _running = false;
@@ -215,6 +238,7 @@ namespace TCC
             }
             Environment.Exit(code);
         }
+
         private static bool IsAlreadyRunning()
         {
             _mutex = new Mutex(true, nameof(TCC), out var createdNew);
@@ -222,6 +246,7 @@ namespace TCC
             _mutex.WaitOne();
             return false;
         }
+
         public static void ReleaseMutex()
         {
             _running = false;
@@ -237,6 +262,7 @@ namespace TCC
                 }
             });
         }
+
         private static void LoadModules()
         {
             BaseDispatcher.Invoke(() =>
@@ -259,6 +285,7 @@ namespace TCC
         }
 
         #region Dispatchers
+
         public static Dispatcher BaseDispatcher { get; private set; } = null!;
 
         public static ConcurrentDictionary<int, Dispatcher> RunningDispatchers { get; } = new();
@@ -310,8 +337,9 @@ namespace TCC
                         });
                         Thread.Sleep(1000);
                     }
-                    catch
+                    catch (Exception e)
                     {
+                        Log.CW($"Error while checking for threads activity: {e}");
                     }
 
                     if (deadlockedDispatchers.Count <= 1) continue;
@@ -322,7 +350,8 @@ namespace TCC
             })
             { Name = "Watcher" }.Start();
         }
-        #endregion
+
+        #endregion Dispatchers
 
         #region Misc
 
@@ -340,7 +369,6 @@ namespace TCC
             });
         }
 
-        #endregion
-
+        #endregion Misc
     }
 }
