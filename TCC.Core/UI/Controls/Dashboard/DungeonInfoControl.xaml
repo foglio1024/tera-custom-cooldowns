@@ -44,17 +44,17 @@
                 </Border.RenderTransform>
             </Border>
             <TextBlock Grid.Column="0" Foreground="#afff"  VerticalAlignment="Bottom" Margin="7,2,15,2" FontWeight="Normal" HorizontalAlignment="Left" 
-                                   FontSize="13" TextWrapping="WrapWithOverflow" Text="{Binding Dungeon.Name}"></TextBlock>
+                                   FontSize="13" TextWrapping="WrapWithOverflow" Text="{Binding Dungeon.Name}" />
         </Grid>
         <Border.RenderTransform>
             <TranslateTransform Y="0"/>
         </Border.RenderTransform>
         <Border.Effect>
-            <DropShadowEffect Opacity=".4" ShadowDepth="1" BlurRadius="3"></DropShadowEffect>
+            <DropShadowEffect Opacity=".4" ShadowDepth="1" BlurRadius="3" />
         </Border.Effect>
 
     </Border>
     <UserControl.RenderTransform>
-        <TranslateTransform></TranslateTransform>
+        <TranslateTransform />
     </UserControl.RenderTransform>
 </UserControl>

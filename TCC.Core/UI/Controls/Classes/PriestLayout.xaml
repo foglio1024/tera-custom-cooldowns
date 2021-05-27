@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:PriestLayoutVM}" >
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:PriestLayoutVM}" >
     <Grid Width="Auto" Margin="50 20 140 50" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,8 +27,7 @@
                     </FrameworkElement.RenderTransform>
                 </Border>
                 <skills:RhombSkillEffectControl DataContext="{Binding EdictOfJudgment }" HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
-                </skills:RhombSkillEffectControl>
+                                            VerticalAlignment="Center" />
 
             </Grid>
             <Border BorderBrush="#89a" BorderThickness="1" Margin="9" Background="{StaticResource RevampBackgroundGradientBrush}"
@@ -83,7 +82,7 @@
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="45"/>
-                            <TranslateTransform X="90" Y="0"></TranslateTransform>
+                            <TranslateTransform X="90" Y="0" />
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>
@@ -100,7 +99,7 @@
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
                             <RotateTransform Angle="45"/>
-                            <TranslateTransform X="135" Y="45"></TranslateTransform>
+                            <TranslateTransform X="135" Y="45" />
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>

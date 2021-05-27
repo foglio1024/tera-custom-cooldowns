@@ -11,7 +11,6 @@
                     xmlns:chat="clr-namespace:TCC.Data.Chat"
                     xmlns:pc="clr-namespace:TCC.Data.Pc"
                     xmlns:skills="clr-namespace:TCC.Data.Skills"
-                    xmlns:mg="clr-namespace:TCC.Interop.Moongourd"
                     xmlns:abnormalities1="clr-namespace:TCC.UI.Controls.Abnormalities"
                     xmlns:chat1="clr-namespace:TCC.UI.Controls.Chat"
                     xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
@@ -1519,7 +1518,7 @@
                 </Setter>
             </DataTrigger>
             <DataTrigger Binding="{Binding IsFullOffline}" Value="True">
-                <Setter TargetName="MainGrid" Property="Opacity" Value=".5"></Setter>
+                <Setter TargetName="MainGrid" Property="Opacity" Value=".5" />
                 <Setter TargetName="Ell" Property="BorderBrush" Value="SlateGray" />
                 <Setter TargetName="hover" Property="Background" Value="SlateGray" />
             </DataTrigger>
@@ -1703,7 +1702,7 @@
                        VerticalAlignment="Center" Margin="5 0" />
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="MoongourdEncounterDataTemplate" DataType="mg:MoongourdEncounter">
+    <DataTemplate x:Key="MoongourdEncounterDataTemplate" DataType="chat1:EncounterViewModel">
         <Grid VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230" />

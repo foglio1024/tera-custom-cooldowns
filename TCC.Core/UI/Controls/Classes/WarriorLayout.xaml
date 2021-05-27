@@ -3,13 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:nsConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
              xmlns:conv="clr-namespace:TCC.UI.Converters"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:WarriorLayoutVM}">
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:WarriorLayoutVM}">
     <UserControl.Resources>
         <ControlTemplate x:Key="EdgeArrowLayout">
             <elements:EdgeArrowLayout EdgeCounter="{Binding EdgeCounter}"  Margin="0 -40"

@@ -16,8 +16,7 @@
                 Height="26" 
                 Visibility="Hidden"
                 CornerRadius="0,13,0,0" 
-                x:Name="BaseBorder" >
-        </Border>
+                x:Name="BaseBorder" />
         <Grid x:Name="MaxBorder" Margin="2 -2 -6 -2" Opacity="0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -55,15 +54,15 @@
                      Style="{StaticResource Cont}">
             <UniformGrid.Resources>
                 <Style TargetType="Path">
-                    <Setter Property="Fill" Value="{StaticResource RevampBackgroundBrush}"></Setter>
-                    <Setter Property="Stroke" Value="{StaticResource RevampBorderBrush}"></Setter>
-                    <Setter Property="StrokeThickness" Value="1"></Setter>
-                    <Setter Property="Width" Value="32"></Setter>
-                    <Setter Property="Height" Value="Auto"></Setter>
-                    <Setter Property="Margin" Value="0 0 -9 0"></Setter>
-                    <Setter Property="Stretch" Value="UniformToFill"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="Data" Value="M0 0, 1 0, 1.5 .5, 1 1, 0 1, .5 .5, 0 0"></Setter>
+                    <Setter Property="Fill" Value="{StaticResource RevampBackgroundBrush}" />
+                    <Setter Property="Stroke" Value="{StaticResource RevampBorderBrush}" />
+                    <Setter Property="StrokeThickness" Value="1" />
+                    <Setter Property="Width" Value="32" />
+                    <Setter Property="Height" Value="Auto" />
+                    <Setter Property="Margin" Value="0 0 -9 0" />
+                    <Setter Property="Stretch" Value="UniformToFill" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Data" Value="M0 0, 1 0, 1.5 .5, 1 1, 0 1, .5 .5, 0 0" />
                 </Style>
             </UniformGrid.Resources>
             <Path />
@@ -86,16 +85,16 @@
                      Style="{StaticResource Cont}">
             <UniformGrid.Resources>
                 <Style TargetType="Path">
-                    <Setter Property="Opacity" Value="0"></Setter>
-                    <Setter Property="Fill" Value="#1fff"></Setter>
-                    <Setter Property="Stroke" Value="#2fff"></Setter>
-                    <Setter Property="StrokeThickness" Value="1"></Setter>
-                    <Setter Property="Width" Value="32"></Setter>
-                    <Setter Property="Margin" Value="0 0 -9 0"></Setter>
-                    <Setter Property="Height" Value="Auto"></Setter>
-                    <Setter Property="Stretch" Value="UniformToFill"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="Data" Value="M0 0, 1 0, 1.5 .5, 1 1, 0 1, .5 .5, 0 0"></Setter>
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="Fill" Value="#1fff" />
+                    <Setter Property="Stroke" Value="#2fff" />
+                    <Setter Property="StrokeThickness" Value="1" />
+                    <Setter Property="Width" Value="32" />
+                    <Setter Property="Margin" Value="0 0 -9 0" />
+                    <Setter Property="Height" Value="Auto" />
+                    <Setter Property="Stretch" Value="UniformToFill" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Data" Value="M0 0, 1 0, 1.5 .5, 1 1, 0 1, .5 .5, 0 0" />
 
                 </Style>
             </UniformGrid.Resources>
@@ -119,10 +118,10 @@
                      Style="{StaticResource Cont}">
             <UniformGrid.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Foreground" Value="#fff"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                    <Setter Property="Margin" Value="9 0 -2 0"></Setter>
+                    <Setter Property="Foreground" Value="#fff" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="9 0 -2 0" />
 
                 </Style>
             </UniformGrid.Resources>

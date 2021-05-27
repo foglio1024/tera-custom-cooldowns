@@ -45,7 +45,7 @@
                               Margin="0" VerticalAlignment="Center" RenderTransformOrigin=".5 .5">
                         <Path.RenderTransform>
                             <TransformGroup>
-                                <TranslateTransform X="0" Y="-2"></TranslateTransform>
+                                <TranslateTransform X="0" Y="-2" />
                                 <RotateTransform Angle="-45" />
 
                             </TransformGroup>
@@ -55,8 +55,8 @@
 
                 <Border.RenderTransform>
                     <TransformGroup>
-                        <RotateTransform Angle="45"></RotateTransform>
-                        <TranslateTransform X="20" Y="-3"></TranslateTransform>
+                        <RotateTransform Angle="45" />
+                        <TranslateTransform X="20" Y="-3" />
                     </TransformGroup>
                 </Border.RenderTransform>
             </Border>

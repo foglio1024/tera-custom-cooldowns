@@ -53,7 +53,7 @@
                     Click="OnCloseButtonClick"
                     VerticalContentAlignment="Center"
                     Grid.Column="2">
-                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"></Path>
+                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" />
             </Button>
         </Grid>
         <Border Style="{StaticResource RevampBorderStyle}"
@@ -101,15 +101,15 @@
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                              Value="Uncommon">
-                                                                        <Setter Property="Foreground" Value="Green"></Setter>
+                                                                        <Setter Property="Foreground" Value="Green" />
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                              Value="Rare">
-                                                                        <Setter Property="Foreground" Value="DodgerBlue"></Setter>
+                                                                        <Setter Property="Foreground" Value="DodgerBlue" />
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                              Value="Superior">
-                                                                        <Setter Property="Foreground" Value="Orange"></Setter>
+                                                                        <Setter Property="Foreground" Value="Orange" />
                                                                     </DataTrigger>
                                                                 </Style.Triggers>
                                                             </Style>
@@ -122,8 +122,8 @@
                                                             <DataTemplate DataType="{x:Type local:InventoryItemWithOwner}">
                                                                 <StackPanel Orientation="Horizontal">
 
-                                                                    <TextBlock Text="{Binding Owner.Name}" Width="120" TextTrimming="CharacterEllipsis" Foreground="#aaa"></TextBlock>
-                                                                    <TextBlock Text="{Binding Item.Amount}" Margin="3 0"></TextBlock>
+                                                                    <TextBlock Text="{Binding Owner.Name}" Width="120" TextTrimming="CharacterEllipsis" Foreground="#aaa" />
+                                                                    <TextBlock Text="{Binding Item.Amount}" Margin="3 0" />
 
                                                                 </StackPanel>
                                                             </DataTemplate>
@@ -143,8 +143,7 @@
                                         <!--TODO:Stroke="{Binding Item.RareGrade, Converter={StaticResource ...}}"-->
                                         <Shape.Fill>
                                             <ImageBrush
-                                                            ImageSource="{Binding Item.Item.IconName, Converter={StaticResource IconNameToPath}}">
-                                            </ImageBrush>
+                                                            ImageSource="{Binding Item.Item.IconName, Converter={StaticResource IconNameToPath}}" />
                                         </Shape.Fill>
                                         <Shape.Style>
                                             <Style TargetType="Shape">
@@ -156,15 +155,15 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                  Value="Uncommon">
-                                                        <Setter Property="Stroke" Value="{StaticResource TccGreenGradientBrush}"></Setter>
+                                                        <Setter Property="Stroke" Value="{StaticResource TccGreenGradientBrush}" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                  Value="Rare">
-                                                        <Setter Property="Stroke" Value="{StaticResource TccNormalGradientBrush}"></Setter>
+                                                        <Setter Property="Stroke" Value="{StaticResource TccNormalGradientBrush}" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                  Value="Superior">
-                                                        <Setter Property="Stroke" Value="{StaticResource TccYellowGradientBrush}"></Setter>
+                                                        <Setter Property="Stroke" Value="{StaticResource TccYellowGradientBrush}" />
                                                     </DataTrigger>
 
                                                 </Style.Triggers>
@@ -175,7 +174,7 @@
                                                          Stretch="Uniform" VerticalAlignment="Top"
                                                          HorizontalAlignment="Left">
                                         <Shape.Effect>
-                                            <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
+                                            <DropShadowEffect ShadowDepth="1" />
                                         </Shape.Effect>
                                         <Shape.Style>
                                             <Style TargetType="Shape">
@@ -183,20 +182,19 @@
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                              Value="Common">
                                                         <Setter Property="Fill"
-                                                                            Value="{StaticResource RevampBorderBrush}">
-                                                        </Setter>
+                                                                            Value="{StaticResource RevampBorderBrush}" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                              Value="Uncommon">
-                                                        <Setter Property="Fill" Value="Green"></Setter>
+                                                        <Setter Property="Fill" Value="Green" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                              Value="Rare">
-                                                        <Setter Property="Fill" Value="DodgerBlue"></Setter>
+                                                        <Setter Property="Fill" Value="DodgerBlue" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Item.Item.RareGrade}"
                                                                              Value="Superior">
-                                                        <Setter Property="Fill" Value="Orange"></Setter>
+                                                        <Setter Property="Fill" Value="Orange" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -215,8 +213,7 @@
                                                                             StrokeThickness="3"
                                                                             Stroke="#9000"
                                                                             HorizontalAlignment="Right"
-                                                                            TextAlignment="Right">
-                                        </controls:OutlinedTextBlock>
+                                                                            TextAlignment="Right" />
                                     </Viewbox>
                                 </Grid>
                             </DataTemplate>
@@ -226,15 +223,13 @@
                 <Grid Grid.Row="1">
                     <Path Data="{StaticResource SvgSearch}" Margin="0 3 3 3" Height="15"
                                       VerticalAlignment="Center"
-                                      HorizontalAlignment="Right">
-                    </Path>
+                                      HorizontalAlignment="Right" />
                     <TextBox Margin="0 0 0 0" BorderThickness="0"
-                                         x:Name="InventoryFilter"
-                                         VerticalAlignment="Stretch"
-                                         VerticalContentAlignment="Center"
-                                         Foreground="#bfff" Background="#1ddf"
-                                         CaretBrush="#8fff" TextChanged="FilterInventory">
-                    </TextBox>
+                             x:Name="InventoryFilter"
+                             VerticalAlignment="Stretch"
+                             VerticalContentAlignment="Center"
+                             Foreground="#bfff" Background="#1ddf"
+                             CaretBrush="#8fff" TextChanged="FilterInventory" />
                 </Grid>
 
             </Grid>
@@ -242,17 +237,16 @@
         <ProgressBar Grid.Row="2" Height="3" Background="#7112" BorderThickness="0" Foreground="#9667"
                      Value="{Binding TotalProgress}"
                      IsHitTestVisible="False"
-                     Margin="1 12 1 1"></ProgressBar>
+                     Margin="1 12 1 1" />
         <TextBlock Style="{StaticResource DefaultTextStyle}"
-                       Foreground="#999"
-                       Text="{Binding ElementName=MainItemsControl, Path=Items.Count}"
-                       VerticalAlignment="Center"
-                       TextAlignment="Right"
-                       FontSize="11"
-                       Grid.Row="2"
-                       Margin="0 -12 7 -4" 
-                   IsHitTestVisible="False">
-        </TextBlock>
+                   Foreground="#999"
+                   Text="{Binding ElementName=MainItemsControl, Path=Items.Count}"
+                   VerticalAlignment="Center"
+                   TextAlignment="Right"
+                   FontSize="11"
+                   Grid.Row="2"
+                   Margin="0 -12 7 -4" 
+                   IsHitTestVisible="False" />
 
     </Grid>
 </Window>

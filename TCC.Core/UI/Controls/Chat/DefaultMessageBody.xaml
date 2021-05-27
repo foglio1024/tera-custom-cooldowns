@@ -52,29 +52,25 @@
                         VerticalAlignment="Center" Style="{StaticResource ButtonContentOpacityStyle}" Click="PinBtn_OnClick">
                         <Grid Margin="3 0">
                             <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource RevampDarkBackgroundBrush}"  Margin="-6" Opacity=".8"
-                                 Height="18" Width="18"
-                                 >
-                            </Ellipse>
+                                 Height="18" Width="18" />
 
-                            <Path Data="{StaticResource SvgPin}" Height="Auto" MaxHeight="12" Margin="3"></Path>
+                            <Path Data="{StaticResource SvgPin}" Height="Auto" MaxHeight="12" Margin="3" />
                         </Grid>
                     </Button>
                     <Button Grid.Column="1" HorizontalAlignment="Right" x:Name="CopyBtn" Visibility="Collapsed" ToolTip="Copy text to clipboard"
                         VerticalAlignment="Center" Style="{StaticResource ButtonContentOpacityStyle}" Click="CopyBtn_OnClick">
                         <Grid Margin="3 0">
                             <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource RevampDarkBackgroundBrush}" Margin="-6" Opacity=".8"
-             Height="18" Width="18"
-    >
-                            </Ellipse>
-                            <Path Data="{StaticResource SvgCopy}" Height="Auto" MaxHeight="12" Margin="3"></Path>
+             Height="18" Width="18" />
+                            <Path Data="{StaticResource SvgCopy}" Height="Auto" MaxHeight="12" Margin="3" />
                         </Grid>
                     </Button>
                 </Grid>
             </Grid>
             <DataTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter TargetName="PinBtn" Property="Visibility" Value="Visible"></Setter>
-                    <Setter TargetName="CopyBtn" Property="Visibility" Value="Visible"></Setter>
+                    <Setter TargetName="PinBtn" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="CopyBtn" Property="Visibility" Value="Visible" />
                 </Trigger>
             </DataTemplate.Triggers>
         </DataTemplate>

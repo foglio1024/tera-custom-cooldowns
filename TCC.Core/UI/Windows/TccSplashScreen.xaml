@@ -56,8 +56,8 @@
         <Image Grid.Row="1" Source="{Binding Image}" x:Name="BackgroundImage" Stretch="UniformToFill" Height="250" >
             <Image.OpacityMask>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="1.2 0">
-                    <GradientStop Offset="0" Color="Transparent"></GradientStop>
-                    <GradientStop Offset="1" Color="White"></GradientStop>
+                    <GradientStop Offset="0" Color="Transparent" />
+                    <GradientStop Offset="1" Color="White" />
                 </LinearGradientBrush>
             </Image.OpacityMask>
         </Image>
@@ -74,14 +74,14 @@
                            Visibility="{Binding Beta, Converter={converters:BoolToVisibility}}" 
                            />
             </StackPanel>
-            <Separator Margin="0 -6 -20 3" Background="#3acf"></Separator>
+            <Separator Margin="0 -6 -20 3" Background="#3acf" />
             <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Margin="0 -6 -20 0" FontSize="12" Foreground="#7fff" FontWeight="Thin">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
-                        <Setter Property="Text" Value="standalone mode"></Setter>
+                        <Setter Property="Text" Value="standalone mode" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Toolbox}" Value="true">
-                                <Setter Property="Text" Value="toolbox mode"></Setter>
+                                <Setter Property="Text" Value="toolbox mode" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

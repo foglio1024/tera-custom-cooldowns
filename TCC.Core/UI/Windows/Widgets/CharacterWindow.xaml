@@ -30,9 +30,9 @@
     </widgets:TccWidget.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Border Grid.RowSpan="3" Style="{StaticResource BoundaryBorderStyle}" x:Name="Boundary"/>
 
@@ -132,8 +132,8 @@
                                         <Setter Property="Background">
                                             <Setter.Value>
                                                 <LinearGradientBrush EndPoint="1 0">
-                                                    <GradientStop Offset=".6" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
-                                                    <GradientStop Offset=".98" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                                    <GradientStop Offset=".6" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}" />
+                                                    <GradientStop Offset=".98" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}" />
                                                     <GradientStop Color="White" Offset="1" />
 
                                                 </LinearGradientBrush>
@@ -147,8 +147,8 @@
                                             <Setter Property="Background">
                                                 <Setter.Value>
                                                     <LinearGradientBrush EndPoint="1 0">
-                                                        <GradientStop Offset="1" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}"></GradientStop>
-                                                        <GradientStop Offset="0.02" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}"></GradientStop>
+                                                        <GradientStop Offset="1" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor}}" />
+                                                        <GradientStop Offset="0.02" Color="{Binding Player.IsDebuffed, Converter={StaticResource DebuffStatusToHpColor2}}" />
                                                         <GradientStop Color="White" Offset="0" />
                                                     </LinearGradientBrush>
                                                 </Setter.Value>
@@ -190,7 +190,7 @@
                             <Border.Style>
                                 <Style TargetType="Border" BasedOn="{StaticResource {x:Type Border}}">
                                     <Style.Setters>
-                                        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                                        <Setter Property="HorizontalAlignment" Value="Left" />
                                         <Setter Property="Background">
                                             <Setter.Value>
                                                 <LinearGradientBrush EndPoint="1 0">
@@ -205,7 +205,7 @@
 
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Path=Settings.(windowSettings:CharacterWindowSettings.CompactMode)}" Value="False">
-                                            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                                            <Setter Property="HorizontalAlignment" Value="Right" />
                                             <Setter Property="Background">
                                                 <Setter.Value>
                                                     <LinearGradientBrush EndPoint="1 0">
@@ -292,8 +292,8 @@
                                     </FrameworkElement>
                                     <Border.Background>
                                         <LinearGradientBrush EndPoint="1 0">
-                                            <GradientStop Color="{StaticResource MpColorLight}" Offset=".98"></GradientStop>
-                                            <GradientStop Color="{StaticResource MpColor}" Offset="0"></GradientStop>
+                                            <GradientStop Color="{StaticResource MpColorLight}" Offset=".98" />
+                                            <GradientStop Color="{StaticResource MpColor}" Offset="0" />
                                             <GradientStop Color="White" Offset="1" />
 
                                         </LinearGradientBrush>
@@ -345,9 +345,9 @@
                     <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.Level}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="5 0 0 -1" Text="{Binding Player.Name}" 
                                          Fill="#eee" StrokeThickness="3" Stroke="#7000"  FontSize="16" FontFamily="{StaticResource Frutiger}"/>
-                    <Path Data="{StaticResource SvgWeapon}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Item level"></Path>
+                    <Path Data="{StaticResource SvgWeapon}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Item level" />
                     <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.ItemLevel, StringFormat={}{0:N1}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
-                    <Path Data="{StaticResource SvgCrossedSwords}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Current crit factor"></Path>
+                    <Path Data="{StaticResource SvgCrossedSwords}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Current crit factor" />
                     <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.CritFactor, StringFormat={}{0:0}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000" 
                                                 FontSize="14" FontFamily="{StaticResource Frutiger}" Margin="0 0 -300 0"/>
                     <StackPanel.Style>
@@ -546,7 +546,7 @@
                                             <DropShadowEffect ShadowDepth="0"  
                                                               Color="{Binding Player.Class , Converter={converters:ClassToReColorConverter}}"
                                                               
-                                                              BlurRadius="50"></DropShadowEffect>
+                                                              BlurRadius="50" />
                                         </Setter.Value>
                                     </Setter>
 
@@ -600,12 +600,10 @@
                         </Grid.Style>
                         <Rectangle Stroke="{StaticResource TccRedGradient1Brush}" StrokeThickness="1" 
                                RenderTransform="{StaticResource DefaultRotateTransform}" RenderTransformOrigin=".5 .5"
-                               Margin="0">
-
-                        </Rectangle>
+                               Margin="0" />
                         <Rectangle Stroke="{StaticResource TccRedGradient1Brush}" StrokeThickness="5" 
-                               RenderTransform="{StaticResource DefaultRotateTransform}" RenderTransformOrigin=".5 .5"
-                               Margin="0">
+                                   RenderTransform="{StaticResource DefaultRotateTransform}" RenderTransformOrigin=".5 .5"
+                                   Margin="0">
                             <Rectangle.Effect>
                                 <BlurEffect Radius="15"/>
                             </Rectangle.Effect>
@@ -699,14 +697,14 @@
                             <Style BasedOn="{StaticResource {x:Type Path}}" TargetType="Path">
                                 <Setter Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="{StaticResource MpColorLight}"></DropShadowEffect>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="{StaticResource MpColorLight}" />
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Player.IsInCombat}" Value="True">
                                         <Setter Property="Effect">
                                             <Setter.Value>
-                                                <DropShadowEffect ShadowDepth="0" Color="{StaticResource TccRedGradient1Color}" BlurRadius="10"></DropShadowEffect>
+                                                <DropShadowEffect ShadowDepth="0" Color="{StaticResource TccRedGradient1Color}" BlurRadius="10" />
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>

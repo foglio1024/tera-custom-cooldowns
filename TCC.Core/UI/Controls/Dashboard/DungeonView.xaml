@@ -211,7 +211,7 @@
                 Width="30"
                 Style="{StaticResource ButtonContentOpacityStyle}"
                 Click="OnDungeonEditButtonClick">
-            <Path Data="{StaticResource SvgPen}" Margin="7"></Path>
+            <Path Data="{StaticResource SvgPen}" Margin="7" />
         </Button>
     </Grid>
 </UserControl>

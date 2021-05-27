@@ -31,8 +31,7 @@
                     </Rectangle.RenderTransform>
                 </Rectangle>
                 <Rectangle Stroke="#7fff" StrokeThickness="1" RenderTransformOrigin=".5 .5" Margin="10"
-                           RenderTransform="{StaticResource Rotate45}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                </Rectangle>
+                           RenderTransform="{StaticResource Rotate45}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             </Grid>
             <Grid ClipToBounds="True" Width="Auto" Height="Auto" 
               RenderTransform="{StaticResource Rotate45}" 

@@ -27,12 +27,11 @@
         <!-- Icon -->
         <Grid Margin="-2">
             <Rectangle Name="BgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}"
-                     RenderTransformOrigin=".5 .5" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            </Rectangle>
+                     RenderTransformOrigin=".5 .5" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             <Rectangle Name="AbnormalityIcon" Margin="1" UseLayoutRounding="False"
-                     Width="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
-                     Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
-                     RenderTransformOrigin=".5 .5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                       Width="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
+                       Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
+                       RenderTransformOrigin=".5 .5" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource IconNameToPath}}"/>
                 </Rectangle.Fill>
@@ -42,8 +41,7 @@
         <!-- Arc -->
         <Grid ClipToBounds="True" Margin="-1">
             <controls:Arc Grid.Row="0" x:Name="MainArc" Stroke="#8000" StrokeThickness="40" EndAngle="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Height="80" Width="80" Margin="-80">
-            </controls:Arc>
+                      Height="80" Width="80" Margin="-80" />
         </Grid>
         <!-- Duration -->
         <Grid x:Name="DurationLabel"  Width="Auto" 
@@ -84,7 +82,7 @@
 
               Margin="-1" >
             <Grid.LayoutTransform>
-                <ScaleTransform ScaleX=".85" ScaleY=".85"></ScaleTransform>
+                <ScaleTransform ScaleX=".85" ScaleY=".85" />
             </Grid.LayoutTransform>
             <Grid.Style>
                 <Style TargetType="Grid">
@@ -97,8 +95,7 @@
             </Grid.Style>
 
             <Rectangle Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#60ffffff" StrokeThickness="1.5"
-                     Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" RenderTransformOrigin=".5 .5">
-            </Rectangle>
+                     Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" RenderTransformOrigin=".5 .5" />
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                 <TextBlock Foreground="#d9ffffff" 
                    HorizontalAlignment="Center" 
@@ -111,8 +108,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="2.5"
-                   Text="{Binding Stacks}">
-                </TextBlock>
+                   Text="{Binding Stacks}" />
             </Viewbox>
         </Grid>
     </Grid>

@@ -25,7 +25,7 @@
                     <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".7" />
                 </Border.Effect>
             </Border>
-            <Rectangle Fill="#1000"></Rectangle>
+            <Rectangle Fill="#1000" />
             <TextBlock Foreground="White" Effect="{StaticResource ClassIconGlow}" FontSize="16" Margin="11 7 0 7">Civil Unrest</TextBlock>
             <ListBox x:Name="GuildList" ItemsSource="{Binding Guilds}" Grid.Row="1" Margin="0 0 0 5" Background="Transparent" 
                      IsHitTestVisible="True" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -41,7 +41,7 @@
                             </Grid.ColumnDefinitions>
                             <Ellipse Height="26" Width="26" Margin="2" StrokeThickness="1" Stroke="#999">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding Id, Converter={StaticResource LogoInfoToImage}}" ></ImageBrush>
+                                    <ImageBrush ImageSource="{Binding Id, Converter={StaticResource LogoInfoToImage}}" />
                                 </Ellipse.Fill>
                             </Ellipse>
                             <TextBlock Text="{Binding Name}" Foreground="White" Grid.Column="1" VerticalAlignment="Center" Margin="5 0" TextTrimming="CharacterEllipsis"/>

@@ -114,12 +114,12 @@
                             >
                         <Border.Background>
                             <LinearGradientBrush StartPoint="-.5 .5" EndPoint="1 2">
-                                <GradientStop Color="{StaticResource HpColor}" Offset=".2" ></GradientStop>
+                                <GradientStop Color="{StaticResource HpColor}" Offset=".2" />
                                 <GradientStop Color="Black" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
                         <Border.Effect>
-                            <DropShadowEffect Color="{StaticResource HpColorLight}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
+                            <DropShadowEffect Color="{StaticResource HpColorLight}" ShadowDepth="0" BlurRadius="15" />
                         </Border.Effect>
                         <Border.RenderTransform>
                             <TransformGroup>
@@ -361,8 +361,7 @@
                                   RenderTransformOrigin="0 0">
                                 <Border Background="{StaticResource RevampBackgroundBrush}"
                                         BorderThickness="2 1"
-                                        BorderBrush="{StaticResource RevampBorderBrush}">
-                                </Border>
+                                        BorderBrush="{StaticResource RevampBorderBrush}" />
                                 <Rectangle Fill="{StaticResource TccNormalGradientBrush}" 
                                            Width="90" 
                                            HorizontalAlignment="Left" 
@@ -416,18 +415,15 @@
                             BorderBrush="{StaticResource RevampBorderBrush}"
                             BorderThickness="2 1" 
                             Grid.RowSpan="2"
-                            Margin="-4 0"
-                            >
-                    </Border>
+                            Margin="-4 0" />
                     <Grid Margin="0 2 0 2">
                         <Rectangle Fill="#1fff"
                             Height="8" 
-                            Margin="0" >
-                        </Rectangle>
+                            Margin="0" />
                         <Rectangle HorizontalAlignment="Stretch"
-                               Width="Auto"
-                               Height="8"
-                               Name="HpBar">
+                                   Width="Auto"
+                                   Height="8"
+                                   Name="HpBar">
                             <Rectangle.Style>
                                 <Style TargetType="Shape">
                                     <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}"/>
@@ -591,9 +587,9 @@
                     </npcCtrl:TccContextMenu>
                 </Button.ContextMenu>
                 <Grid>
-                    <Ellipse Fill="#3fff" Height="14" Width="14"></Ellipse>
+                    <Ellipse Fill="#3fff" Height="14" Width="14" />
                     <Path Data="{StaticResource SvgDotsVertical}" MaxHeight="10" Margin="0 0 0 0" Height="Auto" Fill="White"
-                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                          VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
             </Button>
         </Grid>

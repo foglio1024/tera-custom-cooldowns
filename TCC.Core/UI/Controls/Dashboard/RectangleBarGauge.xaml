@@ -16,7 +16,7 @@
                    x:Name="GaugeValue">
             <Rectangle.RenderTransform>
                 <!--<ScaleTransform ScaleX="{Binding Factor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RectangleBarGauge}}"/>-->
-                <ScaleTransform ScaleX="1"></ScaleTransform>
+                <ScaleTransform ScaleX="1" />
             </Rectangle.RenderTransform>
         </Rectangle>
         <Grid.RenderTransform>

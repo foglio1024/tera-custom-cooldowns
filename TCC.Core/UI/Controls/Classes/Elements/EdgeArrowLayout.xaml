@@ -35,7 +35,7 @@
 
                 </Style>
             </Grid.Resources>
-            <Image Source="{StaticResource CharWindowBgSide2}" Height="101" Grid.RowSpan="2"></Image>
+            <Image Source="{StaticResource CharWindowBgSide2}" Height="101" Grid.RowSpan="2" />
             <Border Style="{StaticResource EdgeContainer}" VerticalAlignment="Top" Margin="4 6 0 -20"
                     RenderTransform="{StaticResource Skew45Inv}">
                 <StackPanel UseLayoutRounding="False" x:Name="Edge10To6">
@@ -49,11 +49,11 @@
             <Border Grid.Row="1" Style="{StaticResource EdgeContainer}" Margin="3 -20 0 5" VerticalAlignment="Bottom"
                     RenderTransform="{StaticResource Skew45}" >
                 <StackPanel UseLayoutRounding="False" x:Name="Edge5To1">
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
-                    <Rectangle></Rectangle>
+                    <Rectangle />
+                    <Rectangle />
+                    <Rectangle />
+                    <Rectangle />
+                    <Rectangle />
                 </StackPanel>
             </Border>
         </Grid>

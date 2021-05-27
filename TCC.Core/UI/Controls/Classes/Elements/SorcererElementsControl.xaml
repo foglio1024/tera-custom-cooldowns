@@ -38,12 +38,12 @@
                    StartAngle="219" EndAngle="302"  >
             <Shape.Stroke>
                 <RadialGradientBrush GradientOrigin="1 .7" RadiusX="10" RadiusY="10">
-                    <GradientStop Color="{StaticResource FireColor}"></GradientStop>
-                    <GradientStop Color="{StaticResource FireColorLight}" Offset=".1"></GradientStop>
+                    <GradientStop Color="{StaticResource FireColor}" />
+                    <GradientStop Color="{StaticResource FireColorLight}" Offset=".1" />
                 </RadialGradientBrush>
             </Shape.Stroke>
             <Shape.Effect>
-                <DropShadowEffect Color="{StaticResource FireColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
+                <DropShadowEffect Color="{StaticResource FireColor}" ShadowDepth="0" BlurRadius="15" />
             </Shape.Effect>
         </controls:Arc>
         <Polygon Visibility="{Binding FireBoosted, Converter={converters:BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
@@ -75,16 +75,16 @@
         <controls:Arc Visibility="{Binding Ice, Converter={converters:BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
                    StartAngle="219" EndAngle="302">
             <FrameworkElement.RenderTransform>
-                <ScaleTransform ScaleX="-1"></ScaleTransform>
+                <ScaleTransform ScaleX="-1" />
             </FrameworkElement.RenderTransform>
             <Shape.Stroke>
                 <RadialGradientBrush GradientOrigin="1 .7" RadiusX="10" RadiusY="10">
-                    <GradientStop Color="{StaticResource IceColor}"></GradientStop>
-                    <GradientStop Color="{StaticResource IceColorLight}" Offset=".1"></GradientStop>
+                    <GradientStop Color="{StaticResource IceColor}" />
+                    <GradientStop Color="{StaticResource IceColorLight}" Offset=".1" />
                 </RadialGradientBrush>
             </Shape.Stroke>
             <Shape.Effect>
-                <DropShadowEffect Color="{StaticResource IceColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
+                <DropShadowEffect Color="{StaticResource IceColor}" ShadowDepth="0" BlurRadius="15" />
             </Shape.Effect>
         </controls:Arc>
         <Polygon Visibility="{Binding IceBoosted,  Converter={converters:BoolToVisibility}, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=elements:SorcererElementsControl}}"
@@ -120,12 +120,12 @@
                    StartAngle="38" EndAngle="142">
             <Shape.Stroke>
                 <RadialGradientBrush GradientOrigin=".2 .7" RadiusX="10" RadiusY="10">
-                    <GradientStop Color="{StaticResource ArcaneColor}"></GradientStop>
-                    <GradientStop Color="{StaticResource ArcaneColorLight}" Offset=".1"></GradientStop>
+                    <GradientStop Color="{StaticResource ArcaneColor}" />
+                    <GradientStop Color="{StaticResource ArcaneColorLight}" Offset=".1" />
                 </RadialGradientBrush>
             </Shape.Stroke>
             <Shape.Effect>
-                <DropShadowEffect Color="{StaticResource ArcaneColor}" ShadowDepth="0" BlurRadius="15"></DropShadowEffect>
+                <DropShadowEffect Color="{StaticResource ArcaneColor}" ShadowDepth="0" BlurRadius="15" />
             </Shape.Effect>
             <Shape.RenderTransform>
                 <RotateTransform Angle="-90"/>

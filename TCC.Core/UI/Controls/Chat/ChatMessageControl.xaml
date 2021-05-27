@@ -7,8 +7,8 @@
              DataContextChanged="UserControl_DataContextChanged">
     <UserControl.LayoutTransform>
         <TransformGroup>
-            <ScaleTransform ScaleY="1"></ScaleTransform>
-            <RotateTransform Angle="180"></RotateTransform>
+            <ScaleTransform ScaleY="1" />
+            <RotateTransform Angle="180" />
         </TransformGroup>
     </UserControl.LayoutTransform>
     <Grid Margin="2 0 2 1" HorizontalAlignment="Stretch" Width="Auto" x:Name="Root" Height="Auto" Background="#0f00" VerticalAlignment="Top"

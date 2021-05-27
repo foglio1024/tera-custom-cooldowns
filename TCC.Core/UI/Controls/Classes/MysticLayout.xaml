@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MysticLayoutVM}">
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:MysticLayoutVM}">
 
     <Grid Margin="60" ClipToBounds="False">
         <Grid.Resources>
@@ -59,7 +59,7 @@
                 <Setter Property="RenderTransformOrigin" Value=".5 .5" />
                 <Setter Property="RenderTransform" >
                     <Setter.Value>
-                        <RotateTransform Angle="90"></RotateTransform>
+                        <RotateTransform Angle="90" />
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
@@ -92,7 +92,7 @@
                 <Setter Property="RenderTransformOrigin" Value=".5 .5" />
                 <Setter Property="RenderTransform" >
                     <Setter.Value>
-                        <RotateTransform Angle="-90"></RotateTransform>
+                        <RotateTransform Angle="-90" />
                     </Setter.Value>
                 </Setter>
 
@@ -243,8 +243,7 @@
             </Rectangle.OpacityMask>
             <Rectangle.Fill>
                 <ImageBrush  
-                    ImageSource="{Binding AuraMerciless.Skill.IconName, Converter={StaticResource IconNameToPath}}" >
-                </ImageBrush>
+                    ImageSource="{Binding AuraMerciless.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
             </Rectangle.Fill>
         </Rectangle>
         <!--Mana-->
@@ -395,7 +394,7 @@
         <Image Source="{StaticResource CharWindowFg}" Margin="-14" Visibility="Visible" Stretch="Uniform"
                Width="101" RenderTransformOrigin=".5 .5" Opacity=".7" >
             <Image.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="5"></DropShadowEffect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="5" />
             </Image.Effect>
         </Image>
         <!--Elementalize top-->

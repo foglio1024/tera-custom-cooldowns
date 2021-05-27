@@ -38,7 +38,7 @@
             <Setter Property="Margin" Value="{Binding Margin, ElementName=ContainerMarginGovernor}" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding (ItemsControl.Items).Count, RelativeSource={RelativeSource Self}}" Value="0">
-                    <Setter Property="Margin" Value="0"></Setter>
+                    <Setter Property="Margin" Value="0" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>

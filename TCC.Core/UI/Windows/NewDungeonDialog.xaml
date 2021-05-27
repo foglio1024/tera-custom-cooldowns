@@ -47,7 +47,7 @@
                     Click="OnCloseButtonClick"
                     VerticalContentAlignment="Center"
                     Grid.Column="2">
-                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"></Path>
+                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" />
             </Button>
         </Grid>
         <Border Style="{StaticResource RevampBorderStyle}"
@@ -76,8 +76,7 @@
                                                TextTrimming="CharacterEllipsis"
                                                VerticalAlignment="Center"
                                                Style="{StaticResource DefaultTextStyle}"
-                                               Margin="10 0">
-                                    </TextBlock>
+                                               Margin="10 0" />
 
                                     <TextBlock Text="{Binding Id}"
                                                Width="20"
@@ -87,8 +86,7 @@
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
                                                Style="{StaticResource DefaultTextStyle}"
-                                               Margin="10 0">
-                                    </TextBlock>
+                                               Margin="10 0" />
                                 </StackPanel>
                                 <Button Grid.Column="1" HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
@@ -108,8 +106,8 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="ListBoxItem">
                                         <Grid >
-                                            <Rectangle x:Name="alt" Height="1" VerticalAlignment="Bottom" Fill="#1ddf" ></Rectangle>
-                                            <ContentPresenter Margin="{TemplateBinding Padding}"></ContentPresenter>
+                                            <Rectangle x:Name="alt" Height="1" VerticalAlignment="Bottom" Fill="#1ddf" />
+                                            <ContentPresenter Margin="{TemplateBinding Padding}" />
                                         </Grid>
                                     </ControlTemplate>
                                 </Setter.Value>

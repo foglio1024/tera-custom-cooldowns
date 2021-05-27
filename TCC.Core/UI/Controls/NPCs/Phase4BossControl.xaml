@@ -122,9 +122,9 @@
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="5"/>
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"/>
                         <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"/>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="8"></Path>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="4"></Path>
-                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,15,0" Grid.Column="1"></Path>
+                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="8" />
+                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="4" />
+                        <Path Fill="#222" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,15,0" Grid.Column="1" />
                     </Grid>
                 </Grid>
             </Grid>

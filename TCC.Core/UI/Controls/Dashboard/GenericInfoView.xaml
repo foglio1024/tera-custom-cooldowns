@@ -82,7 +82,7 @@
                         <TextBlock FontSize="16" FontWeight="DemiBold">
                             <Run Text="{Binding Name, Mode=OneWay}" Foreground="#9fff" /><Run Text="'s Guardian Legion info" Foreground="#4fff" />
                         </TextBlock>
-                        <Separator Margin="0 2" Background="#2fff"></Separator>
+                        <Separator Margin="0 2" Background="#2fff" />
                         <Grid Margin="0 5 0 3">
                             <TextBlock HorizontalAlignment="Left" Text="Claimed quests" Foreground="#4fff" />
                             <TextBlock HorizontalAlignment="Right" Text="{Binding GuardianInfo.Claimed, Mode=OneWay}"
@@ -125,7 +125,7 @@
                         <TextBlock FontSize="16" FontWeight="DemiBold">
                             <Run Text="{Binding Name, Mode=OneWay}" Foreground="#9fff" /><Run Text="'s Vanguard Initiative credits info" Foreground="#4fff" />
                         </TextBlock>
-                        <Separator Margin="0 2" Background="#2fff"></Separator>
+                        <Separator Margin="0 2" Background="#2fff" />
                         <Grid Margin="0 5 0 3">
                             <TextBlock HorizontalAlignment="Left" Text="Credits" Foreground="#4fff" />
                             <TextBlock HorizontalAlignment="Right" Text="{Binding VanguardInfo.Credits, Mode=OneWay}"
@@ -147,7 +147,7 @@
                         <TextBlock FontSize="16" FontWeight="DemiBold">
                             <Run Text="{Binding Name, Mode=OneWay}" Foreground="#9fff" /><Run Text="'s Vanguard Initiative quests info" Foreground="#4fff" />
                         </TextBlock>
-                        <Separator Margin="0 2" Background="#2fff"></Separator>
+                        <Separator Margin="0 2" Background="#2fff" />
 
                         <Grid Margin="0 5 0 3">
                             <TextBlock HorizontalAlignment="Left" Text="Daily quests" Foreground="#4fff" />
@@ -228,10 +228,10 @@
                                FontSize="9"
                                Margin="0 -1 4 0"
                                VerticalAlignment="Top">
-                        <Run Text="{Binding VanguardInfo.DailiesDone, Mode=OneWay}"></Run>
-                        <Run Text="-" Foreground="#5fff"></Run>
+                        <Run Text="{Binding VanguardInfo.DailiesDone, Mode=OneWay}" />
+                        <Run Text="-" Foreground="#5fff" />
                         <Run Text="{Binding VanguardInfo.WeekliesDone, Mode=OneWay}" 
-                             Foreground="#5fff"></Run>
+                             Foreground="#5fff" />
                     </TextBlock>
 
                 </Grid>
@@ -272,7 +272,7 @@
                     </TextBlock>
                     <TextBlock Foreground="#9fff" FontSize="9" Grid.Column="1" HorizontalAlignment="Right">
                         <Run Text="{Binding GuardianInfo.Credits, Mode=OneWay}" 
-                             Foreground="#5fff"></Run>
+                             Foreground="#5fff" />
                     </TextBlock>
                     </Grid>
 
@@ -305,7 +305,7 @@
                                FontSize="9"
                                Margin="0 -1 4 0"
                                VerticalAlignment="Top">
-                        <Run Text="{Binding DragonwingScales, Mode=OneWay}"></Run>
+                        <Run Text="{Binding DragonwingScales, Mode=OneWay}" />
                     </TextBlock>
 
                 </Grid>
@@ -333,7 +333,7 @@
                                FontSize="9"
                                Margin="0 -1 4 0"
                                VerticalAlignment="Top">
-                        <Run Text="{Binding ElleonMarks, Mode=OneWay}"></Run>
+                        <Run Text="{Binding ElleonMarks, Mode=OneWay}" />
                     </TextBlock>
 
                 </Grid>

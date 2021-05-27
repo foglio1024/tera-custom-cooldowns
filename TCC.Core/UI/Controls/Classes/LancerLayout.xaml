@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:LancerLayoutVM}">
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:LancerLayoutVM}">
     <Grid Width="Auto" Margin="45 35 45 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -20,7 +20,7 @@
             <Grid>
                 <Image Source="{StaticResource CharWindowBg}" Margin="-14" Stretch="Uniform" x:Name="BgImage">
                     <FrameworkElement.Effect>
-                        <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="20" />
                     </FrameworkElement.Effect>
 
                     <Image.Style>
@@ -38,8 +38,7 @@
                     </Image.Style>
                 
                 </Image>
-                <Image Source="{StaticResource CharWindowFg}" Margin="-14" Stretch="Uniform" x:Name="FgImage">
-                </Image>
+                <Image Source="{StaticResource CharWindowFg}" Margin="-14" Stretch="Uniform" x:Name="FgImage" />
                 <Path Data="{StaticResource SvgClassLancer}" Margin="19" Opacity=".3"/>
                 <Grid x:Name="LineHeldContainer" >
                     <controls:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
@@ -82,7 +81,7 @@
                     </controls:Arc>
                     <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center" Margin="0,-1,0,-2" FontSize="22" 
                            FontWeight="DemiBold" Foreground="#afff"  Width="45" VerticalAlignment="Center"
-                                             Text="{Binding LH.Stacks}"></TextBlock>
+                                             Text="{Binding LH.Stacks}" />
                     <!--<Grid.Resources>
                         <Style TargetType="Rectangle">
                             <Setter Property="Fill" Value="{StaticResource TankRoleBrush}"></Setter>
@@ -225,7 +224,7 @@
                     RenderTransformOrigin=".5 .5" 
                     Opacity=".7">
                 <FrameworkElement.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" />
                 </FrameworkElement.Effect>
 
                 <FrameworkElement.RenderTransform>
@@ -239,7 +238,7 @@
                     Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
                     Opacity=".7">
                 <FrameworkElement.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" />
                 </FrameworkElement.Effect>
 
                 <FrameworkElement.RenderTransform>
@@ -274,7 +273,7 @@
                     Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
                     Opacity=".7">
                 <FrameworkElement.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20"></DropShadowEffect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" />
                 </FrameworkElement.Effect>
 
                 <FrameworkElement.RenderTransform>

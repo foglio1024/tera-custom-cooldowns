@@ -40,7 +40,7 @@
                 <Style TargetType="ContentPresenter">
                     <Setter Property="LayoutTransform">
                         <Setter.Value>
-                            <ScaleTransform ScaleX=".8" ScaleY=".8"></ScaleTransform>
+                            <ScaleTransform ScaleX=".8" ScaleY=".8" />
                         </Setter.Value>
                     </Setter>
                 </Style>

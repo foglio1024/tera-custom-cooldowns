@@ -51,7 +51,7 @@
                     Click="OnCloseButtonClick"
                     VerticalContentAlignment="Center"
                     Grid.Column="2">
-                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9"></Path>
+                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" />
             </Button>
         </Grid>
         <Border Style="{StaticResource RevampBorderStyle}"
@@ -156,8 +156,7 @@
                                          Margin="5 0">
                                     <Ellipse.Fill>
                                         <ImageBrush
-                                            ImageSource="{Binding Dungeon.IconName, Converter={StaticResource DungeonImageConverter}}">
-                                        </ImageBrush>
+                                            ImageSource="{Binding Dungeon.IconName, Converter={StaticResource DungeonImageConverter}}" />
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 <StackPanel Grid.Column="1">
@@ -165,8 +164,7 @@
                                                TextTrimming="CharacterEllipsis"
                                                VerticalAlignment="Center"
                                                Style="{StaticResource DefaultTextStyle}"
-                                               Margin="10 0">
-                                    </TextBlock>
+                                               Margin="10 0" />
 
                                     <TextBlock Text="{Binding Dungeon.Id}"
                                                Width="20"
@@ -176,8 +174,7 @@
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
                                                Style="{StaticResource DefaultTextStyle}"
-                                               Margin="10 0">
-                                    </TextBlock>
+                                               Margin="10 0" />
                                 </StackPanel>
                                 <TextBox Grid.Column="2"
                                          Text="{Binding Dungeon.ShortName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -233,8 +230,7 @@
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Right"
                                           HorizontalContentAlignment="Right"
-                                          ItemTemplate="{StaticResource EnumDescrDataTemplate}">
-                                </ComboBox>
+                                          ItemTemplate="{StaticResource EnumDescrDataTemplate}" />
 
                                 <Button Grid.Column="7" HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
@@ -253,8 +249,8 @@
                                 <Setter.Value>
                                     <ControlTemplate TargetType="dragablz:DragablzItem">
                                         <Grid >
-                                            <Rectangle x:Name="alt" Height="1" VerticalAlignment="Bottom" Fill="#1ddf" ></Rectangle>
-                                            <ContentPresenter Margin="{TemplateBinding Padding}"></ContentPresenter>
+                                            <Rectangle x:Name="alt" Height="1" VerticalAlignment="Bottom" Fill="#1ddf" />
+                                            <ContentPresenter Margin="{TemplateBinding Padding}" />
                                             <Thumb x:Name="Thumb" HorizontalAlignment="Left"
                                                    dragablz:DragablzItem.IsCustomThumb="True"
                                                    Cursor="SizeNS">
@@ -262,8 +258,7 @@
                                                     <ControlTemplate>
                                                         <Grid Background="Transparent"
                                                               Width="30"
-                                                              Height="30">
-                                                        </Grid>
+                                                              Height="30" />
                                                     </ControlTemplate>
                                                 </Thumb.Template>
                                             </Thumb>
@@ -295,8 +290,8 @@
                 Margin="5"
                     Click="AddDungeon">
                 <StackPanel Orientation="Horizontal">
-                    <Path Data="{StaticResource SvgAddCircle}" VerticalAlignment="Center" Margin="5" Stretch="Uniform"></Path>
-                    <TextBlock Text="Add dungeon" VerticalAlignment="Center" Margin="2 0 10 0"></TextBlock>
+                    <Path Data="{StaticResource SvgAddCircle}" VerticalAlignment="Center" Margin="5" Stretch="Uniform" />
+                    <TextBlock Text="Add dungeon" VerticalAlignment="Center" Margin="2 0 10 0" />
                 </StackPanel>
             </Button>
 

@@ -3,10 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SorcererLayoutVM}">
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:SorcererLayoutVM}">
 
     <Grid Width="Auto" Margin="20" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0">
@@ -31,12 +31,11 @@
                                            FireBoostMargin="-7 1 0 0"
                                            IceBoostMargin="0 1 -5 0"
                                            />
-            <skills:RhombFixedSkillControl DataContext="{Binding Fusion}"></skills:RhombFixedSkillControl>
+            <skills:RhombFixedSkillControl DataContext="{Binding Fusion}" />
             <Border BorderBrush="#89a" BorderThickness="1" Width="51" Height="51"
                     Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
                     RenderTransform="{StaticResource Rotate45}"
-                    Opacity=".7" Grid.Row="1">
-            </Border>
+                    Opacity=".7" Grid.Row="1" />
             <skills:RhombSkillEffectControl DataContext="{Binding ManaBoost}" Margin="-20" Padding="20" Grid.Row="1"/>
 
             <!--HP/MP-->

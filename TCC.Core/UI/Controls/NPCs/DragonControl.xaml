@@ -31,15 +31,15 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Ellipse Fill="#1fff" Width="54" Height="54" Grid.Row="1"></Ellipse>
+            <Ellipse Fill="#1fff" Width="54" Height="54" Grid.Row="1" />
 
             <TextBlock Text="{Binding Name}" 
-                                   Foreground="White" 
-                                   Grid.Row="0"
-                                   Margin="0,0,0,5"
-                               Width="60"
-                               HorizontalAlignment="Center"
-                               TextAlignment="Center"/>
+                       Foreground="White" 
+                       Grid.Row="0"
+                       Margin="0,0,0,5"
+                       Width="60"
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center"/>
             <Grid Grid.Row="1">
                 <Grid.Style>
                     <Style TargetType="Grid">

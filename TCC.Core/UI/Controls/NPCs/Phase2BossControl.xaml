@@ -121,10 +121,10 @@
                         <Border BorderThickness=".4,0,.4,0" BorderBrush="#9000" Grid.Column="8"/>
                         <Border BorderThickness=".4,0,0,0" BorderBrush="#9000" Grid.Column="9"/>
 
-                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="6"></Path>
-                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="7"></Path>
-                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="8"></Path>
-                        <Rectangle Grid.ColumnSpan="6" Fill="#202027" ></Rectangle>
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="6" />
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="7" />
+                        <Path Fill="#202027" Data="M0,0 2,0 1,1 0,0" Stretch="Uniform" HorizontalAlignment="Right" Height="6" Width="10" Margin="0,-2,-5,0" Grid.Column="8" />
+                        <Rectangle Grid.ColumnSpan="6" Fill="#202027" />
                     </Grid>
                 </Grid>
             </Grid>

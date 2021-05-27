@@ -37,7 +37,7 @@
                 VerticalAlignment="Top"
                 Padding="10"
                 Click="OnOkButtonClick">
-            <Path Data="{StaticResource SvgClose}"></Path>
+            <Path Data="{StaticResource SvgClose}" />
         </Button>
         <TextBlock Foreground="#afff" TextAlignment="Left"
                    Margin="10 10 10 0"

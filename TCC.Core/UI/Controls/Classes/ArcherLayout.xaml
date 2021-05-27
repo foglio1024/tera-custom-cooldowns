@@ -3,11 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
-             mc:Ignorable="d" Loaded="OnLoaded" d:DataContext="{d:DesignInstance viewModels:ArcherLayoutVM}"
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             mc:Ignorable="d" Loaded="OnLoaded" d:DataContext="{d:DesignInstance classManagers:ArcherLayoutVM}"
              Height="165">
             <!-- Add Height = "165" to fix windwalk UI cropping problem by HQ -->
     <Grid Width="Auto" Margin="50 20 50 50" Name="Root" ClipToBounds="False">
@@ -21,8 +21,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid>
-                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Stretch="Uniform" x:Name="BgImage">
-                </Image>
+                <Image Source="{StaticResource CharWindowBg}" Margin="-14" Stretch="Uniform" x:Name="BgImage" />
                 <Grid x:Name="MainReArcGrid" >
                     <controls:Arc StartAngle="42" EndAngle="42" RenderTransformOrigin=".5 .5"
                                StrokeThickness="4" Stroke="{StaticResource LightGreenBrush}" HorizontalAlignment="Center"

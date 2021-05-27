@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:classes="clr-namespace:TCC.UI.Controls.Classes"
              xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
              mc:Ignorable="d" Loaded="UserControl_Loaded"
-             d:DataContext="{d:DesignInstance viewModels:ValkyrieLayoutVM}">
+             d:DataContext="{d:DesignInstance classManagers:ValkyrieLayoutVM}">
     <Grid Width="Auto" Margin="50 20" Name="Root">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" Margin="0">
             <Grid.ColumnDefinitions>

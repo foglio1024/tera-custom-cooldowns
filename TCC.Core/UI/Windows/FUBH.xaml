@@ -17,36 +17,37 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Style="{StaticResource RevampBorderStyle}"  Grid.RowSpan="2" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"></Border>
-        <Border Style="{StaticResource RevampBorderStyle}" Margin="0"></Border>
+        <Border Style="{StaticResource RevampBorderStyle}"  Grid.RowSpan="2" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown" />
+        <Border Style="{StaticResource RevampBorderStyle}" Margin="0" />
         <TextBlock TextWrapping="Wrap" TextAlignment="Center" 
                    VerticalAlignment="Center" Margin="50 0"
                    FontSize="12" FontWeight="Normal"
                    Foreground="#dfff">
-            <Run Text="Hello, Foglio here (who else?)."></Run>
+            <Run Text="Hello, Foglio here (who else?)." />
             <LineBreak/>
             <LineBreak/>
-            <Run Text="As you may have noticed, this game has been getting worse and worse with every recent patch."></Run>
+            <Run Text="As you may have noticed, this game has been getting worse and worse with every recent patch." />
             <LineBreak/>
-            <Run Text="Excessive grind, unaddressed game issues, badly implemented systems like Adventure coins, full rng and paywall-locked systems like Relic/Haildom and Partners (just to mention some)."></Run>
+            <Run Text="Excessive grind, unaddressed game issues, badly implemented systems like Adventure coins, full rng and paywall-locked systems like Relic/Haildom and Partners (just to mention some)." />
             <LineBreak/>
-            <Run Text="Current TERA state is pretty bad and, as latest KTera patches show, there seems to be no improvements coming soon."></Run>
-            <LineBreak/>
-            <LineBreak/>
-            <Run Text="This is why many people stopped making ingame purchases and/or are canceling their monthly subscription."></Run>
+            <Run Text="Current TERA state is pretty bad and, as latest KTera patches show, there seems to be no improvements coming soon." />
             <LineBreak/>
             <LineBreak/>
-            <Run Text="You can find more info about the topic in" FontWeight="DemiBold" FontSize="16"></Run>
+            <Run Text="This is why many people stopped making ingame purchases and/or are canceling their monthly subscription." />
+            <LineBreak/>
+            <LineBreak/>
+            <Run Text="You can find more info about the topic in" FontWeight="DemiBold" FontSize="16" />
             <Hyperlink RequestNavigate="Hyperlink_OnRequestNavigate" NavigateUri="https://board.tera.gameforge.com/index.php?thread/75979-another-useless-ranting-about-tera-current-state/&amp;postID=923258#post923258" FontWeight="Bold" FontSize="16">this thread</Hyperlink><Run Text="."/>
             <LineBreak/>
             <LineBreak/>
-            <Run Text="I joined those people who stopped spending money on this game and, if things don't get better, I might join the ones who already quit,"></Run><Run Text=" quitting the development of all my mods aswell." FontWeight="Bold"></Run>
+            <Run Text="I joined those people who stopped spending money on this game and, if things don't get better, I might join the ones who already quit," />
+            <Run Text=" quitting the development of all my mods aswell." FontWeight="Bold" />
             <LineBreak/>
             <LineBreak/>
-            <Run Text="I thought the best I could do to help the community would be to add this message here, so that hopefully more people will put pressure on the developer for actual changes, since I've been playing this game for 6 years and it's really sad to see what it has become."></Run>
+            <Run Text="I thought the best I could do to help the community would be to add this message here, so that hopefully more people will put pressure on the developer for actual changes, since I've been playing this game for 6 years and it's really sad to see what it has become." />
             <LineBreak/>
             <LineBreak/>
-            <Run Text="This message will be displayed at every server login." Foreground="#5fff"></Run>
+            <Run Text="This message will be displayed at every server login." Foreground="#5fff" />
         </TextBlock>
         <TextBlock VerticalAlignment="Center" 
                    TextAlignment="Center" 

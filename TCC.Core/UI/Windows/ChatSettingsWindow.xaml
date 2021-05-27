@@ -21,9 +21,7 @@
     <Grid x:Name="ChatSettingsPopup"  VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch">
         <Border Style="{StaticResource RevampBorderStyle}" 
-                Margin="5"  
-                >
-        </Border>
+                Margin="5" />
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

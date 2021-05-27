@@ -20,14 +20,14 @@
 
         <Rectangle Grid.Row="0" Height="5"  VerticalAlignment="Bottom" Margin="0 -2" Fill="{StaticResource TccNormalGradientBrush}" x:Name="ColorRectFx">
             <Rectangle.Effect>
-                <BlurEffect Radius="30"></BlurEffect>
+                <BlurEffect Radius="30" />
             </Rectangle.Effect>
         </Rectangle>
         <Rectangle Grid.Row="0" Height="1" VerticalAlignment="Bottom" Margin="0 0" Fill="{StaticResource TccNormalGradientBrush}" x:Name="ColorRect"/>
         </Grid>
         <!--<Path Data="{StaticResource SvgInfo}" Fill="#4fff" VerticalAlignment="Center" Grid.Row="1" Height="50" HorizontalAlignment="Left" Margin="10"/>-->
         <TextBlock Foreground="#cfff" FontSize="20" x:Name="MessageTitle" Grid.Row="0" Margin="5" Text="TCC"
-                   TextAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" IsHitTestVisible="False"></TextBlock>
+                   TextAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" IsHitTestVisible="False" />
         <TextBlock Foreground="#bfff" x:Name="TxtMsg" Grid.Row="1" VerticalAlignment="Center" TextAlignment="Center" 
                    Margin="30 20" TextWrapping="WrapWithOverflow" IsHitTestVisible="False" FontSize="14"/>
         <UniformGrid Rows="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 0">

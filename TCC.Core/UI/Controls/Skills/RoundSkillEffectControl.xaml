@@ -17,16 +17,15 @@
                    VerticalAlignment="Center"
                    EndAngle="0"
                    x:Name="ExternalArc"
-                   Margin="0,0,0,0">
-        </controls:Arc>
+                   Margin="0,0,0,0" />
         <skills:RoundFixedSkillControl HorizontalAlignment="Center" 
-                                           IsHitTestVisible="False"
-                                 VerticalAlignment="Center" Padding="25" Margin="-25"
-                                 DataContext="{Binding Cooldown}" 
-                                    x:Name="FixedSkillControl"
-                                 >
+                                       IsHitTestVisible="False"
+                                       VerticalAlignment="Center" Padding="25" Margin="-25"
+                                       DataContext="{Binding Cooldown}" 
+                                       x:Name="FixedSkillControl"
+        >
             <skills:RoundFixedSkillControl.LayoutTransform>
-                <ScaleTransform ScaleX=".95" ScaleY=".95"></ScaleTransform>
+                <ScaleTransform ScaleX=".95" ScaleY=".95" />
             </skills:RoundFixedSkillControl.LayoutTransform>
         </skills:RoundFixedSkillControl>
 

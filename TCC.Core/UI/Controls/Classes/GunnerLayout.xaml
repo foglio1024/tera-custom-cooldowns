@@ -4,9 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
-             mc:Ignorable="d" Loaded="GunnerLayout_OnLoaded" d:DataContext="{d:DesignInstance viewModels:GunnerLayoutVM}">
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             mc:Ignorable="d" Loaded="GunnerLayout_OnLoaded" d:DataContext="{d:DesignInstance classManagers:GunnerLayoutVM}">
     <Grid Width="Auto" Margin="50 30 50 90" Name="Root" ClipToBounds="False" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -70,8 +70,7 @@
                                         </Setter.Value>
                                     </Setter>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
-                                </DataTrigger>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1" />
                             </Style.Triggers>
                         </Style>
                     </Grid.Style>

@@ -7,7 +7,7 @@
              Loaded="TimeMarkerControl_OnLoaded" d:DataContext="{d:DesignData TimeMarker}">
     <Grid  ClipToBounds="False"  ToolTip="{Binding Name}" Margin="0,-8,0,0" VerticalAlignment="Stretch">
         <Grid.Effect>
-            <DropShadowEffect ShadowDepth="0" Opacity=".2"></DropShadowEffect>
+            <DropShadowEffect ShadowDepth="0" Opacity=".2" />
         </Grid.Effect>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,20 +16,18 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1">
             <FrameworkElement Width="1100" >
                 <FrameworkElement.LayoutTransform>
-                    <ScaleTransform ScaleX="{Binding TimeFactor}"></ScaleTransform>
+                    <ScaleTransform ScaleX="{Binding TimeFactor}" />
                 </FrameworkElement.LayoutTransform>
             </FrameworkElement>
             <Border Background="#fff" Width="2" Height="Auto" 
                     VerticalAlignment="Stretch" HorizontalAlignment="Left" 
-                    Margin="0,-2,0,0">
-                
-            </Border>
-        <!--<Ellipse Width="8" Height="8" Fill="#ccc" Margin="-5 4 0 0" ></Ellipse>-->
+                    Margin="0,-2,0,0" />
+            <!--<Ellipse Width="8" Height="8" Fill="#ccc" Margin="-5 4 0 0" ></Ellipse>-->
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <FrameworkElement Width="1060">
                 <FrameworkElement.LayoutTransform>
-                    <ScaleTransform ScaleX="{Binding TimeFactor}"></ScaleTransform>
+                    <ScaleTransform ScaleX="{Binding TimeFactor}" />
                 </FrameworkElement.LayoutTransform>
             </FrameworkElement>
             <Border Background="#555" 
@@ -39,7 +37,7 @@
                         Margin="-1" Name="TextBorder">
                 <TextBlock Foreground="#ccc" FontSize="15" FontWeight="Normal" Width="Auto" Text="{Binding TimeString}" Name="TimeTextBlock"/>
                 <Border.LayoutTransform>
-                    <TranslateTransform X="0"></TranslateTransform>
+                    <TranslateTransform X="0" />
                 </Border.LayoutTransform>
             </Border>
         </StackPanel>

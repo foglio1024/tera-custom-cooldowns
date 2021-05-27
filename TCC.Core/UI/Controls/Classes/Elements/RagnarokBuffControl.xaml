@@ -23,7 +23,7 @@
                 <ImageBrush ImageSource="{Binding Effect.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
             </Ellipse.Fill>
             <Ellipse.Effect>
-                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" x:Name="IconGlow" Opacity="0"></DropShadowEffect>
+                <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="10" x:Name="IconGlow" Opacity="0" />
             </Ellipse.Effect>
         </Ellipse>
 

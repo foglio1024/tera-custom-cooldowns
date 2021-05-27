@@ -109,8 +109,7 @@
             </Grid.Style>
 
             <Ellipse Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40ffffff" StrokeThickness="1.5"
-                     Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
-            </Ellipse>
+                     Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                 <TextBlock Foreground="#d9ffffff" 
                    HorizontalAlignment="Center" 
@@ -123,8 +122,7 @@
                    FontStyle="Normal"
                    Opacity="1" 
                    Margin="2.5"
-                   Text="{Binding Stacks}">
-                </TextBlock>
+                   Text="{Binding Stacks}" />
             </Viewbox>
         </Grid>
     </Grid>

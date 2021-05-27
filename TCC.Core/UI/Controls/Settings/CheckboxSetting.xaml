@@ -30,9 +30,7 @@
                    VerticalAlignment="Center" 
                    Padding="0" 
                    TextAlignment="Left"
-                   Opacity=".9">
-
-</TextBlock>
+                   Opacity=".9" />
         <CheckBox x:Name="CheckBox"
                   IsChecked="{Binding IsOn, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}" 
                   BorderBrush="{Binding CheckBoxColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=settings:CheckboxSetting}}"

@@ -53,8 +53,7 @@
         <DataTemplate x:Key="Slayer">
             <classes:SlayerLayout/>
         </DataTemplate>
-        <DataTemplate x:Key="EmptyTemplate">
-        </DataTemplate>
+        <DataTemplate x:Key="EmptyTemplate" />
         <wm:ClassWindowTemplateSelector x:Key="ClassWindowTemplateSelector"
                                         Warrior="{StaticResource Warrior}"
                                         Valkyrie="{StaticResource Valkyrie}"
@@ -70,7 +69,7 @@
                                         Berserker="{StaticResource Berserker}"
                                         Slayer="{StaticResource Slayer}"
                                         None="{StaticResource EmptyTemplate}"
-                                        />
+        />
 
     </widgets1:TccWidget.Resources>
     <Grid ClipToBounds="False">

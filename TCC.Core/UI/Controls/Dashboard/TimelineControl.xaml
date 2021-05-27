@@ -28,13 +28,12 @@
                            ToolTipService.InitialShowDelay="0"
                            ToolTipService.ShowDuration="500000"
                            ToolTipService.HasDropShadow="True"
-                   x:Name="TimelineBase">
-                </Rectangle>
+                   x:Name="TimelineBase" />
                 <ItemsControl ItemsSource="{Binding Events}" 
-                      ItemTemplate="{StaticResource EventTemplate}"
-                      Margin="-8,0,0,0" Opacity=".9"
-                      VerticalAlignment="Top"
-                      >
+                              ItemTemplate="{StaticResource EventTemplate}"
+                              Margin="-8,0,0,0" Opacity=".9"
+                              VerticalAlignment="Top"
+                >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Grid />
@@ -58,7 +57,7 @@
                 <StackPanel Orientation="Horizontal" Margin="-4,0,0,0" VerticalAlignment="Stretch">
                     <FrameworkElement Width="1100" >
                         <FrameworkElement.LayoutTransform>
-                            <ScaleTransform ScaleX="{Binding StartFactor}"></ScaleTransform>
+                            <ScaleTransform ScaleX="{Binding StartFactor}" />
                         </FrameworkElement.LayoutTransform>
                     </FrameworkElement>
                     <Border

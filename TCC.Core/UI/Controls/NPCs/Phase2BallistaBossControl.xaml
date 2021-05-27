@@ -109,12 +109,12 @@
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="5"/>
                         <Border BorderThickness=".8,0,.8,0" BorderBrush="#90000000" Grid.Column="7"/>
                         <Border BorderThickness=".8,0,0,0"  BorderBrush="#90000000" Grid.Column="9"/>
-                        <Rectangle Grid.ColumnSpan="4" Fill="#202027"></Rectangle>
+                        <Rectangle Grid.ColumnSpan="4" Fill="#202027" />
                     </Grid>
 
                     <Path Fill="OrangeRed" Width="11" Stretch="Uniform" Height="8"  Data="M0,0 2,0 1,1 0,0" Name="EnrageEll" HorizontalAlignment="Left" Margin="155,-8,-5,-5">
                         <Path.RenderTransform>
-                            <TranslateTransform X="240" Y="-5"></TranslateTransform>
+                            <TranslateTransform X="240" Y="-5" />
                         </Path.RenderTransform>
                     </Path>
                 </Grid>

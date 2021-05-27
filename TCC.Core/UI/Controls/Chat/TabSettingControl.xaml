@@ -29,7 +29,7 @@
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveChannel"
                         VerticalContentAlignment="Center">
-                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7" />
                 </Button>
 
             </Grid>
@@ -56,7 +56,7 @@
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExChannel"
                         VerticalContentAlignment="Center">
-                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7" />
                 </Button>
 
             </Grid>
@@ -81,7 +81,7 @@
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveAuthor">
-                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7" />
                 </Button>
 
             </Grid>
@@ -106,7 +106,7 @@
                         VerticalContentAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExAuthor">
-                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7" />
                 </Button>
 
             </Grid>
@@ -131,7 +131,7 @@
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveKeyword">
-                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7" />
                 </Button>
 
             </Grid>
@@ -156,7 +156,7 @@
                         VerticalContentAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExKeyword">
-                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7"></Path>
+                    <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" Stretch="Uniform" Margin="7" />
                 </Button>
 
             </Grid>
@@ -304,8 +304,7 @@
                              VerticalContentAlignment="Center" Background="#199a" BorderThickness="0"
                              LostFocus="NewAuthorTextBox_LostFocus"
                              Foreground="#3fff" Margin="0 1" CaretBrush="White" Text="New author..."
-                             KeyDown="NewAuthorTextBox_KeyDown">
-                    </TextBox>
+                             KeyDown="NewAuthorTextBox_KeyDown" />
                     <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right" VerticalAlignment="Stretch"
@@ -342,8 +341,7 @@
                              VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
                              Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author..."
                              PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
-                             KeyDown="NewExAuthorTextBox_KeyDown" LostFocus="NewAuthorTextBox_LostFocus">
-                    </TextBox>
+                             KeyDown="NewExAuthorTextBox_KeyDown" LostFocus="NewAuthorTextBox_LostFocus" />
                     <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right" VerticalAlignment="Stretch"
@@ -383,8 +381,7 @@
                              VerticalContentAlignment="Center" Background="#199a" BorderThickness="0"
                              LostFocus="NewKeywordTextBox_LostFocus"
                              Foreground="#3fff" Margin="0 1" CaretBrush="White" Text="New keyword..."
-                             KeyDown="NewKeywordTextBox_KeyDown">
-                    </TextBox>
+                             KeyDown="NewKeywordTextBox_KeyDown" />
                 </Grid>
             </Border>
             <ItemsControl ItemTemplate="{StaticResource KeywordSettingTemplate}" ItemsSource="{Binding TabInfoVM.Keywords}"
@@ -411,8 +408,7 @@
                              VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
                              Foreground="#3fff" Margin="0" CaretBrush="White" Text="New keyword..."
                              PreviewMouseLeftButtonDown="NewExKeywordTextBox_MouseLeftButtonDown"
-                             KeyDown="NewExKeywordTextBox_KeyDown" LostFocus="NewKeywordTextBox_LostFocus">
-                    </TextBox>
+                             KeyDown="NewExKeywordTextBox_KeyDown" LostFocus="NewKeywordTextBox_LostFocus" />
                 </Grid>
             </Border>
             <ItemsControl ItemTemplate="{StaticResource ExcludedKeywordSettingTemplate}"

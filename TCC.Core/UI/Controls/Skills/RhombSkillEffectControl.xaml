@@ -21,20 +21,19 @@
                    VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch"
                    Margin="8"
-                   Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={converters:BoolToVisibility}}"
-                   ></Rectangle>
-            <controls:Arc Width="71" 
-                       Height="71" 
-                       StrokeThickness="3" 
-                       Stroke="#ffbd3d" 
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       StartAngle="32"
-                       EndAngle="32"
-                       Rhomb="True"
-                       x:Name="ExternalArc"
-                       Margin="-0"
-                       RenderTransformOrigin=".5 .5">
+                   Visibility="{Binding ShowEffectSeconds, RelativeSource={RelativeSource AncestorType=skills:RhombSkillEffectControl}, Converter={converters:BoolToVisibility}}" />
+        <controls:Arc Width="71" 
+                      Height="71" 
+                      StrokeThickness="3" 
+                      Stroke="#ffbd3d" 
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      StartAngle="32"
+                      EndAngle="32"
+                      Rhomb="True"
+                      x:Name="ExternalArc"
+                      Margin="-0"
+                      RenderTransformOrigin=".5 .5">
                 <controls:Arc.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#ffffaa"/>
                 </controls:Arc.Effect>

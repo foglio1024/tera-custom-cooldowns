@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewModels="clr-namespace:TCC.ViewModels"
              xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
-             mc:Ignorable="d" Loaded="NinjaLayout_OnLoaded" d:DataContext="{d:DesignInstance viewModels:NinjaLayoutVM}">
+             xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             mc:Ignorable="d" Loaded="NinjaLayout_OnLoaded" d:DataContext="{d:DesignInstance classManagers:NinjaLayoutVM}">
     <Grid Width="Auto" Margin="50 10 50 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -69,8 +69,7 @@
                                         </Setter.Value>
                                     </Setter>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1">
-                                </DataTrigger>
+                                <DataTrigger Binding="{Binding StaminaTracker.Factor}" Value="1" />
                             </Style.Triggers>
                         </Style>
                     </Grid.Style>

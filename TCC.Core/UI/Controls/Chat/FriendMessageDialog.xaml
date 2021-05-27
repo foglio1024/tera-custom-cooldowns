@@ -15,9 +15,9 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock Foreground="#777" FontSize="13"  VerticalAlignment="Center">
-                <Run Text="Add"></Run>
-                <Run Text="{Binding TargetName, RelativeSource={RelativeSource AncestorType=chat:FriendMessageDialog}}"></Run>
-                <Run Text="as friend"></Run>
+                <Run Text="Add" />
+                <Run Text="{Binding TargetName, RelativeSource={RelativeSource AncestorType=chat:FriendMessageDialog}}" />
+                <Run Text="as friend" />
             </TextBlock>
             <TextBox Text="Friend me?" TextWrapping="Wrap" Grid.Row="1" Foreground="#333" Name="Box" Focusable="True"
                      BorderBrush="#1000" TextChanged="TextBox_TextChanged" FontSize="14"/>
@@ -73,7 +73,7 @@
             </UniformGrid>
         </Grid>
         <Border.Effect>
-            <DropShadowEffect Opacity=".6" BlurRadius="10"></DropShadowEffect>
+            <DropShadowEffect Opacity=".6" BlurRadius="10" />
         </Border.Effect>
     </Border>
 </Window>

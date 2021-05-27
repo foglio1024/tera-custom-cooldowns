@@ -116,7 +116,7 @@
                                 <ImageBrush ImageSource="{Binding GrowingFury.Buff.Skill.IconName, Converter={StaticResource IconNameToPath}}" />
                             </Rectangle.Fill>
                             <FrameworkElement.RenderTransform>
-                                <TranslateTransform X="0"></TranslateTransform>
+                                <TranslateTransform X="0" />
                             </FrameworkElement.RenderTransform>
                         </Rectangle>
                     </Grid>

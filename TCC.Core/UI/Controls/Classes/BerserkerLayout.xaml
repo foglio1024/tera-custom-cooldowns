@@ -19,9 +19,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid>
-                
-            </Grid>
+            <Grid />
 
             <!-- Show if Unleash isn't active -->
             <Grid Visibility="{Binding IsUnleashOff, Converter={converters:BoolToVisibility}}">
@@ -39,11 +37,10 @@
                             </TransformGroup>
                         </FrameworkElement.RenderTransform>
                     </Border>
-                    <skills:RhombSkillEffectControl DataContext="{Binding Unleash}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    </skills:RhombSkillEffectControl>
+                    <skills:RhombSkillEffectControl DataContext="{Binding Unleash}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
+                            Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                            Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="45"/>
@@ -98,12 +95,11 @@
                         </FrameworkElement.RenderTransform>
                     </Border>
                     <skills:RhombFixedSkillControl DataContext="{Binding BeastFury}" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center">
-                    </skills:RhombFixedSkillControl>
-                    
+                                              VerticalAlignment="Center" />
+
                     <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
+                            Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
+                            Opacity=".7">
                         <FrameworkElement.RenderTransform>
                             <TransformGroup>
                                 <RotateTransform Angle="45"/>
