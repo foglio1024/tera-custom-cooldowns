@@ -18,7 +18,6 @@ namespace TCC.UI
         private static bool _isForeground;
         private static bool _forceFocused;
         private static bool _disposed;
-        private static bool _pauseTopmost;
         private static readonly object _lock = new();
         private static Screen? _teraScreen;
         private static Timer? _focusTimer;
@@ -74,7 +73,7 @@ namespace TCC.UI
             }
         }
 
-        private static int _pausedCount = 0;
+        private static int _pausedCount;
         public static bool PauseTopmost
         {
             get => _pausedCount > 0;
