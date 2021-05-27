@@ -10,7 +10,8 @@ namespace TCC.Utils
         public const string AnotherInstanceRunning        = "Another instance of TCC is already running. Shutting down.";
         public const string CannotDetectCurrentRegion     = "Current region could not be detected, so TCC will load EU-EN database. To force a specific language, use Region Override setting in Misc Settings.";
         public const string RenderThreadError             = "An error in render thread occured. This is usually caused by outdated video card drivers. TCC will now close.";
-        public const string FatalError                    = "An error occured and TCC will now close. Report this issue to the developer attaching crash.log from TCC folder.";
+        public const string FatalError                    = "An error occured and TCC will now close. Please report this issue to the developer attaching crash.log from TCC folder.";
+        public const string FatalErrorAskUpload           = "An error occured and TCC will now close. Do you want TCC to automatically upload a crash report?\n Please report this issue to the developer attaching crash.log from TCC folder.";
         public const string OutOfMemoryError              = "TCC doesn't have enough available RAM to keep running and will now close.";
         public const string SettingsNotFoundImport        = "Settings file not found. Do you want to import an existing one?";
         public const string SettingsNotFoundDefault       = "Cannot load settings file. Do you want TCC to delete it and recreate a default file?";

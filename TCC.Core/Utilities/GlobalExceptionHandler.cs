@@ -63,8 +63,11 @@ namespace TCC.Utilities
                     }
                 default:
                     {
-                        UploadCrashReport(js);
-                        TccMessageBox.Show("TCC", SR.FatalError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        var res = TccMessageBox.Show("TCC", SR.FatalErrorAskUpload, MessageBoxButton.YesNo, MessageBoxImage.Error);
+                        if (res == MessageBoxResult.Yes)
+                        {
+                            UploadCrashReport(js);
+                        }
                         break;
                     }
             }
@@ -107,7 +110,6 @@ namespace TCC.Utilities
 
         private static void UploadCrashReport(JObject js)
         {
-            Log.CW("Uploading crash dump");
             try
             {
                 using var c = MiscUtils.GetDefaultWebClient();
@@ -116,11 +118,10 @@ namespace TCC.Utilities
                 c.Headers[HttpRequestHeader.UserAgent] = "TCC/Windows";
                 c.Encoding = Encoding.UTF8;
                 c.UploadString(new Uri("https://www.foglio1024.it/api/crash-reports"), Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
-                Log.CW("Crash dump uploaded");
             }
             catch (Exception e)
             {
-                Log.CW($"Failed to upload crash dump: {e}");
+                Log.CW($"Failed to upload crash report: {e}");
             }
         }
     }
