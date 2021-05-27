@@ -1,4 +1,5 @@
-﻿using Nostrum;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum;
 using Nostrum.Extensions;
 using System;
 using System.Collections.Generic;
@@ -9,23 +10,25 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Abnormalities;
+using TCC.Data.Chat;
 using TCC.Data.Databases;
 using TCC.Data.Map;
 using TCC.Data.Pc;
 using TCC.Interop;
 using TCC.Interop.Proxy;
-using TCC.Processing;
 using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Update;
 using TCC.Utilities;
 using TCC.Utils;
+using TCC.ViewModels;
 using TeraDataLite;
 using TeraPacketParser;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
+using TeraPacketParser.Sniffing;
 using Player = TCC.Data.Pc.Player;
 using Server = TeraPacketParser.TeraCommon.Game.Server;
 
@@ -46,7 +49,7 @@ namespace TCC
         public static readonly GuildInfo Guild = new();
         public static Server Server { get; private set; } = new("Unknown", "Unknown", "0.0.0.0", 0);
         public static Account Account { get; set; } = new();
-        public static string Language => DB!.ServerDatabase.StringLanguage;
+        public static string Language => PacketAnalyzer.ServerDatabase.StringLanguage;
 
         public static bool LoadingScreen
         {
@@ -125,13 +128,21 @@ namespace TCC
         }
 
         public static event Action? ChatModeChanged;
+
         public static event Action? GameUiModeChanged;
+
         public static event Action? EncounterChanged;
+
         public static event Action? CombatChanged;
+
         public static event Action? LoadingScreenChanged;
+
         public static event Action? LoggedChanged;
+
         public static event Action? DatabaseLoaded;
+
         public static event Action? Teleported;
+
         public static event Action? SkillStarted;
 
         public static Player Me { get; } = new();
@@ -141,14 +152,45 @@ namespace TCC
         public static bool IsInDungeon => DB!.MapDatabase.IsDungeon(CurrentZoneId);
         public static string CurrentAccountNameHash { get; private set; } = "";
 
-
         public static async Task InitAsync()
         {
             PacketAnalyzer.ProcessorReady += InstallHooks;
+
             await InitDatabasesAsync(string.IsNullOrEmpty(App.Settings.LastLanguage)
                 ? "EU-EN"
                 : App.Settings.LastLanguage);
+
             KeyboardHook.Instance.RegisterCallback(App.Settings.ReturnToLobbyHotkey, OnReturnToLobbyHotkeyPressed);
+
+            StubMessageParser.SetUiModeEvent += OnSetUiMode;
+            StubMessageParser.SetChatModeEvent += OnSetChatMode;
+            StubMessageParser.HandleChatMessageEvent += OnStubChatMessage;
+            StubMessageParser.HandleRawPacketEvent += OnRawPacket;
+        }
+
+        private static void OnRawPacket(Message msg)
+        {
+            PacketAnalyzer.EnqueuePacket(msg);
+        }
+
+        private static void OnStubChatMessage(string author, uint channel, string message)
+        {
+            if (!ChatManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
+                ChatManager.Instance.CachePrivateMessage(channel, author, message);
+            else
+                ChatManager.Instance.AddChatMessage(
+                    ChatManager.Instance.Factory.CreateMessage((ChatChannel)ChatManager.Instance.PrivateChannels.FirstOrDefault(x =>
+                        x.Id == channel && x.Joined).Index + 11, author, message));
+        }
+
+        private static void OnSetChatMode(bool b)
+        {
+            InGameChatOpen = b;
+        }
+
+        private static void OnSetUiMode(bool b)
+        {
+            InGameUiOn = b;
         }
 
         private static async Task InitDatabasesAsync(string lang)
@@ -188,9 +230,11 @@ namespace TCC
                         WindowManager.SettingsWindow.ShowDialogAtPage(9);
                         InitDatabases(App.Settings.LastLanguage);
                         break;
+
                     case MessageBoxResult.No:
                         InitDatabases("EU-EN");
                         break;
+
                     case MessageBoxResult.Cancel:
                         App.Close();
                         break;
@@ -210,11 +254,11 @@ namespace TCC
             PacketAnalyzer.Sniffer.NewConnection += OnConnected;
             PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
 
-            // db stuff
-            PacketAnalyzer.Processor.Hook<C_LOGIN_ARBITER>(OnLoginArbiter);
+            PacketAnalyzer.Processor.Hook<C_CHECK_VERSION>(async p => await OnCheckVersion(p));
+            PacketAnalyzer.Processor.Hook<C_LOGIN_ARBITER>(async p => await OnLoginArbiter(p));
 
             // player stuff
-            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(async (p) => await OnLogin(p));
             PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
             PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
 
@@ -279,9 +323,65 @@ namespace TCC
             //PacketAnalyzer.Processor.Hook<S_FATIGABILITY_POINT>(OnFatigabilityPoint);
         }
 
+        private static async Task OnCheckVersion(C_CHECK_VERSION p)
+        {
+            var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
+            if (!File.Exists(opcPath))
+            {
+                if (PacketAnalyzer.Sniffer is ToolboxSniffer tbs)
+                {
+                    if (!Directory.Exists(Path.Combine(App.DataPath, "opcodes")))
+                        Directory.CreateDirectory(Path.Combine(App.DataPath, "opcodes"));
+                    if (!await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
+                    {
+                        TccMessageBox.Show(SR.UnknownClientVersion(p.Versions[0]), MessageBoxType.Error);
+                        App.Close();
+                        return;
+                    }
+                }
+                else
+                {
+                    if (OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"))) return;
+                    TccMessageBox.Show(SR.UnknownClientVersion(p.Versions[0]), MessageBoxType.Error);
+                    App.Close();
+                    return;
+                }
+            }
+
+            OpCodeNamer opcNamer;
+            try
+            {
+                opcNamer = new OpCodeNamer(opcPath);
+            }
+            catch (Exception ex)
+            {
+                switch (ex)
+                {
+                    case OverflowException:
+                    case ArgumentException:
+                        TccMessageBox.Show(SR.InvalidOpcodeFile(ex.Message), MessageBoxType.Error);
+                        Log.F(ex.ToString());
+                        App.Close();
+                        break;
+                }
+                return;
+            }
+
+            PacketAnalyzer.Factory!.Set(p.Versions[0], opcNamer);
+            PacketAnalyzer.Sniffer.Connected = true;
+        }
+
         private static void OnConnected(Server server)
         {
             Server = server;
+            if (App.Settings.DontShowFUBH == false) App.FUBH();
+
+            WindowManager.TrayIcon.Connected = true;
+            WindowManager.TrayIcon.Text = $"{App.AppVersion} - connected";
+
+            //if (Game.Server.Region == "EU")
+            //    TccMessageBox.Show("WARNING",
+            //        "Official statement from Gameforge:\n\n don't combine partners or pets! It will lock you out of your character permanently.\n\n This message will keep showing until next release.");
         }
 
         private static Laurel GetLaurel(uint pId)
@@ -322,10 +422,15 @@ namespace TCC
 
         private static void OnDisconnected()
         {
+            WindowManager.TrayIcon.Connected = false;
+            WindowManager.TrayIcon.Text = $"{App.AppVersion} - not connected";
+            Firebase.Dispose();
             Me.ClearAbnormalities();
             Logged = false;
             LoadingScreen = true;
             App.Settings.Save();
+            if (App.ToolboxMode && UpdateManager.UpdateAvailable) App.Close();
+
         }
 
         private static void SetAbnormalityTracker(Class c)
@@ -348,9 +453,9 @@ namespace TCC
                 _ => new AbnormalityTracker()
             };
         }
+
         private static void CheckChatMention(ParsedMessage m)
         {
-
             string author = "", txt = "", strCh = "";
 
             switch (m)
@@ -361,21 +466,21 @@ namespace TCC
                     author = w.Author;
                     strCh = TccUtils.ChatChannelToName(ChatChannel.ReceivedWhisper);
                     break;
+
                 case S_CHAT c:
                     txt = ChatUtils.GetPlainText(c.Message).UnescapeHtml();
                     if (!TccUtils.CheckMention(txt)) return;
                     author = c.AuthorName;
                     strCh = TccUtils.ChatChannelToName((ChatChannel)c.Channel);
                     break;
+
                 case S_PRIVATE_CHAT p:
                     txt = ChatUtils.GetPlainText(p.Message).UnescapeHtml();
                     if (!TccUtils.CheckMention(txt)) return;
                     author = p.AuthorName;
                     strCh = TccUtils.ChatChannelToName((ChatChannel)p.Channel);
                     break;
-
             }
-
 
             TccUtils.CheckWindowNotify(txt, $"{author} - {strCh}");
             TccUtils.CheckDiscordNotify($"`{strCh}` {txt}", author);
@@ -395,43 +500,52 @@ namespace TCC
                     Me.Ice = m.Ice;
                     Me.Arcane = m.Arcane;
                     break;
+
                 case Class.Warrior:
                     Me.StacksCounter.Val = m.Edge;
                     break;
             }
         }
+
         private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
         {
             DB!.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
             TccUtils.CheckWindowNotify($"New broker offer for {m.Amount} <{i?.Name ?? m.Item.ToString()}> from {m.Name}", "Broker offer");
             TccUtils.CheckDiscordNotify($"New broker offer for {m.Amount} **<{i?.Name ?? m.Item.ToString()}>**", m.Name);
         }
+
         private static void OnRequestContract(S_BEGIN_THROUGH_ARBITER_CONTRACT p)
         {
             if (p.Type != S_BEGIN_THROUGH_ARBITER_CONTRACT.RequestType.PartyInvite) return;
             TccUtils.CheckWindowNotify($"{p.Sender} invited you to join a party", "Party invite");
             TccUtils.CheckDiscordNotify($"**{p.Sender}** invited you to join a party", "TCC");
         }
+
         private static void OnBanPartyMember(S_BAN_PARTY_MEMBER obj)
         {
             Group.Remove(obj.PlayerId, obj.ServerId);
         }
+
         private static void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER obj)
         {
             Group.Remove(obj.PlayerId, obj.ServerId);
         }
+
         private static void OnChangePartyManager(S_CHANGE_PARTY_MANAGER p)
         {
             Group.ChangeLeader(p.Name);
         }
+
         private static void OnBanParty(S_BAN_PARTY p)
         {
             Group.Disband();
         }
+
         private static void OnLeaveParty(S_LEAVE_PARTY p)
         {
             Group.Disband();
         }
+
         private static void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
         {
             Group.SetGroup(p.Members, p.Raid);
@@ -443,20 +557,24 @@ namespace TCC
             Log.N("Instance Matching", SR.BgMatchingComplete, NotificationType.Success);
             Log.F($"Zone: {p.Zone}\nId: {p.Id}\nData: {p.Data.Array.ToHexString()}", "S_BATTLE_FIELD_ENTRANCE_INFO.txt");
         }
+
         private static void OnFinInterPartyMatch(S_FIN_INTER_PARTY_MATCH p)
         {
             Log.N("Instance Matching", SR.DungMatchingComplete, NotificationType.Success);
             Log.F($"Zone: {p.Zone}\nData: {p.Data.Array.ToHexString()}", "S_FIN_INTER_PARTY_MATCH.txt");
         }
+
         private static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
         {
             if (IsMe(m.Target)) return;
             SetEncounter(m.CurrentHP, m.MaxHP);
         }
+
         private static void OnBossGageInfo(S_BOSS_GAGE_INFO m)
         {
             SetEncounter(m.CurrentHP, m.MaxHP);
         }
+
         private static void OnWhisper(S_WHISPER p)
         {
             if (p.Recipient != Me.Name) return;
@@ -466,13 +584,16 @@ namespace TCC
         private static void OnChat(S_CHAT m)
         {
             #region Greet meme
+
             if ((ChatChannel)m.Channel == ChatChannel.Greet
                 && (m.AuthorName == "Foglio"
                     || m.AuthorName == "Folyemi"))
                 Log.N("owo", SR.GreetMemeContent, NotificationType.Success, 3000);
-            #endregion
+
+            #endregion Greet meme
 
             #region Global trade angery
+
             if (m.AuthorName == Me.Name)
             {
                 if ((ChatChannel)m.Channel != ChatChannel.Global) return;
@@ -481,9 +602,9 @@ namespace TCC
                       m.Message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                       m.Message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0)) return;
                 Log.N("REEEEEEEEEEEEEEEEEEEEEE", SR.GlobalSellAngery, NotificationType.Error);
-
             }
-            #endregion
+
+            #endregion Global trade angery
 
             if (BlockList.Contains(m.AuthorName)) return;
 
@@ -495,21 +616,25 @@ namespace TCC
             if (BlockList.Contains(m.AuthorName)) return;
             CheckChatMention(m);
         }
+
         private static void OnSpawnNpc(S_SPAWN_NPC p)
         {
             if (!DB!.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
             NearbyNPC[p.EntityId] = m.Name;
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
+
         private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO x)
         {
             if (!x.Online) return;
             SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{x.Name}", "SMT_FRIEND_IS_CONNECTED");
         }
+
         private static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
         {
             SystemMessagesProcessor.AnalyzeMessage($"@0\vAchievementName\v@achievement:{x.AchievementId}", "SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE");
         }
+
         private static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM x)
         {
             App.BaseDispatcher.InvokeAsync(() =>
@@ -525,6 +650,7 @@ namespace TCC
                 }
             });
         }
+
         private static void OnSystemMessage(S_SYSTEM_MESSAGE x)
         {
             if (DB!.SystemMessagesDatabase.IsHandledInternally(x.Message)) return;
@@ -541,22 +667,29 @@ namespace TCC
                 }
             });
         }
+
         private static void OnDespawnNpc(S_DESPAWN_NPC p)
         {
             NearbyNPC.Remove(p.Target);
             FlyingGuardianDataProvider.InvokeProgressChanged();
             AbnormalityTracker.CheckMarkingOnDespawn(p.Target);
         }
+
         private static void OnDespawnUser(S_DESPAWN_USER p)
         {
             #region Aura meme
+
             if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024);
-            #endregion
+
+            #endregion Aura meme
+
             NearbyPlayers.Remove(p.EntityId);
         }
+
         private static void OnSpawnUser(S_SPAWN_USER p)
         {
             #region Aura meme
+
             switch (p.Name)
             {
                 case "Foglio":
@@ -581,9 +714,11 @@ namespace TCC
                     break;
             }
 
-            #endregion
+            #endregion Aura meme
+
             NearbyPlayers[p.EntityId] = new Tuple<string, Class>(p.Name, TccUtils.ClassFromModel(p.TemplateId));
         }
+
         private static void OnSpawnMe(S_SPAWN_ME p)
         {
             NearbyNPC.Clear();
@@ -607,7 +742,8 @@ namespace TCC
                     SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
                 }
 
-                #endregion
+                #endregion Fear Inoculum
+
                 if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "it")
                 {
                     var zg = DB!.AbnormalityDatabase.Abnormalities[10240001];
@@ -631,13 +767,14 @@ namespace TCC
                     Me.UpdateAbnormality(zone, int.MaxValue, 1);
                     SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{zone.Name}", "SMT_BATTLE_BUFF_DEBUFF");
                 }
-
             });
         }
+
         private static void OnAccountPackageList(S_ACCOUNT_PACKAGE_LIST m)
         {
             Account.IsElite = m.IsElite;
         }
+
         private static void OnLoadTopo(S_LOAD_TOPO m)
         {
             LoadingScreen = true;
@@ -645,16 +782,16 @@ namespace TCC
             CurrentZoneId = m.Zone;
             Teleported?.Invoke();
             Me.ClearAbnormalities();
-
         }
+
         private static void OnGetUserList(S_GET_USER_LIST m)
         {
             if (PacketAnalyzer.Factory!.ReleaseVersion == 0)
                 Log.F("Warning: C_LOGIN_ARBITER not received.");
 
             Logged = false;
-            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false);
-            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false, App.Settings.LastAccountNameHash);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false, App.Settings.LastAccountNameHash);
             Me.ClearAbnormalities();
 
             foreach (var item in m.CharacterList)
@@ -676,12 +813,13 @@ namespace TCC
                     Account.Characters.Add(new Character(item));
                 }
             }
-
         }
+
         private static void OnUserStatus(S_USER_STATUS m)
         {
             if (IsMe(m.EntityId)) Combat = m.IsInCombat;
         }
+
         private static void OnFieldEventOnLeave(S_FIELD_EVENT_ON_LEAVE p)
         {
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_LEAVE");
@@ -691,6 +829,7 @@ namespace TCC
                 || !App.Settings.FpsAtGuardian) return;
             StubInterface.Instance.StubClient.InvokeCommand("fps mode 1");
         }
+
         private static void OnFieldEventOnEnter(S_FIELD_EVENT_ON_ENTER p)
         {
             SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_ENTER");
@@ -700,6 +839,7 @@ namespace TCC
                 || !App.Settings.FpsAtGuardian) return;
             StubInterface.Instance.StubClient.InvokeCommand("fps mode 3");
         }
+
         private static void OnFieldPointInfo(S_FIELD_POINT_INFO p)
         {
             if (Account.CurrentCharacter == null) return;
@@ -709,6 +849,7 @@ namespace TCC
             if (old == p.Cleared) return;
             SystemMessagesProcessor.AnalyzeMessage("@0", "SMT_FIELD_EVENT_REWARD_AVAILABLE");
         }
+
         private static void OnGetUserGuildLogo(S_GET_USER_GUILD_LOGO p)
         {
             S_IMAGE_DATA.Database[p.GuildId] = p.GuildLogo;
@@ -727,36 +868,88 @@ namespace TCC
                 Log.F($"Error while saving guild logo: {e}");
             }
         }
+
         private static void OnGuildMemberList(S_GUILD_MEMBER_LIST m)
         {
             Task.Run(() => Guild.Set(m.Members, m.MasterId, m.MasterName));
         }
+
         private static void OnLoadEpInfo(S_LOAD_EP_INFO m)
         {
             if (!m.Perks.TryGetValue(851010, out var level)) return;
             EpDataProvider.SetManaBarrierPerkLevel(level);
         }
+
         private static void OnLearnEpPerk(S_LEARN_EP_PERK m)
         {
             if (!m.Perks.TryGetValue(851010, out var level)) return;
             EpDataProvider.SetManaBarrierPerkLevel(level);
         }
+
         private static void OnResetEpPerk(S_RESET_EP_PERK m)
         {
             if (!m.Success) return;
             EpDataProvider.SetManaBarrierPerkLevel(0);
         }
+
         private static void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
             Logged = false;
             Me.ClearAbnormalities();
-
         }
-        private static void OnLogin(S_LOGIN m)
+
+        private static async Task OnLogin(S_LOGIN m)
         {
-            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true);
-            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true);
-            Firebase.SendUsageStatAsync();
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true, App.Settings.LastAccountNameHash);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true, App.Settings.LastAccountNameHash);
+
+            if (App.Settings.StatSentVersion != App.AppVersion ||
+                App.Settings.StatSentTime.Month != DateTime.UtcNow.Month ||
+                App.Settings.StatSentTime.Day != DateTime.UtcNow.Day)
+            {
+                var js = new JObject
+                {
+                {"region", Game.Server.Region},
+                {"server", Game.Server.ServerId},
+                {"account", App.Settings.LastAccountNameHash},
+                {"tcc_version", App.AppVersion},
+                {
+                    "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
+                               App.Settings.StatSentTime.Day == DateTime.Now.Day &&
+                               App.Settings.StatSentVersion != App.AppVersion
+                },
+                {
+                    "settings_summary", new JObject
+                    {
+                        {
+                            "windows", new JObject
+                            {
+                                { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
+                                { "buffs", App.Settings.BuffWindowSettings.Enabled },
+                                { "character", App.Settings.CharacterWindowSettings.Enabled },
+                                { "class", App.Settings.ClassWindowSettings.Enabled },
+                                { "chat", App.Settings.ChatEnabled },
+                                { "group", App.Settings.GroupWindowSettings.Enabled }
+                            }
+                        },
+                        {
+                            "generic", new JObject
+                            {
+                                { "proxy_enabled", StubInterface.Instance.IsStubAvailable},
+                                { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
+                            }
+                        }
+                    }
+                }
+            };
+
+                if (await Firebase.SendUsageStatAsync(js))
+                {
+                    App.Settings.StatSentTime = DateTime.UtcNow;
+                    App.Settings.StatSentVersion = App.AppVersion;
+                    App.Settings.Save();
+                }
+            }
 
             App.Settings.LastLanguage = Language;
 
@@ -768,7 +961,7 @@ namespace TCC
             FriendList.Clear();
             BlockList.Clear();
 
-            Server = DB!.ServerDatabase.GetServer(m.ServerId);
+            Server = PacketAnalyzer.ServerDatabase.GetServer(m.ServerId);
 
             Me.Name = m.Name;
             Me.Class = m.CharacterClass;
@@ -785,13 +978,52 @@ namespace TCC
             InitDatabases(App.Settings.LastLanguage);
             SetAbnormalityTracker(m.CharacterClass);
         }
-        private static void OnLoginArbiter(C_LOGIN_ARBITER m)
+
+        private static async Task OnLoginArbiter(C_LOGIN_ARBITER m)
         {
+            var rvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory!.ReleaseVersion / 100}.map");
+            var pvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory!.Version}.map");
+
+            var path = File.Exists(rvSysMsgPath)
+                ? rvSysMsgPath
+                : File.Exists(pvSysMsgPath)
+                    ? pvSysMsgPath
+                    : "";
+
+            if (path == "")
+            {
+                var destPath = pvSysMsgPath.Replace("\\", "/");
+
+
+                if (PacketAnalyzer.Sniffer.Connected && PacketAnalyzer.Sniffer is ToolboxSniffer tbs)
+                {
+                    if (await tbs.ControlConnection.DumpMap(destPath, "sysmsg"))
+                    {
+                        PacketAnalyzer.Factory.SystemMessageNamer = new OpCodeNamer(destPath);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (OpcodeDownloader.DownloadSysmsgIfNotExist(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
+                    {
+                        PacketAnalyzer.Factory.SystemMessageNamer = new OpCodeNamer(destPath);
+                        return;
+                    }
+                }
+
+                TccMessageBox.Show(SR.InvalidSysMsgFile(PacketAnalyzer.Factory.ReleaseVersion / 100, PacketAnalyzer.Factory.Version), MessageBoxType.Error);
+                App.Close();
+                return;
+            }
+            PacketAnalyzer.Factory.ReloadSysMsg(path);
+
             CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
-            DB!.ServerDatabase.Language = m.Language == LangEnum.EN && Server.Region == "RU" ? LangEnum.RU : LangEnum.EN;
-            App.Settings.LastLanguage = DB.ServerDatabase.StringLanguage;
+            PacketAnalyzer.ServerDatabase.Language = m.Language == LangEnum.EN && Server.Region == "RU" ? LangEnum.RU : LangEnum.EN;
+            App.Settings.LastLanguage = PacketAnalyzer.ServerDatabase.StringLanguage;
             App.Settings.LastAccountNameHash = CurrentAccountNameHash;
         }
+
         private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
         {
             CurrentAbnormalityTracker.CheckAbnormality(p);
@@ -801,6 +1033,7 @@ namespace TCC
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
         }
+
         private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
         {
             CurrentAbnormalityTracker.CheckAbnormality(p);
@@ -809,8 +1042,8 @@ namespace TCC
             ab.Infinity = p.Duration >= int.MaxValue / 2;
             Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
             FlyingGuardianDataProvider.HandleAbnormal(p);
-
         }
+
         private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
         {
             CurrentAbnormalityTracker.CheckAbnormality(p);
@@ -818,21 +1051,24 @@ namespace TCC
             if (!DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
             FlyingGuardianDataProvider.HandleAbnormal(p);
             Me.EndAbnormality(ab);
-
         }
+
         private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
         {
             App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
+
         private static void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
         {
             App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
         }
+
         private static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF m)
         {
             SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Guild.NameOf(m.PlayerId)}", "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED");
             Guild.SetMaster(m.PlayerId, Guild.NameOf(m.PlayerId));
         }
+
         private static void OnNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
         {
             if (p.Type != S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce) return;
@@ -845,6 +1081,7 @@ namespace TCC
             var name = DB.MonsterDatabase.GetMonsterName(p.TemplateId, p.ZoneId);
             SystemMessagesProcessor.AnalyzeMessage($"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}", "SMT_GQUEST_URGENT_NOTIFY");
         }
+
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
             var friend = FriendList.FirstOrDefault(f => f.PlayerId == x.PlayerId);
@@ -861,10 +1098,12 @@ namespace TCC
 
             SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{friend.Name}\vAreaName\v{areaName}", "SMT_FRIEND_WALK_INTO_SAME_AREA");
         }
+
         private static void OnFriendList(S_FRIEND_LIST m)
         {
             FriendList = m.Friends;
         }
+
         private static void OnUserBlockList(S_USER_BLOCK_LIST m)
         {
             m.BlockedUsers.ForEach(u =>
@@ -873,6 +1112,7 @@ namespace TCC
                 BlockList.Add(u);
             });
         }
+
         //private static void OnFatigabilityPoint(S_FATIGABILITY_POINT p)
         //{
         //    var ppFactor = MathUtils.FactorCalc(p.CurrFatigability, p.MaxFatigability) * 100;
@@ -885,6 +1125,6 @@ namespace TCC
         //        );
         //}
 
-        #endregion
+        #endregion Hooks
     }
 }
