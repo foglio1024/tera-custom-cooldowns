@@ -1,5 +1,6 @@
 ﻿using Nostrum;
 using System.Collections.Generic;
+using System.Windows.Input;
 using System.Windows.Threading;
 using TCC.Interop.Moongourd;
 
@@ -35,13 +36,13 @@ namespace TCC.UI.Controls.Chat
             }
         }
 
-        public TSObservableCollection<MoongourdEncounter> Encounters { get; }
+        public TSObservableCollection<EncounterViewModel> Encounters { get; }
 
         public MoongourdPopupViewModel()
         {
             Dispatcher = Dispatcher.CurrentDispatcher;
 
-            Encounters = new TSObservableCollection<MoongourdEncounter>(Dispatcher);
+            Encounters = new TSObservableCollection<EncounterViewModel>(Dispatcher);
 
             _manager = new KabedonManager();
             _manager.Started += OnSearchStarted;
@@ -54,13 +55,13 @@ namespace TCC.UI.Controls.Chat
             Dispatcher?.Invoke(() => EmptyText = "Loading...");
         }
 
-        private void OnSearchFinished(List<MoongourdEncounter> list)
+        private void OnSearchFinished(List<IMoongourdEncounter> list)
         {
             Dispatcher.Invoke(() =>
             {
                 EmptyText = "No entries.";
                 Encounters.Clear();
-                list.ForEach(Encounters.Add);
+                list.ForEach(e => Encounters.Add(new EncounterViewModel(e.AreaId, e.BossId, e.LogId) { PlayerDeaths = e.PlayerDeaths, PlayerDps = e.PlayerDps }));
             });
         }
 
@@ -85,6 +86,30 @@ namespace TCC.UI.Controls.Chat
                 region = "EU";
             }
             _manager.GetEncounters(name, region, Game.Server.Name);
+        }
+    }
+
+    public class EncounterViewModel
+    {
+        public string BossName { get; }
+        public string DungeonName { get; }
+        public int PlayerDps { get; init; }
+        public int PlayerDeaths { get; init; }
+
+        public ICommand Browse { get; }
+
+        public EncounterViewModel(int areaId, int bossId, long logId)
+        {
+            DungeonName = Game.DB!.RegionsDatabase.GetZoneName((uint)areaId);
+            BossName = Game.DB!.MonsterDatabase.GetMonsterName((uint)bossId, (uint)areaId);
+
+            Browse = new RelayCommand(_ =>
+            {
+                var reg = App.Settings.LastLanguage.ToLower();
+                reg = reg.StartsWith("eu") ? "eu" : reg;
+                reg = reg == "na" ? "" : reg + "/";
+                Utils.Utilities.OpenUrl("https://" + $"moongourd.com/{reg}upload/{areaId}/{bossId}/1/{logId}");
+            });
         }
     }
 
