@@ -178,11 +178,12 @@ namespace TCC.Data.Databases
                 return true;
             }
             var (_, guard) = MapDatabase.Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continentId);
-            //if (guard == null)
-            //{
-            //    name = "Unknown";
-            //    return false;
-            //}
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            if (guard == null)
+            {
+                name = "Unknown";
+                return false;
+            }
             name = RegionsDatabase.GetZoneName(guard.NameId);
             return true;
 
