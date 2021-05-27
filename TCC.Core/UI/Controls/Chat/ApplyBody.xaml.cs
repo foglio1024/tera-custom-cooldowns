@@ -17,7 +17,7 @@ namespace TCC.UI.Controls.Chat
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            StubInterface.Instance.StubClient.GroupInviteUser(dc.Author); //ProxyOld.PartyInvite(dc.Author);
+            StubInterface.Instance.StubClient.GroupInviteUser(dc.Author, Game.Group.IsRaid); //ProxyOld.PartyInvite(dc.Author);
             dc.Handled = true;
         }
         private void InspectBtn(object sender, MouseButtonEventArgs e)

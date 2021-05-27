@@ -41,7 +41,7 @@ namespace TCC.UI.Windows
 
         public override void ShowWindow()
         {
-            StubInterface.Instance.StubClient.RequestListings();
+            StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
 
             base.ShowWindow();
 

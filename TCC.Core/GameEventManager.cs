@@ -199,7 +199,7 @@ namespace TCC
 
         private static void SendWebhook(string content, string url, bool test = false)
         {
-            Discord.FireWebhook(url, $"{content}{(test ? " (test message)" : "")}");
+            Discord.FireWebhook(url, $"{content}{(test ? " (test message)" : "")}", App.AppVersion, App.Settings.LastAccountNameHash);
         }
 
         private struct TeraServerTimeInfo

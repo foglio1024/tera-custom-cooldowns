@@ -3,12 +3,12 @@ using System;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
-using TCC.Analysis;
 using TCC.Interop.Proxy;
 using TCC.UI.Controls.Chat;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 using FocusManager = TCC.UI.FocusManager;
 
@@ -333,7 +333,7 @@ namespace TCC.ViewModels
             });
             GroupInviteCommand = new RelayCommand(_ =>
             {
-                StubInterface.Instance.StubClient.GroupInviteUser(Name);
+                StubInterface.Instance.StubClient.GroupInviteUser(Name, Game.Group.IsRaid);
             });
             GrantInviteCommand = new RelayCommand(_ =>
             {

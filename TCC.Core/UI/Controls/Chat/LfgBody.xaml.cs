@@ -20,7 +20,7 @@ namespace TCC.UI.Controls.Chat
             if (dc.LinkedListing != null)
             {
                 WindowManager.ViewModels.LfgVM.LastClicked = dc.LinkedListing;
-                if (WindowManager.LfgListWindow.IsVisible) StubInterface.Instance.StubClient.RequestListings();
+                if (WindowManager.LfgListWindow.IsVisible) StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
                 else WindowManager.LfgListWindow.ShowWindow();
             }
             StubInterface.Instance.StubClient.RequestPartyInfo(dc.AuthorId); 

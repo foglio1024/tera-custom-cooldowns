@@ -11,7 +11,6 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
-using TCC.Analysis;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
@@ -20,6 +19,7 @@ using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Utils;
 using TeraDataLite;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 using FocusManager = TCC.UI.FocusManager;
 
@@ -227,7 +227,7 @@ namespace TCC.ViewModels
             SortCommand = new SortCommand(ListingsView);
             PublicizeCommand = new RelayCommand(_ => Publicize(), _ => CanPublicize());
             ToggleAutoPublicizeCommand = new RelayCommand(_ => ToggleAutoPublicize(), _ => CanToggleAutoPublicize());
-            ReloadCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.RequestListings());
+            ReloadCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
             RemoveMessageCommand = new RelayCommand(_ => RemoveMessage());
             CreateMessageCommand = new RelayCommand(_ => CreateMessage(), _ => CanCreateMessage());
             ExpandAllCommand = new RelayCommand(_ => ExpandAll());
@@ -263,7 +263,7 @@ namespace TCC.ViewModels
                 Listings.Remove(listing);
             }
 
-            StubInterface.Instance.StubClient.RequestListings();
+            StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
 
         }
 
@@ -326,7 +326,7 @@ namespace TCC.ViewModels
         {
             ForceStopPublicize();
             StubInterface.Instance.StubClient.RemoveListing();
-            StubInterface.Instance.StubClient.RequestListings();
+            StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
         }
 
         private void OnShowLfgHotkeyPressed()
@@ -430,7 +430,7 @@ namespace TCC.ViewModels
             if (req == 0)
             {
                 StayClosed = true;
-                StubInterface.Instance.StubClient.RequestListings(); //ProxyOld.RequestLfgList();
+                StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel); //ProxyOld.RequestLfgList();
             }
             else
             {
@@ -698,7 +698,7 @@ namespace TCC.ViewModels
                 !Game.InGameUiOn) return;
             StubInterface.Instance.StubClient.RequestListingCandidates();
             if (!WindowManager.LfgListWindow.IsVisible) return;
-            StubInterface.Instance.StubClient.RequestListings();
+            StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
         }
 
         private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)

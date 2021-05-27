@@ -33,7 +33,7 @@ namespace TCC.ResourceDictionaries
             Keyboard.ClearFocus();
             FocusManager.MakeUnfocusable(WindowManager.LfgListWindow.Handle);
 
-            Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings());
+            Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
         }
 
         private void LfgMessage_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

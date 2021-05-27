@@ -485,7 +485,7 @@ namespace TCC.Data.Pc
 
             AcceptApplyCommand = new RelayCommand(_ =>
             {
-                StubInterface.Instance.StubClient.GroupInviteUser(Name);
+                StubInterface.Instance.StubClient.GroupInviteUser(Name, Game.Group.IsRaid);
             });
             DeclineApplyCommand = new RelayCommand(_ =>
             {
