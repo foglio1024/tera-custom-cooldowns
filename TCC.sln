@@ -57,6 +57,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.Interop", "TCC.Interop\TCC.Interop.csproj", "{52BC16F8-FAF9-4579-B2E8-D044706F5112}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,12 @@ Global
 		{2C329A75-5632-45E0-8F2E-08D158E08A01}.DebugToolbox|Any CPU.Build.0 = DebugToolbox|Any CPU
 		{2C329A75-5632-45E0-8F2E-08D158E08A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C329A75-5632-45E0-8F2E-08D158E08A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52BC16F8-FAF9-4579-B2E8-D044706F5112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52BC16F8-FAF9-4579-B2E8-D044706F5112}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52BC16F8-FAF9-4579-B2E8-D044706F5112}.DebugToolbox|Any CPU.ActiveCfg = Debug|Any CPU
+		{52BC16F8-FAF9-4579-B2E8-D044706F5112}.DebugToolbox|Any CPU.Build.0 = Debug|Any CPU
+		{52BC16F8-FAF9-4579-B2E8-D044706F5112}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52BC16F8-FAF9-4579-B2E8-D044706F5112}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
