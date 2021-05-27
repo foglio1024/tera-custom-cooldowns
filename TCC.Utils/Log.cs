@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using TCC.Data;
 
 namespace TCC.Utils
 {
@@ -9,6 +8,7 @@ namespace TCC.Utils
     {
         public static event Action<ChatChannel, string, string>? NewChatMessage;
         public static event Func<string, string, NotificationType, int, NotificationTemplate, int, int>? NewNotification;
+        public static event Action<string>? NewMessageBox;
 
         private static string _logPath = "logs";
         private static string _version = "";
@@ -71,6 +71,11 @@ namespace TCC.Utils
         {
             if (!message.StartsWith("<font")) message = ChatUtils.Font(message);
             NewChatMessage?.Invoke(channel, message, author);
+        }
+
+        public static void MB(string message)
+        {
+            NewMessageBox?.Invoke(message);
         }
     }
 }

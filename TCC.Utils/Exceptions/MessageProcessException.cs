@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TCC.Exceptions
+namespace TCC.Utils.Exceptions
 {
     public class MessageProcessException : Exception
     {

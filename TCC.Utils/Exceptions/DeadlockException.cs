@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TCC.Exceptions
+namespace TCC.Utils.Exceptions
 {
     public class DeadlockException : Exception
     {

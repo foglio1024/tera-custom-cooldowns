@@ -18,10 +18,6 @@ namespace TCC.Utils
         Confirm
     }
 
-}
-
-namespace TCC.Data
-{
     public enum LanguageOverride
     {
         None = 0,
