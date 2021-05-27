@@ -17,22 +17,22 @@
                 <Style TargetType="TextBlock">
                     <Setter Property="Foreground" Value="#0af"/>
                     <Style.Triggers>
-                        <EventTrigger RoutedEvent="MouseEnter">
-                            <EventTrigger.EnterActions>
+                        <Trigger Property="FrameworkElement.IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="Foreground" From="#0af" To="White" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" From="#0af" To="White" Duration="0:0:0.2"/>
                                     </Storyboard>
                                 </BeginStoryboard>
-                            </EventTrigger.EnterActions>
-                            <EventTrigger.ExitActions>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ColorAnimation Storyboard.TargetProperty="Foreground" To="#0af" From="White" Duration="0:0:0.2"/>
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="#0af" From="White" Duration="0:0:0.2"/>
                                     </Storyboard>
                                 </BeginStoryboard>
-                            </EventTrigger.ExitActions>
-                        </EventTrigger>
+                            </Trigger.ExitActions>
+                        </Trigger>
                     </Style.Triggers>
                 </Style>
             </TextBlock.Style>
