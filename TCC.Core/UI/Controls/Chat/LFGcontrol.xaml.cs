@@ -49,7 +49,7 @@ namespace TCC.UI.Controls.Chat
         {
             if (App.Settings.LfgWindowSettings.Enabled)
             {
-                StubInterface.Instance.StubClient.RequestListings(); //ProxyOld.RequestLfgList();
+                StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel); //ProxyOld.RequestLfgList();
                 Task.Delay(1000).ContinueWith(_ =>
                 {
                     if (_dc == null) return;
@@ -63,14 +63,14 @@ namespace TCC.UI.Controls.Chat
             StubInterface.Instance.StubClient.RequestPartyInfo(_dc.Id); //ProxyOld.RequestPartyInfo(_dc.Id);
         }
 
-        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Label.Foreground = Brushes.White;
-        }
+        //private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    Label.Foreground = Brushes.White;
+        //}
 
-        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Label.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xaa, 0xff));
-        }
+        //private void UserControl_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    Label.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xaa, 0xff));
+        //}
     }
 }

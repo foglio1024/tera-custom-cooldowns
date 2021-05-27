@@ -3,30 +3,54 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d"  MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave"
-             d:DataContext="{d:DesignData LFG}">
+             xmlns:chat="clr-namespace:TCC.Data.Chat"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance chat:LFG}">
     <Border Height="Auto" x:Name="Root" ToolTipService.ShowDuration="50000" ToolTipService.InitialShowDelay="0" 
             Background="#50af" Width="Auto" 
             Padding="5,0,5,0" CornerRadius="3" 
             Cursor="Hand"
             MouseLeftButtonDown="root_MouseLeftButtonDown"
             >
-            <TextBlock Foreground="#0af" Name="Label">
-                <Run Text="{Binding DungeonName}"/>
-            </TextBlock>
+        <TextBlock Name="Label" Text="{Binding DungeonName}">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="#0af"/>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <EventTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground" From="#0af" To="White" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.EnterActions>
+                            <EventTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground" To="#0af" From="White" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.ExitActions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
         <Border.ToolTip>
             <ToolTip Background="Transparent" BorderBrush="Transparent" 
                      Placement="Top" >
-                
-            <Grid Margin="0">
-                <Border Style="{StaticResource DefaultBorderStyle}" Padding="5,3" Opacity="1">
-                    <TextBlock >
+
+                <Grid Margin="0">
+                    <Border Style="{StaticResource DefaultBorderStyle}" Padding="5,3" Opacity="1">
+                        <TextBlock >
                         <Run Text="{Binding Name}" Foreground="#3fff"/>
                         <Run Text=" "/>
                         <Run Text="{Binding Message}" Foreground="#9fff"/>
                         </TextBlock>
-                </Border>
-            </Grid>
+                    </Border>
+                </Grid>
             </ToolTip>
         </Border.ToolTip>
     </Border>
