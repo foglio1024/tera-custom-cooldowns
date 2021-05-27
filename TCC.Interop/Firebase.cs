@@ -6,22 +6,21 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using TCC.Interop.Proxy;
 using TCC.Utils;
 
 namespace TCC.Interop
 {
     public static class Firebase
     {
-        private static readonly List<string> _registeredWebhooks = new();
-        public static async void RegisterWebhook(string? webhook, bool online)
+        private static readonly List<Tuple<string, string>> _registeredWebhooks = new();
+        public static async void RegisterWebhook(string? webhook, bool online, string accountHash)
         {
             if (string.IsNullOrEmpty(webhook)) return;
-            if (string.IsNullOrEmpty(App.Settings.LastAccountNameHash)) return;
+            if (string.IsNullOrEmpty(accountHash)) return;
             var req = new JObject
             {
                 {"webhook", HashUtils.GenerateHash(webhook)},
-                {"user", App.Settings.LastAccountNameHash},
+                {"user", accountHash},
                 {"online", online }
             };
             using var c = MiscUtils.GetDefaultWebClient();
@@ -34,22 +33,28 @@ namespace TCC.Interop
                     new Uri("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook"),
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())));
                 if (online)
-                    _registeredWebhooks.Add(webhook);
+                {
+                    _registeredWebhooks.Add(new(webhook, accountHash));
+                }
                 else
-                    _registeredWebhooks.Remove(webhook);
+                {
+                    var toRemove = _registeredWebhooks.FirstOrDefault(x => x.Item1 == webhook);
+                    if (toRemove == null) return;
+                    _registeredWebhooks.Remove(toRemove);
+                }
             }
             catch
             {
                 Log.F($"Failed to register webhook.");
             }
         }
-        public static async Task<bool> RequestWebhookExecution(string webhook)
+        public static async Task<bool> RequestWebhookExecution(string webhook, string accountHash)
         {
             bool canFire;
             var req = new JObject
             {
                 { "webhook" , HashUtils.GenerateHash(webhook)},
-                { "user", App.Settings.LastAccountNameHash }
+                { "user", accountHash }
             };
             using var c = MiscUtils.GetDefaultWebClient();
             c.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -81,11 +86,8 @@ namespace TCC.Interop
             return canFire;
         }
 
-        public static async void SendUsageStatAsync()
+        public static async Task<bool> SendUsageStatAsync(JObject js)
         {
-            if (App.Settings.StatSentVersion == App.AppVersion &&
-                App.Settings.StatSentTime.Month == DateTime.UtcNow.Month &&
-                App.Settings.StatSentTime.Day == DateTime.UtcNow.Day) return;
 
             try
             {
@@ -94,52 +96,16 @@ namespace TCC.Interop
                 c.Headers.Add(HttpRequestHeader.AcceptCharset, "utf-8");
                 c.Encoding = Encoding.UTF8;
 
-                var js = new JObject
-                {
-                    {"region", Game.Server.Region},
-                    {"server", Game.Server.ServerId},
-                    {"account", App.Settings.LastAccountNameHash},
-                    {"tcc_version", App.AppVersion},
-                    {
-                        "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
-                                   App.Settings.StatSentTime.Day == DateTime.Now.Day &&
-                                   App.Settings.StatSentVersion != App.AppVersion
-                    },
-                    {
-                        "settings_summary", new JObject
-                        {
-                            {
-                                "windows", new JObject
-                                {
-                                    { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
-                                    { "buffs", App.Settings.BuffWindowSettings.Enabled },
-                                    { "character", App.Settings.CharacterWindowSettings.Enabled },
-                                    { "class", App.Settings.ClassWindowSettings.Enabled },
-                                    { "chat", App.Settings.ChatEnabled },
-                                    { "group", App.Settings.GroupWindowSettings.Enabled }
-                                }
-                            },
-                            {
-                                "generic", new JObject
-                                {
-                                    { "proxy_enabled", StubInterface.Instance.IsStubAvailable},
-                                    { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
-                                }
-                            }
-                        }
-                    }
-                };
 
                 await c.UploadStringTaskAsync(new Uri("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat"),
                     Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())));
 
-                App.Settings.StatSentTime = DateTime.UtcNow;
-                App.Settings.StatSentVersion = App.AppVersion;
-                App.Settings.Save();
+                
+                return true;
             }
             catch
             {
-                //TODO: write error?
+                return false;
             }
         }
 
@@ -147,11 +113,11 @@ namespace TCC.Interop
         {
             try
             {
-                var webhooks = new string[_registeredWebhooks.Count];
+                var webhooks = new List<Tuple<string, string>> () { Capacity = _registeredWebhooks.Count}.ToArray();
                 _registeredWebhooks.CopyTo(webhooks);
                 webhooks.ToList().ForEach(w =>
                 {
-                    RegisterWebhook(w, false);
+                    RegisterWebhook(w.Item1, false, w.Item2);
                 });
             }
             catch (Exception e)

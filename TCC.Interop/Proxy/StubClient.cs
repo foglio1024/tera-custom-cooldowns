@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using TCC.Analysis;
-using TCC.UI;
+using TeraPacketParser.Sniffing;
 
 namespace TCC.Interop.Proxy
 {
@@ -24,6 +23,7 @@ namespace TCC.Interop.Proxy
             var resp = await TccStub.CallAsync("pingStub");
             return resp?.Result != null && resp.Result.Value<bool>();
         }
+
         public async Task<bool> GetIsModAvailable([NotNull] string modName)
         {
             var resp = await TccStub.CallAsync("getIsModAvailable", new JObject
@@ -32,6 +32,7 @@ namespace TCC.Interop.Proxy
             });
             return resp?.Result != null && resp.Result.Value<bool>();
         }
+
         public async void RequestPartyInfo(uint id)
         {
             await TccStub.CallAsync("requestPartyInfo", new JObject
@@ -39,6 +40,7 @@ namespace TCC.Interop.Proxy
                 { "listingId", id }
             });
         }
+
         public async Task<bool> ApplyToGroup(uint id)
         {
             var resp = await TccStub.CallAsync("applyToGroup",
@@ -48,6 +50,7 @@ namespace TCC.Interop.Proxy
             });
             return resp?.Result != null && resp.Result.Value<bool>();
         }
+
         public async void FriendUser([NotNull] string userName, [NotNull] string message)
         {
             await TccStub.CallAsync("friendUser", new JObject
@@ -56,6 +59,7 @@ namespace TCC.Interop.Proxy
                 { "message", message }
             });
         }
+
         public async void UnfriendUser([NotNull] string userName)
         {
             await TccStub.CallAsync("unfriendUser", new JObject
@@ -63,6 +67,7 @@ namespace TCC.Interop.Proxy
                 { "userName", userName },
             });
         }
+
         public async void UnfriendUser([NotNull] uint playerId)
         {
             await TccStub.CallAsync("unfriendUser", new JObject
@@ -70,6 +75,7 @@ namespace TCC.Interop.Proxy
                 { "playerId", playerId},
             });
         }
+
         public async void BlockUser([NotNull] string userName)
         {
             await TccStub.CallAsync("blockUser", new JObject
@@ -77,6 +83,7 @@ namespace TCC.Interop.Proxy
                 { "userName", userName },
             });
         }
+
         public async void UnblockUser([NotNull] string userName)
         {
             await TccStub.CallAsync("unblockUser", new JObject
@@ -84,6 +91,7 @@ namespace TCC.Interop.Proxy
                 { "userName", userName },
             });
         }
+
         public async void SetInvitePower(uint serverId, uint playerId, bool canInvite)
         {
             await TccStub.CallAsync("setInvitePower", new JObject
@@ -93,6 +101,7 @@ namespace TCC.Interop.Proxy
                 { "canInvite", canInvite},
             });
         }
+
         public async void DelegateLeader(uint serverId, uint playerId)
         {
             await TccStub.CallAsync("delegateLeader", new JObject
@@ -101,6 +110,7 @@ namespace TCC.Interop.Proxy
                 { "playerId", playerId }
             });
         }
+
         public async void KickUser(uint serverId, uint playerId)
         {
             await TccStub.CallAsync("kickUser", new JObject
@@ -109,6 +119,7 @@ namespace TCC.Interop.Proxy
                 { "playerId", playerId }
             });
         }
+
         public async void InspectUser([NotNull] string userName)
         {
             await TccStub.CallAsync("inspectUser", new JObject
@@ -116,6 +127,7 @@ namespace TCC.Interop.Proxy
                 { "userName", userName }
             });
         }
+
         public async void InspectUser(ulong userGameId)
         {
             await TccStub.CallAsync("inspectUserWithGameId", new JObject
@@ -123,14 +135,16 @@ namespace TCC.Interop.Proxy
                 { "gameId", userGameId}
             });
         }
-        public async void GroupInviteUser([NotNull] string userName)
+
+        public async void GroupInviteUser([NotNull] string userName, bool raid)
         {
             await TccStub.CallAsync("groupInviteUser", new JObject
             {
                 { "userName", userName },
-                { "isRaid", WindowManager.ViewModels.GroupVM.Raid ? 1 : 0 }
+                { "isRaid", raid ? 1 : 0 }
             });
         }
+
         public async void GuildInviteUser([NotNull] string userName)
         {
             await TccStub.CallAsync("guildInviteUser", new JObject
@@ -138,6 +152,7 @@ namespace TCC.Interop.Proxy
                 { "userName", userName },
             });
         }
+
         public async void AcceptBrokerOffer(uint playerId, uint listingId)
         {
             await TccStub.CallAsync("acceptBrokerOffer", new JObject
@@ -146,6 +161,7 @@ namespace TCC.Interop.Proxy
                 { "listingId", listingId }
             });
         }
+
         public async void DeclineBrokerOffer(uint playerId, uint listingId)
         {
             await TccStub.CallAsync("declineBrokerOffer", new JObject
@@ -154,6 +170,7 @@ namespace TCC.Interop.Proxy
                 { "listingId", listingId }
             });
         }
+
         public async void DeclineUserGroupApply(uint playerId)
         {
             await TccStub.CallAsync("declineUserGroupApply", new JObject
@@ -161,19 +178,19 @@ namespace TCC.Interop.Proxy
                 { "playerId", playerId },
             });
         }
+
         public async void PublicizeListing()
         {
             await TccStub.CallAsync("publicizeListing");
         }
+
         public async void RemoveListing()
         {
             await TccStub.CallAsync("removeListing");
         }
-        public async void RequestListings()
-        {
-            var minLevel = App.Settings.LfgWindowSettings.MinLevel;
-            var maxLevel = App.Settings.LfgWindowSettings.MaxLevel;
 
+        public async void RequestListings(int minLevel, int maxLevel)
+        {
             if (minLevel < 1) minLevel = 60;
             if (maxLevel < 1) maxLevel = 70;
 
@@ -189,6 +206,7 @@ namespace TCC.Interop.Proxy
                 { "maxLevel", maxLevel }
             });
         }
+
         public async void AskInteractive(uint serverId, [NotNull] string userName)
         {
             await TccStub.CallAsync("askInteractive", new JObject
@@ -197,6 +215,7 @@ namespace TCC.Interop.Proxy
                 { "userName", userName }
             });
         }
+
         public async void RequestExTooltip(long itemUid, [NotNull] string ownerName)
         {
             await TccStub.CallAsync("requestExTooltip", new JObject
@@ -205,6 +224,7 @@ namespace TCC.Interop.Proxy
                 { "ownerName", ownerName}
             });
         }
+
         public async void RequestNonDbItemInfo(uint itemId)
         {
             await TccStub.CallAsync("requestNonDbItemInfo", new JObject
@@ -212,6 +232,7 @@ namespace TCC.Interop.Proxy
                 { "itemId", itemId}
             });
         }
+
         public async void RequestListingsPage(int page)
         {
             await TccStub.CallAsync("requestListingsPage", new JObject
@@ -219,6 +240,7 @@ namespace TCC.Interop.Proxy
                 { "page", page }
             });
         }
+
         public async void RegisterListing([NotNull] string message, bool isRaid)
         {
             await TccStub.CallAsync("registerListing", new JObject
@@ -227,21 +249,24 @@ namespace TCC.Interop.Proxy
                 { "isRaid", isRaid }
             });
         }
+
         public async void DisbandGroup()
         {
             await TccStub.CallAsync("disbandGroup");
         }
+
         public async void LeaveGroup()
         {
             await TccStub.CallAsync("leaveGroup");
         }
+
         public async void RequestListingCandidates()
         {
             await TccStub.CallAsync("requestListingCandidates");
         }
-        public async void ForceSystemMessage([NotNull] string message, [NotNull] string opcode)
+
+        public async void ForceSystemMessage([NotNull] string message, [NotNull] int opc)
         {
-            var opc = PacketAnalyzer.Factory!.SystemMessageNamer.GetCode(opcode);
             var badOpc = message.Split('\v')[0];
             if (badOpc == "@0") message = message.Replace(badOpc, "@" + opc);
 
@@ -250,6 +275,7 @@ namespace TCC.Interop.Proxy
                 { "message", message }
             });
         }
+
         public async void InvokeCommand([NotNull] string command)
         {
             await TccStub.CallAsync("invokeCommand", new JObject
@@ -257,10 +283,12 @@ namespace TCC.Interop.Proxy
                 { "command", command }
             });
         }
+
         public async void ReturnToLobby()
         {
             await TccStub.CallAsync("returnToLobby");
         }
+
         public async void ChatLinkAction([NotNull] string data)
         {
             await TccStub.CallAsync("chatLinkAction", new JObject
@@ -268,10 +296,12 @@ namespace TCC.Interop.Proxy
                 { "linkData", $":tcc-chatLinkAction:{data}:tcc-chatLinkAction:" }
             });
         }
+
         public async void ResetInstance()
         {
             await TccStub.CallAsync("resetInstance");
         }
+
         public async Task<string> QuerySingleValue(string path, IEnumerable<string> arguments, string attribute)
         {
             var resp = await TccStub.CallAsync("querySingleValue", new JObject
@@ -294,15 +324,15 @@ namespace TCC.Interop.Proxy
             });
         }
 
-        public async void Initialize()
+        public async void Initialize(bool useLfg, bool enablePlayerMenu, bool enableProxy, bool showIngameChat, bool tccChatEnabled)
         {
             await TccStub.CallAsync("initialize", new JObject
             {
-                { "useLfg", App.Settings.LfgWindowSettings.Enabled },
-                { "EnablePlayerMenu", App.Settings.EnablePlayerMenu },
-                { "EnableProxy", App.Settings.EnableProxy },
-                { "ShowIngameChat", App.Settings.ShowIngameChat},
-                { "TccChatEnabled", App.Settings.ChatEnabled}
+                { "useLfg", useLfg},
+                { "EnablePlayerMenu", enablePlayerMenu},
+                { "EnableProxy", enableProxy},
+                { "ShowIngameChat", showIngameChat},
+                { "TccChatEnabled", tccChatEnabled}
             });
         }
     }

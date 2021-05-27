@@ -10,7 +10,7 @@ namespace TCC.Interop.Proxy
 
         public readonly StubClient StubClient;
         private readonly RpcServer2 StubServer;
-        private readonly StubMessageHandler MessageHandler;
+        private readonly StubMessageParser _messageParser;
 
         public bool IsFpsModAvailable { get; set; }
         public bool IsStubAvailable { get; set; }
@@ -21,23 +21,23 @@ namespace TCC.Interop.Proxy
 
             StubServer = new RpcServer2();
             StubClient = new StubClient();
-            MessageHandler = new StubMessageHandler();
+            _messageParser = new StubMessageParser();
             
         }
 
-        public async Task Init()
+        public async Task Init(bool useLfg, bool enablePlayerMenu, bool enableProxy, bool showIngameChat, bool tccChatEnabled)
         {
-            StubServer.RequestReceived += MessageHandler.HandleRequest;
-            StubServer.ResponseReceived += MessageHandler.HandleResponse;
+            StubServer.RequestReceived += _messageParser.HandleRequest;
+            StubServer.ResponseReceived += _messageParser.HandleResponse;
 
-            if (!App.Settings.EnableProxy) return;
+            if (!enableProxy) return;
             IsStubAvailable = await StubClient.PingStub();
             if (!IsStubAvailable)
             {
                 Log.F("Stub not found");
                 return;
             }
-            StubClient.Initialize();
+            StubClient.Initialize(useLfg, enablePlayerMenu, enableProxy, showIngameChat, tccChatEnabled);
             StubServer.Start();
             IsFpsModAvailable = await StubClient.GetIsModAvailable("fps-utils") || await StubClient.GetIsModAvailable("fps-manager");
         }
@@ -45,8 +45,8 @@ namespace TCC.Interop.Proxy
         public void Disconnect()
         {
             StubServer.Stop();
-            StubServer.RequestReceived -= MessageHandler.HandleRequest;
-            StubServer.ResponseReceived -= MessageHandler.HandleResponse;
+            StubServer.RequestReceived -= _messageParser.HandleRequest;
+            StubServer.ResponseReceived -= _messageParser.HandleResponse;
 
         }
     }

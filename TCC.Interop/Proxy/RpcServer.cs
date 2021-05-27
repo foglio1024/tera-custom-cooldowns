@@ -7,8 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Nostrum.Extensions;
-using TCC.Interop.JsonRPC;
 using TCC.Utils;
+using TeraPacketParser.Sniffing.JsonRPC;
 
 namespace TCC.Interop.Proxy
 {

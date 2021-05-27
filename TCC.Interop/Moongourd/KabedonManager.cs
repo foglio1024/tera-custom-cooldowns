@@ -17,7 +17,7 @@ namespace TCC.Interop.Moongourd
 
         public event Action? Started;
 
-        public event Action<List<MoongourdEncounter>>? Finished;
+        public event Action<List<IMoongourdEncounter>>? Finished;
 
         public event Action<string>? Failed;
 
@@ -41,7 +41,7 @@ namespace TCC.Interop.Moongourd
                 if (_requestInProgress) return;
                 Started?.Invoke();
                 _requestInProgress = true;
-                var results = new List<MoongourdEncounter>();
+                var results = new List<IMoongourdEncounter>();
                 using var webClient = Nostrum.MiscUtils.GetDefaultWebClient();
 
                 try
@@ -67,7 +67,7 @@ namespace TCC.Interop.Moongourd
                         var dps = int.Parse(jLog["members"]!.FirstOrDefault(y => y["playerName"]!.Value<string>() == playerName)!["playerDps"]!.Value<string>()!);
                         var deaths = int.Parse(jLog["members"]!.FirstOrDefault(y => y["playerName"]!.Value<string>() == playerName)!["playerDeaths"]!.Value<string>()!);
 
-                        var encounter = new MoongourdEncounter
+                        var encounter = new MoongourdEncounter()
                         {
                             PlayerName = playerName,
                             AreaId = logZoneId,

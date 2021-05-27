@@ -9,13 +9,13 @@ namespace TCC.Interop
 {
     public static class Discord
     {
-        public static async void FireWebhook(string webhook, string message, string usernameOverride = "")
+        public static async void FireWebhook(string webhook, string message, string usernameOverride, string accountHash)
         {
-            if (!await Firebase.RequestWebhookExecution(webhook)) return;
+            if (!await Firebase.RequestWebhookExecution(webhook, accountHash)) return;
             var msg = new JObject
             {
                 {"content", message},
-                {"username", string.IsNullOrEmpty(usernameOverride) ? App.AppVersion : usernameOverride},
+                {"username", usernameOverride},
                 {"avatar_url", "http://i.imgur.com/8IltuVz.png" }
             };
             

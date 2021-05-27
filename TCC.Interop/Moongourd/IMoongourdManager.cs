@@ -7,7 +7,7 @@ namespace TCC.Interop.Moongourd
     {
         event Action Started;
 
-        event Action<List<MoongourdEncounter>> Finished;
+        event Action<List<IMoongourdEncounter>> Finished;
 
         event Action<string> Failed;
 
