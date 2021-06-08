@@ -165,10 +165,10 @@ namespace TCC
             SplashScreen.VM.Progress = 80;
             SplashScreen.VM.BottomText = "Initializing packet processor...";
             PacketAnalyzer.ProcessorReady += LoadModules;
-            await PacketAnalyzer.InitAsync(Settings.CaptureMode, ToolboxMode);
             PacketAnalyzer.InitServerDatabase(DataPath, Path.Combine(ResourcesPath, "config/server-overrides.txt"), string.IsNullOrEmpty(Settings.LastLanguage)
                 ? "EU-EN"
                 : Settings.LastLanguage);
+            await PacketAnalyzer.InitAsync(Settings.CaptureMode, ToolboxMode);
             _ = StubInterface.Instance.InitAsync(Settings.LfgWindowSettings.Enabled,
                                                  Settings.EnablePlayerMenu,
                                                  Settings.EnableProxy,
