@@ -10,8 +10,8 @@ namespace TeraPacketParser.Messages
         public S_LOAD_EP_INFO(TeraMessageReader r) : base(r)
         {
             var perksCount = r.ReadInt16();
+            var perksOffset = r.ReadInt16();
 
-            //var perksOffset = r.ReadInt16();
             //var lvl = r.ReadUInt32();
             //var exp = r.ReadUInt64();
             //var totPoints = r.ReadUInt32();
@@ -20,7 +20,8 @@ namespace TeraPacketParser.Messages
             //var dailyExpMax = r.ReadUInt32();
             //var prevLevel = r.ReadUInt32();
             //var prevTotalPoints = r.ReadUInt32();
-            r.Skip(38);
+            //r.Skip(38);
+            r.RepositionAt(perksOffset);
 
             Perks = new Dictionary<uint, uint>();
             if (perksCount == 0) return;

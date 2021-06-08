@@ -216,7 +216,7 @@ class RpcHandler {
         this.debug(`Sent C_ASK_INTERACTIVE { serverId: ${params.serverId}, name: ${params.userName} }`);
     }
     requestExTooltip(params) {
-        this.currNetworkMod.send("C_SHOW_ITEM_TOOLTIP_EX", this.currNetworkMod.majorPatchVersion >= 103 ? 5 : 4, {
+        this.currNetworkMod.send("C_SHOW_ITEM_TOOLTIP_EX", this.currNetworkMod.majorPatchVersion >= 106 ? 6 : 5, {
             type: 17,
             dbid: params.itemUid,
             playerId: -1,

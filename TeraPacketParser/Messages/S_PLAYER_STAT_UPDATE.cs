@@ -1,7 +1,4 @@
-﻿
-
-
-namespace TeraPacketParser.Messages
+﻿namespace TeraPacketParser.Messages
 {
     public class S_PLAYER_STAT_UPDATE : ParsedMessage
     {
@@ -39,7 +36,7 @@ namespace TeraPacketParser.Messages
 
             var baseCrit = reader.ReadSingle();
 
-            reader.Skip((14 * 4) + (3 * 2));
+            reader.Skip((((reader.Factory.ReleaseVersion / 100) >= 106 ? 16 : 14) * 4) + (3 * 2));
 
             var magRes = reader.ReadInt32();
 
@@ -72,7 +69,7 @@ namespace TeraPacketParser.Messages
             Ilvl = reader.ReadSingle();
             Edge = reader.ReadInt32();
 
-            reader.Skip(reader.Factory.ReleaseVersion/100 >= 105 ? 32 : 28);
+            reader.Skip(reader.Factory.ReleaseVersion / 100 >= 105 ? 32 : 28);
 
             Fire = reader.ReadUInt32() == 4;
             Ice = reader.ReadUInt32() == 4;
