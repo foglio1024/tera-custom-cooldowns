@@ -46,6 +46,7 @@ namespace TeraPacketParser.Messages
                 u.PlayerId = reader.ReadUInt32();
                 u.Level = reader.ReadUInt32();
                 u.Class = (Class)reader.ReadUInt32();
+                reader.Skip(8); // race, gender
                 u.Online = reader.ReadBoolean();
                 u.EntityId = reader.ReadUInt64();
                 u.Order = reader.ReadInt32();
