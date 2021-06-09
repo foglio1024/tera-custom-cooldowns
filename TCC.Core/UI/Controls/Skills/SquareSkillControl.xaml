@@ -16,14 +16,22 @@
 
     <Grid Width="54" Height="54" 
           HorizontalAlignment="Left">
-            <Rectangle x:Name="Icon" 
+        <Rectangle x:Name="IconBg" 
                        Width="48" Height="48" 
                        Stroke="{StaticResource SkillStrokeBrush}" StrokeThickness="1" 
                        HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Shape.Fill>
-                    <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}" />
-                </Shape.Fill>
-            </Rectangle>
+            <Shape.Fill>
+                <ImageBrush ImageSource="{StaticResource SlotNeutralBg}" />
+            </Shape.Fill>
+        </Rectangle>
+        <Rectangle x:Name="Icon" 
+                       Width="48" Height="48" 
+                       Stroke="{StaticResource SkillStrokeBrush}" StrokeThickness="1" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Shape.Fill>
+                <ImageBrush ImageSource="{Binding Skill.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Shape.Fill>
+        </Rectangle>
         <Grid ClipToBounds="True" Width="48" Height="48">
 
             <controls:Arc x:Name="Arc"

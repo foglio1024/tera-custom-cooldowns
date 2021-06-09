@@ -16,6 +16,14 @@
           HorizontalAlignment="Left"
           >
         <Grid>
+            <Ellipse Width="51" Height="51" x:Name="IconBh"
+                     Stroke="{StaticResource SkillStrokeBrush}"
+                     StrokeThickness="1"
+                     HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{StaticResource SlotNeutralBg}" />
+                </Ellipse.Fill>
+            </Ellipse>
             <Ellipse Width="51" Height="51" x:Name="Icon"
                      Stroke="{StaticResource SkillStrokeBrush}"
                      StrokeThickness="1"

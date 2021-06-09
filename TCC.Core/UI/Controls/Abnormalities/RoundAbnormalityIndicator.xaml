@@ -36,6 +36,17 @@
                 <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
             </Ellipse.RenderTransform>
             </Ellipse>
+            <Ellipse Name="AbnormalityIconBG" Margin="0,0" UseLayoutRounding="False"
+                     Width="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
+                     Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
+                     RenderTransformOrigin=".5 .5">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{StaticResource SlotNeutralBg}"/>
+                </Ellipse.Fill>
+                <Ellipse.RenderTransform>
+                    <ScaleTransform ScaleX=".95" ScaleY=".95"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
             <Ellipse Name="AbnormalityIcon" Margin="0,0" UseLayoutRounding="False"
                      Width="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
                      Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 

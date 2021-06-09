@@ -51,6 +51,8 @@
     <ImageSource x:Key="CharWindowBgSorc">         pack://application:,,,/resources/images/char_window_bg_sorc.png               </ImageSource>
     <ImageSource x:Key="CharWindowFg">             pack://application:,,,/resources/images/char_window_fg.png                    </ImageSource>
 
+    <ImageSource x:Key="SlotNeutralBg">             pack://application:,,,/resources/images/slot_bg_neutral.png                    </ImageSource>
+
     <ImageSource x:Key="MobIcon">                  pack://application:,,,/resources/images/kr_mob_icon.png                       </ImageSource>
     <ImageSource x:Key="BossIcon">                 pack://application:,,,/resources/images/kr_boss_icon.png                      </ImageSource>
     <ImageSource x:Key="BossIconFull">             pack://application:,,,/resources/images/kr_boss_icon_full.png                 </ImageSource>

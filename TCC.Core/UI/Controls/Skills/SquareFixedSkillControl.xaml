@@ -39,6 +39,33 @@
           ClipToBounds="False"
           VerticalAlignment="Center">
         <Grid ClipToBounds="False">
+            <Rectangle x:Name="IconBg"
+                       Width="48" Height="48"
+                       RenderTransformOrigin=".5 .5"
+                       HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{StaticResource SlotNeutralBg}" />
+                </Rectangle.Fill>
+                <Rectangle.RenderTransform>
+                    <RotateTransform />
+                </Rectangle.RenderTransform>
+                <Rectangle.Style>
+                    <Style TargetType="Rectangle">
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=skills:FixedSkillControl}, Path=Warning}"
+                                Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource WarnShake}" x:Name="StartWarning" />
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <StopStoryboard BeginStoryboardName="StartWarning" />
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Rectangle.Style>
+            </Rectangle>
             <Rectangle x:Name="Icon"
                        Width="48" Height="48"
                        RenderTransformOrigin=".5 .5"

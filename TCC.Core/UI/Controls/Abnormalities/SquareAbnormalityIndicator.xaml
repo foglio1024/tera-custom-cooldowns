@@ -28,6 +28,14 @@
         <Grid Margin="-2">
             <Rectangle Name="BgEll" Fill="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}"
                      RenderTransformOrigin=".5 .5" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <Rectangle Name="AbnormalityIconBg" Margin="1" UseLayoutRounding="False"
+                       Width="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
+                       Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
+                       RenderTransformOrigin=".5 .5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{StaticResource SlotNeutralBg}"/>
+                </Rectangle.Fill>
+            </Rectangle>
             <Rectangle Name="AbnormalityIcon" Margin="1" UseLayoutRounding="False"
                        Width="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
                        Height="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}}" 
