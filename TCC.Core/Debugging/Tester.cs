@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -14,12 +15,14 @@ using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Databases;
 using TCC.Data.Pc;
+using TCC.Data.Skills;
 using TCC.Debugging;
 using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
 using TCC.ViewModels.ClassManagers;
+using TCC.ViewModels.Widgets;
 using TeraDataLite;
 using TeraPacketParser;
 using TeraPacketParser.Data;
@@ -95,7 +98,7 @@ namespace TCC.Debug
 
             var msg = new Message(DateTime.Now, MessageDirection.ServerToClient, new ArraySegment<byte>(hex.ToByteArrayHex()));
             var opcNamer = new OpCodeNamer(Path.Combine(App.DataPath, "opcodes", $"protocol.{version}.map"));
-            var fac = new MessageFactory(version, opcNamer) {ReleaseVersion = 0};
+            var fac = new MessageFactory(version, opcNamer) { ReleaseVersion = 0 };
             var del = MessageFactory.Constructor<Func<TeraMessageReader, PacketType>>();
             var reader = new TeraMessageReader(msg, opcNamer, fac, null!);
             del?.DynamicInvoke(reader);
@@ -523,7 +526,7 @@ namespace TCC.Debug
 
         public static void ReadyCheck()
         {
-            var status = new[] {ReadyStatus.Ready, ReadyStatus.NotReady, ReadyStatus.Undefined};
+            var status = new[] { ReadyStatus.Ready, ReadyStatus.NotReady, ReadyStatus.Undefined };
             foreach (var m in WindowManager.ViewModels.GroupVM.Members)
             {
                 WindowManager.ViewModels.GroupVM.SetReadyStatus(new ReadyPartyMember
@@ -553,9 +556,19 @@ namespace TCC.Debug
                 db.Load();
                 sw.Stop();
                 samples.Add(sw.ElapsedMilliseconds);
-                System.Diagnostics.Debug.WriteLine($"Average: {samples.Average():N2}ms Last:{sw.ElapsedMilliseconds:N2}ms n:{i+1}");
+                System.Diagnostics.Debug.WriteLine($"Average: {samples.Average():N2}ms Last:{sw.ElapsedMilliseconds:N2}ms n:{i + 1}");
             }
 
+        }
+
+        public static void StartItemCooldown(uint i)
+        {
+            if (!Game.DB!.ItemsDatabase.TryGetItemSkill(i, out var itemSkill)) return;
+            typeof(CooldownWindowViewModel)
+                .GetMethod("RouteSkill", BindingFlags.Instance | BindingFlags.NonPublic)?
+                .Invoke(WindowManager.ViewModels.CooldownsVM, new[] { new Cooldown(itemSkill, 60, CooldownType.Item) });
+
+            //WindowManager.ViewModels.CooldownsVM.RouteSkill(new Cooldown(itemSkill, 60, CooldownType.Item));
         }
     }
 }

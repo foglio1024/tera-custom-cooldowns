@@ -12,6 +12,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.Debug;
 using TCC.Interop;
 using TCC.Interop.Proxy;
 using TCC.Loader;
@@ -109,6 +110,8 @@ namespace TCC
 
 
             //Tester.Enable();
+            //Tester.AddAbnormality(4886);
+            //Tester.StartItemCooldown(444);
             //Tester.ShowDebugWindow();
         }
 
