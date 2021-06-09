@@ -14,7 +14,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <Version>1.4.124</Version>
+    <Version>1.4.125</Version>
     <Description>TERA Custom Cooldowns</Description>
     <PackageIcon>tcc.ico</PackageIcon>
     <PackageIconUrl />
@@ -90,6 +90,7 @@
     <None Remove="resources\images\kr_mob_icon.png" />
     <None Remove="resources\images\moongourd.png" />
     <None Remove="resources\images\shinrameter.png" />
+    <None Remove="resources\images\slot_bg_neutral.png" />
     <None Remove="resources\tcc_off.ico" />
     <None Remove="resources\tcc_on.ico" />
     <None Remove="resources\ttb.ico" />
@@ -163,6 +164,7 @@
     <Resource Include="resources\images\kr_mob_icon.png" />
     <Resource Include="resources\images\moongourd.png" />
     <Resource Include="resources\images\shinrameter.png" />
+    <Resource Include="resources\images\slot_bg_neutral.png" />
     <Resource Include="resources\tcc.ico" Pack="True" />
     <Resource Include="resources\tcc_off.ico" />
     <Resource Include="resources\tcc_on.ico" />
