@@ -1,30 +1,20 @@
 ﻿using System.Collections.Generic;
 
-
-
 namespace TeraPacketParser.Messages
 {
     public class S_LOAD_EP_INFO : ParsedMessage
     {
-        public Dictionary<uint, uint> Perks;
+        public Dictionary<uint, uint> Perks { get; }
+
         public S_LOAD_EP_INFO(TeraMessageReader r) : base(r)
         {
-            var perksCount = r.ReadInt16();
-            var perksOffset = r.ReadInt16();
-
-            //var lvl = r.ReadUInt32();
-            //var exp = r.ReadUInt64();
-            //var totPoints = r.ReadUInt32();
-            //var usedPoints = r.ReadUInt32();
-            //var dailyExp = r.ReadUInt32();
-            //var dailyExpMax = r.ReadUInt32();
-            //var prevLevel = r.ReadUInt32();
-            //var prevTotalPoints = r.ReadUInt32();
-            //r.Skip(38);
-            r.RepositionAt(perksOffset);
-
             Perks = new Dictionary<uint, uint>();
+
+            var perksCount = r.ReadInt16();
             if (perksCount == 0) return;
+
+            var perksOffset = r.ReadInt16();
+            r.RepositionAt(perksOffset);
 
             for (var i = 0; i < perksCount; i++)
             {
