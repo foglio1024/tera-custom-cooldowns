@@ -14,6 +14,8 @@ namespace TeraPacketParser.Messages
 
         public S_ABNORMALITY_BEGIN(TeraMessageReader reader) : base(reader)
         {
+            if (reader.Factory.ReleaseVersion >= 10700 ||
+                reader.Factory.ReleaseVersion == 9901 && reader.Factory.Version != 381995) reader.Skip(4);
             TargetId = reader.ReadUInt64();
             CasterId = reader.ReadUInt64();
             AbnormalityId = reader.ReadUInt32();

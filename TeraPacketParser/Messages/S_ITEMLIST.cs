@@ -48,6 +48,7 @@ namespace TeraPacketParser.Messages
                     r.Skip(4); // crystals ref
                     r.Skip(4); // passivity ref
                     r.Skip(4); // merged passivity ref
+                    if (r.Factory.ReleaseVersion >= 10700) r.Skip(4); // p108 stuff
                     r.Skip(2); // custom string offset
                     var itemId = r.ReadUInt32();
                     r.Skip(8); // dbid
