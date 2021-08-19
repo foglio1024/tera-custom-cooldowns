@@ -46,11 +46,13 @@ namespace TCC.Data.Chat
             }
         }
         public uint AuthorId { get; }
+        public uint ServerId { get; } //TODO: should be added to base class and assigned from S_CHAT, S_WHISPER, etc
         public bool ShowMembers => LinkedListing != null && LinkedListing.Players.Count <= 7;
 
-        public LfgMessage(uint authorId, string author, string msg) : base(ChatChannel.LFG, author, msg, 0, false)
+        public LfgMessage(uint authorId, string author, string msg, uint serverId) : base(ChatChannel.LFG, author, msg, 0, false)
         {
             AuthorId = authorId;
+            ServerId = serverId;
             _members = new TSObservableCollection<User>();
             _timer = new Timer(1500);
             _timer.Elapsed += OnTimerTick;
@@ -103,7 +105,7 @@ namespace TCC.Data.Chat
                 return;
             }
             _timer.Stop();
-            WindowManager.ViewModels.LfgVM.EnqueueRequest(LinkedListing.LeaderId);
+            WindowManager.ViewModels.LfgVM.EnqueueRequest(LinkedListing.LeaderId,  LinkedListing.ServerId);
 
         }
         private Listing? FindListing()

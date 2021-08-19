@@ -470,7 +470,7 @@ namespace TCC
                 case S_CHAT c:
                     txt = ChatUtils.GetPlainText(c.Message).UnescapeHtml();
                     if (!TccUtils.CheckMention(txt)) return;
-                    author = c.AuthorName;
+                    author = c.Name;
                     strCh = TccUtils.ChatChannelToName((ChatChannel)c.Channel);
                     break;
 
@@ -586,15 +586,15 @@ namespace TCC
             #region Greet meme
 
             if ((ChatChannel)m.Channel == ChatChannel.Greet
-                && (m.AuthorName == "Foglio"
-                    || m.AuthorName == "Folyemi"))
+                && (m.Name == "Foglio"
+                    || m.Name == "Folyemi"))
                 Log.N("owo", SR.GreetMemeContent, NotificationType.Success, 3000);
 
             #endregion Greet meme
 
             #region Global trade angery
 
-            if (m.AuthorName == Me.Name)
+            if (m.Name == Me.Name)
             {
                 if ((ChatChannel)m.Channel != ChatChannel.Global) return;
 
@@ -606,7 +606,7 @@ namespace TCC
 
             #endregion Global trade angery
 
-            if (BlockList.Contains(m.AuthorName)) return;
+            if (BlockList.Contains(m.Name)) return;
 
             CheckChatMention(m);
         }
@@ -817,7 +817,7 @@ namespace TCC
 
         private static void OnUserStatus(S_USER_STATUS m)
         {
-            if (IsMe(m.EntityId)) Combat = m.IsInCombat;
+            if (IsMe(m.GameId)) Combat = m.Status == S_USER_STATUS.UserStatus.InCombat;
         }
 
         private static void OnFieldEventOnLeave(S_FIELD_EVENT_ON_LEAVE p)

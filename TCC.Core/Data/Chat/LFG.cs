@@ -23,6 +23,9 @@ namespace TCC.Data.Chat
                 N(nameof(Id));
             }
         }
+
+        public uint ServerId { get; }
+
         public string Name
         {
             get => _name; set
@@ -74,11 +77,12 @@ namespace TCC.Data.Chat
         }
         public string MembersCountLabel => MembersCount == 0 ? "" : MembersCount.ToString();
 
-        public LFG(uint id, string name, string msg, bool raid)
+        public LFG(uint id, string name, string msg, bool raid, uint serverId)
         {
             Dispatcher = ChatManager.Instance.GetDispatcher();
 
             Id = id;
+            ServerId = serverId;
             Name = name;
             Message = msg;
             Raid = raid;

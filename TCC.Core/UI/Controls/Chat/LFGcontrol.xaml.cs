@@ -60,7 +60,7 @@ namespace TCC.UI.Controls.Chat
 
             if (_dc == null) return;
             ChatManager.Instance.LastClickedLfg = _dc;
-            StubInterface.Instance.StubClient.RequestPartyInfo(_dc.Id); //ProxyOld.RequestPartyInfo(_dc.Id);
+            StubInterface.Instance.StubClient.RequestPartyInfo(_dc.Id, _dc.ServerId); //ProxyOld.RequestPartyInfo(_dc.Id);
         }
 
         //private void UserControl_MouseEnter(object sender, MouseEventArgs e)

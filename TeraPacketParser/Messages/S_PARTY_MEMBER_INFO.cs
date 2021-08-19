@@ -12,7 +12,8 @@ namespace TeraPacketParser.Messages
         {
             var count = reader.ReadUInt16();
             var offset = reader.ReadUInt16();
-            reader.Skip(2);
+
+            reader.Skip(2); // bool isRaid + bool adminInspectionUI
 
             reader.BaseStream.Position = offset - 4;
             Members = new List<GroupMemberData>();
@@ -23,10 +24,11 @@ namespace TeraPacketParser.Messages
                 var next = reader.ReadUInt16();
                 var nameOffset = reader.ReadUInt16();
                 u.PlayerId = reader.ReadUInt32();
+                if (reader.Factory.ReleaseVersion / 100 >= 108) u.ServerId = reader.ReadUInt32();
                 u.Class = (Class)reader.ReadUInt16();
                 reader.Skip(4);
                 u.Level = Convert.ToUInt32(reader.ReadUInt16());
-                reader.Skip(4);
+                reader.Skip(4); // worldId
                 u.GuardId = reader.ReadUInt32();
                 u.SectionId = reader.ReadUInt32();
                 u.Order = Convert.ToInt32(reader.ReadInt16());

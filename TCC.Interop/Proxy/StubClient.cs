@@ -33,20 +33,22 @@ namespace TCC.Interop.Proxy
             return resp?.Result != null && resp.Result.Value<bool>();
         }
 
-        public async void RequestPartyInfo(uint id)
+        public async void RequestPartyInfo(uint playerId, uint serverId)
         {
             await TccStub.CallAsync("requestPartyInfo", new JObject
             {
-                { "listingId", id }
+                { "playerId", playerId },
+                { "serverId", serverId}
             });
         }
 
-        public async Task<bool> ApplyToGroup(uint id)
+        public async Task<bool> ApplyToGroup(uint playerId, uint serverId)
         {
             var resp = await TccStub.CallAsync("applyToGroup",
             new JObject
             {
-                { "listingId", id }
+                { "playerId", playerId },
+                { "serverId", serverId }
             });
             return resp?.Result != null && resp.Result.Value<bool>();
         }

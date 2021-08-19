@@ -26,9 +26,9 @@ namespace TCC.ViewModels
         {
             return _dispatcher.InvokeAsync(() => new SystemMessage(template, msg, ch) { Author = authorOverride }).Result;
         }
-        public ChatMessage CreateLfgMessage(uint authorId, string author, string msg)
+        public ChatMessage CreateLfgMessage(uint authorId, string author, string msg, uint serverId)
         {
-            return _dispatcher.InvokeAsync(() => new LfgMessage(authorId, author, msg)).Result;
+            return _dispatcher.InvokeAsync(() => new LfgMessage(authorId, author, msg, serverId)).Result;
         }
         public ChatMessage CreateEnchantSystemMessage(string systemMessage)
         {

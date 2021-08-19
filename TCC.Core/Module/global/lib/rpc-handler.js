@@ -53,15 +53,37 @@ class RpcHandler {
         this.debug("Sent C_RESET_ALL_DUNGEON");
     }
     requestPartyInfo(params) {
-        this.currNetworkMod.send("C_REQUEST_PARTY_INFO", 2, {
-            playerId: params.listingId
-        });
+        if (this.currNetworkMod.majorPatchVersion >= 108) {
+
+            this.currNetworkMod.send("C_REQUEST_PARTY_INFO", 3, {
+                playerId: params.playerId,
+                serverId: params.serverId
+            });
+        }
+        else{
+            
+            this.currNetworkMod.send("C_REQUEST_PARTY_INFO", 2, {
+                playerId: params.playerId
+            });
+        }
         this.debug("Sent C_REQUEST_PARTY_INFO");
     }
     applyToGroup(params) {
-        this.currNetworkMod.send("C_APPLY_PARTY", 1, {
-            playerId: params.listingId
-        });
+        if (this.currNetworkMod.majorPatchVersion >= 108) {
+
+            this.currNetworkMod.send("C_APPLY_PARTY", 2, {
+                playerId: params.playerId,
+                serverId: params.serverId,
+            });
+        }
+        else {
+            this.currNetworkMod.send("C_APPLY_PARTY", 1, {
+                playerId: params.playerId
+            });
+
+        }
+
+
         this.debug(`Sent C_APPLY_PARTY { playerId : ${params.listingId}}`);
         return true;
     }
@@ -265,7 +287,7 @@ class RpcHandler {
         this.debug(`Sent C_RETURN_TO_LOBBY`);
     }
     chatLinkAction(params) {
-        this.currNetworkMod.send("S_CHAT", 3, {
+        this.currNetworkMod.send("S_CHAT", 4, {
             channel: 18,
             name: "tccChatLink",
             message: params.linkData
@@ -443,7 +465,7 @@ class RpcHandler {
         return ret;
     }
 
-   
+
 
     async dumpSkills(params) {
         //RawExtract
@@ -462,25 +484,25 @@ class RpcHandler {
                 name: x.attributes.name,
                 race: x.attributes.race,
                 gender: x.attributes.gender,
-                pClass : Helpers.convClass(x.attributes.class)
+                pClass: Helpers.convClass(x.attributes.class)
             });
         });
 
         const skillIconData = (await this.mod.queryData(`/SkillIconData/Icon/`, [], true, false, ['skillId', 'race', 'gender', 'class', 'iconName']));
 
         skills.forEach(s => {
-            const iconData = skillIconData.find(x => x.attributes.skillId == s.id 
-                                                  && x.attributes.race == s.race
-                                                  && x.attributes.gender == s.gender
-                                                  && Helpers.convClass(x.attributes.class) == s.pClass);
-            if(iconData === undefined) return;
+            const iconData = skillIconData.find(x => x.attributes.skillId == s.id
+                && x.attributes.race == s.race
+                && x.attributes.gender == s.gender
+                && Helpers.convClass(x.attributes.class) == s.pClass);
+            if (iconData === undefined) return;
             s.iconName = iconData.attributes.iconName.toLowerCase();
         });
 
         let tsv = "";
 
         skills.forEach(skill => {
-            tsv+=`${skill.id}\t${skill.race}\t${skill.gender}\t${skill.pClass}\t${skill.name}\t${skill.chained}\t${skill.detail}\t${skill.iconName}\n`;
+            tsv += `${skill.id}\t${skill.race}\t${skill.gender}\t${skill.pClass}\t${skill.name}\t${skill.chained}\t${skill.detail}\t${skill.iconName}\n`;
         });
 
         fs.writeFile("skills.tsv", tsv, function (err, data) { });

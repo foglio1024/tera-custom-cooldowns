@@ -16,7 +16,6 @@ namespace TCC.Data
 {
     public class Listing : TSPropertyChanged
     {
-        private uint _playerId;
         private bool _isRaid;
         private string _message = "";
         private string _leaderName = "";
@@ -37,22 +36,9 @@ namespace TCC.Data
         public ICommand WhisperLeaderCommand { get; }
         public ICommand ToggleAutoPublicizeCommand { get; }
 
-        public uint LeaderId
-        {
-            get
-            {
-                return _playerId;
-                //return Players.ToSyncList().Count == 0
-                //    ? _playerId
-                //    : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.PlayerId ?? 0;
-            }
-            set
-            {
-                if (_playerId == value) return;
-                _playerId = value;
-                N();
-            }
-        }
+        public uint LeaderId { get; set; }
+
+        public uint ServerId { get; set; }
 
         public bool IsRaid
         {
@@ -221,7 +207,7 @@ namespace TCC.Data
                         IsExpanded = !IsExpanded;
                         if (!IsExpanded) return;
                         WindowManager.ViewModels.LfgVM.LastClicked = this;
-                        StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId);
+                        StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId, ServerId);
                     }
                     else
                     {
@@ -237,7 +223,7 @@ namespace TCC.Data
                     else
                     {
                         WindowManager.ViewModels.LfgVM.LastClicked = this;
-                        StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId);
+                        StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId, ServerId);
                     }
                 }
             });
@@ -284,6 +270,7 @@ namespace TCC.Data
         {
             LeaderName = l.LeaderName;
             LeaderId = l.LeaderId;
+            ServerId = l.LeaderServerId;
             IsRaid = l.IsRaid;
             Message = l.Message;
             PlayerCount = l.PlayerCount;
@@ -317,7 +304,7 @@ namespace TCC.Data
 
         public async void Execute(object? parameter)
         {
-            var success = await StubInterface.Instance.StubClient.ApplyToGroup(_listing.LeaderId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
+            var success = await StubInterface.Instance.StubClient.ApplyToGroup(_listing.LeaderId, _listing.ServerId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
             if (!success) return;
             SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{_listing.LeaderName}", "SMT_PARTYBOARD_APPLY");
             _listing.CanApply = false;

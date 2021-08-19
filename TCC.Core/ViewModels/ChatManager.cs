@@ -174,7 +174,7 @@ namespace TCC.ViewModels
                 if (m.Message.IndexOf("WTS", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
                 if (m.Message.IndexOf("WTT", 0, StringComparison.InvariantCultureIgnoreCase) != -1) return;
                 AddOrRefreshLfg(m.ListingData);
-                AddLfgMessage(m.Id, m.Name, m.Message);
+                AddLfgMessage(m.Id, m.Name, m.Message, m.ListingData.LeaderServerId);
             });
         }
 
@@ -222,7 +222,7 @@ namespace TCC.ViewModels
         {
             Task.Run(() =>
             {
-                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : (ChatChannel)m.Channel, m.AuthorName, m.Message, m.IsGm, m.AuthorId));
+                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : (ChatChannel)m.Channel, m.Name, m.Message, m.IsGm, m.GameId));
             });
         }
 
@@ -379,10 +379,10 @@ namespace TCC.ViewModels
             Task.Run(() => AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, channelOverride, authorOverride)));
         }
 
-        private void AddLfgMessage(uint id, string name, string msg)
+        private void AddLfgMessage(uint id, string name, string msg, uint serverId)
         {
             if (!App.Settings.ChatEnabled) return;
-            Task.Run(() => AddChatMessage(Factory.CreateLfgMessage(id, name, msg)));
+            Task.Run(() => AddChatMessage(Factory.CreateLfgMessage(id, name, msg, serverId)));
         }
 
         public void AddChatMessage(ChatMessage chatMessage)
@@ -575,7 +575,7 @@ namespace TCC.ViewModels
             }
             else
             {
-                LFGs.Add(new LFG(x.LeaderId, x.LeaderName, x.Message, x.IsRaid));
+                LFGs.Add(new LFG(x.LeaderId, x.LeaderName, x.Message, x.IsRaid, x.LeaderServerId));
             }
         }
 

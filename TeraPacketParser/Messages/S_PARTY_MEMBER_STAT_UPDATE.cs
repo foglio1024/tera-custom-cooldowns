@@ -18,15 +18,16 @@ namespace TeraPacketParser.Messages
 
         public short Level { get; }
 
-        public bool InCombat { get; }
+        //public bool InCombat { get; }
+        public S_USER_STATUS.UserStatus Status { get; }
 
         public short Vitality { get; }
 
         public bool Alive { get; }
 
-        public int CurrentRE {  get; }
+        public int CurrentStamina {  get; }
 
-        public int MaxRE {  get; }
+        public int MaxStamina {  get; }
 
         public GroupMemberData GroupMemberData { get; }
 
@@ -41,14 +42,14 @@ namespace TeraPacketParser.Messages
             MaxMP = reader.ReadInt32();
 
             Level = reader.ReadInt16();
-            InCombat = reader.ReadInt16() > 0;
+            Status = (S_USER_STATUS.UserStatus)reader.ReadUInt16();
             Vitality = reader.ReadInt16();
 
             Alive = reader.ReadBoolean();
 
             reader.Skip(4);
-            CurrentRE = reader.ReadInt32();
-            MaxRE = reader.ReadInt32();
+            CurrentStamina = reader.ReadInt32();
+            MaxStamina = reader.ReadInt32();
 
             GroupMemberData = new GroupMemberData()
             {
@@ -56,12 +57,12 @@ namespace TeraPacketParser.Messages
                 PlayerId = PlayerId,
                 CurrentHP = CurrentHP,
                 CurrentMP = CurrentMP,
-                CurrentST = CurrentRE,
+                CurrentST = CurrentStamina,
                 MaxHP = MaxHP,
                 MaxMP = MaxMP,
-                MaxST = MaxRE,
+                MaxST = MaxStamina,
                 Level = (uint)Level,
-                InCombat = InCombat,
+                InCombat = Status == S_USER_STATUS.UserStatus.InCombat,
                 Alive = Alive
             };
         }

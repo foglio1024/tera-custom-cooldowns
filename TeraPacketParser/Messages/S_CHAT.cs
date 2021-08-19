@@ -6,8 +6,8 @@ namespace TeraPacketParser.Messages
     public class S_CHAT : ParsedMessage
     {
         public uint Channel { get; }
-        public ulong AuthorId { get; }
-        public string AuthorName { get; }
+        public ulong GameId { get; }
+        public string Name { get; }
         public string Message { get; }
         public bool IsGm { get; }
 
@@ -16,12 +16,16 @@ namespace TeraPacketParser.Messages
             var authorNameOffset = reader.ReadUInt16();
             var messageOffset = reader.ReadUInt16();
             Channel = reader.ReadUInt32();
-            AuthorId = reader.ReadUInt64();
+            GameId = reader.ReadUInt64();
+            if(reader.Factory.ReleaseVersion /100 >= 108)
+            {
+                reader.Skip(8); // uint32 playerId + uint32 serverId
+            }
             reader.Skip(1);
             IsGm = reader.ReadBoolean();
             reader.Skip(1);
             reader.BaseStream.Position = authorNameOffset - 4;
-            AuthorName= reader.ReadTeraString();
+            Name= reader.ReadTeraString();
             reader.BaseStream.Position = messageOffset - 4;
             Message = reader.ReadTeraString();
             

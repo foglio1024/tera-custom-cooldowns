@@ -7,6 +7,9 @@ namespace TeraPacketParser.Messages
     {
         public static List<ListingData> Listings { get; } = new();
         public bool IsLast => Pages == Page;
+        public short Pages { get; set; }
+        public short Page { get; set; }
+
         public S_SHOW_PARTY_MATCH_INFO(TeraMessageReader reader) : base(reader)
         {
             var count = reader.ReadUInt16();
@@ -31,6 +34,8 @@ namespace TeraPacketParser.Messages
                 var msgOffset = reader.ReadUInt16();
                 var leaderNameOffset = reader.ReadUInt16();
                 var leaderId = reader.ReadUInt32();
+                var serverId = 0U;
+                if (reader.Factory.ReleaseVersion / 100 >= 108) serverId = reader.ReadUInt32(); 
                 var isRaid = reader.ReadBoolean();
                 var playerCount = reader.ReadInt16();
 
@@ -48,6 +53,7 @@ namespace TeraPacketParser.Messages
                 var leaderName = reader.ReadTeraString();
                 l.LeaderName = leaderName;
                 l.LeaderId = leaderId;
+                l.LeaderServerId = serverId;
                 l.IsRaid = isRaid;
                 l.Message = msg;
                 l.PlayerCount = playerCount;
@@ -58,9 +64,5 @@ namespace TeraPacketParser.Messages
 
             }
         }
-
-        public short Pages { get; set; }
-
-        public short Page { get; set; }
     }
 }

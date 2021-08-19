@@ -11,9 +11,13 @@
         {
             reader.Skip(6);
             GameId = reader.ReadUInt64();
-            reader.Skip(1);
+            if(reader.Factory.ReleaseVersion /100 >= 108)
+            {
+                reader.Skip(8); // senderServerId + recipientServerId
+            }
+            reader.Skip(1); // isWorldEventTarget
             IsGm = reader.ReadBoolean();
-            reader.Skip(1);
+            reader.Skip(1); // isFounder
             Author = reader.ReadTeraString();
             Recipient = reader.ReadTeraString();
             Message = reader.ReadTeraString();

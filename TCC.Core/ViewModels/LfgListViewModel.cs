@@ -44,7 +44,7 @@ namespace TCC.ViewModels
         private DispatcherTimer _requestTimer;
 
         private readonly DispatcherTimer AutoPublicizeTimer;
-        private static readonly Queue<uint> _requestQueue = new();
+        private static readonly Queue<(uint, uint)> _requestQueue = new();
         private bool _creating;
         private bool _creatingRaid;
         private int _lastGroupSize;
@@ -426,25 +426,25 @@ namespace TCC.ViewModels
             if (!App.Settings.LfgWindowSettings.Enabled) return;
             if (_requestQueue.Count == 0) return;
 
-            var req = _requestQueue.Dequeue();
-            if (req == 0)
+            var (playerId, serverId) = _requestQueue.Dequeue();
+            if (playerId == 0)
             {
                 StayClosed = true;
                 StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel); //ProxyOld.RequestLfgList();
             }
             else
             {
-                StubInterface.Instance.StubClient.RequestPartyInfo(req); //ProxyOld.RequestPartyInfo(req);
+                StubInterface.Instance.StubClient.RequestPartyInfo(playerId, serverId); //ProxyOld.RequestPartyInfo(req);
             }
         }
 
-        public void EnqueueRequest(uint id)
+        public void EnqueueRequest(uint playerId, uint serverId)
         {
             if ((Game.IsInDungeon || Game.CivilUnrestZone) && Game.Combat) return;
             Dispatcher.InvokeAsyncIfRequired(() =>
             {
-                if (_requestQueue.Count > 0 && _requestQueue.Last() == id) return;
-                _requestQueue.Enqueue(id);
+                if (_requestQueue.Count > 0 && _requestQueue.Last().Item1 == playerId) return;
+                _requestQueue.Enqueue(( playerId, serverId));
             }, DispatcherPriority.Background);
         }
 
@@ -463,8 +463,8 @@ namespace TCC.ViewModels
         {
             Dispatcher.InvokeAsync(() =>
             {
-                if (_requestQueue.Count > 0 && _requestQueue.Last() == 0) return;
-                _requestQueue.Enqueue(0);
+                if (_requestQueue.Count > 0 && _requestQueue.Last().Item1 == 0) return;
+                _requestQueue.Enqueue((0, 0));
             });
         }
 
@@ -512,18 +512,19 @@ namespace TCC.ViewModels
                 var target = Listings.ToSyncList().FirstOrDefault(t => t.LeaderId == l.LeaderId);
                 if (target == null) return;
                 target.LeaderId = l.LeaderId;
+                target.ServerId = l.ServerId;
                 target.Message = l.Message;
                 target.IsRaid = l.IsRaid;
                 target.LeaderName = l.LeaderName;
                 target.ExN(nameof(Listing.AliveSinceMs));
-                if (target.PlayerCount != l.PlayerCount) EnqueueRequest(l.LeaderId);
+                if (target.PlayerCount != l.PlayerCount) EnqueueRequest(l.LeaderId, l.ServerId);
             }
             else
             {
                 if (l.IsTrade && ((LfgWindowSettings)Settings!).HideTradeListings) return;
                 if (IsMessageBlacklisted(l.Message.ToLowerInvariant())) return;
                 Listings.Add(l);
-                EnqueueRequest(l.LeaderId);
+                EnqueueRequest(l.LeaderId, l.ServerId);
             }
         }
 
@@ -637,6 +638,7 @@ namespace TCC.ViewModels
                             target.Location = Game.DB!.GetSectionName(member.GuardId, member.SectionId);
                             if (!member.IsLeader) return;
                             lfg.LeaderId = member.PlayerId;
+                            lfg.ServerId = member.ServerId;
                             lfg.LeaderName = member.Name;
                         }
                         else
@@ -646,6 +648,7 @@ namespace TCC.ViewModels
                                 lfg.Players.Add(new User(member));
                                 if (!member.IsLeader) return;
                                 lfg.LeaderId = member.PlayerId;
+                                lfg.ServerId = member.ServerId;
                                 lfg.LeaderName = member.Name;
                             });
                         }
@@ -668,7 +671,11 @@ namespace TCC.ViewModels
 
                     lfg.LeaderId = m.Id;
                     var leader = lfg.Players.ToSyncList().FirstOrDefault(u => u.IsLeader);
-                    if (leader != null) lfg.LeaderName = leader.Name;
+                    if (leader != null)
+                    {
+                        lfg.LeaderName = leader.Name;
+                        lfg.ServerId = leader.ServerId;
+                    }
                     if (LastClicked != null && LastClicked.LeaderId == lfg.LeaderId) lfg.IsExpanded = true;
                     lfg.PlayerCount = m.Members.Count;
                     NotifyMyLfg();

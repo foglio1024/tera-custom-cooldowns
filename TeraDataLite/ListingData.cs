@@ -6,6 +6,7 @@ namespace TeraDataLite
     {
         public string LeaderName { get; set; }
         public uint LeaderId { get; set; }
+        public uint LeaderServerId { get; set; }
         public bool IsRaid { get; set; }
         public string Message { get; set; }
         public int PlayerCount { get; set; }
