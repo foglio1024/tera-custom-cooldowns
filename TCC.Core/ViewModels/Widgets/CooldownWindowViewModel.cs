@@ -427,7 +427,7 @@ namespace TCC.ViewModels.Widgets
                 data.Secondary.ForEach(cdData => TryAddToList(cdData, SecondarySkills));
                 data.Hidden.ForEach(cdData => TryAddToList(cdData, HiddenSkills));
 
-                Dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(Game.DB!.SkillsDatabase.SkillsForClass));
+                Dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(Game.DB!.SkillsDatabase.SkillsForClass(c)));
 
                 N(nameof(SkillsView));
                 N(nameof(MainSkills));

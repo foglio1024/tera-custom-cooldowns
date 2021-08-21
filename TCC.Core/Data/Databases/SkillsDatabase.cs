@@ -80,23 +80,18 @@ namespace TCC.Data.Databases
         }
 
         //TODO do this better one day
-        public IEnumerable<Skill> SkillsForClass
+        public IEnumerable<Skill> SkillsForClass(Class c)
         {
-            get
+            var list = new TSObservableCollection<Skill>();
+            var skillsForClass = Skills[c];
+            foreach (var skill in skillsForClass.Values)
             {
-                var list = new TSObservableCollection<Skill>();
-                var c = Game.Me.Class;
-                var skillsForClass = Skills[c];
-                foreach (var skill in skillsForClass.Values)
+                if (list.All(x => x.IconName != skill.IconName) && !IsIgnoredSkill(skill))
                 {
-                    if (list.All(x => x.IconName != skill.IconName) && !IsIgnoredSkill(skill))
-                    {
-                        list.Add(skill);
-                    }
+                    list.Add(skill);
                 }
-                return list;
             }
-
+            return list;
         }
 
 
@@ -109,7 +104,8 @@ namespace TCC.Data.Databases
         public static readonly Dictionary<Class, List<string>> IgnoredSkills = new()
         {
             {
-                Class.Archer, new List<string>()
+                Class.Archer,
+                new List<string>()
                 {
                     "icon_skills.arrowshot_tex",
                     "icon_skills.webtrap_tex",
@@ -117,14 +113,16 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Berserker, new List<string>()
+                Class.Berserker,
+                new List<string>()
                 {
                     "icon_skills.comboattack_tex",
                     "icon_skills.weapondefence_tex",
                 }
             },
             {
-                Class.Brawler, new List<string>()
+                Class.Brawler,
+                new List<string>()
                 {
                     "icon_skills.comboattack01_tex",
                     "icon_skills.comboattack02_tex",
@@ -139,7 +137,8 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Gunner, new List<string>()
+                Class.Gunner,
+                new List<string>()
                 {
                     "icon_skills.cannonshot_tex",
                     "icon_skills.gatlingshot_tex",
@@ -148,7 +147,8 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Lancer, new List<string>()
+                Class.Lancer,
+                new List<string>()
                 {
                     "icon_skills.comboattack_tex",
                     "icon_skills.defence_tex",
@@ -156,7 +156,8 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Mystic, new List<string>()
+                Class.Mystic,
+                new List<string>()
                 {
                     "icon_skills.elementalshot_tex",
                     "icon_skills.mpsupplycharge_tex",
@@ -165,21 +166,24 @@ namespace TCC.Data.Databases
                     "icon_skills.energiesofwillpower_tex"
                 }
             },
-             {
-                Class.Ninja, new List<string>()
+            {
+                Class.Ninja,
+                new List<string>()
                 {
                     "icon_skills.c12_meleecombo",
                 }
             },
             {
-                Class.Priest, new List<string>()
+                Class.Priest,
+                new List<string>()
                 {
                     "icon_skills.magicshot_tex",
                     "icon_skills.adventgoddess_tex"
                 }
             },
             {
-                Class.Reaper, new List<string>()
+                Class.Reaper,
+                new List<string>()
                 {
                     "icon_skills.comboattack2_tex",
                     "icon_skills.shieldattack_tex",
@@ -187,13 +191,15 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Slayer, new List<string>()
+                Class.Slayer,
+                new List<string>()
                 {
                     "icon_skills.comboattack_tex",
                 }
             },
             {
-                Class.Sorcerer, new List<string>()
+                Class.Sorcerer,
+                new List<string>()
                 {
                     "icon_skills.fireball_tex",
                     "icon_skills.tornadoprison_tex",
@@ -201,14 +207,16 @@ namespace TCC.Data.Databases
                 }
             },
             {
-                Class.Valkyrie, new List<string>()
+                Class.Valkyrie,
+                new List<string>()
                 {
                     "icon_skills.combo_tex",
 
                 }
             },
             {
-                Class.Warrior, new List<string>()
+                Class.Warrior,
+                new List<string>()
                 {
                     "icon_skills.comboattack_tex",
                     "icon_skills.twinswordsdefence_tex",
