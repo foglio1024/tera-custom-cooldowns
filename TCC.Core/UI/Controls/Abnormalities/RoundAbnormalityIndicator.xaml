@@ -4,9 +4,9 @@
                                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                                             xmlns:abnormalities="clr-namespace:TCC.Data.Abnormalities"
-                                            xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+                                            xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
                                             xmlns:abnormCtrl="clr-namespace:TCC.UI.Controls.Abnormalities"
-                                            xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                                            xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
                                             mc:Ignorable="d" 
              FlowDirection="LeftToRight" Width="Auto" Height="Auto" 
              d:DataContext="{d:DesignInstance abnormalities:AbnormalityDuration}">

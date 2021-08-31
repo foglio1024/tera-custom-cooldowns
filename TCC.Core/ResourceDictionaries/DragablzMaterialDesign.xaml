@@ -6,10 +6,10 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:converters="clr-namespace:Dragablz.Converters;assembly=Dragablz"
                     xmlns:local="clr-namespace:Dragablz.Themes;assembly=Dragablz"
-                    xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
-                    xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+                    xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
+                    xmlns:extensions="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
                     xmlns:chat="clr-namespace:TCC.Data.Chat"
-                    xmlns:nsConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                    xmlns:nsConv="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
                     mc:Ignorable="d">
 
     <converters:ShowDefaultCloseButtonConverter x:Key="ShowDefaultCloseButtonConverter" />

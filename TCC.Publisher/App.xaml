@@ -1,9 +1,9 @@
 ﻿<Application x:Class="TCC.Publisher.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
-             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
-             xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+             xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
+             xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
+             xmlns:extensions="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
              StartupUri="Windows/PublisherWindow.xaml"
              Startup="Application_Startup">
     <Application.Resources>

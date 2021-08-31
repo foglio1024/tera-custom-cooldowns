@@ -5,7 +5,7 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:pc="clr-namespace:TCC.Data.Pc"
                      xmlns:group="clr-namespace:TCC.UI.Controls.Group"
-                     xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                     xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
                      xmlns:converters1="clr-namespace:TCC.UI.Converters"
                      UseLayoutRounding="True"
                      mc:Ignorable="d"

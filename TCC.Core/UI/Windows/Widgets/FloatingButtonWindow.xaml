@@ -4,7 +4,7 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
-                   xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                   xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
                    xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
                    mc:Ignorable="d"
                    Title="TCC Floating button"

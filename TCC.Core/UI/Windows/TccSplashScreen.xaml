@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
         xmlns:windows="clr-namespace:TCC.UI.Windows"
-        xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+        xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
         ResizeMode="NoResize" 
         AllowsTransparency="True" 
         SizeToContent="Height" 

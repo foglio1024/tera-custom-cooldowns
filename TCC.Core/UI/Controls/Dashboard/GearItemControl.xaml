@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:data="clr-namespace:TCC.Data"
-             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+             xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
              mc:Ignorable="d"  d:DataContext="{d:DesignInstance data:GearItem}" 
              Loaded="GearItemControl_OnLoaded" >
     <UserControl.Resources>

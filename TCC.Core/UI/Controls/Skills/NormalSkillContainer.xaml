@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
-             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+             xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance widgets:CooldownWindowViewModel}">
     <Grid Width="Auto" Name="Root" Height="Auto">
         <Grid.RowDefinitions>

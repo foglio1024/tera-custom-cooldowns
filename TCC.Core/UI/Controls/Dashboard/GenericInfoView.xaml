@@ -7,7 +7,7 @@
              xmlns:pc="clr-namespace:TCC.Data.Pc"
              xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
              xmlns:windows="clr-namespace:TCC.UI.Windows"
-             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+             xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DataContext="{d:DesignInstance viewModels:DashboardViewModel}">
     <UserControl.Resources>

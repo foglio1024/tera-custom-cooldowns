@@ -5,10 +5,10 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/SVG.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/MiscResources.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/Converters.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Nostrum;component/Resources/Styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum.WPF;component/Resources/SVG.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum.WPF;component/Resources/MiscResources.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum.WPF;component/Resources/Converters.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Nostrum.WPF;component/Resources/Styles.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/SVG.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Colors.xaml"/>
                 <ResourceDictionary Source="ResourceDictionaries/Brushes.xaml"/>

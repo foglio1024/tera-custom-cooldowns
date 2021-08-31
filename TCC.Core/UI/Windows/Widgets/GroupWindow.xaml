@@ -6,7 +6,7 @@
              xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
              xmlns:controls="clr-namespace:TCC.UI.Controls"
              xmlns:widgets1="clr-namespace:TCC.UI.Windows.Widgets"
-             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+             xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
              mc:Ignorable="d"
              Title="TCC Group"
              MouseLeftButtonDown="Drag"

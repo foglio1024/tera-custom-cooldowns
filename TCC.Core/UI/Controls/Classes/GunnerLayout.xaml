@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+             xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
              mc:Ignorable="d" Loaded="GunnerLayout_OnLoaded" d:DataContext="{d:DesignInstance classManagers:GunnerLayoutVM}">

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:nsConv="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+                    xmlns:nsConv="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
                     xmlns:converters="clr-namespace:TCC.UI.Converters">
 
     <converters:RollToStringConverter x:Key="RollToString"/>

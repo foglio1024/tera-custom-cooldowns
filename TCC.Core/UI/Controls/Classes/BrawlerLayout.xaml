@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+             xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
-             xmlns:converters="clr-namespace:Nostrum.Converters;assembly=Nostrum"
+             xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
              mc:Ignorable="d" Loaded="BrawlerLayout_OnLoaded" d:DataContext="{d:DesignData BrawlerLayoutVM}">
     <Grid Width="Auto" Margin="50 20 55 75" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>

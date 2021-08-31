@@ -4,7 +4,7 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:widgetsWm="clr-namespace:TCC.ViewModels.Widgets"
-                   xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
+                   xmlns:extensions="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
                    xmlns:controls="clr-namespace:TCC.UI.Controls"
                    xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
                    MouseEnter="OnWindowMouseEnter"

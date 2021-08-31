@@ -3,8 +3,8 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:extensions="clr-namespace:Nostrum.Extensions;assembly=Nostrum"
-                    xmlns:controls="clr-namespace:Nostrum.Controls;assembly=Nostrum"
+                    xmlns:extensions="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
+                    xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
                     xmlns:tccControls="clr-namespace:TCC.UI.Controls"
                     xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
                     mc:Ignorable="d">
