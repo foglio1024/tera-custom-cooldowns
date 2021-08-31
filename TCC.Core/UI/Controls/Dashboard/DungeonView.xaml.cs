@@ -1,4 +1,5 @@
 ﻿using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;

@@ -1,4 +1,5 @@
 ﻿using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 namespace TCC
 {
     //TODO: big refactor here
-    public class GameEventManager : TSPropertyChanged
+    public class GameEventManager : ThreadSafePropertyChanged
     {
         private static GameEventManager? _instance;
         public static GameEventManager Instance => _instance ??= new GameEventManager();
@@ -48,7 +49,7 @@ namespace TCC
 
         private GameEventManager()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             var s = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             s.Tick += CheckNewDay;
             s.Start();

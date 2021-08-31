@@ -4,6 +4,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
 using TCC.Utils;
 
 namespace TCC.UI.Converters
@@ -16,8 +17,8 @@ namespace TCC.UI.Converters
             try
             {
                 if (string.IsNullOrEmpty(c)) return R.Brushes.ChatSystemGenericBrush;
-                if (targetType == typeof(Brush)) return new SolidColorBrush(MiscUtils.ParseColor(c));
-                if (targetType == typeof(Color)) return MiscUtils.ParseColor(c);
+                if (targetType == typeof(Brush)) return new SolidColorBrush(Nostrum.WPF.MiscUtils.ParseColor(c));
+                if (targetType == typeof(Color)) return Nostrum.WPF.MiscUtils.ParseColor(c);
 
             }
             catch (FormatException e)

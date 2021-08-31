@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
 using System;
 using System.Text;
 using TCC.Utilities;

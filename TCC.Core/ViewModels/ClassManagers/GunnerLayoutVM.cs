@@ -23,7 +23,7 @@ namespace TCC.ViewModels.ClassManagers
             Bombardment = new Cooldown(bombard, true) { CanFlash = true };
             Balder = new Cooldown(balder, true) { CanFlash = true };
 
-            ModularSystem = new SkillWithEffect(Dispatcher, modSys);
+            ModularSystem = new SkillWithEffect(_dispatcher, modSys);
             // ????
             //Balder.FlashOnAvailable = true;
             //Bombardment.FlashOnAvailable = true;

@@ -1,10 +1,11 @@
 ﻿using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Utils;
 
 namespace TCC.Data.Chat
 {
-    public class ChatChannelOnOff : TSPropertyChanged
+    public class ChatChannelOnOff : ThreadSafePropertyChanged
     {
         private bool _enabled;
         private ChatChannel _channel;
@@ -32,7 +33,7 @@ namespace TCC.Data.Chat
 
         public ChatChannelOnOff()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
         }
         public ChatChannelOnOff(ChatChannel ch, bool en = true) : this()
         {

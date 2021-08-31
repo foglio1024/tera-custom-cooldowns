@@ -1,4 +1,5 @@
 ﻿using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

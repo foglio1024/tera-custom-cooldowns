@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Nostrum;
 using Nostrum.Extensions;
-using Nostrum.Factories;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -65,7 +68,7 @@ namespace TCC.ViewModels
 
         public bool ShowElleonMarks => App.Settings.LastLanguage.Contains("EU");
 
-        private TSObservableCollection<Character> _characters { get; }
+        private ThreadSafeObservableCollection<Character> _characters { get; }
         public ICollectionViewLiveShaping SortedCharacters { get; }
         public ICollectionViewLiveShaping HiddenCharacters { get; }
         public ICollectionViewLiveShaping SortedColumns// { get; }
@@ -129,7 +132,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public TSObservableCollection<CharacterViewModel> CharacterViewModels
+        public ThreadSafeObservableCollection<CharacterViewModel> CharacterViewModels
         {
             get;
             //{
@@ -225,11 +228,11 @@ namespace TCC.ViewModels
         public DashboardViewModel(WindowSettingsBase? settings) : base(settings)
         {
             KeyboardHook.Instance.RegisterCallback(App.Settings.DashboardHotkey, OnShowDashboardHotkeyPressed);
-            _characters = new TSObservableCollection<Character>();
-            CharacterViewModels = new TSObservableCollection<CharacterViewModel>();
-            EventGroups = new TSObservableCollection<EventGroup>();
-            Markers = new TSObservableCollection<TimeMarker>();
-            SpecialEvents = new TSObservableCollection<DailyEvent>();
+            _characters = new ThreadSafeObservableCollection<Character>();
+            CharacterViewModels = new ThreadSafeObservableCollection<CharacterViewModel>();
+            EventGroups = new ThreadSafeObservableCollection<EventGroup>();
+            Markers = new ThreadSafeObservableCollection<TimeMarker>();
+            SpecialEvents = new ThreadSafeObservableCollection<DailyEvent>();
             LoadDungeonsCommand = new RelayCommand(_ =>
             {
                 if (_loaded) return;
@@ -316,7 +319,7 @@ namespace TCC.ViewModels
             try
             {
                 CurrentCharacter?.Inventory.Clear();
-                Dispatcher.InvokeAsync(() =>
+                _dispatcher.InvokeAsync(() =>
                 {
                     lock (_lock)
                     {
@@ -604,9 +607,9 @@ namespace TCC.ViewModels
 
         /* -- TODO EVENTS: TO BE REFACTORED ------------------------- */
 
-        public TSObservableCollection<EventGroup> EventGroups { get; }
-        public TSObservableCollection<TimeMarker> Markers { get; }
-        public TSObservableCollection<DailyEvent> SpecialEvents { get; }
+        public ThreadSafeObservableCollection<EventGroup> EventGroups { get; }
+        public ThreadSafeObservableCollection<TimeMarker> Markers { get; }
+        public ThreadSafeObservableCollection<DailyEvent> SpecialEvents { get; }
 
 
         public void LoadEvents(DayOfWeek today, string region)

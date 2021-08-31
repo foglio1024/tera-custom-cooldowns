@@ -8,6 +8,8 @@ ClassToggle         -> MyClassToggle
 using System.Windows.Input;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.UI.Windows;
@@ -15,7 +17,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class MyAbnormalityVM : TSPropertyChanged
+    public class MyAbnormalityVM : ThreadSafePropertyChanged
     {
         private bool _special;
         private bool _hidden;
@@ -46,14 +48,14 @@ namespace TCC.ViewModels
 
         public bool CanBeSpecial => Abnormality.Type == AbnormalityType.Special || Abnormality.Type == AbnormalityType.Buff;
 
-        public TSObservableCollection<MyClassToggle> Classes { get; }
+        public ThreadSafeObservableCollection<MyClassToggle> Classes { get; }
 
         public MyAbnormalityVM(Abnormality ab)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             Abnormality = ab;
             Special = App.Settings.BuffWindowSettings.Specials.Contains(ab.Id);
-            Classes = new TSObservableCollection<MyClassToggle>(Dispatcher);
+            Classes = new ThreadSafeObservableCollection<MyClassToggle>(_dispatcher);
             for (var i = 0; i < 13; i++)
             {
                 var ct = new MyClassToggle((Class)i, ab.Id);

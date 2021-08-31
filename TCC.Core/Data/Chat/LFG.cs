@@ -1,10 +1,11 @@
 ﻿using System.Timers;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class LFG : TSPropertyChanged
+    public class LFG : ThreadSafePropertyChanged
     {
         private uint _id;
         private string _name = "";
@@ -79,7 +80,7 @@ namespace TCC.Data.Chat
 
         public LFG(uint id, string name, string msg, bool raid, uint serverId)
         {
-            Dispatcher = ChatManager.Instance.GetDispatcher();
+            SetDispatcher(ChatManager.Instance.GetDispatcher());
 
             Id = id;
             ServerId = serverId;

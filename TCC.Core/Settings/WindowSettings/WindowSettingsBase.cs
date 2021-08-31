@@ -6,6 +6,8 @@ using System.Windows.Threading;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.UI;
 using TCC.UI.Windows.Widgets;
@@ -14,7 +16,7 @@ using TeraDataLite;
 
 namespace TCC.Settings.WindowSettings
 {
-    public class WindowSettingsBase : TSPropertyChanged
+    public class WindowSettingsBase : ThreadSafePropertyChanged
     {
         protected double _w;
         protected double _h;
@@ -273,7 +275,7 @@ namespace TCC.Settings.WindowSettings
 
         public WindowSettingsBase()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             Positions = new ClassPositions();
             GpkNames = new List<string>();
             EnabledChanged += OnEnabledChanged;

@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using Nostrum.Controls;
-using Nostrum.Factories;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using TCC.Data.Abnormalities;
 using TCC.UI.Windows.Widgets;
 

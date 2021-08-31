@@ -6,7 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using Nostrum;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Pc;
 using TCC.UI;
 using TCC.Utils;
@@ -16,7 +17,7 @@ namespace TCC.Data.Chat
     public class LfgMessage : ChatMessage
     {
         private int _tries = 10;
-        private readonly TSObservableCollection<User> _members;
+        private readonly ThreadSafeObservableCollection<User> _members;
         private readonly Timer _timer;
 
         private Listing? _linkedListing;
@@ -53,7 +54,7 @@ namespace TCC.Data.Chat
         {
             AuthorId = authorId;
             ServerId = serverId;
-            _members = new TSObservableCollection<User>();
+            _members = new ThreadSafeObservableCollection<User>();
             _timer = new Timer(1500);
             _timer.Elapsed += OnTimerTick;
 
@@ -117,7 +118,7 @@ namespace TCC.Data.Chat
         }
         public void LinkListing()
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 LinkedListing = FindListing();
                 if (LinkedListing != null) return;

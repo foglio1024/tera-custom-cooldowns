@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF;
 using TCC.Debugging;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
@@ -72,7 +73,7 @@ namespace TCC.ViewModels.Widgets
 
                 foreach (var (_, dispatcher) in App.RunningDispatchers)
                 {
-                    if (dispatcher == Dispatcher) continue;
+                    if (dispatcher == _dispatcher) continue;
                     dispatcher.InvokeAsync(() =>
                     {
                         lock (_lock)
@@ -141,7 +142,7 @@ namespace TCC.ViewModels.Widgets
                 var cpu = (_cpuCounter.NextValue() / Environment.ProcessorCount);
                 var mem = (_ramCounter.NextValue()) / (1024 * 1024D);
 
-                Dispatcher.InvokeAsync(() =>
+                _dispatcher.InvokeAsync(() =>
                 {
                     CPU = cpu;
                     Memory = mem;

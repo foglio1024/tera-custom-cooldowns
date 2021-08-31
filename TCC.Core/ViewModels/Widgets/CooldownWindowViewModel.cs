@@ -8,7 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Threading;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -22,6 +22,8 @@ using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
+using Nostrum.WPF.ThreadSafe;
+using Nostrum.WPF.Extensions;
 
 namespace TCC.ViewModels.Widgets
 {
@@ -46,13 +48,13 @@ namespace TCC.ViewModels.Widgets
         public event Action? SkillsLoaded;
         private const int LongSkillTreshold = 40000; //TODO: make configurable?
 
-        public TSObservableCollection<Cooldown> ShortSkills { get; }
-        public TSObservableCollection<Cooldown> LongSkills { get; }
-        public TSObservableCollection<Cooldown> MainSkills { get; }
-        public TSObservableCollection<Cooldown> SecondarySkills { get; }
-        public TSObservableCollection<Cooldown> OtherSkills { get;  }
-        public TSObservableCollection<Cooldown> ItemSkills { get; }
-        public TSObservableCollection<Cooldown> HiddenSkills { get; }
+        public ThreadSafeObservableCollection<Cooldown> ShortSkills { get; }
+        public ThreadSafeObservableCollection<Cooldown> LongSkills { get; }
+        public ThreadSafeObservableCollection<Cooldown> MainSkills { get; }
+        public ThreadSafeObservableCollection<Cooldown> SecondarySkills { get; }
+        public ThreadSafeObservableCollection<Cooldown> OtherSkills { get;  }
+        public ThreadSafeObservableCollection<Cooldown> ItemSkills { get; }
+        public ThreadSafeObservableCollection<Cooldown> HiddenSkills { get; }
 
         public ICollectionViewLiveShaping? SkillsView { get; private set; }
         public ICollectionViewLiveShaping ItemsView { get; }
@@ -63,7 +65,7 @@ namespace TCC.ViewModels.Widgets
         //TODO: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         private static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.ClassVM.CurrentManager;
 
-        private static bool FindAndUpdate(TSObservableCollection<Cooldown> list, Cooldown sk)
+        private static bool FindAndUpdate(ThreadSafeObservableCollection<Cooldown> list, Cooldown sk)
         {
             var existing = list.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (existing == null)
@@ -89,7 +91,7 @@ namespace TCC.ViewModels.Widgets
             //if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
             if (!App.Settings.CooldownWindowSettings.Enabled) return false;
 
-            var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, Dispatcher);
+            var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, _dispatcher);
 
             var hSkill = HiddenSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
             if (hSkill != null) return false;
@@ -333,7 +335,7 @@ namespace TCC.ViewModels.Widgets
                 return false;
             }
             //create it again with cd window dispatcher
-            var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, Dispatcher);
+            var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, _dispatcher);
             sk.Dispose();
 
             try
@@ -350,7 +352,7 @@ namespace TCC.ViewModels.Widgets
 
         public void AddOrRefresh(Cooldown sk)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 switch (App.Settings.CooldownWindowSettings.Mode)
                 {
@@ -365,7 +367,7 @@ namespace TCC.ViewModels.Widgets
         }
         public void Change(Skill skill, uint cd)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 switch (App.Settings.CooldownWindowSettings.Mode)
                 {
@@ -380,7 +382,7 @@ namespace TCC.ViewModels.Widgets
         }
         public void Remove(Skill sk)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 switch (App.Settings.CooldownWindowSettings.Mode)
                 {
@@ -396,7 +398,7 @@ namespace TCC.ViewModels.Widgets
 
         public void ClearSkills()
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 ShortSkills.ToSyncList().ForEach(sk => sk.Dispose());
                 LongSkills.ToSyncList().ForEach(sk => sk.Dispose());
@@ -419,7 +421,7 @@ namespace TCC.ViewModels.Widgets
         {
             if (c == Class.None || c == Class.Common) return;
 
-            Dispatcher.InvokeAsyncIfRequired(() =>
+            _dispatcher?.InvokeAsyncIfRequired(() =>
             {
                 var data = new CooldownConfigParser(c).Data;
 
@@ -427,7 +429,7 @@ namespace TCC.ViewModels.Widgets
                 data.Secondary.ForEach(cdData => TryAddToList(cdData, SecondarySkills));
                 data.Hidden.ForEach(cdData => TryAddToList(cdData, HiddenSkills));
 
-                Dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(Game.DB!.SkillsDatabase.SkillsForClass(c)));
+                _dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(Game.DB!.SkillsDatabase.SkillsForClass(c)));
 
                 N(nameof(SkillsView));
                 N(nameof(MainSkills));
@@ -437,10 +439,10 @@ namespace TCC.ViewModels.Widgets
 
                 #region Local
 
-                void TryAddToList(CooldownData cdData, TSObservableCollection<Cooldown> list)
+                void TryAddToList(CooldownData cdData, ThreadSafeObservableCollection<Cooldown> list)
                 {
                     if (!Game.DB!.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)) return;
-                    list.Add(new Cooldown(sk, false, cdData.Type, Dispatcher));
+                    list.Add(new Cooldown(sk, false, cdData.Type, _dispatcher));
                 }
                 #endregion
             }, DispatcherPriority.Background);
@@ -472,14 +474,14 @@ namespace TCC.ViewModels.Widgets
 
         public CooldownWindowViewModel(WindowSettingsBase settings) : base(settings)
         {
-            ShortSkills = new TSObservableCollection<Cooldown>(Dispatcher);
-            LongSkills = new TSObservableCollection<Cooldown>(Dispatcher);
-            SecondarySkills = new TSObservableCollection<Cooldown>(Dispatcher);
-            MainSkills = new TSObservableCollection<Cooldown>(Dispatcher);
-            OtherSkills = new TSObservableCollection<Cooldown>(Dispatcher);
-            ItemSkills = new TSObservableCollection<Cooldown>(Dispatcher);
+            ShortSkills = new ThreadSafeObservableCollection<Cooldown>(_dispatcher);
+            LongSkills = new ThreadSafeObservableCollection<Cooldown>(_dispatcher);
+            SecondarySkills = new ThreadSafeObservableCollection<Cooldown>(_dispatcher);
+            MainSkills = new ThreadSafeObservableCollection<Cooldown>(_dispatcher);
+            OtherSkills = new ThreadSafeObservableCollection<Cooldown>(_dispatcher);
+            ItemSkills = new ThreadSafeObservableCollection<Cooldown>(_dispatcher);
 
-            HiddenSkills = new TSObservableCollection<Cooldown>(Dispatcher);
+            HiddenSkills = new ThreadSafeObservableCollection<Cooldown>(_dispatcher);
 
             ItemsView = CollectionViewFactory.CreateLiveCollectionView(Items);
             AbnormalitiesView = CollectionViewFactory.CreateLiveCollectionView(Passivities);
@@ -511,7 +513,7 @@ namespace TCC.ViewModels.Widgets
         public void OnShowSkillConfigHotkeyPressed()
         {
             if (!Game.Logged && !Debugger.IsAttached) return;
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 //if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible)
                 //{
@@ -542,7 +544,7 @@ namespace TCC.ViewModels.Widgets
         {
             if (!App.Settings.CooldownWindowSettings.Enabled) return;
             if (App.Settings.CooldownWindowSettings.Mode == CooldownBarMode.Normal) return;
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 if (ClassManager.ResetSpecialSkill(skill)) return;
                 var sk = MainSkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName) ?? SecondarySkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName);

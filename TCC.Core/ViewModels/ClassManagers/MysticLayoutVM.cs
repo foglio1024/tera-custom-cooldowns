@@ -47,10 +47,10 @@ namespace TCC.ViewModels.ClassManagers
             ThrallOfLife = new Cooldown(tol, false);
             
             Game.DB.SkillsDatabase.TryGetSkill(331700, Class.Mystic, out var tov);
-            ThrallOfVengeance = new SkillWithEffect(Dispatcher, tov);
+            ThrallOfVengeance = new SkillWithEffect(_dispatcher, tov);
             
             Game.DB.SkillsDatabase.TryGetSkill(341600, Class.Mystic, out var tow);
-            ThrallOfWrath = new SkillWithEffect(Dispatcher, tow);
+            ThrallOfWrath = new SkillWithEffect(_dispatcher, tow);
 
 
             Game.DB.SkillsDatabase.TryGetSkill(160500, Class.Mystic, out var at);
@@ -67,13 +67,13 @@ namespace TCC.ViewModels.ClassManagers
 
 
             Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Mystic, out var vow);
-            Vow = new SkillWithEffect(Dispatcher, vow);
+            Vow = new SkillWithEffect(_dispatcher, vow);
             Vow.Cooldown.FlashOnAvailable = false;
             Vow.Effect.Ended += OnVowBuffEnded;
             Vow.Effect.Started += OnVowBuffStarted;
 
             Game.DB.SkillsDatabase.TryGetSkill(241210, Class.Mystic, out var voc);
-            VolleyOfCurse = new SkillWithEffect(Dispatcher, voc);
+            VolleyOfCurse = new SkillWithEffect(_dispatcher, voc);
 
             Game.DB.SkillsDatabase.TryGetSkill(410100, Class.Mystic, out var cont);
             Contagion = new Cooldown(cont, true) { CanFlash = true };

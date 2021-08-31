@@ -1,10 +1,11 @@
 ﻿using System;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class Money : TSPropertyChanged
+    public class Money : ThreadSafePropertyChanged
     {
         public long Gold { get; set; }
         public long Silver { get; set; }
@@ -12,7 +13,7 @@ namespace TCC.Data.Chat
 
         public Money(long money)
         {
-            Dispatcher = ChatManager.Instance.GetDispatcher();
+            SetDispatcher(ChatManager.Instance.GetDispatcher());
 
             Gold = Convert.ToInt64(money / 10000);
             Silver = Convert.ToInt64(money / 100) - Gold * 100;
@@ -20,7 +21,7 @@ namespace TCC.Data.Chat
         }
         public Money(int g, int s, int c)
         {
-            Dispatcher = ChatManager.Instance.GetDispatcher();
+            SetDispatcher(ChatManager.Instance.GetDispatcher());
 
             Gold = g;
             Silver = s;

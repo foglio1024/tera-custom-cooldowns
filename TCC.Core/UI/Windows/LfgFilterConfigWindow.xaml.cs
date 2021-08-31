@@ -1,5 +1,7 @@
 ﻿using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

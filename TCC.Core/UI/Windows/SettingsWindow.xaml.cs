@@ -1,4 +1,4 @@
-﻿using Nostrum.Factories;
+﻿using Nostrum.WPF.Factories;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;

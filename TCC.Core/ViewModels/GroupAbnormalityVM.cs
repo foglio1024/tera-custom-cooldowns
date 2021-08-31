@@ -1,4 +1,6 @@
 ﻿using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using System.Windows.Input;
 using System.Windows.Threading;
 using TCC.Data.Abnormalities;
@@ -7,7 +9,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class GroupAbnormalityVM : TSPropertyChanged
+    public class GroupAbnormalityVM : ThreadSafePropertyChanged
     {
         private bool _hidden;
 
@@ -24,14 +26,14 @@ namespace TCC.ViewModels
 
         public ICommand HiddenCommand { get; }
         public Abnormality Abnormality { get; }
-        public TSObservableCollection<ClassToggle> Classes { get; }
+        public ThreadSafeObservableCollection<ClassToggle> Classes { get; }
 
         public GroupAbnormalityVM(Abnormality ab)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             Abnormality = ab;
 
-            Classes = new TSObservableCollection<ClassToggle>(Dispatcher);
+            Classes = new ThreadSafeObservableCollection<ClassToggle>(_dispatcher);
             for (var i = 0; i < 13; i++)
             {
                 var ct = new ClassToggle((Class)i, ab.Id);

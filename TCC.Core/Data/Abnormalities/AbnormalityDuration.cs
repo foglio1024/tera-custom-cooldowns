@@ -1,4 +1,5 @@
 ﻿using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Timers;
 using System.Windows.Threading;
@@ -6,7 +7,7 @@ using TCC.Debugging;
 
 namespace TCC.Data.Abnormalities
 {
-    public class AbnormalityDuration : TSPropertyChanged, IDisposable
+    public class AbnormalityDuration : ThreadSafePropertyChanged, IDisposable
     {
         public event Action? Refreshed;
 
@@ -62,7 +63,7 @@ namespace TCC.Data.Abnormalities
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated) : this(b)
         {
             ObjectTracker.Register(this.GetType());
-            Dispatcher = disp;
+            SetDispatcher(disp);
             Animated = animated;
             Duration = d;
             Stacks = s;

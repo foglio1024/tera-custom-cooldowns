@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Npc;
 using TCC.Utilities;
 
 namespace TCC.UI.Controls.NPCs
 {
-    public class NpcViewModel : TSPropertyChanged
+    public class NpcViewModel : ThreadSafePropertyChanged
     {
         public event Action? Disposed;
         public event Action? HpFactorChanged;

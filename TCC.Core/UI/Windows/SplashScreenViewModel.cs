@@ -5,10 +5,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.UI.Windows
 {
-    public class SplashScreenViewModel : TSPropertyChanged
+    public class SplashScreenViewModel : ThreadSafePropertyChanged
     {
         private int _progress;
         private bool _waiting;

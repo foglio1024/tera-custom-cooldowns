@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using Nostrum;
+using Nostrum.WPF;
 using ContextMenu = System.Windows.Controls.ContextMenu;
 using MenuItem = System.Windows.Controls.MenuItem;
 
@@ -33,8 +34,8 @@ namespace TCC.UI.Controls
 
         public TccTrayIcon()
         {
-            _defaultIcon = MiscUtils.GetEmbeddedIcon("resources/tcc_off.ico");
-            _connectedIcon = MiscUtils.GetEmbeddedIcon("resources/tcc_on.ico");
+            _defaultIcon = Nostrum.WPF.MiscUtils.GetEmbeddedIcon("resources/tcc_off.ico");
+            _connectedIcon = Nostrum.WPF.MiscUtils.GetEmbeddedIcon("resources/tcc_on.ico");
 
             _trayIcon = new NotifyIcon
             {

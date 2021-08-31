@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Skills;
 
 using TeraDataLite;
@@ -82,7 +83,7 @@ namespace TCC.Data.Databases
         //TODO do this better one day
         public IEnumerable<Skill> SkillsForClass(Class c)
         {
-            var list = new TSObservableCollection<Skill>();
+            var list = new ThreadSafeObservableCollection<Skill>();
             var skillsForClass = Skills[c];
             foreach (var skill in skillsForClass.Values)
             {

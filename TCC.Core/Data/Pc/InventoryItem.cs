@@ -1,9 +1,10 @@
 ﻿using Nostrum;
 using Newtonsoft.Json;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Pc
 {
-    public class InventoryItem : TSPropertyChanged
+    public class InventoryItem : ThreadSafePropertyChanged
     {
         private int _amount;
         public uint Id { get; }

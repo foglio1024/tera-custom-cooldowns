@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Utils;
 
 namespace TCC.UI.Windows.Widgets
@@ -39,7 +41,7 @@ namespace TCC.UI.Windows.Widgets
             }
         }
     }
-    public class NotificationInfoBase : TSPropertyChanged
+    public class NotificationInfoBase : ThreadSafePropertyChanged
     {
         public event Action? Disposed;
         public event Action<int>? Disposing;

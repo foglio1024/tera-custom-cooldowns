@@ -16,7 +16,7 @@ namespace TCC.ViewModels.ClassManagers
         {
             // In Cold Blood
             Game.DB!.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);
-            InColdBlood = new SkillWithEffect(Dispatcher, icb);
+            InColdBlood = new SkillWithEffect(_dispatcher, icb);
 
             // Overhand Strike
             Game.DB.SkillsDatabase.TryGetSkill(80900, Class.Slayer, out var ohs);

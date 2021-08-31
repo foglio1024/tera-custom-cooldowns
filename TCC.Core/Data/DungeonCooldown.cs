@@ -3,10 +3,11 @@ using System.Windows.Threading;
 using Nostrum;
 using Newtonsoft.Json;
 using TCC.Data.Pc;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data
 {
-    public class DungeonCooldown : TSPropertyChanged
+    public class DungeonCooldown : ThreadSafePropertyChanged
     {
         private int _entries;
         private int _clears;
@@ -81,7 +82,7 @@ namespace TCC.Data
         }
         public DungeonCooldown(uint id, Dispatcher d, Character owner)
         {
-            Dispatcher = d;
+            SetDispatcher(d); 
             Id = id;
             Entries = Runs;
             Owner = owner;

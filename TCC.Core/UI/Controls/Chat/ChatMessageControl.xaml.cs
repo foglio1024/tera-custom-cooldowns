@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using TCC.Data.Chat;
 
 namespace TCC.UI.Controls.Chat

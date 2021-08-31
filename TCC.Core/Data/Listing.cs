@@ -1,4 +1,6 @@
 ﻿using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +16,7 @@ using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.Data
 {
-    public class Listing : TSPropertyChanged
+    public class Listing : ThreadSafePropertyChanged
     {
         private bool _isRaid;
         private string _message = "";
@@ -131,8 +133,8 @@ namespace TCC.Data
         public double AliveSinceMs => (DateTime.Now - _createdOn).TotalMilliseconds;
 
 
-        public TSObservableCollection<User> Players { get; set; }
-        public TSObservableCollection<User> Applicants { get; set; }
+        public ThreadSafeObservableCollection<User> Players { get; set; }
+        public ThreadSafeObservableCollection<User> Applicants { get; set; }
 
         public int MaxCount => IsRaid ? 30 : 5;
         public ApplyCommand ApplyCommand { get; }
@@ -177,7 +179,7 @@ namespace TCC.Data
 
         public void UpdateIsMyLfg()
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId) ||
                           LeaderId == Game.Me.PlayerId ||
@@ -189,9 +191,9 @@ namespace TCC.Data
 
         public Listing()
         {
-            Dispatcher = App.BaseDispatcher;
-            Players = new TSObservableCollection<User>(Dispatcher);
-            Applicants = new TSObservableCollection<User>(Dispatcher);
+            SetDispatcher(App.BaseDispatcher);
+            Players = new ThreadSafeObservableCollection<User>(_dispatcher);
+            Applicants = new ThreadSafeObservableCollection<User>(_dispatcher);
             ApplyCommand = new ApplyCommand(this);
             RefreshApplicantsCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.RequestListingCandidates(), _ => IsMyLfg);
             ExpandCollapseCommand = new RelayCommand(force =>

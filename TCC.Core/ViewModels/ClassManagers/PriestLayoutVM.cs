@@ -18,28 +18,28 @@ namespace TCC.ViewModels.ClassManagers
         {
             //Energy Stars
             Game.DB!.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);
-            EnergyStars = new SkillWithEffect(Dispatcher, es);
+            EnergyStars = new SkillWithEffect(_dispatcher, es);
 
             // Grace
             Game.DB.SkillsDatabase.TryGetSkill(390100, Class.Priest, out var gr);
-            Grace = new SkillWithEffect(Dispatcher, gr);
+            Grace = new SkillWithEffect(_dispatcher, gr);
 
             Grace.Effect.Started += OnGraceBuffStarted;
             Grace.Effect.Ended += OnGraceBuffEnded;
 
             // Edict Of Judgment
             Game.DB.SkillsDatabase.TryGetSkill(430100, Class.Priest, out var ed);
-            EdictOfJudgment = new SkillWithEffect(Dispatcher, ed);
+            EdictOfJudgment = new SkillWithEffect(_dispatcher, ed);
             EdictOfJudgment.Effect.Started += OnEdictBuffStarted;
             EdictOfJudgment.Effect.Ended += OnEdictBuffEnded;
 
             // Divine Charge
             Game.DB.SkillsDatabase.TryGetSkill(280200, Class.Priest, out var dc);
-            DivineCharge = new SkillWithEffect(Dispatcher, dc);
+            DivineCharge = new SkillWithEffect(_dispatcher, dc);
 
             // Tripple Nenesis
             Game.DB.SkillsDatabase.TryGetSkill(290100, Class.Priest, out var tn);
-            TripleNemesis = new SkillWithEffect(Dispatcher, tn);
+            TripleNemesis = new SkillWithEffect(_dispatcher, tn);
 
             AbnormalityTracker.MarkingExpired += OnTripleNemesisExpired;
             AbnormalityTracker.MarkingRefreshed += OnTripleNemesisRefreshed;

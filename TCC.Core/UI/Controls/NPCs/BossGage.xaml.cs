@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using TCC.Data.Npc;
 using TCC.ViewModels;
 

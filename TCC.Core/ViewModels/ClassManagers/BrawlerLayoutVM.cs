@@ -42,7 +42,7 @@ namespace TCC.ViewModels.ClassManagers
         {
             // Growing Fury
             Game.DB!.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);
-            GrowingFury = new SkillWithEffect(Dispatcher, gf);
+            GrowingFury = new SkillWithEffect(_dispatcher, gf);
 
             // Counter 
             Game.DB.SkillsDatabase.TryGetSkill(21200, Class.Brawler, out var c);

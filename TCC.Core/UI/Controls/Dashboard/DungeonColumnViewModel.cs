@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using Nostrum;
-using Nostrum.Factories;
+using Nostrum.WPF;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Pc;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    public class DungeonColumnViewModel : TSPropertyChanged
+    public class DungeonColumnViewModel : ThreadSafePropertyChanged
     {
         private bool _hilight;
 
@@ -19,7 +21,7 @@ namespace TCC.UI.Controls.Dashboard
             N(nameof(IsVisible));
         }
 
-        public TSObservableCollection<DungeonCooldownViewModel> DungeonsList { get; private set; }
+        public ThreadSafeObservableCollection<DungeonCooldownViewModel> DungeonsList { get; private set; }
         public ICollectionViewLiveShaping DungeonsListView { get; }
         public ICommand RemoveDungeonCommand { get; }
         public bool IsVisible => Dungeon.Show;
@@ -38,7 +40,7 @@ namespace TCC.UI.Controls.Dashboard
         {
             Dungeon = dungeon;
             Dungeon.PropertyChanged += OnDungeonPropertyChanged;
-            DungeonsList = new TSObservableCollection<DungeonCooldownViewModel>();
+            DungeonsList = new ThreadSafeObservableCollection<DungeonCooldownViewModel>();
             DungeonsListView = CollectionViewFactory.CreateLiveCollectionView(DungeonsList,
                 o => !o.Owner.Hidden,
                 new[] { $"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}" },

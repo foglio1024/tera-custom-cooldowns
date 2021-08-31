@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using TCC.Data;
 
 namespace TCC.UI.Controls.Classes.Elements
@@ -70,7 +70,7 @@ namespace TCC.UI.Controls.Classes.Elements
                 {
                     _toZeroAnimation.From = _dc.Factor * 359.9;
                 }
-                ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _toZeroAnimation);
+                ExternalArc.BeginAnimation(Nostrum.WPF.Controls.Arc.EndAngleProperty, _toZeroAnimation);
             });
         }
 
@@ -80,7 +80,7 @@ namespace TCC.UI.Controls.Classes.Elements
             if (_dc != null)
             {
                 _anim.To = _dc.Factor * 359.9;
-                ExternalArc.BeginAnimation(Nostrum.Controls.Arc.EndAngleProperty, _anim);
+                ExternalArc.BeginAnimation(Nostrum.WPF.Controls.Arc.EndAngleProperty, _anim);
             }
             _isAnimating = true;
         }

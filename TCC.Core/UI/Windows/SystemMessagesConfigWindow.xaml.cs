@@ -5,14 +5,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Nostrum;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.UI.Windows
 {
     public partial class SystemMessagesConfigWindow
     {
-        public TSObservableCollection<SystemMessageViewModel> HiddenMessages { get; }
-        public TSObservableCollection<SystemMessageViewModel> ShowedMessages { get; }
+        public ThreadSafeObservableCollection<SystemMessageViewModel> HiddenMessages { get; }
+        public ThreadSafeObservableCollection<SystemMessageViewModel> ShowedMessages { get; }
         public ICollectionViewLiveShaping ShowedMessagesView { get; }
         public ICollectionViewLiveShaping HiddenMessagesView { get; }
 
@@ -20,8 +21,8 @@ namespace TCC.UI.Windows
         {
             InitializeComponent();
             DataContext = this;
-            HiddenMessages = new TSObservableCollection<SystemMessageViewModel>();
-            ShowedMessages = new TSObservableCollection<SystemMessageViewModel>();
+            HiddenMessages = new ThreadSafeObservableCollection<SystemMessageViewModel>();
+            ShowedMessages = new ThreadSafeObservableCollection<SystemMessageViewModel>();
 
             App.Settings.UserExcludedSysMsg.ForEach(opc =>
             {

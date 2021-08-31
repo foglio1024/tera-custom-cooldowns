@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
-using Nostrum.Controls;
-using Nostrum.Factories;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using TCC.Data;
 using TCC.ViewModels;
 

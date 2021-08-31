@@ -7,20 +7,21 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Nostrum;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Pc;
 
 namespace TCC.UI.Windows
 {
 
-    public class MergedInventoryViewModel : TSPropertyChanged
+    public class MergedInventoryViewModel : ThreadSafePropertyChanged
     {
-        public TSObservableCollection<MergedInventoryItem> MergedInventory { get; }
+        public ThreadSafeObservableCollection<MergedInventoryItem> MergedInventory { get; }
         public ICollectionViewLiveShaping MergedInventoryView { get; }
         public MergedInventoryViewModel()
         {
-            MergedInventory = new TSObservableCollection<MergedInventoryItem>();
+            MergedInventory = new ThreadSafeObservableCollection<MergedInventoryItem>();
             MergedInventoryView = CollectionViewFactory.CreateLiveCollectionView(MergedInventory, 
                 sortFilters: new[]
                 {
@@ -53,11 +54,11 @@ namespace TCC.UI.Windows
             {
                 Game.Account.Characters.Where(c => !c.Hidden).ToList().ForEach(ch =>
                 {
-                    Dispatcher.InvokeAsync(() =>
+                    _dispatcher.InvokeAsync(() =>
                     {
                         ch.Inventory.ToList().ForEach(item =>
                         {
-                            Dispatcher.InvokeAsync(() =>
+                            _dispatcher.InvokeAsync(() =>
                             {
                                 var existing = MergedInventory.FirstOrDefault(x => x.Item?.Item.Id == item.Item.Id);
                                 if (existing == null)
@@ -97,10 +98,10 @@ namespace TCC.UI.Windows
             Owner = o;
         }
     }
-    public class MergedInventoryItem : TSPropertyChanged
+    public class MergedInventoryItem : ThreadSafePropertyChanged
     {
         public InventoryItem? Item => Items.Count > 0 ? Items[0].Item : null;
-        public TSObservableCollection<InventoryItemWithOwner> Items { get; }
+        public ThreadSafeObservableCollection<InventoryItemWithOwner> Items { get; }
         public int TotalAmount
         {
             get
@@ -113,7 +114,7 @@ namespace TCC.UI.Windows
 
         public MergedInventoryItem()
         {
-            Items = new TSObservableCollection<InventoryItemWithOwner>();
+            Items = new ThreadSafeObservableCollection<InventoryItemWithOwner>();
             Items.CollectionChanged += (_, _) => N(nameof(TotalAmount));
         }
     }

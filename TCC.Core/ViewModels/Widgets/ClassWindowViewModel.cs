@@ -25,7 +25,7 @@ namespace TCC.ViewModels.Widgets
                 if (_currentClass == value) return;
                 _currentClass = value;
 
-                Dispatcher.Invoke(() =>
+                _dispatcher.Invoke(() =>
                 {
                     CurrentManager.Dispose();
                     CurrentManager = _currentClass switch
@@ -157,7 +157,7 @@ namespace TCC.ViewModels.Widgets
 
         private void OnLogin(S_LOGIN m)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher.InvokeAsync(() =>
             {
                 CurrentClass = m.CharacterClass;
             });

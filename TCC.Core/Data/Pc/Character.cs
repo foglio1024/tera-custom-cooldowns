@@ -7,12 +7,14 @@ using System.Windows.Threading;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TeraDataLite;
+using Nostrum.WPF.ThreadSafe;
+using Nostrum.WPF;
 
 namespace TCC.Data.Pc
 {
     //TODO: remove INPC from properties where it's not needed
 
-    public class Character : TSPropertyChanged, IComparable
+    public class Character : ThreadSafePropertyChanged, IComparable
     {
         private string _name = "";
         private Class _class;
@@ -170,8 +172,8 @@ namespace TCC.Data.Pc
         public VanguardInfo VanguardInfo { get; }
         public DungeonInfo DungeonInfo { get; }
 
-        public TSObservableCollection<AbnormalityData> Buffs { get; }
-        public TSObservableCollection<InventoryItem> Inventory { get; }
+        public ThreadSafeObservableCollection<AbnormalityData> Buffs { get; }
+        public ThreadSafeObservableCollection<InventoryItem> Inventory { get; }
 
         [JsonIgnore]
         public ICommand UnhideCommand { get; }
@@ -229,9 +231,9 @@ namespace TCC.Data.Pc
 
         public Character()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-            Buffs = new TSObservableCollection<AbnormalityData>(Dispatcher);
-            Inventory = new TSObservableCollection<InventoryItem>(Dispatcher);
+            SetDispatcher(Dispatcher.CurrentDispatcher);
+            Buffs = new ThreadSafeObservableCollection<AbnormalityData>(_dispatcher);
+            Inventory = new ThreadSafeObservableCollection<InventoryItem>(_dispatcher);
             GuardianInfo = new GuardianInfo();
             VanguardInfo = new VanguardInfo();
             DungeonInfo = new DungeonInfo();

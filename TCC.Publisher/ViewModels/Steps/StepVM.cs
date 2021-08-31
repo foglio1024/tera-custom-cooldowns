@@ -1,9 +1,11 @@
 ﻿using System.Windows.Input;
 using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Publisher.ViewModels.Steps
 {
-    public class StepVM : TSPropertyChanged
+    public class StepVM : ThreadSafePropertyChanged
     {
         private bool _completed;
         public bool Completed

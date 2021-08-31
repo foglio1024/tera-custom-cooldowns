@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
 
 namespace TCC.UI.Controls.Dashboard
 {

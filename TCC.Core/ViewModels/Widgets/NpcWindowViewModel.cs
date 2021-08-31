@@ -8,7 +8,9 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
 using Nostrum;
-using Nostrum.Factories;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -28,7 +30,7 @@ namespace TCC.ViewModels.Widgets
     [TccModule]
     public class NpcWindowViewModel : TccWindowViewModel
     {
-        private readonly TSObservableCollection<NPC> _npcList;
+        private readonly ThreadSafeObservableCollection<NPC> _npcList;
 
         private readonly Dictionary<ulong, string> _towerNames = new();
         private readonly Dictionary<ulong, double> _savedHp = new();
@@ -48,7 +50,7 @@ namespace TCC.ViewModels.Widgets
 
         public NpcWindowViewModel(NpcWindowSettings settings) : base(settings)
         {
-            _npcList = new TSObservableCollection<NPC>(Dispatcher);
+            _npcList = new ThreadSafeObservableCollection<NPC>(_dispatcher);
             Bams = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                 npc => npc != null && npc.IsBoss && !npc.IsTower && npc.Visible,
                 new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
@@ -94,14 +96,14 @@ namespace TCC.ViewModels.Widgets
 
         public void AddOrUpdateNpc(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true, int remainingEnrageTime = 0)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 var boss = GetOrAddNpc(entityId, zoneId, templateId, isBoss, visibility);
                 SetHP(boss, maxHp, curHp, src);
                 SetEnrageTime(entityId, remainingEnrageTime);
                 if (boss.Visible == visibility) return;
                 boss.Visible = visibility;
-                Dispatcher.Invoke(() => CheckPendingAbnormalities(boss));
+                _dispatcher?.Invoke(() => CheckPendingAbnormalities(boss));
                 NpcListChanged?.Invoke();
             });
         }
@@ -124,14 +126,14 @@ namespace TCC.ViewModels.Widgets
 
         public void RemoveNPC(NPC npc, uint delay)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 if (!TryFindNPC(npc.EntityId, out _)) return;
                 npc.Buffs.Clear();
                 if (delay != 0)
                 {
                     Task.Delay(TimeSpan.FromMilliseconds(delay))
-                        .ContinueWith(_ => Dispatcher.Invoke(() => RemoveAndDisposeNPC(npc)));
+                        .ContinueWith(_ => _dispatcher?.Invoke(() => RemoveAndDisposeNPC(npc)));
                 }
                 else
                 {
@@ -145,7 +147,7 @@ namespace TCC.ViewModels.Widgets
             {
                 if (Game.IsMe(target) || Game.NearbyPlayers.ContainsKey(target)) return;
                 Log.CW($"Added pending abnormal {ab.Name} for {target}");
-                Dispatcher.Invoke(() =>
+                _dispatcher?.Invoke(() =>
                 {
                     PendingAbnormalities.Add(new PendingAbnormality
                     {
@@ -179,7 +181,7 @@ namespace TCC.ViewModels.Widgets
         }
         public void Clear()
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 foreach (var npc in _npcList.ToSyncList())
                 {
@@ -242,7 +244,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void AddOrUpdateNpc(S_SPAWN_NPC spawn, Monster npcData)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 var visibility = npcData.IsBoss && TccUtils.IsFieldBoss(npcData.ZoneId, npcData.TemplateId);
                 var boss = GetOrAddNpc(spawn.EntityId, npcData.ZoneId, npcData.TemplateId, npcData.IsBoss, visibility);
@@ -270,7 +272,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void FlushCache()
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 if (_cache.Count == 0) return;
                 try
@@ -465,7 +467,7 @@ namespace TCC.ViewModels.Widgets
         {
             CurrentHHphase = HarrowholdPhase.None;
             ClearGuildTowers();
-            Dispatcher.Invoke(() => PendingAbnormalities.Clear());
+            _dispatcher?.Invoke(() => PendingAbnormalities.Clear());
         }
         private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
         {
@@ -494,7 +496,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnDespawnNpc(S_DESPAWN_NPC p)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 if (TryFindNPC(p.Target, out var boss))
                 {
@@ -727,7 +729,7 @@ namespace TCC.ViewModels.Widgets
         }
         private static Dragon CheckCurrentDragon(Point p)
         {
-            var rel = MathUtils.GetRelativePoint(p.X, p.Y, -7672, -84453);
+            var rel = p.RelativeTo(new Point(-7672, -84453));
 
             Dragon d;
             if (rel.Y > .8 * rel.X - 78)

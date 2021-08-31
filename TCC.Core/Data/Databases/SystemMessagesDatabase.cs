@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
 using TCC.Data.Chat;
 using TCC.Utils;
 using TeraPacketParser.Analysis;

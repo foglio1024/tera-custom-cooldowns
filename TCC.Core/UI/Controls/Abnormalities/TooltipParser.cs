@@ -130,7 +130,7 @@ namespace TCC.UI.Controls.Abnormalities
             var col = d[1].Substring(0, 7);
             var cstm = new {Text = txt, Color = col};
             Add(d[0]);
-            AddFormatted(cstm.Text, MiscUtils.ParseColor(cstm.Color));
+            AddFormatted(cstm.Text, Nostrum.WPF.MiscUtils.ParseColor(cstm.Color));
 
             return true;
         }

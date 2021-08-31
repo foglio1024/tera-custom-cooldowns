@@ -4,8 +4,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media.Animation;
 using Nostrum;
-using Nostrum.Controls;
-using Nostrum.Factories;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Skills

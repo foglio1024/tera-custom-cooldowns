@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
 using TCC.ViewModels;
@@ -16,12 +17,12 @@ namespace TCC.UI.Windows.Widgets
     {
         private static int _id;
         private readonly ConcurrentQueue<NotificationInfoBase> _queue;
-        public TSObservableCollection<NotificationInfoBase> Notifications { get; }
+        public ThreadSafeObservableCollection<NotificationInfoBase> Notifications { get; }
 
         public NotificationAreaViewModel(WindowSettingsBase settings) : base(settings)
         {
             _queue = new ConcurrentQueue<NotificationInfoBase>();
-            Notifications = new TSObservableCollection<NotificationInfoBase>(Dispatcher);
+            Notifications = new ThreadSafeObservableCollection<NotificationInfoBase>(_dispatcher);
             Log.NewNotification += Enqueue;
         }
 
@@ -58,7 +59,7 @@ namespace TCC.UI.Windows.Widgets
 
         private void CheckShow()
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher.Invoke(() =>
             {
                 while (Notifications.Count < ((NotificationAreaSettings)Settings!).MaxNotifications)
                 {
@@ -77,7 +78,7 @@ namespace TCC.UI.Windows.Widgets
 
         private int Enqueue(string title, string message, NotificationType type, int secDuration = -1, NotificationTemplate template = NotificationTemplate.Default, int forcedId = -1)
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher.Invoke(() =>
             {
                 var id = forcedId != -1 ? forcedId : _id;
                 if (secDuration == -1) secDuration = ((NotificationAreaSettings)Settings!).DefaultNotificationDuration * 1000;
@@ -97,7 +98,7 @@ namespace TCC.UI.Windows.Widgets
 
         public void DeleteNotification(NotificationInfoBase dc)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher.InvokeAsync(() =>
             {
                 Notifications.Remove(dc);
                 CheckShow();

@@ -1,4 +1,5 @@
 ﻿using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,12 +11,12 @@ using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class GroupConfigVM : TSPropertyChanged
+    public class GroupConfigVM : ThreadSafePropertyChanged
     {
 
         public event Action? ShowAllChanged;
 
-        public TSObservableCollection<GroupAbnormalityVM> GroupAbnormals;
+        public ThreadSafeObservableCollection<GroupAbnormalityVM> GroupAbnormals;
         public IEnumerable<Abnormality> Abnormalities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
         public ICollectionView AbnormalitiesView { get; set; }
 
@@ -26,7 +27,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.GroupWindowSettings.ShowAllAbnormalities == value) return;
                 App.Settings.GroupWindowSettings.ShowAllAbnormalities = value;
-                Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
+                _dispatcher?.Invoke(() => ShowAllChanged?.Invoke());
                 App.Settings.Save();
                 N();
             }
@@ -42,8 +43,8 @@ namespace TCC.ViewModels
         }
         public GroupConfigVM()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-            GroupAbnormals = new TSObservableCollection<GroupAbnormalityVM>(Dispatcher);
+            SetDispatcher(Dispatcher.CurrentDispatcher);
+            GroupAbnormals = new ThreadSafeObservableCollection<GroupAbnormalityVM>(_dispatcher);
             foreach (var abnormality in Abnormalities)
             {
                 var abVM = new GroupAbnormalityVM(abnormality);

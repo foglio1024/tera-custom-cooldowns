@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Debugging;
 
 namespace TCC.Data.Skills
 {
-    public class Cooldown : TSPropertyChanged, IDisposable
+    public class Cooldown : ThreadSafePropertyChanged, IDisposable
     {
         // events
         public event Action<ulong, CooldownMode>? Started;
@@ -60,7 +61,7 @@ namespace TCC.Data.Skills
                 if (_seconds == value) return;
                 _seconds = value;
                 N();
-                Dispatcher.Invoke(() => SecondsUpdated?.Invoke());
+                _dispatcher.Invoke(() => SecondsUpdated?.Invoke());
             }
         }
         public bool IsAvailable => !_mainTimer.IsEnabled;
@@ -86,14 +87,14 @@ namespace TCC.Data.Skills
         }
 
         // ctors
-        public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher? d = null, double intervalMs = 100)
+        public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher d = null, double intervalMs = 100)
         {
             ObjectTracker.Register(GetType());
             Interval = intervalMs;
-            Dispatcher = d ?? Dispatcher.CurrentDispatcher;
-            _mainTimer = Dispatcher.Invoke(() => new DispatcherTimer());
-            _offsetTimer = Dispatcher.Invoke(() => new DispatcherTimer());
-            _secondsTimer = Dispatcher.Invoke(() => new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(Interval) });
+            SetDispatcher(d ?? Dispatcher.CurrentDispatcher);
+            _mainTimer = _dispatcher.Invoke(() => new DispatcherTimer());
+            _offsetTimer = _dispatcher.Invoke(() => new DispatcherTimer());
+            _secondsTimer = _dispatcher.Invoke(() => new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(Interval) });
 
             _mainTimer.Tick += CooldownEnded;
             _offsetTimer.Tick += StartSecondsTimer;
@@ -118,12 +119,12 @@ namespace TCC.Data.Skills
         }
         private void OnGlobalFlashChanged()
         {
-            Dispatcher.InvokeAsync(OnCombatStatusChanged);
+            _dispatcher.InvokeAsync(OnCombatStatusChanged);
         }
 
         private void OnCombatStatusChanged()
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher.InvokeAsync(() =>
             {
 
                 if ((Game.Encounter || Game.Combat) && FlashOnAvailable)
@@ -141,7 +142,7 @@ namespace TCC.Data.Skills
             N(nameof(IsAvailable));
             _secondsTimer.Stop();
             Seconds = 0;
-            Dispatcher.Invoke(() => Ended?.Invoke(Mode));
+            _dispatcher.Invoke(() => Ended?.Invoke(Mode));
         }
         private void StartSecondsTimer(object? sender, EventArgs? e)
         {
@@ -187,7 +188,7 @@ namespace TCC.Data.Skills
                     _secondsTimer.Stop();
                     _offsetTimer.Stop();
 
-                    Dispatcher.Invoke(() => Ended?.Invoke(Mode));
+                    _dispatcher.Invoke(() => Ended?.Invoke(Mode));
                 }
             }
 
@@ -207,7 +208,7 @@ namespace TCC.Data.Skills
             _offsetTimer.Interval = TimeSpan.FromMilliseconds(Duration % Interval);
             _offsetTimer.Start();
 
-            Dispatcher.Invoke(() => Started?.Invoke(Duration, Mode));
+            _dispatcher.Invoke(() => Started?.Invoke(Duration, Mode));
         }
 
         public void Stop()
@@ -216,7 +217,7 @@ namespace TCC.Data.Skills
             N(nameof(IsAvailable));
             Seconds = 0;
             Duration = 0;
-            Dispatcher?.Invoke(() => Ended?.Invoke(Mode));
+            _dispatcher?.Invoke(() => Ended?.Invoke(Mode));
         }
         public void Refresh(ulong cd, CooldownMode mode)
         {
@@ -227,7 +228,7 @@ namespace TCC.Data.Skills
             {
                 Seconds = 0;
                 Duration = 0;
-                Dispatcher?.Invoke(() => Ended?.Invoke(Mode));
+                _dispatcher?.Invoke(() => Ended?.Invoke(Mode));
                 return;
             }
             Mode = mode;
@@ -244,7 +245,7 @@ namespace TCC.Data.Skills
             _mainTimer.Start();
             N(nameof(IsAvailable));
 
-            Dispatcher?.Invoke(() => Started?.Invoke(Duration, Mode));
+            _dispatcher?.Invoke(() => Started?.Invoke(Duration, Mode));
 
         }
         public void Refresh(ulong id, ulong cd, CooldownMode mode)
@@ -259,11 +260,11 @@ namespace TCC.Data.Skills
         }
         private void ForceFlashing()
         {
-            Dispatcher.InvokeAsync(() => FlashingForced?.Invoke());
+            _dispatcher.InvokeAsync(() => FlashingForced?.Invoke());
         }
         public void ForceStopFlashing()
         {
-            Dispatcher.InvokeAsync(() => FlashingStopForced?.Invoke());
+            _dispatcher.InvokeAsync(() => FlashingStopForced?.Invoke());
         }
         public void ForceEnded()
         {
@@ -271,7 +272,7 @@ namespace TCC.Data.Skills
         }
         public void ProcReset()
         {
-            Dispatcher.Invoke(() => Reset?.Invoke());
+            _dispatcher.Invoke(() => Reset?.Invoke());
         }
         public void Dispose()
         {

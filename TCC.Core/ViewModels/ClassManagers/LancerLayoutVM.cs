@@ -15,10 +15,10 @@ namespace TCC.ViewModels.ClassManagers
             LH = new LancerLineHeldTracker();
             Game.Me.Death += OnDeath;
             Game.DB!.SkillsDatabase.TryGetSkill(70300, Class.Lancer, out var gshout);
-            GuardianShout = new SkillWithEffect(Dispatcher, gshout);
+            GuardianShout = new SkillWithEffect(_dispatcher, gshout);
 
             Game.DB.SkillsDatabase.TryGetSkill(170200, Class.Lancer, out var arush);
-            AdrenalineRush = new SkillWithEffect(Dispatcher, arush);
+            AdrenalineRush = new SkillWithEffect(_dispatcher, arush);
 
             Game.DB.SkillsDatabase.TryGetSkill(120100, Class.Lancer, out var infu);
             Infuriate = new Cooldown(infu, true) { CanFlash = true };

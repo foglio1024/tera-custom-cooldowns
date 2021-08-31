@@ -1,9 +1,10 @@
 ﻿using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Pc;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    public class CharacterViewModel : TSPropertyChanged
+    public class CharacterViewModel : ThreadSafePropertyChanged
     {
         private bool _hilight;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Nostrum;
+using Nostrum.WPF;
 using TCC.Settings.WindowSettings;
 using TCC.ViewModels;
 using TeraPacketParser.Analysis;

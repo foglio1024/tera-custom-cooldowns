@@ -1,5 +1,8 @@
 ﻿using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Linq;
 using System.Windows.Input;
@@ -12,7 +15,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class MessagePieceBase : TSPropertyChanged, IDisposable
+    public class MessagePieceBase : ThreadSafePropertyChanged, IDisposable
     {
         protected bool _customSize;
         protected int _fontSize = 18;
@@ -66,7 +69,7 @@ namespace TCC.Data.Chat
         protected MessagePieceBase()
         {
             ObjectTracker.Register(GetType());
-            Dispatcher = ChatManager.Instance.GetDispatcher();
+            SetDispatcher(ChatManager.Instance.GetDispatcher());
             ClickCommand = new RelayCommand(_ => { });
         }
 
@@ -193,7 +196,7 @@ namespace TCC.Data.Chat
         }
     }
 
-    //public class MessagePiece : TSPropertyChanged, IDisposable
+    //public class MessagePiece : ThreadSafePropertyChanged, IDisposable
     //{
     //    private ChatMessage _container;
 

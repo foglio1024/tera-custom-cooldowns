@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -36,7 +38,7 @@ namespace TCC.ViewModels
             Name = name;
         }
     }
-    public class TabInfoVM : TSPropertyChanged
+    public class TabInfoVM : ThreadSafePropertyChanged
     {
         private string _tabName = "";
         public string TabName
@@ -50,26 +52,26 @@ namespace TCC.ViewModels
             }
         }
 
-        public TSObservableCollection<string> Authors { get; set; }
+        public ThreadSafeObservableCollection<string> Authors { get; set; }
 
-        public TSObservableCollection<string> ExcludedAuthors { get; set; }
+        public ThreadSafeObservableCollection<string> ExcludedAuthors { get; set; }
 
-        public TSObservableCollection<ChatChannel> ShowedChannels { get; set; }
+        public ThreadSafeObservableCollection<ChatChannel> ShowedChannels { get; set; }
 
-        public TSObservableCollection<ChatChannel> ExcludedChannels { get; set; }
+        public ThreadSafeObservableCollection<ChatChannel> ExcludedChannels { get; set; }
 
-        public TSObservableCollection<string> Keywords { get; set; }
+        public ThreadSafeObservableCollection<string> Keywords { get; set; }
 
-        public TSObservableCollection<string> ExcludedKeywords { get; set; }
+        public ThreadSafeObservableCollection<string> ExcludedKeywords { get; set; }
 
         public TabInfoVM()
         {
-            Authors = new TSObservableCollection<string>(Dispatcher);
-            ExcludedAuthors = new TSObservableCollection<string>(Dispatcher);
-            Keywords = new TSObservableCollection<string>(Dispatcher);
-            ExcludedKeywords = new TSObservableCollection<string>(Dispatcher);
-            ShowedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
-            ExcludedChannels = new TSObservableCollection<ChatChannel>(Dispatcher);
+            Authors = new ThreadSafeObservableCollection<string>(_dispatcher);
+            ExcludedAuthors = new ThreadSafeObservableCollection<string>(_dispatcher);
+            Keywords = new ThreadSafeObservableCollection<string>(_dispatcher);
+            ExcludedKeywords = new ThreadSafeObservableCollection<string>(_dispatcher);
+            ShowedChannels = new ThreadSafeObservableCollection<ChatChannel>(_dispatcher);
+            ExcludedChannels = new ThreadSafeObservableCollection<ChatChannel>(_dispatcher);
         }
 
         public TabInfoVM(TabInfo info) : this()
@@ -156,7 +158,7 @@ namespace TCC.ViewModels
             };
         }
     }
-    public class Tab : TSPropertyChanged
+    public class Tab : ThreadSafePropertyChanged
     {
         public TabInfo TabInfo { get; }
         public TabInfoVM TabInfoVM { get; set; }
@@ -191,7 +193,7 @@ namespace TCC.ViewModels
         public bool Attention => ImportantMessages.Count > 0;
 
         [JsonIgnore]
-        public TSObservableCollection<ChatMessage> ImportantMessages { get; set; }
+        public ThreadSafeObservableCollection<ChatMessage> ImportantMessages { get; set; }
         [JsonIgnore]
         public ICollectionView Messages { get; }
 
@@ -213,9 +215,9 @@ namespace TCC.ViewModels
 
         public Tab(TabInfo tabInfo) 
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             Messages = new ListCollectionView(ChatManager.Instance.ChatMessages);
-            ImportantMessages = new TSObservableCollection<ChatMessage>(Dispatcher);
+            ImportantMessages = new ThreadSafeObservableCollection<ChatMessage>(_dispatcher);
             RemoveImportantMessageCommand = new RelayCommand(msg =>
             {
                 RemoveImportantMessage((ChatMessage)msg);
@@ -294,7 +296,7 @@ namespace TCC.ViewModels
             //else
             //{
             //}
-            Dispatcher.Invoke(() =>
+            _dispatcher.Invoke(() =>
             {
                 Messages.Filter = f =>
                 {

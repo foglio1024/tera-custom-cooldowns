@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows.Threading;
 using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Npc;
 
@@ -132,7 +134,7 @@ namespace TCC.UI.Controls.NPCs
             _numberTimer.Tick += OnNumberTimerTick;
 
 
-            EnrageHistory = new TSObservableCollection<EnragePeriodItem>();
+            EnrageHistory = new ThreadSafeObservableCollection<EnragePeriodItem>();
 
             if (NPC.EnragePattern != null)
             {

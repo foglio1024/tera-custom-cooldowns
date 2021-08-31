@@ -2,6 +2,8 @@
 
 using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -49,21 +51,21 @@ namespace TCC.ViewModels
         public int MessageCount => ChatMessages.Count;
         public int QueuedMessagesCount => _pauseQueue.Count;
         public bool IsQueueEmpty => QueuedMessagesCount == 0;
-        public TSObservableCollection<ChatWindow> ChatWindows { get; }
+        public ThreadSafeObservableCollection<ChatWindow> ChatWindows { get; }
 #if BATCH
         private readonly ConcurrentQueue<ChatMessage> _mainQueue;
         private readonly DispatcherTimer _flushTimer;
         public TSObservableCollectionBatch<ChatMessage> ChatMessages { get; private set; }
 #else
-        public TSObservableCollection<ChatMessage> ChatMessages { get; }
+        public ThreadSafeObservableCollection<ChatMessage> ChatMessages { get; }
 #endif
-        public TSObservableCollection<LFG> LFGs { get; }
+        public ThreadSafeObservableCollection<LFG> LFGs { get; }
 
         private ChatManager(WindowSettingsBase settings) : base(settings)
         {
             _pauseQueue = new ConcurrentQueue<ChatMessage>();
             _privateMessagesCache = new List<TempPrivateMessage>();
-            ChatWindows = new TSObservableCollection<ChatWindow>(Dispatcher);
+            ChatWindows = new ThreadSafeObservableCollection<ChatWindow>(_dispatcher);
 #if BATCH
             _mainQueue = new ConcurrentQueue<ChatMessage>();
             _flushTimer =
@@ -71,9 +73,9 @@ namespace TCC.ViewModels
             ChatMessages = new TSObservableCollectionBatch<ChatMessage>(Dispatcher);
             _flushTimer.Start();
 #else
-            ChatMessages = new TSObservableCollection<ChatMessage>(Dispatcher);
+            ChatMessages = new ThreadSafeObservableCollection<ChatMessage>(_dispatcher);
 #endif
-            LFGs = new TSObservableCollection<LFG>(Dispatcher);
+            LFGs = new ThreadSafeObservableCollection<LFG>(_dispatcher);
 
             ChatMessages.CollectionChanged += OnChatMessagesCollectionChanged;
             BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
@@ -83,7 +85,7 @@ namespace TCC.ViewModels
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.ForceClickableChatHotkey, ToggleForcedClickThru);
 
-            Factory = new ChatMessageFactory(Dispatcher);
+            Factory = new ChatMessageFactory(_dispatcher);
 
             Log.NewChatMessage += OnLogChatMessage;
         }
@@ -180,7 +182,7 @@ namespace TCC.ViewModels
 
         private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
         {
-            AddChatMessage(new ApplyMessage(m.PlayerId, m.Class, m.Level, m.Name));
+            AddChatMessage(new ApplyMessage(m.PlayerId, m.Class, m.Level, m.Name, m.ServerId));
         }
 
         private void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
@@ -284,7 +286,7 @@ namespace TCC.ViewModels
 
         public void CloseAllWindows()
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 foreach (var w in ChatWindows) w.CloseWindowSafe();
             });
@@ -389,7 +391,7 @@ namespace TCC.ViewModels
         {
             if (!App.Settings.ChatEnabled) return;
 
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 if (Filtered(chatMessage)) return;
 
@@ -473,7 +475,7 @@ namespace TCC.ViewModels
                 for (var i = list.Count - 1; i >= 0; i--)
                 {
                     var idx = i;
-                    Dispatcher.InvokeAsync(() =>
+                    _dispatcher?.InvokeAsync(() =>
                     {
                         ChatMessages.RemoveAt(idx);
                         list[idx].Dispose();

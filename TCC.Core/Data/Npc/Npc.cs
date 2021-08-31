@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Abnormalities;
 using TCC.UI;
 using TCC.Utilities;
@@ -10,7 +12,7 @@ using TeraDataLite;
 
 namespace TCC.Data.Npc
 {
-    public class NPC : TSPropertyChanged, IDisposable
+    public class NPC : ThreadSafePropertyChanged, IDisposable
     {
         public bool HasGage { get; set; }
         public ICommand Override { get; }
@@ -39,8 +41,8 @@ namespace TCC.Data.Npc
             }
         }
 
-        private TSObservableCollection<AbnormalityDuration> _buffs;
-        public TSObservableCollection<AbnormalityDuration> Buffs
+        private ThreadSafeObservableCollection<AbnormalityDuration> _buffs;
+        public ThreadSafeObservableCollection<AbnormalityDuration> Buffs
         {
             get => _buffs;
             set
@@ -166,7 +168,7 @@ namespace TCC.Data.Npc
             var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, _target, Dispatcher, true);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, _target, _dispatcher!, true);
                 if (ab.Infinity) Buffs.Insert(0, newAb);
                 else Buffs.Add(newAb);
                 if (!ab.IsShield) return;
@@ -236,8 +238,8 @@ namespace TCC.Data.Npc
         //}
         public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern? ep = null, TimerPattern? tp = null)
         {
-            Dispatcher = WindowManager.ViewModels.NpcVM.GetDispatcher();
-            _buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
+            _dispatcher = WindowManager.ViewModels.NpcVM.GetDispatcher();
+            _buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);
             Game.DB!.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
             Name = monster.Name;
             MaxHP = monster.MaxHP;

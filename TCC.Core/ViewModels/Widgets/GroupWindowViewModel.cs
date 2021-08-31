@@ -1,6 +1,7 @@
 ﻿using Nostrum;
 using Nostrum.Extensions;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace TCC.ViewModels.Widgets
 
         public event Action? SettingsUpdated;
 
-        public TSObservableCollection<User> Members { get; }
+        public ThreadSafeObservableCollection<User> Members { get; }
         public GroupWindowLayout GroupWindowLayout => ((GroupWindowSettings)Settings!).Layout;
 
         public ICollectionViewLiveShaping All { get; }
@@ -59,7 +60,7 @@ namespace TCC.ViewModels.Widgets
 
         public GroupWindowViewModel(GroupWindowSettings settings) : base(settings)
         {
-            Members = new TSObservableCollection<User>(Dispatcher);
+            Members = new ThreadSafeObservableCollection<User>(_dispatcher);
             Members.CollectionChanged += Members_CollectionChanged;
 
             Dps = CollectionViewFactory.CreateLiveCollectionView(Members,
@@ -152,20 +153,20 @@ namespace TCC.ViewModels.Widgets
         public bool TryGetUser(string name, out User? u)
         {
             var exists = Exists(name);
-            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.Name == name) : new User(Dispatcher);
+            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.Name == name) : new User(_dispatcher);
             return exists;
         }
         public bool TryGetUser(ulong id, out User? u)
         {
             var exists = Exists(id);
 
-            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.EntityId == id) : new User(Dispatcher);
+            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.EntityId == id) : new User(_dispatcher);
             return u != null;
         }
         public bool TryGetUser(uint pId, uint sId, out User? u)
         {
             var exists = Exists(pId, sId);
-            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : new User(Dispatcher);
+            u = exists ? Members.ToSyncList().FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : new User(_dispatcher);
             return exists;
         }
 
@@ -205,7 +206,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 if (ab.Infinity) duration = uint.MaxValue;
                 var u = Members.ToSyncList().FirstOrDefault(x => x.ServerId == serverId && x.PlayerId == playerId);
@@ -233,7 +234,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
 
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
@@ -256,7 +257,7 @@ namespace TCC.ViewModels.Widgets
 
         private void ClearAbnormality(uint playerId, uint serverId)
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId)?.ClearAbnormalities();
             });
@@ -371,7 +372,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void ClearAll()
         {
-            if (!((GroupWindowSettings)Settings!).Enabled || !Dispatcher.Thread.IsAlive) return;
+            if (!((GroupWindowSettings)Settings!).Enabled || !_dispatcher.Thread.IsAlive) return;
             Members.ToSyncList().ForEach(x => x.ClearAbnormalities());
             Members.Clear();
             Raid = false;
@@ -426,12 +427,12 @@ namespace TCC.ViewModels.Widgets
                 m.IsRolling = true;
             }
         }
-        private void SetRoll(ulong entityId, int rollResult)
+        private void SetRoll(uint serverId, uint playerId, int rollResult)
         {
             if (rollResult == int.MaxValue) rollResult = -1;
             Members.ToSyncList().ForEach(member =>
             {
-                if (member.EntityId == entityId)
+                if (member.PlayerId == playerId && member.ServerId == serverId)
                 {
                     member.RollResult = rollResult;
                 }
@@ -493,7 +494,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
                 if (u == null) return;
@@ -503,7 +504,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
                 if (u == null) return;
@@ -513,7 +514,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void UpdateMemberStamina(uint playerId, uint serverId, int curSt, int maxSt)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
                 if (u == null) return;
@@ -523,11 +524,11 @@ namespace TCC.ViewModels.Widgets
         }
         private void SetRaid(bool raid)
         {
-            Dispatcher.InvokeAsync(new Action(() => Raid = raid));
+            _dispatcher?.InvokeAsync(new Action(() => Raid = raid));
         }
         private void UpdateMember(GroupMemberData update)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 var current = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == update.PlayerId && x.ServerId == update.ServerId);
                 if (current == null) return;
@@ -560,7 +561,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 if (!Game.DB!.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
                 BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
@@ -568,7 +569,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 if (!Game.DB!.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
                 EndAbnormality(ab, playerId, serverId);
@@ -706,7 +707,7 @@ namespace TCC.ViewModels.Widgets
         }
         private void OnCheckToReadyParty(S_CHECK_TO_READY_PARTY p)
         {
-            Dispatcher.InvokeAsync(() => p.Party.ForEach(SetReadyStatus));
+            _dispatcher?.InvokeAsync(() => p.Party.ForEach(SetReadyStatus));
         }
         private void OnPartyMemberStatUpdate(S_PARTY_MEMBER_STAT_UPDATE p)
         {
@@ -740,7 +741,7 @@ namespace TCC.ViewModels.Widgets
         private void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
         {
             SetRaid(p.Raid);
-            Dispatcher.InvokeAsync(() => p.Members.ForEach(AddOrUpdateMember));
+            _dispatcher?.InvokeAsync(() => p.Members.ForEach(AddOrUpdateMember));
         }
         private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)
         {
@@ -785,7 +786,7 @@ namespace TCC.ViewModels.Widgets
         private void OnResultBiddingDiceThrow(S_RESULT_BIDDING_DICE_THROW m)
         {
             if (!Rolling) StartRoll();
-            SetRoll(m.EntityId, m.RollResult);
+            SetRoll(m.ServerId, m.PlayerId, m.RollResult);
         }
         private void OnAskBiddingRareItem(S_ASK_BIDDING_RARE_ITEM m)
         {

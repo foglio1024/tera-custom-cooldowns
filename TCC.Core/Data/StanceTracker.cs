@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data
 {
 
-    public class StanceTracker<T> : TSPropertyChanged where T : struct, IComparable
+    public class StanceTracker<T> : ThreadSafePropertyChanged where T : struct, IComparable
     {
         private T _currentStance;
         public T CurrentStance
@@ -20,10 +21,10 @@ namespace TCC.Data
         }
         public StanceTracker()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
         }
     }
-    public class AurasTracker : TSPropertyChanged
+    public class AurasTracker : ThreadSafePropertyChanged
     {
         public event Action? AuraChanged;
 
@@ -79,7 +80,7 @@ namespace TCC.Data
 
         public AurasTracker()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
         }
     }
 }

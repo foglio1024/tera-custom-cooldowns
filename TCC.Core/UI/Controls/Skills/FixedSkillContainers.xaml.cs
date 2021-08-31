@@ -2,7 +2,9 @@
 using GongSolutions.Wpf.DragDrop;
 using Nostrum;
 using Nostrum.Extensions;
-using Nostrum.Factories;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -245,7 +247,7 @@ namespace TCC.UI.Controls.Skills
 
             public void Drop(IDropInfo dropInfo)
             {
-                var target = (TSObservableCollection<Cooldown>)dropInfo.TargetCollection;
+                var target = (ThreadSafeObservableCollection<Cooldown>)dropInfo.TargetCollection;
                 switch (dropInfo.Data)
                 {
                     case Skill sk:

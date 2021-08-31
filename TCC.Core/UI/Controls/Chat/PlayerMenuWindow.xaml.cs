@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using Nostrum.WinAPI;
 using TCC.ViewModels;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;

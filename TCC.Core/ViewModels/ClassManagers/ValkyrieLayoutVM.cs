@@ -22,10 +22,10 @@ namespace TCC.ViewModels.ClassManagers
             RunemarksCounter = new Counter(7, false);
 
             Game.DB!.SkillsDatabase.TryGetSkill(120100, Class.Valkyrie, out var rag);
-            Ragnarok = new SkillWithEffect(Dispatcher, rag);
+            Ragnarok = new SkillWithEffect(_dispatcher, rag);
 
             Game.DB.SkillsDatabase.TryGetSkill(250100, Class.Valkyrie, out var gf);
-            Godsfall = new SkillWithEffect(Dispatcher, gf);
+            Godsfall = new SkillWithEffect(_dispatcher, gf);
 
             Ragnarok.Effect.SecondsUpdated += OnEffectSecondsUpdated;
         }

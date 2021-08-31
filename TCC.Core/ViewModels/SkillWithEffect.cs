@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Skills;
 
 namespace TCC.ViewModels
 {
-    public class SkillWithEffect : TSPropertyChanged, IDisposable
+    public class SkillWithEffect : ThreadSafePropertyChanged, IDisposable
     {
         public Cooldown Cooldown
         {
@@ -21,7 +22,7 @@ namespace TCC.ViewModels
 
         public SkillWithEffect(Dispatcher d, Skill sk, bool canFlashOverride = true)
         {
-            Dispatcher = d;
+            SetDispatcher(d);
             Cooldown = new Cooldown(sk, canFlashOverride) { CanFlash = canFlashOverride };
             Effect = new Cooldown(sk, false);
         }

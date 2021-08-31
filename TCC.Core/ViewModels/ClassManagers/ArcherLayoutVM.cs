@@ -31,7 +31,7 @@ namespace TCC.ViewModels.ClassManagers
             Game.DB!.SkillsDatabase.TryGetSkill(350100, Class.Archer, out var ws);    // Windsong
             Game.DB!.SkillsDatabase.TryGetSkill(340100, Class.Archer, out var ww);    // Wind Walk
             Thunderbolt = new Cooldown(tb, true) { CanFlash = true };
-            Windsong = new SkillWithEffect(Dispatcher, ws);
+            Windsong = new SkillWithEffect(_dispatcher, ws);
             WindWalk = new Cooldown(ww, false);
         }
 

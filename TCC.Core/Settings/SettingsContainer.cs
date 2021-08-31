@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -101,7 +102,7 @@ namespace TCC.Settings
 
         #region Chat
 
-        public TSObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; }
+        public ThreadSafeObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; }
         public WindowSettingsBase ChatSettings { get; private set; } // added to have the EnabledChanged event
         public bool ChatEnabled
         {
@@ -167,7 +168,7 @@ namespace TCC.Settings
             FlightGaugeWindowSettings = new FlightWindowSettings();
             FloatingButtonSettings = new FloatingButtonWindowSettings();
             CivilUnrestWindowSettings = new CivilUnrestWindowSettings();
-            ChatWindowsSettings = new TSObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
+            ChatWindowsSettings = new ThreadSafeObservableCollection<ChatWindowSettings>(App.BaseDispatcher);
             PerfMonitorSettings = new PerfMonitorSettings();
             ChatSettings = new WindowSettingsBase();
             LfgWindowSettings = new LfgWindowSettings();

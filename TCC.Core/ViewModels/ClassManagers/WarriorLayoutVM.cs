@@ -40,13 +40,13 @@ namespace TCC.ViewModels.ClassManagers
             Stance.PropertyChanged += OnStanceOnPropertyChanged; // StanceTracker has only one prop
 
             Game.DB!.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
-            DeadlyGamble = new SkillWithEffect(Dispatcher, dg);
+            DeadlyGamble = new SkillWithEffect(_dispatcher, dg);
 
             Game.DB.SkillsDatabase.TryGetSkill(170250, Class.Lancer, out var ar);
-            AdrenalineRush = new SkillWithEffect(Dispatcher, ar, false);
+            AdrenalineRush = new SkillWithEffect(_dispatcher, ar, false);
 
             var ab = Game.DB.AbnormalityDatabase.Abnormalities[21010];
-            Swift = new SkillWithEffect(Dispatcher, new Skill(ab), false);
+            Swift = new SkillWithEffect(_dispatcher, new Skill(ab), false);
 
         }
 

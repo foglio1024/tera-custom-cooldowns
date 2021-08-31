@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using Nostrum;
 using Nostrum.WinAPI;
+using Nostrum.WPF;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 

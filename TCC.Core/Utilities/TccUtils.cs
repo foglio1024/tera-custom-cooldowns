@@ -1,6 +1,7 @@
 ﻿using Nostrum;
 using Nostrum.Extensions;
 using Nostrum.WinAPI;
+using Nostrum.WPF.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;

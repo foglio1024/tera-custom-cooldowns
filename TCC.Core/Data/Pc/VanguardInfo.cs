@@ -1,9 +1,10 @@
 ﻿using Nostrum;
 using Newtonsoft.Json;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Pc
 {
-    public class VanguardInfo : TSPropertyChanged
+    public class VanguardInfo : ThreadSafePropertyChanged
     {
         public const float MaxCredits = 20000;
         public const int MaxDaily = 16;

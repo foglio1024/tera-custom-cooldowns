@@ -8,6 +8,9 @@ using System.Windows.Threading;
 using Dragablz;
 using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Settings.WindowSettings;
@@ -37,7 +40,7 @@ namespace TCC.ViewModels.Widgets
         }
 
     }
-    public class ChatViewModel : TSPropertyChanged
+    public class ChatViewModel : ThreadSafePropertyChanged
     {
         public event Action? ForceSizePosUpdateEvent;
 
@@ -123,8 +126,8 @@ namespace TCC.ViewModels.Widgets
 
         public ChatWindowSettings WindowSettings { get; }
 
-        public TSObservableCollection<TabViewModel> TabVMs { get; set; }
-        public TSObservableCollection<LFG> LFGs => ChatManager.Instance.LFGs;
+        public ThreadSafeObservableCollection<TabViewModel> TabVMs { get; set; }
+        public ThreadSafeObservableCollection<LFG> LFGs => ChatManager.Instance.LFGs;
         public IInterTabClient InterTabClient { get; }
         public List<Tab> Tabs
         {
@@ -165,7 +168,7 @@ namespace TCC.ViewModels.Widgets
             _hideTimer.Tick += OnHideTimerTick;
             WindowSettings.TimeoutChanged += ChangeTimerInterval;
             InterTabClient = new ChatTabClient();
-            TabVMs = new TSObservableCollection<TabViewModel>();
+            TabVMs = new ThreadSafeObservableCollection<TabViewModel>();
 
             MakeGlobalCommand = new RelayCommand(_ => WindowSettings.MakePositionsGlobal());
             OpenSysMsgSettingsCommand = new RelayCommand(_ => new SystemMessagesConfigWindow { ShowActivated = true, Topmost = true }.Show());

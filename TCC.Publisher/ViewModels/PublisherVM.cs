@@ -1,10 +1,11 @@
 ﻿using System;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Publisher.ViewModels.Steps;
 
 namespace TCC.Publisher.ViewModels
 {
-    public class PublisherVM : TSPropertyChanged
+    public class PublisherVM : ThreadSafePropertyChanged
     {
         private double _progress;
         private bool _completed;
@@ -44,7 +45,7 @@ namespace TCC.Publisher.ViewModels
             }
         }
 
-        public TSObservableCollection<string> LogData { get; }
+        public ThreadSafeObservableCollection<string> LogData { get; }
 
         public GetVersionStepVM GetVersionStep { get; }
         public GenerateStepVM GenerateStep { get; }
@@ -58,7 +59,7 @@ namespace TCC.Publisher.ViewModels
             CreateReleaseStep = new CreateReleaseStepVM(this);
             PushZipStep = new PushZipStepVM(this);
 
-            LogData = new TSObservableCollection<string>();
+            LogData = new ThreadSafeObservableCollection<string>();
 
             Logger.NewLine += OnLogger_NewLine;
             Logger.AppendedLine += OnLogger_AppendedLine;

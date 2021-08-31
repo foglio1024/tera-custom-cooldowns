@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media.Animation;
-using Nostrum.Controls;
-using Nostrum.Factories;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using TCC.ViewModels.ClassManagers;
 
 namespace TCC.UI.Controls.Classes

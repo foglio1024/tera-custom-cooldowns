@@ -1,10 +1,11 @@
 ﻿using HtmlAgilityPack;
+using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Nostrum;
-using Nostrum.Extensions;
 using TCC.Debugging;
 using TCC.UI;
 using TCC.Utilities;
@@ -13,7 +14,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class ChatMessage : TSPropertyChanged, IDisposable
+    public class ChatMessage : ThreadSafePropertyChanged, IDisposable
     {
         #region Properties
 
@@ -38,8 +39,8 @@ namespace TCC.Data.Chat
         public bool ShowTimestamp => App.Settings.ShowTimestamp;
         public bool IsGm { get; protected set; }
         public bool ShowChannel => App.Settings.ShowChannel;
-        public TSObservableCollection<MessageLine> Lines { get; protected set; }
-        public TSObservableCollection<MessagePieceBase> Pieces { get; }
+        public ThreadSafeObservableCollection<MessageLine> Lines { get; protected set; }
+        public ThreadSafeObservableCollection<MessagePieceBase> Pieces { get; }
 
         public bool IsVisible
         {
@@ -73,9 +74,9 @@ namespace TCC.Data.Chat
         protected ChatMessage()
         {
             ObjectTracker.Register(GetType());
-            Dispatcher = ChatManager.Instance.GetDispatcher();
-            Pieces = new TSObservableCollection<MessagePieceBase>(Dispatcher);
-            Lines = new TSObservableCollection<MessageLine>(Dispatcher);
+            SetDispatcher(ChatManager.Instance.GetDispatcher()!);
+            Pieces = new ThreadSafeObservableCollection<MessagePieceBase>(_dispatcher);
+            Lines = new ThreadSafeObservableCollection<MessageLine>(_dispatcher);
             Timestamp = App.Settings.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();
             RawMessage = "";
             PlainMessage = "";
@@ -222,7 +223,7 @@ namespace TCC.Data.Chat
         public override string ToString()
         {
             var sb = new StringBuilder();
-            Dispatcher.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 foreach (var item in Pieces.ToSyncList())
                 {

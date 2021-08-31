@@ -10,7 +10,10 @@ ToggleCommand               -> MyToggleCommand
 
 using Nostrum;
 using Nostrum.Extensions;
-using Nostrum.Factories;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Linq;
 using System.Windows;
@@ -113,7 +116,7 @@ namespace TCC.UI.Windows
         }
     }
 
-    public class MyClassToggle : TSPropertyChanged
+    public class MyClassToggle : ThreadSafePropertyChanged
     {
         private bool _selected;
         public bool Selected
@@ -131,7 +134,7 @@ namespace TCC.UI.Windows
         public uint AbnormalityId { get; }
         public MyClassToggle(Class c, uint abId)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             Class = c;
             AbnormalityId = abId;
             MyToggleCommand = new RelayCommand(_ =>

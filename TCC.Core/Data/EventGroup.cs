@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Globalization;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.UI;
 using TCC.ViewModels;
 
 namespace TCC.Data
 {
-    public class EventGroup : TSPropertyChanged
+    public class EventGroup : ThreadSafePropertyChanged
     {
-        public TSObservableCollection<DailyEvent> Events { get; }
+        public ThreadSafeObservableCollection<DailyEvent> Events { get; }
         public string Name { get; }
         public bool RemoteCheck { get; }
         private DateTime _start;
@@ -26,8 +27,8 @@ namespace TCC.Data
 
         public EventGroup(string name, DateTime start, DateTime end, bool rc)
         {
-            Dispatcher = WindowManager.DashboardWindow.Dispatcher;
-            Events = new TSObservableCollection<DailyEvent>(Dispatcher);
+            SetDispatcher(WindowManager.DashboardWindow.Dispatcher);
+            Events = new ThreadSafeObservableCollection<DailyEvent>(_dispatcher);
             Name = name;
             RemoteCheck = rc;
             _start = start;
@@ -35,7 +36,7 @@ namespace TCC.Data
         }
         public void AddEvent(DailyEvent ev)
         {
-            Dispatcher.Invoke(() => Events.Add(ev));
+            _dispatcher.Invoke(() => Events.Add(ev));
             //Events.Insert(0, ev);
         }
     }

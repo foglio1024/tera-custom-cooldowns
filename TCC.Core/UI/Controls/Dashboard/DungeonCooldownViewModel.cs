@@ -1,9 +1,10 @@
 ﻿using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Pc;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    public class DungeonCooldownViewModel : TSPropertyChanged
+    public class DungeonCooldownViewModel : ThreadSafePropertyChanged
     {
         public DungeonCooldownData Cooldown { get; set; }
         public Character Owner { get; set; }

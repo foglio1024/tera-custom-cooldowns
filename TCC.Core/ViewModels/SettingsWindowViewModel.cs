@@ -1,4 +1,6 @@
 ﻿using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,7 +27,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
-    public class SettingsWindowViewModel : TSPropertyChanged
+    public class SettingsWindowViewModel : ThreadSafePropertyChanged
     {
         public static event Action? ChatShowChannelChanged;
         public static event Action? ChatShowTimestampChanged;
@@ -679,14 +681,14 @@ namespace TCC.ViewModels
         public IEnumerable<LanguageOverride> LanguageOverrides => EnumUtils.ListFromEnum<LanguageOverride>();
 
 
-        private TSObservableCollection<BlacklistedMonsterVM>? _blacklistedMonsters;
+        private ThreadSafeObservableCollection<BlacklistedMonsterVM>? _blacklistedMonsters;
         private bool _showDebugSettings;
 
-        public TSObservableCollection<BlacklistedMonsterVM> BlacklistedMonsters
+        public ThreadSafeObservableCollection<BlacklistedMonsterVM> BlacklistedMonsters
         {
             get
             {
-                _blacklistedMonsters ??= new TSObservableCollection<BlacklistedMonsterVM>(Dispatcher);
+                _blacklistedMonsters ??= new ThreadSafeObservableCollection<BlacklistedMonsterVM>(_dispatcher);
                 var bl =Game.DB?.MonsterDatabase.GetBlacklistedMonsters();
                 bl?.ForEach(m =>
                 {
@@ -740,7 +742,7 @@ namespace TCC.ViewModels
 
         public SettingsWindowViewModel()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
 
@@ -816,7 +818,7 @@ namespace TCC.ViewModels
 
     }
 
-    public class BlacklistedMonsterVM : TSPropertyChanged
+    public class BlacklistedMonsterVM : ThreadSafePropertyChanged
     {
         public readonly Monster Monster;
         public string Name => Monster.Name;

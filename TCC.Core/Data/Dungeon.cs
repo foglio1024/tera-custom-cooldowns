@@ -1,8 +1,9 @@
 ﻿using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data
 {
-    public class Dungeon : TSPropertyChanged
+    public class Dungeon : ThreadSafePropertyChanged
     {
         private string _shortName = "";
         private bool _doublesOnElite;

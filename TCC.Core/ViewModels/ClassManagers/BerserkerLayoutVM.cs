@@ -52,11 +52,11 @@ namespace TCC.ViewModels.ClassManagers
             RampageTracker = new StatTracker();
 
             Game.DB!.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
-            FieryRage = new SkillWithEffect(Dispatcher, fr);
+            FieryRage = new SkillWithEffect(_dispatcher, fr);
             Game.DB.SkillsDatabase.TryGetSkill(210200, Class.Berserker, out var bl);
-            Bloodlust = new SkillWithEffect(Dispatcher, bl);
+            Bloodlust = new SkillWithEffect(_dispatcher, bl);
             Game.DB.SkillsDatabase.TryGetSkill(330100, Class.Berserker, out var ul);
-            Unleash = new SkillWithEffect(Dispatcher, ul);
+            Unleash = new SkillWithEffect(_dispatcher, ul);
 
             Game.DB.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
             Dexter = new Cooldown(dx, false);

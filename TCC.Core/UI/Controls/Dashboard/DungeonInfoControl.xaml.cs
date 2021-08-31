@@ -1,4 +1,4 @@
-﻿using Nostrum.Factories;
+﻿using Nostrum.WPF.Factories;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 

@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using TCC.Data;
 
 namespace TCC.UI.Controls.Skills

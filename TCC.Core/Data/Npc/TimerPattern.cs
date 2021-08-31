@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Timers;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Npc
 {
-    public class TimerPattern : TSPropertyChanged, IDisposable
+    public class TimerPattern : ThreadSafePropertyChanged, IDisposable
     {
         private readonly Timer _timer;
         protected bool Running => _timer.Enabled;

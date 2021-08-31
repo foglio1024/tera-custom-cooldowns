@@ -2,6 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Pc;
 
 namespace TCC.Data
@@ -11,7 +12,7 @@ namespace TCC.Data
         public bool IsElite { get; set; }
         [JsonIgnore]
         public Character? CurrentCharacter { get; private set; }
-        public TSObservableCollection<Character> Characters { get; }
+        public ThreadSafeObservableCollection<Character> Characters { get; }
 
         public void LoginCharacter(uint id)
         {
@@ -19,7 +20,7 @@ namespace TCC.Data
         }
         public Account()
         {
-            Characters = new TSObservableCollection<Character>();
+            Characters = new ThreadSafeObservableCollection<Character>();
         }
 
         /// <summary>

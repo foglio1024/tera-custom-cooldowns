@@ -1,5 +1,5 @@
-﻿using Nostrum.Controls;
-using Nostrum.Factories;
+﻿using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;

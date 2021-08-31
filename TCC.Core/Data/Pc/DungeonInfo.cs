@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 
 namespace TCC.Data.Pc
 {

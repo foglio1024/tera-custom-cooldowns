@@ -1,13 +1,14 @@
 ﻿using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Chat
 {
-    public class MessageLine : TSPropertyChanged
+    public class MessageLine : ThreadSafePropertyChanged
     {
-        public TSObservableCollection<MessagePieceBase> LinePieces { get; protected set; }
+        public ThreadSafeObservableCollection<MessagePieceBase> LinePieces { get; protected set; }
         public MessageLine()
         {
-            LinePieces = new TSObservableCollection<MessagePieceBase>();
+            LinePieces = new ThreadSafeObservableCollection<MessagePieceBase>();
         }
     }
 }

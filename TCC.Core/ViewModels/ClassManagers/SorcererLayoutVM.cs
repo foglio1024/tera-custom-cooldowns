@@ -59,7 +59,7 @@ namespace TCC.ViewModels.ClassManagers
             FusionSkill = fusion;
             FusionSkillBoost = fusionBoost;
 
-            ManaBoost = new SkillWithEffect(Dispatcher, mb);
+            ManaBoost = new SkillWithEffect(_dispatcher, mb);
             Fusion = new Cooldown(fusion, false);
 
             _sw = new Stopwatch();

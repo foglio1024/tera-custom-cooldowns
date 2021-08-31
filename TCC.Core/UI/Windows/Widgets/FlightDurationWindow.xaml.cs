@@ -4,7 +4,7 @@ using System.Windows.Media.Animation;
 using Nostrum;
 using TCC.Data;
 using TCC.ViewModels.Widgets;
-using Arc = Nostrum.Controls.Arc;
+using Arc = Nostrum.WPF.Controls.Arc;
 
 namespace TCC.UI.Windows.Widgets
 {

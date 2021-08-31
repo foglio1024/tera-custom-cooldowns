@@ -1,6 +1,6 @@
 ﻿using Nostrum;
-using Nostrum.Controls;
-using Nostrum.Factories;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TeraDataLite;
 
 namespace TCC.Data
@@ -11,7 +12,7 @@ namespace TCC.Data
         public bool InGuild { get; private set; }
         public GuildMemberData Master { get; private set; }
 
-        public TSObservableCollection<GuildMemberData> Members { get; private set; } = new();
+        public ThreadSafeObservableCollection<GuildMemberData> Members { get; private set; } = new();
         public bool AmIMaster { get; private set; }
 
         public string NameOf(uint id)

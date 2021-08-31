@@ -25,7 +25,7 @@ namespace TCC.UI.Converters
                 GearPiece.PowerRing => SVG.SvgRing,
                 GearPiece.Circlet => SVG.SvgCirclet,
                 GearPiece.Belt => SVG.SvgBelt,
-                _ => Nostrum_SVG.SvgClose
+                _ => Nostrum_WPF_SVG.SvgClose
             };
         }
 

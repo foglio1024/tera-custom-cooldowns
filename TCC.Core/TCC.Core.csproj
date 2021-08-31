@@ -14,7 +14,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <Version>1.4.129</Version>
+    <Version>1.4.130</Version>
     <Description>TERA Custom Cooldowns</Description>
     <PackageIcon>tcc.ico</PackageIcon>
     <PackageIconUrl />
@@ -104,7 +104,8 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="gong-wpf-dragdrop" Version="2.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Nostrum" Version="1.2.15" />
+    <PackageReference Include="Nostrum" Version="2.0.0" />
+    <PackageReference Include="Nostrum.WPF" Version="1.2.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TCC.Loader\TCC.Loader\TCC.Loader.csproj" />
@@ -182,6 +183,6 @@
     </Page>
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="D:\Repos\ReSource\src\bin\Release\net5-windows\ReSource.exe &quot;D:\Repos\TCC\TCC.Core\\TCC.Core.csproj&quot; &quot;D:\Repos\TCC\TCC.Core\bin\Debug\TCC.dll&quot; &quot;D:\Repos\TCC\TCC.Core\\R.cs&quot; TCC.R" />
+    <Exec Command="D:\Repos\ReSource\ReSource.CLI\bin\Release\ReSource.CLI.exe &quot;D:\Repos\TCC\TCC.Core\\TCC.Core.csproj&quot; &quot;D:\Repos\TCC\TCC.Core\bin\Debug\TCC.dll&quot; &quot;D:\Repos\TCC\TCC.Core\\R.cs&quot; TCC.R" />
   </Target>
 </Project>

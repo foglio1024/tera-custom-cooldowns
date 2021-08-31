@@ -38,7 +38,7 @@ namespace TCC.ViewModels.ClassManagers
 
             BurningHeart = new Cooldown(bh,  false) { CanFlash = true };
             FireAvalanche = new Cooldown(fa,  false) { CanFlash = true };
-            InnerHarmony = new SkillWithEffect(Dispatcher, ih);
+            InnerHarmony = new SkillWithEffect(_dispatcher, ih);
 
             StaminaTracker.PropertyChanged += FlashOnMaxSt;
 

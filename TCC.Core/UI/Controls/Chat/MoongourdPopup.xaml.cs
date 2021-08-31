@@ -1,4 +1,6 @@
 ﻿using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -6,7 +8,7 @@ using TCC.Interop.Moongourd;
 
 namespace TCC.UI.Controls.Chat
 {
-    public class MoongourdPopupViewModel : TSPropertyChanged
+    public class MoongourdPopupViewModel : ThreadSafePropertyChanged
     {
         private readonly IMoongourdManager _manager;
 
@@ -36,13 +38,13 @@ namespace TCC.UI.Controls.Chat
             }
         }
 
-        public TSObservableCollection<EncounterViewModel> Encounters { get; }
+        public ThreadSafeObservableCollection<EncounterViewModel> Encounters { get; }
 
         public MoongourdPopupViewModel()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
 
-            Encounters = new TSObservableCollection<EncounterViewModel>(Dispatcher);
+            Encounters = new ThreadSafeObservableCollection<EncounterViewModel>(_dispatcher);
 
             _manager = new KabedonManager();
             _manager.Started += OnSearchStarted;
@@ -52,12 +54,12 @@ namespace TCC.UI.Controls.Chat
 
         private void OnSearchStarted()
         {
-            Dispatcher?.Invoke(() => EmptyText = "Loading...");
+            _dispatcher?.Invoke(() => EmptyText = "Loading...");
         }
 
         private void OnSearchFinished(List<IMoongourdEncounter> list)
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher.Invoke(() =>
             {
                 EmptyText = "No entries.";
                 Encounters.Clear();
@@ -67,7 +69,7 @@ namespace TCC.UI.Controls.Chat
 
         private void OnSearchFailed(string error)
         {
-            Dispatcher?.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 EmptyText = $"Failed to retrieve data.\n{error}";
             });
@@ -75,7 +77,7 @@ namespace TCC.UI.Controls.Chat
 
         public void RequestInfo(string name, string region)
         {
-            Dispatcher?.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 PlayerName = name;
                 Encounters.Clear();

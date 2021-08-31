@@ -1,5 +1,5 @@
 ﻿using Nostrum;
-using Nostrum.Controls;
+using Nostrum.WPF.Controls;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

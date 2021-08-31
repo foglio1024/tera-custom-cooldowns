@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Skills

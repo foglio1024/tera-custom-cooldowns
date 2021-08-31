@@ -12,12 +12,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Threading;
 using Nostrum.Extensions;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using TeraDataLite;
+using Nostrum.WPF.ThreadSafe;
+using Nostrum.WPF.Extensions;
 
 namespace TCC.ViewModels
 {
-    public class MyAbnormalConfigVM : TSPropertyChanged, IDisposable
+    public class MyAbnormalConfigVM : ThreadSafePropertyChanged, IDisposable
     {
         public event Action? ShowAllChanged;
 
@@ -30,7 +32,7 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.BuffWindowSettings.ShowAll== value) return;
                 App.Settings.BuffWindowSettings.ShowAll= value;
-                Dispatcher.Invoke(() => ShowAllChanged?.Invoke());
+                _dispatcher?.Invoke(() => ShowAllChanged?.Invoke());
                 App.Settings.Save();
                 N();
             }
@@ -46,8 +48,8 @@ namespace TCC.ViewModels
         }
         public MyAbnormalConfigVM()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
-            var myAbnormals = new TSObservableCollection<MyAbnormalityVM>(Dispatcher);
+            SetDispatcher(Dispatcher.CurrentDispatcher);
+            var myAbnormals = new ThreadSafeObservableCollection<MyAbnormalityVM>(_dispatcher);
             foreach (var abnormality in Game.DB!.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
             {
                 var abVM = new MyAbnormalityVM(abnormality);

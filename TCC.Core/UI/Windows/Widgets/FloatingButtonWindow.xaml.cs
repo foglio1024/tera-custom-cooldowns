@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 
 namespace TCC.UI.Windows.Widgets
 {

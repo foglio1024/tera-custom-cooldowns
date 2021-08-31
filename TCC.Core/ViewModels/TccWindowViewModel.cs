@@ -1,14 +1,15 @@
 ﻿using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Settings.WindowSettings;
 using TeraPacketParser.Analysis;
 
 namespace TCC.ViewModels
 {
-    public class TccWindowViewModel : TSPropertyChanged
+    public class TccWindowViewModel : ThreadSafePropertyChanged
     {
         public WindowSettingsBase? Settings { get; }
-        
+
         /// <summary>
         /// Called from <see cref="OnEnabledChanged"/> or when <see cref="PacketAnalyzer.ProcessorReady"/> is raised.
         /// </summary>
@@ -29,7 +30,7 @@ namespace TCC.ViewModels
 
         protected TccWindowViewModel(WindowSettingsBase? settings)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
 
             if (settings != null)
             {

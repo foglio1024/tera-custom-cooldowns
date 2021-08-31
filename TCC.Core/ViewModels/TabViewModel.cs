@@ -1,5 +1,6 @@
 ﻿using Dragablz;
 using Nostrum;
+using Nostrum.WPF;
 using System;
 using System.Windows.Input;
 using TCC.ViewModels.Widgets;

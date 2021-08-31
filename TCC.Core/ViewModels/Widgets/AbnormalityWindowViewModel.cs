@@ -1,5 +1,5 @@
 ﻿using System;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
@@ -41,7 +41,7 @@ namespace TCC.ViewModels.Widgets
 
         public AbnormalityWindowViewModel(WindowSettingsBase settings) : base(settings)
         {
-            Player.InitAbnormalityCollections(Dispatcher);
+            Player.InitAbnormalityCollections(_dispatcher);
 
             ((BuffWindowSettings)settings).DirectionChanged += () => ExN(nameof(Direction));
             ((BuffWindowSettings)settings).OverlapChanged += () =>
@@ -62,7 +62,7 @@ namespace TCC.ViewModels.Widgets
         private void OnShowAbnormalConfigHotkeyPressed()
         {
             //if (!Game.Logged) return;
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher.InvokeAsync(() =>
             {
                 MyAbnormalConfigWindow.Instance.ShowWindow();
             },

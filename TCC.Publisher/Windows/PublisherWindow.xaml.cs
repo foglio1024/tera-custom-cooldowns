@@ -1,4 +1,4 @@
-﻿using Nostrum.Factories;
+﻿using Nostrum.WPF.Factories;
 using System.Windows.Controls.Primitives;
 using TCC.Publisher.ViewModels;
 

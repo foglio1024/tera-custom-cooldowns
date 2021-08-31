@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TeraDataLite;
 
 namespace TCC.Data
 {
-    public class Counter : TSPropertyChanged
+    public class Counter : ThreadSafePropertyChanged
     {
         //TODO use events here
         private int _val;
@@ -40,7 +41,7 @@ namespace TCC.Data
 
         public Counter(int max, bool autoexpire)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             MaxValue = max;
             AutoExpire = autoexpire;
             _expire = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(9000) };

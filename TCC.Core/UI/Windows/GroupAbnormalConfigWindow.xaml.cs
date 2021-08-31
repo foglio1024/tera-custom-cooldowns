@@ -8,7 +8,9 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Nostrum;
 using Nostrum.Extensions;
-using Nostrum.Factories;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.ViewModels;
 using TeraDataLite;
 
@@ -97,7 +99,7 @@ namespace TCC.UI.Windows
         }
     }
 
-    public class ClassToggle : TSPropertyChanged
+    public class ClassToggle : ThreadSafePropertyChanged
     {
         private bool _selected;
 
@@ -117,7 +119,7 @@ namespace TCC.UI.Windows
         public uint AbnormalityId { get; }
         public ClassToggle(Class c, uint abId)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             Class = c;
             AbnormalityId = abId;
             ToggleCommand = new ToggleCommand(this);

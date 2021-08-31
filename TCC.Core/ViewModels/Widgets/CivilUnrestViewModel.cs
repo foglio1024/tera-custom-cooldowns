@@ -4,7 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Nostrum;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.Utils;
@@ -14,7 +15,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets
 {
-    public class CivilUnrestGuild : TSPropertyChanged
+    public class CivilUnrestGuild : ThreadSafePropertyChanged
     {
         private float _towerHp;
         private uint _towersDestroyed;
@@ -66,7 +67,7 @@ namespace TCC.ViewModels.Widgets
     public class CivilUnrestViewModel : TccWindowViewModel
     {
         public bool CivilUnrest => Game.CivilUnrestZone;
-        private readonly TSObservableCollection<CivilUnrestGuild> _guilds;
+        private readonly ThreadSafeObservableCollection<CivilUnrestGuild> _guilds;
 
         public ICollectionViewLiveShaping Guilds //TODO: fix getter
         {
@@ -110,7 +111,7 @@ namespace TCC.ViewModels.Widgets
 
         public CivilUnrestViewModel(WindowSettingsBase settings) : base(settings)
         {
-            _guilds = new TSObservableCollection<CivilUnrestGuild>();
+            _guilds = new ThreadSafeObservableCollection<CivilUnrestGuild>();
         }
 
         protected override void InstallHooks()

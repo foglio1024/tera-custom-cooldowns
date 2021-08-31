@@ -2,8 +2,8 @@
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Nostrum.Controls;
-using Nostrum.Factories;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using TCC.Data.Npc;
 using TCC.ViewModels;
 

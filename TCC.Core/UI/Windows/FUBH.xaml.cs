@@ -1,6 +1,8 @@
 ﻿using System.Windows.Input;
 using Nostrum;
 using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.UI.Windows
 {
@@ -36,7 +38,7 @@ namespace TCC.UI.Windows
         }
     }
 
-    public class FUBHVM : TSPropertyChanged
+    public class FUBHVM : ThreadSafePropertyChanged
     {
         public string CloseMessage => $"Click to {(!_dontshowagain ? "temporarily " : "")}close this window";
         private bool _dontshowagain;

@@ -1,4 +1,5 @@
 ﻿using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace TCC.Data.Pc
 {
     //TODO: remove INPC from properties where it's not needed
 
-    public class Player : TSPropertyChanged
+    public class Player : ThreadSafePropertyChanged
     {
         public event Action? Death;
         public event Action? Ress;
@@ -355,13 +356,13 @@ namespace TCC.Data.Pc
         // tracking only warrior stance for now
         public StanceTracker<WarriorStance> WarriorStance { get; set; }
 
-        public TSObservableCollection<AbnormalityDuration>? Buffs { get; private set; }
-        public TSObservableCollection<AbnormalityDuration>? Debuffs { get; private set; }
-        public TSObservableCollection<AbnormalityDuration>? InfBuffs { get; private set; }
+        public ThreadSafeObservableCollection<AbnormalityDuration>? Buffs { get; private set; }
+        public ThreadSafeObservableCollection<AbnormalityDuration>? Debuffs { get; private set; }
+        public ThreadSafeObservableCollection<AbnormalityDuration>? InfBuffs { get; private set; }
 
         public Player()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             StacksCounter = new Counter(10, true);
             WarriorStance = new StanceTracker<WarriorStance>();
         }
@@ -370,7 +371,7 @@ namespace TCC.Data.Pc
         #region Shield
         public void DamageShield(uint damage)
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 if (_shields.Count == 0) return;
                 var firstShield = _shields.First();
@@ -387,7 +388,7 @@ namespace TCC.Data.Pc
         }
         private void AddShield(Abnormality ab)
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 _shields[ab.Id] = GetShieldSize(ab);
                 RefreshMaxShieldAmount();
@@ -408,7 +409,7 @@ namespace TCC.Data.Pc
         }
         private void EndShield(Abnormality ab)
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 _shields.Remove(ab.Id);
                 RefreshShieldAmount();
@@ -442,9 +443,9 @@ namespace TCC.Data.Pc
         #region Abnormalities
         public void InitAbnormalityCollections(Dispatcher disp)
         {
-            Buffs = new TSObservableCollection<AbnormalityDuration>(disp);
-            Debuffs = new TSObservableCollection<AbnormalityDuration>(disp);
-            InfBuffs = new TSObservableCollection<AbnormalityDuration>(disp);
+            Buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
+            Debuffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
+            InfBuffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
             //_shields = new Dictionary<uint, uint>();
             //_debuffList = new List<uint>();
 
@@ -468,13 +469,13 @@ namespace TCC.Data.Pc
         }
         private void FindAndUpdate(Abnormality ab, uint duration, int stacks)
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 var list = GetList(ab);
                 var existing = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
                 if (existing == null)
                 {
-                    var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true);
+                    var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true);
                     list.Add(newAb);
                     if (ab.IsShield) AddShield(ab);
                     if (ab.IsDebuff) AddToDebuffList(ab);
@@ -530,7 +531,7 @@ namespace TCC.Data.Pc
         }
 
         // utils
-        private TSObservableCollection<AbnormalityDuration> GetList(Abnormality ab)
+        private ThreadSafeObservableCollection<AbnormalityDuration> GetList(Abnormality ab)
         {
             var list = ab.Type switch
             {
@@ -556,7 +557,7 @@ namespace TCC.Data.Pc
             var existing = Buffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher!, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Buffs?.Add(newAb);
                 if (ab.IsShield)
@@ -578,7 +579,7 @@ namespace TCC.Data.Pc
             var existing = Debuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher!, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 Debuffs?.Add(newAb);
                 return;
@@ -594,7 +595,7 @@ namespace TCC.Data.Pc
             var existing = InfBuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher!, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
 
                 InfBuffs?.Add(newAb);
                 return;

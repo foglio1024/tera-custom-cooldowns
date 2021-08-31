@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Skills;
 
 namespace TCC.ViewModels.ClassManagers
 {
-    public abstract class BaseClassLayoutVM : TSPropertyChanged, IDisposable
+    public abstract class BaseClassLayoutVM : ThreadSafePropertyChanged, IDisposable
     {
         public virtual bool StartSpecialSkill(Cooldown sk)
         {
@@ -41,7 +42,7 @@ namespace TCC.ViewModels.ClassManagers
         }
         public BaseClassLayoutVM()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             StaminaTracker = new StatTracker();
         }
 

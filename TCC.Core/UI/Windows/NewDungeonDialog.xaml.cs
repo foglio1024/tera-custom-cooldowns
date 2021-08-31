@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using Nostrum.Factories;
+using Nostrum.WPF.Factories;
 using TCC.Data;
 
 namespace TCC.UI.Windows

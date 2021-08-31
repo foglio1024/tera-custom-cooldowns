@@ -1,10 +1,11 @@
 using System;
 using System.Windows.Threading;
 using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.ViewModels
 {
-    public class DailyEvent : TSPropertyChanged
+    public class DailyEvent : ThreadSafePropertyChanged
     {
         private DateTime Start { get; set; }
         private TimeSpan Duration { get; set; }
@@ -32,7 +33,8 @@ namespace TCC.ViewModels
         public string Color { get; }
         public DailyEvent(string name, double startHour, double startMin, double durationOrEndHour, string color = "30afff", bool isDuration = true)
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
+
             //var m = startHour % 1;
             //var h = startHour - m;
             Start = DateTime.Parse(startHour + ":"+startMin);
