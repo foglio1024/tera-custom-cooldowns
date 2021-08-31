@@ -17,19 +17,19 @@ namespace TCC.UI.Controls.Chat
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            StubInterface.Instance.StubClient.GroupInviteUser(dc.Author, Game.Group.IsRaid); //ProxyOld.PartyInvite(dc.Author);
+            StubInterface.Instance.StubClient.GroupInviteUser(dc.Author, Game.Group.IsRaid);
             dc.Handled = true;
         }
         private void InspectBtn(object sender, MouseButtonEventArgs e)
         {
             var dc = (ApplyMessage)DataContext;
-            StubInterface.Instance.StubClient.InspectUser(dc.Author); //ProxyOld.Inspect(dc.Author);
+            StubInterface.Instance.StubClient.InspectUser(dc.Author, dc.ServerId);
         }
         private void DeclineApplyBtn(object sender, MouseButtonEventArgs e)
         {
             var dc = (ApplyMessage)DataContext;
             if (dc.Handled) return;
-            StubInterface.Instance.StubClient.DeclineUserGroupApply(dc.PlayerId); //ProxyOld.DeclineApply(dc.PlayerId);
+            StubInterface.Instance.StubClient.DeclineUserGroupApply(dc.PlayerId, dc.ServerId);
             dc.Handled = true;
         }
     }

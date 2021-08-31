@@ -8,9 +8,10 @@ namespace TCC.Data.Chat
         public Class UserClass { get; }
         public uint PlayerId { get; }
         public short PlayerLevel { get; }
+        public uint ServerId { get; }
 
         public bool Handled = false;
-        public ApplyMessage(uint playerId, Class c, short level, string name)
+        public ApplyMessage(uint playerId, Class c, short level, string name, uint serverId)
         {
             Channel = ChatChannel.Apply;
             Author = name;
@@ -18,7 +19,7 @@ namespace TCC.Data.Chat
             PlayerLevel = level;
             UserClass = c;
             PlainMessage = $"{Author} apply";
-
+            ServerId = serverId;
         }
     }
 }

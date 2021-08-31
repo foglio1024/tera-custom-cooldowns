@@ -1,4 +1,6 @@
 ﻿using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Linq;
 using System.Windows.Input;
@@ -14,7 +16,7 @@ using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels
 {
-    public class PlayerMenuViewModel : TSPropertyChanged
+    public class PlayerMenuViewModel : ThreadSafePropertyChanged
     {
         private string _name = "";
         private string _info = "";
@@ -241,7 +243,7 @@ namespace TCC.ViewModels
 
         public PlayerMenuViewModel()
         {
-            Dispatcher = Dispatcher.CurrentDispatcher;
+            SetDispatcher(Dispatcher.CurrentDispatcher);
             Name = "";
             Info = "";
             Level = 0;
@@ -249,15 +251,15 @@ namespace TCC.ViewModels
 
             InspectCommand = new RelayCommand(_ =>
             {
-                if (IsFromOtherServer)
-                {
-                    if (_gameId == 0) return;
-                    StubInterface.Instance.StubClient.InspectUser(_gameId);
-                }
-                else
-                {
-                    StubInterface.Instance.StubClient.InspectUser(Name);
-                }
+                //if (IsFromOtherServer)
+                //{
+                //    if (_gameId == 0) return;
+                //    StubInterface.Instance.StubClient.InspectUser(_gameId);
+                //}
+                //else  
+                //{
+                //}
+                StubInterface.Instance.StubClient.InspectUser(Name, _serverId);
             });
             WhisperCommand = new RelayCommand(_ =>
             {
@@ -302,7 +304,15 @@ namespace TCC.ViewModels
                     if (Blocking)
                     {
                         Close();
-                        StubInterface.Instance.StubClient.BlockUser(Name);
+                        if (_serverId == 0)
+                        {
+                            Log.N("Error", "Failed to block user: server id cannot be 0.", NotificationType.Error);
+                            Blocking = !Blocking;
+                            N(nameof(BlockLabelText));
+                            Refresh();
+                            return;
+                        }
+                        StubInterface.Instance.StubClient.BlockUser(Name, _serverId);
                         Game.BlockList.Add(Name);
                         try
                         {
@@ -405,7 +415,7 @@ namespace TCC.ViewModels
         {
             if (!App.Settings.EnablePlayerMenu) return;
 
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 Name = name;
                 _serverId = serverId;
@@ -417,7 +427,7 @@ namespace TCC.ViewModels
                 IsFromOtherServer = serverId != Game.Server.ServerId;
                 if (IsFromOtherServer)
                 {
-                    Dispatcher.InvokeAsync(() =>
+                    _dispatcher?.InvokeAsync(() =>
                     {
                         ShowGuildInvite = false;
                         ShowPartyInvite = false;
@@ -436,7 +446,7 @@ namespace TCC.ViewModels
 
         public void Close()
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 _win.Close();
             });
@@ -456,7 +466,7 @@ namespace TCC.ViewModels
         {
             if (!App.Settings.EnablePlayerMenu) return;
 
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher?.InvokeAsync(() =>
             {
                 Game.DB!.MonsterDatabase.TryGetMonster((uint)x.TemplateId, 0, out var m);
                 Name = x.Name;

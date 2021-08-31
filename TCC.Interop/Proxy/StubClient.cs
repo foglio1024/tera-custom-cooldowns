@@ -78,11 +78,12 @@ namespace TCC.Interop.Proxy
             });
         }
 
-        public async void BlockUser([NotNull] string userName)
+        public async void BlockUser([NotNull] string userName, uint serverId)
         {
             await TccStub.CallAsync("blockUser", new JObject
             {
                 { "userName", userName },
+                { "serverId", serverId }
             });
         }
 
@@ -122,11 +123,12 @@ namespace TCC.Interop.Proxy
             });
         }
 
-        public async void InspectUser([NotNull] string userName)
+        public async void InspectUser([NotNull] string userName, uint serverId)
         {
             await TccStub.CallAsync("inspectUser", new JObject
             {
-                { "userName", userName }
+                { "userName", userName },
+                { "serverId", serverId }
             });
         }
 
@@ -173,11 +175,12 @@ namespace TCC.Interop.Proxy
             });
         }
 
-        public async void DeclineUserGroupApply(uint playerId)
+        public async void DeclineUserGroupApply(uint playerId, uint serverId)
         {
             await TccStub.CallAsync("declineUserGroupApply", new JObject
             {
                 { "playerId", playerId },
+                { "serverId", serverId },
             });
         }
 

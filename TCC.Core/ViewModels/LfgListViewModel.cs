@@ -1,6 +1,9 @@
 ﻿using Nostrum;
 using Nostrum.Extensions;
-using Nostrum.Factories;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -60,8 +63,8 @@ namespace TCC.ViewModels
         public int AutoPublicizeCooldown => 20;
 
         public bool IsAutoPublicizeRunning => AutoPublicizeTimer.IsEnabled;
-        public TSObservableCollection<Listing> Listings { get; }
-        public TSObservableCollection<string> BlacklistedWords { get; }
+        public ThreadSafeObservableCollection<Listing> Listings { get; }
+        public ThreadSafeObservableCollection<string> BlacklistedWords { get; }
         public SortCommand SortCommand { get; }
         public ICommand PublicizeCommand { get; }
         public ICommand ToggleAutoPublicizeCommand { get; }
@@ -123,7 +126,7 @@ namespace TCC.ViewModels
             }
         }
 
-        public bool AmIinLfg => Dispatcher.Invoke(() => Listings.ToSyncList().Any(listing =>
+        public bool AmIinLfg => _dispatcher.Invoke(() => Listings.ToSyncList().Any(listing =>
             listing.LeaderId == Game.Me.PlayerId
             || listing.LeaderName == Game.Me.Name
             || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
@@ -131,7 +134,7 @@ namespace TCC.ViewModels
 
         public bool AmILeader => Game.Group.AmILeader || (MyLfg != null && MyLfg?.LeaderId == Game.Me.PlayerId);
 
-        public Listing? MyLfg => Dispatcher.Invoke(() => Listings.FirstOrDefault(listing =>
+        public Listing? MyLfg => _dispatcher.Invoke(() => Listings.FirstOrDefault(listing =>
                 listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
                 || listing.LeaderId == Game.Me.PlayerId
                 || Game.Group.Has(listing.LeaderId)
@@ -200,8 +203,8 @@ namespace TCC.ViewModels
 
         public LfgListViewModel(LfgWindowSettings settings) : base(settings)
         {
-            Listings = new TSObservableCollection<Listing>(Dispatcher);
-            BlacklistedWords = new TSObservableCollection<string>(Dispatcher);
+            Listings = new ThreadSafeObservableCollection<Listing>(_dispatcher);
+            BlacklistedWords = new ThreadSafeObservableCollection<string>(_dispatcher);
             settings.BlacklistedWords.ForEach(w => BlacklistedWords.Add(w));
             ListingsView = CollectionViewFactory.CreateLiveCollectionView(Listings,
             //l => !l.IsFullOffline,
@@ -221,8 +224,8 @@ namespace TCC.ViewModels
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.LfgHotkey, OnShowLfgHotkeyPressed);
 
-            _requestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, Dispatcher);
-            AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, Dispatcher) { IsEnabled = false };
+            _requestTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Background, RequestNextLfg, _dispatcher);
+            AutoPublicizeTimer = new DispatcherTimer(TimeSpan.FromSeconds(AutoPublicizeCooldown), DispatcherPriority.Background, OnAutoPublicizeTimerTick, _dispatcher) { IsEnabled = false };
 
             SortCommand = new SortCommand(ListingsView);
             PublicizeCommand = new RelayCommand(_ => Publicize(), _ => CanPublicize());
@@ -441,7 +444,7 @@ namespace TCC.ViewModels
         public void EnqueueRequest(uint playerId, uint serverId)
         {
             if ((Game.IsInDungeon || Game.CivilUnrestZone) && Game.Combat) return;
-            Dispatcher.InvokeAsyncIfRequired(() =>
+            _dispatcher?.InvokeAsyncIfRequired(() =>
             {
                 if (_requestQueue.Count > 0 && _requestQueue.Last().Item1 == playerId) return;
                 _requestQueue.Enqueue(( playerId, serverId));
@@ -450,7 +453,7 @@ namespace TCC.ViewModels
 
         private void ListingsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            Task.Delay(500).ContinueWith(_ => Dispatcher.Invoke(NotifyMyLfg));
+            Task.Delay(500).ContinueWith(_ => _dispatcher?.Invoke(NotifyMyLfg));
         }
 
         internal void RemoveDeadLfg()
@@ -461,7 +464,7 @@ namespace TCC.ViewModels
 
         public void EnqueueListRequest()
         {
-            Dispatcher.InvokeAsync(() =>
+            _dispatcher.InvokeAsync(() =>
             {
                 if (_requestQueue.Count > 0 && _requestQueue.Last().Item1 == 0) return;
                 _requestQueue.Enqueue((0, 0));
@@ -480,9 +483,9 @@ namespace TCC.ViewModels
         {
             Task.Factory.StartNew(() =>
             {
-                Dispatcher.InvokeAsync(() => ActualListingsAmount = listings.Count);
+                _dispatcher.InvokeAsync(() => ActualListingsAmount = listings.Count);
                 RemoveMissingListings();
-                listings.ForEach(l => Dispatcher.InvokeAsync(() => AddOrRefreshListing(l)));
+                listings.ForEach(l => _dispatcher.InvokeAsync(() => AddOrRefreshListing(l)));
             });
 
             void RemoveMissingListings()
@@ -495,7 +498,7 @@ namespace TCC.ViewModels
                 });
                 toRemove.ForEach(r =>
                 {
-                    Dispatcher.InvokeAsync(() =>
+                    _dispatcher.InvokeAsync(() =>
                     {
                         var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
                         if (target != null) Listings.Remove(target);
@@ -643,7 +646,7 @@ namespace TCC.ViewModels
                         }
                         else
                         {
-                            Dispatcher.Invoke(() =>
+                            _dispatcher.Invoke(() =>
                             {
                                 lfg.Players.Add(new User(member));
                                 if (!member.IsLeader) return;
@@ -713,15 +716,15 @@ namespace TCC.ViewModels
             //if (!App.Settings.LfgWindowSettings.Enabled) return;
             if (MyLfg == null) return;
             var dest = MyLfg.Applicants;
-            if (dest.Any(u => u.PlayerId == m.PlayerId)) return;
-            dest.Add(new User(Dispatcher)
+            if (dest.Any(u => u.PlayerId == m.PlayerId && u.ServerId == m.ServerId)) return;
+            dest.Add(new User(_dispatcher)
             {
                 PlayerId = m.PlayerId,
                 UserClass = m.Class,
                 Level = Convert.ToUInt32(m.Level),
                 Name = m.Name,
                 Online = true,
-                ServerId = Game.Me.ServerId
+                ServerId = m.ServerId
             });
         }
 
@@ -744,7 +747,7 @@ namespace TCC.ViewModels
 
             NotifyMyLfg();
 
-            Dispatcher.Invoke(() => SortCommand.Refresh(LastSortDescr));
+            _dispatcher.Invoke(() => SortCommand.Refresh(LastSortDescr));
             //Dispatcher.Invoke(() => ((ICollectionView)ListingsView).Refresh());
             //Dispatcher?.InvokeAsync(RefreshSorting, DispatcherPriority.Background);
         }

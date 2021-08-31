@@ -1,5 +1,6 @@
 ﻿using Nostrum;
-
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -12,7 +13,7 @@ using TeraDataLite;
 namespace TCC.Data.Pc
 {
     //TODO: remove INPC from properties where it's not needed
-    public class User : TSPropertyChanged
+    public class User : ThreadSafePropertyChanged
     {
         private ulong _entityId;
         private uint _level;
@@ -357,8 +358,8 @@ namespace TCC.Data.Pc
                 N(nameof(Boots));
             }
         }
-        public TSObservableCollection<AbnormalityDuration> Buffs { get; }
-        public TSObservableCollection<AbnormalityDuration> Debuffs { get; }
+        public ThreadSafeObservableCollection<AbnormalityDuration> Buffs { get; }
+        public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs { get; }
         public bool Awakened { get; set; }
         public bool InCombat { get; set; } //make npc when needed
         public bool Visible
@@ -409,7 +410,7 @@ namespace TCC.Data.Pc
             var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, false);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher!, false);
                 if (ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
                 return;
             }
@@ -430,7 +431,7 @@ namespace TCC.Data.Pc
             var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, Dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher!, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
 
                 Debuffs.Add(newAb);
                 return;
@@ -461,7 +462,7 @@ namespace TCC.Data.Pc
         }
         public void ClearAbnormalities()
         {
-            Dispatcher.Invoke(() =>
+            _dispatcher?.Invoke(() =>
             {
                 foreach (var item in Buffs)
                 {
@@ -479,9 +480,9 @@ namespace TCC.Data.Pc
 
         public User(Dispatcher? d)
         {
-            Dispatcher = d ?? Dispatcher.CurrentDispatcher;
-            Debuffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
-            Buffs = new TSObservableCollection<AbnormalityDuration>(Dispatcher);
+            SetDispatcher(d ?? Dispatcher.CurrentDispatcher);
+            Debuffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);
+            Buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);
 
             AcceptApplyCommand = new RelayCommand(_ =>
             {
@@ -489,7 +490,7 @@ namespace TCC.Data.Pc
             });
             DeclineApplyCommand = new RelayCommand(_ =>
             {
-                StubInterface.Instance.StubClient.DeclineUserGroupApply(PlayerId);
+                StubInterface.Instance.StubClient.DeclineUserGroupApply(PlayerId, ServerId);
                 StubInterface.Instance.StubClient.RequestListingCandidates();
             });
             RequestInteractiveCommand = new RelayCommand(_ =>
@@ -499,7 +500,7 @@ namespace TCC.Data.Pc
             });
             InspectCommand = new RelayCommand(_ =>
             {
-                StubInterface.Instance.StubClient.InspectUser(Name);
+                StubInterface.Instance.StubClient.InspectUser(Name, ServerId);
             });
 
         }

@@ -108,7 +108,8 @@ class RpcHandler {
         this.debug(`Sent C_DELETE_FRIEND`);
     }
     blockUser(params) {
-        this.currNetworkMod.send("C_BLOCK_USER", 1, {
+        this.currNetworkMod.send("C_BLOCK_USER", 2, {
+            serverId: params.serverId
             name: params.userName
         });
         this.debug(`Sent C_BLOCK_USER`);
@@ -142,8 +143,10 @@ class RpcHandler {
         this.debug(`Sent C_BAN_PARTY_MEMBER`);
     }
     inspectUser(params) {
-        this.currNetworkMod.send("C_REQUEST_USER_PAPERDOLL_INFO", 3, {
-            name: params.userName
+        this.currNetworkMod.send("C_REQUEST_USER_PAPERDOLL_INFO", 4, {
+            name: params.userName,
+            serverId: params.serverId,
+            zoom: false
         });
         this.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO`);
     }
@@ -186,8 +189,10 @@ class RpcHandler {
         this.debug(`Sent C_TRADE_BROKER_REJECT_SUGGEST`);
     }
     declineUserGroupApply(params) {
-        this.currNetworkMod.send("C_PARTY_APPLICATION_DENIED", 1, {
-            pid: params.playerId
+        this.currNetworkMod.send("C_PARTY_APPLICATION_DENIED", 2, {
+            playerId: params.playerId,
+            serverId: params.serverId
+
         });
         this.debug(`Sent C_PARTY_APPLICATION_DENIED`);
     }

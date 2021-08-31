@@ -2,21 +2,29 @@
 {
     public class S_BEGIN_THROUGH_ARBITER_CONTRACT : ParsedMessage
     {
-        public RequestType Type { get; private set; }
-        public string Sender { get; private set; }
-        public string Recipient { get; private set; }
+        public uint ServerId { get; }
+        public RequestType Type { get; set; }
+        public string Sender { get; set; }
 
         public S_BEGIN_THROUGH_ARBITER_CONTRACT(TeraMessageReader reader) : base(reader)
         {
             var senderOffset = reader.ReadUInt16();
-            var recipientOffset = reader.ReadUInt16();
-            reader.Skip(2);
-            Type = (RequestType)reader.ReadUInt32();
+            reader.Skip(2); // data/recipient offset 
+            if (reader.Factory.ReleaseVersion / 100 >= 108)
+            {
+                ServerId = reader.ReadUInt32();
+                Type = (RequestType)reader.ReadUInt32();
+            }
+            else
+            {
+
+                reader.Skip(2);
+                Type = (RequestType)reader.ReadUInt32();
+            }
             reader.RepositionAt(senderOffset);
             Sender = reader.ReadTeraString();
-            reader.RepositionAt(recipientOffset);
-            Recipient = reader.ReadTeraString();
         }
+
         public enum RequestType
         {
             TradeRequest = 3,
