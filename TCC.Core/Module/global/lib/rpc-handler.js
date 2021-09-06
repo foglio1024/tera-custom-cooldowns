@@ -109,7 +109,7 @@ class RpcHandler {
     }
     blockUser(params) {
         this.currNetworkMod.send("C_BLOCK_USER", 2, {
-            serverId: params.serverId
+            serverId: params.serverId,
             name: params.userName
         });
         this.debug(`Sent C_BLOCK_USER`);
