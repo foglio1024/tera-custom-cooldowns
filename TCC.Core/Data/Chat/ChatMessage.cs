@@ -104,7 +104,7 @@ namespace TCC.Data.Chat
             if(AuthorServerId != Game.Me.ServerId)
             {
                 var srv = PacketAnalyzer.ServerDatabase.GetServer(AuthorServerId);
-                DisplayedAuthor = $"{Author}-({srv.Region})-{srv.Name}";
+                DisplayedAuthor = $"{Author}@({srv.Region})-{srv.Name}";
             }
             else
             {
