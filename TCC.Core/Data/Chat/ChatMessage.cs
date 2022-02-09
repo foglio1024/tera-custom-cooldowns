@@ -11,6 +11,7 @@ using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
+using TeraPacketParser.Analysis;
 
 namespace TCC.Data.Chat
 {
@@ -70,6 +71,7 @@ namespace TCC.Data.Chat
         }
         public int Size => App.Settings.FontSize;
         public string PlainMessage { get; set; }
+        public string DisplayedAuthor { get; }
 
         #endregion
 
@@ -98,6 +100,16 @@ namespace TCC.Data.Chat
             AuthorPlayerId = authorPlayerId;
             AuthorServerId = authorServerId;
             AuthorGameId = authorGameId;
+
+            if(AuthorServerId != Game.Me.ServerId)
+            {
+                var srv = PacketAnalyzer.ServerDatabase.GetServer(AuthorServerId);
+                DisplayedAuthor = $"{Author}-({srv.Region})-{srv.Name}";
+            }
+            else
+            {
+                DisplayedAuthor = Author;
+            }
 
             try
             {
