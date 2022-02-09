@@ -28,9 +28,9 @@ namespace TCC.UI.Controls.Chat
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var name = ((sender as FrameworkElement)?.DataContext as User)?.Name;
-            if (name == null) return;
-            WindowManager.ViewModels.PlayerMenuVM.Open(name, Game.Server.ServerId);
+            var user = ((sender as FrameworkElement)?.DataContext as User);
+            if (user == null) return;
+            WindowManager.ViewModels.PlayerMenuVM.Open(user.Name, user.ServerId);
         }
 
         private void OnMessageMouseEnter(object sender, MouseEventArgs e)

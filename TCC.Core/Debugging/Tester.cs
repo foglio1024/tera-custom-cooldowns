@@ -436,7 +436,7 @@ namespace TCC.Debug
             for (var i = 0; i < amount; i++)
             {
                 ChatManager.Instance.AddChatMessage(
-                    ChatManager.Instance.Factory.CreateMessage(ChatChannel.ReceivedWhisper, "Test", $"Test {i}"));
+                    ChatManager.Instance.Factory.CreateMessage(ChatChannel.ReceivedWhisper, "Test", $"Test {i}", 1, 2));
             }
         }
 

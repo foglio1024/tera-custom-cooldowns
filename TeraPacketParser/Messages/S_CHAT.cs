@@ -7,6 +7,8 @@ namespace TeraPacketParser.Messages
     {
         public uint Channel { get; }
         public ulong GameId { get; }
+        public uint PlayerId { get; }
+        public uint ServerId { get; }
         public string Name { get; }
         public string Message { get; }
         public bool IsGm { get; }
@@ -19,7 +21,8 @@ namespace TeraPacketParser.Messages
             GameId = reader.ReadUInt64();
             if(reader.Factory.ReleaseVersion /100 >= 108)
             {
-                reader.Skip(8); // uint32 playerId + uint32 serverId
+                PlayerId = reader.ReadUInt32();
+                ServerId = reader.ReadUInt32();
             }
             reader.Skip(1);
             IsGm = reader.ReadBoolean();

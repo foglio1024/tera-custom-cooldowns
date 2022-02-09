@@ -18,9 +18,9 @@ namespace TCC.ViewModels
         {
             return _dispatcher.InvokeAsync(() => new ChatMessage(ch)).Result;
         }
-        public ChatMessage CreateMessage(ChatChannel ch, string author, string msg, bool isGm = false, ulong authorGameId = 0)
+        public ChatMessage CreateMessage(ChatChannel ch, string author, string msg, uint authorPlayerId = 0, uint authorServerId = 0, bool isGm = false, ulong authorGameId = 0)
         {
-            return _dispatcher.InvokeAsync(() => new ChatMessage(ch, author, msg, authorGameId, isGm)).Result;
+            return _dispatcher.InvokeAsync(() => new ChatMessage(ch, author, msg, authorGameId, isGm, authorPlayerId, authorServerId)).Result;
         }
         public ChatMessage CreateSystemMessage(string template, SystemMessageData msg, ChatChannel ch, string authorOverride = "System")
         {
@@ -47,7 +47,7 @@ namespace TCC.ViewModels
                 var prm = ChatUtils.SplitDirectives(systemMessage);
                 if (prm == null) return msg;
 
-                
+
                 msg.Author = prm["UserName"];
                 var txt = "{ItemName}";
                 txt = ChatUtils.ReplaceParameters(txt, prm, true);

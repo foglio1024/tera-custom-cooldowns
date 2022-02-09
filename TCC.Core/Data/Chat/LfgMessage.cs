@@ -50,7 +50,7 @@ namespace TCC.Data.Chat
         public uint ServerId { get; } //TODO: should be added to base class and assigned from S_CHAT, S_WHISPER, etc
         public bool ShowMembers => LinkedListing != null && LinkedListing.Players.Count <= 7;
 
-        public LfgMessage(uint authorId, string author, string msg, uint serverId) : base(ChatChannel.LFG, author, msg, 0, false)
+        public LfgMessage(uint authorId, string author, string msg, uint serverId) : base(ChatChannel.LFG, author, msg, 0, false, authorId, serverId)
         {
             AuthorId = authorId;
             ServerId = serverId;

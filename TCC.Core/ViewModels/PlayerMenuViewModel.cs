@@ -121,8 +121,8 @@ namespace TCC.ViewModels
         }
 
         public bool ShowAddFriend => !IsBlocked && Name != Game.Me.Name && !IsFromOtherServer;
-        public bool ShowBlockUnblock => !IsFromOtherServer;
-        public bool ShowWhisper => !IsBlocked && !IsFromOtherServer;
+        public bool ShowBlockUnblock => true /*!IsFromOtherServer*/;
+        public bool ShowWhisper => !IsBlocked /*&& !IsFromOtherServer*/;
         public string BlockLabelText => !IsBlocked ? Blocking ? "Are you sure?" : "Block" : "Unblock";
         public string FriendLabelText => IsFriend ? Unfriending ? "Are you sure?" : "Remove friend" : "Add friend";
 
@@ -256,15 +256,20 @@ namespace TCC.ViewModels
                 //    if (_gameId == 0) return;
                 //    StubInterface.Instance.StubClient.InspectUser(_gameId);
                 //}
-                //else  
-                //{
-                //}
                 StubInterface.Instance.StubClient.InspectUser(Name, _serverId);
             });
             WhisperCommand = new RelayCommand(_ =>
             {
                 if (!Game.InGameChatOpen) FocusManager.SendNewLine();
-                FocusManager.SendString($"/w {Name} ");
+                if (IsFromOtherServer)
+                {
+                    var server = PacketAnalyzer.ServerDatabase.GetServer(_serverId);
+                    FocusManager.SendString($"/w {Name}@({server.Region})-{server.Name} ");
+                }
+                else
+                {
+                    FocusManager.SendString($"/w {Name} ");
+                }
             });
             AddRemoveFriendCommand = new RelayCommand(_ =>
             {
@@ -430,7 +435,7 @@ namespace TCC.ViewModels
                     _dispatcher?.InvokeAsync(() =>
                     {
                         ShowGuildInvite = false;
-                        ShowPartyInvite = false;
+                        //ShowPartyInvite = false;
 
                         Refresh();
                         _win.ShowAndPosition();

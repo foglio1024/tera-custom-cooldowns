@@ -29,6 +29,8 @@ namespace TCC.Data.Chat
 
         public string Author { get; set; } = "";
         public ulong AuthorGameId { get; set; }
+        public uint AuthorPlayerId { get; set; }
+        public uint AuthorServerId { get; set; }
 
         public bool ContainsPlayerName { get; set; }
         public bool Animate
@@ -85,7 +87,7 @@ namespace TCC.Data.Chat
         {
             Channel = ch;
         }
-        public ChatMessage(ChatChannel ch, string auth, string msg, ulong authorGameId, bool isGm) : this()
+        public ChatMessage(ChatChannel ch, string auth, string msg, ulong authorGameId, bool isGm, uint authorPlayerId, uint authorServerId) : this()
         {
             Channel = ch;
             RawMessage = msg;
@@ -93,6 +95,8 @@ namespace TCC.Data.Chat
             var authHtml = new HtmlDocument();
             authHtml.LoadHtml(auth);
             Author = authHtml.DocumentNode.InnerText;
+            AuthorPlayerId = authorPlayerId;
+            AuthorServerId = authorServerId;
             AuthorGameId = authorGameId;
 
             try

@@ -20,9 +20,9 @@ namespace TeraPacketParser.Messages
             // ReSharper disable UnusedVariable
             var template = reader.ReadInt32();
             Skill = new SkillId(reader).Id;
-            var stage = reader.ReadInt32();
-            var targeting = reader.ReadInt16();
-            var area = reader.ReadInt16();
+            var originSkill = reader.ReadInt32();
+            var targeting = reader.ReadInt32();
+            var area = reader.ReadInt32();
             var id = reader.ReadUInt32();
             var time = reader.ReadInt32();
             // ReSharper restore UnusedVariable
