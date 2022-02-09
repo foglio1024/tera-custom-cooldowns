@@ -2,8 +2,8 @@
   <PropertyGroup>
     <RootNamespace>TeraDataLite</RootNamespace>
     <AssemblyName>TeraDataLite</AssemblyName>
-    <TargetFramework>net5-windows</TargetFramework>
-    <PreserveCompilationContext>false</PreserveCompilationContext>
+	  <TargetFramework>net6-windows</TargetFramework>
+	  <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
     <Configurations>Debug;Release;DebugToolbox</Configurations>

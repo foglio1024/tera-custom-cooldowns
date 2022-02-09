@@ -2,7 +2,7 @@
   <PropertyGroup>
     <RootNamespace>TCC</RootNamespace>
     <AssemblyName>TCC</AssemblyName>
-    <TargetFramework>net5-windows</TargetFramework>
+    <TargetFramework>net6-windows</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
@@ -29,7 +29,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
-    <OutputPath>D:\TERA\TeraToolbox\mods\TCC</OutputPath>
+    <OutputPath>E:\TERA\TeraToolbox\mods\TCC</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
@@ -183,6 +183,6 @@
     </Page>
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="D:\Repos\ReSource\ReSource.CLI\bin\Release\ReSource.CLI.exe &quot;D:\Repos\TCC\TCC.Core\\TCC.Core.csproj&quot; &quot;D:\Repos\TCC\TCC.Core\bin\Debug\TCC.dll&quot; &quot;D:\Repos\TCC\TCC.Core\\R.cs&quot; TCC.R" />
+    <Exec Command="E:\Repos\ReSource\ReSource.CLI\bin\Release\ReSource.CLI.exe &quot;E:\Repos\TCC\TCC.Core\\TCC.Core.csproj&quot; &quot;E:\Repos\TCC\TCC.Core\bin\Debug\TCC.dll&quot; &quot;E:\Repos\TCC\TCC.Core\\R.cs&quot; TCC.R" />
   </Target>
 </Project>

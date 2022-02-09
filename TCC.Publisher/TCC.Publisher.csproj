@@ -5,8 +5,8 @@
     <AssemblyName>TCC.Publisher</AssemblyName>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <TargetFramework>net5-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
+	  <TargetFramework>net6-windows</TargetFramework>
+	  <UseWPF>true</UseWPF>
     <LangVersion>8</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

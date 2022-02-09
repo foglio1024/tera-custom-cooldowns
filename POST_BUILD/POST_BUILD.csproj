@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5</TargetFramework>
+    <TargetFramework>net6</TargetFramework>
     <LangVersion>9</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PreserveCompilationContext>false</PreserveCompilationContext>

@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+	  <TargetFramework>net6-windows</TargetFramework>
+	  <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

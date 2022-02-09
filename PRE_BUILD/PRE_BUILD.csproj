@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5</TargetFramework>
-    <LangVersion>9</LangVersion>
+	  <TargetFramework>net6</TargetFramework>
+	  <LangVersion>9</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release;DebugToolbox</Configurations>
