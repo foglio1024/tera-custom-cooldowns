@@ -13,12 +13,12 @@
       xcopy $(SolutionDir)\TCC.Core\Module\index.js $(SolutionDir)\release\ /y /i
       xcopy $(SolutionDir)\TCC.Core\Module\module.json $(SolutionDir)\release\ /y /i
       xcopy $(SolutionDir)\TCC.Core\Module\ $(SolutionDir)\release\ /y /s 
-      node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
+      node E:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
     <PostBuildEvent>
-      xcopy $(SolutionDir)\TCC.Core\Module\ "D:\TERA\TERAToolbox\mods\TCC\" /y /s
+      xcopy $(SolutionDir)\TCC.Core\Module\ "E:\TERA\TERAToolbox\mods\TCC\" /y /s
     </PostBuildEvent>
     </PropertyGroup>
 </Project>

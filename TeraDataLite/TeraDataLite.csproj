@@ -17,6 +17,6 @@
     <OutputPath>..\TCC.Core\bin\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
-    <OutputPath>D:\TERA\TeraToolbox\mods\TCC</OutputPath>
+    <OutputPath>E:\TERA\TeraToolbox\mods\TCC</OutputPath>
   </PropertyGroup>
 </Project>

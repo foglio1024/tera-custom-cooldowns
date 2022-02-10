@@ -17,7 +17,7 @@
     <PostBuildEvent>del "$(SolutionDir)\release\*.xml"
 xcopy $(SolutionDir)\TCC.Core\Module\index.js $(SolutionDir)\release\ /y /i
 xcopy $(SolutionDir)\TCC.Core\Module\module.json $(SolutionDir)\release\ /y /i
-node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
+node E:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
 </PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
@@ -33,11 +33,11 @@ node D:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
     <None Include="App.config" Visible="False" />
     <None Include="packages.config" Visible="False" />
     <ProjectReference Include="..\TCC.Utils\TCC.Utils.csproj" />
-    <None Update="D:\Repos\tcc_publisher_settings.json">
+    <None Update="E:\Repos\tcc_publisher_settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="xcopy D:\Repos\tcc_publisher_settings.json $(OutDir) /y /i" />
+    <Exec Command="xcopy E:\Repos\tcc_publisher_settings.json $(OutDir) /y /i" />
   </Target>
 </Project>
