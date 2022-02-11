@@ -134,7 +134,7 @@ namespace TCC
 
             // ----------------------------
             SplashScreen.VM.Progress = 10;
-            SplashScreen.VM.BottomText = "Loading settings...";
+            SplashScreen.VM.BottomText = Random.NextDouble() <= 0.4 ? "Complaining because I'm too lazy to keep updating this..." : "Loading settings...";
             Settings = SettingsContainer.Load();
             WindowManager.InitSettingsWindow(); // need it in case language is not correct
             SplashScreen.VM.Progress = 20;
@@ -148,26 +148,26 @@ namespace TCC
 
             // ----------------------------
             SplashScreen.VM.Progress = 30;
-            SplashScreen.VM.BottomText = "Pre-loading databases...";
+            SplashScreen.VM.BottomText = Random.NextDouble() <= 0.4 ? "WTB <Patch 28> /w me" : "Pre-loading databases...";
             UpdateManager.CheckDatabaseHash();
             SplashScreen.VM.Progress = 40;
             await Game.InitAsync();
 
             // ----------------------------
             SplashScreen.VM.Progress = 50;
-            SplashScreen.VM.BottomText = "Initializing widgets...";
+            SplashScreen.VM.BottomText = Random.NextDouble() <= 0.4 ? "WTS <Mark of Bloodshed> 40k /w me" : "Initializing widgets...";
             await WindowManager.Init();
             SplashScreen.VM.Progress = 60;
             StartDispatcherWatcher();
 
             // ----------------------------
             SplashScreen.VM.Progress = 70;
-            SplashScreen.VM.BottomText = "Checking for icon database updates...";
+            SplashScreen.VM.BottomText = Random.NextDouble() <= 0.4 ? "Ok but where is my flying EX-TRM????" : "Checking for icon database updates...";
             _ = Task.Run(() => new IconsUpdater().CheckForUpdates());
 
             // ----------------------------
             SplashScreen.VM.Progress = 80;
-            SplashScreen.VM.BottomText = "Initializing packet processor...";
+            SplashScreen.VM.BottomText = Random.NextDouble() <= 0.4 ? "Just move to Genshin Impact :kekw:" : "Initializing packet processor...";
             PacketAnalyzer.ProcessorReady += LoadModules;
             PacketAnalyzer.InitServerDatabase(DataPath, Path.Combine(ResourcesPath, "config/server-overrides.txt"), string.IsNullOrEmpty(Settings.LastLanguage)
                 ? "EU-EN"
@@ -181,7 +181,7 @@ namespace TCC
 
             // ----------------------------
             SplashScreen.VM.Progress = 90;
-            SplashScreen.VM.BottomText = "Starting";
+            SplashScreen.VM.BottomText = Random.NextDouble() <= 0.4 ? "Imagine unironically playing TERA :^)" : "Starting";
             GameEventManager.Instance.SetServerTimeZone(Settings.LastLanguage);
             UpdateManager.StartPeriodicCheck();
 
