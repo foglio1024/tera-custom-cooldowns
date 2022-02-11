@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Nostrum.WPF.Factories;
+using TCC.Utilities;
 
 namespace TCC.UI.Windows
 {
@@ -26,7 +27,11 @@ namespace TCC.UI.Windows
         {
             try
             {
-                BeginAnimation(TopProperty, AnimationFactory.CreateDoubleAnimation(500, Screen.FromRectangle(new System.Drawing.Rectangle((int)Left, (int)Top, (int)Width, (int)Height)).Bounds.Height / 2 - ActualHeight / 2 - 40, easing: true));
+                var screen = Screen.FromRectangle(new System.Drawing.Rectangle((int)Left, (int)Top, (int)Width, (int)Height));
+                var bounds = screen.Bounds;
+                var (_, dpiY) = TccUtils.GetDPI(this);
+                var top = (bounds.Height / 2 - ActualHeight / 2 - 40 )/ dpiY;
+                BeginAnimation(TopProperty, AnimationFactory.CreateDoubleAnimation(500, to: top, easing: true));
             }
             catch { }
         }

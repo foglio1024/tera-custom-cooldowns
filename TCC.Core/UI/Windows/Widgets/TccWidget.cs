@@ -15,6 +15,7 @@ using Nostrum.WPF.Factories;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 using TCC.UI.Controls;
+using TCC.Utilities;
 using TCC.Utils;
 using Size = System.Drawing.Size;
 
@@ -161,8 +162,10 @@ namespace TCC.UI.Windows.Widgets
         {
             Dispatcher?.Invoke(() =>
             {
-                Left = FocusManager.TeraScreen.Bounds.X + FocusManager.TeraScreen.Bounds.Width / 2 - ActualWidth / 2;
-                Top = FocusManager.TeraScreen.Bounds.Y + FocusManager.TeraScreen.Bounds.Height / 2 - ActualHeight / 2;
+                var (dpiX, dpiY) = TccUtils.GetDPI(this);
+
+                Left = (FocusManager.TeraScreen.Bounds.X + FocusManager.TeraScreen.Bounds.Width / 2 - ActualWidth / 2)/dpiX;
+                Top = (FocusManager.TeraScreen.Bounds.Y + FocusManager.TeraScreen.Bounds.Height / 2 - ActualHeight / 2) / dpiY;
                 SetRelativeCoordinates();
             });
         }

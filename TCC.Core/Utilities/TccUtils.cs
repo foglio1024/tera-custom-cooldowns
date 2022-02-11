@@ -339,5 +339,18 @@ namespace TCC.Utilities
             var field = t.GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
             if (field != null) field.SetValue(null, false);
         }
+
+        public static (double, double) GetDPI(Visual visual)
+        {
+            double dpiX = 1, dpiY = 1;
+
+            if (PresentationSource.FromVisual(visual) is PresentationSource source)
+            {
+                dpiX = source.CompositionTarget.TransformToDevice.M11;
+                dpiY = source.CompositionTarget.TransformToDevice.M22;
+            }
+
+            return (dpiX, dpiY);
+        }
     }
 }
