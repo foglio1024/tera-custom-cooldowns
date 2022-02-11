@@ -29,8 +29,8 @@ namespace TCC.UI.Windows
             {
                 var screen = Screen.FromRectangle(new System.Drawing.Rectangle((int)Left, (int)Top, (int)Width, (int)Height));
                 var bounds = screen.Bounds;
-                var (_, dpiY) = TccUtils.GetDPI(this);
-                var top = (bounds.Height / 2 - ActualHeight / 2 - 40 )/ dpiY;
+                var dpi = TccUtils.GetDPI(this);
+                var top = (bounds.Height / 2 - ActualHeight / 2 - 40 )/ dpi.DpiScaleY;
                 BeginAnimation(TopProperty, AnimationFactory.CreateDoubleAnimation(500, to: top, easing: true));
             }
             catch { }

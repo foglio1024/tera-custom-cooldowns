@@ -340,7 +340,7 @@ namespace TCC.Utilities
             if (field != null) field.SetValue(null, false);
         }
 
-        public static (double, double) GetDPI(Visual visual)
+        public static DpiScale GetDPI(Visual visual)
         {
             double dpiX = 1, dpiY = 1;
 
@@ -350,7 +350,7 @@ namespace TCC.Utilities
                 dpiY = source.CompositionTarget.TransformToDevice.M22;
             }
 
-            return (dpiX, dpiY);
+            return new DpiScale(dpiX, dpiY);
         }
     }
 }
