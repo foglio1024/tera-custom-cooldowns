@@ -6,7 +6,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
-    <Configurations>Debug;Release;DebugToolbox</Configurations>
+    <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
     <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
     <IncludeSymbolsInSingleFile>true</IncludeSymbolsInSingleFile>
     <OutputType>WinExe</OutputType>
@@ -33,6 +33,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
+	  <OutputPath>E:\MTERA\proxy\mods\TCC</OutputPath>
+	  <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\release\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>

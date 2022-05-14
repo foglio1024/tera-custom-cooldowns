@@ -3,6 +3,7 @@
   <PropertyGroup>
 	  <TargetFramework>net6-windows</TargetFramework>
 	  <Nullable>enable</Nullable>
+	  <Configurations>Debug;Release;DebugMenma</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

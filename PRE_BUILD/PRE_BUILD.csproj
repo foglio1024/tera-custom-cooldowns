@@ -4,7 +4,7 @@
 	  <LangVersion>9</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <Configurations>Debug;Release;DebugToolbox</Configurations>
+    <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)\clean-TargetDir.bat $(SolutionDir)release\</PreBuildEvent>

@@ -6,7 +6,7 @@
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9</LangVersion>
-    <Configurations>Debug;Release;DebugToolbox</Configurations>
+    <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -18,6 +18,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
 	  <OutputPath>D:\Program Files\TERA\TeraToolbox\mods\TCC</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
+    <OutputPath>D:\Program Files\TERA\TeraToolbox\mods\TCC</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Nostrum" Version="1.2.15" />

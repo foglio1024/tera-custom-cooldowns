@@ -4,7 +4,7 @@
     <LangVersion>9</LangVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PreserveCompilationContext>false</PreserveCompilationContext>
-    <Configurations>Debug;Release;DebugToolbox</Configurations>
+    <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PostBuildEvent>
@@ -21,4 +21,9 @@
 		xcopy $(SolutionDir)\TCC.Core\Module\ "D:\Program Files\TERA\TeraToolbox\mods\TCC\" /y /s
 	</PostBuildEvent>
     </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
+    <PostBuildEvent>
+		xcopy $(SolutionDir)\TCC.Core\Module\ "E:\MTERA\proxy\mods\TCC\" /y /s
+	</PostBuildEvent>
+  </PropertyGroup>
 </Project>
