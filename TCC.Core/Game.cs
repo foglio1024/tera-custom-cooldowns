@@ -374,7 +374,7 @@ namespace TCC
         private static void OnConnected(Server server)
         {
             Server = server;
-            if (App.Settings.DontShowFUBH == false) App.FUBH();
+            //if (App.Settings.DontShowFUBH == false) App.FUBH();
 
             WindowManager.TrayIcon.Connected = true;
             WindowManager.TrayIcon.Text = $"{App.AppVersion} - connected";

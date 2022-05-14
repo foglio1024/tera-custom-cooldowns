@@ -12,3 +12,5 @@
 # Lines starting with '#' are ignored
 # Place servers below the next line
 ###########################################################
+
+46.105.161.204 EU 2800 Menma's TERA

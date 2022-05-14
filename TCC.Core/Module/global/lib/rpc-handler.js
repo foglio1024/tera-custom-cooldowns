@@ -292,7 +292,7 @@ class RpcHandler {
         this.debug(`Sent C_RETURN_TO_LOBBY`);
     }
     chatLinkAction(params) {
-        this.currNetworkMod.send("S_CHAT", 4, {
+        this.currNetworkMod.send("S_CHAT", 3, {
             channel: 18,
             name: "tccChatLink",
             message: params.linkData

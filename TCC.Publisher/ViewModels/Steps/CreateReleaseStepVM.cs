@@ -19,18 +19,19 @@ namespace TCC.Publisher.ViewModels.Steps
         protected override async void Execute()
         {
             VM.Progress = 5 / 0.07;
-            var confirm = MessageBox.Show("Confirm release creation?", "TCC publisher", MessageBoxButton.YesNo);
-            if (confirm != MessageBoxResult.Yes) return;
-            if (string.IsNullOrWhiteSpace(VM.ReleaseNotes))
-            {
-                var emptyNotesConf = MessageBox.Show("Changelog field is empty, continue anyway?",
-                    "TCC publisher", MessageBoxButton.YesNo);
-                if (emptyNotesConf != MessageBoxResult.Yes) return;
-            }
 
-            await Publisher.Instance.CreateRelease(VM.ReleaseNotes);
+            //var confirm = MessageBox.Show("Confirm release creation?", "TCC publisher", MessageBoxButton.YesNo);
+            //if (confirm != MessageBoxResult.Yes) return;
+            //if (string.IsNullOrWhiteSpace(VM.ReleaseNotes))
+            //{
+            //    var emptyNotesConf = MessageBox.Show("Changelog field is empty, continue anyway?",
+            //        "TCC publisher", MessageBoxButton.YesNo);
+            //    if (emptyNotesConf != MessageBoxResult.Yes) return;
+            //}
 
-            ReleaseCreatedLabel = "Release created";
+            //await Publisher.Instance.CreateRelease(VM.ReleaseNotes);
+
+            ReleaseCreatedLabel = "Release skipped";
             VM.Progress = 6 / 0.07;
             Completed = true;
         }

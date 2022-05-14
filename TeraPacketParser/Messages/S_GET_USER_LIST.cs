@@ -11,6 +11,7 @@ namespace TeraPacketParser.Messages
 
         public S_GET_USER_LIST(TeraMessageReader reader) : base(reader)
         {
+            reader.RepositionAt(4);
             CharacterList = new List<CharacterData>();
             var count = reader.ReadInt16();
             var next = reader.ReadInt16();
@@ -27,8 +28,11 @@ namespace TeraPacketParser.Messages
                 reader.Skip(4);
 
                 var nameOffset = reader.ReadInt16();
-
-                reader.Skip(8); //array offsets and counts
+                var detailsOffset = reader.ReadInt16();
+                var detailsCount = reader.ReadInt16();
+                var shapeOffset = reader.ReadInt16();
+                var shapeCount = reader.ReadInt16();
+                //reader.Skip(4); //array offsets and counts
 
                 var guildOffset = reader.ReadInt16();
 
@@ -46,7 +50,12 @@ namespace TeraPacketParser.Messages
                 c.LastSectionId = reader.ReadUInt32();
                 reader.Skip(4); // dungeon gauntlet difficulty id
                 c.LastOnline = reader.ReadInt64();
-                reader.Skip(367);
+                var isDeleting = reader.ReadBoolean();
+                var deleteTime = reader.ReadInt64();
+                var deleteRemainSec = reader.ReadInt32();
+                reader.Skip(4*12); // weapon to face
+                var custom = reader.ReadBytes(8);
+                reader.Skip(298);
                 c.Laurel = (Laurel)reader.ReadInt32();
                 c.Position = reader.ReadInt32();
                 c.GuildId = reader.ReadUInt32();
@@ -59,6 +68,11 @@ namespace TeraPacketParser.Messages
                     c.GuildName = reader.ReadTeraString();
                 }
                 catch { }
+
+                reader.RepositionAt(detailsOffset);
+                var details = reader.ReadBytes(detailsCount);
+                reader.RepositionAt(shapeOffset);
+                var shape = reader.ReadBytes(shapeCount);
                 CharacterList.Add(c);
                 //CharacterList.Add(new Character(c.Name, (Class)c.CharClass, c.Id, c.Pos)
                 //{
