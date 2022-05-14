@@ -340,6 +340,7 @@ namespace TCC.Utilities
             if (field != null) field.SetValue(null, false);
         }
 
+        //todo: move to nostrum
         public static DpiScale GetDPI(Visual visual)
         {
             double dpiX = 1, dpiY = 1;

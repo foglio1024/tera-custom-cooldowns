@@ -224,7 +224,7 @@ namespace TCC.ViewModels
         {
             Task.Run(() =>
             {
-                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : (ChatChannel)m.Channel, m.Name, m.Message, m.PlayerId, m.ServerId, m.IsGm, m.GameId));
+                AddChatMessage(Factory.CreateMessage(m.Channel == 212 ? (ChatChannel)26 : (ChatChannel)m.Channel, m.Name, m.Message, (uint)m.PlayerId, (uint)m.ServerId, m.IsGm, m.GameId));
             });
         }
 

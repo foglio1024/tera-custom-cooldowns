@@ -23,6 +23,8 @@ namespace TeraPacketParser.Messages
             {
                 PlayerId = reader.ReadUInt32();
                 ServerId = reader.ReadUInt32();
+                if(PlayerId == uint.MaxValue) PlayerId = 0;
+                if(ServerId == uint.MaxValue) ServerId = 0;
             }
             reader.Skip(1);
             IsGm = reader.ReadBoolean();
