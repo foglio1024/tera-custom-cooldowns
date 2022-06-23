@@ -29,9 +29,9 @@ namespace TCC.Publisher.ViewModels.Steps
             //    if (emptyNotesConf != MessageBoxResult.Yes) return;
             //}
 
-            //await Publisher.Instance.CreateRelease(VM.ReleaseNotes);
+            await Publisher.Instance.CreateRelease(VM.ReleaseNotes);
 
-            ReleaseCreatedLabel = "Release skipped";
+            ReleaseCreatedLabel = "Release created";
             VM.Progress = 6 / 0.07;
             Completed = true;
         }
