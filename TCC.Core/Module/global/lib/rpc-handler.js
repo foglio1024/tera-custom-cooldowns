@@ -9,11 +9,6 @@ class RpcHandler {
         this.mod = mod;
     }
 
-    debug(msg) {
-        //if (!this.mod.settings.debug) return;
-        //this.mod.command.message(`<font color="#fff1b5">${msg}</font>`);
-    }
-
     setNetworkMod(networkMod) {
         this.currNetworkMod = networkMod.mod;
     }
@@ -23,7 +18,7 @@ class RpcHandler {
     }
 
     dumpSysMsg(params) {
-        this.debug(`Dumping sysmsg`);
+        Globals.debug(`Dumping sysmsg`);
 
         let ret = true;
         let sysmsg = "";
@@ -41,16 +36,16 @@ class RpcHandler {
     }
 
     pingStub(params) {
-        this.debug(`Ping received`);
+        Globals.debug(`Ping received`);
         return true;
     }
     getIsModAvailable(params) {
-        this.debug(`Checking mod available: ${params.modName}`);
+        Globals.debug(`Checking mod available: ${params.modName}`);
         return this.mod.manager.isLoaded(params.modName);
     }
     resetInstance(params) {
         this.currNetworkMod.send("C_RESET_ALL_DUNGEON", 1, {});
-        this.debug("Sent C_RESET_ALL_DUNGEON");
+        Globals.debug("Sent C_RESET_ALL_DUNGEON");
     }
     requestPartyInfo(params) {
         if (this.currNetworkMod.majorPatchVersion >= 108) {
@@ -66,7 +61,7 @@ class RpcHandler {
                 playerId: params.playerId
             });
         }
-        this.debug("Sent C_REQUEST_PARTY_INFO");
+        Globals.debug("Sent C_REQUEST_PARTY_INFO");
     }
     applyToGroup(params) {
         if (this.currNetworkMod.majorPatchVersion >= 108) {
@@ -84,7 +79,7 @@ class RpcHandler {
         }
 
 
-        this.debug(`Sent C_APPLY_PARTY { playerId : ${params.listingId}}`);
+        Globals.debug(`Sent C_APPLY_PARTY { playerId : ${params.listingId}}`);
         return true;
     }
     friendUser(params) {
@@ -92,7 +87,7 @@ class RpcHandler {
             name: params.userName,
             message: params.message
         });
-        this.debug(`Sent C_ADD_FRIEND`);
+        Globals.debug(`Sent C_ADD_FRIEND`);
     }
     unfriendUser(params) {
         if (this.currNetworkMod.majorPatchVersion >= 103) {
@@ -105,20 +100,20 @@ class RpcHandler {
                 name: params.userName
             });
         }
-        this.debug(`Sent C_DELETE_FRIEND`);
+        Globals.debug(`Sent C_DELETE_FRIEND`);
     }
     blockUser(params) {
         this.currNetworkMod.send("C_BLOCK_USER", 2, {
             serverId: params.serverId,
             name: params.userName
         });
-        this.debug(`Sent C_BLOCK_USER`);
+        Globals.debug(`Sent C_BLOCK_USER`);
     }
     unblockUser(params) {
         this.currNetworkMod.send("C_REMOVE_BLOCKED_USER", 1, {
             name: params.userName
         });
-        this.debug(`Sent C_REMOVE_BLOCKED_USER`);
+        Globals.debug(`Sent C_REMOVE_BLOCKED_USER`);
     }
     setInvitePower(params) {
         this.currNetworkMod.send("C_CHANGE_PARTY_MEMBER_AUTHORITY", 1, {
@@ -126,21 +121,21 @@ class RpcHandler {
             playerId: params.playerId,
             canInvite: params.canInvite
         });
-        this.debug(`Sent C_CHANGE_PARTY_MEMBER_AUTHORITY`);
+        Globals.debug(`Sent C_CHANGE_PARTY_MEMBER_AUTHORITY`);
     }
     delegateLeader(params) {
         this.currNetworkMod.send("C_CHANGE_PARTY_MANAGER", 2, {
             serverId: params.serverId,
             playerId: params.playerId
         });
-        this.debug(`Sent C_CHANGE_PARTY_MANAGER`);
+        Globals.debug(`Sent C_CHANGE_PARTY_MANAGER`);
     }
     kickUser(params) {
         this.currNetworkMod.send("C_BAN_PARTY_MEMBER", 1, {
             serverId: params.serverId,
             playerId: params.playerId
         });
-        this.debug(`Sent C_BAN_PARTY_MEMBER`);
+        Globals.debug(`Sent C_BAN_PARTY_MEMBER`);
     }
     inspectUser(params) {
         if (this.currNetworkMod.majorPatchVersion >= 108) {
@@ -158,13 +153,13 @@ class RpcHandler {
                 zoom: false
             });
         }
-        this.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO`);
+        Globals.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO`);
     }
     inspectUserWithGameId(params) {
         this.currNetworkMod.send("C_REQUEST_USER_PAPERDOLL_INFO_WITH_GAMEID", 3, {
             gameId: params.gameId
         });
-        this.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO_WITH_GAMEID`);
+        Globals.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO_WITH_GAMEID`);
     }
     groupInviteUser(params) {
         var dataArray = new Buffer.alloc(1, Number(params.isRaid));
@@ -173,13 +168,13 @@ class RpcHandler {
             name: params.userName,
             data: dataArray
         });
-        this.debug(`Sent C_REQUEST_CONTRACT`);
+        Globals.debug(`Sent C_REQUEST_CONTRACT`);
     }
     guildInviteUser(params) {
         this.currNetworkMod.send("C_INVITE_USER_TO_GUILD", 1, {
             name: params.userName
         });
-        this.debug(`Sent C_INVITE_USER_TO_GUILD`);
+        Globals.debug(`Sent C_INVITE_USER_TO_GUILD`);
     }
     acceptBrokerOffer(params) {
         const data = Buffer.alloc(30);
@@ -189,14 +184,14 @@ class RpcHandler {
             type: 35,
             data
         });
-        this.debug(`Sent C_REQUEST_CONTRACT`);
+        Globals.debug(`Sent C_REQUEST_CONTRACT`);
     }
     declineBrokerOffer(params) {
         this.currNetworkMod.send("C_TRADE_BROKER_REJECT_SUGGEST", 1, {
             playerId: params.playerId,
             listing: params.listingId
         });
-        this.debug(`Sent C_TRADE_BROKER_REJECT_SUGGEST`);
+        Globals.debug(`Sent C_TRADE_BROKER_REJECT_SUGGEST`);
     }
     declineUserGroupApply(params) {
         this.currNetworkMod.send("C_PARTY_APPLICATION_DENIED", 2, {
@@ -204,11 +199,11 @@ class RpcHandler {
             serverId: params.serverId
 
         });
-        this.debug(`Sent C_PARTY_APPLICATION_DENIED`);
+        Globals.debug(`Sent C_PARTY_APPLICATION_DENIED`);
     }
     publicizeListing(params) {
         this.currNetworkMod.send("C_REQUEST_PARTY_MATCH_LINK", 1, {});
-        this.debug(`Sent C_REQUEST_PARTY_MATCH_LINK`);
+        Globals.debug(`Sent C_REQUEST_PARTY_MATCH_LINK`);
     }
     removeListing(params) {
         this.currNetworkMod.send("C_UNREGISTER_PARTY_INFO", 1, {
@@ -217,11 +212,11 @@ class RpcHandler {
             maxLevel: 65,
             unk3: 3
         });
-        this.debug(`Sent C_UNREGISTER_PARTY_INFO`);
+        Globals.debug(`Sent C_UNREGISTER_PARTY_INFO`);
     }
     requestListings(params) {
         this.currNetworkMod.send("C_PARTY_MATCH_WINDOW_CLOSED", 1, {});
-        this.debug(`Sent C_PARTY_MATCH_WINDOW_CLOSED`);
+        Globals.debug(`Sent C_PARTY_MATCH_WINDOW_CLOSED`);
 
         let min = params.minLevel;
         let max = params.maxLevel;
@@ -234,7 +229,7 @@ class RpcHandler {
             maxlvl: max,
             unk2: 3
         });
-        this.debug(`Sent C_REQUEST_PARTY_MATCH_INFO`);
+        Globals.debug(`Sent C_REQUEST_PARTY_MATCH_INFO`);
 
     }
     requestListingsPage(params) {
@@ -242,7 +237,7 @@ class RpcHandler {
             page: params.page,
             unk1: 3
         });
-        this.debug(`Sent C_REQUEST_PARTY_MATCH_INFO_PAGE`);
+        Globals.debug(`Sent C_REQUEST_PARTY_MATCH_INFO_PAGE`);
     }
     askInteractive(params) {
         this.currNetworkMod.send("C_ASK_INTERACTIVE", 2, {
@@ -250,7 +245,7 @@ class RpcHandler {
             serverId: params.serverId,
             name: params.userName
         });
-        this.debug(`Sent C_ASK_INTERACTIVE { serverId: ${params.serverId}, name: ${params.userName} }`);
+        Globals.debug(`Sent C_ASK_INTERACTIVE { serverId: ${params.serverId}, name: ${params.userName} }`);
     }
     requestExTooltip(params) {
         this.currNetworkMod.send("C_SHOW_ITEM_TOOLTIP_EX", this.currNetworkMod.majorPatchVersion >= 106 ? 6 : 5, {
@@ -259,55 +254,56 @@ class RpcHandler {
             playerId: -1,
             owner: params.ownerName
         });
-        this.debug(`Sent C_SHOW_ITEM_TOOLTIP_EX`);
+        Globals.debug(`Sent C_SHOW_ITEM_TOOLTIP_EX`);
 
     }
     requestNonDbItemInfo(params) {
         this.currNetworkMod.send("C_REQUEST_NONDB_ITEM_INFO", 2, {
             item: params.itemId
         });
-        this.debug(`Sent C_REQUEST_NONDB_ITEM_INFO`);
+        Globals.debug(`Sent C_REQUEST_NONDB_ITEM_INFO`);
     }
     registerListing(params) {
         this.currNetworkMod.send("C_REGISTER_PARTY_INFO", 1, {
             isRaid: params.isRaid,
             message: params.message
         });
-        this.debug(`Sent C_REGISTER_PARTY_INFO`);
+        Globals.debug(`Sent C_REGISTER_PARTY_INFO`);
     }
     disbandGroup(params) {
         this.currNetworkMod.send("C_DISMISS_PARTY", 1, {});
-        this.debug(`Sent C_DISMISS_PARTY`);
+        Globals.debug(`Sent C_DISMISS_PARTY`);
     }
     leaveGroup(params) {
         this.currNetworkMod.send("C_LEAVE_PARTY", 1, {});
-        this.debug(`Sent C_LEAVE_PARTY`);
+        Globals.debug(`Sent C_LEAVE_PARTY`);
     }
     requestListingCandidates(params) {
         this.currNetworkMod.send("C_REQUEST_CANDIDATE_LIST", 1, {});
-        this.debug(`Sent C_REQUEST_CANDIDATE_LIST`);
+        Globals.debug(`Sent C_REQUEST_CANDIDATE_LIST`);
     }
     forceSystemMessage(params) {
         this.currNetworkMod.send("S_SYSTEM_MESSAGE", 1, {
             message: params.message
         });
-        this.debug(`Sent S_SYSTEM_MESSAGE`);
+        Globals.debug(`Sent S_SYSTEM_MESSAGE`);
     }
     invokeCommand(params) {
         this.mod.command.exec(params.command);
-        this.debug(`Invoking command: ${params.command}`);
+        Globals.debug(`Invoking command: ${params.command}`);
     }
     returnToLobby(params) {
         this.currNetworkMod.send("C_RETURN_TO_LOBBY", 1, {});
-        this.debug(`Sent C_RETURN_TO_LOBBY`);
+        Globals.debug(`Sent C_RETURN_TO_LOBBY`);
     }
     chatLinkAction(params) {
-        this.currNetworkMod.send("S_CHAT", 3, {
+
+        this.currNetworkMod.send("S_CHAT", this.currNetworkMod.majorPatchVersion >= 108 ? 4 : 3, {
             channel: 18,
             name: "tccChatLink",
             message: params.linkData
         });
-        this.debug(`Calling chatLinkAction: ${params.linkData}`);
+        Globals.debug(`Calling chatLinkAction: ${params.linkData}`);
     }
     updateSetting(params) // bool only, send type if needed for other setting
     {

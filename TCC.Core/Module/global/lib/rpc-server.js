@@ -1,16 +1,10 @@
 const { Helpers } = require("./helpers");
 const { RpcHandler } = require("./rpc-handler");
 const http = require("http");
+const { Globals } = require("./globals");
 
 class RpcServer
 {
-    debug(msg)
-    {
-        //if (!this.mod.settings.debug) return;
-        //this.mod.command.message(`<font color="#fff1b5">${msg}</font>`);
-        //this.mod.log(`${msg}`);
-    }
-
     setNetworkMod(networkMod) {
         this.handler.setNetworkMod(networkMod);
     }
@@ -19,7 +13,7 @@ class RpcServer
     {
         this.mod = mod;
         
-        this.debug("Creating rpc server");
+        Globals.debug("Creating rpc server");
         this.isRunning = false;
         this.handler = new RpcHandler(mod);
         this.server = http.createServer((req, res) =>
@@ -77,12 +71,12 @@ class RpcServer
 
     start()
     {
-        this.debug("Starting rpc server");
+        Globals.debug("Starting rpc server");
         this.server.listen(9550, "127.0.0.52", () => { });
     }
     stop()
     {
-        this.debug("Stopping rpc server");
+        Globals.debug("Stopping rpc server");
         this.server.removeAllListeners();
         this.server.close();
     }

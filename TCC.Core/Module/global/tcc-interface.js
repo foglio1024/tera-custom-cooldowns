@@ -1,5 +1,7 @@
 const net = require("net");
 const { RpcServer } = require("./lib/rpc-server");
+const { Globals } = require("./lib/globals");
+
 // TODO: move these to settings ------
 const address = "127.0.0.51";
 const port = 9551;
@@ -11,6 +13,7 @@ class TccInterface {
     constructor(mod) {
         this.nextId = 1;
         this.mod = mod;
+        Globals.setLogging(mod);
         this.server = new RpcServer(mod);
         this.server.start();
 
