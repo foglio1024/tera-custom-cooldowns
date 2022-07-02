@@ -78,6 +78,7 @@ namespace TeraPacketParser
             { nameof(S_ACCOMPLISH_ACHIEVEMENT),                Constructor<Func<TeraMessageReader, S_ACCOMPLISH_ACHIEVEMENT>>() },
             { nameof(S_TRADE_BROKER_DEAL_SUGGESTED),           Constructor<Func<TeraMessageReader, S_TRADE_BROKER_DEAL_SUGGESTED>>() },
             { nameof(S_UPDATE_FRIEND_INFO),                    Constructor<Func<TeraMessageReader, S_UPDATE_FRIEND_INFO>>() },
+            { nameof(S_CHANGE_FRIEND_STATE),                   Constructor<Func<TeraMessageReader, S_CHANGE_FRIEND_STATE>>() },
             { nameof(S_PARTY_MATCH_LINK),                      Constructor<Func<TeraMessageReader, S_PARTY_MATCH_LINK>>() },
             { nameof(S_PARTY_MEMBER_INFO),                     Constructor<Func<TeraMessageReader, S_PARTY_MEMBER_INFO>>() },
             { nameof(S_OTHER_USER_APPLY_PARTY),                Constructor<Func<TeraMessageReader, S_OTHER_USER_APPLY_PARTY>>() },

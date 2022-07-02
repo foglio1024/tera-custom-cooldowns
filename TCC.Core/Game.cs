@@ -47,6 +47,7 @@ namespace TCC
         public static readonly Dictionary<ulong, Tuple<string, Class>> NearbyPlayers = new();
         public static readonly GroupInfo Group = new();
         public static readonly GuildInfo Guild = new();
+        public static readonly FriendList Friends = new();
         public static Server Server { get; private set; } = new("Unknown", "Unknown", "0.0.0.0", 0);
         public static Account Account { get; set; } = new();
         public static string Language => PacketAnalyzer.ServerDatabase.StringLanguage;
@@ -118,7 +119,6 @@ namespace TCC
         }
 
         public static int CurrentZoneId { get; private set; }
-        public static List<FriendData> FriendList { get; private set; } = new();
         public static List<string> BlockList { get; } = new();
         public static AbnormalityTracker CurrentAbnormalityTracker { get; private set; } = new();
 
@@ -290,6 +290,7 @@ namespace TCC
             PacketAnalyzer.Processor.Hook<S_ACCOUNT_PACKAGE_LIST>(OnAccountPackageList);
             PacketAnalyzer.Processor.Hook<S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA>(OnNotifyToFriendsWalkIntoSameArea);
             PacketAnalyzer.Processor.Hook<S_UPDATE_FRIEND_INFO>(OnUpdateFriendInfo);
+            PacketAnalyzer.Processor.Hook<S_CHANGE_FRIEND_STATE>(OnChangeFriendState);
             PacketAnalyzer.Processor.Hook<S_ACCOMPLISH_ACHIEVEMENT>(OnAccomplishAchievement);
             PacketAnalyzer.Processor.Hook<S_SYSTEM_MESSAGE_LOOT_ITEM>(OnSystemMessageLootItem);
             PacketAnalyzer.Processor.Hook<S_SYSTEM_MESSAGE>(OnSystemMessage);
@@ -624,10 +625,13 @@ namespace TCC
             FlyingGuardianDataProvider.InvokeProgressChanged();
         }
 
-        private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO x)
+        private static void OnChangeFriendState(S_CHANGE_FRIEND_STATE p)
         {
-            if (!x.Online) return;
-            SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{x.Name}", "SMT_FRIEND_IS_CONNECTED");
+            Log.Chat($"Changed friend state: {p.PlayerId} {p.FriendStatus}");
+        }
+        private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO p)
+        {
+            Friends.UpdateFriendInfo(p.FriendUpdates);
         }
 
         private static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
@@ -693,19 +697,19 @@ namespace TCC
             switch (p.Name)
             {
                 case "Foglio":
-                case "Fogolio":
-                case "Foglietto":
-                case "Foglia":
-                case "Myvia":
-                case "Foglietta.Blu":
-                case "Foglia.Trancer":
-                case "Folyria":
-                case "Folyvia":
-                case "Fogliolina":
-                case "Folyemi":
-                case "Foiya":
-                case "Fogliarya":
-                    if (p.ServerId != 27) break;
+                //case "Fogolio":
+                //case "Foglietto":
+                //case "Foglia":
+                //case "Myvia":
+                //case "Foglietta.Blu":
+                //case "Foglia.Trancer":
+                //case "Folyria":
+                //case "Folyvia":
+                //case "Fogliolina":
+                //case "Folyemi":
+                //case "Foiya":
+                //case "Fogliarya":
+                    if (p.ServerId != 2800) break;
                     if (CivilUnrestZone) break;
                     _foglioEid = p.EntityId;
                     var ab = DB!.AbnormalityDatabase.Abnormalities[10241024];
@@ -958,7 +962,7 @@ namespace TCC
             Encounter = false;
             Account.LoginCharacter(m.PlayerId);
             Guild.Clear();
-            FriendList.Clear();
+            Friends.Clear();
             BlockList.Clear();
 
             Server = PacketAnalyzer.ServerDatabase.GetServer(m.ServerId);
@@ -1084,24 +1088,12 @@ namespace TCC
 
         private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
         {
-            var friend = FriendList.FirstOrDefault(f => f.PlayerId == x.PlayerId);
-            if (friend.Equals(default(FriendData))) return;
-            var areaName = x.SectionId.ToString();
-            try
-            {
-                areaName = DB!.RegionsDatabase.GetZoneName(DB.MapDatabase.Worlds[x.WorldId].Guards[x.GuardId].Sections[x.SectionId].NameId);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-
-            SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{friend.Name}\vAreaName\v{areaName}", "SMT_FRIEND_WALK_INTO_SAME_AREA");
+            Friends.NotifyWalkInSameArea(x.PlayerId, x.WorldId, x.GuardId, x.SectionId);
         }
 
         private static void OnFriendList(S_FRIEND_LIST m)
         {
-            FriendList = m.Friends;
+            Friends.SetFrom(m.Friends);
         }
 
         private static void OnUserBlockList(S_USER_BLOCK_LIST m)

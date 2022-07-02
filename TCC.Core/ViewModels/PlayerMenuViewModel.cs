@@ -168,7 +168,7 @@ namespace TCC.ViewModels
 
         public bool IsBlocked => _name != "" && Game.BlockList.Contains(_name);
 
-        public bool IsFriend => !Game.FriendList.FirstOrDefault(x => x.Name == _name).Equals(default(FriendData));
+        public bool IsFriend => !Game.Friends.Has(_name);
 
         public bool ShowFpsUtils => StubInterface.Instance.IsStubAvailable
                                  && StubInterface.Instance.IsFpsModAvailable;
@@ -321,9 +321,7 @@ namespace TCC.ViewModels
                         Game.BlockList.Add(Name);
                         try
                         {
-                            var i = Game.FriendList.IndexOf(Game.FriendList.FirstOrDefault(x => x.Name == Name));
-                            if (i != -1)
-                                Game.FriendList.RemoveAt(i);
+                            Game.Friends.Remove(Name);
                         }
                         catch (Exception e)
                         {
