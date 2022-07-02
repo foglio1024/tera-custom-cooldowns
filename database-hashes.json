@@ -1,7 +1,7 @@
 {
   "default-dungeon-defs.tsv": "4962aa372b67922587376262e17296fdcc49bfbd58ba93784219cf9ad8e38e8c",
   "section_images.tsv": "303863ecd63a566547b609670aab15501eaf513254f38f5444f1878a2ff4b36a",
-  "servers.txt": "0205541fe4f734770dcda81ef20f61f7686c4c005b96884170de54415c4a0a1c",
+  "servers.txt": "78e7917caa1dacf82a0840f638f50eb4bda3e426899c4a496e86d4a3a9834f1f",
   "acc_benefits/acc_benefits-EU-EN.tsv": "84b75b25aeb2c7db731060ac1ecded13c04f19443e381e2e8b740c7f09c97d19",
   "acc_benefits/acc_benefits-EU-FR.tsv": "f807053567812bd5f40da4599386fe8c6db6f8619755d852e370eb5c3f4ae4bd",
   "acc_benefits/acc_benefits-EU-GER.tsv": "ac33847ead6f3897a04b14fe21b2f88985291753c0b2dee1038c80645044347e",
