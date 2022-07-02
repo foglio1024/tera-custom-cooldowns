@@ -3,7 +3,7 @@
     <RootNamespace>TCC.Utils</RootNamespace>
     <AssemblyName>TCC.Utils</AssemblyName>
 	  <TargetFramework>net6-windows</TargetFramework>
-	  <LangVersion>9</LangVersion>
+	  <LangVersion>10</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>

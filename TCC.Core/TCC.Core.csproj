@@ -4,7 +4,7 @@
     <AssemblyName>TCC</AssemblyName>
     <TargetFramework>net6-windows</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <LangVersion>9</LangVersion>
+    <LangVersion>10</LangVersion>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
     <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
