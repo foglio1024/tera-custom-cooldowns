@@ -7,6 +7,8 @@ class TccLauncher
 {
     constructor(m)
     {
+        let arch = m.clientInterface.info.arch === 'x64' ? 'x64' : 'x86';
+
         const tccPath = Path.join(__dirname, "../TCC.exe");
         m.clientInterface.once("ready", () => 
         {
@@ -19,7 +21,7 @@ class TccLauncher
         {
             try
             {
-                installer.gpk(`client/gpk/${removerGpkName}`);
+                installer.gpk(`client/gpk/${arch}/${removerGpkName}`);
                 //m.log(`Installed ${removerNiceName} remover (${removerGpkName})`);
             } 
             catch (error)
