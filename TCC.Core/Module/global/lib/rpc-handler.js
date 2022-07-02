@@ -143,18 +143,28 @@ class RpcHandler {
         this.debug(`Sent C_BAN_PARTY_MEMBER`);
     }
     inspectUser(params) {
-        this.currNetworkMod.send("C_REQUEST_USER_PAPERDOLL_INFO", 4, {
-            name: params.userName,
-            serverId: params.serverId,
-            zoom: false
-        });
+        if (this.currNetworkMod.majorPatchVersion >= 108) {
+
+            this.currNetworkMod.send("C_REQUEST_USER_PAPERDOLL_INFO", 4, {
+                name: params.userName,
+                serverId: params.serverId,
+                zoom: false
+            });
+        }
+        else {
+
+            this.currNetworkMod.send("C_REQUEST_USER_PAPERDOLL_INFO", 3, {
+                name: params.userName,
+                zoom: false
+            });
+        }
         this.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO`);
     }
     inspectUserWithGameId(params) {
         this.currNetworkMod.send("C_REQUEST_USER_PAPERDOLL_INFO_WITH_GAMEID", 3, {
             gameId: params.gameId
         });
-        this.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO`);
+        this.debug(`Sent C_REQUEST_USER_PAPERDOLL_INFO_WITH_GAMEID`);
     }
     groupInviteUser(params) {
         var dataArray = new Buffer.alloc(1, Number(params.isRaid));
