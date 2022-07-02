@@ -135,7 +135,7 @@ namespace TCC.Publisher
             sb.AppendLine(_stringVersion);
             Logger.WriteLine($"    Added version: {_stringVersion}.");
             sb.Append(url);
-            //Logger.WriteLine($"    Added URL: {url}.");
+            Logger.WriteLine($"    Added URL: {url}.");
             File.WriteAllText(versionCheckFile, sb.ToString());
             Logger.WriteLine("    File saved.");
         }
@@ -155,7 +155,7 @@ namespace TCC.Publisher
                     Name = $"v{_stringVersion}{_beta}",
                     Body = changelog,
                     Prerelease = false,
-                    TargetCommitish = string.IsNullOrEmpty(_beta) ? "menma" : "beta"
+                    TargetCommitish = string.IsNullOrEmpty(_beta) ? "master" : "beta"
                 };
                 await Task.Run(() => _client.Repository.Release.Create(_settings.RepositoryOwner, _settings.RepositoryName, newRelease));
                 ExecuteWebhook(changelog);

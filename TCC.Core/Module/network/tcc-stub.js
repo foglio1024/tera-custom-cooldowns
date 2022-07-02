@@ -81,7 +81,7 @@ class TccStub
     notifyShowIngameChatChanged()
     {
         if(!Globals.TccChatEnabled) return;
-        this.mod.send("S_CHAT", 3,
+        this.mod.send("S_CHAT", this.mod.majorPatchVersion >= 108 ? 4 : 3,
             {
                 channel: 18,
                 name: "tccChatLink",
@@ -99,7 +99,7 @@ class TccStub
         this.mod.hook("S_PARTY_MEMBER_INFO", "raw", () => { return !Globals.useLfg; });
         this.mod.hook("S_SHOW_CANDIDATE_LIST", "raw", () => { return !Globals.useLfg; });
         // block tcc messages from gpk file
-        this.mod.hook("S_CHAT", 3, (p) => { return p.authorName != "tccChatLink"; });
+        this.mod.hook("S_CHAT", this.mod.majorPatchVersion >= 108 ? 4 : 3, (p) => { return p.authorName != "tccChatLink"; });
         // hook Command messages to display them in tcc {order: 999, filter:{fake:true}}
         this.mod.hook("S_PRIVATE_CHAT", 1, { order: 999, filter: { fake: true } }, p =>
         {
@@ -164,7 +164,7 @@ class TccStub
             this.mod.setTimeout(() =>
             {
                 Globals.debug("Sending tcc-proxyOn to Chat2.gpk");
-                this.mod.send("S_CHAT", 3, {
+                this.mod.send("S_CHAT", this.mod.majorPatchVersion >= 108 ? 4 : 3, {
                     channel: 18,
                     name: "tccChatLink",
                     message: ":tcc-proxyOn:"

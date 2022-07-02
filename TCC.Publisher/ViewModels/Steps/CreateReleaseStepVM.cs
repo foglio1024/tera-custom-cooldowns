@@ -20,14 +20,14 @@ namespace TCC.Publisher.ViewModels.Steps
         {
             VM.Progress = 5 / 0.07;
 
-            //var confirm = MessageBox.Show("Confirm release creation?", "TCC publisher", MessageBoxButton.YesNo);
-            //if (confirm != MessageBoxResult.Yes) return;
-            //if (string.IsNullOrWhiteSpace(VM.ReleaseNotes))
-            //{
-            //    var emptyNotesConf = MessageBox.Show("Changelog field is empty, continue anyway?",
-            //        "TCC publisher", MessageBoxButton.YesNo);
-            //    if (emptyNotesConf != MessageBoxResult.Yes) return;
-            //}
+            var confirm = MessageBox.Show("Confirm release creation?", "TCC publisher", MessageBoxButton.YesNo);
+            if (confirm != MessageBoxResult.Yes) return;
+            if (string.IsNullOrWhiteSpace(VM.ReleaseNotes))
+            {
+                var emptyNotesConf = MessageBox.Show("Changelog field is empty, continue anyway?",
+                    "TCC publisher", MessageBoxButton.YesNo);
+                if (emptyNotesConf != MessageBoxResult.Yes) return;
+            }
 
             await Publisher.Instance.CreateRelease(VM.ReleaseNotes);
 

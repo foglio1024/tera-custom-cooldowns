@@ -51,15 +51,13 @@ namespace TeraPacketParser.TeraCommon.Game.Services
         }
         public ServerDatabase(string folder, string serversOverridePath)
         {
-            _serverlist = new List<Server> { new Server("Menma's TERA", "EU", "46.105.161.204", 2800) };
-
-            //_serverlist = File.ReadAllLines(Path.Combine(folder, "servers.txt"))
-            //    .Where(s => !string.IsNullOrWhiteSpace(s))
-            //    .Select(s => s.Split(new[] { ' ' }, 4))
-            //    .Select(
-            //        parts =>
-            //            new Server(parts[3], parts[1], parts[0],
-            //                !string.IsNullOrEmpty(parts[2]) ? uint.Parse(parts[2]) : uint.MaxValue)).ToList();
+            _serverlist = File.ReadAllLines(Path.Combine(folder, "servers.txt"))
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Split(new[] { ' ' }, 4))
+                .Select(
+                    parts =>
+                        new Server(parts[3], parts[1], parts[0],
+                            !string.IsNullOrEmpty(parts[2]) ? uint.Parse(parts[2]) : uint.MaxValue)).ToList();
             _servers = _serverlist.Where(x => x.ServerId != uint.MaxValue).ToList();
             _serverlist.Add(new Server("VPN", "Unknown", "127.0.0.1"));
 
