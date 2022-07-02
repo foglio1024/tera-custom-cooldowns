@@ -10,6 +10,7 @@ using Nostrum.WinAPI;
 using TCC.ViewModels;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Point = System.Drawing.Point;
+using Nostrum.WPF.Extensions;
 
 namespace TCC.UI.Controls.Chat
 {
@@ -64,12 +65,13 @@ namespace TCC.UI.Controls.Chat
                 var prevTop = Top;
                 User32.GetCursorPos(out var pos);
                 Show();
-
+                var dpi = this.GetDpiScale();
                 var currScreen = Screen.FromPoint(new Point(Convert.ToInt32(Left), Convert.ToInt32(Top)));
-                double top = pos.Y;
-                double left = pos.X + 20;
-                if (top > currScreen.Bounds.Height / 2D) top -= ActualHeight;
-
+                double top = pos.Y; ;
+                double left = (pos.X + 20);
+                if (top > currScreen.Bounds.Height / 2D) top -= ActualHeight*dpi.DpiScaleY;
+                top /= dpi.DpiScaleY;
+                left /= dpi.DpiScaleX;
                 if (double.IsNaN(prevLeft)) prevLeft = left;
                 if (double.IsNaN(prevTop)) prevTop = top;
 
