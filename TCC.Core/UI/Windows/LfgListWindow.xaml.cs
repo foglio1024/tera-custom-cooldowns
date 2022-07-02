@@ -4,6 +4,7 @@ using System.Windows.Interop;
 using Nostrum;
 using Nostrum.WinAPI;
 using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
 using TCC.Interop.Proxy;
 using TCC.ViewModels;
 
@@ -38,6 +39,16 @@ namespace TCC.UI.Windows
             base.OnLoaded(sender, e);
             FocusManager.HideFromToolBar(Handle);
             FocusManager.MakeUnfocusable(Handle);
+
+            var teraScreen = FocusManager.TeraScreen;
+            var dpi = this.GetDpiScale();
+            var x = teraScreen.Bounds.X + teraScreen.Bounds.Size.Width / (2D * dpi.DpiScaleX);
+            var y = teraScreen.Bounds.Y + teraScreen.Bounds.Size.Height / (2D * dpi.DpiScaleY);
+
+            x -= Width / 2;
+            y -= Height / 2;
+            Left = x;
+            Top = y;
         }
 
         public override void ShowWindow()
@@ -45,33 +56,20 @@ namespace TCC.UI.Windows
             StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
 
             base.ShowWindow();
-
-            Dispatcher?.Invoke(() =>
-            {
-                var teraScreen = FocusManager.TeraScreen;
-                var x = teraScreen.Bounds.X + teraScreen.Bounds.Size.Width / 2D;
-                var y = teraScreen.Bounds.Y + teraScreen.Bounds.Size.Height / 2D;
-
-                x -= Width / 2;
-                y -= Height / 2;
-                Left = x;
-                Top = y;
-            });
-
         }
 
         private void OnTbMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _keepPopupOpen = true;
             FocusManager.UndoUnfocusable(Handle);
-            var src = (HwndSource?) PresentationSource.FromVisual(ActionsPopup.Child);
+            var src = (HwndSource?)PresentationSource.FromVisual(ActionsPopup.Child);
             if (src != null)
             {
                 User32.SetForegroundWindow(src.Handle);
                 FocusManager.UndoUnfocusable(src.Handle);
             }
 
-            ((FrameworkElement) sender).Focus();
+            ((FrameworkElement)sender).Focus();
             Keyboard.Focus((FrameworkElement)sender);
         }
 
