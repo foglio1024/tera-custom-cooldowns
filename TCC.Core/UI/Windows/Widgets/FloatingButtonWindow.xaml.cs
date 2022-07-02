@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using Nostrum.WPF.Extensions;
 using Nostrum.WPF.Factories;
 
 namespace TCC.UI.Windows.Widgets
@@ -54,8 +55,9 @@ namespace TCC.UI.Windows.Widgets
             Dispatcher.InvokeAsync(() =>
             {
                 var teraScreenBounds = FocusManager.TeraScreen.Bounds;
-                Left = teraScreenBounds.X;
-                Top = teraScreenBounds.Y + teraScreenBounds.Height / 2;
+                var dpi = this.GetDpiScale();
+                Left = teraScreenBounds.X /dpi.DpiScaleX ;
+                Top = (teraScreenBounds.Y + teraScreenBounds.Height / 2) / dpi.DpiScaleY;
             });
         }
 
