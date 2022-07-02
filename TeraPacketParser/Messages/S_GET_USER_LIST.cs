@@ -11,7 +11,6 @@ namespace TeraPacketParser.Messages
 
         public S_GET_USER_LIST(TeraMessageReader reader) : base(reader)
         {
-            reader.RepositionAt(4);
             CharacterList = new List<CharacterData>();
             var count = reader.ReadInt16();
             var next = reader.ReadInt16();

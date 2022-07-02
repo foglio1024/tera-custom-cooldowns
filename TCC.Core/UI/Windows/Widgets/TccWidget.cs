@@ -162,7 +162,7 @@ namespace TCC.UI.Windows.Widgets
         {
             Dispatcher?.Invoke(() =>
             {
-                var dpi = TccUtils.GetDPI(this);
+                var dpi = this.GetDpiScale();
 
                 Left = (FocusManager.TeraScreen.Bounds.X + FocusManager.TeraScreen.Bounds.Width / 2 - ActualWidth / 2)/dpi.DpiScaleX;
                 Top = (FocusManager.TeraScreen.Bounds.Y + FocusManager.TeraScreen.Bounds.Height / 2 - ActualHeight / 2) / dpi.DpiScaleY;

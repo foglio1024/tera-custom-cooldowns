@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Nostrum.WPF.Extensions;
 using Nostrum.WPF.Factories;
 using TCC.Utilities;
 
@@ -29,7 +30,7 @@ namespace TCC.UI.Windows
             {
                 var screen = Screen.FromRectangle(new System.Drawing.Rectangle((int)Left, (int)Top, (int)Width, (int)Height));
                 var bounds = screen.Bounds;
-                var dpi = TccUtils.GetDPI(this);
+                var dpi = this.GetDpiScale();
                 var top = (bounds.Height / 2 - ActualHeight / 2 - 40 )/ dpi.DpiScaleY;
                 BeginAnimation(TopProperty, AnimationFactory.CreateDoubleAnimation(500, to: top, easing: true));
             }

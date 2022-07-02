@@ -34,7 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
-	  <OutputPath>E:\MTERA\proxy\mods\TCC</OutputPath>
+	  <OutputPath>E:\MTERA\TeraToolboxPrivate\mods\TCC</OutputPath>
 	  <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
@@ -110,8 +110,8 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="gong-wpf-dragdrop" Version="2.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Nostrum" Version="2.0.0" />
-    <PackageReference Include="Nostrum.WPF" Version="1.2.2" />
+    <PackageReference Include="Nostrum" Version="2.0.9" />
+    <PackageReference Include="Nostrum.WPF" Version="1.2.19" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TCC.Loader\TCC.Loader\TCC.Loader.csproj" />
