@@ -23,7 +23,7 @@
     </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
     <PostBuildEvent>
-		xcopy $(SolutionDir)\TCC.Core\Module\ "E:\MTERA\proxy\mods\TCC\" /y /s
+		xcopy $(SolutionDir)\TCC.Core\Module\ "E:\MTERA\TeraToolboxPrivate\mods\TCC\" /y /s
 	</PostBuildEvent>
   </PropertyGroup>
 </Project>
