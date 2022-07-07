@@ -16,19 +16,17 @@ namespace TCC.Data
         {
             friendUpdates.ForEach(update =>
             {
-                if (update.IsUpdated && update.Status is FriendStatus.Online)
-                {
-                    var friend = Friends.Find(x => x.Id == update.Id);
-                    if (friend == default) return;
-                    var fireMessage = update.Status != friend.Status
-                                   && update.Status is FriendStatus.Online
-                                   && !_waitingForFirstUpdate;
-                    var idx = Friends.IndexOf(friend);
-                    friend.UpdateFrom(update);
-                    Friends[idx] = friend;
-                    if (!fireMessage) return;
-                    SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{friend.Name}", "SMT_FRIEND_IS_CONNECTED");
-                }
+                var friend = Friends.Find(x => x.Id == update.Id);
+                if (friend == default) return;
+                var fireMessage = update.Status != friend.Status
+                               && update.Status is FriendStatus.Online
+                               && !_waitingForFirstUpdate;
+                //Log.Chat($"Updating {friend.Name} from {friend.Status} to {update.Status} ({nameof(_waitingForFirstUpdate)}:{_waitingForFirstUpdate})");
+                var idx = Friends.IndexOf(friend);
+                friend.UpdateFrom(update);
+                Friends[idx] = friend;
+                if (!fireMessage) return;
+                SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{friend.Name}", "SMT_FRIEND_IS_CONNECTED");
             });
             _waitingForFirstUpdate = false;
         }
