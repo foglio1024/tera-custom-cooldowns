@@ -141,8 +141,6 @@ namespace TCC.Publisher
         }
         public async Task CreateRelease(string changelog)
         {
-            ExecuteWebhook(changelog);
-
             try
             {
                 await _client.Repository.Release.Get(_settings.RepositoryOwner, _settings.RepositoryName, _tag);
