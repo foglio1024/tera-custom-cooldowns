@@ -184,7 +184,7 @@
                                 </Grid>
                             </Button>
                             <Button x:Name="AutoPublicizeButton"
-                                    ToolTip="Enable auto-publicize of LFG message with a 20 seconds cooldown."
+                                    ToolTip="Enable auto-publicize of LFG message with a configurable cooldown."
                                     Command="{Binding ToggleAutoPublicizeCommand}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -198,6 +198,27 @@
                                                Foreground="White" />
                                 </Grid>
                             </Button>
+                            <Grid Height="36" IsEnabled="{Binding IsAutoPublicizeRunning, Converter={converters:BooleanInverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="36" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Text="{Binding AutoPublicizeCooldown, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                         Foreground="White" Background="#0fff" Width="20"
+                                         PreviewMouseLeftButtonDown="OnTbMouseLeftButtonDown"
+                                         LostKeyboardFocus="OnTbLostKeyboardFocus"
+                                         TextAlignment="Center"
+                                         KeyDown="OnTbKeyDown"
+                                         MouseLeave="OnTbMouseLeave"
+                                         CaretBrush="#9fff"
+                                         Grid.Column="1"
+                                         VerticalAlignment="Center" BorderThickness="0 0 0 1" />
+                                <TextBlock Text="cooldown (sec)" Grid.Column="2" Foreground="White"
+                                           VerticalAlignment="Center" />
+
+                            </Grid>
+
                             <Rectangle Margin="10 0" Fill="#1fff" Height="1" VerticalAlignment="Stretch" />
                             <Grid Height="36">
                                 <Grid.ColumnDefinitions>

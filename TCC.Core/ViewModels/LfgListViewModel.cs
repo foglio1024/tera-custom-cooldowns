@@ -60,7 +60,19 @@ namespace TCC.ViewModels
 
         public string LastSortDescr { get; set; } = "Message";
         public int PublicizeCooldown => 5;
-        public int AutoPublicizeCooldown => 20;
+
+        public int AutoPublicizeCooldown
+        {
+            get => ((LfgWindowSettings)Settings!).AutoPublicizeCooldown;
+            set
+            {
+                if (((LfgWindowSettings)Settings!).AutoPublicizeCooldown == value) return;
+                ((LfgWindowSettings)Settings!).AutoPublicizeCooldown = value;
+                AutoPublicizeTimer.Interval = TimeSpan.FromSeconds(value);
+                N();
+            }
+        }
+
 
         public bool IsAutoPublicizeRunning => AutoPublicizeTimer.IsEnabled;
         public ThreadSafeObservableCollection<Listing> Listings { get; }

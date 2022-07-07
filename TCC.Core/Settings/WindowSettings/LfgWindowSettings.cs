@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using TCC.Interop.Proxy;
+using TCC.Utils;
 
 namespace TCC.Settings.WindowSettings
 {
     public class LfgWindowSettings : WindowSettingsBase
     {
+        const int MIN_AUTO_PUBLICIZE_COOLDOWN = 20;
+
         public event Action? HideTradeListingsChangedEvent;
 
         private bool _hideTradeListings;
@@ -48,6 +51,20 @@ namespace TCC.Settings.WindowSettings
             }
         }
 
+        private int _autoPublicizeCooldown;
+
+        public int AutoPublicizeCooldown
+        {
+            get => _autoPublicizeCooldown;
+            set
+            {
+                if (_autoPublicizeCooldown == value) return;
+                _autoPublicizeCooldown = value < MIN_AUTO_PUBLICIZE_COOLDOWN ? MIN_AUTO_PUBLICIZE_COOLDOWN : value;
+                N();
+            }
+        }
+
+
         public List<string> BlacklistedWords { get; }
 
         public LfgWindowSettings()
@@ -57,6 +74,8 @@ namespace TCC.Settings.WindowSettings
             HideTradeListings = true;
             MinLevel = 60;
             MaxLevel = 70;
+
+            AutoPublicizeCooldown = MIN_AUTO_PUBLICIZE_COOLDOWN;
 
             GpkNames.Add("PartyBoard");
             GpkNames.Add("PartyBoardMemberInfo");
