@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Nostrum.WPF.Extensions;
 using Nostrum.WPF.Factories;
+using TCC.ViewModels;
 
 namespace TCC.UI.Windows.Widgets
 {
@@ -19,6 +21,12 @@ namespace TCC.UI.Windows.Widgets
         private readonly TranslateTransform _bubbleTranslateTransform;
         private readonly Timer _animRepeatTimer;
 
+
+        readonly DoubleAnimation _s1Anim;
+        readonly DoubleAnimation _s2Anim;
+        readonly DoubleAnimation _s3Anim;
+
+
         public FloatingButtonWindow(FloatingButtonViewModel vm)
         {
             DataContext = vm;
@@ -31,6 +39,21 @@ namespace TCC.UI.Windows.Widgets
             vm.NotificationsCleared += OnNotificationsCleared;
             vm.NotificationsAdded += OnNotificationsAdded;
 
+            var duration = TimeSpan.FromSeconds(5);
+            var start = -1;
+            var end = 1;
+            var tailSize = 0.5;
+            var headSize = 0.5;
+            var fps = 10;
+
+            _s1Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start, To = end };
+            _s2Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start + tailSize, To = end + tailSize };
+            _s3Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start + tailSize + headSize, To = end + tailSize + headSize };
+
+            Timeline.SetDesiredFrameRate(_s1Anim, fps);
+            Timeline.SetDesiredFrameRate(_s2Anim, fps);
+            Timeline.SetDesiredFrameRate(_s3Anim, fps);
+
             InitializeComponent();
 
             _bubbleScaleTransform = (ScaleTransform) ((TransformGroup) NotificationBubble.RenderTransform).Children[0];
@@ -40,7 +63,33 @@ namespace TCC.UI.Windows.Widgets
             ButtonsRef = null;
             _canMove = false;
             Init(App.Settings.FloatingButtonSettings);
+
+            SettingsWindowViewModel.IntegratedGpuSleepWorkaroundChanged += OnIntegratedGpuSleepWorkaroundChanged;
         }
+
+        void OnIntegratedGpuSleepWorkaroundChanged()
+        {
+            Dispatcher.InvokeAsync(() =>
+            {
+                if (App.Settings.IntegratedGpuSleepWorkaround) StartGradientAnimation();
+                else StopGradientAnimation();
+            });
+        }
+
+        void StartGradientAnimation()
+        {
+            Stop1.BeginAnimation(GradientStop.OffsetProperty, _s1Anim);
+            Stop2.BeginAnimation(GradientStop.OffsetProperty, _s2Anim);
+            Stop3.BeginAnimation(GradientStop.OffsetProperty, _s3Anim);
+        }
+
+        void StopGradientAnimation()
+        {
+            Stop1.BeginAnimation(GradientStop.OffsetProperty, null);
+            Stop2.BeginAnimation(GradientStop.OffsetProperty, null);
+            Stop3.BeginAnimation(GradientStop.OffsetProperty, null);
+        }
+
 
         protected override void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -48,6 +97,7 @@ namespace TCC.UI.Windows.Widgets
             Left = 0;
             Top = Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
             _animRepeatTimer.Tick += (_, _) => AnimateBubble();
+            StartGradientAnimation();
         }
         protected override void OnVisibilityChanged()
         {

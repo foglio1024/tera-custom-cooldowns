@@ -34,6 +34,13 @@
             <Border Style="{StaticResource RevampBorderStyle}" x:Name="RootBorder"
                     Margin="0 10"
                     HorizontalAlignment="Stretch">
+                <Border.BorderBrush>
+                    <LinearGradientBrush>
+                        <GradientStop x:Name="Stop1" Color="{StaticResource RevampBorderColor}" Offset="-1"/>
+                        <GradientStop x:Name="Stop2" Color="{StaticResource TeraRestyleBorderColorLight}" Offset="0"/>
+                        <GradientStop x:Name="Stop3" Color="{StaticResource RevampBorderColor}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />

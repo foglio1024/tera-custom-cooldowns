@@ -1688,6 +1688,22 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
+                            <settings:CheckboxSetting SettingName="Enable integrated graphics sleep workaround"
+                                                      IsOn="{Binding IntegratedGpuSleepWorkaround, Mode=TwoWay}">
+                                <settings:CheckboxSetting.ToolTip>
+                                    <Grid Margin="5">
+                                        <Border Style="{StaticResource RevampBorderStyle}" />
+                                        <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap"
+                                                   MaxWidth="200">
+                                            <Run Text="Useful when running TCC on integrated graphic card while TERA runs on dedicated graphic card. Plays a subtle animation on Floating button's border to keep the integrated GPU awake and prevent delays when any TCC graphical update is triggered." />
+                                            <LineBreak/>
+                                            <LineBreak/>
+                                            <Run Text="It's suggested to keep it disabled to avoid messing with GPU power saving features and to save on graphical performance."/>
+                                        </TextBlock>
+                                    </Grid>
+                                </settings:CheckboxSetting.ToolTip>
+                            </settings:CheckboxSetting>
+
                             <settings:SelectionSetting SettingName="Capture mode"
                                                        SelectedItem="{Binding CaptureMode, Mode=TwoWay}"
                                                        ChoicesType="{x:Type teraPacketParser:CaptureMode}"

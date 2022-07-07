@@ -46,6 +46,7 @@ namespace TCC.Settings
         public bool CheckGuildBamWithoutOpcode { get; set; } //by HQ 20190324
         public bool BetaNotification { get; set; }
         public bool FpsAtGuardian { get; set; }
+        public bool IntegratedGpuSleepWorkaround { get; set; }
         public bool EnableProxy
         {
             get => _enableProxy || App.ToolboxMode;
@@ -221,6 +222,7 @@ namespace TCC.Settings
             WebhookEnabledMentions = false;
             WebhookUrlMentions = "";
             ShowDecimalsInCooldowns = true;
+            IntegratedGpuSleepWorkaround = false;
         }
 
         public static SettingsContainer Load()

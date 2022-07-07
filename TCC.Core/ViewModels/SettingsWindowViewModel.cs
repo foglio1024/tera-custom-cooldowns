@@ -34,6 +34,7 @@ namespace TCC.ViewModels
         public static event Action? AbnormalityShapeChanged;
         public static event Action? SkillShapeChanged;
         public static event Action? FontSizeChanged;
+        public static event Action? IntegratedGpuSleepWorkaroundChanged;
 
         public bool Beta => App.Beta;
         public bool ToolboxMode => App.ToolboxMode;
@@ -253,6 +254,17 @@ namespace TCC.ViewModels
             {
                 if (App.Settings.CheckGuildBamWithoutOpcode == value) return;
                 App.Settings.CheckGuildBamWithoutOpcode = value;
+                N();
+            }
+        }
+        public bool IntegratedGpuSleepWorkaround
+        {
+            get => App.Settings.IntegratedGpuSleepWorkaround;
+            set
+            {
+                if (App.Settings.IntegratedGpuSleepWorkaround == value) return;
+                App.Settings.IntegratedGpuSleepWorkaround = value;
+                IntegratedGpuSleepWorkaroundChanged?.Invoke();
                 N();
             }
         }
