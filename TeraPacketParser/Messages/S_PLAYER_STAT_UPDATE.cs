@@ -65,8 +65,21 @@
             reader.Skip(4); // defPhy
             var defMag = reader.ReadInt32();
 
-            reader.Skip(4); // impact
-            reader.Skip(4); // balance
+            if (reader.Factory.ReleaseVersion / 100 >= 93)
+            {
+                reader.Skip(4); // defenseReductionPhysical
+                reader.Skip(4); // defenseReductionMagical
+
+                reader.Skip(4); // piercingPhysical
+                reader.Skip(4); // piercingMagical
+
+                reader.Skip(4); // healValue
+            }
+            else
+            {
+                reader.Skip(4); // impact
+                reader.Skip(4); // balance
+            }
 
             reader.Skip(4); // resWeak
             reader.Skip(4); // resPeriodic
@@ -102,8 +115,18 @@
             var defMagBonus = reader.ReadInt32();
             TotalMagicalResistance = defMag + defMagBonus;
 
-            reader.Skip(4); // impactBonus
-            reader.Skip(4); // balanceBonus
+            if (reader.Factory.ReleaseVersion / 100 >= 93)
+            {
+                reader.Skip(4); // defenseReductionPhysicalBonus
+                reader.Skip(4); // defenseReductionMagicalBonus
+                reader.Skip(4); // piercingPhysicalBonus
+                reader.Skip(4); // piercingMagicalBonus
+            }
+            else
+            {
+                reader.Skip(4); // impactBonus
+                reader.Skip(4); // balanceBonus
+            }
 
             reader.Skip(4); // resWeakBonus
             reader.Skip(4); // resPeriodicBonus
