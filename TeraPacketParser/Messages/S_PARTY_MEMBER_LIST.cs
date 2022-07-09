@@ -26,12 +26,23 @@ namespace TeraPacketParser.Messages
             Im = reader.ReadBoolean();
             Raid = reader.ReadBoolean();
 
-            reader.Skip(12);
+            reader.Skip(4); // memberLimit
+            reader.Skip(8); // id
 
             LeaderServerId = reader.ReadUInt32();
             LeaderPlayerId = reader.ReadUInt32();
 
-            reader.Skip(19);
+            //reader.Skip(19);
+            /*
+                - uint32 mode                       # 0: free for all, 1: round robin
+                - uint32 distributeMinRarity
+                - bool   distributeAllEquipment
+                - bool   distributeOnlyReqClass
+                - uint32 distributeMode             # 0: random, 1: roll
+                - uint32 distributeModeBoP          # 0: random, 1: roll
+                - bool   disableCombatLooting
+             */
+
 
             Members = new List<GroupMemberData>();
 
@@ -46,14 +57,16 @@ namespace TeraPacketParser.Messages
                 u.PlayerId = reader.ReadUInt32();
                 u.Level = reader.ReadUInt32();
                 u.Class = (Class)reader.ReadUInt32();
-                reader.Skip(8); // race, gender
+                if (reader.Factory.ReleaseVersion / 100 >= 106)
+                {
+                    reader.Skip(8); // race, gender
+                }
                 u.Online = reader.ReadBoolean();
                 u.EntityId = reader.ReadUInt64();
                 u.Order = reader.ReadInt32();
                 u.CanInvite = reader.ReadBoolean();
                 u.Laurel = (Laurel)reader.ReadUInt32();
                 u.Awakened = reader.ReadInt32() > 0;
-
                 reader.RepositionAt(nameOffset);
                 u.Name = reader.ReadTeraString();
                 u.Alive = true;
