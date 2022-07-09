@@ -329,23 +329,17 @@ namespace TCC
             var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
             if (!File.Exists(opcPath))
             {
-                if (PacketAnalyzer.Sniffer is ToolboxSniffer tbs)
+                if (!Directory.Exists(Path.Combine(App.DataPath, "opcodes")))
+                    Directory.CreateDirectory(Path.Combine(App.DataPath, "opcodes"));
+
+                if (!OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/")))
                 {
-                    if (!Directory.Exists(Path.Combine(App.DataPath, "opcodes")))
-                        Directory.CreateDirectory(Path.Combine(App.DataPath, "opcodes"));
-                    if (!await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
+                    if (PacketAnalyzer.Sniffer is ToolboxSniffer tbs && !await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
                     {
                         TccMessageBox.Show(SR.UnknownClientVersion(p.Versions[0]), MessageBoxType.Error);
                         App.Close();
                         return;
                     }
-                }
-                else
-                {
-                    if (OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/"))) return;
-                    TccMessageBox.Show(SR.UnknownClientVersion(p.Versions[0]), MessageBoxType.Error);
-                    App.Close();
-                    return;
                 }
             }
 
