@@ -551,8 +551,10 @@ namespace TCC.ViewModels
             {
                 Log.F($"Failed to update buffs: {e.Message}");
             }
-
-            SaveCharacters();
+            Dispatcher.BeginInvoke(() =>
+            {
+                SaveCharacters();
+            });
         }
         private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
         {
