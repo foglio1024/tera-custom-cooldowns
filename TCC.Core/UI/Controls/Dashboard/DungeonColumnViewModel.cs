@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using Nostrum;
 using Nostrum.WPF;
@@ -9,7 +10,7 @@ using TCC.Data.Pc;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    public class DungeonColumnViewModel : ThreadSafePropertyChanged
+    public class DungeonColumnViewModel : ThreadSafeObservableObject
     {
         private bool _hilight;
 
@@ -44,7 +45,8 @@ namespace TCC.UI.Controls.Dashboard
             DungeonsListView = CollectionViewFactory.CreateLiveCollectionView(DungeonsList,
                 o => !o.Owner.Hidden,
                 new[] { $"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}" },
-                new[] { new SortDescription($"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
+                new[] { new SortDescription($"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Position)}", ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
             RemoveDungeonCommand = new RelayCommand(_ => Dungeon.Show = false);
         }
     }

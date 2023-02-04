@@ -6,7 +6,7 @@ using TCC.Debugging;
 
 namespace TCC.Data.Skills
 {
-    public class Cooldown : ThreadSafePropertyChanged, IDisposable
+    public class Cooldown : ThreadSafeObservableObject, IDisposable
     {
         // events
         public event Action<ulong, CooldownMode>? Started;
@@ -87,11 +87,10 @@ namespace TCC.Data.Skills
         }
 
         // ctors
-        public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher d = null, double intervalMs = 100)
+        public Cooldown(Skill sk, bool flashOnAvailable, CooldownType t = CooldownType.Skill, Dispatcher? d = null, double intervalMs = 100) : base(d)
         {
             ObjectTracker.Register(GetType());
             Interval = intervalMs;
-            SetDispatcher(d ?? Dispatcher.CurrentDispatcher);
             _mainTimer = _dispatcher.Invoke(() => new DispatcherTimer());
             _offsetTimer = _dispatcher.Invoke(() => new DispatcherTimer());
             _secondsTimer = _dispatcher.Invoke(() => new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(Interval) });

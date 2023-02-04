@@ -8,7 +8,7 @@ using TCC.Interop.Moongourd;
 
 namespace TCC.UI.Controls.Chat
 {
-    public class MoongourdPopupViewModel : ThreadSafePropertyChanged
+    public class MoongourdPopupViewModel : ThreadSafeObservableObject
     {
         private readonly IMoongourdManager _manager;
 
@@ -42,8 +42,6 @@ namespace TCC.UI.Controls.Chat
 
         public MoongourdPopupViewModel()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
-
             Encounters = new ThreadSafeObservableCollection<EncounterViewModel>(_dispatcher);
 
             _manager = new KabedonManager();

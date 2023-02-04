@@ -12,7 +12,7 @@ using TeraDataLite;
 
 namespace TCC.Data.Npc
 {
-    public class NPC : ThreadSafePropertyChanged, IDisposable
+    public class NPC : ThreadSafeObservableObject, IDisposable
     {
         public bool HasGage { get; set; }
         public ICommand Override { get; }
@@ -216,7 +216,7 @@ namespace TCC.Data.Npc
 
         //public NPC(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
         //{
-        //    _dispatcher = WindowManager.ViewModels.NPC.GetDispatcher();
+        //    _dispatcher = WindowManager.ViewModels.NPC.Dispatcher;
         //    EntityId = eId;
         //    Name = EntityManager.MonsterDatabase.GetName(tId, zId);
         //    ZoneId = zId;
@@ -238,7 +238,7 @@ namespace TCC.Data.Npc
         //}
         public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern? ep = null, TimerPattern? tp = null)
         {
-            _dispatcher = WindowManager.ViewModels.NpcVM.GetDispatcher();
+            _dispatcher = WindowManager.ViewModels.NpcVM.Dispatcher;
             _buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);
             Game.DB!.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
             Name = monster.Name;

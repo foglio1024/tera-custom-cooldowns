@@ -50,10 +50,10 @@ namespace TCC.ViewModels.Widgets
                 ExN(nameof(ContainersMargin));
             };
 
-            BuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs, a => a.Abnormality.Type != AbnormalityType.Special);
-            SpecBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs, a => a.Abnormality.Type == AbnormalityType.Special);
-            InfBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.InfBuffs, a => a.Abnormality.Type != AbnormalityType.Special);
-            SpecInfBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.InfBuffs, a => a.Abnormality.Type == AbnormalityType.Special);
+            BuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs, a => a.Abnormality.Type != AbnormalityType.Special) ?? throw new Exception("Failed to create LiveCollectionView");
+            SpecBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs, a => a.Abnormality.Type == AbnormalityType.Special) ?? throw new Exception("Failed to create LiveCollectionView");
+            InfBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.InfBuffs, a => a.Abnormality.Type != AbnormalityType.Special) ?? throw new Exception("Failed to create LiveCollectionView");
+            SpecInfBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.InfBuffs, a => a.Abnormality.Type == AbnormalityType.Special) ?? throw new Exception("Failed to create LiveCollectionView");
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.AbnormalSettingsHotkey, OnShowAbnormalConfigHotkeyPressed);
 

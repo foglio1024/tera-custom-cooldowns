@@ -16,7 +16,7 @@ using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.Data
 {
-    public class Listing : ThreadSafePropertyChanged
+    public class Listing : ThreadSafeObservableObject
     {
         private bool _isRaid;
         private string _message = "";
@@ -191,7 +191,7 @@ namespace TCC.Data
 
         public Listing()
         {
-            SetDispatcher(App.BaseDispatcher);
+            Dispatcher = App.BaseDispatcher;
             Players = new ThreadSafeObservableCollection<User>(_dispatcher);
             Applicants = new ThreadSafeObservableCollection<User>(_dispatcher);
             ApplyCommand = new ApplyCommand(this);
@@ -291,7 +291,7 @@ namespace TCC.Data
             _t.Elapsed += OnTimerElapsed;
         }
 
-        void OnTimerElapsed(object s, ElapsedEventArgs ev)
+        void OnTimerElapsed(object? s, ElapsedEventArgs ev)
         {
             _t.Stop();
             _listing.CanApply = true;

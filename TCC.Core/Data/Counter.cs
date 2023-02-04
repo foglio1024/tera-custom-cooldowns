@@ -6,7 +6,7 @@ using TeraDataLite;
 
 namespace TCC.Data
 {
-    public class Counter : ThreadSafePropertyChanged
+    public class Counter : ThreadSafeObservableObject
     {
         //TODO use events here
         private int _val;
@@ -41,7 +41,7 @@ namespace TCC.Data
 
         public Counter(int max, bool autoexpire)
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
             MaxValue = max;
             AutoExpire = autoexpire;
             _expire = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(9000) };

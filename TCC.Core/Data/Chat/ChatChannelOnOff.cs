@@ -5,7 +5,7 @@ using TCC.Utils;
 
 namespace TCC.Data.Chat
 {
-    public class ChatChannelOnOff : ThreadSafePropertyChanged
+    public class ChatChannelOnOff : ThreadSafeObservableObject
     {
         private bool _enabled;
         private ChatChannel _channel;
@@ -33,7 +33,6 @@ namespace TCC.Data.Chat
 
         public ChatChannelOnOff()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
         }
         public ChatChannelOnOff(ChatChannel ch, bool en = true) : this()
         {

@@ -78,7 +78,8 @@ namespace TCC.ViewModels
                 return _sortedColumns ??= CollectionViewFactory.CreateLiveCollectionView(Columns,
                     o => o.IsVisible,
                     new[] { $"{nameof(DungeonColumnViewModel.IsVisible)}", $"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}" },
-                    new[] { new SortDescription($"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
+                    new[] { new SortDescription($"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) })
+                    ?? throw new Exception("Failed to create LiveCollectionView");
             }
         }
         public ICollectionViewLiveShaping? SelectedCharacterInventory { get; set; }
@@ -289,17 +290,21 @@ namespace TCC.ViewModels
             SortedCharacters = CollectionViewFactory.CreateLiveCollectionView(_characters,
                 character => !character.Hidden,
                 new[] { nameof(Character.Hidden) },
-                new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
+                new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
 
             HiddenCharacters = CollectionViewFactory.CreateLiveCollectionView(_characters,
                 character => character.Hidden,
                 new[] { nameof(Character.Hidden) },
-                new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) });
+                new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
+
 
             CharacterViewModelsView = CollectionViewFactory.CreateLiveCollectionView(CharacterViewModels,
                 characterVM => !characterVM.Character.Hidden,
                 new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
-                new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) });
+                new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
 
 
             _pendingTabs = new List<Dictionary<uint, ItemAmount>>();
@@ -314,7 +319,7 @@ namespace TCC.ViewModels
             //    new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
         }
 
-        private void OnTabFlushTimerElapsed(object sender, ElapsedEventArgs e)
+        private void OnTabFlushTimerElapsed(object? sender, ElapsedEventArgs e)
         {
             try
             {
@@ -355,28 +360,30 @@ namespace TCC.ViewModels
 
         /* -- Methods ---------------------------------------------- */
 
-        public static void SaveCharacters()
+        public void SaveCharacters()
         {
-            var account = (Account)Game.Account.Clone();
-            foreach (var ch in account.Characters.ToSyncList())
+            Dispatcher.BeginInvoke(() =>
             {
-                var dungs = new Dictionary<uint, DungeonCooldownData>();
-                foreach (var dgcd in ch.DungeonInfo.DungeonList)
+                var account = (Account)Game.Account.Clone();
+                foreach (var ch in account.Characters.ToSyncList())
                 {
-                    dungs[dgcd.Id] = dgcd;
+                    var dungs = new Dictionary<uint, DungeonCooldownData>();
+                    foreach (var dgcd in ch.DungeonInfo.DungeonList)
+                    {
+                        dungs[dgcd.Id] = dgcd;
+                    }
+                    ch.DungeonInfo.DungeonList.Clear();
+                    foreach (var dg in dungs.Values)
+                    {
+                        ch.DungeonInfo.DungeonList.Add(dg);
+                    }
                 }
-                ch.DungeonInfo.DungeonList.Clear();
-                foreach (var dg in dungs.Values)
-                {
-                    ch.DungeonInfo.DungeonList.Add(dg);
-                }
-            }
 
-            var json = JsonConvert.SerializeObject(account, Formatting.Indented);
-            File.WriteAllText(SettingsGlobals.CharacterJsonPath, json);
-            if (File.Exists(SettingsGlobals.CharacterXmlPath))
-                File.Delete(SettingsGlobals.CharacterXmlPath);
-
+                var json = JsonConvert.SerializeObject(account, Formatting.Indented);
+                File.WriteAllText(SettingsGlobals.CharacterJsonPath, json);
+                if (File.Exists(SettingsGlobals.CharacterXmlPath))
+                    File.Delete(SettingsGlobals.CharacterXmlPath);
+            });
         }
         private void LoadCharacters()
         {

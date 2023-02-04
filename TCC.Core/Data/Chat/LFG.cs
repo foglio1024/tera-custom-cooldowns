@@ -5,7 +5,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class LFG : ThreadSafePropertyChanged
+    public class LFG : ThreadSafeObservableObject
     {
         private uint _id;
         private string _name = "";
@@ -80,7 +80,7 @@ namespace TCC.Data.Chat
 
         public LFG(uint id, string name, string msg, bool raid, uint serverId)
         {
-            SetDispatcher(ChatManager.Instance.GetDispatcher());
+            Dispatcher = ChatManager.Instance.Dispatcher;
 
             Id = id;
             ServerId = serverId;
@@ -96,7 +96,7 @@ namespace TCC.Data.Chat
 
         }
 
-        private void _removeTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void _removeTimer_Elapsed(object? sender, ElapsedEventArgs e)
         {
             ChatManager.Instance.RemoveLfg(this);
         }

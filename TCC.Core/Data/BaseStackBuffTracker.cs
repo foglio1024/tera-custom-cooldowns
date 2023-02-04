@@ -5,7 +5,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data
 {
-    public class BaseStackBuffTracker : ThreadSafePropertyChanged
+    public class BaseStackBuffTracker : ThreadSafeObservableObject
     {
         public event Action? BuffEnded;
         public event Action<int>? BaseStacksChanged;
@@ -31,7 +31,7 @@ namespace TCC.Data
 
         protected BaseStackBuffTracker()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
+            Dispatcher = Dispatcher.CurrentDispatcher;
         }
 
         public virtual void StartBaseBuff(long duration)

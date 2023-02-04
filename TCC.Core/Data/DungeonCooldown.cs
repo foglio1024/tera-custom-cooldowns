@@ -7,7 +7,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data
 {
-    public class DungeonCooldown : ThreadSafePropertyChanged
+    public class DungeonCooldown : ThreadSafeObservableObject
     {
         private int _entries;
         private int _clears;
@@ -82,7 +82,7 @@ namespace TCC.Data
         }
         public DungeonCooldown(uint id, Dispatcher d, Character owner)
         {
-            SetDispatcher(d); 
+            Dispatcher = d; 
             Id = id;
             Entries = Runs;
             Owner = owner;

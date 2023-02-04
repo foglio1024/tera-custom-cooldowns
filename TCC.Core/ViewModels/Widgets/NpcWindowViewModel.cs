@@ -54,14 +54,17 @@ namespace TCC.ViewModels.Widgets
             Bams = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                 npc => npc != null && npc.IsBoss && !npc.IsTower && npc.Visible,
                 new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
-                new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
+                new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
             Mobs = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                 npc => npc != null && !npc.IsBoss && !npc.IsTower && npc.Visible,
                 new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
-                new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
+                new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
             GuildTowers = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                 npc => npc != null && npc.IsTower,
-                sortFilters: new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) });
+                sortFilters: new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
 
             PendingAbnormalities = new List<PendingAbnormality>();
             InitFlushTimer();

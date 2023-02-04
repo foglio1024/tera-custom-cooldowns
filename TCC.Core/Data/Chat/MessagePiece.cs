@@ -15,7 +15,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class MessagePieceBase : ThreadSafePropertyChanged, IDisposable
+    public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
     {
         protected bool _customSize;
         protected int _fontSize = 18;
@@ -69,7 +69,7 @@ namespace TCC.Data.Chat
         protected MessagePieceBase()
         {
             ObjectTracker.Register(GetType());
-            SetDispatcher(ChatManager.Instance.GetDispatcher());
+            Dispatcher = ChatManager.Instance.Dispatcher;
             ClickCommand = new RelayCommand(_ => { });
         }
 
@@ -196,7 +196,7 @@ namespace TCC.Data.Chat
         }
     }
 
-    //public class MessagePiece : ThreadSafePropertyChanged, IDisposable
+    //public class MessagePiece : ThreadSafeObservableObject, IDisposable
     //{
     //    private ChatMessage _container;
 
@@ -335,7 +335,7 @@ namespace TCC.Data.Chat
     //    }
     //    public MessagePiece(string text)
     //    {
-    //        Dispatcher = ChatWindowManager.Instance.GetDispatcher();
+    //        Dispatcher = ChatWindowManager.Instance.Dispatcher;
     //        Text = text;
     //        Spaces = SetThickness(text);
     //        _customSize = false;

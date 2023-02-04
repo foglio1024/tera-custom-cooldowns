@@ -67,7 +67,7 @@ namespace TCC.UI.Windows
         {
             Handle = new WindowInteropHelper(this).Handle;
         }
-        protected virtual void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        protected virtual void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_canClose)
             {

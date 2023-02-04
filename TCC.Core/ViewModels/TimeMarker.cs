@@ -5,7 +5,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.ViewModels
 {
-    public class TimeMarker : ThreadSafePropertyChanged
+    public class TimeMarker : ThreadSafeObservableObject
     {
         private readonly DispatcherTimer _t = new();
         private DateTime _dateTime;
@@ -17,7 +17,6 @@ namespace TCC.ViewModels
         public string Color { get; }
         public TimeMarker(int hourOffset, string name, string color = "ffffff")
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Name = name;
             Color = color;
             _hourOffset = hourOffset;

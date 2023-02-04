@@ -11,7 +11,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class GroupConfigVM : ThreadSafePropertyChanged
+    public class GroupConfigVM : ThreadSafeObservableObject
     {
 
         public event Action? ShowAllChanged;
@@ -43,7 +43,6 @@ namespace TCC.ViewModels
         }
         public GroupConfigVM()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             GroupAbnormals = new ThreadSafeObservableCollection<GroupAbnormalityVM>(_dispatcher);
             foreach (var abnormality in Abnormalities)
             {

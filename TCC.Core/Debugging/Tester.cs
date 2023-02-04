@@ -46,11 +46,11 @@ namespace TCC.Debug
         }
         public static void Deadlock()
         {
-            ChatManager.Instance.GetDispatcher().Invoke(() =>
+            ChatManager.Instance.Dispatcher.Invoke(() =>
             {
                 App.BaseDispatcher.Invoke(() =>
                 {
-                    ChatManager.Instance.GetDispatcher().Invoke(() => { Console.WriteLine("Deadlock"); });
+                    ChatManager.Instance.Dispatcher.Invoke(() => { Console.WriteLine("Deadlock"); });
                 });
             });
         }
@@ -123,7 +123,7 @@ namespace TCC.Debug
         public static void AddFakeGroupMember(int id, Class c, Laurel l, bool leader = false)
         {
 #pragma warning disable 612
-            WindowManager.ViewModels.GroupVM?.AddOrUpdateMember(new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
+            WindowManager.ViewModels.GroupVM?.AddOrUpdateMember(new User(WindowManager.ViewModels.GroupVM.Dispatcher)
 #pragma warning restore 612
             {
                 Alive = true,
@@ -255,7 +255,7 @@ namespace TCC.Debug
 #pragma warning disable CS8600 
             WindowManager.ViewModels.GroupVM.TryGetUser(eid, out User l);
 #pragma warning restore CS8600 
-            var ut = new User(WindowManager.ViewModels.GroupVM.GetDispatcher())
+            var ut = new User(WindowManager.ViewModels.GroupVM.Dispatcher)
             {
                 Name = l!.Name,
                 PlayerId = l!.PlayerId,
@@ -462,7 +462,7 @@ namespace TCC.Debug
             t.Start();
         }
         private static ulong _eid = 1;
-        private static void T_Elapsed(object sender, ElapsedEventArgs e)
+        private static void T_Elapsed(object? sender, ElapsedEventArgs e)
         {
             SpawnNPC(9, 700, _eid++, true, false, 0);
             if (_eid != 10000) return;
@@ -547,7 +547,7 @@ namespace TCC.Debug
 
         public static void TestAbnormDbLoad()
         {
-            var db = new ItemsDatabase("EU-EN", "master");
+            var db = new ItemsDatabase("EU-EN");
             var samples = new List<long>();
             var sw = new Stopwatch();
             for (int i = 0; i < 1000; i++)

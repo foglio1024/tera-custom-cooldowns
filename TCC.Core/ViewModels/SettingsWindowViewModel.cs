@@ -27,7 +27,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.ViewModels
 {
-    public class SettingsWindowViewModel : ThreadSafePropertyChanged
+    public class SettingsWindowViewModel : ThreadSafeObservableObject
     {
         public static event Action? ChatShowChannelChanged;
         public static event Action? ChatShowTimestampChanged;
@@ -754,21 +754,24 @@ namespace TCC.ViewModels
 
         public SettingsWindowViewModel()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
-
             KeyboardHook.Instance.RegisterCallback(App.Settings.SettingsHotkey, OnShowSettingsWindowHotkeyPressed);
 
             BrowseUrlCommand = new RelayCommand(url =>
             {
-                var strUrl = url.ToString();
+                var strUrl = url?.ToString();
                 if (strUrl == null) return;
                 Utils.Utilities.OpenUrl(strUrl);
             });
-            RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook.ToString(), true, App.Settings.LastAccountNameHash));
+            RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook?.ToString(), true, App.Settings.LastAccountNameHash));
             OpenWindowCommand = new RelayCommand(winType =>
             {
+                if(winType == null)
+                {
+                    Log.CW("Failed to open window with null type");
+                    return;
+                }
                 var t = (Type) winType;
-                if (TccWindow.Exists(t)) return;
+                if (TccWindow.Exists(t)) return; 
                 var win = Activator.CreateInstance(t, null) as TccWindow;
                 win?.ShowWindow();
             });
@@ -830,7 +833,7 @@ namespace TCC.ViewModels
 
     }
 
-    public class BlacklistedMonsterVM : ThreadSafePropertyChanged
+    public class BlacklistedMonsterVM : ThreadSafeObservableObject
     {
         public readonly Monster Monster;
         public string Name => Monster.Name;

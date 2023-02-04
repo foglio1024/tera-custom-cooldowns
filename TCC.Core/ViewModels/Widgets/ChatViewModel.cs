@@ -40,7 +40,7 @@ namespace TCC.ViewModels.Widgets
         }
 
     }
-    public class ChatViewModel : ThreadSafePropertyChanged
+    public class ChatViewModel : ThreadSafeObservableObject
     {
         public event Action? ForceSizePosUpdateEvent;
 
@@ -208,7 +208,7 @@ namespace TCC.ViewModels.Widgets
         {
             if (!WindowSettings.ShowImportant) return;
             if (!chatMessage.ContainsPlayerName && chatMessage.Channel != ChatChannel.ReceivedWhisper) return;
-            TabVMs.Where(x => ((Tab)x.Content).GetDispatcher()
+            TabVMs.Where(x => ((Tab)x.Content).Dispatcher
                                 .Invoke(() => ((Tab)x.Content).Messages.Contains(chatMessage)))
                         .ToList()
                         .ForEach(t =>

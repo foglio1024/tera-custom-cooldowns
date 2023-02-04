@@ -7,7 +7,7 @@ using TCC.Debugging;
 
 namespace TCC.Data.Abnormalities
 {
-    public class AbnormalityDuration : ThreadSafePropertyChanged, IDisposable
+    public class AbnormalityDuration : ThreadSafeObservableObject, IDisposable
     {
         public event Action? Refreshed;
 
@@ -63,7 +63,7 @@ namespace TCC.Data.Abnormalities
         public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated) : this(b)
         {
             ObjectTracker.Register(this.GetType());
-            SetDispatcher(disp);
+            Dispatcher = disp;
             Animated = animated;
             Duration = d;
             Stacks = s;
@@ -82,7 +82,7 @@ namespace TCC.Data.Abnormalities
             ObjectTracker.Unregister(this.GetType());
         }
 
-        private void DecreaseDuration(object sender, EventArgs e)
+        private void DecreaseDuration(object? sender, EventArgs e)
         {
             DurationLeft = (_endTime - DateTime.Now).TotalMilliseconds;
             if (DurationLeft < 0) DurationLeft = 0;

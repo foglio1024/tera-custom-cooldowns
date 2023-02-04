@@ -228,7 +228,7 @@ namespace TCC.ViewModels
                 new SortDescription(nameof(Listing.IsFullOffline), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsTrade), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending),
-            });
+            }) ?? throw new Exception("Failed to create LiveCollectionView");
 
             Listings.CollectionChanged += ListingsOnCollectionChanged;
             BlacklistedWords.CollectionChanged += OnBlacklistedWordsCollectionChanged;

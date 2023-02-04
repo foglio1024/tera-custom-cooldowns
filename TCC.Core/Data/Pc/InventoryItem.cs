@@ -4,7 +4,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Pc
 {
-    public class InventoryItem : ThreadSafePropertyChanged
+    public class InventoryItem : ThreadSafeObservableObject
     {
         private int _amount;
         public uint Id { get; }

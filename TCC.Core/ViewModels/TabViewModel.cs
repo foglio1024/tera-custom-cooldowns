@@ -36,16 +36,16 @@ namespace TCC.ViewModels
 
         public TabViewModel()
         {
-            TogglePopupCommand = new RelayCommand(SetPopupStatus);
+            TogglePopupCommand = new RelayCommand(SetPopupStatus); // todo: use RelayCommand<bool>
             TabOpened += OnTabOpened;
         }
         public TabViewModel(object header, object content, bool isSelected = false) : base(header, content, isSelected)
         {
-            TogglePopupCommand = new RelayCommand(SetPopupStatus);
+            TogglePopupCommand = new RelayCommand(SetPopupStatus); // todo: use RelayCommand<bool>
             TabOpened += OnTabOpened;
         }
 
-        private void SetPopupStatus(object par)
+        private void SetPopupStatus(object? par)
         {
             var val = Convert.ToBoolean(par);
             ShowImportantPopup = val;

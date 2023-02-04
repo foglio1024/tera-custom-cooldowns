@@ -7,7 +7,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data
 {
-    public class EventGroup : ThreadSafePropertyChanged
+    public class EventGroup : ThreadSafeObservableObject
     {
         public ThreadSafeObservableCollection<DailyEvent> Events { get; }
         public string Name { get; }
@@ -27,7 +27,7 @@ namespace TCC.Data
 
         public EventGroup(string name, DateTime start, DateTime end, bool rc)
         {
-            SetDispatcher(WindowManager.DashboardWindow.Dispatcher);
+            Dispatcher = WindowManager.DashboardWindow.Dispatcher;
             Events = new ThreadSafeObservableCollection<DailyEvent>(_dispatcher);
             Name = name;
             RemoteCheck = rc;

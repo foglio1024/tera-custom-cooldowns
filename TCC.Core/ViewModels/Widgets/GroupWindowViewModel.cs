@@ -66,15 +66,18 @@ namespace TCC.ViewModels.Widgets
             Dps = CollectionViewFactory.CreateLiveCollectionView(Members,
                 dps => dps.Role == Role.Dps && dps.Visible,
                 new[] { nameof(User.Role), nameof(User.Visible) },
-                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
             Tanks = CollectionViewFactory.CreateLiveCollectionView(Members,
                 tank => tank.Role == Role.Tank && tank.Visible,
                 new[] { nameof(User.Role), nameof(User.Visible) },
-                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
             Healers = CollectionViewFactory.CreateLiveCollectionView(Members,
                 healer => healer.Role == Role.Healer && healer.Visible,
                 new[] { nameof(User.Role), nameof(User.Visible) },
-                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) });
+                new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
+                ?? throw new Exception("Failed to create LiveCollectionView");
             All = CollectionViewFactory.CreateLiveCollectionView(Members,
                 user => user.Visible,
                 new[] { nameof(User.Visible) },
@@ -82,7 +85,8 @@ namespace TCC.ViewModels.Widgets
                 {
                     new SortDescription(nameof(User.Role), ListSortDirection.Descending),
                     new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)
-                });
+                })
+                ?? throw new Exception("Failed to create LiveCollectionView");
 
             Game.Teleported += OnTeleported;
             Game.EncounterChanged += OnEncounterChanged;

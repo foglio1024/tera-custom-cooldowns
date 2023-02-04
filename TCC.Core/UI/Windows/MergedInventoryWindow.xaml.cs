@@ -15,7 +15,7 @@ using TCC.Data.Pc;
 namespace TCC.UI.Windows
 {
 
-    public class MergedInventoryViewModel : ThreadSafePropertyChanged
+    public class MergedInventoryViewModel : ThreadSafeObservableObject
     {
         public ThreadSafeObservableCollection<MergedInventoryItem> MergedInventory { get; }
         public ICollectionViewLiveShaping MergedInventoryView { get; }
@@ -27,7 +27,8 @@ namespace TCC.UI.Windows
                 {
                     new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending),
                     new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending),
-                });
+                })
+                ?? throw new Exception("Failed to create LiveCollectionView");
         }
 
         private double _totalProgress;
@@ -98,7 +99,7 @@ namespace TCC.UI.Windows
             Owner = o;
         }
     }
-    public class MergedInventoryItem : ThreadSafePropertyChanged
+    public class MergedInventoryItem : ThreadSafeObservableObject
     {
         public InventoryItem? Item => Items.Count > 0 ? Items[0].Item : null;
         public ThreadSafeObservableCollection<InventoryItemWithOwner> Items { get; }
@@ -124,7 +125,7 @@ namespace TCC.UI.Windows
         {
             InitializeComponent();
             DataContext = new MergedInventoryViewModel();
-            ((MergedInventoryViewModel) DataContext).SetDispatcher(Dispatcher);
+            ((MergedInventoryViewModel) DataContext).Dispatcher = Dispatcher;
             Loaded += OnLoaded;
 
         }

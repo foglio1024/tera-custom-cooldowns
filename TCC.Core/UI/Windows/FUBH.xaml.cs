@@ -15,7 +15,7 @@ namespace TCC.UI.Windows
             Closing += FUBH_Closing;
         }
 
-        private void FUBH_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void FUBH_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
             Hide();
@@ -38,7 +38,7 @@ namespace TCC.UI.Windows
         }
     }
 
-    public class FUBHVM : ThreadSafePropertyChanged
+    public class FUBHVM : ThreadSafeObservableObject
     {
         public string CloseMessage => $"Click to {(!_dontshowagain ? "temporarily " : "")}close this window";
         private bool _dontshowagain;

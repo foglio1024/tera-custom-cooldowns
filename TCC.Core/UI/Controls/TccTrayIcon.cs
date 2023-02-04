@@ -12,8 +12,8 @@ namespace TCC.UI.Controls
         private bool _connected;
         private readonly NotifyIcon _trayIcon;
         private readonly ContextMenu _contextMenu;
-        private readonly Icon _defaultIcon;
-        private readonly Icon _connectedIcon;
+        private readonly Icon? _defaultIcon;
+        private readonly Icon? _connectedIcon;
 
         public bool Connected
         {

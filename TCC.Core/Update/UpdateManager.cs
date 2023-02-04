@@ -202,7 +202,7 @@ namespace TCC.Update
                 if (res == System.Windows.MessageBoxResult.Yes) DownloadServersFile();
             }
         }
-        private static void CheckTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private static void CheckTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             _checkTimer.Stop();
             CheckAppVersionPeriodic();

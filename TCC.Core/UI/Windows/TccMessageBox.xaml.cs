@@ -24,7 +24,7 @@ namespace TCC.UI.Windows
         }
 
 
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
             Hide();

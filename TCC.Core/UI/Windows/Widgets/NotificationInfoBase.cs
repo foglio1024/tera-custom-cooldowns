@@ -41,7 +41,7 @@ namespace TCC.UI.Windows.Widgets
             }
         }
     }
-    public class NotificationInfoBase : ThreadSafePropertyChanged
+    public class NotificationInfoBase : ThreadSafeObservableObject
     {
         public event Action? Disposed;
         public event Action<int>? Disposing;

@@ -4,7 +4,7 @@ using TCC.Data.Pc;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    public class DungeonCooldownViewModel : ThreadSafePropertyChanged
+    public class DungeonCooldownViewModel : ThreadSafeObservableObject
     {
         public DungeonCooldownData Cooldown { get; set; }
         public Character Owner { get; set; }

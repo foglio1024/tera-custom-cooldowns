@@ -7,7 +7,7 @@ using TCC.Data.Skills;
 
 namespace TCC.ViewModels
 {
-    public class SkillWithEffect : ThreadSafePropertyChanged, IDisposable
+    public class SkillWithEffect : ThreadSafeObservableObject, IDisposable
     {
         public Cooldown Cooldown
         {
@@ -20,9 +20,8 @@ namespace TCC.ViewModels
         }
 
 
-        public SkillWithEffect(Dispatcher d, Skill sk, bool canFlashOverride = true)
+        public SkillWithEffect(Dispatcher d, Skill sk, bool canFlashOverride = true) : base(d)
         {
-            SetDispatcher(d);
             Cooldown = new Cooldown(sk, canFlashOverride) { CanFlash = canFlashOverride };
             Effect = new Cooldown(sk, false);
         }

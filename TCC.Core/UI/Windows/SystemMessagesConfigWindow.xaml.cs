@@ -58,8 +58,10 @@ namespace TCC.UI.Windows
                 App.Settings.Save();
             };
 
-            ShowedMessagesView = CollectionViewFactory.CreateLiveCollectionView(ShowedMessages);
-            HiddenMessagesView = CollectionViewFactory.CreateLiveCollectionView(HiddenMessages);
+            ShowedMessagesView = CollectionViewFactory.CreateLiveCollectionView(ShowedMessages)
+                ?? throw new Exception("Failed to create LiveCollectionView");
+            HiddenMessagesView = CollectionViewFactory.CreateLiveCollectionView(HiddenMessages)
+                ?? throw new Exception("Failed to create LiveCollectionView");
         }
 
         private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)

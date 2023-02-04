@@ -20,7 +20,7 @@ namespace TCC.UI.Windows
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
             HideWindow();
-            DashboardViewModel.SaveCharacters();
+            _vm.SaveCharacters();
         }
         private void OnTabChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -90,7 +90,7 @@ namespace TCC.Data.Chat
                 }
             });
         }
-        private void OnTimerTick(object sender, EventArgs e)
+        private void OnTimerTick(object? sender, EventArgs e)
         {
             if (_tries == 0)
             {

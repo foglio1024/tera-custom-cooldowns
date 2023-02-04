@@ -86,7 +86,7 @@ namespace TCC.UI
         }
 
         private static IntPtr TeraWindow => User32.FindWindow("LaunchUnrealUWindowsClient", "TERA");
-        private static IntPtr MeterWindow => User32.FindWindow("Shinra Meter", null);
+        private static IntPtr MeterWindow => User32.FindWindow("Shinra Meter", null); // todo: fix in Nostrum
         private static IntPtr ForegroundWindow => User32.GetForegroundWindow();
 
         public static Screen TeraScreen
@@ -169,7 +169,7 @@ namespace TCC.UI
             User32.SetForegroundWindow(TeraWindow);
         }
 
-        private static void CheckForegroundWindow(object sender, ElapsedEventArgs e)
+        private static void CheckForegroundWindow(object? sender, ElapsedEventArgs e)
         {
             if (_disposed) return;
             if (!PauseTopmost) FocusTick?.Invoke();

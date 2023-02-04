@@ -5,7 +5,7 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat
 {
-    public class Money : ThreadSafePropertyChanged
+    public class Money : ThreadSafeObservableObject
     {
         public long Gold { get; set; }
         public long Silver { get; set; }
@@ -13,7 +13,7 @@ namespace TCC.Data.Chat
 
         public Money(long money)
         {
-            SetDispatcher(ChatManager.Instance.GetDispatcher());
+            Dispatcher = ChatManager.Instance.Dispatcher;
 
             Gold = Convert.ToInt64(money / 10000);
             Silver = Convert.ToInt64(money / 100) - Gold * 100;
@@ -21,7 +21,7 @@ namespace TCC.Data.Chat
         }
         public Money(int g, int s, int c)
         {
-            SetDispatcher(ChatManager.Instance.GetDispatcher());
+            Dispatcher = ChatManager.Instance.Dispatcher;
 
             Gold = g;
             Silver = s;

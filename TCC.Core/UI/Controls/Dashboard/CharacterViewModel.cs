@@ -4,7 +4,7 @@ using TCC.Data.Pc;
 
 namespace TCC.UI.Controls.Dashboard
 {
-    public class CharacterViewModel : ThreadSafePropertyChanged
+    public class CharacterViewModel : ThreadSafeObservableObject
     {
         private bool _hilight;
 

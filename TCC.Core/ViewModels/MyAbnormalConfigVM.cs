@@ -19,7 +19,7 @@ using Nostrum.WPF.Extensions;
 
 namespace TCC.ViewModels
 {
-    public class MyAbnormalConfigVM : ThreadSafePropertyChanged, IDisposable
+    public class MyAbnormalConfigVM : ThreadSafeObservableObject, IDisposable
     {
         public event Action? ShowAllChanged;
 
@@ -48,7 +48,6 @@ namespace TCC.ViewModels
         }
         public MyAbnormalConfigVM()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             var myAbnormals = new ThreadSafeObservableCollection<MyAbnormalityVM>(_dispatcher);
             foreach (var abnormality in Game.DB!.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
             {

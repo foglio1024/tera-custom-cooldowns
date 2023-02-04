@@ -7,7 +7,7 @@ using TCC.Utilities;
 
 namespace TCC.UI.Controls.NPCs
 {
-    public class NpcViewModel : ThreadSafePropertyChanged
+    public class NpcViewModel : ThreadSafeObservableObject
     {
         public event Action? Disposed;
         public event Action? HpFactorChanged;

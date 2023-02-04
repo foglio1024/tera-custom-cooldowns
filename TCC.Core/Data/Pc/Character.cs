@@ -14,7 +14,7 @@ namespace TCC.Data.Pc
 {
     //TODO: remove INPC from properties where it's not needed
 
-    public class Character : ThreadSafePropertyChanged, IComparable
+    public class Character : ThreadSafeObservableObject, IComparable
     {
         private string _name = "";
         private Class _class;
@@ -231,7 +231,6 @@ namespace TCC.Data.Pc
 
         public Character()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Buffs = new ThreadSafeObservableCollection<AbnormalityData>(_dispatcher);
             Inventory = new ThreadSafeObservableCollection<InventoryItem>(_dispatcher);
             GuardianInfo = new GuardianInfo();

@@ -16,7 +16,7 @@ using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels
 {
-    public class PlayerMenuViewModel : ThreadSafePropertyChanged
+    public class PlayerMenuViewModel : ThreadSafeObservableObject
     {
         private string _name = "";
         private string _info = "";
@@ -243,7 +243,6 @@ namespace TCC.ViewModels
 
         public PlayerMenuViewModel()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Name = "";
             Info = "";
             Level = 0;

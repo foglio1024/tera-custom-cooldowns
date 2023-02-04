@@ -116,7 +116,7 @@ namespace TCC.UI.Windows
         }
     }
 
-    public class MyClassToggle : ThreadSafePropertyChanged
+    public class MyClassToggle : ThreadSafeObservableObject
     {
         private bool _selected;
         public bool Selected
@@ -134,7 +134,6 @@ namespace TCC.UI.Windows
         public uint AbnormalityId { get; }
         public MyClassToggle(Class c, uint abId)
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Class = c;
             AbnormalityId = abId;
             MyToggleCommand = new RelayCommand(_ =>

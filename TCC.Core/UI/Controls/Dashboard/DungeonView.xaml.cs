@@ -22,8 +22,8 @@ namespace TCC.UI.Controls.Dashboard
             var headerSw = DungeonHeaders.FindVisualChild<ScrollViewer>();
             var namesSw = CharacterNames.FindVisualChild<ScrollViewer>();
 
-            headerSw.ScrollToHorizontalOffset(e.HorizontalOffset);
-            namesSw.ScrollToVerticalOffset(e.VerticalOffset);
+            headerSw?.ScrollToHorizontalOffset(e.HorizontalOffset);
+            namesSw?.ScrollToVerticalOffset(e.VerticalOffset);
 
         }
         private void OnEntryMouseEnter(object sender, MouseEventArgs e)

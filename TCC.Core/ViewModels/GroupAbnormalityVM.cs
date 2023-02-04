@@ -9,7 +9,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class GroupAbnormalityVM : ThreadSafePropertyChanged
+    public class GroupAbnormalityVM : ThreadSafeObservableObject
     {
         private bool _hidden;
 
@@ -30,7 +30,6 @@ namespace TCC.ViewModels
 
         public GroupAbnormalityVM(Abnormality ab)
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Abnormality = ab;
 
             Classes = new ThreadSafeObservableCollection<ClassToggle>(_dispatcher);

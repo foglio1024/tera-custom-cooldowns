@@ -5,7 +5,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Npc
 {
-    public class TimerPattern : ThreadSafePropertyChanged, IDisposable
+    public class TimerPattern : ThreadSafeObservableObject, IDisposable
     {
         private readonly Timer _timer;
         protected bool Running => _timer.Enabled;
@@ -34,7 +34,7 @@ namespace TCC.Data.Npc
             _timer.Elapsed += OnTimerElapsed;
         }
 
-        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
+        private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
         {
             _timer.Stop();
             Ended?.Invoke();

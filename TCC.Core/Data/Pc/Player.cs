@@ -13,7 +13,7 @@ namespace TCC.Data.Pc
 {
     //TODO: remove INPC from properties where it's not needed
 
-    public class Player : ThreadSafePropertyChanged
+    public class Player : ThreadSafeObservableObject
     {
         public event Action? Death;
         public event Action? Ress;
@@ -356,13 +356,12 @@ namespace TCC.Data.Pc
         // tracking only warrior stance for now
         public StanceTracker<WarriorStance> WarriorStance { get; set; }
 
-        public ThreadSafeObservableCollection<AbnormalityDuration>? Buffs { get; private set; }
-        public ThreadSafeObservableCollection<AbnormalityDuration>? Debuffs { get; private set; }
-        public ThreadSafeObservableCollection<AbnormalityDuration>? InfBuffs { get; private set; }
+        public ThreadSafeObservableCollection<AbnormalityDuration> Buffs { get; private set; }    = new();
+        public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs { get; private set; }  = new();
+        public ThreadSafeObservableCollection<AbnormalityDuration> InfBuffs { get; private set; } = new();
 
         public Player()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             StacksCounter = new Counter(10, true);
             WarriorStance = new StanceTracker<WarriorStance>();
         }
@@ -531,16 +530,16 @@ namespace TCC.Data.Pc
         }
 
         // utils
-        private ThreadSafeObservableCollection<AbnormalityDuration> GetList(Abnormality ab)
+        private ThreadSafeObservableCollection<AbnormalityDuration> GetList(Abnormality abnormality)
         {
-            var list = ab.Type switch
+            var list = abnormality.Type switch
             {
                 AbnormalityType.Debuff => Debuffs,
                 AbnormalityType.DOT => Debuffs,
                 AbnormalityType.Stun => Debuffs,
-                AbnormalityType.Buff => (ab.Infinity ? InfBuffs : Buffs),
-                AbnormalityType.Special => (ab.Infinity ? InfBuffs : Buffs),
-                _ => throw new ArgumentOutOfRangeException()
+                AbnormalityType.Buff => (abnormality.Infinity ? InfBuffs : Buffs),
+                AbnormalityType.Special => (abnormality.Infinity ? InfBuffs : Buffs),
+                _ => throw new ArgumentOutOfRangeException(nameof(abnormality))
             };
 
             if (list == null)
@@ -549,97 +548,5 @@ namespace TCC.Data.Pc
             return list;
         }
         #endregion
-
-        #region Deprecated
-        [Obsolete]
-        public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
-        {
-            var existing = Buffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (existing == null)
-            {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher!, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
-
-                Buffs?.Add(newAb);
-                if (ab.IsShield)
-                {
-                    AddShield(ab);
-                }
-
-                return;
-            }
-            existing.Duration = duration;
-            existing.DurationLeft = duration;
-            existing.Stacks = stacks;
-            existing.Refresh();
-
-        }
-        [Obsolete]
-        public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
-        {
-            var existing = Debuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (existing == null)
-            {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher!, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
-
-                Debuffs?.Add(newAb);
-                return;
-            }
-            existing.Duration = duration;
-            existing.DurationLeft = duration;
-            existing.Stacks = stacks;
-            existing.Refresh();
-        }
-        [Obsolete]
-        public void AddOrRefreshInfBuff(Abnormality ab, uint duration, int stacks)
-        {
-            var existing = InfBuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (existing == null)
-            {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher!, true/*, size * .9, size, new System.Windows.Thickness(margin)*/);
-
-                InfBuffs?.Add(newAb);
-                return;
-            }
-            existing.Duration = duration;
-            existing.DurationLeft = duration;
-            existing.Stacks = stacks;
-            existing.Refresh();
-
-        }
-        [Obsolete]
-        public void RemoveBuff(Abnormality ab)
-        {
-            var buff = Buffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (buff == null) return;
-
-            Buffs?.Remove(buff);
-            buff.Dispose();
-
-            if (ab.IsShield)
-            {
-                EndShield(ab);
-            }
-
-        }
-        [Obsolete]
-        public void RemoveDebuff(Abnormality ab)
-        {
-
-            var buff = Debuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (buff == null) return;
-            Debuffs?.Remove(buff);
-            buff.Dispose();
-        }
-        [Obsolete]
-        public void RemoveInfBuff(Abnormality ab)
-        {
-            var buff = InfBuffs?.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (buff == null) return;
-            InfBuffs?.Remove(buff);
-            buff.Dispose();
-        }
-
-        #endregion
-
     }
 }

@@ -3,7 +3,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data
 {
-    public class Dungeon : ThreadSafePropertyChanged
+    public class Dungeon : ThreadSafeObservableObject
     {
         private string _shortName = "";
         private bool _doublesOnElite;

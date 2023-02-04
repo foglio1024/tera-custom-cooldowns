@@ -10,7 +10,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.UI.Windows
 {
-    public class SplashScreenViewModel : ThreadSafePropertyChanged
+    public class SplashScreenViewModel : ThreadSafeObservableObject
     {
         private int _progress;
         private bool _waiting;

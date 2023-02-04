@@ -15,7 +15,7 @@ using TeraPacketParser.Analysis;
 
 namespace TCC.Data.Chat
 {
-    public class ChatMessage : ThreadSafePropertyChanged, IDisposable
+    public class ChatMessage : ThreadSafeObservableObject, IDisposable
     {
         #region Properties
 
@@ -71,14 +71,14 @@ namespace TCC.Data.Chat
         }
         public int Size => App.Settings.FontSize;
         public string PlainMessage { get; set; }
-        public string DisplayedAuthor { get; }
+        public string DisplayedAuthor { get; } = string.Empty;
 
         #endregion
 
         protected ChatMessage()
         {
             ObjectTracker.Register(GetType());
-            SetDispatcher(ChatManager.Instance.GetDispatcher()!);
+            Dispatcher = ChatManager.Instance.Dispatcher;
             Pieces = new ThreadSafeObservableCollection<MessagePieceBase>(_dispatcher);
             Lines = new ThreadSafeObservableCollection<MessageLine>(_dispatcher);
             Timestamp = App.Settings.ChatTimestampSeconds ? DateTime.Now.ToLongTimeString() : DateTime.Now.ToShortTimeString();

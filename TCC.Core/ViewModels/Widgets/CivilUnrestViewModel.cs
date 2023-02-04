@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets
 {
-    public class CivilUnrestGuild : ThreadSafePropertyChanged
+    public class CivilUnrestGuild : ThreadSafeObservableObject
     {
         private float _towerHp;
         private uint _towersDestroyed;
@@ -78,7 +79,7 @@ namespace TCC.ViewModels.Widgets
                     {
                         new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
                         new SortDescription(nameof(CivilUnrestGuild.TowersDestroyed), ListSortDirection.Descending)
-                    });
+                    }) ?? throw new Exception("Failed to create LiveCollectionView");
                 return ret;
             }
         }

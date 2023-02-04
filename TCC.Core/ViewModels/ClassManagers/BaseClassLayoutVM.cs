@@ -7,7 +7,7 @@ using TCC.Data.Skills;
 
 namespace TCC.ViewModels.ClassManagers
 {
-    public abstract class BaseClassLayoutVM : ThreadSafePropertyChanged, IDisposable
+    public abstract class BaseClassLayoutVM : ThreadSafeObservableObject, IDisposable
     {
         public virtual bool StartSpecialSkill(Cooldown sk)
         {
@@ -42,7 +42,6 @@ namespace TCC.ViewModels.ClassManagers
         }
         public BaseClassLayoutVM()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             StaminaTracker = new StatTracker();
         }
 

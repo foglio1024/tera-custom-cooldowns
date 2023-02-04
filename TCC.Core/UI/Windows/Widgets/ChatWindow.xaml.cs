@@ -60,8 +60,9 @@ namespace TCC.UI.Windows.Widgets
 
         private void TabLoaded(object sender, RoutedEventArgs e)
         {
-            if (!(sender is FrameworkElement s)) return;
+            if (sender is not FrameworkElement s) return;
             var p = s.FindVisualParent<DragablzItemsControl>();
+            if (p == null) return;
             if (p.ItemsSource.TryGetList().IndexOf(s.DataContext) != 0) return;
 
             SetTopBorder(s);
@@ -137,6 +138,8 @@ namespace TCC.UI.Windows.Widgets
         private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
         {
             var sw = ((ItemsControl)sender).FindVisualChild<ScrollViewer>();
+            if (sw == null) return;
+
             var lines = sw.VerticalOffset + e.Delta >= sw.ScrollableHeight ? 1 : App.Settings.ChatScrollAmount;
             sw.ScrollToVerticalOffset(sw.VerticalOffset + (e.Delta > 0 ? lines : -lines));
 
@@ -170,7 +173,7 @@ namespace TCC.UI.Windows.Widgets
 
         }
 
-        public void ScrollToMessage(Tab tab, ChatMessage msg)
+        public void ScrollToMessage(Tab tab, ChatMessage? msg)
         {
             if (VM.CurrentTab != tab) TabControl.SelectedIndex = VM.Tabs.IndexOf(tab);
             TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>

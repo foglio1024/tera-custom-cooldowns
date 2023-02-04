@@ -13,7 +13,7 @@ using TeraDataLite;
 namespace TCC.Data.Pc
 {
     //TODO: remove INPC from properties where it's not needed
-    public class User : ThreadSafePropertyChanged
+    public class User : ThreadSafeObservableObject
     {
         private ulong _entityId;
         private uint _level;
@@ -478,9 +478,8 @@ namespace TCC.Data.Pc
             });
         }
 
-        public User(Dispatcher? d)
+        public User(Dispatcher? d) : base(d)
         {
-            SetDispatcher(d ?? Dispatcher.CurrentDispatcher);
             Debuffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);
             Buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);
 

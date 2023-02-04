@@ -5,7 +5,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data
 {
-    public class StatTracker : ThreadSafePropertyChanged
+    public class StatTracker : ThreadSafeObservableObject
     {
         private int _max = 1;
         private int _val;
@@ -52,7 +52,6 @@ namespace TCC.Data
 
         public StatTracker()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
         }
 
         public void InvokeToZero(uint pDuration)

@@ -38,7 +38,7 @@ namespace TCC.ViewModels
             Name = name;
         }
     }
-    public class TabInfoVM : ThreadSafePropertyChanged
+    public class TabInfoVM : ThreadSafeObservableObject
     {
         private string _tabName = "";
         public string TabName
@@ -158,7 +158,7 @@ namespace TCC.ViewModels
             };
         }
     }
-    public class Tab : ThreadSafePropertyChanged
+    public class Tab : ThreadSafeObservableObject
     {
         public TabInfo TabInfo { get; }
         public TabInfoVM TabInfoVM { get; set; }
@@ -215,20 +215,19 @@ namespace TCC.ViewModels
 
         public Tab(TabInfo tabInfo) 
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Messages = new ListCollectionView(ChatManager.Instance.ChatMessages);
             ImportantMessages = new ThreadSafeObservableCollection<ChatMessage>(_dispatcher);
             RemoveImportantMessageCommand = new RelayCommand(msg =>
             {
-                RemoveImportantMessage((ChatMessage)msg);
-                TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Remove, (ChatMessage)msg));
+                RemoveImportantMessage((ChatMessage?)msg);
+                TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Remove, (ChatMessage?)msg));
             });
             ClearAllCommand = new RelayCommand(_ =>
             {
                 ClearImportant();
                 TabViewModel.InvokeImportantRemoved(this, new ImportantRemovedArgs(ImportantRemovedArgs.ActionType.Clear));
             });
-            ScrollToMessageCommand = new RelayCommand(msg => { ChatManager.Instance.ScrollToMessage(this, (ChatMessage)msg); });
+            ScrollToMessageCommand = new RelayCommand(msg => { ChatManager.Instance.ScrollToMessage(this, (ChatMessage?)msg); });
             TabViewModel.ImportantRemoved += SyncImportant;
 
             TabInfo = tabInfo;

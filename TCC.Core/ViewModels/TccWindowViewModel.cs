@@ -6,7 +6,7 @@ using TeraPacketParser.Analysis;
 
 namespace TCC.ViewModels
 {
-    public class TccWindowViewModel : ThreadSafePropertyChanged
+    public class TccWindowViewModel : ThreadSafeObservableObject
     {
         public WindowSettingsBase? Settings { get; }
 
@@ -30,8 +30,6 @@ namespace TCC.ViewModels
 
         protected TccWindowViewModel(WindowSettingsBase? settings)
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
-
             if (settings != null)
             {
                 Settings = settings;

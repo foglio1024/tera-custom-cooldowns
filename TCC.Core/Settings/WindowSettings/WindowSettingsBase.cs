@@ -16,7 +16,7 @@ using TeraDataLite;
 
 namespace TCC.Settings.WindowSettings
 {
-    public class WindowSettingsBase : ThreadSafePropertyChanged
+    public class WindowSettingsBase : ThreadSafeObservableObject
     {
         protected double _w;
         protected double _h;
@@ -275,7 +275,6 @@ namespace TCC.Settings.WindowSettings
 
         public WindowSettingsBase()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Positions = new ClassPositions();
             GpkNames = new List<string>();
             EnabledChanged += OnEnabledChanged;

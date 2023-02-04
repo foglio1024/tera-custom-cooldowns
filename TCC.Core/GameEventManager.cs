@@ -20,7 +20,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 namespace TCC
 {
     //TODO: big refactor here
-    public class GameEventManager : ThreadSafePropertyChanged
+    public class GameEventManager : ThreadSafeObservableObject
     {
         private static GameEventManager? _instance;
         public static GameEventManager Instance => _instance ??= new GameEventManager();
@@ -49,7 +49,6 @@ namespace TCC
 
         private GameEventManager()
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             var s = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             s.Tick += CheckNewDay;
             s.Start();
@@ -117,7 +116,7 @@ namespace TCC
             if (weeklyDungeonsReset) WindowManager.ViewModels.DashboardVM.ResetWeeklyDungeons();
             if (weeklyVanguardReset) WindowManager.ViewModels.DashboardVM.ResetVanguardWeekly();
 
-            DashboardViewModel.SaveCharacters();
+            WindowManager.ViewModels.DashboardVM.SaveCharacters();
             App.Settings.LastRun = DateTime.Now;
             App.Settings.Save();
         }

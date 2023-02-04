@@ -483,8 +483,10 @@ namespace TCC.ViewModels.Widgets
 
             HiddenSkills = new ThreadSafeObservableCollection<Cooldown>(_dispatcher);
 
-            ItemsView = CollectionViewFactory.CreateLiveCollectionView(Items);
-            AbnormalitiesView = CollectionViewFactory.CreateLiveCollectionView(Passivities);
+            ItemsView = CollectionViewFactory.CreateLiveCollectionView(Items)
+                ?? throw new Exception("Failed to create LiveCollectionView");
+            AbnormalitiesView = CollectionViewFactory.CreateLiveCollectionView(Passivities)
+                ?? throw new Exception("Failed to create LiveCollectionView");
 
             KeyboardHook.Instance.RegisterCallback(App.Settings.SkillSettingsHotkey, OnShowSkillConfigHotkeyPressed);
 

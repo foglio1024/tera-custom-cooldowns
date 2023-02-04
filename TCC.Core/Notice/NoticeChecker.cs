@@ -59,7 +59,7 @@ namespace TCC.Notice
             });
         }
 
-        private static void OnTimerElapsed(object sender, ElapsedEventArgs e)
+        private static void OnTimerElapsed(object? sender, ElapsedEventArgs e)
         {
             Check();
         }

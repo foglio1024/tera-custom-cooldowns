@@ -19,7 +19,7 @@ namespace TCC.UI.Windows
             _dc = vm;
             RemoveEntryCommand = new RelayCommand<string>(entry =>
             {
-                vm.BlacklistedWords.Remove(entry);
+                vm.BlacklistedWords.Remove(entry ?? string.Empty);
             });
             InitializeComponent();
         }

@@ -4,7 +4,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.UI.Controls.NPCs
 {
-    public class EnragePeriodItem : ThreadSafePropertyChanged
+    public class EnragePeriodItem : ThreadSafeObservableObject
     {
         public double Start { get; }
         public double End { get; private set; }
@@ -14,7 +14,6 @@ namespace TCC.UI.Controls.NPCs
         public double Duration => Start - End;
         public EnragePeriodItem(double start)
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Start = start;
 
         }

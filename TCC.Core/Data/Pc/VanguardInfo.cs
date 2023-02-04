@@ -4,7 +4,7 @@ using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Pc
 {
-    public class VanguardInfo : ThreadSafePropertyChanged
+    public class VanguardInfo : ThreadSafeObservableObject
     {
         public const float MaxCredits = 20000;
         public const int MaxDaily = 16;

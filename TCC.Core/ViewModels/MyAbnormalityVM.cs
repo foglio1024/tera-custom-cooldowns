@@ -17,7 +17,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels
 {
-    public class MyAbnormalityVM : ThreadSafePropertyChanged
+    public class MyAbnormalityVM : ThreadSafeObservableObject   
     {
         private bool _special;
         private bool _hidden;
@@ -52,7 +52,6 @@ namespace TCC.ViewModels
 
         public MyAbnormalityVM(Abnormality ab)
         {
-            SetDispatcher(Dispatcher.CurrentDispatcher);
             Abnormality = ab;
             Special = App.Settings.BuffWindowSettings.Specials.Contains(ab.Id);
             Classes = new ThreadSafeObservableCollection<MyClassToggle>(_dispatcher);
