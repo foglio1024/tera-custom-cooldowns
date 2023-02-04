@@ -21,7 +21,7 @@ namespace TCC.Update
     {
         private const string AppVersionUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
         private const string AppVersionBetaUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/beta/version";
-        private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{ (App.Beta ? "beta" : "master")}/database-hashes.json";
+        private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{(App.Beta ? "beta" : "master")}/database-hashes.json";
 
         private static readonly Timer _checkTimer = new((App.ToolboxMode ? 2 : 10) * 60 * 1000);
         private static bool _waitingDownload = true;
@@ -87,7 +87,7 @@ namespace TCC.Update
             // example https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/acc_benefits/acc_benefits-EU-EN.tsv
             try
             {
-                var url = $"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/{ relativePath.Replace("\\", "/") }";
+                var url = $"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/menma/{relativePath.Replace("\\", "/")}";
                 var destPath = Path.Combine(App.DataPath, relativePath);
                 var destDir = Path.GetDirectoryName(destPath);
                 if (!Directory.Exists(destDir) && destDir != null) Directory.CreateDirectory(destDir);
