@@ -816,7 +816,7 @@
                                                                 </Grid>
                                                             </Grid>
                                                             <Button Grid.Column="2"
-                                                                    Style="{StaticResource ButtonContentOpacityStyle}"
+                                                                    Style="{StaticResource NostrumContentOpacityButtonStyle}"
                                                                     VerticalAlignment="Center"
                                                                     VerticalContentAlignment="Center"
                                                                     Command="{Binding ElementName=ImportantMessagesIc, Path=DataContext.Content.RemoveImportantMessageCommand}"
@@ -827,7 +827,7 @@
                                                             </Button>
                                                             <Button Grid.Column="1"
                                                                     Margin="0 0 3 0"
-                                                                    Style="{StaticResource ButtonContentOpacityStyle}"
+                                                                    Style="{StaticResource NostrumContentOpacityButtonStyle}"
                                                                     VerticalAlignment="Center"
                                                                     VerticalContentAlignment="Center"
                                                                     Command="{Binding ElementName=ImportantMessagesIc, Path=DataContext.Content.ScrollToMessageCommand}"
@@ -861,7 +861,7 @@
 
                                             </ItemsControl>
                                             <Button Grid.Row="2" Command="{Binding Content.ClearAllCommand}"
-                                                    Style="{StaticResource ButtonMainStyle}"
+                                                    Style="{StaticResource NostrumMainButtonStyle}"
                                                     Margin="1"
                                                     Background="#1fff"
                                                     Padding="5"

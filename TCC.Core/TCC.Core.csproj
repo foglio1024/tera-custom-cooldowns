@@ -105,13 +105,13 @@
     <Resource Include="resources\fonts\Inconsolata-SemiBold.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
-    <PackageReference Include="Microsoft.Diagnostics.Runtime" Version="2.0.217201" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
-    <PackageReference Include="gong-wpf-dragdrop" Version="2.3.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Nostrum" Version="2.0.9" />
-    <PackageReference Include="Nostrum.WPF" Version="1.2.19" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
+    <PackageReference Include="Microsoft.Diagnostics.Runtime" Version="2.3.405304" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Nostrum" Version="2.0.10" />
+    <PackageReference Include="Nostrum.WPF" Version="1.2.24" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TCC.Loader\TCC.Loader\TCC.Loader.csproj" />
@@ -189,6 +189,6 @@
     </Page>
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="E:\Repos\ReSource\ReSource.CLI\bin\Release\ReSource.CLI.exe &quot;E:\Repos\TCC\TCC.Core\\TCC.Core.csproj&quot; &quot;E:\Repos\TCC\TCC.Core\bin\Debug\TCC.dll&quot; &quot;E:\Repos\TCC\TCC.Core\\R.cs&quot; TCC.R" />
+    <!--<Exec Command="E:\Repos\ReSource\ReSource.CLI\bin\Release\ReSource.CLI.exe &quot;E:\Repos\TCC\TCC.Core\\TCC.Core.csproj&quot; &quot;E:\Repos\TCC\TCC.Core\bin\Debug\TCC.dll&quot; &quot;E:\Repos\TCC\TCC.Core\\R.cs&quot; TCC.R" />-->
   </Target>
 </Project>

@@ -41,7 +41,7 @@
                 <Grid>
                     <Rectangle Margin="5" Fill="#2fff" />
                     <Rectangle Opacity=".2" Fill="{StaticResource TccNormalGradientBrush}"/>
-                    <Path Width="30" Height="30" Fill="White" Data="{StaticResource SvgUsers}"
+                    <Path Width="30" Height="30" Fill="White" Data="{StaticResource SvgUsers}" 
                               Margin="0" VerticalAlignment="Center" RenderTransformOrigin=".5 .5">
                         <Path.RenderTransform>
                             <TransformGroup>
@@ -77,7 +77,7 @@
                         Visibility="{Binding IsAutoPublicizeRunning, Converter={converters:BoolToVisibility}}"
                         Command="{Binding ToggleAutoPublicizeCommand}">
                     <Button.Style>
-                        <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
+                        <Style TargetType="Button" BasedOn="{StaticResource NostrumMainButtonStyle}">
                             <Setter Property="ToolTip" Value="Auto-publicize running. Click to disable." />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsAutoPublicizeEnabled}" Value="False">
@@ -90,7 +90,7 @@
                     <Path Data="{StaticResource SvgAuto}" RenderTransformOrigin=".5 .5" Stretch="Uniform" Fill="#fff"
                           Margin="12 17">
                         <Path.Style>
-                            <Style TargetType="Path" BasedOn="{StaticResource {x:Type Path}}">
+                            <Style TargetType="Path" BasedOn="{StaticResource NostrumDefaultPathStyle}">
                                 <Setter Property="RenderTransform"
                                         Value="{StaticResource DefaultRotateTransform}" />
                                 <Style.Triggers>
@@ -121,20 +121,20 @@
                         </Path.Style>
                     </Path>
                 </Button>
-                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
+                <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" HorizontalAlignment="Right"
                         VerticalAlignment="Stretch" x:Name="CreateBtn"
                         ToolTip="Create new LFG message."
                         Command="{Binding CreateMessageCommand}">
                     <Path Data="{StaticResource SvgAdd}" Stretch="Uniform" Fill="#fff" Margin="12 17" />
                 </Button>
-                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
+                <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" HorizontalAlignment="Right"
                         VerticalAlignment="Stretch" x:Name="RefreshBtn"
                         ToolTip="Refresh LFG list (same as pressing LFG hotkey)"
                         Command="{Binding ReloadCommand}">
                     <Path Data="{StaticResource SvgReload}" Stretch="Uniform" Fill="#fff" Margin="12 17" />
                 </Button>
                 <Rectangle Margin="0 8 0 8" Fill="#1fff" Width="1" VerticalAlignment="Stretch" />
-                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
+                <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" HorizontalAlignment="Right"
                         VerticalAlignment="Stretch" x:Name="ActionsBtn"
                         ToolTip="More actions..."
                         Command="{Binding OpenPopupCommand}">
@@ -159,11 +159,11 @@
                         </Border>
                         <StackPanel>
                             <StackPanel.Resources>
-                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonMainStyle}">
+                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NostrumMainButtonStyle}">
                                     <Setter Property="Padding" Value="10 5" />
                                     <Setter Property="Height" Value="36" />
                                 </Style>
-                                <Style TargetType="{x:Type Path}" BasedOn="{StaticResource {x:Type Path}}">
+                                <Style TargetType="{x:Type Path}" BasedOn="{StaticResource NostrumDefaultPathStyle}">
                                     <Setter Property="Width" Value="16" />
                                     <Setter Property="Height" Value="16" />
                                     <Setter Property="Margin" Value="0 5 10 5" />
@@ -289,7 +289,7 @@
                         </StackPanel>
                     </Grid>
                 </Popup>
-                <Button Style="{StaticResource ButtonContentOpacityStyle}" HorizontalAlignment="Right"
+                <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" HorizontalAlignment="Right"
                         VerticalAlignment="Stretch" 
                         Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=windows:LfgListWindow}, Path=HideWindowCommand}">
                     <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="#fff" Margin="12 17" />
@@ -306,22 +306,22 @@
                     <ColumnDefinition Width="19" />
                 </Grid.ColumnDefinitions>
                 <Button Command="{Binding SortCommand}" CommandParameter="Message" Padding="5 3 5 3"
-                        Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="0"
+                        Style="{StaticResource NostrumMainButtonStyle}" HorizontalAlignment="Stretch" Grid.Column="0"
                         Grid.ColumnSpan="2" Margin="5 0 0 -5" Foreground="#faaa" HorizontalContentAlignment="Left">
                     Message
                 </Button>
                 <Button Command="{Binding SortCommand}" CommandParameter="AliveSinceMs" Padding="5 3 5 3"
-                        Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="2"
+                        Style="{StaticResource NostrumMainButtonStyle}" HorizontalAlignment="Stretch" Grid.Column="2"
                         Margin="0 0 0 -5" Foreground="#faaa" HorizontalContentAlignment="Right">
                     Time
                 </Button>
                 <Button Command="{Binding SortCommand}" CommandParameter="LeaderName" Padding="5 3 5 3"
-                        Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="3"
+                        Style="{StaticResource NostrumMainButtonStyle}" HorizontalAlignment="Stretch" Grid.Column="3"
                         Margin="0 0 0 -5" Foreground="#faaa" HorizontalContentAlignment="Left">
                     Leader
                 </Button>
                 <Button Command="{Binding SortCommand}" CommandParameter="PlayerCount" Padding="16 3"
-                        Style="{StaticResource ButtonMainStyle}" HorizontalAlignment="Stretch" Grid.Column="4"
+                        Style="{StaticResource NostrumMainButtonStyle}" HorizontalAlignment="Stretch" Grid.Column="4"
                         Margin="0 0 0 -5" Foreground="#faaa" HorizontalContentAlignment="Left">
                     Count
                 </Button>
@@ -410,7 +410,7 @@
                         FontSize="15"
                         FontWeight="Normal"
                         VerticalAlignment="Center"
-                        Style="{StaticResource ButtonMainStyle}"
+                        Style="{StaticResource NostrumMainButtonStyle}"
                         Background="{StaticResource ChatMegaphoneBrushDark}"
                         IsHitTestVisible="{Binding AmIinLfg, Converter={StaticResource BoolInverter}}">
                     <Button.Content>
@@ -425,14 +425,14 @@
                 </Button>
                 <UniformGrid Grid.Row="2" Rows="1" x:Name="LfgMgmtBtn"
                              IsHitTestVisible="{Binding AmIinLfg}">
-                    <Button Style="{StaticResource ButtonMainStyle}" x:Name="RemoveMessageButton"
+                    <Button Style="{StaticResource NostrumMainButtonStyle}" x:Name="RemoveMessageButton"
                             Command="{Binding RemoveMessageCommand}"
                             Margin="5" BorderBrush="{StaticResource HpBrush}"
                             Background="{StaticResource RevampBackgroundBrush}"
                             extensions:ButtonExtensions.BorderEffect="{StaticResource DropShadow}"
                             extensions:ButtonExtensions.CornerRadius="1" FontSize="15" FontWeight="Normal"
                             Content="Remove message" HorizontalContentAlignment="Center" Padding="0 4" />
-                    <Button Style="{StaticResource ButtonMainStyle}" x:Name="EditMessageButton"
+                    <Button Style="{StaticResource NostrumMainButtonStyle}" x:Name="EditMessageButton"
                             Command="{Binding CreateMessageCommand}"
                             extensions:ButtonExtensions.BorderEffect="{StaticResource DropShadow}"
                             Background="{StaticResource RevampBackgroundBrush}"
@@ -444,7 +444,7 @@
                             <ColumnDefinition Width="5*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource ButtonMainStyle}"
+                        <Button Style="{StaticResource NostrumMainButtonStyle}"
                                 BorderBrush="{StaticResource GreenBrush}" FontSize="15" FontWeight="Normal"
                                 Background="{StaticResource RevampBackgroundBrush}"
                                 extensions:ButtonExtensions.CornerRadius="1 0 0 1" Padding="0 4"
@@ -453,7 +453,7 @@
                                 IsEnabled="{Binding IsPublicizeEnabled}"
                                 IsHitTestVisible="{Binding IsPublicizeEnabled}"
                                 x:Name="PublicizeBtn" />
-                        <Button Style="{StaticResource ButtonMainStyle}" ToolTip="Auto publicize"
+                        <Button Style="{StaticResource NostrumMainButtonStyle}" ToolTip="Auto publicize"
                                 BorderBrush="{StaticResource GreenBrush}" FontSize="15" FontWeight="Normal"
                                 extensions:ButtonExtensions.CornerRadius="0 1 1 0" Padding="0 4"
                                 Background="{StaticResource RevampBackgroundBrush}"
@@ -467,7 +467,7 @@
                                   Fill="#dfff" Height="18" Margin="0"
                                   RenderTransformOrigin=".5 .5">
                                 <Path.Style>
-                                    <Style TargetType="Path" BasedOn="{StaticResource {x:Type Path}}">
+                                    <Style TargetType="Path" BasedOn="{StaticResource NostrumDefaultPathStyle}">
                                         <Setter Property="RenderTransform"
                                                 Value="{StaticResource DefaultRotateTransform}" />
                                         <Style.Triggers>

@@ -547,7 +547,7 @@ namespace TCC.Debug
 
         public static void TestAbnormDbLoad()
         {
-            var db = new ItemsDatabase("EU-EN");
+            var db = new ItemsDatabase("EU-EN", "master");
             var samples = new List<long>();
             var sw = new Stopwatch();
             for (int i = 0; i < 1000; i++)

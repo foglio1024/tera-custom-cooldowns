@@ -237,7 +237,7 @@ namespace TCC.Settings
         {
             var toRemove = ChatWindowsSettings.Where(s => s.Tabs.Count == 0).ToList();
             toRemove.ForEach(s => ChatWindowsSettings.Remove(s));
-            new JsonSettingsWriter().Save();
+            App.Current.Dispatcher.InvokeAsync(() =>  new JsonSettingsWriter().Save());
         }
     }
 }

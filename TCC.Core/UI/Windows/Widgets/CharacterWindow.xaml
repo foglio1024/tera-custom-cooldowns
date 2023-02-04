@@ -694,7 +694,7 @@
                       Width="Auto"
                       >
                         <Path.Style>
-                            <Style BasedOn="{StaticResource {x:Type Path}}" TargetType="Path">
+                            <Style BasedOn="{StaticResource NostrumDefaultPathStyle}" TargetType="Path">
                                 <Setter Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="{StaticResource MpColorLight}" />

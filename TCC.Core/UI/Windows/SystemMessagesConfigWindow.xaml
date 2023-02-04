@@ -41,7 +41,7 @@
                 <Button Grid.Column="1" HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="ExcludeMessage"
-                        Style="{StaticResource ButtonContentOpacityStyle}">
+                        Style="{StaticResource NostrumContentOpacityButtonStyle}">
                     <Path Data="{StaticResource SvgMenuRight}" Margin="2" />
                 </Button>
             </Grid>
@@ -73,7 +73,7 @@
                 <Button Grid.Column="1" HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Click="RestoreMessage"
-                        Style="{StaticResource ButtonContentOpacityStyle}">
+                        Style="{StaticResource NostrumContentOpacityButtonStyle}">
                     <Path Data="{StaticResource SvgMenuRight}" Margin="2" RenderTransformOrigin=".5 .5">
                         <Path.RenderTransform>
                             <ScaleTransform ScaleX="-1" />
@@ -115,7 +115,7 @@
                        FontSize="16"
                        Grid.Column="1"
                        Margin="2 0" />
-            <Button Style="{StaticResource ButtonContentOpacityStyle}"
+            <Button Style="{StaticResource NostrumContentOpacityButtonStyle}"
                     VerticalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
                     Opacity=".9"

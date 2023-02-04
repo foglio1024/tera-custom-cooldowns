@@ -50,7 +50,7 @@
                             Background="{StaticResource RevampDarkerBackgroundBrush}" BorderThickness="0 0 1 0" />
 
                     <StackPanel Grid.Column="1">
-                        <Button VerticalContentAlignment="Center" Style="{StaticResource ButtonMainStyle}"
+                        <Button VerticalContentAlignment="Center" Style="{StaticResource NostrumMainButtonStyle}"
                                 Command="{Binding OpenLfgCommand}"
                                 Height="{Binding ElementName=InfoBtn, Path=ActualHeight}">
                             <Grid>
@@ -65,7 +65,7 @@
                                            Margin="0 0 5 0" />
                             </Grid>
                         </Button>
-                        <Button Style="{StaticResource ButtonMainStyle}"
+                        <Button Style="{StaticResource NostrumMainButtonStyle}"
                                 x:Name="InfoBtn"
                                 Command="{Binding OpenDashboardCommand}">
                             <Grid>
@@ -80,7 +80,7 @@
                                            Grid.Column="1" Margin="0 0 5 0" />
                             </Grid>
                         </Button>
-                        <Button Style="{StaticResource ButtonMainStyle}"
+                        <Button Style="{StaticResource NostrumMainButtonStyle}"
                                 Command="{Binding OpenSettingsCommand}">
                             <Grid>
                                 <Grid.ColumnDefinitions>

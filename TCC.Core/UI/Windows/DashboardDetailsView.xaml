@@ -142,7 +142,7 @@
                              FontWeight="DemiBold"
                              Foreground="#cfff" />
                 </TextBlock>
-                <Button Style="{StaticResource ButtonMainStyle}"
+                <Button Style="{StaticResource NostrumMainButtonStyle}"
                             Background="{StaticResource HpBrush}"
                             extensions:ButtonExtensions.CornerRadius="12"
                             Grid.Column="2"
@@ -429,7 +429,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="Inventory" Foreground="#5fff" FontSize="20"
                                        FontWeight="Thin" Margin="10 0 10 6" TextAlignment="Center" />
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" Height="16"
+                        <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" Height="16"
                                     HorizontalAlignment="Right" Margin="0 0 10 0"
                                     ToolTip="Open merged inventory"
                                     Command="{Binding OpenMergedInventoryCommand}"
@@ -699,7 +699,7 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Button Style="{StaticResource ButtonContentOpacityStyle}"
+            <Button Style="{StaticResource NostrumContentOpacityButtonStyle}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Grid.Column="1"

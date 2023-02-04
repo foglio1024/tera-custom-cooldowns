@@ -141,7 +141,7 @@
                 </Style>
             </UniformGrid.Style>
             <UniformGrid.Resources>
-                <Style BasedOn="{StaticResource ButtonContentOpacityStyle}" TargetType="{x:Type Button}">
+                <Style BasedOn="{StaticResource NostrumContentOpacityButtonStyle}" TargetType="{x:Type Button}">
                     <Setter Property="Padding" Value="3"/>
                     <Setter Property="FontWeight" Value="Thin"/>
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>

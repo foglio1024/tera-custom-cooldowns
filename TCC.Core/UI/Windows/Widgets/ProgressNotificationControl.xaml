@@ -76,7 +76,7 @@
             <TextBlock Style="{StaticResource NotificationTimestamp}"
                        Text="{Binding TimeStamp, Mode=OneWay}"
                        Grid.Row="2" />
-            <Button Style="{StaticResource ButtonMainStyle}"
+            <Button Style="{StaticResource NostrumMainButtonStyle}"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"

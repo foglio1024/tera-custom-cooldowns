@@ -84,11 +84,11 @@
                         Visibility="{Binding Formed, Converter={converters:BoolToVisibility}}"
                         x:Name="GroupButtonsSingle" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="SettingsButton"
+                        <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" x:Name="SettingsButton"
                                 ToolTip="Configure buffs" Click="ShowAbnormalSettings" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgSettings}" Fill="#fff" Margin="3 3" Width="15" Height="15" />
                         </Button>
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LeaveButton"
+                        <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" x:Name="LeaveButton"
                                 ToolTip="Leave party" Click="LeaveParty" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgRemoveCircle}" Fill="{StaticResource HpBrush}" Margin="3 3" Width="15" Height="15"
                                   Visibility="{Binding ShowLeaveButton, Converter={converters:BoolToVisibility}}" />
@@ -104,15 +104,15 @@
                         x:Name="GroupButtons" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
 
-                        <!--<Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="LootSettingsButton" Padding="10 0" Visibility="Collapsed"
+                        <!--<Button Style="{StaticResource NostrumContentOpacityButtonStyle}" x:Name="LootSettingsButton" Padding="10 0" Visibility="Collapsed"
                             ToolTip="Loot options" Click="LootSettingsButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgGift}" Fill="#fff" Margin="3 3" Width="15" Height="15"/>
                         </Button>-->
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="ResetButton"
+                        <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" x:Name="ResetButton"
                             ToolTip="Reset instance" Click="ResetButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgReload}" Fill="#fff" Margin="3 3" Width="15" Height="15"/>
                         </Button>
-                        <Button Style="{StaticResource ButtonContentOpacityStyle}" x:Name="DisbandButton"
+                        <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" x:Name="DisbandButton"
                                 ToolTip="Disband" Click="DisbandButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgDisband}" Fill="{StaticResource HpBrush}" Margin="3 3" Width="15" Height="15"/>
                         </Button>

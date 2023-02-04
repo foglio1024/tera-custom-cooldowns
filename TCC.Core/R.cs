@@ -660,7 +660,7 @@ namespace TCC.R
 		public static SolidColorBrush SelectionBackgroundLightBrush => Get<SolidColorBrush>("SelectionBackgroundLightBrush");
 		public static SolidColorBrush SelectionBorderBrush => Get<SolidColorBrush>("SelectionBorderBrush");
 		public static Style ButtonContentOpacityStyle => Get<Style>("ButtonContentOpacityStyle");
-		public static Style ButtonMainStyle => Get<Style>("ButtonMainStyle");
+		public static Style NostrumMainButtonStyle => Get<Style>("NostrumMainButtonStyle");
 		public static Style ComboBoxEditableTextBox => Get<Style>("ComboBoxEditableTextBox");
 		public static Style ComboBoxMainStyle => Get<Style>("ComboBoxMainStyle");
 		public static Style ComboBoxToggleButton => Get<Style>("ComboBoxToggleButton");

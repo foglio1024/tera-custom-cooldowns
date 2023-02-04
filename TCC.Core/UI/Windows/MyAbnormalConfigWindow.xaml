@@ -40,7 +40,7 @@
 
         <Grid MouseLeftButtonDown="Drag" Background="Transparent">
 
-            <Button HorizontalAlignment="Right" Style="{StaticResource ButtonContentOpacityStyle}"
+            <Button HorizontalAlignment="Right" Style="{StaticResource NostrumContentOpacityButtonStyle}"
                     VerticalAlignment="Stretch"
                     Click="Close" VerticalContentAlignment="Center">
                 <Path Data="{StaticResource SvgClose}" Margin="10 0" />
@@ -89,7 +89,7 @@
                                     <Setter Property="Height" Value="24" />
                                     <Setter Property="Width" Value="24" />
                                 </Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}">
+                                <Style TargetType="Button" BasedOn="{StaticResource NostrumContentOpacityButtonStyle}">
                                     <Setter Property="VerticalAlignment" Value="Center" />
                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                     <Setter Property="Height" Value="24" />

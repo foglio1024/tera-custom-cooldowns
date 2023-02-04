@@ -49,7 +49,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" HorizontalAlignment="Right" x:Name="PinBtn" Visibility="Collapsed" ToolTip="Pin/Unpin"
-                        VerticalAlignment="Center" Style="{StaticResource ButtonContentOpacityStyle}" Click="PinBtn_OnClick">
+                        VerticalAlignment="Center" Style="{StaticResource NostrumContentOpacityButtonStyle}" Click="PinBtn_OnClick">
                         <Grid Margin="3 0">
                             <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource RevampDarkBackgroundBrush}"  Margin="-6" Opacity=".8"
                                  Height="18" Width="18" />
@@ -58,7 +58,7 @@
                         </Grid>
                     </Button>
                     <Button Grid.Column="1" HorizontalAlignment="Right" x:Name="CopyBtn" Visibility="Collapsed" ToolTip="Copy text to clipboard"
-                        VerticalAlignment="Center" Style="{StaticResource ButtonContentOpacityStyle}" Click="CopyBtn_OnClick">
+                        VerticalAlignment="Center" Style="{StaticResource NostrumContentOpacityButtonStyle}" Click="CopyBtn_OnClick">
                         <Grid Margin="3 0">
                             <Ellipse HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="{StaticResource RevampDarkBackgroundBrush}" Margin="-6" Opacity=".8"
              Height="18" Width="18" />

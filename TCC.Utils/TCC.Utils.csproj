@@ -32,7 +32,7 @@
     <OutputPath>..\release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Nostrum" Version="2.0.9" />
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
+    <PackageReference Include="Nostrum" Version="2.0.10" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
   </ItemGroup>
 </Project>

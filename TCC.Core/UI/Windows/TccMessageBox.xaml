@@ -32,7 +32,7 @@
                    Margin="30 20" TextWrapping="WrapWithOverflow" IsHitTestVisible="False" FontSize="14"/>
         <UniformGrid Rows="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 0">
             <UniformGrid.Resources>
-                <Style TargetType="Button" BasedOn="{StaticResource ButtonMainStyle}">
+                <Style TargetType="Button" BasedOn="{StaticResource NostrumMainButtonStyle}">
                     <Setter Property="Margin" Value="10 5"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="FontSize" Value="14"/>

@@ -225,7 +225,7 @@
                 Margin="-2 -7 0 0"
                 extensions:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
                 ToolTip="Blacklist or change type"
-                Style="{StaticResource ButtonContentOpacityStyle}">
+                Style="{StaticResource NostrumContentOpacityButtonStyle}">
             <Button.ContextMenu>
                 <npc:TccContextMenu Style="{StaticResource {x:Type ContextMenu}}">
                     <MenuItem Header="Use boss bar"

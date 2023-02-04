@@ -275,7 +275,7 @@
                                                          InterTabClient="{Binding InterTabClient}" />
                         </dragablz:TabablzControl.InterTabController>
                     </dragablz:TabablzControl>
-                    <Button VerticalAlignment="Bottom" Grid.Row="1" Style="{StaticResource ButtonMainStyle}"
+                    <Button VerticalAlignment="Bottom" Grid.Row="1" Style="{StaticResource NostrumMainButtonStyle}"
                             Opacity="1"
                             Margin="20 1 1 1"
                             Background="{StaticResource RevampBorderBrush}"
@@ -344,7 +344,7 @@
                     <Button x:Name="SettingsButton" Margin="0 5" HorizontalAlignment="Right"
                             Click="OnSettingsButtonClick" Opacity="1"
                             ToolTip="Settings"
-                            Style="{StaticResource ButtonMainStyle}" Grid.Row="1" Height="18"
+                            Style="{StaticResource NostrumMainButtonStyle}" Grid.Row="1" Height="18"
                             Padding="2"
                             VerticalAlignment="Top"
                             Background="{StaticResource RevampBackgroundBrush}"
@@ -452,7 +452,7 @@
                     <Button Margin="0 0 10 64" HorizontalAlignment="Right" Click="OnSettingsButtonClick"
                             Opacity=".5"
                             Visibility="{Binding ShowCollapsedSettingsButton, Converter={converters:BoolToVisibility}}"
-                            Style="{StaticResource ButtonMainStyle}" Height="18"
+                            Style="{StaticResource NostrumMainButtonStyle}" Height="18"
                             Padding="2"
                             Background="{StaticResource RevampBackgroundBrush}"
                             BorderThickness="1"

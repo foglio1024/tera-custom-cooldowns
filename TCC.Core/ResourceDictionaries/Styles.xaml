@@ -9,6 +9,10 @@
                     xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
                     mc:Ignorable="d">
 
+    <Style TargetType="{x:Type Path}" BasedOn="{StaticResource NostrumDefaultPathStyle}"/>
+    <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource DefaultListBoxStyle}"/>
+    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource NostrumMainCheckBoxStyle}"/>
+
     <Style x:Key="BaseSkillArcStyle" TargetType="controls:Arc">
         <Setter Property="EndAngle" Value="0.01" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -157,7 +161,7 @@
         <Setter Property="Foreground" Value="#ccffffff" />
     </Style>
 
-    <Style TargetType="{x:Type Button}" x:Key="SettingsButton" BasedOn="{StaticResource ButtonMainStyle}">
+    <Style TargetType="{x:Type Button}" x:Key="SettingsButton" BasedOn="{StaticResource NostrumMainButtonStyle}">
         <Setter Property="Margin" Value="35 5 7 5" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -595,7 +599,7 @@
         <Setter Property="OffColor" Value="#f222" />
     </Style>
 
-    <Style TargetType="{x:Type Path}" x:Key="WindowLogo" BasedOn="{StaticResource {x:Type Path}}">
+    <Style TargetType="{x:Type Path}" x:Key="WindowLogo" BasedOn="{StaticResource NostrumDefaultPathStyle}">
         <Setter Property="Data" Value="{StaticResource SvgTera}" />
         <Setter Property="Fill" Value="#6fff" />
         <Setter Property="Height" Value="20" />

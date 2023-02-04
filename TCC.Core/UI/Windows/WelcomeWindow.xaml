@@ -32,7 +32,7 @@
                 Grid.Row="1"
                 Margin="10 10 10 10" />
         <Button Grid.Column="1"
-                Style="{StaticResource ButtonMainStyle}"
+                Style="{StaticResource NostrumMainButtonStyle}"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Padding="10"
@@ -82,7 +82,7 @@
             <TextBlock FontSize="11" Foreground="#3fff"
                        Margin="0 -15 0 -20" TextAlignment="Center">Quick links</TextBlock>
 
-            <Button Style="{StaticResource ButtonMainStyle}"
+            <Button Style="{StaticResource NostrumMainButtonStyle}"
                     Margin="5"
                     Height="60" Width="160" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Center"
@@ -115,7 +115,7 @@
                                TextWrapping="Wrap" />
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonMainStyle}"
+            <Button Style="{StaticResource NostrumMainButtonStyle}"
                     Margin="5"
                     Height="60" Width="160" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch"
                     BorderBrush="{StaticResource RevampBorderBrush}"
@@ -149,7 +149,7 @@
                                TextWrapping="Wrap" />
                 </Grid>
             </Button>
-            <Button Style="{StaticResource ButtonMainStyle}"
+            <Button Style="{StaticResource NostrumMainButtonStyle}"
                     Margin="5"
                     Height="60" Width="160" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch"
                     BorderBrush="{StaticResource RevampBorderBrush}"

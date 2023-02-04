@@ -300,7 +300,7 @@
                 Margin="-4 0 0 5" Padding="2"
                 BorderThickness="1"
                 extensions:ButtonExtensions.CornerRadius="1"
-                Style="{StaticResource ButtonMainStyle}"
+                Style="{StaticResource NostrumMainButtonStyle}"
                 BorderBrush="{StaticResource RevampBorderBrush}"
                 Background="{StaticResource RevampBackgroundBrush}"
                 Click="OpenCooldownSettings"

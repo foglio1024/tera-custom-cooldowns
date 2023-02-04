@@ -79,7 +79,7 @@
             </StackPanel.LayoutTransform>
             <!-- Settings Button -->
             <Grid Style="{StaticResource GridRowStyle}" Margin="3">
-                <Button Style="{StaticResource ButtonMainStyle}"
+                <Button Style="{StaticResource NostrumMainButtonStyle}"
                         BorderThickness="1" Padding="2"
                         BorderBrush="{StaticResource RevampBorderBrush}"
                         Background="{StaticResource RevampBackgroundBrush}"

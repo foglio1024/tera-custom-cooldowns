@@ -45,7 +45,7 @@
                        FontSize="16"
                        Grid.Column="1"
                        Margin="2 0" />
-            <Button Style="{StaticResource ButtonContentOpacityStyle}"
+            <Button Style="{StaticResource NostrumContentOpacityButtonStyle}"
                     VerticalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
                     Opacity=".9"

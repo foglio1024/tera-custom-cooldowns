@@ -46,7 +46,7 @@
                 </Ellipse>
                 <TextBlock Grid.Column="1" Foreground="#9fff" Text="{Binding Skill.ShortName}"
                            VerticalAlignment="Center" Margin="5 0" />
-                <Button Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Center"
+                <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" VerticalAlignment="Center"
                         Click="RemoveHiddenSkill" Grid.Column="2">
                     <Path Data="{StaticResource SvgClose}" Stretch="Uniform" Fill="{StaticResource HpBrush}" />
                 </Button>
@@ -64,7 +64,7 @@
                 Grid.RowSpan="3" />
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
             <Border Background="#3000" CornerRadius="1 1 0 0" />
-            <Button HorizontalAlignment="Right" Style="{StaticResource ButtonContentOpacityStyle}"
+            <Button HorizontalAlignment="Right" Style="{StaticResource NostrumContentOpacityButtonStyle}"
                     VerticalAlignment="Stretch"
                     Click="ClosewWindow" VerticalContentAlignment="Center">
                 <Path Data="{StaticResource SvgClose}" Margin="10 0" />

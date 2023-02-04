@@ -31,7 +31,7 @@
             <chat:TabSettingControl Grid.Row="1" Visibility="Visible" Margin="3 0 3 3"/>
             <Grid  MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
                 <!--<Border Background="{StaticResource RevampBackgroundBrush}" Style="{StaticResource RevampBorderStyle}"></Border>-->
-                <Button HorizontalAlignment="Right" Style="{StaticResource ButtonContentOpacityStyle}" VerticalAlignment="Stretch"
+                <Button HorizontalAlignment="Right" Style="{StaticResource NostrumContentOpacityButtonStyle}" VerticalAlignment="Stretch"
                                Click="CloseChannelSettings" VerticalContentAlignment="Center">
                     <Path Data="{StaticResource SvgClose}" Margin="10 0" />
                 </Button>

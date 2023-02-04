@@ -66,7 +66,7 @@
                     <TextBlock Text="Dump details" Width="40" FontSize="10" TextWrapping="Wrap" TextAlignment="Center"
                                Foreground="#5fff" />
                     <Button.Style>
-                        <Style BasedOn="{StaticResource ButtonMainStyle}" TargetType="Button">
+                        <Style BasedOn="{StaticResource NostrumMainButtonStyle}" TargetType="Button">
                                     <Setter Property="Visibility" Value="Collapsed" />
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding MemoryWarning}" Value="True">

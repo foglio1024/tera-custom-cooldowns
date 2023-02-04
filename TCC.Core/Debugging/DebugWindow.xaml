@@ -8,7 +8,7 @@
         Title="DebugWindow" Background="{StaticResource RevampBackgroundBrush}">
     <StackPanel Orientation="Horizontal">
         <StackPanel.Resources>
-            <Style TargetType="Button" BasedOn="{StaticResource ButtonContentOpacityStyle}"/>
+            <Style TargetType="Button" BasedOn="{StaticResource NostrumContentOpacityButtonStyle}"/>
         </StackPanel.Resources>
         <StackPanel Orientation="Vertical"  VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Click="SwitchClass">Reaper</Button>
@@ -51,7 +51,7 @@
             <Button Click="NotifyFieldBossDie">Field Boss Die</Button>
         </StackPanel>
         <Grid Width="50" Height="50">
-            <Button Style="{StaticResource ButtonMainStyle}"
+            <Button Style="{StaticResource NostrumMainButtonStyle}"
                      extensions:ButtonExtensions.RippleBrush="Red" />
         </Grid>
     </StackPanel>

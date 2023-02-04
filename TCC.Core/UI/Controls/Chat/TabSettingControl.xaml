@@ -25,7 +25,7 @@
                            Margin="4 2 0 4" />
 
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16"
-                        Style="{StaticResource ButtonContentOpacityStyle}" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource NostrumContentOpacityButtonStyle}" HorizontalContentAlignment="Stretch"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveChannel"
                         VerticalContentAlignment="Center">
@@ -52,7 +52,7 @@
                            Margin="4 2 0 4" />
 
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16"
-                        Style="{StaticResource ButtonContentOpacityStyle}" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource NostrumContentOpacityButtonStyle}" HorizontalContentAlignment="Stretch"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExChannel"
                         VerticalContentAlignment="Center">
@@ -77,7 +77,7 @@
                            HorizontalAlignment="Left"
                            Margin="4 2 0 4" />
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16"
-                        Style="{StaticResource ButtonContentOpacityStyle}"
+                        Style="{StaticResource NostrumContentOpacityButtonStyle}"
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveAuthor">
@@ -102,7 +102,7 @@
                            HorizontalAlignment="Left"
                            Margin="4 2 0 4" />
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16"
-                        Style="{StaticResource ButtonContentOpacityStyle}" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource NostrumContentOpacityButtonStyle}" HorizontalContentAlignment="Stretch"
                         VerticalContentAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExAuthor">
@@ -127,7 +127,7 @@
                            HorizontalAlignment="Left"
                            Margin="4 2 0 4" />
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16"
-                        Style="{StaticResource ButtonContentOpacityStyle}"
+                        Style="{StaticResource NostrumContentOpacityButtonStyle}"
                         HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveKeyword">
@@ -152,7 +152,7 @@
                            HorizontalAlignment="Left"
                            Margin="4 2 0 4" />
                 <Button Grid.Column="0" VerticalAlignment="Stretch" FontSize="16"
-                        Style="{StaticResource ButtonContentOpacityStyle}" HorizontalContentAlignment="Stretch"
+                        Style="{StaticResource NostrumContentOpacityButtonStyle}" HorizontalContentAlignment="Stretch"
                         VerticalContentAlignment="Center"
                         HorizontalAlignment="Stretch"
                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="RemoveExKeyword">
@@ -219,7 +219,7 @@
                         </ComboBox.ItemsPanel>
                     </ComboBox>
                     <!--<Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
-                            Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
+                            Style="{StaticResource NostrumMainButtonStyle}" HorizontalContentAlignment="Stretch"
                             VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddChannel">
@@ -265,7 +265,7 @@
                         </ComboBox.ItemsPanel>
                     </ComboBox>
                     <!--<Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
-                            Style="{StaticResource ButtonMainStyle}" HorizontalContentAlignment="Stretch"
+                            Style="{StaticResource NostrumMainButtonStyle}" HorizontalContentAlignment="Stretch"
                             VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExChannel">
@@ -305,7 +305,7 @@
                              LostFocus="NewAuthorTextBox_LostFocus"
                              Foreground="#3fff" Margin="0 1" CaretBrush="White" Text="New author..."
                              KeyDown="NewAuthorTextBox_KeyDown" />
-                    <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
+                    <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource NostrumMainButtonStyle}"
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right" VerticalAlignment="Stretch"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddAuthor">
@@ -342,7 +342,7 @@
                              Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author..."
                              PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
                              KeyDown="NewExAuthorTextBox_KeyDown" LostFocus="NewAuthorTextBox_LostFocus" />
-                    <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource ButtonMainStyle}"
+                    <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource NostrumMainButtonStyle}"
                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             HorizontalAlignment="Right" VerticalAlignment="Stretch"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExAuthor">
@@ -422,7 +422,7 @@
             </ItemsControl>
         </StackPanel>
 
-        <Button Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource ButtonContentOpacityStyle}"
+        <Button Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource NostrumContentOpacityButtonStyle}"
                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5"
                 Foreground="{StaticResource HpBrush}"
                 Click="DeleteTab">

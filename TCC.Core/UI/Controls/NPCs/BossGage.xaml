@@ -575,7 +575,7 @@
                     Grid.RowSpan="2"
                     extensions:ContextMenuLeftClickBehavior.IsLeftClickEnabled="True"
                     ToolTip="Blacklist or change type"
-                    Style="{StaticResource ButtonContentOpacityStyle}"
+                    Style="{StaticResource NostrumContentOpacityButtonStyle}"
                     Visibility="{Binding VM.ShowOverrideBtn, Converter={converters:BoolToVisibility}, RelativeSource={RelativeSource AncestorType={x:Type npcCtrl:BossGage}}}"
                     >
                 <Button.ContextMenu>
