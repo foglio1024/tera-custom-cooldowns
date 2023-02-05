@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Newtonsoft.Json;
 using TCC.UI.Windows;
+using TCC.Utilities;
 using TCC.Utils;
 
 namespace TCC.Settings
@@ -15,7 +16,7 @@ namespace TCC.Settings
         }
         public override void Save()
         {
-            var json = JsonConvert.SerializeObject(App.Settings, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new JsonIgnoreResolver(new[] { "Dispatcher" }) });
+            var json = JsonConvert.SerializeObject(App.Settings, Formatting.Indented, TccUtils.GetDefaultJsonSerializerSettings());
             var savePath = SettingsContainer.SettingsOverride == ""
                 ? Path.Combine(App.BasePath, FileName)
                 : SettingsContainer.SettingsOverride;

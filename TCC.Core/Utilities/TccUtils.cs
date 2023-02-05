@@ -1,4 +1,5 @@
-﻿using Nostrum;
+﻿using Newtonsoft.Json;
+using Nostrum;
 using Nostrum.Extensions;
 using Nostrum.WinAPI;
 using Nostrum.WPF.Extensions;
@@ -8,12 +9,15 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Interop;
 using TCC.R;
+using TCC.Settings;
 using TCC.UI;
 using TCC.Utils;
 using TCC.ViewModels;
@@ -338,6 +342,19 @@ namespace TCC.Utilities
             var t = typeof(SystemParameters);
             var field = t.GetField("_menuDropAlignment", BindingFlags.NonPublic | BindingFlags.Static);
             if (field != null) field.SetValue(null, false);
+        }
+
+        public static JsonIgnoreResolver GetDefaultIgnore()
+        {
+            var ret = new JsonIgnoreResolver();
+            ret.Ignore(typeof(Thread));
+            ret.Ignore(typeof(Dispatcher), "Dispatcher");
+            return ret;
+        }
+
+        public static JsonSerializerSettings GetDefaultJsonSerializerSettings()
+        {
+            return new JsonSerializerSettings { ContractResolver = GetDefaultIgnore(), ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
         }
     }
 }

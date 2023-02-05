@@ -24,6 +24,7 @@ using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 using Nostrum.WPF.ThreadSafe;
 using Nostrum.WPF.Extensions;
+using TCC.Utilities;
 
 namespace TCC.ViewModels.Widgets
 {
@@ -457,7 +458,7 @@ namespace TCC.ViewModels.Widgets
             HiddenSkills.ToList().ForEach(sk => data.Hidden.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
             var path = Path.Combine(App.ResourcesPath, "config","skills", $"{Game.Me.Class.ToString().ToLower()}-skills.json");
             if (!Directory.Exists(Path.GetDirectoryName(path))) Directory.CreateDirectory(Path.GetDirectoryName(path) ?? throw new InvalidOperationException());
-            File.WriteAllText(path, JsonConvert.SerializeObject(data, new JsonSerializerSettings { ContractResolver = new JsonIgnoreResolver(new[] { "Dispatcher" }) }));
+            File.WriteAllText(path, JsonConvert.SerializeObject(data, TccUtils.GetDefaultJsonSerializerSettings()));
             try
             {
                 File.Delete(path.Replace(".json", ".xml"));

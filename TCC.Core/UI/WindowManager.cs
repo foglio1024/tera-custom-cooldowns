@@ -45,7 +45,7 @@ namespace TCC.UI
         //public static SkillConfigWindow? SkillConfigWindow { get; set; }
         public static PerfMonitorWindow PerfMonitor { get; private set; } = null!;
 
-        public static Dashboard DashboardWindow { get; private set; } = null!;
+        public static DashboardWindow DashboardWindow { get; private set; } = null!;
 
         public static LfgListWindow LfgListWindow { get; private set; } = null!;
 
@@ -127,7 +127,7 @@ namespace TCC.UI
             FloatingButton = await b8.GetWindow();
             ViewModels.FloatingButtonVM = await b8.GetViewModel();
 
-            var b9 = new TccWidgetBuilder<Dashboard, DashboardViewModel>(null);
+            var b9 = new TccWidgetBuilder<DashboardWindow, DashboardViewModel>(null);
             DashboardWindow = await b9.GetWindow();
             ViewModels.DashboardVM = await b9.GetViewModel();
 

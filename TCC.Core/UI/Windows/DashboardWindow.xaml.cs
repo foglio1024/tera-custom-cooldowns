@@ -1,14 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using TCC.Utils;
 using TCC.ViewModels;
 
 namespace TCC.UI.Windows
 {
-    public partial class Dashboard
+    public partial class DashboardWindow
     {
         private readonly DashboardViewModel _vm;
 
-        public Dashboard(DashboardViewModel vm) : base(false)
+        public DashboardWindow(DashboardViewModel vm) : base(false)
         {
             InitializeComponent();
             DataContext = vm;

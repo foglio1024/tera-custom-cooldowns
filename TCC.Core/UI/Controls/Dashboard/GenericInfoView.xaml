@@ -318,7 +318,7 @@
                       ToolTipService.InitialShowDelay="0"
                       ToolTipService.ShowDuration="50000"
                       Background="Transparent"
-                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={converters:BoolToVisibility}}"
+                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:DashboardWindow}},Converter={converters:BoolToVisibility}}"
                       >
                     <StackPanel Margin="6 0" VerticalAlignment="Center">
                         <dashboard:RectangleBarGauge Width="100"
@@ -405,7 +405,7 @@
                        Width="100"
                        Grid.Column="4"
                        Margin="6 0" 
-                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:Dashboard}},Converter={converters:BoolToVisibility}}"
+                      Visibility="{Binding DataContext.ShowElleonMarks, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type windows:DashboardWindow}},Converter={converters:BoolToVisibility}}"
             />
         </Grid>
         <ListBox ItemsSource="{Binding SortedCharacters}" AlternationCount="1" Grid.ColumnSpan="2"

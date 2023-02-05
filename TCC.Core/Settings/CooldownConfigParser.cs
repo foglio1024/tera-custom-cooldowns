@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 using TCC.Data;
+using TCC.Utilities;
 using TeraDataLite;
 
 namespace TCC.Settings
@@ -15,7 +16,7 @@ namespace TCC.Settings
 
             if (File.Exists(filePath))
             {
-                Data = JsonConvert.DeserializeObject<CooldownConfigData>(File.ReadAllText(filePath))!;
+                Data = JsonConvert.DeserializeObject<CooldownConfigData>(File.ReadAllText(filePath), TccUtils.GetDefaultJsonSerializerSettings())!;
                 return;
             }
             

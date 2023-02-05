@@ -378,7 +378,7 @@ namespace TCC.ViewModels
                         ch.DungeonInfo.DungeonList.Add(dg);
                     }
                 }
-                var json = JsonConvert.SerializeObject(account, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new JsonIgnoreResolver(new[] { "Dispatcher" }) });
+                var json = JsonConvert.SerializeObject(account, Formatting.Indented, TccUtils.GetDefaultJsonSerializerSettings());
                 File.WriteAllText(SettingsGlobals.CharacterJsonPath, json);
                 if (File.Exists(SettingsGlobals.CharacterXmlPath))
                     File.Delete(SettingsGlobals.CharacterXmlPath);
@@ -391,7 +391,7 @@ namespace TCC.ViewModels
                 if (!File.Exists(SettingsGlobals.CharacterJsonPath)) return;
                 App.BaseDispatcher.Invoke(() =>
                 {
-                    var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath), new JsonSerializerSettings { ContractResolver = new JsonIgnoreResolver(new[] { "Dispatcher" }) });
+                    var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath), TccUtils.GetDefaultJsonSerializerSettings());
                     Game.Account = account ?? throw new FileFormatException(new Uri(SettingsGlobals.CharacterJsonPath));
                 });
             }
