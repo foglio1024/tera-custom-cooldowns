@@ -362,7 +362,7 @@ namespace TCC.ViewModels
 
         public void SaveCharacters()
         {
-            Dispatcher.BeginInvoke(() =>
+            App.BaseDispatcher.BeginInvoke(() =>
             {
                 var account = (Account)Game.Account.Clone();
                 foreach (var ch in account.Characters.ToSyncList())
@@ -378,8 +378,7 @@ namespace TCC.ViewModels
                         ch.DungeonInfo.DungeonList.Add(dg);
                     }
                 }
-
-                var json = JsonConvert.SerializeObject(account, Formatting.Indented);
+                var json = JsonConvert.SerializeObject(account, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new JsonIgnoreResolver(new[] { "Dispatcher" }) });
                 File.WriteAllText(SettingsGlobals.CharacterJsonPath, json);
                 if (File.Exists(SettingsGlobals.CharacterXmlPath))
                     File.Delete(SettingsGlobals.CharacterXmlPath);
@@ -390,8 +389,11 @@ namespace TCC.ViewModels
             try
             {
                 if (!File.Exists(SettingsGlobals.CharacterJsonPath)) return;
-                var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath));
-                Game.Account = account ?? throw new FileFormatException(new Uri(SettingsGlobals.CharacterJsonPath));
+                App.BaseDispatcher.Invoke(() =>
+                {
+                    var account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SettingsGlobals.CharacterJsonPath), new JsonSerializerSettings { ContractResolver = new JsonIgnoreResolver(new[] { "Dispatcher" }) });
+                    Game.Account = account ?? throw new FileFormatException(new Uri(SettingsGlobals.CharacterJsonPath));
+                });
             }
             catch (Exception e)
             {

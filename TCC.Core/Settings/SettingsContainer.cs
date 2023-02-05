@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
+using TCC.UI.Controls.NPCs;
 using TCC.Utils;
 using TeraPacketParser;
 using Key = System.Windows.Forms.Keys;
@@ -230,14 +232,15 @@ namespace TCC.Settings
             var settingsPath = SettingsOverride == ""
                 ? Path.Combine(App.BasePath, SettingsGlobals.SettingsFileName)
                 : SettingsOverride;
-            return new JsonSettingsReader().LoadSettings(settingsPath);
+            var settings =  new JsonSettingsReader().LoadSettings(settingsPath);
+            return settings;
         }
 
         public void Save()
         {
             var toRemove = ChatWindowsSettings.Where(s => s.Tabs.Count == 0).ToList();
             toRemove.ForEach(s => ChatWindowsSettings.Remove(s));
-            App.Current.Dispatcher.InvokeAsync(() =>  new JsonSettingsWriter().Save());
+            App.BaseDispatcher.InvokeAsync(() =>  new JsonSettingsWriter().Save());
         }
     }
 }

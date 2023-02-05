@@ -1,12 +1,35 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Threading;
 using TCC.UI.Windows;
 using TCC.Utils;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.Settings
 {
+    public class JsonIgnoreResolver : DefaultContractResolver
+    {
+        private readonly HashSet<string> ignoreProps;
+
+        public JsonIgnoreResolver(IEnumerable<string> propNamesToIgnore)
+        {
+            this.ignoreProps = new HashSet<string>(propNamesToIgnore);
+        }
+
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        {
+            JsonProperty property = base.CreateProperty(member, memberSerialization);
+            if (this.ignoreProps.Contains(property.PropertyName))
+            {
+                property.ShouldSerialize = _ => false;
+            }
+            return property;
+        }
+    }
     public class JsonSettingsReader : SettingsReaderBase
     {
         public JsonSettingsReader()
@@ -29,7 +52,8 @@ namespace TCC.Settings
                                .Replace("\"LanguageOverride\": \"\"", "\"LanguageOverride\" : 0");
 
                     #endregion
-                    return JsonConvert.DeserializeObject<SettingsContainer>(file)!;
+                    var ret =  JsonConvert.DeserializeObject<SettingsContainer>(file, new JsonSerializerSettings { ContractResolver = new JsonIgnoreResolver(new[] { "Dispatcher" }) })!;
+                    return ret;
                 }
 //                else
 //                {
