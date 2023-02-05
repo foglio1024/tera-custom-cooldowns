@@ -5,9 +5,9 @@
     <AssemblyName>TCC.Publisher</AssemblyName>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-	  <TargetFramework>net6-windows</TargetFramework>
+	  <TargetFramework>net7-windows</TargetFramework>
 	  <UseWPF>true</UseWPF>
-    <LangVersion>10</LangVersion>
+    <LangVersion>11</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
