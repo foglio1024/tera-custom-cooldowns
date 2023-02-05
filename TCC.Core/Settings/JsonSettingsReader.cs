@@ -71,6 +71,7 @@ namespace TCC.Settings
             {
                 property.ShouldSerialize = instance => { return false; };
                 property.ShouldDeserialize = instance => { return false; };
+                property.Ignored = true;
             }
 
             return property;

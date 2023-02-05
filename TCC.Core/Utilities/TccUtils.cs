@@ -3,6 +3,7 @@ using Nostrum;
 using Nostrum.Extensions;
 using Nostrum.WinAPI;
 using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -347,8 +348,7 @@ namespace TCC.Utilities
         public static JsonIgnoreResolver GetDefaultIgnore()
         {
             var ret = new JsonIgnoreResolver();
-            ret.Ignore(typeof(Thread));
-            ret.Ignore(typeof(Dispatcher), "Dispatcher");
+            ret.Ignore(typeof(ThreadSafeObservableObject), "Dispatcher");
             return ret;
         }
 
