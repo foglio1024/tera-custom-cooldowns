@@ -168,7 +168,7 @@ namespace TCC.ViewModels
 
         public bool IsBlocked => _name != "" && Game.BlockList.Contains(_name);
 
-        public bool IsFriend => !Game.Friends.Has(_name);
+        public bool IsFriend => Game.Friends.Has(_name);
 
         public bool ShowFpsUtils => StubInterface.Instance.IsStubAvailable
                                  && StubInterface.Instance.IsFpsModAvailable;
