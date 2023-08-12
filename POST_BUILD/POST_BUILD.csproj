@@ -18,12 +18,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
     <PostBuildEvent>
-		xcopy $(SolutionDir)\TCC.Core\Module\ "D:\Program Files\TERA\TeraToolbox\mods\TCC\" /y /s
+		xcopy $(SolutionDir)\TCC.Core\Module\ "$(TOOLBOX_TCC_PATH)" /y /s
 	</PostBuildEvent>
     </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
     <PostBuildEvent>
-		xcopy $(SolutionDir)\TCC.Core\Module\ "E:\MTERA\TeraToolboxPrivate\mods\TCC\" /y /s
+		xcopy $(SolutionDir)\TCC.Core\Module\ "$(TOOLBOX_TCC_PATH)" /y /s
 	</PostBuildEvent>
   </PropertyGroup>
 </Project>

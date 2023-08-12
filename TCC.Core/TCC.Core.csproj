@@ -29,12 +29,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
-    <OutputPath>D:\Program Files\TERA\TeraToolbox\mods\TCC</OutputPath>
+    <OutputPath>$(TOOLBOX_TCC_PATH)</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
-	  <OutputPath>E:\MTERA\TeraToolboxPrivate\mods\TCC</OutputPath>
+	  <OutputPath>$(TOOLBOX_TCC_PATH)</OutputPath>
 	  <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>

@@ -2,8 +2,8 @@
   "profiles": {
     "Toolbox mode": {
       "commandName": "Project",
-      "commandLineArgs": "--toolbox --root_override \"E:\\MTERA\\TeraToolboxPrivate\\mods\\TCC\"",
-      "workingDirectory": "E:\\MTERA\\TeraToolboxPrivate\\mods\\TCC"
+      "commandLineArgs": "--toolbox --root_override \"%TOOLBOX_TCC_PATH%\"",
+      "workingDirectory": "%TOOLBOX_TCC_PATH%"
     },
     "Standalone mode": {
       "commandName": "Project"
