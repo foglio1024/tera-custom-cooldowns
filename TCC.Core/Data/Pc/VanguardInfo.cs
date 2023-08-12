@@ -6,7 +6,7 @@ namespace TCC.Data.Pc
 {
     public class VanguardInfo : ThreadSafeObservableObject
     {
-        public const float MaxCredits = 20000;
+        public const float MaxCredits = 100000;
         public const int MaxDaily = 16;
         public const int MaxWeekly = 16;
 
