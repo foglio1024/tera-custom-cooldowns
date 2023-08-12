@@ -416,7 +416,7 @@
                             BorderThickness="2 1" 
                             Grid.RowSpan="2"
                             Margin="-4 0" />
-                    <Grid Margin="0 2 0 2">
+                    <Grid Margin="0 2 0 2" Panel.ZIndex="99">
                         <Rectangle Fill="#1fff"
                             Height="8" 
                             Margin="0" />
@@ -455,7 +455,7 @@
                                 Width="28" 
                                 Height="Auto"
                                 Opacity="1" 
-                                Margin="-14 0 0 0"
+                                Margin="-15 0 0 0"
                                 HorizontalAlignment="Left" 
                                 VerticalAlignment="Center"
                                 RenderTransformOrigin=".5 .5"
@@ -465,11 +465,20 @@
                             <StackPanel.RenderTransform>
                                 <TranslateTransform X="0"/>
                             </StackPanel.RenderTransform>
-                            <Border Background="White" 
-                                BorderThickness="2 0"
-                                Width="6" 
-                                BorderBrush="#5000"
-                                Height="8" />
+                            <Grid>
+                                
+                            <Border Background="{StaticResource TccWhiteGradientBrush}" 
+                                    Width="8"
+                                    BorderThickness="2 0"
+                                    BorderBrush="#6000"
+                                    Margin="0 -8"
+                                    Height="14" >
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="Black" Opacity="1" />
+                                </Border.Effect>
+                            </Border>
+                            </Grid>
+
                         </StackPanel>
                         <StackPanel x:Name="DotPanel"
                                 Orientation="Horizontal" 
@@ -532,7 +541,7 @@
                                    Visibility="{Binding VM.IsTimerRunning, Converter={converters:BoolToVisibility}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type npcCtrl:BossGage}}}" />
                         </StackPanel>
                     </Grid>
-                    <UniformGrid Rows="1" VerticalAlignment="Center" Margin="0 2 0 2">
+                    <UniformGrid Rows="1" VerticalAlignment="Center" Margin="0 2 0 2" Panel.ZIndex="100">
                         <UniformGrid.Resources>
                             <Style TargetType="Line">
                                 <Setter Property="X1" Value="0"/>
