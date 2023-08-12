@@ -111,7 +111,8 @@ namespace TCC
 
 
             //Tester.Enable();
-            //Tester.AddAbnormality(4886);
+            //Tester.AddAbnormality(101301);
+            //Tester.AddAbnormality(690093);
             //Tester.StartItemCooldown(444);
             //Tester.ShowDebugWindow();
         }
