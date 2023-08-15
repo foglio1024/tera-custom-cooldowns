@@ -16,8 +16,8 @@ namespace TCC.UI.Controls.Chat
 {
     public partial class PlayerMenuWindow
     {
-        private readonly DoubleAnimation _openAnim;
-        private readonly DoubleAnimation _closeAnim;
+        readonly DoubleAnimation _openAnim;
+        readonly DoubleAnimation _closeAnim;
 
         public PlayerMenuWindow([NotNull] PlayerMenuViewModel vm)
         {
@@ -46,7 +46,15 @@ namespace TCC.UI.Controls.Chat
                 FocusManager.HideFromToolBar(handle);
             };
 
+            FocusManager.ForegroundChanged += OnForegroundChanged;
+
             InitializeComponent();
+        }
+
+        void OnForegroundChanged()
+        {
+            if (!IsVisible) return;
+            Dispatcher.InvokeAsync(Close);
         }
 
         public void AnimateOpening()
@@ -60,7 +68,7 @@ namespace TCC.UI.Controls.Chat
         {
             Dispatcher?.InvokeAsync(() =>
             {
-                FocusManager.PauseTopmost = true;
+                if(!IsVisible) FocusManager.PauseTopmost = true;
                 var prevLeft = Left;
                 var prevTop = Top;
                 User32.GetCursorPos(out var pos);
@@ -94,54 +102,54 @@ namespace TCC.UI.Controls.Chat
             RootBorder.BeginAnimation(OpacityProperty, _closeAnim);
         }
 
-        private void OnMouseLeave(object sender, MouseEventArgs e)
+        void OnMouseLeave(object sender, MouseEventArgs e)
         {
             Close();
         }
 
-        private void InspectClick(object sender, RoutedEventArgs e)
+        void InspectClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void PartyInviteClick(object sender, RoutedEventArgs e)
+        void PartyInviteClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void GuildInviteClick(object sender, RoutedEventArgs e)
+        void GuildInviteClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void WhisperClick(object sender, RoutedEventArgs e)
+        void WhisperClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void GrantInviteClick(object sender, RoutedEventArgs e)
+        void GrantInviteClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void DelegateLeaderClick(object sender, RoutedEventArgs e)
+        void DelegateLeaderClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void MakeGuildMasterClick(object sender, RoutedEventArgs e)
+        void MakeGuildMasterClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
+        void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
         {
             //var p = MgPopup.Child as MoongourdPopup;
             //p?.SetInfo(_vm.Name, App.Settings.LastLanguage);
             MgPopup.IsOpen = true;
         }
 
-        private void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)
+        void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)
         {
             FpsUtilsPopup.IsOpen = true;
         }
