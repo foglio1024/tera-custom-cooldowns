@@ -345,11 +345,13 @@
                     <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.Level}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <controls:OutlinedTextBlock VerticalAlignment="Bottom" Margin="5 0 0 -1" Text="{Binding Player.Name}" 
                                          Fill="#eee" StrokeThickness="3" Stroke="#7000"  FontSize="16" FontFamily="{StaticResource Frutiger}"/>
-                    <Path Data="{StaticResource SvgWeapon}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Item level" />
+                    <Path Data="{StaticResource SvgCrown}" Width="15" Margin="5 0 0 0" StrokeThickness="2" Stroke="#4223" Fill="Orange" Visibility="{Binding ShowLeaderIcon, Converter={converters1:BoolToVisibility Mode=Hidden}}"/>
+                    <Path Data="{StaticResource SvgWeapon}" Width="15" Margin="10 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Item level" />
                     <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.ItemLevel, StringFormat={}{0:N1}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000"  FontSize="14" FontFamily="{StaticResource Frutiger}"/>
                     <Path Data="{StaticResource SvgCrossedSwords}" Width="15" Margin="20 0 3 0" StrokeThickness="2" Stroke="#4223" Fill="#eee" ToolTip="Current crit factor" />
                     <controls:OutlinedTextBlock VerticalAlignment="Bottom" Text="{Binding Player.CritFactor, StringFormat={}{0:0}}" Fill="#ccc" StrokeThickness="3" Stroke="#7000" 
                                                 FontSize="14" FontFamily="{StaticResource Frutiger}" Margin="0 0 -300 0"/>
+
                     <StackPanel.Style>
                         <Style TargetType="StackPanel"  >
                             <Setter Property="Grid.Column" Value="2"/>
@@ -545,7 +547,6 @@
                                         <Setter.Value>
                                             <DropShadowEffect ShadowDepth="0"  
                                                               Color="{Binding Player.Class , Converter={converters:ClassToReColorConverter}}"
-                                                              
                                                               BlurRadius="50" />
                                         </Setter.Value>
                                     </Setter>
@@ -685,7 +686,6 @@
                                 </Style>
                             </FrameworkElement.Style>
                         </elements:EdgeRhombControl>
-
                     </Grid>
                     <Path Data="{Binding Player.Class, Converter={StaticResource ClassToSvg}}" 
                       HorizontalAlignment="Center" 
@@ -741,6 +741,7 @@
 
                     </controls:OutlinedTextBlock>
                 </Grid>
+
             </Grid>
         </Grid>
         <controls1:WindowButtons WindowName="Character window" x:Name="Buttons" HorizontalAlignment="Right"
