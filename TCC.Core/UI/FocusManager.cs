@@ -15,12 +15,12 @@ namespace TCC.UI
 {
     public static class FocusManager
     {
-        private static bool _isForeground;
-        private static bool _forceFocused;
-        private static bool _disposed;
-        private static readonly object _lock = new();
-        private static Screen? _teraScreen;
-        private static Timer? _focusTimer;
+        static bool _isForeground;
+        static bool _forceFocused;
+        static bool _disposed;
+        static readonly object _lock = new();
+        static Screen? _teraScreen;
+        static Timer? _focusTimer;
 
         // events
         public static event Action<Point, Point, Size>? TeraScreenChanged;
@@ -47,7 +47,7 @@ namespace TCC.UI
             }
         }
 
-        private static bool IsActive
+        static bool IsActive
         {
             get
             {
@@ -73,7 +73,7 @@ namespace TCC.UI
             }
         }
 
-        private static int _pausedCount;
+        static int _pausedCount;
         public static bool PauseTopmost
         {
             get => _pausedCount > 0;
@@ -81,13 +81,14 @@ namespace TCC.UI
             {
                 if (value) _pausedCount++;
                 else _pausedCount--;
+                if(_pausedCount < 0) _pausedCount = 0;
                 Log.CW($"TopMost paused {_pausedCount}");
             }
         }
 
-        private static IntPtr TeraWindow => User32.FindWindow("LaunchUnrealUWindowsClient", "TERA");
-        private static IntPtr MeterWindow => User32.FindWindow("Shinra Meter", null); // todo: fix in Nostrum
-        private static IntPtr ForegroundWindow => User32.GetForegroundWindow();
+        static IntPtr TeraWindow => User32.FindWindow("LaunchUnrealUWindowsClient", "TERA");
+        static IntPtr MeterWindow => User32.FindWindow("Shinra Meter", null); // todo: fix in Nostrum
+        static IntPtr ForegroundWindow => User32.GetForegroundWindow();
 
         public static Screen TeraScreen
         {
@@ -169,7 +170,7 @@ namespace TCC.UI
             User32.SetForegroundWindow(TeraWindow);
         }
 
-        private static void CheckForegroundWindow(object? sender, ElapsedEventArgs e)
+        static void CheckForegroundWindow(object? sender, ElapsedEventArgs e)
         {
             if (_disposed) return;
             if (!PauseTopmost) FocusTick?.Invoke();
