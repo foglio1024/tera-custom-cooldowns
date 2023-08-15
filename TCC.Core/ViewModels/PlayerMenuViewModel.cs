@@ -18,24 +18,24 @@ namespace TCC.ViewModels
 {
     public class PlayerMenuViewModel : ThreadSafeObservableObject
     {
-        private string _name = "";
-        private string _info = "";
-        private int _level;
-        private Class _class = Class.Warrior;
-        private uint _serverId;
-        private ulong _gameId;
-        private bool _showPartyInvite;
-        private bool _showGuildInvite;
-        private bool _isFromOtherServer;
-        private bool _unfriending;
-        private bool _blocking;
-        private bool _kicking;
-        private bool _gkicking;
-        private uint _playerId;
+        string _name = "";
+        string _info = "";
+        int _level;
+        Class _class = Class.Warrior;
+        uint _serverId;
+        ulong _gameId;
+        bool _showPartyInvite;
+        bool _showGuildInvite;
+        bool _isFromOtherServer;
+        bool _unfriending;
+        bool _blocking;
+        bool _kicking;
+        bool _gkicking;
+        uint _playerId;
 
-        private string _kickLabelText = "Kick";
-        private string _gkickLabelText = "Kick from guild";
-        private readonly PlayerMenuWindow _win;
+        string _kickLabelText = "Kick";
+        string _gkickLabelText = "Kick from guild";
+        readonly PlayerMenuWindow _win;
         public MoongourdPopupViewModel MoongourdPopupViewModel { get; }
 
         public event Action? UnfriendConfirmationRequested;
@@ -53,6 +53,7 @@ namespace TCC.ViewModels
                 N(nameof(BlockLabelText));
                 N(nameof(ShowAddFriend));
                 N(nameof(ShowWhisper));
+                N(nameof(ShowBlockUnblock));
             }
         }
 
@@ -121,8 +122,8 @@ namespace TCC.ViewModels
         }
 
         public bool ShowAddFriend => !IsBlocked && Name != Game.Me.Name && !IsFromOtherServer;
-        public bool ShowBlockUnblock => true /*!IsFromOtherServer*/;
-        public bool ShowWhisper => !IsBlocked /*&& !IsFromOtherServer*/;
+        public bool ShowBlockUnblock => Name != Game.Me.Name /*!IsFromOtherServer*/;
+        public bool ShowWhisper => !IsBlocked && Name != Game.Me.Name/*&& !IsFromOtherServer*/;
         public string BlockLabelText => !IsBlocked ? Blocking ? "Are you sure?" : "Block" : "Unblock";
         public string FriendLabelText => IsFriend ? Unfriending ? "Are you sure?" : "Remove friend" : "Add friend";
 
@@ -171,7 +172,8 @@ namespace TCC.ViewModels
         public bool IsFriend => !Game.Friends.Has(_name);
 
         public bool ShowFpsUtils => StubInterface.Instance.IsStubAvailable
-                                 && StubInterface.Instance.IsFpsModAvailable;
+                                 && StubInterface.Instance.IsFpsModAvailable
+                                 && Game.Me.Name != Name;
 
         public bool ShowMakeGuildMaster => Game.Guild.AmIMaster &&
                                            Game.Guild.Has(Name);
@@ -464,7 +466,7 @@ namespace TCC.ViewModels
             Unfriending = false;
         }
 
-        private void OnAnswerInteractive(S_ANSWER_INTERACTIVE x)
+        void OnAnswerInteractive(S_ANSWER_INTERACTIVE x)
         {
             if (!App.Settings.EnablePlayerMenu) return;
 
@@ -485,7 +487,7 @@ namespace TCC.ViewModels
             });
         }
 
-        private void Refresh()
+        void Refresh()
         {
             N(nameof(ShowPartyInvite));
             N(nameof(ShowGuildInvite));
@@ -506,7 +508,7 @@ namespace TCC.ViewModels
             N(nameof(ShowSeparator2));
         }
 
-        private void AskInteractive()
+        void AskInteractive()
         {
             if (_serverId == 0 || string.IsNullOrEmpty(Name) || !StubInterface.Instance.IsStubAvailable) return;
 
