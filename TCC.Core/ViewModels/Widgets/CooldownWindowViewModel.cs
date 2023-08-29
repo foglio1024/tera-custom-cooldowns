@@ -127,7 +127,7 @@ namespace TCC.ViewModels.Widgets
             }
             catch
             {
-                Log.CW($"[NormalMode_Update] Error in skill: {sk.Skill.Name}");
+                //Log.CW($"[NormalMode_Update] Error in skill: {sk.Skill.Name}");
                 return false;
             }
         }
@@ -172,7 +172,7 @@ namespace TCC.ViewModels.Widgets
             }
             catch
             {
-                Log.CW($"Error while changing cd on {skill.Name}");
+                //Log.CW($"Error while changing cd on {skill.Name}");
                 // ignored
             }
         }
@@ -346,7 +346,7 @@ namespace TCC.ViewModels.Widgets
             }
             catch
             {
-                Log.CW("Error while refreshing skill");
+                //Log.CW("Error while refreshing skill");
                 return false;
             }
         }

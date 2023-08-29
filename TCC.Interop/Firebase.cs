@@ -69,7 +69,7 @@ namespace TCC.Interop
                 var jRes = JObject.Parse(res);
                 canFire = (jRes["canFire"] ?? throw new InvalidOperationException("Invalid webhook response format"))
                     .Value<bool>();
-                Log.CW($"Webhook fire requested, result: {canFire}");
+                //Log.CW($"Webhook fire requested, result: {canFire}");
 
             }
             catch (WebException e)

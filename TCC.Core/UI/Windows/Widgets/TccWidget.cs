@@ -514,7 +514,7 @@ namespace TCC.UI.Windows.Widgets
             });
 
             if (Dispatcher == App.BaseDispatcher) return;
-            Log.CW($"[{GetType().Name}] Invoking dispatcher shutdown");
+            //Log.CW($"[{GetType().Name}] Invoking dispatcher shutdown");
             Dispatcher?.Invoke(() => Thread.Sleep(100)); //uhmmmmm ok
             Dispatcher?.BeginInvokeShutdown(DispatcherPriority.ContextIdle);
         }

@@ -121,7 +121,7 @@ namespace TCC.Utilities
             }
             catch (Exception e)
             {
-                Log.CW($"Failed to upload crash report: {e}");
+                //Log.CW($"Failed to upload crash report: {e}");
             }
         }
     }

@@ -122,7 +122,7 @@ namespace TCC.ViewModels.Widgets
                 var delay = (uint)(DateTime.Now - ab.ArrivalTime).TotalMilliseconds;
                 if (delay >= ab.Duration) return;
                 npc.AddorRefresh(ab.Abnormality, ab.Duration - delay, ab.Stacks);
-                Log.CW($"Applied pending abnormal {ab.Abnormality.Name} to {ab.Target} ({npc.Name})");
+                //Log.CW($"Applied pending abnormal {ab.Abnormality.Name} to {ab.Target} ({npc.Name})");
             });
             npcAbs.ForEach(aa => PendingAbnormalities.Remove(aa));
         }
@@ -149,7 +149,7 @@ namespace TCC.ViewModels.Widgets
             if (!TryFindNPC(target, out var boss))
             {
                 if (Game.IsMe(target) || Game.NearbyPlayers.ContainsKey(target)) return;
-                Log.CW($"Added pending abnormal {ab.Name} for {target}");
+                //Log.CW($"Added pending abnormal {ab.Name} for {target}");
                 _dispatcher?.Invoke(() =>
                 {
                     PendingAbnormalities.Add(new PendingAbnormality
@@ -284,7 +284,7 @@ namespace TCC.ViewModels.Widgets
                 }
                 catch (Exception ex)
                 {
-                    Log.CW($"[{nameof(NpcWindowViewModel)}.{nameof(FlushCache)}] Error while setting HP from cache: {ex.Message}");
+                    //Log.CW($"[{nameof(NpcWindowViewModel)}.{nameof(FlushCache)}] Error while setting HP from cache: {ex.Message}");
                 }
 
                 _cache.Clear();

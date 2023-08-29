@@ -84,7 +84,7 @@ namespace TCC.Interop.Moongourd
                 }
                 catch (Exception e)
                 {
-                    Log.CW(e.ToString());
+                    //Log.CW(e.ToString());
                     Failed?.Invoke(e.ToString());
                     _requestInProgress = false;
                     return;

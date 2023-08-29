@@ -94,14 +94,14 @@ namespace TCC.Data.Chat
         {
             if (_tries == 0)
             {
-                Log.CW($"Unable to find linked listing for [{Author}]{RawMessage}, stopping tries.");
+                //Log.CW($"Unable to find linked listing for [{Author}]{RawMessage}, stopping tries.");
                 _timer.Stop();
                 return;
             }
             LinkedListing = FindListing();
             if (LinkedListing == null)
             {
-                Log.CW($"Linked listing ({Author}/{AuthorId}) is still null! ({_tries})");
+                //Log.CW($"Linked listing ({Author}/{AuthorId}) is still null! ({_tries})");
                 _tries--;
                 return;
             }

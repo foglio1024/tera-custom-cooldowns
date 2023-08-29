@@ -698,7 +698,7 @@ namespace TCC.ViewModels
             }
             catch (Exception e)
             {
-                Log.CW(e.ToString());
+                //Log.CW(e.ToString());
             }
         }
 
@@ -747,15 +747,15 @@ namespace TCC.ViewModels
 
             if (!m.IsLast)
             {
-                Log.CW($"S_SHOW_PARTY_MATCH_INFO is not last {m.Page + 1}/{m.Pages + 1}");
+                //Log.CW($"S_SHOW_PARTY_MATCH_INFO is not last {m.Page + 1}/{m.Pages + 1}");
                 return;
             }
 
-            Log.CW($"S_SHOW_PARTY_MATCH_INFO is last {m.Page + 1}/{m.Pages + 1}");
+            //Log.CW($"S_SHOW_PARTY_MATCH_INFO is last {m.Page + 1}/{m.Pages + 1}");
 
             if (S_SHOW_PARTY_MATCH_INFO.Listings.Count != 0)
                 SyncListings(S_SHOW_PARTY_MATCH_INFO.Listings);
-            else Log.CW("No listings to show.");
+            //else Log.CW("No listings to show.");
 
             NotifyMyLfg();
 

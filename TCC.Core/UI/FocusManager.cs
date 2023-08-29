@@ -82,7 +82,7 @@ namespace TCC.UI
                 if (value) _pausedCount++;
                 else _pausedCount--;
                 if(_pausedCount < 0) _pausedCount = 0;
-                Log.CW($"TopMost paused {_pausedCount}");
+                //Log.CW($"TopMost paused {_pausedCount}");
             }
         }
 

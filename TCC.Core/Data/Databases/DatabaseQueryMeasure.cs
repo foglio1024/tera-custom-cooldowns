@@ -35,7 +35,7 @@ namespace TCC.Data.Databases
             _hitCount++;
             _totHitTime += _sw.ElapsedMilliseconds;
             _totTotalTime += _sw.ElapsedMilliseconds;
-            Log.CW($"Last query took: {_sw.ElapsedTicks}ticks [hit]");
+            //Log.CW($"Last query took: {_sw.ElapsedTicks}ticks [hit]");
         }
 
         public void RegisterMiss()
@@ -44,7 +44,7 @@ namespace TCC.Data.Databases
             _missCount++;
             _totMissTime += _sw.ElapsedTicks;
             _totTotalTime += _sw.ElapsedTicks;
-            Log.CW($"Last query took: {_sw.ElapsedTicks}ticks [miss]");
+            //Log.CW($"Last query took: {_sw.ElapsedTicks}ticks [miss]");
         }
 
         public static void PrintInfo()

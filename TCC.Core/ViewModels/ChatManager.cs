@@ -267,7 +267,7 @@ namespace TCC.ViewModels
 
             if (ChatWindows.Count != 0) return;
             {
-                Log.CW("No chat windows found, initializing default one.");
+                //Log.CW("No chat windows found, initializing default one.");
                 var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true,
                     false)
                 {HideTimeout = 10, FadeOut = true, LfgOn = false};
@@ -663,7 +663,7 @@ namespace TCC.ViewModels
                 Instance.InitWindows();
                 App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
-                Log.CW("[ChatWindow] Dispatcher stopped.");
+                //Log.CW("[ChatWindow] Dispatcher stopped.");
                 App.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
             })
             {

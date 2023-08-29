@@ -680,7 +680,7 @@ namespace TCC.ViewModels.Widgets
                 //if (p.TargetId != p.CasterId) return;
                 if (p.AbnormalityId < 100101 || p.AbnormalityId > 100203) return;
                 Game.NearbyPlayers.TryGetValue(p.TargetId, out var name);
-                Log.CW($"Starting stance on {p.TargetId} ({name}), members: {(Members.ToSyncList().Select(i => $"{i.EntityId} ({i.Name})").ToList().ToCSV())}");
+                //Log.CW($"Starting stance on {p.TargetId} ({name}), members: {(Members.ToSyncList().Select(i => $"{i.EntityId} ({i.Name})").ToList().ToCSV())}");
                 if (!TryGetUser(p.TargetId, out var u)) return;
                 UpdatePartyMemberAbnormality(u!.PlayerId, u!.ServerId, p.AbnormalityId, p.Duration, p.Stacks);
             }
@@ -708,7 +708,7 @@ namespace TCC.ViewModels.Widgets
             {
                 if (p.AbnormalityId < 100101 || p.AbnormalityId > 100203) return;
                 Game.NearbyPlayers.TryGetValue(p.TargetId, out var name);
-                Log.CW($"Ending stance on {p.TargetId} ({name}), members: {(Members.ToSyncList().Select(i => $"{i.EntityId} ({i.Name})").ToList().ToCSV())}");
+                //Log.CW($"Ending stance on {p.TargetId} ({name}), members: {(Members.ToSyncList().Select(i => $"{i.EntityId} ({i.Name})").ToList().ToCSV())}");
                 if (!TryGetUser(p.TargetId, out var u)) return;
                 EndAbnormality(ab, u!.PlayerId, u!.ServerId);
             }

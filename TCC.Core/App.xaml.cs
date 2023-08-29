@@ -311,12 +311,12 @@ namespace TCC
             while (tries > 0)
             {
                 if (RunningDispatchers.Count == 0) break;
-                Log.CW($"Waiting for all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
+                //Log.CW($"Waiting for all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
                 Thread.Sleep(100);
                 tries--;
             }
 
-            Log.CW("All dispatchers shut down.");
+            //Log.CW("All dispatchers shut down.");
         }
 
         private static void StartDispatcherWatcher()
@@ -337,14 +337,14 @@ namespace TCC
                                 //Log.CW($"{dispatcher.Thread.Name} is alive!");
                                 return;
                             }
-                            Log.CW($"{dispatcher.Thread.Name} didn't respond in time!");
+                            //Log.CW($"{dispatcher.Thread.Name} didn't respond in time!");
                             deadlockedDispatchers.Add(dispatcher);
                         });
                         Thread.Sleep(1000);
                     }
                     catch (Exception e)
                     {
-                        Log.CW($"Error while checking for threads activity: {e}");
+                        //Log.CW($"Error while checking for threads activity: {e}");
                     }
 
                     if (deadlockedDispatchers.Count <= 1) continue;

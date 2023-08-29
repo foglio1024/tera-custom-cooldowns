@@ -32,7 +32,7 @@ namespace TeraPacketParser.Sniffing
             }
             catch (Exception e)
             {
-                Log.CW($"Error while sending data to Toolbox: {e}");
+                //Log.CW($"Error while sending data to Toolbox: {e}");
                 return null;
             }
         }
@@ -45,7 +45,7 @@ namespace TeraPacketParser.Sniffing
             var resp = await Send(req);
             if (resp?.Error != null)
             {
-                Log.CW($"Toolbox RPC call generated an error: {resp.Error["message"]}");
+                //Log.CW($"Toolbox RPC call generated an error: {resp.Error["message"]}");
             }
             return resp;
         }

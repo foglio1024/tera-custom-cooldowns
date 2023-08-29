@@ -767,7 +767,7 @@ namespace TCC.ViewModels
             {
                 if(winType == null)
                 {
-                    Log.CW("Failed to open window with null type");
+                    //Log.CW("Failed to open window with null type");
                     return;
                 }
                 var t = (Type) winType;
@@ -826,9 +826,9 @@ namespace TCC.ViewModels
         }
         public static void PrintEventsData()
         {
-            Log.CW($"ChatShowChannelChanged: {ChatShowChannelChanged?.GetInvocationList().Length}");
-            Log.CW($"ChatShowTimestampChanged: {ChatShowTimestampChanged?.GetInvocationList().Length}");
-            Log.CW($"FontSizeChanged: {FontSizeChanged?.GetInvocationList().Length}");
+            //Log.CW($"ChatShowChannelChanged: {ChatShowChannelChanged?.GetInvocationList().Length}");
+            //Log.CW($"ChatShowTimestampChanged: {ChatShowTimestampChanged?.GetInvocationList().Length}");
+            //Log.CW($"FontSizeChanged: {FontSizeChanged?.GetInvocationList().Length}");
         }
 
     }

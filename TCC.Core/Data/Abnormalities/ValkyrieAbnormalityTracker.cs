@@ -95,7 +95,7 @@ namespace TCC.Data.Abnormalities
         {
             if (!TwilightWaltzIds.Contains(p.AbnormalityId)) return;
             if (p.AbnormalityId == 10155530 && p.Duration == 7000) return; // ewww
-            Log.CW($"Starting TW {p.AbnormalityId} {p.Duration}");
+            //Log.CW($"Starting TW {p.AbnormalityId} {p.Duration}");
             StartPrecooldown(_twilightWaltz, p.Duration);
         }
         private void CheckGodsfallPrecd(S_ABNORMALITY_BEGIN p)

@@ -372,7 +372,7 @@ namespace TCC.Settings.WindowSettings
 
         public void MakePositionsGlobal()
         {
-            Log.CW($"[{GetType().Name}] {nameof(MakePositionsGlobal)}()");
+            //Log.CW($"[{GetType().Name}] {nameof(MakePositionsGlobal)}()");
 
             var currentPos = new Point(X, Y);
             Positions.SetAllPositions(currentPos);
@@ -383,7 +383,7 @@ namespace TCC.Settings.WindowSettings
 
         public void ApplyScreenCorrection(Size sc)
         {
-            Log.CW($"[{GetType().Name}] {nameof(ApplyScreenCorrection)}({sc})");
+            //Log.CW($"[{GetType().Name}] {nameof(ApplyScreenCorrection)}({sc})");
 
             Positions.ApplyCorrection(sc);
         }

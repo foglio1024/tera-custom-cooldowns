@@ -86,7 +86,7 @@ namespace TCC.UI.Windows.Widgets
                 }
                 App.AddDispatcher(Thread.CurrentThread.ManagedThreadId, Dispatcher.CurrentDispatcher);
                 Dispatcher.Run();
-                Log.CW($"[{typeof(TWindow).Name}] Dispatcher stopped.");
+                //Log.CW($"[{typeof(TWindow).Name}] Dispatcher stopped.");
                 App.RemoveDispatcher(Thread.CurrentThread.ManagedThreadId);
             })
             {

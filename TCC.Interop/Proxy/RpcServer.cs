@@ -170,18 +170,18 @@ namespace TCC.Interop.Proxy
                             }
                             else
                             {
-                                Log.CW($"Received unknown message type: \n{jsonReq}");
+                                //Log.CW($"Received unknown message type: \n{jsonReq}");
                             }
                         }
                         catch (Exception e)
                         {
-                            Log.CW($"Error while parsing request: {e}");
+                            //Log.CW($"Error while parsing request: {e}");
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                    Log.CW($"Socket error: {e}");
+                    //Log.CW($"Socket error: {e}");
                 }
             }
             _listening = false;
