@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ using TCC.ViewModels.ClassManagers;
 using TCC.ViewModels.Widgets;
 using TeraDataLite;
 using TeraPacketParser;
+using TeraPacketParser.Analysis;
 using TeraPacketParser.Data;
 using TeraPacketParser.Messages;
 // ReSharper disable All
@@ -33,17 +35,22 @@ using TeraPacketParser.Messages;
 
 namespace TCC.Debug
 {
+
     public static class Tester
     {
         public static bool Enabled { get; private set; }
 
-        public static void Enable(bool forceFocused = true, bool forceVisible = true, bool forceUndim = true)
+        public static void Enable(bool forceFocused = false, bool forceVisible = false, bool forceUndim = false)
         {
             Enabled = true;
             FocusManager.ForceFocused = forceFocused;
             WindowManager.VisibilityManager.ForceVisible = forceVisible;
             WindowManager.VisibilityManager.ForceUndim = forceUndim;
+            SetupBlenderSocket();
+
         }
+
+
         public static void Deadlock()
         {
             ChatManager.Instance.Dispatcher.Invoke(() =>
@@ -440,7 +447,7 @@ namespace TCC.Debug
             }
         }
 
-        private static Timer? _t;
+        static Timer? _t;
         public static void AddMobs()
         {
             _t = new Timer { Interval = 1 };
@@ -461,8 +468,10 @@ namespace TCC.Debug
             };
             t.Start();
         }
-        private static ulong _eid = 1;
-        private static void T_Elapsed(object? sender, ElapsedEventArgs e)
+        static ulong _eid = 1;
+        static TcpClient? _blenderSocket;
+        static StreamWriter? _blenderSocketWriter;
+        static void T_Elapsed(object? sender, ElapsedEventArgs e)
         {
             SpawnNPC(9, 700, _eid++, true, false, 0);
             if (_eid != 10000) return;
@@ -569,6 +578,61 @@ namespace TCC.Debug
                 .Invoke(WindowManager.ViewModels.CooldownsVM, new[] { new Cooldown(itemSkill, 60, CooldownType.Item) });
 
             //WindowManager.ViewModels.CooldownsVM.RouteSkill(new Cooldown(itemSkill, 60, CooldownType.Item));
+        }
+
+        public static void SetupBlenderSocket()
+        {
+            _blenderSocket = new TcpClient();
+            PacketAnalyzer.Processor.Hook<C_PLAYER_LOCATION>(OnPlayerLocation);
+            PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
+            PacketAnalyzer.Processor.Hook<S_GET_USER_LIST>(OnGetUserListAsync);
+
+        }
+
+        private static async void OnLogin(S_LOGIN lOGIN)
+        {
+            try
+            {
+                await _blenderSocket.ConnectAsync("localhost", 65432);
+                _blenderSocketWriter = new StreamWriter(_blenderSocket.GetStream(), Encoding.UTF8);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        static async void OnGetUserListAsync(S_GET_USER_LIST _)
+        {
+            //PacketAnalyzer.Processor.Unhook<C_PLAYER_LOCATION>(OnPlayerLocation);
+
+            try
+            {
+                await _blenderSocketWriter?.WriteAsync("quit");
+                await _blenderSocketWriter.FlushAsync();
+
+                _blenderSocket?.Close();
+                _blenderSocket?.Dispose();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+
+
+        static void OnPlayerLocation(C_PLAYER_LOCATION l)
+        {
+            try
+            {
+                var w = ((l.W) / 65535f) * 360;
+
+                _blenderSocketWriter.WriteAsync($"{(-l.X / 100f)}\t{(l.Y / 100f)}\t{(l.Z / 100f)}\t{(-w)}".Replace(".", "").Replace(",", "."));
+                _blenderSocketWriter.FlushAsync();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }
