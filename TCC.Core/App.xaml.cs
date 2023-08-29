@@ -168,7 +168,7 @@ namespace TCC
 
             // ----------------------------
             SplashScreen.VM.Progress = 80;
-            SplashScreen.VM.BottomText = Random.NextDouble() <= 0.4 ? "Just move to Genshin Impact :kekw:" : "Initializing packet processor...";
+            SplashScreen.VM.BottomText = /*Random.NextDouble() <= 0.4 ? "Just move to Genshin Impact :kekw:" :*/ "Initializing packet processor...";
             PacketAnalyzer.ProcessorReady += LoadModules;
             PacketAnalyzer.InitServerDatabase(DataPath, Path.Combine(ResourcesPath, "config/server-overrides.txt"), string.IsNullOrEmpty(Settings.LastLanguage)
                 ? "EU-EN"
