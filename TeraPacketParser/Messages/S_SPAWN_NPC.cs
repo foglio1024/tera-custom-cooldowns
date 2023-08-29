@@ -5,11 +5,13 @@ namespace TeraPacketParser.Messages
 {
     public class S_SPAWN_NPC : ParsedMessage
     {
+        public GameId GameId { get; }
         public ulong EntityId { get; }
         public uint TemplateId { get; }
         public ushort HuntingZoneId { get; }
         public bool Villager { get; }
         public int RemainingEnrageTime { get; }
+        public short Status { get; }
         public long MaxHP { get; set; }
         public long EnrageThreshold { get; set; }
         public int Level { get; set; }
@@ -19,8 +21,9 @@ namespace TeraPacketParser.Messages
         {
             reader.Skip(10); // seatsRef [4] + partsRef[4] + npcNameRef [2]
             EntityId = reader.ReadUInt64();
+            GameId = GameId.Parse(EntityId);
             reader.Skip(8); // target
-            if (reader.Factory.ReleaseVersion/100 >= 101)
+            if (reader.Factory.ReleaseVersion / 100 >= 101)
             {
                 Level = reader.ReadInt32();
                 MaxHP = reader.ReadInt64();
@@ -34,7 +37,7 @@ namespace TeraPacketParser.Messages
             reader.Skip(4  // shapeID
                       + 2 + 2  // walkSpeed + runSpeed
                       );
-            reader.Skip(2); // status
+            Status = reader.ReadInt16(); // status
             IsEnraged = reader.ReadInt16() == 1; //var enrage = reader.ReadUInt16(); // 0/1
             RemainingEnrageTime = reader.ReadInt32();
             reader.Skip(2  // hpLevel  
