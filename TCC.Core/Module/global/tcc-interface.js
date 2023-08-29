@@ -56,9 +56,20 @@ class TccInterface {
         data.writeUInt16LE(len);
         data.write(strReq, 2);
         //this.mod.log("Sending " + data.length + " bytes: " + strReq + "\n" + data);
+        let socketsToRemove = [];
+
         connectedClients.forEach(socket => {
+            if (socket.destroyed) {
+                socketsToRemove.push(socket);
+                this.mod.warn("Socket destroyed, removing...");
+                return;
+            }
             socket.write(data);
         });
+        socketsToRemove.forEach(destroyed => {
+            const idx = connectedClients.indexOf(destroyed);
+            connectedClients.splice(idx, 1);
+        })
     }
 
     destructor() {
