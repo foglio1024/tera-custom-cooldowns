@@ -426,7 +426,7 @@ namespace TCC.ViewModels
             Game.Account.Characters.FirstOrDefault(x => x.Id == charId)?.DungeonInfo.UpdateEntries(dungeonCooldowns);
 
         }
-        public void SetVanguard(int weeklyDone, int dailyDone, int vanguardCredits)
+        public void SetVanguard(int weeklyDone, int weeklymax, int dailyDone, int vanguardCredits)
         {
             if (_discardFirstVanguardPacket)
             {
@@ -436,6 +436,7 @@ namespace TCC.ViewModels
 
             if (CurrentCharacter == null) return;
             CurrentCharacter.VanguardInfo.WeekliesDone = weeklyDone;
+            CurrentCharacter.VanguardInfo.WeekliesMax = weeklymax;
             CurrentCharacter.VanguardInfo.DailiesDone = dailyDone;
             CurrentCharacter.VanguardInfo.Credits = vanguardCredits;
             SaveCharacters();
@@ -535,7 +536,7 @@ namespace TCC.ViewModels
         }
         private void OnAvailableEventMatchingList(S_AVAILABLE_EVENT_MATCHING_LIST m)
         {
-            SetVanguard(m.WeeklyDone, m.DailyDone, m.VanguardCredits);
+            SetVanguard(m.WeeklyDone,m.WeeklyMax, m.DailyDone, m.VanguardCredits);
         }
         private void OnDungeonCoolTimeList(S_DUNGEON_COOL_TIME_LIST m)
         {

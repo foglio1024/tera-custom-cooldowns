@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 using Nostrum.Extensions;
+using TCC.Data.Pc;
 using TCC.UI;
 using TCC.Utils;
 using TCC.ViewModels;
@@ -178,13 +179,13 @@ namespace TCC.Data.Chat
             var currChar = WindowManager.ViewModels.DashboardVM.CurrentCharacter;
             if (currChar == null) return;
             var cleared = currChar.GuardianInfo.Cleared;
-            var standardCountString = ChatUtils.Font($"({cleared}/40)", "cccccc");
+            var standardCountString = ChatUtils.Font($"({cleared}/{GuardianInfo.MAX_DAILIES})", "cccccc");
             var maxedCountString = ChatUtils.Font("(", "cccccc")
                                    + ChatUtils.Font($"{cleared}", "ff0000")
-                                   + ChatUtils.Font("/40)", "cccccc");
-            var newMsg = new SystemMessageData($"{template.Template} {(cleared == 40 ? maxedCountString : standardCountString)}", template.ChatChannel);
+                                   + ChatUtils.Font($"/{GuardianInfo.MAX_DAILIES})", "cccccc");
+            var newMsg = new SystemMessageData($"{template.Template} {(cleared == GuardianInfo.MAX_DAILIES ? maxedCountString : standardCountString)}", template.ChatChannel);
             var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, newMsg, ChatChannel.Guardian);
-            if (currChar.GuardianInfo.Cleared == 40)
+            if (currChar.GuardianInfo.Cleared == GuardianInfo.MAX_DAILIES)
             {
                 msg.ContainsPlayerName = true;
             }
