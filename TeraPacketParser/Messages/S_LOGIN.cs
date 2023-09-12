@@ -71,7 +71,7 @@ namespace TeraPacketParser.Messages
                 RestMax = reader.ReadInt32();
             }
 
-            reader.Skip(8);
+            reader.Skip(8 + 12); // dunno why + 12
             Weap = reader.ReadInt32();
             Chest = reader.ReadInt32();
             Gloves = reader.ReadInt32();
