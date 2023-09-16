@@ -283,7 +283,7 @@ namespace TCC.Settings.WindowSettings
             HideCommand = new RelayCommand(_ => Visible = false);
             PinCommand = new RelayCommand(_ => ShowAlways = !ShowAlways);
             AutoDimCommand = new RelayCommand(_ => AutoDim = !AutoDim);
-            MakeGlobalCommand = new RelayCommand(_ => MakePositionsGlobal());
+            MakeGlobalCommand = new RelayCommand(MakePositionsGlobal);
             CloseCommand = new RelayCommand(_ => Enabled = false);
             //Game.LoadingScreenChanged += () => OnEnabledChanged(!Game.LoadingScreen && Enabled);
         }

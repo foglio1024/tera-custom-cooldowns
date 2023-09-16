@@ -1,6 +1,14 @@
-﻿using System;
+﻿using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using System;
+using System.Linq;
+using System.Text.Json.Serialization;
+using System.Windows.Input;
 using TCC.Data;
+using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
+using TCC.ViewModels;
+using TeraDataLite;
 
 namespace TCC.Settings.WindowSettings
 {
@@ -9,11 +17,13 @@ namespace TCC.Settings.WindowSettings
         public event Action? SorcererShowElementsChanged;
         public event Action? WarriorShowEdgeChanged;
         public event Action? ShowStaminaChanged;
+        public event Action? CustomLaurelChanged;
 
-        private bool _sorcererShowElements;
-        private bool _warriorShowEdge;
-        private bool _compactMode;
-        private bool _showStamina;
+        bool _sorcererShowElements;
+        bool _warriorShowEdge;
+        bool _compactMode;
+        bool _showStamina;
+        CustomLaurel _customLaurel;
 
         public bool CompactMode
         {
@@ -58,6 +68,19 @@ namespace TCC.Settings.WindowSettings
                 N();
             }
         }
+        public CustomLaurel CustomLaurel
+        {
+            get => _customLaurel;
+            set
+            {
+                if (_customLaurel == value) return;
+                _customLaurel = value;
+                CustomLaurelChanged?.Invoke();
+                N();
+            }
+        }
+
+        [JsonIgnore] public ICommand ChooseCustomLaurelCommand { get; }
 
         public CharacterWindowSettings()
         {
@@ -71,10 +94,27 @@ namespace TCC.Settings.WindowSettings
             _allowOffScreen = false;
             Positions = new ClassPositions(.4, 1, ButtonsPosition.Above);
 
+            _customLaurel = CustomLaurel.Game;
             CompactMode = true;
             UndimOnFlyingGuardian = false;
             GpkNames.Add("CharacterWindow");
+            ChooseCustomLaurelCommand = new RelayCommand(ChooseCustomLaurel);
 
+        }
+
+        void ChooseCustomLaurel()
+        {
+            LaurelSelectionWindow? w;
+            w = App.Current.Windows.ToList().OfType<LaurelSelectionWindow>().FirstOrDefault();
+
+            if (w != null)
+            {
+                w.Focus();
+                return;
+            }
+            var vm = new LaurelSelectionViewModel(Game.Me.Class, CustomLaurel);
+            w = new LaurelSelectionWindow { DataContext = vm };
+            w.Show();
         }
     }
 }

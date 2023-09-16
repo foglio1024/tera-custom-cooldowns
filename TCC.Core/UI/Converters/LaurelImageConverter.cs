@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 using TCC.R;
+using TCC.Utilities;
 using TeraDataLite;
 
 namespace TCC.UI.Converters
@@ -19,31 +20,36 @@ namespace TCC.UI.Converters
         public LaurelType LaurelType { get; set; }
         public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            var laurel = (Laurel?) value ?? Laurel.None;
+            var laurel = value is CustomLaurel cl 
+                ? cl : value is Laurel l 
+                ? TccUtils.CustomFromLaurel(l) : CustomLaurel.None;
 
             return (LaurelType, l: laurel) switch
             {
-                (LaurelType.Old,     Laurel.Bronze)   => MiscResources.BronzeLaurel, 
-                (LaurelType.Old,     Laurel.Silver)   => MiscResources.SilverLaurel, 
-                (LaurelType.Old,     Laurel.Gold)     => MiscResources.GoldLaurel, 
-                (LaurelType.Old,     Laurel.Diamond)  => MiscResources.DiamondLaurel, 
-                (LaurelType.Old,     Laurel.Champion) => MiscResources.ChampionLaurel, 
-                (LaurelType.Rhomb,     Laurel.Bronze)   => MiscResources.BronzeLaurelRhomb, 
-                (LaurelType.Rhomb,     Laurel.Silver)   => MiscResources.SilverLaurelRhomb, 
-                (LaurelType.Rhomb,     Laurel.Gold)     => MiscResources.GoldLaurelRhomb, 
-                (LaurelType.Rhomb,     Laurel.Diamond)  => MiscResources.DiamondLaurelRhomb, 
-                (LaurelType.Rhomb,     Laurel.Champion) => MiscResources.ChampionLaurelRhomb, 
-                (LaurelType.RhombBig,  Laurel.Bronze)   => MiscResources.BronzeLaurelRhombBig, 
-                (LaurelType.RhombBig,  Laurel.Silver)   => MiscResources.SilverLaurelRhombBig, 
-                (LaurelType.RhombBig,  Laurel.Gold)     => MiscResources.GoldLaurelRhombBig, 
-                (LaurelType.RhombBig,  Laurel.Diamond)  => MiscResources.DiamondLaurelRhombBig, 
-                (LaurelType.RhombBig,  Laurel.Champion) => MiscResources.ChampionLaurelRhombBig,
-                (LaurelType.RhombBottom, Laurel.Bronze)   => MiscResources.BronzeLaurelRhombBottom, 
-                (LaurelType.RhombBottom, Laurel.Silver)   => MiscResources.SilverLaurelRhombBottom, 
-                (LaurelType.RhombBottom, Laurel.Gold)     => MiscResources.GoldLaurelRhombBottom, 
-                (LaurelType.RhombBottom, Laurel.Diamond)  => MiscResources.DiamondLaurelRhombBottom, 
-                (LaurelType.RhombBottom, Laurel.Champion) => MiscResources.ChampionLaurelRhombBottom, 
+                (LaurelType.Old,         CustomLaurel.Bronze)        => MiscResources.BronzeLaurel, 
+                (LaurelType.Old,         CustomLaurel.Silver)        => MiscResources.SilverLaurel, 
+                (LaurelType.Old,         CustomLaurel.Gold)          => MiscResources.GoldLaurel, 
+                (LaurelType.Old,         CustomLaurel.Diamond)       => MiscResources.DiamondLaurel, 
+                (LaurelType.Old,         CustomLaurel.Champion)      => MiscResources.ChampionLaurel, 
+                (LaurelType.Rhomb,       CustomLaurel.Bronze)        => MiscResources.BronzeLaurelRhomb, 
+                (LaurelType.Rhomb,       CustomLaurel.Silver)        => MiscResources.SilverLaurelRhomb, 
+                (LaurelType.Rhomb,       CustomLaurel.Gold)          => MiscResources.GoldLaurelRhomb, 
+                (LaurelType.Rhomb,       CustomLaurel.Diamond)       => MiscResources.DiamondLaurelRhomb, 
+                (LaurelType.Rhomb,       CustomLaurel.Champion)      => MiscResources.ChampionLaurelRhomb, 
+                (LaurelType.Rhomb,       CustomLaurel.ChampionPink)  => MiscResources.ChampionPinkLaurelRhomb, 
+                (LaurelType.Rhomb,       CustomLaurel.ChampionBlack) => MiscResources.ChampionBlackLaurelRhomb, 
+                (LaurelType.RhombBig,    CustomLaurel.Bronze)        => MiscResources.BronzeLaurelRhombBig, 
+                (LaurelType.RhombBig,    CustomLaurel.Silver)        => MiscResources.SilverLaurelRhombBig, 
+                (LaurelType.RhombBig,    CustomLaurel.Gold)          => MiscResources.GoldLaurelRhombBig, 
+                (LaurelType.RhombBig,    CustomLaurel.Diamond)       => MiscResources.DiamondLaurelRhombBig, 
+                (LaurelType.RhombBig,    CustomLaurel.Champion)      => MiscResources.ChampionLaurelRhombBig,
+                (LaurelType.RhombBig,    CustomLaurel.ChampionPink)  => MiscResources.ChampionPinkLaurelRhombBig,
+                (LaurelType.RhombBig,    CustomLaurel.ChampionBlack) => MiscResources.ChampionBlackLaurelRhombBig,
+                (LaurelType.RhombBottom, CustomLaurel.Bronze)        => MiscResources.BronzeLaurelRhombBottom, 
+                (LaurelType.RhombBottom, CustomLaurel.Silver)        => MiscResources.SilverLaurelRhombBottom, 
+                (LaurelType.RhombBottom, CustomLaurel.Gold)          => MiscResources.GoldLaurelRhombBottom, 
+                (LaurelType.RhombBottom, CustomLaurel.Diamond)       => MiscResources.DiamondLaurelRhombBottom, 
+                (LaurelType.RhombBottom, CustomLaurel.Champion)      => MiscResources.ChampionLaurelRhombBottom, 
                 _ => null
             };
         }

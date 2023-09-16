@@ -44,6 +44,10 @@
     <ImageSource x:Key="ChampionLaurelRhomb">        pack://application:,,,/resources/images/Icon_Laurels/champion_kr.png          </ImageSource>
     <ImageSource x:Key="ChampionLaurelRhombBig">     pack://application:,,,/resources/images/Icon_Laurels/champion_kr_big.png      </ImageSource>
     <ImageSource x:Key="ChampionLaurelRhombBottom">  pack://application:,,,/resources/images/Icon_Laurels/champion_kr_bottom.png   </ImageSource>
+    <ImageSource x:Key="ChampionPinkLaurelRhomb">        pack://application:,,,/resources/images/Icon_Laurels/champion_kr_2.png          </ImageSource>
+    <ImageSource x:Key="ChampionPinkLaurelRhombBig">     pack://application:,,,/resources/images/Icon_Laurels/champion_kr_big_2.png  </ImageSource>
+    <ImageSource x:Key="ChampionBlackLaurelRhomb">        pack://application:,,,/resources/images/Icon_Laurels/champion_kr_black.png          </ImageSource>
+    <ImageSource x:Key="ChampionBlackLaurelRhombBig">     pack://application:,,,/resources/images/Icon_Laurels/champion_kr_big_black.png  </ImageSource>
 
     <ImageSource x:Key="CharWindowBg">             pack://application:,,,/resources/images/char_window_bg.png                    </ImageSource>
     <ImageSource x:Key="CharWindowBgSide2">        pack://application:,,,/resources/images/char_window_bg_side_2.png             </ImageSource>

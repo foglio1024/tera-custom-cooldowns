@@ -643,7 +643,7 @@
                         </controls:Arc.Style>
                     </controls:Arc>
                     <Image Opacity="1"
-                           Source="{Binding Player.Laurel, Converter={converters:LaurelImageConverter LaurelType=RhombBig}}"
+                           Source="{Binding Laurel, Converter={converters:LaurelImageConverter LaurelType=RhombBig}}"
                            Margin="-3 -2 -3 -4"/>
 
                     <elements:SorcererElementsControl Fire="{Binding Player.Fire}"

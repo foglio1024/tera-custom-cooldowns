@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using TCC.Data.Pc;
 using TCC.Settings.WindowSettings;
+using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
 using TeraPacketParser.Analysis;
@@ -24,6 +25,18 @@ public class CharacterWindowViewModel : TccWindowViewModel
 
     public bool ShowLeaderIcon => Game.Group.AmILeader;
 
+    public CustomLaurel Laurel
+    {
+        get
+        {
+            var cl = ((CharacterWindowSettings)Settings!).CustomLaurel;
+
+            if (cl == CustomLaurel.Game) return TccUtils.CustomFromLaurel(Player.Laurel);
+            else return cl;
+        }
+    }
+
+
     public CharacterWindowViewModel(CharacterWindowSettings settings) : base(settings)
     {
         Game.Me.PropertyChanged += MePropertyChanged;
@@ -31,6 +44,8 @@ public class CharacterWindowViewModel : TccWindowViewModel
         settings.SorcererShowElementsChanged += () => N(nameof(ShowElements));
         settings.WarriorShowEdgeChanged += () => N(nameof(ShowEdge));
         settings.ShowStaminaChanged += () => N(nameof(ShowRe));
+        settings.CustomLaurelChanged += () => N(nameof(Laurel));
+
     }
 
     void OnLeaderChanged()
@@ -110,5 +125,6 @@ public class CharacterWindowViewModel : TccWindowViewModel
         N(nameof(ShowRe));
         N(nameof(ShowEdge));
         N(nameof(ShowElements));
+        N(nameof(Laurel));
     }
 }

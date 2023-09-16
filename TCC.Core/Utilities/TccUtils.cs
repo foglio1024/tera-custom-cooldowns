@@ -356,5 +356,18 @@ namespace TCC.Utilities
         {
             return new JsonSerializerSettings { ContractResolver = GetDefaultIgnore(), ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
         }
+
+        internal static CustomLaurel CustomFromLaurel(Laurel actualLaurel)
+        {
+            return actualLaurel switch
+            {
+                Laurel.None => CustomLaurel.None,
+                Laurel.Bronze => CustomLaurel.Bronze,
+                Laurel.Silver => CustomLaurel.Silver,
+                Laurel.Gold => CustomLaurel.Gold,
+                Laurel.Champion => CustomLaurel.Champion,
+                _ => CustomLaurel.None
+            };
+        }
     }
 }

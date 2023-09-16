@@ -43,6 +43,29 @@ namespace TeraDataLite
         Diamond = 4,
         Champion = 5
     }
+    public enum CustomLaurel
+    {
+        [Description("None")]
+        None,
+        [Description("From game")]
+        Game,
+        [Description("Bronze")]
+        Bronze,
+        [Description("Silver")]
+        Silver,
+        [Description("Gold")]
+        Gold,
+        [Description("Diamond")]
+        Diamond,
+        [Description("Champion")]
+        Champion,
+        [Description("Pink Champion")]
+        ChampionPink,
+        [Description("Black Champion")]
+        ChampionBlack,
+
+    }
+
     public enum Species
     {
         Unknown = 0,

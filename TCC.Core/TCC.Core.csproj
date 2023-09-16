@@ -77,6 +77,8 @@
     <None Remove="resources\images\Icon_Laurels\champion_kr_2.png" />
     <None Remove="resources\images\Icon_Laurels\champion_kr_big.png" />
     <None Remove="resources\images\Icon_Laurels\champion_kr_big_2.png" />
+    <None Remove="resources\images\Icon_Laurels\champion_kr_big_black.png" />
+    <None Remove="resources\images\Icon_Laurels\champion_kr_black.png" />
     <None Remove="resources\images\Icon_Laurels\champion_kr_bottom.png" />
     <None Remove="resources\images\Icon_Laurels\diamond.png" />
     <None Remove="resources\images\Icon_Laurels\diamond_kr.png" />
@@ -152,6 +154,8 @@
     <Resource Include="resources\images\Icon_Laurels\champion_kr_2.png" />
     <Resource Include="resources\images\Icon_Laurels\champion_kr_big.png" />
     <Resource Include="resources\images\Icon_Laurels\champion_kr_big_2.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_big_black.png" />
+    <Resource Include="resources\images\Icon_Laurels\champion_kr_black.png" />
     <Resource Include="resources\images\Icon_Laurels\champion_kr_bottom.png" />
     <Resource Include="resources\images\Icon_Laurels\diamond.png" />
     <Resource Include="resources\images\Icon_Laurels\diamond_kr.png" />

@@ -631,6 +631,10 @@
                                     Content="Move window to center screen"
                                     Command="{Binding CharacterWindowSettings.ResetPositionCommand}" 
                                     IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
+                            <Button Style="{StaticResource SettingsButton}"
+                                    Content="Choose custom laurel"
+                                    Command="{Binding CharacterWindowSettings.ChooseCustomLaurelCommand}" 
+                                    IsEnabled="{Binding CharacterWindowSettings.Enabled}"/>
                         </StackPanel>
                     </Grid>
                 </TabItem>

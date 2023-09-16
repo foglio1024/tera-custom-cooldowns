@@ -1,0 +1,139 @@
+﻿<local:TccWindow x:Class="TCC.UI.Windows.LaurelSelectionWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:nsEx="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
+                 xmlns:converters="clr-namespace:TCC.UI.Converters"
+                 xmlns:nsCv="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
+                 xmlns:local="clr-namespace:TCC.UI.Windows"
+                 xmlns:viewmodels="clr-namespace:TCC.ViewModels"
+                 d:DataContext="{d:DesignInstance Type=viewmodels:LaurelSelectionViewModel}"
+                 Topmost="True"
+                 mc:Ignorable="d"
+                Background="Transparent"
+                 ResizeMode="NoResize"
+                 WindowStyle="None" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Title="TCC - Custom laurel selection" Height="250" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Effect="{StaticResource DropShadow}"
+                Grid.RowSpan="3"
+                Background="{StaticResource RevampBackgroundBrush}"
+                BorderThickness="1"
+                Opacity=".8"
+                BorderBrush="{StaticResource TccNormalGradientBrush}"
+                HorizontalAlignment="Stretch" />
+
+        <!-- Title bar -->
+        <Grid HorizontalAlignment="Stretch" Background="Transparent" MouseLeftButtonDown="Drag">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Path Style="{StaticResource WindowLogo}"/>
+            <TextBlock Style="{StaticResource DefaultTextStyle}"
+                       Foreground="#999"
+                       Text="TCC - Custom laurel selection"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       Grid.Column="1"
+                       Margin="0 0" />
+            <Button Style="{StaticResource NostrumContentOpacityButtonStyle}"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Opacity=".9"
+                    Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Click="OnCloseButtonClick"
+                    VerticalContentAlignment="Center"
+                    Grid.Column="2">
+                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" />
+            </Button>
+        </Grid>
+
+        <Border Grid.Row="1" VerticalAlignment="Stretch"
+                Background="{StaticResource SelectionBackgroundBrush}"
+                BorderThickness="1"
+                Margin="10 0"
+                Opacity=".8"
+                BorderBrush="{StaticResource RevampBorderBrush}"
+                HorizontalAlignment="Stretch" >
+            <Border.Effect>
+                <DropShadowEffect Direction="-90"
+                                  BlurRadius="30"
+                                  ShadowDepth="0"/>
+            </Border.Effect>
+
+        </Border>
+        <Grid Width="Auto" Height="100" HorizontalAlignment="Center" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource NostrumMainButtonStyle}">
+                    <Setter Property="Background" Value="{StaticResource SelectionBackgroundBrush}"/>
+                    <Setter Property="Padding" Value="14"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Height" Value="48"/>
+                    <Setter Property="Width" Value="48"/>
+                    <Setter Property="nsEx:ButtonExtensions.CornerRadius" Value="24"/>
+                </Style>
+            </Grid.Resources>
+            <Image Source="{StaticResource CharWindowBg}"  Grid.Column="1" Margin="20 0"/>
+            <Image Source="{Binding CurrentLaurel, Converter={converters:LaurelImageConverter LaurelType=RhombBig}}" 
+                       Grid.Column="1"
+                       Margin="-3 -2 -3 -4" />
+
+            <Path Data="{Binding ExampleClass, Converter={StaticResource ClassToSvg}}" 
+                      HorizontalAlignment="Center" 
+                      Grid.Column="1"
+                      Fill="#eee" 
+                      Margin="31" 
+                      Width="Auto"
+                      >
+                <Path.Style>
+                    <Style BasedOn="{StaticResource NostrumDefaultPathStyle}" TargetType="Path">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="{StaticResource MpColorLight}" />
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Path.Style>
+
+                <Path.RenderTransform>
+                    <TranslateTransform Y="0"/>
+                </Path.RenderTransform>
+            </Path>
+
+            <TextBlock Text="{Binding CurrentLaurel, Converter={nsCv:EnumDescriptionConverter}}" Grid.Row="1"
+                       Grid.Column="1" Foreground="{StaticResource TccWhiteGradientBrush}"
+                       TextAlignment="Center"/>
+            <Button Command="{Binding PrevLaurelCommand}">
+                <Path Data="{StaticResource SvgChevronLeft}"/>
+            </Button>
+            <Button Command="{Binding NextLaurelCommand}" Grid.Column="2">
+                <Path Data="{StaticResource SvgChevronRight}"/>
+            </Button>
+        </Grid>
+
+        <Button Margin="10" Grid.Row="2" Style="{StaticResource SettingsButton}"
+                Content="Confirm"
+                Command="{Binding ConfirmCommand}"
+                Padding="5"/>
+
+    </Grid>
+</local:TccWindow>
