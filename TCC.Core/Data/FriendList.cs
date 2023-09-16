@@ -56,7 +56,7 @@ namespace TCC.Data
 
         internal void SetFrom(List<FriendEntry> friends)
         {
-            var toRemove = Friends.Where(x => !friends.Any(f => f.Id == x.Id));
+            var toRemove = Friends.Where(x => !friends.Any(f => f.Id == x.Id)).ToArray();
 
             foreach (var item in toRemove)
             {
