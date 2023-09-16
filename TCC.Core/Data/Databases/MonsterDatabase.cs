@@ -96,7 +96,10 @@ namespace TCC.Data.Databases
                             m.IsBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
                         if (monst.Attribute("isHidden") != null)
                             m.IsHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
-                        m.Name = monst.Attribute("name")?.Value ?? $"Unknown {zoneId}.{mId}";
+                        if(string.IsNullOrEmpty(m.Name))
+                        {
+                            m.Name = monst.Attribute("name")?.Value ?? $"Unknown {zoneId}.{mId}";
+                        }
                     }
                     else
                     {
