@@ -136,6 +136,10 @@
     <SolidColorBrush x:Key="TccYellowGradient1Brush"        Color="{StaticResource TccYellowGradient1Color}"                   />
     <SolidColorBrush x:Key="TccRedGradient0Brush"           Color="{StaticResource TccRedGradient0Color}"                      />
     <SolidColorBrush x:Key="TccRedGradient1Brush"           Color="{StaticResource TccRedGradient1Color}"                      />
+    <SolidColorBrush x:Key="TccGreenGradient0Brush"         Color="{StaticResource TccGreenGradient0Color}"                    />
+    <SolidColorBrush x:Key="TccGreenGradient1Brush"         Color="{StaticResource TccGreenGradient1Color}"                    />
+    <SolidColorBrush x:Key="TccWhiteGradient0Brush"         Color="{StaticResource TccWhiteGradient0Color}"                    />
+    <SolidColorBrush x:Key="TccWhiteGradient1Brush"         Color="{StaticResource TccWhiteGradient1Color}"                    />
 
     <SolidColorBrush x:Key="SkillStrokeBrush"               Color="{StaticResource SkillStrokeColor}"                          />
     <SolidColorBrush x:Key="CooldownArcBrush"               Color="{StaticResource CooldownArcColor}"                          />
