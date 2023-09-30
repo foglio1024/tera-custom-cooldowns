@@ -30,9 +30,8 @@ namespace TeraPacketParser.Sniffing
                 var resp = await _client.PostAsync(_address, req);
                 return new Response(JObject.Parse(await resp.Content.ReadAsStringAsync()));
             }
-            catch (Exception e)
+            catch
             {
-                //Log.CW($"Error while sending data to Toolbox: {e}");
                 return null;
             }
         }
