@@ -9,7 +9,7 @@ namespace TCC.Settings.WindowSettings
 
         public PerfMonitorSettings()
         {
-            _visible = true;
+            _visible = false;
             _clickThruMode = ClickThruMode.Never;
             _scale = 1;
             _autoDim = false;
