@@ -23,6 +23,7 @@
     <Copyright>MIT</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoWin32Manifest>true</NoWin32Manifest>
+	<XamlDebuggingInformation>True</XamlDebuggingInformation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
