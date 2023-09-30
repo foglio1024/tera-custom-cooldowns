@@ -79,7 +79,7 @@ namespace TCC.Update
             }
             else
             {
-                Log.N("TCC icon updater", "All icons are up to date.", NotificationType.Success);
+                //Log.N("TCC icon updater", "All icons are up to date.", NotificationType.Success);
             }
         }
         private async Task DownloadArchive()
