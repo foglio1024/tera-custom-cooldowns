@@ -339,9 +339,9 @@ namespace TCC
                 if (!Directory.Exists(Path.Combine(App.DataPath, "opcodes")))
                     Directory.CreateDirectory(Path.Combine(App.DataPath, "opcodes"));
 
-                if (!OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/")))
+                if (PacketAnalyzer.Sniffer is ToolboxSniffer tbs && !await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
                 {
-                    if (PacketAnalyzer.Sniffer is ToolboxSniffer tbs && !await tbs.ControlConnection.DumpMap(opcPath, "protocol"))
+                    if (!OpcodeDownloader.DownloadOpcodesIfNotExist(p.Versions[0], Path.Combine(App.DataPath, "opcodes/")))
                     {
                         TccMessageBox.Show(SR.UnknownClientVersion(p.Versions[0]), MessageBoxType.Error);
                         App.Close();
@@ -556,7 +556,7 @@ namespace TCC
 
         private static void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
         {
-            Group.SetGroup(p.Members, p.Raid);
+            Group.UpdateComposition(p.Members, p.Raid);
         }
 
         private static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
