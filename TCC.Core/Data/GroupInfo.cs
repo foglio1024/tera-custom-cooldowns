@@ -1,15 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using TeraDataLite;
 
 namespace TCC.Data;
 
+public enum GroupCompositionChangeReason
+{
+    Created,
+    Disbanded,
+    Updated
+}
+
 public class GroupInfo
 {
-    GroupMemberData leader = new();
+    GroupMemberData _leader = new() { Class = Class.None, Name = "", PlayerId = 0 };
+    List<GroupMemberData> _members = new();
 
     public event Action? LeaderChanged;
+
+    public event Action<ReadOnlyCollection<GroupMemberData>, GroupCompositionChangeReason>? CompositionChanged;
+
     public bool InGroup { get; private set; }
     public bool IsRaid { get; private set; }
     public bool AmILeader => Game.Me.Name == Leader.Name && InGroup;
@@ -17,64 +29,95 @@ public class GroupInfo
 
     public GroupMemberData Leader
     {
-        get => leader;
+        get => _leader;
         private set
         {
-            if (leader == value) return;
-            leader = value;
+            if (_leader == value) return;
+            _leader = value;
             LeaderChanged?.Invoke();
         }
     }
-    List<GroupMemberData> Members { get; set; } = new();
 
-    public void SetGroup(List<GroupMemberData> members, bool raid)
+    public void UpdateComposition(ReadOnlyCollection<GroupMemberData> members, bool raid)
     {
-        Members = members;
+        var reason = Size == 0 ? GroupCompositionChangeReason.Created : GroupCompositionChangeReason.Updated;
+
+        _members = members.ToList();
         Leader = members.FirstOrDefault(m => m.IsLeader)!;
         IsRaid = raid;
         InGroup = true;
-        Size = Members.Count;
+        Size = _members.Count;
+
+        CompositionChanged?.Invoke(_members.AsReadOnly(), reason);
     }
+
     public void ChangeLeader(string name)
     {
-        Members.ForEach(x => x.IsLeader = x.Name == name);
-        Leader = Members.FirstOrDefault(m => m.Name == name)!;
+        _members.ForEach(x => x.IsLeader = x.Name == name);
+        Leader = _members.FirstOrDefault(m => m.Name == name)!;
     }
-    public void Remove(uint playerId, uint serverId)
+
+    public void RemoveMember(uint playerId, uint serverId)
     {
-        var target = Members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
+        var target = _members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
         if (target == null) return;
-        Members.Remove(target);
-        Size = Members.Count;
+        _members.Remove(target);
+        Size = _members.Count;
+
+        CompositionChanged?.Invoke(_members.AsReadOnly(), GroupCompositionChangeReason.Updated);
     }
+
     public void Disband()
     {
-        Members.Clear();
-        Leader = new GroupMemberData();
+        _members.Clear();
+        Leader = new GroupMemberData
+        {
+            Class = Class.None,
+            Name = "",
+            PlayerId = 0
+        };
         IsRaid = false;
         InGroup = false;
-        Size = Members.Count;
+        Size = _members.Count;
+
+        CompositionChanged?.Invoke(_members.AsReadOnly(), GroupCompositionChangeReason.Disbanded);
     }
+
     public bool Has(string name)
     {
-        return Members.Any(m => m.Name == name);
+        return _members.Any(m => m.Name == name);
     }
+
     public bool Has(uint pId)
     {
-        return Members.Any(m => m.PlayerId == pId);
+        return _members.Any(m => m.PlayerId == pId);
     }
+
     public bool HasPowers(string name)
     {
-        return Has(name) && Members.FirstOrDefault(x => x.Name == name)?.CanInvite == true;
+        return Has(name) && _members.FirstOrDefault(x => x.Name == name)?.CanInvite == true;
     }
+
     public bool TryGetMember(uint playerId, uint serverId, out GroupMemberData? member)
     {
-        member = Members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
+        member = _members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
         return member != null;
     }
+
+    public bool TryGetMember(ulong entityId, out GroupMemberData? member)
+    {
+        member = _members.FirstOrDefault(m => m.EntityId == entityId);
+        return member != null;
+    }
+
     public bool TryGetMember(string name, out GroupMemberData? member)
     {
-        member = Members.FirstOrDefault(m => m.Name == name);
+        member = _members.FirstOrDefault(m => m.Name == name);
         return member != null;
+    }
+
+    internal ReadOnlyCollection<GroupMemberData> GetMembers()
+    {
+        return _members.ToArray().AsReadOnly();
     }
 }
