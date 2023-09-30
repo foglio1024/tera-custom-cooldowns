@@ -21,6 +21,18 @@ namespace TCC.Data.Databases
         {
             return Items.TryGetValue(id, out var item) ? item.Name : "Unknown";
         }
+        public bool TryGetItem(uint itemId, out Item item)
+        {
+            if (!Items.TryGetValue(itemId, out var found))
+            {
+                item = new Item(0, "Unknown", RareGrade.Common, 0, 0, "");
+                return false;
+            }
+
+            item = found;
+            return true;
+        }
+
         public bool TryGetItemSkill(uint itemId, out Skill sk)
         {
             sk = new Skill(0, Class.None, string.Empty, string.Empty);
@@ -42,13 +54,13 @@ namespace TCC.Data.Databases
 
                 var s = line.Split('\t');
 
-                uint id; 
+                uint id;
                 uint grad;
                 string name;
-                uint expId = 0; 
-                uint cd; 
+                uint expId = 0;
+                uint cd;
                 string icon;
-                
+
                 if (s.Length == 6)
                 {
                     id = uint.Parse(s[0]);
