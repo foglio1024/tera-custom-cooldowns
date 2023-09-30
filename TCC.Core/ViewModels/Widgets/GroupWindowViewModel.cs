@@ -1,11 +1,11 @@
-﻿using Nostrum;
-using Nostrum.Extensions;
+﻿using Nostrum.WPF;
 using Nostrum.WPF.Factories;
 using Nostrum.WPF.ThreadSafe;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
@@ -36,7 +36,7 @@ namespace TCC.ViewModels.Widgets
         public GroupWindowLayout GroupWindowLayout => ((GroupWindowSettings)Settings!).Layout;
 
         public ICollectionViewLiveShaping All { get; }
-        public ICollectionViewLiveShaping Dps {  get; }
+        public ICollectionViewLiveShaping Dps { get; }
         public ICollectionViewLiveShaping Tanks { get; }
         public ICollectionViewLiveShaping Healers { get; }
         public bool Raid
@@ -57,6 +57,8 @@ namespace TCC.ViewModels.Widgets
         public bool ShowLeaveButton => Formed && StubInterface.Instance.IsStubAvailable;
         public bool ShowLeaderButtons => Formed && StubInterface.Instance.IsStubAvailable && AmILeader;
         public bool Rolling { get; set; }
+
+        public ICommand ShowLootWindowCommand { get; }
 
         public GroupWindowViewModel(GroupWindowSettings settings) : base(settings)
         {
@@ -88,12 +90,15 @@ namespace TCC.ViewModels.Widgets
                 })
                 ?? throw new Exception("Failed to create LiveCollectionView");
 
+
             Game.Teleported += OnTeleported;
             Game.EncounterChanged += OnEncounterChanged;
             settings.SettingsUpdated += NotifySettingUpdated;
             settings.ThresholdChanged += NotifyThresholdChanged;
             settings.IgnoreMeChanged += ToggleMe;
             settings.LayoutChanged += OnLayoutChanged;
+
+            ShowLootWindowCommand = new RelayCommand(Game.ShowLootDistributionWindow);
         }
 
         void OnEncounterChanged()
@@ -459,6 +464,7 @@ namespace TCC.ViewModels.Widgets
         {
             Rolling = false;
 
+
             foreach (var m in Members.ToSyncList())
             {
                 m.IsRolling = false;
@@ -599,9 +605,7 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
             PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
             PacketAnalyzer.Processor.Hook<S_LOAD_TOPO>(OnLoadTopo);
-            PacketAnalyzer.Processor.Hook<S_ASK_BIDDING_RARE_ITEM>(OnAskBiddingRareItem);
-            PacketAnalyzer.Processor.Hook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
-            PacketAnalyzer.Processor.Hook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
+
             PacketAnalyzer.Processor.Hook<S_SPAWN_USER>(OnSpawnUser);
             PacketAnalyzer.Processor.Hook<S_DESPAWN_USER>(OnDespawnUser);
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_BUFF_UPDATE>(OnPartyMemberBuffUpdate);
@@ -624,7 +628,12 @@ namespace TCC.ViewModels.Widgets
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
             PacketAnalyzer.Processor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
+
+            PacketAnalyzer.Processor.Hook<S_ASK_BIDDING_RARE_ITEM>(OnAskBiddingRareItem);
+            PacketAnalyzer.Processor.Hook<S_RESULT_BIDDING_DICE_THROW>(OnResultBiddingDiceThrow);
+            PacketAnalyzer.Processor.Hook<S_RESULT_ITEM_BIDDING>(OnResultItemBidding);
         }
+
         protected override void RemoveHooks()
         {
             PacketAnalyzer.Processor.Unhook<S_USER_EFFECT>(OnUserEffect);
@@ -753,7 +762,10 @@ namespace TCC.ViewModels.Widgets
         void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
         {
             SetRaid(p.Raid);
-            _dispatcher?.InvokeAsync(() => p.Members.ForEach(AddOrUpdateMember));
+            _dispatcher?.InvokeAsync(() =>
+            {
+                foreach (var member in p.Members) AddOrUpdateMember(member);
+            });
         }
         void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)
         {
@@ -798,7 +810,7 @@ namespace TCC.ViewModels.Widgets
         void OnResultBiddingDiceThrow(S_RESULT_BIDDING_DICE_THROW m)
         {
             if (!Rolling) StartRoll();
-            if(m.EntityId != 0)
+            if (m.EntityId != 0)
                 SetRoll(m.EntityId, m.RollResult);
             else
                 SetRoll(m.ServerId, m.PlayerId, m.RollResult);
@@ -807,6 +819,7 @@ namespace TCC.ViewModels.Widgets
         {
             StartRoll();
         }
+
         void OnLoadTopo(S_LOAD_TOPO m)
         {
             ClearAllAbnormalities();
@@ -845,4 +858,6 @@ namespace TCC.ViewModels.Widgets
             UpdateMemberStamina(Game.Me.PlayerId, Game.Me.ServerId, p.CurrentST, Game.Me.MaxST);
         }
     }
+
+    public record struct DropItem(GameId GameId, uint ItemId, uint Amount);
 }

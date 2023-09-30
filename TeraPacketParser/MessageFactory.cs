@@ -120,16 +120,18 @@ namespace TeraPacketParser
             { nameof(S_LEAVE_GUILD),                           Constructor<Func<TeraMessageReader, S_LEAVE_GUILD>>() },
             { nameof(S_BEGIN_THROUGH_ARBITER_CONTRACT),        Constructor<Func<TeraMessageReader, S_BEGIN_THROUGH_ARBITER_CONTRACT>>() },
             { nameof(S_FATIGABILITY_POINT),                    Constructor<Func<TeraMessageReader, S_FATIGABILITY_POINT>>() },
+            { nameof(S_SET_ITEM_BIDDING_FLAG),                 Constructor<Func<TeraMessageReader, S_SET_ITEM_BIDDING_FLAG>>() },
+            { nameof(S_UPDATE_BIDDING_COUNT),                  Constructor<Func<TeraMessageReader, S_UPDATE_BIDDING_COUNT>>() },
+            { nameof(S_SPAWN_DROPITEM),                        Constructor<Func<TeraMessageReader, S_SPAWN_DROPITEM>>() },
           //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
           //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
           //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },
-            //{ nameof(S_SPAWN_BUILD_OBJECT),                    Constructor<Func<TeraMessageReader, S_SPAWN_BUILD_OBJECT>>() },
-            //{ nameof(S_SPAWN_COLLECTION),                      Constructor<Func<TeraMessageReader, S_SPAWN_COLLECTION>>() },
-            //{ nameof(S_SPAWN_DROPITEM),                        Constructor<Func<TeraMessageReader, S_SPAWN_DROPITEM>>() },
-            //{ nameof(S_SPAWN_EVENT_SEED),                      Constructor<Func<TeraMessageReader, S_SPAWN_EVENT_SEED>>() },
-            //{ nameof(S_SPAWN_PROJECTILE),                      Constructor<Func<TeraMessageReader, S_SPAWN_PROJECTILE>>() },
-            //{ nameof(S_SPAWN_WORKOBJECT),                      Constructor<Func<TeraMessageReader, S_SPAWN_WORKOBJECT>>() },
-            //{ nameof(C_PLAYER_FLYING_LOCATION),                Constructor<Func<TeraMessageReader, C_PLAYER_FLYING_LOCATION>>() },
+            //{ nameof(S_SPAWN_BUILD_OBJECT),                  Constructor<Func<TeraMessageReader, S_SPAWN_BUILD_OBJECT>>() },
+            //{ nameof(S_SPAWN_COLLECTION),                    Constructor<Func<TeraMessageReader, S_SPAWN_COLLECTION>>() },
+            //{ nameof(S_SPAWN_EVENT_SEED),                    Constructor<Func<TeraMessageReader, S_SPAWN_EVENT_SEED>>() },
+            //{ nameof(S_SPAWN_PROJECTILE),                    Constructor<Func<TeraMessageReader, S_SPAWN_PROJECTILE>>() },
+            //{ nameof(S_SPAWN_WORKOBJECT),                    Constructor<Func<TeraMessageReader, S_SPAWN_WORKOBJECT>>() },
+            //{ nameof(C_PLAYER_FLYING_LOCATION),              Constructor<Func<TeraMessageReader, C_PLAYER_FLYING_LOCATION>>() },
         };
         public static readonly Dictionary<string, ushort> Extras = new();
         public uint Version { get; private set; }

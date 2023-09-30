@@ -23,6 +23,7 @@ namespace TCC.Settings
         private string _lastLanguage;
         private bool _chatEnabled;
         private bool _enableProxy;
+        private LootDistributionWindowSettings _lootDistributionWindowSettings;
 
         #region Misc
 
@@ -102,6 +103,15 @@ namespace TCC.Settings
         public LfgWindowSettings LfgWindowSettings { get; set; }
         public NotificationAreaSettings NotificationAreaSettings { get; set; }
         public PerfMonitorSettings PerfMonitorSettings { get; set; }
+        public LootDistributionWindowSettings LootDistributionWindowSettings
+        {
+            get => _lootDistributionWindowSettings;
+            set
+            {
+                if (value == null) return;
+                _lootDistributionWindowSettings = value;
+            }
+        }
 
         #region Chat
 
@@ -176,6 +186,7 @@ namespace TCC.Settings
             ChatSettings = new WindowSettingsBase();
             LfgWindowSettings = new LfgWindowSettings();
             NotificationAreaSettings = new NotificationAreaSettings();
+            LootDistributionWindowSettings = new LootDistributionWindowSettings();
 
             MaxMessages = 500;
             SpamThreshold = 2;
@@ -232,7 +243,7 @@ namespace TCC.Settings
             var settingsPath = SettingsOverride == ""
                 ? Path.Combine(App.BasePath, SettingsGlobals.SettingsFileName)
                 : SettingsOverride;
-            var settings =  new JsonSettingsReader().LoadSettings(settingsPath);
+            var settings = new JsonSettingsReader().LoadSettings(settingsPath);
             return settings;
         }
 
@@ -240,7 +251,7 @@ namespace TCC.Settings
         {
             var toRemove = ChatWindowsSettings.Where(s => s.Tabs.Count == 0).ToList();
             toRemove.ForEach(s => ChatWindowsSettings.Remove(s));
-            App.BaseDispatcher.InvokeAsync(() =>  new JsonSettingsWriter().Save());
+            App.BaseDispatcher.InvokeAsync(() => new JsonSettingsWriter().Save());
         }
     }
 }

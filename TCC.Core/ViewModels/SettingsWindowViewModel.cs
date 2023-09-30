@@ -50,6 +50,7 @@ namespace TCC.ViewModels
         public CivilUnrestWindowSettings CuWindowSettings => App.Settings.CivilUnrestWindowSettings;
         public LfgWindowSettings LfgWindowSettings => App.Settings.LfgWindowSettings;
         public NotificationAreaSettings NotificationAreaSettings => App.Settings.NotificationAreaSettings;
+        public LootDistributionWindowSettings LootDistributionWindowSettings => App.Settings.LootDistributionWindowSettings;
         public WindowSettingsBase PerfMonitorSettings => App.Settings.PerfMonitorSettings;
 
         public ICommand BrowseUrlCommand { get; }
@@ -95,6 +96,26 @@ namespace TCC.ViewModels
                 if (App.Settings.SettingsHotkey.Equals(value)) return;
                 KeyboardHook.Instance.ChangeHotkey(App.Settings.SettingsHotkey, value);
                 App.Settings.SettingsHotkey = value;
+                N();
+            }
+        }
+        public HotKey RollHotkey
+        {
+            get => LootDistributionWindowSettings.RollHotKey;
+            set
+            {
+                if (LootDistributionWindowSettings.RollHotKey.Equals(value)) return;
+                LootDistributionWindowSettings.RollHotKey = value;
+                N();
+            }
+        }
+        public HotKey PassHotkey
+        {
+            get => LootDistributionWindowSettings.PassHotKey;
+            set
+            {
+                if (LootDistributionWindowSettings.PassHotKey.Equals(value)) return;
+                LootDistributionWindowSettings.PassHotKey = value;
                 N();
             }
         }

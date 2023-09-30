@@ -84,6 +84,11 @@
                         Visibility="{Binding Formed, Converter={converters:BoolToVisibility}}"
                         x:Name="GroupButtonsSingle" VerticalAlignment="Top">
                     <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" x:Name="LootWindowButton"
+                                ToolTip="Show loot window" Command="{Binding ShowLootWindowCommand}" 
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+                            <Path Data="{StaticResource SvgLoot}" Fill="#fff" Margin="3 3" Width="15" Height="15" />
+                        </Button>
                         <Button Style="{StaticResource NostrumContentOpacityButtonStyle}" x:Name="SettingsButton"
                                 ToolTip="Configure buffs" Click="ShowAbnormalSettings" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
                             <Path Data="{StaticResource SvgSettings}" Fill="#fff" Margin="3 3" Width="15" Height="15" />

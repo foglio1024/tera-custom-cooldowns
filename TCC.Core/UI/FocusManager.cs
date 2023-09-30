@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Nostrum.WinAPI;
+using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Timers;
 using System.Windows.Forms;
-using Nostrum.WinAPI;
 using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
-using TCC.Utils;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 using Timer = System.Timers.Timer;
@@ -137,6 +137,16 @@ namespace TCC.UI
         {
             if (TeraWindow == IntPtr.Zero) { return; }
             InputInjector.NewLine(TeraWindow);
+        }
+        public static void SendPgUp(int delayMs)
+        {
+            if (TeraWindow == IntPtr.Zero) { Debugger.Break(); return; }
+            InputInjector.PgUp(TeraWindow, delayMs);
+        }
+        public static void SendPgDown(int delayMs)
+        {
+            if (TeraWindow == IntPtr.Zero) { Debugger.Break(); return; }
+            InputInjector.PgDown(TeraWindow, delayMs);
         }
         public static void MakeUnfocusable(IntPtr hwnd)
         {

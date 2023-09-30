@@ -2,16 +2,16 @@
 {
     public class GroupMemberData
     {
-        public uint PlayerId { get; set; }
-        public Class Class { get; set; }
+        public uint PlayerId { get; init; }
+        public Class Class { get; init; }
+        public string Name { get; init; } = "";
+        public uint ServerId { get; init; }
         public uint Level { get; set; }
         public int Order { get; set; }
         public uint GuardId { get; set; }
         public uint SectionId { get; set; }
         public bool IsLeader { get; set; }
         public bool Online { get; set; }
-        public string Name { get; set; } = "";
-        public uint ServerId { get; set; }
         public ulong EntityId { get; set; }
         public bool CanInvite { get; set; }
         public Laurel Laurel { get; set; }

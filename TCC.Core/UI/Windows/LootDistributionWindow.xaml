@@ -1,0 +1,813 @@
+﻿<local:TccWindow x:Class="TCC.UI.Windows.LootDistributionWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
+                 xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
+                 xmlns:nsEx="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
+                 xmlns:data="clr-namespace:TCC.Data"
+                 xmlns:local="clr-namespace:TCC.UI.Windows"
+                 xmlns:viewmodels="clr-namespace:TCC.ViewModels"
+                 d:DataContext="{d:DesignInstance Type=viewmodels:LootDistributionViewModel}"
+                 Background="Transparent"
+                 mc:Ignorable="d"
+                 ResizeMode="CanResize"
+                 WindowStyle="None" AllowsTransparency="True" SizeToContent="WidthAndHeight"
+                 Title="Loot distribution" MinHeight="294" Width="Auto" MaxHeight="600">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" 
+                      ResizeBorderThickness="0 12 0 12" 
+                      GlassFrameThickness="0 0 0 1" 
+                      CornerRadius="0" />
+
+    </WindowChrome.WindowChrome>
+    <FrameworkElement.Resources>
+        <Style x:Key="BidButtonStyle" TargetType="Button" BasedOn="{StaticResource NostrumMainButtonStyle}">
+            <Setter Property="Foreground" Value="#ddd"/>
+            <Setter Property="Padding" Value="3 2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="{StaticResource RevampBorderBrush}"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="nsEx:ButtonExtensions.CornerRadius" Value="3"/>
+            <Setter Property="nsEx:ButtonExtensions.HighlightBrush" Value="#1fff"/>
+        </Style>
+
+        <DataTemplate x:Key="LootItemTemplate" DataType="{x:Type viewmodels:LootDistributionViewModel}">
+            <Grid Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Rectangle Width="42" Height="42" Margin="1" Grid.Column="1"
+                           RadiusX="5" RadiusY="5" VerticalAlignment="Top"
+                           StrokeThickness="1" x:Name="ItemIcon"
+                           Stroke="{StaticResource RevampBorderBrush}">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="{Binding ItemInDistribution.DbItem.IconName, Converter={StaticResource IconNameToPath}}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Polygon x:Name="RareGradePolygon" Grid.Column="1"
+                         Points="0 0 1 0 0 1" Width="10" Height="10"
+                         Stretch="Uniform" VerticalAlignment="Top" Margin="1"
+                         HorizontalAlignment="Left" Visibility="Visible" 
+                         Fill="{Binding Stroke, ElementName=ItemIcon}"/>
+                <controls:OutlinedTextBlock FontWeight="DemiBold" Margin="3 2"
+                                            Text="{Binding ItemInDistribution.Item.Amount}"
+                                            Fill="#fff"
+                                            Grid.Column="1"
+                                            StrokeThickness="3"
+                                            Stroke="#111"
+                                            VerticalAlignment="Bottom"
+                                            HorizontalAlignment="Right"
+                                            TextAlignment="Right" />
+                <TextBlock x:Name="ItemNameTb" Foreground="White" Margin="2 -2 0 0" FontSize="12"
+                           Grid.Column="2"
+                           VerticalAlignment="Top" TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
+                           FontWeight="DemiBold"
+                           Text="{Binding ItemInDistribution.DbItem.Name, Mode=OneWay}" MaxWidth="200"
+                           />
+
+                <TextBlock Text="{Binding TimeLeft, StringFormat={}{0:0s}}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                           Foreground="White" FontSize="10" FontWeight="DemiBold" Margin="0 0 1 -8"/>
+
+                <Grid Grid.Row="1" Grid.ColumnSpan="4" Margin="1 10 1 0">
+                    <Rectangle Fill="#2fff" Height="6" HorizontalAlignment="Stretch"
+                               RadiusX="3" RadiusY="3" x:Name="BaseBorder"/>
+
+                    <Border Background="{StaticResource TccNormalGradientBrush}" Height="6" HorizontalAlignment="Left"
+                                CornerRadius="3" Padding="0" x:Name="ParentBorder">
+                        <FrameworkElement Width="{Binding ActualWidth, ElementName=BaseBorder}"
+                                          x:Name="BarGovernor">
+                            <FrameworkElement.LayoutTransform>
+                                <ScaleTransform ScaleX="1"/>
+                            </FrameworkElement.LayoutTransform>
+                        </FrameworkElement>
+                    </Border>
+
+                    <Border BorderBrush="White" BorderThickness="1 0 0 0" Margin="0 -2"
+                            Height="8" HorizontalAlignment="Right" x:Name="DelayBorder"
+                                >
+                        <FrameworkElement Width="{Binding ActualWidth, ElementName=BaseBorder}"
+                                          x:Name="DelayGovernor">
+                            <FrameworkElement.LayoutTransform>
+                                <ScaleTransform ScaleX="{Binding DelayFactor}"/>
+                            </FrameworkElement.LayoutTransform>
+
+                        </FrameworkElement>
+                    </Border>
+
+                </Grid>
+
+                <UniformGrid Rows="1" Grid.Row="2" Grid.ColumnSpan="4" Margin="0 5 0 0">
+
+                    <Button x:Name="RollBtn" Content="Roll" 
+                            Background="{StaticResource RevampBorderBrush}"
+                            Foreground="White"
+                            CommandParameter="{x:Static viewmodels:BidAction.Roll}"
+                            nsEx:ButtonExtensions.CornerRadius="12" 
+                            Style="{StaticResource BidButtonStyle}" 
+                            Command="{Binding ItemInDistribution.SetBidIntentCommand}"
+                            Margin="1 1 2.5 1"
+                            FontSize="10" Padding="4"/>
+
+                    <Button x:Name="PassBtn" Content="Pass" 
+                            Background="{StaticResource RevampBorderBrush}"
+                            Foreground="White"
+                            CommandParameter="{x:Static viewmodels:BidAction.Pass}"
+                            FontSize="10" Padding="4" Margin="2.5 1 1 1"
+                            Command="{Binding ItemInDistribution.SetBidIntentCommand}"
+                            nsEx:ButtonExtensions.CornerRadius="12" 
+                            Style="{StaticResource BidButtonStyle}"/>
+
+                </UniformGrid>
+
+
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding DelayFactor}" Value="0">
+                    <Setter TargetName="DelayBorder" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <EventTrigger RoutedEvent="Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:1:0"
+                                                 Storyboard.TargetName="BarGovernor"
+                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleX)"
+                                                 From="1" To="0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+
+
+                <DataTrigger Binding="{Binding ItemInDistribution.BidIntent}" Value="{x:Static viewmodels:BidAction.Pass}">
+                    <Setter TargetName="PassBtn" Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource TccYellowGradient1Color}" Opacity="1"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="PassBtn" Property="Foreground" Value="White"/>
+                    <Setter TargetName="PassBtn" Property="BorderBrush" Value="{StaticResource TccYellowGradientBrush}"/>
+                    <Setter TargetName="PassBtn" Property="Panel.ZIndex" Value="99"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ItemInDistribution.BidIntent}" Value="{x:Static viewmodels:BidAction.Roll}">
+                    <Setter TargetName="RollBtn" Property="Background" >
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource TccGreenGradient0Color}" Opacity="1"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="RollBtn" Property="Foreground" Value="White"/>
+                    <Setter TargetName="RollBtn" Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}"/>
+                    <Setter TargetName="RollBtn" Property="Panel.ZIndex" Value="99"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ItemInDistribution.DbItem.RareGrade}" Value="{x:Static data:RareGrade.Uncommon}">
+                    <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemUncommonBrush}"/>
+                    <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemUncommonBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ItemInDistribution.DbItem.RareGrade}" Value="{x:Static data:RareGrade.Rare}">
+                    <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemRareBrush}"/>
+                    <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemRareBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ItemInDistribution.DbItem.RareGrade}" Value="{x:Static data:RareGrade.Superior}">
+                    <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemSuperiorBrush}"/>
+                    <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemSuperiorBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ItemInDistribution.DbItem.RareGrade}" Value="{x:Static data:RareGrade.Heroic}">
+                    <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemHeroicBrush}"/>
+                    <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemHeroicBrush}"/>
+                </DataTrigger>
+
+            </DataTemplate.Triggers>
+
+        </DataTemplate>
+        <DataTemplate x:Key="LootItemTemplateCondensed" DataType="{x:Type viewmodels:LootItemViewModel}">
+            <Grid Margin="0 0 -3 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <!--todo: item tooltip-->
+                <Grid Grid.Column="1" VerticalAlignment="Center" Margin="0" >
+                    <!--<Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Ellipse Width="4" Height="4"
+                             Margin="0 3 0 0"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             Fill="{StaticResource RevampBorderBrush}"/>
+                    <TextBlock x:Name="ItemNameTb" Foreground="White" Margin="5 0" FontSize="10"
+                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+                           MaxWidth="200" Grid.Column="1">
+                                
+                               <Run Text="stack of "  
+                                    Foreground="#999"/><Run
+                                    Text="{Binding Item.Amount, Mode=OneWay}" 
+                                    FontWeight="DemiBold"/>
+                               <!--<Run x:Name="ItemNameRun" Text="{Binding DbItem.Name, Mode=OneWay}" />-->
+                    </TextBlock>
+
+
+                    <Border x:Name="ResultTagBorder" BorderThickness="0" BorderBrush="{StaticResource RevampBorderBrush}" 
+                            HorizontalAlignment="Left" Padding="3 1" CornerRadius="2" 
+                            Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
+                        <Border.Background>
+                            <SolidColorBrush Color="{StaticResource RevampBorderColor}" Opacity=".2"/>
+                        </Border.Background>
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock x:Name="ResultTagText" Text="waiting" FontSize="8" 
+                                   Margin="0 0 0 1" 
+                                   Foreground="{StaticResource RevampBorderBrush}"
+                                   FontWeight="DemiBold"/>
+                            <TextBlock x:Name="ResultTagText2" Text="" FontSize="8" 
+                                   Margin="2 0 0 1" 
+                                   Foreground="{StaticResource RevampBorderBrush}"
+                                   FontWeight="DemiBold"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                <Rectangle Grid.Column="2" VerticalAlignment="Center" Height="1"
+                           Fill="#1fff" Margin="5 0" UseLayoutRounding="True"/>
+                <UniformGrid Rows="1" Grid.Column="3">
+                    <UniformGrid.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource BidButtonStyle}">
+                            <Setter Property="nsEx:ButtonExtensions.CornerRadius" Value="7"/>
+                            <Setter Property="Padding" Value="4 1"/>
+                            <Setter Property="Width" Value="30"/>
+                            <Setter Property="Background" Value="{StaticResource RevampBackgroundBrush}"/>
+                        </Style>
+                    </UniformGrid.Resources>
+
+                    <Button x:Name="RollBtn" CommandParameter="{x:Static viewmodels:BidAction.Roll}" 
+                            Command="{Binding SetBidIntentCommand}"
+                            Content="Roll" Margin="0 0 1 0"/>
+
+                    <Button x:Name="PassBtn"  CommandParameter="{x:Static viewmodels:BidAction.Pass}" 
+                            Command="{Binding SetBidIntentCommand}"
+                            Content="Pass"
+                            Margin="1 0 0 0"/>
+
+                </UniformGrid>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding BidIntent}" Value="{x:Static viewmodels:BidAction.Pass}">
+                    <Setter TargetName="PassBtn" Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource TccYellowGradient1Color}" Opacity=".2"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="PassBtn" Property="Foreground" Value="{StaticResource TccYellowGradientBrush}"/>
+                    <Setter TargetName="PassBtn" Property="Panel.ZIndex" Value="99"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding BidIntent}" Value="{x:Static viewmodels:BidAction.Roll}">
+                    <Setter TargetName="RollBtn" Property="Background" >
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource TccGreenGradient0Color}" Opacity=".2"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="RollBtn" Property="Foreground" Value="{StaticResource TccGreenGradient1Brush}"/>
+                    <Setter TargetName="RollBtn" Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}"/>
+                    <Setter TargetName="RollBtn" Property="Panel.ZIndex" Value="99"/>
+                </DataTrigger>
+                <!--<DataTrigger Binding="{Binding DbItem.RareGrade}" Value="{x:Static data:RareGrade.Uncommon}">
+                    <Setter TargetName="ItemNameRun" Property="Foreground" Value="{StaticResource ItemUncommonBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DbItem.RareGrade}" Value="{x:Static data:RareGrade.Rare}">
+                    <Setter TargetName="ItemNameRun" Property="Foreground" Value="{StaticResource ItemRareBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DbItem.RareGrade}" Value="{x:Static data:RareGrade.Superior}">
+                    <Setter TargetName="ItemNameRun" Property="Foreground" Value="{StaticResource ItemSuperiorBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DbItem.RareGrade}" Value="{x:Static data:RareGrade.Heroic}">
+                    <Setter TargetName="ItemNameRun" Property="Foreground" Value="{StaticResource ItemHeroicBrush}"/>
+                </DataTrigger>-->
+                <DataTrigger Binding="{Binding DistributionStatus}" Value="{x:Static viewmodels:DistributionStatus.Distributing}">
+                    <Setter TargetName="ResultTagBorder" Property="BorderBrush" Value="{StaticResource TccYellowGradientBrush}"/>
+                    <Setter TargetName="ResultTagBorder" Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource TccYellowGradient1Color}" Opacity=".2"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="ResultTagText" Property="Foreground" Value="{StaticResource TccYellowGradient1Brush}"/>
+                    <Setter TargetName="ResultTagText" Property="Text" Value="distributing"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DistributionStatus}" Value="{x:Static viewmodels:DistributionStatus.Distributed}">
+                    <Setter TargetName="ResultTagBorder" Property="BorderBrush" Value="{StaticResource TccGreenGradientBrush}"/>
+                    <Setter TargetName="ResultTagBorder" Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource TccGreenGradient0Color}" Opacity=".2"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="ResultTagText" Property="Foreground" Value="{StaticResource TccGreenGradient1Brush}"/>
+                    <Setter TargetName="ResultTagText2" Property="Foreground" Value="{StaticResource TccGreenGradient1Brush}"/>
+                    <Setter TargetName="ResultTagText" Property="Text" Value="{Binding WinnerName}"/>
+                    <Setter TargetName="ResultTagText2" Property="Text" Value="{Binding WinnerRoll}"/>
+
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DistributionStatus}" Value="{x:Static viewmodels:DistributionStatus.Discarded}">
+                    <Setter TargetName="ResultTagBorder" Property="BorderBrush" Value="{StaticResource TccRedGradientBrush}"/>
+                    <Setter TargetName="ResultTagBorder" Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{StaticResource TccRedGradient1Color}" Opacity=".1"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="ResultTagText" Property="Foreground" Value="{StaticResource TccRedGradient1Brush}"/>
+                    <Setter TargetName="ResultTagText" Property="Text" Value="discarded"/>
+
+                </DataTrigger>
+            </DataTemplate.Triggers>
+
+        </DataTemplate>
+        <DataTemplate x:Key="LootItemTemplateHeader" DataType="{x:Type viewmodels:LootItemViewModel}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Width="30" Height="30" Margin="0" Grid.Column="1"
+                           RadiusX="3" RadiusY="3" VerticalAlignment="Top"
+                           StrokeThickness="1" x:Name="ItemIcon"
+                           Stroke="{StaticResource RevampBorderBrush}">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="{Binding DbItem.IconName, Converter={StaticResource IconNameToPath}}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Polygon x:Name="RareGradePolygon" Grid.Column="1"
+                         Points="0 0 1 0 0 1" Width="10" Height="10"
+                         Stretch="Uniform" VerticalAlignment="Top" Margin="0"
+                         HorizontalAlignment="Left" Visibility="Visible" 
+                         Fill="{Binding Stroke, ElementName=ItemIcon}"/>
+                <!--todo: item tooltip-->
+                <TextBlock x:Name="ItemNameTb" Foreground="White" Margin="5 -2 0 0" FontSize="10"
+                        Grid.Column="2" VerticalAlignment="Top" TextTrimming="CharacterEllipsis"
+                        FontWeight="Medium"
+                        TextWrapping="WrapWithOverflow"
+                        Text="{Binding DbItem.Name, Mode=OneWay}" MaxWidth="200"
+                        />
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding DbItem.RareGrade}" Value="{x:Static data:RareGrade.Uncommon}">
+                    <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemUncommonBrush}"/>
+                    <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemUncommonBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DbItem.RareGrade}" Value="{x:Static data:RareGrade.Rare}">
+                    <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemRareBrush}"/>
+                    <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemRareBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DbItem.RareGrade}" Value="{x:Static data:RareGrade.Superior}">
+                    <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemSuperiorBrush}"/>
+                    <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemSuperiorBrush}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DbItem.RareGrade}" Value="{x:Static data:RareGrade.Heroic}">
+                    <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemHeroicBrush}"/>
+                    <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemHeroicBrush}"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+
+        </DataTemplate>
+        <DataTemplate x:Key="ItemRollTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--current item-->
+                <Border Effect="{StaticResource DropShadow}"
+                        Background="{StaticResource RevampDarkerBackground70Brush}"
+                        BorderThickness="1"
+                        Opacity=".95" 
+                        CornerRadius="5 5 16 16"
+                        UseLayoutRounding="True"
+                        VerticalAlignment="Top"
+                        BorderBrush="{StaticResource RevampBorderBrush}"
+                        HorizontalAlignment="Stretch">
+                    <ContentControl Content="{Binding}"
+                                    UseLayoutRounding="False"
+                            ContentTemplate="{StaticResource LootItemTemplate}"
+                            VerticalAlignment="Top"
+                            Margin="5 5 5 5"/>
+
+                </Border>
+
+                <!--members-->
+                <Border Effect="{StaticResource DropShadow}"
+                        Grid.Row="1"
+                        Background="{StaticResource RevampDarkerBackground70Brush}"
+                        BorderThickness="1"
+                        Opacity=".95" 
+                        Margin="0 10 0 0"
+                        CornerRadius="5"
+                        MinHeight="26"
+                        VerticalAlignment="Top"
+                        BorderBrush="{StaticResource RevampBorderBrush}"
+                        HorizontalAlignment="Stretch">
+                    <ListBox Style="{StaticResource DefaultListBoxStyle}"
+                             ItemsSource="{Binding MembersView}"
+                             VerticalAlignment="Top"
+                             
+                             >
+                        <!--<system:String>Max.Roll</system:String>
+                        <system:String>Winning</system:String>
+                        <system:String>Long.Name.Player</system:String>
+                        <system:String>Waiting</system:String>
+                        <system:String>Passed</system:String>
+                        <system:String>Raid member 6</system:String>
+                        <system:String>Raid member 7</system:String>
+                        <system:String>Raid member 8</system:String>
+                        <system:String>Raid member 9</system:String>
+                        <system:String>Raid member 10</system:String>
+                        <system:String>Raid member 11</system:String>
+                        <system:String>Raid member 12</system:String>
+                        <system:String>Raid member 13</system:String>
+                        <system:String>Raid member 14</system:String>
+                        <system:String>Raid member 15</system:String>
+                        <system:String>Raid member 16</system:String>
+                        <system:String>Raid member 17</system:String>
+                        <system:String>Raid member 18</system:String>
+                        <system:String>Raid member 19</system:String>
+                        <system:String>Raid member 20</system:String>-->
+
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource NoHilightListItemStyle}">
+                                <Setter Property="Margin" Value="-5 -2"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="2"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type viewmodels:LootingGroupMember}">
+                                <Border BorderThickness="1" Margin="1"
+                                    Padding="4" CornerRadius="3"
+                                    x:Name="RootBorder">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{StaticResource RevampBorderColor}" Opacity=".5"/>
+                                    </Border.Background>
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="{StaticResource RevampBorderColor}" Opacity=".5"/>
+                                    </Border.BorderBrush>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Path Data="{Binding Member.Class, Converter={StaticResource ClassToSvg}}" 
+                                              Width="12" Height="12"
+                                              VerticalAlignment="Center" Fill="White"/>
+                                        <TextBlock Text="{Binding Member.Name}" Foreground="White" TextTrimming="CharacterEllipsis"
+                                               MaxWidth="85" HorizontalAlignment="Left" Grid.Column="1"
+                                               Margin="3 0 0 0" VerticalAlignment="Center" />
+                                        <ContentControl x:Name="ResultControl" Grid.Column="2" Content="{Binding}">
+                                            <ContentControl.ContentTemplate>
+                                                <DataTemplate>
+                                                    <Path Width="12" Height="12"
+                                                          Fill="#5fff" Data="{StaticResource SvgTime}"
+                                                          />
+                                                </DataTemplate>
+                                            </ContentControl.ContentTemplate>
+                                        </ContentControl>
+                                    </Grid>
+                                </Border>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsWinning}" Value="True">
+                                        <Setter TargetName="RootBorder" Property="Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush Opacity=".7">
+                                                    <GradientStop Color="{StaticResource TccGreenGradient0Color}" Offset="-0.2" />
+                                                    <GradientStop Color="{StaticResource TccGreenGradient1Color}" Offset="1.2" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="RootBorder" Property="BorderBrush">
+                                            <Setter.Value>
+                                                <LinearGradientBrush Opacity="1">
+                                                    <GradientStop Color="{StaticResource TccGreenGradient0Color}" Offset="0" />
+                                                    <GradientStop Color="{StaticResource TccGreenGradient1Color}" Offset="1.2" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding BidAction}" Value="{x:Static viewmodels:BidAction.Pass}">
+                                        <Setter TargetName="RootBorder" Property="Opacity" Value=".4"/>
+                                        <Setter TargetName="ResultControl" Property="ContentTemplate" >
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <Path Width="12" Height="12"
+                                                      Fill="#9fff" Data="{StaticResource SvgPass}"
+                                                      />
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding BidAction}" Value="{x:Static viewmodels:BidAction.Roll}">
+                                        <Setter TargetName="ResultControl" Property="ContentTemplate" >
+                                            <Setter.Value>
+                                                <DataTemplate DataType="{x:Type viewmodels:LootingGroupMember}">
+                                                    <TextBlock Text="{Binding Roll, Mode=OneWay}" 
+                                                               Foreground="White" 
+                                                               VerticalAlignment="Center"
+                                                               FontWeight="DemiBold"/>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding Roll}" Value="100">
+                                        <Setter TargetName="RootBorder" Property="Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush Opacity=".7">
+                                                    <GradientStop Color="{StaticResource TccYellowGradient0Color}" Offset="-0.2" />
+                                                    <GradientStop Color="{StaticResource TccYellowGradient1Color}" Offset="1.2" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter TargetName="RootBorder" Property="BorderBrush">
+                                            <Setter.Value>
+                                                <LinearGradientBrush Opacity="1">
+                                                    <GradientStop Color="{StaticResource TccYellowGradient0Color}" Offset="0" />
+                                                    <GradientStop Color="{StaticResource TccYellowGradient1Color}" Offset="1.2" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ListBox>
+                </Border>
+
+            </Grid>
+
+        </DataTemplate>
+        <DataTemplate x:Key="ItemRollEmptyTemplate">
+            <TextBlock Text="No dice rolling in progress."
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#2fff"/>
+        </DataTemplate>
+
+    </FrameworkElement.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="290"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Effect="{StaticResource DropShadow}"
+                Grid.RowSpan="4"
+                Grid.ColumnSpan="3"
+                Background="{StaticResource RevampBackgroundBrush}"
+                BorderThickness="1"
+                Opacity=".95"
+                BorderBrush="{StaticResource RevampBorderBrush}"
+                HorizontalAlignment="Stretch" 
+                CornerRadius="5"/>
+
+        <!-- Title bar -->
+        <Grid HorizontalAlignment="Stretch" Grid.ColumnSpan="3"
+              Background="Transparent" MouseLeftButtonDown="Drag">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Path Style="{StaticResource WindowLogo}"/>
+            <TextBlock Style="{StaticResource DefaultTextStyle}"
+                       Foreground="#999"
+                       Text="{Binding Title, RelativeSource={RelativeSource AncestorType=Window}}"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       Grid.Column="1"
+                       Margin="0 0" />
+            <Button Style="{StaticResource NostrumContentOpacityButtonStyle}"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Opacity=".9"
+                    Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                    Click="OnCloseButtonClick"
+                    VerticalContentAlignment="Center"
+                    Grid.Column="2">
+                <Path Data="{StaticResource SvgClose}" Fill="White" Stretch="Uniform" Margin="5" Opacity=".9" />
+            </Button>
+        </Grid>
+
+        <!--ItemRoll-->
+        <ContentControl Grid.Row="1"
+                        Content="{Binding}"
+                        Margin="10 0 10 10" >
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="ContentTemplate" 
+                            Value="{StaticResource ItemRollTemplate}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ItemInDistribution}" Value="{x:Null}">
+                            <Setter Property="ContentTemplate" Value="{StaticResource ItemRollEmptyTemplate}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+
+
+
+        <!--List-->
+        <Border Effect="{StaticResource DropShadow}"
+                Visibility="{Binding IsListVisible, Converter={converters:BoolToVisibility}}"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                Background="{StaticResource RevampDarkerBackground70Brush}"
+                BorderThickness="1"
+                Opacity=".95"
+                Margin="0 0 10 10"
+                Width="280"
+                CornerRadius="5"
+                BorderBrush="{StaticResource RevampBorderBrush}"
+                HorizontalAlignment="Stretch">
+
+            <ListBox Style="{StaticResource DefaultListBoxStyle}"
+                     ItemsSource="{Binding DistributionListView}"
+                     ItemTemplate="{StaticResource LootItemTemplateCondensed}"
+                     Margin="-1"  
+                     ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource NoHilightListItemStyle}">
+                        <Setter Property="Margin" Value="0 -2 0 0"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.GroupStyle>
+                    <GroupStyle >
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate DataType="{x:Type CollectionViewGroup}">
+                                <StackPanel Margin="5" MaxWidth="250">
+                                    <Rectangle Height="1" Margin="5" HorizontalAlignment="Stretch" >
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush >
+                                                <GradientStop Color="#3fff"/>
+                                                <GradientStop Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentControl Content="{Binding Items[0]}"
+                                                        Margin="6 0"
+                                                        ContentTemplate="{StaticResource LootItemTemplateHeader}"/>
+                                        <TextBlock Text="all:" Foreground="#2fff" Margin="0 0 3 0" VerticalAlignment="Top" Grid.Column="1" FontSize="11"/>
+                                        <Border Padding="2" Grid.Column="2" VerticalAlignment="Top" Background="{StaticResource RevampBorderBrush}" CornerRadius="8">
+                                            <Border.Resources>
+                                                <Style TargetType="Button" BasedOn="{StaticResource BidButtonStyle}">
+                                                    <Setter Property="nsEx:ButtonExtensions.CornerRadius" Value="6"/>
+                                                    <Setter Property="Padding" Value="4 1"/>
+                                                    <Setter Property="Width" Value="30"/>
+                                                    <Setter Property="Background" Value="{StaticResource RevampBackgroundBrush}"/>
+                                                </Style>
+                                            </Border.Resources>
+                                            <UniformGrid Rows="1" Margin="0 0 0 0">
+
+                                                <Button Command="{Binding DataContext.SetRollForCategoryCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                CommandParameter="{Binding Name}" 
+                                                Margin="0 0 1 0"
+                                                Content="Roll"
+                                                />
+
+                                                <Button Command="{Binding DataContext.SetWaitForCategoryCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                CommandParameter="{Binding Name}" 
+                                                Margin="1 0 1 0"
+                                                Content="Wait"
+                                                />
+
+
+                                                <Button Command="{Binding DataContext.SetPassForCategoryCommand, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                                                CommandParameter="{Binding Name}" 
+                                                Margin="1 0 0 0"
+                                                Content="Pass"/>
+                                            </UniformGrid>
+                                        </Border>
+                                    </Grid>
+                                    <!--<Rectangle Height="1" Margin="5" HorizontalAlignment="Stretch" >
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush >
+                                                <GradientStop Color="#3fff"/>
+                                                <GradientStop Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>-->
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListBox.GroupStyle>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" Width="250" ItemWidth="250"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <!--<viewmodels:LootItemViewModel BidIntent="Roll" DistributionStatus="{x:Static viewmodels:DistributionStatus.Distributed}" WinnerName="Foglio"  />
+                <viewmodels:LootItemViewModel BidIntent="Pass" DistributionStatus="{x:Static viewmodels:DistributionStatus.Distributing}"/>
+                <viewmodels:LootItemViewModel BidIntent="Roll" DistributionStatus="{x:Static viewmodels:DistributionStatus.Discarded}"/>
+                <viewmodels:LootItemViewModel BidIntent="Unset" DistributionStatus="{x:Static viewmodels:DistributionStatus.Waiting}" />
+                <viewmodels:LootItemViewModel BidIntent="Roll" DistributionStatus="{x:Static viewmodels:DistributionStatus.Distributed}" WinnerName="Foglio"/>
+                <viewmodels:LootItemViewModel BidIntent="Pass" DistributionStatus="{x:Static viewmodels:DistributionStatus.Distributing}"/>
+                <viewmodels:LootItemViewModel BidIntent="Roll" DistributionStatus="{x:Static viewmodels:DistributionStatus.Discarded}"/>
+                <viewmodels:LootItemViewModel BidIntent="Unset" DistributionStatus="{x:Static viewmodels:DistributionStatus.Waiting}" />
+                <viewmodels:LootItemViewModel BidIntent="Roll" DistributionStatus="{x:Static viewmodels:DistributionStatus.Distributed}" WinnerName="Foglio"/>
+                <viewmodels:LootItemViewModel BidIntent="Pass" DistributionStatus="{x:Static viewmodels:DistributionStatus.Distributing}"/>-->
+            </ListBox>
+
+        </Border>
+
+        <Button Grid.Column="0" Grid.Row="2" Margin="0 6 10 10"  Padding="4"
+                nsEx:ButtonExtensions.CornerRadius="3" VerticalAlignment="Bottom"
+                nsEx:ButtonExtensions.RippleDuration="100"
+                HorizontalAlignment="Right"
+                nsEx:ButtonExtensions.HighlightBrush="#1fff"
+                nsEx:ButtonExtensions.RippleBrush="#2fff"
+                Command="{Binding ToggleListViewCommand}"
+                Click="OnShowListButtonClick"
+                ToolTip="Show items list">
+            <Path Data="{StaticResource SvgList}" Width="10" Height="10"/>
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource NostrumMainButtonStyle}">
+                    <Setter Property="Background" Value="#1fff"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsListVisible}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource DefensiveStanceBrush}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Foreground="#5fff" FontSize="11" FontWeight="Normal" Margin="0 0 0 0">
+                    <Run Text="{Binding ItemsLeftAmount, Mode=OneWay}" 
+                         FontWeight="DemiBold" Foreground="White"/>
+                    <Run>
+                        <Run.Style>
+                            <Style TargetType="Run">
+                                <Setter Property="Text" Value="items left"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ItemsLeftAmount}" Value="1">
+                                        <Setter Property="Text" Value="item left"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Run.Style>
+                    </Run>
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ItemsLeftAmount}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+    </Grid>
+</local:TccWindow>

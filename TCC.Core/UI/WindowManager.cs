@@ -49,6 +49,8 @@ namespace TCC.UI
 
         public static LfgListWindow LfgListWindow { get; private set; } = null!;
 
+        public static LootDistributionWindow LootDistributionWindow { get; private set; } = null!;
+
         public static async Task Init()
         {
             FocusManager.Init();
@@ -143,6 +145,8 @@ namespace TCC.UI
 
             LfgListWindow = new LfgListWindow(ViewModels.LfgVM);
 
+            LootDistributionWindow = new LootDistributionWindow(ViewModels.LootDistributionVM);
+
             ViewModels.PlayerMenuVM = new PlayerMenuViewModel();
 
             ChatManager.Start();
@@ -175,6 +179,7 @@ namespace TCC.UI
             private static CivilUnrestViewModel? _civilUnrestVm;
             private static LfgListViewModel? _lfgVm;
             private static FlightGaugeViewModel? _flightGaugeVm;
+            private static LootDistributionViewModel? _lootDistributionVm;
 
             public static CooldownWindowViewModel CooldownsVM { get; set; } = null!;
             public static CharacterWindowViewModel CharacterVM { get; set; } = null!;
@@ -191,6 +196,7 @@ namespace TCC.UI
             public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ??= new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings);
             public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
             public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ??= new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings);
+            public static LootDistributionViewModel LootDistributionVM => _lootDistributionVm ??= new LootDistributionViewModel(App.Settings.LootDistributionWindowSettings);
         }
     }
 }
