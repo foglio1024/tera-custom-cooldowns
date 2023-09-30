@@ -13,7 +13,7 @@ namespace TCC.Interop.Proxy
         private readonly StubMessageParser _messageParser;
 
         public bool IsFpsModAvailable { get; set; }
-        public bool IsStubAvailable { get; set; }
+        public bool IsStubAvailable { get; private set; }
 
         private StubInterface()
         {
@@ -22,7 +22,6 @@ namespace TCC.Interop.Proxy
             StubServer = new RpcServer2();
             StubClient = new StubClient();
             _messageParser = new StubMessageParser();
-            
         }
 
         public async Task InitAsync(bool useLfg, bool enablePlayerMenu, bool enableProxy, bool showIngameChat, bool tccChatEnabled)
@@ -47,7 +46,6 @@ namespace TCC.Interop.Proxy
             StubServer.Stop();
             StubServer.RequestReceived -= _messageParser.HandleRequest;
             StubServer.ResponseReceived -= _messageParser.HandleResponse;
-
         }
     }
 }

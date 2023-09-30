@@ -788,6 +788,16 @@ namespace TCC
             if (PacketAnalyzer.Factory!.ReleaseVersion == 0)
                 Log.F("Warning: C_LOGIN_ARBITER not received.");
 
+            if (!Logged && !StubInterface.Instance.IsStubAvailable)
+            {
+                StubInterface.Instance.Disconnect();
+                _ = StubInterface.Instance.InitAsync(App.Settings.LfgWindowSettings.Enabled,
+                                     App.Settings.EnablePlayerMenu,
+                                     App.Settings.EnableProxy,
+                                     App.Settings.ShowIngameChat,
+                                     App.Settings.ChatEnabled);
+            }
+
             Logged = false;
             Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false, App.Settings.LastAccountNameHash);
             Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false, App.Settings.LastAccountNameHash);
