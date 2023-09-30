@@ -634,5 +634,23 @@ namespace TCC.Debug
             {
             }
         }
+
+        internal static void ShowLootWindow()
+        {
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 50056, 1)));
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 50056, 1)) { DistributionStatus = DistributionStatus.Distributing});
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 21351, 4)) { DistributionStatus = DistributionStatus.Discarded });
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 21351, 7)) { DistributionStatus = DistributionStatus.Distributed, WinnerName = "Foglio • 69" });
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 21351, 6)));
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 71475, 1)));
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 71475, 2)));
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 71377, 1)));
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 71377, 1)));
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 71377, 1)));
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 71379, 1)));
+            WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 90747, 1)));
+
+            Game.ShowLootDistributionWindow();
+        }
     }
 }
