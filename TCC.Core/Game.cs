@@ -126,6 +126,10 @@ namespace TCC
         {
             return eid == Me.EntityId;
         }
+        public static bool IsMe(uint playerId, uint serverId)
+        {
+            return playerId == Me.PlayerId && serverId == Me.ServerId;
+        }
 
         public static event Action? ChatModeChanged;
 
@@ -144,6 +148,8 @@ namespace TCC
         public static event Action? Teleported;
 
         public static event Action? SkillStarted;
+
+        public static event Action? LootDistributionWindowShowRequest;
 
         public static Player Me { get; } = new();
         public static TccDatabase? DB { get; private set; }
@@ -482,6 +488,12 @@ namespace TCC
             TccUtils.CheckDiscordNotify($"`{strCh}` {txt}", author);
         }
 
+        internal static void ShowLootDistributionWindow()
+        {
+            LootDistributionWindowShowRequest?.Invoke();
+        }
+
+
         #region Hooks
 
         private static void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
@@ -519,12 +531,12 @@ namespace TCC
 
         private static void OnBanPartyMember(S_BAN_PARTY_MEMBER obj)
         {
-            Group.Remove(obj.PlayerId, obj.ServerId);
+            Group.RemoveMember(obj.PlayerId, obj.ServerId);
         }
 
         private static void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER obj)
         {
-            Group.Remove(obj.PlayerId, obj.ServerId);
+            Group.RemoveMember(obj.PlayerId, obj.ServerId);
         }
 
         private static void OnChangePartyManager(S_CHANGE_PARTY_MANAGER p)
@@ -624,6 +636,7 @@ namespace TCC
         {
             Log.Chat($"Changed friend state: {p.PlayerId} {p.FriendStatus}");
         }
+
         private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO p)
         {
             Friends.UpdateFriendInfo(p.FriendUpdates);
@@ -692,18 +705,18 @@ namespace TCC
             switch (p.Name)
             {
                 case "Foglio":
-                //case "Fogolio":
-                //case "Foglietto":
-                //case "Foglia":
-                //case "Myvia":
-                //case "Foglietta.Blu":
-                //case "Foglia.Trancer":
-                //case "Folyria":
-                //case "Folyvia":
-                //case "Fogliolina":
-                //case "Folyemi":
-                //case "Foiya":
-                //case "Fogliarya":
+                    //case "Fogolio":
+                    //case "Foglietto":
+                    //case "Foglia":
+                    //case "Myvia":
+                    //case "Foglietta.Blu":
+                    //case "Foglia.Trancer":
+                    //case "Folyria":
+                    //case "Folyvia":
+                    //case "Fogliolina":
+                    //case "Folyemi":
+                    //case "Foiya":
+                    //case "Fogliarya":
                     if (p.ServerId != 2800) break;
                     if (CivilUnrestZone) break;
                     _foglioEid = p.EntityId;
@@ -999,28 +1012,26 @@ namespace TCC
                     ? pvSysMsgPath
                     : "";
 
+            var destPath = pvSysMsgPath.Replace("\\", "/");
+
+            if (PacketAnalyzer.Sniffer.Connected && PacketAnalyzer.Sniffer is ToolboxSniffer tbs)
+            {
+                if (await tbs.ControlConnection.DumpMap(destPath, "sysmsg"))
+                {
+                    PacketAnalyzer.Factory.SystemMessageNamer = new OpCodeNamer(destPath);
+                    return;
+                }
+            }
+            else
+            {
+                if (OpcodeDownloader.DownloadSysmsgIfNotExist(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
+                {
+                    PacketAnalyzer.Factory.SystemMessageNamer = new OpCodeNamer(destPath);
+                    return;
+                }
+            }
             if (path == "")
             {
-                var destPath = pvSysMsgPath.Replace("\\", "/");
-
-
-                if (PacketAnalyzer.Sniffer.Connected && PacketAnalyzer.Sniffer is ToolboxSniffer tbs)
-                {
-                    if (await tbs.ControlConnection.DumpMap(destPath, "sysmsg"))
-                    {
-                        PacketAnalyzer.Factory.SystemMessageNamer = new OpCodeNamer(destPath);
-                        return;
-                    }
-                }
-                else
-                {
-                    if (OpcodeDownloader.DownloadSysmsgIfNotExist(PacketAnalyzer.Factory.Version, Path.Combine(App.DataPath, "opcodes/"), PacketAnalyzer.Factory.ReleaseVersion))
-                    {
-                        PacketAnalyzer.Factory.SystemMessageNamer = new OpCodeNamer(destPath);
-                        return;
-                    }
-                }
-
                 TccMessageBox.Show(SR.InvalidSysMsgFile(PacketAnalyzer.Factory.ReleaseVersion / 100, PacketAnalyzer.Factory.Version), MessageBoxType.Error);
                 App.Close();
                 return;
