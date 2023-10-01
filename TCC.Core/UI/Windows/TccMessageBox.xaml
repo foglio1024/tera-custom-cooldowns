@@ -1,8 +1,9 @@
 ﻿<Window x:Class="TCC.UI.Windows.TccMessageBox"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:nsEx="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
         mc:Ignorable="d" WindowStyle="None" IsVisibleChanged="Window_IsVisibleChanged" RenderTransformOrigin=".5 .5" Background="Transparent" AllowsTransparency="True"
         Title="TCC" Height="230" Width="420" SizeToContent="Height" Topmost="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         UseLayoutRounding="True">
@@ -14,16 +15,28 @@
         </Grid.RowDefinitions>
         <Border Style="{StaticResource RevampBorderStyle}"  Grid.RowSpan="3" Margin="0 0 0 0" x:Name="Bg" 
                  MouseLeftButtonDown="BG_MouseLeftButtonDown" Effect="{StaticResource BigDropShadow}"/>
-        <Border  Style="{StaticResource RevampBorderStyle}" Background="{StaticResource RevampDarkerBackground70Brush}"  Grid.Row="1" VerticalAlignment="Stretch" Margin="1 0"
-                 x:Name="InnerBorder" BorderThickness="0 1 0 1"/>
-        <Grid ClipToBounds="False" Margin="0 -1">
+        <Border  Style="{StaticResource RevampBorderStyle}" Background="{StaticResource RevampDarkerBackground70Brush}"  
+                 Grid.Row="1" VerticalAlignment="Stretch" Margin="10 0"
+                 CornerRadius="5"
+                 x:Name="InnerBorder" BorderThickness="1"/>
+        <Grid ClipToBounds="False" Margin="20 -1" Grid.Row="0" >
 
-        <Rectangle Grid.Row="0" Height="5"  VerticalAlignment="Bottom" Margin="0 -2" Fill="{StaticResource TccNormalGradientBrush}" x:Name="ColorRectFx">
-            <Rectangle.Effect>
-                <BlurEffect Radius="30" />
-            </Rectangle.Effect>
-        </Rectangle>
-        <Rectangle Grid.Row="0" Height="1" VerticalAlignment="Bottom" Margin="0 0" Fill="{StaticResource TccNormalGradientBrush}" x:Name="ColorRect"/>
+            <Rectangle Height="5" VerticalAlignment="Bottom" Margin="0 -2" Fill="{StaticResource TccNormalGradientBrush}" x:Name="ColorRectFx">
+                <Rectangle.Effect>
+                    <BlurEffect Radius="30" />
+                </Rectangle.Effect>
+            </Rectangle>
+            <Rectangle  Height="1" VerticalAlignment="Bottom" Margin="0 0" Fill="{StaticResource TccNormalGradientBrush}" x:Name="ColorRect"/>
+            <Grid.OpacityMask>
+                <LinearGradientBrush>
+                    <GradientStop Color="Transparent"/>
+                    <GradientStop Offset=".1" Color="Transparent"/>
+                    <GradientStop Offset=".4" Color="White"/>
+                    <GradientStop Offset=".6" Color="White"/>
+                    <GradientStop Offset=".9" Color="Transparent"/>
+                    <GradientStop Offset="1" Color="Transparent"/>
+                </LinearGradientBrush>
+            </Grid.OpacityMask>
         </Grid>
         <!--<Path Data="{StaticResource SvgInfo}" Fill="#4fff" VerticalAlignment="Center" Grid.Row="1" Height="50" HorizontalAlignment="Left" Margin="10"/>-->
         <TextBlock Foreground="#cfff" FontSize="20" x:Name="MessageTitle" Grid.Row="0" Margin="5" Text="TCC"
@@ -33,8 +46,9 @@
         <UniformGrid Rows="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0 0">
             <UniformGrid.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource NostrumMainButtonStyle}">
-                    <Setter Property="Margin" Value="10 5"/>
+                    <Setter Property="Margin" Value="10"/>
                     <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="nsEx:ButtonExtensions.CornerRadius" Value="5"/>
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="Foreground" Value="#ccc"/>
                     <Setter Property="FontFamily" Value="{StaticResource Frutiger}"/>
@@ -42,7 +56,7 @@
                     <Setter Property="BorderBrush" Value="{StaticResource RevampBorderBrush}"/>
                     <Setter Property="Background" >
                         <Setter.Value>
-                            <SolidColorBrush Color="{StaticResource RevampDarkerBackgroundColor}" Opacity=".7"/>
+                            <SolidColorBrush Color="{StaticResource RevampDarkerBackgroundColor}" Opacity=".95"/>
                         </Setter.Value>
                     </Setter>
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -51,16 +65,16 @@
                 </Style>
             </UniformGrid.Resources>
             <Button x:Name="BtnOk">
-                <TextBlock Margin="10 3">Ok</TextBlock>
+                <TextBlock Margin="10 5">Ok</TextBlock>
             </Button>
             <Button x:Name="BtnYes">
-                <TextBlock Margin="10 3">Yes</TextBlock>
+                <TextBlock Margin="10 5">Yes</TextBlock>
             </Button>
             <Button x:Name="BtnNo">
-                <TextBlock Margin="10 3">No</TextBlock>
+                <TextBlock Margin="10 5">No</TextBlock>
             </Button>
             <Button x:Name="BtnCancel">
-                <TextBlock Margin="10 3">Cancel</TextBlock>
+                <TextBlock Margin="10 5">Cancel</TextBlock>
             </Button>
         </UniformGrid>
     </Grid>

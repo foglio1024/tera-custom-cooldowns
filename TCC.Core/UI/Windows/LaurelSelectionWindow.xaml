@@ -28,6 +28,7 @@
                 Background="{StaticResource RevampBackgroundBrush}"
                 BorderThickness="1"
                 Opacity=".8"
+                CornerRadius="5"
                 BorderBrush="{StaticResource TccNormalGradientBrush}"
                 HorizontalAlignment="Stretch" />
 
@@ -41,7 +42,7 @@
             <Path Style="{StaticResource WindowLogo}"/>
             <TextBlock Style="{StaticResource DefaultTextStyle}"
                        Foreground="#999"
-                       Text="TCC - Custom laurel selection"
+                       Text="Custom laurel selection"
                        VerticalAlignment="Center"
                        FontSize="16"
                        Grid.Column="1"
@@ -59,7 +60,8 @@
         </Grid>
 
         <Border Grid.Row="1" VerticalAlignment="Stretch"
-                Background="{StaticResource SelectionBackgroundBrush}"
+                Background="{StaticResource RevampDarkerBackground70Brush}"
+                CornerRadius="5"
                 BorderThickness="1"
                 Margin="10 0"
                 Opacity=".8"

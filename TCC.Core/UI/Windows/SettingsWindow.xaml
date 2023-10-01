@@ -11,7 +11,7 @@
                    xmlns:teraPacketParser="clr-namespace:TeraPacketParser;assembly=TeraPacketParser"
                    Topmost="True"
                  mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
-                 Title="TCC Settings" Height="630" Width="900" ResizeMode="NoResize"
+                 Title="TCC Settings" Height="637" Width="916" ResizeMode="NoResize"
                  Background="Transparent" UseLayoutRounding="True"
                  WindowStartupLocation="CenterScreen"
                  KeyDown="OnKeyDown"
@@ -332,10 +332,11 @@
 
         <Style x:Key="TabContentBackgroundBorder" TargetType="Border">
             <Setter Property="Margin" Value="-2 -1 -1 0" />
-            <Setter Property="Effect" Value="{StaticResource DropShadow}" />
+            <!--<Setter Property="Effect" Value="{StaticResource DropShadow}" />-->
             <Setter Property="Background" Value="{StaticResource RevampBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource RevampBorderBrush}" />
             <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="5" />
             <Setter Property="Grid.RowSpan" Value="10" />
             <Setter Property="Grid.ColumnSpan" Value="10" />
             <Setter Property="Opacity" Value=".5" />
@@ -372,9 +373,10 @@
         </Grid.RowDefinitions>
         <Border Effect="{StaticResource DropShadow}"
                 Grid.RowSpan="2"
+                CornerRadius="5"
                 Background="{StaticResource RevampBackgroundBrush}"
                 BorderThickness="1"
-                Opacity=".8"
+                Opacity=".95"
                 BorderBrush="{StaticResource RevampBorderBrush}"
                 HorizontalAlignment="Stretch" />
         <!-- Title bar -->
@@ -407,20 +409,25 @@
         <Grid HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
               Grid.Row="1">
-            <Border Effect="{StaticResource DropShadow}"
+            <Border Effect="{StaticResource BigDropShadow}"
                     Grid.RowSpan="2"
                     Background="{StaticResource RevampDarkerBackgroundBrush}"
                     BorderThickness="1"
-                    Opacity=".5"
-                    Margin="3 0 3 3"
+                    CornerRadius="5"
+                    Opacity=".95"
+                    Margin="10 0 11 10"
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     HorizontalAlignment="Stretch" />
             <TabControl Background="Transparent"
                         BorderThickness="0"
-                        Margin="2 -1 2 1"
-                        ItemContainerStyle="{StaticResource TabItemStyle}"
+                        Margin="10 -1 10 8"
                         TabStripPlacement="Left"
                         x:Name="TabControl">
+                <TabControl.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource TabItemStyle}" TargetType="TabItem">
+                        <Setter Property="Margin" Value="0 10 0 -10"/>
+                    </Style>
+                </TabControl.ItemContainerStyle>
                 <!-- Cooldown window -->
                 <TabItem>
                     <TabItem.Header>

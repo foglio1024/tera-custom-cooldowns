@@ -35,7 +35,7 @@
         </Storyboard>
     </Window.Resources>
     <!-- Root -->
-    <Grid Margin="20">
+    <Grid Margin="20" x:Name="Root">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
@@ -43,112 +43,136 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!-- Base border -->
-        <Border Style="{StaticResource RevampBorderStyle}" Opacity=".95" BorderThickness="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="4">
+        <Border Style="{StaticResource RevampBorderStyle}" Background="{StaticResource RevampDarkerBackgroundBrush}" Opacity="0.99" BorderThickness="0" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="4" CornerRadius="5"
+                x:Name="BaseBorder">
             <Border.Effect>
                 <DropShadowEffect Direction="-90"
                                   BlurRadius="20"
                                   RenderingBias="Quality"
-                                  Opacity=".3"
+                                  Opacity=".5"
                                   Color="{StaticResource BackgroundDarkColor}"/>
             </Border.Effect>
         </Border>
-        <!-- Image -->
-        <Image Grid.Row="1" Source="{Binding Image}" x:Name="BackgroundImage" Stretch="UniformToFill" Height="250" >
-            <Image.OpacityMask>
-                <LinearGradientBrush StartPoint="0 0" EndPoint="1.2 0">
-                    <GradientStop Offset="0" Color="Transparent" />
-                    <GradientStop Offset="1" Color="White" />
-                </LinearGradientBrush>
-            </Image.OpacityMask>
-        </Image>
-        <TextBlock Text="" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Foreground="#9ccc"/>
-        <!-- Version text -->
-        <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock HorizontalAlignment="Stretch" TextAlignment="Left" Margin="0" FontSize="26" Foreground="#9fff" FontWeight="Thin" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.OpacityMask>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Border Background="White" 
+                            CornerRadius="5"
+                            Width="{Binding ActualWidth, ElementName=BaseBorder}"
+                            Height="{Binding ActualHeight, ElementName=BaseBorder}"
+                            />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.OpacityMask>
+
+            <!-- Image -->
+            <Image Grid.Row="1" Source="{Binding Image}" x:Name="BackgroundImage" Stretch="UniformToFill" Height="250" >
+                <Image.OpacityMask>
+                    <LinearGradientBrush StartPoint="0 0" EndPoint="1.2 0">
+                        <GradientStop Offset="0" Color="Transparent" />
+                        <GradientStop Offset=".6" Color="White" />
+                    </LinearGradientBrush>
+                </Image.OpacityMask>
+            </Image>
+            <TextBlock Text="" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10" Foreground="#9ccc"/>
+            <!-- Version text -->
+            <StackPanel Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock HorizontalAlignment="Stretch" TextAlignment="Left" Margin="0" FontSize="26" Foreground="#9fff" FontWeight="Thin" >
                     <Run Text="TCC" FontWeight="DemiBold" FontSize="36"/>
                     <Run Text="{Binding Version, Mode=OneWay}"/>
-                </TextBlock>
-                <TextBlock Text="-b"  HorizontalAlignment="Stretch" TextAlignment="Left" Margin="0 0 0 2" 
+                    </TextBlock>
+                    <TextBlock Text="-b"  HorizontalAlignment="Stretch" TextAlignment="Left" Margin="0 0 0 2" 
                            FontSize="26" Foreground="{StaticResource DpsRoleBrush}" FontWeight="Thin" VerticalAlignment="Bottom"
                            Visibility="{Binding Beta, Converter={converters:BoolToVisibility}}" 
                            />
+                </StackPanel>
+                <Separator Margin="0 -6 -20 3" Background="#3acf" />
+                <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Margin="0 -6 -20 0" FontSize="12" Foreground="#7fff" FontWeight="Thin">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Text" Value="standalone mode" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Toolbox}" Value="true">
+                                    <Setter Property="Text" Value="toolbox mode" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
             </StackPanel>
-            <Separator Margin="0 -6 -20 3" Background="#3acf" />
-            <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Margin="0 -6 -20 0" FontSize="12" Foreground="#7fff" FontWeight="Thin">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Text" Value="standalone mode" />
+            <!-- Status rectangle-->
+            <Rectangle Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="1" Fill="{StaticResource TccNormalGradientBrush}">
+                <Rectangle.Style>
+                    <Style TargetType="Shape">
+                        <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Toolbox}" Value="true">
-                                <Setter Property="Text" Value="toolbox mode" />
+                            <DataTrigger Binding="{Binding Waiting}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource ToYellow}"/>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource ToNormal}"/>
+                                </DataTrigger.ExitActions>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </TextBlock.Style>
-            </TextBlock>
-        </StackPanel>
-        <!-- Status rectangle-->
-        <Rectangle Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.Row="1" Fill="{StaticResource TccNormalGradientBrush}">
-            <Rectangle.Style>
-                <Style TargetType="Shape">
-                    <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Waiting}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ToYellow}"/>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource ToNormal}"/>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Rectangle.Style>
-        </Rectangle>
-        <!-- Bottom text -->
-        <Rectangle Name="ProgressBar" Fill="#29af" Grid.Row="2">
-            <Rectangle.RenderTransform>
-                <ScaleTransform ScaleX="0"/>
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <TextBlock Foreground="#afff" Text="{Binding BottomText}" Grid.Row="2" Margin="3" HorizontalAlignment="Center"/>
-        <!-- Buttons -->
-        <UniformGrid Grid.Row="3" Rows="1" Background="#3000">
-            <UniformGrid.LayoutTransform>
-                <ScaleTransform ScaleY="0"/>
-            </UniformGrid.LayoutTransform>
-            <UniformGrid.Style>
-                <Style TargetType="FrameworkElement">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Waiting}" Value="True">
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard TargetProperty="LayoutTransform.(ScaleTransform.ScaleY)">
-                                        <DoubleAnimation To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard TargetProperty="LayoutTransform.(ScaleTransform.ScaleY)">
-                                        <DoubleAnimation To="0" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </UniformGrid.Style>
-            <UniformGrid.Resources>
-                <Style BasedOn="{StaticResource NostrumContentOpacityButtonStyle}" TargetType="{x:Type Button}">
-                    <Setter Property="Padding" Value="3"/>
-                    <Setter Property="FontWeight" Value="Thin"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                </Style>
-            </UniformGrid.Resources>
-            <Button Command="{Binding OkCommand}">YES</Button>
-            <Button Command="{Binding NoCommand}">NO</Button>
-        </UniformGrid>
+                </Rectangle.Style>
+            </Rectangle>
+            <!-- Bottom text -->
+            <Rectangle Name="ProgressBar" Fill="#29af" Grid.Row="2">
+                <Rectangle.RenderTransform>
+                    <ScaleTransform ScaleX="0"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <TextBlock Foreground="#afff" Text="{Binding BottomText}" FontStyle="Italic" Grid.Row="2" Margin="10" HorizontalAlignment="Center"/>
+            <!-- Buttons -->
+            <UniformGrid Grid.Row="3" Rows="1" Background="#3000">
+                <UniformGrid.LayoutTransform>
+                    <ScaleTransform ScaleY="0"/>
+                </UniformGrid.LayoutTransform>
+                <UniformGrid.Style>
+                    <Style TargetType="FrameworkElement">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Waiting}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetProperty="LayoutTransform.(ScaleTransform.ScaleY)">
+                                            <DoubleAnimation To="1" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard TargetProperty="LayoutTransform.(ScaleTransform.ScaleY)">
+                                            <DoubleAnimation To="0" Duration="0:0:0.2" EasingFunction="{StaticResource QuadraticEase}"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </UniformGrid.Style>
+
+                <UniformGrid.Resources>
+                    <Style BasedOn="{StaticResource NostrumContentOpacityButtonStyle}" TargetType="{x:Type Button}">
+                        <Setter Property="Padding" Value="10"/>
+                        <Setter Property="FontWeight" Value="Regular"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </UniformGrid.Resources>
+                <Button Command="{Binding OkCommand}">YES</Button>
+                <Button Command="{Binding NoCommand}">NO</Button>
+            </UniformGrid>
+        </Grid>
+
     </Grid>
 </widgets:TccWidget>

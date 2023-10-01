@@ -6,6 +6,7 @@
                    xmlns:vm="clr-namespace:TCC.ViewModels"
                    xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
                    xmlns:windows="clr-namespace:TCC.UI.Windows"
+                   xmlns:nsEx="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
                    SizeToContent="Height"
                    mc:Ignorable="d"
                    Style="{StaticResource BaseWindowStyle}"
@@ -108,12 +109,12 @@
 
                 </ItemsControl>
             </Grid>
-            <Grid Grid.Row="2" Margin="0 0 0 0" Height="25">
+            <Grid Grid.Row="2" Margin="5" Height="25">
                 <Path Data="{StaticResource SvgSearch}" Margin="10 0 10 0" Height="15" VerticalAlignment="Center"
                       HorizontalAlignment="Right" />
-                <TextBox Margin="5 0" BorderThickness="0" x:Name="SearchBox"
-                         Foreground="#bfff" Background="#1fff" Padding="0 3"
-                         VerticalContentAlignment="Center"
+                <TextBox Margin="5 0" BorderThickness="0" x:Name="SearchBox" 
+                         Foreground="#bfff" Background="Transparent" Padding="0 3"
+                         VerticalContentAlignment="Center" 
                          CaretBrush="#8fff" TextChanged="PassivitySearch_OnTextChanged" />
             </Grid>
             <ListBox Grid.Row="1" ItemsSource="{Binding AbnormalitiesView}"

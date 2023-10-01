@@ -5,7 +5,7 @@
                                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                                xmlns:widgets="clr-namespace:TCC.UI.Windows.Widgets"
                                mc:Ignorable="d" d:DataContext="{d:DesignInstance widgets:ProgressNotificationInfo}">
-    <Border x:Name="Root" MinWidth="200" MaxWidth="250"
+    <Border x:Name="Root" MinWidth="200" MaxWidth="250" CornerRadius="5"
             HorizontalAlignment="Left" MinHeight="20" Margin="5" BorderThickness="1">
         <Border.RenderTransform>
             <TranslateTransform />
@@ -46,7 +46,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border BorderThickness="1" Grid.Row="1"
+            <Border BorderThickness="1" Grid.Row="1" CornerRadius="5"
                     BorderBrush="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}" />
             <Rectangle Style="{StaticResource NotificationRectangle}" Grid.Row="1"
                        Fill="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}" />

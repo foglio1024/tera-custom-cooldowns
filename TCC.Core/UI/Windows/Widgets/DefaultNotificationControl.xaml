@@ -9,7 +9,7 @@
                                d:DataContext="{d:DesignInstance widgets:NotificationInfoBase}"
                                >
     <Border x:Name="Root" MinWidth="200" MaxWidth="250" BorderThickness="1"
-            HorizontalAlignment="Left" MinHeight="20" Margin="5">
+            HorizontalAlignment="Left" MinHeight="20" Margin="5" CornerRadius="5">
         <Border.RenderTransform>
             <TranslateTransform />
         </Border.RenderTransform>
@@ -48,7 +48,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Border BorderThickness="1" Grid.Row="1"
+            <Border BorderThickness="1" Grid.Row="1" CornerRadius="5"
                     BorderBrush="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}" />
             <Rectangle Style="{StaticResource NotificationRectangle}" Grid.Row="1" 
                        Fill="{Binding NotificationType, Converter={StaticResource NotificationTypeToBrush}}"/>

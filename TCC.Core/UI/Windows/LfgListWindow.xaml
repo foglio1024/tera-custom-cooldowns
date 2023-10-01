@@ -14,9 +14,9 @@
                    WindowStartupLocation="Manual">
     <Grid Margin="5">
         <Border Background="{StaticResource RevampBackgroundBrush}"
-                CornerRadius="1" Effect="{StaticResource DropShadow}"
-                BorderThickness="1" BorderBrush="{StaticResource TccNormalGradientBrush}"
-                Margin="6" Width="600" HorizontalAlignment="Stretch" Opacity=".75" />
+                CornerRadius="5" Effect="{StaticResource DropShadow}"
+                BorderThickness="1" BorderBrush="{StaticResource RevampBorderBrush}"
+                Margin="6" Width="600" HorizontalAlignment="Stretch" Opacity=".95" />
         <Grid HorizontalAlignment="Stretch" Margin="6" MouseLeftButtonDown="OnBgMouseLeftButtonDown">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
@@ -28,8 +28,9 @@
                     Grid.Row="1"
                     Background="{StaticResource RevampDarkerBackgroundBrush}"
                     BorderThickness="1"
-                    Opacity=".5"
-                    Margin="4  21 4 4"
+                    Opacity=".95"
+                    CornerRadius="5"
+                    Margin="10 21 10 10"
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     HorizontalAlignment="Stretch" />
 
@@ -37,7 +38,7 @@
             <Border Width="40" Height="40" Style="{StaticResource RevampBorderStyle}"
                     BorderBrush="{StaticResource TccNormalGradientBrush}"
                     RenderTransformOrigin=".5 .5"
-                    HorizontalAlignment="Left" Margin="-20">
+                    HorizontalAlignment="Left" Margin="-20" CornerRadius="0">
                 <Grid>
                     <Rectangle Margin="5" Fill="#2fff" />
                     <Rectangle Opacity=".2" Fill="{StaticResource TccNormalGradientBrush}"/>
@@ -170,6 +171,7 @@
                                 </Style>
                             </StackPanel.Resources>
                             <Button x:Name="CollapseAllButton"
+                                    HorizontalAlignment="Left"
                                     extensions:ButtonExtensions.CornerRadius="3"
                                     Command="{Binding CollapseAllCommand}"
                                     ToolTip="Collapse any expanded LFG">
@@ -183,7 +185,7 @@
                                                VerticalAlignment="Center" />
                                 </Grid>
                             </Button>
-                            <Button x:Name="AutoPublicizeButton"
+                            <Button x:Name="AutoPublicizeButton" HorizontalAlignment="Left"
                                     ToolTip="Enable auto-publicize of LFG message with a configurable cooldown."
                                     Command="{Binding ToggleAutoPublicizeCommand}">
                                 <Grid>
@@ -198,7 +200,8 @@
                                                Foreground="White" />
                                 </Grid>
                             </Button>
-                            <Grid Height="36" IsEnabled="{Binding IsAutoPublicizeRunning, Converter={converters:BooleanInverter}}">
+                            <Grid Height="36" IsEnabled="{Binding IsAutoPublicizeRunning, Converter={converters:BooleanInverter}}"
+                                  HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="10" />
                                     <ColumnDefinition Width="36" />
@@ -220,7 +223,7 @@
                             </Grid>
 
                             <Rectangle Margin="10 0" Fill="#1fff" Height="1" VerticalAlignment="Stretch" />
-                            <Grid Height="36">
+                            <Grid Height="36" HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="36" />
                                     <ColumnDefinition />
@@ -238,7 +241,7 @@
                                            VerticalAlignment="Center" />
 
                             </Grid>
-                            <Grid Height="36">
+                            <Grid Height="36" HorizontalAlignment="Left">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="36" />
                                     <ColumnDefinition />
@@ -258,7 +261,7 @@
 
                             </Grid>
                             <Rectangle Margin="10 0" Fill="#1fff" Height="1" VerticalAlignment="Stretch" />
-                            <Button x:Name="ShowTradeListingsButton"
+                            <Button x:Name="ShowTradeListingsButton" HorizontalAlignment="Left"
                                     ToolTip="Enable auto-publicize of LFG message with a 20 seconds cooldown."
                                     Command="{Binding ToggleShowTradeListingsCommand}">
                                 <Grid>
@@ -273,7 +276,7 @@
                                                Foreground="White" />
                                 </Grid>
                             </Button>
-                            <Button x:Name="ConfigBlacklistButton"
+                            <Button x:Name="ConfigBlacklistButton" HorizontalAlignment="Left"
                                 extensions:ButtonExtensions.CornerRadius="3"
                                 Command="{Binding ConfigureBlacklistCommand}">
                                 <Grid>
@@ -296,7 +299,7 @@
                 </Button>
             </StackPanel>
             <!--Header-->
-            <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="0 0 5 0">
+            <Grid Grid.Row="1" VerticalAlignment="Stretch" Margin="10 0 15 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="260" />
@@ -336,7 +339,7 @@
                      Grid.Row="2"
                      ItemsSource="{Binding ListingsView}"
                      HorizontalAlignment="Stretch"
-                     Margin="5 5 5 5"
+                     Margin="12 6 12 10"
                      AlternationCount="2"
                      ItemTemplateSelector="{StaticResource ListingTemplateSelector}"
                      x:Name="MainList">

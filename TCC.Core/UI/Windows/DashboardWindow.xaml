@@ -159,7 +159,8 @@
                 Background="{StaticResource RevampBackgroundBrush}"
                 BorderBrush="{StaticResource RevampBorderBrush}"
                 BorderThickness="1"
-                Opacity=".7"
+                CornerRadius="5"
+                Opacity=".95"
                 HorizontalAlignment="Stretch" 
                 Grid.RowSpan="2"
                 Grid.ColumnSpan="2" />

@@ -352,7 +352,7 @@
                         <RotateTransform Angle="45" />
                     </Border.RenderTransform>
                 </Border>
-                <Path Stroke="Transparent" RenderOptions.BitmapScalingMode="Fant" Margin="4 0 0 0" Data="m0,1 1,-1 1,1"
+                <!--<Path Stroke="Transparent" RenderOptions.BitmapScalingMode="Fant" Margin="4 0 0 0" Data="m0,1 1,-1 1,1"
                       Fill="Orange"
                       Visibility="{Binding Awakened, Converter={converters:BoolToVisibility}}" x:Name="AwakenIcon"
                       RenderTransformOrigin=".5 .5" Width="10">
@@ -362,7 +362,7 @@
                     <Path.Effect>
                         <DropShadowEffect Color="Orange" ShadowDepth="0" BlurRadius="20" />
                     </Path.Effect>
-                </Path>
+                </Path>-->
 
                 <Grid.RenderTransform>
                     <TransformGroup>

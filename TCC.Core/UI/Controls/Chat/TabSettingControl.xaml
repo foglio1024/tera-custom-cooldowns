@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:TCC.ViewModels"
+             xmlns:nsEx="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
              mc:Ignorable="d" Loaded="TabSettingControl_OnLoaded" d:DataContext="{d:DesignInstance viewModels:Tab }"
              Margin="0">
     <UserControl.Resources>
@@ -175,14 +176,282 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Style="{StaticResource RevampBorderStyle}"
-                UseLayoutRounding="True" Opacity=".4" Grid.Row="1" Grid.RowSpan="3" Margin="0 0 1 0"
+        <Border Style="{StaticResource RevampBorderStyle}" Padding="5" VerticalAlignment="Top"
+                UseLayoutRounding="True" Opacity="1" Grid.Row="1" Grid.RowSpan="3" Margin="0 0 5 0"
                 Background="{StaticResource RevampDarkerBackgroundBrush}"
-                ClipToBounds="False" />
-        <Border Style="{StaticResource RevampBorderStyle}"
-                UseLayoutRounding="True" Opacity=".4" Grid.Row="1" Margin="1 0 0 0" Grid.Column="1" Grid.RowSpan="3"
+                ClipToBounds="False" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" >
+                    <Grid ToolTip="Channels to display in this tab. All other channels will be excluded.">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Displayed channels"
+                                   Padding="5 5"
+                                   VerticalAlignment="Center" Foreground="#9fff" />
+                        <ComboBox Name="NewChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
+                                  ItemTemplate="{StaticResource SimpleChatChannelTemplate}" Cursor="Hand"
+                                  VerticalContentAlignment="Center" SelectionChanged="NewChannelComboBox_SelectionChanged"
+                                  Background="#199a" BorderThickness="0" VerticalAlignment="Stretch">
+                            <ComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel RequestBringIntoView="OnRequestBringIntoView" />
+                                </ItemsPanelTemplate>
+                            </ComboBox.ItemsPanel>
+                        </ComboBox>
+                    </Grid>
+
+                    <Border Background="#1fff" Padding="5" Margin="0 5 0 0" CornerRadius="5">
+                        <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}" 
+                                  ItemsSource="{Binding TabInfoVM.ShowedChannels}"
+                                  Margin="0 0 0 0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TabInfoVM.ShowedChannels.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </StackPanel>
+                <Separator Background="{StaticResource SelectionBackgroundLightBrush}" Width="50" Margin="0 5" Grid.Row="1"/>
+                <StackPanel Grid.Row="2" >
+                    <Grid ToolTip="Authors to display in this tab. All other authors will be excluded.">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Displayed authors"
+                                   Padding="5"
+                                   VerticalAlignment="Center" Foreground="#9fff" />
+                        <TextBox Padding="0" Name="NewAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
+                                    PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
+                                    VerticalContentAlignment="Center" Background="#199a" BorderThickness="0"
+                                    LostFocus="NewAuthorTextBox_LostFocus"
+                                    Foreground="#3fff" Margin="0 1" CaretBrush="White" Text="New author..."
+                                    KeyDown="NewAuthorTextBox_KeyDown" />
+                    </Grid>
+                    <Border Background="#1fff" Padding="5" Margin="0 5 0 0" CornerRadius="5">
+                        <ItemsControl ItemTemplate="{StaticResource AuthorSettingTemplate}" ItemsSource="{Binding TabInfoVM.Authors}"
+                                   Margin="0,0,0,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TabInfoVM.Authors.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                    </Border>
+                </StackPanel>
+                <Separator Background="{StaticResource SelectionBackgroundLightBrush}" Width="50" Margin="0 5" Grid.Row="3"/>
+                <StackPanel Grid.Row="4" >
+                    <Grid ToolTip="Keywords to display in this tab.">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Displayed keywords"
+                                       Padding="5" Margin="0"
+                                       VerticalAlignment="Center" Foreground="#9fff" />
+                        <TextBox Padding="0" Name="NewKeywordTextBox" VerticalAlignment="Stretch" Grid.Column="1"
+                                     PreviewMouseLeftButtonDown="NewExKeywordTextBox_MouseLeftButtonDown"
+                                     VerticalContentAlignment="Center" Background="#199a" BorderThickness="0"
+                                     LostFocus="NewKeywordTextBox_LostFocus"
+                                     Foreground="#3fff" Margin="0" CaretBrush="White" Text="New keyword..."
+                                     KeyDown="NewKeywordTextBox_KeyDown" />
+                    </Grid>
+                    <Border Background="#1fff" Padding="5" Margin="0 5 0 0" CornerRadius="5">
+
+                        <ItemsControl ItemTemplate="{StaticResource KeywordSettingTemplate}" ItemsSource="{Binding TabInfoVM.Keywords}"
+                                Margin="0 0 0 0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TabInfoVM.Keywords.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Style="{StaticResource RevampBorderStyle}" Padding="5" VerticalAlignment="Top"
+                UseLayoutRounding="True" Grid.Row="1" Margin="5 0 0 0" Grid.Column="1" Grid.RowSpan="3"
                 Background="{StaticResource RevampDarkerBackgroundBrush}"
-                ClipToBounds="False" />
+                ClipToBounds="False" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Hidden channels"
+                               Padding="10,5" ToolTip="Channels to hide from this tab"
+                               VerticalAlignment="Center" />
+                        <ComboBox Name="NewExChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
+                              ItemTemplate="{StaticResource SimpleChatChannelTemplate}" Cursor="Hand"
+                              VerticalContentAlignment="Center"
+                              SelectionChanged="NewExChannelComboBox_SelectionChanged"
+                              Background="#199a" BorderThickness="0" VerticalAlignment="Stretch">
+                            <ComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel RequestBringIntoView="OnRequestBringIntoView" />
+                                </ItemsPanelTemplate>
+                            </ComboBox.ItemsPanel>
+                        </ComboBox>
+                    </Grid>
+                    <Border Background="#1fff" Padding="5" Margin="0 5 0 0" CornerRadius="5">
+                        <ItemsControl ItemTemplate="{StaticResource ExcludedChannelSettingTemplate}"
+                                      ItemsSource="{Binding TabInfoVM.ExcludedChannels}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TabInfoVM.ExcludedChannels.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                    </Border>
+                </StackPanel>
+
+                <Separator Background="{StaticResource SelectionBackgroundLightBrush}" Width="50" Margin="0 5" Grid.Row="1"/>
+
+                <StackPanel Grid.Row="2" Grid.Column="1" Margin="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Hidden authors"
+                               Padding="10,5" ToolTip="Authors to hide from this tab"
+                               VerticalAlignment="Center" />
+                        <TextBox Padding="0" Name="NewExAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
+                             VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
+                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author..."
+                             PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
+                             KeyDown="NewExAuthorTextBox_KeyDown" LostFocus="NewAuthorTextBox_LostFocus" />
+                    </Grid>
+                    <Border Background="#1fff" Padding="5" Margin="0 5" CornerRadius="5">
+                        <ItemsControl ItemTemplate="{StaticResource ExcludedAuthorSettingTemplate}"
+                          ItemsSource="{Binding TabInfoVM.ExcludedAuthors}"
+                          Margin="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TabInfoVM.ExcludedAuthors.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </StackPanel>
+
+                <Separator Background="{StaticResource SelectionBackgroundLightBrush}" Width="50" Margin="0 5" Grid.Row="3"/>
+
+                <StackPanel Grid.Row="4" Grid.Column="1" Margin="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Hidden keywords"
+                               Padding="10,5" ToolTip="Keywords to hide from this tab"
+                               VerticalAlignment="Center" />
+                        <TextBox Padding="0" Name="NewExKeywordTextBox" VerticalAlignment="Stretch" Grid.Column="1"
+                             VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
+                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New keyword..."
+                             PreviewMouseLeftButtonDown="NewExKeywordTextBox_MouseLeftButtonDown"
+                             KeyDown="NewExKeywordTextBox_KeyDown" LostFocus="NewKeywordTextBox_LostFocus" />
+                    </Grid>
+                    <Border Background="#1fff" Padding="5" Margin="0 5 0 0" CornerRadius="5">
+                        <ItemsControl ItemTemplate="{StaticResource ExcludedKeywordSettingTemplate}"
+                                      ItemsSource="{Binding TabInfoVM.ExcludedKeywords}"
+                                      Margin="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding TabInfoVM.ExcludedKeywords.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+
+                </StackPanel>
+            </Grid>
+        </Border>
         <!-- Header -->
         <Grid Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
@@ -196,235 +465,12 @@
             <Path Data="{StaticResource SvgPen}" HorizontalAlignment="Right" Grid.Column="1" Margin="5 5" Height="15"
                   IsHitTestVisible="False" Opacity=".3" />
         </Grid>
-        
-        <StackPanel Grid.Row="1" Grid.Column="0" Margin="1 0 2 0">
-            <Border Background="#1ccf" Margin="0,0,0,5">
-                <Grid ToolTip="Channels to display in this tab. All other channels will be excluded.">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Displayed channels"
-                               Padding="10,5"
-                               VerticalAlignment="Center" Foreground="#9fff" />
-                    <ComboBox Name="NewChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
-                              ItemTemplate="{StaticResource SimpleChatChannelTemplate}" Cursor="Hand"
-                              VerticalContentAlignment="Center" SelectionChanged="NewChannelComboBox_SelectionChanged"
-                              Background="#0fff" BorderThickness="0" VerticalAlignment="Stretch">
-                        <ComboBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel RequestBringIntoView="OnRequestBringIntoView" />
-                            </ItemsPanelTemplate>
-                        </ComboBox.ItemsPanel>
-                    </ComboBox>
-                    <!--<Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
-                            Style="{StaticResource NostrumMainButtonStyle}" HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Stretch"
-                            HorizontalAlignment="Right"
-                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddChannel">
-                        <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center"
-                                   VerticalAlignment="Center">
-                            +
-                        </TextBlock>
-                    </Button>-->
 
-                </Grid>
-            </Border>
-            <ItemsControl ItemTemplate="{StaticResource ChannelSettingTemplate}" 
-                          ItemsSource="{Binding TabInfoVM.ShowedChannels}"
-                          Margin="0,-5,0,0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1" Margin="2 0 1 0">
-            <Border Background="#1ccf" Margin="0,0,0,5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Hidden channels"
-                               Padding="10,5" ToolTip="Channels to hide from this tab"
-                               VerticalAlignment="Center" />
-                    <ComboBox Name="NewExChannelComboBox" Grid.Column="1" ItemsSource="{Binding AllChannels}"
-                              ItemTemplate="{StaticResource SimpleChatChannelTemplate}" Cursor="Hand"
-                              VerticalContentAlignment="Center"
-                              SelectionChanged="NewExChannelComboBox_SelectionChanged"
-                              Background="#0fff" BorderThickness="0" VerticalAlignment="Stretch">
-                        <ComboBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel RequestBringIntoView="OnRequestBringIntoView" />
-                            </ItemsPanelTemplate>
-                        </ComboBox.ItemsPanel>
-                    </ComboBox>
-                    <!--<Button Grid.Column="2" ToolTip="Add selected channel" FontSize="16"
-                            Style="{StaticResource NostrumMainButtonStyle}" HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Stretch"
-                            HorizontalAlignment="Right"
-                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExChannel">
-                        <TextBlock Style="{StaticResource DefaultTextStyle}" TextAlignment="Center"
-                                   VerticalAlignment="Center">
-                            +
-                        </TextBlock>
-                    </Button>-->
 
-                </Grid>
-            </Border>
-            <ItemsControl ItemTemplate="{StaticResource ExcludedChannelSettingTemplate}"
-                          ItemsSource="{Binding TabInfoVM.ExcludedChannels}"
-                          Margin="0,-5,0,0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-
-        </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="0" Margin="1 0 2 0">
-            <Border Background="#1ccf" CornerRadius="0,0,0,0" Margin="0,0,0,5">
-                <Grid ToolTip="Authors to display in this tab. All other authors will be excluded.">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Displayed authors"
-                               Padding="10,5"
-                               VerticalAlignment="Center" Foreground="#9fff" />
-                    <TextBox Padding="0" Name="NewAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
-                             PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
-                             VerticalContentAlignment="Center" Background="#199a" BorderThickness="0"
-                             LostFocus="NewAuthorTextBox_LostFocus"
-                             Foreground="#3fff" Margin="0 1" CaretBrush="White" Text="New author..."
-                             KeyDown="NewAuthorTextBox_KeyDown" />
-                    <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource NostrumMainButtonStyle}"
-                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                            HorizontalAlignment="Right" VerticalAlignment="Stretch"
-                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddAuthor">
-                        <TextBlock ToolTip="Add author" Style="{StaticResource DefaultTextStyle}"
-                                   TextAlignment="Center" VerticalAlignment="Center">
-                            +
-                        </TextBlock>
-                    </Button>-->
-
-                </Grid>
-            </Border>
-            <ItemsControl ItemTemplate="{StaticResource AuthorSettingTemplate}" ItemsSource="{Binding TabInfoVM.Authors}"
-                          Margin="0,-5,0,0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="2 0 1 0">
-            <Border Background="#1ccf" CornerRadius="0,0,0,0" Margin="0,0,0,5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Hidden authors"
-                               Padding="10,5" ToolTip="Authors to hide from this tab"
-                               VerticalAlignment="Center" />
-                    <TextBox Padding="0" Name="NewExAuthorTextBox" VerticalAlignment="Stretch" Grid.Column="1"
-                             VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
-                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New author..."
-                             PreviewMouseLeftButtonDown="NewExAuthorTextBox_MouseLeftButtonDown"
-                             KeyDown="NewExAuthorTextBox_KeyDown" LostFocus="NewAuthorTextBox_LostFocus" />
-                    <!--<Button Grid.Column="2" FontSize="16" Style="{StaticResource NostrumMainButtonStyle}"
-                            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                            HorizontalAlignment="Right" VerticalAlignment="Stretch"
-                            Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" Click="AddExAuthor">
-                        <TextBlock ToolTip="Add author" Style="{StaticResource DefaultTextStyle}"
-                                   TextAlignment="Center" VerticalAlignment="Center">
-                            +
-                        </TextBlock>
-                    </Button>-->
-
-                </Grid>
-            </Border>
-            <ItemsControl ItemTemplate="{StaticResource ExcludedAuthorSettingTemplate}"
-                          ItemsSource="{Binding TabInfoVM.ExcludedAuthors}"
-                          Margin="0,-5,0,0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" Grid.Column="0" Margin="1 0 2 0">
-            <Border Background="#1ccf" CornerRadius="0,0,0,0" Margin="0,0,0,5">
-                <Grid ToolTip="Keywords to display in this tab.">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Displayed keywords"
-                               Padding="10,5"
-                               VerticalAlignment="Center" Foreground="#9fff" />
-                    <TextBox Padding="0" Name="NewKeywordTextBox" VerticalAlignment="Stretch" Grid.Column="1"
-                             PreviewMouseLeftButtonDown="NewExKeywordTextBox_MouseLeftButtonDown"
-                             VerticalContentAlignment="Center" Background="#199a" BorderThickness="0"
-                             LostFocus="NewKeywordTextBox_LostFocus"
-                             Foreground="#3fff" Margin="0 1" CaretBrush="White" Text="New keyword..."
-                             KeyDown="NewKeywordTextBox_KeyDown" />
-                </Grid>
-            </Border>
-            <ItemsControl ItemTemplate="{StaticResource KeywordSettingTemplate}" ItemsSource="{Binding TabInfoVM.Keywords}"
-                          Margin="0 -5 0 0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" Margin="2 0 1 0">
-            <Border Background="#1ccf" CornerRadius="0,0,0,0" Margin="0,0,0,5">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource DefaultTextStyle}" FontSize="13" Text="Hidden keywords"
-                               Padding="10,5" ToolTip="Keywords to hide from this tab"
-                               VerticalAlignment="Center" />
-                    <TextBox Padding="0" Name="NewExKeywordTextBox" VerticalAlignment="Stretch" Grid.Column="1"
-                             VerticalContentAlignment="Center" Background="#1fff" BorderThickness="0"
-                             Foreground="#3fff" Margin="0" CaretBrush="White" Text="New keyword..."
-                             PreviewMouseLeftButtonDown="NewExKeywordTextBox_MouseLeftButtonDown"
-                             KeyDown="NewExKeywordTextBox_KeyDown" LostFocus="NewKeywordTextBox_LostFocus" />
-                </Grid>
-            </Border>
-            <ItemsControl ItemTemplate="{StaticResource ExcludedKeywordSettingTemplate}"
-                          ItemsSource="{Binding TabInfoVM.ExcludedKeywords}"
-                          Margin="0,-5,0,0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="2" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </StackPanel>
-
-        <Button Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource NostrumContentOpacityButtonStyle}"
-                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5"
-                Foreground="{StaticResource HpBrush}"
+        <Button Grid.Row="4" Grid.ColumnSpan="4" Style="{StaticResource NostrumMainButtonStyle}"
+                HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="10 5" Margin="0 10 0 0" FontWeight="Medium"
+                Background="{StaticResource HpBrush}" HorizontalAlignment="Center" nsEx:ButtonExtensions.CornerRadius="14"
                 Click="DeleteTab">
             Delete tab
         </Button>

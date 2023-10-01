@@ -142,17 +142,18 @@
     </Style>
     <Style TargetType="{x:Type Border}" x:Key="RevampBorderStyle">
         <Setter Property="Background" Value="{StaticResource RevampBackgroundBrush}" />
-        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="CornerRadius" Value="5" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{StaticResource RevampBorderBrush}" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="Effect" Value="{StaticResource DropShadow}" />
-        <Setter Property="Opacity" Value=".85" />
+        <Setter Property="Opacity" Value=".95" />
     </Style>
     <Style TargetType="{x:Type Border}" x:Key="BoundaryBorderStyle">
-        <Setter Property="Background" Value="#1fff" />
+        <Setter Property="Background" Value="#05ffffff" />
         <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="5" />
         <Setter Property="BorderBrush" Value="#4fff" />
     </Style>
 

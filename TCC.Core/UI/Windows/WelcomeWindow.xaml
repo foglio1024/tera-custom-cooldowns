@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:nsEx="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
         mc:Ignorable="d"
         Topmost="True"
         WindowStyle="None"
@@ -84,6 +85,7 @@
 
             <Button Style="{StaticResource NostrumMainButtonStyle}"
                     Margin="5"
+                    nsEx:ButtonExtensions.CornerRadius="5"
                     Height="60" Width="160" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Center"
                     BorderBrush="{StaticResource TccYellowGradientBrush}"
@@ -95,7 +97,7 @@
                                VerticalAlignment="Center"
                                Width="45" Height="45" Margin="5">
                         <Rectangle.OpacityMask>
-                            <VisualBrush>
+                            <VisualBrush Stretch="Uniform">
                                 <VisualBrush.Visual>
                                     <Grid >
                                         <Path Data="{StaticResource SvgGitHub}" Margin="20" Width="50" Height="50" Stretch="Uniform"/>
@@ -103,7 +105,6 @@
                                 </VisualBrush.Visual>
                             </VisualBrush>
                         </Rectangle.OpacityMask>
-
                     </Rectangle>
                     <TextBlock Text="TCC GitHub wiki"
                                Foreground="White"
@@ -116,29 +117,22 @@
                 </Grid>
             </Button>
             <Button Style="{StaticResource NostrumMainButtonStyle}"
+                    nsEx:ButtonExtensions.CornerRadius="5"
                     Margin="5"
                     Height="60" Width="160" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch"
                     BorderBrush="{StaticResource RevampBorderBrush}"
                     Background="{StaticResource RevampDarkerBackground70Brush}"
                     BorderThickness="1"
                     Click="OnTeraDpsDiscordButtonClick">
-                <Grid>
-                    <Image Source="../../resources/images/shinrameter.png" HorizontalAlignment="Right">
-                        <Image.OpacityMask>
-                            <VisualBrush>
-                                <VisualBrush.Visual>
-                                    <Border Width="50" Height="50">
-                                        <Border.Background>
-                                            <LinearGradientBrush EndPoint="1 0">
-                                                <GradientStop Offset="1" Color="White" />
-                                                <GradientStop Offset="0" Color="Transparent" />
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                    </Border>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </Image.OpacityMask>
-                    </Image>
+                <Grid Margin="5">
+                    <Ellipse  HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Width="45" Height="45" Margin="0">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="../../resources/images/shinrameter.png"
+                                        Stretch="Uniform"/>
+                        </Ellipse.Fill>
+                    </Ellipse>                    
                     <TextBlock Text="Shinra Meter and TCC Discord"
                                Foreground="White"
                                Width="80"
@@ -150,6 +144,7 @@
                 </Grid>
             </Button>
             <Button Style="{StaticResource NostrumMainButtonStyle}"
+                    nsEx:ButtonExtensions.CornerRadius="5"
                     Margin="5"
                     Height="60" Width="160" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch"
                     BorderBrush="{StaticResource RevampBorderBrush}"

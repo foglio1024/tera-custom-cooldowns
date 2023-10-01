@@ -36,10 +36,8 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Grid.RowSpan="3" Opacity=".95" Style="{StaticResource RevampBorderStyle}" />
-
+        <Border Grid.RowSpan="3" Opacity=".95" Style="{StaticResource RevampBorderStyle}" CornerRadius="5"/>
         <Grid MouseLeftButtonDown="Drag" Background="Transparent">
-
             <Button HorizontalAlignment="Right" Style="{StaticResource NostrumContentOpacityButtonStyle}"
                     VerticalAlignment="Stretch"
                     Click="Close" VerticalContentAlignment="Center">
@@ -50,17 +48,15 @@
                        Margin="34 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"
                        FontSize="15" Foreground="#999" />
         </Grid>
-
-
         <Grid Grid.Row="1" x:Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Border Style="{StaticResource RevampBorderStyle}" Opacity=".6"
-                    Background="{StaticResource RevampDarkerBackground70Brush}" Grid.RowSpan="3" Margin="4 0 4 0" />
-            <Grid Margin="5 0">
+            <Border Style="{StaticResource RevampBorderStyle}" Opacity=".95"
+                    Background="{StaticResource RevampDarkerBackground70Brush}" Grid.RowSpan="3" Margin="10 0" />
+            <Grid Margin="10 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -70,7 +66,7 @@
                            Opacity=".5" FontWeight="Thin" FontSize="16">
                     Abnormalities
                 </TextBlock>
-                <ItemsControl Grid.Column="1" Width="450" Margin="0 0 74 0" ItemsSource="{Binding Classes}"
+                <ItemsControl Grid.Column="1" Width="450" Margin="0 0 64 0" ItemsSource="{Binding Classes}"
                               x:Name="ClassesButtons">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -115,11 +111,11 @@
 
                 </ItemsControl>
             </Grid>
-            <Grid Grid.Row="2" Margin="0 0 0 0" Height="25">
+            <Grid Grid.Row="2" Margin="10 5" Height="25">
                 <Path Data="{StaticResource SvgSearch}" Margin="10 0 10 0" Height="15" VerticalAlignment="Center"
                       HorizontalAlignment="Right" />
                 <TextBox Margin="5 0" BorderThickness="0" x:Name="SearchBox"
-                         Foreground="#bfff" Background="#1fff" Padding="0 3"
+                         Foreground="#bfff" Padding="0 3" Background="Transparent"
                          VerticalContentAlignment="Center"
                          CaretBrush="#8fff" TextChanged="PassivitySearch_OnTextChanged" />
             </Grid>
@@ -127,7 +123,8 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      Height="500" ItemTemplate="{StaticResource MyAbnormalitySelectorDataTemplate}"
                      AlternationCount="2" VirtualizingStackPanel.IsVirtualizing="True"
-                     VirtualizingStackPanel.VirtualizationMode="Recycling" />
+                     VirtualizingStackPanel.VirtualizationMode="Recycling"
+                     Margin="10 5"/>
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleY="1" />
             </Grid.LayoutTransform>
