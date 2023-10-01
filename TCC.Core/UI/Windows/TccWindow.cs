@@ -55,11 +55,13 @@ namespace TCC.UI.Windows
             Dispatcher?.InvokeAsync(() =>
             {
                 BeginAnimation(OpacityProperty, null);
-                Opacity = 0;
+                //((FrameworkElement)Content).BeginAnimation(OpacityProperty, null);
+                //((FrameworkElement)Content).Opacity = 0;
+                //_showAnim.From = 0;
                 Show();
                 Showed?.Invoke();
                 RefreshTopmost();
-                BeginAnimation(OpacityProperty, _showAnim);
+                //((FrameworkElement)Content).BeginAnimation(OpacityProperty, _showAnim);
             });
         }
 
@@ -78,7 +80,7 @@ namespace TCC.UI.Windows
             HideWindow();
         }
 
-        protected void Drag(object sender, MouseButtonEventArgs e)
+        protected virtual void Drag(object sender, MouseButtonEventArgs e)
         {
             ((UIElement)Content).Opacity = .7;
             this.TryDragMove();
