@@ -1,15 +1,14 @@
-﻿namespace TCC.Data.Chat
+﻿namespace TCC.Data.Chat;
+
+public struct SystemMessageData
 {
-    public struct SystemMessageData
+    public string Template { get; }
+    public int ChatChannel { get; }
+
+    public SystemMessageData(string s, int ch)
     {
-        public string Template { get; }
-        public int ChatChannel { get; }
-
-        public SystemMessageData(string s, int ch)
-        {
-            Template = s;
-            ChatChannel = ch;
-        }
-
+        Template = s;
+        ChatChannel = ch;
     }
+
 }

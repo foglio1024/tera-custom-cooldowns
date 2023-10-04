@@ -1,13 +1,12 @@
-﻿namespace TCC.UI.Controls.Classes
+﻿namespace TCC.UI.Controls.Classes;
+
+/// <summary>
+/// Logica di interazione per ReaperLayout.xaml
+/// </summary>
+public partial class ReaperLayout
 {
-    /// <summary>
-    /// Logica di interazione per ReaperLayout.xaml
-    /// </summary>
-    public partial class ReaperLayout
+    public ReaperLayout()
     {
-        public ReaperLayout()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

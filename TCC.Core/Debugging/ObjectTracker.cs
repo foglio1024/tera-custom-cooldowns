@@ -2,47 +2,46 @@
 using System.Collections.Concurrent;
 using TCC.Utils;
 
-namespace TCC.Debugging
+namespace TCC.Debugging;
+
+public static class ObjectTracker
 {
-    public static class ObjectTracker
+    static ConcurrentDictionary<Type, long> Instances { get; } = new();
+    static readonly object _lock = new();
+    public static void Register(Type t)
     {
-        private static ConcurrentDictionary<Type, long> Instances { get; } = new();
-        private static readonly object _lock = new();
-        public static void Register(Type t)
+        lock (_lock)
         {
-            lock (_lock)
-            {
-                if (!Instances.ContainsKey(t)) Instances.TryAdd(t, 0);
-                Instances[t]++;
-            }
+            if (!Instances.ContainsKey(t)) Instances.TryAdd(t, 0);
+            Instances[t]++;
         }
+    }
 
-        public static void Unregister(Type t)
+    public static void Unregister(Type t)
+    {
+        lock (_lock)
         {
-            lock (_lock)
-            {
-                if (!Instances.ContainsKey(t)) return;
-                Instances[t]--;
-            }
+            if (!Instances.ContainsKey(t)) return;
+            Instances[t]--;
         }
+    }
 
-        public static void DumpToFile()
+    public static void DumpToFile()
+    {
+        var sb = "Instanced objects\n";
+        foreach (var (type, count) in Instances)
         {
-            var sb = "Instanced objects\n";
-            foreach (var (type, count) in Instances)
+            var name = $"- {type.Name} ";
+            while (name.Length < 35)
             {
-                var name = $"- {type.Name} ";
-                while (name.Length < 35)
-                {
-                    name += "-";
-                }
-
-                name += $" {count}";
-                sb += name;
-                sb += "\n";
+                name += "-";
             }
 
-            Log.F(sb, "objects.log");
+            name += $" {count}";
+            sb += name;
+            sb += "\n";
         }
+
+        Log.F(sb, "objects.log");
     }
 }

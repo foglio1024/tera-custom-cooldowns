@@ -325,7 +325,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Grid.Column="1" Margin="0">
+                <StackPanel Grid.Row="0" Margin="0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -372,7 +372,7 @@
 
                 <Separator Background="{StaticResource SelectionBackgroundLightBrush}" Width="50" Margin="0 5" Grid.Row="1"/>
 
-                <StackPanel Grid.Row="2" Grid.Column="1" Margin="0">
+                <StackPanel Grid.Row="2" Margin="0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -412,7 +412,7 @@
 
                 <Separator Background="{StaticResource SelectionBackgroundLightBrush}" Width="50" Margin="0 5" Grid.Row="3"/>
 
-                <StackPanel Grid.Row="4" Grid.Column="1" Margin="0">
+                <StackPanel Grid.Row="4" Margin="0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />

@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel;
 
-namespace TeraPacketParser
+namespace TeraPacketParser;
+
+public enum CaptureMode
 {
-    public enum CaptureMode
-    {
-        [Description("npcap")]
-        Npcap,
-        [Description("Raw sockets")]
-        RawSockets,
-        [Description("TERA Toolbox")]
-        Toolbox
-    }
+    [Description("npcap")]
+    Npcap,
+    [Description("Raw sockets")]
+    RawSockets,
+    [Description("TERA Toolbox")]
+    Toolbox
 }

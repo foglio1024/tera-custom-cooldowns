@@ -736,7 +736,7 @@
                                         <DropShadowEffect BlurRadius="2" ShadowDepth="2" Opacity=".5" />
                                     </Border.Effect>
                                 </Border>
-                                <ContentPresenter Content="{Binding Content.TabInfoVM.TabName}"
+                                <ContentPresenter Grid.Column="0" Content="{Binding Content.TabInfoVM.TabName}"
                                                   ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                                   ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                                                   HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
@@ -749,7 +749,7 @@
                                         <DropShadowEffect Opacity="1" Color="Black" ShadowDepth="0" BlurRadius="3" />
                                     </ContentPresenter.Effect>
                                 </ContentPresenter>
-                                <ContentPresenter Content="{Binding Content.TabInfoVM.TabName}"
+                                <ContentPresenter Grid.Column="0" Content="{Binding Content.TabInfoVM.TabName}"
                                                   ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                                   ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                                                   HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
@@ -761,7 +761,7 @@
                                 <Thumb Grid.Column="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch"
                                        x:Name="PART_Thumb"
                                        Style="{StaticResource MaterialDesignInvisibleThumbStyle}" />
-                                <Grid HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ImportantCounter"
+                                <Grid Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="ImportantCounter"
                                       Background="Transparent"
                                       Visibility="{Binding Content.Attention, Converter={nsConv:BoolToVisibility}}">
                                     <TextBlock Text="{Binding Content.ImportantMessagesLabel}"

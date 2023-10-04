@@ -1,12 +1,11 @@
-﻿namespace TCC.UI.Controls.Abnormalities
+﻿namespace TCC.UI.Controls.Abnormalities;
+
+public partial class RoundAbnormalityIndicator
 {
-    public partial class RoundAbnormalityIndicator
+    public RoundAbnormalityIndicator()
     {
-        public RoundAbnormalityIndicator()
-        {
-            InitializeComponent();
-            DurationLabelRef = DurationLabel;
-            MainArcRef = Arc;
-        }
+        InitializeComponent();
+        DurationLabelRef = DurationLabel;
+        MainArcRef = Arc;
     }
 }

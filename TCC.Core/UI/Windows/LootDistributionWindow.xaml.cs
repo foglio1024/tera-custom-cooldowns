@@ -1,9 +1,10 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Media;
+using Nostrum.WPF.Factories;
 using TCC.ViewModels;
 
 namespace TCC.UI.Windows;
-public partial class LootDistributionWindow : TccWindow
+public partial class LootDistributionWindow
 {
     readonly LootDistributionViewModel _vm;
     public LootDistributionWindow(LootDistributionViewModel vm) : base(false)
@@ -27,15 +28,7 @@ public partial class LootDistributionWindow : TccWindow
 
     void OnVisibilityChanged()
     {
-
-        if (WindowManager.VisibilityManager.Visible || _vm.Settings!.ShowAlways)
-        {
-            Opacity = 1;
-        }
-        else
-        {
-            Opacity = 0;
-        }
+        Opacity = WindowManager.VisibilityManager.Visible || _vm.Settings!.ShowAlways ? 1 : 0;
     }
 
     protected override void OnLoaded(object sender, RoutedEventArgs e)
@@ -96,5 +89,11 @@ public partial class LootDistributionWindow : TccWindow
         _vm.Settings.W = ActualWidth;
         _vm.Settings.H = ActualHeight;
         if (!App.Loading) App.Settings.Save();
+    }
+
+    void OnBarLoaded(object sender, RoutedEventArgs e)
+    {
+        var bar = (FrameworkElement)sender;
+        bar.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, AnimationFactory.CreateDoubleAnimation(60 * 1000, 0, 1));
     }
 }

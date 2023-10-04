@@ -1,29 +1,29 @@
 ﻿using System.Windows.Input;
 using TCC.ViewModels.Widgets;
 
-namespace TCC.UI.Windows.Widgets
+namespace TCC.UI.Windows.Widgets;
+
+public partial class PerfMonitorWindow 
 {
-    public partial class PerfMonitorWindow 
+    public PerfMonitorWindow(PerfMonitorViewModel vm)
     {
-        public PerfMonitorWindow(PerfMonitorViewModel vm)
-        {
-            DataContext = vm;
+        DataContext = vm;
 
-            InitializeComponent();
+        InitializeComponent();
 
-            BoundaryRef = Boundary;
-            MainContent = WindowContent;
+        BoundaryRef = Boundary;
+        MainContent = WindowContent;
 
-            Init(vm.Settings!);
-        }
+        Init(vm.Settings!);
+    }
 
-        private void PerfMonitorWindow_OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            ((PerfMonitorViewModel) DataContext).ShowDumpButton = true;
-        }
-        private void PerfMonitorWindow_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            ((PerfMonitorViewModel) DataContext).ShowDumpButton = false;
-        }
+    void PerfMonitorWindow_OnMouseEnter(object sender, MouseEventArgs e)
+    {
+        ((PerfMonitorViewModel) DataContext).ShowDumpButton = true;
+    }
+
+    void PerfMonitorWindow_OnMouseLeave(object sender, MouseEventArgs e)
+    {
+        ((PerfMonitorViewModel) DataContext).ShowDumpButton = false;
     }
 }

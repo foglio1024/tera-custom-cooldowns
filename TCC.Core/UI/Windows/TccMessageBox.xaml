@@ -17,8 +17,7 @@
                  MouseLeftButtonDown="BG_MouseLeftButtonDown" Effect="{StaticResource BigDropShadow}"/>
         <Border  Style="{StaticResource RevampBorderStyle}" Background="{StaticResource RevampDarkerBackground70Brush}"  
                  Grid.Row="1" VerticalAlignment="Stretch" Margin="10 0"
-                 CornerRadius="5"
-                 x:Name="InnerBorder" BorderThickness="1"/>
+                 x:Name="InnerBorder" />
         <Grid ClipToBounds="False" Margin="20 -1" Grid.Row="0" >
 
             <Rectangle Height="5" VerticalAlignment="Bottom" Margin="0 -2" Fill="{StaticResource TccNormalGradientBrush}" x:Name="ColorRectFx">

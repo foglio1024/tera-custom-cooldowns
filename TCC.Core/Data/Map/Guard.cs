@@ -2,49 +2,48 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace TCC.Data.Map
+namespace TCC.Data.Map;
+
+public class Guard
 {
-    public class Guard
+    public Dictionary<uint, Section> Sections { get; }
+    public uint Id { get; }
+    public uint NameId { get; }
+    public uint ContinentId { get; }
+
+    Guard()
     {
-        public Dictionary<uint, Section> Sections { get; }
-        public uint Id { get; }
-        public uint NameId { get; }
-        public uint ContinentId { get; }
-
-        private Guard()
-        {
-            Sections = new Dictionary<uint, Section>();
-        }
-
-        public Guard(uint gId, uint gNameId, uint continentId) : this()
-        {
-            Id = gId;
-            NameId = gNameId;
-            ContinentId = continentId;
-        }
-
-        public static Guard FromXElement(XElement guardElem)
-        {
-            var guardId = 0U;
-            var guardNameId = 0U;
-            var continentId = 0U;
-
-            guardElem.Attributes().ToList().ForEach(a =>
-            {
-                if (a.Name == "id") guardId = uint.Parse(a.Value);
-                if (a.Name == "nameId") guardNameId = uint.Parse(a.Value);
-                if (a.Name == "continentId") continentId = uint.Parse(a.Value);
-            });
-
-            var guard = new Guard(guardId, guardNameId, continentId);
-
-            guardElem.Descendants().Where(x => x.Name == "Section").ToList().ForEach(sectionElem =>
-            {
-                var section = Section.FromXElement(sectionElem);
-                guard.Sections[section.Id] = section;
-            });
-            return guard;
-        }
-
+        Sections = new Dictionary<uint, Section>();
     }
+
+    public Guard(uint gId, uint gNameId, uint continentId) : this()
+    {
+        Id = gId;
+        NameId = gNameId;
+        ContinentId = continentId;
+    }
+
+    public static Guard FromXElement(XElement guardElem)
+    {
+        var guardId = 0U;
+        var guardNameId = 0U;
+        var continentId = 0U;
+
+        guardElem.Attributes().ToList().ForEach(a =>
+        {
+            if (a.Name == "id") guardId = uint.Parse(a.Value);
+            if (a.Name == "nameId") guardNameId = uint.Parse(a.Value);
+            if (a.Name == "continentId") continentId = uint.Parse(a.Value);
+        });
+
+        var guard = new Guard(guardId, guardNameId, continentId);
+
+        guardElem.Descendants().Where(x => x.Name == "Section").ToList().ForEach(sectionElem =>
+        {
+            var section = Section.FromXElement(sectionElem);
+            guard.Sections[section.Id] = section;
+        });
+        return guard;
+    }
+
 }

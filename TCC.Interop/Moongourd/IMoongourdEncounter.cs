@@ -1,14 +1,13 @@
-﻿namespace TCC.Interop.Moongourd
+﻿namespace TCC.Interop.Moongourd;
+
+public interface IMoongourdEncounter
 {
-    public interface IMoongourdEncounter
-    {
-        string PlayerName { get; set; }
-        long LogId { get; set; }
-        int PlayerDps { get; set; }
-        int PlayerDeaths { get; set; }
-        int AreaId { get; set; }
-        int BossId { get; set; }
-        //string DungeonName { get; }
-        //string BossName { get; }
-    }
+    string PlayerName { get; set; }
+    long LogId { get; set; }
+    int PlayerDps { get; set; }
+    int PlayerDeaths { get; set; }
+    int AreaId { get; set; }
+    int BossId { get; set; }
+    //string DungeonName { get; }
+    //string BossName { get; }
 }

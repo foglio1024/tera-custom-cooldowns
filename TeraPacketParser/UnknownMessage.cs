@@ -1,10 +1,10 @@
-﻿namespace TeraPacketParser
+﻿namespace TeraPacketParser;
+
+// Created when we want a parsed message, but don't know how to handle that OpCode
+public class UnknownMessage : ParsedMessage
 {
-    // Created when we want a parsed message, but don't know how to handle that OpCode
-    public class UnknownMessage : ParsedMessage
+    internal UnknownMessage(TeraMessageReader reader) : base(reader)
     {
-        internal UnknownMessage(TeraMessageReader reader) : base(reader)
-        {
 #if false   
             // [Foglio] better not do this at every UnknownMessage - it could be a good parser for OpcodeSearcher though
             // added as a setting (needed only for KR)
@@ -28,6 +28,5 @@
             }
 
 #endif
-        }
     }
 }

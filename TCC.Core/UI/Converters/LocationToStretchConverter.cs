@@ -4,27 +4,21 @@ using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data.Map;
 
-namespace TCC.UI.Converters
+namespace TCC.UI.Converters;
+
+public class LocationToStretchConverter : IValueConverter
 {
-    public class LocationToStretchConverter : IValueConverter
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var loc = (Location)value;
-            if (Game.DB!.MapDatabase.IsDungeon(loc))
-            {
-                return Stretch.Uniform;
-            }
-            else
-            {
-                return Stretch.UniformToFill;
+        if (value is not Location loc) return Stretch.Uniform;
 
-            }
-        }
+        return Game.DB!.MapDatabase.IsDungeon(loc) 
+            ? Stretch.Uniform 
+            : Stretch.UniformToFill;
+    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

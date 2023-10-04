@@ -1,11 +1,10 @@
-﻿namespace TCC.UI.Controls.Group
+﻿namespace TCC.UI.Controls.Group;
+
+public partial class PartyMember
 {
-    public partial class PartyMember
+    public PartyMember()
     {
-        public PartyMember()
-        {
-            InitialAbnormalityDataTemplateSelector = R.TemplateSelectors.PartyAbnormalityTemplateSelector;
-            InitializeComponent();
-        }
+        InitialAbnormalityDataTemplateSelector = R.TemplateSelectors.PartyAbnormalityTemplateSelector;
+        InitializeComponent();
     }
 }

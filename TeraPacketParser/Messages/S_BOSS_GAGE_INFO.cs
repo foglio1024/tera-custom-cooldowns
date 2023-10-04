@@ -1,44 +1,43 @@
-﻿namespace TeraPacketParser.Messages
+﻿namespace TeraPacketParser.Messages;
+
+public class S_BOSS_GAGE_INFO : ParsedMessage
 {
-    public class S_BOSS_GAGE_INFO : ParsedMessage
+    //private ulong id, targetId;
+    //private int templateId, huntingZoneId;//, unk1;
+    //private float /*hpDiff,*/ currHp, maxHp;
+    //private byte enrage/*, unk3*/;
+
+    public ulong EntityId { get; }
+    public uint TemplateId { get; }
+    public uint HuntingZoneId { get; }
+    public float CurrentHP { get; }
+    public float MaxHP { get; }
+    public ulong Target { get; }
+    public bool Enrage { get; }
+
+    public S_BOSS_GAGE_INFO(TeraMessageReader reader) : base(reader)
     {
-        //private ulong id, targetId;
-        //private int templateId, huntingZoneId;//, unk1;
-        //private float /*hpDiff,*/ currHp, maxHp;
-        //private byte enrage/*, unk3*/;
+        EntityId = reader.ReadUInt64();
+        HuntingZoneId = reader.ReadUInt32();
+        TemplateId = reader.ReadUInt32();
+        Target = reader.ReadUInt64();
+        reader.Skip(4); //unk1 = reader.ReadInt32();
+        //if (reader.Version < 321550 || reader.Version > 321600)
+        //{
+        Enrage = reader.ReadBoolean();
+        CurrentHP = reader.ReadInt64();
+        MaxHP = reader.ReadInt64();
 
-        public ulong EntityId { get; }
-        public uint TemplateId { get; }
-        public uint HuntingZoneId { get; }
-        public float CurrentHP { get; }
-        public float MaxHP { get; }
-        public ulong Target { get; }
-        public bool Enrage { get; }
+        //}
+        //else
+        //{
 
-        public S_BOSS_GAGE_INFO(TeraMessageReader reader) : base(reader)
-        {
-            EntityId = reader.ReadUInt64();
-            HuntingZoneId = reader.ReadUInt32();
-            TemplateId = reader.ReadUInt32();
-            Target = reader.ReadUInt64();
-            reader.Skip(4); //unk1 = reader.ReadInt32();
-                            //if (reader.Version < 321550 || reader.Version > 321600)
-                            //{
-            Enrage = reader.ReadBoolean();
-            CurrentHP = reader.ReadInt64();
-            MaxHP = reader.ReadInt64();
+        //    hpDiff = reader.ReadSingle();
+        //    enrage = reader.ReadByte();
+        //    currHp = reader.ReadSingle();
+        //    maxHp = reader.ReadSingle();
+        //}
 
-            //}
-            //else
-            //{
-
-            //    hpDiff = reader.ReadSingle();
-            //    enrage = reader.ReadByte();
-            //    currHp = reader.ReadSingle();
-            //    maxHp = reader.ReadSingle();
-            //}
-
-            //unk3 = reader.ReadByte();
-        }
+        //unk3 = reader.ReadByte();
     }
 }

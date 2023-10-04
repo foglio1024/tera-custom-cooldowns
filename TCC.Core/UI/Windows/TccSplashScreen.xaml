@@ -44,7 +44,7 @@
         </Grid.RowDefinitions>
         <!-- Base border -->
         <Border Style="{StaticResource RevampBorderStyle}" Background="{StaticResource RevampDarkerBackgroundBrush}" Opacity="0.99" BorderThickness="0" 
-                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="4" CornerRadius="5"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="4"
                 x:Name="BaseBorder">
             <Border.Effect>
                 <DropShadowEffect Direction="-90"

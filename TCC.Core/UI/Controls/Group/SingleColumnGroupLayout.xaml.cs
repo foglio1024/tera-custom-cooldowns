@@ -1,13 +1,12 @@
-﻿namespace TCC.UI.Controls.Group
+﻿namespace TCC.UI.Controls.Group;
+
+/// <summary>
+/// Logica di interazione per SingleColumnGroupLayout.xaml
+/// </summary>
+public partial class SingleColumnGroupLayout
 {
-    /// <summary>
-    /// Logica di interazione per SingleColumnGroupLayout.xaml
-    /// </summary>
-    public partial class SingleColumnGroupLayout
+    public SingleColumnGroupLayout()
     {
-        public SingleColumnGroupLayout()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

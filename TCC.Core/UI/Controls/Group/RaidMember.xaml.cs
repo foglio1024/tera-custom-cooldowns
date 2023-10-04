@@ -1,11 +1,10 @@
-﻿namespace TCC.UI.Controls.Group
+﻿namespace TCC.UI.Controls.Group;
+
+public partial class RaidMember
 {
-    public partial class RaidMember
+    public RaidMember()
     {
-        public RaidMember()
-        {
-            InitialAbnormalityDataTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector;
-            InitializeComponent();
-        }
+        InitialAbnormalityDataTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector;
+        InitializeComponent();
     }
 }

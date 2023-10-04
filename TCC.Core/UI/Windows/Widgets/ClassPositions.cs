@@ -4,80 +4,79 @@ using System.Windows;
 using TCC.Data;
 using TeraDataLite;
 
-namespace TCC.UI.Windows.Widgets
+namespace TCC.UI.Windows.Widgets;
+
+public class ClassPositions
 {
-    public class ClassPositions
+    public Dictionary<Class, ClassPositionsData> Classes { get; set; }
+
+    public ClassPositions()
     {
-        public Dictionary<Class, ClassPositionsData> Classes { get; set; }
-
-        public ClassPositions()
+        Classes = new Dictionary<Class, ClassPositionsData>();
+        foreach (Class cl in Enum.GetValues(typeof(Class)))
         {
-            Classes = new Dictionary<Class, ClassPositionsData>();
-            foreach (Class cl in Enum.GetValues(typeof(Class)))
-            {
-                Classes.Add(cl, new ClassPositionsData(0, 0, ButtonsPosition.Above));
-            }
+            Classes.Add(cl, new ClassPositionsData(0, 0, ButtonsPosition.Above));
         }
+    }
 
-        public ClassPositions(ClassPositions origin)
+    public ClassPositions(ClassPositions origin)
+    {
+        Classes = new Dictionary<Class, ClassPositionsData>();
+        foreach (Class cl in Enum.GetValues(typeof(Class)))
         {
-            Classes = new Dictionary<Class, ClassPositionsData>();
-            foreach (Class cl in Enum.GetValues(typeof(Class)))
-            {
-                Classes.Add(cl, new ClassPositionsData(origin.Classes[cl]));
-            }
+            Classes.Add(cl, new ClassPositionsData(origin.Classes[cl]));
         }
+    }
 
-        public ClassPositions(double x, double y, ButtonsPosition buttons)
+    public ClassPositions(double x, double y, ButtonsPosition buttons)
+    {
+        Classes = new Dictionary<Class, ClassPositionsData>();
+        foreach (Class cl in Enum.GetValues(typeof(Class)))
         {
-            Classes = new Dictionary<Class, ClassPositionsData>();
-            foreach (Class cl in Enum.GetValues(typeof(Class)))
-            {
-                Classes.Add(cl, new ClassPositionsData(x, y, buttons));
-            }
+            Classes.Add(cl, new ClassPositionsData(x, y, buttons));
         }
+    }
 
-        public void SetPosition(Class cname, Point position)
-        {
-            Classes[cname].Position = position;
-        }
+    public void SetPosition(Class cname, Point position)
+    {
+        Classes[cname].Position = position;
+    }
 
-        public void SetAllPositions(Point position)
+    public void SetAllPositions(Point position)
+    {
+        foreach (Class cl in Enum.GetValues(typeof(Class)))
         {
-            foreach (Class cl in Enum.GetValues(typeof(Class)))
-            {
-                Classes[cl].Position = position;
-            }
+            Classes[cl].Position = position;
         }
+    }
 
-        public void ApplyCorrection(Size sc)
+    public void ApplyCorrection(Size sc)
+    {
+        foreach (Class cl in Enum.GetValues(typeof(Class)))
         {
-            foreach (Class cl in Enum.GetValues(typeof(Class)))
-            {
-                Classes[cl].ApplyCorrection(sc);
-            }
+            Classes[cl].ApplyCorrection(sc);
         }
-        public void SetButtons(Class cname, ButtonsPosition buttons)
-        {
-            Classes[cname].Buttons = buttons;
-        }
+    }
+    public void SetButtons(Class cname, ButtonsPosition buttons)
+    {
+        Classes[cname].Buttons = buttons;
+    }
 
-        public Point Position(Class cname)
-        {
-            return Classes[cname].Position;
-        }
+    public Point Position(Class cname)
+    {
+        return Classes[cname].Position;
+    }
 
-        public ButtonsPosition Buttons(Class cname)
-        {
-            return Classes[cname].Buttons;
-        }
+    public ButtonsPosition Buttons(Class cname)
+    {
+        return Classes[cname].Buttons;
+    }
 
-        public void ApplyOffset(Point oldPos, Point newPos, Size size)
+    public void ApplyOffset(Point oldPos, Point newPos, Size size)
+    {
+        foreach (var cl in Classes.Values)
         {
-            foreach (var cl in Classes.Values)
-            {
-                cl.ApplyOffset(oldPos, newPos,size);
-            }
+            cl.ApplyOffset(oldPos, newPos,size);
         }
     }
 }

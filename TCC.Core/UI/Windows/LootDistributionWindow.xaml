@@ -88,7 +88,8 @@
                     <Border Background="{StaticResource TccNormalGradientBrush}" Height="6" HorizontalAlignment="Left"
                                 CornerRadius="3" Padding="0" x:Name="ParentBorder">
                         <FrameworkElement Width="{Binding ActualWidth, ElementName=BaseBorder}"
-                                          x:Name="BarGovernor">
+                                          Loaded="OnBarLoaded"
+                                          x:Name="BarGovernor" >
                             <FrameworkElement.LayoutTransform>
                                 <ScaleTransform ScaleX="1"/>
                             </FrameworkElement.LayoutTransform>
@@ -109,10 +110,10 @@
 
                 </Grid>
 
-                <UniformGrid Rows="1" Grid.Row="2" Grid.ColumnSpan="4" Margin="0 5 0 0">
+                <UniformGrid Rows="1" Grid.Row="2" Grid.ColumnSpan="4" Margin="0 5 0 0"
+                             >
 
                     <Button x:Name="RollBtn" Content="Roll" 
-                            Background="{StaticResource RevampBorderBrush}"
                             Foreground="White"
                             CommandParameter="{x:Static viewmodels:BidAction.Roll}"
                             nsEx:ButtonExtensions.CornerRadius="12" 
@@ -122,7 +123,6 @@
                             FontSize="10" Padding="4"/>
 
                     <Button x:Name="PassBtn" Content="Pass" 
-                            Background="{StaticResource RevampBorderBrush}"
                             Foreground="White"
                             CommandParameter="{x:Static viewmodels:BidAction.Pass}"
                             FontSize="10" Padding="4" Margin="2.5 1 1 1"
@@ -138,20 +138,6 @@
                 <DataTrigger Binding="{Binding DelayFactor}" Value="0">
                     <Setter TargetName="DelayBorder" Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
-                <EventTrigger RoutedEvent="Loaded">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Duration="0:1:0"
-                                                 Storyboard.TargetName="BarGovernor"
-                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleX)"
-                                                 From="1" To="0"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-
-
                 <DataTrigger Binding="{Binding ItemInDistribution.BidIntent}" Value="{x:Static viewmodels:BidAction.Pass}">
                     <Setter TargetName="PassBtn" Property="Background">
                         <Setter.Value>
@@ -231,7 +217,7 @@
 
                     <Border x:Name="ResultTagBorder" BorderThickness="0" BorderBrush="{StaticResource RevampBorderBrush}" 
                             HorizontalAlignment="Left" Padding="3 1" CornerRadius="2" 
-                            Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
+                            Grid.Column="2" VerticalAlignment="Center">
                         <Border.Background>
                             <SolidColorBrush Color="{StaticResource RevampBorderColor}" Opacity=".2"/>
                         </Border.Background>
@@ -652,7 +638,7 @@
                 Visibility="{Binding IsListVisible, Converter={converters:BoolToVisibility}}"
                 Grid.Row="1"
                 Grid.RowSpan="2"
-                Grid.Column="2"
+                Grid.Column="1"
                 Background="{StaticResource RevampDarkerBackground70Brush}"
                 BorderThickness="1"
                 Opacity=".95"

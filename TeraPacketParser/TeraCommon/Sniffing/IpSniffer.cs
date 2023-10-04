@@ -4,31 +4,30 @@
 using System;
 using PacketDotNet;
 
-namespace TeraPacketParser.TeraCommon.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing;
+
+public abstract class IpSniffer
 {
-    public abstract class IpSniffer
+    bool _enabled;
+
+    public bool Enabled
     {
-        private bool _enabled;
-
-        public bool Enabled
+        get => _enabled;
+        set
         {
-            get => _enabled;
-            set
-            {
-                if (_enabled == value) return;
-                _enabled = value;
-                SetEnabled(value);
-            }
+            if (_enabled == value) return;
+            _enabled = value;
+            SetEnabled(value);
         }
-
-        public event Action<IPv4Packet>? PacketReceived;
-
-        protected void OnPacketReceived(IPv4Packet data)
-        {
-            var packetReceived = PacketReceived;
-            packetReceived?.Invoke(data);
-        }
-
-        protected abstract void SetEnabled(bool value);
     }
+
+    public event Action<IPv4Packet>? PacketReceived;
+
+    protected void OnPacketReceived(IPv4Packet data)
+    {
+        var packetReceived = PacketReceived;
+        packetReceived?.Invoke(data);
+    }
+
+    protected abstract void SetEnabled(bool value);
 }

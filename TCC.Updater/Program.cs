@@ -10,10 +10,10 @@ namespace TCC.Updater
 {
     internal class Program
     {
-        private static string SourcePath = Path.GetDirectoryName(typeof(Program).Assembly.Location)+ "/tmp";
-        private static string DestinationPath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+        static string SourcePath = Path.GetDirectoryName(typeof(Program).Assembly.Location)+ "/tmp";
+        static string DestinationPath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
 
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             if (!HasUpdateArg(args)) return;
             WaitForTccExit();
@@ -32,7 +32,7 @@ namespace TCC.Updater
             Environment.Exit(0);
         }
 
-        private static void ReplaceFiles()
+        static void ReplaceFiles()
         {
             foreach (var newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories).Where(p => !p.Contains(@"\config\")))
             {
@@ -40,14 +40,16 @@ namespace TCC.Updater
                 Console.WriteLine($"Copied file {Path.GetFileName(newPath)}");
             }
         }
-        private static void CreateDirectories()
+
+        static void CreateDirectories()
         {
             foreach (var dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
             {
                 Directory.CreateDirectory(dirPath.Replace(SourcePath, DestinationPath));
             }
         }
-        private static void WaitForTccExit()
+
+        static void WaitForTccExit()
         {
             var pl = Process.GetProcesses();
             var tries = 10;
@@ -68,7 +70,8 @@ namespace TCC.Updater
                 }
             }
         }
-        private static bool HasUpdateArg(IEnumerable<string> args)
+
+        static bool HasUpdateArg(IEnumerable<string> args)
         {
             if (args.Any(x => x == "update")) return true;
             MessageBox.Show("This is not meant to be launched manually!", "TCC Updater", MessageBoxButton.OK,

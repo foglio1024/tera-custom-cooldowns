@@ -1,59 +1,59 @@
-﻿using Nostrum.Extensions;
-using Nostrum.WPF.Extensions;
+﻿using Nostrum.WPF.Extensions;
 using System.Windows;
 using System.Windows.Input;
 
-namespace TCC.UI.Windows
+namespace TCC.UI.Windows;
+
+public partial class WelcomeWindow
 {
-    public partial class WelcomeWindow
+    public WelcomeWindow()
     {
-        public WelcomeWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void OnOkButtonClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+    void OnOkButtonClick(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
 
-        private void OnWikiButtonClick(object sender, RoutedEventArgs e)
+    void OnWikiButtonClick(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            try
-            {
-                Utils.Utilities.OpenUrl("https://github.com/Foglio1024/Tera-custom-cooldowns/wiki");
-            }
-            catch
-            {
-
-            }
+            Utils.Utilities.OpenUrl("https://github.com/Foglio1024/Tera-custom-cooldowns/wiki");
         }
-        private void OnTeraDpsDiscordButtonClick(object sender, RoutedEventArgs e)
+        catch
         {
-            try
-            {
-                Utils.Utilities.OpenUrl("https://discord.gg/anUXQTp");
-            }
-            catch 
-            {
-
-            }
+            // ignored
         }
-        private void OnToolboxDiscordButtonClick(object sender, RoutedEventArgs e)
+    }
+
+    void OnTeraDpsDiscordButtonClick(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            try
-            {
-                Utils.Utilities.OpenUrl("https://discord.gg/dUNDDtw");
-            }
-            catch 
-            {
-
-            }
+            Utils.Utilities.OpenUrl("https://discord.gg/anUXQTp");
         }
-
-        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        catch 
         {
-            this.TryDragMove();
+            // ignored
         }
+    }
+
+    void OnToolboxDiscordButtonClick(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Utils.Utilities.OpenUrl("https://discord.gg/dUNDDtw");
+        }
+        catch 
+        {
+            // ignored
+        }
+    }
+
+    void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        this.TryDragMove();
     }
 }

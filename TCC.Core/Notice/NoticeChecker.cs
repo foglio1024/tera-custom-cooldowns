@@ -9,127 +9,128 @@ using TCC.Utils;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.TeraCommon.Game;
 
-namespace TCC.Notice
+namespace TCC.Notice;
+
+public static class NoticeChecker
 {
-    public static class NoticeChecker
+    const string Url = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/messages.json";
+    static List<NoticeBase> _notices = new();
+    static readonly Timer _checkTimer = new(60 * 5 * 1000);
+
+    public static void Init()
     {
-        private const string Url = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/messages.json";
-        private static List<NoticeBase> _notices = new();
-        private static readonly Timer _checkTimer = new(60 * 5 * 1000);
-
-        public static void Init()
-        {
-            App.ReadyEvent += Ready;
+        App.ReadyEvent += Ready;
             
-            _checkTimer.Elapsed += OnTimerElapsed;
-            _checkTimer.Start();
+        _checkTimer.Elapsed += OnTimerElapsed;
+        _checkTimer.Start();
 
-            Check();
+        Check();
 
-            FireNotices(NoticeTrigger.Startup);
-        }
+        FireNotices(NoticeTrigger.Startup);
+    }
 
-        public static void Ready()
+    public static void Ready()
+    {
+        Game.LoggedChanged += OnLoggedChanged;
+        PacketAnalyzer.Sniffer.NewConnection += OnNewConnection;
+        FireNotices(NoticeTrigger.Ready);
+    }
+
+    static void OnNewConnection(Server obj)
+    {
+        FireNotices(NoticeTrigger.Connection);
+    }
+
+    static void OnLoggedChanged()
+    {
+        if (!Game.Logged) return;
+        FireNotices(NoticeTrigger.Login);
+    }
+
+    static void FireNotices(NoticeTrigger trigger)
+    {
+        App.BaseDispatcher.Invoke(() =>
         {
-            Game.LoggedChanged += OnLoggedChanged;
-            PacketAnalyzer.Sniffer.NewConnection += OnNewConnection;
-            FireNotices(NoticeTrigger.Ready);
-        }
-
-        private static void OnNewConnection(Server obj)
-        {
-            FireNotices(NoticeTrigger.Connection);
-        }
-
-        private static void OnLoggedChanged()
-        {
-            if (!Game.Logged) return;
-            FireNotices(NoticeTrigger.Login);
-        }
-
-        private static void FireNotices(NoticeTrigger trigger)
-        {
-            App.BaseDispatcher.Invoke(() =>
+            var list = _notices.Where(n => n.Enabled && !n.Fired && n.Trigger == trigger).ToList();
+            foreach (var n in list)
             {
-                var list = _notices.Where(n => n.Enabled && !n.Fired && n.Trigger == trigger).ToList();
-                foreach (var n in list)
-                {
-                    n.Fire();
-                }
-            });
-        }
-
-        private static void OnTimerElapsed(object? sender, ElapsedEventArgs e)
-        {
-            Check();
-        }
-
-        private static void Check()
-        {
-            try
-            {
-                using var c = MiscUtils.GetDefaultWebClient();
-                var sMsg = c.DownloadString(new Uri(Url));
-                var jMsg = JObject.Parse(sMsg);
-
-                var newNotices = new List<NoticeBase>();
-
-                var jNotices = jMsg["notices"];
-                if (jNotices == null) return;
-                foreach (var jNotice in jNotices)
-                {
-                    var jType = jNotice["Type"];
-                    if(jType == null) continue;
-                    var type = jType.Value<string>();
-
-                    var jDetails = jNotice["Details"];
-                    if(jDetails == null) continue;
-
-                    // todo: maybe use a factory
-                    var jEnabled = jNotice[nameof(NoticeBase.Enabled)];
-                    var jTrigger = jNotice[nameof(NoticeBase.Trigger)];
-                    var jTitle = jDetails[nameof(NoticeBase.Title)];
-                    var jContent = jDetails[nameof(NoticeBase.Content)];
-
-                    if (jEnabled == null || jTrigger == null || jTitle == null || jContent == null) continue;
-                    var notice = new NoticeBase
-                    {
-                        Enabled = jEnabled.Value<bool>(),
-                        Trigger = (NoticeTrigger)jTrigger.Value<int>(),
-                        Title = jTitle.Value<string>()!,
-                        Content = jContent.Value<string>()!
-                    };
-
-                    var duration = jDetails[nameof(NotificationNotice.Duration)]?.Value<int>() ?? 0;
-                    var intNotifType = jDetails[nameof(NotificationNotice.NotificationType)]?.Value<int>() ?? 0;
-                    var notifType = (NotificationType) intNotifType;
-
-                    notice = type switch
-                    {
-                        nameof(NotificationNotice) => new NotificationNotice(notice)
-                        {
-                            Duration = duration,
-                            NotificationType = notifType
-                        },
-                        nameof(MessageBoxNotice) => new MessageBoxNotice(notice),
-                        _ => notice
-                    };
-
-                    newNotices.Add(notice);
-                }
-
-                _notices = _notices.Where(existing => newNotices.All(n => n.Content != existing.Content)).ToList();
-
-                foreach (var newNotice in newNotices)
-                {
-                    _notices.Add(newNotice);
-                }
-
+                n.Fire();
             }
-            catch (Exception e)
+        });
+    }
+
+    static void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        Check();
+    }
+
+    static void Check()
+    {
+        try
+        {
+            using var c = MiscUtils.GetDefaultHttpClient();
+            var req = c.GetStringAsync(new Uri(Url));
+            req.Wait();
+            var sMsg = req.Result;
+            var jMsg = JObject.Parse(sMsg);
+
+            var newNotices = new List<NoticeBase>();
+
+            var jNotices = jMsg["notices"];
+            if (jNotices == null) return;
+            foreach (var jNotice in jNotices)
             {
-                Log.F($"Failed to check for messages. {e}");
+                var jType = jNotice["Type"];
+                if(jType == null) continue;
+                var type = jType.Value<string>();
+
+                var jDetails = jNotice["Details"];
+                if(jDetails == null) continue;
+
+                // todo: maybe use a factory
+                var jEnabled = jNotice[nameof(NoticeBase.Enabled)];
+                var jTrigger = jNotice[nameof(NoticeBase.Trigger)];
+                var jTitle = jDetails[nameof(NoticeBase.Title)];
+                var jContent = jDetails[nameof(NoticeBase.Content)];
+
+                if (jEnabled == null || jTrigger == null || jTitle == null || jContent == null) continue;
+                var notice = new NoticeBase
+                {
+                    Enabled = jEnabled.Value<bool>(),
+                    Trigger = (NoticeTrigger)jTrigger.Value<int>(),
+                    Title = jTitle.Value<string>()!,
+                    Content = jContent.Value<string>()!
+                };
+
+                var duration = jDetails[nameof(NotificationNotice.Duration)]?.Value<int>() ?? 0;
+                var intNotifType = jDetails[nameof(NotificationNotice.NotificationType)]?.Value<int>() ?? 0;
+                var notifType = (NotificationType) intNotifType;
+
+                notice = type switch
+                {
+                    nameof(NotificationNotice) => new NotificationNotice(notice)
+                    {
+                        Duration = duration,
+                        NotificationType = notifType
+                    },
+                    nameof(MessageBoxNotice) => new MessageBoxNotice(notice),
+                    _ => notice
+                };
+
+                newNotices.Add(notice);
             }
+
+            _notices = _notices.Where(existing => newNotices.All(n => n.Content != existing.Content)).ToList();
+
+            foreach (var newNotice in newNotices)
+            {
+                _notices.Add(newNotice);
+            }
+
+        }
+        catch (Exception e)
+        {
+            Log.F($"Failed to check for messages. {e}");
         }
     }
 }

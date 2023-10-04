@@ -107,15 +107,15 @@ public class LootDistributionViewModel : TccWindowViewModel
 
     public LootDistributionViewModel(LootDistributionWindowSettings settings) : base(settings)
     {
-        DistributionList = new();
-        Members = new();
+        DistributionList = new ThreadSafeObservableCollection<LootItemViewModel>();
+        Members = new ThreadSafeObservableCollection<LootingGroupMember>();
 
-        DistributionListView = CollectionViewFactory.CreateCollectionView(DistributionList, null, sortDescr: new[] {
+        DistributionListView = CollectionViewFactory.CreateCollectionView(DistributionList, sortDescr: new[] {
             new SortDescription($"{nameof(LootItemViewModel.DbItem)}.{nameof(Item.RareGrade)}", ListSortDirection.Descending),
             new SortDescription($"{nameof(LootItemViewModel.Item)}.{nameof(DropItem.ItemId)}", ListSortDirection.Ascending)
         });
 
-        MembersView = CollectionViewFactory.CreateCollectionView(Members, null, sortDescr: new[] {
+        MembersView = CollectionViewFactory.CreateCollectionView(Members, sortDescr: new[] {
             new SortDescription($"{nameof(LootingGroupMember.Roll)}", ListSortDirection.Descending),
         });
 
@@ -386,7 +386,7 @@ public class LootDistributionViewModel : TccWindowViewModel
                                                           && x.Item.Amount == m.Amount).ToArray();
         Log.CW($"  found {items.Length} candidates");
 
-        LootItemViewModel? item = null;
+        LootItemViewModel? item;
 
         if (_amountsDistributed.TryGetValue((m.ItemId, m.Amount), out var amount) && amount < items.Length)
         {

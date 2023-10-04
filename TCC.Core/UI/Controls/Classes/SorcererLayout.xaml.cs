@@ -1,13 +1,12 @@
-﻿namespace TCC.UI.Controls.Classes
+﻿namespace TCC.UI.Controls.Classes;
+
+/// <summary>
+/// Logica di interazione per SorcererLayout.xaml
+/// </summary>
+public partial class SorcererLayout
 {
-    /// <summary>
-    /// Logica di interazione per SorcererLayout.xaml
-    /// </summary>
-    public partial class SorcererLayout
+    public SorcererLayout()
     {
-        public SorcererLayout()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

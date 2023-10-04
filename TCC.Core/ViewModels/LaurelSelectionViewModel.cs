@@ -3,15 +3,15 @@ using Nostrum.WPF.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
-using TCC.UI.Windows;
 using TeraDataLite;
 
 namespace TCC.ViewModels;
 
-class LaurelSelectionViewModel : ObservableObject
+internal class LaurelSelectionViewModel : ObservableObject
 {
     CustomLaurel _currentLaurel;
 
@@ -56,7 +56,7 @@ class LaurelSelectionViewModel : ObservableObject
         if(settings != null) settings.CustomLaurel = CurrentLaurel;
 
         WindowManager.ViewModels.DashboardVM.SaveCharacters();
-        var win = App.Current.Windows.ToList().FirstOrDefault(x => x.DataContext == this);
+        var win = Application.Current.Windows.ToList().FirstOrDefault(x => x.DataContext == this);
         win?.Close();
     }
 

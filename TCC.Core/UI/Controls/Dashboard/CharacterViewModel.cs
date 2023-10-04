@@ -1,29 +1,27 @@
-﻿using Nostrum;
-using Nostrum.WPF.ThreadSafe;
+﻿using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Pc;
 
-namespace TCC.UI.Controls.Dashboard
+namespace TCC.UI.Controls.Dashboard;
+
+public class CharacterViewModel : ThreadSafeObservableObject
 {
-    public class CharacterViewModel : ThreadSafeObservableObject
+    bool _hilight;
+
+    public bool Hilight
     {
-        private bool _hilight;
-
-        public bool Hilight
+        get => _hilight;
+        set
         {
-            get => _hilight;
-            set
-            {
-                if (_hilight == value) return;
-                _hilight = value;
-                N();
-            }
+            if (_hilight == value) return;
+            _hilight = value;
+            N();
         }
-        public Character Character { get; }
-
-        public CharacterViewModel(Character c)
-        {
-            Character = c;
-        }
-
     }
+    public Character Character { get; }
+
+    public CharacterViewModel(Character c)
+    {
+        Character = c;
+    }
+
 }

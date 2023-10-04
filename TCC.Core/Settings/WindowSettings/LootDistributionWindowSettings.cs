@@ -76,7 +76,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         {
             if (_alwaysRoll == value) return;
             _alwaysRoll = value;
-            if (_alwaysPass == _alwaysRoll && value == true)
+            if (_alwaysPass == _alwaysRoll && value)
                 _alwaysPass = !_alwaysRoll;
             N();
             N(nameof(AlwaysPass));
@@ -91,7 +91,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         {
             if (_alwaysPass == value) return;
             _alwaysPass = value;
-            if (_alwaysPass == _alwaysRoll && value == true)
+            if (_alwaysPass == _alwaysRoll && value)
                 _alwaysRoll = !_alwaysPass;
             N();
             N(nameof(AlwaysRoll));

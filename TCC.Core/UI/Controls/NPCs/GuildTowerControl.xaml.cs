@@ -1,13 +1,12 @@
-﻿namespace TCC.UI.Controls.NPCs
+﻿namespace TCC.UI.Controls.NPCs;
+
+/// <summary>
+/// Logica di interazione per GuildTowerControl.xaml
+/// </summary>
+public partial class GuildTowerControl
 {
-    /// <summary>
-    /// Logica di interazione per GuildTowerControl.xaml
-    /// </summary>
-    public partial class GuildTowerControl
+    public GuildTowerControl()
     {
-        public GuildTowerControl()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

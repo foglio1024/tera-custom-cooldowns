@@ -1,50 +1,47 @@
-﻿using Nostrum;
-using Nostrum.Extensions;
-using Nostrum.WPF;
+﻿using Nostrum.WPF;
 using Nostrum.WPF.Extensions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TCC.ViewModels;
 
-namespace TCC.UI.Windows
+namespace TCC.UI.Windows;
+
+public partial class LfgFilterConfigWindow
 {
-    public partial class LfgFilterConfigWindow
+    readonly LfgListViewModel _dc;
+
+    public LfgFilterConfigWindow(LfgListViewModel vm)
     {
-        private readonly LfgListViewModel _dc;
-
-        public LfgFilterConfigWindow(LfgListViewModel vm)
+        DataContext = vm;
+        _dc = vm;
+        RemoveEntryCommand = new RelayCommand<string>(entry =>
         {
-            DataContext = vm;
-            _dc = vm;
-            RemoveEntryCommand = new RelayCommand<string>(entry =>
-            {
-                vm.BlacklistedWords.Remove(entry ?? string.Empty);
-            });
-            InitializeComponent();
-        }
+            vm.BlacklistedWords.Remove(entry ?? string.Empty);
+        });
+        InitializeComponent();
+    }
 
-        public ICommand RemoveEntryCommand { get; }
+    public ICommand RemoveEntryCommand { get; }
 
-        private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.TryDragMove();
-        }
+    void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        this.TryDragMove();
+    }
 
-        private void OnCloseButtonClick(object sender, RoutedEventArgs e)
-        {
-            App.Settings.Save();
-            Close();
-        }
+    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    {
+        App.Settings.Save();
+        Close();
+    }
 
-        private void OnTextBoxKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Enter) return;
-            var content = ((TextBox)sender).Text.Trim();
-            if (string.IsNullOrWhiteSpace(content)) return;
-            if (_dc.BlacklistedWords.Contains(content)) return;
-            _dc.BlacklistedWords.Add(content);
-            ((TextBox) sender).Text = "";
-        }
+    void OnTextBoxKeyUp(object sender, KeyEventArgs e)
+    {
+        if (e.Key != Key.Enter) return;
+        var content = ((TextBox)sender).Text.Trim();
+        if (string.IsNullOrWhiteSpace(content)) return;
+        if (_dc.BlacklistedWords.Contains(content)) return;
+        _dc.BlacklistedWords.Add(content);
+        ((TextBox) sender).Text = "";
     }
 }

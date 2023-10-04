@@ -1,119 +1,118 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Nostrum;
 using Nostrum.WPF;
 using Nostrum.WPF.ThreadSafe;
 using TCC.Utils;
 
-namespace TCC.UI.Windows.Widgets
+namespace TCC.UI.Windows.Widgets;
+
+public class ProgressNotificationInfo : NotificationInfoBase
 {
-    public class ProgressNotificationInfo : NotificationInfoBase
+    double _progress;
+    public double Progress
     {
-        private double _progress;
-        public double Progress
+        get => _progress;
+        set
         {
-            get => _progress;
-            set
-            {
-                if (_progress == value) return;
-                _progress = value;
-                N();
-            }
-        }
-
-        public ProgressNotificationInfo(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template) : base(id, title, message, type, duration, template)
-        {
-            CanClose = false;
-        }
-
-        public void Dispose(int msDelay)
-        {
-            InvokeDisposing(msDelay);
-            if (msDelay == 0)
-            {
-                InvokeDisposed();
-            }
-            else
-            {
-                CanClose = true;
-                Task.Delay(msDelay).ContinueWith(_ => InvokeDisposed());
-            }
+            if (_progress == value) return;
+            _progress = value;
+            N();
         }
     }
-    public class NotificationInfoBase : ThreadSafeObservableObject
+
+    public ProgressNotificationInfo(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template) : base(id, title, message, type, duration, template)
     {
-        public event Action? Disposed;
-        public event Action<int>? Disposing;
+        CanClose = false;
+    }
 
-        private string _message = "";
-        private NotificationType _notificationType;
-
-        public int Id { get; }
-        public string Title { get; }
-        public string Message
+    public void Dispose(int msDelay)
+    {
+        InvokeDisposing(msDelay);
+        if (msDelay == 0)
         {
-            get => _message;
-            set
-            {
-                if (_message == value) return;
-                _message = value;
-                N();
-            }
+            InvokeDisposed();
         }
-        public NotificationType NotificationType
+        else
         {
-            get => _notificationType;
-            set
-            {
-                if (_notificationType == value) return;
-                _notificationType = value;
-                N();
-            }
-        }
-        private bool _canClose;
-
-        public bool CanClose
-        {
-            get => _canClose;
-            set
-            {
-                if (_canClose == value) return;
-                _canClose = value;
-                N();
-            }
-        }
-
-        public NotificationTemplate NotificationTemplate { get; }
-        public int Duration { get; }
-        public string TimeStamp { get; }
-        public string Version => App.AppVersion;
-
-        public ICommand DismissCommand { get; }
-
-        public NotificationInfoBase(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template)
-        {
-            Id = id;
-            Title = title;
-            Message = message;
-            _notificationType = type;
-            Duration = duration;
-            TimeStamp = DateTime.Now.ToString("HH:mm:ss");
-            NotificationTemplate = template;
             CanClose = true;
-
-            DismissCommand = new RelayCommand(_ => InvokeDisposed());
+            Task.Delay(msDelay).ContinueWith(_ => InvokeDisposed());
         }
-
-        protected void InvokeDisposing(int delay)
-        {
-            Disposing?.Invoke(delay);
-        }
-
-        protected void InvokeDisposed()
-        {
-            Disposed?.Invoke();
-        }
-
     }
+}
+public class NotificationInfoBase : ThreadSafeObservableObject
+{
+    public event Action? Disposed;
+    public event Action<int>? Disposing;
+
+    string _message = "";
+    NotificationType _notificationType;
+
+    public int Id { get; }
+    public string Title { get; }
+    public string Message
+    {
+        get => _message;
+        set
+        {
+            if (_message == value) return;
+            _message = value;
+            N();
+        }
+    }
+    public NotificationType NotificationType
+    {
+        get => _notificationType;
+        set
+        {
+            if (_notificationType == value) return;
+            _notificationType = value;
+            N();
+        }
+    }
+
+    bool _canClose;
+
+    public bool CanClose
+    {
+        get => _canClose;
+        set
+        {
+            if (_canClose == value) return;
+            _canClose = value;
+            N();
+        }
+    }
+
+    public NotificationTemplate NotificationTemplate { get; }
+    public int Duration { get; }
+    public string TimeStamp { get; }
+    public string Version => App.AppVersion;
+
+    public ICommand DismissCommand { get; }
+
+    public NotificationInfoBase(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template)
+    {
+        Id = id;
+        Title = title;
+        Message = message;
+        _notificationType = type;
+        Duration = duration;
+        TimeStamp = DateTime.Now.ToString("HH:mm:ss");
+        NotificationTemplate = template;
+        CanClose = true;
+
+        DismissCommand = new RelayCommand(_ => InvokeDisposed());
+    }
+
+    protected void InvokeDisposing(int delay)
+    {
+        Disposing?.Invoke(delay);
+    }
+
+    protected void InvokeDisposed()
+    {
+        Disposed?.Invoke();
+    }
+
 }

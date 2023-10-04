@@ -1,13 +1,12 @@
-﻿namespace TCC.UI.Controls.Classes
+﻿namespace TCC.UI.Controls.Classes;
+
+/// <summary>
+/// Logica di interazione per BerserkerLayout.xaml
+/// </summary>
+public partial class BerserkerLayout
 {
-    /// <summary>
-    /// Logica di interazione per BerserkerLayout.xaml
-    /// </summary>
-    public partial class BerserkerLayout
+    public BerserkerLayout()
     {
-        public BerserkerLayout()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

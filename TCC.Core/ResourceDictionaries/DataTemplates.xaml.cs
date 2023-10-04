@@ -8,68 +8,67 @@ using TCC.Interop.Proxy;
 using TCC.UI;
 using FocusManager = TCC.UI.FocusManager;
 
-namespace TCC.ResourceDictionaries
+namespace TCC.ResourceDictionaries;
+
+public partial class DataTemplates
 {
-    public partial class DataTemplates
+    void OnCharacterNameMouseLeftButtonDown(object? sender, MouseButtonEventArgs e)
     {
-        private void OnCharacterNameMouseLeftButtonDown(object? sender, MouseButtonEventArgs e)
-        {
-            var dc = (sender as FrameworkElement)?.DataContext;
-            if (dc != null)
-                WindowManager.ViewModels.DashboardVM.SelectCharacter((Character) dc);
-        }
+        var dc = (sender as FrameworkElement)?.DataContext;
+        if (dc != null)
+            WindowManager.ViewModels.DashboardVM.SelectCharacter((Character) dc);
+    }
 
-        private void LfgMessage_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Enter) return;
+    void LfgMessage_OnKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key != Key.Enter) return;
 
-            var lfg = (Listing) ((FrameworkElement) sender).DataContext;
-            var msg = lfg.Message;
-            var isRaid = lfg.IsRaid;
+        var lfg = (Listing) ((FrameworkElement) sender).DataContext;
+        var msg = lfg.Message;
+        var isRaid = lfg.IsRaid;
 
-            if (lfg.Temp) WindowManager.ViewModels.LfgVM.Listings.Remove(lfg);
+        if (lfg.Temp) WindowManager.ViewModels.LfgVM.Listings.Remove(lfg);
 
-            StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
-            Keyboard.ClearFocus();
-            FocusManager.MakeUnfocusable(WindowManager.LfgListWindow.Handle);
+        StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
+        Keyboard.ClearFocus();
+        FocusManager.MakeUnfocusable(WindowManager.LfgListWindow.Handle);
 
-            Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
-        }
+        Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
+    }
 
-        private void LfgMessage_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
-            WindowManager.LfgListWindow.Activate();
-        }
+    void LfgMessage_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
+        WindowManager.LfgListWindow.Activate();
+    }
 
-        private void LfgMessage_OnTbLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            FocusManager.MakeUnfocusable(WindowManager.LfgListWindow.Handle);
-        }
+    void LfgMessage_OnTbLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    {
+        FocusManager.MakeUnfocusable(WindowManager.LfgListWindow.Handle);
+    }
 
-        private void LfgMessage_OnTbLoaded(object sender, RoutedEventArgs e)
-        {
-            FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
-            WindowManager.LfgListWindow.Activate();
+    void LfgMessage_OnTbLoaded(object sender, RoutedEventArgs e)
+    {
+        FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
+        WindowManager.LfgListWindow.Activate();
 
-            ((TextBox) sender).Focus();
-            Keyboard.Focus((TextBox) sender);
-        }
+        ((TextBox) sender).Focus();
+        Keyboard.Focus((TextBox) sender);
+    }
 
-        private void LfgMessage_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
-            ((TextBox)sender).Focus();
-            Keyboard.Focus((TextBox)sender);
-            WindowManager.LfgListWindow.Activate();
+    void LfgMessage_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
+        ((TextBox)sender).Focus();
+        Keyboard.Focus((TextBox)sender);
+        WindowManager.LfgListWindow.Activate();
 
 
-        }
+    }
 
-        private void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            if (sender is FrameworkElement fe && fe.DataContext is Listing l) l.IsPopupOpen = false;
-            else FocusManager.PauseTopmost = false;
-        }
+    void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
+    {
+        if (sender is FrameworkElement fe && fe.DataContext is Listing l) l.IsPopupOpen = false;
+        else FocusManager.PauseTopmost = false;
     }
 }

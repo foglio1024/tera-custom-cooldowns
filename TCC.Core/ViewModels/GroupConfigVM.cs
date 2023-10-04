@@ -5,57 +5,55 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
-using System.Windows.Threading;
 using TCC.Data.Abnormalities;
 using TeraDataLite;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels;
+
+public class GroupConfigVM : ThreadSafeObservableObject
 {
-    public class GroupConfigVM : ThreadSafeObservableObject
+
+    public event Action? ShowAllChanged;
+
+    public ThreadSafeObservableCollection<GroupAbnormalityVM> GroupAbnormals;
+    public IEnumerable<Abnormality> Abnormalities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
+    public ICollectionView AbnormalitiesView { get; set; }
+
+    public bool ShowAll
     {
-
-        public event Action? ShowAllChanged;
-
-        public ThreadSafeObservableCollection<GroupAbnormalityVM> GroupAbnormals;
-        public IEnumerable<Abnormality> Abnormalities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
-        public ICollectionView AbnormalitiesView { get; set; }
-
-        public bool ShowAll
+        get => App.Settings.GroupWindowSettings.ShowAllAbnormalities;
+        set
         {
-            get => App.Settings.GroupWindowSettings.ShowAllAbnormalities;
-            set
-            {
-                if (App.Settings.GroupWindowSettings.ShowAllAbnormalities == value) return;
-                App.Settings.GroupWindowSettings.ShowAllAbnormalities = value;
-                _dispatcher?.Invoke(() => ShowAllChanged?.Invoke());
-                App.Settings.Save();
-                N();
-            }
+            if (App.Settings.GroupWindowSettings.ShowAllAbnormalities == value) return;
+            App.Settings.GroupWindowSettings.ShowAllAbnormalities = value;
+            _dispatcher.Invoke(() => ShowAllChanged?.Invoke());
+            App.Settings.Save();
+            N();
         }
-        public List<Class> Classes
+    }
+    public List<Class> Classes
+    {
+        get
         {
-            get
-            {
-                var l = EnumUtils.ListFromEnum<Class>();
-                l.Remove(Class.None);
-                return l;
-            }
+            var l = EnumUtils.ListFromEnum<Class>();
+            l.Remove(Class.None);
+            return l;
         }
-        public GroupConfigVM()
+    }
+    public GroupConfigVM()
+    {
+        GroupAbnormals = new ThreadSafeObservableCollection<GroupAbnormalityVM>(_dispatcher);
+        foreach (var abnormality in Abnormalities)
         {
-            GroupAbnormals = new ThreadSafeObservableCollection<GroupAbnormalityVM>(_dispatcher);
-            foreach (var abnormality in Abnormalities)
-            {
-                var abVM = new GroupAbnormalityVM(abnormality);
-                GroupAbnormals.Add(abVM);
-            }
-            AbnormalitiesView = new CollectionViewSource { Source = GroupAbnormals }.View;
-            AbnormalitiesView.CurrentChanged += OnAbnormalitiesViewOnCurrentChanged;
-            AbnormalitiesView.Filter = null;
+            var abVM = new GroupAbnormalityVM(abnormality);
+            GroupAbnormals.Add(abVM);
         }
-        //to keep view referenced
-        private void OnAbnormalitiesViewOnCurrentChanged(object? s, EventArgs ev)
-        {
-        }
+        AbnormalitiesView = new CollectionViewSource { Source = GroupAbnormals }.View;
+        AbnormalitiesView.CurrentChanged += OnAbnormalitiesViewOnCurrentChanged;
+        AbnormalitiesView.Filter = null;
+    }
+    //to keep view referenced
+    void OnAbnormalitiesViewOnCurrentChanged(object? s, EventArgs ev)
+    {
     }
 }

@@ -8,148 +8,150 @@ using Nostrum.WPF.Extensions;
 using Nostrum.WPF.Factories;
 using TCC.ViewModels;
 
-namespace TCC.UI.Windows.Widgets
+namespace TCC.UI.Windows.Widgets;
+
+public partial class FloatingButtonWindow
 {
-    public partial class FloatingButtonWindow
+    readonly DoubleAnimation _slideInAnim;
+    readonly DoubleAnimation _slideOutAnim;
+    readonly DoubleAnimation _bubbleAnim;
+    readonly DoubleAnimation _bubbleSlideIn;
+    readonly DoubleAnimation _bubbleSlideOut;
+    readonly ScaleTransform _bubbleScaleTransform;
+    readonly TranslateTransform _bubbleTranslateTransform;
+    readonly Timer _animRepeatTimer;
+
+
+    readonly DoubleAnimation _s1Anim;
+    readonly DoubleAnimation _s2Anim;
+    readonly DoubleAnimation _s3Anim;
+
+
+    public FloatingButtonWindow(FloatingButtonViewModel vm)
     {
-        private readonly DoubleAnimation _slideInAnim;
-        private readonly DoubleAnimation _slideOutAnim;
-        private readonly DoubleAnimation _bubbleAnim;
-        private readonly DoubleAnimation _bubbleSlideIn;
-        private readonly DoubleAnimation _bubbleSlideOut;
-        private readonly ScaleTransform _bubbleScaleTransform;
-        private readonly TranslateTransform _bubbleTranslateTransform;
-        private readonly Timer _animRepeatTimer;
+        DataContext = vm;
+        _animRepeatTimer = new Timer { Interval = 2000 };
+        _slideOutAnim = AnimationFactory.CreateDoubleAnimation(250, to: -288, easing: true);
+        _slideInAnim = AnimationFactory.CreateDoubleAnimation(250, to: -1, easing: true);
+        _bubbleSlideIn = AnimationFactory.CreateDoubleAnimation(250, to: -77, easing: true);
+        _bubbleSlideOut = AnimationFactory.CreateDoubleAnimation(250, to: 0, easing: true);
+        _bubbleAnim = AnimationFactory.CreateDoubleAnimation(800, 1, .75, true);
+        vm.NotificationsCleared += OnNotificationsCleared;
+        vm.NotificationsAdded += OnNotificationsAdded;
 
+        var duration = TimeSpan.FromSeconds(5);
+        var start = -1;
+        var end = 1;
+        var tailSize = 0.5;
+        var headSize = 0.5;
+        var fps = 10;
 
-        readonly DoubleAnimation _s1Anim;
-        readonly DoubleAnimation _s2Anim;
-        readonly DoubleAnimation _s3Anim;
+        _s1Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start, To = end };
+        _s2Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start + tailSize, To = end + tailSize };
+        _s3Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start + tailSize + headSize, To = end + tailSize + headSize };
 
+        Timeline.SetDesiredFrameRate(_s1Anim, fps);
+        Timeline.SetDesiredFrameRate(_s2Anim, fps);
+        Timeline.SetDesiredFrameRate(_s3Anim, fps);
 
-        public FloatingButtonWindow(FloatingButtonViewModel vm)
+        InitializeComponent();
+
+        _bubbleScaleTransform = (ScaleTransform) ((TransformGroup) NotificationBubble.RenderTransform).Children[0];
+        _bubbleTranslateTransform = (TranslateTransform)((TransformGroup)NotificationBubble.RenderTransform).Children[1];
+
+        MainContent = WindowContent;
+        ButtonsRef = null;
+        _canMove = false;
+        Init(App.Settings.FloatingButtonSettings);
+
+        SettingsWindowViewModel.IntegratedGpuSleepWorkaroundChanged += OnIntegratedGpuSleepWorkaroundChanged;
+    }
+
+    void OnIntegratedGpuSleepWorkaroundChanged()
+    {
+        Dispatcher.InvokeAsync(() =>
         {
-            DataContext = vm;
-            _animRepeatTimer = new Timer { Interval = 2000 };
-            _slideOutAnim = AnimationFactory.CreateDoubleAnimation(250, to: -288, easing: true);
-            _slideInAnim = AnimationFactory.CreateDoubleAnimation(250, to: -1, easing: true);
-            _bubbleSlideIn = AnimationFactory.CreateDoubleAnimation(250, to: -77, easing: true);
-            _bubbleSlideOut = AnimationFactory.CreateDoubleAnimation(250, to: 0, easing: true);
-            _bubbleAnim = AnimationFactory.CreateDoubleAnimation(800, 1, .75, true);
-            vm.NotificationsCleared += OnNotificationsCleared;
-            vm.NotificationsAdded += OnNotificationsAdded;
+            if (App.Settings.IntegratedGpuSleepWorkaround) StartGradientAnimation();
+            else StopGradientAnimation();
+        });
+    }
 
-            var duration = TimeSpan.FromSeconds(5);
-            var start = -1;
-            var end = 1;
-            var tailSize = 0.5;
-            var headSize = 0.5;
-            var fps = 10;
+    void StartGradientAnimation()
+    {
+        Stop1.BeginAnimation(GradientStop.OffsetProperty, _s1Anim);
+        Stop2.BeginAnimation(GradientStop.OffsetProperty, _s2Anim);
+        Stop3.BeginAnimation(GradientStop.OffsetProperty, _s3Anim);
+    }
 
-            _s1Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start, To = end };
-            _s2Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start + tailSize, To = end + tailSize };
-            _s3Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start + tailSize + headSize, To = end + tailSize + headSize };
+    void StopGradientAnimation()
+    {
+        Stop1.BeginAnimation(GradientStop.OffsetProperty, null);
+        Stop2.BeginAnimation(GradientStop.OffsetProperty, null);
+        Stop3.BeginAnimation(GradientStop.OffsetProperty, null);
+    }
 
-            Timeline.SetDesiredFrameRate(_s1Anim, fps);
-            Timeline.SetDesiredFrameRate(_s2Anim, fps);
-            Timeline.SetDesiredFrameRate(_s3Anim, fps);
 
-            InitializeComponent();
-
-            _bubbleScaleTransform = (ScaleTransform) ((TransformGroup) NotificationBubble.RenderTransform).Children[0];
-            _bubbleTranslateTransform = (TranslateTransform)((TransformGroup)NotificationBubble.RenderTransform).Children[1];
-
-            MainContent = WindowContent;
-            ButtonsRef = null;
-            _canMove = false;
-            Init(App.Settings.FloatingButtonSettings);
-
-            SettingsWindowViewModel.IntegratedGpuSleepWorkaroundChanged += OnIntegratedGpuSleepWorkaroundChanged;
-        }
-
-        void OnIntegratedGpuSleepWorkaroundChanged()
+    protected override void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        base.OnLoaded(sender, e);
+        Left = 0;
+        Top = Screen.PrimaryScreen!.Bounds.Height / 2f - ActualHeight / 2f;
+        _animRepeatTimer.Tick += (_, _) => AnimateBubble();
+        StartGradientAnimation();
+    }
+    protected override void OnVisibilityChanged()
+    {
+        base.OnVisibilityChanged();
+        Dispatcher.InvokeAsync(() =>
         {
-            Dispatcher.InvokeAsync(() =>
+            var teraScreenBounds = FocusManager.TeraScreen.Bounds;
+            var dpi = this.GetDpiScale();
+            Left = teraScreenBounds.X /dpi.DpiScaleX ;
+            Top = (teraScreenBounds.Y + teraScreenBounds.Height / 2f) / dpi.DpiScaleY;
+        });
+    }
+
+    void OnNotificationsAdded()
+    {
+        Dispatcher?.InvokeAsync(() =>
+        {
+            AnimateBubble();
+            _animRepeatTimer.Start();
+        });
+    }
+
+    void OnNotificationsCleared()
+    {
+        Dispatcher?.InvokeAsync(() =>
+        {
+            _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
+            _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
+            _animRepeatTimer.Stop();
+        });
+    }
+
+    void AnimateBubble()
+    {
+        _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _bubbleAnim);
+        _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _bubbleAnim);
+    }
+
+    void OnMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideInAnim);
+        _bubbleTranslateTransform.BeginAnimation(TranslateTransform.XProperty, _bubbleSlideIn);
+    }
+
+    void OnMouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        Task.Delay(1000).ContinueWith(_ =>
+        {
+            Dispatcher.Invoke(() =>
             {
-                if (App.Settings.IntegratedGpuSleepWorkaround) StartGradientAnimation();
-                else StopGradientAnimation();
+                if (IsMouseOver) return;
+                RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideOutAnim);
+                _bubbleTranslateTransform.BeginAnimation(TranslateTransform.XProperty, _bubbleSlideOut);
             });
-        }
-
-        void StartGradientAnimation()
-        {
-            Stop1.BeginAnimation(GradientStop.OffsetProperty, _s1Anim);
-            Stop2.BeginAnimation(GradientStop.OffsetProperty, _s2Anim);
-            Stop3.BeginAnimation(GradientStop.OffsetProperty, _s3Anim);
-        }
-
-        void StopGradientAnimation()
-        {
-            Stop1.BeginAnimation(GradientStop.OffsetProperty, null);
-            Stop2.BeginAnimation(GradientStop.OffsetProperty, null);
-            Stop3.BeginAnimation(GradientStop.OffsetProperty, null);
-        }
-
-
-        protected override void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            base.OnLoaded(sender, e);
-            Left = 0;
-            Top = Screen.PrimaryScreen.Bounds.Height / 2 - ActualHeight / 2;
-            _animRepeatTimer.Tick += (_, _) => AnimateBubble();
-            StartGradientAnimation();
-        }
-        protected override void OnVisibilityChanged()
-        {
-            base.OnVisibilityChanged();
-            Dispatcher.InvokeAsync(() =>
-            {
-                var teraScreenBounds = FocusManager.TeraScreen.Bounds;
-                var dpi = this.GetDpiScale();
-                Left = teraScreenBounds.X /dpi.DpiScaleX ;
-                Top = (teraScreenBounds.Y + teraScreenBounds.Height / 2) / dpi.DpiScaleY;
-            });
-        }
-
-        private void OnNotificationsAdded()
-        {
-            Dispatcher?.InvokeAsync(() =>
-            {
-                AnimateBubble();
-                _animRepeatTimer.Start();
-            });
-        }
-        private void OnNotificationsCleared()
-        {
-            Dispatcher?.InvokeAsync(() =>
-            {
-                _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
-                _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, null);
-                _animRepeatTimer.Stop();
-            });
-        }
-        private void AnimateBubble()
-        {
-            _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _bubbleAnim);
-            _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _bubbleAnim);
-        }
-
-        private void OnMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideInAnim);
-            _bubbleTranslateTransform.BeginAnimation(TranslateTransform.XProperty, _bubbleSlideIn);
-        }
-        private void OnMouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            Task.Delay(1000).ContinueWith(_ =>
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    if (IsMouseOver) return;
-                    RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideOutAnim);
-                    _bubbleTranslateTransform.BeginAnimation(TranslateTransform.XProperty, _bubbleSlideOut);
-                });
-            });
-        }
+        });
     }
 }

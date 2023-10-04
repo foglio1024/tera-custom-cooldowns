@@ -36,7 +36,7 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Grid.RowSpan="3" Opacity=".95" Style="{StaticResource RevampBorderStyle}" CornerRadius="5"/>
+        <Border Grid.RowSpan="3" Style="{StaticResource RevampBorderStyle}" />
         <Grid MouseLeftButtonDown="Drag" Background="Transparent">
             <Button HorizontalAlignment="Right" Style="{StaticResource NostrumContentOpacityButtonStyle}"
                     VerticalAlignment="Stretch"
@@ -54,7 +54,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Border Style="{StaticResource RevampBorderStyle}" Opacity=".95"
+            <Border Style="{StaticResource RevampBorderStyle}"
                     Background="{StaticResource RevampDarkerBackground70Brush}" Grid.RowSpan="3" Margin="10 0" />
             <Grid Margin="10 0">
                 <Grid.ColumnDefinitions>

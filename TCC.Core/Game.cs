@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,15 +35,15 @@ namespace TCC;
 
 public static class Game
 {
-    private static ulong _foglioEid;
-    private static bool _logged;
-    private static bool _loadingScreen = true;
-    private static bool _encounter;
-    private static bool _inGameChatOpen;
-    private static bool _inGameUiOn = true;
+    static ulong _foglioEid;
+    static bool _logged;
+    static bool _loadingScreen = true;
+    static bool _encounter;
+    static bool _inGameChatOpen;
+    static bool _inGameUiOn = true;
 
-    public static readonly Dictionary<ulong, string> NearbyNPC = new();
-    public static readonly Dictionary<ulong, Tuple<string, Class>> NearbyPlayers = new();
+    public static readonly Dictionary<ulong, string> NearbyNPCs = new();
+    public static readonly Dictionary<ulong, (string Name, Class Class)> NearbyPlayers = new();
     public static readonly GroupInfo Group = new();
     public static readonly GuildInfo Guild = new();
     public static readonly FriendList Friends = new();
@@ -175,12 +174,12 @@ public static class Game
         StubMessageParser.HandleRawPacketEvent += OnRawPacket;
     }
 
-    private static void OnRawPacket(Message msg)
+    static void OnRawPacket(Message msg)
     {
         PacketAnalyzer.EnqueuePacket(msg);
     }
 
-    private static void OnStubChatMessage(string author, uint channel, string message)
+    static void OnStubChatMessage(string author, uint channel, string message)
     {
         if (!ChatManager.Instance.PrivateChannels.Any(x => x.Id == channel && x.Joined))
             ChatManager.Instance.CachePrivateMessage(channel, author, message);
@@ -190,23 +189,23 @@ public static class Game
                     x.Id == channel && x.Joined).Index + 11, author, message));
     }
 
-    private static void OnSetChatMode(bool b)
+    static void OnSetChatMode(bool b)
     {
         InGameChatOpen = b;
     }
 
-    private static void OnSetUiMode(bool b)
+    static void OnSetUiMode(bool b)
     {
         InGameUiOn = b;
     }
 
-    private static async Task InitDatabasesAsync(string lang)
+    static async Task InitDatabasesAsync(string lang)
     {
         await Task.Factory.StartNew(() => InitDatabases(lang));
         DatabaseLoaded?.Invoke();
     }
 
-    private static void InitDatabases(string lang)
+    static void InitDatabases(string lang)
     {
         UpdateManager.CheckDatabaseHash();
         UpdateManager.CheckServersFile();
@@ -257,16 +256,16 @@ public static class Game
         }
     }
 
-    private static void InstallHooks()
+    static void InstallHooks()
     {
         PacketAnalyzer.Sniffer.NewConnection += OnConnected;
         PacketAnalyzer.Sniffer.EndConnection += OnDisconnected;
 
-        PacketAnalyzer.Processor.Hook<C_CHECK_VERSION>(async p => await OnCheckVersion(p));
-        PacketAnalyzer.Processor.Hook<C_LOGIN_ARBITER>(async p => await OnLoginArbiter(p));
+        PacketAnalyzer.Processor.Hook<C_CHECK_VERSION>(p => _ = OnCheckVersion(p));
+        PacketAnalyzer.Processor.Hook<C_LOGIN_ARBITER>(p => _ = OnLoginArbiter(p));
 
         // player stuff
-        PacketAnalyzer.Processor.Hook<S_LOGIN>(async (p) => await OnLogin(p));
+        PacketAnalyzer.Processor.Hook<S_LOGIN>(p => _ = OnLogin(p));
         PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
         PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
 
@@ -332,7 +331,7 @@ public static class Game
         //PacketAnalyzer.Processor.Hook<S_FATIGABILITY_POINT>(OnFatigabilityPoint);
     }
 
-    private static async Task OnCheckVersion(C_CHECK_VERSION p)
+    static async Task OnCheckVersion(C_CHECK_VERSION p)
     {
         var opcPath = Path.Combine(App.DataPath, $"opcodes/protocol.{p.Versions[0]}.map").Replace("\\", "/");
         if (!File.Exists(opcPath))
@@ -374,7 +373,7 @@ public static class Game
         PacketAnalyzer.Sniffer.Connected = true;
     }
 
-    private static void OnConnected(Server server)
+    static void OnConnected(Server server)
     {
         Server = server;
         //if (App.Settings.DontShowFUBH == false) App.FUBH();
@@ -387,7 +386,7 @@ public static class Game
         //        "Official statement from Gameforge:\n\n don't combine partners or pets! It will lock you out of your character permanently.\n\n This message will keep showing until next release.");
     }
 
-    private static Laurel GetLaurel(uint pId)
+    static Laurel GetLaurel(uint pId)
     {
         var ch = Account.Characters.FirstOrDefault(x => x.Id == pId);
         return ch?.Laurel ?? Laurel.None;
@@ -412,7 +411,7 @@ public static class Game
         Me.ArcaneBoost = a;
     }
 
-    private static void OnReturnToLobbyHotkeyPressed()
+    static void OnReturnToLobbyHotkeyPressed()
     {
         if (!Logged
           || LoadingScreen
@@ -423,7 +422,7 @@ public static class Game
         StubInterface.Instance.StubClient.ReturnToLobby();
     }
 
-    private static void OnDisconnected()
+    static void OnDisconnected()
     {
         WindowManager.TrayIcon.Connected = false;
         WindowManager.TrayIcon.Text = $"{App.AppVersion} - not connected";
@@ -435,7 +434,7 @@ public static class Game
         if (App.ToolboxMode && UpdateManager.UpdateAvailable) App.Close();
     }
 
-    private static void SetAbnormalityTracker(Class c)
+    static void SetAbnormalityTracker(Class c)
     {
         CurrentAbnormalityTracker = c switch
         {
@@ -456,7 +455,7 @@ public static class Game
         };
     }
 
-    private static void CheckChatMention(ParsedMessage m)
+    static void CheckChatMention(ParsedMessage m)
     {
         string author = "", txt = "", strCh = "";
 
@@ -495,7 +494,7 @@ public static class Game
 
     #region Hooks
 
-    private static void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
+    static void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
     {
         Me.MaxCoins = m.MaxCoins;
         Me.Coins = m.Coins;
@@ -514,87 +513,86 @@ public static class Game
         }
     }
 
-    private static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
+    static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
     {
         DB!.ItemsDatabase.Items.TryGetValue((uint)m.Item, out var i);
         TccUtils.CheckWindowNotify($"New broker offer for {m.Amount} <{i?.Name ?? m.Item.ToString()}> from {m.Name}", "Broker offer");
         TccUtils.CheckDiscordNotify($"New broker offer for {m.Amount} **<{i?.Name ?? m.Item.ToString()}>**", m.Name);
     }
 
-    private static void OnRequestContract(S_BEGIN_THROUGH_ARBITER_CONTRACT p)
+    static void OnRequestContract(S_BEGIN_THROUGH_ARBITER_CONTRACT p)
     {
         if (p.Type != S_BEGIN_THROUGH_ARBITER_CONTRACT.RequestType.PartyInvite) return;
         TccUtils.CheckWindowNotify($"{p.Sender} invited you to join a party", "Party invite");
         TccUtils.CheckDiscordNotify($"**{p.Sender}** invited you to join a party", "TCC");
     }
 
-    private static void OnBanPartyMember(S_BAN_PARTY_MEMBER obj)
+    static void OnBanPartyMember(S_BAN_PARTY_MEMBER obj)
     {
         Group.RemoveMember(obj.PlayerId, obj.ServerId);
     }
 
-    private static void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER obj)
+    static void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER obj)
     {
         Group.RemoveMember(obj.PlayerId, obj.ServerId);
     }
 
-    private static void OnChangePartyManager(S_CHANGE_PARTY_MANAGER p)
+    static void OnChangePartyManager(S_CHANGE_PARTY_MANAGER p)
     {
         Group.ChangeLeader(p.Name);
     }
 
-    private static void OnBanParty(S_BAN_PARTY p)
+    static void OnBanParty(S_BAN_PARTY p)
     {
         Group.Disband();
     }
 
-    private static void OnLeaveParty(S_LEAVE_PARTY p)
+    static void OnLeaveParty(S_LEAVE_PARTY p)
     {
         Group.Disband();
     }
 
-    private static void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
+    static void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
     {
         Group.UpdateComposition(p.Members, p.Raid);
     }
 
-    private static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
+    static void OnBattleFieldEntranceInfo(S_BATTLE_FIELD_ENTRANCE_INFO p)
     {
         // TODO: add discord notification after events revamp
         Log.N("Instance Matching", SR.BgMatchingComplete, NotificationType.Success);
         Log.F($"Zone: {p.Zone}\nId: {p.Id}\nData: {p.Data.Array?.ToHexString()}", "S_BATTLE_FIELD_ENTRANCE_INFO.txt");
     }
 
-    private static void OnFinInterPartyMatch(S_FIN_INTER_PARTY_MATCH p)
+    static void OnFinInterPartyMatch(S_FIN_INTER_PARTY_MATCH p)
     {
         Log.N("Instance Matching", SR.DungMatchingComplete, NotificationType.Success);
         Log.F($"Zone: {p.Zone}\nData: {p.Data.Array?.ToHexString()}", "S_FIN_INTER_PARTY_MATCH.txt");
     }
 
-    private static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
+    static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
     {
         if (IsMe(m.Target)) return;
         SetEncounter(m.CurrentHP, m.MaxHP);
     }
 
-    private static void OnBossGageInfo(S_BOSS_GAGE_INFO m)
+    static void OnBossGageInfo(S_BOSS_GAGE_INFO m)
     {
         SetEncounter(m.CurrentHP, m.MaxHP);
     }
 
-    private static void OnWhisper(S_WHISPER p)
+    static void OnWhisper(S_WHISPER p)
     {
         if (p.Recipient != Me.Name) return;
         CheckChatMention(p);
     }
 
-    private static void OnChat(S_CHAT m)
+    static void OnChat(S_CHAT m)
     {
         #region Greet meme
 
         if ((ChatChannel)m.Channel == ChatChannel.Greet
-            && (m.Name == "Foglio"
-                || m.Name == "Folyemi"))
+            && m.Name is "Foglio" or "Folyemi")
             Log.N("owo", SR.GreetMemeContent, NotificationType.Success, 3000);
 
         #endregion Greet meme
@@ -618,35 +616,35 @@ public static class Game
         CheckChatMention(m);
     }
 
-    private static void OnPrivateChat(S_PRIVATE_CHAT m)
+    static void OnPrivateChat(S_PRIVATE_CHAT m)
     {
         if (BlockList.Contains(m.AuthorName)) return;
         CheckChatMention(m);
     }
 
-    private static void OnSpawnNpc(S_SPAWN_NPC p)
+    static void OnSpawnNpc(S_SPAWN_NPC p)
     {
         if (!DB!.MonsterDatabase.TryGetMonster(p.TemplateId, p.HuntingZoneId, out var m)) return;
-        NearbyNPC[p.EntityId] = m.Name;
+        NearbyNPCs[p.EntityId] = m.Name;
         FlyingGuardianDataProvider.InvokeProgressChanged();
     }
 
-    private static void OnChangeFriendState(S_CHANGE_FRIEND_STATE p)
+    static void OnChangeFriendState(S_CHANGE_FRIEND_STATE p)
     {
         Log.Chat($"Changed friend state: {p.PlayerId} {p.FriendStatus}");
     }
 
-    private static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO p)
+    static void OnUpdateFriendInfo(S_UPDATE_FRIEND_INFO p)
     {
         Friends.UpdateFriendInfo(p.FriendUpdates);
     }
 
-    private static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
+    static void OnAccomplishAchievement(S_ACCOMPLISH_ACHIEVEMENT x)
     {
         SystemMessagesProcessor.AnalyzeMessage($"@0\vAchievementName\v@achievement:{x.AchievementId}", "SMT_ACHIEVEMENT_GRADE0_CLEAR_MESSAGE");
     }
 
-    private static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM x)
+    static void OnSystemMessageLootItem(S_SYSTEM_MESSAGE_LOOT_ITEM x)
     {
         App.BaseDispatcher.InvokeAsync(() =>
         {
@@ -662,7 +660,7 @@ public static class Game
         });
     }
 
-    private static void OnSystemMessage(S_SYSTEM_MESSAGE x)
+    static void OnSystemMessage(S_SYSTEM_MESSAGE x)
     {
         if (DB!.SystemMessagesDatabase.IsHandledInternally(x.Message)) return;
         App.BaseDispatcher.InvokeAsync(() =>
@@ -679,14 +677,14 @@ public static class Game
         });
     }
 
-    private static void OnDespawnNpc(S_DESPAWN_NPC p)
+    static void OnDespawnNpc(S_DESPAWN_NPC p)
     {
-        NearbyNPC.Remove(p.Target);
+        NearbyNPCs.Remove(p.Target);
         FlyingGuardianDataProvider.InvokeProgressChanged();
         AbnormalityTracker.CheckMarkingOnDespawn(p.Target);
     }
 
-    private static void OnDespawnUser(S_DESPAWN_USER p)
+    static void OnDespawnUser(S_DESPAWN_USER p)
     {
         #region Aura meme
 
@@ -697,7 +695,7 @@ public static class Game
         NearbyPlayers.Remove(p.EntityId);
     }
 
-    private static void OnSpawnUser(S_SPAWN_USER p)
+    static void OnSpawnUser(S_SPAWN_USER p)
     {
         #region Aura meme
 
@@ -727,18 +725,18 @@ public static class Game
 
         #endregion Aura meme
 
-        NearbyPlayers[p.EntityId] = new Tuple<string, Class>(p.Name, TccUtils.ClassFromModel(p.TemplateId));
+        NearbyPlayers[p.EntityId] = new (p.Name, TccUtils.ClassFromModel(p.TemplateId));
     }
 
-    private static void OnSpawnMe(S_SPAWN_ME p)
+    static void OnSpawnMe(S_SPAWN_ME p)
     {
-        NearbyNPC.Clear();
+        NearbyNPCs.Clear();
         NearbyPlayers.Clear();
         AbnormalityTracker.ClearMarkedTargets();
         FlyingGuardianDataProvider.Stacks = 0;
         FlyingGuardianDataProvider.StackType = FlightStackType.None;
         FlyingGuardianDataProvider.InvokeProgressChanged();
-        // was done with timer before, test it
+
         Task.Delay(2000).ContinueWith(_ =>
         {
             LoadingScreen = false;
@@ -755,19 +753,21 @@ public static class Game
 
             #endregion Fear Inoculum
 
+            #region Lockdown
+#if false
             if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "it")
             {
                 var zg = DB!.AbnormalityDatabase.Abnormalities[10240001];
-                var za = DB!.AbnormalityDatabase.Abnormalities[10240002];
-                var zr = DB!.AbnormalityDatabase.Abnormalities[10240003];
+                var za = DB.AbnormalityDatabase.Abnormalities[10240002];
+                var zr = DB.AbnormalityDatabase.Abnormalities[10240003];
 
                 var zone = DateTime.Now.Month switch
                 {
                     12 when DateTime.Now.Year == 2020 => DateTime.Now.Day switch
                     {
                         >= 24 and <= 27 => zr,
-                        31 => zr,
                         >= 28 and <= 30 => za,
+                        31 => zr,
                         _ => zg
                     },
                     1 when DateTime.Now.Year == 2021 && DateTime.Now.Day < 7 => DateTime.Now.Day == 4 ? za : zr,
@@ -778,15 +778,17 @@ public static class Game
                 Me.UpdateAbnormality(zone, int.MaxValue, 1);
                 SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{zone.Name}", "SMT_BATTLE_BUFF_DEBUFF");
             }
+#endif
+            #endregion
         });
     }
 
-    private static void OnAccountPackageList(S_ACCOUNT_PACKAGE_LIST m)
+    static void OnAccountPackageList(S_ACCOUNT_PACKAGE_LIST m)
     {
         Account.IsElite = m.IsElite;
     }
 
-    private static void OnLoadTopo(S_LOAD_TOPO m)
+    static void OnLoadTopo(S_LOAD_TOPO m)
     {
         LoadingScreen = true;
         Encounter = false;
@@ -795,7 +797,7 @@ public static class Game
         Me.ClearAbnormalities();
     }
 
-    private static void OnGetUserList(S_GET_USER_LIST m)
+    static void OnGetUserList(S_GET_USER_LIST m)
     {
         if (PacketAnalyzer.Factory!.ReleaseVersion == 0)
             Log.F("Warning: C_LOGIN_ARBITER not received.");
@@ -836,12 +838,12 @@ public static class Game
         }
     }
 
-    private static void OnUserStatus(S_USER_STATUS m)
+    static void OnUserStatus(S_USER_STATUS m)
     {
         if (IsMe(m.GameId)) Combat = m.Status == S_USER_STATUS.UserStatus.InCombat;
     }
 
-    private static void OnFieldEventOnLeave(S_FIELD_EVENT_ON_LEAVE p)
+    static void OnFieldEventOnLeave(S_FIELD_EVENT_ON_LEAVE p)
     {
         SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_LEAVE");
 
@@ -851,7 +853,7 @@ public static class Game
         StubInterface.Instance.StubClient.InvokeCommand("fps mode 1");
     }
 
-    private static void OnFieldEventOnEnter(S_FIELD_EVENT_ON_ENTER p)
+    static void OnFieldEventOnEnter(S_FIELD_EVENT_ON_ENTER p)
     {
         SystemMessagesProcessor.AnalyzeMessage("", "SMT_FIELD_EVENT_ENTER");
 
@@ -861,7 +863,7 @@ public static class Game
         StubInterface.Instance.StubClient.InvokeCommand("fps mode 3");
     }
 
-    private static void OnFieldPointInfo(S_FIELD_POINT_INFO p)
+    static void OnFieldPointInfo(S_FIELD_POINT_INFO p)
     {
         if (Account.CurrentCharacter == null) return;
         var old = Account.CurrentCharacter.GuardianInfo.Cleared;
@@ -871,7 +873,7 @@ public static class Game
         SystemMessagesProcessor.AnalyzeMessage("@0", "SMT_FIELD_EVENT_REWARD_AVAILABLE");
     }
 
-    private static void OnGetUserGuildLogo(S_GET_USER_GUILD_LOGO p)
+    static void OnGetUserGuildLogo(S_GET_USER_GUILD_LOGO p)
     {
         S_IMAGE_DATA.Database[p.GuildId] = p.GuildLogo;
 
@@ -890,36 +892,36 @@ public static class Game
         }
     }
 
-    private static void OnGuildMemberList(S_GUILD_MEMBER_LIST m)
+    static void OnGuildMemberList(S_GUILD_MEMBER_LIST m)
     {
         Task.Run(() => Guild.Set(m.Members, m.MasterId, m.MasterName));
     }
 
-    private static void OnLoadEpInfo(S_LOAD_EP_INFO m)
+    static void OnLoadEpInfo(S_LOAD_EP_INFO m)
     {
         if (!m.Perks.TryGetValue(851010, out var level)) return;
         EpDataProvider.SetManaBarrierPerkLevel(level);
     }
 
-    private static void OnLearnEpPerk(S_LEARN_EP_PERK m)
+    static void OnLearnEpPerk(S_LEARN_EP_PERK m)
     {
         if (!m.Perks.TryGetValue(851010, out var level)) return;
         EpDataProvider.SetManaBarrierPerkLevel(level);
     }
 
-    private static void OnResetEpPerk(S_RESET_EP_PERK m)
+    static void OnResetEpPerk(S_RESET_EP_PERK m)
     {
         if (!m.Success) return;
         EpDataProvider.SetManaBarrierPerkLevel(0);
     }
 
-    private static void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+    static void OnReturnToLobby(S_RETURN_TO_LOBBY m)
     {
         Logged = false;
         Me.ClearAbnormalities();
     }
 
-    private static async Task OnLogin(S_LOGIN m)
+    static async Task OnLogin(S_LOGIN m)
     {
         Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true, App.Settings.LastAccountNameHash);
         Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true, App.Settings.LastAccountNameHash);
@@ -1000,10 +1002,10 @@ public static class Game
         SetAbnormalityTracker(m.CharacterClass);
     }
 
-    private static async Task OnLoginArbiter(C_LOGIN_ARBITER m)
+    static async Task OnLoginArbiter(C_LOGIN_ARBITER m)
     {
         var rvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory!.ReleaseVersion / 100}.map");
-        var pvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory!.Version}.map");
+        var pvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.Version}.map");
 
         var path = File.Exists(rvSysMsgPath)
             ? rvSysMsgPath
@@ -1043,7 +1045,7 @@ public static class Game
         App.Settings.LastAccountNameHash = CurrentAccountNameHash;
     }
 
-    private static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
+    static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
         CurrentAbnormalityTracker.CheckAbnormality(p);
         if (!IsMe(p.TargetId)) return;
@@ -1053,7 +1055,7 @@ public static class Game
         FlyingGuardianDataProvider.HandleAbnormal(p);
     }
 
-    private static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+    static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
         CurrentAbnormalityTracker.CheckAbnormality(p);
         if (!IsMe(p.TargetId)) return;
@@ -1063,7 +1065,7 @@ public static class Game
         FlyingGuardianDataProvider.HandleAbnormal(p);
     }
 
-    private static void OnAbnormalityEnd(S_ABNORMALITY_END p)
+    static void OnAbnormalityEnd(S_ABNORMALITY_END p)
     {
         CurrentAbnormalityTracker.CheckAbnormality(p);
         if (!IsMe(p.TargetId)) return;
@@ -1072,23 +1074,23 @@ public static class Game
         Me.EndAbnormality(ab);
     }
 
-    private static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
+    static void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
     {
         App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
     }
 
-    private static void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
+    static void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
     {
         App.BaseDispatcher.InvokeAsync(() => SkillStarted?.Invoke());
     }
 
-    private static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF m)
+    static void OnChangeGuildChief(S_CHANGE_GUILD_CHIEF m)
     {
         SystemMessagesProcessor.AnalyzeMessage($"@0\vName\v{Guild.NameOf(m.PlayerId)}", "SMT_GC_SYSMSG_GUILD_CHIEF_CHANGED");
         Guild.SetMaster(m.PlayerId, Guild.NameOf(m.PlayerId));
     }
 
-    private static void OnNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
+    static void OnNotifyGuildQuestUrgent(S_NOTIFY_GUILD_QUEST_URGENT p)
     {
         if (p.Type != S_NOTIFY_GUILD_QUEST_URGENT.GuildBamQuestType.Announce) return;
 
@@ -1101,17 +1103,17 @@ public static class Game
         SystemMessagesProcessor.AnalyzeMessage($"@0\vquestName\v{questName}\vnpcName\v{name}\vzoneName\v{zone}", "SMT_GQUEST_URGENT_NOTIFY");
     }
 
-    private static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
+    static void OnNotifyToFriendsWalkIntoSameArea(S_NOTIFY_TO_FRIENDS_WALK_INTO_SAME_AREA x)
     {
         Friends.NotifyWalkInSameArea(x.PlayerId, x.WorldId, x.GuardId, x.SectionId);
     }
 
-    private static void OnFriendList(S_FRIEND_LIST m)
+    static void OnFriendList(S_FRIEND_LIST m)
     {
         Friends.SetFrom(m.Friends);
     }
 
-    private static void OnUserBlockList(S_USER_BLOCK_LIST m)
+    static void OnUserBlockList(S_USER_BLOCK_LIST m)
     {
         m.BlockedUsers.ForEach(u =>
         {

@@ -1,21 +1,20 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace TeraPacketParser.Sniffing.JsonRPC
+namespace TeraPacketParser.Sniffing.JsonRPC;
+
+public class Response : JObject
 {
-    public class Response : JObject
+    public const string ResultKey = "result";
+    public const string ErrorKey = "error";
+
+    public JToken? Result => this[ResultKey];
+    public JToken? Error => this[ErrorKey];
+
+    public Response(JObject jObj)
     {
-        public const string ResultKey = "result";
-        public const string ErrorKey = "error";
-
-        public JToken? Result => this[ResultKey];
-        public JToken? Error => this[ErrorKey];
-
-        public Response(JObject jObj)
-        {
-            this["jsonrpc"] = jObj["jsonrpc"];
-            if (jObj.ContainsKey(ResultKey)) this[ResultKey] = jObj[ResultKey];
-            else if (jObj.ContainsKey(ErrorKey)) this[ErrorKey] = jObj[ErrorKey];
-            this["id"] = jObj["id"];
-        }
+        this["jsonrpc"] = jObj["jsonrpc"];
+        if (jObj.TryGetValue(ResultKey, out var resVal)) this[ResultKey] = resVal;
+        else if (jObj.TryGetValue(ErrorKey, out var errVal)) this[ErrorKey] = errVal;
+        this["id"] = jObj["id"];
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Nostrum.WPF;
 using Nostrum.WPF.ThreadSafe;
 using System.Windows.Input;
-using System.Windows.Threading;
 using TCC.Data;
 using TCC.ViewModels.Widgets;
 
@@ -110,10 +109,10 @@ public class LootItemViewModel : ThreadSafeObservableObject
         DbItem = dbItem;
 
         SetBidIntentCommand = new RelayCommand<BidAction>(SetBidIntent,
-            ce => this.DistributionStatus is not DistributionStatus.Distributed or DistributionStatus.Discarded && !BidSent);
+            _ => DistributionStatus is not (DistributionStatus.Distributed or DistributionStatus.Discarded) && !BidSent);
     }
 
-    private void SetBidIntent(BidAction intent)
+    void SetBidIntent(BidAction intent)
     {
         if (BidIntent == intent) BidIntent = BidAction.Unset;
         else BidIntent = intent;

@@ -1,34 +1,32 @@
 ﻿using System.IO;
 using System.Windows;
-using System.Windows.Threading;
 using Newtonsoft.Json;
 using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
 
-namespace TCC.Settings
+namespace TCC.Settings;
+
+public class JsonSettingsWriter : SettingsWriterBase
 {
-    public class JsonSettingsWriter : SettingsWriterBase
+    public JsonSettingsWriter()
     {
-        public JsonSettingsWriter()
+        FileName = SettingsGlobals.SettingsFileName;
+    }
+    public override void Save()
+    {
+        var json = JsonConvert.SerializeObject(App.Settings, Formatting.Indented, TccUtils.GetDefaultJsonSerializerSettings());
+        var savePath = SettingsContainer.SettingsOverride == ""
+            ? Path.Combine(App.BasePath, FileName)
+            : SettingsContainer.SettingsOverride;
+        try
         {
-            FileName = SettingsGlobals.SettingsFileName;
+            File.WriteAllText(savePath, json);
         }
-        public override void Save()
+        catch (IOException ex)
         {
-            var json = JsonConvert.SerializeObject(App.Settings, Formatting.Indented, TccUtils.GetDefaultJsonSerializerSettings());
-            var savePath = SettingsContainer.SettingsOverride == ""
-                ? Path.Combine(App.BasePath, FileName)
-                : SettingsContainer.SettingsOverride;
-            try
-            {
-                File.WriteAllText(savePath, json);
-            }
-            catch (IOException ex)
-            {
-                var res = TccMessageBox.Show("TCC", SR.CannotSaveSettings(ex.Message), MessageBoxButton.YesNo);
-                if(res == MessageBoxResult.Yes) Save();
-            }
+            var res = TccMessageBox.Show("TCC", SR.CannotSaveSettings(ex.Message), MessageBoxButton.YesNo);
+            if(res == MessageBoxResult.Yes) Save();
         }
     }
 }

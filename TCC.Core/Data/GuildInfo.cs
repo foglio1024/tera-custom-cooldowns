@@ -1,62 +1,60 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nostrum;
 using Nostrum.WPF.ThreadSafe;
 using TeraDataLite;
 
-namespace TCC.Data
+namespace TCC.Data;
+
+public class GuildInfo
 {
-    public class GuildInfo
+    public bool InGuild { get; private set; }
+    public GuildMemberData Master { get; private set; }
+
+    public ThreadSafeObservableCollection<GuildMemberData> Members { get; private set; } = new();
+    public bool AmIMaster { get; private set; }
+
+    public string NameOf(uint id)
     {
-        public bool InGuild { get; private set; }
-        public GuildMemberData Master { get; private set; }
+        var found = Members.ToSyncList().FirstOrDefault(m => m.PlayerId == id);
+        return found.Name != "" ? found.Name : "Unknown player";
+    }
 
-        public ThreadSafeObservableCollection<GuildMemberData> Members { get; private set; } = new();
-        public bool AmIMaster { get; private set; }
-
-        public string NameOf(uint id)
+    public void Set(List<GuildMemberData> mMembers, uint masterId, string masterName)
+    {
+        mMembers.ForEach(m =>
         {
-            var found = Members.ToSyncList().FirstOrDefault(m => m.PlayerId == id);
-            return found.Name != "" ? found.Name : "Unknown player";
-        }
+            if (Has(m.Name)) return;
+            Members.Add(m);
+        });
 
-        public void Set(List<GuildMemberData> mMembers, uint masterId, string masterName)
-        {
-            mMembers.ForEach(m =>
-            {
-                if (Has(m.Name)) return;
-                Members.Add(m);
-            });
+        //var toRemove = new List<GuildMemberData>();
+        //Members.ToSyncList().ForEach(m =>
+        //{
+        //    if (mMembers.All(f => f.PlayerId != m.PlayerId)) toRemove.Add(m);
+        //});
+        //toRemove.ForEach(m => Members.Remove(m));
 
-            //var toRemove = new List<GuildMemberData>();
-            //Members.ToSyncList().ForEach(m =>
-            //{
-            //    if (mMembers.All(f => f.PlayerId != m.PlayerId)) toRemove.Add(m);
-            //});
-            //toRemove.ForEach(m => Members.Remove(m));
+        InGuild = true;
+        SetMaster(masterId, masterName);
+    }
 
-            InGuild = true;
-            SetMaster(masterId, masterName);
-        }
+    public bool Has(string name)
+    {
+        return Members.ToSyncList().Any(m => m.Name == name);
+    }
 
-        public bool Has(string name)
-        {
-            return Members.ToSyncList().Any(m => m.Name == name);
-        }
+    public void Clear()
+    {
+        Task.Run(() => Members.Clear());
+        InGuild = false;
+        Master = default;
+        AmIMaster = false;
+    }
 
-        public void Clear()
-        {
-            Task.Run(() => Members.Clear());
-            InGuild = false;
-            Master = default;
-            AmIMaster = false;
-        }
-
-        public void SetMaster(uint playerId, string playerName)
-        {
-            Master = new GuildMemberData { Name = playerName, PlayerId = playerId };
-            AmIMaster = Master.Name == Game.Me.Name;
-        }
+    public void SetMaster(uint playerId, string playerName)
+    {
+        Master = new GuildMemberData { Name = playerName, PlayerId = playerId };
+        AmIMaster = Master.Name == Game.Me.Name;
     }
 }

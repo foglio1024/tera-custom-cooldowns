@@ -1,17 +1,16 @@
-﻿namespace TCC.Data.Chat
+﻿namespace TCC.Data.Chat;
+
+public struct PrivateChatChannel
 {
-    public struct PrivateChatChannel
+    public uint Id;
+    public string Name;
+    public int Index;
+    public bool Joined;
+    public PrivateChatChannel(uint id, string name, int index)
     {
-        public uint Id;
-        public string Name;
-        public int Index;
-        public bool Joined;
-        public PrivateChatChannel(uint id, string name, int index)
-        {
-            Id = id;
-            Name = name;
-            Index = index;
-            Joined = true;
-        }
+        Id = id;
+        Name = name;
+        Index = index;
+        Joined = true;
     }
 }

@@ -359,7 +359,7 @@
                                    Maximum="{TemplateBinding ScrollableHeight}"
                                    ViewportSize="{TemplateBinding ViewportHeight}"
                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                   Grid.Column="1" />
+                                   Grid.Row="0" Grid.Column="1" />
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                    Orientation="Horizontal"
                                    Grid.Row="1"
@@ -398,7 +398,7 @@
                                    ViewportSize="{TemplateBinding ViewportHeight}"
                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                                    Style="{StaticResource ReversedScrollBar}"
-                                   Grid.Column="1" />
+                                   Grid.Row="0" Grid.Column="1" />
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                    Orientation="Horizontal"
                                    Grid.Row="1"

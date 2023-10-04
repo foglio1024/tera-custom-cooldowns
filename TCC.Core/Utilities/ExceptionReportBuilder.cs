@@ -12,138 +12,137 @@ using Nostrum.WinAPI;
 using TCC.Utils.Exceptions;
 using TeraPacketParser.Analysis;
 
-namespace TCC.Utilities
+namespace TCC.Utilities;
+
+public static class ExceptionReportBuilder
 {
-    public static class ExceptionReportBuilder
+    public static JObject BuildJsonCrashReport(Exception ex)
     {
-        public static JObject BuildJsonCrashReport(Exception ex)
+        var ret = new JObject
         {
-            var ret = new JObject
-            {
-                { "timestamp" , new JValue(DateTime.UtcNow.ToEpoch()) },
-                { "tcc_version" , new JValue(App.AppVersion) },
-                { "user_id" , new JValue(App.Settings.LastAccountNameHash) },
-                { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
-                { "exception", BuildExceptionMessage(ex)},
-                { "exception_type", new JValue(ex.GetType().FullName)},
-                { "exception_source", new JValue(ex.Source)},
-                { "stack_trace", new JValue(ex.StackTrace)},
-                { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
-                { "region", new JValue(Game.Server.Region)},
-                { "server_id", new JValue(Game.Server.ServerId.ToString())},
-                { "settings_summary", new JObject
-                    {
-                        { "windows", new JObject
-                            {
-                                { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
-                                { "buffs", App.Settings.BuffWindowSettings.Enabled },
-                                { "character", App.Settings.CharacterWindowSettings.Enabled },
-                                { "class", App.Settings.ClassWindowSettings.Enabled },
-                                { "chat", App.Settings.ChatEnabled},
-                                { "npc", App.Settings.NpcWindowSettings.Enabled},
-                                { "group", App.Settings.GroupWindowSettings.Enabled }
-                            }
-                        },
+            { "timestamp" , new JValue(DateTime.UtcNow.ToEpoch()) },
+            { "tcc_version" , new JValue(App.AppVersion) },
+            { "user_id" , new JValue(App.Settings.LastAccountNameHash) },
+            { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
+            { "exception", BuildExceptionMessage(ex)},
+            { "exception_type", new JValue(ex.GetType().FullName)},
+            { "exception_source", new JValue(ex.Source)},
+            { "stack_trace", new JValue(ex.StackTrace)},
+            { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
+            { "region", new JValue(Game.Server.Region)},
+            { "server_id", new JValue(Game.Server.ServerId.ToString())},
+            { "settings_summary", new JObject
+                {
+                    { "windows", new JObject
                         {
-                            "generic", new JObject
-                            {
-                                { "proxy_enabled", App.Settings.EnableProxy },
-                                { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
-                            }
+                            { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
+                            { "buffs", App.Settings.BuffWindowSettings.Enabled },
+                            { "character", App.Settings.CharacterWindowSettings.Enabled },
+                            { "class", App.Settings.ClassWindowSettings.Enabled },
+                            { "chat", App.Settings.ChatEnabled},
+                            { "npc", App.Settings.NpcWindowSettings.Enabled},
+                            { "group", App.Settings.GroupWindowSettings.Enabled }
+                        }
+                    },
+                    {
+                        "generic", new JObject
+                        {
+                            { "proxy_enabled", App.Settings.EnableProxy },
+                            { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
                         }
                     }
-                },
-                {
-                    "stats", new JObject
-                    {
-                        { "os", $"{Environment.OSVersion} {Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")?.GetValue("ProductName")}" },
-                        { "current_USER_objects" , User32.GetGuiResources(Process.GetCurrentProcess().Handle, 1) },
-                        { "used_memory" , Process.GetCurrentProcess().PrivateMemorySize64 },
-                        { "uptime", (DateTime.Now  - Process.GetCurrentProcess().StartTime).TotalSeconds},
-                    }
                 }
-            };
-            if (ex.InnerException != null)
+            },
             {
-                var innEx = BuildInnerExceptionJObject(ex.InnerException);
-                ret["inner_exception"] = innEx;
+                "stats", new JObject
+                {
+                    { "os", $"{Environment.OSVersion} {Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")?.GetValue("ProductName")}" },
+                    { "current_USER_objects" , User32.GetGuiResources(Process.GetCurrentProcess().Handle, 1) },
+                    { "used_memory" , Process.GetCurrentProcess().PrivateMemorySize64 },
+                    { "uptime", (DateTime.Now  - Process.GetCurrentProcess().StartTime).TotalSeconds},
+                }
             }
-
-            switch (ex)
-            {
-                case PacketParseException ppe:
-                    ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
-                    ret.Add("packet_data", new JValue(ppe.RawData.ToHexString()));
-                    break;
-
-                case DeadlockException de:
-                    ret.Add("thread_traces", GetThreadTraces(de));
-                    break;
-            }
-
-            return ret;
-        }
-
-        private static JObject BuildInnerExceptionJObject(Exception ex)
+        };
+        if (ex.InnerException != null)
         {
-            var ret = new JObject
-            {
-                ["exception"] = BuildExceptionMessage(ex),
-                ["exception_type"] = new JValue(ex.GetType().FullName),
-                ["exception_source"] = new JValue(ex.Source),
-                ["stack_trace"] = new JValue(ex.StackTrace)
-            };
-            if (ex.InnerException == null) return ret;
             var innEx = BuildInnerExceptionJObject(ex.InnerException);
             ret["inner_exception"] = innEx;
-            return ret;
         }
 
-        private static string GetStackTraceClrmd(ClrThread runtimeThread)
+        switch (ex)
         {
-            var sb = new StringBuilder();
-            foreach (var frame in runtimeThread.EnumerateStackTrace())
-            {
-                if (frame.Method == null) continue;
-                sb.AppendLine($"   in {frame.Method}");
-            }
+            case PacketParseException ppe:
+                ret.Add("packet_opcode_name", new JValue(ppe.OpcodeName));
+                ret.Add("packet_data", new JValue(ppe.RawData.ToHexString()));
+                break;
 
-            return sb.ToString();
+            case DeadlockException de:
+                ret.Add("thread_traces", GetThreadTraces(de));
+                break;
         }
 
-        private static JArray GetThreadTraces(DeadlockException de)
+        return ret;
+    }
+
+    static JObject BuildInnerExceptionJObject(Exception ex)
+    {
+        var ret = new JObject
         {
-            using var dataTarget = DataTarget.CreateSnapshotAndAttach(Process.GetCurrentProcess().Id);
+            ["exception"] = BuildExceptionMessage(ex),
+            ["exception_type"] = new JValue(ex.GetType().FullName),
+            ["exception_source"] = new JValue(ex.Source),
+            ["stack_trace"] = new JValue(ex.StackTrace)
+        };
+        if (ex.InnerException == null) return ret;
+        var innEx = BuildInnerExceptionJObject(ex.InnerException);
+        ret["inner_exception"] = innEx;
+        return ret;
+    }
 
-            var version = dataTarget.ClrVersions[0];
-            var runtime = version.CreateRuntime();
+    static string GetStackTraceClrmd(ClrThread runtimeThread)
+    {
+        var sb = new StringBuilder();
+        foreach (var frame in runtimeThread.EnumerateStackTrace())
+        {
+            if (frame.Method == null) continue;
+            sb.AppendLine($"   in {frame.Method}");
+        }
 
-            var ret = new JArray();
-            var threads = App.RunningDispatchers.Values.Append(App.BaseDispatcher).Where(d => de.ThreadNames.Contains(d.Thread.Name)).Select(d => d.Thread).Append(PacketAnalyzer.AnalysisThread);
-            foreach (var thread in threads)
+        return sb.ToString();
+    }
+
+    static JArray GetThreadTraces(DeadlockException de)
+    {
+        using var dataTarget = DataTarget.CreateSnapshotAndAttach(Process.GetCurrentProcess().Id);
+
+        var version = dataTarget.ClrVersions[0];
+        var runtime = version.CreateRuntime();
+
+        var ret = new JArray();
+        var threads = App.RunningDispatchers.Values.Append(App.BaseDispatcher).Where(d => de.ThreadNames.Contains(d.Thread.Name)).Select(d => d.Thread).Append(PacketAnalyzer.AnalysisThread);
+        foreach (var thread in threads)
+        {
+            if (thread.Name == null) continue;
+            var runtimeThread = runtime.Threads.FirstOrDefault(t => t.ManagedThreadId == thread.ManagedThreadId);
+            if (runtimeThread != null)
             {
-                if (thread.Name == null) continue;
-                var runtimeThread = runtime.Threads.FirstOrDefault(t => t.ManagedThreadId == thread.ManagedThreadId);
-                if (runtimeThread != null)
+                ret.Add(new JObject
                 {
-                    ret.Add(new JObject
-                    {
-                        {"thread_name" , thread.Name},
-                        {"stack_trace", GetStackTraceClrmd(runtimeThread)}
-                    });
-                }
+                    {"thread_name" , thread.Name},
+                    {"stack_trace", GetStackTraceClrmd(runtimeThread)}
+                });
             }
-            return ret;
         }
+        return ret;
+    }
 
-        private static JValue BuildExceptionMessage(Exception ex)
+    static JValue BuildExceptionMessage(Exception ex)
+    {
+        if (ex is Win32Exception w32ex)
         {
-            if (ex is Win32Exception w32ex)
-            {
-                return new JValue($"{ex.Message} HRESULT:{w32ex.HResult} ErrorCode:{w32ex.ErrorCode} NativeCode:{w32ex.NativeErrorCode}");
-            }
-
-            return new JValue(ex.Message);
+            return new JValue($"{ex.Message} HRESULT:{w32ex.HResult} ErrorCode:{w32ex.ErrorCode} NativeCode:{w32ex.NativeErrorCode}");
         }
+
+        return new JValue(ex.Message);
     }
 }

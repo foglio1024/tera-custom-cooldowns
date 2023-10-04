@@ -2,28 +2,25 @@
 using System.Linq;
 using System.Windows;
 
-namespace TCC.UI.Controls.Classes.Elements
+namespace TCC.UI.Controls.Classes.Elements;
+
+/// <summary>
+/// Logica di interazione per EdgeRhombControl.xaml
+/// </summary>
+public partial class EdgeRhombControl
 {
-
-
-    /// <summary>
-    /// Logica di interazione per EdgeRhombControl.xaml
-    /// </summary>
-    public partial class EdgeRhombControl
+    public EdgeRhombControl()
     {
-        public EdgeRhombControl()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        public override List<FrameworkElement> EdgeElements
+    public override List<FrameworkElement> EdgeElements
+    {
+        get
         {
-            get
-            {
-                var ret = new List<FrameworkElement>();
-                Dispatcher.Invoke(() => ret.AddRange(Container.Children.Cast<FrameworkElement>()));
-                return ret;
-            }
+            var ret = new List<FrameworkElement>();
+            Dispatcher.Invoke(() => ret.AddRange(Container.Children.Cast<FrameworkElement>()));
+            return ret;
         }
     }
 }

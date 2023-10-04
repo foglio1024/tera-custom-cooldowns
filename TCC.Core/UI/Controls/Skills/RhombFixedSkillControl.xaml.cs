@@ -1,16 +1,15 @@
-﻿namespace TCC.UI.Controls.Skills
-{
-    public partial class RhombFixedSkillControl 
-    {
-        public RhombFixedSkillControl()
-        {
-            InitializeComponent();
+﻿namespace TCC.UI.Controls.Skills;
 
-            MainArcRef = Arc;
-            PreArcRef = PreArc;
-            ResetArcRef = ResetArc;
-            GlowRef = Glow;
-            DeleteButtonRef = DeleteButton;
-        }
+public partial class RhombFixedSkillControl 
+{
+    public RhombFixedSkillControl()
+    {
+        InitializeComponent();
+
+        MainArcRef = Arc;
+        PreArcRef = PreArc;
+        ResetArcRef = ResetArc;
+        GlowRef = Glow;
+        DeleteButtonRef = DeleteButton;
     }
 }

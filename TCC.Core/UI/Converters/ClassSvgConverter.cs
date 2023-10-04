@@ -4,25 +4,24 @@ using System.Windows.Data;
 using TCC.Utilities;
 using TeraDataLite;
 
-namespace TCC.UI.Converters
+namespace TCC.UI.Converters;
+
+public class ClassSvgConverter : IValueConverter
 {
-    public class ClassSvgConverter : IValueConverter
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        var c = value switch
         {
-            var c = value switch
-            {
-                Class cl => cl,
-                string s => Enum.Parse<Class>(s),
-                _ => Class.Common
-            };
+            Class cl => cl,
+            string s => Enum.Parse<Class>(s),
+            _ => Class.Common
+        };
 
-            return TccUtils.SvgClass(c); //App.Current.FindResource("SvgClass" + c.ToString());
-        }
+        return TccUtils.SvgClass(c); //App.Current.FindResource("SvgClass" + c.ToString());
+    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -476,7 +476,7 @@
                            StaysOpen="True" DataContext="{Binding}"
                            PopupAnimation="Fade" d:DataContext="{d:DesignInstance widgetsVm:ChatViewModel}">
             <Grid>
-                <Border Style="{StaticResource RevampBorderStyle}" Margin="3" Opacity=".95" />
+                <Border Style="{StaticResource RevampBorderStyle}" Margin="3" />
                 <StackPanel Width="350" Margin="3">
                     <settings:ValueSetting SettingName="Background opacity" Foreground="#9fff"
                                            TextBoxVisibility="Collapsed"

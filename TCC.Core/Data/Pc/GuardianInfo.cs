@@ -20,7 +20,7 @@ public class GuardianInfo : ThreadSafeObservableObject
         {
             if (_credits == value) return;
             _credits = value;
-            N(nameof(Credits));
+            N();
             N(nameof(CreditsFactor));
         }
     }

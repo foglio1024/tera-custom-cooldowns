@@ -14,8 +14,7 @@ public class CharacterWindowViewModel : TccWindowViewModel
 {
     public Player Player => Game.Me;
     public bool ShowRe =>
-        (Player.Class == Class.Brawler || Player.Class == Class.Gunner ||
-         Player.Class == Class.Ninja || Player.Class == Class.Valkyrie) &&
+        Player.Class is Class.Brawler or Class.Gunner or Class.Ninja or Class.Valkyrie &&
         ((CharacterWindowSettings)Settings!).ShowStamina;
     public bool ShowElements => Player.Class == Class.Sorcerer &&
                                 ((CharacterWindowSettings)Settings!).SorcererShowElements;

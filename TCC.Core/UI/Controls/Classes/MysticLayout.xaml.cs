@@ -1,11 +1,10 @@
-﻿namespace TCC.UI.Controls.Classes
-{
-    public partial class MysticLayout
-    {
+﻿namespace TCC.UI.Controls.Classes;
 
-        public MysticLayout()
-        {
-            InitializeComponent();
-        }
+public partial class MysticLayout
+{
+
+    public MysticLayout()
+    {
+        InitializeComponent();
     }
 }

@@ -2,127 +2,126 @@
 using TCC.Data;
 using TCC.UI.Windows.Widgets;
 
-namespace TCC.Settings.WindowSettings
+namespace TCC.Settings.WindowSettings;
+
+public class ClassWindowSettings : WindowSettingsBase
 {
-    public class ClassWindowSettings : WindowSettingsBase
+    public event Action? WarriorShowEdgeChanged;
+    public event Action? WarriorEdgeModeChanged;
+    public event Action? WarriorShowTraverseCutChanged;
+    public event Action? ValkyrieShowRagnarokChanged;
+    public event Action? ValkyrieShowGodsfallChanged;
+    public event Action? SorcererShowElementsChanged;
+    public event Action? FlashAvailableSkillsChanged;
+
+    bool _warriorShowEdge;
+    bool _warriorShowTraverseCut;
+    bool _sorcererShowElements;
+    bool _valkyrieShowRagnarok;
+    bool _valkyrieShowGodsfall;
+    bool _flashAvailableSkills;
+
+    WarriorEdgeMode _warriorEdgeMode;
+
+    public bool WarriorShowEdge
     {
-        public event Action? WarriorShowEdgeChanged;
-        public event Action? WarriorEdgeModeChanged;
-        public event Action? WarriorShowTraverseCutChanged;
-        public event Action? ValkyrieShowRagnarokChanged;
-        public event Action? ValkyrieShowGodsfallChanged;
-        public event Action? SorcererShowElementsChanged;
-        public event Action? FlashAvailableSkillsChanged;
-
-        private bool _warriorShowEdge;
-        private bool _warriorShowTraverseCut;
-        private bool _sorcererShowElements;
-        private bool _valkyrieShowRagnarok;
-        private bool _valkyrieShowGodsfall;
-        private bool _flashAvailableSkills;
-
-        private WarriorEdgeMode _warriorEdgeMode;
-
-        public bool WarriorShowEdge
+        get => _warriorShowEdge;
+        set
         {
-            get => _warriorShowEdge;
-            set
-            {
-                if (_warriorShowEdge == value) return;
-                _warriorShowEdge = value;
-                N();
-                WarriorShowEdgeChanged?.Invoke();
-            }
+            if (_warriorShowEdge == value) return;
+            _warriorShowEdge = value;
+            N();
+            WarriorShowEdgeChanged?.Invoke();
         }
-        public bool ValkyrieShowRagnarok
+    }
+    public bool ValkyrieShowRagnarok
+    {
+        get => _valkyrieShowRagnarok;
+        set
         {
-            get => _valkyrieShowRagnarok;
-            set
-            {
-                if (_valkyrieShowRagnarok == value) return;
-                _valkyrieShowRagnarok = value;
-                N();
-                ValkyrieShowRagnarokChanged?.Invoke();
-            }
+            if (_valkyrieShowRagnarok == value) return;
+            _valkyrieShowRagnarok = value;
+            N();
+            ValkyrieShowRagnarokChanged?.Invoke();
         }
-        public bool ValkyrieShowGodsfall
+    }
+    public bool ValkyrieShowGodsfall
+    {
+        get => _valkyrieShowGodsfall;
+        set
         {
-            get => _valkyrieShowGodsfall;
-            set
-            {
-                if (_valkyrieShowGodsfall == value) return;
-                _valkyrieShowGodsfall = value;
-                N();
-                ValkyrieShowGodsfallChanged?.Invoke();
-            }
+            if (_valkyrieShowGodsfall == value) return;
+            _valkyrieShowGodsfall = value;
+            N();
+            ValkyrieShowGodsfallChanged?.Invoke();
         }
-        public bool SorcererShowElements
+    }
+    public bool SorcererShowElements
+    {
+        get => _sorcererShowElements;
+        set
         {
-            get => _sorcererShowElements;
-            set
-            {
-                if (_sorcererShowElements == value) return;
-                _sorcererShowElements = value;
-                N();
-                SorcererShowElementsChanged?.Invoke();
-            }
+            if (_sorcererShowElements == value) return;
+            _sorcererShowElements = value;
+            N();
+            SorcererShowElementsChanged?.Invoke();
         }
-        public bool WarriorShowTraverseCut
+    }
+    public bool WarriorShowTraverseCut
+    {
+        get => _warriorShowTraverseCut;
+        set
         {
-            get => _warriorShowTraverseCut;
-            set
-            {
-                if (_warriorShowTraverseCut == value) return;
-                _warriorShowTraverseCut = value;
-                N();
-                WarriorShowTraverseCutChanged?.Invoke();
-
-            }
-        }
-        public bool FlashAvailableSkills
-        {
-            get => _flashAvailableSkills;
-            set
-            {
-                if (_flashAvailableSkills == value) return;
-                _flashAvailableSkills = value;
-                N();
-                FlashAvailableSkillsChanged?.Invoke();
-            }
-        }
-        public WarriorEdgeMode WarriorEdgeMode
-        {
-            get => _warriorEdgeMode;
-            set
-            {
-                if (_warriorEdgeMode == value) return;
-                _warriorEdgeMode = value;
-                N();
-                WarriorEdgeModeChanged?.Invoke();
-            }
-        }
-
-        public ClassWindowSettings()
-        {
-            _visible = true;
-            _clickThruMode = ClickThruMode.Never;
-            _scale = 1;
-            _autoDim = true;
-            _dimOpacity = .5;
-            _showAlways = false;
-            _enabled = true;
-            _allowOffScreen = false;
-            Positions = new ClassPositions(.25, .6, ButtonsPosition.Above);
-
-            UndimOnFlyingGuardian = false;
-
-            FlashAvailableSkills = true;
-
-            WarriorShowTraverseCut = true;
-            WarriorShowEdge = true;
-            WarriorEdgeMode = WarriorEdgeMode.Rhomb;
-            SorcererShowElements = true;
+            if (_warriorShowTraverseCut == value) return;
+            _warriorShowTraverseCut = value;
+            N();
+            WarriorShowTraverseCutChanged?.Invoke();
 
         }
+    }
+    public bool FlashAvailableSkills
+    {
+        get => _flashAvailableSkills;
+        set
+        {
+            if (_flashAvailableSkills == value) return;
+            _flashAvailableSkills = value;
+            N();
+            FlashAvailableSkillsChanged?.Invoke();
+        }
+    }
+    public WarriorEdgeMode WarriorEdgeMode
+    {
+        get => _warriorEdgeMode;
+        set
+        {
+            if (_warriorEdgeMode == value) return;
+            _warriorEdgeMode = value;
+            N();
+            WarriorEdgeModeChanged?.Invoke();
+        }
+    }
+
+    public ClassWindowSettings()
+    {
+        _visible = true;
+        _clickThruMode = ClickThruMode.Never;
+        _scale = 1;
+        _autoDim = true;
+        _dimOpacity = .5;
+        _showAlways = false;
+        _enabled = true;
+        _allowOffScreen = false;
+        Positions = new ClassPositions(.25, .6, ButtonsPosition.Above);
+
+        UndimOnFlyingGuardian = false;
+
+        FlashAvailableSkills = true;
+
+        WarriorShowTraverseCut = true;
+        WarriorShowEdge = true;
+        WarriorEdgeMode = WarriorEdgeMode.Rhomb;
+        SorcererShowElements = true;
+
     }
 }

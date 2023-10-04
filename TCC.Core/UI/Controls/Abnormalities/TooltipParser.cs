@@ -3,166 +3,164 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
-using Nostrum;
 using Colors = TCC.R.Colors;
 
-namespace TCC.UI.Controls.Abnormalities
+namespace TCC.UI.Controls.Abnormalities;
+
+public class TooltipParser
 {
-    public class TooltipParser
+    const string GoodMarker = "H_W_GOOD";
+    const string BadMarker = "H_W_BAD";
+    const string CustomMarker = "H_W_CSTM";
+    const string EndMarker = "COLOR_END";
+
+    const string CarriageReturn1 = "$BR";
+    const string CarriageReturn2 = "<br>";
+
+    string _t;
+
+    readonly List<Inline> _ret;
+
+    public TooltipParser(string s)
     {
-        private const string GoodMarker = "H_W_GOOD";
-        private const string BadMarker = "H_W_BAD";
-        private const string CustomMarker = "H_W_CSTM";
-        private const string EndMarker = "COLOR_END";
+        _ret = new List<Inline>();
+        _t = s;
+        Clean();
+        CorrectOrder();
+        ReplaceHTML();
+    }
 
-        private const string CarriageReturn1 = "$BR";
-        private const string CarriageReturn2 = "<br>";
+    public List<Inline> Parse()
+    {
+        var pieces = SplitOn(_t, EndMarker);
 
-        private string _t;
-
-        private readonly List<Inline> _ret;
-
-        public TooltipParser(string s)
+        for (var i = 0; i < pieces.Length; i++)
         {
-            _ret = new List<Inline>();
-            _t = s;
-            Clean();
-            CorrectOrder();
-            ReplaceHTML();
-        }
+            var piece = pieces[i];
 
-        public List<Inline> Parse()
-        {
-            var pieces = SplitOn(_t, EndMarker);
-
-            for (var i = 0; i < pieces.Length; i++)
+            if (i == pieces.Length - 1)
             {
-                var piece = pieces[i];
-
-                if (i == pieces.Length - 1)
-                {
-                    Add(piece);
-                }
-                else
-                {
-                    if (ParseGood(piece)) continue;
-                    if (ParseBad(piece)) continue;
-                    if (ParseCustom(piece)) continue;
-                    System.Diagnostics.Debug.WriteLine("Failed to parse piece");
-                }
+                Add(piece);
             }
-
-            return _ret;
-        }
-
-        private void Clean()
-        {
-            _t = _t.Replace(CarriageReturn1, "\n")
-                .Replace(CarriageReturn2, "\n")
-                .Replace("color = ", "color=")
-                .Replace("=\"", "='")
-                .Replace("\">", "'>");
-        }
-
-        private void CorrectOrder()
-        {
-            var correctionSplit = _t.Split('$');
-            var swapped = false;
-            for (var i = 0; i < correctionSplit.Length - 1; i++)
+            else
             {
-                if (!correctionSplit[i].StartsWith(EndMarker)
-                    || correctionSplit[i - 1].StartsWith(GoodMarker)
-                    || correctionSplit[i - 1].StartsWith(BadMarker)) continue;
-
-                if (correctionSplit[i + 1].StartsWith(GoodMarker))
-                {
-                    correctionSplit[i] = correctionSplit[i].Replace(EndMarker, $"${GoodMarker}");
-                    correctionSplit[i + 1] = correctionSplit[i + 1].Replace(GoodMarker, $"${EndMarker}");
-                    swapped = true;
-                }
-                else if (correctionSplit[i + 1].StartsWith(BadMarker))
-                {
-                    correctionSplit[i] = correctionSplit[i].Replace(EndMarker, $"${BadMarker}");
-                    correctionSplit[i + 1] = correctionSplit[i + 1].Replace(BadMarker, $"${EndMarker}");
-                    swapped = true;
-                }
+                if (ParseGood(piece)) continue;
+                if (ParseBad(piece)) continue;
+                if (ParseCustom(piece)) continue;
+                System.Diagnostics.Debug.WriteLine("Failed to parse piece");
             }
-
-            if (!swapped) return;
-            _t = "";
-            foreach (var s1 in correctionSplit) _t += s1;
         }
 
-        private void ReplaceHTML()
+        return _ret;
+    }
+
+    void Clean()
+    {
+        _t = _t.Replace(CarriageReturn1, "\n")
+            .Replace(CarriageReturn2, "\n")
+            .Replace("color = ", "color=")
+            .Replace("=\"", "='")
+            .Replace("\">", "'>");
+    }
+
+    void CorrectOrder()
+    {
+        var correctionSplit = _t.Split('$');
+        var swapped = false;
+        for (var i = 0; i < correctionSplit.Length - 1; i++)
         {
-            while (_t.Contains("<font"))
-                _t = _t.Replace("<font color='", $"${CustomMarker}")
-                    .Replace("'>", "")
-                    .Replace("</font>", $"${EndMarker}");
+            if (!correctionSplit[i].StartsWith(EndMarker)
+                || correctionSplit[i - 1].StartsWith(GoodMarker)
+                || correctionSplit[i - 1].StartsWith(BadMarker)) continue;
+
+            if (correctionSplit[i + 1].StartsWith(GoodMarker))
+            {
+                correctionSplit[i] = correctionSplit[i].Replace(EndMarker, $"${GoodMarker}");
+                correctionSplit[i + 1] = correctionSplit[i + 1].Replace(GoodMarker, $"${EndMarker}");
+                swapped = true;
+            }
+            else if (correctionSplit[i + 1].StartsWith(BadMarker))
+            {
+                correctionSplit[i] = correctionSplit[i].Replace(EndMarker, $"${BadMarker}");
+                correctionSplit[i + 1] = correctionSplit[i + 1].Replace(BadMarker, $"${EndMarker}");
+                swapped = true;
+            }
         }
 
-        private bool ParseGood(string piece)
-        {
-            if (!IsGood(piece)) return false;
-            var d = SplitOn(piece, GoodMarker);
+        if (!swapped) return;
+        _t = "";
+        foreach (var s1 in correctionSplit) _t += s1;
+    }
 
-            Add(d[0]);
-            AddFormatted(d[1], Colors.TooltipGoodColor);
-            return true;
-        }
+    void ReplaceHTML()
+    {
+        while (_t.Contains("<font"))
+            _t = _t.Replace("<font color='", $"${CustomMarker}")
+                .Replace("'>", "")
+                .Replace("</font>", $"${EndMarker}");
+    }
 
-        private bool ParseBad(string piece)
-        {
-            if (!IsBad(piece)) return false;
-            var d = SplitOn(piece, BadMarker);
+    bool ParseGood(string piece)
+    {
+        if (!IsGood(piece)) return false;
+        var d = SplitOn(piece, GoodMarker);
 
-            Add(d[0]);
-            AddFormatted(d[1], Colors.TooltipBadColor);
-            return true;
-        }
+        Add(d[0]);
+        AddFormatted(d[1], Colors.TooltipGoodColor);
+        return true;
+    }
 
-        private bool ParseCustom(string piece)
-        {
-            if (!IsCustom(piece)) return false;
-            var d = SplitOn(piece, CustomMarker);
+    bool ParseBad(string piece)
+    {
+        if (!IsBad(piece)) return false;
+        var d = SplitOn(piece, BadMarker);
 
-            var txt = d[1].Substring(7);
-            var col = d[1].Substring(0, 7);
-            var cstm = new {Text = txt, Color = col};
-            Add(d[0]);
-            AddFormatted(cstm.Text, Nostrum.WPF.MiscUtils.ParseColor(cstm.Color));
+        Add(d[0]);
+        AddFormatted(d[1], Colors.TooltipBadColor);
+        return true;
+    }
 
-            return true;
-        }
+    bool ParseCustom(string piece)
+    {
+        if (!IsCustom(piece)) return false;
+        var d = SplitOn(piece, CustomMarker);
 
-        private void Add(string content)
-        {
-            _ret.Add(new Run(content));
-        }
+        var txt = d[1].Substring(7);
+        var col = d[1].Substring(0, 7);
+        var cstm = new {Text = txt, Color = col};
+        Add(d[0]);
+        AddFormatted(cstm.Text, Nostrum.WPF.MiscUtils.ParseColor(cstm.Color));
 
-        private void AddFormatted(string content, Color color)
-        {
-            _ret.Add(new Run(content) {Foreground = new SolidColorBrush(color), FontWeight = FontWeights.DemiBold});
-        }
+        return true;
+    }
 
-        private static string[] SplitOn(string input, string marker)
-        {
-            return input.Split(new[] {$"${marker}"}, StringSplitOptions.None);
-        }
+    void Add(string content)
+    {
+        _ret.Add(new Run(content));
+    }
 
-        private static bool IsGood(string input)
-        {
-            return input.Contains($"${GoodMarker}");
-        }
+    void AddFormatted(string content, Color color)
+    {
+        _ret.Add(new Run(content) {Foreground = new SolidColorBrush(color), FontWeight = FontWeights.DemiBold});
+    }
 
-        private static bool IsBad(string input)
-        {
-            return input.Contains($"${BadMarker}");
-        }
+    static string[] SplitOn(string input, string marker)
+    {
+        return input.Split(new[] {$"${marker}"}, StringSplitOptions.None);
+    }
 
-        private static bool IsCustom(string input)
-        {
-            return input.Contains($"${CustomMarker}");
-        }
+    static bool IsGood(string input)
+    {
+        return input.Contains($"${GoodMarker}");
+    }
+
+    static bool IsBad(string input)
+    {
+        return input.Contains($"${BadMarker}");
+    }
+
+    static bool IsCustom(string input)
+    {
+        return input.Contains($"${CustomMarker}");
     }
 }

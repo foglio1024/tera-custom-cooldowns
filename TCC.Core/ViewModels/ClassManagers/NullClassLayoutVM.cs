@@ -1,6 +1,5 @@
-﻿namespace TCC.ViewModels.ClassManagers
+﻿namespace TCC.ViewModels.ClassManagers;
+
+internal class NullClassLayoutVM : BaseClassLayoutVM
 {
-    internal class NullClassLayoutVM : BaseClassLayoutVM
-    {
-    }
 }

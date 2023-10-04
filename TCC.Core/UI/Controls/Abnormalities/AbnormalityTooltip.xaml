@@ -21,7 +21,7 @@
         <Grid.CacheMode>
             <BitmapCache RenderAtScale="1"/>
         </Grid.CacheMode>
-        <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource RevampBorderStyle}" Effect="{x:Null}" Opacity=".95"/>
+        <Border Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource RevampBorderStyle}" Effect="{x:Null}" />
         <TextBlock Grid.Row="0"
                    Grid.Column="1"
                    Foreground="White" Margin="10" >

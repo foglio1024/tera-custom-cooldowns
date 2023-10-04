@@ -12,7 +12,7 @@ public class LootFilterConfigurationViewModel : ThreadSafeObservableObject
     public ICollectionViewLiveShaping? ItemsView { get; }
     public LootDistributionWindowSettings Settings { get; }
 
-    string _searchFilter;
+    string _searchFilter = "";
     public string SearchFilter
     {
         get => _searchFilter;
@@ -22,7 +22,9 @@ public class LootFilterConfigurationViewModel : ThreadSafeObservableObject
             _searchFilter = value;
             N();
 
-            var view = (ICollectionView)ItemsView;
+            var view = (ICollectionView?)ItemsView;
+            if (view == null) return;
+
             view.Filter = o => ((Item)o).Name.IndexOf(_searchFilter, StringComparison.InvariantCultureIgnoreCase) != -1;
             view.Refresh();
         }

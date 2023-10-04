@@ -4,15 +4,14 @@
 using System;
 using TeraPacketParser.TeraCommon.Game;
 
-namespace TeraPacketParser.TeraCommon.Sniffing
-{
-    public interface ITeraSniffer
-    {
-        bool Enabled { get; set; }
-        bool Connected { get; set; }
+namespace TeraPacketParser.TeraCommon.Sniffing;
 
-        event Action<Message> MessageReceived;
-        event Action<Server> NewConnection;
-        event Action EndConnection;
-    }
+public interface ITeraSniffer
+{
+    bool Enabled { get; set; }
+    bool Connected { get; set; }
+
+    event Action<Message> MessageReceived;
+    event Action<Server> NewConnection;
+    event Action EndConnection;
 }

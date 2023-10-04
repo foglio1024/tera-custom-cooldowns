@@ -1,344 +1,342 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using TeraPacketParser.Sniffing;
 
-namespace TCC.Interop.Proxy
+namespace TCC.Interop.Proxy;
+
+/// <summary>
+/// Sends commands to tcc-stub using a <see cref="ToolboxHttpClient"/>.
+/// </summary>
+public class StubClient
 {
-    /// <summary>
-    /// Sends commands to tcc-stub using a <see cref="ToolboxHttpClient"/>.
-    /// </summary>
-    public class StubClient
+    ToolboxHttpClient TccStub { get; }
+
+    public StubClient()
     {
-        private ToolboxHttpClient TccStub { get; }
+        TccStub = new ToolboxHttpClient("http://127.0.0.52:9550");
+    }
 
-        public StubClient()
-        {
-            TccStub = new ToolboxHttpClient("http://127.0.0.52:9550");
-        }
+    public async Task<bool> PingStub()
+    {
+        var resp = await TccStub.CallAsync("pingStub");
+        return resp?.Result != null && resp.Result.Value<bool>();
+    }
 
-        public async Task<bool> PingStub()
+    public async Task<bool> GetIsModAvailable(string modName)
+    {
+        var resp = await TccStub.CallAsync("getIsModAvailable", new JObject
         {
-            var resp = await TccStub.CallAsync("pingStub");
-            return resp?.Result != null && resp.Result.Value<bool>();
-        }
+            { "modName", modName }
+        });
+        return resp?.Result != null && resp.Result.Value<bool>();
+    }
 
-        public async Task<bool> GetIsModAvailable([NotNull] string modName)
+    public async void RequestPartyInfo(uint playerId, uint serverId)
+    {
+        await TccStub.CallAsync("requestPartyInfo", new JObject
         {
-            var resp = await TccStub.CallAsync("getIsModAvailable", new JObject
-            {
-                { "modName", modName }
-            });
-            return resp?.Result != null && resp.Result.Value<bool>();
-        }
+            { "playerId", playerId },
+            { "serverId", serverId}
+        });
+    }
 
-        public async void RequestPartyInfo(uint playerId, uint serverId)
-        {
-            await TccStub.CallAsync("requestPartyInfo", new JObject
-            {
-                { "playerId", playerId },
-                { "serverId", serverId}
-            });
-        }
-
-        public async Task<bool> ApplyToGroup(uint playerId, uint serverId)
-        {
-            var resp = await TccStub.CallAsync("applyToGroup",
+    public async Task<bool> ApplyToGroup(uint playerId, uint serverId)
+    {
+        var resp = await TccStub.CallAsync("applyToGroup",
             new JObject
             {
                 { "playerId", playerId },
                 { "serverId", serverId }
             });
-            return resp?.Result != null && resp.Result.Value<bool>();
-        }
+        return resp?.Result != null && resp.Result.Value<bool>();
+    }
 
-        public async void FriendUser([NotNull] string userName, [NotNull] string message)
+    public async void FriendUser(string userName, string message)
+    {
+        await TccStub.CallAsync("friendUser", new JObject
         {
-            await TccStub.CallAsync("friendUser", new JObject
-            {
-                { "userName", userName },
-                { "message", message }
-            });
-        }
+            { "userName", userName },
+            { "message", message }
+        });
+    }
 
-        public async void UnfriendUser([NotNull] string userName)
+    public async void UnfriendUser(string userName)
+    {
+        await TccStub.CallAsync("unfriendUser", new JObject
         {
-            await TccStub.CallAsync("unfriendUser", new JObject
-            {
-                { "userName", userName },
-            });
-        }
+            { "userName", userName },
+        });
+    }
 
-        public async void UnfriendUser([NotNull] uint playerId)
+    public async void UnfriendUser(uint playerId)
+    {
+        await TccStub.CallAsync("unfriendUser", new JObject
         {
-            await TccStub.CallAsync("unfriendUser", new JObject
-            {
-                { "playerId", playerId},
-            });
-        }
+            { "playerId", playerId},
+        });
+    }
 
-        public async void BlockUser([NotNull] string userName, uint serverId)
+    public async void BlockUser(string userName, uint serverId)
+    {
+        await TccStub.CallAsync("blockUser", new JObject
         {
-            await TccStub.CallAsync("blockUser", new JObject
-            {
-                { "userName", userName },
-                { "serverId", serverId }
-            });
-        }
+            { "userName", userName },
+            { "serverId", serverId }
+        });
+    }
 
-        public async void UnblockUser([NotNull] string userName)
+    public async void UnblockUser(string userName)
+    {
+        await TccStub.CallAsync("unblockUser", new JObject
         {
-            await TccStub.CallAsync("unblockUser", new JObject
-            {
-                { "userName", userName },
-            });
-        }
+            { "userName", userName },
+        });
+    }
 
-        public async void SetInvitePower(uint serverId, uint playerId, bool canInvite)
+    public async void SetInvitePower(uint serverId, uint playerId, bool canInvite)
+    {
+        await TccStub.CallAsync("setInvitePower", new JObject
         {
-            await TccStub.CallAsync("setInvitePower", new JObject
-            {
-                { "serverId", serverId},
-                { "playerId", playerId },
-                { "canInvite", canInvite},
-            });
-        }
+            { "serverId", serverId},
+            { "playerId", playerId },
+            { "canInvite", canInvite},
+        });
+    }
 
-        public async void DelegateLeader(uint serverId, uint playerId)
+    public async void DelegateLeader(uint serverId, uint playerId)
+    {
+        await TccStub.CallAsync("delegateLeader", new JObject
         {
-            await TccStub.CallAsync("delegateLeader", new JObject
-            {
-                { "serverId", serverId },
-                { "playerId", playerId }
-            });
-        }
+            { "serverId", serverId },
+            { "playerId", playerId }
+        });
+    }
 
-        public async void KickUser(uint serverId, uint playerId)
+    public async void KickUser(uint serverId, uint playerId)
+    {
+        await TccStub.CallAsync("kickUser", new JObject
         {
-            await TccStub.CallAsync("kickUser", new JObject
-            {
-                { "serverId", serverId },
-                { "playerId", playerId }
-            });
-        }
+            { "serverId", serverId },
+            { "playerId", playerId }
+        });
+    }
 
-        public async void InspectUser([NotNull] string userName, uint serverId)
+    public async void InspectUser(string userName, uint serverId)
+    {
+        await TccStub.CallAsync("inspectUser", new JObject
         {
-            await TccStub.CallAsync("inspectUser", new JObject
-            {
-                { "userName", userName },
-                { "serverId", serverId }
-            });
-        }
+            { "userName", userName },
+            { "serverId", serverId }
+        });
+    }
 
-        public async void InspectUser(ulong userGameId)
+    public async void InspectUser(ulong userGameId)
+    {
+        await TccStub.CallAsync("inspectUserWithGameId", new JObject
         {
-            await TccStub.CallAsync("inspectUserWithGameId", new JObject
-            {
-                { "gameId", userGameId}
-            });
-        }
+            { "gameId", userGameId}
+        });
+    }
 
-        public async void GroupInviteUser([NotNull] string userName, bool raid)
+    public async void GroupInviteUser(string userName, bool raid)
+    {
+        await TccStub.CallAsync("groupInviteUser", new JObject
         {
-            await TccStub.CallAsync("groupInviteUser", new JObject
-            {
-                { "userName", userName },
-                { "isRaid", raid ? 1 : 0 }
-            });
-        }
+            { "userName", userName },
+            { "isRaid", raid ? 1 : 0 }
+        });
+    }
 
-        public async void GuildInviteUser([NotNull] string userName)
+    public async void GuildInviteUser(string userName)
+    {
+        await TccStub.CallAsync("guildInviteUser", new JObject
         {
-            await TccStub.CallAsync("guildInviteUser", new JObject
-            {
-                { "userName", userName },
-            });
-        }
+            { "userName", userName },
+        });
+    }
 
-        public async void AcceptBrokerOffer(uint playerId, uint listingId)
+    public async void AcceptBrokerOffer(uint playerId, uint listingId)
+    {
+        await TccStub.CallAsync("acceptBrokerOffer", new JObject
         {
-            await TccStub.CallAsync("acceptBrokerOffer", new JObject
-            {
-                { "playerId", playerId },
-                { "listingId", listingId }
-            });
-        }
+            { "playerId", playerId },
+            { "listingId", listingId }
+        });
+    }
 
-        public async void DeclineBrokerOffer(uint playerId, uint listingId)
+    public async void DeclineBrokerOffer(uint playerId, uint listingId)
+    {
+        await TccStub.CallAsync("declineBrokerOffer", new JObject
         {
-            await TccStub.CallAsync("declineBrokerOffer", new JObject
-            {
-                { "playerId", playerId },
-                { "listingId", listingId }
-            });
-        }
+            { "playerId", playerId },
+            { "listingId", listingId }
+        });
+    }
 
-        public async void DeclineUserGroupApply(uint playerId, uint serverId)
+    public async void DeclineUserGroupApply(uint playerId, uint serverId)
+    {
+        await TccStub.CallAsync("declineUserGroupApply", new JObject
         {
-            await TccStub.CallAsync("declineUserGroupApply", new JObject
-            {
-                { "playerId", playerId },
-                { "serverId", serverId },
-            });
-        }
+            { "playerId", playerId },
+            { "serverId", serverId },
+        });
+    }
 
-        public async void PublicizeListing()
+    public async void PublicizeListing()
+    {
+        await TccStub.CallAsync("publicizeListing");
+    }
+
+    public async void RemoveListing()
+    {
+        await TccStub.CallAsync("removeListing");
+    }
+
+    public async void RequestListings(int minLevel, int maxLevel)
+    {
+        if (minLevel < 1) minLevel = 60;
+        if (maxLevel < 1) maxLevel = 70;
+
+        if (minLevel > 70) minLevel = 60;
+        if (maxLevel > 70) maxLevel = 70;
+
+        if (minLevel > maxLevel) minLevel = maxLevel;
+        if (maxLevel < minLevel) maxLevel = minLevel;
+
+        await TccStub.CallAsync("requestListings", new JObject
         {
-            await TccStub.CallAsync("publicizeListing");
-        }
+            { "minLevel", minLevel },
+            { "maxLevel", maxLevel }
+        });
+    }
 
-        public async void RemoveListing()
+    public async void AskInteractive(uint serverId, string userName)
+    {
+        await TccStub.CallAsync("askInteractive", new JObject
         {
-            await TccStub.CallAsync("removeListing");
-        }
+            { "serverId", serverId },
+            { "userName", userName }
+        });
+    }
 
-        public async void RequestListings(int minLevel, int maxLevel)
+    public async void RequestExTooltip(long itemUid, string ownerName)
+    {
+        await TccStub.CallAsync("requestExTooltip", new JObject
         {
-            if (minLevel < 1) minLevel = 60;
-            if (maxLevel < 1) maxLevel = 70;
+            { "itemUid", itemUid},
+            { "ownerName", ownerName}
+        });
+    }
 
-            if (minLevel > 70) minLevel = 60;
-            if (maxLevel > 70) maxLevel = 70;
-
-            if (minLevel > maxLevel) minLevel = maxLevel;
-            if (maxLevel < minLevel) maxLevel = minLevel;
-
-            await TccStub.CallAsync("requestListings", new JObject
-            {
-                { "minLevel", minLevel },
-                { "maxLevel", maxLevel }
-            });
-        }
-
-        public async void AskInteractive(uint serverId, [NotNull] string userName)
+    public async void RequestNonDbItemInfo(uint itemId)
+    {
+        await TccStub.CallAsync("requestNonDbItemInfo", new JObject
         {
-            await TccStub.CallAsync("askInteractive", new JObject
-            {
-                { "serverId", serverId },
-                { "userName", userName }
-            });
-        }
+            { "itemId", itemId}
+        });
+    }
 
-        public async void RequestExTooltip(long itemUid, [NotNull] string ownerName)
+    public async void RequestListingsPage(int page)
+    {
+        await TccStub.CallAsync("requestListingsPage", new JObject
         {
-            await TccStub.CallAsync("requestExTooltip", new JObject
-            {
-                { "itemUid", itemUid},
-                { "ownerName", ownerName}
-            });
-        }
+            { "page", page }
+        });
+    }
 
-        public async void RequestNonDbItemInfo(uint itemId)
+    public async void RegisterListing(string message, bool isRaid)
+    {
+        await TccStub.CallAsync("registerListing", new JObject
         {
-            await TccStub.CallAsync("requestNonDbItemInfo", new JObject
-            {
-                { "itemId", itemId}
-            });
-        }
+            { "message", message },
+            { "isRaid", isRaid }
+        });
+    }
 
-        public async void RequestListingsPage(int page)
+    public async void DisbandGroup()
+    {
+        await TccStub.CallAsync("disbandGroup");
+    }
+
+    public async void LeaveGroup()
+    {
+        await TccStub.CallAsync("leaveGroup");
+    }
+
+    public async void RequestListingCandidates()
+    {
+        await TccStub.CallAsync("requestListingCandidates");
+    }
+
+    public async void ForceSystemMessage(string message, int opc)
+    {
+        var badOpc = message.Split('\v')[0];
+        if (badOpc == "@0") message = message.Replace(badOpc, "@" + opc);
+
+        await TccStub.CallAsync("forceSystemMessage", new JObject
         {
-            await TccStub.CallAsync("requestListingsPage", new JObject
-            {
-                { "page", page }
-            });
-        }
+            { "message", message }
+        });
+    }
 
-        public async void RegisterListing([NotNull] string message, bool isRaid)
+    public async void InvokeCommand(string command)
+    {
+        await TccStub.CallAsync("invokeCommand", new JObject
         {
-            await TccStub.CallAsync("registerListing", new JObject
-            {
-                { "message", message },
-                { "isRaid", isRaid }
-            });
-        }
+            { "command", command }
+        });
+    }
 
-        public async void DisbandGroup()
+    public async void ReturnToLobby()
+    {
+        await TccStub.CallAsync("returnToLobby");
+    }
+
+    public async void ChatLinkAction(string data)
+    {
+        await TccStub.CallAsync("chatLinkAction", new JObject
         {
-            await TccStub.CallAsync("disbandGroup");
-        }
+            { "linkData", $":tcc-chatLinkAction:{data}:tcc-chatLinkAction:" }
+        });
+    }
 
-        public async void LeaveGroup()
+    public async void ResetInstance()
+    {
+        await TccStub.CallAsync("resetInstance");
+    }
+
+    public async Task<string> QuerySingleValue(string path, IEnumerable<string> arguments, string attribute)
+    {
+        var resp = await TccStub.CallAsync("querySingleValue", new JObject
         {
-            await TccStub.CallAsync("leaveGroup");
-        }
+            { "path", path },
+            { "arguments", new JArray(arguments) },
+            { "attribute", attribute }
+        });
 
-        public async void RequestListingCandidates()
+        return resp?.Result?.Value<string>() ?? string.Empty;
+    }
+
+    // bool only, send type if needed for other settings
+    public async void UpdateSetting(string settingName, object value)
+    {
+        await TccStub.CallAsync("updateSetting", new JObject
         {
-            await TccStub.CallAsync("requestListingCandidates");
-        }
+            { "name", settingName },
+            { "value", value.ToString() },
+        });
+    }
 
-        public async void ForceSystemMessage([NotNull] string message, [NotNull] int opc)
+    public async void Initialize(bool useLfg, bool enablePlayerMenu, bool enableProxy, bool showIngameChat, bool tccChatEnabled)
+    {
+        await TccStub.CallAsync("initialize", new JObject
         {
-            var badOpc = message.Split('\v')[0];
-            if (badOpc == "@0") message = message.Replace(badOpc, "@" + opc);
-
-            await TccStub.CallAsync("forceSystemMessage", new JObject
-            {
-                { "message", message }
-            });
-        }
-
-        public async void InvokeCommand([NotNull] string command)
-        {
-            await TccStub.CallAsync("invokeCommand", new JObject
-            {
-                { "command", command }
-            });
-        }
-
-        public async void ReturnToLobby()
-        {
-            await TccStub.CallAsync("returnToLobby");
-        }
-
-        public async void ChatLinkAction([NotNull] string data)
-        {
-            await TccStub.CallAsync("chatLinkAction", new JObject
-            {
-                { "linkData", $":tcc-chatLinkAction:{data}:tcc-chatLinkAction:" }
-            });
-        }
-
-        public async void ResetInstance()
-        {
-            await TccStub.CallAsync("resetInstance");
-        }
-
-        public async Task<string> QuerySingleValue(string path, IEnumerable<string> arguments, string attribute)
-        {
-            var resp = await TccStub.CallAsync("querySingleValue", new JObject
-            {
-                { "path", path },
-                { "arguments", new JArray(arguments) },
-                { "attribute", attribute }
-            });
-
-            return resp?.Result?.Value<string>() ?? string.Empty;
-        }
-
-        // bool only, send type if needed for other settings
-        public async void UpdateSetting(string settingName, object value)
-        {
-            await TccStub.CallAsync("updateSetting", new JObject
-            {
-                { "name", settingName },
-                { "value", value.ToString() },
-            });
-        }
-
-        public async void Initialize(bool useLfg, bool enablePlayerMenu, bool enableProxy, bool showIngameChat, bool tccChatEnabled)
-        {
-            await TccStub.CallAsync("initialize", new JObject
-            {
-                { "useLfg", useLfg},
-                { "EnablePlayerMenu", enablePlayerMenu},
-                { "EnableProxy", enableProxy},
-                { "ShowIngameChat", showIngameChat},
-                { "TccChatEnabled", tccChatEnabled}
-            });
-        }
+            { "useLfg", useLfg},
+            { "EnablePlayerMenu", enablePlayerMenu},
+            { "EnableProxy", enableProxy},
+            { "ShowIngameChat", showIngameChat},
+            { "TccChatEnabled", tccChatEnabled}
+        });
     }
 }

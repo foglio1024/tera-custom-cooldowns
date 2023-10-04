@@ -10,58 +10,55 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Threading;
-using Nostrum.Extensions;
 using Nostrum.WPF.Factories;
 using TeraDataLite;
 using Nostrum.WPF.ThreadSafe;
 using Nostrum.WPF.Extensions;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels;
+
+public class MyAbnormalConfigVM : ThreadSafeObservableObject, IDisposable
 {
-    public class MyAbnormalConfigVM : ThreadSafeObservableObject, IDisposable
+    public event Action? ShowAllChanged;
+
+    public ICollectionView AbnormalitiesView { get; set; }
+
+    public bool ShowAll
     {
-        public event Action? ShowAllChanged;
-
-        public ICollectionView AbnormalitiesView { get; set; }
-
-        public bool ShowAll
+        get => App.Settings.BuffWindowSettings.ShowAll;
+        set
         {
-            get => App.Settings.BuffWindowSettings.ShowAll;
-            set
-            {
-                if (App.Settings.BuffWindowSettings.ShowAll== value) return;
-                App.Settings.BuffWindowSettings.ShowAll= value;
-                _dispatcher?.Invoke(() => ShowAllChanged?.Invoke());
-                App.Settings.Save();
-                N();
-            }
+            if (App.Settings.BuffWindowSettings.ShowAll== value) return;
+            App.Settings.BuffWindowSettings.ShowAll= value;
+            _dispatcher.Invoke(() => ShowAllChanged?.Invoke());
+            App.Settings.Save();
+            N();
         }
-        public List<Class> Classes
+    }
+    public List<Class> Classes
+    {
+        get
         {
-            get
-            {
-                var l = EnumUtils.ListFromEnum<Class>();
-                l.Remove(Class.None);
-                return l;
-            }
+            var l = EnumUtils.ListFromEnum<Class>();
+            l.Remove(Class.None);
+            return l;
         }
-        public MyAbnormalConfigVM()
+    }
+    public MyAbnormalConfigVM()
+    {
+        var myAbnormals = new ThreadSafeObservableCollection<MyAbnormalityVM>(_dispatcher);
+        foreach (var abnormality in Game.DB!.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
         {
-            var myAbnormals = new ThreadSafeObservableCollection<MyAbnormalityVM>(_dispatcher);
-            foreach (var abnormality in Game.DB!.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
-            {
-                var abVM = new MyAbnormalityVM(abnormality);
+            var abVM = new MyAbnormalityVM(abnormality);
 
-                myAbnormals.Add(abVM);
-            }
-
-            AbnormalitiesView = CollectionViewFactory.CreateCollectionView(myAbnormals);
+            myAbnormals.Add(abVM);
         }
 
-        public void Dispose()
-        {
-            AbnormalitiesView.Free();
-        }
+        AbnormalitiesView = CollectionViewFactory.CreateCollectionView(myAbnormals);
+    }
+
+    public void Dispose()
+    {
+        AbnormalitiesView.Free();
     }
 }

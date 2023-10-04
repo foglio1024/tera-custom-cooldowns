@@ -1,43 +1,40 @@
-﻿using System.Windows.Threading;
-using Nostrum;
-using Nostrum.WPF.ThreadSafe;
+﻿using Nostrum.WPF.ThreadSafe;
 using TCC.Settings.WindowSettings;
 using TeraPacketParser.Analysis;
 
-namespace TCC.ViewModels
+namespace TCC.ViewModels;
+
+public class TccWindowViewModel : ThreadSafeObservableObject
 {
-    public class TccWindowViewModel : ThreadSafeObservableObject
+    public WindowSettingsBase? Settings { get; }
+
+    /// <summary>
+    /// Called from <see cref="OnEnabledChanged"/> or when <see cref="PacketAnalyzer.ProcessorReady"/> is raised.
+    /// </summary>
+    protected virtual void InstallHooks() { }
+    /// <summary>
+    /// Called from <see cref="OnEnabledChanged"/>.
+    /// </summary>
+    protected virtual void RemoveHooks() { }
+    /// <summary>
+    /// Called when <see cref="WindowSettingsBase.Enabled"/> changes.
+    /// </summary>
+    /// <param name="enabled"></param>
+    protected virtual void OnEnabledChanged(bool enabled)
     {
-        public WindowSettingsBase? Settings { get; }
+        if (enabled) InstallHooks();
+        else RemoveHooks();
+    }
 
-        /// <summary>
-        /// Called from <see cref="OnEnabledChanged"/> or when <see cref="PacketAnalyzer.ProcessorReady"/> is raised.
-        /// </summary>
-        protected virtual void InstallHooks() { }
-        /// <summary>
-        /// Called from <see cref="OnEnabledChanged"/>.
-        /// </summary>
-        protected virtual void RemoveHooks() { }
-        /// <summary>
-        /// Called when <see cref="WindowSettingsBase.Enabled"/> changes.
-        /// </summary>
-        /// <param name="enabled"></param>
-        protected virtual void OnEnabledChanged(bool enabled)
+    protected TccWindowViewModel(WindowSettingsBase? settings)
+    {
+        if (settings != null)
         {
-            if (enabled) InstallHooks();
-            else RemoveHooks();
+            Settings = settings;
+            settings.EnabledChanged += OnEnabledChanged;
+            if (!settings.Enabled) return;
         }
 
-        protected TccWindowViewModel(WindowSettingsBase? settings)
-        {
-            if (settings != null)
-            {
-                Settings = settings;
-                settings.EnabledChanged += OnEnabledChanged;
-                if (!settings.Enabled) return;
-            }
-
-            PacketAnalyzer.ProcessorReady += InstallHooks;
-        }
+        PacketAnalyzer.ProcessorReady += InstallHooks;
     }
 }

@@ -3,20 +3,19 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace TCC.UI.Converters
+namespace TCC.UI.Converters;
+
+public class CombatToColorConverter : IValueConverter
 {
-    public class CombatToColorConverter : IValueConverter
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var c = (bool?)value ?? false;
+        var c = (bool?)value ?? false;
 
-            return c ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Black);
-        }
+        return c ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Black);
+    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TeraDataLite;
+﻿namespace TeraDataLite;
 
 public enum FriendEntryType
 {

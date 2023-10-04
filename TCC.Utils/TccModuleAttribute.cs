@@ -1,15 +1,14 @@
 ﻿using System;
 
-namespace TCC.Utils
-{
-    [AttributeUsage(AttributeTargets.Class)]
-    public class TccModuleAttribute : Attribute
-    {
-        public bool Enabled { get; set; }
+namespace TCC.Utils;
 
-        public TccModuleAttribute(bool enabled = true)
-        {
-            Enabled = enabled;
-        }
+[AttributeUsage(AttributeTargets.Class)]
+public class TccModuleAttribute : Attribute
+{
+    public bool Enabled { get; set; }
+
+    public TccModuleAttribute(bool enabled = true)
+    {
+        Enabled = enabled;
     }
 }

@@ -1,15 +1,14 @@
-﻿namespace TCC.Data.Chat
+﻿namespace TCC.Data.Chat;
+
+public enum MessagePieceType
 {
-    public enum MessagePieceType
-    {
-        Simple,
-        Item,
-        Quest,
-        PointOfInterest,
-        Money,
-        Url,
-        Emoji,
-        Achievement,
-        Icon
-    }
+    Simple,
+    Item,
+    Quest,
+    PointOfInterest,
+    Money,
+    Url,
+    Emoji,
+    Achievement,
+    Icon
 }

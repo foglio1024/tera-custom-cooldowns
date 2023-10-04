@@ -1,12 +1,11 @@
 ﻿using System.Windows;
 
-namespace TCC.Publisher
+namespace TCC.Publisher;
+
+public partial class App
 {
-    public partial class App
+    void Application_Startup(object sender, StartupEventArgs e)
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            Publisher.Init();
-        }
+        Publisher.Init();
     }
 }

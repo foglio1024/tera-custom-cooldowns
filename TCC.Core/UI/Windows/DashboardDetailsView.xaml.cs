@@ -1,10 +1,9 @@
-﻿namespace TCC.UI.Windows
+﻿namespace TCC.UI.Windows;
+
+public partial class DashboardDetailsView 
 {
-    public partial class DashboardDetailsView 
+    public DashboardDetailsView()
     {
-        public DashboardDetailsView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

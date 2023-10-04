@@ -3,20 +3,19 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Data;
 
-namespace TCC.UI.Converters
+namespace TCC.UI.Converters;
+
+public class IconConverter : IValueConverter
 {
-    public class IconConverter : IValueConverter
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var iconName = value?.ToString()?.Replace(".", "/") ?? "unknown";
+        var iconName = value?.ToString()?.Replace(".", "/") ?? "unknown";
 
-            return Path.Combine(App.ResourcesPath, "images/" + iconName + ".png");
-        }
+        return Path.Combine(App.ResourcesPath, "images/" + iconName + ".png");
+    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

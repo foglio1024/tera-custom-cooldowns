@@ -1,16 +1,15 @@
-﻿namespace TCC.UI.Controls.Skills
-{
-    public partial class SquareFixedSkillControl
-    {
-        public SquareFixedSkillControl()
-        {
-            InitializeComponent();
+﻿namespace TCC.UI.Controls.Skills;
 
-            MainArcRef = Arc;
-            PreArcRef = PreArc;
-            ResetArcRef = ResetArc;
-            GlowRef = Glow;
-            DeleteButtonRef = DeleteButton;
-        }
+public partial class SquareFixedSkillControl
+{
+    public SquareFixedSkillControl()
+    {
+        InitializeComponent();
+
+        MainArcRef = Arc;
+        PreArcRef = PreArc;
+        ResetArcRef = ResetArc;
+        GlowRef = Glow;
+        DeleteButtonRef = DeleteButton;
     }
 }

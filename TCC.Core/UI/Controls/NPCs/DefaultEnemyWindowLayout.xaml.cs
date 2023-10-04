@@ -1,10 +1,9 @@
-﻿namespace TCC.UI.Controls.NPCs
+﻿namespace TCC.UI.Controls.NPCs;
+
+public partial class DefaultEnemyWindowLayout
 {
-    public partial class DefaultEnemyWindowLayout
+    public DefaultEnemyWindowLayout()
     {
-        public DefaultEnemyWindowLayout()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

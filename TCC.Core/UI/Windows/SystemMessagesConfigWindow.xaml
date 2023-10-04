@@ -95,7 +95,6 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Border Style="{StaticResource RevampBorderStyle}"
-                Opacity=".95"
                 Grid.RowSpan="3"
                 Grid.ColumnSpan="2" />
         <!-- Title bar -->

@@ -3,42 +3,41 @@ using Dragablz;
 using TCC.Data.Chat;
 using TCC.ViewModels;
 
-namespace TCC.UI.Controls.Chat
+namespace TCC.UI.Controls.Chat;
+
+/// <summary>
+/// Interaction logic for DefaultMessageBody.xaml
+/// </summary>
+public partial class DefaultMessageBody
 {
-    /// <summary>
-    /// Interaction logic for DefaultMessageBody.xaml
-    /// </summary>
-    public partial class DefaultMessageBody
+    public DefaultMessageBody()
     {
-        public DefaultMessageBody()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
+    }
+
+    void PinBtn_OnClick(object sender, RoutedEventArgs e)
+    {
+        var dc = DataContext as ChatMessage;
+        foreach (var w in ChatManager.Instance.ChatWindows)
+        {
+            if (!w.IsMouseOver) continue;
+            var currTabVm = w.TabControl.SelectedItem as HeaderedItemViewModel;
+            var currTab = currTabVm?.Content as Tab;
+            if (currTab == null) continue;
+            currTab.PinnedMessage = currTab.PinnedMessage == dc ? null : dc;
         }
+    }
 
-        private void PinBtn_OnClick(object sender, RoutedEventArgs e)
+    void CopyBtn_OnClick(object sender, RoutedEventArgs e)
+    {
+        try
         {
-            var dc = DataContext as ChatMessage;
-            foreach (var w in ChatManager.Instance.ChatWindows)
-            {
-                if (!w.IsMouseOver) continue;
-                var currTabVm = w.TabControl.SelectedItem as HeaderedItemViewModel;
-                var currTab = currTabVm?.Content as Tab;
-                if (currTab == null) continue;
-                currTab.PinnedMessage = currTab.PinnedMessage == dc ? null : dc;
-            }
+            Clipboard.SetText(((ChatMessage)DataContext).ToString());
         }
-
-        private void CopyBtn_OnClick(object sender, RoutedEventArgs e)
+        catch
         {
-            try
-            {
-                Clipboard.SetText(((ChatMessage)DataContext).ToString());
-            }
-            catch
-            {
-                // ignored
-            }
+            // ignored
         }
     }
 }

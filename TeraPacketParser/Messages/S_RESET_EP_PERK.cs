@@ -1,14 +1,13 @@
 ﻿
 
 
-namespace TeraPacketParser.Messages
+namespace TeraPacketParser.Messages;
+
+public class S_RESET_EP_PERK : ParsedMessage
 {
-    public class S_RESET_EP_PERK : ParsedMessage
+    public bool Success { get; }
+    public S_RESET_EP_PERK(TeraMessageReader r) : base(r)
     {
-        public bool Success { get; }
-        public S_RESET_EP_PERK(TeraMessageReader r) : base(r)
-        {
-            Success = r.ReadBoolean();
-        }
+        Success = r.ReadBoolean();
     }
 }

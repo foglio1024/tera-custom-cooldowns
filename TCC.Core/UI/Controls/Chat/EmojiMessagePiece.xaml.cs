@@ -1,10 +1,9 @@
-﻿namespace TCC.UI.Controls.Chat
+﻿namespace TCC.UI.Controls.Chat;
+
+public partial class EmojiMessagePiece
 {
-    public partial class EmojiMessagePiece
+    public EmojiMessagePiece()
     {
-        public EmojiMessagePiece()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

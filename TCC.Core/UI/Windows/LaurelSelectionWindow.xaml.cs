@@ -2,14 +2,14 @@
 
 namespace TCC.UI.Windows;
 
-public partial class LaurelSelectionWindow : TccWindow
+public partial class LaurelSelectionWindow
 {
     public LaurelSelectionWindow() : base(true)
     {
         InitializeComponent();
     }
 
-    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
     }

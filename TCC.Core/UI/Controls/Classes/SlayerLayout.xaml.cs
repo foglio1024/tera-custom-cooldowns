@@ -1,13 +1,12 @@
-﻿namespace TCC.UI.Controls.Classes
+﻿namespace TCC.UI.Controls.Classes;
+
+/// <summary>
+/// Logica di interazione per SlayerLayout.xaml
+/// </summary>
+public partial class SlayerLayout
 {
-    /// <summary>
-    /// Logica di interazione per SlayerLayout.xaml
-    /// </summary>
-    public partial class SlayerLayout
+    public SlayerLayout()
     {
-        public SlayerLayout()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

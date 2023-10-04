@@ -1,32 +1,29 @@
-﻿using System.Windows.Threading;
-using Nostrum;
-using Nostrum.WPF.ThreadSafe;
+﻿using Nostrum.WPF.ThreadSafe;
 
-namespace TCC.UI.Controls.NPCs
+namespace TCC.UI.Controls.NPCs;
+
+public class EnragePeriodItem : ThreadSafeObservableObject
 {
-    public class EnragePeriodItem : ThreadSafeObservableObject
+    public double Start { get; }
+    public double End { get; private set; }
+    public double Factor => Duration * .01;
+    public double StartFactor => End * .01;
+
+    public double Duration => Start - End;
+    public EnragePeriodItem(double start)
     {
-        public double Start { get; }
-        public double End { get; private set; }
-        public double Factor => Duration * .01;
-        public double StartFactor => End * .01;
+        Start = start;
 
-        public double Duration => Start - End;
-        public EnragePeriodItem(double start)
-        {
-            Start = start;
+    }
+    public void SetEnd(double end)
+    {
+        End = end;
+        Refresh();
+    }
 
-        }
-        public void SetEnd(double end)
-        {
-            End = end;
-            Refresh();
-        }
-
-        private void Refresh()
-        {
-            N(nameof(Factor));
-            N(nameof(StartFactor));
-        }
+    void Refresh()
+    {
+        N(nameof(Factor));
+        N(nameof(StartFactor));
     }
 }

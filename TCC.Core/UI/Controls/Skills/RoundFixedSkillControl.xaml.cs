@@ -1,15 +1,14 @@
-﻿namespace TCC.UI.Controls.Skills
+﻿namespace TCC.UI.Controls.Skills;
+
+public partial class RoundFixedSkillControl 
 {
-    public partial class RoundFixedSkillControl 
+    public RoundFixedSkillControl()
     {
-        public RoundFixedSkillControl()
-        {
-            InitializeComponent();
-            MainArcRef = Arc;
-            PreArcRef = PreArc;
-            ResetArcRef = ResetArc;
-            GlowRef = Glow;
-            DeleteButtonRef = DeleteButton;
-        }
+        InitializeComponent();
+        MainArcRef = Arc;
+        PreArcRef = PreArc;
+        ResetArcRef = ResetArc;
+        GlowRef = Glow;
+        DeleteButtonRef = DeleteButton;
     }
 }

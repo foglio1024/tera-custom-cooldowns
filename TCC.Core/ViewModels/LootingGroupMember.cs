@@ -7,7 +7,7 @@ public class LootingGroupMember : ThreadSafeObservableObject
 {
     public GroupMemberData Member { get; }
 
-    int _roll = 0;
+    int _roll;
 
     public int Roll
     {

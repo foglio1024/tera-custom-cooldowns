@@ -1,9 +1,8 @@
-﻿namespace TeraPacketParser.Data
+﻿namespace TeraPacketParser.Data;
+
+public enum MessageDirection
 {
-    public enum MessageDirection
-    {
-        Undefined = 0,
-        ClientToServer = 1,
-        ServerToClient = 2
-    }
+    Undefined = 0,
+    ClientToServer = 1,
+    ServerToClient = 2
 }

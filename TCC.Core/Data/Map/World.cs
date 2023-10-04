@@ -2,45 +2,44 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace TCC.Data.Map
+namespace TCC.Data.Map;
+
+public class World
 {
-    public class World
+    public Dictionary<uint, Guard> Guards { get; set; }
+    public uint Id { get; }
+    public uint NameId { get; }
+
+    public World(uint wId, uint name)
     {
-        public Dictionary<uint, Guard> Guards { get; set; }
-        public uint Id { get; }
-        public uint NameId { get; }
+        Guards = new Dictionary<uint, Guard>();
+        Id = wId;
+        NameId = name;
+    }
 
-        public World(uint wId, uint name)
+
+
+    public static World FromXElement(XElement worldElem)
+    {
+        var worldId = 0U;
+        var worldNameId = 0U;
+        worldElem.Attributes().ToList().ForEach(a =>
         {
-            Guards = new Dictionary<uint, Guard>();
-            Id = wId;
-            NameId = name;
-        }
+            if (a.Name == "id") worldId = uint.Parse(a.Value);
+            if (a.Name == "nameId") worldNameId = uint.Parse(a.Value);
+        });
 
-
-
-        public static World FromXElement(XElement worldElem)
+        var world = new World(worldId, worldNameId);
+        worldElem.Descendants().Where(x => x.Name == "Guard").ToList().ForEach(guardElem =>
         {
-            var worldId = 0U;
-            var worldNameId = 0U;
-            worldElem.Attributes().ToList().ForEach(a =>
-            {
-                if (a.Name == "id") worldId = uint.Parse(a.Value);
-                if (a.Name == "nameId") worldNameId = uint.Parse(a.Value);
-            });
+            var guard = Guard.FromXElement(guardElem);
+            world.Guards[guard.Id] = guard;
+        });
+        return world;
 
-            var world = new World(worldId, worldNameId);
-            worldElem.Descendants().Where(x => x.Name == "Guard").ToList().ForEach(guardElem =>
-            {
-                var guard = Guard.FromXElement(guardElem);
-                world.Guards[guard.Id] = guard;
-            });
-            return world;
-
-            //----------------------------------------------
-
-        }
-
+        //----------------------------------------------
 
     }
+
+
 }

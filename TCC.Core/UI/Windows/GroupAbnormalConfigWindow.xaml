@@ -6,7 +6,6 @@
                    xmlns:vm="clr-namespace:TCC.ViewModels"
                    xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
                    xmlns:windows="clr-namespace:TCC.UI.Windows"
-                   xmlns:nsEx="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
                    SizeToContent="Height"
                    mc:Ignorable="d"
                    Style="{StaticResource BaseWindowStyle}"
@@ -30,7 +29,7 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Grid.RowSpan="3" Opacity=".95" Style="{StaticResource RevampBorderStyle}" />
+        <Border Grid.RowSpan="3" Style="{StaticResource RevampBorderStyle}" />
 
         <Grid MouseLeftButtonDown="Drag" Background="Transparent">
 

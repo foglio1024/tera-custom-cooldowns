@@ -1,13 +1,12 @@
-﻿namespace TCC.UI.Controls.Group
+﻿namespace TCC.UI.Controls.Group;
+
+/// <summary>
+/// Logica di interazione per DefaultGroupLayout.xaml
+/// </summary>
+public partial class RoleColumnsGroupLayout
 {
-    /// <summary>
-    /// Logica di interazione per DefaultGroupLayout.xaml
-    /// </summary>
-    public partial class RoleColumnsGroupLayout
+    public RoleColumnsGroupLayout()
     {
-        public RoleColumnsGroupLayout()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

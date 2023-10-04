@@ -1,13 +1,12 @@
-﻿namespace TCC.UI.Controls.Classes
+﻿namespace TCC.UI.Controls.Classes;
+
+/// <summary>
+/// Logica di interazione per PriestLayout.xaml
+/// </summary>
+public partial class PriestLayout
 {
-    /// <summary>
-    /// Logica di interazione per PriestLayout.xaml
-    /// </summary>
-    public partial class PriestLayout
+    public PriestLayout()
     {
-        public PriestLayout()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -1,56 +1,50 @@
 ﻿using System;
-using System.Windows.Threading;
-using Nostrum;
 using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Skills;
 
-namespace TCC.ViewModels.ClassManagers
+namespace TCC.ViewModels.ClassManagers;
+
+public abstract class BaseClassLayoutVM : ThreadSafeObservableObject, IDisposable
 {
-    public abstract class BaseClassLayoutVM : ThreadSafeObservableObject, IDisposable
+    public virtual bool StartSpecialSkill(Cooldown sk)
     {
-        public virtual bool StartSpecialSkill(Cooldown sk)
-        {
-            return false;
-        }
+        return false;
+    }
 
-        //public abstract void LoadSpecialSkills();
+    //public abstract void LoadSpecialSkills();
 
-        public virtual bool ChangeSpecialSkill(Skill skill, uint cd)
-        {
-            return false;
-        }
+    public virtual bool ChangeSpecialSkill(Skill skill, uint cd)
+    {
+        return false;
+    }
 
-        public virtual bool ResetSpecialSkill(Skill skill)
-        {
-            return false;
-        }
+    public virtual bool ResetSpecialSkill(Skill skill)
+    {
+        return false;
+    }
 
-        public StatTracker StaminaTracker { get; set; }
+    public StatTracker StaminaTracker { get; set; }
 
 
-        public void SetMaxST(int v)
-        {
-            if (!App.Settings.ClassWindowSettings.Enabled) return;
-            StaminaTracker.Max = v;
-        }
+    public void SetMaxST(int v)
+    {
+        if (!App.Settings.ClassWindowSettings.Enabled) return;
+        StaminaTracker.Max = v;
+    }
 
-        public void SetST(int currentStamina)
-        {
-            if (!App.Settings.ClassWindowSettings.Enabled) return;
-            StaminaTracker.Val = currentStamina;
-        }
-        public BaseClassLayoutVM()
-        {
-            StaminaTracker = new StatTracker();
-        }
+    public void SetST(int currentStamina)
+    {
+        if (!App.Settings.ClassWindowSettings.Enabled) return;
+        StaminaTracker.Val = currentStamina;
+    }
+    public BaseClassLayoutVM()
+    {
+        StaminaTracker = new StatTracker();
+    }
 
-        public virtual void Dispose()
-        {
+    public virtual void Dispose()
+    {
 
-        }
     }
 }
-
-
-

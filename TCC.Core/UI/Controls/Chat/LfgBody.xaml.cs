@@ -4,43 +4,42 @@ using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 
-namespace TCC.UI.Controls.Chat
+namespace TCC.UI.Controls.Chat;
+
+public partial class LfgBody
 {
-    public partial class LfgBody
+
+    public LfgBody()
     {
+        InitializeComponent();
+    }
 
-        public LfgBody()
+    void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        var dc = (LfgMessage)DataContext;
+        if (dc.LinkedListing != null)
         {
-            InitializeComponent();
+            WindowManager.ViewModels.LfgVM.LastClicked = dc.LinkedListing;
+            if (WindowManager.LfgListWindow.IsVisible) StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
+            else WindowManager.LfgListWindow.ShowWindow();
         }
+        StubInterface.Instance.StubClient.RequestPartyInfo(dc.AuthorId, dc.ServerId); 
+    }
 
-        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var dc = (LfgMessage)DataContext;
-            if (dc.LinkedListing != null)
-            {
-                WindowManager.ViewModels.LfgVM.LastClicked = dc.LinkedListing;
-                if (WindowManager.LfgListWindow.IsVisible) StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
-                else WindowManager.LfgListWindow.ShowWindow();
-            }
-            StubInterface.Instance.StubClient.RequestPartyInfo(dc.AuthorId, dc.ServerId); 
-        }
+    void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    {
+        var user = ((sender as FrameworkElement)?.DataContext as User);
+        if (user == null) return;
+        WindowManager.ViewModels.PlayerMenuVM.Open(user.Name, user.ServerId);
+    }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            var user = ((sender as FrameworkElement)?.DataContext as User);
-            if (user == null) return;
-            WindowManager.ViewModels.PlayerMenuVM.Open(user.Name, user.ServerId);
-        }
+    void OnMessageMouseEnter(object sender, MouseEventArgs e)
+    {
+        Underline.Visibility = Visibility.Visible;
+    }
 
-        private void OnMessageMouseEnter(object sender, MouseEventArgs e)
-        {
-            Underline.Visibility = Visibility.Visible;
-        }
-
-        private void OnMessageMouseLeave(object sender, MouseEventArgs e)
-        {
-            Underline.Visibility = Visibility.Collapsed;
-        }
+    void OnMessageMouseLeave(object sender, MouseEventArgs e)
+    {
+        Underline.Visibility = Visibility.Collapsed;
     }
 }

@@ -32,7 +32,7 @@ public class S_PARTY_MEMBER_INFO : ParsedMessage
             var cl = (Class)reader.ReadUInt16();
             reader.Skip(4); // race + gender
             var level = Convert.ToUInt32(reader.ReadUInt16());
-            var worldId = reader.ReadUInt32(); // worldId
+            reader.Skip(4); // worldId
             var guardId = reader.ReadUInt32();
             var sectionId = reader.ReadUInt32();
 

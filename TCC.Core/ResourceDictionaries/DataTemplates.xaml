@@ -759,7 +759,7 @@
                 </Rectangle.Style>
             </Rectangle>
             <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                       Grid.ColumnSpan="3" StrokeThickness="0" Margin="0 -1 0 0">
+                       Grid.ColumnSpan="3" Grid.Column="0" StrokeThickness="0" Margin="0 -1 0 0">
                 <Rectangle.Fill>
                     <LinearGradientBrush StartPoint="0 .7" EndPoint="1 3">
                         <GradientStop Offset=".3" x:Name="StartGradient" Color="White" />
@@ -779,7 +779,7 @@
                     </Style>
                 </Rectangle.Style>
             </Rectangle>
-            <Path Data="{Binding Class, Converter={StaticResource ClassToSvg}}" Width="20" Height="20"
+            <Path Grid.Column="0" Data="{Binding Class, Converter={StaticResource ClassToSvg}}" Width="20" Height="20"
                   Margin="10 4 5 4" VerticalAlignment="Center"
                   HorizontalAlignment="Center" />
             <TextBlock Text="{Binding Level}"
@@ -838,7 +838,7 @@
                 </Rectangle.Style>
             </Rectangle>
             <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                       Grid.ColumnSpan="3" StrokeThickness="0" Margin="0 -1 0 0">
+                       Grid.ColumnSpan="3" Grid.Column="0" StrokeThickness="0" Margin="0 -1 0 0">
                 <Rectangle.Fill>
                     <LinearGradientBrush StartPoint="0 .7" EndPoint="1 3">
                         <GradientStop Offset=".3" x:Name="StartGradient" Color="White" />
@@ -859,7 +859,7 @@
                 </Rectangle.Style>
             </Rectangle>
             <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Fill="#2ddf"
-                       Grid.ColumnSpan="3" StrokeThickness="0" Margin="0 -1 0 0">
+                       Grid.ColumnSpan="3" Grid.Column="0" StrokeThickness="0" Margin="0 -1 0 0">
                 <Rectangle.Style>
                     <Style TargetType="Shape">
                         <Setter Property="Opacity" Value="0" />
@@ -871,7 +871,7 @@
                     </Style>
                 </Rectangle.Style>
             </Rectangle>
-            <Path Data="{Binding Character.Class, Converter={StaticResource ClassToSvg}}" Width="20" Height="20"
+            <Path Grid.Column="0" Data="{Binding Character.Class, Converter={StaticResource ClassToSvg}}" Width="20" Height="20"
                   Margin="10 4 5 4" VerticalAlignment="Center"
                   HorizontalAlignment="Center" />
             <TextBlock Text="{Binding Character.Level}"
@@ -1129,17 +1129,17 @@
             <Border Grid.Row="2" Grid.RowSpan="4"
                     Background="#2000" VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
-                    Grid.ColumnSpan="5"
+                    Grid.ColumnSpan="5" Grid.Column="0"
                     Margin="-5 0 -5 0"
                     BorderThickness="0 1 0 0"
                     BorderBrush="#0affffff"
                     CornerRadius="1" />
             <Border x:Name="hover"
                     Margin="-5 0 -5 0"
-                    Grid.ColumnSpan="6"
+                    Grid.ColumnSpan="4" Grid.Column="0"
                     CornerRadius="1"
                     Opacity=".3"
-                    Grid.RowSpan="2">
+                    Grid.Row="0" Grid.RowSpan="2">
                 <Border.Background>
                     <SolidColorBrush Color="{StaticResource ChatPartyColor}" Opacity=".5" />
 
@@ -1148,8 +1148,8 @@
             </Border>
             <Border HorizontalAlignment="Stretch" x:Name="Ell"
                     Margin="-5 0 -5 0"
-                    Grid.ColumnSpan="6"
-                    Grid.RowSpan="5"
+                    Grid.ColumnSpan="4" Grid.Column="0"
+                    Grid.Row="0" Grid.RowSpan="5"
                     Opacity=".5"
                     BorderThickness="3 0 0 0"
                     CornerRadius="1 0 0 1"
@@ -1171,7 +1171,7 @@
                      LostKeyboardFocus="LfgMessage_OnTbLostKeyboardFocus"
                      KeyDown="LfgMessage_OnKeyDown"
                      PreviewMouseLeftButtonDown="LfgMessage_OnMouseLeftButtonDown"
-                     Grid.Column="1">
+                     Grid.Row="0" Grid.Column="1">
                 <b:Interaction.Triggers>
                     <b:EventTrigger EventName="PreviewMouseLeftButtonDown">
                         <b:InvokeCommandAction Command="{Binding BrowseTwitchCommand}" />
@@ -1182,7 +1182,7 @@
                           Grid.Column="2"
                           Grid.ColumnSpan="2"
                           VerticalAlignment="Center"
-                          Grid.RowSpan="2"
+                          Grid.Row="0" Grid.RowSpan="2"
                           Height="Auto"
                           Width="50"
                           HorizontalAlignment="Right"
@@ -1216,7 +1216,7 @@
             <TextBlock Text="{Binding LeaderName}"
                        Style="{StaticResource DefaultTextStyle}"
                        Grid.Column="2"
-                       Grid.RowSpan="2"
+                       Grid.Row="0" Grid.RowSpan="2"
                        x:Name="LeaderNameTb"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left"
@@ -1225,14 +1225,14 @@
                        TextTrimming="CharacterEllipsis"/>
             <TextBlock Style="{StaticResource DefaultTextStyle}"
                        Grid.Column="3"
-                       Grid.RowSpan="2"
+                       Grid.Row="0" Grid.RowSpan="2"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center">
                 <Run Text="{Binding PlayerCount, Mode=OneWay}" />
             </TextBlock>
             <TextBlock Foreground="#5fff"
                        FontSize="10"
-                       Grid.RowSpan="2"
+                       Grid.Row="0" Grid.RowSpan="2"
                        Grid.Column="1"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"
@@ -1258,7 +1258,7 @@
                     <ScaleTransform ScaleY="0" />
                 </ListBox.LayoutTransform>
             </ListBox>
-            <Grid Grid.ColumnSpan="5"
+            <Grid Grid.ColumnSpan="5" Grid.Column="0"
                   Grid.Row="4"
                   x:Name="ApplicantsGrid"
                   Visibility="Collapsed">
@@ -1295,7 +1295,7 @@
             </Grid>
             <controls:Arc StrokeThickness="10"
                           Stroke="{StaticResource Tier5DungeonBrush}"
-                          Grid.Column="4"
+                          Grid.Row="0" Grid.Column="4"
                           Width="22"
                           Height="22"
                           EndAngle="0"
@@ -1304,7 +1304,7 @@
                           Margin="4 0 -4 0"
                           x:Name="cdArc" />
             <Button x:Name="btn"
-                    Grid.RowSpan="2"
+                    Grid.Row="0" Grid.RowSpan="2"
                     VerticalAlignment="Center"
                     Grid.Column="4"
                     HorizontalAlignment="Right"
@@ -1318,7 +1318,7 @@
                       Fill="White" />
 
             </Button>
-            <Popup PlacementTarget="{Binding ElementName=btn}"
+            <Popup Grid.Row="0" Grid.Column="0" PlacementTarget="{Binding ElementName=btn}"
                    IsOpen="{Binding IsPopupOpen}"
                    PopupAnimation="Slide"
                    AllowsTransparency="True"
@@ -1604,8 +1604,8 @@
                     CornerRadius="0 0 0 0" />
             <Border HorizontalAlignment="Stretch" x:Name="Ell"
                     Margin="-5 0 -5 0"
-                    Grid.ColumnSpan="6"
-                    Grid.RowSpan="5"
+                    Grid.ColumnSpan="6" Grid.Column="0"
+                    Grid.Row="0" Grid.RowSpan="5"
                     Opacity="1"
                     BorderThickness="2 0 0 0"
                     CornerRadius="0"
@@ -1622,7 +1622,7 @@
                 </Border.Background>
             </Border>
             <TextBox Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Grid.Column="1"
+                     Grid.Row="0" Grid.Column="1"
                      Foreground="#9fff"
                      x:Name="MessageTb"
                      FontSize="14"
@@ -1641,7 +1641,7 @@
                      KeyDown="LfgMessage_OnKeyDown"
                      PreviewMouseLeftButtonDown="LfgMessage_OnMouseLeftButtonDown" />
 
-            <settings:CheckboxSetting Grid.Column="2"
+            <settings:CheckboxSetting Grid.Row="0" Grid.Column="2"
                                       Foreground="{StaticResource GreenBrush}"
                                       x:Name="IsRaidCb"
                                       IsOn="{Binding IsRaid, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -1655,7 +1655,7 @@
 
             <StackPanel
                 Orientation="Horizontal"
-                Grid.Column="5">
+                Grid.Row="0" Grid.Column="5">
 
                 <Button VerticalAlignment="Center"
                         Margin=" 5 2 0 0"

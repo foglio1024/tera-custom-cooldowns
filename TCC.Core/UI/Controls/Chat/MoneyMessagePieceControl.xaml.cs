@@ -1,10 +1,9 @@
-﻿namespace TCC.UI.Controls.Chat
+﻿namespace TCC.UI.Controls.Chat;
+
+public partial class MoneyMessagePieceControl
 {
-    public partial class MoneyMessagePieceControl
+    public MoneyMessagePieceControl()
     {
-        public MoneyMessagePieceControl()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

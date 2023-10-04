@@ -8,70 +8,69 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
-namespace TeraPacketParser.TeraCommon.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing;
+
+public class IpSnifferRawSocketMultipleInterfaces : IpSniffer
 {
-    public class IpSnifferRawSocketMultipleInterfaces : IpSniffer
+    readonly List<IpSnifferRawSocketSingleInterface> _individualSniffers =
+        new();
+
+    readonly IEnumerable<IPAddress> _ipAddresses;
+
+    public IpSnifferRawSocketMultipleInterfaces()
+        : this(DefaultInterfaceIPs)
     {
-        private readonly List<IpSnifferRawSocketSingleInterface> _individualSniffers =
-            new();
+    }
 
-        private readonly IEnumerable<IPAddress> _ipAddresses;
+    public IpSnifferRawSocketMultipleInterfaces(IEnumerable<IPAddress> ipAddresses)
+    {
+        _ipAddresses = ipAddresses;
+    }
 
-        public IpSnifferRawSocketMultipleInterfaces()
-            : this(DefaultInterfaceIPs)
+    public static IEnumerable<IPAddress> AllInterfaceIPs
+    {
+        get
         {
+            return NetworkInterface.GetAllNetworkInterfaces()
+                .SelectMany(x => x.GetIPProperties().UnicastAddresses)
+                .Select(x => x.Address)
+                .Where(x => x.AddressFamily == AddressFamily.InterNetwork);
         }
+    }
 
-        public IpSnifferRawSocketMultipleInterfaces(IEnumerable<IPAddress> ipAddresses)
-        {
-            _ipAddresses = ipAddresses;
-        }
+    public static IEnumerable<IPAddress> DefaultInterfaceIPs => AllInterfaceIPs;
 
-        public static IEnumerable<IPAddress> AllInterfaceIPs
+    protected override void SetEnabled(bool value)
+    {
+        if (value)
         {
-            get
+            foreach (var localIp in _ipAddresses)
             {
-                return NetworkInterface.GetAllNetworkInterfaces()
-                    .SelectMany(x => x.GetIPProperties().UnicastAddresses)
-                    .Select(x => x.Address)
-                    .Where(x => x.AddressFamily == AddressFamily.InterNetwork);
+                var individualSniffer = new IpSnifferRawSocketSingleInterface(localIp);
+                individualSniffer.PacketReceived += OnPacketReceived;
+                _individualSniffers.Add(individualSniffer);
+            }
+            foreach (var individualSniffer in _individualSniffers)
+            {
+                individualSniffer.Enabled = true;
             }
         }
-
-        public static IEnumerable<IPAddress> DefaultInterfaceIPs => AllInterfaceIPs;
-
-        protected override void SetEnabled(bool value)
+        else
         {
-            if (value)
+            foreach (var individualSniffer in _individualSniffers)
             {
-                foreach (var localIp in _ipAddresses)
-                {
-                    var individualSniffer = new IpSnifferRawSocketSingleInterface(localIp);
-                    individualSniffer.PacketReceived += OnPacketReceived;
-                    _individualSniffers.Add(individualSniffer);
-                }
-                foreach (var individualSniffer in _individualSniffers)
-                {
-                    individualSniffer.Enabled = true;
-                }
+                individualSniffer.Enabled = false;
             }
-            else
-            {
-                foreach (var individualSniffer in _individualSniffers)
-                {
-                    individualSniffer.Enabled = false;
-                }
-                _individualSniffers.Clear();
-            }
+            _individualSniffers.Clear();
         }
+    }
 
 
-        public event Action<string>? Warning;
+    public event Action<string>? Warning;
 
-        protected virtual void OnWarning(string obj)
-        {
-            var handler = Warning;
-            handler?.Invoke(obj);
-        }
+    protected virtual void OnWarning(string obj)
+    {
+        var handler = Warning;
+        handler?.Invoke(obj);
     }
 }

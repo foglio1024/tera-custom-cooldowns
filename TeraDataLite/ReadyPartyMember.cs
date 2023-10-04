@@ -1,9 +1,8 @@
-﻿namespace TeraDataLite
+﻿namespace TeraDataLite;
+
+public struct ReadyPartyMember
 {
-    public struct ReadyPartyMember
-    {
-        public uint ServerId;
-        public uint PlayerId;
-        public ReadyStatus Status;
-    }
+    public uint ServerId;
+    public uint PlayerId;
+    public ReadyStatus Status;
 }

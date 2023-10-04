@@ -50,7 +50,7 @@
                      Foreground="{StaticResource TccNormalGradient0Brush}"
                      RenderTransformOrigin=".5 .5"
                      Grid.Row="7"
-                     Grid.RowSpan="2"
+                     Grid.RowSpan="2" Grid.Column="0"
                      Margin="0 0 0 5"
                      x:Name="ProgressBarEnd">
             <ProgressBar.Background>
@@ -270,7 +270,6 @@
                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                      ItemsSource="{Binding LogData}"
-
                      x:Name="LogList">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">

@@ -12,153 +12,152 @@ using SharpPcap.Npcap;
 
 //using log4net;
 
-namespace TeraPacketParser.TeraCommon.Sniffing
+namespace TeraPacketParser.TeraCommon.Sniffing;
+
+// Only works when WinPcap is installed
+public class IpSnifferWinPcap : IpSniffer
 {
-    // Only works when WinPcap is installed
-    public class IpSnifferWinPcap : IpSniffer
+    //private static readonly ILog Logger = LogManager.GetLogger
+    //    (MethodBase.GetCurrentMethod().DeclaringType);
+
+    readonly string _filter;
+    NpcapDeviceList? _devices;
+    volatile uint _droppedPackets;
+    volatile uint _interfaceDroppedPackets;
+    DateTime _nextCheck;
+
+    public IpSnifferWinPcap(string filter)
     {
-        //private static readonly ILog Logger = LogManager.GetLogger
-        //    (MethodBase.GetCurrentMethod().DeclaringType);
+        _filter = filter;
+        BufferSize = 1<<24;
+        _devices = NpcapDeviceList.New();
+        //BasicTeraData.LogError(string.Join("\r\n",_devices.Select(x=>x.Description)),true,true);
+        //check for winpcap installed if not - exception to fallback to rawsockets
+        _devices = null;
+    }
 
-        private readonly string _filter;
-        private NpcapDeviceList? _devices;
-        private volatile uint _droppedPackets;
-        private volatile uint _interfaceDroppedPackets;
-        private DateTime _nextCheck;
+    public int? BufferSize { get; set; }
 
-        public IpSnifferWinPcap(string filter)
+    public IEnumerable<string> Status()
+    {
+        return _devices!.Select(device =>
+            $"Device {device.LinkType} {(device.Opened ? "Open" : "Closed")} {device.LastError}\r\n{device}");
+    }
+
+    protected override void SetEnabled(bool value)
+    {
+        if (value)
+            Start();
+        else
+            Finish();
+    }
+
+    static bool IsInteresting(NpcapDevice device)
+    {
+        return true;
+    }
+
+    void Start()
+    {
+        Debug.Assert(_devices == null);
+        _devices = NpcapDeviceList.New();
+        var interestingDevices = _devices.Where(IsInteresting);
+        foreach (var device in interestingDevices)
         {
-            _filter = filter;
-            BufferSize = 1<<24;
-            _devices = NpcapDeviceList.New();
-            //BasicTeraData.LogError(string.Join("\r\n",_devices.Select(x=>x.Description)),true,true);
-            //check for winpcap installed if not - exception to fallback to rawsockets
-            _devices = null;
-        }
-
-        public int? BufferSize { get; set; }
-
-        public IEnumerable<string> Status()
-        {
-                return _devices!.Select(device =>
-                    $"Device {device.LinkType} {(device.Opened ? "Open" : "Closed")} {device.LastError}\r\n{device}");
-        }
-
-        protected override void SetEnabled(bool value)
-        {
-            if (value)
-                Start();
-            else
-                Finish();
-        }
-
-        private static bool IsInteresting(NpcapDevice device)
-        {
-            return true;
-        }
-
-        private void Start()
-        {
-            Debug.Assert(_devices == null);
-            _devices = NpcapDeviceList.New();
-            var interestingDevices = _devices.Where(IsInteresting);
-            foreach (var device in interestingDevices)
-            {
-                device.OnPacketArrival += device_OnPacketArrival;
+            device.OnPacketArrival += device_OnPacketArrival;
                
+            try
+            {
+                device.Open(DeviceMode.Normal, 100);
+            }
+            catch (Exception)
+            {
+                //Logger.Warn($"Failed to open device {device.Name}. {e.Message}");
+                continue;
+            }
+            device.Filter = _filter;
+            if (BufferSize != null)
+            {
                 try
                 {
-                    device.Open(DeviceMode.Normal, 100);
+                    device.KernelBufferSize = (uint) BufferSize.Value;
                 }
                 catch (Exception)
                 {
-                    //Logger.Warn($"Failed to open device {device.Name}. {e.Message}");
-                    continue;
+                    //Logger.Warn(
+                    //    $"Failed to set KernelBufferSize to {BufferSize.Value} on {device.Name}. {e.Message}");
                 }
-                device.Filter = _filter;
-                if (BufferSize != null)
-                {
-                    try
-                    {
-                        device.KernelBufferSize = (uint) BufferSize.Value;
-                    }
-                    catch (Exception)
-                    {
-                        //Logger.Warn(
-                        //    $"Failed to set KernelBufferSize to {BufferSize.Value} on {device.Name}. {e.Message}");
-                    }
-                }
-                device.StartCapture();
-                Debug.WriteLine("winpcap capture");
             }
+            device.StartCapture();
+            Debug.WriteLine("winpcap capture");
         }
+    }
 
-        private void Finish()
+    void Finish()
+    {
+        Debug.Assert(_devices != null);
+        foreach (var device in _devices.Where(device => device.Opened))
         {
-            Debug.Assert(_devices != null);
-            foreach (var device in _devices.Where(device => device.Opened))
-            {
-                try
-                {
-                    device.StopCapture();
-                }
-                catch
-                {
-                    // ignored
-                }
-
-                //SharpPcap.PcapException: captureThread was aborted after 00:00:02 - it's normal when there is no traffic while stopping
-                device.Close();
-            }
-            _devices = null;
-        }
-
-        public event Action<string>? Warning;
-
-        protected virtual void OnWarning(string obj)
-        {
-            var handler = Warning;
-            handler?.Invoke(obj);
-        }
-
-        private void device_OnPacketArrival(object sender, CaptureEventArgs e)
-        {
-            IPv4Packet? ipPacket;
             try
             {
-                if (e.Packet.LinkLayerType != LinkLayers.Null)
-                {
-                    var linkPacket = Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
-                    ipPacket = (IPv4Packet) linkPacket.PayloadPacket;
-                }
-                else
-                {
-                    ipPacket = new IPv4Packet(new ByteArraySegment(e.Packet.Data,4,e.Packet.Data.Length-4));
-                }
-                //if (ipPacket == null)
-                //    return;
+                device.StopCapture();
             }
             catch
             {
-                return;
-                // ignored bad packet
+                // ignored
             }
 
-            OnPacketReceived(ipPacket);
-
-            var now = DateTime.UtcNow;
-            if (now <= _nextCheck) return;
-            _nextCheck = now + TimeSpan.FromSeconds(20);
-            var device = (NpcapDevice) sender;
-            if (device.Statistics.DroppedPackets == _droppedPackets &&
-                device.Statistics.InterfaceDroppedPackets == _interfaceDroppedPackets)
-            {
-                return;
-            }
-            _droppedPackets = device.Statistics.DroppedPackets;
-            _interfaceDroppedPackets = device.Statistics.InterfaceDroppedPackets;
-            OnWarning(
-                $"DroppedPackets {device.Statistics.DroppedPackets}, InterfaceDroppedPackets {device.Statistics.InterfaceDroppedPackets}, ReceivedPackets {device.Statistics.ReceivedPackets}");
+            //SharpPcap.PcapException: captureThread was aborted after 00:00:02 - it's normal when there is no traffic while stopping
+            device.Close();
         }
+        _devices = null;
+    }
+
+    public event Action<string>? Warning;
+
+    protected virtual void OnWarning(string obj)
+    {
+        var handler = Warning;
+        handler?.Invoke(obj);
+    }
+
+    void device_OnPacketArrival(object sender, CaptureEventArgs e)
+    {
+        IPv4Packet? ipPacket;
+        try
+        {
+            if (e.Packet.LinkLayerType != LinkLayers.Null)
+            {
+                var linkPacket = Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
+                ipPacket = (IPv4Packet) linkPacket.PayloadPacket;
+            }
+            else
+            {
+                ipPacket = new IPv4Packet(new ByteArraySegment(e.Packet.Data,4,e.Packet.Data.Length-4));
+            }
+            //if (ipPacket == null)
+            //    return;
+        }
+        catch
+        {
+            return;
+            // ignored bad packet
+        }
+
+        OnPacketReceived(ipPacket);
+
+        var now = DateTime.UtcNow;
+        if (now <= _nextCheck) return;
+        _nextCheck = now + TimeSpan.FromSeconds(20);
+        var device = (NpcapDevice) sender;
+        if (device.Statistics.DroppedPackets == _droppedPackets &&
+            device.Statistics.InterfaceDroppedPackets == _interfaceDroppedPackets)
+        {
+            return;
+        }
+        _droppedPackets = device.Statistics.DroppedPackets;
+        _interfaceDroppedPackets = device.Statistics.InterfaceDroppedPackets;
+        OnWarning(
+            $"DroppedPackets {device.Statistics.DroppedPackets}, InterfaceDroppedPackets {device.Statistics.InterfaceDroppedPackets}, ReceivedPackets {device.Statistics.ReceivedPackets}");
     }
 }
