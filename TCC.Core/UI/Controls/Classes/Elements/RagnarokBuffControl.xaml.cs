@@ -13,7 +13,7 @@ public partial class RagnarokBuffControl : INotifyPropertyChanged
 {
     bool _running;
     SkillWithEffect? _context;
-    DoubleAnimation _an;
+    readonly DoubleAnimation _an;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

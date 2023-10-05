@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -6,6 +7,8 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using TCC.Data;
+using TCC.R;
+using TCC.Utils;
 using MessageBoxImage = TCC.Data.MessageBoxImage;
 
 namespace TCC.UI.Windows;
@@ -24,7 +27,7 @@ public partial class TccMessageBox
     }
 
 
-    void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
+    void OnClosing(object? sender, CancelEventArgs e)
     {
         e.Cancel = true;
         Hide();
@@ -112,12 +115,12 @@ public partial class TccMessageBox
         {
             case MessageBoxImage.Warning:
             case MessageBoxImage.Question:
-                _messageBox.ColorRectFx.Fill = R.Brushes.TccYellowGradientBrush;
-                _messageBox.ColorRect.Fill = R.Brushes.TccYellowGradientBrush;
+                _messageBox.ColorRectFx.Fill = Brushes.TccYellowGradientBrush;
+                _messageBox.ColorRect.Fill = Brushes.TccYellowGradientBrush;
                 break;
             case MessageBoxImage.Error:
-                _messageBox.ColorRect.Fill = R.Brushes.TccRedGradientBrush;
-                _messageBox.ColorRectFx.Fill = R.Brushes.TccRedGradientBrush;
+                _messageBox.ColorRect.Fill = Brushes.TccRedGradientBrush;
+                _messageBox.ColorRectFx.Fill = Brushes.TccRedGradientBrush;
                 break;
         }
     }
@@ -163,7 +166,7 @@ public partial class TccMessageBox
     {
         _messageBox = new TccMessageBox();
 
-        Utils.Log.NewMessageBox += (msg) => TccMessageBox.Show(msg);
+        Log.NewMessageBox += msg => Show(msg);
 
     }
 

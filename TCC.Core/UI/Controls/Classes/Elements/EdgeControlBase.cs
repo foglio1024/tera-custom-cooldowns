@@ -14,21 +14,21 @@ public class EdgeControlBase : UserControl
         get => (Color)GetValue(GlowColorProperty);
         set => SetValue(GlowColorProperty, value);
     }
-    public static readonly DependencyProperty GlowColorProperty = DependencyProperty.Register("GlowColor", typeof(Color), typeof(EdgeControlBase));
+    public static readonly DependencyProperty GlowColorProperty = DependencyProperty.Register(nameof(GlowColor), typeof(Color), typeof(EdgeControlBase));
 
     public Brush FillBrush
     {
         get => (Brush)GetValue(FillBrushProperty);
         set => SetValue(FillBrushProperty, value);
     }
-    public static readonly DependencyProperty FillBrushProperty = DependencyProperty.Register("FillBrush", typeof(Brush), typeof(EdgeControlBase));
+    public static readonly DependencyProperty FillBrushProperty = DependencyProperty.Register(nameof(FillBrush), typeof(Brush), typeof(EdgeControlBase));
 
     public Counter? EdgeCounter
     {
         get => (Counter)GetValue(EdgeCounterProperty);
         set => SetValue(EdgeCounterProperty, value);
     }
-    public static readonly DependencyProperty EdgeCounterProperty = DependencyProperty.Register("EdgeCounter", typeof(Counter), typeof(EdgeControlBase));
+    public static readonly DependencyProperty EdgeCounterProperty = DependencyProperty.Register(nameof(EdgeCounter), typeof(Counter), typeof(EdgeControlBase));
 
     public virtual List<FrameworkElement> EdgeElements { get; }
 

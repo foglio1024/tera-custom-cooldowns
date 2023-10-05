@@ -5,7 +5,7 @@ namespace TCC.Data.Databases;
 
 public class GuildQuestDatabase : DatabaseBase
 {
-    public Dictionary<uint, GuildQuest> GuildQuests;
+    public readonly Dictionary<uint, GuildQuest> GuildQuests;
 
     protected override string FolderName => "guild_quests";
 

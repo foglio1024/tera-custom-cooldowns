@@ -68,7 +68,7 @@ public partial class DataTemplates
 
     void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
     {
-        if (sender is FrameworkElement fe && fe.DataContext is Listing l) l.IsPopupOpen = false;
+        if (sender is FrameworkElement { DataContext: Listing l }) l.IsPopupOpen = false;
         else FocusManager.PauseTopmost = false;
     }
 }

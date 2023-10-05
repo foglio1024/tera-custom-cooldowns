@@ -31,51 +31,51 @@ public class BrawlerAbnormalityTracker : AbnormalityTracker
     static void CheckGrowingFury(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != GrowingFuryId) return;
-        if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<BrawlerLayoutViewModel>(out var vm)) return;
 
-        vm!.IsGfOn = true;
+        vm.IsGfOn = true;
     }
 
     static void CheckGrowingFury(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != GrowingFuryId) return;
-        if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<BrawlerLayoutViewModel>(out var vm)) return;
 
-        vm!.IsGfOn = true;
+        vm.IsGfOn = true;
     }
 
     static void CheckGrowingFury(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != GrowingFuryId) return;
-        if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<BrawlerLayoutViewModel>(out var vm)) return;
 
-        vm!.IsGfOn = false;
+        vm.IsGfOn = false;
     }
 
     static void CheckCounterProc(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != CounterGlyphId) return;
-        if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<BrawlerLayoutViewModel>(out var vm)) return;
 
-        vm!.Counter.Start(p.Duration);
+        vm.Counter.Start(p.Duration);
         vm.CounterProc = true;
     }
 
     static void CheckCounterProc(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != CounterGlyphId) return;
-        if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<BrawlerLayoutViewModel>(out var vm)) return;
 
-        vm!.Counter.Start(p.Duration);
+        vm.Counter.Start(p.Duration);
         vm.CounterProc = true;
     }
 
     static void CheckCounterProc(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != CounterGlyphId) return;
-        if (!IsViewModelAvailable<BrawlerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<BrawlerLayoutViewModel>(out var vm)) return;
 
-        vm!.Counter.Stop();
+        vm.Counter.Stop();
         vm.CounterProc = false;
     }
 }

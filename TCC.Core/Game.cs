@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using Nostrum;
-using Nostrum.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -9,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Newtonsoft.Json.Linq;
+using Nostrum;
+using Nostrum.Extensions;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
@@ -28,8 +28,7 @@ using TeraPacketParser;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 using TeraPacketParser.Sniffing;
-using Player = TCC.Data.Pc.Player;
-using Server = TeraPacketParser.TeraCommon.Game.Server;
+using TeraPacketParser.TeraCommon.Game;
 
 namespace TCC;
 
@@ -201,7 +200,7 @@ public static class Game
 
     static async Task InitDatabasesAsync(string lang)
     {
-        await Task.Factory.StartNew(() => InitDatabases(lang));
+        await Task.Run(() => InitDatabases(lang));
         DatabaseLoaded?.Invoke();
     }
 
@@ -725,7 +724,7 @@ public static class Game
 
         #endregion Aura meme
 
-        NearbyPlayers[p.EntityId] = new (p.Name, TccUtils.ClassFromModel(p.TemplateId));
+        NearbyPlayers[p.EntityId] = new ValueTuple<string, Class>(p.Name, TccUtils.ClassFromModel(p.TemplateId));
     }
 
     static void OnSpawnMe(S_SPAWN_ME p)
@@ -829,7 +828,7 @@ public static class Game
                 ch.Level = item.Level;
                 ch.LastLocation = new Location(item.LastWorldId, item.LastGuardId, item.LastSectionId);
                 ch.LastOnline = item.LastOnline;
-                ch.ServerName = Game.Server.Name;
+                ch.ServerName = Server.Name;
             }
             else
             {
@@ -932,8 +931,8 @@ public static class Game
         {
             var js = new JObject
             {
-            {"region", Game.Server.Region},
-            {"server", Game.Server.ServerId},
+            {"region", Server.Region},
+            {"server", Server.ServerId},
             {"account", App.Settings.LastAccountNameHash},
             {"tcc_version", App.AppVersion},
             {
@@ -998,7 +997,7 @@ public static class Game
 
         WindowManager.ReloadPositions();
         GameEventManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
-        InitDatabases(App.Settings.LastLanguage);
+        await InitDatabasesAsync(App.Settings.LastLanguage);
         SetAbnormalityTracker(m.CharacterClass);
     }
 

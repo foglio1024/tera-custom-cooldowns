@@ -5,7 +5,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-internal class MysticLayoutVM : BaseClassLayoutVM
+internal class MysticLayoutVM : BaseClassLayoutViewModel
 {
     bool _elementalize;
     public AurasTracker Auras { get; }
@@ -21,7 +21,8 @@ internal class MysticLayoutVM : BaseClassLayoutVM
     public Cooldown AuraTenacious { get; }
     public Cooldown AuraSwift { get; }
     public Cooldown AuraUnyielding { get; }
-    public string ElementalizeIcon { get; } = "icon_skills.spiritedness_tex";
+    public string ElementalizeIcon => "icon_skills.spiritedness_tex";
+
     public bool Elementalize
     {
         get => _elementalize;
@@ -105,10 +106,10 @@ internal class MysticLayoutVM : BaseClassLayoutVM
 
     void CheckAurasWarning()
     {
-        AuraMerciless.FlashOnAvailable = !Auras.CritAura && !Auras.SwiftAura;
-        AuraSwift.FlashOnAvailable = !Auras.CritAura && !Auras.SwiftAura;
-        AuraTenacious.FlashOnAvailable = !Auras.ManaAura && !Auras.CritResAura;
-        AuraUnyielding.FlashOnAvailable = !Auras.ManaAura && !Auras.CritResAura;
+        AuraMerciless.FlashOnAvailable = Auras is { CritAura: false, SwiftAura: false };
+        AuraSwift.FlashOnAvailable = Auras is { CritAura: false, SwiftAura: false };
+        AuraTenacious.FlashOnAvailable = Auras is { ManaAura: false, CritResAura: false };
+        AuraUnyielding.FlashOnAvailable = Auras is { ManaAura: false, CritResAura: false };
 
         N(nameof(OffenseAuraWarning));
         N(nameof(SupportAuraWarning));

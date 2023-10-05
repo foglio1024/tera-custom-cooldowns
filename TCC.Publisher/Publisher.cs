@@ -8,8 +8,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Nostrum;
 using Newtonsoft.Json.Linq;
+using Nostrum;
 using Octokit;
 using SevenZip;
 using TCC.Utils;
@@ -74,7 +74,7 @@ public class Publisher
         var v = an.Version;
         if (v == null)
         {
-            Logger.WriteLine($"    Failed to get TCC version.");
+            Logger.WriteLine("    Failed to get TCC version.");
             return "";
         }
         _stringVersion = $"{v.Major}.{v.Minor}.{v.Build}";
@@ -145,7 +145,7 @@ public class Publisher
         try
         {
             await _client.Repository.Release.Get(_settings.RepositoryOwner, _settings.RepositoryName, _tag);
-            Logger.WriteLine($"WARNING: Release already existing.");
+            Logger.WriteLine("WARNING: Release already existing.");
         }
         catch (NotFoundException)
         {
@@ -166,7 +166,7 @@ public class Publisher
             {
                 Logger.WriteLine($"Errors while updating Firestore version: {e}");
             }
-            Logger.WriteLine($"Release created");
+            Logger.WriteLine("Release created");
         }
     }
 
@@ -212,7 +212,7 @@ public class Publisher
         str.Write(bytes, 0, bytes.Length);
         str.Seek(0, SeekOrigin.Begin);
 
-        Logger.WriteLine($"Release zip loaded");
+        Logger.WriteLine("Release zip loaded");
 
         var au = new ReleaseAssetUpload
         {
@@ -221,9 +221,9 @@ public class Publisher
             RawData = str
         };
 
-        Logger.WriteLine($"Uploading asset");
+        Logger.WriteLine("Uploading asset");
         await _client.Repository.Release.UploadAsset(rls, au);
-        Logger.WriteLine($"Asset uploaded");
+        Logger.WriteLine("Asset uploaded");
     }
 
 }

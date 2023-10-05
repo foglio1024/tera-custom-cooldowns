@@ -1,11 +1,11 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
@@ -25,7 +25,7 @@ public class Listing : ThreadSafeObservableObject
     int _playerCount;
     bool _canApply = true;
     bool _isMyLfg;
-    bool _temp;
+    readonly bool _temp;
     readonly DateTime _createdOn;
     bool _isFullOffline;
 
@@ -108,7 +108,7 @@ public class Listing : ThreadSafeObservableObject
     public bool Temp
     {
         get => _temp;
-        set
+        private init
         {
             if (_temp == value) return;
             _temp = value;
@@ -132,8 +132,8 @@ public class Listing : ThreadSafeObservableObject
     public double AliveSinceMs => (DateTime.Now - _createdOn).TotalMilliseconds;
 
 
-    public ThreadSafeObservableCollection<User> Players { get; set; }
-    public ThreadSafeObservableCollection<User> Applicants { get; set; }
+    public ThreadSafeObservableCollection<User> Players { get; }
+    public ThreadSafeObservableCollection<User> Applicants { get; }
 
     public int MaxCount => IsRaid ? 30 : 5;
     public ApplyCommand ApplyCommand { get; }
@@ -156,9 +156,9 @@ public class Listing : ThreadSafeObservableObject
             var username = "";
             var split = _message.Split(' ').ToList();
             var twLink = split.FirstOrDefault(x =>
-                x.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1);
+                x.Contains("twitch.tv", StringComparison.InvariantCultureIgnoreCase));
             var splitLink = twLink?.Split('/');
-            if (splitLink != null && splitLink.Length >= 2) username = splitLink[1];
+            if (splitLink is { Length: >= 2 }) username = splitLink[1];
             return $"https://www.twitch.tv/{username}";
         }
     }

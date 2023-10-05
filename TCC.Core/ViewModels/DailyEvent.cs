@@ -16,7 +16,7 @@ public class DailyEvent : ThreadSafeObservableObject
         get
         {
             var ts = Start - GameEventManager.Instance.CurrentServerTime;
-            return ts.TotalMinutes > 0 && ts.TotalMinutes <= 15;
+            return ts.TotalMinutes is > 0 and <= 15;
         }
     }
     public string Name { get; set; }

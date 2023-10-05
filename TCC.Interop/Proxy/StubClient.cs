@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using TeraPacketParser.Sniffing;
 
 namespace TCC.Interop.Proxy;
@@ -65,7 +65,7 @@ public class StubClient
     {
         await TccStub.CallAsync("unfriendUser", new JObject
         {
-            { "userName", userName },
+            { "userName", userName }
         });
     }
 
@@ -73,7 +73,7 @@ public class StubClient
     {
         await TccStub.CallAsync("unfriendUser", new JObject
         {
-            { "playerId", playerId},
+            { "playerId", playerId}
         });
     }
 
@@ -90,7 +90,7 @@ public class StubClient
     {
         await TccStub.CallAsync("unblockUser", new JObject
         {
-            { "userName", userName },
+            { "userName", userName }
         });
     }
 
@@ -100,7 +100,7 @@ public class StubClient
         {
             { "serverId", serverId},
             { "playerId", playerId },
-            { "canInvite", canInvite},
+            { "canInvite", canInvite}
         });
     }
 
@@ -152,7 +152,7 @@ public class StubClient
     {
         await TccStub.CallAsync("guildInviteUser", new JObject
         {
-            { "userName", userName },
+            { "userName", userName }
         });
     }
 
@@ -179,7 +179,7 @@ public class StubClient
         await TccStub.CallAsync("declineUserGroupApply", new JObject
         {
             { "playerId", playerId },
-            { "serverId", serverId },
+            { "serverId", serverId }
         });
     }
 
@@ -324,7 +324,7 @@ public class StubClient
         await TccStub.CallAsync("updateSetting", new JObject
         {
             { "name", settingName },
-            { "value", value.ToString() },
+            { "value", value.ToString() }
         });
     }
 

@@ -49,7 +49,7 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
     public bool ShowMp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideMpThreshold;
 
     public bool ShowSt =>
-        (WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideStThreshold)
+        WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideStThreshold
         && Game.Server.Region == "EU"
         && DataContext is User
         {

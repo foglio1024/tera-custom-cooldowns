@@ -1,5 +1,5 @@
-﻿using Nostrum.WPF.Extensions;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using Nostrum.WPF.Extensions;
 
 namespace TCC.UI.Controls.Dashboard;
 

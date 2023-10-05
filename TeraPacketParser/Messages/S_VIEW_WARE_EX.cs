@@ -1,21 +1,19 @@
 ﻿using System.Collections.Generic;
 
-
-
 namespace TeraPacketParser.Messages;
 
 public class S_VIEW_WARE_EX : ParsedMessage
 {
     public static List<BankPage> Pages = new()
     {
-        {new BankPage(0)},
-        {new BankPage(1)},
-        {new BankPage(2)},
-        {new BankPage(3)},
-        {new BankPage(4)},
-        {new BankPage(5)},
-        {new BankPage(6)},
-        {new BankPage(7)}
+        new BankPage(0),
+        new BankPage(1),
+        new BankPage(2),
+        new BankPage(3),
+        new BankPage(4),
+        new BankPage(5),
+        new BankPage(6),
+        new BankPage(7)
     };
     public S_VIEW_WARE_EX(TeraMessageReader reader) : base(reader)
     {

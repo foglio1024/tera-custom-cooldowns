@@ -4,8 +4,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-
-
 namespace TeraPacketParser.Messages;
 
 public class S_GET_USER_GUILD_LOGO : ParsedMessage

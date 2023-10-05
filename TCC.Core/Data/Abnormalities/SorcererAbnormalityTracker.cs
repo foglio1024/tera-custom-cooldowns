@@ -41,7 +41,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         if (!IsManaBoost(p.AbnormalityId)) return;
         if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-        vm!.ManaBoost.StartEffect(p.Duration);
+        vm.ManaBoost.StartEffect(p.Duration);
 
     }
 
@@ -50,7 +50,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         if (!IsManaBoost(p.AbnormalityId)) return;
         if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-        vm!.ManaBoost.RefreshEffect(p.Duration);
+        vm.ManaBoost.RefreshEffect(p.Duration);
 
     }
 
@@ -59,50 +59,53 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         if (!IsManaBoost(p.AbnormalityId)) return;
         if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
 
-        vm!.ManaBoost.StopEffect();
+        vm.ManaBoost.StopEffect();
     }
 
     static void CheckFusionBoost(S_ABNORMALITY_BEGIN p)
     {
-        if (FlameFusionIncreaseId == p.AbnormalityId)
+        switch (p.AbnormalityId)
         {
-            Game.SetSorcererElementsBoost(true, false, false);
+            case FlameFusionIncreaseId:
+                Game.SetSorcererElementsBoost(true, false, false);
+                break;
+            case FrostFusionIncreaseId:
+                Game.SetSorcererElementsBoost(false, true, false);
+                break;
+            case ArcaneFusionIncreaseId:
+                Game.SetSorcererElementsBoost(false, false, true);
+                break;
+            default:
+                return;
         }
-        else if (FrostFusionIncreaseId == p.AbnormalityId)
-        {
-            Game.SetSorcererElementsBoost(false, true, false);
-        }
-        else if (ArcaneFusionIncreaseId == p.AbnormalityId)
-        {
-            Game.SetSorcererElementsBoost(false, false, true);
-        }
-        else return;
+
         BoostChanged?.Invoke();
     }
 
     static void CheckFusionBoost(S_ABNORMALITY_REFRESH p)
     {
-        if (FlameFusionIncreaseId == p.AbnormalityId)
+        switch (p.AbnormalityId)
         {
-            Game.SetSorcererElementsBoost(true, false, false);
+            case FlameFusionIncreaseId:
+                Game.SetSorcererElementsBoost(true, false, false);
+                break;
+            case FrostFusionIncreaseId:
+                Game.SetSorcererElementsBoost(false, true, false);
+                break;
+            case ArcaneFusionIncreaseId:
+                Game.SetSorcererElementsBoost(false, false, true);
+                break;
+            default:
+                return;
         }
-        else if (FrostFusionIncreaseId == p.AbnormalityId)
-        {
-            Game.SetSorcererElementsBoost(false, true, false);
-        }
-        else if (ArcaneFusionIncreaseId == p.AbnormalityId)
-        {
-            Game.SetSorcererElementsBoost(false, false, true);
-        }
-        else return;
-        BoostChanged?.Invoke();
 
+        BoostChanged?.Invoke();
     }
 
     static void CheckFusionBoost(S_ABNORMALITY_END p)
     {
-        if (p.AbnormalityId is FlameFusionIncreaseId 
-                            or FrostFusionIncreaseId 
+        if (p.AbnormalityId is FlameFusionIncreaseId
+                            or FrostFusionIncreaseId
                             or ArcaneFusionIncreaseId)
         {
             Game.SetSorcererElementsBoost(false, false, false);
@@ -130,12 +133,11 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
 
     static void CheckFusions(S_ABNORMALITY_END p)
     {
-        if (FireIceFusionId == p.AbnormalityId)
-        {
-            if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
+        if (FireIceFusionId != p.AbnormalityId) return;
 
-            vm!.EndFireIcePre();
-        }
+        if (!IsViewModelAvailable<SorcererLayoutVM>(out var vm)) return;
+
+        vm.EndFireIcePre();
         //else if (FireArcaneFusionId == p.AbnormalityId)
         //{
         //    StartPrecooldown(_fireArcaneFusion, p.Duration);

@@ -114,12 +114,10 @@ public class AbnormalityDatabase : DatabaseBase
     public bool GetAbnormality(uint id, out Abnormality ab)
     {
         ab = new Abnormality(0, false, false, false, AbnormalityType.Buff, "", "", "");
-        if (Abnormalities.TryGetValue(id, out var found))
-        {
-            ab = found;
-            return true;
-        }
+        if (!Abnormalities.TryGetValue(id, out var found)) return false;
 
-        return false;
+        ab = found;
+        return true;
+
     }
 }

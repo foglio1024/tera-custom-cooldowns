@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using TeraPacketParser.Data;
-using Server = TeraPacketParser.TeraCommon.Game.Server;
+using TeraPacketParser.TeraCommon.Game;
 
 namespace TeraPacketParser.TeraCommon.Sniffing;
 

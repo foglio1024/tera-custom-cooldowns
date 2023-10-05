@@ -1,11 +1,12 @@
-﻿using Nostrum;
-using Nostrum.WPF.Controls;
-using Nostrum.WPF.Factories;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Nostrum;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Skills;
@@ -16,7 +17,7 @@ public partial class RoundSkillEffectControl : INotifyPropertyChanged
     SkillWithEffect? _context;
 
     public string DurationLabel => _context == null ? "" : TimeUtils.FormatSeconds(Convert.ToInt64(_context.Effect.Seconds / _context.Effect.Interval));
-    public bool ShowEffectSeconds => _context?.Effect != null && _context.Effect.Seconds > 0;
+    public bool ShowEffectSeconds => _context?.Effect is { Seconds: > 0 };
 
     public RoundSkillEffectControl()
     {
@@ -50,7 +51,7 @@ public partial class RoundSkillEffectControl : INotifyPropertyChanged
         Unloaded -= OnUnloaded;
     }
 
-    void OnBuffEnded(Data.CooldownMode obj)
+    void OnBuffEnded(CooldownMode obj)
     {
         ExternalArc.BeginAnimation(Arc.EndAngleProperty, null);
         ExternalArc.EndAngle = 0;
@@ -62,7 +63,7 @@ public partial class RoundSkillEffectControl : INotifyPropertyChanged
         NPC(nameof(ShowEffectSeconds));
     }
 
-    void OnBuffStarted(ulong duration, Data.CooldownMode mode)
+    void OnBuffStarted(ulong duration, CooldownMode mode)
     {
         _anim.Duration = TimeSpan.FromMilliseconds(duration);
         ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);

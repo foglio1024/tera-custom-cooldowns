@@ -7,6 +7,7 @@ using System.Windows.Media.Animation;
 using Nostrum.WPF.Extensions;
 using Nostrum.WPF.Factories;
 using TCC.ViewModels;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
 namespace TCC.UI.Windows.Widgets;
 
@@ -40,11 +41,11 @@ public partial class FloatingButtonWindow
         vm.NotificationsAdded += OnNotificationsAdded;
 
         var duration = TimeSpan.FromSeconds(5);
-        var start = -1;
-        var end = 1;
-        var tailSize = 0.5;
-        var headSize = 0.5;
-        var fps = 10;
+        const int start = -1;
+        const int end = 1;
+        const double tailSize = 0.5;
+        const double headSize = 0.5;
+        const int fps = 10;
 
         _s1Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start, To = end };
         _s2Anim = new DoubleAnimation { Duration = duration, RepeatBehavior = RepeatBehavior.Forever, From = start + tailSize, To = end + tailSize };
@@ -136,13 +137,13 @@ public partial class FloatingButtonWindow
         _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _bubbleAnim);
     }
 
-    void OnMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+    void OnMouseEnter(object sender, MouseEventArgs e)
     {
         RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideInAnim);
         _bubbleTranslateTransform.BeginAnimation(TranslateTransform.XProperty, _bubbleSlideIn);
     }
 
-    void OnMouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+    void OnMouseLeave(object sender, MouseEventArgs e)
     {
         Task.Delay(1000).ContinueWith(_ =>
         {

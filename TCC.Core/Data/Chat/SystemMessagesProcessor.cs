@@ -14,7 +14,7 @@ namespace TCC.Data.Chat;
 
 public static class SystemMessagesProcessor
 {
-    public static string Build(SystemMessageData template, params string[] parameters)
+    static string Build(SystemMessageData template, params string[] parameters)
     {
         var pieces = new List<string>();
         var sb = new StringBuilder();
@@ -27,11 +27,7 @@ public static class SystemMessagesProcessor
         {
             //only one parameter (opcode) so just add text
 
-            foreach (var htmlPiece in htmlPieces)
-            {
-                var content = htmlPiece.InnerText;
-                pieces.Add(content);
-            }
+            pieces.AddRange(htmlPieces.Select(htmlPiece => htmlPiece.InnerText));
         }
         else
         {
@@ -140,7 +136,7 @@ public static class SystemMessagesProcessor
     public static void AnalyzeMessage(string fullParameters)
     {
         var opcodeStr = fullParameters.Split('\v')[0]; // "@opcode \v parameters"
-        var opcode = ushort.Parse(opcodeStr.Substring(1));
+        var opcode = ushort.Parse(opcodeStr[1..]);
         var opcodeName = PacketAnalyzer.Factory!.SystemMessageNamer.GetName(opcode);
         AnalyzeMessage(fullParameters, opcodeName);
     }
@@ -180,13 +176,13 @@ public static class SystemMessagesProcessor
         var currChar = WindowManager.ViewModels.DashboardVM.CurrentCharacter;
         if (currChar == null) return;
         var cleared = currChar.GuardianInfo.Cleared;
-        var standardCountString = ChatUtils.Font($"({cleared}/{GuardianInfo.MAX_DAILIES})", "cccccc");
+        var standardCountString = ChatUtils.Font($"({cleared}/{GuardianInfo.MaxDailies})", "cccccc");
         var maxedCountString = ChatUtils.Font("(", "cccccc")
                                + ChatUtils.Font($"{cleared}", "ff0000")
-                               + ChatUtils.Font($"/{GuardianInfo.MAX_DAILIES})", "cccccc");
-        var newMsg = new SystemMessageData($"{template.Template} {(cleared == GuardianInfo.MAX_DAILIES ? maxedCountString : standardCountString)}", template.ChatChannel);
+                               + ChatUtils.Font($"/{GuardianInfo.MaxDailies})", "cccccc");
+        var newMsg = new SystemMessageData($"{template.Template} {(cleared == GuardianInfo.MaxDailies ? maxedCountString : standardCountString)}", template.ChatChannel);
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, newMsg, ChatChannel.Guardian);
-        if (currChar.GuardianInfo.Cleared == GuardianInfo.MAX_DAILIES)
+        if (currChar.GuardianInfo.Cleared == GuardianInfo.MaxDailies)
         {
             msg.ContainsPlayerName = true;
         }
@@ -217,7 +213,7 @@ public static class SystemMessagesProcessor
     static void HandleDungeonEngagedMessage(string parameters, SystemMessageData template)
     {
         const string s = "dungeon:";
-        var dgId = Convert.ToUInt32(parameters.Substring(parameters.IndexOf(s, StringComparison.Ordinal) + s.Length));
+        var dgId = Convert.ToUInt32(parameters[(parameters.IndexOf(s, StringComparison.Ordinal) + s.Length)..]);
         WindowManager.ViewModels.DashboardVM.CurrentCharacter?.DungeonInfo.Engage(dgId);
 
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
@@ -458,7 +454,7 @@ public static class SystemMessagesProcessor
         { "SMT_PARTY_MATCHING_CANT_PR_NO_INFORMATION",  new Action<string, SystemMessageData>(HandleLfgNotListed)},
 
         { "SMT_WORLDSPAWN_NOTIFY_SPAWN",                new Action<string, SystemMessageData>(HandleMerchantSpawn)},
-        { "SMT_WORLDSPAWN_NOTIFY_DESPAWN",              new Action<string, SystemMessageData>(HandleMerchantDespawn)},
+        { "SMT_WORLDSPAWN_NOTIFY_DESPAWN",              new Action<string, SystemMessageData>(HandleMerchantDespawn)}
     };
 
 

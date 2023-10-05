@@ -40,9 +40,9 @@ public class ServerDatabase
             var ret = _language.ToString();
             ret = _language switch
             {
-                LangEnum.GER => ($"EU-{ret}"),
-                LangEnum.FR => ($"EU-{ret}"),
-                LangEnum.EN => ($"EU-{ret}"),
+                LangEnum.GER => $"EU-{ret}",
+                LangEnum.FR => $"EU-{ret}",
+                LangEnum.EN => $"EU-{ret}",
                 _ => ret
             };
 

@@ -28,8 +28,7 @@ public partial class LfgBody
 
     void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        var user = ((sender as FrameworkElement)?.DataContext as User);
-        if (user == null) return;
+        if ((sender as FrameworkElement)?.DataContext is not User user) return;
         WindowManager.ViewModels.PlayerMenuVM.Open(user.Name, user.ServerId);
     }
 

@@ -5,7 +5,7 @@ namespace TCC.Data.Databases;
 
 public class AchievementDatabase : DatabaseBase
 {
-    public Dictionary<uint, string> Achievements;
+    public readonly Dictionary<uint, string> Achievements;
     public AchievementDatabase(string lang) : base(lang)
     {
         Achievements = new Dictionary<uint, string>();

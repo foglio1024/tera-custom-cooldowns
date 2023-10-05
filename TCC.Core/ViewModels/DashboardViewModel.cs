@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using Nostrum.WPF;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -17,6 +12,12 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
+using JetBrains.Annotations;
+using Newtonsoft.Json;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
@@ -35,6 +36,7 @@ using MessageBoxImage = TCC.Data.MessageBoxImage;
 namespace TCC.ViewModels;
 
 [TccModule]
+[UsedImplicitly]
 public class DashboardViewModel : TccWindowViewModel
 {
     /* -- Fields ----------------------------------------------- */
@@ -565,10 +567,7 @@ public class DashboardViewModel : TccWindowViewModel
         {
             Log.F($"Failed to update buffs: {e.Message}");
         }
-        Dispatcher.BeginInvoke(() =>
-        {
-            SaveCharacters();
-        });
+        Dispatcher.BeginInvoke(SaveCharacters);
     }
 
     void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)

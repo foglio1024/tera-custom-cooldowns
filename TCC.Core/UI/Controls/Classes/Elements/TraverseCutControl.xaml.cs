@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Nostrum.WPF.Controls;
 using Nostrum.WPF.Factories;
 using TCC.Data;
 
@@ -14,7 +15,7 @@ public partial class TraverseCutControl
     readonly DoubleAnimation _anim;
     StatTracker? _dc;
     bool _isAnimating;
-    DispatcherTimer _delay;
+    readonly DispatcherTimer _delay;
     uint _lastDuration;
     public string IconName { get; } = "icon_skills.dualrapidpiercing_tex";
 
@@ -71,7 +72,7 @@ public partial class TraverseCutControl
             {
                 _toZeroAnimation.From = _dc.Factor * 359.9;
             }
-            ExternalArc.BeginAnimation(Nostrum.WPF.Controls.Arc.EndAngleProperty, _toZeroAnimation);
+            ExternalArc.BeginAnimation(Arc.EndAngleProperty, _toZeroAnimation);
         });
     }
 
@@ -81,7 +82,7 @@ public partial class TraverseCutControl
         if (_dc != null)
         {
             _anim.To = _dc.Factor * 359.9;
-            ExternalArc.BeginAnimation(Nostrum.WPF.Controls.Arc.EndAngleProperty, _anim);
+            ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
         }
         _isAnimating = true;
     }

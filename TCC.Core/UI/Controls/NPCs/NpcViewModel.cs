@@ -39,9 +39,9 @@ public class NpcViewModel : ThreadSafeObservableObject
         }
     }
 
-    public NPC NPC { get; protected set; }
+    public Npc NPC { get; protected set; }
 
-    public NpcViewModel(NPC npc)
+    public NpcViewModel(Npc npc)
     {
         NPC = npc;
         ShowMenuButtonTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };

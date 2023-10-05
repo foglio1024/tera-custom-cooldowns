@@ -34,16 +34,14 @@ public struct EntityId : IEquatable<EntityId>
     }
 
 
-    public bool Equals(EntityId other)
+    public readonly bool Equals(EntityId other)
     {
         return this == other;
     }
 
     public override bool Equals(object? obj)
     {
-        if (!(obj is EntityId))
-            return false;
-        return this == (EntityId)obj;
+        return obj is EntityId id && this == id;
     }
 
     public override int GetHashCode()

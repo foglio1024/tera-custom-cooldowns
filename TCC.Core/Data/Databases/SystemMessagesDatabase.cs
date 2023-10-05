@@ -2,6 +2,7 @@
 using System.IO;
 using Nostrum.WPF.Extensions;
 using TCC.Data.Chat;
+using TCC.R;
 using TCC.Utils;
 using TeraPacketParser.Analysis;
 
@@ -9,8 +10,8 @@ namespace TCC.Data.Databases;
 
 public class SystemMessagesDatabase : DatabaseBase
 {
+    readonly List<string> _handledInternally = new() { "SMT_FIELD_EVENT_REWARD_AVAILABLE" };
     public Dictionary<string, SystemMessageData> Messages { get; }
-    List<string> _handledInternally = new() { "SMT_FIELD_EVENT_REWARD_AVAILABLE"};
     protected override string FolderName => "sys_msg";
     protected override string Extension => "tsv";
 
@@ -74,7 +75,7 @@ public class SystemMessagesDatabase : DatabaseBase
                       ChatUtils.Font(" (", "cccccc") +
                       ChatUtils.Font("{Perc}") +
                       ChatUtils.Font(")", "cccccc") +
-                      ChatUtils.Font(" crit", R.Colors.ItemSuperiorColor.ToHex(true)) +
+                      ChatUtils.Font(" crit", Colors.ItemSuperiorColor.ToHex(true)) +
                       ChatUtils.Font(" damage from ", "cccccc") +
                       ChatUtils.Font("{Source}") +
                       ChatUtils.Font(".", "cccccc");
@@ -101,7 +102,7 @@ public class SystemMessagesDatabase : DatabaseBase
             ChatUtils.Font(" (", "cccccc") +
             ChatUtils.Font("{Perc}") +
             ChatUtils.Font(")", "cccccc") +
-            ChatUtils.Font(" crit", R.Colors.ItemSuperiorColor.ToHex(true)) +
+            ChatUtils.Font(" crit", Colors.ItemSuperiorColor.ToHex(true)) +
             ChatUtils.Font(" damage.", "cccccc");
 
         var damageReceivedUnknownCrit = new SystemMessageData(msgUnkCrit, (int)ChatChannel.Damage);
@@ -109,7 +110,7 @@ public class SystemMessagesDatabase : DatabaseBase
 
         // ---------------------
         var ench = Messages["SMT_MAX_ENCHANT_SUCCEED"];
-        var newEnch = new SystemMessageData(ChatUtils.Font(ench.Template, R.Colors.ChatSystemGenericColor.ToHex()), ench.ChatChannel);
+        var newEnch = new SystemMessageData(ChatUtils.Font(ench.Template, Colors.ChatSystemGenericColor.ToHex()), ench.ChatChannel);
         Messages["SMT_MAX_ENCHANT_SUCCEED"] = newEnch;
     }
 
@@ -118,7 +119,7 @@ public class SystemMessagesDatabase : DatabaseBase
         try
         {
             var pars = msg.Split('\v');
-            var opc = ushort.Parse(pars[0].Substring(1));
+            var opc = ushort.Parse(pars[0][1..]);
             var opcName = PacketAnalyzer.Factory!.SystemMessageNamer.GetName(opc);
             return _handledInternally.Contains(opcName);
         }

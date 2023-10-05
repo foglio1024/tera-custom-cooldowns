@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Windows.Data;
 using Newtonsoft.Json;
-using TeraDataLite;
 using Nostrum.WPF.ThreadSafe;
+using TeraDataLite;
 
 namespace TCC.Data.Pc;
 
@@ -21,7 +21,7 @@ public class GearInfo
     public GearInfo()
     {
         Gear = new ThreadSafeObservableCollection<GearItem>();
-        Jewels = new CollectionViewSource() { Source = Gear }.View;
+        Jewels = new CollectionViewSource { Source = Gear }.View;
         Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
         Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
     }

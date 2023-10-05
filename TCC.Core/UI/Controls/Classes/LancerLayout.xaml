@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:LancerLayoutVM}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:LancerLayoutViewModel}">
     <Grid Width="Auto" Margin="45 35 45 90" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

@@ -12,4 +12,4 @@ public interface IMoongourdManager
     event Action<string> Failed;
 
     void GetEncounters(string playerName, string region, string playerServer = "", int areaId = 0, int bossId = 0);
-};
+}

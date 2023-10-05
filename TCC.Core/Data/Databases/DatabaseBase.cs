@@ -1,5 +1,5 @@
-﻿using Nostrum;
-using System.IO;
+﻿using System.IO;
+using Nostrum;
 using TCC.Update;
 using TCC.Utils;
 
@@ -7,15 +7,16 @@ namespace TCC.Data.Databases;
 
 public abstract class DatabaseBase
 {
-    protected string Language;
+    int _outdatedCount;
+
+    protected readonly string Language;
     protected abstract string FolderName { get; }
     protected abstract string Extension { get; }
 
-    public string RelativePath => $"{FolderName}/{FolderName}-{Language}.{Extension}";
+    protected string RelativePath => $"{FolderName}/{FolderName}-{Language}.{Extension}";
     protected string FullPath { get; }
     public virtual bool Exists => File.Exists(FullPath);
-    public bool IsUpToDate => outdatedCount == 0 && Exists;
-    protected int outdatedCount;
+    public bool IsUpToDate => _outdatedCount == 0 && Exists;
 
     public abstract void Load();
     public virtual void CheckVersion(string customAbsPath = "", string customRelPath = "")
@@ -25,10 +26,10 @@ public abstract class DatabaseBase
             Log.F($"{(string.IsNullOrEmpty(customAbsPath) ? FullPath : customAbsPath)} not found. Skipping hash check.");
             return;
         }
-        var localHash = HashUtils.GenerateFileHash((string.IsNullOrEmpty(customAbsPath) ? FullPath : customAbsPath));
+        var localHash = HashUtils.GenerateFileHash(string.IsNullOrEmpty(customAbsPath) ? FullPath : customAbsPath);
         if (UpdateManager.DatabaseHashes.Count == 0)
         {
-            Log.F($"No database hashes in update manager. Skipping hash check.");
+            Log.F("No database hashes in update manager. Skipping hash check.");
             return;
         }
 
@@ -43,7 +44,7 @@ public abstract class DatabaseBase
             return;
         }
         //Log.F($"Hash mismatch for {customRelPath ?? RelativePath} (local:{localHash} remote:{remoteHash})");
-        outdatedCount++;
+        _outdatedCount++;
 
     }
 

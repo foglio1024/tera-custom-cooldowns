@@ -1,9 +1,11 @@
-﻿using HtmlAgilityPack;
+﻿using System;
+using System.Text;
+using HtmlAgilityPack;
 using Nostrum.Extensions;
 using Nostrum.WPF.Extensions;
-using System;
-using System.Text;
+using TCC.R;
 using TCC.Utilities;
+using TCC.Utils;
 
 namespace TCC.Data.Chat;
 
@@ -11,13 +13,13 @@ public static class SystemMessageParser
 {
     public static string ParseSysMsgZone(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
         var zoneId = uint.Parse(dictionary["zoneName"]);
         return Game.DB!.MonsterDatabase.GetZoneName(zoneId);
     }
     public static string ParseSysMsgCreature(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
         var creatureId = dictionary["creature"];
         var creatureSplit = creatureId.Split('#');
@@ -35,17 +37,17 @@ public static class SystemMessageParser
     }
     public static string ParseSysMsgItem(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
-        var id = Utils.ChatUtils.GetId(dictionary, "item");
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+        var id = ChatUtils.GetId(dictionary, "item");
         var name = $"Unknown item [{id}]";
         if (Game.DB!.ItemsDatabase.Items.TryGetValue(id, out var i)) name = i.Name;
         return $"<{name}>";
     }
     public static string ParseSysMsgAchi(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
-        var id = Utils.ChatUtils.GetId(dictionary, "achievement");
+        var id = ChatUtils.GetId(dictionary, "achievement");
         var achiName = id.ToString();
         if (Game.DB!.AchievementDatabase.Achievements.TryGetValue(id * 1000 + 1, out var g2))
         {
@@ -56,41 +58,41 @@ public static class SystemMessageParser
     }
     public static string ParseSysMsgQuest(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
-        var id = Utils.ChatUtils.GetId(dictionary, "quest");
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+        var id = ChatUtils.GetId(dictionary, "quest");
         var txt = id.ToString();
         if (Game.DB!.QuestDatabase.Quests.TryGetValue(id, out var q)) txt = q;
         return txt;
     }
     public static string ParseSysMsgAchiGrade(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
-        var id = Utils.ChatUtils.GetId(dictionary, "AchievementGradeInfo");
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+        var id = ChatUtils.GetId(dictionary, "AchievementGradeInfo");
         var txt = id.ToString();
         if (Game.DB!.AchievementGradeDatabase.Grades.TryGetValue(id, out var g)) txt = g;
         return txt;
     }
     public static string ParseSysMsgDungeon(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
-        var id = Utils.ChatUtils.GetId(dictionary, "dungeon");
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+        var id = ChatUtils.GetId(dictionary, "dungeon");
         var txt = id.ToString();
         if (Game.DB!.DungeonDatabase.Dungeons.TryGetValue(id, out var dung)) txt = dung.Name;
         return txt;
     }
     public static string ParseSysMsgAccBenefit(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
-        var id = Utils.ChatUtils.GetId(dictionary, "accountBenefit");
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
+        var id = ChatUtils.GetId(dictionary, "accountBenefit");
         var txt = id.ToString();
         if (Game.DB!.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab)) txt = ab;
         return txt;
     }
     public static string ParseSysMsgGuildQuest(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
-        var id = Utils.ChatUtils.GetId(dictionary, "GuildQuest");
+        var id = ChatUtils.GetId(dictionary, "GuildQuest");
         var questName = id.ToString();
         if (Game.DB!.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
         {
@@ -100,7 +102,7 @@ public static class SystemMessageParser
     }
     public static string ParseSysMsgRegion(string inPiece)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(inPiece);
+        var dictionary = ChatUtils.BuildParametersDictionary(inPiece);
         var regId = dictionary["rgn"];
         var msgText = Game.DB!.RegionsDatabase.GetZoneName(Convert.ToUInt32(regId));
         return msgText;
@@ -111,18 +113,18 @@ public static class MessagePieceBuilder
 {
     public static SimpleMessagePiece BuildSysMsgZone(string msgText)
     {
-        return new(SystemMessageParser.ParseSysMsgZone(msgText));
+        return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgZone(msgText));
     }
     public static SimpleMessagePiece BuildSysMsgCreature(string msgText)
     {
-        return new(SystemMessageParser.ParseSysMsgCreature(msgText));
+        return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgCreature(msgText));
     }
     public static SimpleMessagePiece BuildSysMsgItem(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
-        var id = Utils.ChatUtils.GetId(dictionary, "item");
-        var uid = Utils.ChatUtils.GetItemUid(dictionary);
+        var id = ChatUtils.GetId(dictionary, "item");
+        var uid = ChatUtils.GetItemUid(dictionary);
 
         var rawLink = new StringBuilder("1#####");
         rawLink.Append(id.ToString());
@@ -152,17 +154,17 @@ public static class MessagePieceBuilder
     }
     public static SimpleMessagePiece BuildSysMsgAchi(string msgText)
     {
-        return new(SystemMessageParser.ParseSysMsgAchi(msgText));
+        return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgAchi(msgText));
     }
     public static SimpleMessagePiece BuildSysMsgQuest(string msgText)
     {
-        return new(SystemMessageParser.ParseSysMsgQuest(msgText));
+        return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgQuest(msgText));
     }
     public static SimpleMessagePiece BuildSysMsgAchiGrade(string msgText)
     {
-        var dictionary = Utils.ChatUtils.BuildParametersDictionary(msgText);
+        var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
-        var id = Utils.ChatUtils.GetId(dictionary, "AchievementGradeInfo");
+        var id = ChatUtils.GetId(dictionary, "AchievementGradeInfo");
         var txt = id.ToString();
         var col = "fcb06f";
 
@@ -174,8 +176,8 @@ public static class MessagePieceBuilder
         txt = g;
         col = id switch
         {
-            104 => R.Colors.ChatDiamondLaurelColor.ToHex(false, false),
-            105 => R.Colors.ChatChampionLaurelColor.ToHex(false, false),
+            104 => Colors.ChatDiamondLaurelColor.ToHex(false, false),
+            105 => Colors.ChatChampionLaurelColor.ToHex(false, false),
             _ => col
         };
 
@@ -186,24 +188,24 @@ public static class MessagePieceBuilder
     }
     public static SimpleMessagePiece BuildSysMsgDungeon(string msgText)
     {
-        return new(SystemMessageParser.ParseSysMsgDungeon(msgText));
+        return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgDungeon(msgText));
     }
     public static SimpleMessagePiece BuildSysMsgAccBenefit(string msgText)
     {
-        return new(SystemMessageParser.ParseSysMsgAccBenefit(msgText));
+        return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgAccBenefit(msgText));
     }
     public static SimpleMessagePiece BuildSysMsgGuildQuest(string msgText)
     {
-        return new(SystemMessageParser.ParseSysMsgGuildQuest(msgText));
+        return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgGuildQuest(msgText));
     }
     public static SimpleMessagePiece BuildSysMsgRegion(string inPiece)
     {
-        return new(SystemMessageParser.ParseSysMsgRegion(inPiece));
+        return new SimpleMessagePiece(SystemMessageParser.ParseSysMsgRegion(inPiece));
     }
     public static SimpleMessagePiece ParseChatLinkAction(HtmlNode chatLinkAction)
     {
         var param = chatLinkAction.GetAttributeValue("param", "");
-        var type = int.Parse(param.Substring(0, 1));
+        var type = int.Parse(param[..1]);
         var mp = type switch
         {
             1 => ParseHtmlItem(chatLinkAction),
@@ -218,24 +220,24 @@ public static class MessagePieceBuilder
 
     static ActionMessagePiece ParseHtmlAchievement(HtmlNode node)
     {
-        return new(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
+        return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
     }
 
     static ActionMessagePiece ParseHtmlItem(HtmlNode node)
     {
-        return new(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
+        return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
     }
 
     static ActionMessagePiece ParseHtmlQuest(HtmlNode node)
     {
-        return new(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
+        return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
     }
 
     static ActionMessagePiece ParseHtmlLocation(HtmlNode node)
     {
         var linkData = node.GetAttributeValue("param", "");
 
-        var pars = linkData.Substring(6).Split('@');
+        var pars = linkData[6..].Split('@');
         var locTree = pars[0].Split('_');
         var worldId = uint.Parse(locTree[0]);
         var guardId = uint.Parse(locTree[1]);

@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
-using Nostrum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
+using Newtonsoft.Json.Linq;
+using Nostrum;
 using TCC.Data;
 using TCC.Utils;
 using TeraPacketParser.Analysis;
@@ -51,7 +51,7 @@ public static class NoticeChecker
     {
         App.BaseDispatcher.Invoke(() =>
         {
-            var list = _notices.Where(n => n.Enabled && !n.Fired && n.Trigger == trigger).ToList();
+            var list = _notices.Where(n => n is { Enabled: true, Fired: false } && n.Trigger == trigger).ToList();
             foreach (var n in list)
             {
                 n.Fire();

@@ -1,19 +1,20 @@
 ﻿/* Add My Abnormals Setting by HQ
 GroupConfigVM               -> MyAbnormalConfigVM
-GroupAbnormalityVM          -> MyAbnormalityVM
+GroupAbnormalityViewModel          -> MyAbnormalityVM
 GroupAbnormals              -> MyAbnormals
 
 ShowAllGroupAbnormalities   -> ShowAllMyAbnormalities
 */
-using Nostrum;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Nostrum.WPF.Factories;
-using TeraDataLite;
-using Nostrum.WPF.ThreadSafe;
+using Nostrum;
 using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
+using TeraDataLite;
 
 namespace TCC.ViewModels;
 
@@ -47,10 +48,9 @@ public class MyAbnormalConfigVM : ThreadSafeObservableObject, IDisposable
     public MyAbnormalConfigVM()
     {
         var myAbnormals = new ThreadSafeObservableCollection<MyAbnormalityVM>(_dispatcher);
-        foreach (var abnormality in Game.DB!.AbnormalityDatabase.Abnormalities.Values.Where(a => a.IsShow && a.CanShow))
+        foreach (var abnormality in Game.DB!.AbnormalityDatabase.Abnormalities.Values.Where(a => a is { IsShow: true, CanShow: true }))
         {
             var abVM = new MyAbnormalityVM(abnormality);
-
             myAbnormals.Add(abVM);
         }
 

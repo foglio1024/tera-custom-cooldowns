@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using TeraPacketParser.Messages;
 
 namespace TeraPacketParser;
@@ -123,7 +122,7 @@ public class MessageFactory
         { nameof(S_FATIGABILITY_POINT),                    Constructor<Func<TeraMessageReader, S_FATIGABILITY_POINT>>() },
         { nameof(S_SET_ITEM_BIDDING_FLAG),                 Constructor<Func<TeraMessageReader, S_SET_ITEM_BIDDING_FLAG>>() },
         { nameof(S_UPDATE_BIDDING_COUNT),                  Constructor<Func<TeraMessageReader, S_UPDATE_BIDDING_COUNT>>() },
-        { nameof(S_SPAWN_DROPITEM),                        Constructor<Func<TeraMessageReader, S_SPAWN_DROPITEM>>() },
+        { nameof(S_SPAWN_DROPITEM),                        Constructor<Func<TeraMessageReader, S_SPAWN_DROPITEM>>() }
         //{ nameof(S_VIEW_WARE_EX),                          Contructor<Func<TeraMessageReader, S_VIEW_WARE_EX>>() },
         //{ nameof(S_ACTION_STAGE),                          Contructor<Func<TeraMessageReader, S_ACTION_STAGE>>() }, //nvm
         //{ nameof(S_EACH_SKILL_RESULT),                     Contructor<Func<TeraMessageReader, S_EACH_SKILL_RESULT>>() },

@@ -13,7 +13,7 @@ public partial class LfgListWindow
 {
     bool _keepPopupOpen;
 
-    LfgListViewModel VM { get; }
+    readonly LfgListViewModel _vm;
 
     public ICommand HideWindowCommand { get; }
 
@@ -21,7 +21,7 @@ public partial class LfgListWindow
     {
         InitializeComponent();
         DataContext = vm;
-        VM = vm;
+        _vm = vm;
         WindowManager.VisibilityManager.VisibilityChanged += () =>
         {
             if (!WindowManager.VisibilityManager.Visible) return;
@@ -87,7 +87,7 @@ public partial class LfgListWindow
     void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
     {
         if (_keepPopupOpen) return;
-        VM.IsPopupOpen = false;
+        _vm.IsPopupOpen = false;
     }
 
     void OnTbKeyDown(object sender, KeyEventArgs e)

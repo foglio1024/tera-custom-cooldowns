@@ -1,10 +1,10 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.Extensions;
-using System;
+﻿using System;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Input;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
 using TCC.Data;
 using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
@@ -105,8 +105,7 @@ public class CharacterWindowSettings : WindowSettingsBase
 
     void ChooseCustomLaurel()
     {
-        LaurelSelectionWindow? w;
-        w = Application.Current.Windows.ToList().OfType<LaurelSelectionWindow>().FirstOrDefault();
+        var w = Application.Current.Windows.ToList().OfType<LaurelSelectionWindow>().FirstOrDefault();
 
         if (w != null)
         {

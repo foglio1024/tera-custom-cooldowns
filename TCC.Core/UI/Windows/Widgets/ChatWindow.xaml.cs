@@ -71,7 +71,7 @@ public partial class ChatWindow
     {
         if (sender is not FrameworkElement s) return;
         if (s.DataContext is not HeaderedItemViewModel dc) return;
-        var tab = ((Tab)dc.Content);
+        var tab = (Tab)dc.Content;
 
         if (e.RightButton == MouseButtonState.Pressed)
         {

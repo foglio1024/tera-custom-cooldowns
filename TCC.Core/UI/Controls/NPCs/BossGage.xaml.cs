@@ -13,7 +13,7 @@ public partial class BossGage
 {
     bool _firstLoad = true;
 
-    public BossViewModel? VM { get; set; }
+    public BossViewModel? VM { get; private set; }
 
     readonly DoubleAnimation _enrageArcAnimation;
     readonly DoubleAnimation _hpAnim;
@@ -39,7 +39,7 @@ public partial class BossGage
 
     void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
     {
-        if (e.NewValue is not NPC npc) return;
+        if (e.NewValue is not Npc npc) return;
         VM = new BossViewModel(npc);
     }
 

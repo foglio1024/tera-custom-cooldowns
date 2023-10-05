@@ -10,12 +10,11 @@ public class ItemExpDatabase : DatabaseBase
     protected override string FolderName => "equip_exp";
     protected override string Extension => "xml";
 
-    public Dictionary<uint, Dictionary<int, int>> ExpData;
+    public readonly Dictionary<uint, Dictionary<int, int>> ExpData;
 
     public ItemExpDatabase(string lang) : base(lang)
     {
         ExpData = new Dictionary<uint, Dictionary<int, int>>();
-
     }
 
     public override void Load()

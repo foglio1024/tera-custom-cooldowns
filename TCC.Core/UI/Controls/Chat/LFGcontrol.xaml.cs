@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,10 +13,10 @@ using TCC.ViewModels;
 namespace TCC.UI.Controls.Chat;
 
 //TODO: rework when?
-public partial class LFGcontrol
+public partial class LfgControl
 {
-    LFG? _dc;
-    public LFGcontrol()
+    Lfg? _dc;
+    public LfgControl()
     {
         InitializeComponent();
         Loaded += OnLoaded;
@@ -32,11 +33,11 @@ public partial class LFGcontrol
 
     void OnLoaded(object sender, RoutedEventArgs e)
     {
-        _dc = (LFG)DataContext;
+        _dc = (Lfg)DataContext;
         _dc.PropertyChanged += DC_PropertyChanged;
     }
 
-    void DC_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    void DC_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == "Refresh")
         {

@@ -1,13 +1,13 @@
-﻿using Nostrum.WPF;
+﻿using System.Windows.Input;
+using Nostrum.WPF;
 using Nostrum.WPF.ThreadSafe;
-using System.Windows.Input;
 using TCC.Data.Abnormalities;
 using TCC.UI.Windows;
 using TeraDataLite;
 
 namespace TCC.ViewModels;
 
-public class GroupAbnormalityVM : ThreadSafeObservableObject
+public class GroupAbnormalityViewModel : ThreadSafeObservableObject
 {
     bool _hidden;
 
@@ -26,7 +26,7 @@ public class GroupAbnormalityVM : ThreadSafeObservableObject
     public Abnormality Abnormality { get; }
     public ThreadSafeObservableCollection<ClassToggle> Classes { get; }
 
-    public GroupAbnormalityVM(Abnormality ab)
+    public GroupAbnormalityViewModel(Abnormality ab)
     {
         Abnormality = ab;
 

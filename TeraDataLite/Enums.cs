@@ -62,7 +62,7 @@ public enum CustomLaurel
     [Description("Pink Champion")]
     ChampionPink,
     [Description("Black Champion")]
-    ChampionBlack,
+    ChampionBlack
 
 }
 
@@ -156,5 +156,5 @@ public enum GearPiece
     PowerEarring = 9,
     PowerRing = 10,
     Circlet = 11,
-    Belt = 12,
+    Belt = 12
 }

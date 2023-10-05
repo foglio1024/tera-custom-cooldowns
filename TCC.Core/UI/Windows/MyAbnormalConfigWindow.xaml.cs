@@ -1,17 +1,13 @@
 ﻿/* Add My Abnormals Setting by HQ
 GroupAbnormalConfigWindow   -> MyAbnormalConfigWindow
 GroupConfigVM               -> MyAbnormalConfigVM
-GroupAbnormalityVM          -> MyAbnormalityVM
+GroupAbnormalityViewModel          -> MyAbnormalityVM
 GroupAbnormals              -> MyAbnormals
 
 ClassToggle                 -> MyClassToggle
 ToggleCommand               -> MyToggleCommand
 */
 
-using Nostrum.WPF;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Linq;
 using System.Windows;
@@ -20,6 +16,10 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.ViewModels;
 using TeraDataLite;
 

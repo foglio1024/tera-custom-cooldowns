@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
-
 namespace TeraPacketParser.Messages;
 
 public class S_DUNGEON_CLEAR_COUNT_LIST : ParsedMessage

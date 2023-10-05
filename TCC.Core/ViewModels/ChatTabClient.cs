@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Dragablz;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
@@ -27,7 +28,7 @@ public class ChatTabClient : IInterTabClient
             ChatManager.Instance.ChatWindows.Remove((ChatWindow) window);
             window.Close();
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             Log.F($"Error while removing empty chat window: {e} ");
         }

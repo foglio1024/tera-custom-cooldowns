@@ -27,7 +27,7 @@ public static class EpDataProvider
         { 17, 1.56f },
         { 18, 1.59f },
         { 19, 1.62f },
-        { 20, 1.65f },
+        { 20, 1.65f }
     };
     public static void SetManaBarrierPerkLevel(uint level)
     {

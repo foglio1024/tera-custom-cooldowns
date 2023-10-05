@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json.Linq;
-using Nostrum.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using Nostrum.Extensions;
 using TCC.Utils;
 using TeraPacketParser;
 using TeraPacketParser.Data;
 using TeraPacketParser.Sniffing.JsonRPC;
-using Log = TCC.Utils.Log;
 
 namespace TCC.Interop.Proxy;
 
@@ -21,7 +20,7 @@ public class StubMessageParser
         { "setChatMode", new Action<JObject>(SetChatMode) },
         { "handleChatMessage", new Action<JObject>(HandleChatMessage) },
         { "handleRawPacket", new Action<JObject>(HandleRawPacket) },
-        { "enqueueNotification", new Action<JObject>(HandleEnqueueNotification) },
+        { "enqueueNotification", new Action<JObject>(HandleEnqueueNotification) }
     };
 
     public static event Action<bool>? SetUiModeEvent;

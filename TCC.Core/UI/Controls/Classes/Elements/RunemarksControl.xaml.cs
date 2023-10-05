@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using TCC.Data;
+using TCC.R;
 using TCC.ViewModels.ClassManagers;
 
 namespace TCC.UI.Controls.Classes.Elements;
 
 public partial class RunemarksControl
 {
-    ValkyrieLayoutVM? _dc;
+    ValkyrieLayoutViewModel? _dc;
 
     public RunemarksControl()
     {
@@ -21,7 +21,7 @@ public partial class RunemarksControl
 
     void OnLoaded(object _, RoutedEventArgs __)
     {
-        _dc = (ValkyrieLayoutVM) DataContext;
+        _dc = (ValkyrieLayoutViewModel) DataContext;
         if (_dc == null) return;
         _dc.RunemarksCounter.PropertyChanged += OnRunemarksPropertyChanged;
     }
@@ -37,14 +37,14 @@ public partial class RunemarksControl
                 RunemarkContainer.Children[i].Opacity = 1;
                 ((Shape)RunemarkContainer.Children[i]).Fill =
                     _dc.RunemarksCounter.Val == _dc.RunemarksCounter.MaxValue
-                        ? R.Brushes.MaxRunemarkBrush : 
-                        R.Brushes.RunemarkBrush; 
+                        ? Brushes.MaxRunemarkBrush : 
+                        Brushes.RunemarkBrush; 
 
             }
             else
             {
                 RunemarkContainer.Children[i].Opacity = .1;
-                ((Shape)RunemarkContainer.Children[i]).Fill = Brushes.White;
+                ((Shape)RunemarkContainer.Children[i]).Fill = System.Windows.Media.Brushes.White;
             }
         }
 
@@ -52,7 +52,7 @@ public partial class RunemarksControl
         {
             BlurRadius = 10,
             ShadowDepth = 0,
-            Color = R.Colors.MaxRunemarkColor 
+            Color = Colors.MaxRunemarkColor 
         } : null;
     }
 }

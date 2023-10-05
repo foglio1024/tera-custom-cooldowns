@@ -1,15 +1,15 @@
-﻿using Nostrum.WPF.Controls;
-using Nostrum.WPF.Factories;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using TCC.ViewModels.ClassManagers;
 
 namespace TCC.UI.Controls.Classes;
 
 public partial class BrawlerLayout
 {
-    BrawlerLayoutVM? _dc;
+    BrawlerLayoutViewModel? _dc;
     readonly DoubleAnimation _an;
 
     public BrawlerLayout()
@@ -20,7 +20,7 @@ public partial class BrawlerLayout
 
     void BrawlerLayout_OnLoaded(object sender, RoutedEventArgs e)
     {
-        _dc = (BrawlerLayoutVM)DataContext;
+        _dc = (BrawlerLayoutViewModel)DataContext;
         _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
     }
 

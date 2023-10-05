@@ -23,8 +23,7 @@ public partial class DefaultMessageBody
         {
             if (!w.IsMouseOver) continue;
             var currTabVm = w.TabControl.SelectedItem as HeaderedItemViewModel;
-            var currTab = currTabVm?.Content as Tab;
-            if (currTab == null) continue;
+            if (currTabVm?.Content is not Tab currTab) continue;
             currTab.PinnedMessage = currTab.PinnedMessage == dc ? null : dc;
         }
     }

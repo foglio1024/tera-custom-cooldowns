@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Nostrum;
 
 namespace TeraPacketParser;
 
@@ -41,7 +42,7 @@ public class OpCodeNamer
 
         if (!File.Exists(filename)) { return new List<KeyValuePair<ushort, string>>(); }
 
-        await Nostrum.MiscUtils.WaitForFileUnlock(filename, FileAccess.Read);
+        await MiscUtils.WaitForFileUnlock(filename, FileAccess.Read);
 
         var names = File.ReadLines(filename)
             .Select(s => Regex.Replace(s.Replace("=", " "), @"\s+", " ").Split(' ').ToArray())

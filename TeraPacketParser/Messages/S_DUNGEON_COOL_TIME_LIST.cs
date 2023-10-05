@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TeraPacketParser.Messages;
 
@@ -29,9 +30,9 @@ public class S_DUNGEON_COOL_TIME_LIST : ParsedMessage
                 reader.RepositionAt(next);
             }
         }
-        catch (System.Exception)
+        catch (Exception)
         {
-            System.Console.WriteLine($"[S_DUNGEON_COOL_TIME_LIST] Failed to parse packet");
+            Console.WriteLine("[S_DUNGEON_COOL_TIME_LIST] Failed to parse packet");
         }
     }
 }

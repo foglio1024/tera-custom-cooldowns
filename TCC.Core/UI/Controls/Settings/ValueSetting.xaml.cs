@@ -16,7 +16,7 @@ public partial class ValueSetting
         set => SetValue(SettingNameProperty, value);
     }
     public static readonly DependencyProperty SettingNameProperty = 
-        DependencyProperty.Register("SettingName", typeof(string), typeof(ValueSetting));
+        DependencyProperty.Register(nameof(SettingName), typeof(string), typeof(ValueSetting));
 
     public Visibility TextBoxVisibility
     {
@@ -24,7 +24,7 @@ public partial class ValueSetting
         set => SetValue(TextBoxVisibilityProperty, value);
     }
     public static readonly DependencyProperty TextBoxVisibilityProperty = 
-        DependencyProperty.Register("TextBoxVisibility", typeof(Visibility), typeof(ValueSetting));
+        DependencyProperty.Register(nameof(TextBoxVisibility), typeof(Visibility), typeof(ValueSetting));
 
     public double Max
     {
@@ -32,7 +32,7 @@ public partial class ValueSetting
         set => SetValue(MaxProperty, value);
     }
     public static readonly DependencyProperty MaxProperty =
-        DependencyProperty.Register("Max", typeof(double), typeof(ValueSetting));
+        DependencyProperty.Register(nameof(Max), typeof(double), typeof(ValueSetting));
 
     public double Min
     {
@@ -40,7 +40,7 @@ public partial class ValueSetting
         set => SetValue(MinProperty, value);
     }
     public static readonly DependencyProperty MinProperty =
-        DependencyProperty.Register("Min", typeof(double), typeof(ValueSetting));
+        DependencyProperty.Register(nameof(Min), typeof(double), typeof(ValueSetting));
 
     public double Value
     {
@@ -48,7 +48,7 @@ public partial class ValueSetting
         set => SetValue(ValueProperty, value);
     }
     public static readonly DependencyProperty ValueProperty = 
-        DependencyProperty.Register("Value", typeof(double), typeof(ValueSetting));
+        DependencyProperty.Register(nameof(Value), typeof(double), typeof(ValueSetting));
 
     public Geometry SvgIcon
     {
@@ -56,7 +56,7 @@ public partial class ValueSetting
         set => SetValue(SvgIconProperty, value);
     }
     public static readonly DependencyProperty SvgIconProperty =
-        DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(ValueSetting));
+        DependencyProperty.Register(nameof(SvgIcon), typeof(Geometry), typeof(ValueSetting));
 
 
     public ValueSetting()

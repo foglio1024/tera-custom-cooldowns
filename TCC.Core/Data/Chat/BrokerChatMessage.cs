@@ -12,7 +12,7 @@ public class BrokerChatMessage : ChatMessage
         
     public MessagePieceBase StartingPrice { get; set; }
     public MessagePieceBase OfferedPrice { get; set; }
-    public MessagePieceBase Listing { get; set; }
+    MessagePieceBase Listing { get; }
     public MessagePieceBase Amount { get; set; }
 
     public BrokerChatMessage(uint playerId, uint listing, int item, long amount, long sellerPrice, long offeredPrice, string name)

@@ -8,7 +8,7 @@ public class AccountBenefitDatabase : DatabaseBase
     protected override string FolderName => "acc_benefits";
     protected override string Extension => "tsv";
 
-    public Dictionary<uint, string> Benefits;
+    public readonly Dictionary<uint, string> Benefits;
 
     public AccountBenefitDatabase(string lang) : base(lang)
     {

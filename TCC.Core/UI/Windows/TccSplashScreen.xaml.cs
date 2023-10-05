@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Drawing;
+using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
@@ -11,7 +12,7 @@ namespace TCC.UI.Windows;
 
 public partial class TccSplashScreen
 {
-    DoubleAnimation _progressAnimation;
+    readonly DoubleAnimation _progressAnimation;
     public SplashScreenViewModel VM { get; }
     public TccSplashScreen()
     {
@@ -27,7 +28,7 @@ public partial class TccSplashScreen
     {
         try
         {
-            var screen = Screen.FromRectangle(new System.Drawing.Rectangle((int)Left, (int)Top, (int)Width, (int)Height));
+            var screen = Screen.FromRectangle(new Rectangle((int)Left, (int)Top, (int)Width, (int)Height));
             var bounds = screen.Bounds;
             var dpi = this.GetDpiScale();
             var top = (bounds.Height / 2f - ActualHeight / 2f - 40 )/ dpi.DpiScaleY;
@@ -70,7 +71,6 @@ public partial class TccSplashScreen
                 SynchronizationContext.SetSynchronizationContext(
                     new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
                 App.SplashScreen = new TccSplashScreen();
-                App.SplashScreen.VM.BottomText = "Initializing...";
                 App.SplashScreen.Show();
                 waiting = false;
                 Dispatcher.Run();

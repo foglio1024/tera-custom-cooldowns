@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using TCC.Data.Skills;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
@@ -12,10 +13,11 @@ using TeraPacketParser.Messages;
 namespace TCC.ViewModels.Widgets;
 
 [TccModule]
+[UsedImplicitly]
 public class ClassWindowViewModel : TccWindowViewModel
 {
     Class _currentClass = Class.None;
-    BaseClassLayoutVM _currentManager = new NullClassLayoutVM();
+    BaseClassLayoutViewModel _currentManager = new NullClassLayoutViewModel();
 
     public Class CurrentClass
     {
@@ -30,27 +32,27 @@ public class ClassWindowViewModel : TccWindowViewModel
                 CurrentManager.Dispose();
                 CurrentManager = _currentClass switch
                 {
-                    Class.Warrior => new WarriorLayoutVM(),
-                    Class.Valkyrie => new ValkyrieLayoutVM(),
-                    Class.Archer => new ArcherLayoutVM(),
-                    Class.Lancer => new LancerLayoutVM(),
-                    Class.Priest => new PriestLayoutVM(),
+                    Class.Warrior => new WarriorLayoutViewModel(),
+                    Class.Valkyrie => new ValkyrieLayoutViewModel(),
+                    Class.Archer => new ArcherLayoutViewModel(),
+                    Class.Lancer => new LancerLayoutViewModel(),
+                    Class.Priest => new PriestLayoutViewModel(),
                     Class.Mystic => new MysticLayoutVM(),
-                    Class.Slayer => new SlayerLayoutVM(),
-                    Class.Berserker => new BerserkerLayoutVM(),
+                    Class.Slayer => new SlayerLayoutViewModel(),
+                    Class.Berserker => new BerserkerLayoutViewModel(),
                     Class.Sorcerer => new SorcererLayoutVM(),
-                    Class.Reaper => new ReaperLayoutVM(),
-                    Class.Gunner => new GunnerLayoutVM(),
-                    Class.Brawler => new BrawlerLayoutVM(),
-                    Class.Ninja => new NinjaLayoutVM(),
-                    _ => new NullClassLayoutVM()
+                    Class.Reaper => new ReaperLayoutViewModel(),
+                    Class.Gunner => new GunnerLayoutViewModel(),
+                    Class.Brawler => new BrawlerLayoutViewModel(),
+                    Class.Ninja => new NinjaLayoutViewModel(),
+                    _ => new NullClassLayoutViewModel()
                 };
             });
             N();
         }
     }
 
-    public BaseClassLayoutVM CurrentManager
+    public BaseClassLayoutViewModel CurrentManager
     {
         get => _currentManager;
         set
@@ -99,27 +101,27 @@ public class ClassWindowViewModel : TccWindowViewModel
 
     void OnValkyrieShowRagnarokChanged()
     {
-        TccUtils.CurrentClassVM<ValkyrieLayoutVM>()?.ExN(nameof(ValkyrieLayoutVM.ShowRagnarok));
+        TccUtils.CurrentClassVM<ValkyrieLayoutViewModel>()?.ExN(nameof(ValkyrieLayoutViewModel.ShowRagnarok));
     }
 
     void OnValkyrieShowGodsfallChanged()
     {
-        TccUtils.CurrentClassVM<ValkyrieLayoutVM>()?.ExN(nameof(ValkyrieLayoutVM.ShowGodsfall));
+        TccUtils.CurrentClassVM<ValkyrieLayoutViewModel>()?.ExN(nameof(ValkyrieLayoutViewModel.ShowGodsfall));
     }
 
     void OnWarriorEdgeModeChanged()
     {
-        TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.WarriorEdgeMode));
+        TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.WarriorEdgeMode));
     }
 
     void OnWarriorShowTraverseCutChanged()
     {
-        TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowTraverseCut));
+        TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.ShowTraverseCut));
     }
 
     void OnWarriorShowEdgeChanged()
     {
-        TccUtils.CurrentClassVM<WarriorLayoutVM>()?.ExN(nameof(WarriorLayoutVM.ShowEdge));
+        TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.ShowEdge));
     }
 
     void OnSorcererShowElementsChanged()
@@ -194,7 +196,7 @@ public class ClassWindowViewModel : TccWindowViewModel
 
     void OnWeakPoint(S_WEAK_POINT p)
     {
-        if (CurrentManager is not ValkyrieLayoutVM vvm) return;
+        if (CurrentManager is not ValkyrieLayoutViewModel vvm) return;
         vvm.RunemarksCounter.Val = p.TotalRunemarks;
     }
 

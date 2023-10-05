@@ -1,10 +1,10 @@
-﻿using Nostrum;
-using Nostrum.WPF;
-using Nostrum.WPF.ThreadSafe;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Abnormalities;
 using TCC.Interop.Proxy;
 using TCC.UI;

@@ -26,7 +26,7 @@ public sealed class KeyboardHook : IDisposable
         _callbacks = new Dictionary<HotKey, Action>();
         _window = new Window();
         // register the event of the inner native window.
-        _window.KeyPressed += (key) => KeyPressed?.Invoke(key);
+        _window.KeyPressed += key => KeyPressed?.Invoke(key);
     }
 
     public void Enable()
@@ -129,7 +129,7 @@ public sealed class KeyboardHook : IDisposable
     /// </summary>
     sealed class Window : NativeWindow, IDisposable
     {
-        static readonly int WmHotkey = 0x0312;
+        const int WmHotkey = 0x0312;
 
         public Window()
         {

@@ -20,30 +20,39 @@ public partial class EdgeControl
     {
         var diff = newEdge - _currentEdge;
 
-        if (diff == 0) return;
-        if (diff > 0)
+        switch (diff)
         {
-            if (newEdge == 10)
+            case 0:
+                return;
+            case > 0:
             {
-                foreach (var child in EdgeContainer.Children)
+                if (newEdge == 10)
                 {
-                    if (child != null) ((FrameworkElement)child).Opacity = 1;
+                    foreach (var child in EdgeContainer.Children)
+                    {
+                        if (child != null) ((FrameworkElement)child).Opacity = 1;
+                    }
                 }
-            }
-            for (var i = 0; i < diff; i++)
-            {
-                if (_currentEdge + i < EdgeContainer.Children.Count - 1) EdgeContainer.Children[_currentEdge + i].Opacity = 1;
-            }
-        }
-        else
-        {
-            MaxBorder.Opacity = 0;
+                for (var i = 0; i < diff; i++)
+                {
+                    if (_currentEdge + i < EdgeContainer.Children.Count - 1) EdgeContainer.Children[_currentEdge + i].Opacity = 1;
+                }
 
-            for (var i = EdgeContainer.Children.Count - 1; i >= 0; i--)
+                break;
+            }
+            default:
             {
-                EdgeContainer.Children[i].Opacity = 0;
+                MaxBorder.Opacity = 0;
+
+                for (var i = EdgeContainer.Children.Count - 1; i >= 0; i--)
+                {
+                    EdgeContainer.Children[i].Opacity = 0;
+                }
+
+                break;
             }
         }
+
         _currentEdge = newEdge;
     }
 

@@ -27,24 +27,24 @@ public class SlayerAbnormalityTracker : AbnormalityTracker
     static void CheckInColdBlood(S_ABNORMALITY_BEGIN p)
     {
         if (!IcbIds.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<SlayerLayoutViewModel>(out var vm)) return;
 
-        vm!.InColdBlood.StartEffect(p.Duration);
+        vm.InColdBlood.StartEffect(p.Duration);
     }
 
     static void CheckInColdBlood(S_ABNORMALITY_REFRESH p)
     {
         if (!IcbIds.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<SlayerLayoutViewModel>(out var vm)) return;
 
-        vm!.InColdBlood.StartEffect(p.Duration);
+        vm.InColdBlood.StartEffect(p.Duration);
     }
 
     static void CheckInColdBlood(S_ABNORMALITY_END p)
     {
         if (!IcbIds.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<SlayerLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<SlayerLayoutViewModel>(out var vm)) return;
 
-        vm!.InColdBlood.StopEffect();
+        vm.InColdBlood.StopEffect();
     }
 }

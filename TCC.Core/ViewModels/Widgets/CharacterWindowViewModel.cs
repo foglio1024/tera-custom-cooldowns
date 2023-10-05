@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using JetBrains.Annotations;
 using TCC.Data.Pc;
 using TCC.Settings.WindowSettings;
 using TCC.Utilities;
@@ -10,6 +11,7 @@ using TeraPacketParser.Messages;
 namespace TCC.ViewModels.Widgets;
 
 [TccModule]
+[UsedImplicitly]
 public class CharacterWindowViewModel : TccWindowViewModel
 {
     public Player Player => Game.Me;
@@ -30,8 +32,7 @@ public class CharacterWindowViewModel : TccWindowViewModel
         {
             var cl = ((CharacterWindowSettings)Settings!).CustomLaurel;
 
-            if (cl == CustomLaurel.Game) return TccUtils.CustomFromLaurel(Player.Laurel);
-            else return cl;
+            return cl == CustomLaurel.Game ? TccUtils.CustomFromLaurel(Player.Laurel) : cl;
         }
     }
 

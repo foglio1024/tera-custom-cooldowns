@@ -1,8 +1,8 @@
-﻿using HtmlAgilityPack;
-using Nostrum.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
+using HtmlAgilityPack;
+using Nostrum.Extensions;
 
 namespace TCC.Utils;
 

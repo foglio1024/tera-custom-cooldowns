@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
@@ -17,12 +17,7 @@ namespace TCC.Settings;
 /// </summary>
 public class JsonIgnoreResolver : DefaultContractResolver
 {
-    protected readonly Dictionary<Type, HashSet<string>> Ignores;
-
-    public JsonIgnoreResolver()
-    {
-        Ignores = new Dictionary<Type, HashSet<string>>();
-    }
+    readonly Dictionary<Type, HashSet<string>> _ignores = new();
 
     /// <summary>
     /// Explicitly ignore the given property(s) for the given type
@@ -32,11 +27,11 @@ public class JsonIgnoreResolver : DefaultContractResolver
     public void Ignore(Type type, params string[] propertyName)
     {
         // start bucket if DNE
-        if (!Ignores.ContainsKey(type)) Ignores[type] = new HashSet<string>();
+        if (!_ignores.ContainsKey(type)) _ignores[type] = new HashSet<string>();
 
         foreach (var prop in propertyName)
         {
-            Ignores[type].Add(prop);
+            _ignores[type].Add(prop);
         }
     }
 
@@ -48,7 +43,7 @@ public class JsonIgnoreResolver : DefaultContractResolver
     /// <returns></returns>
     bool IsIgnored(Type type, string propertyName)
     {
-        if (!Ignores.TryGetValue(type, out var props)) return false;
+        if (!_ignores.TryGetValue(type, out var props)) return false;
 
         // if no properties provided, ignore the type entirely
         return props.Count == 0 

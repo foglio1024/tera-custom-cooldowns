@@ -12,6 +12,6 @@ public class ListingTemplateSelector : DataTemplateSelector
     public override DataTemplate? SelectTemplate(object? item, DependencyObject container)
     {
         var lfg = (Listing?) item;
-        return lfg != null && lfg.Temp ? Temp : Default;
+        return lfg is { Temp: true } ? Temp : Default;
     }
 }

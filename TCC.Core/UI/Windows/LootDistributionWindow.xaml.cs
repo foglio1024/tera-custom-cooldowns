@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using Nostrum.WPF.Factories;
 using TCC.ViewModels;
@@ -47,11 +48,10 @@ public partial class LootDistributionWindow
         {
             Left = _vm.Settings.X * WindowManager.ScreenSize.Width;
             Top = _vm.Settings.Y * WindowManager.ScreenSize.Height;
-            if (!_vm.Settings.IgnoreSize)
-            {
-                if (_vm.Settings.H != 0) Height = _vm.Settings.H;
-                if (_vm.Settings.W != 0) Width = _vm.Settings.W;
-            }
+            if (_vm.Settings.IgnoreSize) return;
+
+            if (_vm.Settings.H != 0) Height = _vm.Settings.H;
+            if (_vm.Settings.W != 0) Width = _vm.Settings.W;
         });
     }
 
@@ -61,7 +61,7 @@ public partial class LootDistributionWindow
         Hide();
     }
 
-    protected override void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    protected override void Drag(object sender, MouseButtonEventArgs e)
     {
         ResizeMode = ResizeMode.NoResize;
         base.Drag(sender, e);

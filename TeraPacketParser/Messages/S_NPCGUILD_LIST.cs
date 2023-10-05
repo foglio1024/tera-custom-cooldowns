@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
-
 namespace TeraPacketParser.Messages;
 
 public class S_NPCGUILD_LIST : ParsedMessage

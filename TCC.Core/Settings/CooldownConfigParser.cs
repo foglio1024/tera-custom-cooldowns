@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.IO;
+﻿using System.IO;
+using Newtonsoft.Json;
 using TCC.Data;
 using TCC.Utilities;
 using TeraDataLite;
@@ -39,11 +39,11 @@ public class CooldownConfigParser
                     new CooldownData(160700, CooldownType.Skill),
                     new CooldownData(191000, CooldownType.Skill),
                     new CooldownData(400100, CooldownType.Skill),
-                    new CooldownData(290730, CooldownType.Skill),
+                    new CooldownData(290730, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
-                    new CooldownData(420100, CooldownType.Skill),
+                    new CooldownData(420100, CooldownType.Skill)
                 });
                 break;
             case Class.Lancer:
@@ -56,13 +56,13 @@ public class CooldownConfigParser
                     new CooldownData(131100, CooldownType.Skill),
                     new CooldownData(80100, CooldownType.Skill),
                     new CooldownData(250100, CooldownType.Skill),
-                    new CooldownData(280100, CooldownType.Skill),
+                    new CooldownData(280100, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(160700, CooldownType.Skill),
                     new CooldownData(220100, CooldownType.Skill),
-                    new CooldownData(300100, CooldownType.Skill),
+                    new CooldownData(300100, CooldownType.Skill)
                 });
                 break;
             case Class.Slayer:
@@ -73,11 +73,11 @@ public class CooldownConfigParser
                     new CooldownData(80100, CooldownType.Skill),
                     new CooldownData(120100, CooldownType.Skill),
                     new CooldownData(220200, CooldownType.Skill),
-                    new CooldownData(230900, CooldownType.Skill),
+                    new CooldownData(230900, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
-                    new CooldownData(60100, CooldownType.Skill),
+                    new CooldownData(60100, CooldownType.Skill)
                 });
                 break;
             case Class.Berserker:
@@ -86,12 +86,12 @@ public class CooldownConfigParser
                     new CooldownData(31400, CooldownType.Skill),
                     new CooldownData(101400, CooldownType.Skill),
                     new CooldownData(151200, CooldownType.Skill),
-                    new CooldownData(240500, CooldownType.Skill),
+                    new CooldownData(240500, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(270100, CooldownType.Skill),
-                    new CooldownData(80700, CooldownType.Skill),
+                    new CooldownData(80700, CooldownType.Skill)
                 });
                 break;
             case Class.Sorcerer:
@@ -101,12 +101,12 @@ public class CooldownConfigParser
                     new CooldownData(41500, CooldownType.Skill),
                     new CooldownData(120900, CooldownType.Skill),
                     new CooldownData(271000, CooldownType.Skill),
-                    new CooldownData(301000, CooldownType.Skill),
+                    new CooldownData(301000, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(70100, CooldownType.Skill),
-                    new CooldownData(260100, CooldownType.Skill),
+                    new CooldownData(260100, CooldownType.Skill)
                 });
                 break;
             case Class.Archer:
@@ -118,13 +118,13 @@ public class CooldownConfigParser
                     new CooldownData(81200, CooldownType.Skill),
                     new CooldownData(221100, CooldownType.Skill),
                     new CooldownData(221100, CooldownType.Skill),
-                    new CooldownData(320300, CooldownType.Skill),
+                    new CooldownData(320300, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(60300, CooldownType.Skill),
                     new CooldownData(70700, CooldownType.Skill),
-                    new CooldownData(360100, CooldownType.Skill),
+                    new CooldownData(360100, CooldownType.Skill)
                 });
                 break;
             case Class.Priest:
@@ -134,13 +134,13 @@ public class CooldownConfigParser
                     new CooldownData(193200, CooldownType.Skill),
                     new CooldownData(220500, CooldownType.Skill),
                     new CooldownData(370200, CooldownType.Skill),
-                    new CooldownData(401000, CooldownType.Skill),
+                    new CooldownData(401000, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(120100, CooldownType.Skill),
                     new CooldownData(300800, CooldownType.Skill),
-                    new CooldownData(330300, CooldownType.Skill),
+                    new CooldownData(330300, CooldownType.Skill)
                 });
                 break;
             case Class.Mystic:
@@ -149,13 +149,13 @@ public class CooldownConfigParser
                     new CooldownData(53100, CooldownType.Skill),
                     new CooldownData(423200, CooldownType.Skill),
                     new CooldownData(70100, CooldownType.Skill),
-                    new CooldownData(100100, CooldownType.Skill),
+                    new CooldownData(100100, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(60100, CooldownType.Skill),
                     new CooldownData(170100, CooldownType.Skill),
-                    new CooldownData(280600, CooldownType.Skill),
+                    new CooldownData(280600, CooldownType.Skill)
                 });
                 break;
             case Class.Reaper:
@@ -169,14 +169,14 @@ public class CooldownConfigParser
                     new CooldownData(80200, CooldownType.Skill),
                     new CooldownData(190100, CooldownType.Skill),
                     new CooldownData(120200, CooldownType.Skill),
-                    new CooldownData(90100, CooldownType.Skill),
+                    new CooldownData(90100, CooldownType.Skill)
 
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(230100, CooldownType.Skill),
                     new CooldownData(110200, CooldownType.Skill),
-                    new CooldownData(150300, CooldownType.Skill),
+                    new CooldownData(150300, CooldownType.Skill)
                 });
                 break;
             case Class.Gunner:
@@ -187,18 +187,18 @@ public class CooldownConfigParser
                     new CooldownData(71100, CooldownType.Skill),
                     new CooldownData(61100, CooldownType.Skill),
                     new CooldownData(91000, CooldownType.Skill),
-                    new CooldownData(430100, CooldownType.Skill),
+                    new CooldownData(430100, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(470100, CooldownType.Skill),
                     new CooldownData(110800, CooldownType.Skill),
                     new CooldownData(400100, CooldownType.Skill),
-                    new CooldownData(210300, CooldownType.Skill),
+                    new CooldownData(210300, CooldownType.Skill)
                 });
                 ret.Hidden.AddRange(new[]
                 {
-                    new CooldownData(110731, CooldownType.Skill),
+                    new CooldownData(110731, CooldownType.Skill)
                 });
                 break;
             case Class.Brawler:
@@ -209,12 +209,12 @@ public class CooldownConfigParser
                     new CooldownData(91000, CooldownType.Skill), //jh
                     new CooldownData(81000, CooldownType.Skill), //pd
                     new CooldownData(61000, CooldownType.Skill), //hm
-                    new CooldownData(240100, CooldownType.Skill),
+                    new CooldownData(240100, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(260100, CooldownType.Skill),
-                    new CooldownData(50900, CooldownType.Skill),
+                    new CooldownData(50900, CooldownType.Skill)
                 });
                 break;
             case Class.Ninja:
@@ -228,13 +228,13 @@ public class CooldownConfigParser
                     new CooldownData(61000, CooldownType.Skill),
                     new CooldownData(190500, CooldownType.Skill),
                     new CooldownData(220100, CooldownType.Skill),
-                    new CooldownData(210190, CooldownType.Skill),
+                    new CooldownData(210190, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(20100, CooldownType.Skill),
                     new CooldownData(53100, CooldownType.Skill),
-                    new CooldownData(90100, CooldownType.Skill),
+                    new CooldownData(90100, CooldownType.Skill)
                 });
                 break;
             case Class.Valkyrie:
@@ -249,12 +249,12 @@ public class CooldownConfigParser
                     new CooldownData(136100, CooldownType.Skill),
                     new CooldownData(166000, CooldownType.Skill),
                     new CooldownData(245100, CooldownType.Skill),
-                    new CooldownData(230100, CooldownType.Skill),
+                    new CooldownData(230100, CooldownType.Skill)
                 });
                 ret.Secondary.AddRange(new[]
                 {
                     new CooldownData(80100, CooldownType.Skill),
-                    new CooldownData(205800, CooldownType.Skill),
+                    new CooldownData(205800, CooldownType.Skill)
                 });
                 break;
         }

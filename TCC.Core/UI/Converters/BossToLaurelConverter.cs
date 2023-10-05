@@ -11,7 +11,7 @@ public class BossToLaurelConverter : IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (value is not NPC npc) return null;
+        if (value is not Npc npc) return null;
         var laurel = "";
 
         switch (npc.ZoneId)
@@ -109,10 +109,7 @@ public class BossToLaurelConverter : IValueConverter
         }
 
 
-        if (laurel == "") return null;
-
-        return Path.Combine(App.ResourcesPath, "images/Icon_Laurels/" + laurel + "_kr_big.png");
-
+        return laurel == "" ? null : Path.Combine(App.ResourcesPath, "images/Icon_Laurels/" + laurel + "_kr_big.png");
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

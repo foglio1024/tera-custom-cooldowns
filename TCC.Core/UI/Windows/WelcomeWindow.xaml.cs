@@ -1,6 +1,6 @@
-﻿using Nostrum.WPF.Extensions;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
+using Nostrum.WPF.Extensions;
 
 namespace TCC.UI.Windows;
 

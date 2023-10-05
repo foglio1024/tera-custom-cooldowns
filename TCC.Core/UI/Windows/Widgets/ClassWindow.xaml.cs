@@ -4,12 +4,12 @@ namespace TCC.UI.Windows.Widgets;
 
 public partial class ClassWindow 
 {
-    ClassWindowViewModel VM { get; }
+    readonly ClassWindowViewModel _vm;
 
     public ClassWindow(ClassWindowViewModel vm)
     {
         DataContext = vm;
-        VM = (ClassWindowViewModel) DataContext;
+        _vm = (ClassWindowViewModel) DataContext;
         InitializeComponent();
         ButtonsRef = Buttons;
         BoundaryRef = Boundary;
@@ -25,6 +25,6 @@ public partial class ClassWindow
     protected override void OnEnabledChanged(bool enabled)
     {
         base.OnEnabledChanged(enabled);
-        if (enabled) VM.CurrentClass = Game.Me.Class;
+        if (enabled) _vm.CurrentClass = Game.Me.Class;
     }
 }

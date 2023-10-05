@@ -4,13 +4,13 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-internal class LancerLayoutVM : BaseClassLayoutVM
+internal class LancerLayoutViewModel : BaseClassLayoutViewModel
 {
     public SkillWithEffect AdrenalineRush { get;  }
     public SkillWithEffect GuardianShout { get; }
     public Cooldown Infuriate { get; }
     public LancerLineHeldTracker LH { get; }
-    public LancerLayoutVM()
+    public LancerLayoutViewModel()
     {
         LH = new LancerLineHeldTracker();
         Game.Me.Death += OnDeath;

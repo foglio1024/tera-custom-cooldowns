@@ -13,7 +13,7 @@
              UseLayoutRounding="True"
              Width="Auto"
              Height="Auto"
-             d:DataContext="{d:DesignInstance npc:NPC}"
+             d:DataContext="{d:DesignInstance npc:Npc}"
              MouseEnter="BossGage_OnMouseEnter"
              MouseLeave="BossGage_OnMouseLeave">
     <UserControl.Resources>

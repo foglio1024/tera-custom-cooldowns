@@ -1,7 +1,7 @@
-﻿using Dragablz;
-using Nostrum.WPF;
-using System;
+﻿using System;
 using System.Windows.Input;
+using Dragablz;
+using Nostrum.WPF;
 using TCC.ViewModels.Widgets;
 using FocusManager = TCC.UI.FocusManager;
 

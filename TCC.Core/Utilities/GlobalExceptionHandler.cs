@@ -105,7 +105,7 @@ public static class GlobalExceptionHandler
             sb.AppendLine($"opcode: {js["packet_opcode_name"]}");
             sb.AppendLine($"data: {js["packet_data"]}");
         }
-        sb.AppendLine($"threads");
+        sb.AppendLine("threads");
         sb.AppendLine($"{js["thread_traces"]}");
         Log.F(sb.ToString(), "crash.log");
     }

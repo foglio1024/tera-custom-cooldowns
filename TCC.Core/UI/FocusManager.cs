@@ -1,14 +1,12 @@
-﻿using Nostrum.WinAPI;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Timers;
 using System.Windows.Forms;
+using Nostrum.WinAPI;
 using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
-using Point = System.Drawing.Point;
-using Size = System.Drawing.Size;
 using Timer = System.Timers.Timer;
 
 namespace TCC.UI;
@@ -54,21 +52,6 @@ public static class FocusManager
             if (ForegroundWindow == TeraWindow && TeraWindow != IntPtr.Zero) return true;
             if (ForegroundWindow == MeterWindow && MeterWindow != IntPtr.Zero) return true;
             if (TccWidget.Exists(ForegroundWindow) || TccWindow.Exists(ForegroundWindow)) return true;
-            //if (ForegroundWindow == WindowManager.SettingsWindow?.Handle && WindowManager.SettingsWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.SkillConfigWindow?.Handle && WindowManager.SkillConfigWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.LfgListWindow?.Handle && WindowManager.LfgListWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.DashboardWindow?.Handle && WindowManager.DashboardWindow?.Handle != IntPtr.Zero) return true;
-
-            //if (ForegroundWindow == WindowManager.CooldownWindow?.Handle && WindowManager.CooldownWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.CharacterWindow?.Handle && WindowManager.CharacterWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.BossWindow?.Handle && WindowManager.BossWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.BuffWindow?.Handle && WindowManager.BuffWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.FloatingButton?.Handle && WindowManager.FloatingButton?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.CivilUnrestWindow?.Handle && WindowManager.CivilUnrestWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.ClassWindow?.Handle && WindowManager.ClassWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.FlightDurationWindow?.Handle && WindowManager.FlightDurationWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.GroupWindow?.Handle && WindowManager.GroupWindow?.Handle != IntPtr.Zero) return true;
-            //if (ForegroundWindow == WindowManager.NotificationArea?.Handle && WindowManager.NotificationArea?.Handle != IntPtr.Zero) return true;
             return false;
         }
     }

@@ -1,8 +1,4 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -12,6 +8,10 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
@@ -70,7 +70,6 @@ public class LfgListViewModel : TccWindowViewModel
             N();
         }
     }
-
 
     public bool IsAutoPublicizeRunning => AutoPublicizeTimer.IsEnabled;
     public ThreadSafeObservableCollection<Listing> Listings { get; }
@@ -148,7 +147,7 @@ public class LfgListViewModel : TccWindowViewModel
             listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
             || listing.LeaderId == Game.Me.PlayerId
             || Game.Group.Has(listing.LeaderId)
-        //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
+    //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
     ));
 
     public int MinLevel
@@ -225,7 +224,7 @@ public class LfgListViewModel : TccWindowViewModel
                 new SortDescription(nameof(Listing.IsTwitch), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsFullOffline), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsTrade), ListSortDirection.Ascending),
-                new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending),
+                new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending)
             }) ?? throw new Exception("Failed to create LiveCollectionView");
 
         Listings.CollectionChanged += ListingsOnCollectionChanged;
@@ -262,14 +261,7 @@ public class LfgListViewModel : TccWindowViewModel
         FocusManager.PauseTopmost = false;
 
         var listingsToRemove = Listings.ToSyncList().Where(l =>
-        {
-            foreach (var word in BlacklistedWords)
-            {
-                if (l.Message.Contains(word)) return true;
-            }
-
-            return false;
-        });
+            BlacklistedWords.Any(word => l.Message.Contains(word)));
 
         foreach (var listing in listingsToRemove)
         {
@@ -277,7 +269,6 @@ public class LfgListViewModel : TccWindowViewModel
         }
 
         StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
-
     }
 
     void OnBlacklistedWordsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -290,6 +281,7 @@ public class LfgListViewModel : TccWindowViewModel
                     ((LfgWindowSettings)Settings!).BlacklistedWords.AddRange(e.NewItems.Cast<string>());
                 }
                 break;
+
             case NotifyCollectionChangedAction.Remove:
                 if (e.OldItems != null)
                 {
@@ -299,6 +291,7 @@ public class LfgListViewModel : TccWindowViewModel
                     }
                 }
                 break;
+
             case NotifyCollectionChangedAction.Reset:
                 ((LfgWindowSettings)Settings!).BlacklistedWords.Clear();
                 break;
@@ -428,10 +421,8 @@ public class LfgListViewModel : TccWindowViewModel
                    Game.Logged &&
                    !Game.IsInDungeon;
         }
-        else
-        {
-            return StubInterface.Instance.IsStubAvailable;
-        }
+
+        return StubInterface.Instance.IsStubAvailable;
     }
 
     void RequestNextLfg(object? sender, EventArgs e)
@@ -457,7 +448,7 @@ public class LfgListViewModel : TccWindowViewModel
         _dispatcher.InvokeAsyncIfRequired(() =>
         {
             if (_requestQueue.Count > 0 && _requestQueue.Last().Item1 == playerId) return;
-            _requestQueue.Enqueue(( playerId, serverId));
+            _requestQueue.Enqueue((playerId, serverId));
         }, DispatcherPriority.Background);
     }
 
@@ -497,6 +488,7 @@ public class LfgListViewModel : TccWindowViewModel
             RemoveMissingListings();
             listings.ForEach(l => _dispatcher.InvokeAsync(() => AddOrRefreshListing(l)));
         });
+        return;
 
         void RemoveMissingListings()
         {
@@ -516,7 +508,6 @@ public class LfgListViewModel : TccWindowViewModel
             });
         }
     }
-
 
     public void AddOrRefreshListing(Listing l)
     {
@@ -616,14 +607,10 @@ public class LfgListViewModel : TccWindowViewModel
         if (MyLfg == null) return;
 
         var dest = MyLfg.Applicants;
-        foreach (var applicant in p.Candidates)
-            if (dest.All(x => x.PlayerId != applicant.PlayerId))
-                dest.Add(new User(applicant));
+        foreach (var applicant in p.Candidates.Where(applicant => dest.All(x => x.PlayerId != applicant.PlayerId)))
+            dest.Add(new User(applicant));
 
-        var toRemove = new List<User>();
-        foreach (var user in dest)
-            if (p.Candidates.All(x => x.PlayerId != user.PlayerId))
-                toRemove.Add(user);
+        var toRemove = dest.Where(user => p.Candidates.All(x => x.PlayerId != user.PlayerId)).ToList();
 
         toRemove.ForEach(r => dest.Remove(r));
     }

@@ -6,6 +6,7 @@ using System.Windows.Media.Animation;
 using Nostrum;
 using Nostrum.WPF.Controls;
 using Nostrum.WPF.Factories;
+using TCC.Data;
 using TCC.ViewModels;
 
 namespace TCC.UI.Controls.Skills;
@@ -36,7 +37,7 @@ public partial class RhombSkillEffectControl : INotifyPropertyChanged
     }
 
     public string DurationLabel => _context == null ? "" : TimeUtils.FormatSeconds(Convert.ToInt64(_context.Effect.Seconds));
-    public bool ShowEffectSeconds => _context?.Effect != null && _context.Effect.Seconds > 0;
+    public bool ShowEffectSeconds => _context?.Effect is { Seconds: > 0 };
 
     void OnLoaded(object sender, RoutedEventArgs e)
     {
@@ -48,7 +49,7 @@ public partial class RhombSkillEffectControl : INotifyPropertyChanged
         _context.Effect.Ended += OnBuffEnded;
     }
 
-    void OnBuffEnded(Data.CooldownMode obj)
+    void OnBuffEnded(CooldownMode obj)
     {
         ExternalArc.BeginAnimation(Arc.EndAngleProperty, null);
         ExternalArc.EndAngle = 32;
@@ -60,7 +61,7 @@ public partial class RhombSkillEffectControl : INotifyPropertyChanged
         NPC(nameof(ShowEffectSeconds));
     }
 
-    void OnBuffStarted(ulong duration, Data.CooldownMode mode)
+    void OnBuffStarted(ulong duration, CooldownMode mode)
     {
         _anim.Duration = TimeSpan.FromMilliseconds(duration);
         ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);

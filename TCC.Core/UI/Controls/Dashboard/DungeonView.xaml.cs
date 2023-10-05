@@ -1,8 +1,8 @@
-﻿using Nostrum.WPF.Extensions;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Nostrum.WPF.Extensions;
 using TCC.UI.Windows;
 using TCC.ViewModels;
 
@@ -53,6 +53,6 @@ public partial class DungeonView
 
     void OnDungeonEditButtonClick(object sender, RoutedEventArgs e)
     {
-        new DungeonEditWindow() { Topmost = true, Owner = WindowManager.DashboardWindow }.ShowDialog();
+        new DungeonEditWindow { Topmost = true, Owner = WindowManager.DashboardWindow }.ShowDialog();
     }
 }

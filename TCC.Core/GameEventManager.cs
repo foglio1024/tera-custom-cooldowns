@@ -1,6 +1,4 @@
-﻿using Nostrum;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Interop;
 using TCC.UI;
 using TCC.UI.Windows;
@@ -35,7 +35,7 @@ public class GameEventManager : ThreadSafeObservableObject
         { RegionEnum.TW,  new TeraServerTimeInfo("China Standard Time",          6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
         { RegionEnum.JP,  new TeraServerTimeInfo("Tokyo Standard Time",          6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
         { RegionEnum.THA, new TeraServerTimeInfo("Indochina Time",               6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
-        { RegionEnum.KR,  new TeraServerTimeInfo("Korea Standard Time",          6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
+        { RegionEnum.KR,  new TeraServerTimeInfo("Korea Standard Time",          6, DayOfWeek.Wednesday, DayOfWeek.Thursday) }
     };
 
     public const double SecondsInDay = 60 * 60 * 24;
@@ -65,7 +65,7 @@ public class GameEventManager : ThreadSafeObservableObject
 
     void CheckNewDay(object? sender, EventArgs e)
     {
-        if (CurrentServerTime.Hour == 0 && CurrentServerTime.Minute == 0)
+        if (CurrentServerTime is { Hour: 0, Minute: 0 })
             WindowManager.ViewModels.DashboardVM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
         if (CurrentServerTime.Second == 0 && CurrentServerTime.Minute % 3 == 0)
             CheckCloseEvents();

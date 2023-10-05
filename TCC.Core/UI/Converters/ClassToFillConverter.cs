@@ -3,9 +3,8 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 using TeraDataLite;
-using Colors = TCC.R.Colors;
 using Brushes = TCC.R.Brushes;
-
+using Colors = TCC.R.Colors;
 
 namespace TCC.UI.Converters;
 

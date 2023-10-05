@@ -11,30 +11,30 @@ namespace TCC.UI.Windows.Widgets;
 
 public partial class GroupWindow
 {
-    GroupWindowViewModel VM { get;}
+    readonly GroupWindowViewModel _vm;
 
     public GroupWindow(GroupWindowViewModel vm)
     {
         DataContext = vm;
-        VM = vm;
+        _vm = vm;
         InitializeComponent();
         BoundaryRef = Boundary;
         ButtonsRef = Buttons;
         MainContent = WindowContent;
-        Init(VM.Settings!);
+        Init(_vm.Settings!);
     }
 
     //TODO: to commands in VM
     void DisbandButtonClicked(object sender, RoutedEventArgs e)
     {
-        if(!VM.AmILeader) return;
+        if(!_vm.AmILeader) return;
         StubInterface.Instance.StubClient.DisbandGroup(); //ProxyOld.DisbandParty();
     }
 
     //TODO: to commands in VM
     void ResetButtonClicked(object sender, RoutedEventArgs e)
     {
-        if(!VM.AmILeader) return;
+        if(!_vm.AmILeader) return;
         StubInterface.Instance.StubClient.ResetInstance(); //ProxyOld.ResetInstance();
     }
 

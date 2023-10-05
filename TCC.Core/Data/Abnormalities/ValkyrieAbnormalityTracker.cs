@@ -54,50 +54,50 @@ public class ValkyrieAbnormalityTracker : AbnormalityTracker
     static void CheckRagnarok(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != RagnarokId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
 
-        vm!.Ragnarok.StartEffect(p.Duration);
+        vm.Ragnarok.StartEffect(p.Duration);
     }
 
     static void CheckRagnarok(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != RagnarokId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-        vm!.Ragnarok.StopEffect();
+        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        vm.Ragnarok.StopEffect();
     }
 
     static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != RagnarokId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-        vm!.Ragnarok.RefreshEffect(p.Duration);
+        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        vm.Ragnarok.RefreshEffect(p.Duration);
     }
 
     static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != GodsfallId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-        vm!.Godsfall.StartEffect(p.Duration);
+        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        vm.Godsfall.StartEffect(p.Duration);
     }
 
     static void CheckGodsfall(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != GodsfallId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-        vm!.Godsfall.RefreshEffect(p.Duration);
+        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        vm.Godsfall.RefreshEffect(p.Duration);
     }
 
     static void CheckGodsfall(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != GodsfallId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutVM>(out var vm)) return;
-        vm!.Godsfall.StopEffect();
+        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        vm.Godsfall.StopEffect();
     }
 
     void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)
     {
         if (!TwilightWaltzIds.Contains(p.AbnormalityId)) return;
-        if (p.AbnormalityId == 10155530 && p.Duration == 7000) return; // ewww
+        if (p is { AbnormalityId: 10155530, Duration: 7000 }) return; // ewww
         //Log.CW($"Starting TW {p.AbnormalityId} {p.Duration}");
         StartPrecooldown(_twilightWaltz, p.Duration);
     }

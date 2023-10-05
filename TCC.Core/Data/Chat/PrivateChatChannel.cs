@@ -2,9 +2,9 @@
 
 public struct PrivateChatChannel
 {
-    public uint Id;
-    public string Name;
-    public int Index;
+    public readonly uint Id;
+    public readonly string Name;
+    public readonly int Index;
     public bool Joined;
     public PrivateChatChannel(uint id, string name, int index)
     {

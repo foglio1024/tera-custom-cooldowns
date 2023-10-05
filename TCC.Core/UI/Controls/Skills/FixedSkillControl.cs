@@ -25,10 +25,11 @@ public class FixedSkillControl : SkillControlBase
             NPC();
         }
     }
-    public FixedSkillControl()
+
+    protected FixedSkillControl()
     {
-        _resetAnimation = AnimationFactory.CreateDoubleAnimation(500, to: 0, @from: 30, true, framerate: 60); // new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(500)) { EasingFunction = new QuadraticEase() };
-        _glowAnimation = AnimationFactory.CreateDoubleAnimation(200, to: 0, @from: 1, framerate: 30); // new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
+        _resetAnimation = AnimationFactory.CreateDoubleAnimation(500, to: 0, from: 30, true, framerate: 60); // new DoubleAnimation(30, 0, TimeSpan.FromMilliseconds(500)) { EasingFunction = new QuadraticEase() };
+        _glowAnimation = AnimationFactory.CreateDoubleAnimation(200, to: 0, from: 1, framerate: 30); // new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(200));
     }
 
     protected override void OnCooldownStarted(ulong duration, CooldownMode mode)

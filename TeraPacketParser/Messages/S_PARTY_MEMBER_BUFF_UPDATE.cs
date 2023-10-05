@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 
-
-
 namespace TeraPacketParser.Messages;
 
 public struct MemberAbnormal

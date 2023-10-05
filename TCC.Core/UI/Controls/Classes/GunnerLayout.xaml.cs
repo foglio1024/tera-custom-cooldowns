@@ -1,14 +1,15 @@
-﻿using Nostrum.WPF.Controls;
-using Nostrum.WPF.Factories;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using TCC.ViewModels.ClassManagers;
 
 namespace TCC.UI.Controls.Classes;
 
 public partial class GunnerLayout
 {
-    GunnerLayoutVM? _dc;
+    GunnerLayoutViewModel? _dc;
     readonly DoubleAnimation _an;
     public GunnerLayout()
     {
@@ -18,13 +19,13 @@ public partial class GunnerLayout
 
     void GunnerLayout_OnLoaded(object sender, RoutedEventArgs e)
     {
-        _dc = (GunnerLayoutVM) DataContext;
+        _dc = (GunnerLayoutViewModel) DataContext;
         _an.To = _dc.StaminaTracker.Factor * 359.99 + 40;
         _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
 
     }
 
-    void ST_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
         if (_dc == null) return;

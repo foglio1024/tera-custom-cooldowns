@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using TCC.Data;
+using TCC.R;
 
 namespace TCC.UI.Converters;
 
@@ -11,8 +12,8 @@ public class HHphaseToEnemyWindowTemplate : IValueConverter
     {
         return (HarrowholdPhase?) value switch
         {
-            HarrowholdPhase.Phase1 => R.DataTemplates.Phase1EnemyWindowLayout,
-            _ => R.DataTemplates.DefaultEnemyWindowLayout
+            HarrowholdPhase.Phase1 => DataTemplates.Phase1EnemyWindowLayout,
+            _ => DataTemplates.DefaultEnemyWindowLayout
         };
     }
 

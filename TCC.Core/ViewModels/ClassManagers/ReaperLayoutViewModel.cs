@@ -3,13 +3,13 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class ReaperLayoutVM : BaseClassLayoutVM
+public class ReaperLayoutViewModel : BaseClassLayoutViewModel
 {
 
     public SkillWithEffect ShadowReaping { get; }
     public SkillWithEffect ShroudedEscape { get; }
 
-    public ReaperLayoutVM()
+    public ReaperLayoutViewModel()
     {
         Game.DB!.SkillsDatabase.TryGetSkill(160100, Class.Reaper, out var sr);
         ShadowReaping = new SkillWithEffect(_dispatcher, sr);

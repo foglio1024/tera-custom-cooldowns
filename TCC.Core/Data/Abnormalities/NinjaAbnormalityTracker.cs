@@ -31,41 +31,41 @@ public class NinjaAbnormalityTracker :AbnormalityTracker
     static void CheckFocus(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != FocusId) return;
-        if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<NinjaLayoutViewModel>(out var vm)) return;
 
-        vm!.FocusOn = true;
+        vm.FocusOn = true;
     }
 
     static void CheckFocus(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != FocusId) return;
-        if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<NinjaLayoutViewModel>(out var vm)) return;
 
-        vm!.FocusOn = false;
+        vm.FocusOn = false;
     }
 
     static void CheckInnerHarmony(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != InnerHarmonyBuffId) return;
-        if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<NinjaLayoutViewModel>(out var vm)) return;
 
-        vm!.InnerHarmony.StartEffect(p.Duration);
+        vm.InnerHarmony.StartEffect(p.Duration);
 
     }
 
     static void CheckInnerHarmony(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != InnerHarmonyBuffId) return;
-        if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<NinjaLayoutViewModel>(out var vm)) return;
 
-        vm!.InnerHarmony.RefreshEffect(p.Duration);
+        vm.InnerHarmony.RefreshEffect(p.Duration);
     }
 
     static void CheckInnerHarmony(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != InnerHarmonyBuffId) return;
-        if (!IsViewModelAvailable<NinjaLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<NinjaLayoutViewModel>(out var vm)) return;
 
-        vm!.InnerHarmony.StopEffect();
+        vm.InnerHarmony.StopEffect();
     }
 }

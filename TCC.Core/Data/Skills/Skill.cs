@@ -22,17 +22,17 @@ public class Skill
         get
         {
             var n = Name.Split(' ');
-            var last = n[n.Length - 1];
+            var last = n[^1];
             if (last.Length >= 5) return Name;
-            if (!(last.Contains("X") || last.Contains("I") || last.Contains("V"))) return Name;
+            if (!(last.Contains('X') || last.Contains('I') || last.Contains('V'))) return Name;
             var sb = new StringBuilder();
-            for (var i = 0; i < n.Length-1; i++)
+            for (var i = 0; i < n.Length - 1; i++)
             {
                 sb.Append(n[i]);
-                sb.Append(" ");
+                sb.Append(' ');
             }
 
-            return sb.Length == 0 ? "" : sb.ToString().Substring(0,sb.Length-1);
+            return sb.Length == 0 ? "" : sb.ToString()[..(sb.Length - 1)];
         }
     }
 

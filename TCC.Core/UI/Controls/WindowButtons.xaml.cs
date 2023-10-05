@@ -17,26 +17,26 @@ public partial class WindowButtons
         get => (string)GetValue(WindowNameProperty);
         set => SetValue(WindowNameProperty, value);
     }
-    public static readonly DependencyProperty WindowNameProperty = DependencyProperty.Register("WindowName", typeof(string), typeof(WindowButtons));
+    public static readonly DependencyProperty WindowNameProperty = DependencyProperty.Register(nameof(WindowName), typeof(string), typeof(WindowButtons));
 
     public Visibility AutoDimButtonVisiblity
     {
         get => (Visibility)GetValue(AutoDimButtonVisiblityProperty);
         set => SetValue(AutoDimButtonVisiblityProperty, value);
     }
-    public static readonly DependencyProperty AutoDimButtonVisiblityProperty = DependencyProperty.Register("AutoDimButtonVisiblity", typeof(Visibility), typeof(WindowButtons));
+    public static readonly DependencyProperty AutoDimButtonVisiblityProperty = DependencyProperty.Register(nameof(AutoDimButtonVisiblity), typeof(Visibility), typeof(WindowButtons));
 
     public Visibility HideButtonVisibility
     {
         get => (Visibility)GetValue(HideButtonVisibilityProperty);
         set => SetValue(HideButtonVisibilityProperty, value);
     }
-    public static readonly DependencyProperty HideButtonVisibilityProperty = DependencyProperty.Register("HideButtonVisibility", typeof(Visibility), typeof(WindowButtons));
+    public static readonly DependencyProperty HideButtonVisibilityProperty = DependencyProperty.Register(nameof(HideButtonVisibility), typeof(Visibility), typeof(WindowButtons));
 
     public Visibility CloseButtonVisibility
     {
         get => (Visibility)GetValue(CloseButtonVisibilityProperty);
         set => SetValue(CloseButtonVisibilityProperty, value);
     }
-    public static readonly DependencyProperty CloseButtonVisibilityProperty = DependencyProperty.Register("CloseButtonVisibility", typeof(Visibility), typeof(WindowButtons));
+    public static readonly DependencyProperty CloseButtonVisibilityProperty = DependencyProperty.Register(nameof(CloseButtonVisibility), typeof(Visibility), typeof(WindowButtons));
 }

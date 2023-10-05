@@ -35,8 +35,7 @@ public class EntityIdToClassConverter : IValueConverter
             : TccUtils.IsEntitySpawned(id)
                 ? TccUtils.GetEntityClass(id)
                 : Class.None;
-        if (cl == Class.None) return null;
-        return TccUtils.SvgClass(cl);
+        return cl == Class.None ? null : TccUtils.SvgClass(cl);
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

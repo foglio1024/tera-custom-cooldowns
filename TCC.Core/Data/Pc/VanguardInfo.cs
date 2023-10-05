@@ -1,5 +1,5 @@
-﻿using Nostrum;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Nostrum;
 using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Pc;

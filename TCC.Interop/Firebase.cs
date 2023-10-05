@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
-using Nostrum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using Nostrum;
 using TCC.Utils;
 
 namespace TCC.Interop;
@@ -33,7 +33,7 @@ public static class Firebase
                 new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())), Encoding.UTF8));
             if (online)
             {
-                _registeredWebhooks.Add(new(webhook, accountHash));
+                _registeredWebhooks.Add(new Tuple<string, string>(webhook, accountHash));
             }
             else
             {
@@ -44,7 +44,7 @@ public static class Firebase
         }
         catch
         {
-            Log.F($"Failed to register webhook.");
+            Log.F("Failed to register webhook.");
         }
     }
     public static async Task<bool> RequestWebhookExecution(string webhook, string accountHash)
@@ -106,7 +106,7 @@ public static class Firebase
     {
         try
         {
-            var webhooks = new List<Tuple<string, string>> () { Capacity = _registeredWebhooks.Count}.ToArray();
+            var webhooks = new List<Tuple<string, string>> { Capacity = _registeredWebhooks.Count}.ToArray();
             _registeredWebhooks.CopyTo(webhooks);
             webhooks.ToList().ForEach(w =>
             {

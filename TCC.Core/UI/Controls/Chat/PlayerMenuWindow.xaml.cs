@@ -4,12 +4,12 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
-using Nostrum.WPF.Factories;
 using Nostrum.WinAPI;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
 using TCC.ViewModels;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Point = System.Drawing.Point;
-using Nostrum.WPF.Extensions;
 
 namespace TCC.UI.Controls.Chat;
 
@@ -75,7 +75,7 @@ public partial class PlayerMenuWindow
             var dpi = this.GetDpiScale();
             var currScreen = Screen.FromPoint(new Point(Convert.ToInt32(Left), Convert.ToInt32(Top)));
             double top = pos.Y;
-            double left = (pos.X + 20);
+            double left = pos.X + 20;
             if (top > currScreen.Bounds.Height / 2D) top -= ActualHeight*dpi.DpiScaleY;
             top /= dpi.DpiScaleY;
             left /= dpi.DpiScaleX;

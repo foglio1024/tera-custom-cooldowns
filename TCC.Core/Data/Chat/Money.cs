@@ -31,20 +31,20 @@ public class Money : ThreadSafeObservableObject
         long gold = 0;
         long silver = 0;
         long copper;
-        if (money.Length >= 5)
+        switch (money.Length)
         {
-            copper = long.Parse(money.Substring(money.Length - 2));
-            silver = long.Parse(money.Substring(money.Length - 4, 2));
-            gold = long.Parse(money.Substring(0, money.Length - 4));
-        }
-        else if (money.Length >= 3 && money.Length < 5)
-        {
-            copper = long.Parse(money.Substring(money.Length - 2));
-            silver = long.Parse(money.Substring(0, money.Length - 2));
-        }
-        else
-        {
-            copper = long.Parse(money);
+            case >= 5:
+                copper = long.Parse(money[^2..]);
+                silver = long.Parse(money.Substring(money.Length - 4, 2));
+                gold = long.Parse(money[..^4]);
+                break;
+            case >= 3 and < 5:
+                copper = long.Parse(money[^2..]);
+                silver = long.Parse(money[..^2]);
+                break;
+            default:
+                copper = long.Parse(money);
+                break;
         }
         Gold = gold;
         Silver = silver;

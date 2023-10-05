@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using Nostrum.WPF;
-using Nostrum.WPF.ThreadSafe;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
+using Newtonsoft.Json;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Chat;
 using TCC.Utilities;
 using TCC.Utils;

@@ -74,7 +74,7 @@ public class TccDatabase
         var dungWorld = MapDatabase.Worlds[9999];
         var guardList = dungWorld.Guards.Values.ToList();
         var guard = guardList.FirstOrDefault(x => x.Sections.ContainsKey(dungeonId));
-        if (guard == null) return ret;
+        if (guard == default) return ret;
 
         var openWorld = MapDatabase.Worlds[1];
 
@@ -109,7 +109,7 @@ public class TccDatabase
         return ret;
     }
 
-    public bool GetSkillFromId(uint id, Class c, CooldownType t, out Skill sk)
+    public static bool GetSkillFromId(uint id, Class c, CooldownType t, out Skill sk)
     {
         sk = new Skill(0, Class.None, "", "");
         switch (t)
@@ -145,8 +145,7 @@ public class TccDatabase
     public int GetItemMaxExp(uint id, int enchant)
     {
         if (!ItemsDatabase.Items.TryGetValue(id, out var item)) return 0;
-        if (item.ExpId == 0) return 0;
-        return ItemExpDatabase.ExpData[item.ExpId][enchant];
+        return item.ExpId == 0 ? 0 : ItemExpDatabase.ExpData[item.ExpId][enchant];
     }
 
     List<DatabaseBase> Databases
@@ -178,8 +177,8 @@ public class TccDatabase
             return true;
         }
         var (_, guard) = MapDatabase.Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continentId);
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalse
-        if (guard == null)
+
+        if (guard == default)
         {
             name = "Unknown";
             return false;

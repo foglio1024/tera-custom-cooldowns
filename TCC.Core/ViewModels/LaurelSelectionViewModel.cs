@@ -1,10 +1,10 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TeraDataLite;
@@ -32,7 +32,7 @@ internal class LaurelSelectionViewModel : ObservableObject
     public ICommand NextLaurelCommand { get; }
     public ICommand ConfirmCommand { get; }
 
-    public List<CustomLaurel> AvailableLaurels = Enum.GetValues<CustomLaurel>().ToList();
+    public readonly List<CustomLaurel> AvailableLaurels = Enum.GetValues<CustomLaurel>().ToList();
 
     int _laurelIdx;
 
@@ -52,7 +52,7 @@ internal class LaurelSelectionViewModel : ObservableObject
 
     void Confirm()
     {
-        var settings = ((CharacterWindowSettings?)WindowManager.ViewModels.CharacterVM.Settings);
+        var settings = (CharacterWindowSettings?)WindowManager.ViewModels.CharacterVM.Settings;
         if(settings != null) settings.CustomLaurel = CurrentLaurel;
 
         WindowManager.ViewModels.DashboardVM.SaveCharacters();

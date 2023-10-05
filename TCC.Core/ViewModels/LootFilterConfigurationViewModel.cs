@@ -1,7 +1,7 @@
-﻿using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.ComponentModel;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 

@@ -6,7 +6,7 @@ namespace TCC.Settings.WindowSettings;
 
 public class LfgWindowSettings : WindowSettingsBase
 {
-    const int MIN_AUTO_PUBLICIZE_COOLDOWN = 20;
+    const int MinAutoPublicizeCooldown = 20;
 
     public event Action? HideTradeListingsChangedEvent;
 
@@ -58,7 +58,7 @@ public class LfgWindowSettings : WindowSettingsBase
         set
         {
             if (_autoPublicizeCooldown == value) return;
-            _autoPublicizeCooldown = value < MIN_AUTO_PUBLICIZE_COOLDOWN ? MIN_AUTO_PUBLICIZE_COOLDOWN : value;
+            _autoPublicizeCooldown = value < MinAutoPublicizeCooldown ? MinAutoPublicizeCooldown : value;
             N();
         }
     }
@@ -74,7 +74,7 @@ public class LfgWindowSettings : WindowSettingsBase
         MinLevel = 60;
         MaxLevel = 70;
 
-        AutoPublicizeCooldown = MIN_AUTO_PUBLICIZE_COOLDOWN;
+        AutoPublicizeCooldown = MinAutoPublicizeCooldown;
 
         GpkNames.Add("PartyBoard");
         GpkNames.Add("PartyBoardMemberInfo");

@@ -7,10 +7,10 @@ namespace TCC.Debugging;
 public static class ObjectTracker
 {
     static ConcurrentDictionary<Type, long> Instances { get; } = new();
-    static readonly object _lock = new();
+    static readonly object Lock = new();
     public static void Register(Type t)
     {
-        lock (_lock)
+        lock (Lock)
         {
             if (!Instances.ContainsKey(t)) Instances.TryAdd(t, 0);
             Instances[t]++;
@@ -19,7 +19,7 @@ public static class ObjectTracker
 
     public static void Unregister(Type t)
     {
-        lock (_lock)
+        lock (Lock)
         {
             if (!Instances.ContainsKey(t)) return;
             Instances[t]--;

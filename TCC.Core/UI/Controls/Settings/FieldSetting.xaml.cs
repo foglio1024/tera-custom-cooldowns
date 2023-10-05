@@ -11,19 +11,19 @@ public partial class FieldSetting
         get => (string)GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
     }
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(FieldSetting));
+    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(string), typeof(FieldSetting));
     public string SettingName
     {
         get => (string)GetValue(SettingNameProperty);
         set => SetValue(SettingNameProperty, value);
     }
-    public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register("SettingName", typeof(string), typeof(FieldSetting));
+    public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register(nameof(SettingName), typeof(string), typeof(FieldSetting));
     public Geometry SvgIcon
     {
         get => (Geometry)GetValue(SvgIconProperty);
         set => SetValue(SvgIconProperty, value);
     }
-    public static readonly DependencyProperty SvgIconProperty = DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(FieldSetting));
+    public static readonly DependencyProperty SvgIconProperty = DependencyProperty.Register(nameof(SvgIcon), typeof(Geometry), typeof(FieldSetting));
 
     public FieldSetting()
     {

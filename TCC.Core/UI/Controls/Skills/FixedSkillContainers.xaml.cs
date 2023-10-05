@@ -1,9 +1,4 @@
-﻿using Dragablz;
-using GongSolutions.Wpf.DragDrop;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -14,6 +9,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using Dragablz;
+using GongSolutions.Wpf.DragDrop;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Skills;
@@ -146,8 +146,7 @@ public partial class FixedSkillContainers
         for (var j = 0; j < list.Count; j++)
         {
             var newIndex = order.ToList().IndexOf(list[j]);
-            var oldIndex = j;
-            list.Move(oldIndex, newIndex);
+            list.Move(j, newIndex);
         }
     }
 

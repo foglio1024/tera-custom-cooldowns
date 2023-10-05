@@ -10,21 +10,21 @@ public class FriendList
 {
 
     bool _waitingForFirstUpdate = true;
-    public List<FriendEntry> Friends { get; private set; } = new();
+    readonly List<FriendEntry> _friends  = new();
 
     internal void UpdateFriendInfo(List<FriendInfoUpdate> friendUpdates)
     {
         friendUpdates.ForEach(update =>
         {
-            var friend = Friends.Find(x => x.Id == update.Id);
+            var friend = _friends.Find(x => x.Id == update.Id);
             if (friend == default) return;
             var fireMessage = update.Status != friend.Status
                               && update.Status is FriendStatus.Online
                               && !_waitingForFirstUpdate;
             //Log.Chat($"Updating {friend.Name} from {friend.Status} to {update.Status} ({nameof(_waitingForFirstUpdate)}:{_waitingForFirstUpdate})");
-            var idx = Friends.IndexOf(friend);
+            var idx = _friends.IndexOf(friend);
             friend.UpdateFrom(update);
-            Friends[idx] = friend;
+            _friends[idx] = friend;
             if (!fireMessage) return;
             SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{friend.Name}", "SMT_FRIEND_IS_CONNECTED");
         });
@@ -33,13 +33,13 @@ public class FriendList
 
     internal void Clear()
     {
-        Friends.Clear();
+        _friends.Clear();
         _waitingForFirstUpdate = true;
     }
 
     internal void NotifyWalkInSameArea(uint playerId, uint worldId, uint guardId, uint sectionId)
     {
-        var friend = Friends.Find(f => f.Id == playerId);
+        var friend = _friends.Find(f => f.Id == playerId);
         if (friend == default) return;
         var areaName = sectionId.ToString();
         try
@@ -56,34 +56,34 @@ public class FriendList
 
     internal void SetFrom(List<FriendEntry> friends)
     {
-        var toRemove = Friends.Where(x => !friends.Any(f => f.Id == x.Id)).ToArray();
+        var toRemove = _friends.Where(x => friends.All(f => f.Id != x.Id)).ToArray();
 
         foreach (var item in toRemove)
         {
-            Friends.Remove(item);
+            _friends.Remove(item);
         }
 
         friends.ForEach(updated =>
         {
-            var existing = Friends.Find(x => x.Id == updated.Id);
+            var existing = _friends.Find(x => x.Id == updated.Id);
             if (existing == default)
-                Friends.Add(updated);
+                _friends.Add(updated);
             else
             {
-                var idx = Friends.IndexOf(existing);
+                var idx = _friends.IndexOf(existing);
                 existing.UpdateFrom(updated);
-                Friends[idx] = existing;
+                _friends[idx] = existing;
             }
         });
     }
 
     internal void Remove(string name)
     {
-        Friends.RemoveAll(x => x.Name == name);
+        _friends.RemoveAll(x => x.Name == name);
     }
 
     internal bool Has(string name)
     {
-        return Friends.Any(x => x.Name == name && x.Type is FriendEntryType.Friend);
+        return _friends.Any(x => x.Name == name && x.Type is FriendEntryType.Friend);
     }
 }

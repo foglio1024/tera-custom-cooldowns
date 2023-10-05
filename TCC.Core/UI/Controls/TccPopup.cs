@@ -13,7 +13,7 @@ public class TccPopup : Popup
         set => SetValue(MouseLeaveToleranceProperty, value);
     }
 
-    public static readonly DependencyProperty MouseLeaveToleranceProperty = DependencyProperty.Register("MouseLeaveTolerance",
+    public static readonly DependencyProperty MouseLeaveToleranceProperty = DependencyProperty.Register(nameof(MouseLeaveTolerance),
         typeof(double),
         typeof(TccPopup),
         new PropertyMetadata(0D));
@@ -55,8 +55,8 @@ public class TccPopup : Popup
         if (Child == null) return;
         var content = (FrameworkElement) Child;
         var pos = e.MouseDevice.GetPosition(content);
-        if ((pos.X > MouseLeaveTolerance && pos.X < content.ActualWidth - MouseLeaveTolerance)
-            && (pos.Y > MouseLeaveTolerance && pos.Y < content.ActualHeight - MouseLeaveTolerance)) return;
+        if (pos.X > MouseLeaveTolerance && pos.X < content.ActualWidth - MouseLeaveTolerance
+                                        && pos.Y > MouseLeaveTolerance && pos.Y < content.ActualHeight - MouseLeaveTolerance) return;
         IsOpen = false;
     }
 }

@@ -59,7 +59,7 @@ public static class ExceptionReportBuilder
                     { "os", $"{Environment.OSVersion} {Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion")?.GetValue("ProductName")}" },
                     { "current_USER_objects" , User32.GetGuiResources(Process.GetCurrentProcess().Handle, 1) },
                     { "used_memory" , Process.GetCurrentProcess().PrivateMemorySize64 },
-                    { "uptime", (DateTime.Now  - Process.GetCurrentProcess().StartTime).TotalSeconds},
+                    { "uptime", (DateTime.Now  - Process.GetCurrentProcess().StartTime).TotalSeconds}
                 }
             }
         };

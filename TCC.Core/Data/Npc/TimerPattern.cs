@@ -8,20 +8,20 @@ public class TimerPattern : ThreadSafeObservableObject, IDisposable
 {
     readonly Timer _timer;
     protected bool Running => _timer.Enabled;
-    protected NPC? Target { get; set; }
+    protected Npc? Target { get; set; }
     public int Duration { get; }
 
     public event Action? Started;
     public event Action? Ended;
     //public event Action Reset;
 
-    public void Start()
+    protected void Start()
     {
         _timer.Start();
         Started?.Invoke();
     }
 
-    public virtual void SetTarget(NPC target)
+    public virtual void SetTarget(Npc target)
     {
         Target = target;
     }

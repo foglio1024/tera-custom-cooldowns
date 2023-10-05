@@ -1,11 +1,11 @@
-﻿using Nostrum;
-using Nostrum.WPF.Controls;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using Nostrum;
+using Nostrum.WPF.Controls;
 using TCC.Data;
 using TCC.Data.Skills;
 

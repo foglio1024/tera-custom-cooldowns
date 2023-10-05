@@ -2,16 +2,9 @@
 
 namespace TCC.Settings;
 
-public class CooldownConfigData
+public class CooldownConfigData // todo: readonly record struct?
 {
-    public List<CooldownData> Main { get; }
-    public List<CooldownData> Secondary { get; }
-    public List<CooldownData> Hidden { get; }
-
-    public CooldownConfigData()
-    {
-        Main = new List<CooldownData>();
-        Secondary = new List<CooldownData>();
-        Hidden = new List<CooldownData>();
-    }
+    public List<CooldownData> Main { get; } = new();
+    public List<CooldownData> Secondary { get; } = new();
+    public List<CooldownData> Hidden { get; } = new();
 }

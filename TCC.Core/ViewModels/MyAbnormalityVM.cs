@@ -1,5 +1,5 @@
 ﻿/* Add My Abnormals Setting by HQ
-GroupAbnormalityVM  -> MyAbnormalityVM 
+GroupAbnormalityViewModel  -> MyAbnormalityVM 
 GroupAbnormals      -> MyAbnormals
 
 ClassToggle         -> MyClassToggle

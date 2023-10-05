@@ -4,7 +4,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class BerserkerLayoutVM : BaseClassLayoutVM
+public class BerserkerLayoutViewModel : BaseClassLayoutViewModel
 {
     bool _isUnleashOn;
     bool _isUnleashOff = true;
@@ -44,7 +44,7 @@ public class BerserkerLayoutVM : BaseClassLayoutVM
         }
     }
 
-    public BerserkerLayoutVM()
+    public BerserkerLayoutViewModel()
     {
         SinisterTracker = new StatTracker();
         DexterTracker = new StatTracker();

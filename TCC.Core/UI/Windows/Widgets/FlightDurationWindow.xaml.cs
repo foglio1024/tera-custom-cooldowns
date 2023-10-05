@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Media.Animation;
 using Nostrum;
+using Nostrum.WPF.Controls;
 using TCC.Data;
 using TCC.ViewModels.Widgets;
-using Arc = Nostrum.WPF.Controls.Arc;
 
 namespace TCC.UI.Windows.Widgets;
 
@@ -34,7 +34,7 @@ public partial class FlightDurationWindow
 
         _winHide = new DoubleAnimation(0, TimeSpan.FromMilliseconds(100));
         _winShow = new DoubleAnimation(1, TimeSpan.FromMilliseconds(100));
-        _arcAn = new DoubleAnimation()
+        _arcAn = new DoubleAnimation
         {
             Duration = TimeSpan.FromMilliseconds(250),
             EasingFunction = new QuadraticEase()

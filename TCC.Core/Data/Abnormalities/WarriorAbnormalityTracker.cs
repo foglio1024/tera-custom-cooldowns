@@ -100,27 +100,27 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     {
         if (p.AbnormalityId != 100801) return;
         //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
 
-        vm!.DeadlyGamble.StartEffect(p.Duration);
+        vm.DeadlyGamble.StartEffect(p.Duration);
     }
 
     static void CheckDeadlyGamble(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != 100801) return;
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
         //if (!GambleIDs.Contains(p.AbnormalityId)) return;
         //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-        vm!.DeadlyGamble.RefreshEffect(p.Duration);
+        vm.DeadlyGamble.RefreshEffect(p.Duration);
     }
 
     static void CheckDeadlyGamble(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != 100801) return;
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
         //if (!GambleIDs.Contains(p.AbnormalityId)) return;
         //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-        vm!.DeadlyGamble.StopEffect();
+        vm.DeadlyGamble.StopEffect();
     }
 
     void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)
@@ -132,66 +132,66 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static void CheckTraverseCut(S_ABNORMALITY_BEGIN p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.TraverseCut.Val = p.Stacks;
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.TraverseCut.Val = p.Stacks;
         vm.TraverseCut.InvokeToZero(p.Duration);
     }
 
     static void CheckTraverseCut(S_ABNORMALITY_REFRESH p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.TraverseCut.Val = p.Stacks;
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.TraverseCut.Val = p.Stacks;
         vm.TraverseCut.InvokeToZero(p.Duration);
     }
 
     static void CheckTraverseCut(S_ABNORMALITY_END p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.TraverseCut.Val = 0;
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.TraverseCut.Val = 0;
     }
 
     static void CheckSwiftGlyphs(S_ABNORMALITY_BEGIN p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.SetSwift(p.Duration);
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.SetSwift(p.Duration);
     }
 
     static void CheckSwiftGlyphs(S_ABNORMALITY_REFRESH p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.SetSwift(p.Duration);
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.SetSwift(p.Duration);
     }
 
     static void CheckSwiftGlyphs(S_ABNORMALITY_END p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.SetSwift(0);
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.SetSwift(0);
     }
 
     static void CheckArush(S_ABNORMALITY_BEGIN p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.SetArush(p.Duration);
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.SetArush(p.Duration);
     }
 
     static void CheckArush(S_ABNORMALITY_REFRESH p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.SetArush(p.Duration);
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.SetArush(p.Duration);
     }
 
     static void CheckArush(S_ABNORMALITY_END p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<WarriorLayoutVM>(out var vm)) return;
-        vm!.SetArush(0);
+        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        vm.SetArush(0);
     }
 }
 /*

@@ -1,16 +1,15 @@
-﻿using Microsoft.Win32;
-using Nostrum.WPF.Extensions;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
+using Nostrum.WPF.Extensions;
 using TCC.UI.Controls;
 using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
-using Application = System.Windows.Application;
 using Size = System.Drawing.Size;
 
 namespace TCC.UI;

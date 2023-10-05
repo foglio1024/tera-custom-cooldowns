@@ -1,9 +1,9 @@
-﻿using Nostrum.WPF.Factories;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using Nostrum.WPF.Factories;
 using TCC.Utils;
 using TCC.ViewModels;
 
@@ -63,7 +63,8 @@ public partial class SettingsWindow
 
     // memeing
     int _testNotifIdx;
-    List<string> _lyrics = new()
+
+    readonly List<string> _lyrics = new()
     {
         "This was a triumph",
         "I'm making a note here:",
@@ -133,11 +134,14 @@ public partial class SettingsWindow
     {
         var msg = _lyrics[_testNotifIdx];
 
-        var type = NotificationType.None;
-        if (_testNotifIdx == 2) type = NotificationType.Success;
-        else if (_testNotifIdx > 9 && _testNotifIdx <= 17) type = NotificationType.Warning;
-        else if (_testNotifIdx > 33 && _testNotifIdx <= 41) type = NotificationType.Error;
-        else if (_testNotifIdx > 48 ) type = NotificationType.Success;
+        var type = _testNotifIdx switch
+        {
+            2 => NotificationType.Success,
+            > 9 and <= 17 => NotificationType.Warning,
+            > 33 and <= 41 => NotificationType.Error,
+            > 48 => NotificationType.Success,
+            _ => NotificationType.None
+        };
 
         Log.N("GLaDOS", msg, type);
         _testNotifIdx++;

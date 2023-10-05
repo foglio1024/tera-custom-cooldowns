@@ -72,7 +72,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
             if (cc == Class.None || !PerClassPosition) cc = Class.Common;
             var old = Positions.Position(cc);
             if (old.X == value) return;
-            Positions.SetPosition(cc, new Point(value, old.Y));
+            Positions.SetPosition(cc, old with { X = value });
             N();
         }
     }
@@ -86,7 +86,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
             if (cc == Class.None || !PerClassPosition) cc = Class.Common;
             var old = Positions.Position(cc);
             if (old.Y == value) return;
-            Positions.SetPosition(cc, new Point(old.X, value));
+            Positions.SetPosition(cc, old with { Y = value });
             N();
         }
     }

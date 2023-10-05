@@ -28,7 +28,7 @@ public partial class RectangleBarGauge
         set => SetValue(WidthProperty, value);
     }
     public new static readonly DependencyProperty WidthProperty =
-        DependencyProperty.Register("Width", typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(double.NaN));
+        DependencyProperty.Register(nameof(Width), typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(double.NaN));
 
     public new double Height
     {
@@ -36,7 +36,7 @@ public partial class RectangleBarGauge
         set => SetValue(HeightProperty, value);
     }
     public new  static readonly DependencyProperty HeightProperty =
-        DependencyProperty.Register("Height", typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(double.NaN));
+        DependencyProperty.Register(nameof(Height), typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(double.NaN));
 
     public Brush Color
     {
@@ -44,7 +44,7 @@ public partial class RectangleBarGauge
         set => SetValue(ColorProperty, value);
     }
     public static readonly DependencyProperty ColorProperty =
-        DependencyProperty.Register("Color", typeof(Brush), typeof(RectangleBarGauge));
+        DependencyProperty.Register(nameof(Color), typeof(Brush), typeof(RectangleBarGauge));
 
     public double Factor
     {
@@ -52,7 +52,7 @@ public partial class RectangleBarGauge
         set => SetValue(FactorProperty, value);
     }
     public static readonly DependencyProperty FactorProperty =
-        DependencyProperty.Register("Factor", typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(0d, OnFactorChanged));
+        DependencyProperty.Register(nameof(Factor), typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(0d, OnFactorChanged));
 
     static void OnFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
@@ -67,7 +67,7 @@ public partial class RectangleBarGauge
         set => SetValue(SkewProperty, value);
     }
     public static readonly DependencyProperty SkewProperty =
-        DependencyProperty.Register("Skew", typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(0d));
+        DependencyProperty.Register(nameof(Skew), typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(0d));
 
 
 

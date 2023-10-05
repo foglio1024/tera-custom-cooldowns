@@ -1,7 +1,4 @@
-﻿using Nostrum;
-using Nostrum.WPF;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -11,6 +8,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Databases;
 using TCC.Interop;
@@ -799,7 +799,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             new WelcomeWindow().Show();
         });
-        DownloadBetaCommand = new RelayCommand(async (_) =>
+        DownloadBetaCommand = new RelayCommand(async _ =>
         {
             if (TccMessageBox.Show(SR.BetaUnstableWarning, MessageBoxType.ConfirmationWithYesNo) == MessageBoxResult.Yes)
             {

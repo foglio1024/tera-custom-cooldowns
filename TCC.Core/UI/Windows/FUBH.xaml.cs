@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Windows.Input;
+using System.Windows.Navigation;
 using Nostrum.WPF.Extensions;
 using Nostrum.WPF.ThreadSafe;
 
@@ -13,7 +15,7 @@ public partial class FUBH
         Closing += FUBH_Closing;
     }
 
-    void FUBH_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+    void FUBH_Closing(object? sender, CancelEventArgs e)
     {
         e.Cancel = true;
         Hide();
@@ -30,7 +32,7 @@ public partial class FUBH
         App.Settings.Save();
     }
 
-    void Hyperlink_OnRequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+    void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
     {
         Utils.Utilities.OpenUrl(e.Uri.AbsoluteUri);
     }

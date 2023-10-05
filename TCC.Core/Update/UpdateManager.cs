@@ -7,6 +7,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
+using System.Windows;
 using Newtonsoft.Json.Linq;
 using Nostrum;
 using TCC.Data;
@@ -101,7 +103,7 @@ public static class UpdateManager
         catch
         {
             var res = TccMessageBox.Show(SR.DbDownloadFailed(Path.GetFileNameWithoutExtension(relativePath)), MessageBoxType.ConfirmationWithYesNo);
-            if (res == System.Windows.MessageBoxResult.Yes) UpdateDatabase(relativePath);
+            if (res == MessageBoxResult.Yes) UpdateDatabase(relativePath);
         }
     }
     public static void StartPeriodicCheck()
@@ -134,7 +136,7 @@ public static class UpdateManager
         catch (Exception ex)
         {
             Log.F($"Error while checking updates. \nException: {ex.Message}\n{ex.StackTrace}");
-            if (TccMessageBox.Show(SR.UpdateCheckFailed, MessageBoxType.ConfirmationWithYesNo) != System.Windows.MessageBoxResult.Yes) return;
+            if (TccMessageBox.Show(SR.UpdateCheckFailed, MessageBoxType.ConfirmationWithYesNo) != MessageBoxResult.Yes) return;
             ForceUpdateToBeta();
         }
     }
@@ -189,7 +191,7 @@ public static class UpdateManager
         {
             Log.F($"Error while downloading update. \nException:\n{e.Message}\n{e.StackTrace}");
             var res = TccMessageBox.Show(SR.UpdateDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
-            if (res != System.Windows.MessageBoxResult.Yes) return;
+            if (res != MessageBoxResult.Yes) return;
             await Update(url);
         }
     }
@@ -206,11 +208,11 @@ public static class UpdateManager
         catch
         {
             var res = TccMessageBox.Show(SR.ServersFileDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
-            if (res == System.Windows.MessageBoxResult.Yes) DownloadServersFile();
+            if (res == MessageBoxResult.Yes) DownloadServersFile();
         }
     }
 
-    static void CheckTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+    static void CheckTimer_Elapsed(object? sender, ElapsedEventArgs e)
     {
         _checkTimer.Stop();
         CheckAppVersionPeriodic();

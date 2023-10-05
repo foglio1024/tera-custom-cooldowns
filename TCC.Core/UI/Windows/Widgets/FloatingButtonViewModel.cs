@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using JetBrains.Annotations;
 using Nostrum;
 using Nostrum.WPF;
 using TCC.Settings.WindowSettings;
@@ -9,6 +10,7 @@ using TeraPacketParser.Messages;
 
 namespace TCC.UI.Windows.Widgets;
 
+[UsedImplicitly]
 public class FloatingButtonViewModel : TccWindowViewModel
 {
     public event Action? NotificationsAdded;

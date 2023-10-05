@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -67,7 +68,7 @@ public class TccWindow : Window
     {
         Handle = new WindowInteropHelper(this).Handle;
     }
-    protected virtual void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
+    protected virtual void OnClosing(object? sender, CancelEventArgs e)
     {
         if (_canClose)
         {

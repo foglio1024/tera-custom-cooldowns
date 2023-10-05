@@ -1,4 +1,6 @@
-﻿namespace TCC.Data.Npc;
+﻿using System.ComponentModel;
+
+namespace TCC.Data.Npc;
 
 public class HpTriggeredTimerPattern : TimerPattern
 {
@@ -13,17 +15,17 @@ public class HpTriggeredTimerPattern : TimerPattern
         StartAt = startAt;
     }
 
-    public override void SetTarget(NPC target)
+    public override void SetTarget(Npc target)
     {
         base.SetTarget(target);
         target.PropertyChanged += OnTargetPropertyChanged;
     }
 
-    void OnTargetPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    void OnTargetPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (Running) return;
-        if (e.PropertyName != nameof(NPC.HPFactor)) return;
-        if (sender is not NPC npc || !(npc.HPFactor < StartAt)) return;
+        if (e.PropertyName != nameof(Npc.HPFactor)) return;
+        if (sender is not Npc npc || !(npc.HPFactor < StartAt)) return;
         Start();
     }
 }

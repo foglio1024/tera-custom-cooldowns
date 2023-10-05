@@ -8,11 +8,11 @@ namespace TCC.Data.Databases;
 
 public class DungeonDatabase : DatabaseBase
 {
+    const string DefaultDefsRelativePath = "default-dungeon-defs.tsv";
+    const string ImagesRelativePath = "section_images.tsv";
     readonly string _customDefsPath = Path.Combine(App.DataPath, "dungeon-defs.tsv");
     readonly string _defaultDefsFullPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
-    readonly string _defaultDefsRelativePath = "default-dungeon-defs.tsv";
     readonly string _imagesFullPath = Path.Combine(App.DataPath, "section_images.tsv");
-    readonly string _imagesRelativePath = "section_images.tsv";
 
     public readonly Dictionary<uint, Dungeon> Dungeons;
 
@@ -25,14 +25,14 @@ public class DungeonDatabase : DatabaseBase
     public override void CheckVersion(string customAbsPath = "", string customRelPath = "")
     {
         base.CheckVersion(FullPath, RelativePath);
-        base.CheckVersion(_defaultDefsFullPath, _defaultDefsRelativePath);
-        base.CheckVersion(_imagesFullPath, _imagesRelativePath);
+        base.CheckVersion(_defaultDefsFullPath, DefaultDefsRelativePath);
+        base.CheckVersion(_imagesFullPath, ImagesRelativePath);
     }
     public override void Update(string custom = "")
     {
         base.Update(RelativePath);
-        base.Update(_defaultDefsRelativePath);
-        base.Update(_imagesRelativePath);
+        base.Update(DefaultDefsRelativePath);
+        base.Update(ImagesRelativePath);
     }
 
     public DungeonDatabase(string lang) : base(lang)

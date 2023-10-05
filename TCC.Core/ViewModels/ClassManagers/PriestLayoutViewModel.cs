@@ -5,7 +5,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class PriestLayoutVM : BaseClassLayoutVM
+public class PriestLayoutViewModel : BaseClassLayoutViewModel
 {
     public SkillWithEffect EnergyStars { get; }
     public SkillWithEffect Grace { get; }
@@ -14,7 +14,7 @@ public class PriestLayoutVM : BaseClassLayoutVM
     public SkillWithEffect TripleNemesis { get; }
 
 
-    public PriestLayoutVM()
+    public PriestLayoutViewModel()
     {
         //Energy Stars
         Game.DB!.SkillsDatabase.TryGetSkill(350410, Class.Priest, out var es);

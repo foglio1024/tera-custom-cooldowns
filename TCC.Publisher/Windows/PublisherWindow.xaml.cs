@@ -1,5 +1,5 @@
-﻿using Nostrum.WPF.Factories;
-using System.Windows.Controls.Primitives;
+﻿using System.Windows.Controls.Primitives;
+using Nostrum.WPF.Factories;
 using TCC.Publisher.ViewModels;
 
 namespace TCC.Publisher.Windows;

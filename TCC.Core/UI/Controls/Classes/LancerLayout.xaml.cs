@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Media.Animation;
 using Nostrum.WPF.Controls;
 using Nostrum.WPF.Factories;
@@ -9,7 +10,7 @@ namespace TCC.UI.Controls.Classes;
 // TODO: refactor dis
 public partial class LancerLayout
 {
-    LancerLayoutVM? _dc;
+    LancerLayoutViewModel? _dc;
     readonly DoubleAnimation _lineHeldDurationAn;
     readonly DoubleAnimation _lineHeldStacksAn;
 
@@ -23,9 +24,9 @@ public partial class LancerLayout
         Loaded += OnLoaded;
     }
 
-    void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    void OnLoaded(object sender, RoutedEventArgs e)
     {
-        _dc = (LancerLayoutVM)DataContext;
+        _dc = (LancerLayoutViewModel)DataContext;
 
         if (_dc == null) return;
         _dc.LH.BaseStacksChanged += OnStacksChanged;

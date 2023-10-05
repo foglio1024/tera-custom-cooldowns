@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nostrum.Extensions;
 using HtmlAgilityPack;
+using Nostrum.Extensions;
 using TCC.Utils;
 
 namespace TCC.Data.Chat;
@@ -87,7 +87,7 @@ public class SystemMessage : ChatMessage
                     case 2:
                         if (inPiece == "/s//s" && plural)
                         {
-                            Pieces.Last().Text = Pieces.Last().Text + "s";
+                            Pieces.Last().Text += "s";
                             plural = false;
                         }
                         selectionStep = 0;

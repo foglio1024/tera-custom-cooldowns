@@ -4,9 +4,8 @@ using TCC.ViewModels;
 
 namespace TCC.Data.Chat;
 
-public class LFG : ThreadSafeObservableObject
+public class Lfg : ThreadSafeObservableObject
 {
-    uint _id;
     string _name = "";
     string _message = "";
     bool _raid;
@@ -14,15 +13,7 @@ public class LFG : ThreadSafeObservableObject
     int _membersCount;
     readonly Timer _removeTimer;
 
-    public uint Id
-    {
-        get => _id; set
-        {
-            if (_id == value) return;
-            _id = value;
-            N();
-        }
-    }
+    public uint Id { get; }
 
     public uint ServerId { get; }
 
@@ -57,7 +48,8 @@ public class LFG : ThreadSafeObservableObject
 
     public string DungeonName
     {
-        get => _dungeonName; set
+        get => _dungeonName;
+        private set
         {
             if (_dungeonName == value) return;
             _dungeonName = value;
@@ -77,7 +69,7 @@ public class LFG : ThreadSafeObservableObject
     }
     public string MembersCountLabel => MembersCount == 0 ? "" : MembersCount.ToString();
 
-    public LFG(uint id, string name, string msg, bool raid, uint serverId)
+    public Lfg(uint id, string name, string msg, bool raid, uint serverId)
     {
         Dispatcher = ChatManager.Instance.Dispatcher;
 
@@ -116,14 +108,7 @@ public class LFG : ThreadSafeObservableObject
     void UpdateDungeonName()
     {
         var a = Message.Split(' ');
-        if (a[0].Length <= 5)
-        {
-            DungeonName = a[0];
-        }
-        else
-        {
-            DungeonName = "LFG";
-        }
+        DungeonName = a[0].Length <= 5 ? a[0] : "LFG";
     }
     public void Dispose()
     {

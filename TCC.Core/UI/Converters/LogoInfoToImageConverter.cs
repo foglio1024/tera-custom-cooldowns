@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using Nostrum.WinAPI;
 using TCC.R;
@@ -21,7 +22,7 @@ public class LogoInfoToImageConverter : IValueConverter
         BitmapSource bs;
         try
         {
-            bs = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(ip,
+            bs = Imaging.CreateBitmapSourceFromHBitmap(ip,
                 IntPtr.Zero, Int32Rect.Empty,
                 BitmapSizeOptions.FromEmptyOptions());
         }

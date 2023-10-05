@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using TeraDataLite;
 
@@ -98,25 +99,23 @@ public class GroupInfo
         return Has(name) && _members.FirstOrDefault(x => x.Name == name)?.CanInvite == true;
     }
 
-#pragma warning disable CS8601
-    public bool TryGetMember(uint playerId, uint serverId, out GroupMemberData member)
+    public bool TryGetMember(uint playerId, uint serverId, [MaybeNullWhen(false)] out GroupMemberData member)
     {
         member = _members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
         return member != null;
     }
 
-    public bool TryGetMember(ulong entityId, out GroupMemberData member)
+    public bool TryGetMember(ulong entityId, [MaybeNullWhen(false)] out GroupMemberData member)
     {
         member = _members.FirstOrDefault(m => m.EntityId == entityId);
         return member != null;
     }
 
-    public bool TryGetMember(string name, out GroupMemberData member)
+    public bool TryGetMember(string name, [MaybeNullWhen(false)] out GroupMemberData member)
     {
         member = _members.FirstOrDefault(m => m.Name == name);
         return member != null;
     }
-#pragma warning restore CS8601 
 
     internal ReadOnlyCollection<GroupMemberData> GetMembers()
     {

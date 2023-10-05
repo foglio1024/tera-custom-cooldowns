@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using Nostrum;
-using Nostrum.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -13,6 +10,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using Newtonsoft.Json.Linq;
+using Nostrum;
+using Nostrum.Extensions;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Databases;
@@ -30,6 +30,7 @@ using TeraPacketParser;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Data;
 using TeraPacketParser.Messages;
+
 // ReSharper disable All
 
 namespace TCC.Debug;
@@ -120,7 +121,7 @@ public static class Tester
     }
     public static void StartDeadlyGambleCooldown(uint cd)
     {
-        TccUtils.CurrentClassVM<WarriorLayoutVM>()?.DeadlyGamble.StartCooldown(cd);
+        TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.DeadlyGamble.StartCooldown(cd);
     }
     public static void AddFakeGroupMember(int id, Class c, Laurel l, bool leader = false)
     {

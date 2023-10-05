@@ -4,19 +4,14 @@ using System.Xml.Linq;
 
 namespace TCC.Data.Map;
 
-public class Guard
+public readonly record struct Guard
 {
-    public Dictionary<uint, Section> Sections { get; }
+    public Dictionary<uint, Section> Sections { get; } = new();
     public uint Id { get; }
     public uint NameId { get; }
     public uint ContinentId { get; }
 
-    Guard()
-    {
-        Sections = new Dictionary<uint, Section>();
-    }
-
-    public Guard(uint gId, uint gNameId, uint continentId) : this()
+    Guard(uint gId, uint gNameId, uint continentId)
     {
         Id = gId;
         NameId = gNameId;
@@ -45,5 +40,4 @@ public class Guard
         });
         return guard;
     }
-
 }

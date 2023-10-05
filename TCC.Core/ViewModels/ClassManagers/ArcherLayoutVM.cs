@@ -4,7 +4,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class ArcherLayoutVM : BaseClassLayoutVM
+public class ArcherLayoutViewModel : BaseClassLayoutViewModel
 {
     bool _windWalkProc;
 
@@ -24,7 +24,7 @@ public class ArcherLayoutVM : BaseClassLayoutVM
         }
     }
 
-    public ArcherLayoutVM()
+    public ArcherLayoutViewModel()
     {
         Focus = new ArcherFocusTracker();
         Game.DB!.SkillsDatabase.TryGetSkill(290100, Class.Archer, out var tb);    // Thunderbolt

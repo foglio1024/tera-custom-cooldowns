@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -37,7 +38,7 @@ public partial class SystemMessagesConfigWindow
         {
             switch (args.Action)
             {
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                case NotifyCollectionChangedAction.Add:
                     foreach (var item in args.NewItems!)
                     {
                         var opcode = ((SystemMessageViewModel?) item)?.Opcode;
@@ -45,7 +46,7 @@ public partial class SystemMessagesConfigWindow
                             App.Settings.UserExcludedSysMsg.Add(opcode);
                     }
                     break;
-                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                case NotifyCollectionChangedAction.Remove:
                     foreach (var item in args.OldItems!)
                     {
                         var opcode = ((SystemMessageViewModel?) item)?.Opcode;

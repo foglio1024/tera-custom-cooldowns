@@ -1,7 +1,7 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Windows.Input;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Interop.Proxy;
 using TCC.UI.Controls.Chat;
 using TCC.Utilities;

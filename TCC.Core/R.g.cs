@@ -2,13 +2,13 @@
 //// File automatically generated from TCC.Core.csproj ////
 ///////////////////////////////////////////////////////////
 
-using Dragablz.Converters;
-using Nostrum.WPF.Converters;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
+using Dragablz.Converters;
+using Nostrum.WPF.Converters;
 using TCC.UI.Converters;
 using TCC.UI.TemplateSelectors;
 

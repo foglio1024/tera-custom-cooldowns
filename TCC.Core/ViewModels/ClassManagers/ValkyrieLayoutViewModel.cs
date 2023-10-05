@@ -6,7 +6,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class ValkyrieLayoutVM : BaseClassLayoutVM
+public class ValkyrieLayoutViewModel : BaseClassLayoutViewModel
 {
     public Counter RunemarksCounter { get; set; }
     public SkillWithEffect Ragnarok { get; }
@@ -17,7 +17,7 @@ public class ValkyrieLayoutVM : BaseClassLayoutVM
 
     public string RagnarokEffectSecondsText => TimeUtils.FormatMilliseconds(Convert.ToInt64((Ragnarok.Effect.Seconds > uint.MaxValue ? 0 : Ragnarok.Effect.Seconds) * 1000), App.Settings.ShowDecimalsInCooldowns);
 
-    public ValkyrieLayoutVM()
+    public ValkyrieLayoutViewModel()
     {
         RunemarksCounter = new Counter(7, false);
 

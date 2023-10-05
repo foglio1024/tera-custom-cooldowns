@@ -13,7 +13,7 @@ namespace TCC.UI.Controls.NPCs;
 
 public partial class DragonControl
 {
-    NPC? _dc;
+    Npc? _dc;
     readonly DoubleAnimation _shieldArcAn;
     readonly DoubleAnimation _enrageEndAnim;
 
@@ -26,7 +26,7 @@ public partial class DragonControl
 
     void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
-        _dc = (NPC)DataContext;
+        _dc = (Npc)DataContext;
         _dc.PropertyChanged += Dc_PropertyChanged;
         _dc.DeleteEvent += Dc_DeleteEvent;
         EnrageLine.LayoutTransform = _dc.EnragePattern != null && _dc.CurrentPercentage > _dc.EnragePattern.Percentage 

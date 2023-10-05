@@ -30,7 +30,7 @@ public partial class BoolSetting
         set => SetValue(SettingNameProperty, value);
     }
     public static readonly DependencyProperty SettingNameProperty =
-        DependencyProperty.Register("SettingName", typeof(string), typeof(BoolSetting));
+        DependencyProperty.Register(nameof(SettingName), typeof(string), typeof(BoolSetting));
 
     public bool IsOn
     {
@@ -38,7 +38,7 @@ public partial class BoolSetting
         set => SetValue(IsOnProperty, value);
     }
     public static readonly DependencyProperty IsOnProperty =
-        DependencyProperty.Register("IsOn", typeof(bool), typeof(BoolSetting), new PropertyMetadata(false));
+        DependencyProperty.Register(nameof(IsOn), typeof(bool), typeof(BoolSetting), new PropertyMetadata(false));
 
     public ImageSource SettingImage
     {

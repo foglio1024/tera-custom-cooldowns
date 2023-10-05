@@ -1,8 +1,9 @@
 ﻿using System;
-using Nostrum.WPF.Factories;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
+using JetBrains.Annotations;
+using Nostrum.WPF.Factories;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Settings.WindowSettings;
@@ -14,6 +15,7 @@ namespace TCC.ViewModels.Widgets;
 
 //NOTE: hooks handled by Game
 [TccModule]
+[UsedImplicitly]
 public class AbnormalityWindowViewModel : TccWindowViewModel
 {
     public Player Player => Game.Me;

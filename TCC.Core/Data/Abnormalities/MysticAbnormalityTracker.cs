@@ -38,35 +38,35 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         if (!Game.IsMe(p.TargetId)) return;
         if (CritAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.CritAura = true;
+            vm.Auras.CritAura = true;
         }
         else if (ManaAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.ManaAura = true;
+            vm.Auras.ManaAura = true;
         }
         else if (CritResAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.CritResAura = true;
+            vm.Auras.CritResAura = true;
         }
         else if (SwiftAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.SwiftAura = true;
+            vm.Auras.SwiftAura = true;
         }
         else if (p.AbnormalityId == VowId)
         {
-            vm!.Vow.StartEffect(p.Duration);
+            vm.Vow.StartEffect(p.Duration);
         }
         else if (ElementalizeIDs.Contains(p.AbnormalityId))
         {
-            vm!.Elementalize = true;
+            vm.Elementalize = true;
         }
         else if (p.AbnormalityId == TovId)
         {
-            vm!.ThrallOfVengeance.StartEffect(p.Duration);
+            vm.ThrallOfVengeance.StartEffect(p.Duration);
         }
         else if (p.AbnormalityId == TowId)
         {
-            vm!.ThrallOfWrath.StartEffect(p.Duration);
+            vm.ThrallOfWrath.StartEffect(p.Duration);
         }
     }
     public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
@@ -79,35 +79,35 @@ public class MysticAbnormalityTracker : AbnormalityTracker
 
         if (CritAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.CritAura = true;
+            vm.Auras.CritAura = true;
         }
         else if (ManaAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.ManaAura = true;
+            vm.Auras.ManaAura = true;
         }
         else if (CritResAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.CritResAura = true;
+            vm.Auras.CritResAura = true;
         }
         else if (SwiftAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.SwiftAura = true;
+            vm.Auras.SwiftAura = true;
         }
         else if (p.AbnormalityId == VowId)
         {
-            vm!.Vow.RefreshEffect(p.Duration);
+            vm.Vow.RefreshEffect(p.Duration);
         }
         else if (p.AbnormalityId == TovId)
         {
-            vm!.ThrallOfVengeance.RefreshEffect(p.Duration);
+            vm.ThrallOfVengeance.RefreshEffect(p.Duration);
         }
         else if (p.AbnormalityId == TowId)
         {
-            vm!.ThrallOfWrath.RefreshEffect(p.Duration);
+            vm.ThrallOfWrath.RefreshEffect(p.Duration);
         }
         else if (ElementalizeIDs.Contains(p.AbnormalityId))
         {
-            vm!.Elementalize = true;
+            vm.Elementalize = true;
         }
     }
     public override void CheckAbnormality(S_ABNORMALITY_END p)
@@ -120,35 +120,35 @@ public class MysticAbnormalityTracker : AbnormalityTracker
 
         if (CritAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.CritAura = false;
+            vm.Auras.CritAura = false;
         }
         else if (ManaAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.ManaAura = false;
+            vm.Auras.ManaAura = false;
         }
         else if (CritResAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.CritResAura = false;
+            vm.Auras.CritResAura = false;
         }
         else if (SwiftAuraIDs.Contains(p.AbnormalityId))
         {
-            vm!.Auras.SwiftAura = false;
+            vm.Auras.SwiftAura = false;
         }
         else if (p.AbnormalityId == VowId)
         {
-            vm!.Vow.StopEffect();
+            vm.Vow.StopEffect();
         }
         else if (p.AbnormalityId == TovId)
         {
-            vm!.ThrallOfVengeance.StopEffect();
+            vm.ThrallOfVengeance.StopEffect();
         }
         else if (p.AbnormalityId == TowId)
         {
-            vm!.ThrallOfWrath.StopEffect();
+            vm.ThrallOfWrath.StopEffect();
         }
         else if (ElementalizeIDs.Contains(p.AbnormalityId))
         {
-            vm!.Elementalize = false;
+            vm.Elementalize = false;
         }
     }
 

@@ -55,7 +55,7 @@ public class S_PARTY_MEMBER_INFO : ParsedMessage
                 GuardId = guardId,
                 SectionId = sectionId,
                 IsLeader = isLeader,
-                Online = online,
+                Online = online
             };
 
             if (u.IsLeader) Id = u.PlayerId;

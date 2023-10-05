@@ -3,7 +3,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class GunnerLayoutVM : BaseClassLayoutVM
+public class GunnerLayoutViewModel : BaseClassLayoutViewModel
 {
 
     public Cooldown BurstFire { get;  }
@@ -11,7 +11,7 @@ public class GunnerLayoutVM : BaseClassLayoutVM
     public Cooldown Bombardment { get; }
     public SkillWithEffect ModularSystem { get; }
 
-    public GunnerLayoutVM()
+    public GunnerLayoutViewModel()
     {
         Game.DB!.SkillsDatabase.TryGetSkill(51000, Class.Gunner, out var bfire);
         Game.DB.SkillsDatabase.TryGetSkill(130200, Class.Gunner, out var balder);

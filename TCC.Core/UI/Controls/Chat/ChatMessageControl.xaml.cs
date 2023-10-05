@@ -48,8 +48,8 @@ public partial class ChatMessageControl
 
     void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
     {
-        if(!(DataContext is ChatMessage)) return;
-        _dc = (ChatMessage) DataContext;
+        if(DataContext is not ChatMessage message) return;
+        _dc = message;
         var tg = (TransformGroup) LayoutTransform;
         var sc = tg.Children[0];
         if (!_dc.Animate)

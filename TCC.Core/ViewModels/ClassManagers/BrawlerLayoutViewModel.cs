@@ -4,7 +4,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class BrawlerLayoutVM : BaseClassLayoutVM
+public class BrawlerLayoutViewModel : BaseClassLayoutViewModel
 {
     bool _isGfOn;
     bool _counterProc;
@@ -38,7 +38,7 @@ public class BrawlerLayoutVM : BaseClassLayoutVM
     }
 
 
-    public BrawlerLayoutVM()
+    public BrawlerLayoutViewModel()
     {
         // Growing Fury
         Game.DB!.SkillsDatabase.TryGetSkill(180100, Class.Brawler, out var gf);

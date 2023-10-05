@@ -92,26 +92,20 @@ public static class OpcodeDownloader
 
         var filename = Path.Combine(directory, $"sysmsg.{revision / 100}.map");
         if (File.Exists(filename)) return true;
-        else
+        try
         {
-            try
-            {
-                Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg.{revision / 100}.map", filename);
-                return true;
-            }
-            catch { /* ignored*/ }
+            Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg.{revision / 100}.map", filename);
+            return true;
         }
+        catch { /* ignored*/ }
         filename = Path.Combine(directory, $"sysmsg.{version}.map");
         if (File.Exists(filename)) return true;
-        else
+        try
         {
-            try
-            {
-                Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg.{version}.map", filename);
-                return true;
-            }
-            catch { /* ignored*/ }
+            Download($"https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/opcodes/sysmsg.{version}.map", filename);
+            return true;
         }
+        catch { /* ignored*/ }
         return false;
     }
 

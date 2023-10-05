@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using TCC.R;
 using TeraDataLite;
 
 namespace TCC.UI.Converters;
@@ -12,11 +13,11 @@ public class GearLevelToColorConverter : IValueConverter
         var val = (GearTier? ) value ?? GearTier.Low;
         return val switch
         {
-            GearTier.Low => R.Brushes.Tier2DungeonBrush,
-            GearTier.Mid => R.Brushes.Tier3DungeonBrush,
-            GearTier.High => R.Brushes.Tier4DungeonBrush,
-            GearTier.Top => R.Brushes.Tier5DungeonBrush,
-            _ => R.Brushes.Tier1DungeonBrush
+            GearTier.Low => Brushes.Tier2DungeonBrush,
+            GearTier.Mid => Brushes.Tier3DungeonBrush,
+            GearTier.High => Brushes.Tier4DungeonBrush,
+            GearTier.Top => Brushes.Tier5DungeonBrush,
+            _ => Brushes.Tier1DungeonBrush
         };
     }
 

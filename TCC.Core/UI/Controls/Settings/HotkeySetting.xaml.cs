@@ -24,7 +24,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
         set => SetValue(ValueProperty, value);
     }
 
-    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(HotKey), typeof(HotkeySetting));
+    public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(HotKey), typeof(HotkeySetting));
 
     public string SettingName
     {
@@ -32,7 +32,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
         set => SetValue(SettingNameProperty, value);
     }
 
-    public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register("SettingName", typeof(string), typeof(HotkeySetting));
+    public static readonly DependencyProperty SettingNameProperty = DependencyProperty.Register(nameof(SettingName), typeof(string), typeof(HotkeySetting));
 
     public Geometry SvgIcon
     {
@@ -40,7 +40,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
         set => SetValue(SvgIconProperty, value);
     }
 
-    public static readonly DependencyProperty SvgIconProperty = DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(HotkeySetting));
+    public static readonly DependencyProperty SvgIconProperty = DependencyProperty.Register(nameof(SvgIcon), typeof(Geometry), typeof(HotkeySetting));
 
     public bool ForceCtrl
     {
@@ -48,7 +48,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
         set { SetValue(ForceCtrlProperty, value); }
     }
 
-    public static readonly DependencyProperty ForceCtrlProperty = DependencyProperty.Register("ForceCtrl", typeof(bool), typeof(HotkeySetting), new PropertyMetadata(true));
+    public static readonly DependencyProperty ForceCtrlProperty = DependencyProperty.Register(nameof(ForceCtrl), typeof(bool), typeof(HotkeySetting), new PropertyMetadata(true));
 
     public bool AllowModifiers
     {
@@ -57,7 +57,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
     }
 
     public static readonly DependencyProperty AllowModifiersProperty =
-        DependencyProperty.Register("AllowModifiers", typeof(bool), typeof(HotkeySetting), new PropertyMetadata(true));
+        DependencyProperty.Register(nameof(AllowModifiers), typeof(bool), typeof(HotkeySetting), new PropertyMetadata(true));
 
     readonly List<Key> _pressedKeys;
 

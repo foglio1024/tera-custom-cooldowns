@@ -161,9 +161,9 @@ public class HiddenSKillsDragHandler : IDropTarget
             {
                 var ret = dropInfo.Data switch
                 {
-                    Skill s => (cd.Skill.IconName == s.IconName),
-                    Item i => (cd.Skill.IconName == i.IconName),
-                    Abnormality a => (cd.Skill.IconName == a.IconName),
+                    Skill s => cd.Skill.IconName == s.IconName,
+                    Item i => cd.Skill.IconName == i.IconName,
+                    Abnormality a => cd.Skill.IconName == a.IconName,
                     _ => false
                 };
 

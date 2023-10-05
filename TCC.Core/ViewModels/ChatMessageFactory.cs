@@ -57,7 +57,7 @@ public class ChatMessageFactory
             var sb = new StringBuilder();
             sb.Append("<");
             sb.Append(e);
-            sb.Append(mp.Text.Substring(1));
+            sb.Append(mp.Text[1..]);
             mp.Text = sb.ToString();
             msg.AddPiece(new SimpleMessagePiece("Successfully enchanted ", App.Settings.FontSize, false, "cccccc"));
             msg.AddPiece(mp);

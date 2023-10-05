@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
+using Nostrum.WPF;
 using Colors = TCC.R.Colors;
 
 namespace TCC.UI.Controls.Abnormalities;
@@ -125,11 +126,11 @@ public class TooltipParser
         if (!IsCustom(piece)) return false;
         var d = SplitOn(piece, CustomMarker);
 
-        var txt = d[1].Substring(7);
-        var col = d[1].Substring(0, 7);
+        var txt = d[1][7..];
+        var col = d[1][..7];
         var cstm = new {Text = txt, Color = col};
         Add(d[0]);
-        AddFormatted(cstm.Text, Nostrum.WPF.MiscUtils.ParseColor(cstm.Color));
+        AddFormatted(cstm.Text, MiscUtils.ParseColor(cstm.Color));
 
         return true;
     }

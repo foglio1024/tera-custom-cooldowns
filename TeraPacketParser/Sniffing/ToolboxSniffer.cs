@@ -6,8 +6,8 @@ using Newtonsoft.Json.Linq;
 using Nostrum.Extensions;
 using TCC.Utils;
 using TeraPacketParser.Analysis;
+using TeraPacketParser.TeraCommon.Game;
 using TeraPacketParser.TeraCommon.Sniffing;
-using Server = TeraPacketParser.TeraCommon.Game.Server;
 
 namespace TeraPacketParser.Sniffing;
 

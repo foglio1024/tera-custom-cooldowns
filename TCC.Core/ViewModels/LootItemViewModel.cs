@@ -1,8 +1,9 @@
-﻿using Nostrum.WPF;
+﻿using System.Windows.Input;
+using Nostrum.WPF;
 using Nostrum.WPF.ThreadSafe;
-using System.Windows.Input;
 using TCC.Data;
 using TCC.ViewModels.Widgets;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels;
 
@@ -49,28 +50,30 @@ public class LootItemViewModel : ThreadSafeObservableObject
             _bidIntent = value;
             N();
 
-            if (DistributionStatus == DistributionStatus.Distributing
-                && !_bidSent
-                && Index != -1
-                && _bidIntent != BidAction.Unset)
+            if (DistributionStatus != DistributionStatus.Distributing
+                || _bidSent
+                || Index == -1
+                || _bidIntent == BidAction.Unset)
             {
-                //StubInterface.Instance.StubClient.BidItem(Index, _bidIntent == BidIntent.Roll);
-                switch (_bidIntent)
-                {
-                    case BidAction.Unset:
-                        return;
-
-                    case BidAction.Pass:
-                        UI.FocusManager.SendPgDown(200);
-                        break;
-
-                    case BidAction.Roll:
-                        UI.FocusManager.SendPgUp(200);
-                        break;
-                }
-
-                BidSent = true;
+                return;
             }
+
+            //StubInterface.Instance.StubClient.BidItem(Index, _bidIntent == BidIntent.Roll);
+            switch (_bidIntent)
+            {
+                case BidAction.Unset:
+                    return;
+
+                case BidAction.Pass:
+                    FocusManager.SendPgDown(200);
+                    break;
+
+                case BidAction.Roll:
+                    FocusManager.SendPgUp(200);
+                    break;
+            }
+
+            BidSent = true;
         }
     }
 
@@ -114,7 +117,6 @@ public class LootItemViewModel : ThreadSafeObservableObject
 
     void SetBidIntent(BidAction intent)
     {
-        if (BidIntent == intent) BidIntent = BidAction.Unset;
-        else BidIntent = intent;
+        BidIntent = BidIntent == intent ? BidAction.Unset : intent;
     }
 }

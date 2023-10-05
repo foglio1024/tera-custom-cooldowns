@@ -5,7 +5,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class WarriorLayoutVM : BaseClassLayoutVM
+public class WarriorLayoutViewModel : BaseClassLayoutViewModel
 {
 
     public SkillWithEffect DeadlyGamble { get; set; }
@@ -31,7 +31,7 @@ public class WarriorLayoutVM : BaseClassLayoutVM
 
     public bool AtkSpeedProc => !(Swift.Effect.IsAvailable && AdrenalineRush.Effect.IsAvailable);
 
-    public WarriorLayoutVM()
+    public WarriorLayoutViewModel()
     {
         TraverseCut = new StatTracker { Max = 13, Val = 0 };
         Game.Me.Death += OnDeath;

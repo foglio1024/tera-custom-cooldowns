@@ -214,7 +214,7 @@ public class GroupWindowSettings : WindowSettingsBase
         HpLabelMode = GroupHpLabelMode.Percentage;
         Layout = GroupWindowLayout.RoleSeparated;
 
-        GroupAbnormals = new Dictionary<Class, List<uint>>()
+        GroupAbnormals = new Dictionary<Class, List<uint>>
         {
             {       0, new List<uint>()},
             {(Class)1, new List<uint>()},
@@ -229,7 +229,7 @@ public class GroupWindowSettings : WindowSettingsBase
             {(Class)10, new List<uint>()},
             {(Class)11, new List<uint>()},
             {(Class)12, new List<uint>()},
-            {(Class)255, new List<uint>()},
+            {(Class)255, new List<uint>()}
         };
 
         GpkNames.Add("PartyWindow");

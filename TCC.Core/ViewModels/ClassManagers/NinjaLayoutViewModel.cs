@@ -1,9 +1,10 @@
-﻿using TCC.Data.Skills;
+﻿using System.ComponentModel;
+using TCC.Data.Skills;
 using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class NinjaLayoutVM : BaseClassLayoutVM
+public class NinjaLayoutViewModel : BaseClassLayoutViewModel
 {
     bool _focusOn;
 
@@ -23,14 +24,14 @@ public class NinjaLayoutVM : BaseClassLayoutVM
 
     }
 
-    void FlashOnMaxSt(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    void FlashOnMaxSt(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(StaminaTracker.Maxed)) return;
         BurningHeart.FlashOnAvailable = StaminaTracker.Maxed;
         FireAvalanche.FlashOnAvailable = StaminaTracker.Maxed;
     }
 
-    public NinjaLayoutVM()
+    public NinjaLayoutViewModel()
     {
         Game.DB!.SkillsDatabase.TryGetSkill(150700, Class.Ninja, out var bh);
         Game.DB.SkillsDatabase.TryGetSkill(80200, Class.Ninja, out var fa);

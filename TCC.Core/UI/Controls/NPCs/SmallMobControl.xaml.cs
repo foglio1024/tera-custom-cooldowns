@@ -28,7 +28,7 @@ public partial class SmallMobControl
 
     void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
     {
-        if (e.NewValue is not NPC npc) return;
+        if (e.NewValue is not Npc npc) return;
         VM = new SmallMobViewModel(npc);
     }
 

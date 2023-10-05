@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:PriestLayoutVM}" >
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:PriestLayoutViewModel}" >
     <Grid Width="Auto" Margin="50 20 140 50" Name="Root" ClipToBounds="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

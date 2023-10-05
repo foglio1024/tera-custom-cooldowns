@@ -6,9 +6,9 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class SorcererLayoutVM : BaseClassLayoutVM
+public class SorcererLayoutVM : BaseClassLayoutViewModel
 {
-    Stopwatch _sw;
+    readonly Stopwatch _sw;
     long _latestCooldown;
 
     public SkillWithEffect ManaBoost { get; set; }
@@ -98,15 +98,13 @@ public class SorcererLayoutVM : BaseClassLayoutVM
 
         var fusion = ManaBoost.Effect.IsAvailable ? FusionSkill : FusionSkillBoost;
 
-        if (sk.Skill.IconName == fusion.IconName)
-        {
-            _latestCooldown = (long)sk.OriginalDuration;
-            Fusion.Start(sk.Duration, sk.Mode);
-            _sw.Restart();
-            return false;
-        }
+        if (sk.Skill.IconName != fusion.IconName) return false;
 
+        _latestCooldown = (long)sk.OriginalDuration;
+        Fusion.Start(sk.Duration, sk.Mode);
+        _sw.Restart();
         return false;
+
     }
 
     public void EndFireIcePre()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using TCC.Data.Skills;
 using TCC.Utilities;
 using TCC.ViewModels.ClassManagers;
@@ -47,7 +48,7 @@ public class AbnormalityTracker
         ClearMarkedTargets();
     }
 
-    protected static bool IsViewModelAvailable<T>(out T? vm) where T : BaseClassLayoutVM
+    protected static bool IsViewModelAvailable<T>([MaybeNullWhen(false)] out T vm) where T : BaseClassLayoutViewModel
     {
         vm = TccUtils.CurrentClassVM<T>();
         return vm != null;

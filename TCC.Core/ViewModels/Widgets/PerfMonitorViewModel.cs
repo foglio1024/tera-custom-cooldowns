@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
+using JetBrains.Annotations;
 using Nostrum.WPF;
 using TCC.Debugging;
 using TCC.Settings.WindowSettings;
@@ -12,6 +13,7 @@ using TCC.Utils;
 namespace TCC.ViewModels.Widgets;
 
 [TccModule]
+[UsedImplicitly]
 public class PerfMonitorViewModel : TccWindowViewModel
 {
     double _memory;
@@ -49,7 +51,7 @@ public class PerfMonitorViewModel : TccWindowViewModel
     public bool MemoryAAAAAAAAAAAAAAA => _memory > 3000;
 
     public ICommand DumpThreadAllocationCommand { get; }
-    object _lock = new();
+    readonly object _lock = new();
     bool _showDumpButton;
 
     public bool ShowDumpButton
@@ -112,7 +114,7 @@ public class PerfMonitorViewModel : TccWindowViewModel
             name += "-";
         }
 
-        ret += ($"{name} {GC.GetAllocatedBytesForCurrentThread() / (1024 * 1024D):N0} MB\n");
+        ret += $"{name} {GC.GetAllocatedBytesForCurrentThread() / (1024 * 1024D):N0} MB\n";
         Interlocked.Increment(ref count);
         System.Diagnostics.Debug.WriteLine($"{dispatcher.Thread.Name} {count}");
 
@@ -138,8 +140,8 @@ public class PerfMonitorViewModel : TccWindowViewModel
 
         while (true)
         {
-            var cpu = (_cpuCounter.NextValue() / Environment.ProcessorCount);
-            var mem = (_ramCounter.NextValue()) / (1024 * 1024D);
+            var cpu = _cpuCounter.NextValue() / Environment.ProcessorCount;
+            var mem = _ramCounter.NextValue() / (1024 * 1024D);
 
             _dispatcher.InvokeAsync(() =>
             {

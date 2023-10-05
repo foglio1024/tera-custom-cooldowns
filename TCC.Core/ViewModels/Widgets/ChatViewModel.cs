@@ -124,7 +124,7 @@ public class ChatViewModel : ThreadSafeObservableObject
     public ChatWindowSettings WindowSettings { get; }
 
     public ThreadSafeObservableCollection<TabViewModel> TabVMs { get; set; }
-    public ThreadSafeObservableCollection<LFG> LFGs => ChatManager.Instance.LFGs;
+    public ThreadSafeObservableCollection<Lfg> LFGs => ChatManager.Instance.LFGs;
     public IInterTabClient InterTabClient { get; }
     public List<Tab> Tabs
     {
@@ -227,24 +227,19 @@ public class ChatViewModel : ThreadSafeObservableObject
 
         var old = new TabViewModel[TabVMs.Count];
         TabVMs.CopyTo(old, 0);
-        var same = true;
         var items = newOrder.ToList();
-        for (var i = 0; i < items.Count; i++)
-        {
-            if (old[i].Header == items.ToList()[i].Content) continue;
-            same = false;
-            break;
-        }
+        var same = !items.Where((_, i) => old[i].Header != items.ToList()[i].Content).Any();
         if (same)
         {
             FocusManager.ForceFocused = false;
             return;
         }
         TabVMs.Clear();
-        foreach (var tab in items)
+        foreach (var foundTab in items.Select(tab => old.FirstOrDefault(x => x.Header == tab.Content))
+                                      .Where(foundTab => foundTab != null))
         {
-            var foundTab = old.FirstOrDefault(x => x.Header == tab.Content);
-            if (foundTab != null) TabVMs.Add(foundTab);
+            if (foundTab != null)
+                TabVMs.Add(foundTab);
         }
         FocusManager.ForceFocused = false;
     }

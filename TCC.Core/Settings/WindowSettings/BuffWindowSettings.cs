@@ -80,7 +80,7 @@ public class BuffWindowSettings : WindowSettingsBase
         ShowAll = true;
         Specials = new List<uint>();
         Hidden = new List<uint>();
-        MyAbnormals = new Dictionary<Class, List<uint>>()
+        MyAbnormals = new Dictionary<Class, List<uint>>
         {
             {       0, new List<uint>{ 100800, 100801 }},
             {(Class)1, new List<uint>{ 200230, 200231, 200232, 201701 }},
@@ -95,7 +95,7 @@ public class BuffWindowSettings : WindowSettingsBase
             {(Class)10, new List<uint>{ 31020, 10153210 }},
             {(Class)11, new List<uint>{ 89314201, 89314202, 89314203, 89314204, 89314205, 89314206, 89314207, 89314208, 89314209, 89314210, 89314211, 89314212, 89314213, 89314214, 89314215, 89314216, 89314217, 89314218, 89314219, 89314220, 10154480, 10154450 }},
             {(Class)12, new List<uint>{ 10155130, 10155551, 10155510, 10155512, 10155540, 10155541, 10155542 }},
-            {(Class)255, new List<uint>{ 6001, 6002, 6003, 6004, 6012, 6013, 702004, 805800, 805803, 200700, 200701, 200731, 800300, 800301, 800302, 800303, 800304, 702001 }},
+            {(Class)255, new List<uint>{ 6001, 6002, 6003, 6004, 6012, 6013, 702004, 805800, 805803, 200700, 200701, 200731, 800300, 800301, 800302, 800303, 800304, 702001 }}
         };
 
         GpkNames.Add("Abnormality");

@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace TCC.Data.Map;
 
-public class Section
+public readonly record struct Section
 {
     public uint Id { get; }
     public uint NameId { get; }
@@ -15,7 +15,7 @@ public class Section
     public bool IsDungeon { get; }
     //public double Scale => Width / (double)Application.Current.FindResource("MapWidth");
 
-    public Section(uint sId, uint sNameId, string mapId, bool dg)
+    Section(uint sId, uint sNameId, string mapId, bool dg)
     {
         Id = sId;
         NameId = sNameId;
@@ -42,7 +42,6 @@ public class Section
         });
         return new Section(sectionId, sectionNameId, sectionMapId, isDungeon);
     }
-
 
     /*
             public bool ContainsPoint(float x, float y)

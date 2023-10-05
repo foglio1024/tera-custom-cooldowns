@@ -17,7 +17,7 @@ public partial class CheckboxSetting
         set => SetValue(IsOnProperty, value);
     }
     public static readonly DependencyProperty IsOnProperty =
-        DependencyProperty.Register("IsOn", typeof(bool), typeof(CheckboxSetting), new PropertyMetadata(false));
+        DependencyProperty.Register(nameof(IsOn), typeof(bool), typeof(CheckboxSetting), new PropertyMetadata(false));
 
     public Brush CheckBoxColor
     {
@@ -25,7 +25,7 @@ public partial class CheckboxSetting
         set => SetValue(CheckBoxColorProperty, value);
     }
     public static readonly DependencyProperty CheckBoxColorProperty =
-        DependencyProperty.Register("CheckBoxColor", typeof(Brush), typeof(CheckboxSetting), new PropertyMetadata(Brushes.LightSlateGray));
+        DependencyProperty.Register(nameof(CheckBoxColor), typeof(Brush), typeof(CheckboxSetting), new PropertyMetadata(Brushes.LightSlateGray));
 
     public string SettingName
     {
@@ -33,7 +33,7 @@ public partial class CheckboxSetting
         set => SetValue(SettingNameProperty, value);
     }
     public static readonly DependencyProperty SettingNameProperty =
-        DependencyProperty.Register("SettingName", typeof(string), typeof(CheckboxSetting), new PropertyMetadata(""));
+        DependencyProperty.Register(nameof(SettingName), typeof(string), typeof(CheckboxSetting), new PropertyMetadata(""));
 
     public Geometry SvgIcon
     {
@@ -41,7 +41,7 @@ public partial class CheckboxSetting
         set => SetValue(SvgIconProperty, value);
     }
     public static readonly DependencyProperty SvgIconProperty =
-        DependencyProperty.Register("SvgIcon", typeof(Geometry), typeof(CheckboxSetting));
+        DependencyProperty.Register(nameof(SvgIcon), typeof(Geometry), typeof(CheckboxSetting));
 
     public double CheckboxSize
     {
@@ -49,7 +49,7 @@ public partial class CheckboxSetting
         set => SetValue(CheckboxSizeProperty, value);
     }
     public static readonly DependencyProperty CheckboxSizeProperty =
-        DependencyProperty.Register("CheckboxSize", typeof(double), typeof(CheckboxSetting), new PropertyMetadata(18D));
+        DependencyProperty.Register(nameof(CheckboxSize), typeof(double), typeof(CheckboxSetting), new PropertyMetadata(18D));
 
 
     void OnMouseButtonDown(object sender, MouseButtonEventArgs e)

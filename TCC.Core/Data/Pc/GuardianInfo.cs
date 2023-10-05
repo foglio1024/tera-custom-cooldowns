@@ -1,13 +1,13 @@
-﻿using Nostrum;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Nostrum;
 using Nostrum.WPF.ThreadSafe;
 
 namespace TCC.Data.Pc;
 
 public class GuardianInfo : ThreadSafeObservableObject
 {
-    public const float MAX_CREDITS = 100000;
-    public const int MAX_DAILIES = 100;
+    public const float MaxCredits = 100000;
+    public const int MaxDailies = 100;
 
     int _credits;
     int _cleared;
@@ -48,7 +48,7 @@ public class GuardianInfo : ThreadSafeObservableObject
         }
     }
 
-    [JsonIgnore] public float CreditsFactor => (float)MathUtils.FactorCalc(Credits, MAX_CREDITS);
-    [JsonIgnore] public float ClearedFactor => (float)MathUtils.FactorCalc(Cleared, MAX_DAILIES);
-    [JsonIgnore] public float ClaimedFactor => (float)MathUtils.FactorCalc(Claimed, MAX_DAILIES);
+    [JsonIgnore] public float CreditsFactor => (float)MathUtils.FactorCalc(Credits, MaxCredits);
+    [JsonIgnore] public float ClearedFactor => (float)MathUtils.FactorCalc(Cleared, MaxDailies);
+    [JsonIgnore] public float ClaimedFactor => (float)MathUtils.FactorCalc(Claimed, MaxDailies);
 }

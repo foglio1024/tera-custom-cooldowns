@@ -24,7 +24,7 @@ public class MergedInventoryViewModel : ThreadSafeObservableObject
                                   sortFilters: new[]
                                   {
                                       new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending),
-                                      new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending),
+                                      new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending)
                                   })
                               ?? throw new Exception("Failed to create LiveCollectionView");
     }
@@ -43,11 +43,7 @@ public class MergedInventoryViewModel : ThreadSafeObservableObject
 
     public void LoadItems()
     {
-        var totalItemsAmount = 0;
-        foreach (var ch in Game.Account.Characters.Where(c => !c.Hidden))
-        {
-            totalItemsAmount += ch.Inventory.Count;
-        }
+        var totalItemsAmount = Game.Account.Characters.Where(c => !c.Hidden).Sum(ch => ch.Inventory.Count);
         var itemsParsed = 0;
         Task.Factory.StartNew(() =>
         {

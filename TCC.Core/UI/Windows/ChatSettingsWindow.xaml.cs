@@ -1,7 +1,7 @@
-﻿using Nostrum.WPF.Factories;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Nostrum.WPF.Factories;
 using TCC.ViewModels;
 
 namespace TCC.UI.Windows;

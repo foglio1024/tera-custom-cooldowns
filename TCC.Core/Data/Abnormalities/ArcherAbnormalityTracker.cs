@@ -41,93 +41,93 @@ public class ArcherAbnormalityTracker : AbnormalityTracker
     static void CheckWindsong(S_ABNORMALITY_BEGIN p)
     {
         if (!WindsongIds.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-        vm!.Windsong.StartEffect(p.Duration);
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
+        vm.Windsong.StartEffect(p.Duration);
     }
 
     static void CheckWindsong(S_ABNORMALITY_REFRESH p)
     {
         if (!WindsongIds.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
 
-        vm!.Windsong.RefreshEffect(p.Duration);
+        vm.Windsong.RefreshEffect(p.Duration);
     }
 
     static void CheckWindsong(S_ABNORMALITY_END p)
     {
         if (!WindsongIds.Contains(p.AbnormalityId)) return;
         //if (!CheckByIconName(p.AbnormalityId, WindsongIconName)) return; //TODO: temporary
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
 
-        vm!.Windsong.StopEffect();
+        vm.Windsong.StopEffect();
     }
 
     static void CheckGaleSteps(S_ABNORMALITY_BEGIN p)
     {
         if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
 
-        vm!.WindWalk.Start(p.Duration);
+        vm.WindWalk.Start(p.Duration);
         vm.WindWalkProc = true;
     }
 
     static void CheckWindWalk(S_ABNORMALITY_REFRESH p)
     {
         if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
 
-        vm!.WindWalk.Refresh(p.Duration, CooldownMode.Normal);
+        vm.WindWalk.Refresh(p.Duration, CooldownMode.Normal);
         vm.WindWalkProc = true;
     }
 
     static void CheckGaleSteps(S_ABNORMALITY_END p)
     {
         if (!WindWalkIds.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
 
-        vm!.WindWalk.Stop();
+        vm.WindWalk.Stop();
         vm.WindWalkProc = false;
     }
 
     static void CheckFocus(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != FocusId) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-        vm!.Focus.StartFocus(p.Duration);
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
+        vm.Focus.StartFocus(p.Duration);
     }
 
     static void CheckFocus(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != FocusId) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-        vm!.Focus.SetFocusStacks(p.Stacks, p.Duration);
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
+        vm.Focus.SetFocusStacks(p.Stacks, p.Duration);
     }
 
     static void CheckFocus(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != FocusId) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-        vm!.Focus.StopFocus();
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
+        vm.Focus.StopFocus();
     }
 
     static void CheckFocusX(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != FocusXId) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-        vm!.Focus.StartFocusX(p.Duration);
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
+        vm.Focus.StartFocusX(p.Duration);
     }
 
     static void CheckFocusX(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != FocusXId) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-        vm!.Focus.StartFocusX(p.Duration);
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
+        vm.Focus.StartFocusX(p.Duration);
     }
 
     static void CheckFocusX(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != FocusXId) return;
-        if (!IsViewModelAvailable<ArcherLayoutVM>(out var vm)) return;
-        vm!.Focus.StopFocusX();
+        if (!IsViewModelAvailable<ArcherLayoutViewModel>(out var vm)) return;
+        vm.Focus.StopFocusX();
     }
 }

@@ -2,13 +2,13 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using TCC.Data;
 using TCC.Debug;
 using TCC.UI;
 using TCC.Utilities;
 using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
-using Button = System.Windows.Controls.Button;
 
 namespace TCC.Debugging;
 
@@ -87,8 +87,10 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         if (fire) SetSorcererElements(!currFire, currIce, currArc);
         if (ice) SetSorcererElements(currFire, !currIce, currArc);
         if (arc) SetSorcererElements(currFire, currIce, !currArc);
+      
+        return;
 
-        void SetSorcererElements(bool pFire, bool pIce, bool pArcane)
+        static void SetSorcererElements(bool pFire, bool pIce, bool pArcane)
         {
             Game.Me.Fire = pFire;
             Game.Me.Ice = pIce;
@@ -136,9 +138,13 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     void SetStance(object sender, RoutedEventArgs e)
     {
-        if (((Button)sender).Content.ToString() == "Assault") Game.Me.WarriorStance.CurrentStance = WarriorStance.Assault;
-        else if (((Button)sender).Content.ToString() == "Defensive") Game.Me.WarriorStance.CurrentStance = WarriorStance.Defensive;
-        else if (((Button)sender).Content.ToString() == "None") Game.Me.WarriorStance.CurrentStance = WarriorStance.None;
+        Game.Me.WarriorStance.CurrentStance = ((Button)sender).Content.ToString() switch
+        {
+            "Assault" => WarriorStance.Assault,
+            "Defensive" => WarriorStance.Defensive,
+            "None" => WarriorStance.None,
+            _ => Game.Me.WarriorStance.CurrentStance
+        };
     }
 
     void IncreaseEdge(object sender, RoutedEventArgs e)
@@ -150,7 +156,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     void RegisterWebhook(object sender, RoutedEventArgs e)
     {
-        for (int i = 0; i < 80; i++)
+        for (var i = 0; i < 80; i++)
         {
             var i1 = i;
             Dispatcher.InvokeAsync(() => Tester.RegisterWebhook("user" + i1));
@@ -159,7 +165,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     void FireWebhook(object sender, RoutedEventArgs e)
     {
-        for (int i = 0; i < 80; i++)
+        for (var i = 0; i < 80; i++)
         {
             var i1 = i;
             Dispatcher.InvokeAsync(() => Tester.FireWebhook("user" + i1));
@@ -192,8 +198,14 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     void SetAtkSpeed(object sender, RoutedEventArgs e)
     {
-        if (((Button)sender).Content.ToString() == "Swift") TccUtils.CurrentClassVM<WarriorLayoutVM>()?.SetSwift(1000);
-        else if (((Button)sender).Content.ToString() == "Arush") TccUtils.CurrentClassVM<WarriorLayoutVM>()?.SetArush(1000);
-
+        switch (((Button)sender).Content.ToString())
+        {
+            case "Swift":
+                TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.SetSwift(1000);
+                break;
+            case "Arush":
+                TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.SetArush(1000);
+                break;
+        }
     }
 }

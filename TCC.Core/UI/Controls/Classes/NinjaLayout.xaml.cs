@@ -1,14 +1,15 @@
-﻿using Nostrum.WPF.Controls;
-using Nostrum.WPF.Factories;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
+using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
 using TCC.ViewModels.ClassManagers;
 
 namespace TCC.UI.Controls.Classes;
 
 public partial class NinjaLayout
 {
-    NinjaLayoutVM? _dc;
+    NinjaLayoutViewModel? _dc;
     readonly DoubleAnimation _an;
 
     public NinjaLayout()
@@ -19,11 +20,11 @@ public partial class NinjaLayout
 
     void NinjaLayout_OnLoaded(object sender, RoutedEventArgs e)
     {
-        _dc = (NinjaLayoutVM)DataContext;
+        _dc = (NinjaLayoutViewModel)DataContext;
         _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
     }
 
-    void ST_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_dc == null) return;
         if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;

@@ -9,7 +9,7 @@ namespace TCC.UI.Controls.Classes;
 
 public partial class ArcherLayout
 {
-    ArcherLayoutVM? _context;
+    ArcherLayoutViewModel? _context;
     readonly DoubleAnimation _an;
     readonly DoubleAnimation _an2;
 
@@ -22,7 +22,7 @@ public partial class ArcherLayout
 
     void OnLoaded(object sender, RoutedEventArgs e)
     {
-        _context = (ArcherLayoutVM)DataContext;
+        _context = (ArcherLayoutViewModel)DataContext;
         _context.Focus.EmpoweredBuffStarted += OnFocusXStarted;
         _context.Focus.BaseStacksChanged += OnStacksChanged;
     }

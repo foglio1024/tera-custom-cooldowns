@@ -148,7 +148,7 @@ public enum Dragon
     Ignidrax = 1100,
     Terradrax = 1101,
     Umbradrax = 1102,
-    Aquadrax = 1103,
+    Aquadrax = 1103
 }
 
 
@@ -160,7 +160,7 @@ public enum HarrowholdPhase
     Phase2 = 2,
     Phase3 = 3,
     Phase4 = 4,
-    Balistas = 5,
+    Balistas = 5
 }
 public enum ShieldStatus
 {
@@ -187,7 +187,7 @@ public enum ClickThruMode
 public enum ButtonsPosition
 {
     Above = 0,
-    Below = 1,
+    Below = 1
 }
 
 public enum CooldownBarMode

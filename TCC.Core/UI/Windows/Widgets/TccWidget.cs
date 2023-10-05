@@ -24,7 +24,7 @@ public class TccWidget : Window
     static bool _hidden;
     static event Action? ShowBoundariesToggled;
     static event Action? HiddenToggled;
-    static List<TccWidget> _activeWidgets = new();
+    static readonly List<TccWidget> _activeWidgets = new();
 
     readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, 0);
     readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, 0);
@@ -466,14 +466,13 @@ public class TccWidget : Window
             if (!_showBoundaries) BoundaryRef?.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
         }
         Opacity = currOp;
-        if (WindowSettings != null)
-        {
-            UpdateButtons();
-            CheckBounds();
-            if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
-            SetRelativeCoordinates();
-            App.Settings.Save();
-        }
+        if (WindowSettings == null) return;
+
+        UpdateButtons();
+        CheckBounds();
+        if (!WindowSettings.IgnoreSize) ResizeMode = ResizeMode.CanResize;
+        SetRelativeCoordinates();
+        App.Settings.Save();
     }
 
     void SetRelativeCoordinates()

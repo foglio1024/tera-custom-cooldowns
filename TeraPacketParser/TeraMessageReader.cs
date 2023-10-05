@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using TeraPacketParser.Data;
 
@@ -50,7 +51,7 @@ public class TeraMessageReader : BinaryReader
 
     public Angle ReadAngle()
     {
-        return new(ReadInt16());
+        return new Angle(ReadInt16());
     }
 
     public void Skip(int count)
@@ -72,7 +73,7 @@ public class TeraMessageReader : BinaryReader
                 builder.Append(c);
             }
         }
-        catch (System.Exception)
+        catch (Exception)
         {
             return "";
         }

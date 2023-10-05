@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Nostrum;
 
 namespace TCC.Interop.Moongourd;
 
@@ -41,7 +42,7 @@ public class KabedonManager : IMoongourdManager
             Started?.Invoke();
             _requestInProgress = true;
             var results = new List<IMoongourdEncounter>();
-            using var webClient = Nostrum.MiscUtils.GetDefaultHttpClient();
+            using var webClient = MiscUtils.GetDefaultHttpClient();
 
             try
             {
@@ -54,7 +55,7 @@ public class KabedonManager : IMoongourdManager
                 {
                     if (count >= MAX_ENCOUNTERS) break;
                     if (jEntry["playerName"]!.Value<string>() != playerName) continue;
-                    var logId = long.Parse((jEntry["logId"])!.Value<string>()!);
+                    var logId = long.Parse(jEntry["logId"]!.Value<string>()!);
                     var logZoneId = jEntry["zoneId"]!.Value<int>();
                     var logBossId = jEntry["bossId"]!.Value<int>();
 
@@ -66,7 +67,7 @@ public class KabedonManager : IMoongourdManager
                     var dps = int.Parse(jLog["members"]!.FirstOrDefault(y => y["playerName"]!.Value<string>() == playerName)!["playerDps"]!.Value<string>()!);
                     var deaths = int.Parse(jLog["members"]!.FirstOrDefault(y => y["playerName"]!.Value<string>() == playerName)!["playerDeaths"]!.Value<string>()!);
 
-                    var encounter = new MoongourdEncounter()
+                    var encounter = new MoongourdEncounter
                     {
                         PlayerName = playerName,
                         AreaId = logZoneId,

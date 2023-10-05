@@ -4,6 +4,8 @@ using System.Windows.Data;
 using System.Windows.Media;
 using TCC.Data;
 using TCC.Utils;
+using Brushes = TCC.R.Brushes;
+using Colors = TCC.R.Colors;
 
 namespace TCC.UI.Converters;
 
@@ -12,8 +14,8 @@ public class ItemLevelTierToColorConverter : IValueConverter
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         object ret;
-        if (targetType == typeof(Brush)) ret = R.Brushes.IceBrushLight;
-        else ret = R.Colors.IceColorLight;
+        if (targetType == typeof(Brush)) ret = Brushes.IceBrushLight;
+        else ret = Colors.IceColorLight;
 
         if (value == null) return ret;
 
@@ -25,27 +27,27 @@ public class ItemLevelTierToColorConverter : IValueConverter
             if (targetType == typeof(Brush))
                 ret = tier switch
                 {
-                    ItemLevelTier.Tier0 => R.Brushes.IceBrushLight,
-                    ItemLevelTier.Tier1 => R.Brushes.Tier1DungeonBrush,
-                    ItemLevelTier.Tier2 => R.Brushes.Tier2DungeonBrush,
-                    ItemLevelTier.Tier3 => R.Brushes.Tier3DungeonBrush,
-                    ItemLevelTier.Tier4 => R.Brushes.Tier4DungeonBrush,
-                    ItemLevelTier.Tier5 => R.Brushes.Tier5DungeonBrush,
-                    ItemLevelTier.Tier6 => R.Brushes.HpBrush,
-                    ItemLevelTier.Tier7 => R.Brushes.AssaultStanceBrush,
+                    ItemLevelTier.Tier0 => Brushes.IceBrushLight,
+                    ItemLevelTier.Tier1 => Brushes.Tier1DungeonBrush,
+                    ItemLevelTier.Tier2 => Brushes.Tier2DungeonBrush,
+                    ItemLevelTier.Tier3 => Brushes.Tier3DungeonBrush,
+                    ItemLevelTier.Tier4 => Brushes.Tier4DungeonBrush,
+                    ItemLevelTier.Tier5 => Brushes.Tier5DungeonBrush,
+                    ItemLevelTier.Tier6 => Brushes.HpBrush,
+                    ItemLevelTier.Tier7 => Brushes.AssaultStanceBrush,
                     _ => ret
                 };
             else
                 ret = tier switch
                 {
-                    ItemLevelTier.Tier0 => R.Colors.IceColorLight,
-                    ItemLevelTier.Tier1 => R.Colors.Tier1DungeonColor,
-                    ItemLevelTier.Tier2 => R.Colors.Tier2DungeonColor,
-                    ItemLevelTier.Tier3 => R.Colors.Tier3DungeonColor,
-                    ItemLevelTier.Tier4 => R.Colors.Tier4DungeonColor,
-                    ItemLevelTier.Tier5 => R.Colors.Tier5DungeonColor,
-                    ItemLevelTier.Tier6 => R.Colors.HpColor,
-                    ItemLevelTier.Tier7 => R.Colors.AssaultStanceColor,
+                    ItemLevelTier.Tier0 => Colors.IceColorLight,
+                    ItemLevelTier.Tier1 => Colors.Tier1DungeonColor,
+                    ItemLevelTier.Tier2 => Colors.Tier2DungeonColor,
+                    ItemLevelTier.Tier3 => Colors.Tier3DungeonColor,
+                    ItemLevelTier.Tier4 => Colors.Tier4DungeonColor,
+                    ItemLevelTier.Tier5 => Colors.Tier5DungeonColor,
+                    ItemLevelTier.Tier6 => Colors.HpColor,
+                    ItemLevelTier.Tier7 => Colors.AssaultStanceColor,
                     _ => ret
                 };
         }

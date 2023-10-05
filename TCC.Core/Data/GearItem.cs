@@ -4,12 +4,12 @@ namespace TCC.Data;
 
 public class GearItem
 {
-    public uint Id { get; private set; }
-    public GearTier Tier { get; private set; }
-    public GearPiece Piece { get; private set; }
+    public uint Id { get; }
+    public GearTier Tier { get; }
+    public GearPiece Piece { get; }
 
-    public int Enchant { get; private set; }
-    public long Experience { get; private set; }
+    public int Enchant { get; }
+    public long Experience { get; }
     public int MaxExperience => Game.DB!.GetItemMaxExp(Id, Enchant);
 
     public double ExperienceFactor
@@ -46,6 +46,7 @@ public class GearItem
     }
 
     public string Name => Game.DB!.ItemsDatabase.GetItemName(Id);
+
     public GearItem(uint id, GearTier t, GearPiece p, int enchant, long exp)
     {
         Id = id;
@@ -54,12 +55,14 @@ public class GearItem
         Enchant = enchant;
         Experience = exp;
     }
+
     public GearItem(GearItemData data)
     {
         Id = data.Id;
         Tier = data.Tier;
         Piece = data.Piece;
     }
+
     public override string ToString()
     {
         return $"[{Id}] {Piece} {Tier} +{Enchant}";

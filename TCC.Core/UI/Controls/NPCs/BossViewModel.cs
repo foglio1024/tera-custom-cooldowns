@@ -29,7 +29,7 @@ public class BossViewModel : NpcViewModel
         get
         {
             if (!ShowHP) return "??";
-            double val = NPC.HPFactor * 100 % 1 * 100;
+            var val = NPC.HPFactor * 100 % 1 * 100;
             val = val > 99 ? 99 : val;
             return $"{val:00}";
 
@@ -76,15 +76,13 @@ public class BossViewModel : NpcViewModel
             {
                 return NPC.EnragePattern?.StaysEnraged == true ? "∞" : $"{TimeUtils.FormatSeconds(CurrentEnrageTime)}";
             }
-            else
+
+            return App.Settings.NpcWindowSettings.EnrageLabelMode switch
             {
-                return App.Settings.NpcWindowSettings.EnrageLabelMode switch
-                {
-                    EnrageLabelMode.Next => $"{NextEnragePercentage:0.#}%",
-                    EnrageLabelMode.Remaining => $"{CurrentPercentage - NextEnragePercentage:0.#}%",
-                    _ => throw new ArgumentOutOfRangeException()
-                };
-            }
+                EnrageLabelMode.Next => $"{NextEnragePercentage:0.#}%",
+                EnrageLabelMode.Remaining => $"{CurrentPercentage - NextEnragePercentage:0.#}%",
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
     }
     public string RhombEnrageTimerText
@@ -126,7 +124,7 @@ public class BossViewModel : NpcViewModel
         }
     }
 
-    public BossViewModel(NPC npc) : base(npc)
+    public BossViewModel(Npc npc) : base(npc)
     {
 
         _numberTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
@@ -208,7 +206,7 @@ public class BossViewModel : NpcViewModel
                 N(nameof(MainPercInt));
                 break;
             case nameof(NPC.MaxHP):
-                if (NPC.HPFactor == 1 && NPC.EnragePattern != null)
+                if (NPC is { HPFactor: 1, EnragePattern: not null })
                 {
                     NextEnragePercentage = 100 - NPC.EnragePattern.Percentage;
                 }

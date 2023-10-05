@@ -10,7 +10,7 @@
              xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
              xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
              mc:Ignorable="d" Loaded="UserControl_Loaded"
-             d:DataContext="{d:DesignInstance classManagers:ValkyrieLayoutVM}">
+             d:DataContext="{d:DesignInstance classManagers:ValkyrieLayoutViewModel}">
     <Grid Width="Auto" Margin="50 20" Name="Root">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" Margin="0">
             <Grid.ColumnDefinitions>

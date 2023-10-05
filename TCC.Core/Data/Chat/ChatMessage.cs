@@ -1,12 +1,13 @@
-﻿using HtmlAgilityPack;
-using Nostrum.Extensions;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using HtmlAgilityPack;
+using Nostrum.Extensions;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Debugging;
+using TCC.R;
 using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
@@ -24,14 +25,14 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 
     public ChatChannel Channel { get; protected set; }
 
-    public string Timestamp { get; protected set; }
+    public string Timestamp { get; }
 
-    public string RawMessage { get; protected set; }
+    public string RawMessage { get; protected init; }
 
     public string Author { get; set; } = "";
     public ulong AuthorGameId { get; set; }
     public uint AuthorPlayerId { get; set; }
-    public uint AuthorServerId { get; set; }
+    uint AuthorServerId { get; }
 
     public bool ContainsPlayerName { get; set; }
     public bool Animate
@@ -42,7 +43,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     public bool ShowTimestamp => App.Settings.ShowTimestamp;
     public bool IsGm { get; protected set; }
     public bool ShowChannel => App.Settings.ShowChannel;
-    public ThreadSafeObservableCollection<MessageLine> Lines { get; protected set; }
+    public ThreadSafeObservableCollection<MessageLine> Lines { get; }
     public ThreadSafeObservableCollection<MessagePieceBase> Pieces { get; }
 
     public bool IsVisible
@@ -70,7 +71,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         }
     }
     public int Size => App.Settings.FontSize;
-    public string PlainMessage { get; set; }
+    public string PlainMessage { get; protected init; }
     public string DisplayedAuthor { get; } = string.Empty;
 
     #endregion
@@ -155,7 +156,8 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     {
         ObjectTracker.Unregister(GetType());
     }
-    protected void InsertPiece(MessagePieceBase mp, int index)
+
+    void InsertPiece(MessagePieceBase mp, int index)
     {
         mp.Container = this;
         //Dispatcher.InvokeAsyncIfRequired(() =>
@@ -163,7 +165,8 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         Pieces.Insert(index, mp);
         //}, DispatcherPriority.DataBind);
     }
-    protected void RemovePiece(MessagePieceBase mp)
+
+    void RemovePiece(MessagePieceBase mp)
     {
         //Dispatcher.InvokeAsyncIfRequired(() =>
         //{
@@ -173,7 +176,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     //TODO: refactor
     public void SplitSimplePieces()
     {
-        var simplePieces = Pieces.ToSyncList().Where(item => item is SimpleMessagePiece && item is not UrlMessagePiece);
+        var simplePieces = Pieces.ToSyncList().Where(item => item is SimpleMessagePiece and not UrlMessagePiece);
 
         foreach (var simplePiece in simplePieces)
         {
@@ -267,7 +270,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
             return;
         }
         start += header.Length;
-        var id = uint.Parse(msg.Substring(start));
+        var id = uint.Parse(msg[start..]);
         var text = Game.DB!.SocialDatabase.Social[id].Replace("{Name}", Author);
         AddPiece(new SimpleMessagePiece(text, App.Settings.FontSize, false));
     }
@@ -291,7 +294,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 
             // heroic items bright magenta is ugly af
             if (customColor == "F93ECE") 
-                customColor = R.Colors.ItemHeroicColor.ToHex(sharp: false);
+                customColor = Colors.ItemHeroicColor.ToHex(sharp: false);
 
             if (piece.HasChildNodes && piece.ChildNodes.Count == 1 && piece.ChildNodes[0].Name != "#text")
             {
@@ -343,7 +346,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
                     .Replace("</a>", "")
                     .UnescapeHtml(), App.Settings.FontSize, false
             );
-            if (Channel == ChatChannel.ReceivedWhisper) p.Color = R.Brushes.GoldBrush.Color.ToHex();
+            if (Channel == ChatChannel.ReceivedWhisper) p.Color = Brushes.GoldBrush.Color.ToHex();
             AddPiece(p);
         }
     }

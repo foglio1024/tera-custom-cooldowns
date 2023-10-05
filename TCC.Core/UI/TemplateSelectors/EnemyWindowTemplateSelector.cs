@@ -12,7 +12,6 @@ public class EnemyWindowTemplateSelector : DataTemplateSelector
     {
         if (item == null) return null;
         //if (((ViewModels.BossGageWindowViewModel)item).CurrentHHphase == HarrowholdPhase.Phase1) return Phase1;
-        if ((HarrowholdPhase)item == HarrowholdPhase.Phase1) return Phase1;
-        else return Default;
+        return (HarrowholdPhase)item == HarrowholdPhase.Phase1 ? Phase1 : Default;
     }
 }

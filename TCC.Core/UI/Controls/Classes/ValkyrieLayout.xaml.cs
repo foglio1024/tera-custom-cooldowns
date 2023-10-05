@@ -1,15 +1,17 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
 using Nostrum.WPF.Controls;
 using Nostrum.WPF.Factories;
+using TCC.Data;
 using TCC.ViewModels.ClassManagers;
 
 namespace TCC.UI.Controls.Classes;
 
 public partial class ValkyrieLayout
 {
-    ValkyrieLayoutVM? _dc;
+    ValkyrieLayoutViewModel? _dc;
     readonly DoubleAnimation _an;
     readonly DoubleAnimation _rag;
 
@@ -22,18 +24,18 @@ public partial class ValkyrieLayout
 
     void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
-        _dc = (ValkyrieLayoutVM)DataContext;
+        _dc = (ValkyrieLayoutViewModel)DataContext;
         _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
         _dc.Ragnarok.Effect.Started += OnRagnarokStarted;
     }
 
-    void OnRagnarokStarted(ulong duration, Data.CooldownMode mode)
+    void OnRagnarokStarted(ulong duration, CooldownMode mode)
     {
         _rag.Duration = TimeSpan.FromMilliseconds(duration);
         RagArc.BeginAnimation(Arc.EndAngleProperty, _rag);
     }
 
-    void ST_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_dc == null) return;
         if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;

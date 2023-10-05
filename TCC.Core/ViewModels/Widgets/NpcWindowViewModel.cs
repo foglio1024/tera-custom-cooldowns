@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
+using JetBrains.Annotations;
 using Nostrum.WPF.Extensions;
 using Nostrum.WPF.Factories;
 using Nostrum.WPF.ThreadSafe;
@@ -26,9 +27,10 @@ namespace TCC.ViewModels.Widgets;
 
 // TODO: move HH stuff to own class
 [TccModule]
+[UsedImplicitly]
 public class NpcWindowViewModel : TccWindowViewModel
 {
-    readonly ThreadSafeObservableCollection<NPC> _npcList;
+    readonly ThreadSafeObservableCollection<Npc> _npcList;
 
     readonly Dictionary<ulong, string> _towerNames = new();
     readonly Dictionary<ulong, double> _savedHp = new();
@@ -36,7 +38,7 @@ public class NpcWindowViewModel : TccWindowViewModel
 
     public event Action? NpcListChanged;
 
-    public int VisibleBossesCount => _npcList.ToSyncList().Count(x => x.Visible && x.CurrentHP > 0);
+    public int VisibleBossesCount => _npcList.ToSyncList().Count(x => x is { Visible: true, CurrentHP: > 0 });
     public int VisibleMobsCount => _npcList.ToSyncList().Count(x => x.Visible/* && x.CurrentHP > 0 */&& !x.IsBoss);
     public bool IsCompact => VisibleMobsCount > 6;
 
@@ -48,20 +50,20 @@ public class NpcWindowViewModel : TccWindowViewModel
 
     public NpcWindowViewModel(NpcWindowSettings settings) : base(settings)
     {
-        _npcList = new ThreadSafeObservableCollection<NPC>(_dispatcher);
+        _npcList = new ThreadSafeObservableCollection<Npc>(_dispatcher);
         Bams = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                    npc => npc is { IsBoss: true, IsTower: false, Visible: true },
-                   new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
-                   new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) })
+                   new[] { nameof(Npc.Visible), nameof(Npc.IsBoss) },
+                   new[] { new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending) })
                ?? throw new Exception("Failed to create LiveCollectionView");
         Mobs = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                    npc => npc is { IsBoss: false, IsTower: false, Visible: true },
-                   new[] { nameof(NPC.Visible), nameof(NPC.IsBoss) },
-                   new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) })
+                   new[] { nameof(Npc.Visible), nameof(Npc.IsBoss) },
+                   new[] { new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending) })
                ?? throw new Exception("Failed to create LiveCollectionView");
         GuildTowers = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                           npc => npc.IsTower,
-                          sortFilters: new[] { new SortDescription(nameof(NPC.CurrentHP), ListSortDirection.Ascending) })
+                          sortFilters: new[] { new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending) })
                       ?? throw new Exception("Failed to create LiveCollectionView");
 
         PendingAbnormalities = new List<PendingAbnormality>();
@@ -71,6 +73,8 @@ public class NpcWindowViewModel : TccWindowViewModel
         settings.HideAddsChanged += OnHideAddsChanged;
         MonsterDatabase.OverrideChangedEvent += RefreshOverride;
         MonsterDatabase.BlacklistChangedEvent += RefreshBlacklist;
+
+        return;
 
         void InitFlushTimer()
         {
@@ -109,7 +113,7 @@ public class NpcWindowViewModel : TccWindowViewModel
         });
     }
 
-    void CheckPendingAbnormalities(NPC npc)
+    void CheckPendingAbnormalities(Npc npc)
     {
         if (PendingAbnormalities.Count == 0) return;
         var npcAbs = PendingAbnormalities.Where(x => x.Target == npc.EntityId).ToList();
@@ -125,7 +129,7 @@ public class NpcWindowViewModel : TccWindowViewModel
         npcAbs.ForEach(aa => PendingAbnormalities.Remove(aa));
     }
 
-    public void RemoveNPC(NPC npc, uint delay)
+    public void RemoveNPC(Npc npc, uint delay)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -142,6 +146,7 @@ public class NpcWindowViewModel : TccWindowViewModel
             }
         });
     }
+
     public void UpdateAbnormality(Abnormality ab, int stacks, uint duration, ulong target)
     {
         if (!TryFindNPC(target, out var boss))
@@ -180,6 +185,7 @@ public class NpcWindowViewModel : TccWindowViewModel
         if (!TryFindNPC(target, out var boss)) return;
         boss.EndBuff(ab);
     }
+
     public void Clear()
     {
         _dispatcher.InvokeAsync(() =>
@@ -191,12 +197,12 @@ public class NpcWindowViewModel : TccWindowViewModel
             _npcList.Clear();
         });
     }
+
     public void CopyToClipboard()
     {
         var sb = new StringBuilder();
-        foreach (var boss in _npcList.ToSyncList())
+        foreach (var boss in _npcList.ToSyncList().Where(boss => boss.Visible))
         {
-            if (!boss.Visible) continue;
             sb.Append(boss.Name);
             sb.Append(": ");
             sb.Append($"{boss.HPFactor:##0%}");
@@ -212,9 +218,10 @@ public class NpcWindowViewModel : TccWindowViewModel
             ChatManager.Instance.AddTccMessage("Failed to copy boss HP.");
         }
     }
-    public bool TryFindNPC(ulong entityId, out NPC found)
+
+    public bool TryFindNPC(ulong entityId, out Npc found)
     {
-        found = new NPC(0, 0, 0, false, false);
+        found = new Npc(0, 0, 0, false, false);
         var f = _npcList.ToSyncList().FirstOrDefault(x => x.EntityId == entityId);
         if (f == null)
             return false;
@@ -231,7 +238,7 @@ public class NpcWindowViewModel : TccWindowViewModel
             .ForEach(n => n.IsBoss = b);
     }
 
-    NPC GetOrAddNpc(ulong eid, uint zone, uint template, bool isBoss, bool visible)
+    Npc GetOrAddNpc(ulong eid, uint zone, uint template, bool isBoss, bool visible)
     {
         if (TryFindNPC(eid, out var npc))
         {
@@ -290,7 +297,6 @@ public class NpcWindowViewModel : TccWindowViewModel
             }
 
             _cache.Clear();
-
         }, DispatcherPriority.Background);
     }
 
@@ -306,7 +312,7 @@ public class NpcWindowViewModel : TccWindowViewModel
         if (templateId == 0 || zoneId == 0) return;
         if (zoneId == 1023) return;
 
-        var boss = new NPC(entityId, zoneId, templateId, isBoss, visibility);
+        var boss = new Npc(entityId, zoneId, templateId, isBoss, visibility);
 
         boss.Visible = boss.IsTower || visibility;
         if (boss.IsTower)
@@ -327,14 +333,14 @@ public class NpcWindowViewModel : TccWindowViewModel
         NpcListChanged?.Invoke();
     }
 
-    void AddNormalNPC(NPC boss)
+    void AddNormalNPC(Npc boss)
     {
         SetVergos(boss);
         if (_savedHp.TryGetValue(boss.EntityId, out var cached)) boss.CurrentHP = cached;
         _npcList.Add(boss);
     }
 
-    void HandleNewTower(NPC tower, ulong entityId)
+    void HandleNewTower(Npc tower, ulong entityId)
     {
         if (_towerNames.TryGetValue(entityId, out var towerName))
         {
@@ -344,18 +350,21 @@ public class NpcWindowViewModel : TccWindowViewModel
         tower.IsBoss = true;
         _npcList.Add(tower);
         if (_savedHp.TryGetValue(entityId, out var hp)) tower.CurrentHP = hp;
-
     }
 
-    void SetHP(NPC boss, double maxHp, double curHp, HpChangeSource src)
+    void SetHP(Npc boss, double maxHp, double curHp, HpChangeSource src)
     {
         boss.MaxHP = maxHp;
 
-        if (src == HpChangeSource.BossGage) boss.HasGage = true;
-        else if (src == HpChangeSource.Me && boss.HasGage)
+        switch (src)
         {
-            FlushCache();
-            return;
+            case HpChangeSource.BossGage:
+                boss.HasGage = true;
+                break;
+
+            case HpChangeSource.Me when boss.HasGage:
+                FlushCache();
+                return;
         }
 
         CacheHP(boss.EntityId, curHp);
@@ -393,7 +402,7 @@ public class NpcWindowViewModel : TccWindowViewModel
         if (TryFindNPC(towerId, out var t))
         {
             t.Name = guildName;
-            t.ExN(nameof(NPC.GuildId));
+            t.ExN(nameof(Npc.GuildId));
         }
         _towerNames[towerId] = guildName;
     }
@@ -404,7 +413,7 @@ public class NpcWindowViewModel : TccWindowViewModel
         boss.CurrentShield -= damage;
     }
 
-    void RemoveAndDisposeNPC(NPC b)
+    void RemoveAndDisposeNPC(Npc b)
     {
         b.Dispose();
         _npcList.Remove(b);
@@ -433,6 +442,7 @@ public class NpcWindowViewModel : TccWindowViewModel
 
         if (App.Settings.NpcWindowSettings.AccurateHp) PacketAnalyzer.Processor.Hook<S_SHOW_HP>(OnShowHp);
     }
+
     protected override void RemoveHooks()
     {
         PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
@@ -556,7 +566,6 @@ public class NpcWindowViewModel : TccWindowViewModel
             {
                 Game.Encounter = false;
             }
-
         });
     }
 
@@ -587,14 +596,13 @@ public class NpcWindowViewModel : TccWindowViewModel
         if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
         if (p.Duration == int.MaxValue) ab.Infinity = true;
 
-
         UpdateAbnormality(ab, p.Stacks, p.Duration, p.TargetId);
     }
 
     void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
-        if (p.Duration == Int32.MaxValue) ab.Infinity = true;
+        if (p.Duration == int.MaxValue) ab.Infinity = true;
 
         UpdateAbnormality(ab, p.Stacks, p.Duration, p.TargetId);
     }
@@ -605,18 +613,19 @@ public class NpcWindowViewModel : TccWindowViewModel
         EndAbnormality(p.TargetId, ab);
     }
 
-    #endregion
+    #endregion Hooks
 
     #region HH
+
     public const int Ph1ShieldDuration = 16;
 
-    NPC? _selectedDragon;
-    NPC? _vergos;
-    readonly List<NPC> _holdedDragons = new();
+    Npc? _selectedDragon;
+    Npc? _vergos;
+    readonly List<Npc> _holdedDragons = new();
     HarrowholdPhase _currentHHphase;
     ICollectionView? _dragons;
 
-    public NPC? SelectedDragon
+    public Npc? SelectedDragon
     {
         get => _selectedDragon;
         set
@@ -626,7 +635,8 @@ public class NpcWindowViewModel : TccWindowViewModel
             N();
         }
     }
-    public NPC? Vergos
+
+    public Npc? Vergos
     {
         get => _vergos;
         set
@@ -636,6 +646,7 @@ public class NpcWindowViewModel : TccWindowViewModel
             N();
         }
     }
+
     public HarrowholdPhase CurrentHHphase
     {
         get => _currentHHphase;
@@ -657,12 +668,13 @@ public class NpcWindowViewModel : TccWindowViewModel
             N();
         }
     }
+
     public ICollectionView? Dragons
     {
         get
         {
             _dragons = new CollectionViewSource { Source = _npcList }.View;
-            _dragons.Filter = p => ((NPC)p)?.TemplateId is > 1099 and < 1104;
+            _dragons.Filter = p => ((Npc)p)?.TemplateId is > 1099 and < 1104;
             return _dragons;
         }
     }
@@ -702,37 +714,41 @@ public class NpcWindowViewModel : TccWindowViewModel
                     item.StartShield();
                 }
                 break;
+
             case 9950113:
                 //aquadrax interrupted
-                _npcList.First(x => x.ZoneId == 950 && x.TemplateId == 1103).BreakShield();
+                _npcList.First(x => x is { ZoneId: 950, TemplateId: 1103 }).BreakShield();
                 break;
+
             case 9950114:
                 //umbradrax interrupted
-                _npcList.First(x => x.ZoneId == 950 && x.TemplateId == 1102).BreakShield();
+                _npcList.First(x => x is { ZoneId: 950, TemplateId: 1102 }).BreakShield();
                 break;
+
             case 9950115:
                 //ignidrax interrupted
-                _npcList.First(x => x.ZoneId == 950 && x.TemplateId == 1100).BreakShield();
+                _npcList.First(x => x is { ZoneId: 950, TemplateId: 1100 }).BreakShield();
                 break;
+
             case 9950116:
                 //terradrax interrupted
-                _npcList.First(x => x.ZoneId == 950 && x.TemplateId == 1101).BreakShield();
+                _npcList.First(x => x is { ZoneId: 950, TemplateId: 1101 }).BreakShield();
                 break;
+
             case 9950044:
                 //shield fail
                 break;
         }
-
     }
 
-    void SetVergos(NPC boss)
+    void SetVergos(Npc boss)
     {
         Vergos = boss is { ZoneId: 950, TemplateId: 1000 or 2000 or 3000 or 4000 }
             ? boss
             : null;
     }
 
-    void HandleNewPh1Dragon(NPC boss)
+    void HandleNewPh1Dragon(Npc boss)
     {
         var d = _holdedDragons.FirstOrDefault(x => x.TemplateId == boss.TemplateId && x.ZoneId == boss.ZoneId);
         if (d != null) return;
@@ -751,7 +767,7 @@ public class NpcWindowViewModel : TccWindowViewModel
     void CheckHarrowholdPhase(ushort zoneId, uint templateId)
     {
         if (zoneId != 950) return;
-        if (templateId >= 1100 && templateId <= 1103)
+        if (templateId is >= 1100 and <= 1103)
         {
             CurrentHHphase = HarrowholdPhase.Phase1;
         }
@@ -778,6 +794,5 @@ public class NpcWindowViewModel : TccWindowViewModel
         return d;
     }
 
-    #endregion
-
+    #endregion HH
 }

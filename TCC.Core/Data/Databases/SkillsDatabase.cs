@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Skills;
-
 using TeraDataLite;
 
 namespace TCC.Data.Databases;
@@ -84,28 +83,25 @@ public class SkillsDatabase : DatabaseBase
     {
         var list = new ThreadSafeObservableCollection<Skill>();
         var skillsForClass = Skills[c];
-        foreach (var skill in skillsForClass.Values)
+        foreach (var skill in skillsForClass.Values.Where(skill => list.All(x => x.IconName != skill.IconName)
+                        && !IsIgnoredSkill(skill)))
         {
-            if (list.All(x => x.IconName != skill.IconName) && !IsIgnoredSkill(skill))
-            {
-                list.Add(skill);
-            }
+            list.Add(skill);
         }
         return list;
     }
 
 
-
-    public static bool IsIgnoredSkill(Skill skill)
+    static bool IsIgnoredSkill(Skill skill)
     {
         return IgnoredSkills[skill.Class].Any(x => x == skill.IconName);
     }
 
-    public static readonly Dictionary<Class, List<string>> IgnoredSkills = new()
+    static readonly Dictionary<Class, List<string>> IgnoredSkills = new()
     {
         {
             Class.Archer,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.arrowshot_tex",
                 "icon_skills.webtrap_tex",
@@ -114,15 +110,15 @@ public class SkillsDatabase : DatabaseBase
         },
         {
             Class.Berserker,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.comboattack_tex",
-                "icon_skills.weapondefence_tex",
+                "icon_skills.weapondefence_tex"
             }
         },
         {
             Class.Brawler,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.comboattack01_tex",
                 "icon_skills.comboattack02_tex",
@@ -133,31 +129,31 @@ public class SkillsDatabase : DatabaseBase
                 "icon_skills.smashattack03_tex",
                 "icon_skills.smashattack04_tex",
                 "icon_skills.pet_mushroom_tex",
-                "icon_skills.rampage_tex",
+                "icon_skills.rampage_tex"
             }
         },
         {
             Class.Gunner,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.cannonshot_tex",
                 "icon_skills.gatlingshot_tex",
                 "icon_skills.superrocketjump_tex",
-                "icon_skills.command_electricballshot_tex",
+                "icon_skills.command_electricballshot_tex"
             }
         },
         {
             Class.Lancer,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.comboattack_tex",
                 "icon_skills.defence_tex",
-                "icon_skills.backstep_tex",
+                "icon_skills.backstep_tex"
             }
         },
         {
             Class.Mystic,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.elementalshot_tex",
                 "icon_skills.mpsupplycharge_tex",
@@ -168,14 +164,14 @@ public class SkillsDatabase : DatabaseBase
         },
         {
             Class.Ninja,
-            new List<string>()
+            new List<string>
             {
-                "icon_skills.c12_meleecombo",
+                "icon_skills.c12_meleecombo"
             }
         },
         {
             Class.Priest,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.magicshot_tex",
                 "icon_skills.adventgoddess_tex"
@@ -183,7 +179,7 @@ public class SkillsDatabase : DatabaseBase
         },
         {
             Class.Reaper,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.comboattack2_tex",
                 "icon_skills.shieldattack_tex",
@@ -192,14 +188,14 @@ public class SkillsDatabase : DatabaseBase
         },
         {
             Class.Slayer,
-            new List<string>()
+            new List<string>
             {
-                "icon_skills.comboattack_tex",
+                "icon_skills.comboattack_tex"
             }
         },
         {
             Class.Sorcerer,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.fireball_tex",
                 "icon_skills.tornadoprison_tex",
@@ -208,20 +204,20 @@ public class SkillsDatabase : DatabaseBase
         },
         {
             Class.Valkyrie,
-            new List<string>()
+            new List<string>
             {
-                "icon_skills.combo_tex",
+                "icon_skills.combo_tex"
 
             }
         },
         {
             Class.Warrior,
-            new List<string>()
+            new List<string>
             {
                 "icon_skills.comboattack_tex",
-                "icon_skills.twinswordsdefence_tex",
+                "icon_skills.twinswordsdefence_tex"
             }
-        },
+        }
     };
 
     public bool TryGetSkillByIconName(string iconName, Class c, out Skill? sk)

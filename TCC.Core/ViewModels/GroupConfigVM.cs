@@ -1,10 +1,10 @@
-﻿using Nostrum;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Abnormalities;
 using TeraDataLite;
 
@@ -15,7 +15,7 @@ public class GroupConfigVM : ThreadSafeObservableObject
 
     public event Action? ShowAllChanged;
 
-    public ThreadSafeObservableCollection<GroupAbnormalityVM> GroupAbnormals;
+    public readonly ThreadSafeObservableCollection<GroupAbnormalityViewModel> GroupAbnormals;
     public IEnumerable<Abnormality> Abnormalities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
     public ICollectionView AbnormalitiesView { get; set; }
 
@@ -42,10 +42,10 @@ public class GroupConfigVM : ThreadSafeObservableObject
     }
     public GroupConfigVM()
     {
-        GroupAbnormals = new ThreadSafeObservableCollection<GroupAbnormalityVM>(_dispatcher);
+        GroupAbnormals = new ThreadSafeObservableCollection<GroupAbnormalityViewModel>(_dispatcher);
         foreach (var abnormality in Abnormalities)
         {
-            var abVM = new GroupAbnormalityVM(abnormality);
+            var abVM = new GroupAbnormalityViewModel(abnormality);
             GroupAbnormals.Add(abVM);
         }
         AbnormalitiesView = new CollectionViewSource { Source = GroupAbnormals }.View;

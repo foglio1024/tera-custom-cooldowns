@@ -293,7 +293,7 @@ public class Monster
     public long MaxHP { get; }
     public bool IsBoss { get; set; }
     public bool IsHidden { get; set; }
-    public Species Species { get; set; }
+    public Species Species { get; }
 
     public Monster(uint npc, uint zoneId, string name, long maxHp, bool isBoss, bool isHidden, Species sp)
     {

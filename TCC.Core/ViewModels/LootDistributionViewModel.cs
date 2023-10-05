@@ -1,7 +1,4 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,6 +6,9 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Nostrum.WPF;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Interop.Proxy;
 using TCC.Settings.WindowSettings;
@@ -18,6 +18,7 @@ using TCC.ViewModels.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
+using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels;
 
@@ -116,7 +117,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         });
 
         MembersView = CollectionViewFactory.CreateCollectionView(Members, sortDescr: new[] {
-            new SortDescription($"{nameof(LootingGroupMember.Roll)}", ListSortDirection.Descending),
+            new SortDescription($"{nameof(LootingGroupMember.Roll)}", ListSortDirection.Descending)
         });
 
         DistributionListView.GroupDescriptions.Add(new PropertyGroupDescription($"{nameof(LootItemViewModel.DbItem)}.{nameof(Item.Id)}"));
@@ -224,12 +225,12 @@ public class LootDistributionViewModel : TccWindowViewModel
             switch (ItemInDistribution.BidIntent)
             {
                 case BidAction.Pass:
-                    UI.FocusManager.SendPgDown(500);
+                    FocusManager.SendPgDown(500);
                     ItemInDistribution.BidSent = true;
                     break;
 
                 case BidAction.Roll:
-                    UI.FocusManager.SendPgUp(500);
+                    FocusManager.SendPgUp(500);
                     ItemInDistribution.BidSent = true;
                     break;
 
@@ -263,7 +264,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     {
         DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
         {
-            x.BidIntent = (BidAction.Roll);
+            x.BidIntent = BidAction.Roll;
         });
     }
 
@@ -271,7 +272,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     {
         DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
         {
-            x.BidIntent = (BidAction.Pass);
+            x.BidIntent = BidAction.Pass;
         });
     }
 
@@ -279,7 +280,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     {
         DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
         {
-            x.BidIntent = (BidAction.Unset);
+            x.BidIntent = BidAction.Unset;
         });
     }
 
@@ -326,8 +327,8 @@ public class LootDistributionViewModel : TccWindowViewModel
 
             case GroupCompositionChangeReason.Updated:
                 var current = Members.ToSyncList();
-                var removed = current.Where(x => !members.Any(y => y.PlayerId == x.Member.PlayerId)).ToArray();
-                var added = members.Where(x => !current.Any(y => y.Member.PlayerId == x.PlayerId)).ToArray();
+                var removed = current.Where(x => members.All(y => y.PlayerId != x.Member.PlayerId)).ToArray();
+                var added = members.Where(x => current.All(y => y.Member.PlayerId != x.PlayerId)).ToArray();
 
                 Dispatcher.Invoke(() =>
                 {
@@ -338,7 +339,7 @@ public class LootDistributionViewModel : TccWindowViewModel
 
                     foreach (var member in added)
                     {
-                        Members.Add(new(member));
+                        Members.Add(new LootingGroupMember(member));
                     }
                 });
 
@@ -406,7 +407,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         }
         else
         {
-            Log.CW($"! item is still null, creating new one as Distributing");
+            Log.CW("! item is still null, creating new one as Distributing");
 
             Dispatcher.Invoke(() =>
             {
@@ -451,18 +452,18 @@ public class LootDistributionViewModel : TccWindowViewModel
 
         if (Game.IsMe(m.EntityId) || Game.IsMe(m.PlayerId, m.ServerId))
         {
-            Log.CW($"  roll result is from player");
+            Log.CW("  roll result is from player");
             //var item = DistributionList.FirstOrDefault(x => x.DistributionStatus == DistributionStatus.Distributing);
             if (ItemInDistribution != null)
             {
                 //item.BidSent = true;
-                Log.CW($"  setting BidSent to true");
+                Log.CW("  setting BidSent to true");
                 ItemInDistribution.BidIntent = m.RollResult != -1 ? BidAction.Roll : BidAction.Pass;
                 ItemInDistribution.BidSent = true;
             }
             else
             {
-                Log.CW($"!  no items in distribution not found");
+                Log.CW("!  no items in distribution not found");
             }
 
             _delay.Stop();
@@ -472,19 +473,18 @@ public class LootDistributionViewModel : TccWindowViewModel
 
         var member = members.FirstOrDefault(x =>
                 (x.Member.PlayerId == m.PlayerId && x.Member.ServerId == m.ServerId)
-                || (x.Member.EntityId == m.EntityId)
+                || x.Member.EntityId == m.EntityId
             );
 
         if (member != null)
         {
             Log.CW($"  saving roll for group member {member.Member.Name}");
             member.Roll = m.RollResult;
-            if (m.RollResult == -1) member.BidAction = BidAction.Pass;
-            else member.BidAction = BidAction.Roll;
+            member.BidAction = m.RollResult == -1 ? BidAction.Pass : BidAction.Roll;
         }
         else
         {
-            Log.CW($"! group member not found");
+            Log.CW("! group member not found");
         }
 
         // refresh winning status
@@ -503,7 +503,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     /// </summary>
     void OnResultItemBidding(S_RESULT_ITEM_BIDDING p)
     {
-        Log.CW($"> S_RESULT_ITEM_BIDDING");
+        Log.CW("> S_RESULT_ITEM_BIDDING");
 
         var members = Members.ToSyncList();
 
@@ -512,7 +512,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         if (members.All(m => m.Roll < 1))
         {
             members.ForEach(m => m.BidAction = BidAction.Pass);
-            Log.CW($"  no rolls for current item");
+            Log.CW("  no rolls for current item");
         }
         else
         {
@@ -574,7 +574,7 @@ public class LootDistributionViewModel : TccWindowViewModel
 
         if (!p.Flag)
         {
-            Log.CW($"  flag is false, returning");
+            Log.CW("  flag is false, returning");
             return;
         }
 
@@ -583,7 +583,7 @@ public class LootDistributionViewModel : TccWindowViewModel
 
         if (existing != null)
         {
-            Log.CW($"  item was in DistributionList, reverting it to Waiting");
+            Log.CW("  item was in DistributionList, reverting it to Waiting");
             existing.DistributionStatus = DistributionStatus.Waiting;
 
             if (_settings.AlwaysPass) existing.BidIntent = BidAction.Pass;
@@ -591,12 +591,12 @@ public class LootDistributionViewModel : TccWindowViewModel
         }
         else
         {
-            Log.CW($"  item was not in DistributionList, moving it from dropped items");
+            Log.CW("  item was not in DistributionList, moving it from dropped items");
             var dropItem = _droppedItems.TryGetValue(p.GameId, out var di) ? di : new DropItem(p.GameId, 0, 0);
 
             Log.CW($"  dropped item is {dropItem.ItemId}");
 
-            this.Dispatcher.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
                 var itemVm = new LootItemViewModel(dropItem);
                 DistributionList.Add(itemVm);

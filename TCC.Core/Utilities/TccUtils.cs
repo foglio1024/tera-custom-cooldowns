@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using Nostrum;
-using Nostrum.WinAPI;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +6,11 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
+using Newtonsoft.Json;
+using Nostrum;
+using Nostrum.WinAPI;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Interop;
@@ -78,7 +78,7 @@ public static class TccUtils
 
     public static bool IsPhase1Dragon(uint zoneId, uint templateId)
     {
-        return zoneId == 950 && templateId >= 1100 && templateId <= 1103;
+        return zoneId == 950 && templateId is >= 1100 and <= 1103;
     }
 
     public static bool IsGuildTower(uint zoneId, uint templateId)
@@ -139,9 +139,9 @@ public static class TccUtils
         return RegionEnum.EU;
     }
 
-    public static TClassLayoutVM? CurrentClassVM<TClassLayoutVM>() where TClassLayoutVM : BaseClassLayoutVM
+    public static TClassLayoutVM? CurrentClassVM<TClassLayoutVM>() where TClassLayoutVM : BaseClassLayoutViewModel
     {
-        return WindowManager.ViewModels.ClassVM.CurrentManager is TClassLayoutVM ret ? ret : null;
+        return WindowManager.ViewModels.ClassVM.CurrentManager as TClassLayoutVM;
     }
 
     public static Race RaceFromTemplateId(int templateId)
@@ -185,7 +185,7 @@ public static class TccUtils
         {
             return App.Settings.MentionMode switch
             {
-                MentionMode.Current => (text.IndexOf(Game.Me.Name, StringComparison.InvariantCultureIgnoreCase) != -1),
+                MentionMode.Current => text.IndexOf(Game.Me.Name, StringComparison.InvariantCultureIgnoreCase) != -1,
                 MentionMode.All => Game.Account.Characters.Where(c => !c.Hidden).Any(ch => text.IndexOf(ch.Name, StringComparison.InvariantCultureIgnoreCase) != -1),
                 _ => false
             };
@@ -308,14 +308,14 @@ public static class TccUtils
             ChatChannel.RaidNotice => "Notice",
             ChatChannel.GuildAdvertising => "G. Ad",
             ChatChannel.Megaphone => "Megaphone",
-            ChatChannel.Private1 => (ChatManager.Instance.PrivateChannels[0].Name),
-            ChatChannel.Private2 => (ChatManager.Instance.PrivateChannels[1].Name),
-            ChatChannel.Private3 => (ChatManager.Instance.PrivateChannels[2].Name),
-            ChatChannel.Private4 => (ChatManager.Instance.PrivateChannels[3].Name),
-            ChatChannel.Private5 => (ChatManager.Instance.PrivateChannels[4].Name),
-            ChatChannel.Private6 => (ChatManager.Instance.PrivateChannels[5].Name),
-            ChatChannel.Private7 => (ChatManager.Instance.PrivateChannels[6].Name),
-            ChatChannel.Private8 => (ChatManager.Instance.PrivateChannels[7].Name),
+            ChatChannel.Private1 => ChatManager.Instance.PrivateChannels[0].Name,
+            ChatChannel.Private2 => ChatManager.Instance.PrivateChannels[1].Name,
+            ChatChannel.Private3 => ChatManager.Instance.PrivateChannels[2].Name,
+            ChatChannel.Private4 => ChatManager.Instance.PrivateChannels[3].Name,
+            ChatChannel.Private5 => ChatManager.Instance.PrivateChannels[4].Name,
+            ChatChannel.Private6 => ChatManager.Instance.PrivateChannels[5].Name,
+            ChatChannel.Private7 => ChatManager.Instance.PrivateChannels[6].Name,
+            ChatChannel.Private8 => ChatManager.Instance.PrivateChannels[7].Name,
             ChatChannel.Notify => "Info",
             ChatChannel.Error => "Alert",
             ChatChannel.GuildNotice => "Guild",

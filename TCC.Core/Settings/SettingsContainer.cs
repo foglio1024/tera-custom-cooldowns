@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
-using Nostrum.Extensions;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using Nostrum.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 using TCC.UI;

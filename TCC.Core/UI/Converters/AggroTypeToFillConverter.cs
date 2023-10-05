@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media;
+using TCC.R;
 using TeraDataLite;
 
 namespace TCC.UI.Converters;
@@ -12,9 +12,9 @@ public class AggroTypeToFillConverter : IValueConverter
     {
         return (value is AggroCircle ac ? ac : AggroCircle.None) switch
         {
-            AggroCircle.Main => R.Brushes.GoldBrush,
-            AggroCircle.Secondary => R.Brushes.TwitchBrush,
-            _ => Brushes.Transparent
+            AggroCircle.Main => Brushes.GoldBrush,
+            AggroCircle.Secondary => Brushes.TwitchBrush,
+            _ => System.Windows.Media.Brushes.Transparent
         };
     }
 

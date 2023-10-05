@@ -1,8 +1,7 @@
 ﻿using System.Drawing;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using Nostrum.WPF;
-using ContextMenu = System.Windows.Controls.ContextMenu;
-using MenuItem = System.Windows.Controls.MenuItem;
 
 namespace TCC.UI.Controls;
 

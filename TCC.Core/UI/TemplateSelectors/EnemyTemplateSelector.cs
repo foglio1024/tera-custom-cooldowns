@@ -12,6 +12,6 @@ public class EnemyTemplateSelector : DataTemplateSelector
     {
         if (item == null) return null;
 
-        return ((NPC)item).IsBoss ? BossDataTemplate : MobDataTemplate;
+        return ((Npc)item).IsBoss ? BossDataTemplate : MobDataTemplate;
     }
 }

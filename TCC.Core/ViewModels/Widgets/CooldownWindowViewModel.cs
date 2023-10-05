@@ -1,12 +1,14 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Threading;
+using Newtonsoft.Json;
+using Nostrum.WPF.Extensions;
 using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -15,14 +17,12 @@ using TCC.Settings;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows;
+using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
-using Nostrum.WPF.ThreadSafe;
-using Nostrum.WPF.Extensions;
-using TCC.Utilities;
 
 namespace TCC.ViewModels.Widgets;
 
@@ -62,7 +62,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
     public IEnumerable<Abnormality> Passivities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
 
     //TODO: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    static BaseClassLayoutVM ClassManager => WindowManager.ViewModels.ClassVM.CurrentManager;
+    static BaseClassLayoutViewModel ClassManager => WindowManager.ViewModels.ClassVM.CurrentManager;
 
     static bool FindAndUpdate(ThreadSafeObservableCollection<Cooldown> list, Cooldown sk)
     {
@@ -78,11 +78,9 @@ public class CooldownWindowViewModel : TccWindowViewModel
             existing.Start(sk);
             return true;
         }
-        else
-        {
-            existing.Refresh(sk.Skill.Id, sk.Duration, sk.Mode);
-            return true;
-        }
+
+        existing.Refresh(sk.Skill.Id, sk.Duration, sk.Mode);
+        return true;
     }
 
     bool NormalMode_Update(Cooldown sk)
@@ -102,26 +100,25 @@ public class CooldownWindowViewModel : TccWindowViewModel
             {
                 return FindAndUpdate(ShortSkills, other);
             }
-            else
+
+            var existing = LongSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == other.Skill.IconName);
+            if (existing == null)
             {
-                var existing = LongSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == other.Skill.IconName);
+                existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == other.Skill.IconName);
                 if (existing == null)
                 {
-                    existing = ShortSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == other.Skill.IconName);
-                    if (existing == null)
-                    {
-                        LongSkills.Add(other);
-                    }
-                    else
-                    {
-                        existing.Refresh(other);
-                    }
-
-                    return true;
+                    LongSkills.Add(other);
                 }
-                else existing.Refresh(other);
+                else
+                {
+                    existing.Refresh(other);
+                }
+
                 return true;
             }
+
+            existing.Refresh(other);
+            return true;
         }
         catch
         {
@@ -443,7 +440,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
             void TryAddToList(CooldownData cdData, ThreadSafeObservableCollection<Cooldown> list)
             {
-                if (!Game.DB!.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)) return;
+                if (!TccDatabase.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)) return;
                 list.Add(new Cooldown(sk, false, cdData.Type, _dispatcher));
             }
             #endregion

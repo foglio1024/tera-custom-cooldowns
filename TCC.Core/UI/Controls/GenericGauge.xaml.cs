@@ -61,49 +61,49 @@ public partial class GenericGauge : INotifyPropertyChanged
         get => (SolidColorBrush)GetValue(BarColorProperty);
         set => SetValue(BarColorProperty, value);
     }
-    public static readonly DependencyProperty BarColorProperty = DependencyProperty.Register("BarColor", typeof(SolidColorBrush), typeof(GenericGauge));
+    public static readonly DependencyProperty BarColorProperty = DependencyProperty.Register(nameof(BarColor), typeof(SolidColorBrush), typeof(GenericGauge));
 
     public string GaugeName
     {
         get => (string)GetValue(GaugeNameProperty);
         set => SetValue(GaugeNameProperty, value);
     }
-    public static readonly DependencyProperty GaugeNameProperty = DependencyProperty.Register("GaugeName", typeof(string), typeof(GenericGauge));
+    public static readonly DependencyProperty GaugeNameProperty = DependencyProperty.Register(nameof(GaugeName), typeof(string), typeof(GenericGauge));
 
     public int MaxVal
     {
         get => (int)GetValue(MaxValProperty);
         set => SetValue(MaxValProperty, value);
     }
-    public static readonly DependencyProperty MaxValProperty = DependencyProperty.Register("MaxVal", typeof(int), typeof(GenericGauge));
+    public static readonly DependencyProperty MaxValProperty = DependencyProperty.Register(nameof(MaxVal), typeof(int), typeof(GenericGauge));
         
     public float CurrentVal
     {
         get => (float)GetValue(CurrentValProperty);
         set => SetValue(CurrentValProperty, value);
     }
-    public static readonly DependencyProperty CurrentValProperty = DependencyProperty.Register("CurrentVal", typeof(float), typeof(GenericGauge));
+    public static readonly DependencyProperty CurrentValProperty = DependencyProperty.Register(nameof(CurrentVal), typeof(float), typeof(GenericGauge));
 
     public bool ShowPercentage
     {
         get => (bool)GetValue(ShowPercentageProperty);
         set => SetValue(ShowPercentageProperty, value);
     }
-    public static readonly DependencyProperty ShowPercentageProperty = DependencyProperty.Register("ShowPercentage", typeof(bool), typeof(GenericGauge));
+    public static readonly DependencyProperty ShowPercentageProperty = DependencyProperty.Register(nameof(ShowPercentage), typeof(bool), typeof(GenericGauge));
                
     public bool ShowValues
     {
         get => (bool)GetValue(ShowValuesProperty);
         set => SetValue(ShowValuesProperty, value);
     }
-    public static readonly DependencyProperty ShowValuesProperty = DependencyProperty.Register("ShowValues", typeof(bool), typeof(GenericGauge));
+    public static readonly DependencyProperty ShowValuesProperty = DependencyProperty.Register(nameof(ShowValues), typeof(bool), typeof(GenericGauge));
 
     public bool ShowName
     {
         get => (bool)GetValue(ShowNameProperty);
         set => SetValue(ShowNameProperty, value);
     }
-    public static readonly DependencyProperty ShowNameProperty = DependencyProperty.Register("ShowName", typeof(bool), typeof(GenericGauge));
+    public static readonly DependencyProperty ShowNameProperty = DependencyProperty.Register(nameof(ShowName), typeof(bool), typeof(GenericGauge));
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

@@ -62,49 +62,49 @@ public class ReaperAbnormalityTracker : AbnormalityTracker
     static void CheckAssassinate(S_ABNORMALITY_BEGIN p)
     {
         if (AssassinateId != p.AbnormalityId) return;
-        if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
 
-        vm!.ShroudedEscape.StartEffect(p.Duration);
+        vm.ShroudedEscape.StartEffect(p.Duration);
     }
 
     static void CheckAssassinate(S_ABNORMALITY_REFRESH p)
     {
         if (AssassinateId != p.AbnormalityId) return;
-        if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
 
-        vm!.ShroudedEscape.RefreshEffect(p.Duration);
+        vm.ShroudedEscape.RefreshEffect(p.Duration);
     }
 
     static void CheckAssassinate(S_ABNORMALITY_END p)
     {
         if (AssassinateId != p.AbnormalityId) return;
-        if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
 
-        vm!.ShroudedEscape.StopEffect();
+        vm.ShroudedEscape.StopEffect();
     }
 
     static void CheckShadowReaping(S_ABNORMALITY_BEGIN p)
     {
         if (ShadowReapingId != p.AbnormalityId) return;
-        if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
 
-        vm!.ShadowReaping.StartEffect(p.Duration);
+        vm.ShadowReaping.StartEffect(p.Duration);
     }
 
     static void CheckShadowReaping(S_ABNORMALITY_REFRESH p)
     {
         if (ShadowReapingId != p.AbnormalityId) return;
-        if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
 
-        vm!.ShadowReaping.RefreshEffect(p.Duration);
+        vm.ShadowReaping.RefreshEffect(p.Duration);
     }
 
     static void CheckShadowReaping(S_ABNORMALITY_END p)
     {
         if (ShadowReapingId != p.AbnormalityId) return;
-        if (!IsViewModelAvailable<ReaperLayoutVM>(out var vm)) return;
+        if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
 
-        vm!.ShadowReaping.StopEffect();
+        vm.ShadowReaping.StopEffect();
     }
 
 }

@@ -137,7 +137,7 @@
                        VerticalAlignment="Center" Margin="5 0" />
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="GroupAbnormalitySelectorDataTemplate" DataType="vm:GroupAbnormalityVM">
+    <DataTemplate x:Key="GroupAbnormalitySelectorDataTemplate" DataType="vm:GroupAbnormalityViewModel">
         <Grid Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40" />
@@ -586,7 +586,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="LfgTemplate">
-        <chat1:LFGcontrol Margin="1" />
+        <chat1:LfgControl Margin="1" />
     </DataTemplate>
 
     <DataTemplate x:Key="TabSettingsTemplate">

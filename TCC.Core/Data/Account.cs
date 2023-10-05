@@ -11,15 +11,11 @@ public class Account : ICloneable
     public bool IsElite { get; set; }
     [JsonIgnore]
     public Character? CurrentCharacter { get; private set; }
-    public ThreadSafeObservableCollection<Character> Characters { get; }
+    public ThreadSafeObservableCollection<Character> Characters { get; } = new();
 
     public void LoginCharacter(uint id)
     {
         CurrentCharacter = Characters.ToSyncList().FirstOrDefault(x => x.Id == id);
-    }
-    public Account()
-    {
-        Characters = new ThreadSafeObservableCollection<Character>();
     }
 
     /// <summary>

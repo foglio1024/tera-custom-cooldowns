@@ -63,8 +63,8 @@ public class AbnormalityIndicatorBase : UserControl
 
             var hidden = _context != null && sender switch
             {
-                BuffWindow _ => App.Settings.BuffWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
-                GroupWindow _ => App.Settings.GroupWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
+                BuffWindow => App.Settings.BuffWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
+                GroupWindow => App.Settings.GroupWindowSettings.Hidden.Contains(_context.Abnormality.Id) && myWindow,
                 _ => false
             };
             if(!myWindow) return;
@@ -108,7 +108,7 @@ public class AbnormalityIndicatorBase : UserControl
         get => (double)GetValue(SizeProperty);
         set => SetValue(SizeProperty, value);
     }
-    public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size",
+    public static readonly DependencyProperty SizeProperty = DependencyProperty.Register(nameof(Size),
         typeof(double),
         typeof(RoundAbnormalityIndicator),
         new PropertyMetadata(18.0));

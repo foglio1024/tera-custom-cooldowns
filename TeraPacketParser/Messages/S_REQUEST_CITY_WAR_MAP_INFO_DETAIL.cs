@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
-
 namespace TeraPacketParser.Messages;
 
 public class S_REQUEST_CITY_WAR_MAP_INFO_DETAIL : ParsedMessage

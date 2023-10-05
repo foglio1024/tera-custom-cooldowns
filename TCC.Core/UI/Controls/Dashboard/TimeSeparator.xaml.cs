@@ -9,14 +9,14 @@ public partial class TimeSeparator
         get => (string)GetValue(TimeTextProperty);
         set => SetValue(TimeTextProperty, value);
     }
-    public static readonly DependencyProperty TimeTextProperty = DependencyProperty.Register("TimeText", typeof(string), typeof(TimeSeparator));
+    public static readonly DependencyProperty TimeTextProperty = DependencyProperty.Register(nameof(TimeText), typeof(string), typeof(TimeSeparator));
 
     public Thickness Borders
     {
         get => (Thickness)GetValue(BordersProperty);
         set => SetValue(BordersProperty, value);
     }
-    public static readonly DependencyProperty BordersProperty = DependencyProperty.Register("Borders", typeof(Thickness), typeof(TimeSeparator));
+    public static readonly DependencyProperty BordersProperty = DependencyProperty.Register(nameof(Borders), typeof(Thickness), typeof(TimeSeparator));
 
     //private readonly DoubleAnimation _fadeOut;
     //private readonly DoubleAnimation _fadeIn;

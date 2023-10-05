@@ -7,7 +7,7 @@
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
              xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
-             mc:Ignorable="d" Loaded="OnLoaded" d:DataContext="{d:DesignInstance classManagers:ArcherLayoutVM}"
+             mc:Ignorable="d" Loaded="OnLoaded" d:DataContext="{d:DesignInstance classManagers:ArcherLayoutViewModel}"
              Height="165">
             <!-- Add Height = "165" to fix windwalk UI cropping problem by HQ -->
     <Grid Width="Auto" Margin="50 20 50 50" Name="Root" ClipToBounds="False">

@@ -3,7 +3,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class SlayerLayoutVM : BaseClassLayoutVM
+public class SlayerLayoutViewModel : BaseClassLayoutViewModel
 {
 
     public SkillWithEffect InColdBlood { get; }
@@ -12,7 +12,7 @@ public class SlayerLayoutVM : BaseClassLayoutVM
 
 
 
-    public SlayerLayoutVM()
+    public SlayerLayoutViewModel()
     {
         // In Cold Blood
         Game.DB!.SkillsDatabase.TryGetSkill(200200, Class.Slayer, out var icb);

@@ -1,7 +1,5 @@
 ﻿//#define BATCH // pepehands
 
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.ThreadSafe;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -12,8 +10,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Chat;
+using TCC.R;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows.Widgets;
@@ -44,7 +45,7 @@ public class ChatManager : TccWindowViewModel
     public event Action<ChatMessage>? NewMessage;
     public event Action<int>? PrivateChannelJoined;
 
-    public LFG? LastClickedLfg { get; set; }
+    public Lfg? LastClickedLfg { get; set; }
 
     public int MessageCount => ChatMessages.Count;
     public int QueuedMessagesCount => _pauseQueue.Count;
@@ -57,7 +58,7 @@ public class ChatManager : TccWindowViewModel
 #else
     public ThreadSafeObservableCollection<ChatMessage> ChatMessages { get; }
 #endif
-    public ThreadSafeObservableCollection<LFG> LFGs { get; }
+    public ThreadSafeObservableCollection<Lfg> LFGs { get; }
 
     ChatManager(WindowSettingsBase settings) : base(settings)
     {
@@ -73,7 +74,7 @@ public class ChatManager : TccWindowViewModel
 #else
         ChatMessages = new ThreadSafeObservableCollection<ChatMessage>(_dispatcher);
 #endif
-        LFGs = new ThreadSafeObservableCollection<LFG>(_dispatcher);
+        LFGs = new ThreadSafeObservableCollection<Lfg>(_dispatcher);
 
         ChatMessages.CollectionChanged += OnChatMessagesCollectionChanged;
         BindingOperations.EnableCollectionSynchronization(ChatMessages, _lock);
@@ -231,17 +232,17 @@ public class ChatManager : TccWindowViewModel
         if (Game.Me.Level == 70) return;
 
         var msg = ChatUtils.Font("You gained ")
-                  + ChatUtils.Font($"{m.GainedTotalExp - m.GainedRestedExp:N0}", R.Colors.GoldColor.ToHex());
+                  + ChatUtils.Font($"{m.GainedTotalExp - m.GainedRestedExp:N0}", Colors.GoldColor.ToHex());
 
         if (m.GainedRestedExp > 0)
             msg += ChatUtils.Font(" + ") +
-                   ChatUtils.Font($"{m.GainedRestedExp:N0}", R.Colors.ChatMegaphoneColor.ToHex());
+                   ChatUtils.Font($"{m.GainedRestedExp:N0}", Colors.ChatMegaphoneColor.ToHex());
 
-        msg += ChatUtils.Font($" (");
-        msg += ChatUtils.Font($"{m.GainedTotalExp / (double)m.NextLevelExp:P3}", R.Colors.GoldColor.ToHex());
-        msg += ChatUtils.Font($") XP. Total: ");
-        msg += ChatUtils.Font($"{m.LevelExp / (double)m.NextLevelExp:P3}", R.Colors.GoldColor.ToHex());
-        msg += ChatUtils.Font($".");
+        msg += ChatUtils.Font(" (");
+        msg += ChatUtils.Font($"{m.GainedTotalExp / (double)m.NextLevelExp:P3}", Colors.GoldColor.ToHex());
+        msg += ChatUtils.Font(") XP. Total: ");
+        msg += ChatUtils.Font($"{m.LevelExp / (double)m.NextLevelExp:P3}", Colors.GoldColor.ToHex());
+        msg += ChatUtils.Font(".");
 
         AddChatMessage(Factory.CreateMessage(ChatChannel.Exp, "System", msg));
     }
@@ -417,7 +418,7 @@ public class ChatManager : TccWindowViewModel
 #else
             if (ChatMessages.Count > App.Settings.MaxMessages)
             {
-                var toRemove = ChatMessages[ChatMessages.Count - 1];
+                var toRemove = ChatMessages[^1];
                 toRemove.Dispose();
                 ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
@@ -575,11 +576,11 @@ public class ChatManager : TccWindowViewModel
         }
         else
         {
-            LFGs.Add(new LFG(x.LeaderId, x.LeaderName, x.Message, x.IsRaid, x.LeaderServerId));
+            LFGs.Add(new Lfg(x.LeaderId, x.LeaderName, x.Message, x.IsRaid, x.LeaderServerId));
         }
     }
 
-    public void RemoveLfg(LFG lfg)
+    public void RemoveLfg(Lfg lfg)
     {
         lfg.Dispose();
         LFGs.Remove(lfg);
@@ -592,7 +593,7 @@ public class ChatManager : TccWindowViewModel
         LastClickedLfg = null;
     }
 
-    bool TryGetLfg(uint id, string msg, string name, out LFG? lfg)
+    bool TryGetLfg(uint id, string msg, string name, out Lfg? lfg)
     {
         lfg = LFGs.ToSyncList().FirstOrDefault(x => x.Id == id);
         if (lfg != null) return true;
@@ -640,7 +641,7 @@ public class ChatManager : TccWindowViewModel
         App.BaseDispatcher.InvokeAsync(() =>
         {
             foreach (var window in Application.Current.Windows.ToList()
-                         .Where(x => x is ChatWindow c && c.VM.TabVMs.Count == 0))
+                         .Where(x => x is ChatWindow { VM.TabVMs.Count: 0 }))
             {
                 var w = (ChatWindow) window;
                 ChatWindows.Remove(w);

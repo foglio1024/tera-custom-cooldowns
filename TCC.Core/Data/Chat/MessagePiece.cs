@@ -1,9 +1,9 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Input;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Debugging;
 using TCC.Interop.Proxy;
 using TCC.UI.Windows;
@@ -24,7 +24,7 @@ public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
     public int Size
     {
         get => _customSize ? _fontSize : App.Settings.FontSize;
-        set
+        init
         {
             if (_fontSize == value) return;
             _fontSize = value;
@@ -171,7 +171,7 @@ public class UrlMessagePiece : SimpleMessagePiece
 }
 public class MoneyMessagePiece : MessagePieceBase
 {
-    public Money Money { get; set; }
+    public Money Money { get; }
 
     public MoneyMessagePiece(Money money)
     {
@@ -182,15 +182,11 @@ public class MoneyMessagePiece : MessagePieceBase
 
 public class IconMessagePiece : MessagePieceBase
 {
-    public IconMessagePiece(string source)
-    {
-        Text = source;
-    }
-
-    public IconMessagePiece(string source, int fontSize, bool customSize) : this(source)
+    public IconMessagePiece(string source, int fontSize, bool customSize)
     {
         _fontSize = fontSize;
         _customSize = customSize;
+        Text = source;
     }
 }
 

@@ -13,7 +13,7 @@ public class SplashScreenViewModel : ThreadSafeObservableObject
 {
     int _progress;
     bool _waiting;
-    string _bottomText = "TCC";
+    string _bottomText = "Initializing...";
 
     public event Action? ProgressChangedEvent;
 

@@ -1,13 +1,13 @@
-﻿using Nostrum;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Input;
+using Newtonsoft.Json;
+using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Abnormalities;
 using TCC.Data.Map;
 using TeraDataLite;
-using Nostrum.WPF.ThreadSafe;
-using Nostrum.WPF;
 
 namespace TCC.Data.Pc;
 //TODO: remove INPC from properties where it's not needed
@@ -215,9 +215,9 @@ public class Character : ThreadSafeObservableObject, IComparable
         {
             var tiers = Enum.GetValues(typeof(ItemLevelTier)).Cast<ItemLevelTier>().ToList();
             var ret = ItemLevelTier.Tier0;
-            foreach (var t in tiers)
+            foreach (var t in tiers.Where(t => _itemLevel >= (int)t))
             {
-                if (_itemLevel >= (int)t) ret = t;
+                ret = t;
             }
 
             return ret;

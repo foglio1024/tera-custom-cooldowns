@@ -79,7 +79,7 @@ public class TccWidgetBuilder<TWindow, TViewModel> : WindowBuilderBase<TWindow, 
             SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
             _vm = (TViewModel?)Activator.CreateInstance(typeof(TViewModel), ws);
             _window = (TWindow?)Activator.CreateInstance(typeof(TWindow), _vm);
-            if (ws != null && ws.Enabled)
+            if (ws is { Enabled: true })
             {
                 _window?.Show();
             }

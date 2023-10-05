@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
-using Nostrum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using Newtonsoft.Json.Linq;
+using Nostrum;
 using TCC.Data;
 using TCC.UI;
 using TCC.UI.Windows;
@@ -78,10 +79,7 @@ public class IconsUpdater
             _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(ni);
             await Task.Run(() => DownloadMissingIcons(mismatched));
         }
-        else
-        {
-            //Log.N("TCC icon updater", "All icons are up to date.", NotificationType.Success);
-        }
+        //Log.N("TCC icon updater", "All icons are up to date.", NotificationType.Success);
     }
 
     async Task DownloadArchive()
@@ -103,7 +101,7 @@ public class IconsUpdater
             if (args.Error != null)
             {
                 var res = TccMessageBox.Show(SR.IconDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
-                if (res == System.Windows.MessageBoxResult.Yes) await DownloadArchive();
+                if (res == MessageBoxResult.Yes) await DownloadArchive();
             }
             else
             {
@@ -128,7 +126,7 @@ public class IconsUpdater
         catch (Exception)
         {
             var res = TccMessageBox.Show(SR.IconDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
-            if (res == System.Windows.MessageBoxResult.Yes) await DownloadArchive();
+            if (res == MessageBoxResult.Yes) await DownloadArchive();
         }
     }
 
@@ -219,7 +217,7 @@ public class IconsUpdater
         catch
         {
             var res = TccMessageBox.Show(SR.IconExtractFailed, MessageBoxType.ConfirmationWithYesNo);
-            if (res == System.Windows.MessageBoxResult.Yes)
+            if (res == MessageBoxResult.Yes)
                 Extract();
             else
             {

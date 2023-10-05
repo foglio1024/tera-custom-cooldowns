@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using JetBrains.Annotations;
 using Nostrum.WPF.ThreadSafe;
 using TCC.Settings.WindowSettings;
 using TCC.Utils;
@@ -12,6 +13,7 @@ using TeraPacketParser.TeraCommon.Game;
 
 namespace TCC.UI.Windows.Widgets;
 
+[UsedImplicitly]
 public class NotificationAreaViewModel : TccWindowViewModel
 {
     static int _id;
@@ -41,7 +43,7 @@ public class NotificationAreaViewModel : TccWindowViewModel
         {
             var notif = GetNotification<ProgressNotificationInfo>(10241024);
             if (notif == null) return;
-            notif.Message = $"Connection timed out. Reconnect or restart TCC if the issue persists.";
+            notif.Message = "Connection timed out. Reconnect or restart TCC if the issue persists.";
             notif.NotificationType = NotificationType.Warning;
             notif.Dispose(20000);
 

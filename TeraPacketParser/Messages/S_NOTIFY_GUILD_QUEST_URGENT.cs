@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-
 namespace TeraPacketParser.Messages;
 
 public class S_NOTIFY_GUILD_QUEST_URGENT : ParsedMessage

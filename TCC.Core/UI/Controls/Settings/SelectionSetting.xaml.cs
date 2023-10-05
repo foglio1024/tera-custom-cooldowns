@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using TCC.R;
 
 namespace TCC.UI.Controls.Settings;
 
@@ -50,7 +51,7 @@ public partial class SelectionSetting
         get => (DataTemplate) GetValue(ChoicesTemplateProperty);
         set => SetValue(ChoicesTemplateProperty, value);
     }
-    public static readonly DependencyProperty ChoicesTemplateProperty = DependencyProperty.Register(nameof(ChoicesTemplate), typeof(DataTemplate), typeof(SelectionSetting), new PropertyMetadata(R.DataTemplates.EnumDescrDataTemplate));
+    public static readonly DependencyProperty ChoicesTemplateProperty = DependencyProperty.Register(nameof(ChoicesTemplate), typeof(DataTemplate), typeof(SelectionSetting), new PropertyMetadata(DataTemplates.EnumDescrDataTemplate));
 
     public SelectionSetting()
     {

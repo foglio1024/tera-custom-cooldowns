@@ -1,9 +1,9 @@
-﻿using Nostrum;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
+using Nostrum;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Abnormalities;
 using TCC.Utils;
 using TCC.ViewModels;
@@ -350,20 +350,14 @@ public class Player : ThreadSafeObservableObject
         }
     }
 
-    public Counter StacksCounter { get; set; }
+    public Counter StacksCounter { get; set; } = new(10, true);
 
     // tracking only warrior stance for now
-    public StanceTracker<WarriorStance> WarriorStance { get; set; }
+    public StanceTracker<WarriorStance> WarriorStance { get; set; } = new();
 
     public ThreadSafeObservableCollection<AbnormalityDuration> Buffs { get; private set; }    = new();
     public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs { get; private set; }  = new();
     public ThreadSafeObservableCollection<AbnormalityDuration> InfBuffs { get; private set; } = new();
-
-    public Player()
-    {
-        StacksCounter = new Counter(10, true);
-        WarriorStance = new StanceTracker<WarriorStance>();
-    }
 
 
     #region Shield
@@ -394,13 +388,15 @@ public class Player : ThreadSafeObservableObject
             RefreshShieldAmount();
         });
 
+        return;
+
         uint GetShieldSize(Abnormality a)
         {
             return Class switch
             {
                 Class.Sorcerer => Convert.ToUInt32(EpDataProvider.ManaBarrierMult * a.ShieldSize),
-                Class.Mystic when a.Id == 702001 => (a.ShieldSize + ((uint)MagicalResistance * 50 / 100)),
-                Class.Priest when a.Id == 800304 => (a.ShieldSize + ((uint)MagicalResistance * 65 / 100)),
+                Class.Mystic when a.Id == 702001 => a.ShieldSize + (uint)MagicalResistance * 50 / 100,
+                Class.Priest when a.Id == 800304 => a.ShieldSize + (uint)MagicalResistance * 65 / 100,
                 _ when a.Id is 702001 or 800304 => a.ShieldSize + 25000,
                 _ => a.ShieldSize
             };
@@ -425,11 +421,7 @@ public class Player : ThreadSafeObservableObject
             return;
         }
         _currentShield = 0;
-        var total = 0U;
-        foreach (var amount in _shields.Values)
-        {
-            total += amount;
-        }
+        var total = _shields.Values.Aggregate(0U, (current, amount) => current + amount);
         CurrentShield = total;
     }
 
@@ -542,8 +534,8 @@ public class Player : ThreadSafeObservableObject
             AbnormalityType.Debuff => Debuffs,
             AbnormalityType.DOT => Debuffs,
             AbnormalityType.Stun => Debuffs,
-            AbnormalityType.Buff => (abnormality.Infinity ? InfBuffs : Buffs),
-            AbnormalityType.Special => (abnormality.Infinity ? InfBuffs : Buffs),
+            AbnormalityType.Buff => abnormality.Infinity ? InfBuffs : Buffs,
+            AbnormalityType.Special => abnormality.Infinity ? InfBuffs : Buffs,
             _ => throw new ArgumentOutOfRangeException(nameof(abnormality))
         };
 

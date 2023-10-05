@@ -57,7 +57,7 @@ internal struct EndpointIpv4 : IEquatable<EndpointIpv4>
     [Pure]
     public IPEndPoint ToIpEndpoint()
     {
-        return new(ToIpAddress(_ip), _port);
+        return new IPEndPoint(ToIpAddress(_ip), _port);
     }
 
     public override string ToString()

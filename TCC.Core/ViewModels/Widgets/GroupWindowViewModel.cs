@@ -1,11 +1,14 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
-using System;
+﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using JetBrains.Annotations;
+using Nostrum.WPF;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Chat;
@@ -22,6 +25,7 @@ namespace TCC.ViewModels.Widgets;
 
 //TODO: remove all references from other vms to this, maybe move party members to Core
 [TccModule]
+[UsedImplicitly]
 public class GroupWindowViewModel : TccWindowViewModel
 {
     bool _raid;
@@ -66,17 +70,17 @@ public class GroupWindowViewModel : TccWindowViewModel
         Members.CollectionChanged += Members_CollectionChanged;
 
         Dps = CollectionViewFactory.CreateLiveCollectionView(Members,
-                  dps => dps.Role == Role.Dps && dps.Visible,
+                  dps => dps is { Role: Role.Dps, Visible: true },
                   new[] { nameof(User.Role), nameof(User.Visible) },
                   new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
               ?? throw new Exception("Failed to create LiveCollectionView");
         Tanks = CollectionViewFactory.CreateLiveCollectionView(Members,
-                    tank => tank.Role == Role.Tank && tank.Visible,
+                    tank => tank is { Role: Role.Tank, Visible: true },
                     new[] { nameof(User.Role), nameof(User.Visible) },
                     new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
                 ?? throw new Exception("Failed to create LiveCollectionView");
         Healers = CollectionViewFactory.CreateLiveCollectionView(Members,
-                      healer => healer.Role == Role.Healer && healer.Visible,
+                      healer => healer is { Role: Role.Healer, Visible: true },
                       new[] { nameof(User.Role), nameof(User.Visible) },
                       new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
                   ?? throw new Exception("Failed to create LiveCollectionView");
@@ -126,7 +130,7 @@ public class GroupWindowViewModel : TccWindowViewModel
     }
 
 
-    void Members_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    void Members_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         //Task.Delay(0).ContinueWith(t =>
         //{
@@ -159,29 +163,23 @@ public class GroupWindowViewModel : TccWindowViewModel
         return Members.ToSyncList().Any(x => x.PlayerId == pId && x.ServerId == sId);
     }
 
-    public bool TryGetUser(string name, out User u)
+    public bool TryGetUser(string name, [MaybeNullWhen(false)] out User u)
     {
         var exists = Exists(name);
-#pragma warning disable CS8601
         u = exists ? Members.ToSyncList().FirstOrDefault(x => x.Name == name) : new User(_dispatcher);
-#pragma warning restore CS8601
         return exists;
     }
-    public bool TryGetUser(ulong id, out User u)
+    public bool TryGetUser(ulong id, [MaybeNullWhen(false)] out User u)
     {
         var exists = Exists(id);
 
-#pragma warning disable CS8601
         u = exists ? Members.ToSyncList().FirstOrDefault(x => x.EntityId == id) : new User(_dispatcher);
-#pragma warning restore CS8601
         return u != null;
     }
-    public bool TryGetUser(uint pId, uint sId, out User u)
+    public bool TryGetUser(uint pId, uint sId, [MaybeNullWhen(false)] out User u)
     {
         var exists = Exists(pId, sId);
-#pragma warning disable CS8601
         u = exists ? Members.ToSyncList().FirstOrDefault(x => x.PlayerId == pId && x.ServerId == sId) : new User(_dispatcher);
-#pragma warning restore CS8601
         return exists;
     }
 
@@ -230,7 +228,7 @@ public class GroupWindowViewModel : TccWindowViewModel
             if (ab.Type is AbnormalityType.Buff or AbnormalityType.Special)
             {
                 u.AddOrRefreshBuff(ab, duration, stacks);
-                if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203)
+                if (u.UserClass == Class.Warrior && ab.Id is >= 100200 and <= 100203)
                 {
                     u.Role = Role.Tank; //def stance turned on: switch warrior to tank 
                 }
@@ -258,7 +256,7 @@ public class GroupWindowViewModel : TccWindowViewModel
             if (ab.Type is AbnormalityType.Buff or AbnormalityType.Special)
             {
                 u.RemoveBuff(ab);
-                if (u.UserClass == Class.Warrior && ab.Id >= 100200 && ab.Id <= 100203)
+                if (u.UserClass == Class.Warrior && ab.Id is >= 100200 and <= 100203)
                 {
                     u.Role = Role.Dps; //def stance ended: make warrior dps again
                 }
@@ -702,14 +700,13 @@ public class GroupWindowViewModel : TccWindowViewModel
     }
     void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
-        if (Game.IsMe(p.TargetId))
-        {
-            if (Size > ((GroupWindowSettings)Settings!).DisableAbnormalitiesThreshold) return;
-            if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
-            if (p.Duration == int.MaxValue) ab.Infinity = true;
+        if (!Game.IsMe(p.TargetId)) return;
 
-            BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
-        }
+        if (Size > ((GroupWindowSettings)Settings!).DisableAbnormalitiesThreshold) return;
+        if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+        if (p.Duration == int.MaxValue) ab.Infinity = true;
+
+        BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
     }
     void OnAbnormalityEnd(S_ABNORMALITY_END p)
     {

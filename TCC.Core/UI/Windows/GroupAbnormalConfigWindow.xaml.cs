@@ -36,7 +36,7 @@ public partial class GroupAbnormalConfigWindow
         _searchCooldown.Stop();
         if (string.IsNullOrWhiteSpace(_searchText)) return;
         var view = DC.AbnormalitiesView;
-        view.Filter = o => ((GroupAbnormalityVM)o).Abnormality.Name.Contains(_searchText, StringComparison.InvariantCultureIgnoreCase);
+        view.Filter = o => ((GroupAbnormalityViewModel)o).Abnormality.Name.Contains(_searchText, StringComparison.InvariantCultureIgnoreCase);
         view.Refresh();
     }
 
@@ -73,7 +73,7 @@ public partial class GroupAbnormalConfigWindow
 
         if (view.Filter == null || c != _currentFilter)
         {
-            view.Filter = o => ((GroupAbnormalityVM)o).Classes.Any(x => x.Class == c && x.Selected);
+            view.Filter = o => ((GroupAbnormalityViewModel)o).Classes.Any(x => x.Class == c && x.Selected);
             _currentFilter = c;
         }
         else

@@ -34,8 +34,8 @@ public class Counter : ThreadSafeObservableObject
             N();
         }
     }
-    public int MaxValue { get; set; }
-    public bool AutoExpire { get; set; }
+    public int MaxValue { get; private set; }
+    bool AutoExpire { get; set; }
 
 
     public Counter(int max, bool autoexpire)

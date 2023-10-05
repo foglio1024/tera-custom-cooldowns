@@ -1,7 +1,7 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.ThreadSafe;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
 using TCC.Interop.Moongourd;
 
 namespace TCC.UI.Controls.Chat;

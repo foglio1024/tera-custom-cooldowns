@@ -11,12 +11,12 @@ public class GuildInfo
     public bool InGuild { get; private set; }
     public GuildMemberData Master { get; private set; }
 
-    public ThreadSafeObservableCollection<GuildMemberData> Members { get; private set; } = new();
+    readonly ThreadSafeObservableCollection<GuildMemberData> _members = new();
     public bool AmIMaster { get; private set; }
 
     public string NameOf(uint id)
     {
-        var found = Members.ToSyncList().FirstOrDefault(m => m.PlayerId == id);
+        var found = _members.ToSyncList().FirstOrDefault(m => m.PlayerId == id);
         return found.Name != "" ? found.Name : "Unknown player";
     }
 
@@ -25,7 +25,7 @@ public class GuildInfo
         mMembers.ForEach(m =>
         {
             if (Has(m.Name)) return;
-            Members.Add(m);
+            _members.Add(m);
         });
 
         //var toRemove = new List<GuildMemberData>();
@@ -41,12 +41,12 @@ public class GuildInfo
 
     public bool Has(string name)
     {
-        return Members.ToSyncList().Any(m => m.Name == name);
+        return _members.ToSyncList().Any(m => m.Name == name);
     }
 
     public void Clear()
     {
-        Task.Run(() => Members.Clear());
+        Task.Run(() => _members.Clear());
         InGuild = false;
         Master = default;
         AmIMaster = false;

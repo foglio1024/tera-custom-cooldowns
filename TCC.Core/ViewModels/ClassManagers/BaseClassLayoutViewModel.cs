@@ -5,7 +5,7 @@ using TCC.Data.Skills;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public abstract class BaseClassLayoutVM : ThreadSafeObservableObject, IDisposable
+public abstract class BaseClassLayoutViewModel : ThreadSafeObservableObject, IDisposable
 {
     public virtual bool StartSpecialSkill(Cooldown sk)
     {
@@ -24,7 +24,7 @@ public abstract class BaseClassLayoutVM : ThreadSafeObservableObject, IDisposabl
         return false;
     }
 
-    public StatTracker StaminaTracker { get; set; }
+    public StatTracker StaminaTracker { get; set; } = new();
 
 
     public void SetMaxST(int v)
@@ -37,10 +37,6 @@ public abstract class BaseClassLayoutVM : ThreadSafeObservableObject, IDisposabl
     {
         if (!App.Settings.ClassWindowSettings.Enabled) return;
         StaminaTracker.Val = currentStamina;
-    }
-    public BaseClassLayoutVM()
-    {
-        StaminaTracker = new StatTracker();
     }
 
     public virtual void Dispose()

@@ -1,8 +1,8 @@
-﻿using Nostrum.WPF;
-using Nostrum.WPF.Extensions;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Nostrum.WPF;
+using Nostrum.WPF.Extensions;
 using TCC.ViewModels;
 
 namespace TCC.UI.Windows;

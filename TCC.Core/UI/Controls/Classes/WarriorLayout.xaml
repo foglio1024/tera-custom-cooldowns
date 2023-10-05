@@ -9,7 +9,7 @@
              xmlns:nsConv="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
              xmlns:conv="clr-namespace:TCC.UI.Converters"
              xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:WarriorLayoutVM}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:WarriorLayoutViewModel}">
     <UserControl.Resources>
         <ControlTemplate x:Key="EdgeArrowLayout">
             <elements:EdgeArrowLayout EdgeCounter="{Binding EdgeCounter}"  Margin="0 -40"

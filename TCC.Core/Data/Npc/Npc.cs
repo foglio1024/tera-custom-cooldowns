@@ -12,7 +12,7 @@ using TeraDataLite;
 
 namespace TCC.Data.Npc;
 
-public class NPC : ThreadSafeObservableObject, IDisposable
+public class Npc : ThreadSafeObservableObject, IDisposable
 {
     public bool HasGage { get; set; }
     public ICommand Override { get; }
@@ -162,8 +162,8 @@ public class NPC : ThreadSafeObservableObject, IDisposable
     public uint TemplateId { get; }
     public Species Species { get; set; }
 
-    public EnragePattern? EnragePattern { get; set; }
-    public TimerPattern? TimerPattern { get; set; }
+    public EnragePattern? EnragePattern { get; private set; }
+    public TimerPattern? TimerPattern { get; private set; }
 
     public void AddorRefresh(Abnormality ab, uint duration, int stacks)
     {
@@ -238,7 +238,7 @@ public class NPC : ThreadSafeObservableObject, IDisposable
     //    }
 
     //}
-    public NPC(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern? ep = null, TimerPattern? tp = null)
+    public Npc(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern? ep = null, TimerPattern? tp = null)
     {
         _dispatcher = WindowManager.ViewModels.NpcVM.Dispatcher;
         _buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);

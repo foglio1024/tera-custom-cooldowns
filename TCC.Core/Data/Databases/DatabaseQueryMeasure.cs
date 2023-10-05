@@ -6,7 +6,7 @@ namespace TCC.Data.Databases;
 
 public class DatabaseQueryMeasure
 {
-    readonly Stopwatch _sw;
+    readonly Stopwatch _sw = new();
     static int _totalCount;
     static int _hitCount;
     static int _missCount;
@@ -17,11 +17,6 @@ public class DatabaseQueryMeasure
     static double _avgHitTime => _hitCount == 0 ? 0 : _totHitTime / (double) _hitCount;
     static double _avgMissTime => _missCount == 0 ? 0 : _totMissTime / (double) _missCount;
 
-
-    public DatabaseQueryMeasure()
-    {
-        _sw = new Stopwatch();
-    }
 
     public void StartQuery()
     {

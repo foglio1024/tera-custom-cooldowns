@@ -1,17 +1,17 @@
 ﻿using System.ComponentModel;
 using System.Windows.Threading;
 using Newtonsoft.Json;
-using TCC.Data.Pc;
 using Nostrum.WPF.ThreadSafe;
+using TCC.Data.Pc;
 
 namespace TCC.Data;
 
 public class DungeonCooldown : ThreadSafeObservableObject
 {
     int _entries;
-    int _clears;
+    readonly int _clears;
 
-    public uint Id { get; set; }
+    uint Id { get; }
     public int Entries
     {
         get => _entries;
@@ -26,7 +26,7 @@ public class DungeonCooldown : ThreadSafeObservableObject
     public int Clears
     {
         get => _clears;
-        set
+        private init
         {
             if (_clears == value) return;
             _clears = value;
