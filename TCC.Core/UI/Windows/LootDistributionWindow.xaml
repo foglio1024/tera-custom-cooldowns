@@ -89,11 +89,7 @@
                                 CornerRadius="3" Padding="0" x:Name="ParentBorder">
                         <FrameworkElement Width="{Binding ActualWidth, ElementName=BaseBorder}"
                                           Loaded="OnBarLoaded"
-                                          x:Name="BarGovernor" >
-                            <FrameworkElement.LayoutTransform>
-                                <ScaleTransform ScaleX="1"/>
-                            </FrameworkElement.LayoutTransform>
-                        </FrameworkElement>
+                                          x:Name="BarGovernor" />
                     </Border>
 
                     <Border BorderBrush="White" BorderThickness="1 0 0 0" Margin="0 -2"

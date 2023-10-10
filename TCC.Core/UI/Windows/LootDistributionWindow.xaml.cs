@@ -94,6 +94,8 @@ public partial class LootDistributionWindow
     void OnBarLoaded(object sender, RoutedEventArgs e)
     {
         var bar = (FrameworkElement)sender;
-        bar.LayoutTransform.BeginAnimation(ScaleTransform.ScaleXProperty, AnimationFactory.CreateDoubleAnimation(60 * 1000, 0, 1));
+        var scale = new ScaleTransform(1, 1);
+        bar.LayoutTransform = scale;
+        scale.BeginAnimation(ScaleTransform.ScaleXProperty, AnimationFactory.CreateDoubleAnimation(60 * 1000, 0, 1));
     }
 }
