@@ -192,7 +192,7 @@ public static class SystemMessagesProcessor
     static void HandleNewGuildMasterMessage(string parameters, SystemMessageData template)
     {
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.GuildNotice);
-        Log.N("Guild", msg.ToString(), NotificationType.Success);
+        Log.N("Guild", msg.ToString(), NotificationType.Info);
         ChatManager.Instance.AddChatMessage(msg);
         msg.ContainsPlayerName = true;
 
@@ -201,7 +201,7 @@ public static class SystemMessagesProcessor
     static void HandleGuilBamSpawn(string parameters, SystemMessageData template)
     {
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
-        Log.N("Guild BAM", msg.ToString(), NotificationType.Warning, 2 * 60 * 1000);
+        Log.N("Guild BAM", msg.ToString(), NotificationType.Info, 2 * 60 * 1000);
         ChatManager.Instance.AddChatMessage(msg);
 
         GameEventManager.Instance.UploadGuildBamTimestamp();
@@ -271,7 +271,7 @@ public static class SystemMessagesProcessor
     static void HandleMerchantDespawn(string parameters, SystemMessageData template)
     {
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
-        Log.N("Mystery Merchant", msg.ToString(), NotificationType.Error, 10000);
+        Log.N("Mystery Merchant", msg.ToString(), NotificationType.Info, 10000);
         ChatManager.Instance.AddChatMessage(msg);
     }
 
@@ -300,7 +300,7 @@ public static class SystemMessagesProcessor
         {
             notificationText = Build(template, parameters.Split('\v'));
         }
-        Log.N("Field Boss", notificationText, NotificationType.Success, 10000);
+        Log.N("Field Boss", notificationText, NotificationType.Info, 10000);
 
         if (!App.Settings.WebhookEnabledFieldBoss) return;
 
@@ -332,7 +332,7 @@ public static class SystemMessagesProcessor
         {
             notificationText = Build(template, parameters.Split('\v'));
         }
-        Log.N("Field Boss", notificationText, NotificationType.Error, 10000);
+        Log.N("Field Boss", notificationText, NotificationType.Info, 10000);
         if (!App.Settings.WebhookEnabledFieldBoss) return;
 
         //@4158

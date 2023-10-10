@@ -232,7 +232,7 @@ public class Player : ThreadSafeObservableObject
             _coins = value;
             if (_coins == _maxCoins)
             {
-                Log.N("TCC", "Adventure coins maxed!", NotificationType.Success);
+                Log.N("TCC", "Adventure coins maxed!", NotificationType.Info);
                 ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
             }
 

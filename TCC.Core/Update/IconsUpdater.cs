@@ -69,13 +69,13 @@ public class IconsUpdater
 
         if (mismatched.Count > 100)
         {
-            var ni = Log.N("TCC icon updater", "Many icons are missing, downloading the whole archive...", NotificationType.Warning, template: NotificationTemplate.Progress);
+            var ni = Log.N("TCC icon updater", "Many icons are missing, downloading the whole archive...", NotificationType.Info, template: NotificationTemplate.Progress);
             _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(ni);
             await DownloadArchive();
         }
         else if (mismatched.Count > 0)
         {
-            var ni = Log.N("TCC icon updater", $"Updating {mismatched.Count} icons...", NotificationType.Warning, template: NotificationTemplate.Progress);
+            var ni = Log.N("TCC icon updater", $"Updating {mismatched.Count} icons...", NotificationType.Info, template: NotificationTemplate.Progress);
             _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(ni);
             await Task.Run(() => DownloadMissingIcons(mismatched));
         }

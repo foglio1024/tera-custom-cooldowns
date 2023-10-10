@@ -119,17 +119,17 @@ public static class UpdateManager
             var vp = new VersionParser(forceBeta: true);
             if (!vp.Valid) return;
 
-            Log.N("TCC update manager", "Download started", NotificationType.Success, 3000);
+            Log.N("TCC update manager", "Download started", NotificationType.Info, 3000);
             await c.DownloadFileAsync(vp.NewVersionUrl, "update.zip");
 
-            Log.N("TCC update manager", "Extracting zip", NotificationType.Success, 3000);
+            Log.N("TCC update manager", "Extracting zip", NotificationType.Info, 3000);
             if (Directory.Exists(Path.Combine(App.BasePath, "tmp"))) Directory.Delete(Path.Combine(App.BasePath, "tmp"), true);
             ZipFile.ExtractToDirectory("update.zip", Path.Combine(App.BasePath, "tmp"));
 
-            Log.N("TCC update manager", "Moving files", NotificationType.Success, 2000);
+            Log.N("TCC update manager", "Moving files", NotificationType.Info, 2000);
             File.Move(Path.Combine(App.BasePath, "tmp/TCCupdater.exe"), Path.Combine(App.BasePath, "TCCupdater.exe"));
 
-            Log.N("TCC update manager", "Starting updater", NotificationType.Success, 1000);
+            Log.N("TCC update manager", "Starting updater", NotificationType.Info, 1000);
             await Task.Delay(1000).ContinueWith(_ => Process.Start(Path.GetDirectoryName(typeof(App).Assembly.Location) + "/TCCupdater.exe", "update"));
             Environment.Exit(0);
         }
@@ -229,7 +229,7 @@ public static class UpdateManager
             UpdateAvailable = true;
 
             ChatManager.Instance.AddTccMessage($"TCC v{vp.NewVersionNumber} is now available!");
-            Log.N("Update manager", $"TCC v{vp.NewVersionNumber} available!", NotificationType.Success, 10000);
+            Log.N("Update manager", $"TCC v{vp.NewVersionNumber} available!", NotificationType.Info, 10000);
         }
         catch (Exception ex)
         {
