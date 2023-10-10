@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace TCC.Data;
 
-public readonly struct HotKey
+public struct HotKey
 {
     public HotKey(Keys k, ModifierKeys m) : this()
     {
@@ -11,8 +11,8 @@ public readonly struct HotKey
         Modifier = m;
     }
 
-    public Keys Key { get; }
-    public ModifierKeys Modifier { get; }
+    public Keys Key { get; set; }
+    public ModifierKeys Modifier { get; set; }
 
     public override bool Equals(object? obj)
     {
