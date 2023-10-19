@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using TCC.Data;
-using TCC.R;
 
 namespace TCC.UI.Converters;
 
 public class CooldownWindowModeToTemplateConverter : IValueConverter
 {
-    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public DataTemplate? Fixed { get; set; }
+    public DataTemplate? Normal { get; set; }
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        //return Application.Current.FindResource((CooldownBarMode?)value == CooldownBarMode.Fixed ? "FixedCooldownTemplate" : "NormalCooldownTemplate")!;
-        return (CooldownBarMode?) value == CooldownBarMode.Fixed
-            ? DataTemplates.FixedCooldownTemplate
-            : DataTemplates.NormalCooldownTemplate;
+        if (value is not CooldownBarMode cbm) return null;
+        return cbm switch
+        {
+            CooldownBarMode.Fixed => Fixed,
+            CooldownBarMode.Normal => Normal,
+            _ => null
+        };
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

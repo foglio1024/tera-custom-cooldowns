@@ -13,6 +13,7 @@
                    xmlns:viewModels="clr-namespace:TCC.ViewModels"
                    xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
                    xmlns:windows="clr-namespace:TCC.UI.Windows"
+                   xmlns:converters="clr-namespace:TCC.UI.Converters"
                    SizeToContent="Height"
                    mc:Ignorable="d"
                    Style="{StaticResource BaseWindowStyle}"
@@ -101,7 +102,7 @@
                                         <TextBlock>
                                             <Run>Display active buffs for</Run>
                                             <Run
-                                                Text="{Binding Converter={StaticResource ClassToName}, ConverterParameter=true, Mode=OneWay}" />
+                                                Text="{Binding Converter={converters:ClassToNameConverter ToLower=True}, ConverterParameter=true, Mode=OneWay}" />
                                         </TextBlock>
                                     </ToolTip>
                                 </Button.ToolTip>

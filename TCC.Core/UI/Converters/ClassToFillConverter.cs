@@ -3,32 +3,27 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 using TeraDataLite;
-using Brushes = TCC.R.Brushes;
-using Colors = TCC.R.Colors;
 
 namespace TCC.UI.Converters;
 
 public class ClassToFillConverter : IValueConverter
 {
-    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public SolidColorBrush? Dps { get; set; }
+    public SolidColorBrush? Tank { get; set; }
+    public SolidColorBrush? Healer { get; set; }
+
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        var c = (Class?)value ?? Class.Common;
-        var color = targetType == typeof(Color);
+        if (value is not Class c) c = Class.Common;
 
-
-        return (c, color) switch
+        var brush = c switch
         {
-            (Class.Lancer, true) => Colors.TankRoleColor,
-            (Class.Lancer, false) => Brushes.TankRoleBrush,
-            (Class.Brawler, true) => Colors.TankRoleColor,
-            (Class.Brawler, false) => Brushes.TankRoleBrush,
-            (Class.Priest, true) => Colors.HealerRoleColor,
-            (Class.Priest, false) => Brushes.HealerRoleBrush,
-            (Class.Mystic, true) => Colors.HealerRoleColor,
-            (Class.Mystic, false) => Brushes.HealerRoleBrush,
-            (_, true) => Colors.DpsRoleColor,
-            (_, false) => Brushes.DpsRoleBrush
+            Class.Lancer or Class.Brawler => Tank,
+            Class.Priest or Class.Mystic => Healer,
+            _ => Dps,
         };
+        if (targetType == typeof(Color)) return brush?.Color;
+        else return brush;
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

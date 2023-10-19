@@ -291,9 +291,7 @@ public class Converters : RH
     public static ChatChannelToName ChatChannelToName => Get<ChatChannelToName>("ChatChannelToName");
     public static ClassSvgConverter ClassToSvg => Get<ClassSvgConverter>("ClassToSvg");
     public static ClassToFillConverter ClassToFill => Get<ClassToFillConverter>("ClassToFill");
-    public static ClassToNameConverter ClassToName => Get<ClassToNameConverter>("ClassToName");
     public static CooldownWindowModeToTemplateConverter CooldowWindowModeToTemplate => Get<CooldownWindowModeToTemplateConverter>("CooldowWindowModeToTemplate");
-    public static DirectionToHorAlignConveter DirectionToHorAlignConveter => Get<DirectionToHorAlignConveter>("DirectionToHorAlignConveter");
     public static DragonIdToColorConverter DragonIdToColor => Get<DragonIdToColorConverter>("DragonIdToColor");
     public static DungeonImageConverter DungeonImageConverter => Get<DungeonImageConverter>("DungeonImageConverter");
     public static EntityIdToClassConverter EntityIdToClass => Get<EntityIdToClassConverter>("EntityIdToClass");
@@ -316,7 +314,6 @@ public class Converters : RH
     public static PieceToPathConverter PieceToPath => Get<PieceToPathConverter>("PieceToPath");
     public static RaidToColorConverter RaidToColor => Get<RaidToColorConverter>("RaidToColor");
     public static RollToStringConverter RollToString => Get<RollToStringConverter>("RollToString");
-    public static RowsToHeightConverter RowsToHeight => Get<RowsToHeightConverter>("RowsToHeight");
     public static StringToFillConverter StringToFill => Get<StringToFillConverter>("StringToFill");
     public static ValueConverterGroup ClassToTransparentFill => Get<ValueConverterGroup>("ClassToTransparentFill");
     public static ValueConverterGroup IlvlTierToTransparentFill => Get<ValueConverterGroup>("IlvlTierToTransparentFill");

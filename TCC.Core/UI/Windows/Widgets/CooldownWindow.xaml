@@ -6,10 +6,18 @@
                     xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
                     xmlns:controls="clr-namespace:TCC.UI.Controls"
                     xmlns:widgets1="clr-namespace:TCC.UI.Windows.Widgets"
+                    xmlns:converters="clr-namespace:TCC.UI.Converters"
                     mc:Ignorable="d"
                     Title="TCC Cooldowns"
                     Style="{StaticResource BaseWindowStyle}"
                     d:DataContext="{d:DesignInstance widgets:CooldownWindowViewModel}">
+    <Window.Resources>
+        <converters:CooldownWindowModeToTemplateConverter x:Key="CooldowWindowModeToTemplate"
+                                                          Fixed="{StaticResource FixedCooldownTemplate}"
+                                                          Normal="{StaticResource NormalCooldownTemplate}"
+                                                        />
+        
+    </Window.Resources>
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

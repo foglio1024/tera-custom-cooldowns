@@ -10,9 +10,8 @@ public class ChatChannelToName : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        var ch = ChatChannel.Say;
-        if (value is ChatChannel cc) ch = cc;
-        return TccUtils.ChatChannelToName(ch);
+        if (value is not ChatChannel cc) cc = ChatChannel.Say;
+        return TccUtils.ChatChannelToName(cc);
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

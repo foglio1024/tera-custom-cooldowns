@@ -11,27 +11,35 @@
     <converters:MessageTypeToCursor x:Key="MessageTypeToCursor"/>
     <converters:HPbarColorConverter x:Key="DebuffStatusToHpColor"/>
     <converters:HPbarColorConverter2 x:Key="DebuffStatusToHpColor2"/>
-    <converters:RowsToHeightConverter x:Key="RowsToHeight"/>
-    <converters:CooldownWindowModeToTemplateConverter x:Key="CooldowWindowModeToTemplate"/>
     <converters:PieceToPathConverter x:Key="PieceToPath"/>
     <converters:GearLevelToFactorConverter x:Key="GearLevelToFactor"/>
     <converters:GearLevelToColorConverter x:Key="GearLevelToColor"/>
     <converters:LogoInfoToImageConverter x:Key="LogoInfoToImage"/>
-    <converters:DirectionToHorAlignConveter x:Key="DirectionToHorAlignConveter"/>
-    <converters:AbnormalityTypeToColorConverter x:Key="AbnormalityTypeToStrokeColor"/>
+    <converters:AbnormalityTypeToColorConverter x:Key="AbnormalityTypeToStrokeColor"
+                                                Stun="{StaticResource AbnormalityStunBrush}"
+                                                DOT="{StaticResource AbnormalityDotBrush}"
+                                                Debuff="{StaticResource AbnormalityDebuffBrush}"
+                                                Buff="{StaticResource AbnormalityBuffBrush}"
+                                                Special="{StaticResource GoldBrush}"
+                                                />
     <converters:MessageTextToIconConverter x:Key="MessageTextToIcon"/>
-    <!--<converters:ClassToReColorConverter x:Key="ReColorConverter"/>-->
 
     <!--BossGage resources-->
     <converters:EntityIdToNameConverter x:Key="EntityIdToName"/>
     <converters:EntityIdToClassConverter x:Key="EntityIdToClass"/>
-    <converters:AggroTypeToFillConverter x:Key="AggroTypeToFill"/>
+    <converters:AggroTypeToFillConverter x:Key="AggroTypeToFill"
+                                         Main="{StaticResource GoldBrush}"
+                                         Secondary="{StaticResource TwitchBrush}"
+                                         />
     <converters:DragonIdToColorConverter x:Key="DragonIdToColor"/>
     <converters:HHphaseToEnemyWindowTemplate x:Key="HarrowholdPhaseToLayout"/>
 
     <!--Party/raid member resources-->
-    <!--<converters:LaurelImageConverter x:Key="LaurelToImage"/>-->
-    <converters:ClassToFillConverter x:Key="ClassToFill"/>
+    <converters:ClassToFillConverter x:Key="ClassToFill"
+                                     Dps="{StaticResource DpsRoleBrush}"
+                                     Tank="{StaticResource TankRoleBrush}"
+                                     Healer="{StaticResource HealerRoleBrush}"
+                                     />
     <converters:GroupSizeToTemplateConverter x:Key="GroupSizeToTemplate"/>
     <converters:RaidToColorConverter x:Key="RaidToColor"/>
     <nsConv:ValueConverterGroup x:Key="ClassToTransparentFill" >
@@ -49,7 +57,6 @@
 
     <converters:StringToFillConverter x:Key="StringToFill"/>
     <converters:GuardianPointsStringConverter x:Key="GuardianPointsStringConverter"/>
-    <converters:ClassToNameConverter x:Key="ClassToName" />
 
     <converters:ItemLevelTierToColorConverter x:Key="IlvlTierToColor" />
     <converters:EntriesToColor x:Key="EntriesToColor" />
