@@ -44,6 +44,12 @@
     <SolidColorBrush x:Key="TeraRestyleBorderBrush"         Color="{StaticResource TeraRestyleBorderColor}"                    />
     <SolidColorBrush x:Key="TeraRestyleBorderBrushLight"    Color="{StaticResource TeraRestyleBorderColorLight}"               />
 
+    <SolidColorBrush x:Key="AbnormalityBuffBrush"           Color="{StaticResource AbnormalityBuffColor}"             />
+    <SolidColorBrush x:Key="AbnormalityStunBrush"           Color="{StaticResource AbnormalityStunColor}"             />
+    <SolidColorBrush x:Key="AbnormalityDebuffBrush"         Color="{StaticResource AbnormalityDebuffColor}"             />
+    <SolidColorBrush x:Key="AbnormalityDotBrush"            Color="{StaticResource AbnormalityDotColor}"             />
+
+
     <SolidColorBrush x:Key="HpBrush"                        Color="{StaticResource HpColor}"                                   />
     <SolidColorBrush x:Key="HpBrushLight"                   Color="{StaticResource HpColorLight}"                              />
     <SolidColorBrush x:Key="MpBrush"                        Color="{StaticResource MpColor}"                                   />
