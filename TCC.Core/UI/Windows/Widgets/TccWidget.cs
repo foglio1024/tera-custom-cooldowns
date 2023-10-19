@@ -430,9 +430,9 @@ public class TccWidget : Window
     {
         if (ButtonsRef == null) return;
 
-        var screenMiddle = WindowManager.ScreenSize.Height / 2;
-        var middle = Top + Height / 2;
-        var deadzone = WindowManager.ScreenSize.Height / 15;
+        var screenMiddle = WindowManager.ScreenSize.Height / 2f;
+        var middle = (Top*this.GetDpiScale().DpiScaleY) + Height / 2f;
+        var deadzone = WindowManager.ScreenSize.Height / 15f;
         var distance = Math.Abs(screenMiddle - middle);
 
         if (!(distance > deadzone)) return;
