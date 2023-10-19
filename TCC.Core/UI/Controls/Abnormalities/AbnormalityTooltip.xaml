@@ -30,15 +30,15 @@
             <Run Text="{Binding Id, RelativeSource={RelativeSource AncestorType=abnormalities:AbnormalityToolTipControl}}" Foreground="#3fff" FontSize="10"/>
 
         </TextBlock>
-        <Image Source="{Binding Abnormality.IconName, Converter={StaticResource IconNameToPath}}" Width="48" Height="48" Margin="10 10 0 10" Effect="{StaticResource DropShadow}"/>
-        <Rectangle StrokeThickness="1" Stroke="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}" Width="48" Height="48" Margin="10 10 0 10" />
-
-        <!--<Rectangle StrokeThickness="1" Stroke="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Rectangle.Effect>
-                <BlurEffect Radius="10"/>
-            </Rectangle.Effect>
+        <Rectangle StrokeThickness="1" Stroke="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}" 
+                   Width="48" Height="48" Margin="10 10 0 10" 
+                   RadiusX="5" RadiusY="5"
+                   Effect="{StaticResource DropShadow}">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding Abnormality.IconName, Converter={StaticResource IconNameToPath}}" />
+            </Rectangle.Fill>
         </Rectangle>
-        <Rectangle StrokeThickness="1" Stroke="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}" Grid.ColumnSpan="2" Grid.RowSpan="2"></Rectangle>-->
+
         <Border Grid.Row="1" BorderBrush="#20ffffff" BorderThickness="0 1 0 0" Margin="10 0" Grid.ColumnSpan="2"/>
         <TextBlock x:Name="ToolTipTb" Grid.Row="1" Foreground="#91ffffff" TextWrapping="Wrap" Margin="10" Grid.ColumnSpan="2"/>
     </Grid>
