@@ -53,7 +53,7 @@ class TccLauncher
                 this.tryInstallRemover("S1UI_PartyBoardMemberInfo.gpk", installer, "LFG details info");
                 this.tryInstallRemover("S1UI_Chat2.gpk", installer, "Chat");
                 this.tryInstallRemover("S1UI_DistributionWindow.gpk", installer, "Dice roll");
-                // installer.gpk('gpk/S1UI_ProgressBar.gpk');
+                this.tryInstallRemover("S1UI_ProgressBar.gpk", installer, "Flight gauge");
                 return;
             }
 
@@ -93,12 +93,11 @@ class TccLauncher
                 this.tryInstallRemover("S1UI_PartyWindowRaidInfo.gpk", installer, "Raid windows");
             }
 
-            // if (settings.FlightGaugeWindowSettings.Enabled === true)
-            // {
-            //     installer.gpk('gpk/S1UI_ProgressBar.gpk');
-            //     m.log("Installed S1UI_ProgressBar remover.");
-            // }
-
+            if (settings.FlightGaugeWindowSettings.Enabled === true)
+            {
+                this.tryInstallRemover("S1UI_ProgressBar.gpk", installer, "Flight gauge");
+            }
+            
             if (settings.LfgWindowSettings.Enabled === true)
             {
                 this.tryInstallRemover("S1UI_PartyBoard.gpk", installer, "LFG window");
