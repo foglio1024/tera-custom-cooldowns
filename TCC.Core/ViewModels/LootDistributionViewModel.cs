@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -100,7 +100,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     public ThreadSafeObservableCollection<LootingGroupMember> Members { get; }
 
     public ICollectionView DistributionListView { get; }
-    public ICollectionView MembersView { get; }
+    public ICollectionViewLiveShaping MembersView { get; }
     public ICommand SetRollForCategoryCommand { get; }
     public ICommand SetPassForCategoryCommand { get; }
     public ICommand SetWaitForCategoryCommand { get; }
@@ -116,9 +116,10 @@ public class LootDistributionViewModel : TccWindowViewModel
             new SortDescription($"{nameof(LootItemViewModel.Item)}.{nameof(DropItem.ItemId)}", ListSortDirection.Ascending)
         });
 
-        MembersView = CollectionViewFactory.CreateCollectionView(Members, sortDescr: new[] {
+        MembersView = CollectionViewFactory.CreateLiveCollectionView(Members, sortFilters: new[] {
+            new SortDescription($"{nameof(LootingGroupMember.IsPlayer)}", ListSortDirection.Descending),
             new SortDescription($"{nameof(LootingGroupMember.Roll)}", ListSortDirection.Descending)
-        });
+        })!;
 
         DistributionListView.GroupDescriptions.Add(new PropertyGroupDescription($"{nameof(LootItemViewModel.DbItem)}.{nameof(Item.Id)}"));
 

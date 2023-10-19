@@ -46,8 +46,11 @@ public class LootingGroupMember : ThreadSafeObservableObject
         }
     }
 
+    public bool IsPlayer { get; }
+    
     public LootingGroupMember(GroupMemberData member)
     {
+        IsPlayer = Game.IsMe(member.EntityId);
         Member = member;
     }
 }
