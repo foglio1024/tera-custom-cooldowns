@@ -370,7 +370,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         // vergos ph4
         if (TemplateId == 4000 && ZoneId == 950) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
         // nightmare kylos
-        if (TemplateId == 3000 && ZoneId == 982) TimerPattern = new HpTriggeredTimerPattern(9 * 60, .8f);
+        if (TemplateId == 3000 && ZoneId == 982) TimerPattern = new HpTriggeredTimerPattern(8 * 60, .9f);
         // nightmare antaroth
         if (TemplateId == 3000 && ZoneId == 920) TimerPattern = new HpTriggeredTimerPattern(5 * 60, .5f);
         // bahaar
