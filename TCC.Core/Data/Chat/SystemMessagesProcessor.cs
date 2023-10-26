@@ -60,56 +60,56 @@ public static class SystemMessagesProcessor
                     }
 
                     string mp;
-                    if (inPiece.StartsWith("@select"))
+                    if (inPiece.StartsWith("@select", StringComparison.InvariantCultureIgnoreCase))
                     {
                         selectionStep++;
                         continue;
                     }
 
-                    if (inPiece.StartsWith("@item"))
+                    if (inPiece.StartsWith("@item", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgItem(inPiece);
                     }
-                    else if (inPiece.StartsWith("@abnormal"))
+                    else if (inPiece.StartsWith("@abnormal", StringComparison.InvariantCultureIgnoreCase))
                     {
                         var abName = "Unknown";
                         if (Game.DB!.AbnormalityDatabase.Abnormalities.TryGetValue(uint.Parse(inPiece.Split(':')[1]),
                                 out var ab)) abName = ab.Name;
                         mp = abName;
                     }
-                    else if (inPiece.StartsWith("@achievement"))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgAchi(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@GuildQuest"))
+                    else if (inPiece.StartsWith("@GuildQuest", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgGuildQuest(inPiece);
                     }
-                    else if (inPiece.StartsWith("@dungeon"))
+                    else if (inPiece.StartsWith("@dungeon", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgDungeon(inPiece);
                     }
-                    else if (inPiece.StartsWith("@accountBenefit"))
+                    else if (inPiece.StartsWith("@accountBenefit", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgAccBenefit(inPiece);
                     }
-                    else if (inPiece.StartsWith("@AchievementGradeInfo"))
+                    else if (inPiece.StartsWith("@AchievementGradeInfo", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgAchiGrade(inPiece);
                     }
-                    else if (inPiece.StartsWith("@quest"))
+                    else if (inPiece.StartsWith("@achievement", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        mp = SystemMessageParser.ParseSysMsgAchi(inPiece);
+                    }
+                    else if (inPiece.StartsWith("@quest", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgQuest(inPiece);
                     }
-                    else if (inPiece.StartsWith("@creature"))
+                    else if (inPiece.StartsWith("@creature", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgCreature(inPiece);
                     }
-                    else if (inPiece.StartsWith("@rgn"))
+                    else if (inPiece.StartsWith("@rgn", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgRegion(inPiece);
                     }
-                    else if (inPiece.StartsWith("@zoneName"))
+                    else if (inPiece.StartsWith("@zoneName", StringComparison.InvariantCultureIgnoreCase))
                     {
                         mp = SystemMessageParser.ParseSysMsgZone(inPiece);
                     }

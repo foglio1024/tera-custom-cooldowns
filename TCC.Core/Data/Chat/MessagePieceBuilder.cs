@@ -49,7 +49,7 @@ public static class SystemMessageParser
 
         var id = ChatUtils.GetId(dictionary, "achievement");
         var achiName = id.ToString();
-        if (Game.DB!.AchievementDatabase.Achievements.TryGetValue(id * 1000 + 1, out var g2))
+        if (Game.DB!.AchievementDatabase.TryGetAchievementName(id, out var g2))
         {
             achiName = $"[{g2}]";
         }
@@ -67,7 +67,7 @@ public static class SystemMessageParser
     public static string ParseSysMsgAchiGrade(string msgText)
     {
         var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-        var id = ChatUtils.GetId(dictionary, "AchievementGradeInfo");
+        var id = ChatUtils.GetId(dictionary, "achievementgradeinfo");
         var txt = id.ToString();
         if (Game.DB!.AchievementGradeDatabase.Grades.TryGetValue(id, out var g)) txt = g;
         return txt;
@@ -83,7 +83,7 @@ public static class SystemMessageParser
     public static string ParseSysMsgAccBenefit(string msgText)
     {
         var dictionary = ChatUtils.BuildParametersDictionary(msgText);
-        var id = ChatUtils.GetId(dictionary, "accountBenefit");
+        var id = ChatUtils.GetId(dictionary, "accountbenefit");
         var txt = id.ToString();
         if (Game.DB!.AccountBenefitDatabase.Benefits.TryGetValue(id, out var ab)) txt = ab;
         return txt;
@@ -92,7 +92,7 @@ public static class SystemMessageParser
     {
         var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
-        var id = ChatUtils.GetId(dictionary, "GuildQuest");
+        var id = ChatUtils.GetId(dictionary, "guildquest");
         var questName = id.ToString();
         if (Game.DB!.GuildQuestDatabase.GuildQuests.TryGetValue(id, out var q))
         {
@@ -164,7 +164,7 @@ public static class MessagePieceBuilder
     {
         var dictionary = ChatUtils.BuildParametersDictionary(msgText);
 
-        var id = ChatUtils.GetId(dictionary, "AchievementGradeInfo");
+        var id = ChatUtils.GetId(dictionary, "achievementgradeinfo");
         var txt = id.ToString();
         var col = "fcb06f";
 

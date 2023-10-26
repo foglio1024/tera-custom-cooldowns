@@ -95,69 +95,69 @@ public class SystemMessage : ChatMessage
                 }
 
                 MessagePieceBase mp;
-                if (inPiece.StartsWith("@select"))
+                if (inPiece.StartsWith("@select", StringComparison.InvariantCultureIgnoreCase))
                 {
                     selectionStep++;
                     continue;
                 }
-                if (inPiece.StartsWith("@item"))
+                if (inPiece.Contains("@item", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgItem(inPiece);
                 }
-                else if (inPiece.StartsWith("@abnormal"))
+                else if (inPiece.Contains("@abnormal", StringComparison.InvariantCultureIgnoreCase))
                 {
                     var abName = "Unknown";
                     if (Game.DB!.AbnormalityDatabase.Abnormalities.TryGetValue(
                             uint.Parse(inPiece.Split(':')[1]), out var ab)) abName = ab.Name;
                     mp = new SimpleMessagePiece(abName, App.Settings.FontSize, false) { Color = col };
                 }
-                else if (inPiece.StartsWith("@achievement"))
-                {
-                    mp = MessagePieceBuilder.BuildSysMsgAchi(inPiece);
-                    mp.Color = col;
-                }
-                else if (inPiece.StartsWith("@GuildQuest"))
+                else if (inPiece.Contains("@guildquest", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgGuildQuest(inPiece);
                     mp.Color = col;
                 }
-                else if (inPiece.StartsWith("@dungeon"))
+                else if (inPiece.Contains("@dungeon", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgDungeon(inPiece);
                     mp.Color = col;
                 }
-                else if (inPiece.StartsWith("@accountBenefit"))
+                else if (inPiece.Contains("@accountbenefit", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgAccBenefit(inPiece);
                     mp.Color = col;
                 }
-                else if (inPiece.StartsWith("@AchievementGradeInfo"))
+                else if (inPiece.Contains("@achievementgradeinfo", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgAchiGrade(inPiece);
                 }
-                else if (inPiece.StartsWith("@quest"))
+                else if (inPiece.Contains("@achievement", StringComparison.InvariantCultureIgnoreCase)) // this has to be here, find a better way pls
+                {
+                    mp = MessagePieceBuilder.BuildSysMsgAchi(inPiece);
+                    mp.Color = col;
+                }
+                else if (inPiece.Contains("@quest", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgQuest(inPiece);
                     mp.Color = col;
                 }
-                else if (inPiece.StartsWith("@creature"))
+                else if (inPiece.Contains("@creature", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgCreature(inPiece);
                     mp.Color = col;
                 }
-                else if (inPiece.StartsWith("@rgn"))
+                else if (inPiece.Contains("@rgn", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgRegion(inPiece);
                     mp.Color = col;
                 }
-                else if (inPiece.StartsWith("@zoneName"))
+                else if (inPiece.Contains("@zonename", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgZone(inPiece);
                     mp.Color = col;
                 }
-                else if (inPiece.Contains("@money"))
+                else if (inPiece.Contains("@money", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var t = inPiece.Replace("@money", "");
+                    var t = inPiece.Replace("@money", "", StringComparison.InvariantCultureIgnoreCase);
                     mp = new MoneyMessagePiece(new Money(t));
                     Channel = ChatChannel.Money;
                 }
