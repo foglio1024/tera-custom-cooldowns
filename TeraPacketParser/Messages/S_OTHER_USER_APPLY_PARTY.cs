@@ -28,12 +28,13 @@ public class S_OTHER_USER_APPLY_PARTY : ParsedMessage
         else
         {
             var nameOffset = reader.ReadUInt16();
-            reader.Skip(1);
+            reader.Skip(1); // isRaid?
             PlayerId = reader.ReadUInt32();
             Class = (Class)reader.ReadInt16();
-            reader.Skip(4);
+            reader.Skip(4); //race, gender
             Level = reader.ReadInt16();
-            reader.BaseStream.Position = nameOffset - 4;
+            reader.RepositionAt(nameOffset);
+            // bool isWorldEventTarget?
             Name = reader.ReadTeraString();
         }
     }

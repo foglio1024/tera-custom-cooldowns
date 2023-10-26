@@ -72,7 +72,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     }
     public int Size => App.Settings.FontSize;
     public string PlainMessage { get; protected init; }
-    public string DisplayedAuthor { get; } = string.Empty;
+    public string DisplayedAuthor { get; protected init; } = string.Empty;
 
     #endregion
 

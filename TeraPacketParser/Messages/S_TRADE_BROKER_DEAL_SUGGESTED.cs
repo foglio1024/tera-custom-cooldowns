@@ -2,13 +2,13 @@
 
 public class S_TRADE_BROKER_DEAL_SUGGESTED : ParsedMessage
 {
-    public uint PlayerId { get; private set; }
-    public uint Listing { get; private set; }
-    public int Item { get; private set; }
-    public long Amount { get; private set; }
-    public long SellerPrice { get; private set; }
-    public long OfferedPrice { get; private set; }
-    public string Name { get; private set; }
+    public uint PlayerId { get; }
+    public uint Listing { get; }
+    public int Item { get; }
+    public long Amount { get; }
+    public long SellerPrice { get; }
+    public long OfferedPrice { get; }
+    public string Name { get; }
 
     public S_TRADE_BROKER_DEAL_SUGGESTED(TeraMessageReader reader) : base(reader)
     {

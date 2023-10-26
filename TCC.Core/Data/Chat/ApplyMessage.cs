@@ -15,6 +15,7 @@ public class ApplyMessage : ChatMessage
     {
         Channel = ChatChannel.Apply;
         Author = name;
+        DisplayedAuthor = Author;
         PlayerId = playerId;
         PlayerLevel = level;
         UserClass = c;

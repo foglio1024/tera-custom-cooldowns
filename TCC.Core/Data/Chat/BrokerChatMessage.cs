@@ -20,6 +20,7 @@ public class BrokerChatMessage : ChatMessage
         ContainsPlayerName = true;
         Channel = ChatChannel.Bargain;
         Author = name;
+        DisplayedAuthor = Author;
         ListingId = listing;
         PlayerId = playerId;
 
