@@ -10,6 +10,7 @@ public class S_FRIEND_LIST : ParsedMessage
     {
         var friendsCount = reader.ReadUInt16();
         var friendsPtr = reader.ReadUInt16();
+        if (friendsPtr == 0) return;
         reader.RepositionAt(friendsPtr);
 
         for (var i = 0; i < friendsCount; i++)

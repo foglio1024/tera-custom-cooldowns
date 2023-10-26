@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -77,6 +78,8 @@ public partial class App
         AppVersion = TccUtils.GetTccVersion();
         Log.Config(Path.Combine(BasePath, "logs"), AppVersion); // NLog when?
         ParseStartupArgs(e.Args.ToList());
+        
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
         FirstStart = !File.Exists(Path.Combine(BasePath, SettingsGlobals.SettingsFileName));
 

@@ -5,7 +5,22 @@
 
     <converters:RollToStringConverter x:Key="RollToString"/>
     <converters:IconConverter x:Key="IconNameToPath"/>
-    <converters:ClassSvgConverter x:Key="ClassToSvg"/>
+    <converters:ClassSvgConverter x:Key="ClassToSvg"
+                                    Warrior="{StaticResource SvgClassWarrior}"
+                                    Lancer="{StaticResource SvgClassLancer}"
+                                    Slayer="{StaticResource SvgClassSlayer}"
+                                    Berserker="{StaticResource SvgClassBerserker}"
+                                    Sorcerer="{StaticResource SvgClassSorcerer}"
+                                    Archer="{StaticResource SvgClassArcher}"
+                                    Priest="{StaticResource SvgClassPriest}"
+                                    Mystic="{StaticResource SvgClassMystic}"
+                                    Reaper="{StaticResource SvgClassReaper}"
+                                    Gunner="{StaticResource SvgClassGunner}"
+                                    Brawler="{StaticResource SvgClassBrawler}"
+                                    Ninja="{StaticResource SvgClassNinja}"
+                                    Valkyrie="{StaticResource SvgClassValkyrie}"
+                                    Common="{StaticResource SvgClassCommon}"
+                                    />
     <converters:ChatChannelToColorConverter x:Key="ChatChannelToColor"/>
     <converters:ChatChannelToName x:Key="ChatChannelToName"/>
     <converters:MessageTypeToCursor x:Key="MessageTypeToCursor"/>

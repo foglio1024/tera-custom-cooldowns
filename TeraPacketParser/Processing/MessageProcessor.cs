@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TCC.Utils;
 using TCC.Utils.Exceptions;
 
@@ -10,8 +11,6 @@ public class MessageProcessor
 {
     readonly ConcurrentDictionary<Type, List<Delegate>> _hooks;
 
-    readonly object _lock = new();
-
     public MessageProcessor()
     {
         _hooks = new ConcurrentDictionary<Type, List<Delegate>>();
@@ -19,16 +18,16 @@ public class MessageProcessor
 
     public void Hook<T>(Action<T> action)
     {
-        lock (_lock)
+        lock (_hooks)
         {
             if (!_hooks.TryGetValue(typeof(T), out _)) _hooks[typeof(T)] = new List<Delegate>();
             if (!_hooks[typeof(T)].Contains(action)) _hooks[typeof(T)].Add(action);
         }
     }
-        
+
     public void Unhook<T>(Action<T> action)
     {
-        lock (_lock)
+        lock (_hooks)
         {
             if (!_hooks.TryGetValue(typeof(T), out var handlers)) return;
             handlers.Remove(action);
@@ -36,9 +35,10 @@ public class MessageProcessor
     }
     public void Handle(ParsedMessage? msg)
     {
-        lock (_lock)
+        if (msg == null) return;
+
+        lock (_hooks)
         {
-            if (msg == null) return;
             if (!_hooks.TryGetValue(msg.GetType(), out var handlers)) return;
             handlers.ForEach(del =>
             {

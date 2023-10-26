@@ -184,7 +184,6 @@ public class ToolboxSniffer : ITeraSniffer
             if (_connected == value) return;
             _connected = value;
             if (!_connected) EndConnection?.Invoke();
-
         }
     }
 
