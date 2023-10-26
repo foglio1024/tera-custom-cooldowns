@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,7 +18,6 @@ using TCC.ViewModels.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
-using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ViewModels;
 
@@ -27,8 +26,8 @@ public class LootDistributionViewModel : TccWindowViewModel
 {
     readonly Dictionary<GameId, DropItem> _droppedItems = new();
     readonly Dictionary<(uint, uint), uint> _amountsDistributed = new();
-    readonly DispatcherTimer _timer;
-    readonly DispatcherTimer _delay;
+    readonly DispatcherTimer _countdown;
+    readonly DispatcherTimer _commitDelay;
     readonly DispatcherTimer _clear;
 
     LootDistributionWindowSettings _settings => (LootDistributionWindowSettings)Settings!;
@@ -37,7 +36,6 @@ public class LootDistributionViewModel : TccWindowViewModel
     bool _isListVisible;
     int _itemsLeftAmount;
     int _timeLeft = 59;
-    int _index;
     float _delayFactor;
 
     public LootItemViewModel? ItemInDistribution
@@ -131,14 +129,14 @@ public class LootDistributionViewModel : TccWindowViewModel
         Game.Group.CompositionChanged += OnGroupCompositionChanged;
         Game.LoggedChanged += OnLoginStatusChanged;
 
-        _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
-        _timer.Tick += OnTimerTick;
+        _countdown = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _countdown.Tick += OnCountdownTick;
 
         settings.DelayChanged += OnDelaySettingChanged;
         settings.AutoRollPolicyChanged += OnAutoRollPolicyChanged;
 
-        _delay = new DispatcherTimer { Interval = TimeSpan.FromSeconds(settings.AutorollDelaySec) };
-        _delay.Tick += OnDelayTick;
+        _commitDelay = new DispatcherTimer { Interval = TimeSpan.FromSeconds(settings.AutorollDelaySec) };
+        _commitDelay.Tick += OnDelayTick;
 
         _clear = new DispatcherTimer { Interval = TimeSpan.FromSeconds(90) };
         _clear.Tick += OnClearTick;
@@ -163,6 +161,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     void OnClearTick(object? sender, EventArgs e)
     {
         _clear.Stop();
+        WindowManager.LootDistributionWindow.HideWindow();
         ClearLoot();
     }
 
@@ -202,58 +201,42 @@ public class LootDistributionViewModel : TccWindowViewModel
         DistributionList.Clear();
         _droppedItems.Clear();
         _amountsDistributed.Clear();
-        _timer.Stop();
-        _delay.Stop();
-        ItemInDistribution = null;
+        _countdown.Stop();
+        _commitDelay.Stop();
+        if (ItemInDistribution != null)
+        {
+            ItemInDistribution.DistributionStatus = DistributionStatus.Waiting;
+            ItemInDistribution = null;
+        }
         TimeLeft = 59;
     }
 
     void OnDelaySettingChanged(int newValue)
     {
-        _delay.Interval = TimeSpan.FromSeconds(newValue);
+        _commitDelay.Interval = TimeSpan.FromSeconds(newValue);
         DelayFactor = newValue / 59f;
     }
 
     void OnDelayTick(object? sender, EventArgs e)
     {
-        SetBidIntent();
-    }
-
-    void SetBidIntent()
-    {
-        if (ItemInDistribution != null)
+        if (ItemInDistribution != null && ItemInDistribution.BidIntent != BidAction.Unset)
         {
-            switch (ItemInDistribution.BidIntent)
-            {
-                case BidAction.Pass:
-                    FocusManager.SendPgDown(500);
-                    ItemInDistribution.BidSent = true;
-                    break;
-
-                case BidAction.Roll:
-                    FocusManager.SendPgUp(500);
-                    ItemInDistribution.BidSent = true;
-                    break;
-
-                case BidAction.Unset:
-                    ItemInDistribution.Index = _index;
-                    break;
-            }
+            ItemInDistribution?.CommitIntent();
         }
-        _delay.Stop();
+        _commitDelay.Stop();
     }
 
-    void OnTimerTick(object? sender, EventArgs e)
+    void OnCountdownTick(object? sender, EventArgs e)
     {
         TimeLeft--;
-        if (TimeLeft == 0) _timer.Stop();
+        if (TimeLeft == 0) _countdown.Stop();
     }
 
     void ResetTimeLeft()
     {
-        _timer.Stop();
+        _countdown.Stop();
         TimeLeft = 59;
-        _timer.Start();
+        _countdown.Start();
     }
 
     void ToggleListView()
@@ -266,6 +249,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
         {
             x.BidIntent = BidAction.Roll;
+            if (x.DistributionStatus is DistributionStatus.Distributing) x.CommitIntent();
         });
     }
 
@@ -274,6 +258,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
         {
             x.BidIntent = BidAction.Pass;
+            if (x.DistributionStatus is DistributionStatus.Distributing) x.CommitIntent();
         });
     }
 
@@ -296,14 +281,7 @@ public class LootDistributionViewModel : TccWindowViewModel
             case GroupCompositionChangeReason.Disbanded:
                 PacketAnalyzer.Processor.Unhook<S_SPAWN_DROPITEM>(OnSpawnDropitem);
 
-                DistributionList.Clear();
-
-                Dispatcher.InvokeAsync(() =>
-                {
-                    IsListVisible = false;
-                    _droppedItems.Clear();
-                    _amountsDistributed.Clear();
-                });
+                ClearLoot(); // todo: Dispatcher.Invoke?
 
                 break;
         }
@@ -328,8 +306,8 @@ public class LootDistributionViewModel : TccWindowViewModel
 
             case GroupCompositionChangeReason.Updated:
                 var current = Members.ToSyncList();
-                var removed = current.Where(x => members.All(y => y.PlayerId != x.Member.PlayerId)).ToArray();
-                var added = members.Where(x => current.All(y => y.Member.PlayerId != x.PlayerId)).ToArray();
+                var removed = current.Where(x => members.All(y => y.EntityId != x.Member.EntityId)).ToArray();
+                var added = members.Where(x => current.All(y => y.Member.EntityId != x.EntityId)).ToArray();
 
                 Dispatcher.Invoke(() =>
                 {
@@ -420,17 +398,23 @@ public class LootDistributionViewModel : TccWindowViewModel
             });
         }
 
-        if (item!.BidIntent == BidAction.Unset)
-        {
-            if (_settings.AlwaysPass) item!.BidIntent = BidAction.Pass;
-            if (_settings.AlwaysRoll) item!.BidIntent = BidAction.Roll;
-        }
-
         ItemInDistribution = item;
 
+        if (ItemInDistribution!.BidIntent == BidAction.Unset)
+        {
+            if (_settings.AlwaysPass)
+            {
+                ItemInDistribution!.BidIntent = BidAction.Pass;
+            }
+            if (_settings.AlwaysRoll)
+            {
+                ItemInDistribution!.BidIntent = BidAction.Roll;
+            }
+        }
+
         ResetTimeLeft();
-        _index = m.Index; // todo: check logic of this
-        _delay.Start();
+        ItemInDistribution.Index = m.Index;
+        _commitDelay.Start();
 
         if (_settings.AutoShowUponRoll) Game.ShowLootDistributionWindow();
     }
@@ -454,10 +438,8 @@ public class LootDistributionViewModel : TccWindowViewModel
         if (Game.IsMe(m.EntityId) || Game.IsMe(m.PlayerId, m.ServerId))
         {
             Log.CW("  roll result is from player");
-            //var item = DistributionList.FirstOrDefault(x => x.DistributionStatus == DistributionStatus.Distributing);
             if (ItemInDistribution != null)
             {
-                //item.BidSent = true;
                 Log.CW("  setting BidSent to true");
                 ItemInDistribution.BidIntent = m.RollResult != -1 ? BidAction.Roll : BidAction.Pass;
                 ItemInDistribution.BidSent = true;
@@ -467,10 +449,10 @@ public class LootDistributionViewModel : TccWindowViewModel
                 Log.CW("!  no items in distribution not found");
             }
 
-            _delay.Stop();
+            _commitDelay.Stop();
         }
 
-        var members = Members.ToSyncList();
+        var members = Members.ToSyncList().ToArray();
 
         var member = members.FirstOrDefault(x =>
                 (x.Member.PlayerId == m.PlayerId && x.Member.ServerId == m.ServerId)
@@ -485,7 +467,9 @@ public class LootDistributionViewModel : TccWindowViewModel
         }
         else
         {
-            Log.CW("! group member not found");
+            var csv = members.Aggregate("", (current, m2) => current + $"{m2.Member.EntityId}:{m2.Member.Name} | ");
+
+            Log.CW($"! group member ({m.EntityId}) not found: {csv}");
         }
 
         // refresh winning status
@@ -530,7 +514,7 @@ public class LootDistributionViewModel : TccWindowViewModel
                 ItemInDistribution.WinnerName = winner.Member.Name;
                 ItemInDistribution.WinnerRoll = winner.Roll;
                 ItemInDistribution.DistributionStatus = DistributionStatus.Distributed;
-                Log.CW($"  item {ItemInDistribution.DbItem.Name} won by {winner}");
+                Log.CW($"  item {ItemInDistribution.DbItem.Name} won by {winner.Member.Name}");
             }
             else
             {
@@ -554,7 +538,7 @@ public class LootDistributionViewModel : TccWindowViewModel
             Log.CW("!  item in distribution not found");
         }
 
-        _timer.Stop();
+        _countdown.Stop();
 
         ItemInDistribution = null;
 

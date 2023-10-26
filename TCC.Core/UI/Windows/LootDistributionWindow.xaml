@@ -112,7 +112,7 @@
                     <Button x:Name="RollBtn" Content="Roll" 
                             Foreground="White"
                             CommandParameter="{x:Static viewmodels:BidAction.Roll}"
-                            nsEx:ButtonExtensions.CornerRadius="12" 
+                            nsEx:ButtonExtensions.CornerRadius="5" 
                             Style="{StaticResource BidButtonStyle}" 
                             Command="{Binding ItemInDistribution.SetBidIntentCommand}"
                             Margin="1 1 2.5 1"
@@ -123,7 +123,7 @@
                             CommandParameter="{x:Static viewmodels:BidAction.Pass}"
                             FontSize="10" Padding="4" Margin="2.5 1 1 1"
                             Command="{Binding ItemInDistribution.SetBidIntentCommand}"
-                            nsEx:ButtonExtensions.CornerRadius="12" 
+                            nsEx:ButtonExtensions.CornerRadius="5" 
                             Style="{StaticResource BidButtonStyle}"/>
 
                 </UniformGrid>
@@ -384,7 +384,7 @@
                         Background="{StaticResource RevampDarkerBackground70Brush}"
                         BorderThickness="1"
                         Opacity=".95" 
-                        CornerRadius="5 5 16 16"
+                        CornerRadius="5"
                         UseLayoutRounding="True"
                         VerticalAlignment="Top"
                         BorderBrush="{StaticResource RevampBorderBrush}"
