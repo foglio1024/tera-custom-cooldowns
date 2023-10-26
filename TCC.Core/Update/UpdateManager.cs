@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -160,13 +161,12 @@ public static class UpdateManager
     //---------------------------------------------------------------------
     static async Task Update(string url)
     {
-        // todo: need download progress support
-        using var c = MiscUtils.GetDefaultWebClient();
+        using var c = new HttpClientProgress();
         try
         {
             App.SplashScreen.VM.BottomText = "Downloading update...";
-            c.DownloadFileCompleted += (_, _) => _waitingDownload = false;
-            c.DownloadProgressChanged += (_, ev) => App.SplashScreen.VM.Progress = ev.ProgressPercentage;
+            c.DownloadFileCompleted += _ => _waitingDownload = false;
+            c.DownloadProgressChanged += (read, total) => App.SplashScreen.VM.Progress = (int)(100 * read / (double)total);
 
             await App.SplashScreen.Dispatcher.InvokeAsync(() =>
             {
@@ -202,7 +202,7 @@ public static class UpdateManager
         using var c = MiscUtils.GetDefaultHttpClient();
         try
         {
-            c.DownloadFileAsync("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/servers.txt", 
+            c.DownloadFileAsync("https://raw.githubusercontent.com/neowutran/TeraDpsMeterData/master/servers.txt",
                 Path.Combine(App.DataPath, "servers.txt")).Wait();
         }
         catch

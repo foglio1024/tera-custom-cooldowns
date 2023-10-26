@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json.Linq;
@@ -84,21 +85,20 @@ public class IconsUpdater
 
     async Task DownloadArchive()
     {
-        // todo: need download progress support
-        using var c = MiscUtils.GetDefaultWebClient();
-        c.DownloadProgressChanged += (_, ev) =>
+        using var c = new HttpClientProgress();
+
+        c.DownloadProgressChanged += (read, total) =>
         {
-            var total = ev.TotalBytesToReceive;
             if (total == -1) total = 71000000;
-            var perc = ev.BytesReceived * 100 / (double)total;
+            var perc = read * 100 / (double)total;
             if (_n == null) return;
             _n.Progress = perc;
             _n.Message =
-                $"Downloading icons...\n({ev.BytesReceived / (1024 * 1024D):N1}/{total / (1024 * 1024D):N1}MB)";
+                $"Downloading icons...\n({read / (1024 * 1024D):N1}/{total / (1024 * 1024D):N1}MB)";
         };
-        c.DownloadFileCompleted += async (_, args) =>
+        c.DownloadFileCompleted += async (success) =>
         {
-            if (args.Error != null)
+            if (!success)
             {
                 var res = TccMessageBox.Show(SR.IconDownloadFailed, MessageBoxType.ConfirmationWithYesNo);
                 if (res == MessageBoxResult.Yes) await DownloadArchive();
@@ -121,7 +121,7 @@ public class IconsUpdater
                 _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(notifId);
             }
 
-            await Task.Factory.StartNew(() => c.DownloadFileAsync(new Uri(IconsUrl), Path.Combine(App.BasePath, "icons.zip")));
+            await c.DownloadFileAsync(new Uri(IconsUrl), Path.Combine(App.BasePath, "icons.zip"));
         }
         catch (Exception)
         {
