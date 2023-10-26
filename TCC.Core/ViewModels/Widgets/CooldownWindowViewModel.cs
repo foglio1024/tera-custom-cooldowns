@@ -575,6 +575,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Hook<S_CREST_MESSAGE>(OnCrestMessage);
         PacketAnalyzer.Processor.Hook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
         PacketAnalyzer.Processor.Hook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
+        PacketAnalyzer.Processor.Hook<S_ABNORMALITY_END>(OnAbnormalityEnd);
 
     }
     protected override void RemoveHooks()
@@ -588,7 +589,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_CREST_MESSAGE>(OnCrestMessage);
         PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
         PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
-
+        PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
     }
 
     void OnDisconnected()
@@ -630,6 +631,14 @@ public class CooldownWindowViewModel : TccWindowViewModel
         if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
         if (Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
+    }
+
+    void OnAbnormalityEnd(S_ABNORMALITY_END p)
+    {
+        if (App.Settings.EthicalMode) return;
+        if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
+
+        if (Game.IsMe(p.TargetId)) CheckPassivity(ab, 0);
     }
 
     void OnLogin(S_LOGIN m)
