@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
@@ -42,14 +43,14 @@ public static class ChatUtils
         var retDict = new Dictionary<string, string>();
         foreach (var stringPair in stringPairs)
         {
-            var paremterPair = stringPair.Split(':');
+            var paremterPair = stringPair.Split(':').Select(x => x.ToLowerInvariant()).ToArray();
             if (paremterPair.Length == 1)
             {
                 if (paremterPair[0] == "masterpiece") retDict["masterpiece"] = "Masterwork";
                 if (paremterPair[0] == "awakened") retDict["awakened"] = "Awakened";
                 continue;
             }
-            retDict[paremterPair[0]] = paremterPair[1];
+            retDict[paremterPair[0]] = paremterPair[1].ToLowerInvariant();
         }
         return retDict;
     }
