@@ -673,7 +673,10 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
     {
-        if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+        if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)
+         && !Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Class.Common, out skill))
+            return;
+
         if (!Pass(skill)) return;
         RouteSkill(new Cooldown(skill, m.Cooldown));
     }
@@ -709,8 +712,8 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     static bool Pass(Skill sk)
     {
-        if (sk.Detail == "off") return false;
+        if (sk.Detail is "off" or "mount" or "eventseed") return false;
         if (sk.Id == 245109 && Game.Me.Class == Class.Valkyrie) return false; // bad but idk
-        return sk.Class != Class.Common && sk.Class != Class.None;
+        return sk.Class != Class.None;
     }
 }

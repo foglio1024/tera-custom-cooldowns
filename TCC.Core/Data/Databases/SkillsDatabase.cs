@@ -21,51 +21,6 @@ public class SkillsDatabase : DatabaseBase
 
     }
 
-    /*
-            private string FindSkillNameByIdClass(uint id, Class c)
-            {
-                if (Skills[c].TryGetValue(id, out var sk))
-                {
-                    return sk.Name;
-                }
-                else return "Not found";
-
-            }
-    */
-
-    /*
-            private int GetSkillIdByConnectedId(uint id, Class c)
-            {
-                foreach (var skillConnection in SkillConnections.Where(x => x.Class == c))
-                {
-                    foreach (var connectedSkill in skillConnection.ConnectedSkills)
-                    {
-                        if ((int)id == connectedSkill)
-                        {
-                            return skillConnection.Id;
-                        }
-                    }
-                }
-                return -1;
-            }
-    */
-    /*
-            public string SkillIdToName(uint id, Class c)
-            {
-                var name = FindSkillNameByIdClass(id, c);
-                var connSkill = GetSkillIdByConnectedId(id, c);
-
-                if (name != "Not found") //found skill
-                {
-                    return name;
-                }
-                else if (connSkill != -1) //skill found in connected skills
-                {
-                    name = FindSkillNameByIdClass(id, c);
-                }
-                return name;
-            }
-    */
     public bool TryGetSkill(uint id, Class c, out Skill sk)
     {
         var result = false;
@@ -75,18 +30,20 @@ public class SkillsDatabase : DatabaseBase
         result = true;
 
         return result;
-
     }
 
     //TODO do this better one day
-    public IEnumerable<Skill> SkillsForClass(Class c)
+    public IEnumerable<Skill> SkillsForClass(Class c, bool includeCommon = true)
     {
-        var list = new ThreadSafeObservableCollection<Skill>();
         var skillsForClass = Skills[c];
-        foreach (var skill in skillsForClass.Values.Where(skill => list.All(x => x.IconName != skill.IconName)
-                        && !IsIgnoredSkill(skill)))
+
+        var list = skillsForClass.Values.Where(skill => !IsIgnoredSkill(skill))
+            .DistinctBy(x => x.IconName)
+            .ToList();
+
+        if (includeCommon)
         {
-            list.Add(skill);
+            list.AddRange(Skills[Class.Common].Values.Where(skill => skill.Detail is not "mount" and not "eventseed"));
         }
         return list;
     }

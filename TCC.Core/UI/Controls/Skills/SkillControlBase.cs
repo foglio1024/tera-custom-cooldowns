@@ -73,7 +73,6 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
     }
     protected virtual void OnUnloaded(object sender, RoutedEventArgs e) //TODO: maybe use DataContextChanged
     {
-        Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
         if (Context == null)
         {
