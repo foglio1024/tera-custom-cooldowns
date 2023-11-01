@@ -37,7 +37,7 @@ public class OpCodeNamer
         {
             filename = filename.Contains("smt_")
                 ? filename.Replace("smt_", "sysmsg.").Replace(".txt", ".map")
-                : Path.GetDirectoryName(filename) + "/protocol." + Path.GetFileName(filename).Replace(".txt", ".map");
+                : $"{Path.GetDirectoryName(filename)}/protocol.{Path.GetFileName(filename).Replace(".txt", ".map")}";
         }
 
         if (!File.Exists(filename)) { return new List<KeyValuePair<ushort, string>>(); }
@@ -46,26 +46,27 @@ public class OpCodeNamer
 
         var names = File.ReadLines(filename)
             .Select(s => Regex.Replace(s.Replace("=", " "), @"\s+", " ").Split(' ').ToArray())
-            .Select(parts => new KeyValuePair<ushort, string>(ushort.Parse(parts[1]), parts[0]));
+            .Select(parts => new KeyValuePair<ushort, string>(ushort.Parse(parts[1]), parts[0].Replace("TTB_", ""))) // *sigh*
+            .Distinct();
         return names;
     }
 
     public ushort GetCode(string name)
     {
-        ushort code;
-        if (_opCodeCodes.TryGetValue(name, out code))
+        if (_opCodeCodes.TryGetValue(name, out var code))
             return code;
+
         Debug.WriteLine("Missing opcode: " + name);
         return 0;
-        //throw new ArgumentException($"Unknown name '{name}'");
     }
 
     public void Reload(uint version, int releaseVersion, string path)
     {
         var p = Path.GetDirectoryName(path) ?? "";
-        var filename = p + "/sysmsg." + version + ".map";
-        if (!File.Exists(filename)) filename = p + "/sysmsg." + releaseVersion / 100 + ".map";
+        var filename = $"{p}/sysmsg.{version}.map";
+        if (!File.Exists(filename)) filename = $"{p}/sysmsg.{releaseVersion / 100}.map";
         if (!File.Exists(filename)) return;
+
         var namesArray = ReadOpCodeFile(filename).Result.ToArray();
         _opCodeNames = namesArray.ToDictionary(parts => parts.Key, parts => parts.Value);
         _opCodeCodes = namesArray.ToDictionary(parts => parts.Value, parts => parts.Key);

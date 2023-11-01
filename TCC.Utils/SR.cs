@@ -62,7 +62,10 @@ public static class SR
     }
     public static string InvalidOpcodeFile(string error)
     {
-        return $"TCC encountered errors while reading opcodes file. This is probably caused by a manually mapped file containing wrong values. Error: {error}. TCC will now close.";
+        return $"TCC encountered errors while reading opcodes file. This is probably caused by a manually mapped file containing wrong values.\n\n" +
+            "This is NOT a TCC issue, so don't message me about it.\n\n Check #faq-rtfm in Tera DPS discord for more details.\n\n"+
+            "Error: {error}.\n\n" +
+            "TCC will now close.";
     }
     public static string InvalidSysMsgFile(int releaseVersion, uint factoryVersion)
     {
