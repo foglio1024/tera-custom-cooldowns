@@ -15,7 +15,7 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
 {
     #region INPC
     public event PropertyChangedEventHandler? PropertyChanged;
-    protected  void NPC([CallerMemberName] string? propertyName = null)
+    protected void NPC([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
@@ -37,7 +37,19 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
             NPC();
         }
     }
-    public string SecondsText => Context == null ? "0" : TimeUtils.FormatMilliseconds(Convert.ToInt64((Context.Seconds > uint.MaxValue ? 0 : Context.Seconds) * 1000), App.Settings.ShowDecimalsInCooldowns);
+
+    string _secondsText = "0";
+    public string SecondsText
+    {
+        get => _secondsText;
+        set
+        {
+            if (_secondsText == value) return;
+            _secondsText = value;
+            NPC();
+        }
+    }
+
 
     protected SkillControlBase()
     {
@@ -88,6 +100,7 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
     void OnSecondsUpdated()
     {
         NPC(nameof(SecondsText));
+        SecondsText = TimeUtils.FormatMilliseconds(Convert.ToInt64((Context?.Seconds > uint.MaxValue ? 0 : Context?.Seconds) * 1000), Context?.Seconds < 1 && App.Settings.ShowDecimalsInCooldowns);
     }
     protected virtual void OnCooldownStarted(ulong duration, CooldownMode mode)
     {
