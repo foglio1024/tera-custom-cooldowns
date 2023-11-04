@@ -418,7 +418,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     public void LoadConfig(Class c)
     {
-        if (c is Class.None or Class.Common) return;
+        if (c is Class.None) return;
 
         _dispatcher.InvokeAsyncIfRequired(() =>
         {
@@ -440,7 +440,8 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
             void TryAddToList(CooldownData cdData, ThreadSafeObservableCollection<Cooldown> list)
             {
-                if (!TccDatabase.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)) return;
+                if (!TccDatabase.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)
+                && !TccDatabase.GetSkillFromId(cdData.Id, Class.Common, cdData.Type, out sk)) return;
                 list.Add(new Cooldown(sk, false, cdData.Type, _dispatcher));
             }
             #endregion
