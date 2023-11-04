@@ -55,10 +55,24 @@ public partial class FixedSkillContainers
         if (VM == null) return;
         VM.SecondarySkills.CollectionChanged += SecondarySkills_CollectionChanged;
         VM.MainSkills.CollectionChanged += MainSkills_CollectionChanged;
+        VM.OtherSkills.CollectionChanged += OtherSkills_CollectionChanged;
         VM.SkillsLoaded += OnSkillsLoaded;
 
         OnSkillShapeChanged();
         SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
+    }
+
+    void OtherSkills_CollectionChanged(object? _, NotifyCollectionChangedEventArgs __)
+    {
+        SetSeparatorVisibility();
+    }
+
+    void SetSeparatorVisibility()
+    {
+        Dispatcher?.InvokeIfRequired(() =>
+        {
+            SecondRowSeparator.Visibility = VM?.SecondarySkills.Count == 0 || VM?.OtherSkills.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+        }, DispatcherPriority.DataBind);
     }
 
     void OnUnloaded(object _, RoutedEventArgs __)
@@ -70,6 +84,8 @@ public partial class FixedSkillContainers
         if (VM == null) return;
         VM.SecondarySkills.CollectionChanged -= SecondarySkills_CollectionChanged;
         VM.MainSkills.CollectionChanged -= MainSkills_CollectionChanged;
+        VM.OtherSkills.CollectionChanged -= OtherSkills_CollectionChanged;
+
         VM.SkillsLoaded -= OnSkillsLoaded;
     }
 
@@ -120,6 +136,7 @@ public partial class FixedSkillContainers
         if (e.Action != NotifyCollectionChangedAction.Remove) return;
         RefreshMeasure(SecSkills);
         VM?.SaveConfig();
+        SetSeparatorVisibility();
     }
 
     void ItemDragStarted(object? sender, DragablzDragStartedEventArgs e)

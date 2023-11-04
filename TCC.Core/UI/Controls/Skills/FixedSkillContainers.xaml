@@ -44,15 +44,15 @@
         </ItemsPanelTemplate>
 
         <LinearGradientBrush x:Key="TopBorderBackground" EndPoint="0 1">
-            <GradientStop Color="#0222" Offset="0" />
-            <GradientStop Color="#0222" Offset=".2" />
-            <GradientStop Color="#f222" Offset="1" />
+            <GradientStop Color="#02222839" Offset="0" />
+            <GradientStop Color="#02222839" Offset=".2" />
+            <GradientStop Color="#f2222839" Offset="1" />
         </LinearGradientBrush>
 
         <LinearGradientBrush x:Key="BottomBorderBackground" EndPoint="0 1">
-            <GradientStop Color="#b222" Offset="0" />
-            <GradientStop Color="#1222" Offset=".8" />
-            <GradientStop Color="#0222" Offset="1" />
+            <GradientStop Color="#b2222839" Offset="0" />
+            <GradientStop Color="#12222839" Offset=".8" />
+            <GradientStop Color="#02222839" Offset="1" />
         </LinearGradientBrush>
 
         <SineEase x:Key="Ease" EasingMode="EaseInOut" />
@@ -286,7 +286,7 @@
                     x:Name="MainBorderSec" HorizontalAlignment="Stretch" />
             <Border x:Name="MainBorder"
                     Margin="-4 0 0 2"
-                    BorderBrush="#555"
+                    BorderBrush="{StaticResource RevampBorderBrush}"
                     BorderThickness="0 0 0 1"
                     Background="{StaticResource TopBorderBackground}"
                     Effect="{x:Null}"
@@ -384,6 +384,11 @@
                 </dragablz:DragablzItemsControl.PositionMonitor>
             </dragablz:DragablzItemsControl>
 
+            <Ellipse x:Name="SecondRowSeparator" Grid.Column="1" Width="5" Height="5"
+                     Fill="#2fff" Margin="2" 
+                     VerticalAlignment="Center" HorizontalAlignment="Center"
+                     Visibility="Collapsed"/>
+            
             <!--Other skills-->
             <ItemsControl Name="OtherSkills"
                           Grid.Column="2"
