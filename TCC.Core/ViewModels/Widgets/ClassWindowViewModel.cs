@@ -69,6 +69,7 @@ public class ClassWindowViewModel : TccWindowViewModel
         if (!settings.Enabled) return;
         settings.WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
         settings.WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
+        settings.WarriorShowInfuriateChanged += OnWarriorShowInfuriateChanged;
         settings.WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
         settings.SorcererShowElementsChanged += OnSorcererShowElementsChanged;
         settings.ValkyrieShowGodsfallChanged += OnValkyrieShowGodsfallChanged;
@@ -83,6 +84,7 @@ public class ClassWindowViewModel : TccWindowViewModel
             CurrentClass = Class.None;
             ((ClassWindowSettings)Settings!).WarriorShowEdgeChanged -= OnWarriorShowEdgeChanged;
             ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged -= OnWarriorShowTraverseCutChanged;
+            ((ClassWindowSettings)Settings).WarriorShowInfuriateChanged -= OnWarriorShowInfuriateChanged;
             ((ClassWindowSettings)Settings).WarriorEdgeModeChanged -= OnWarriorEdgeModeChanged;
             ((ClassWindowSettings)Settings).SorcererShowElementsChanged -= OnSorcererShowElementsChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowGodsfallChanged -= OnValkyrieShowGodsfallChanged;
@@ -92,6 +94,7 @@ public class ClassWindowViewModel : TccWindowViewModel
         {
             ((ClassWindowSettings)Settings!).WarriorShowEdgeChanged += OnWarriorShowEdgeChanged;
             ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
+            ((ClassWindowSettings)Settings).WarriorShowInfuriateChanged += OnWarriorShowInfuriateChanged;
             ((ClassWindowSettings)Settings).WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
             ((ClassWindowSettings)Settings).SorcererShowElementsChanged += OnSorcererShowElementsChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowGodsfallChanged += OnValkyrieShowGodsfallChanged;
@@ -117,6 +120,11 @@ public class ClassWindowViewModel : TccWindowViewModel
     void OnWarriorShowTraverseCutChanged()
     {
         TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.ShowTraverseCut));
+    }
+
+    void OnWarriorShowInfuriateChanged()
+    {
+        TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.ShowInfuriate));
     }
 
     void OnWarriorShowEdgeChanged()

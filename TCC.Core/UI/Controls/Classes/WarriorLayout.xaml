@@ -9,6 +9,7 @@
              xmlns:nsConv="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
              xmlns:conv="clr-namespace:TCC.UI.Converters"
              xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
+             xmlns:tcc="clr-namespace:TCC.Data"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:WarriorLayoutViewModel}">
     <UserControl.Resources>
         <ControlTemplate x:Key="EdgeArrowLayout">
@@ -36,16 +37,13 @@
             </elements:EdgeBarLayout>
         </ControlTemplate>
     </UserControl.Resources>
-    <Grid Width="Auto" Name="Root" ClipToBounds="False" Margin="55 20 50 100" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid Width="Auto" Name="Root" Margin="60 30 60 180" >
         <Grid Width="Auto" Height="Auto" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
             <Grid>
                 <Grid.Resources>
                     <Style TargetType="controls:Arc">
@@ -104,7 +102,7 @@
                 <Grid Style="{StaticResource WarnGrid}">
                     <controls:Arc StrokeThickness="10" Stroke="White">
                         <Shape.Effect>
-                            <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="15"/>
+                            <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="25"/>
                         </Shape.Effect>
                         <Shape.RenderTransform>
                             <TransformGroup>
@@ -136,22 +134,7 @@
                 <!--Class icon-->
                 <Path Data="{StaticResource SvgClassWarrior}" Margin="21" Opacity=".3"/>
             </Grid>
-            <!--Max edge glow outer--><!--
-            <Rectangle Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
-                       Fill="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter}, ConverterParameter=false}" 
-                       Margin="5"
-                       Style="{StaticResource MaxGlowRhomb}">
-            </Rectangle>
-            --><!--Max edge glow inner--><!--
-            <Rectangle Margin="15" 
-                       Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" 
-                       Fill="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter}, ConverterParameter=false}"
-                       Style="{StaticResource MaxGlowRhomb}">
-            </Rectangle>-->
-            <!--<TextBlock Style="{StaticResource DefaultTextStyle}" 
-                       TextAlignment="Center" FontSize="22" 
-                       FontWeight="DemiBold" Foreground="#afff" 
-                       Text="{Binding EdgeCounter.Val}" VerticalAlignment="Center"/>-->
+
             <ContentControl>
                 <ContentControl.Style>
                     <Style TargetType="ContentControl">
@@ -171,20 +154,75 @@
                     </Style>
                 </ContentControl.Style>
             </ContentControl>
-            <Border Style="{StaticResource ClassWindowSkillBorder}">
-                <FrameworkElement.RenderTransform>
-                    <TransformGroup>
-                        <RotateTransform Angle="45"/>
-                        <TranslateTransform X="0" Y="92" />
-                    </TransformGroup>
-                </FrameworkElement.RenderTransform>
-            </Border>
-            <skills:RhombSkillEffectControl DataContext="{Binding DeadlyGamble}">
+
+            <!--DeadlyGamble-->
+            <Grid>
                 <FrameworkElement.RenderTransform>
                     <TranslateTransform X="0" Y="92" />
                 </FrameworkElement.RenderTransform>
-            </skills:RhombSkillEffectControl>
+                <Border Style="{StaticResource ClassWindowSkillBorder}" 
+                        RenderTransform="{StaticResource Rotate45}"/>
+                <skills:RhombSkillEffectControl DataContext="{Binding DeadlyGamble}"/>
+            </Grid>
 
+            <!--Infuriate-->
+            <Grid>
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="0" Y="175" />
+                </FrameworkElement.RenderTransform>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Stance.CurrentStance}" 
+                                               Value="{x:Static tcc:WarriorStance.Defensive}"/>
+                                    <Condition Binding="{Binding ShowInfuriate}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <Border Style="{StaticResource ClassWindowSkillBorder}"
+                        RenderTransform="{StaticResource Rotate45}"/>
+
+                <skills:RhombFixedSkillControl DataContext="{Binding Infuriate}" 
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" IsHitTestVisible="False" />
+            </Grid>
+
+            <!--Scythe-->
+            <!--<Grid>
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="40" Y="134" />
+                </FrameworkElement.RenderTransform>
+                
+                <Border Style="{StaticResource ClassWindowSkillBorder}"
+                        RenderTransform="{StaticResource Rotate45}"/>
+
+                <skills:RhombFixedSkillControl DataContext="{Binding Scythe}" 
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" IsHitTestVisible="False" />
+            </Grid>-->
+
+            <!--AerialScythe-->
+            <!--<Grid>
+                <FrameworkElement.RenderTransform>
+                    <TranslateTransform X="-40" Y="134" />
+                </FrameworkElement.RenderTransform>
+                
+                <Border Style="{StaticResource ClassWindowSkillBorder}"
+                        RenderTransform="{StaticResource Rotate45}"/>
+
+                <skills:RhombFixedSkillControl DataContext="{Binding AerialScythe}" 
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" IsHitTestVisible="False" />
+            </Grid>-->
+
+            <!--AktSpd-->
             <Grid Visibility="{Binding AtkSpeedProc, Converter={nsConv:BoolToVisibility}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="18"
                         Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" 
@@ -197,10 +235,11 @@
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>
+
                 <skills:RhombSkillEffectControl DataContext="{Binding Swift}" HorizontalAlignment="Center"
-                                               VerticalAlignment="Center" IsHitTestVisible="False" RenderTransformOrigin=".5 .5"
-                                               Visibility="{Binding Effect.IsAvailable, Converter={nsConv:BoolToVisibility Invert=True}}"
-                                               >
+                                                VerticalAlignment="Center" IsHitTestVisible="False" RenderTransformOrigin=".5 .5"
+                                                Visibility="{Binding Effect.IsAvailable, Converter={nsConv:BoolToVisibility Invert=True}}"
+                >
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleX=".7" ScaleY=".7" />
@@ -245,8 +284,10 @@
                     </Style>
 
                 </Grid.Style>
+
             </Grid>
-            <!--Visibility="{Binding ShowTraverseCut, Converter={StaticResource BooleanToVisibilityConverter}}"-->
+
+            <!--TraverseCut-->
             <Grid >
                 <Grid.Style>
                     <Style TargetType="Grid">
@@ -269,8 +310,10 @@
                         </TransformGroup>
                     </FrameworkElement.RenderTransform>
                 </Border>
-                <elements:TraverseCutControl DataContext="{Binding TraverseCut}" HorizontalAlignment="Center"
-                                                VerticalAlignment="Center" IsHitTestVisible="False">
+                <elements:TraverseCutControl Tracker="{Binding TraverseCut}" 
+                                             IconName="{Binding Stance.CurrentStance, Converter={StaticResource WarriorStanceToTraverseCutIconName}}"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center" IsHitTestVisible="False">
                     <FrameworkElement.RenderTransform>
                         <TransformGroup>
                             <TranslateTransform X="16" Y="16" />

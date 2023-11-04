@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
              xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignData StatTracker}">
+             mc:Ignorable="d"  d:DataContext="{d:DesignData StatTracker}">
     <Grid Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" ClipToBounds="False">
         <Grid Width="65" Height="65" Margin="2" HorizontalAlignment="Center" Name="MainGrid" ClipToBounds="False" VerticalAlignment="Center">
             <Grid ClipToBounds="False" >
@@ -79,7 +78,7 @@
                 BorderThickness="1" Padding="0" RenderTransform="{StaticResource Rotate45}"
                 Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}"/>
             <TextBlock Foreground="#dfff" FontWeight="Normal"   Margin="0 2 0 1"                     FontFamily="{StaticResource ArialMonoBold}"
-                       Text="{Binding Val}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center">
+                       Text="{Binding Tracker.Val, RelativeSource={RelativeSource AncestorType=elements:TraverseCutControl}}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="10" />
             </TextBlock.Effect>

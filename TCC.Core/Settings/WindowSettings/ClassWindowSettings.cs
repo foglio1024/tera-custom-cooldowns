@@ -9,12 +9,14 @@ public class ClassWindowSettings : WindowSettingsBase
     public event Action? WarriorShowEdgeChanged;
     public event Action? WarriorEdgeModeChanged;
     public event Action? WarriorShowTraverseCutChanged;
+    public event Action? WarriorShowInfuriateChanged;
     public event Action? ValkyrieShowRagnarokChanged;
     public event Action? ValkyrieShowGodsfallChanged;
     public event Action? SorcererShowElementsChanged;
     public event Action? FlashAvailableSkillsChanged;
 
     bool _warriorShowEdge;
+    bool _warriorShowInfuriate;
     bool _warriorShowTraverseCut;
     bool _sorcererShowElements;
     bool _valkyrieShowRagnarok;
@@ -32,6 +34,17 @@ public class ClassWindowSettings : WindowSettingsBase
             _warriorShowEdge = value;
             N();
             WarriorShowEdgeChanged?.Invoke();
+        }
+    }
+    public bool WarriorShowInfuriate
+    {
+        get => _warriorShowInfuriate;
+        set
+        {
+            if (_warriorShowInfuriate == value) return;
+            _warriorShowInfuriate = value;
+            N();
+            WarriorShowInfuriateChanged?.Invoke();
         }
     }
     public bool ValkyrieShowRagnarok
