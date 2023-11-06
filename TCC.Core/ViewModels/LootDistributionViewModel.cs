@@ -138,7 +138,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         _commitDelay = new DispatcherTimer { Interval = TimeSpan.FromSeconds(settings.AutorollDelaySec) };
         _commitDelay.Tick += OnDelayTick;
 
-        _clear = new DispatcherTimer { Interval = TimeSpan.FromSeconds(90) };
+        _clear = new DispatcherTimer { Interval = TimeSpan.FromSeconds(70) };
         _clear.Tick += OnClearTick;
 
         DelayFactor = settings.AutorollDelaySec / 59f;
