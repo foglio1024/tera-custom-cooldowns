@@ -18,6 +18,7 @@ using TCC.ViewModels.Widgets;
 using TeraDataLite;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
+using ModifierKeys = TCC.Data.ModifierKeys;
 
 namespace TCC.ViewModels;
 
@@ -230,6 +231,7 @@ public class LootDistributionViewModel : TccWindowViewModel
             ItemInDistribution = null;
         }
         TimeLeft = 59;
+        ItemsLeftAmount = 0;
     }
 
     void OnDelaySettingChanged(int newValue)
@@ -563,7 +565,7 @@ public class LootDistributionViewModel : TccWindowViewModel
 
         _countdown.Stop();
 
-        ItemInDistribution = null;
+        //ItemInDistribution = null;
 
         ItemsLeftAmount--;
 
