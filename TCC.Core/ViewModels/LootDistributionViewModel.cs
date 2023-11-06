@@ -144,6 +144,27 @@ public class LootDistributionViewModel : TccWindowViewModel
         DelayFactor = settings.AutorollDelaySec / 59f;
 
         KeyboardHook.Instance.RegisterCallback(_settings.ToggleHotkey, OnShowLootWindowHotkeyPressed);
+        KeyboardHook.Instance.RegisterCallback(_settings.RollHotKey with { Modifier = ModifierKeys.Shift }, SetRollForCurrentCategory);
+        KeyboardHook.Instance.RegisterCallback(_settings.PassHotKey with { Modifier = ModifierKeys.Shift }, SetPassForCurrentCategory);
+        KeyboardHook.Instance.RegisterCallback(_settings.PassHotKey with { Modifier = ModifierKeys.Shift | ModifierKeys.Control }, SetWaitForCurrentCategory);
+    }
+
+    void SetWaitForCurrentCategory()
+    {
+        if (ItemInDistribution == null) return;
+        SetWaitForCategory((int)ItemInDistribution.DbItem.Id);
+    }
+
+    void SetPassForCurrentCategory()
+    {
+        if (ItemInDistribution == null) return;
+        SetPassForCategory((int)ItemInDistribution.DbItem.Id);
+    }
+
+    void SetRollForCurrentCategory()
+    {
+        if (ItemInDistribution == null) return;
+        SetRollForCategory((int)ItemInDistribution.DbItem.Id);
     }
 
     void OnAutoRollPolicyChanged()
