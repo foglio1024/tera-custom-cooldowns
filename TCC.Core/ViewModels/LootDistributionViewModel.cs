@@ -302,7 +302,9 @@ public class LootDistributionViewModel : TccWindowViewModel
             case GroupCompositionChangeReason.Disbanded:
                 PacketAnalyzer.Processor.Unhook<S_SPAWN_DROPITEM>(OnSpawnDropitem);
 
+                WindowManager.LootDistributionWindow.HideWindow();
                 ClearLoot(); // todo: Dispatcher.Invoke?
+                if (_clear.IsEnabled) _clear.Stop();
 
                 break;
         }
