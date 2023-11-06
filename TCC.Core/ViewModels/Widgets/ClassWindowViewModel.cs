@@ -81,7 +81,6 @@ public class ClassWindowViewModel : TccWindowViewModel
         base.OnEnabledChanged(enabled);
         if (!enabled)
         {
-            CurrentClass = Class.None;
             ((ClassWindowSettings)Settings!).WarriorShowEdgeChanged -= OnWarriorShowEdgeChanged;
             ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged -= OnWarriorShowTraverseCutChanged;
             ((ClassWindowSettings)Settings).WarriorShowInfuriateChanged -= OnWarriorShowInfuriateChanged;
@@ -89,6 +88,7 @@ public class ClassWindowViewModel : TccWindowViewModel
             ((ClassWindowSettings)Settings).SorcererShowElementsChanged -= OnSorcererShowElementsChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowGodsfallChanged -= OnValkyrieShowGodsfallChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowRagnarokChanged -= OnValkyrieShowRagnarokChanged;
+            CurrentClass = Class.None;
         }
         else
         {
@@ -99,6 +99,7 @@ public class ClassWindowViewModel : TccWindowViewModel
             ((ClassWindowSettings)Settings).SorcererShowElementsChanged += OnSorcererShowElementsChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowGodsfallChanged += OnValkyrieShowGodsfallChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowRagnarokChanged += OnValkyrieShowRagnarokChanged;
+            CurrentClass = Game.Me.Class;
         }
     }
 
