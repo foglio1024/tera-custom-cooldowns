@@ -267,6 +267,11 @@ public static class Game
         PacketAnalyzer.Processor.Hook<S_LOGIN>(p => _ = OnLogin(p));
         PacketAnalyzer.Processor.Hook<S_RETURN_TO_LOBBY>(OnReturnToLobby);
         PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+        PacketAnalyzer.Processor.Hook<S_CREATURE_LIFE>(OnCreatureLife);
+        PacketAnalyzer.Processor.Hook<S_ABNORMALITY_DAMAGE_ABSORB>(OnAbnormalityDamageAbsorb);
+        PacketAnalyzer.Processor.Hook<S_CREATURE_CHANGE_HP>(OnCreatureChangeHp);
+        PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_MP>(OnPlayerChangeMp);
+        PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
 
         // ep
         PacketAnalyzer.Processor.Hook<S_RESET_EP_PERK>(OnResetEpPerk);
@@ -497,6 +502,16 @@ public static class Game
     {
         Me.MaxCoins = m.MaxCoins;
         Me.Coins = m.Coins;
+        Me.ItemLevel = m.Ilvl;
+        Me.Level = m.Level;
+        Me.CritFactor = m.TotalCritFactor;
+        Me.MaxHP = m.MaxHP;
+        Me.MaxMP = m.MaxMP;
+        Me.MaxST = m.MaxST + m.BonusST;
+        Me.CurrentHP = m.CurrentHP;
+        Me.CurrentMP = m.CurrentMP;
+        Me.CurrentST = m.CurrentST;
+        Me.MagicalResistance = m.TotalMagicalResistance;
 
         switch (Me.Class)
         {
@@ -510,6 +525,12 @@ public static class Game
                 Me.StacksCounter.Val = m.Edge;
                 break;
         }
+    }
+
+    static void OnCreatureLife(S_CREATURE_LIFE m)
+    {
+        if (!IsMe(m.Target)) return;
+        Me.IsAlive = m.Alive;
     }
 
     static void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
@@ -571,8 +592,35 @@ public static class Game
 
     static void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
     {
-        if (IsMe(m.Target)) return;
-        SetEncounter(m.CurrentHP, m.MaxHP);
+        if (IsMe(m.Target))
+        {
+            Me.MaxHP = m.MaxHP;
+            Me.CurrentHP = m.CurrentHP;
+        }
+        else
+        {
+            SetEncounter(m.CurrentHP, m.MaxHP);
+        }
+    }
+
+    static void OnPlayerChangeMp(S_PLAYER_CHANGE_MP m)
+    {
+        if (!IsMe(m.Target)) return;
+        Me.MaxMP = m.MaxMP;
+        Me.CurrentMP = m.CurrentMP;
+    }
+
+    static void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA m)
+    {
+        Me.MaxST = m.MaxST + m.BonusST;
+        Me.CurrentST = m.CurrentST;
+    }
+
+    static void OnAbnormalityDamageAbsorb(S_ABNORMALITY_DAMAGE_ABSORB p)
+    {
+        // todo: add chat message too
+        if (!IsMe(p.Target) || Me.CurrentShield < 0) return;
+        Me.DamageShield(p.Damage);
     }
 
     static void OnBossGageInfo(S_BOSS_GAGE_INFO m)
