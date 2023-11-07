@@ -4,7 +4,7 @@ using TeraDataLite;
 
 namespace TCC.Data.Skills;
 
-public class Skill
+public record struct Skill
 {
     string _iconName = "";
     public string IconName
@@ -37,14 +37,6 @@ public class Skill
     }
 
     public string Detail { get; set; } = "";
-    //public ImageBrush IconBrush { get
-    //    {
-
-    //        return new ImageBrush(Utils.BitmapToImageSource((Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName)));
-
-    //    }
-    //}
-
 
     public Skill(uint id, Class c, string name, string toolTip)
     {
@@ -61,15 +53,4 @@ public class Skill
         ToolTip = ab.ToolTip;
         IconName = ab.IconName;
     }
-    //public void SetSkillIcon(string iconName)
-    //{
-    //    //if (!iconName.Contains("Icon_Skills.")) return;
-    //    IconName = iconName.ToLower();//.Replace("Icon_Skills.", "");
-
-    //    //CooldownWindow.Instance.Dispatcher.InvokeAsync(new Action(() =>
-    //    //{
-    //    //    iconBitmap = (Bitmap)Properties.Icon_Skills.ResourceManager.GetObject(iconName);
-    //    //}));
-    //}
-
 }
