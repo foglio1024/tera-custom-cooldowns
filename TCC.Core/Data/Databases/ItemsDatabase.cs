@@ -92,24 +92,5 @@ public class ItemsDatabase : DatabaseBase
         Items[item.Id] = item;
     }
 
-    public IEnumerable<Item> ItemSkills
-    {
-        get
-        {
-            //var ret = new List<Item>();
-            //foreach (var item in Items.Values)
-            //{
-            //    var iconName = "unknown";
-            //    if (item.IconName.ToString() != "")
-            //    {
-            //        iconName = item.IconName.ToString();
-            //        iconName = iconName.Replace(".", "/");
-            //    }
-            //    if (File.Exists(Path.GetDirectoryName(typeof(App).Assembly.Location)+ "/resources/images/" + iconName+ ".png")) ret.Add(item);
-            //}
-
-            //return ret;
-            return Items.Values.Where(x => x.Cooldown > 0).ToList();
-        }
-    }
+    public IEnumerable<Item> ItemSkills => Items.Values.Where(x => x.Cooldown > 0).ToList();
 }
