@@ -178,7 +178,7 @@
                                 <MultiDataTrigger.Conditions>
                                     <Condition Binding="{Binding Stance.CurrentStance}" 
                                                Value="{x:Static tcc:WarriorStance.Defensive}"/>
-                                    <Condition Binding="{Binding ShowInfuriate}" Value="False"/>
+                                    <Condition Binding="{Binding ShowInfuriate}" Value="True"/>
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="Visibility" Value="Visible"/>
                             </MultiDataTrigger>
