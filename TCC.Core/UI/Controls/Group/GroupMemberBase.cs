@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -45,11 +46,10 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         }
     }
 
-    public bool ShowHp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideHpThreshold;
-    public bool ShowMp => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideMpThreshold;
+    public bool ShowHp => Game.Group.Size <= App.Settings.GroupWindowSettings.HideHpThreshold;
+    public bool ShowMp => Game.Group.Size <= App.Settings.GroupWindowSettings.HideMpThreshold;
 
-    public bool ShowSt =>
-        WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideStThreshold
+    public bool ShowSt => Game.Group.Size <= App.Settings.GroupWindowSettings.HideStThreshold
         && Game.Server.Region == "EU"
         && DataContext is User
         {
@@ -61,8 +61,8 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
                     or Class.Ninja 
                     or Class.Warrior
         };
-    public bool ShowBuffs => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideBuffsThreshold;
-    public bool ShowDebuffs => WindowManager.ViewModels.GroupVM.Size <= App.Settings.GroupWindowSettings.HideDebuffsThreshold;
+    public bool ShowBuffs => Game.Group.Size <= App.Settings.GroupWindowSettings.HideBuffsThreshold;
+    public bool ShowDebuffs => Game.Group.Size <= App.Settings.GroupWindowSettings.HideDebuffsThreshold;
     public bool ShowLaurel => App.Settings.GroupWindowSettings.ShowLaurels;
     public bool ShowAwaken => App.Settings.GroupWindowSettings.ShowAwakenIcon;
     public bool ShowHpAmount => App.Settings.GroupWindowSettings.HpLabelMode == GroupHpLabelMode.Amount && ShowHp;
@@ -83,9 +83,9 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
 
         if (DesignerProperties.GetIsInDesignMode(this)) return;
 
-        WindowManager.ViewModels.GroupVM.SettingsUpdated += UpdateSettings;
-        WindowManager.ViewModels.GroupVM.PropertyChanged += OnGroupVmPropertyChanged;
+        Game.Group.CompositionChanged += OnGroupCompositionChanged;
         SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
+        WindowManager.ViewModels.GroupVM.SettingsUpdated += UpdateSettings;
     }
 
     void OnUnloaded(object _, RoutedEventArgs __)
@@ -95,14 +95,14 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
 
         if (DesignerProperties.GetIsInDesignMode(this)) return;
 
+        Game.Group.CompositionChanged -= OnGroupCompositionChanged;
         SettingsWindowViewModel.AbnormalityShapeChanged -= OnAbnormalityShapeChanged;
         WindowManager.ViewModels.GroupVM.SettingsUpdated -= UpdateSettings;
-        WindowManager.ViewModels.GroupVM.PropertyChanged -= OnGroupVmPropertyChanged;
     }
 
-    void OnGroupVmPropertyChanged(object? sender, PropertyChangedEventArgs args)
+    void OnGroupCompositionChanged(IReadOnlyCollection<GroupMemberData> members, GroupCompositionChangeReason reason)
     {
-        if (args.PropertyName == nameof(GroupWindowViewModel.Size)) UpdateSettings();
+        UpdateSettings();
     }
 
     void UpdateSettings()
