@@ -86,10 +86,13 @@
                                RadiusX="3" RadiusY="3" x:Name="BaseBorder"/>
 
                     <Border Background="{StaticResource TccNormalGradientBrush}" Height="6" HorizontalAlignment="Left"
-                                CornerRadius="3" Padding="0" x:Name="ParentBorder">
+                                CornerRadius="3" Padding="0" x:Name="ParentBorder" Opacity="0">
                         <FrameworkElement Width="{Binding ActualWidth, ElementName=BaseBorder}"
-                                          Loaded="OnBarLoaded"
-                                          x:Name="BarGovernor" />
+                                          x:Name="BarGovernor" >
+                            <FrameworkElement.LayoutTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                            </FrameworkElement.LayoutTransform>
+                        </FrameworkElement>
                     </Border>
 
                     <Border BorderBrush="White" BorderThickness="1 0 0 0" Margin="0 -2"
@@ -170,7 +173,19 @@
                     <Setter TargetName="ItemIcon" Property="Stroke" Value="{StaticResource ItemHeroicBrush}"/>
                     <Setter TargetName="ItemNameTb" Property="Foreground" Value="{StaticResource ItemHeroicBrush}"/>
                 </DataTrigger>
-
+                <DataTrigger Binding="{Binding ItemInDistribution.DistributionStatus}" Value="{x:Static viewmodels:DistributionStatus.Distributing}">
+                    <Setter TargetName="ParentBorder" Property="Opacity" Value="1"/>
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="BarGovernor"
+                                                 Storyboard.TargetProperty="(LayoutTransform).(ScaleTransform.ScaleX)"
+                                                 From="1" To="0"
+                                                 Duration="0:1:0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
             </DataTemplate.Triggers>
 
         </DataTemplate>

@@ -90,12 +90,4 @@ public partial class LootDistributionWindow
         _vm.Settings.H = ActualHeight;
         if (!App.Loading) App.Settings.Save();
     }
-
-    void OnBarLoaded(object sender, RoutedEventArgs e)
-    {
-        var bar = (FrameworkElement)sender;
-        var scale = new ScaleTransform(1, 1);
-        bar.LayoutTransform = scale;
-        scale.BeginAnimation(ScaleTransform.ScaleXProperty, AnimationFactory.CreateDoubleAnimation(60 * 1000, 0, 1));
-    }
 }
