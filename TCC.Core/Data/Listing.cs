@@ -180,9 +180,9 @@ public class Listing : ThreadSafeObservableObject
     {
         _dispatcher.InvokeAsync(() =>
         {
-            IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId) ||
-                      LeaderId == Game.Me.PlayerId ||
-                      WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == LeaderId);
+            IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId) 
+                    || LeaderId == Game.Me.PlayerId 
+                    || LeaderId == Game.Group.Leader.PlayerId;
         }, DispatcherPriority.DataBind);
     }
 
