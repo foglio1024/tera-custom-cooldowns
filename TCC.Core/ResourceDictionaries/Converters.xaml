@@ -21,6 +21,9 @@
                                     Valkyrie="{StaticResource SvgClassValkyrie}"
                                     Common="{StaticResource SvgClassCommon}"
                                     />
+    <converters:WarriorStanceToTraverseCutIconName x:Key="WarriorStanceToTraverseCutIconName"
+                                    AssaultStanceIconName="icon_skills.dualrapidpiercing_tex"
+                                    DefensiveStanceIconName="icon_status.dualrapidpiercingtank_tex"/>
     <converters:ChatChannelToColorConverter x:Key="ChatChannelToColor"/>
     <converters:ChatChannelToName x:Key="ChatChannelToName"/>
     <converters:MessageTypeToCursor x:Key="MessageTypeToCursor"/>
