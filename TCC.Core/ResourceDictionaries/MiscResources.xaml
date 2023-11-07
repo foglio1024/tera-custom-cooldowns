@@ -9,8 +9,8 @@
     </Storyboard>
 
     <Storyboard x:Key="Warn" RepeatBehavior="Forever">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}" />
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.6" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}" BeginTime="0:0:0.2" />
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.1" From="0" To="1"  EasingFunction="{StaticResource QuadraticEase}" />
+        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.7" From="1" To="0"  EasingFunction="{StaticResource QuadraticEase}" BeginTime="0:0:0.2" />
     </Storyboard>
 
     <!-- Fonts -->
