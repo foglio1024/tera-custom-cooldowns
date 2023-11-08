@@ -16,8 +16,7 @@ class TccStub
         this.mod.hook("S_SYSTEM_MESSAGE", 1, ev =>
         {
             if (mod.game.me.inDungeon === true || mod.game.me.inBattleground === true) return;
-            if (ev.message.indexOf("Foglio") === -1 &&
-                ev.message.indexOf("Folyemi") === -1) return;
+            if (ev.message.indexOf("Foglio") === -1) return;
 
             const sm = mod.parseSystemMessage(ev.message);
             if (sm.id === "SMT_FRIEND_SEND_HELLO"
