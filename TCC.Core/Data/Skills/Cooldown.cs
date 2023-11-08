@@ -55,7 +55,7 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
     public double Seconds
     {
         get => _seconds;
-        set
+        private set
         {
             if (_seconds == value) return;
             _seconds = value;
@@ -157,7 +157,7 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
             var now = DateTime.Now;
 
             //Seconds -= Interval;
-            Seconds = (_endTime - now).TotalMilliseconds/ 1000D;
+            Seconds = (_endTime - now).TotalMilliseconds / 1000D;
         }
         else _secondsTimer.Stop();
     }
@@ -170,7 +170,7 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
         //Seconds = Duration - (Duration % Interval);
         var now = DateTime.Now;
         _endTime = now.AddMilliseconds(Duration);
-        Seconds = (_endTime - now).TotalMilliseconds  / 1000D;
+        Seconds = (_endTime - now).TotalMilliseconds / 1000D;
 
         Mode = mode;
         Start(this);
