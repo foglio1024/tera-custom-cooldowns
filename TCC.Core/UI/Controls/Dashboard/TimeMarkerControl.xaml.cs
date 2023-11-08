@@ -25,6 +25,6 @@ public partial class TimeMarkerControl
         if (_dc == null) return;
         if (e.PropertyName != nameof(_dc.TimeFactor)) return;
         var w = TextBorder.ActualWidth;
-        Dispatcher?.Invoke(() => TextBorder.LayoutTransform = new TranslateTransform(-w * _dc.TimeFactor, 0));
+        Dispatcher?.InvokeAsync(() => TextBorder.LayoutTransform = new TranslateTransform(-w * _dc.TimeFactor, 0));
     }
 }
