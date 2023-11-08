@@ -114,7 +114,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 
         try
         {
-            if (Channel == ChatChannel.Raid Game.Group.Leader.Name == Author) Channel = ChatChannel.RaidLeader;
+            if (Channel == ChatChannel.Raid && Game.Group.Leader.Name == Author) Channel = ChatChannel.RaidLeader;
             switch (ch)
             {
                 case ChatChannel.Greet:
