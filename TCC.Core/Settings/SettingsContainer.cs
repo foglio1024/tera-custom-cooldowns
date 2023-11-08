@@ -161,7 +161,7 @@ public class SettingsContainer
     public string LastAccountNameHash { get; set; } = "";
     public bool BackgroundNotifications { get; set; }
     public bool EnablePlayerMenu { get; set; }
-    public bool ShowDecimalsInCooldowns { get; set; } //TODO: move to CooldownWindowSettings
+    public bool ShowDecimalsInCooldowns { get; set; } // todo: add more decimals options #312
 
     public SettingsContainer()
     {
