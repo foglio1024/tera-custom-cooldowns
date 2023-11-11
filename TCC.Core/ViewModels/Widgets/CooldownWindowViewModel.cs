@@ -19,7 +19,6 @@ using TCC.UI;
 using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
-using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
@@ -61,9 +60,6 @@ public class CooldownWindowViewModel : TccWindowViewModel
     public IEnumerable<Item> Items => Game.DB!.ItemsDatabase.ItemSkills;
     public IEnumerable<Abnormality> Passivities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
 
-    //TODO: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    static BaseClassLayoutViewModel ClassManager => WindowManager.ViewModels.ClassVM.CurrentManager;
-
     static bool FindAndUpdate(ThreadSafeObservableCollection<Cooldown> list, Cooldown sk)
     {
         var existing = list.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
@@ -85,7 +81,6 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     bool NormalMode_Update(Cooldown sk)
     {
-        //if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
         if (!App.Settings.CooldownWindowSettings.Enabled) return false;
 
         var other = new Cooldown(sk.Skill, sk.CooldownType == CooldownType.Item ? sk.OriginalDuration / 1000 : sk.OriginalDuration, sk.CooldownType, sk.Mode, _dispatcher);
@@ -130,7 +125,6 @@ public class CooldownWindowViewModel : TccWindowViewModel
     void NormalMode_Change(Skill skill, uint cd)
     {
         if (!App.Settings.CooldownWindowSettings.Enabled) return;
-        ClassManager.ChangeSpecialSkill(skill, cd);
 
         try
         {
@@ -221,8 +215,6 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     bool FixedMode_Update(Cooldown sk)
     {
-        //if (App.Settings.ClassWindowSettings.Enabled && ClassManager.StartSpecialSkill(sk)) return false;
-
         if (!App.Settings.CooldownWindowSettings.Enabled)
         {
             return false;
@@ -257,7 +249,6 @@ public class CooldownWindowViewModel : TccWindowViewModel
     void FixedMode_Change(Skill sk, uint cd)
     {
         if (!App.Settings.CooldownWindowSettings.Enabled) return;
-        if (App.Settings.ClassWindowSettings.Enabled) ClassManager.ChangeSpecialSkill(sk, cd);
 
         var hSkill = HiddenSkills.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.IconName);
         if (hSkill != null) return;
@@ -521,22 +512,10 @@ public class CooldownWindowViewModel : TccWindowViewModel
         if (!Game.Logged && !Debugger.IsAttached) return;
         _dispatcher.InvokeAsync(() =>
         {
-            //if (WindowManager.SkillConfigWindow != null && WindowManager.SkillConfigWindow.IsVisible)
-            //{
-            //WindowManager.SkillConfigWindow.Close();
-            //IsDragging = false;
-            //}
-            //else
-            //{
-            //    new SkillConfigWindow().ShowWindow();
-            //    IsDragging = true;
-            //}
-
             if (SkillConfigWindow.Instance.IsVisible)
                 SkillConfigWindow.Instance.HideWindow();
             else
                 SkillConfigWindow.Instance.ShowWindow();
-
 
         }, DispatcherPriority.Background);
     }
@@ -552,7 +531,6 @@ public class CooldownWindowViewModel : TccWindowViewModel
         if (App.Settings.CooldownWindowSettings.Mode == CooldownBarMode.Normal) return;
         _dispatcher.InvokeAsync(() =>
         {
-            if (ClassManager.ResetSpecialSkill(skill)) return;
             var sk = MainSkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName) ?? SecondarySkills.FirstOrDefault(x => x.Skill.IconName == skill.IconName);
             sk?.ProcReset();
         });
@@ -605,14 +583,12 @@ public class CooldownWindowViewModel : TccWindowViewModel
         if (!PassivityDatabase.TryGetPassivitySkill(ab.Id, out var skill)) return;
         if (PassivityDatabase.Passivities.TryGetValue(ab.Id, out var cdFromDb))
         {
-            //SkillManager.AddPassivitySkill(ab.Id, cdFromDb);
             RouteSkill(new Cooldown(skill, cdFromDb * 1000, CooldownType.Passive));
         }
         else if (MainSkills.ToSyncList().Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id)
                  || SecondarySkills.ToSyncList().Any(m => m.CooldownType == CooldownType.Passive && ab.Id == m.Skill.Id))
         {
             //note: can't do this correctly since we don't know passivity cooldown from database so we just add duration
-            //SkillManager.AddPassivitySkill(ab.Id, cd / 1000);
             RouteSkill(new Cooldown(skill, cd, CooldownType.Passive));
         }
 
@@ -700,14 +676,12 @@ public class CooldownWindowViewModel : TccWindowViewModel
         }
         else
         {
-            //Log.CW($"Adding {skillCooldown.Skill.Id} {skillCooldown.Duration}");
             AddOrRefresh(skillCooldown);
         }
     }
 
     void OnPrecooldownStarted(Skill sk, uint duration)
     {
-        //SkillManager.AddSkillDirectly(sk, duration, CooldownType.Skill, CooldownMode.Pre);
         RouteSkill(new Cooldown(sk, duration, CooldownType.Skill, CooldownMode.Pre));
     }
 

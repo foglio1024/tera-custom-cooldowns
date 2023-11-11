@@ -1,4 +1,5 @@
-﻿using TCC.Data.Skills;
+﻿using TCC.Data;
+using TCC.Data.Skills;
 using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
@@ -6,7 +7,7 @@ namespace TCC.ViewModels.ClassManagers;
 public class GunnerLayoutViewModel : BaseClassLayoutViewModel
 {
 
-    public Cooldown BurstFire { get;  }
+    public Cooldown BurstFire { get; }
     public Cooldown Balder { get; }
     public Cooldown Bombardment { get; }
     public SkillWithEffect ModularSystem { get; }
@@ -55,5 +56,16 @@ public class GunnerLayoutViewModel : BaseClassLayoutViewModel
         if (sk.Skill.IconName != ModularSystem.Cooldown.Skill.IconName) return false;
         ModularSystem.StartCooldown(sk.Duration);
         return true;
+    }
+
+    public override bool ChangeSpecialSkill(Skill skill, uint cd)
+    {
+        if (Balder.Skill.IconName == skill.IconName)
+        {
+            Balder.Refresh(cd, CooldownMode.Normal);
+            return true;
+        }
+
+        return false;
     }
 }
