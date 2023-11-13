@@ -27,7 +27,7 @@
                                     FontFamily="{StaticResource NotoSansMed}" />
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="5" Grid.Column="0" Margin="0,0,0,2">
             <ContentControl x:Name="ItemAmount" Content="{Binding Amount}" ContentTemplate="{StaticResource SimpleTemplate}"/>
-            <ContentControl x:Name="ItemName" Content="{Binding Listing}" ContentTemplate="{StaticResource MessageBodyTemplate}"/>
+            <ContentControl x:Name="ItemName" Content="{Binding Listing.Text}" ContentTemplate="{StaticResource MessageBodyTemplate}"/>
 
 
         </StackPanel>
