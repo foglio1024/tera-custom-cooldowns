@@ -84,6 +84,7 @@ public static class Tester
                 { "tcc_version", version}
             }.ToString()));
 
+            // todo: replace this
             c.PostAsync("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat", new StringContent(data)).Wait();
         }
         catch { }
@@ -365,7 +366,7 @@ public static class Tester
         c.DefaultRequestHeaders.Add(HttpRequestHeader.AcceptCharset.ToString(), "utf-8");
         try
         {
-
+            // todo: replace this
             var res = await c.PostAsync("https://us-central1-tcc-global-events.cloudfunctions.net/fire_webhook",
                 new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString()))));
 
@@ -409,6 +410,7 @@ public static class Tester
         try
         {
             await c.PostAsync(
+                // todo: replace this
                 new Uri("http://localhost:5001/tcc-global-events/us-central1/register_webhook"),
                 new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString()))));
         }

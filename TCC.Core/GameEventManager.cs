@@ -39,7 +39,7 @@ public class GameEventManager : ThreadSafeObservableObject
     };
 
     public const double SecondsInDay = 60 * 60 * 24;
-    const string BaseUrl = "https://tcc-web-99a64.firebaseapp.com/bam";
+    const string BaseUrl = "https://tcc-web-99a64.firebaseapp.com/bam"; //  todo: replace this
 
     public int ResetHour;
     public RegionEnum CurrentRegion { get; set; }

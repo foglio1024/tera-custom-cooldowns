@@ -29,6 +29,7 @@ public static class Firebase
         c.DefaultRequestHeaders.Add(HttpRequestHeader.AcceptCharset.ToString(), "utf-8");
         try
         {
+            // todo: replace
             await c.PostAsync("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook", 
                 new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())), Encoding.UTF8));
             if (online)
@@ -60,6 +61,7 @@ public static class Firebase
         c.DefaultRequestHeaders.Add(HttpRequestHeader.AcceptCharset.ToString(), "utf-8");
         try
         {
+            // todo: replace
             var res = await c.PostAsync("http://us-central1-tcc-global-events.cloudfunctions.net/fire_webhook",
                 new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())), Encoding.UTF8));
 
@@ -91,6 +93,7 @@ public static class Firebase
             c.DefaultRequestHeaders.Add(HttpRequestHeader.ContentType.ToString(), "application/json");
             c.DefaultRequestHeaders.Add(HttpRequestHeader.AcceptCharset.ToString(), "utf-8");
 
+            // todo: replace
             await c.PostAsync("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat",
                 new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString()))));
                 
