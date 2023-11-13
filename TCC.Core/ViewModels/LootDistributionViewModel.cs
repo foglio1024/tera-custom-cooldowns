@@ -25,6 +25,12 @@ namespace TCC.ViewModels;
 [TccModule]
 public class LootDistributionViewModel : TccWindowViewModel
 {
+
+    readonly IReadOnlyCollection<uint> _itemExclusions = new List<uint>()
+    {
+        8008, 8009, 8010, 8011, 8012, 8013, 8014, 8015,
+        8016, 8017, 8018, 8019, 8020, 8021, 8022, 8023
+    };
     readonly Dictionary<GameId, DropItem> _droppedItems = new();
     readonly Dictionary<(uint, uint), uint> _amountsDistributed = new();
     readonly DispatcherTimer _countdown;
@@ -138,7 +144,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         _commitDelay = new DispatcherTimer { Interval = TimeSpan.FromSeconds(settings.AutorollDelaySec) };
         _commitDelay.Tick += OnDelayTick;
 
-        _clear = new DispatcherTimer { Interval = TimeSpan.FromSeconds(70) };
+        _clear = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
         _clear.Tick += OnClearTick;
 
         DelayFactor = settings.AutorollDelaySec / 59f;
@@ -528,9 +534,6 @@ public class LootDistributionViewModel : TccWindowViewModel
             winner = members.Single(m => m.IsWinning);
         }
 
-        //var item = DistributionList.ToSyncList()
-        //    .FirstOrDefault(x => x.DistributionStatus == DistributionStatus.Distributing);
-
         if (ItemInDistribution != null)
         {
             if (winner != null)
@@ -563,8 +566,6 @@ public class LootDistributionViewModel : TccWindowViewModel
         }
 
         _countdown.Stop();
-
-        //ItemInDistribution = null;
 
         ItemsLeftAmount--;
 
@@ -623,6 +624,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     /// </summary>
     void OnSpawnDropitem(S_SPAWN_DROPITEM p)
     {
+        if (_itemExclusions.Contains(p.ItemId)) return;
         Log.CW($"> S_SPAWN_DROPITEM: gameId:{p.GameId} itemId:{p.ItemId} amount:{p.Amount}");
         _droppedItems[p.GameId] = new DropItem(p.GameId, p.ItemId, p.Amount);
     }
