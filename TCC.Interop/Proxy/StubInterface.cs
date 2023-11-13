@@ -34,11 +34,20 @@ public class StubInterface
         if (!IsStubAvailable)
         {
             Log.F("Stub not found");
+            Log.N("tcc-stub", 
+                "Failed to connect to tcc-stub. Some functionalities will be unavailable.",
+                NotificationType.Warning
+                );
             return;
         }
         StubClient.Initialize(useLfg, enablePlayerMenu, enableProxy, showIngameChat, tccChatEnabled);
         StubServer.Start();
         IsFpsModAvailable = await StubClient.GetIsModAvailable("fps-utils") || await StubClient.GetIsModAvailable("fps-manager");
+        Log.N("tcc-stub", 
+            "Successfully connected to tcc-stub.",
+            NotificationType.Success
+            );
+
     }
 
     public void Disconnect()
