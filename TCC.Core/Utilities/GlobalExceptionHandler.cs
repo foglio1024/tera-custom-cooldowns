@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json.Linq;
 using Nostrum;
@@ -26,13 +29,13 @@ public static class GlobalExceptionHandler
         1816  // "Not enough quota"
     };
 
-    public static void OnGlobalException(object sender, UnhandledExceptionEventArgs e)
+    public async static void OnGlobalException(object sender, UnhandledExceptionEventArgs e)
     {
         FocusManager.Dispose();
-        HandleGlobalException(e);
+        await HandleGlobalException(e);
     }
 
-    static void HandleGlobalException(UnhandledExceptionEventArgs e)
+    static async Task HandleGlobalException(UnhandledExceptionEventArgs e)
     {
         var ex = (Exception)e.ExceptionObject;
         var js = ExceptionReportBuilder.BuildJsonCrashReport(ex);
@@ -41,36 +44,36 @@ public static class GlobalExceptionHandler
         switch (ex)
         {
             case COMException { HResult: 88980406 }:
-            {
-                TccMessageBox.Show("TCC", SR.RenderThreadError, MessageBoxButton.OK, MessageBoxImage.Error);
-                break;
-            }
-            case ClientVersionDetectionException cvde:
-            {
-                Log.F($"Failed to detect client version from file: {cvde}");
-                TccMessageBox.Show(SR.CannotDetectClientVersion(StubInterface.Instance.IsStubAvailable), MessageBoxType.Error);
-                break;
-            }
-            case Win32Exception w32ex when _excludedWin32codes.Contains(w32ex.NativeErrorCode):
-            {
-                Log.F(w32ex.ToString());
-                TccMessageBox.Show("TCC", SR.FatalError, MessageBoxButton.OK, MessageBoxImage.Error);
-                break;
-            }
-            case OutOfMemoryException:
-            {
-                TccMessageBox.Show("TCC", SR.OutOfMemoryError, MessageBoxButton.OK, MessageBoxImage.Error);
-                break;
-            }
-            default:
-            {
-                var res = TccMessageBox.Show("TCC", SR.FatalErrorAskUpload, MessageBoxButton.YesNo, MessageBoxImage.Error);
-                if (res == MessageBoxResult.Yes)
                 {
-                    UploadCrashReport(js);
+                    TccMessageBox.Show("TCC", SR.RenderThreadError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
                 }
-                break;
-            }
+            case ClientVersionDetectionException cvde:
+                {
+                    Log.F($"Failed to detect client version from file: {cvde}");
+                    TccMessageBox.Show(SR.CannotDetectClientVersion(StubInterface.Instance.IsStubAvailable), MessageBoxType.Error);
+                    break;
+                }
+            case Win32Exception w32ex when _excludedWin32codes.Contains(w32ex.NativeErrorCode):
+                {
+                    Log.F(w32ex.ToString());
+                    TccMessageBox.Show("TCC", SR.FatalError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
+            case OutOfMemoryException:
+                {
+                    TccMessageBox.Show("TCC", SR.OutOfMemoryError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    break;
+                }
+            default:
+                {
+                    var res = TccMessageBox.Show("TCC", SR.FatalErrorAskUpload, MessageBoxButton.YesNo, MessageBoxImage.Error);
+                    if (res == MessageBoxResult.Yes)
+                    {
+                        UploadCrashReport(js);
+                    }
+                    break;
+                }
         }
 
         StubInterface.Instance.Disconnect();
@@ -114,15 +117,19 @@ public static class GlobalExceptionHandler
     {
         try
         {
-            using var c = MiscUtils.GetDefaultHttpClient();
-            c.DefaultRequestHeaders.Add(HttpRequestHeader.ContentType.ToString(), "application/json");
-            c.DefaultRequestHeaders.Add(HttpRequestHeader.AcceptCharset.ToString(), "utf-8");
-            c.DefaultRequestHeaders.Add(HttpRequestHeader.UserAgent.ToString(), "TCC/Windows");
-            c.PostAsync("https://www.foglio1024.it/api/crash-reports", new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())))).Wait();
+            using var c = new HttpClient();
+            c.DefaultRequestHeaders.Add("User-Agent", "TCC/Windows");
+            var req = new HttpRequestMessage(HttpMethod.Post, "https://foglio.ns0.it/tcc-reports-api/crash-reports/upload")
+            {
+                Content = new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())))
+            };
+            req.Content.Headers.ContentType!.MediaType = "application/json";
+            var task = c.SendAsync(req);
+            task.Wait();
         }
         catch (Exception e)
         {
             Log.F($"Failed to upload crash report: {e}");
-        }
+        }               
     }
 }
