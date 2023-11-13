@@ -21,6 +21,7 @@ public class GroupWindowSettings : WindowSettingsBase
     uint _hideMpThreshold;
     uint _hideStThreshold;
     uint _disableAbnormalitiesThreshold;
+    uint _disableAbnormalitiesAnimationThreshold;
     uint _groupSizeThreshold;
     GroupWindowLayout _layout;
     bool _showAwakenIcon;
@@ -112,6 +113,17 @@ public class GroupWindowSettings : WindowSettingsBase
         {
             if (_disableAbnormalitiesThreshold == value) return;
             _disableAbnormalitiesThreshold = value;
+            N();
+            SettingsUpdated?.Invoke();
+        }
+    }
+    public uint DisableAbnormalitiesAnimationThreshold
+    {
+        get => _disableAbnormalitiesAnimationThreshold;
+        set
+        {
+            if (_disableAbnormalitiesAnimationThreshold == value) return;
+            _disableAbnormalitiesAnimationThreshold = value;
             N();
             SettingsUpdated?.Invoke();
         }
