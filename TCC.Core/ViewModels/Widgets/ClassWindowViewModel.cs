@@ -147,6 +147,7 @@ public class ClassWindowViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Hook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
         PacketAnalyzer.Processor.Hook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
         PacketAnalyzer.Processor.Hook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
+        PacketAnalyzer.Processor.Hook<S_CREST_MESSAGE>(OnCrestMessage);
     }
 
     protected override void RemoveHooks()
@@ -157,13 +158,7 @@ public class ClassWindowViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_STAMINA>(OnPlayerChangeStamina);
         PacketAnalyzer.Processor.Unhook<S_START_COOLTIME_SKILL>(OnStartCooltimeSkill);
         PacketAnalyzer.Processor.Unhook<S_DECREASE_COOLTIME_SKILL>(OnDecreaseCooltimeSkill);
-    }
-
-    void UpdateSkillCooldown(uint skillId, uint cooldown)
-    {
-        if (!App.Settings.ClassWindowSettings.Enabled) return;
-        if (!Game.DB!.SkillsDatabase.TryGetSkill(skillId, Game.Me.Class, out var skill)) return;
-        CurrentManager.StartSpecialSkill(new Cooldown(skill, cooldown));
+        PacketAnalyzer.Processor.Unhook<S_CREST_MESSAGE>(OnCrestMessage);
     }
 
     void OnLogin(S_LOGIN m)
@@ -188,9 +183,6 @@ public class ClassWindowViewModel : TccWindowViewModel
         // check enabled?
         switch (CurrentClass)
         {
-            //case Class.Warrior when CurrentManager is WarriorLayoutVM wm:
-            //    wm.EdgeCounter.Val = m.Edge;
-            //    break;
             case Class.Sorcerer when CurrentManager is SorcererLayoutVM sm:
                 sm.NotifyElementChanged();
                 break;
@@ -211,11 +203,20 @@ public class ClassWindowViewModel : TccWindowViewModel
 
     void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
     {
-        UpdateSkillCooldown(m.SkillId, m.Cooldown);
+        if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+        CurrentManager.StartSpecialSkill(new Cooldown(skill, m.Cooldown));
     }
 
     void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
     {
-        UpdateSkillCooldown(m.SkillId, m.Cooldown);
+        if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+        CurrentManager.ChangeSpecialSkill(skill, m.Cooldown);
+    }
+
+    void OnCrestMessage(S_CREST_MESSAGE m)
+    {
+        if (m.Type != 6) return;
+        if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
+        CurrentManager.ResetSpecialSkill(skill);
     }
 }
