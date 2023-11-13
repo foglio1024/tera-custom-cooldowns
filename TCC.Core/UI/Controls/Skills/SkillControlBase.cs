@@ -22,7 +22,7 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
     #endregion
     protected Cooldown? Context;
     protected Arc? MainArcRef;
-    protected Arc? PreArcRef;
+    protected Arc? PreArcRef; // todo: remove (#315)
     protected FrameworkElement? ResetArcRef;
     readonly DoubleAnimation _arcAnimation;
     bool _isRunning;

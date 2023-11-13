@@ -24,9 +24,10 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
     bool _canFlash;
     Skill _skill;
     DateTime _endTime;
-    public double Interval { get; }
+    CooldownMode _mode;
 
     // properties
+    public double Interval { get; }
     public Skill Skill
     {
         get => _skill;
@@ -40,7 +41,15 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
     public ulong Duration { get; private set; }
     public ulong OriginalDuration { get; private set; }
     public CooldownType CooldownType { get; }
-    public CooldownMode Mode { get; private set; }
+    public CooldownMode Mode
+    {
+        get => _mode; private set
+        {
+            if (_mode == value) return;
+            _mode = value;
+            N();
+        }
+    }
     public bool FlashOnAvailable
     {
         get => _flashOnAvailable && App.Settings.ClassWindowSettings.FlashAvailableSkills;
