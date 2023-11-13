@@ -52,6 +52,21 @@ public class AbnormalityDuration : ThreadSafeObservableObject, IDisposable
         }
     }
     public bool Animated { get; private set; }
+        
+    bool _isHidden;
+    public bool IsHidden
+    {
+        get => _isHidden;
+        set
+        {
+            if (_isHidden == value) return;
+            _isHidden = value;
+            N();
+        }
+    }
+    public bool CanBeHidden { get; set; }
+
+    public DateTime TimeOfArrival { get; } = DateTime.Now;
 
     AbnormalityDuration(Abnormality b)
     {
@@ -59,7 +74,7 @@ public class AbnormalityDuration : ThreadSafeObservableObject, IDisposable
         _timer = new Timer { Interval = 900 };
         _isTimerDisposed = false;
     }
-    public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated) : this(b)
+    public AbnormalityDuration(Abnormality b, uint d, int s, ulong t, Dispatcher disp, bool animated, bool canBeHidden = false) : this(b)
     {
         ObjectTracker.Register(GetType());
         Dispatcher = disp;
@@ -68,6 +83,8 @@ public class AbnormalityDuration : ThreadSafeObservableObject, IDisposable
         Stacks = s;
         Target = t;
         DurationLeft = d;
+        CanBeHidden = canBeHidden;
+        IsHidden = canBeHidden;
         _startTime = DateTime.Now;
         _endTime = DateTime.Now.AddMilliseconds(d);
 

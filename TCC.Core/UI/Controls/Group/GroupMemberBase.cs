@@ -55,10 +55,10 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         {
             UserClass: Class.Valkyrie
                     or Class.Archer
-                    or Class.Brawler 
-                    or Class.Gunner 
-                    or Class.Lancer 
-                    or Class.Ninja 
+                    or Class.Brawler
+                    or Class.Gunner
+                    or Class.Lancer
+                    or Class.Ninja
                     or Class.Warrior
         };
     public bool ShowBuffs => Game.Group.Size <= App.Settings.GroupWindowSettings.HideBuffsThreshold;
@@ -67,16 +67,53 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
     public bool ShowAwaken => App.Settings.GroupWindowSettings.ShowAwakenIcon;
     public bool ShowHpAmount => App.Settings.GroupWindowSettings.HpLabelMode == GroupHpLabelMode.Amount && ShowHp;
     public bool ShowHpPercentage => App.Settings.GroupWindowSettings.HpLabelMode == GroupHpLabelMode.Percentage && ShowHp;
-    public IEnumerable? BuffsSource => ShowBuffs ? (DataContext as User)?.Buffs : null;
-    public IEnumerable? DebuffsSource => ShowDebuffs ? (DataContext as User)?.Debuffs : null;
+    public ICollectionViewLiveShaping? BuffsSource => ShowBuffs ? _buffs : null;
+    public ICollectionViewLiveShaping? DebuffsSource => ShowDebuffs ? _debuffs : null;
+
+    ICollectionViewLiveShaping _buffs;
+    ICollectionViewLiveShaping _debuffs;
 
     protected GroupMemberBase()
     {
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
         PreviewMouseRightButtonDown += ShowUserMenu;
+        MouseEnter += OnMouseEnter;
+        MouseLeave += OnMouseLeave;
     }
 
+    void OnMouseEnter(object sender, MouseEventArgs e)
+    {
+        SetAbnormalitiesVisibility(true);
+    }
+    void OnMouseLeave(object sender, MouseEventArgs e)
+    {
+        Task.Delay(1000).ContinueWith(_ => Dispatcher.InvokeAsync(() =>
+        {
+            SetAbnormalitiesVisibility(false);
+        }));
+    }
+
+    void SetAbnormalitiesVisibility(bool visible)
+    {
+        if (DataContext is not User user) return;
+
+        var buffs = user.Buffs.ToSyncList()
+            .Where(x => App.Settings.GroupWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .ToArray();
+        var debuffs = user.Debuffs.ToSyncList()
+            .Where(x => App.Settings.GroupWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .ToArray();
+
+        foreach (var abnormality in buffs)
+        {
+            abnormality.IsHidden = !visible;
+        }
+        foreach (var abnormality in debuffs)
+        {
+            abnormality.IsHidden = !visible;
+        }
+    }
     void OnLoaded(object _, RoutedEventArgs __)
     {
         UpdateSettings();
@@ -86,6 +123,29 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         Game.Group.CompositionChanged += OnGroupCompositionChanged;
         SettingsWindowViewModel.AbnormalityShapeChanged += OnAbnormalityShapeChanged;
         WindowManager.ViewModels.GroupVM.SettingsUpdated += UpdateSettings;
+
+        if (DataContext is User user)
+        {
+            _buffs = CollectionViewFactory.CreateLiveCollectionView(user.Buffs,
+                predicate: x => !x.IsHidden,
+                filters: new[] { $"{nameof(AbnormalityDuration.IsHidden)}" },
+                sortFilters: new[]
+                {
+                    new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
+                    new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
+                    new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
+            }) ?? throw new Exception("Failed to create LiveCollectionView");
+
+            _debuffs = CollectionViewFactory.CreateLiveCollectionView(user.Debuffs,
+                predicate: x => !x.IsHidden,
+                filters: new[] { $"{nameof(AbnormalityDuration.IsHidden)}" },
+                sortFilters: new[]
+                {
+                    new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
+                    new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
+                    new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
+            }) ?? throw new Exception("Failed to create LiveCollectionView");
+        }
     }
 
     void OnUnloaded(object _, RoutedEventArgs __)

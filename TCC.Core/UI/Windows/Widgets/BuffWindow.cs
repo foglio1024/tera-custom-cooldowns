@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,6 +16,7 @@ public partial class BuffWindow
 {
     readonly DoubleAnimation _opacityUp;
     readonly DoubleAnimation _opacityDown;
+    readonly AbnormalityWindowViewModel _vm;
 
     public BuffWindow(AbnormalityWindowViewModel vm)
     {
@@ -24,7 +26,8 @@ public partial class BuffWindow
 
 
         InitializeComponent();
-        DataContext = vm;
+        _vm = vm;
+        DataContext = _vm;
         ButtonsRef = Buttons;
         MainContent = WindowContent;
         BoundaryRef = Boundary;
@@ -45,14 +48,10 @@ public partial class BuffWindow
                 case FlowDirection.LeftToRight:
                     Grid.SetColumn(Buffs, 1);
                     Grid.SetColumn(InfBuffs, 1);
-                    Grid.SetColumn(SpecBuffs, 0);
-                    Grid.SetColumn(SpecInfBuffs, 0);
                     break;
                 case FlowDirection.RightToLeft:
                     Grid.SetColumn(Buffs, 0);
                     Grid.SetColumn(InfBuffs, 0);
-                    Grid.SetColumn(SpecBuffs, 1);
-                    Grid.SetColumn(SpecInfBuffs, 1);
                     break;
             }
         });
@@ -61,15 +60,13 @@ public partial class BuffWindow
     void OnAbnormalityShapeChanged()
     {
         Buffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
-        SpecBuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
         Debuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
         InfBuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
-        SpecInfBuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
     }
 
     void OnWindowMouseEnter(object sender, MouseEventArgs e)
     {
-        AbnormalityIndicatorBase.InvokeVisibilityChanged(this, true);
+        SetAbnormalitiesVisibility(true);
         SettingsButton.BeginAnimation(OpacityProperty, _opacityUp);
     }
 
@@ -79,8 +76,34 @@ public partial class BuffWindow
         Task.Delay(1000).ContinueWith(_ => Dispatcher.InvokeAsync(() =>
         {
             if (IsMouseOver) return;
-            AbnormalityIndicatorBase.InvokeVisibilityChanged(this, false);
+            SetAbnormalitiesVisibility(false);
         }));
+    }
+
+    void SetAbnormalitiesVisibility(bool visible)
+    {
+        var normal = _vm.Player.Buffs.ToSyncList()
+            .Where(x => App.Settings.BuffWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .ToArray();
+        var perma = _vm.Player.InfBuffs.ToSyncList()
+            .Where(x => App.Settings.BuffWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .ToArray();
+        var debuffs = _vm.Player.Debuffs.ToSyncList()
+            .Where(x => App.Settings.BuffWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .ToArray();
+
+        foreach (var abnormality in normal)
+        {
+            abnormality.IsHidden = !visible;
+        }
+        foreach (var abnormality in perma)
+        {
+            abnormality.IsHidden = !visible;
+        }
+        foreach (var abnormality in debuffs)
+        {
+            abnormality.IsHidden = !visible;
+        }
     }
 
     void OpenBuffSettings(object sender, RoutedEventArgs e)

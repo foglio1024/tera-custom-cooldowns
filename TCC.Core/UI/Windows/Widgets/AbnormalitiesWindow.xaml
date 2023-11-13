@@ -94,38 +94,22 @@
 
             <!-- Inf buffs -->
             <Grid Width="Auto" Style="{StaticResource GridRowStyle}" Margin="0 0 0 -10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
                 <ItemsControl Name="InfBuffs"
                               Style="{StaticResource BuffBarItemsControlStyle}"
                               ItemsSource="{Binding InfBuffsView}" Grid.Column="0" />
-                <ItemsControl Name="SpecInfBuffs" Grid.Column="1"
-                              Style="{StaticResource BuffBarItemsControlStyle}"
-                              ItemsSource="{Binding SpecInfBuffsView}" />
             </Grid>
             <!-- Buffs -->
             <Grid Width="Auto" Style="{StaticResource GridRowStyle}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
                 <ItemsControl Name="Buffs"
                               Style="{StaticResource BuffBarItemsControlStyle}"
                               ItemsSource="{Binding BuffsView}"
                               Grid.Column="0" />
-                <ItemsControl Name="SpecBuffs" Grid.Column="1"
-                              Style="{StaticResource BuffBarItemsControlStyle}"
-                              ItemsSource="{Binding SpecBuffsView}" />
             </Grid>
             <!-- Debuffs -->
             <Grid Style="{StaticResource GridRowStyle}">
                 <ItemsControl Name="Debuffs"
                               Style="{StaticResource BuffBarItemsControlStyle}"
-                              ItemsSource="{Binding Player.Debuffs}" />
+                              ItemsSource="{Binding DebuffsView}" />
             </Grid>
         </StackPanel>
     </Grid>

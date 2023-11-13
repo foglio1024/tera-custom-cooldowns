@@ -40,18 +40,12 @@ public partial class GroupWindow
 
     void GroupWindow_OnMouseEnter(object sender, MouseEventArgs e)
     {
-        AbnormalityIndicatorBase.InvokeVisibilityChanged(this, true);
         GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
         GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
     }
 
     void GroupWindow_OnMouseLeave(object sender, MouseEventArgs e)
     {
-        Task.Delay(1000).ContinueWith(_ => Dispatcher.InvokeAsync(() =>
-        {
-            if (IsMouseOver) return;
-            AbnormalityIndicatorBase.InvokeVisibilityChanged(this, false);
-        }));
         GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)) { BeginTime = TimeSpan.FromMilliseconds(500) });
         GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)) { BeginTime = TimeSpan.FromMilliseconds(500) });
     }

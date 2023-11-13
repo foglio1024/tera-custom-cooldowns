@@ -410,7 +410,7 @@ public class User : ThreadSafeObservableObject
         var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
         if (existing == null)
         {
-            var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, false);
+            var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, Game.Group.Size < App.Settings.GroupWindowSettings.DisableAbnormalitiesAnimationThreshold);
             if (ab.Infinity) Buffs.Insert(0, newAb); else Buffs.Add(newAb);
             return;
         }
@@ -431,7 +431,7 @@ public class User : ThreadSafeObservableObject
         var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
         if (existing == null)
         {
-            var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, false/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
+            var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, Game.Group.Size < App.Settings.GroupWindowSettings.DisableAbnormalitiesAnimationThreshold/*, size * .9, size, new Thickness(margin, 1, 1, 1)*/);
 
             Debuffs.Add(newAb);
             return;

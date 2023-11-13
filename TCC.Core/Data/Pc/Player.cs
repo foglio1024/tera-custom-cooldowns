@@ -470,7 +470,7 @@ public class Player : ThreadSafeObservableObject
             var existing = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
             if (existing == null)
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true);
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, App.Settings.BuffWindowSettings.Hidden.Contains(ab.Id));
                 list.Add(newAb);
                 if (ab.IsShield) AddShield(ab);
                 if (ab.IsDebuff) AddToDebuffList(ab);
