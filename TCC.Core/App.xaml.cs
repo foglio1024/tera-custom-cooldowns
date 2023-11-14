@@ -113,9 +113,17 @@ public partial class App
         }
 
 
-        //Tester.Enable();
-        //Tester.AddAbnormality(101301);
-        //Tester.AddAbnormality(690093);
+        //TCC.Debug.Tester.Enable();
+        ////TCC.Debug.Tester.AddAbnormality(101301);
+        ////TCC.Debug.Tester.AddAbnormality(690093);
+        ////TCC.Debug.Tester.AddAbnormality(4030);
+        ////TCC.Debug.Tester.AddAbnormality(4830);
+        ////TCC.Debug.Tester.AddAbnormality(902);
+        ////TCC.Debug.Tester.AddAbnormality(922);
+        //TCC.Debug.Tester.AddFakeGroupMember(1, TeraDataLite.Class.Sorcerer, TeraDataLite.Laurel.Gold, false);
+        //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 4030);
+        //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 700000);
+        //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 101301);
         //Tester.StartItemCooldown(444);
         //Tester.ShowDebugWindow();
     }
