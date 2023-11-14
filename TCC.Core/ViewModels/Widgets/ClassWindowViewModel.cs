@@ -85,7 +85,6 @@ public class ClassWindowViewModel : TccWindowViewModel
             ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged -= OnWarriorShowTraverseCutChanged;
             ((ClassWindowSettings)Settings).WarriorShowInfuriateChanged -= OnWarriorShowInfuriateChanged;
             ((ClassWindowSettings)Settings).WarriorEdgeModeChanged -= OnWarriorEdgeModeChanged;
-            ((ClassWindowSettings)Settings).SorcererShowElementsChanged -= OnSorcererShowElementsChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowGodsfallChanged -= OnValkyrieShowGodsfallChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowRagnarokChanged -= OnValkyrieShowRagnarokChanged;
             CurrentClass = Class.None;
@@ -96,7 +95,6 @@ public class ClassWindowViewModel : TccWindowViewModel
             ((ClassWindowSettings)Settings).WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
             ((ClassWindowSettings)Settings).WarriorShowInfuriateChanged += OnWarriorShowInfuriateChanged;
             ((ClassWindowSettings)Settings).WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
-            ((ClassWindowSettings)Settings).SorcererShowElementsChanged += OnSorcererShowElementsChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowGodsfallChanged += OnValkyrieShowGodsfallChanged;
             ((ClassWindowSettings)Settings).ValkyrieShowRagnarokChanged += OnValkyrieShowRagnarokChanged;
             CurrentClass = Game.Me.Class;
@@ -133,11 +131,6 @@ public class ClassWindowViewModel : TccWindowViewModel
         TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.ShowEdge));
     }
 
-    void OnSorcererShowElementsChanged()
-    {
-        // TODO: delet this
-        WindowManager.ViewModels.CharacterVM.ExN(nameof(CharacterWindowViewModel.ShowElements));
-    }
 
     protected override void InstallHooks()
     {

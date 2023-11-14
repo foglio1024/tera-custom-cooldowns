@@ -94,14 +94,14 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
 
     void OnOverlapChanged()
     {
-        GlobalMargin = Direction switch // todo: check
+        GlobalMargin = Direction switch
         {
             FlowDirection.LeftToRight => new Thickness { Right = -((BuffWindowSettings)Settings!).Overlap },
             FlowDirection.RightToLeft => new Thickness { Left = -((BuffWindowSettings)Settings!).Overlap },
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        ContainersMargin = new Thickness { Right = ((BuffWindowSettings)Settings!).Overlap }; // todo: check
+        ContainersMargin = new Thickness { Right = ((BuffWindowSettings)Settings!).Overlap };
     }
 
     void OnShowAbnormalConfigHotkeyPressed()

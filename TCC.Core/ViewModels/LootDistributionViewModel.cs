@@ -310,7 +310,7 @@ public class LootDistributionViewModel : TccWindowViewModel
                 PacketAnalyzer.Processor.Unhook<S_SPAWN_DROPITEM>(OnSpawnDropitem);
 
                 WindowManager.LootDistributionWindow.HideWindow();
-                ClearLoot(); // todo: Dispatcher.Invoke?
+                ClearLoot();
                 if (_clear.IsEnabled) _clear.Stop();
 
                 break;
