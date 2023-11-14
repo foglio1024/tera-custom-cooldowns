@@ -135,6 +135,7 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
                 sortFilters: new[]
                 {
                     new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
+                    new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Infinity)}", ListSortDirection.Descending),
                     new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
                     new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
             }) ?? throw new Exception("Failed to create LiveCollectionView");
@@ -145,6 +146,7 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
                 sortFilters: new[]
                 {
                     new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
+                    new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Infinity)}", ListSortDirection.Descending),
                     new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
                     new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
             }) ?? throw new Exception("Failed to create LiveCollectionView");
