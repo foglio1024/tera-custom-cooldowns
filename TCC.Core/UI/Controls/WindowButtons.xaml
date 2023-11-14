@@ -44,11 +44,12 @@
 
         <Button Visibility="{Binding HideButtonVisibility, RelativeSource={RelativeSource AncestorType=controls:WindowButtons}}"
                 Command="{Binding HideCommand}" Padding="3"
-                ToolTip="Hide">
+                ToolTip="Hide"
+                Grid.Column="1">
             <Path Data="{StaticResource SvgHide}"/>
         </Button>
         <Button Command="{Binding PinCommand}" Padding="3"
-                Grid.Column="1" ToolTip="Show always">
+                Grid.Column="2" ToolTip="Show always">
             <Path>
                 <Path.Style>
                     <Style BasedOn="{StaticResource NostrumDefaultPathStyle}" TargetType="Path">
@@ -64,7 +65,7 @@
         </Button>
         <Button Visibility="{Binding AutoDimButtonVisiblity, RelativeSource={RelativeSource AncestorType=controls:WindowButtons}}"
                 Command="{Binding AutoDimCommand}"
-                Grid.Column="2" Padding="3"
+                Grid.Column="3" Padding="3"
                 ToolTip="Auto dim">
             <Path>
                 <Path.Style>
@@ -81,18 +82,18 @@
 
         </Button>
         <Button Command="{Binding MakeGlobalCommand}"
-                Grid.Column="3"  Padding="3"
+                Grid.Column="4"  Padding="3"
                 ToolTip="Apply current position to all classes">
             <Path Data="{StaticResource SvgCheckAll}" />
         </Button>
         <Button Command="{Binding CloseCommand}"
-                Grid.Column="4" ToolTip="Close" Padding="3"
+                Grid.Column="5" ToolTip="Close" Padding="3"
                 Visibility="{Binding CloseButtonVisibility, RelativeSource={RelativeSource AncestorType=controls:WindowButtons}}">
             <Path Fill="{StaticResource HpBrush}" Data="{StaticResource SvgClose}" />
         </Button>
 
         <TextBlock Text="{Binding WindowName, RelativeSource={RelativeSource AncestorType=controls:WindowButtons}}"
-                   Grid.Column="5" Foreground="#5fff" VerticalAlignment="Center" Margin="5 0 10 1" FontSize="14" />
+                   Grid.Column="0" Foreground="#5fff" VerticalAlignment="Center" Margin="10 0 5 1" FontSize="14" />
 
     </Grid>
 </UserControl>

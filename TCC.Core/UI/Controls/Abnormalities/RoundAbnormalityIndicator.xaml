@@ -105,7 +105,7 @@
               HorizontalAlignment="Right" 
               VerticalAlignment="Top" 
               MaxHeight="{Binding Size, RelativeSource={RelativeSource AncestorType=abnormCtrl:AbnormalityIndicatorBase}, Converter={StaticResource MathMultiplication}, ConverterParameter=0.6}"
-              Margin="0,0,0,0" >
+              Margin="-1" >
             <!--<Grid.LayoutTransform>
                 <ScaleTransform ScaleX=".85" ScaleY=".85"></ScaleTransform>
             </Grid.LayoutTransform>-->
@@ -119,7 +119,7 @@
                 </Style>
             </Grid.Style>
 
-            <Ellipse Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="#40ffffff" StrokeThickness="1.5"
+            <Ellipse Fill="#202020"  Opacity="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="{Binding Abnormality.Type, Converter={StaticResource AbnormalityTypeToStrokeColor}}" StrokeThickness="1.5"
                      Height="Auto" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
             <Viewbox StretchDirection="DownOnly" Stretch="Uniform">
                 <TextBlock Foreground="#d9ffffff" 

@@ -71,7 +71,7 @@
             </controls:WindowButtons.Style>
         </controls:WindowButtons>
 
-        <StackPanel Background="Transparent" Name="WindowContent" Grid.Row="1" Width="1000">
+        <StackPanel Background="Transparent" Name="WindowContent" Grid.Row="1" Width="1000" Margin="0">
             <StackPanel.LayoutTransform>
                 <ScaleTransform
                     ScaleX="{Binding WindowSettings.Scale, RelativeSource={RelativeSource AncestorType=widgets:TccWidget}}"
@@ -93,20 +93,20 @@
             </Grid>
 
             <!-- Inf buffs -->
-            <Grid Width="Auto" Style="{StaticResource GridRowStyle}" Margin="0 0 0 -10">
+            <Grid Width="Auto" Style="{StaticResource GridRowStyle}" Margin="10 0 10 -10">
                 <ItemsControl Name="InfBuffs"
                               Style="{StaticResource BuffBarItemsControlStyle}"
                               ItemsSource="{Binding InfBuffsView}" Grid.Column="0" />
             </Grid>
             <!-- Buffs -->
-            <Grid Width="Auto" Style="{StaticResource GridRowStyle}">
+            <Grid Width="Auto" Style="{StaticResource GridRowStyle}" Margin="10 0">
                 <ItemsControl Name="Buffs"
                               Style="{StaticResource BuffBarItemsControlStyle}"
                               ItemsSource="{Binding BuffsView}"
                               Grid.Column="0" />
             </Grid>
             <!-- Debuffs -->
-            <Grid Style="{StaticResource GridRowStyle}">
+            <Grid Style="{StaticResource GridRowStyle}" Margin="10 0">
                 <ItemsControl Name="Debuffs"
                               Style="{StaticResource BuffBarItemsControlStyle}"
                               ItemsSource="{Binding DebuffsView}" />

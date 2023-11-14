@@ -869,7 +869,7 @@
                                                        SelectedItem="{Binding BuffWindowSettings.Direction, Mode=TwoWay}" />
                             <settings:ValueSetting Value="{Binding BuffWindowSettings.Overlap, Mode=TwoWay}"
                                                    IsEnabled="{Binding BuffWindowSettings.Enabled}" 
-                                                   Min="-2" Max="4"
+                                                   Min="-4" Max="4"
                                                    SettingName="Overlap factor"/>
 
                         </StackPanel>

@@ -56,22 +56,12 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
         Player.InitAbnormalityCollections(_dispatcher);
 
         ((BuffWindowSettings)settings).DirectionChanged += () => ExN(nameof(Direction));
-        ((BuffWindowSettings)settings).OverlapChanged += () =>
-        {
-            GlobalMargin = Direction switch // todo: check
-            {
-                FlowDirection.LeftToRight => new Thickness { Right = -((BuffWindowSettings)Settings!).Overlap },
-                FlowDirection.RightToLeft => new Thickness { Left = -((BuffWindowSettings)Settings!).Overlap },
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
-            ContainersMargin = new Thickness { Right = ((BuffWindowSettings)Settings!).Overlap }; // todo: check
-        };
+        ((BuffWindowSettings)settings).OverlapChanged += OnOverlapChanged;
 
         BuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs,
             predicate: x => !x.IsHidden,
-            filters: new[]{ $"{nameof(AbnormalityDuration.IsHidden)}" },
-            sortFilters: new []
+            filters: new[] { $"{nameof(AbnormalityDuration.IsHidden)}" },
+            sortFilters: new[]
             {
                 new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
                 new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
@@ -99,6 +89,19 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
 
         KeyboardHook.Instance.RegisterCallback(App.Settings.AbnormalSettingsHotkey, OnShowAbnormalConfigHotkeyPressed);
 
+        OnOverlapChanged();
+    }
+
+    void OnOverlapChanged()
+    {
+        GlobalMargin = Direction switch // todo: check
+        {
+            FlowDirection.LeftToRight => new Thickness { Right = -((BuffWindowSettings)Settings!).Overlap },
+            FlowDirection.RightToLeft => new Thickness { Left = -((BuffWindowSettings)Settings!).Overlap },
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        ContainersMargin = new Thickness { Right = ((BuffWindowSettings)Settings!).Overlap }; // todo: check
     }
 
     void OnShowAbnormalConfigHotkeyPressed()
