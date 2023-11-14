@@ -83,13 +83,13 @@ public partial class BuffWindow
     void SetAbnormalitiesVisibility(bool visible)
     {
         var normal = _vm.Player.Buffs.ToSyncList()
-            .Where(x => App.Settings.BuffWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .Where(x => x.CanBeHidden)
             .ToArray();
         var perma = _vm.Player.InfBuffs.ToSyncList()
-            .Where(x => App.Settings.BuffWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .Where(x => x.CanBeHidden)
             .ToArray();
         var debuffs = _vm.Player.Debuffs.ToSyncList()
-            .Where(x => App.Settings.BuffWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .Where(x => x.CanBeHidden)
             .ToArray();
 
         foreach (var abnormality in normal)

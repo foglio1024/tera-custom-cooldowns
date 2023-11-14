@@ -1,14 +1,17 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Nostrum.WPF.Factories;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.Data.Pc;
 using TCC.ViewModels;
-using TCC.ViewModels.Widgets;
 using TeraDataLite;
 
 namespace TCC.UI.Controls.Group;
@@ -99,10 +102,10 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         if (DataContext is not User user) return;
 
         var buffs = user.Buffs.ToSyncList()
-            .Where(x => App.Settings.GroupWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .Where(x => x.CanBeHidden)
             .ToArray();
         var debuffs = user.Debuffs.ToSyncList()
-            .Where(x => App.Settings.GroupWindowSettings.Hidden.Contains(x.Abnormality.Id))
+            .Where(x => x.CanBeHidden)
             .ToArray();
 
         foreach (var abnormality in buffs)
