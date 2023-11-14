@@ -217,7 +217,7 @@ public class GroupWindowViewModel : TccWindowViewModel
             SetAggro(user);
         }
     }
-    void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
+    internal void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
     {
         _dispatcher.InvokeAsync(() =>
         {

@@ -636,4 +636,12 @@ public static class Tester
 
         Game.ShowLootDistributionWindow();
     }
+
+    internal static void AddAbnormalityToGroupMember(uint memberId, uint abnormalId)
+    {
+#pragma warning disable CS8602 // Dereferenziamento di un possibile riferimento Null.
+        if (!Game.DB.AbnormalityDatabase.GetAbnormality(abnormalId, out var ab) || !ab.CanShow) return;
+#pragma warning restore CS8602 // Dereferenziamento di un possibile riferimento Null.
+        WindowManager.ViewModels.GroupVM.BeginOrRefreshAbnormality(ab, 2, 10000, memberId, 1);
+    }
 }

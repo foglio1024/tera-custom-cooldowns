@@ -93,6 +93,7 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
     {
         Task.Delay(1000).ContinueWith(_ => Dispatcher.InvokeAsync(() =>
         {
+            if (IsMouseOver) return;
             SetAbnormalitiesVisibility(false);
         }));
     }
@@ -150,6 +151,9 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
                     new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
                     new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
             }) ?? throw new Exception("Failed to create LiveCollectionView");
+
+            NPC(nameof(BuffsSource));
+            NPC(nameof(DebuffsSource));
         }
     }
 
