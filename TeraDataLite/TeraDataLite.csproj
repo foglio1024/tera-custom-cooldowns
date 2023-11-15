@@ -2,10 +2,10 @@
   <PropertyGroup>
     <RootNamespace>TeraDataLite</RootNamespace>
     <AssemblyName>TeraDataLite</AssemblyName>
-	  <TargetFramework>net7-windows</TargetFramework>
+	  <TargetFramework>net8-windows</TargetFramework>
 	  <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <LangVersion>11</LangVersion>
+    <LangVersion>12</LangVersion>
     <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
     <Nullable>enable</Nullable>
   </PropertyGroup>

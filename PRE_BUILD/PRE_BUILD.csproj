@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	  <TargetFramework>net7</TargetFramework>
-	  <LangVersion>11</LangVersion>
+	  <TargetFramework>net8</TargetFramework>
+	  <LangVersion>12</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>

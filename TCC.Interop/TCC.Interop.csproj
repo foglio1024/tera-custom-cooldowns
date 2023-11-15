@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFramework>net7-windows</TargetFramework>
+	  <TargetFramework>net8-windows</TargetFramework>
 	  <Nullable>enable</Nullable>
 	  <Configurations>Debug;Release;DebugMenma</Configurations>
   </PropertyGroup>

@@ -71,7 +71,6 @@ public class ClassWindowViewModel : TccWindowViewModel
         settings.WarriorShowTraverseCutChanged += OnWarriorShowTraverseCutChanged;
         settings.WarriorShowInfuriateChanged += OnWarriorShowInfuriateChanged;
         settings.WarriorEdgeModeChanged += OnWarriorEdgeModeChanged;
-        settings.SorcererShowElementsChanged += OnSorcererShowElementsChanged;
         settings.ValkyrieShowGodsfallChanged += OnValkyrieShowGodsfallChanged;
         settings.ValkyrieShowRagnarokChanged += OnValkyrieShowRagnarokChanged;
     }
