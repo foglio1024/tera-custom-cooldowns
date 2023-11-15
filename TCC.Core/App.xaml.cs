@@ -78,7 +78,7 @@ public partial class App
         AppVersion = TccUtils.GetTccVersion();
         Log.Config(Path.Combine(BasePath, "logs"), AppVersion); // NLog when?
         ParseStartupArgs(e.Args.ToList());
-        
+
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
         FirstStart = !File.Exists(Path.Combine(BasePath, SettingsGlobals.SettingsFileName));
@@ -125,7 +125,7 @@ public partial class App
         //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 700000);
         //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 101301);
         //Tester.StartItemCooldown(444);
-        //Tester.ShowDebugWindow();
+        //TCC.Debug.Tester.ShowDebugWindow();
     }
 
     static async Task Setup()
@@ -333,6 +333,8 @@ public partial class App
     static void StartDispatcherWatcher()
     {
         const int limit = 60000;
+
+        Dispatcher[] dispatchers = [.. RunningDispatchers.Values, BaseDispatcher];
         new Thread(() =>
             {
                 while (_running)
@@ -340,10 +342,10 @@ public partial class App
                     var deadlockedDispatchers = new List<Dispatcher>();
                     try
                     {
-                        Parallel.ForEach(RunningDispatchers.Values.Append(BaseDispatcher), dispatcher =>
+                        Parallel.ForEach(dispatchers, async dispatcher =>
                         {
                             //Log.CW($"{dispatcher.Thread.Name} checking...");
-                            if (dispatcher.IsAlive(limit).Result)
+                            if (await dispatcher.IsAlive(limit))
                             {
                                 //Log.CW($"{dispatcher.Thread.Name} is alive!");
                                 return;
@@ -360,11 +362,11 @@ public partial class App
 
                     if (deadlockedDispatchers.Count <= 1) continue;
                     var threadNames = deadlockedDispatchers.Select(d => d.Thread.Name).ToList();
+                    Log.F($"The following threads didn't report in time: {threadNames.ToCSV()}");
                     throw new DeadlockException($"The following threads didn't report in time: {threadNames.ToCSV()}", threadNames);
-                    //Log.F($"The following threads didn't report in time: {deadlockedDispatchers.Select(d => d.Thread.Name).ToList().ToCSV()}");
                 }
             })
-            { Name = "Watcher" }.Start();
+        { Name = "Watcher" }.Start();
     }
 
     #endregion Dispatchers
