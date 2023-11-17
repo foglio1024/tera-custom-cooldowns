@@ -27,7 +27,7 @@ public class MonsterDatabase : DatabaseBase
         _zones = new Dictionary<uint, Zone>();
     }
 
-    public bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
+    public bool TryGetMonster(uint templateId, uint zoneId, [NotNullWhen(true)] out Monster m)
     {
         m = new Monster(0, 0, "Unknown", 0, false, false, Species.Unknown);
         if (!_zones.TryGetValue(zoneId, out var z) || !z.Monsters.TryGetValue(templateId, out var found))
@@ -61,7 +61,7 @@ public class MonsterDatabase : DatabaseBase
         {
             var zoneId = Convert.ToUInt32(zone.Attribute("id")?.Value);
             var zoneName = zone.Attribute("name")?.Value;
-            if(string.IsNullOrEmpty(zoneName)) continue;
+            if (string.IsNullOrEmpty(zoneName)) continue;
 
             var z = new Zone(zoneName);
 
@@ -71,7 +71,7 @@ public class MonsterDatabase : DatabaseBase
                 var name = monster.Attribute("name")?.Value ?? "Unknown";
                 var isBoss = monster.Attribute("isBoss")?.Value == "True";
                 var maxHP = Convert.ToInt64(monster.Attribute("hp")?.Value);
-                var species = (Species) int.Parse(monster.Attribute("speciesId")?.Value ?? "0");
+                var species = (Species)int.Parse(monster.Attribute("speciesId")?.Value ?? "0");
 
                 var m = new Monster(id, zoneId, name, maxHP, isBoss, false, species);
                 z.AddMonster(m);
@@ -96,7 +96,7 @@ public class MonsterDatabase : DatabaseBase
                         m.IsBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
                     if (monst.Attribute("isHidden") != null)
                         m.IsHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
-                    if(string.IsNullOrEmpty(m.Name))
+                    if (string.IsNullOrEmpty(m.Name))
                     {
                         m.Name = monst.Attribute("name")?.Value ?? $"Unknown {zoneId}.{mId}";
                     }
@@ -108,7 +108,7 @@ public class MonsterDatabase : DatabaseBase
                     var isHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
                     var maxHp = long.Parse(monst.Attribute("hp")?.Value ?? "0");
                     var species = int.Parse(monst.Attribute("speciesId")?.Value ?? "0");
-                    z.Monsters.Add(mId, new Monster(mId, zoneId, name, maxHp, isBoss, isHidden, (Species) species));
+                    z.Monsters.Add(mId, new Monster(mId, zoneId, name, maxHp, isBoss, isHidden, (Species)species));
                 }
             }
         }
