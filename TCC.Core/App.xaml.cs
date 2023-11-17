@@ -113,7 +113,8 @@ public partial class App
         }
 
 
-        //TCC.Debug.Tester.Enable();
+        TCC.Debug.Tester.Enable();
+        TCC.Debug.Tester.ShowDebugWindow();
         ////TCC.Debug.Tester.AddAbnormality(101301);
         ////TCC.Debug.Tester.AddAbnormality(690093);
         ////TCC.Debug.Tester.AddAbnormality(4030);
@@ -125,7 +126,6 @@ public partial class App
         //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 700000);
         //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 101301);
         //Tester.StartItemCooldown(444);
-        //TCC.Debug.Tester.ShowDebugWindow();
     }
 
     static async Task Setup()

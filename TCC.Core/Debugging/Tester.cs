@@ -476,9 +476,7 @@ public static class Tester
 
     public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager, int remainingEnrageTime)
     {
-#pragma warning disable CS8602 // Dereferenziamento di un possibile riferimento Null.
-        if (Game.DB.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
-#pragma warning restore CS8602 // Dereferenziamento di un possibile riferimento Null.
+        if (Game.DB!.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
         {
             if (TccUtils.IsWorldBoss(zoneId, templateId))
             {

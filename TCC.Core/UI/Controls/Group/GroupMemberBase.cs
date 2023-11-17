@@ -73,8 +73,8 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
     public ICollectionViewLiveShaping? BuffsSource => ShowBuffs ? _buffs : null;
     public ICollectionViewLiveShaping? DebuffsSource => ShowDebuffs ? _debuffs : null;
 
-    ICollectionViewLiveShaping _buffs;
-    ICollectionViewLiveShaping _debuffs;
+    ICollectionViewLiveShaping? _buffs;
+    ICollectionViewLiveShaping? _debuffs;
 
     protected GroupMemberBase()
     {

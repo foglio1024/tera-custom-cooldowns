@@ -29,13 +29,13 @@ public static class GlobalExceptionHandler
         1816  // "Not enough quota"
     ];
 
-    public async static void OnGlobalException(object sender, UnhandledExceptionEventArgs e)
+    public static void OnGlobalException(object sender, UnhandledExceptionEventArgs e)
     {
         FocusManager.Dispose();
-        await HandleGlobalException(e);
+        HandleGlobalException(e);
     }
 
-    static async Task HandleGlobalException(UnhandledExceptionEventArgs e)
+    static void HandleGlobalException(UnhandledExceptionEventArgs e)
     {
         var ex = (Exception)e.ExceptionObject;
         var js = ExceptionReportBuilder.BuildJsonCrashReport(ex);
