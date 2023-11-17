@@ -1,13 +1,15 @@
-﻿using TCC.Data.Skills;
+﻿using System;
+using TCC.Data.Skills;
 using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
 public class ReaperLayoutViewModel : BaseClassLayoutViewModel
 {
-
     public SkillWithEffect ShadowReaping { get; }
     public SkillWithEffect ShroudedEscape { get; }
+    public SkillWithEffect PowerlinkedGrimStrike { get; }
+    public SkillWithEffect PowerlinkedDoubleShear { get; }
 
     public ReaperLayoutViewModel()
     {
@@ -16,6 +18,12 @@ public class ReaperLayoutViewModel : BaseClassLayoutViewModel
 
         Game.DB.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
         ShroudedEscape = new SkillWithEffect(_dispatcher, se);
+
+        Game.DB.SkillsDatabase.TryGetSkill(50100, Class.Reaper, out var plgs);
+        PowerlinkedGrimStrike = new SkillWithEffect(_dispatcher, plgs, false);
+
+        Game.DB.SkillsDatabase.TryGetSkill(30100, Class.Reaper, out var plds);
+        PowerlinkedDoubleShear = new SkillWithEffect(_dispatcher, plds, false);
     }
 
     public override void Dispose()
