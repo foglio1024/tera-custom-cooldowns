@@ -6,8 +6,8 @@ namespace TCC.Data.Abnormalities;
 
 public class LancerAbnormalityTracker : AbnormalityTracker
 {
-    public static readonly uint[] ARushIDs = { 200700, 200701, 200731 };
-    static readonly uint[] GShoutIDs = { 200200, 200201, 200202 };
+    public static readonly uint[] ARushIDs = [200700, 200701, 200731];
+    static readonly uint[] GShoutIDs = [200200, 200201, 200202];
     const uint LineHeldId = 201701;
     public const string AdrenalineRushIconName = "icon_skills.fightingwill_tex";
 

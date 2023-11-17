@@ -6,7 +6,7 @@ namespace TCC.Data.Abnormalities;
 
 public class SlayerAbnormalityTracker : AbnormalityTracker
 {
-    static readonly uint[] IcbIds = { 300800, 300801, 300805 };
+    static readonly uint[] IcbIds = [300800, 300801, 300805];
 
     public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
     {

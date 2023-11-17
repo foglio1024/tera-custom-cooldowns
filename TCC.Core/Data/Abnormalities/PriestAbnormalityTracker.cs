@@ -7,11 +7,11 @@ namespace TCC.Data.Abnormalities;
 
 public class PriestAbnormalityTracker : AbnormalityTracker
 {
-    static readonly uint[] EnergyStarsIDs = { 801500, 801501, 801502, 801503, 98000107 };
+    static readonly uint[] EnergyStarsIDs = [801500, 801501, 801502, 801503, 98000107];
     const int GraceId = 801700;
     const int TripleNemesisId = 28090;
     const int DivineId = 805713;
-    static readonly uint[] EdictIDs = { 805800 };
+    static readonly uint[] EdictIDs = [805800];
 
     static void CheckTripleNemesis(S_ABNORMALITY_BEGIN p)
     {

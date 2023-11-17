@@ -76,8 +76,8 @@ public class DashboardViewModel : TccWindowViewModel
         {
             return _sortedColumns ??= CollectionViewFactory.CreateLiveCollectionView(Columns,
                                           o => o.IsVisible,
-                                          new[] { $"{nameof(DungeonColumnViewModel.IsVisible)}", $"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}" },
-                                          new[] { new SortDescription($"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) })
+                                          [$"{nameof(DungeonColumnViewModel.IsVisible)}", $"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}"],
+                                          [new SortDescription($"{nameof(DungeonColumnViewModel.Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending)])
                                       ?? throw new Exception("Failed to create LiveCollectionView");
         }
     }
@@ -289,21 +289,21 @@ public class DashboardViewModel : TccWindowViewModel
 
         SortedCharacters = CollectionViewFactory.CreateLiveCollectionView(_characters,
                                character => !character.Hidden,
-                               new[] { nameof(Character.Hidden) },
-                               new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) })
+                               [nameof(Character.Hidden)],
+                               [new SortDescription(nameof(Character.Position), ListSortDirection.Ascending)])
                            ?? throw new Exception("Failed to create LiveCollectionView");
 
         HiddenCharacters = CollectionViewFactory.CreateLiveCollectionView(_characters,
                                character => character.Hidden,
-                               new[] { nameof(Character.Hidden) },
-                               new[] { new SortDescription(nameof(Character.Position), ListSortDirection.Ascending) })
+                               [nameof(Character.Hidden)],
+                               [new SortDescription(nameof(Character.Position), ListSortDirection.Ascending)])
                            ?? throw new Exception("Failed to create LiveCollectionView");
 
 
         CharacterViewModelsView = CollectionViewFactory.CreateLiveCollectionView(CharacterViewModels,
                                       characterVM => !characterVM.Character.Hidden,
-                                      new[] { $"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}" },
-                                      new[] { new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending) })
+                                      [$"{nameof(CharacterViewModel.Character)}.{nameof(Character.Hidden)}"],
+                                      [new SortDescription($"{nameof(CharacterViewModel.Character)}.{nameof(Character.Position)}", ListSortDirection.Ascending)])
                                   ?? throw new Exception("Failed to create LiveCollectionView");
 
 
@@ -473,11 +473,11 @@ public class DashboardViewModel : TccWindowViewModel
 
             SelectedCharacter = character;
             SelectedCharacterInventory = CollectionViewFactory.CreateLiveCollectionView(character.Inventory,
-                sortFilters: new[]
-                {
+                sortFilters:
+                [
                     new SortDescription($"{nameof(Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending),
                     new SortDescription($"{nameof(Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending)
-                });
+                ]);
 
             //WindowManager.DashboardWindow.ShowDetails();
             ShowDetails = true;

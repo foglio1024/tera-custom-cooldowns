@@ -132,25 +132,25 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         {
             _buffs = CollectionViewFactory.CreateLiveCollectionView(user.Buffs,
                 predicate: x => !x.IsHidden,
-                filters: new[] { $"{nameof(AbnormalityDuration.IsHidden)}" },
-                sortFilters: new[]
-                {
+                filters: [$"{nameof(AbnormalityDuration.IsHidden)}"],
+                sortFilters:
+                [
                     new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
                     new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Infinity)}", ListSortDirection.Descending),
                     new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
                     new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
-            }) ?? throw new Exception("Failed to create LiveCollectionView");
+            ]) ?? throw new Exception("Failed to create LiveCollectionView");
 
             _debuffs = CollectionViewFactory.CreateLiveCollectionView(user.Debuffs,
                 predicate: x => !x.IsHidden,
-                filters: new[] { $"{nameof(AbnormalityDuration.IsHidden)}" },
-                sortFilters: new[]
-                {
+                filters: [$"{nameof(AbnormalityDuration.IsHidden)}"],
+                sortFilters:
+                [
                     new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
                     new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Infinity)}", ListSortDirection.Descending),
                     new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
                     new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
-            }) ?? throw new Exception("Failed to create LiveCollectionView");
+            ]) ?? throw new Exception("Failed to create LiveCollectionView");
 
             NPC(nameof(BuffsSource));
             NPC(nameof(DebuffsSource));

@@ -9,6 +9,6 @@ public class PacketParseException : Exception
     public PacketParseException(string msg, Exception inner, string opcodeName, byte[]? data) : base(msg, inner)
     {
         OpcodeName = opcodeName;
-        RawData = data ?? new byte[]{};
+        RawData = data ?? [];
     }
 }

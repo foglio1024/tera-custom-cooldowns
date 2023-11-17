@@ -60,32 +60,32 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
 
         BuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Buffs,
             predicate: x => !x.IsHidden,
-            filters: new[] { $"{nameof(AbnormalityDuration.IsHidden)}" },
-            sortFilters: new[]
-            {
+            filters: [$"{nameof(AbnormalityDuration.IsHidden)}"],
+            sortFilters:
+            [
                 new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
                 new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
                 new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
-            }) ?? throw new Exception("Failed to create LiveCollectionView");
+            ]) ?? throw new Exception("Failed to create LiveCollectionView");
         InfBuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.InfBuffs,
             predicate: x => !x.IsHidden,
-            filters: new[] { $"{nameof(AbnormalityDuration.IsHidden)}" },
-            sortFilters: new[]
-            {
+            filters: [$"{nameof(AbnormalityDuration.IsHidden)}"],
+            sortFilters:
+            [
                 new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
                 new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
                 new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
-            }) ?? throw new Exception("Failed to create LiveCollectionView");
+            ]) ?? throw new Exception("Failed to create LiveCollectionView");
 
         DebuffsView = CollectionViewFactory.CreateLiveCollectionView(Player.Debuffs,
             predicate: x => !x.IsHidden,
-            filters: new[] { $"{nameof(AbnormalityDuration.IsHidden)}" },
-            sortFilters: new[]
-            {
+            filters: [$"{nameof(AbnormalityDuration.IsHidden)}"],
+            sortFilters:
+            [
                 new SortDescription($"{nameof(AbnormalityDuration.Abnormality)}.{nameof(Abnormality.Type)}", ListSortDirection.Descending),
                 new SortDescription($"{nameof(AbnormalityDuration.CanBeHidden)}", ListSortDirection.Ascending),
                 new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
-            }) ?? throw new Exception("Failed to create LiveCollectionView");
+            ]) ?? throw new Exception("Failed to create LiveCollectionView");
 
         KeyboardHook.Instance.RegisterCallback(App.Settings.AbnormalSettingsHotkey, OnShowAbnormalConfigHotkeyPressed);
 

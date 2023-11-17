@@ -71,27 +71,26 @@ public class GroupWindowViewModel : TccWindowViewModel
 
         Dps = CollectionViewFactory.CreateLiveCollectionView(Members,
                   dps => dps is { Role: Role.Dps, Visible: true },
-                  new[] { nameof(User.Role), nameof(User.Visible) },
-                  new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
+                  [nameof(User.Role), nameof(User.Visible)],
+                  [new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)])
               ?? throw new Exception("Failed to create LiveCollectionView");
         Tanks = CollectionViewFactory.CreateLiveCollectionView(Members,
                     tank => tank is { Role: Role.Tank, Visible: true },
-                    new[] { nameof(User.Role), nameof(User.Visible) },
-                    new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
+                    [nameof(User.Role), nameof(User.Visible)],
+                    [new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)])
                 ?? throw new Exception("Failed to create LiveCollectionView");
         Healers = CollectionViewFactory.CreateLiveCollectionView(Members,
                       healer => healer is { Role: Role.Healer, Visible: true },
-                      new[] { nameof(User.Role), nameof(User.Visible) },
-                      new[] { new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending) })
+                      [nameof(User.Role), nameof(User.Visible)],
+                      [new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)])
                   ?? throw new Exception("Failed to create LiveCollectionView");
         All = CollectionViewFactory.CreateLiveCollectionView(Members,
                   user => user.Visible,
-                  new[] { nameof(User.Visible) },
-                  new[]
-                  {
+                  [nameof(User.Visible)],
+                  [
                       new SortDescription(nameof(User.Role), ListSortDirection.Descending),
                       new SortDescription(nameof(User.UserClass), ListSortDirection.Ascending)
-                  })
+                  ])
               ?? throw new Exception("Failed to create LiveCollectionView");
 
 

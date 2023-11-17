@@ -43,8 +43,8 @@ public class DungeonColumnViewModel : ThreadSafeObservableObject
         DungeonsList = new ThreadSafeObservableCollection<DungeonCooldownViewModel>();
         DungeonsListView = CollectionViewFactory.CreateLiveCollectionView(DungeonsList,
                                o => !o.Owner.Hidden,
-                               new[] { $"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}" },
-                               new[] { new SortDescription($"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Position)}", ListSortDirection.Ascending) })
+                               [$"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}"],
+                               [new SortDescription($"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Position)}", ListSortDirection.Ascending)])
                            ?? throw new Exception("Failed to create LiveCollectionView");
         RemoveDungeonCommand = new RelayCommand(_ => Dungeon.Show = false);
     }

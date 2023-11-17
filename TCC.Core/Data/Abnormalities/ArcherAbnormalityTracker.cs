@@ -8,9 +8,9 @@ public class ArcherAbnormalityTracker : AbnormalityTracker
 {
     const uint FocusId = 601400;
     const uint FocusXId = 601450;
-    static readonly uint[] WindsongIds = { 602101, 602221 /*, 602107, 602108, 602227*/ };
+    static readonly uint[] WindsongIds = [602101, 602221 /*, 602107, 602108, 602227*/];
 
-    static readonly uint[] WindWalkIds = { 602102, 602103 };
+    static readonly uint[] WindWalkIds = [602102, 602103];
     //private const string WindsongIconName = "icon_skills.breeze_tex";
 
     public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)

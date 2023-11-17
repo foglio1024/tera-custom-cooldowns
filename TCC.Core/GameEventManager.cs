@@ -154,7 +154,7 @@ public class GameEventManager : ThreadSafeObservableObject
         try
         {
             var c = MiscUtils.GetDefaultHttpClient();
-            c.PostAsync($"{BaseUrl}?srv={Game.Server.ServerId}&reg={CurrentRegion}&post", new ByteArrayContent(new byte[]{}));
+            c.PostAsync($"{BaseUrl}?srv={Game.Server.ServerId}&reg={CurrentRegion}&post", new ByteArrayContent([]));
         }
         catch
         {

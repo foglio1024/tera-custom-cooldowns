@@ -217,15 +217,15 @@ public class LfgListViewModel : TccWindowViewModel
         settings.BlacklistedWords.ForEach(w => BlacklistedWords.Add(w));
         ListingsView = CollectionViewFactory.CreateLiveCollectionView(Listings,
             //l => !l.IsFullOffline,
-            filters: new[] { nameof(Listing.IsFullOffline) },
-            sortFilters: new[]
-            {
+            filters: [nameof(Listing.IsFullOffline)],
+            sortFilters:
+            [
                 new SortDescription(LastSortDescr, ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsTwitch), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsFullOffline), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsTrade), ListSortDirection.Ascending),
                 new SortDescription(nameof(Listing.IsMyLfg), ListSortDirection.Descending)
-            }) ?? throw new Exception("Failed to create LiveCollectionView");
+            ]) ?? throw new Exception("Failed to create LiveCollectionView");
 
         Listings.CollectionChanged += ListingsOnCollectionChanged;
         BlacklistedWords.CollectionChanged += OnBlacklistedWordsCollectionChanged;

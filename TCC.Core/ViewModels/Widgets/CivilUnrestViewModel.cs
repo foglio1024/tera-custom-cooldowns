@@ -74,11 +74,11 @@ public class CivilUnrestViewModel : TccWindowViewModel
         get
         { 
             var ret = CollectionViewFactory.CreateLiveCollectionView(_guilds,
-                sortFilters: new[]
-                {
+                sortFilters:
+                [
                     new SortDescription(nameof(CivilUnrestGuild.TowerHp), ListSortDirection.Descending),
                     new SortDescription(nameof(CivilUnrestGuild.TowersDestroyed), ListSortDirection.Descending)
-                }) ?? throw new Exception("Failed to create LiveCollectionView");
+                ]) ?? throw new Exception("Failed to create LiveCollectionView");
             return ret;
         }
     }

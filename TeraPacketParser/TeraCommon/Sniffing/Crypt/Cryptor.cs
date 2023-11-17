@@ -7,11 +7,11 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt;
 public class Cryptor
 {
     readonly CryptorKey[] _key =
-    {
+    [
         new(55, 31),
         new(57, 50),
         new(58, 39)
-    };
+    ];
 
     int _changeData;
     int _changeLen;

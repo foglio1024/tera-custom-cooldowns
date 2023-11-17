@@ -9,12 +9,11 @@ namespace TCC.Data.Abnormalities;
 public class WarriorAbnormalityTracker : AbnormalityTracker
 {
     //private static readonly uint[] GambleIDs = { 100800, 100801, 100802, 100803 };
-    static readonly uint[] AstanceIDs = { 100100, 100101, 100102, 100103 };
-    static readonly uint[] DstanceIDs = { 100200, 100201, 100202, 100203 };
-    static readonly uint[] TraverseCutIDs = { 101300/*, 101301*/ };
-    static readonly uint[] BladeWaltzIDs = { 104100 };
-    static readonly uint[] SwiftGlyphs = { 21010, 21070 };
-    public const string DeadlyGambleIconName = "icon_skills.deadlywill_tex";
+    static readonly uint[] AstanceIDs = [100100, 100101, 100102, 100103];
+    static readonly uint[] DstanceIDs = [100200, 100201, 100202, 100203];
+    static readonly uint[] TraverseCutIDs = [101300/*, 101301*/];
+    static readonly uint[] BladeWaltzIDs = [104100];
+    static readonly uint[] SwiftGlyphs = [21010, 21070];
 
     readonly Skill _bladeWaltz;
 
@@ -23,7 +22,6 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         Game.DB!.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", Game.Me.Class, out var bw);
 
         _bladeWaltz = bw ?? throw new NullReferenceException("Skill not found!");
-
     }
 
     public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)

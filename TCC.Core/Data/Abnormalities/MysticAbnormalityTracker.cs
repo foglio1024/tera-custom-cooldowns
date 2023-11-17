@@ -18,11 +18,11 @@ public class MysticAbnormalityTracker : AbnormalityTracker
     const int TovId = 702003;
     const int TowId = 702004;
 
-    static readonly uint[] CritAuraIDs = { 700600, 700601, 700602, 700603 };
-    static readonly uint[] ManaAuraIDs = { 700300 };
-    static readonly uint[] CritResAuraIDs = { 700200, 700201, 700202, 700203 };
-    static readonly uint[] SwiftAuraIDs = { 700700, 700701 };
-    static readonly uint[] ElementalizeIDs = { 702000 };
+    static readonly uint[] CritAuraIDs = [700600, 700601, 700602, 700603];
+    static readonly uint[] ManaAuraIDs = [700300];
+    static readonly uint[] CritResAuraIDs = [700200, 700201, 700202, 700203];
+    static readonly uint[] SwiftAuraIDs = [700700, 700701];
+    static readonly uint[] ElementalizeIDs = [702000];
 
     //public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
     //{

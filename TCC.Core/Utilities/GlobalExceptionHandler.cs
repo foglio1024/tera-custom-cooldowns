@@ -25,9 +25,9 @@ namespace TCC.Utilities;
 public static class GlobalExceptionHandler
 {
     static readonly int[] _excludedWin32codes =
-    {
+    [
         1816  // "Not enough quota"
-    };
+    ];
 
     public async static void OnGlobalException(object sender, UnhandledExceptionEventArgs e)
     {

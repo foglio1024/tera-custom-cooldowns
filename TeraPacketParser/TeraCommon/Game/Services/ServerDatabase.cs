@@ -53,7 +53,7 @@ public class ServerDatabase
     {
         _serverlist = File.ReadAllLines(Path.Combine(folder, "servers.txt"))
             .Where(s => !string.IsNullOrWhiteSpace(s))
-            .Select(s => s.Split(new[] { ' ' }, 4))
+            .Select(s => s.Split([' '], 4))
             .Select(
                 parts =>
                     new Server(parts[3], parts[1], parts[0],
@@ -79,7 +79,7 @@ public class ServerDatabase
     {
         return File.ReadAllLines(filename)
             .Where(s => !s.StartsWith("#") && !string.IsNullOrWhiteSpace(s))
-            .Select(s => s.Split(new[] { ' ' }, 3))
+            .Select(s => s.Split([' '], 3))
             .Select(parts => new Server(parts[2], parts[1], parts[0]));
     }
     public Dictionary<string, Server> GetServersByIp()

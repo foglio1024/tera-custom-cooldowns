@@ -121,9 +121,9 @@ public class LootDistributionViewModel : TccWindowViewModel
             new SortDescription($"{nameof(LootItemViewModel.Item)}.{nameof(DropItem.ItemId)}", ListSortDirection.Ascending)
         });
 
-        MembersView = CollectionViewFactory.CreateLiveCollectionView(Members, sortFilters: new[] {
+        MembersView = CollectionViewFactory.CreateLiveCollectionView(Members, sortFilters: [
             new SortDescription($"{nameof(LootingGroupMember.IsPlayer)}", ListSortDirection.Descending)
-        })!;
+        ])!;
 
         DistributionListView.GroupDescriptions.Add(new PropertyGroupDescription($"{nameof(LootItemViewModel.DbItem)}.{nameof(Item.Id)}"));
 

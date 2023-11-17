@@ -21,11 +21,11 @@ public class MergedInventoryViewModel : ThreadSafeObservableObject
     {
         MergedInventory = new ThreadSafeObservableCollection<MergedInventoryItem>();
         MergedInventoryView = CollectionViewFactory.CreateLiveCollectionView(MergedInventory, 
-                                  sortFilters: new[]
-                                  {
+                                  sortFilters:
+                                  [
                                       new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending),
                                       new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.RareGrade)}", ListSortDirection.Ascending)
-                                  })
+                                  ])
                               ?? throw new Exception("Failed to create LiveCollectionView");
     }
 

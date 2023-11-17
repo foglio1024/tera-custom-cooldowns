@@ -53,17 +53,17 @@ public class NpcWindowViewModel : TccWindowViewModel
         _npcList = new ThreadSafeObservableCollection<Npc>(_dispatcher);
         Bams = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                    npc => npc is { IsBoss: true, IsTower: false, Visible: true },
-                   new[] { nameof(Npc.Visible), nameof(Npc.IsBoss) },
-                   new[] { new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending) })
+                   [nameof(Npc.Visible), nameof(Npc.IsBoss)],
+                   [new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending)])
                ?? throw new Exception("Failed to create LiveCollectionView");
         Mobs = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                    npc => npc is { IsBoss: false, IsTower: false, Visible: true },
-                   new[] { nameof(Npc.Visible), nameof(Npc.IsBoss) },
-                   new[] { new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending) })
+                   [nameof(Npc.Visible), nameof(Npc.IsBoss)],
+                   [new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending)])
                ?? throw new Exception("Failed to create LiveCollectionView");
         GuildTowers = CollectionViewFactory.CreateLiveCollectionView(_npcList,
                           npc => npc.IsTower,
-                          sortFilters: new[] { new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending) })
+                          sortFilters: [new SortDescription(nameof(Npc.CurrentHP), ListSortDirection.Ascending)])
                       ?? throw new Exception("Failed to create LiveCollectionView");
 
         PendingAbnormalities = new List<PendingAbnormality>();
