@@ -1338,9 +1338,6 @@
                                 SelectedItem="{Binding LootDistributionWindowSettings.ClickThruMode, Mode=TwoWay}"
                                 IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
                                 Style="{StaticResource ClickThruSettingStyle}" />
-                            <settings:ValueSetting Value="{Binding LootDistributionWindowSettings.Scale, Mode=TwoWay}"
-                                                   IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
-                                                   Style="{StaticResource ScaleSettingStyle}" />
                             <settings:ValueSetting Value="{Binding LootDistributionWindowSettings.MaxOpacity, Mode=TwoWay}"
                                                    IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
                                                    Style="{StaticResource MaxOpacitySettingStyle}" />
