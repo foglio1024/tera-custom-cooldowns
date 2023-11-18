@@ -655,7 +655,9 @@ public class CooldownWindowViewModel : TccWindowViewModel
             return;
 
         if (!Pass(skill)) return;
-        RouteSkill(new Cooldown(skill, m.Cooldown));
+
+        var cd = skill.Id == 98150023 && m.Cooldown > 0 ? 180000 : m.Cooldown; // temp fix for menma brooch
+        RouteSkill(new Cooldown(skill, cd));
     }
 
     void OnCrestMessage(S_CREST_MESSAGE m)
