@@ -2206,8 +2206,10 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-                            <settings:CheckboxSetting SettingName="Show decimals in cooldowns"
-                                                      IsOn="{Binding ShowDecimalsInCooldowns, Mode=TwoWay}"/>
+                            <settings:SelectionSetting SettingName="Decimals in cooldowns"
+                                                       SelectedItem="{Binding CooldownsDecimalMode, Mode=TwoWay}"
+                                                       ChoicesType="{x:Type data:CooldownDecimalMode}"
+                                                       Choices="{Binding CooldownDecimalModes, Mode=OneWay}" />
                             <settings:SelectionSetting SettingName="Abnormalities shape"
                                                        SelectedItem="{Binding AbnormalityShape, Mode=TwoWay}"
                                                        ChoicesType="{x:Type data:ControlShape}"

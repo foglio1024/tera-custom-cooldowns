@@ -15,7 +15,23 @@ public class ValkyrieLayoutViewModel : BaseClassLayoutViewModel
     public bool ShowRagnarok => App.Settings.ClassWindowSettings.ValkyrieShowRagnarok;
     public bool ShowGodsfall => App.Settings.ClassWindowSettings.ValkyrieShowGodsfall;
 
-    public string RagnarokEffectSecondsText => TimeUtils.FormatMilliseconds(Convert.ToInt64((Ragnarok.Effect.Seconds > uint.MaxValue ? 0 : Ragnarok.Effect.Seconds) * 1000), App.Settings.ShowDecimalsInCooldowns);
+    public string RagnarokEffectSecondsText
+    {
+        get
+        {
+            var showDecimals = App.Settings.CooldownsDecimalMode switch
+            {
+                CooldownDecimalMode.Never => false,
+                CooldownDecimalMode.LessThanOne when Ragnarok.Effect.Seconds< 1 => true,
+                CooldownDecimalMode.LessThanTen when Ragnarok.Effect.Seconds < 10 => true,
+                _ => false
+            };
+
+            return TimeUtils.FormatMilliseconds(
+                Convert.ToInt64((Ragnarok.Effect.Seconds > uint.MaxValue ? 0 : Ragnarok.Effect.Seconds) * 1000),
+                showDecimals);
+        }
+    }
 
     public ValkyrieLayoutViewModel()
     {

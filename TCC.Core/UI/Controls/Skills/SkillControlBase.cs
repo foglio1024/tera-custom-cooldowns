@@ -99,8 +99,24 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
 
     void OnSecondsUpdated()
     {
-        NPC(nameof(SecondsText));
-        SecondsText = TimeUtils.FormatMilliseconds(Convert.ToInt64((Context?.Seconds > uint.MaxValue ? 0 : Context?.Seconds) * 1000), Context?.Seconds < 1 && App.Settings.ShowDecimalsInCooldowns);
+        if (Context == null)
+        {
+            SecondsText = "";
+            return;
+        }
+
+        var showDecimals = App.Settings.CooldownsDecimalMode switch
+        {
+            CooldownDecimalMode.Never => false,
+            CooldownDecimalMode.LessThanOne when Context.Seconds < 1 => true,
+            CooldownDecimalMode.LessThanTen when Context.Seconds < 10 => true,
+            _ => false
+        };
+
+        SecondsText = TimeUtils.FormatMilliseconds(
+            Convert.ToInt64((Context?.Seconds > uint.MaxValue ? 0 : Context?.Seconds) * 1000),
+            showDecimals
+            );
     }
     protected virtual void OnCooldownStarted(ulong duration, CooldownMode mode)
     {

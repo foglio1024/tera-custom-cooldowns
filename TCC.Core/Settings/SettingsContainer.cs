@@ -161,7 +161,7 @@ public class SettingsContainer
     public string LastAccountNameHash { get; set; } = "";
     public bool BackgroundNotifications { get; set; }
     public bool EnablePlayerMenu { get; set; }
-    public bool ShowDecimalsInCooldowns { get; set; } // todo: add more decimals options #312
+    public CooldownDecimalMode CooldownsDecimalMode { get; set; }
 
     public SettingsContainer()
     {
@@ -231,8 +231,8 @@ public class SettingsContainer
         WebhookMessageGuildBam = "@here Guild BAM will spawn soon!";
         WebhookEnabledMentions = false;
         WebhookUrlMentions = "";
-        ShowDecimalsInCooldowns = true;
         IntegratedGpuSleepWorkaround = false;
+        CooldownsDecimalMode = CooldownDecimalMode.LessThanTen;
     }
 
     public static SettingsContainer Load()

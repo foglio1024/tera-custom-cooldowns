@@ -436,13 +436,13 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             N();
         }
     }
-    public bool ShowDecimalsInCooldowns
+    public CooldownDecimalMode CooldownsDecimalMode
     {
-        get => App.Settings.ShowDecimalsInCooldowns;
+        get => App.Settings.CooldownsDecimalMode;
         set
         {
-            if (App.Settings.ShowDecimalsInCooldowns == value) return;
-            App.Settings.ShowDecimalsInCooldowns = value;
+            if (App.Settings.CooldownsDecimalMode == value) return;
+            App.Settings.CooldownsDecimalMode = value;
             N();
         }
     }
@@ -711,6 +711,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
     public IEnumerable<CaptureMode> CaptureModes => EnumUtils.ListFromEnum<CaptureMode>();
     public IEnumerable<MentionMode> MentionModes => EnumUtils.ListFromEnum<MentionMode>();
     public IEnumerable<LanguageOverride> LanguageOverrides => EnumUtils.ListFromEnum<LanguageOverride>();
+    public IEnumerable<CooldownDecimalMode> CooldownDecimalModes => EnumUtils.ListFromEnum<CooldownDecimalMode>();
 
 
     ThreadSafeObservableCollection<BlacklistedMonsterVM>? _blacklistedMonsters;

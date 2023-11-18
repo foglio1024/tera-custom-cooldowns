@@ -227,3 +227,13 @@ public enum MessageBoxImage
     Error,
     None
 }
+
+public enum CooldownDecimalMode
+{
+    [Description("Never")]
+    Never,
+    [Description("Less than one second")]
+    LessThanOne,
+    [Description("Less than ten seconds")]
+    LessThanTen
+}
