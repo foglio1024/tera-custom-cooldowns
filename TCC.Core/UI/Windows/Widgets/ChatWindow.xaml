@@ -205,7 +205,7 @@
                     <!-- Main frame -->
                     <Border Background="#3445"
                             Opacity="{Binding WindowSettings.FrameOpacity}" x:Name="MainBorder"
-                            CornerRadius="1" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1 0 1 1"
+                            CornerRadius="1 5 5 5" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="1 0 1 1"
                             BorderBrush="#8666" Grid.Row="0" VerticalAlignment="Stretch">
                         <Border.Style>
                             <Style TargetType="Border">
@@ -222,25 +222,25 @@
                         </Border.Effect>
                     </Border>
                     <!-- Left top-line -->
-                    <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="1 0 0 0"
-                            Margin="0 0 0 0" HorizontalAlignment="Left"
+                    <Line Stroke="#8666" StrokeThickness=".5" X1="10" Stretch="Uniform"
+                            Margin="3 0 0 0" HorizontalAlignment="Left"
                             VerticalAlignment="Top" Grid.Row="1"
                             Opacity="{Binding WindowSettings.FrameOpacity}"
                             x:Name="LeftLine">
-                        <Border.RenderTransform>
+                        <Line.RenderTransform>
                             <TranslateTransform Y="26" />
-                        </Border.RenderTransform>
-                    </Border>
+                        </Line.RenderTransform>
+                    </Line>
                     <!-- Right top-line -->
-                    <Border BorderBrush="#8666" BorderThickness="0 1 0 0" CornerRadius="0 1 0 0"
-                            Margin="0 0 0 0" HorizontalAlignment="Stretch"
+                    <Line Stroke="#8666" StrokeThickness=".5" X1="10" Stretch="Uniform"
+                            Margin="0 0 3 0" HorizontalAlignment="Stretch"
                             VerticalAlignment="Top" Grid.Row="1"
                             Opacity="{Binding WindowSettings.FrameOpacity}"
                             x:Name="RightLine">
-                        <Border.RenderTransform>
+                        <Line.RenderTransform>
                             <TranslateTransform Y="26" />
-                        </Border.RenderTransform>
-                    </Border>
+                        </Line.RenderTransform>
+                    </Line>
 
                     <!-- Main tab control -->
                     <dragablz:TabablzControl Grid.Row="1"

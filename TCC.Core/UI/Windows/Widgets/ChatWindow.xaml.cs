@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Dragablz;
+using GongSolutions.Wpf.DragDrop.Utilities;
+using Nostrum.WPF.Extensions;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Dragablz;
-using GongSolutions.Wpf.DragDrop.Utilities;
-using Nostrum.WPF.Extensions;
 using TCC.Data.Chat;
 using TCC.Settings.WindowSettings;
 using TCC.ViewModels;
@@ -230,7 +230,19 @@ public partial class ChatWindow
     {
         var w = s.ActualWidth;
         var left = s.TransformToAncestor(this).Transform(new Point()).X;
-        if (left - 2 >= 0) LeftLine.Width = left - 2;
+        if (left - 2 >= 0)
+        {
+            LeftLine.Width = Math.Max(left - 2 - (LeftLine.Margin.Left + LeftLine.Margin.Right), 0);
+        }
         if (left + w - 6 >= 0) RightLine.Margin = new Thickness(left + w - 6, 0, 0, 0);
+
+        if (VM.Tabs.IndexOf(VM.CurrentTab) > 0)
+        {
+            MainBorder.CornerRadius = MainBorder.CornerRadius with { TopLeft = 5 };
+        }
+        else
+        {
+            MainBorder.CornerRadius = MainBorder.CornerRadius with { TopLeft = 0 };
+        }
     }
 }
