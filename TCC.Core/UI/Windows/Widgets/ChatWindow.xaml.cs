@@ -75,7 +75,8 @@ public partial class ChatWindow
 
         if (e.RightButton == MouseButtonState.Pressed)
         {
-            var sw = new ChatSettingsWindow(tab);
+            var sw = ChatSettingsWindow.OpenWindows.FirstOrDefault(x => x.DataContext == tab) 
+                ?? new ChatSettingsWindow(tab);
             sw.Show();
             sw.Activate();
         }
