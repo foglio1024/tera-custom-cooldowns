@@ -1,37 +1,24 @@
 ﻿using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
-using Nostrum.WPF.Factories;
 using TCC.ViewModels;
 
 namespace TCC.UI.Windows;
 public partial class LootDistributionWindow
 {
     readonly LootDistributionViewModel _vm;
-    public LootDistributionWindow(LootDistributionViewModel vm) : base(false)
+    public LootDistributionWindow(LootDistributionViewModel vm)
     {
         _vm = vm;
         DataContext = vm;
-        Game.LootDistributionWindowShowRequest += OnShowRequest;
 
-        WindowManager.VisibilityManager.VisibilityChanged += () =>
-        {
-            if (!WindowManager.VisibilityManager.Visible) return;
-            RefreshTopmost();
-        };
-        FocusManager.FocusTick += RefreshTopmost;
-        WindowManager.VisibilityManager.VisibilityChanged += OnVisibilityChanged;
 
         SizeChanged += OnSizeChanged;
         InitializeComponent();
 
+        BoundaryRef = Boundary;
+        MainContent = WindowContent;
+        Init(_vm.Settings!);
     }
-
-    void OnVisibilityChanged()
-    {
-        Opacity = WindowManager.VisibilityManager.Visible || _vm.Settings!.ShowAlways ? 1 : 0;
-    }
-
+    
     protected override void OnLoaded(object sender, RoutedEventArgs e)
     {
         base.OnLoaded(sender, e);
@@ -39,42 +26,13 @@ public partial class LootDistributionWindow
         FocusManager.MakeUnfocusable(Handle);
     }
 
-    void OnShowRequest()
-    {
-        if (_vm.Settings?.Enabled != true) return;
-        if (IsVisible) return;
-        ShowWindow();
-        Dispatcher.Invoke(() =>
-        {
-            Left = _vm.Settings.X * WindowManager.ScreenSize.Width;
-            Top = _vm.Settings.Y * WindowManager.ScreenSize.Height;
-            if (_vm.Settings.IgnoreSize) return;
-
-            if (_vm.Settings.H != 0) Height = _vm.Settings.H;
-            if (_vm.Settings.W != 0) Width = _vm.Settings.W;
-        });
-    }
-
     void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         e.Handled = true;
-        Hide();
+        _vm.Settings.Visible = false;
     }
 
-    protected override void Drag(object sender, MouseButtonEventArgs e)
-    {
-        ResizeMode = ResizeMode.NoResize;
-        base.Drag(sender, e);
-        ResizeMode = ResizeMode.CanResize;
-        SizeToContent = SizeToContent.Width;
 
-        if (_vm.Settings == null) return;
-
-        _vm.Settings.X = Left / WindowManager.ScreenSize.Width;
-        _vm.Settings.Y = Top / WindowManager.ScreenSize.Height;
-
-        App.Settings.Save();
-    }
 
     void OnShowListButtonClick(object sender, RoutedEventArgs e)
     {

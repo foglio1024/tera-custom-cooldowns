@@ -1328,6 +1328,29 @@
                             <settings:CheckboxSetting IsOn="{Binding LootDistributionWindowSettings.ShowAlways, Mode=TwoWay}"
                                                       IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
                                                       Style="{StaticResource ShowAlwaysSettingStyle}" />
+                            <settings:CheckboxSetting IsOn="{Binding LootDistributionWindowSettings.AllowOffScreen, Mode=TwoWay}"
+                                                      IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
+                                                      Style="{StaticResource AllowOffscreenSettingStyle}" />
+                            <settings:CheckboxSetting IsOn="{Binding LootDistributionWindowSettings.AutoDim, Mode=TwoWay}"
+                                                      IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
+                                                      Style="{StaticResource AutoDimSettingStyle}" />
+                            <settings:SelectionSetting 
+                                SelectedItem="{Binding LootDistributionWindowSettings.ClickThruMode, Mode=TwoWay}"
+                                IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
+                                Style="{StaticResource ClickThruSettingStyle}" />
+                            <settings:ValueSetting Value="{Binding LootDistributionWindowSettings.Scale, Mode=TwoWay}"
+                                                   IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
+                                                   Style="{StaticResource ScaleSettingStyle}" />
+                            <settings:ValueSetting Value="{Binding LootDistributionWindowSettings.MaxOpacity, Mode=TwoWay}"
+                                                   IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
+                                                   Style="{StaticResource MaxOpacitySettingStyle}" />
+                            <settings:ValueSetting Value="{Binding LootDistributionWindowSettings.DimOpacity, Mode=TwoWay}"
+                                                   IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" 
+                                                   Style="{StaticResource DimOpacitySettingStyle}" />
+                            <settings:CheckboxSetting IsOn="{Binding LootDistributionWindowSettings.HideIngameUI, Mode=TwoWay}"
+                                                      Style="{StaticResource HideIngameUISettingStyle}" 
+                                                      IsEnabled="{Binding LootDistributionWindowSettings.Enabled}" />
+
 
                         </StackPanel>
                         <!-- Specific -->

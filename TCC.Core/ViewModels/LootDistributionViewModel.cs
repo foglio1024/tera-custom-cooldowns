@@ -26,11 +26,11 @@ namespace TCC.ViewModels;
 public class LootDistributionViewModel : TccWindowViewModel
 {
 
-    readonly IReadOnlyCollection<uint> _itemExclusions = new List<uint>()
-    {
+    readonly IReadOnlyCollection<uint> _itemExclusions =
+    [
         8008, 8009, 8010, 8011, 8012, 8013, 8014, 8015,
         8016, 8017, 8018, 8019, 8020, 8021, 8022, 8023
-    };
+    ];
     readonly Dictionary<GameId, DropItem> _droppedItems = new();
     readonly Dictionary<(uint, uint), uint> _amountsDistributed = new();
     readonly DispatcherTimer _countdown;
@@ -153,6 +153,13 @@ public class LootDistributionViewModel : TccWindowViewModel
         KeyboardHook.Instance.RegisterCallback(_settings.RollHotKey with { Modifier = ModifierKeys.Shift }, SetRollForCurrentCategory);
         KeyboardHook.Instance.RegisterCallback(_settings.PassHotKey with { Modifier = ModifierKeys.Shift }, SetPassForCurrentCategory);
         KeyboardHook.Instance.RegisterCallback(_settings.PassHotKey with { Modifier = ModifierKeys.Shift | ModifierKeys.Control }, SetWaitForCurrentCategory);
+
+        Game.LootDistributionWindowShowRequest += OnShowRequest;
+    }
+
+    void OnShowRequest()
+    {
+        _settings.Visible = true;
     }
 
     void SetWaitForCurrentCategory()
@@ -188,20 +195,20 @@ public class LootDistributionViewModel : TccWindowViewModel
     void OnClearTick(object? sender, EventArgs e)
     {
         _clear.Stop();
-        WindowManager.LootDistributionWindow.HideWindow();
+        _settings.Visible = false;
         ClearLoot();
     }
 
     void OnShowLootWindowHotkeyPressed()
     {
         if (!Game.Group.InGroup) return;
-        WindowManager.LootDistributionWindow.ShowWindow();
+        _settings.Visible = true;
     }
 
     void OnLoginStatusChanged()
     {
         if (Game.Logged) return;
-        WindowManager.LootDistributionWindow.HideWindow();
+        _settings.Visible = false;
         ClearAll();
     }
 
@@ -210,7 +217,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         base.OnEnabledChanged(enabled);
         if (!enabled)
         {
-            WindowManager.LootDistributionWindow.HideWindow();
+            _settings.Visible = false;
             ClearLoot();
         }
 
@@ -309,7 +316,7 @@ public class LootDistributionViewModel : TccWindowViewModel
             case GroupCompositionChangeReason.Disbanded:
                 PacketAnalyzer.Processor.Unhook<S_SPAWN_DROPITEM>(OnSpawnDropitem);
 
-                WindowManager.LootDistributionWindow.HideWindow();
+                _settings.Visible = false;
                 ClearLoot();
                 if (_clear.IsEnabled) _clear.Stop();
 
@@ -446,7 +453,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         ItemInDistribution.Index = m.Index;
         _commitDelay.Start();
 
-        if (_settings.AutoShowUponRoll) Game.ShowLootDistributionWindow();
+        if (_settings.AutoShowUponRoll) _settings.Visible = true;
     }
 
     /// <summary>
