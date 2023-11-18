@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Runtime;
+using System.Windows;
 using TCC.ViewModels;
 
 namespace TCC.UI.Windows;
@@ -17,8 +18,10 @@ public partial class LootDistributionWindow
         BoundaryRef = Boundary;
         MainContent = WindowContent;
         Init(_vm.Settings!);
+
+        _vm.Settings!.Visible = false;
     }
-    
+
     protected override void OnLoaded(object sender, RoutedEventArgs e)
     {
         base.OnLoaded(sender, e);

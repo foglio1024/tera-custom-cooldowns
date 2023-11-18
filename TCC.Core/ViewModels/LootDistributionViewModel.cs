@@ -453,7 +453,10 @@ public class LootDistributionViewModel : TccWindowViewModel
         ItemInDistribution.Index = m.Index;
         _commitDelay.Start();
 
-        if (_settings.AutoShowUponRoll) _settings.Visible = true;
+        if (_settings.AutoShowUponRoll)
+        {
+            _settings.Visible = true;
+        }
     }
 
     /// <summary>

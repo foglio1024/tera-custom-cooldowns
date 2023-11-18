@@ -141,7 +141,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
 
     public LootDistributionWindowSettings()
     {
-        _visible = true;
+        _visible = false;
         _enabled = true;
         _autoDim = true;
         _showAlways = true;

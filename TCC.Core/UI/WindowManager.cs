@@ -135,6 +135,11 @@ public static class WindowManager
         PerfMonitor = await b10.GetWindow();
         ViewModels.PerfMonitorVM = await b10.GetViewModel();
 
+        var b11 = new TccWidgetBuilder<LootDistributionWindow, LootDistributionViewModel>(App.Settings.LootDistributionWindowSettings);
+        LootDistributionWindow = await b11.GetWindow();
+        ViewModels.LootDistributionVM = await b11.GetViewModel();
+
+
         FlightDurationWindow = new FlightDurationWindow(ViewModels.FlightGaugeVM);
         if (FlightDurationWindow.WindowSettings?.Enabled == true) FlightDurationWindow.Show();
 
@@ -142,8 +147,6 @@ public static class WindowManager
         if (CivilUnrestWindow.WindowSettings?.Enabled == true) CivilUnrestWindow.Show();
 
         LfgListWindow = new LfgListWindow(ViewModels.LfgVM);
-
-        LootDistributionWindow = new LootDistributionWindow(ViewModels.LootDistributionVM);
 
         ViewModels.PlayerMenuVM = new PlayerMenuViewModel();
 
@@ -177,7 +180,6 @@ public static class WindowManager
         static CivilUnrestViewModel? _civilUnrestVm;
         static LfgListViewModel? _lfgVm;
         static FlightGaugeViewModel? _flightGaugeVm;
-        static LootDistributionViewModel? _lootDistributionVm;
 
         public static CooldownWindowViewModel CooldownsVM { get; set; } = null!;
         public static CharacterWindowViewModel CharacterVM { get; set; } = null!;
@@ -194,6 +196,6 @@ public static class WindowManager
         public static CivilUnrestViewModel CivilUnrestVM => _civilUnrestVm ??= new CivilUnrestViewModel(App.Settings.CivilUnrestWindowSettings);
         public static LfgListViewModel LfgVM => _lfgVm ??= new LfgListViewModel(App.Settings.LfgWindowSettings);
         public static FlightGaugeViewModel FlightGaugeVM => _flightGaugeVm ??= new FlightGaugeViewModel(App.Settings.FlightGaugeWindowSettings);
-        public static LootDistributionViewModel LootDistributionVM => _lootDistributionVm ??= new LootDistributionViewModel(App.Settings.LootDistributionWindowSettings);
+        public static LootDistributionViewModel LootDistributionVM { get; set; } = null!;
     }
 }

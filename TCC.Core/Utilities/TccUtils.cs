@@ -306,7 +306,7 @@ public static class TccUtils
         {
             ChatChannel.PartyNotice => "Notice",
             ChatChannel.RaidNotice => "Notice",
-            ChatChannel.GuildAdvertising => "G. Ad",
+            ChatChannel.GuildAdvertising => "PvP",
             ChatChannel.Megaphone => "Megaphone",
             ChatChannel.Private1 => ChatManager.Instance.PrivateChannels[0].Name,
             ChatChannel.Private2 => ChatManager.Instance.PrivateChannels[1].Name,
