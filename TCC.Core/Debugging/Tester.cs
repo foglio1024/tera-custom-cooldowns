@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum;
+using Nostrum.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -10,15 +13,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-using Newtonsoft.Json.Linq;
-using Nostrum;
-using Nostrum.Extensions;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Data.Databases;
 using TCC.Data.Pc;
 using TCC.Data.Skills;
 using TCC.Debugging;
+using TCC.Interop;
 using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
@@ -69,26 +70,14 @@ public static class Tester
     {
         new DebugWindow().Show();
     }
-    public static void SendFakeUsageStat(string region = "EU", int server = 27, string account = "foglio", string version = "TCC v1.3.19")
-    {
-        try
-        {
-            using var c = MiscUtils.GetDefaultHttpClient();
-            c.DefaultRequestHeaders.Add(HttpRequestHeader.ContentType.ToString(), "application/json");
-            c.DefaultRequestHeaders.Add(HttpRequestHeader.AcceptCharset.ToString(), "utf-8");
-            var data = Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(new JObject
-            {
-                { "region", region },
-                { "server", server},
-                { "account", account },
-                { "tcc_version", version}
-            }.ToString()));
 
-            // todo: replace this
-            c.PostAsync("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat", new StringContent(data)).Wait();
-        }
-        catch { }
+
+
+    public static void SendFakeUsageStat(string region = "EU", uint server = 27, string account = "foglio", string version = "TCC v1.3.19")
+    {
+        Cloud.SendUsageStatAsync(region, server, account, version, true).Wait();
     }
+
     public static void AddTccTestMessages(int count)
     {
         var i = 0;
@@ -620,7 +609,7 @@ public static class Tester
     internal static void ShowLootWindow()
     {
         WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 50056, 1)));
-        WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 50056, 1)) { DistributionStatus = DistributionStatus.Distributing});
+        WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 50056, 1)) { DistributionStatus = DistributionStatus.Distributing });
         WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 21351, 4)) { DistributionStatus = DistributionStatus.Discarded });
         WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 21351, 7)) { DistributionStatus = DistributionStatus.Distributed, WinnerName = "Foglio • 69" });
         WindowManager.ViewModels.LootDistributionVM.DistributionList.Add(new LootItemViewModel(new DropItem(GameId.Zero, 21351, 6)));

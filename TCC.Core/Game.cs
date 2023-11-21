@@ -977,43 +977,16 @@ public static class Game
             App.Settings.StatSentTime.Month != DateTime.UtcNow.Month ||
             App.Settings.StatSentTime.Day != DateTime.UtcNow.Day)
         {
-            var js = new JObject
-            {
-            {"region", Server.Region},
-            {"server", Server.ServerId},
-            {"account", App.Settings.LastAccountNameHash},
-            {"tcc_version", App.AppVersion},
-            {
-                "updated", App.Settings.StatSentTime.Month == DateTime.Now.Month &&
-                           App.Settings.StatSentTime.Day == DateTime.Now.Day &&
-                           App.Settings.StatSentVersion != App.AppVersion
-            },
-            {
-                "settings_summary", new JObject
-                {
-                    {
-                        "windows", new JObject
-                        {
-                            { "cooldown", App.Settings.CooldownWindowSettings.Enabled },
-                            { "buffs", App.Settings.BuffWindowSettings.Enabled },
-                            { "character", App.Settings.CharacterWindowSettings.Enabled },
-                            { "class", App.Settings.ClassWindowSettings.Enabled },
-                            { "chat", App.Settings.ChatEnabled },
-                            { "group", App.Settings.GroupWindowSettings.Enabled }
-                        }
-                    },
-                    {
-                        "generic", new JObject
-                        {
-                            { "proxy_enabled", StubInterface.Instance.IsStubAvailable},
-                            { "mode", App.ToolboxMode ? "toolbox" : "standalone" }
-                        }
-                    }
-                }
-            }
-        };
 
-            if (await Firebase.SendUsageStatAsync(js))
+            bool isDailyFirst = App.Settings.StatSentTime.Month == DateTime.Now.Month &&
+                                App.Settings.StatSentTime.Day == DateTime.Now.Day &&
+                                App.Settings.StatSentVersion != App.AppVersion;
+
+            if (await Cloud.SendUsageStatAsync(Server.Region,
+                                               Server.ServerId,
+                                               App.Settings.LastAccountNameHash,
+                                               App.AppVersion,
+                                               isDailyFirst))
             {
                 App.Settings.StatSentTime = DateTime.UtcNow;
                 App.Settings.StatSentVersion = App.AppVersion;

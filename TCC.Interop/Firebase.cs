@@ -1,26 +1,59 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using Nostrum;
 using TCC.Utils;
 
 namespace TCC.Interop;
 
+public static class Cloud
+{
+    readonly record struct UsageStat(string Region,
+                                     uint ServerId,
+                                     string AccountIdHash,
+                                     string TccVersion,
+                                     bool IsDailyFirst
+                                    );
+
+    public static async Task<bool> SendUsageStatAsync(string region, uint server, string account, string version, bool isDailyFirst)
+    {
+        try
+        {
+            using var c = new HttpClient();
+            var req = new HttpRequestMessage(HttpMethod.Post, "https://foglio.ns0.it/tcc-reports-api/usage-stats/post")
+            {
+                Content = JsonContent.Create(new UsageStat(region, server, account, version, isDailyFirst)),
+            };
+            req.Headers.Add("User-Agent", "TCC/Windows");
+            var resp = await c.SendAsync(req);
+
+            return resp.IsSuccessStatusCode;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+}
+
 public static class Firebase
 {
-    static readonly List<Tuple<string, string>> _registeredWebhooks = new();
-    public static async void RegisterWebhook(string? webhook, bool online, string accountHash)
+    readonly record struct Webhook(string URL, string AccountHash);
+    
+    static readonly List<Webhook> _registeredWebhooks = [];
+    public static async void RegisterWebhook(string? url, bool online, string accountHash)
     {
-        if (string.IsNullOrEmpty(webhook)) return;
-        if (string.IsNullOrEmpty(accountHash)) return;
+        if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(accountHash)) return;
         var req = new JObject
         {
-            {"webhook", HashUtils.GenerateHash(webhook)},
+            {"webhook_hash", HashUtils.GenerateHash(url)},
             {"user", accountHash},
             {"online", online }
         };
@@ -30,16 +63,16 @@ public static class Firebase
         try
         {
             // todo: replace
-            await c.PostAsync("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook", 
+            await c.PostAsync("http://us-central1-tcc-global-events.cloudfunctions.net/register_webhook",
                 new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(req.ToString())), Encoding.UTF8));
             if (online)
             {
-                _registeredWebhooks.Add(new Tuple<string, string>(webhook, accountHash));
+                _registeredWebhooks.Add(new Webhook(url, accountHash));
             }
             else
             {
-                var toRemove = _registeredWebhooks.FirstOrDefault(x => x.Item1 == webhook);
-                if (toRemove == null) return;
+                var toRemove = _registeredWebhooks.FirstOrDefault(x => x.URL == url);
+                if (toRemove == default) return;
                 _registeredWebhooks.Remove(toRemove);
             }
         }
@@ -48,12 +81,12 @@ public static class Firebase
             Log.F("Failed to register webhook.");
         }
     }
-    public static async Task<bool> RequestWebhookExecution(string webhook, string accountHash)
+    public static async Task<bool> RequestWebhookExecution(string url, string accountHash)
     {
         bool canFire;
         var req = new JObject
         {
-            { "webhook" , HashUtils.GenerateHash(webhook)},
+            { "webhook_hash" , HashUtils.GenerateHash(url)},
             { "user", accountHash }
         };
         using var c = MiscUtils.GetDefaultHttpClient();
@@ -84,36 +117,15 @@ public static class Firebase
         return canFire;
     }
 
-    public static async Task<bool> SendUsageStatAsync(JObject js)
-    {
-
-        try
-        {
-            using var c = MiscUtils.GetDefaultHttpClient();
-            c.DefaultRequestHeaders.Add(HttpRequestHeader.ContentType.ToString(), "application/json");
-            c.DefaultRequestHeaders.Add(HttpRequestHeader.AcceptCharset.ToString(), "utf-8");
-
-            // todo: replace
-            await c.PostAsync("https://us-central1-tcc-usage-stats.cloudfunctions.net/usage_stat",
-                new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString()))));
-                
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
     public static void Dispose()
     {
         try
         {
-            var webhooks = new List<Tuple<string, string>> { Capacity = _registeredWebhooks.Count}.ToArray();
+            var webhooks = new List<Webhook> { Capacity = _registeredWebhooks.Count }.ToArray();
             _registeredWebhooks.CopyTo(webhooks);
             webhooks.ToList().ForEach(w =>
             {
-                RegisterWebhook(w.Item1, false, w.Item2);
+                RegisterWebhook(w.URL, false, w.AccountHash);
             });
         }
         catch (Exception e)
