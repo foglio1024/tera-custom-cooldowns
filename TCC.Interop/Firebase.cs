@@ -5,43 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using TCC.Utils;
 
 namespace TCC.Interop;
-
-public static class Cloud
-{
-    readonly record struct UsageStat(string Region,
-                                     uint ServerId,
-                                     string AccountIdHash,
-                                     string TccVersion,
-                                     bool IsDailyFirst
-                                    );
-
-    public static async Task<bool> SendUsageStatAsync(string region, uint server, string account, string version, bool isDailyFirst)
-    {
-        try
-        {
-            using var c = new HttpClient();
-            var req = new HttpRequestMessage(HttpMethod.Post, "https://foglio.ns0.it/tcc-reports-api/usage-stats/post")
-            {
-                Content = JsonContent.Create(new UsageStat(region, server, account, version, isDailyFirst)),
-            };
-            req.Headers.Add("User-Agent", "TCC/Windows");
-            var resp = await c.SendAsync(req);
-
-            return resp.IsSuccessStatusCode;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-}
 
 public static class Firebase
 {
@@ -109,6 +77,11 @@ public static class Firebase
             canFire = true;
         }
         catch (InvalidOperationException e)
+        {
+            Log.F($"Failed to request webhook execution. Webhook will be executed anyway: {e}");
+            canFire = true;
+        }
+        catch (Exception e)
         {
             Log.F($"Failed to request webhook execution. Webhook will be executed anyway: {e}");
             canFire = true;
