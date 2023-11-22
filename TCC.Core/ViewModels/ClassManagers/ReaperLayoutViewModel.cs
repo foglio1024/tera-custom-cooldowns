@@ -8,7 +8,7 @@ public class ReaperLayoutViewModel : BaseClassLayoutViewModel
 {
     public SkillWithEffect ShadowReaping { get; }
     public SkillWithEffect ShroudedEscape { get; }
-    public SkillWithEffect PowerlinkedGrimStrike { get; }
+    public SkillWithEffect PowerlinkedDeathSpiral { get; }
     public SkillWithEffect PowerlinkedDoubleShear { get; }
 
     public ReaperLayoutViewModel()
@@ -19,11 +19,11 @@ public class ReaperLayoutViewModel : BaseClassLayoutViewModel
         Game.DB.SkillsDatabase.TryGetSkill(180100, Class.Reaper, out var se);
         ShroudedEscape = new SkillWithEffect(_dispatcher, se);
 
-        Game.DB.SkillsDatabase.TryGetSkill(50100, Class.Reaper, out var plgs);
-        PowerlinkedGrimStrike = new SkillWithEffect(_dispatcher, plgs, false);
+        Game.DB.SkillsDatabase.TryGetSkill(60100, Class.Reaper, out var pldsp);
+        PowerlinkedDeathSpiral = new SkillWithEffect(_dispatcher, pldsp, false);
 
-        Game.DB.SkillsDatabase.TryGetSkill(30100, Class.Reaper, out var plds);
-        PowerlinkedDoubleShear = new SkillWithEffect(_dispatcher, plds, false);
+        Game.DB.SkillsDatabase.TryGetSkill(30100, Class.Reaper, out var pldsh);
+        PowerlinkedDoubleShear = new SkillWithEffect(_dispatcher, pldsh, false);
     }
 
     public override void Dispose()

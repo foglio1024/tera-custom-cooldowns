@@ -48,7 +48,7 @@
                 </TransformGroup>
             </FrameworkElement.RenderTransform>
         </Border>
-        <skills:RhombSkillEffectControl DataContext="{Binding PowerlinkedGrimStrike}" RenderTransformOrigin=".5 .5">
+        <skills:RhombSkillEffectControl DataContext="{Binding PowerlinkedDeathSpiral}" RenderTransformOrigin=".5 .5">
             <skills:RhombSkillEffectControl.RenderTransform>
                 <TransformGroup>
                     <TranslateTransform X="45.5" Y="56.5"/>

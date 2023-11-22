@@ -11,7 +11,7 @@ public class ReaperAbnormalityTracker : AbnormalityTracker
     const int ShadowStepId = 10151000;
     const int DeathSpiralId = 10151131;
     const int AssassinateId = 10151192;
-    const int PowerlinkedGrimStrikeId = 29100;
+    const int PowerlinkedDeathSpiralId = 29112;
     const int PowerlinkedDoubleShearId = 29020;
 
     readonly Skill _shadowStep;
@@ -33,7 +33,7 @@ public class ReaperAbnormalityTracker : AbnormalityTracker
         CheckShadowStep(p);
         CheckDeathSpiral(p);
         CheckAssassinate(p);
-        PowerlinkedGrimStrikeBegin(p);
+        PowerlinkedDeathSpiralBegin(p);
         PowerlinkedDoubleShearBegin(p);
     }
     public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
@@ -41,7 +41,7 @@ public class ReaperAbnormalityTracker : AbnormalityTracker
         if (!Game.IsMe(p.TargetId)) return;
         CheckShadowReaping(p);
         CheckAssassinate(p);
-        PowerlinkedGrimStrikeRefresh(p);
+        PowerlinkedDeathSpiralRefresh(p);
         PowerlinkedDoubleShearRefresh(p);
 
     }
@@ -50,7 +50,7 @@ public class ReaperAbnormalityTracker : AbnormalityTracker
         if (!Game.IsMe(p.TargetId)) return;
         CheckShadowReaping(p);
         CheckAssassinate(p);
-        PowerlinkedGrimStrikeEnd(p);
+        PowerlinkedDeathSpiralEnd(p);
         PowerlinkedDoubleShearEnd(p);
 
     }
@@ -87,24 +87,24 @@ public class ReaperAbnormalityTracker : AbnormalityTracker
         vm.PowerlinkedDoubleShear.StopEffect();
     }
     
-    static void PowerlinkedGrimStrikeBegin(S_ABNORMALITY_BEGIN p)
+    static void PowerlinkedDeathSpiralBegin(S_ABNORMALITY_BEGIN p)
     {
-        if (p.AbnormalityId != PowerlinkedGrimStrikeId) return;
+        if (p.AbnormalityId != PowerlinkedDeathSpiralId) return;
         if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
-        vm.PowerlinkedGrimStrike.RefreshEffect(p.Duration);
+        vm.PowerlinkedDeathSpiral.RefreshEffect(p.Duration);
     }
-    static void PowerlinkedGrimStrikeRefresh(S_ABNORMALITY_REFRESH p)
+    static void PowerlinkedDeathSpiralRefresh(S_ABNORMALITY_REFRESH p)
     {
-        if (p.AbnormalityId != PowerlinkedGrimStrikeId) return;
+        if (p.AbnormalityId != PowerlinkedDeathSpiralId) return;
         if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
-        vm.PowerlinkedGrimStrike.RefreshEffect(p.Duration);
+        vm.PowerlinkedDeathSpiral.RefreshEffect(p.Duration);
     }
-    static void PowerlinkedGrimStrikeEnd(S_ABNORMALITY_END p)
+    static void PowerlinkedDeathSpiralEnd(S_ABNORMALITY_END p)
     {
-        if (PowerlinkedGrimStrikeId != p.AbnormalityId) return;
+        if (PowerlinkedDeathSpiralId != p.AbnormalityId) return;
         if (!IsViewModelAvailable<ReaperLayoutViewModel>(out var vm)) return;
 
-        vm.PowerlinkedGrimStrike.StopEffect();
+        vm.PowerlinkedDeathSpiral.StopEffect();
     }
 
     static void CheckAssassinate(S_ABNORMALITY_BEGIN p)
