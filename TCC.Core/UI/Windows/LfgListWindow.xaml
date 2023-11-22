@@ -7,10 +7,10 @@
                    xmlns:windows="clr-namespace:TCC.UI.Windows"
                    xmlns:vm="clr-namespace:TCC.ViewModels"
                    xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
-                   UseLayoutRounding="True"
+                   UseLayoutRounding="True" 
                    Style="{StaticResource BaseWindowStyle}"
                    mc:Ignorable="d" d:DataContext="{d:DesignInstance {x:Type vm:LfgListViewModel}}"
-                   Title="TCC LFG" Height="810" Width="622"
+                   Title="TCC LFG" Height="500" Width="622"
                    WindowStartupLocation="Manual">
     <Grid Margin="5">
         <Border Background="{StaticResource RevampBackgroundBrush}"
@@ -332,7 +332,7 @@
             <!--Main List-->
             <ListBox Background="Transparent"
                      Padding="-1 -1 -1 -1"
-                     Height="600"
+                     Height="390"
                      ScrollViewer.CanContentScroll="False"
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
                      BorderThickness="0"
