@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	  <TargetFramework>net8</TargetFramework>
-	  <LangVersion>12</LangVersion>
+    <TargetFramework>net8</TargetFramework>
+    <LangVersion>12</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
   </PropertyGroup>
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PreBuildEvent>$(SolutionDir)\clean-TargetDir.bat $(SolutionDir)release\</PreBuildEvent>
   </PropertyGroup>
 </Project>

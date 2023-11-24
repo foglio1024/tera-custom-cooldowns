@@ -6,7 +6,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>12</LangVersion>
     <Nullable>enable</Nullable>
-    <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
     <ApplicationIcon>resources\tcc.ico</ApplicationIcon>
     <IncludeSymbolsInSingleFile>true</IncludeSymbolsInSingleFile>
     <OutputType>WinExe</OutputType>
@@ -23,7 +23,7 @@
     <Copyright>MIT</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <NoWin32Manifest>true</NoWin32Manifest>
-	<XamlDebuggingInformation>True</XamlDebuggingInformation>
+    <XamlDebuggingInformation>True</XamlDebuggingInformation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
@@ -34,12 +34,6 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
-	  <OutputPath>$(TOOLBOX_TCC_PATH)</OutputPath>
-	  <PlatformTarget>AnyCPU</PlatformTarget>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\release\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>

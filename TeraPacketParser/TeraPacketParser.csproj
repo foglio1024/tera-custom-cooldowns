@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	  <TargetFramework>net8-windows</TargetFramework>
-	  <RootNamespace>TeraPacketParser</RootNamespace>
+    <TargetFramework>net8-windows</TargetFramework>
+    <RootNamespace>TeraPacketParser</RootNamespace>
     <AssemblyName>TeraPacketParser</AssemblyName>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>12</LangVersion>
-    <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -17,10 +17,7 @@
     <OutputPath>..\TCC.Core\bin\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
-	  <OutputPath>D:\Program Files\TERA\TeraToolbox\mods\TCC</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
-    <OutputPath>D:\Program Files\TERA\TeraToolbox\mods\TCC</OutputPath>
+    <OutputPath>$(TOOLBOX_TCC_PATH)</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Nostrum" Version="2.0.10" />

@@ -2,11 +2,11 @@
   <PropertyGroup>
     <RootNamespace>TCC.Utils</RootNamespace>
     <AssemblyName>TCC.Utils</AssemblyName>
-	  <TargetFramework>net8-windows</TargetFramework>
-	  <LangVersion>12</LangVersion>
+    <TargetFramework>net8-windows</TargetFramework>
+    <LangVersion>12</LangVersion>
     <PreserveCompilationContext>false</PreserveCompilationContext>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <Configurations>Debug;Release;DebugToolbox;DebugMenma</Configurations>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
 
@@ -19,12 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-	  <OutputPath>D:\Program Files\TERA\TeraToolbox\mods\TCC</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugMenma|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <OutputPath>D:\Program Files\TERA\TeraToolbox\mods\TCC</OutputPath>
+    <OutputPath>$(TOOLBOX_TCC_PATH)</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>

@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFramework>net8-windows</TargetFramework>
-	  <Nullable>enable</Nullable>
-	  <Configurations>Debug;Release;DebugMenma</Configurations>
+    <TargetFramework>net8-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;DebugToolbox</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
