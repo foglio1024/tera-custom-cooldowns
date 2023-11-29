@@ -31,6 +31,7 @@ public static class ExceptionReportBuilder
             { "game_version", new JValue(PacketAnalyzer.Factory == null ? 0 : PacketAnalyzer.Factory.ReleaseVersion)},
             { "region", new JValue(Game.Server.Region)},
             { "server_id", new JValue(Game.Server.ServerId.ToString())},
+            { "server_name", new JValue(Game.Server.Name)},
             { "settings_summary", new JObject
                 {
                     { "windows", new JObject
