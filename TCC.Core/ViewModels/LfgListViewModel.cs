@@ -135,20 +135,35 @@ public class LfgListViewModel : TccWindowViewModel
         }
     }
 
-    public bool AmIinLfg => _dispatcher.Invoke(() => Listings.ToSyncList().Any(listing =>
-        listing.LeaderId == Game.Me.PlayerId
-        || listing.LeaderName == Game.Me.Name
-        || listing.Players.ToSyncList().Any(player => player.PlayerId == Game.Me.PlayerId)
-        || Game.Group.Has(listing.LeaderId)));
+    bool _amIinLfg;
+    public bool AmIinLfg
+    {
+        get => _amIinLfg;
+        set
+        {
+            if (_amIinLfg == value) return;
+            _amIinLfg = value;
+            N();
+        }
+    }
 
-    public bool AmILeader => Game.Group.AmILeader || (MyLfg != null && MyLfg?.LeaderId == Game.Me.PlayerId);
+    public bool AmILeader => Game.Group.AmILeader
+        || (MyLfg != null
+            && MyLfg?.LeaderId == Game.Me.PlayerId);
 
-    public Listing? MyLfg => _dispatcher.Invoke(() => Listings.FirstOrDefault(listing =>
-            listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
-            || listing.LeaderId == Game.Me.PlayerId
-            || Game.Group.Has(listing.LeaderId)
-    //|| WindowManager.ViewModels.GroupVM.Members.ToSyncList().Any(member => member.PlayerId == listing.LeaderId)
-    ));
+    Listing? _myLfg;
+    public Listing? MyLfg
+    {
+        get => _myLfg;
+        set
+        {
+            if (_myLfg == value) return;
+            _myLfg = value;
+            N();
+            AmIinLfg = value != null;
+            MyLfgStateChanged?.Invoke();
+        }
+    }
 
     public int MinLevel
     {
@@ -558,10 +573,19 @@ public class LfgListViewModel : TccWindowViewModel
 
     void NotifyMyLfg()
     {
-        N(nameof(AmIinLfg));
-        MyLfgStateChanged?.Invoke();
-        N(nameof(MyLfg));
-        foreach (var listing in Listings.ToSyncList()) listing.UpdateIsMyLfg();
+        MyLfg = Listings.FirstOrDefault(listing =>
+                    // a lfg containing a player with my id
+                    listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
+                    // a lfg whose leader has my id
+                    || listing.LeaderId == Game.Me.PlayerId
+                    // a group member whose id is the lfg leader id
+                    || Game.Group.Has(listing.LeaderId));
+
+        foreach (var listing in Listings.ToSyncList())
+        {
+            listing.UpdateIsMyLfg();
+        }
+
         MyLfg?.UpdateIsMyLfg();
         N(nameof(AmILeader));
     }
