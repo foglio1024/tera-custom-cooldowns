@@ -129,10 +129,11 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
         if (duration == 0)
         {
             Swift.StopEffect();
-            N(nameof(AtkSpeedProc));
-            return;
         }
-        Swift.StartEffect(duration);
+        else
+        {
+            Swift.StartEffect(duration);
+        }
         N(nameof(AtkSpeedProc));
     }
 
@@ -141,10 +142,11 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
         if (duration == 0)
         {
             AdrenalineRush.StopEffect();
-            N(nameof(AtkSpeedProc));
-            return;
         }
-        AdrenalineRush.StartEffect(duration);
+        else
+        {
+            AdrenalineRush.StartEffect(duration);
+        }
         N(nameof(AtkSpeedProc));
     }
 }

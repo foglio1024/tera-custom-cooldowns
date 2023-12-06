@@ -48,13 +48,13 @@ public partial class TraverseCutControl
         if (oldValue != null)
         {
             oldValue.ToZero -= OnToZero;
-            oldValue.PropertyChanged -= OnPropertyChanged;
+            oldValue.FactorChanged -= OnFactorChanged;
         }
 
         if (newValue != null)
         {
             newValue.ToZero += OnToZero;
-            newValue.PropertyChanged += OnPropertyChanged;
+            newValue.FactorChanged += OnFactorChanged;
         }
     }
 
@@ -97,12 +97,11 @@ public partial class TraverseCutControl
         });
     }
 
-    void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    void OnFactorChanged(double newFactor)
     {
-        if (e.PropertyName != nameof(StatTracker.Factor)) return;
         if (Tracker != null)
         {
-            _anim.To = Tracker.Factor * 359.9;
+            _anim.To = newFactor * 359.9;
             ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);
         }
         _isAnimating = true;

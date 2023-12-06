@@ -208,4 +208,9 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
                 break;
         }
     }
+
+    void Unleash(object sender, RoutedEventArgs e)
+    {
+        Tester.StartUnleash();
+    }
 }

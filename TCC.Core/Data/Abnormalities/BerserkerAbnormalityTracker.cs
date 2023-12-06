@@ -30,7 +30,6 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
             case UnleashId:
                 vm.Unleash.StartEffect(p.Duration);
                 vm.IsUnleashOn = true;
-                vm.IsUnleashOff = false;
                 break;
         }
     }
@@ -52,7 +51,6 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
             case UnleashId:
                 vm.Unleash.RefreshEffect(p.Duration);
                 vm.IsUnleashOn = true;
-                vm.IsUnleashOff = false;
                 break;
         }
     }
@@ -74,7 +72,6 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
             case UnleashId:
                 vm.Unleash.StopEffect();
                 vm.IsUnleashOn = false;
-                vm.IsUnleashOff = true;
                 break;
         }
     }
@@ -86,11 +83,12 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         switch (p.AbnormalityId)
         {
             case SinisterDexter:
-                vm.SinisterTracker.Val = p.Stacks;
-                vm.DexterTracker.Val = p.Stacks;
+                vm.DexterSinixterTracker.Val = p.Stacks;
+                vm.DexterSinixterTracker.InvokeToZero(p.Duration);
                 break;
             case Rampage:
                 vm.RampageTracker.Val = p.Stacks;
+                vm.RampageTracker.InvokeToZero(p.Duration);
                 break;
         }
     }
@@ -102,11 +100,12 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         switch (p.AbnormalityId)
         {
             case SinisterDexter:
-                vm.SinisterTracker.Val = p.Stacks;
-                vm.DexterTracker.Val = p.Stacks;
+                vm.DexterSinixterTracker.Val = p.Stacks;
+                vm.DexterSinixterTracker.InvokeToZero(p.Duration);
                 break;
             case Rampage:
                 vm.RampageTracker.Val = p.Stacks;
+                vm.RampageTracker.InvokeToZero(p.Duration);
                 break;
         }
     }
@@ -118,8 +117,7 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         switch (p.AbnormalityId)
         {
             case SinisterDexter:
-                vm.SinisterTracker.Val = 0;
-                vm.DexterTracker.Val = 0;
+                vm.DexterSinixterTracker.Val = 0;
                 break;
             case Rampage:
                 vm.RampageTracker.Val = 0;

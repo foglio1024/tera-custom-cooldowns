@@ -113,6 +113,11 @@ public static class Tester
     {
         TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.DeadlyGamble.StartCooldown(cd);
     }
+    public static void StartUnleash()
+    {
+        var vm = TccUtils.CurrentClassVM<BerserkerLayoutViewModel>();
+        vm.IsUnleashOn = !vm.IsUnleashOn;
+    }
     public static void AddFakeGroupMember(int id, Class c, Laurel l, bool leader = false)
     {
 #pragma warning disable 612

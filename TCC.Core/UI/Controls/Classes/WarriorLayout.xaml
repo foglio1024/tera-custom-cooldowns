@@ -194,34 +194,6 @@
                                                VerticalAlignment="Center" IsHitTestVisible="False" />
             </Grid>
 
-            <!--Scythe-->
-            <!--<Grid>
-                <FrameworkElement.RenderTransform>
-                    <TranslateTransform X="40" Y="134" />
-                </FrameworkElement.RenderTransform>
-                
-                <Border Style="{StaticResource ClassWindowSkillBorder}"
-                        RenderTransform="{StaticResource Rotate45}"/>
-
-                <skills:RhombFixedSkillControl DataContext="{Binding Scythe}" 
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center" IsHitTestVisible="False" />
-            </Grid>-->
-
-            <!--AerialScythe-->
-            <!--<Grid>
-                <FrameworkElement.RenderTransform>
-                    <TranslateTransform X="-40" Y="134" />
-                </FrameworkElement.RenderTransform>
-                
-                <Border Style="{StaticResource ClassWindowSkillBorder}"
-                        RenderTransform="{StaticResource Rotate45}"/>
-
-                <skills:RhombFixedSkillControl DataContext="{Binding AerialScythe}" 
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center" IsHitTestVisible="False" />
-            </Grid>-->
-
             <!--AktSpd-->
             <Grid Visibility="{Binding AtkSpeedProc, Converter={nsConv:BoolToVisibility}}">
                 <Border BorderBrush="#89a" BorderThickness="1" Margin="18"

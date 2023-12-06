@@ -39,6 +39,7 @@
             <Button Click="IncreaseEdge">Edge</Button>
             <Button Click="SetAtkSpeed">Swift</Button>
             <Button Click="SetAtkSpeed">Arush</Button>
+            <Button Click="Unleash">Unleash</Button>
             <Button Click="DungeonTest">DungeonTest</Button>
         </StackPanel>
         <StackPanel Margin="5">

@@ -7,19 +7,17 @@ namespace TCC.ViewModels.ClassManagers;
 public class BerserkerLayoutViewModel : BaseClassLayoutViewModel
 {
     bool _isUnleashOn;
-    bool _isUnleashOff = true;
 
     public SkillWithEffect FieryRage { get; set; }
     public SkillWithEffect Bloodlust { get; set; }
     public SkillWithEffect Unleash { get; set; }
 
-    public Cooldown Dexter { get; set; }
-    public Cooldown Sinister { get; set; }
-    public Cooldown Rampage { get; set; }
-    public Cooldown BeastFury { get; set; }
+    public SkillWithEffect Dexter { get; set; }
+    public SkillWithEffect Sinister { get; set; }
+    public SkillWithEffect Rampage { get; set; }
+    public SkillWithEffect BeastFury { get; set; }
 
-    public StatTracker SinisterTracker { get; set; }
-    public StatTracker DexterTracker { get; set; }
+    public StatTracker DexterSinixterTracker { get; set; }
     public StatTracker RampageTracker { get; set; }
 
     public bool IsUnleashOn
@@ -33,22 +31,10 @@ public class BerserkerLayoutViewModel : BaseClassLayoutViewModel
         }
     }
 
-    public bool IsUnleashOff
-    {
-        get => _isUnleashOff;
-        set
-        {
-            if (_isUnleashOff == value) return;
-            _isUnleashOff = value;
-            N();
-        }
-    }
-
     public BerserkerLayoutViewModel()
     {
-        SinisterTracker = new StatTracker();
-        DexterTracker = new StatTracker();
-        RampageTracker = new StatTracker();
+        DexterSinixterTracker = new StatTracker { Max = 10, Val = 0 };
+        RampageTracker = new StatTracker { Max = 10, Val = 0 };
 
         Game.DB!.SkillsDatabase.TryGetSkill(80600, Class.Berserker, out var fr);
         FieryRage = new SkillWithEffect(_dispatcher, fr);
@@ -58,13 +44,13 @@ public class BerserkerLayoutViewModel : BaseClassLayoutViewModel
         Unleash = new SkillWithEffect(_dispatcher, ul);
 
         Game.DB.SkillsDatabase.TryGetSkill(340100, Class.Berserker, out var dx);
-        Dexter = new Cooldown(dx, false);
+        Dexter = new SkillWithEffect(_dispatcher, dx);
         Game.DB.SkillsDatabase.TryGetSkill(350100, Class.Berserker, out var sx);
-        Sinister = new Cooldown(sx, false);
+        Sinister = new SkillWithEffect(_dispatcher, sx);
         Game.DB.SkillsDatabase.TryGetSkill(360100, Class.Berserker, out var rp);
-        Rampage = new Cooldown(rp, false);
+        Rampage = new SkillWithEffect(_dispatcher, rp);
         Game.DB.SkillsDatabase.TryGetSkill(370100, Class.Berserker, out var bf);
-        BeastFury = new Cooldown(bf, false);
+        BeastFury = new SkillWithEffect(_dispatcher, bf);
 
     }
 
@@ -86,8 +72,8 @@ public class BerserkerLayoutViewModel : BaseClassLayoutViewModel
             return true;
         }
 
-        if (sk.Skill.IconName != BeastFury.Skill.IconName) return false;
-        BeastFury.Start(sk.Duration);
+        if (sk.Skill.IconName != BeastFury.Cooldown.Skill.IconName) return false;
+        BeastFury.Cooldown.Start(sk.Duration);
         return true;
     }
 

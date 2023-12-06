@@ -4,196 +4,221 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
-             xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
+             xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
+             xmlns:classmanagers="clr-namespace:TCC.ViewModels.ClassManagers" xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
+             d:DataContext="{d:DesignInstance Type=classmanagers:BerserkerLayoutViewModel}"
              UseLayoutRounding="True"
-             mc:Ignorable="d" d:DataContext="{d:DesignData BerserkerLayoutVM}">
-    <Grid Width="Auto" Margin="50 20 50 90" Name="Root" ClipToBounds="False">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+             mc:Ignorable="d" >
 
-        <Grid HorizontalAlignment="Center"  ClipToBounds="False" Width="Auto" Height="Auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid />
+    <UserControl.Resources>
 
-            <!-- Show if Unleash isn't active -->
-            <Grid Visibility="{Binding IsUnleashOff, Converter={converters:BoolToVisibility}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid>
-                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </Border>
-                    <skills:RhombSkillEffectControl DataContext="{Binding Unleash}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                            Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                            Opacity=".7">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="45"/>
-                                <TranslateTransform X="-45" Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </Border>
-                    <skills:RhombSkillEffectControl DataContext="{Binding FieryRage}" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <TranslateTransform X="-45" Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </skills:RhombSkillEffectControl>
-                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="45"/>
-                                <TranslateTransform X="45" Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </Border>
-                    <skills:RhombSkillEffectControl DataContext="{Binding Bloodlust}" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <TranslateTransform X="45" Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </skills:RhombSkillEffectControl>
-                </Grid>
-            </Grid>
+        <Style x:Key="OverchargeArc" TargetType="controls:Arc">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect
+                        Color="{StaticResource TccRedGradient0Color}"
+                        BlurRadius="10" ShadowDepth="0" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Opacity" Value="1" />
+            <Setter Property="RenderTransformOrigin" Value=".5 .5" />
+            <Setter Property="StrokeThickness" Value="4" />
+            <Setter Property="Stroke" Value="{StaticResource TccRedGradientBrush}" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="-20" />
+            <Setter Property="Width" Value="83" />
+            <Setter Property="Height" Value="83" />
+            <Setter Property="StrokeEndLineCap" Value="Flat" />
+            <Setter Property="StrokeStartLineCap" Value="Flat" />
+            <Setter Property="Rhomb" Value="True" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="180" />
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-            <!-- Show if Unleash is active -->
-            <Grid Visibility="{Binding IsUnleashOn, Converter={converters:BoolToVisibility}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid>
-
-                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                            Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </Border>
-                    <skills:RhombFixedSkillControl DataContext="{Binding BeastFury}" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
-
-                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                            Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                            Opacity=".7">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="45"/>
-                                <TranslateTransform X="-45" Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </Border>
-                    <skills:RhombFixedSkillControl DataContext="{Binding Dexter}" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <TranslateTransform X="-45" Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </skills:RhombFixedSkillControl>
-                    <controls:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
-                                         FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
-                                         Text="{Binding DexterTracker.Val}" Width="45" VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
+        <DataTemplate x:Key="NormalTemplate">
+            <Grid>
+                <Border Style="{StaticResource ClassWindowSkillBorder}">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
                             <TranslateTransform X="-45" Y="45" />
-                        </FrameworkElement.RenderTransform>
-                    </controls:OutlinedTextBlock>
-                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="45"/>
-                                <TranslateTransform X="45" Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </Border>
-                    <skills:RhombFixedSkillControl DataContext="{Binding Sinister}" HorizontalAlignment="Center"
-                                              VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <TranslateTransform X="45" Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </skills:RhombFixedSkillControl>
-                    <controls:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
-                                         FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
-                                         Text="{Binding SinisterTracker.Val}" Width="45" VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <skills:RhombSkillEffectControl DataContext="{Binding FieryRage}" 
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="-45" Y="45" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </skills:RhombSkillEffectControl>
+
+                <Border Style="{StaticResource ClassWindowSkillBorder}">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
                             <TranslateTransform X="45" Y="45" />
-                        </FrameworkElement.RenderTransform>
-                    </controls:OutlinedTextBlock>
-                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="45"/>
-                                <TranslateTransform Y="90" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </Border>
-                    <skills:RhombFixedSkillControl DataContext="{Binding Rampage}" HorizontalAlignment="Center"
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <skills:RhombSkillEffectControl DataContext="{Binding Bloodlust}" HorizontalAlignment="Center"
                                               VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <TranslateTransform Y="90" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </skills:RhombFixedSkillControl>
-                    <controls:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="45" Y="45" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </skills:RhombSkillEffectControl>
+
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="UnleashTemplate">
+            <Grid >
+                <Border Style="{StaticResource ClassWindowSkillBorder}">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform Y="90"/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+                </Border>
+                <skills:RhombSkillEffectControl DataContext="{Binding BeastFury}" 
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center" >
+                    <skills:RhombSkillEffectControl.RenderTransform>
+                        <TranslateTransform Y="90"/>
+                    </skills:RhombSkillEffectControl.RenderTransform>
+                </skills:RhombSkillEffectControl>
+
+                <Border Style="{StaticResource ClassWindowSkillBorder}">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform X="-45" Y="45" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <elements:TraverseCutControl Tracker="{Binding DexterSinixterTracker}"
+                                             IconName="{Binding Dexter.Cooldown.Skill.IconName}"
+                                             HorizontalAlignment="Center"
+                                              VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="-45" Y="45" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </elements:TraverseCutControl>
+                <!--<controls:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
+                                         FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
+                                         Text="{Binding DexterSinixterTracker.Val}" Width="45" VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TranslateTransform X="-45" Y="45" />
+                    </FrameworkElement.RenderTransform>
+                </controls:OutlinedTextBlock>-->
+
+
+                <Border Style="{StaticResource ClassWindowSkillBorder}">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="45"/>
+                            <TranslateTransform X="45" Y="45" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </Border>
+                <elements:TraverseCutControl Tracker="{Binding RampageTracker}"
+                                             IconName="{Binding Rampage.Cooldown.Skill.IconName}"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                    <FrameworkElement.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="45" Y="45" />
+                        </TransformGroup>
+                    </FrameworkElement.RenderTransform>
+                </elements:TraverseCutControl>
+                <!--<controls:OutlinedTextBlock TextAlignment="Center" Margin="0, -1, 0, 0" FontSize="17"
                                          FontWeight="DemiBold" Fill="#afff" StrokeThickness="3" Stroke="#6000"
                                          Text="{Binding RampageTracker.Val}" Width="45" VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
-                            <TranslateTransform  Y="90" />
-                        </FrameworkElement.RenderTransform>
-                    </controls:OutlinedTextBlock>
-                    <Border BorderBrush="#89a" BorderThickness="1" Margin="9"
-                        Background="{StaticResource RevampBackgroundGradientBrush}" RenderTransformOrigin=".5 .5" Effect="{StaticResource DropShadow}"
-                        Opacity=".7">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <RotateTransform Angle="45" />
-                                <TranslateTransform Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </Border>
-                    <skills:RhombSkillEffectControl DataContext="{Binding Unleash}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <FrameworkElement.RenderTransform>
-                            <TransformGroup>
-                                <TranslateTransform Y="45" />
-                            </TransformGroup>
-                        </FrameworkElement.RenderTransform>
-                    </skills:RhombSkillEffectControl>
-                </Grid>
+                    <FrameworkElement.RenderTransform>
+                        <TranslateTransform  Y="45" X="45" />
+                    </FrameworkElement.RenderTransform>
+                </controls:OutlinedTextBlock>-->
+
+
             </Grid>
+
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Name="Root" 
+          Width="Auto" 
+          Margin="50 20 50 90" 
+          ClipToBounds="False">
+
+        <Grid HorizontalAlignment="Center"  
+              ClipToBounds="False" 
+              Width="Auto" 
+              Height="Auto">
+
+            <Image Source="{StaticResource CharWindowBg}" Margin="-14" Visibility="Visible" Stretch="Uniform" Width="101"/>
+            <skills:RhombSkillEffectControl DataContext="{Binding Unleash}" 
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center" />
+            <!--<controls:Arc StartAngle="42" EndAngle="132" 
+                          Stroke="{StaticResource TccGreenGradientBrush}"
+                          Style="{StaticResource OverchargeArc}">
+                <controls:Arc.Effect>
+                    <DropShadowEffect
+                        Color="{StaticResource TccGreenGradient0Color}"
+                        BlurRadius="10" ShadowDepth="0" />
+                </controls:Arc.Effect>
+            </controls:Arc>-->
+
+            <!--<controls:Arc StartAngle="138" EndAngle="186" 
+                          Stroke="{StaticResource TccYellowGradientBrush}"
+                          Style="{StaticResource OverchargeArc}">
+                <controls:Arc.Effect>
+                    <DropShadowEffect
+                        Color="{StaticResource TccYellowGradient1Color}"
+                        BlurRadius="10" ShadowDepth="0" />
+                </controls:Arc.Effect>
+
+            </controls:Arc>
+
+            <controls:Arc StartAngle="190" EndAngle="238" 
+                          Style="{StaticResource OverchargeArc}"/>
+
+            <controls:Arc StartAngle="244" EndAngle="318" 
+                          Stroke="{StaticResource TccWhiteGradientBrush}"
+                          Style="{StaticResource OverchargeArc}"/>
+            <controls:Arc StartAngle="244" EndAngle="256" 
+                          Style="{StaticResource OverchargeArc}"/>
+            <controls:Arc StartAngle="258" EndAngle="268" 
+                          Style="{StaticResource OverchargeArc}"/>-->
+
+
+            <ContentControl Content="{Binding}">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="ContentTemplate" Value="{StaticResource NormalTemplate}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsUnleashOn}" Value="True">
+                                <Setter Property="ContentTemplate" Value="{StaticResource UnleashTemplate}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+
         </Grid>
 
-        
     </Grid>
 </UserControl>
 

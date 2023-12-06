@@ -8,8 +8,12 @@ public class StatTracker : ThreadSafeObservableObject
     int _max = 1;
     int _val;
     bool _status;
+    bool _maxed;
+    double _factor;
 
     public event Action<uint>? ToZero;
+    public event Action<double>? FactorChanged;
+
     public int Val
     {
         get => _val;
@@ -19,8 +23,8 @@ public class StatTracker : ThreadSafeObservableObject
             _val = value;
 
             N();
-            N(nameof(Factor));
-            N(nameof(Maxed));
+            Factor = (double)_val / _max;
+            Maxed = Factor == 1;
         }
     }
     public int Max
@@ -32,11 +36,38 @@ public class StatTracker : ThreadSafeObservableObject
             _max = value;
             if (_max == 0) _max = 1;
             N();
-            N(nameof(Factor));
+
+            Factor = (double)_val / _max;
+            Maxed = Factor == 1;
         }
     }
-    public bool Maxed => Factor == 1;
-    public double Factor => (double)_val / _max;
+    public bool Maxed
+    {
+        get { return _maxed; }
+        private set
+        {
+            if (_maxed == value) return;
+            _maxed = value;
+            N();
+        }
+    }
+    public double Factor
+    {
+        get { return _factor; }
+        private set
+        {
+            if (_factor == value) return;
+            _factor = value;
+            Dispatcher.Invoke(InvokeFactorChanged);
+            N();
+        }
+    }
+
+    void InvokeFactorChanged()
+    {
+        FactorChanged?.Invoke(_factor);
+    }
+
     public bool Status
     {
         get => _status;
@@ -47,7 +78,7 @@ public class StatTracker : ThreadSafeObservableObject
             N();
         }
     }
-        
+
     public void InvokeToZero(uint pDuration)
     {
         ToZero?.Invoke(pDuration);
