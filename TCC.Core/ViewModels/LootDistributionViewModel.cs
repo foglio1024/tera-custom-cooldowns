@@ -541,7 +541,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         }
         else
         {
-            winner = members.Single(m => m.IsWinning);
+            winner = members.SingleOrDefault(m => m.IsWinning);
         }
 
         if (ItemInDistribution != null)
