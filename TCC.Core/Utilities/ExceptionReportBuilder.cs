@@ -77,10 +77,8 @@ public static class ExceptionReportBuilder
                 ret.Add("packet_data", new JValue(ppe.RawData.ToHexString()));
                 break;
 
-            case DeadlockException de:
-                ret.Add("thread_traces", GetThreadTraces(de));
-                break;
         }
+        ret.Add("thread_traces", GetThreadTraces());
 
         return ret;
     }
@@ -112,7 +110,7 @@ public static class ExceptionReportBuilder
         return sb.ToString();
     }
 
-    static JArray GetThreadTraces(DeadlockException de)
+    static JArray GetThreadTraces()
     {
         using var dataTarget = DataTarget.CreateSnapshotAndAttach(Process.GetCurrentProcess().Id);
 
@@ -120,7 +118,10 @@ public static class ExceptionReportBuilder
         var runtime = version.CreateRuntime();
 
         var ret = new JArray();
-        var threads = App.RunningDispatchers.Values.Append(App.BaseDispatcher).Where(d => de.ThreadNames.Contains(d.Thread.Name)).Select(d => d.Thread).Append(PacketAnalyzer.AnalysisThread);
+        var threads = App.RunningDispatchers.Values
+            .Append(App.BaseDispatcher)
+            .Select(d => d.Thread)
+            .Append(PacketAnalyzer.AnalysisThread);
         foreach (var thread in threads)
         {
             if (thread.Name == null) continue;
