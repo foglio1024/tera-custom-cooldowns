@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Microsoft.Diagnostics.Runtime;
 using Microsoft.Win32;
@@ -23,7 +24,7 @@ public static class ExceptionReportBuilder
             { "timestamp" , new JValue(DateTime.UtcNow.ToEpoch()) },
             { "tcc_version" , new JValue(App.AppVersion) },
             { "user_id" , new JValue(App.Settings.LastAccountNameHash) },
-            { "tcc_hash", HashUtils.GenerateFileHash(typeof(App).Assembly.Location) },
+            { "tcc_hash", HashUtils.GenerateFileHash(Assembly.GetEntryAssembly()?.Location ?? "") },
             { "exception", BuildExceptionMessage(ex)},
             { "exception_type", new JValue(ex.GetType().FullName)},
             { "exception_source", new JValue(ex.Source)},
@@ -42,7 +43,8 @@ public static class ExceptionReportBuilder
                             { "class", App.Settings.ClassWindowSettings.Enabled },
                             { "chat", App.Settings.ChatEnabled},
                             { "npc", App.Settings.NpcWindowSettings.Enabled},
-                            { "group", App.Settings.GroupWindowSettings.Enabled }
+                            { "group", App.Settings.GroupWindowSettings.Enabled },
+                            { "loot", App.Settings.LootDistributionWindowSettings.Enabled }
                         }
                     },
                     {
@@ -106,7 +108,7 @@ public static class ExceptionReportBuilder
         foreach (var frame in runtimeThread.EnumerateStackTrace())
         {
             if (frame.Method == null) continue;
-            sb.AppendLine($"   in {frame.Method}");
+            sb.AppendLine($"   at {frame.Method}");
         }
 
         return sb.ToString();

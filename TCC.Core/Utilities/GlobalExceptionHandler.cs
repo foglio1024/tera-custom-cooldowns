@@ -119,7 +119,7 @@ public static class GlobalExceptionHandler
         {
             using var c = new HttpClient();
             c.DefaultRequestHeaders.Add("User-Agent", "TCC/Windows");
-            var req = new HttpRequestMessage(HttpMethod.Post, "https://foglio.ns0.it/tcc-reports-api/crash-reports/upload")
+            var req = new HttpRequestMessage(HttpMethod.Post, "https://foglio.ns0.it/tcc/crash-reports/upload")
             {
                 Content = new StringContent(Encoding.UTF8.GetString(Encoding.UTF8.GetBytes(js.ToString())))
             };
