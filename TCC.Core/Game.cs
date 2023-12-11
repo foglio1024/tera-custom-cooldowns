@@ -984,6 +984,7 @@ public static class Game
 
             if (await Cloud.SendUsageStatAsync(Server.Region,
                                                Server.ServerId,
+                                               Server.Name,
                                                App.Settings.LastAccountNameHash,
                                                App.AppVersion,
                                                isDailyFirst))

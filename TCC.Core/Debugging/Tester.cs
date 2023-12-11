@@ -75,7 +75,7 @@ public static class Tester
 
     public static void SendFakeUsageStat(string region = "EU", uint server = 27, string account = "foglio", string version = "TCC v1.3.19")
     {
-        Cloud.SendUsageStatAsync(region, server, account, version, true).Wait();
+        Cloud.SendUsageStatAsync(region, server, "Test", account, version, true).Wait();
     }
 
     public static void AddTccTestMessages(int count)
