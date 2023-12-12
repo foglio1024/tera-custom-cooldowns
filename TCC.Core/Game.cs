@@ -1025,6 +1025,11 @@ public static class Game
 
     static async Task OnLoginArbiter(C_LOGIN_ARBITER m)
     {
+        CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
+        PacketAnalyzer.ServerDatabase.Language = m.Language == LangEnum.EN && Server.Region == "RU" ? LangEnum.RU : LangEnum.EN;
+        App.Settings.LastLanguage = PacketAnalyzer.ServerDatabase.StringLanguage;
+        App.Settings.LastAccountNameHash = CurrentAccountNameHash;
+
         var rvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory!.ReleaseVersion / 100}.map");
         var pvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.Version}.map");
 
@@ -1059,11 +1064,6 @@ public static class Game
             return;
         }
         PacketAnalyzer.Factory.ReloadSysMsg(path);
-
-        CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
-        PacketAnalyzer.ServerDatabase.Language = m.Language == LangEnum.EN && Server.Region == "RU" ? LangEnum.RU : LangEnum.EN;
-        App.Settings.LastLanguage = PacketAnalyzer.ServerDatabase.StringLanguage;
-        App.Settings.LastAccountNameHash = CurrentAccountNameHash;
     }
 
     static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
