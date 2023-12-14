@@ -984,6 +984,7 @@ public static class Game
 
             if (await Cloud.SendUsageStatAsync(Server.Region,
                                                Server.ServerId,
+                                               Server.Ip,
                                                Server.Name,
                                                App.Settings.LastAccountNameHash,
                                                App.AppVersion,
@@ -1026,9 +1027,9 @@ public static class Game
     static async Task OnLoginArbiter(C_LOGIN_ARBITER m)
     {
         CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
+        App.Settings.LastAccountNameHash = CurrentAccountNameHash;
         PacketAnalyzer.ServerDatabase.Language = m.Language == LangEnum.EN && Server.Region == "RU" ? LangEnum.RU : LangEnum.EN;
         App.Settings.LastLanguage = PacketAnalyzer.ServerDatabase.StringLanguage;
-        App.Settings.LastAccountNameHash = CurrentAccountNameHash;
 
         var rvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory!.ReleaseVersion / 100}.map");
         var pvSysMsgPath = Path.Combine(App.DataPath, $"opcodes/sysmsg.{PacketAnalyzer.Factory.Version}.map");
