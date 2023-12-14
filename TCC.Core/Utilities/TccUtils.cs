@@ -362,6 +362,7 @@ public static class TccUtils
             Laurel.Bronze => CustomLaurel.Bronze,
             Laurel.Silver => CustomLaurel.Silver,
             Laurel.Gold => CustomLaurel.Gold,
+            Laurel.Diamond => CustomLaurel.Diamond,
             Laurel.Champion => CustomLaurel.Champion,
             _ => CustomLaurel.None
         };

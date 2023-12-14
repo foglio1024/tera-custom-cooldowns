@@ -135,7 +135,8 @@ public static class Tester
             Online = true,
             Laurel = l,
             InRange = App.Random.Next(0, 10) >= 5,
-            IsLeader = leader
+            IsLeader = leader,
+            Name = id.ToString()
         });
 
     }
