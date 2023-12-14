@@ -204,9 +204,9 @@ public static class Game
         DatabaseLoaded?.Invoke();
     }
 
-    static void InitDatabases(string lang)
+    static async Task InitDatabases(string lang)
     {
-        UpdateManager.CheckDatabaseHash();
+        await UpdateManager.CheckDatabaseHash();
         UpdateManager.CheckServersFile();
         var samedb = DB?.Language == lang;
         var updated = false;
@@ -234,11 +234,11 @@ public static class Game
             {
                 case MessageBoxResult.Yes:
                     WindowManager.SettingsWindow.ShowDialogAtPage(9);
-                    InitDatabases(App.Settings.LastLanguage);
+                    await InitDatabases(App.Settings.LastLanguage);
                     break;
 
                 case MessageBoxResult.No:
-                    InitDatabases("EU-EN");
+                    await InitDatabases("EU-EN");
                     break;
 
                 case MessageBoxResult.Cancel:
