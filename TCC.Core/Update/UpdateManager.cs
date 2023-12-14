@@ -57,17 +57,17 @@ public static class UpdateManager
         if (File.Exists(path) && HashUtils.GenerateFileHash(path) == serversHash) return;
         DownloadServersFile();
     }
-    public static void CheckDatabaseHash()
+    public static async Task CheckDatabaseHash()
     {
         DatabaseHashes.Clear();
         try
         {
-            DownloadDatabaseHashes();
+            await DownloadDatabaseHashes();
         }
         catch (Exception ex)
         {
-            Log.F($"Failed to download database hashes. nException: {ex.Message}\n{ex.StackTrace}");
-            if (App.SplashScreen.VM.AskUpdate("Failed to download database hashes. Try again?")) CheckDatabaseHash();
+            Log.F($"Failed to download database hashes. \nException: {ex.Message}\n{ex.StackTrace}");
+            if (App.SplashScreen.VM.AskUpdate("Failed to download database hashes. Try again?")) await CheckDatabaseHash();
         }
     }
     public static bool IsBetaNewer()
@@ -237,15 +237,13 @@ public static class UpdateManager
         }
     }
 
-    static void DownloadDatabaseHashes()
+    static async Task DownloadDatabaseHashes()
     {
         DatabaseHashes.Clear();
         using var c = MiscUtils.GetDefaultHttpClient();
-        var req = c.GetStreamAsync(DatabaseHashFileUrl);
-        req.Wait();
-        var f = req.Result;
+        var f = await c.GetStreamAsync(DatabaseHashFileUrl);
         using var sr = new StreamReader(f);
-        var sHashes = sr.ReadToEnd();
+        var sHashes = await sr.ReadToEndAsync();
         var jHashes = JObject.Parse(sHashes);
         jHashes.Descendants().ToList().ForEach(jDesc =>
         {
