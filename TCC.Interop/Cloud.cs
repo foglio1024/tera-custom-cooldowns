@@ -22,7 +22,7 @@ public static class Cloud
         try
         {
             using var c = new HttpClient();
-            var req = new HttpRequestMessage(HttpMethod.Post, "https://foglio.ns0.it/tcc/usage-stats/post")
+            var req = new HttpRequestMessage(HttpMethod.Post, "https://foglio.ns0.it/tcc/api/usage-stats/post")
             {
                 Content = JsonContent.Create(new UsageStat(region, serverId, serverName, account, version, HashUtils.GenerateFileHash(Assembly.GetEntryAssembly()?.Location ?? ""), isDailyFirst)),
             };
