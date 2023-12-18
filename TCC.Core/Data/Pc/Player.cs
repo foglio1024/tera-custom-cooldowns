@@ -355,8 +355,8 @@ public class Player : ThreadSafeObservableObject
     // tracking only warrior stance for now
     public StanceTracker<WarriorStance> WarriorStance { get; set; } = new();
 
-    public ThreadSafeObservableCollection<AbnormalityDuration> Buffs { get; private set; }    = new();
-    public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs { get; private set; }  = new();
+    public ThreadSafeObservableCollection<AbnormalityDuration> Buffs { get; private set; } = new();
+    public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs { get; private set; } = new();
     public ThreadSafeObservableCollection<AbnormalityDuration> InfBuffs { get; private set; } = new();
 
 
@@ -448,19 +448,30 @@ public class Player : ThreadSafeObservableObject
     public void UpdateAbnormality(Abnormality ab, uint pDuration, int pStacks)
     {
         if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
-        FindAndUpdate(ab, pDuration, pStacks);
+        lock (_listLock)
+        {
+            FindAndUpdate(ab, pDuration, pStacks);
+        }
     }
     public void EndAbnormality(Abnormality ab)
     {
         if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
-        FindAndRemove(ab);
+        lock (_listLock)
+        {
+            FindAndRemove(ab);
+        }
     }
     public void EndAbnormality(uint id)
     {
         if (!Game.DB!.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
         if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
-        FindAndRemove(ab);
+        lock (_listLock)
+        {
+            FindAndRemove(ab);
+        }
     }
+
+    readonly object _listLock = new();
 
     void FindAndUpdate(Abnormality ab, uint duration, int stacks)
     {
@@ -512,14 +523,16 @@ public class Player : ThreadSafeObservableObject
 
     public void ClearAbnormalities()
     {
-        Buffs.ToSyncList().ForEach(item => item.Dispose());
-        Debuffs.ToSyncList().ForEach(item => item.Dispose());
-        InfBuffs.ToSyncList().ForEach(item => item.Dispose());
+        lock (_listLock)
+        {
+            Buffs.ToSyncList().ForEach(item => item.Dispose());
+            Debuffs.ToSyncList().ForEach(item => item.Dispose());
+            InfBuffs.ToSyncList().ForEach(item => item.Dispose());
 
-        Buffs.Clear();
-        Debuffs.Clear();
-        InfBuffs.Clear();
-
+            Buffs.Clear();
+            Debuffs.Clear();
+            InfBuffs.Clear();
+        }
         _debuffList.Clear();
 
         CurrentShield = 0;
