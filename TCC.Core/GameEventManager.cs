@@ -199,7 +199,7 @@ public class GameEventManager : ThreadSafeObservableObject
 
     static void SendWebhook(string content, string url, bool test = false)
     {
-        Discord.FireWebhook(url, $"{content}{(test ? " (test message)" : "")}", App.AppVersion, App.Settings.LastAccountNameHash);
+        Discord.FireWebhook(url, $"{content}{(test ? " (test message)" : "")}", App.AppVersion, Game.CurrentAccountNameHash);
     }
 
     struct TeraServerTimeInfo

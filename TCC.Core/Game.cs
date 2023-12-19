@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json.Linq;
 using Nostrum;
 using Nostrum.Extensions;
 using TCC.Data;
@@ -860,8 +859,8 @@ public static class Game
         }
 
         Logged = false;
-        Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false, App.Settings.LastAccountNameHash);
-        Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false, App.Settings.LastAccountNameHash);
+        Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, false, CurrentAccountNameHash);
+        Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, false, CurrentAccountNameHash);
         Me.ClearAbnormalities();
 
         foreach (var item in m.CharacterList)
@@ -970,8 +969,8 @@ public static class Game
 
     static async Task OnLogin(S_LOGIN m)
     {
-        Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true, App.Settings.LastAccountNameHash);
-        Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true, App.Settings.LastAccountNameHash);
+        Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true, CurrentAccountNameHash);
+        Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true, CurrentAccountNameHash);
 
         if (App.Settings.StatSentVersion != App.AppVersion ||
             App.Settings.StatSentTime.Month != DateTime.UtcNow.Month ||
@@ -986,7 +985,7 @@ public static class Game
                                                Server.ServerId,
                                                Server.Ip,
                                                Server.Name,
-                                               App.Settings.LastAccountNameHash,
+                                               CurrentAccountNameHash,
                                                App.AppVersion,
                                                isDailyFirst))
             {

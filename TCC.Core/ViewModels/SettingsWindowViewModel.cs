@@ -783,7 +783,8 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (strUrl == null) return;
             Utils.Utilities.OpenUrl(strUrl);
         });
-        RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook?.ToString(), true, App.Settings.LastAccountNameHash));
+        RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook?.ToString(), true, Game.CurrentAccountNameHash),
+            ce => Game.Logged);
         OpenWindowCommand = new RelayCommand(winType =>
         {
             if(winType == null)

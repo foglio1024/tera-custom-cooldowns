@@ -23,7 +23,7 @@ public static class ExceptionReportBuilder
         {
             { "timestamp" , new JValue(DateTime.UtcNow.ToEpoch()) },
             { "tcc_version" , new JValue(App.AppVersion) },
-            { "user_id" , new JValue(App.Settings.LastAccountNameHash) },
+            { "user_id" , new JValue(Game.CurrentAccountNameHash) },
             { "tcc_hash", HashUtils.GenerateFileHash(Assembly.GetEntryAssembly()?.Location ?? "") },
             { "exception", BuildExceptionMessage(ex)},
             { "exception_type", new JValue(ex.GetType().FullName)},

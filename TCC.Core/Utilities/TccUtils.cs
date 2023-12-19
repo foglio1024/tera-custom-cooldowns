@@ -200,7 +200,7 @@ public static class TccUtils
         //var txt = GetPlainText(message).UnescapeHtml();
         //var chStr = new ChatChannelToName().Convert(ch, null, null, null);
 
-        Discord.FireWebhook(App.Settings.WebhookUrlMentions, message, discordUsername, App.Settings.LastAccountNameHash); //string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
+        Discord.FireWebhook(App.Settings.WebhookUrlMentions, message, discordUsername, Game.CurrentAccountNameHash); //string.IsNullOrEmpty(discordTextOverride) ? $"**{author}** `{chStr}`\n{txt}" : discordTextOverride);
     }
 
     public static void CheckWindowNotify(string message, string title)
