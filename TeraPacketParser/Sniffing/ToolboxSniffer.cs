@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using Nostrum.Extensions;
 using TCC.Utils;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.TeraCommon.Game;
@@ -29,14 +29,23 @@ public class ToolboxSniffer : ITeraSniffer
             _client = new ToolboxHttpClient(address);
         }
 
+        public readonly record struct ServerInfo(uint id, string category, string name, string address, uint port);
+
         /// <summary>
         /// Requests <c>ttb-interface-control</c> to return current server id.
         /// </summary>
         /// <returns>server id</returns>
-        public async Task<uint> GetServerId()
+        public async Task<ServerInfo> GetServer()
         {
-            var resp = await _client.CallAsync("getServer");
-            return resp?.Result?.Value<uint>() ?? 0U;
+            var resp = await _client.CallAsync("getServerInfo"); // todo: update after meter
+            try
+            {
+                return resp?.Result?.Value<JObject>()?.ToObject<ServerInfo>() ?? default;
+            }
+            catch 
+            {
+                return default;                
+            }
         }
         /// <summary>
         /// Requests <c>ttb-interface-control</c> to return current release version.
@@ -146,6 +155,12 @@ public class ToolboxSniffer : ITeraSniffer
         {
             var resp = await _client.CallAsync("getProtocolVersion");
             return resp?.Result?.Value<uint>() ?? 0U;
+        }
+
+        internal async Task<string> GetLanguage()
+        {
+            var resp = await _client.CallAsync("getLanguage");
+            return resp?.Result?.Value<string>() ?? "";
         }
     }
 
@@ -276,16 +291,15 @@ public class ToolboxSniffer : ITeraSniffer
     async Task ReceiveAsync()
     {
         if (_failed) return;
-
         while (Enabled)
         {
-            var resp = await ControlConnection.GetServerId();
-            if (resp != 0)
+            var resp = await ControlConnection.GetServer();
+            if (resp != default)
             {
                 Connected = true;
                 await ControlConnection.AddHooks(PacketAnalyzer.Factory!.OpcodesList);
                 PacketAnalyzer.Factory.ReleaseVersion = await ControlConnection.GetReleaseVersion();
-                NewConnection?.Invoke(PacketAnalyzer.ServerDatabase.GetServer(resp));
+                NewConnection?.Invoke(new Server(resp.name, await ControlConnection.GetLanguage(), resp.address, resp.id));
                 _dataConnection = new TcpClient();
                 await _dataConnection.ConnectAsync("127.0.0.60", 5301);
             }
