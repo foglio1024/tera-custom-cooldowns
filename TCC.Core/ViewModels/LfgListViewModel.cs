@@ -325,7 +325,7 @@ public class LfgListViewModel : TccWindowViewModel
 
     bool CanCreateMessage()
     {
-        return Listings.All(l => !l.Temp && !AmIinLfg);
+        return Listings.ToSyncList().All(l => !l.Temp && !AmIinLfg);
     }
 
     void CreateMessage()
@@ -573,7 +573,7 @@ public class LfgListViewModel : TccWindowViewModel
 
     void NotifyMyLfg()
     {
-        MyLfg = Listings.FirstOrDefault(listing =>
+        MyLfg = Listings.ToSyncList().FirstOrDefault(listing =>
                     // a lfg containing a player with my id
                     listing.Players.Any(p => p.PlayerId == Game.Me.PlayerId)
                     // a lfg whose leader has my id
