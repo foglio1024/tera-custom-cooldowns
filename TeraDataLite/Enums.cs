@@ -80,7 +80,8 @@ public enum Species
     Beast = 8,
     [Description("Magical device")]
     MagicalDevice = 9,
-    Demon = 10
+    Demon = 10,
+    Ancestor = 11
 }
 public enum ReadyStatus
 {
