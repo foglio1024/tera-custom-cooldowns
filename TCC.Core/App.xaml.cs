@@ -72,6 +72,8 @@ public partial class App
     public static TccSplashScreen SplashScreen { get; set; } = null!;
     public static SettingsContainer Settings { get; private set; } = null!;
 
+
+
     async void OnStartup(object sender, StartupEventArgs e)
     {
         _running = true;
@@ -102,7 +104,6 @@ public partial class App
         {
             AppDomain.CurrentDomain.UnhandledException += GlobalExceptionHandler.OnGlobalException;
         }
-
         Loading = true;
         await Setup();
         Loading = false;
@@ -127,7 +128,6 @@ public partial class App
         //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 101301);
         //Tester.StartItemCooldown(444);
     }
-
     static async Task Setup()
     {
         TccUtils.SetAlignment();
@@ -161,8 +161,6 @@ public partial class App
         // ----------------------------
         SplashScreen.VM.Progress = 30;
         SplashScreen.VM.BottomText = /*Random.NextDouble() <= 0.4 ? "WTB <Patch 28> /w me" :*/ "Pre-loading databases...";
-        await UpdateManager.CheckDatabaseHash();
-        SplashScreen.VM.Progress = 40;
         await Game.InitAsync();
 
         // ----------------------------
@@ -193,7 +191,7 @@ public partial class App
 
         // ----------------------------
         SplashScreen.VM.Progress = 90;
-        SplashScreen.VM.BottomText = Random.NextDouble() <= 0.4 ? "Imagine unironically playing TERA :^)" : "Starting";
+        SplashScreen.VM.BottomText = /*Random.NextDouble() <= 0.4 ? "Imagine unironically playing TERA :^)" :*/ "Starting";
         GameEventManager.Instance.SetServerTimeZone(Settings.LastLanguage);
         UpdateManager.StartPeriodicCheck();
 
