@@ -62,7 +62,9 @@ public enum CustomLaurel
     [Description("Pink Champion")]
     ChampionPink,
     [Description("Black Champion")]
-    ChampionBlack
+    ChampionBlack,
+    [Description("Rainbow by Snug")]
+    RainbowBySnug,
 
 }
 

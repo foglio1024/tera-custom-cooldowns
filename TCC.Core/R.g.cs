@@ -432,9 +432,11 @@ public class MiscResources : RH
     public static ImageSource ChampionLaurelRhomb => Get<ImageSource>("ChampionLaurelRhomb");
     public static ImageSource ChampionPinkLaurelRhomb => Get<ImageSource>("ChampionPinkLaurelRhomb");
     public static ImageSource ChampionBlackLaurelRhomb => Get<ImageSource>("ChampionBlackLaurelRhomb");
+    public static ImageSource RainbowBySnugLaurelRhomb => Get<ImageSource>("RainbowBySnugLaurelRhomb");
     public static ImageSource ChampionLaurelRhombBig => Get<ImageSource>("ChampionLaurelRhombBig");
     public static ImageSource ChampionPinkLaurelRhombBig => Get<ImageSource>("ChampionPinkLaurelRhombBig");
     public static ImageSource ChampionBlackLaurelRhombBig => Get<ImageSource>("ChampionBlackLaurelRhombBig");
+    public static ImageSource RainbowBySnugLaurelRhombBig => Get<ImageSource>("RainbowBySnugLaurelRhombBig");
     public static ImageSource ChampionLaurelRhombBottom => Get<ImageSource>("ChampionLaurelRhombBottom");
     public static ImageSource CharWindowBg => Get<ImageSource>("CharWindowBg");
     public static ImageSource CharWindowBgSide2 => Get<ImageSource>("CharWindowBgSide2");

@@ -84,6 +84,8 @@
     <None Remove="resources\images\Icon_Laurels\gold_kr.png" />
     <None Remove="resources\images\Icon_Laurels\gold_kr_big.png" />
     <None Remove="resources\images\Icon_Laurels\gold_kr_bottom.png" />
+    <None Remove="resources\images\Icon_Laurels\rainbow_by_snug.png" />
+    <None Remove="resources\images\Icon_Laurels\rainbow_by_snug_big.png" />
     <None Remove="resources\images\Icon_Laurels\silver.png" />
     <None Remove="resources\images\Icon_Laurels\silver_kr.png" />
     <None Remove="resources\images\Icon_Laurels\silver_kr_big.png" />
@@ -162,6 +164,8 @@
     <Resource Include="resources\images\Icon_Laurels\gold_kr.png" />
     <Resource Include="resources\images\Icon_Laurels\gold_kr_big.png" />
     <Resource Include="resources\images\Icon_Laurels\gold_kr_bottom.png" />
+    <Resource Include="resources\images\Icon_Laurels\rainbow_by_snug.png" />
+    <Resource Include="resources\images\Icon_Laurels\rainbow_by_snug_big.png" />
     <Resource Include="resources\images\Icon_Laurels\silver.png" />
     <Resource Include="resources\images\Icon_Laurels\silver_kr.png" />
     <Resource Include="resources\images\Icon_Laurels\silver_kr_big.png" />
