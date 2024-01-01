@@ -9,25 +9,30 @@ public class StubInterface
     public static StubInterface Instance => _instance ?? new StubInterface();
 
     public readonly StubClient StubClient;
-    readonly RpcServer2 StubServer;
+    readonly RpcServer2 _stubServer;
     readonly StubMessageParser _messageParser;
 
     public bool IsFpsModAvailable { get; set; }
     public bool IsStubAvailable { get; private set; }
+    public bool IsConnected => _stubServer.Connected;
 
     StubInterface()
     {
         _instance = this;
 
-        StubServer = new RpcServer2();
+        _stubServer = new RpcServer2();
         StubClient = new StubClient();
         _messageParser = new StubMessageParser();
+
     }
 
     public async Task InitAsync(bool useLfg, bool enablePlayerMenu, bool enableProxy, bool showIngameChat, bool tccChatEnabled)
     {
-        StubServer.RequestReceived += _messageParser.HandleRequest;
-        StubServer.ResponseReceived += _messageParser.HandleResponse;
+        _stubServer.Stop();
+
+        _stubServer.RequestReceived += _messageParser.HandleRequest;
+        _stubServer.ResponseReceived += _messageParser.HandleResponse;
+        _stubServer.ConnectionChanged += OnStubConnectionChanged;
 
         if (!enableProxy) return;
         IsStubAvailable = await StubClient.PingStub();
@@ -41,19 +46,26 @@ public class StubInterface
             return;
         }
         StubClient.Initialize(useLfg, enablePlayerMenu, enableProxy, showIngameChat, tccChatEnabled);
-        StubServer.Start();
+        _stubServer.Start();
         IsFpsModAvailable = await StubClient.GetIsModAvailable("fps-utils") || await StubClient.GetIsModAvailable("fps-manager");
-        Log.N("tcc-stub", 
-            "Successfully connected to tcc-stub.",
-            NotificationType.Success
-            );
+        Log.Chat("Successfully connected to tcc-stub.");
 
+    }
+
+    void OnStubConnectionChanged(bool connected)
+    {
+        if(!connected)
+        {
+            IsStubAvailable = false;
+            Log.Chat("tcc-stub disconnected.");
+        }
     }
 
     public void Disconnect()
     {
-        StubServer.Stop();
-        StubServer.RequestReceived -= _messageParser.HandleRequest;
-        StubServer.ResponseReceived -= _messageParser.HandleResponse;
+        _stubServer.Stop();
+        _stubServer.RequestReceived -= _messageParser.HandleRequest;
+        _stubServer.ResponseReceived -= _messageParser.HandleResponse;
+        _stubServer.ConnectionChanged -= OnStubConnectionChanged;
     }
 }

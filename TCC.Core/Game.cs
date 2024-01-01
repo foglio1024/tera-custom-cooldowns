@@ -848,7 +848,7 @@ public static class Game
         if (PacketAnalyzer.Factory!.ReleaseVersion == 0)
             Log.F("Warning: C_LOGIN_ARBITER not received.");
 
-        if (!Logged && !StubInterface.Instance.IsStubAvailable)
+        if (!StubInterface.Instance.IsConnected)
         {
             StubInterface.Instance.Disconnect();
             _ = StubInterface.Instance.InitAsync(App.Settings.LfgWindowSettings.Enabled,
@@ -969,12 +969,23 @@ public static class Game
 
     static async Task OnLogin(S_LOGIN m)
     {
-        Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true, CurrentAccountNameHash);
-        Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true, CurrentAccountNameHash);
+        var account = string.IsNullOrEmpty(CurrentAccountNameHash)
+            ? string.IsNullOrEmpty(App.Settings.LastAccountNameHash)
+                ? null
+                : App.Settings.LastAccountNameHash
+            : CurrentAccountNameHash;
 
-        if (App.Settings.StatSentVersion != App.AppVersion ||
-            App.Settings.StatSentTime.Month != DateTime.UtcNow.Month ||
-            App.Settings.StatSentTime.Day != DateTime.UtcNow.Day)
+        if (!string.IsNullOrEmpty(account))
+        {
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlGuildBam, true, account);
+            Firebase.RegisterWebhook(App.Settings.WebhookUrlFieldBoss, true, account);
+        }
+
+        if (!string.IsNullOrEmpty(account)
+            // && (App.Settings.StatSentVersion != App.AppVersion ||
+            // App.Settings.StatSentTime.Month != DateTime.UtcNow.Month ||
+            // App.Settings.StatSentTime.Day != DateTime.UtcNow.Day)
+            )
         {
 
             bool isDailyFirst = App.Settings.StatSentTime.Month == DateTime.Now.Month &&
@@ -985,7 +996,7 @@ public static class Game
                                                Server.ServerId,
                                                Server.Ip,
                                                Server.Name,
-                                               CurrentAccountNameHash,
+                                               account,
                                                App.AppVersion,
                                                isDailyFirst))
             {

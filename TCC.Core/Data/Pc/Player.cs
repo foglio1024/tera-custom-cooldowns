@@ -45,8 +45,8 @@ public class Player : ThreadSafeObservableObject
     bool _isAlive;
     uint _coins;
     uint _maxCoins;
-    readonly List<uint> _debuffList = new();
-    readonly Dictionary<uint, uint> _shields = new();
+    readonly List<uint> _debuffList = [];
+    readonly Dictionary<uint, uint> _shields = [];
 
     public string Name
     {
@@ -354,10 +354,44 @@ public class Player : ThreadSafeObservableObject
 
     // tracking only warrior stance for now
     public StanceTracker<WarriorStance> WarriorStance { get; set; } = new();
+    
+    readonly object _listLock = new();
+    ThreadSafeObservableCollection<AbnormalityDuration> _buffs = [];
+    ThreadSafeObservableCollection<AbnormalityDuration> _debuffs = [];
+    ThreadSafeObservableCollection<AbnormalityDuration> _infBuffs = [];
 
-    public ThreadSafeObservableCollection<AbnormalityDuration> Buffs { get; private set; } = new();
-    public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs { get; private set; } = new();
-    public ThreadSafeObservableCollection<AbnormalityDuration> InfBuffs { get; private set; } = new();
+    public ThreadSafeObservableCollection<AbnormalityDuration> Buffs
+    {
+        get
+        {
+            lock (_listLock)
+            {
+                return _buffs;
+            }
+        }
+    }
+
+    public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs
+    {
+        get
+        {
+            lock (_listLock)
+            {
+                return _debuffs;
+            }
+        }
+    }
+
+    public ThreadSafeObservableCollection<AbnormalityDuration> InfBuffs
+    {
+        get
+        {
+            lock (_listLock)
+            {
+                return _infBuffs;
+            }
+        }
+    }
 
 
     #region Shield
@@ -437,12 +471,9 @@ public class Player : ThreadSafeObservableObject
     #region Abnormalities
     public void InitAbnormalityCollections(Dispatcher disp)
     {
-        Buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
-        Debuffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
-        InfBuffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
-        //_shields = new Dictionary<uint, uint>();
-        //_debuffList = new List<uint>();
-
+        _buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
+        _debuffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
+        _infBuffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
     }
 
     public void UpdateAbnormality(Abnormality ab, uint pDuration, int pStacks)
@@ -471,7 +502,6 @@ public class Player : ThreadSafeObservableObject
         }
     }
 
-    readonly object _listLock = new();
 
     void FindAndUpdate(Abnormality ab, uint duration, int stacks)
     {
@@ -525,13 +555,13 @@ public class Player : ThreadSafeObservableObject
     {
         lock (_listLock)
         {
-            Buffs.ToSyncList().ForEach(item => item.Dispose());
-            Debuffs.ToSyncList().ForEach(item => item.Dispose());
-            InfBuffs.ToSyncList().ForEach(item => item.Dispose());
+            _buffs.ToSyncList().ForEach(item => item.Dispose());
+            _debuffs.ToSyncList().ForEach(item => item.Dispose());
+            _infBuffs.ToSyncList().ForEach(item => item.Dispose());
 
-            Buffs.Clear();
-            Debuffs.Clear();
-            InfBuffs.Clear();
+            _buffs.Clear();
+            _debuffs.Clear();
+            _infBuffs.Clear();
         }
         _debuffList.Clear();
 
@@ -544,11 +574,11 @@ public class Player : ThreadSafeObservableObject
     {
         var list = abnormality.Type switch
         {
-            AbnormalityType.Debuff => Debuffs,
-            AbnormalityType.DOT => Debuffs,
-            AbnormalityType.Stun => Debuffs,
-            AbnormalityType.Buff => abnormality.Infinity ? InfBuffs : Buffs,
-            AbnormalityType.Special => abnormality.Infinity ? InfBuffs : Buffs,
+            AbnormalityType.Debuff => _debuffs,
+            AbnormalityType.DOT => _debuffs,
+            AbnormalityType.Stun => _debuffs,
+            AbnormalityType.Buff => abnormality.Infinity ? _infBuffs : _buffs,
+            AbnormalityType.Special => abnormality.Infinity ? _infBuffs : _buffs,
             _ => throw new ArgumentOutOfRangeException(nameof(abnormality))
         };
 

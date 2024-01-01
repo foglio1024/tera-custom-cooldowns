@@ -88,10 +88,23 @@ public class RpcServer2
 {
     public event Action<Response>? ResponseReceived;
     public event Action<Request>? RequestReceived;
+    public event Action<bool>? ConnectionChanged;
 
     TcpClient _socket;
     bool _listening;
     bool _connected;
+
+    public bool Connected
+    {
+        get => _connected;
+        private set
+        {
+            if(_connected == value) return;
+            _connected = value;
+            ConnectionChanged?.Invoke(_connected);
+        }
+    }
+
     public RpcServer2()
     {
         _socket = new TcpClient();
@@ -147,7 +160,7 @@ public class RpcServer2
                         if (!_socket.IsConnected())
                         {
                             _socket.Close();
-                            _connected = false;
+                            Connected = false;
                         }
                         continue;
                     }
@@ -164,7 +177,6 @@ public class RpcServer2
                         if (jsonReq.ContainsKey(Request.MethodKey))
                         {
                             RequestReceived?.Invoke(new Request(jsonReq));
-                            //Log.CW("Received request: " + jsonReq);
                         }
                         else if (jsonReq.ContainsKey(Response.ErrorKey) || jsonReq.ContainsKey(Response.ResultKey))
                         {
@@ -184,8 +196,10 @@ public class RpcServer2
             catch (Exception e)
             {
                 Log.F($"Socket error: {e}");
+                break;
             }
         }
         _listening = false;
+        Connected = false;
     }
 }
