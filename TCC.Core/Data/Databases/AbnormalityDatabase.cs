@@ -97,6 +97,7 @@ public class AbnormalityDatabase : DatabaseBase
 
         #endregion
 
+        Abnormalities[98200379].IsBuff = false;
     }
 
     public bool TryGetPassiveSkill(uint id, out Skill sk)
