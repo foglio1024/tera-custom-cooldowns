@@ -20,12 +20,14 @@ public class StubMessageParser
         { "setChatMode", new Action<JObject>(SetChatMode) },
         { "handleChatMessage", new Action<JObject>(HandleChatMessage) },
         { "handleRawPacket", new Action<JObject>(HandleRawPacket) },
+        { "handleTranslatedMessage", new Action<JObject>(HandleTranslatedMessage) },
         { "enqueueNotification", new Action<JObject>(HandleEnqueueNotification) }
     };
 
     public static event Action<bool>? SetUiModeEvent;
     public static event Action<bool>? SetChatModeEvent;
     public static event Action<string, uint, string>? HandleChatMessageEvent;
+    public static event Action<string, uint, string, bool>? HandleTranslatedMessageEvent;
     public static event Action<Message>? HandleRawPacketEvent;
 
     static void SetUiMode(JObject parameters)
@@ -71,6 +73,29 @@ public class StubMessageParser
 
 
     }
+
+        static void HandleTranslatedMessage(JObject parameters)
+    {
+        var jAuthor = parameters["author"];
+        if (jAuthor == null) return;
+        var author = jAuthor.Value<string>()!;
+
+        var jChannel = parameters["channel"];
+        if (jChannel == null) return;
+        var channel = jChannel.Value<uint>();
+
+        var jGm = parameters["gm"];
+        if (jGm == null) return;
+        var gm = jGm.Value<bool>();
+
+        var jMessage = parameters["message"];
+        if (jMessage == null) return;
+        var message = (jMessage.Value<string>() ?? "").AddFontTagsIfMissing().Replace("(Translated) ", "");
+
+        HandleTranslatedMessageEvent?.Invoke(author, channel, message, gm);
+    }
+
+
 
     static void HandleRawPacket(JObject parameters)
     {

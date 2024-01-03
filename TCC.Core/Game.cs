@@ -169,6 +169,7 @@ public static class Game
         StubMessageParser.SetUiModeEvent += OnSetUiMode;
         StubMessageParser.SetChatModeEvent += OnSetChatMode;
         StubMessageParser.HandleChatMessageEvent += OnStubChatMessage;
+        StubMessageParser.HandleTranslatedMessageEvent += OnStubTranslatedMessage;
         StubMessageParser.HandleRawPacketEvent += OnRawPacket;
     }
 
@@ -185,6 +186,10 @@ public static class Game
             ChatManager.Instance.AddChatMessage(
                 ChatManager.Instance.Factory.CreateMessage((ChatChannel)ChatManager.Instance.PrivateChannels.FirstOrDefault(x =>
                     x.Id == channel && x.Joined).Index + 11, author, message));
+    }
+    static void OnStubTranslatedMessage(string author, uint channel, string message, bool gm)
+    {
+        ChatManager.Instance.HandleTranslation(author, channel, message, gm);
     }
 
     static void OnSetChatMode(bool b)

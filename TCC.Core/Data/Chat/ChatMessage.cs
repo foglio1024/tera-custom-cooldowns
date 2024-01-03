@@ -46,12 +46,70 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     public ThreadSafeObservableCollection<MessageLine> Lines { get; }
     public ThreadSafeObservableCollection<MessagePieceBase> Pieces { get; }
 
+    ChatMessage? _translation;
+
+    public ThreadSafeObservableCollection<MessageLine> DisplayedLines
+    {
+        get
+        {
+            var ret = _translation != null
+                    ? App.Settings.TranslationFirst
+                        ? _translation.Lines
+                        : Lines
+                    : Lines;
+            var lastLine = ret.LastOrDefault();
+
+            if (lastLine != null)
+            {
+                if (lastLine.LinePieces.LastOrDefault() is not TranslationIndicatorPiece)
+                {
+                    lastLine.LinePieces.Add(new TranslationIndicatorPiece { Container = this });
+                }
+            }
+            return ret;
+        }
+    }
+
+    public ThreadSafeObservableCollection<MessageLine> SecondaryLines
+    {
+        get
+        {
+            var ret = _translation != null
+                    ? !App.Settings.TranslationFirst
+                        ? _translation.Lines
+                        : Lines
+                    : Lines;
+
+            var lastLine = ret.LastOrDefault();
+            if (lastLine != null)
+            {
+                if (lastLine.LinePieces.LastOrDefault() is TranslationIndicatorPiece tip)
+                {
+                    lastLine.LinePieces.Remove(tip);
+                }
+            }
+            return ret;
+        }
+    }
+
+    public ThreadSafeObservableCollection<MessagePieceBase> UsedPieces => _translation != null
+    ? App.Settings.TranslationFirst
+        ? _translation.Pieces
+        : Pieces
+    : Pieces;
+
+    public ThreadSafeObservableCollection<MessagePieceBase> SecondaryPieces => _translation != null
+    ? !App.Settings.TranslationFirst
+        ? _translation.Pieces
+        : Pieces
+    : Pieces;
+
     public bool IsVisible
     {
         get => _isVisible;
         set
         {
-            Pieces.ToList().ForEach(p => p.IsVisible = value);
+            UsedPieces.ToList().ForEach(p => p.IsVisible = value);
             if (value)
             {
                 SettingsWindowViewModel.ChatShowChannelChanged += ShowChannelNPC;
@@ -70,6 +128,21 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
             N();
         }
     }
+
+    bool _hasTranslation;
+    public bool HasTranslation
+    {
+        get => _hasTranslation;
+        set
+        {
+            if (_hasTranslation == value) return;
+            _hasTranslation = value;
+            N();
+            N(nameof(DisplayedLines));
+        }
+    }
+
+
     public int Size => App.Settings.FontSize;
     public string PlainMessage { get; protected init; }
     public string DisplayedAuthor { get; protected init; } = string.Empty;
@@ -102,7 +175,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         AuthorServerId = authorServerId;
         AuthorGameId = authorGameId;
 
-        if(AuthorServerId != Game.Me.ServerId && AuthorServerId != 0)
+        if (AuthorServerId != Game.Me.ServerId && AuthorServerId != 0)
         {
             var srv = PacketAnalyzer.ServerDatabase.GetServer(AuthorServerId);
             DisplayedAuthor = $"{Author}@({srv.Region})-{srv.Name}";
@@ -205,7 +278,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
                 }
                 else
                 {
-                    mp = new SimpleMessagePiece(word){ Color = simplePiece.Color, Size = simplePiece.Size};
+                    mp = new SimpleMessagePiece(word) { Color = simplePiece.Color, Size = simplePiece.Size };
                 }
 
                 InsertPiece(mp, index);
@@ -293,7 +366,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
             var customColor = ChatUtils.GetCustomColor(piece);
 
             // heroic items bright magenta is ugly af
-            if (customColor == "F93ECE") 
+            if (customColor == "F93ECE")
                 customColor = Colors.ItemHeroicColor.ToHex(sharp: false);
 
             if (piece.HasChildNodes && piece.ChildNodes.Count == 1 && piece.ChildNodes[0].Name != "#text")
@@ -326,7 +399,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
                             content
                                 .Replace("<a href=\"asfunction:chatLinkAction\">", "")
                                 .Replace("</a>", "")
-                                .UnescapeHtml(),App.Settings.FontSize, false, customColor
+                                .UnescapeHtml(), App.Settings.FontSize, false, customColor
                         )
                     );
                 }
@@ -402,10 +475,20 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         }
         Pieces.Clear();
 
+        _translation?.Dispose();
     }
 
     public void Dispose()
     {
         DisposeImpl();
+    }
+
+    public void AddTranslation(ChatMessage message)
+    {
+        message.SplitSimplePieces();
+        // Lines.ToSyncList().Last().LinePieces.Add(new TranslationIndicatorPiece(){Container = this});
+        // message.Lines.ToSyncList().Last().LinePieces.Add(new TranslationIndicatorPiece(){Container = message});
+        _translation = message;
+        HasTranslation = true;
     }
 }

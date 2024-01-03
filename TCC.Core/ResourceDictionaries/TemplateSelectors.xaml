@@ -15,7 +15,9 @@
                                          SimpleTemplate="{StaticResource SimpleTemplate}"
                                          MoneyTemplate="{StaticResource MoneyTemplate}"
                                          ActionTemplate="{StaticResource ClickableTemplate}"
-                                         IconTemplate="{StaticResource IconTemplate}"/>
+                                         IconTemplate="{StaticResource IconTemplate}"
+                                         TranslationIndicatorTemplate="{StaticResource TranslationIndicatorTemplate}"
+                                         />
     <templateSelectors:ChannelLabelDataTemplateSelector x:Key="ChannelLabelTemplateSelector"
                                          NormalChannelDataTemplate="{StaticResource DefaultChannelLabelTemplate}"
                                          WhisperChannelDataTemplate="{StaticResource WhisperChannelLabelTemplate}"

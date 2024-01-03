@@ -194,7 +194,7 @@ public class ChatManager : TccWindowViewModel
         var isMe = m.Author == Game.Me.Name;
         var author = isMe ? m.Recipient : m.Author;
         var channel = isMe ? ChatChannel.SentWhisper : ChatChannel.ReceivedWhisper;
-        AddChatMessage(Factory.CreateMessage(channel, author, m.Message, authorServerId: m.SenderServerId, isGm: m.IsGm,authorGameId: m.GameId));
+        AddChatMessage(Factory.CreateMessage(channel, author, m.Message, authorServerId: m.SenderServerId, isGm: m.IsGm, authorGameId: m.GameId));
     }
 
     void OnLeavePrivateChannel(S_LEAVE_PRIVATE_CHANNEL m)
@@ -213,10 +213,10 @@ public class ChatManager : TccWindowViewModel
         // ignore these since they're handled differently
         //if (m.Message.Contains(":tcc-chatMode:") || m.Message.Contains(":tcc-uiMode:")) return;
         var i = PrivateChannels.FirstOrDefault(y => y.Id == m.Channel).Index;
-        var ch = (ChatChannel) (PrivateChannels[i].Index + 11);
+        var ch = (ChatChannel)(PrivateChannels[i].Index + 11);
         if (ch == ChatChannel.Private8) return; // already sent by stub
 
-        AddChatMessage(Factory.CreateMessage(ch, m.AuthorName, m.Message,isGm: false, authorGameId: m.AuthorId));
+        AddChatMessage(Factory.CreateMessage(ch, m.AuthorName, m.Message, isGm: false, authorGameId: m.AuthorId));
     }
 
     void OnChat(S_CHAT m)
@@ -269,13 +269,13 @@ public class ChatManager : TccWindowViewModel
             //Log.CW("No chat windows found, initializing default one.");
             var ws = new ChatWindowSettings(0, 1, 200, 500, true, ClickThruMode.Never, 1, false, 1, false, true,
                     false)
-                {HideTimeout = 10, FadeOut = true, LfgOn = false};
+            { HideTimeout = 10, FadeOut = true, LfgOn = false };
             var m = new ChatViewModel(ws);
             var w = new ChatWindow(m);
             App.BaseDispatcher.InvokeAsync(() =>
             {
                 if (w.WindowSettings == null) return;
-                App.Settings.ChatWindowsSettings.Add((ChatWindowSettings) w.WindowSettings);
+                App.Settings.ChatWindowsSettings.Add((ChatWindowSettings)w.WindowSettings);
             });
             ChatWindows.Add(w);
             m.LoadTabs();
@@ -371,7 +371,7 @@ public class ChatManager : TccWindowViewModel
     public void AddSystemMessage(string template, SystemMessageData sysMsg, string authorOverride = "System")
     {
         if (!App.Settings.ChatEnabled) return;
-        Task.Run(() => AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, (ChatChannel) sysMsg.ChatChannel, authorOverride)));
+        Task.Run(() => AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, (ChatChannel)sysMsg.ChatChannel, authorOverride)));
     }
 
     public void AddSystemMessage(string template, SystemMessageData sysMsg, ChatChannel channelOverride, string authorOverride = "System")
@@ -442,7 +442,7 @@ public class ChatManager : TccWindowViewModel
 
         if (!Game.IsMe(target) || diff > 0 || target == source || source == 0 || !TccUtils.IsEntitySpawned(source)) return;
         var srcName = TccUtils.GetEntityName(source);
-        var parameters = $"@0\vAmount\v{-diff}\vPerc\v{-diff / (double) maxHP:P}{(srcName != "" ? $"\vSource\v{srcName}" : "")}";
+        var parameters = $"@0\vAmount\v{-diff}\vPerc\v{-diff / (double)maxHP:P}{(srcName != "" ? $"\vSource\v{srcName}" : "")}";
 
         SystemMessagesProcessor.AnalyzeMessage(parameters, srcName == ""
             ? !crit ? "TCC_DAMAGE_RECEIVED_UNKNOWN" : "TCC_DAMAGE_RECEIVED_UNKNOWN_CRIT"
@@ -461,7 +461,7 @@ public class ChatManager : TccWindowViewModel
 #else
                 ChatMessages.Insert(0, msg);
 #endif
-                if (ChatMessages.Count > App.Settings.MaxMessages) 
+                if (ChatMessages.Count > App.Settings.MaxMessages)
                     ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
     }
@@ -552,8 +552,8 @@ public class ChatManager : TccWindowViewModel
     {
         if (e.Action != NotifyCollectionChangedAction.Remove) return;
         if (e.OldItems?.Count == 0) return;
-        var ws = (ChatWindowSettings?) ((ChatWindow?) e.OldItems?[0])?.WindowSettings;
-        if(ws == null) return;
+        var ws = (ChatWindowSettings?)((ChatWindow?)e.OldItems?[0])?.WindowSettings;
+        if (ws == null) return;
         App.Settings.ChatWindowsSettings.Remove(ws);
     }
 
@@ -643,7 +643,7 @@ public class ChatManager : TccWindowViewModel
             foreach (var window in Application.Current.Windows.ToList()
                          .Where(x => x is ChatWindow { VM.TabVMs.Count: 0 }))
             {
-                var w = (ChatWindow) window;
+                var w = (ChatWindow)window;
                 ChatWindows.Remove(w);
                 w.Close();
             }
@@ -669,5 +669,30 @@ public class ChatManager : TccWindowViewModel
         };
         t.SetApartmentState(ApartmentState.STA);
         t.Start();
+    }
+
+    internal void HandleTranslation(string author, uint channel, string message, bool gm)
+    {
+        var translatedMsg = Factory.CreateMessage((ChatChannel)channel, author, message, isGm: gm);
+        if (Filtered(translatedMsg)) return;
+        var pausedCount = _pauseQueue.Count;
+        for (var i = 0; i < 10; i++)
+        {
+            if (i >= pausedCount + ChatMessages.Count) continue;
+            var target = i <= pausedCount - 1
+                    ? _pauseQueue.ElementAt(i)
+                    : ChatMessages[i - pausedCount];
+
+            if (target.Author != author ||
+               target.Channel != (ChatChannel)channel)
+            {
+                continue;
+            }
+            else{
+                target.AddTranslation(translatedMsg);
+                break;
+            }
+        }
+        translatedMsg.Dispose();
     }
 }

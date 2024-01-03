@@ -2,10 +2,12 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Nostrum.WPF.Extensions;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.UI;
+using TCC.UI.Controls;
 using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ResourceDictionaries;
@@ -16,14 +18,14 @@ public partial class DataTemplates
     {
         var dc = (sender as FrameworkElement)?.DataContext;
         if (dc != null)
-            WindowManager.ViewModels.DashboardVM.SelectCharacter((Character) dc);
+            WindowManager.ViewModels.DashboardVM.SelectCharacter((Character)dc);
     }
 
     void LfgMessage_OnKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
 
-        var lfg = (Listing) ((FrameworkElement) sender).DataContext;
+        var lfg = (Listing)((FrameworkElement)sender).DataContext;
         var msg = lfg.Message;
         var isRaid = lfg.IsRaid;
 
@@ -52,8 +54,8 @@ public partial class DataTemplates
         FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
         WindowManager.LfgListWindow.Activate();
 
-        ((TextBox) sender).Focus();
-        Keyboard.Focus((TextBox) sender);
+        ((TextBox)sender).Focus();
+        Keyboard.Focus((TextBox)sender);
     }
 
     void LfgMessage_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -70,5 +72,12 @@ public partial class DataTemplates
     {
         if (sender is FrameworkElement { DataContext: Listing l }) l.IsPopupOpen = false;
         else FocusManager.PauseTopmost = false;
+    }
+
+    private void OnTranslationIndicatorMouseEnter(object sender, MouseEventArgs e)
+    {
+        var uiel = sender as FrameworkElement;
+        var popup = uiel.Parent.FindVisualChild<TccPopup>();
+        if (popup != null) { popup.IsOpen = true; }
     }
 }

@@ -190,6 +190,11 @@ public class IconMessagePiece : MessagePieceBase
     }
 }
 
+public class TranslationIndicatorPiece : MessagePieceBase
+{
+    // todo: add more stuff? like src and target languages
+}
+
 //public class MessagePiece : ThreadSafeObservableObject, IDisposable
 //{
 //    private ChatMessage _container;

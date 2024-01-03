@@ -13,6 +13,7 @@
                     xmlns:skills="clr-namespace:TCC.Data.Skills"
                     xmlns:abnormalities1="clr-namespace:TCC.UI.Controls.Abnormalities"
                     xmlns:chat1="clr-namespace:TCC.UI.Controls.Chat"
+                    xmlns:tccControls="clr-namespace:TCC.UI.Controls"
                     xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
                     xmlns:group="clr-namespace:TCC.UI.Controls.Group"
                     xmlns:npCs="clr-namespace:TCC.UI.Controls.NPCs"
@@ -423,6 +424,7 @@
 
     </DataTemplate>
 
+
     <DataTemplate x:Key="MessageHeaderTemplate">
         <chat1:ChatMessageHeader />
     </DataTemplate>
@@ -441,6 +443,66 @@
     <DataTemplate x:Key="LfgBody">
         <chat1:LfgBody />
     </DataTemplate>
+
+
+    <DataTemplate x:Key="TranslationIndicatorTemplate" DataType="chat:MessagePieceBase">
+        <Grid VerticalAlignment="Stretch" >
+            <Border  Background="#1fff" Padding="3" x:Name="TranslationIcon" IsHitTestVisible="True"
+                CornerRadius="10" HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                     MouseEnter="OnTranslationIndicatorMouseEnter">
+                <Path Data="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
+                    Fill="#9fff" Stretch="Uniform" Width="18" Height="12" 
+                      VerticalAlignment="Center" IsHitTestVisible="False"
+              />
+            </Border>
+            <tccControls:TccPopup x:Name="TranslationPopup" PlacementTarget="{Binding ElementName=TranslationIcon}" Placement="Top"
+            AllowsTransparency="True" StaysOpen="False" MouseLeaveTolerance="10" 
+                                  >
+                <Border Background="{StaticResource RevampDarkerBackgroundBrush}"
+                            Style="{StaticResource RevampBorderStyle}" MaxWidth="300" Padding="10" >
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="15" Opacity=".4" Direction="-90" />
+                    </Border.Effect>
+                    <ItemsControl ItemsSource="{Binding Container.SecondaryLines}"
+                          Background="Transparent"
+                          Margin="0" 
+                          VerticalAlignment="Center" >
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel VerticalAlignment="Top"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding LinePieces}"
+                                      ItemTemplate="{StaticResource MessageBodyTemplate}" Background="Transparent"
+                                      VerticalAlignment="Center" >
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemContainerStyle>
+                                        <Style TargetType="FrameworkElement">
+                                            <Setter Property="Margin" Value="0 0 0 -3"/>
+                                            <Setter Property="VerticalAlignment" Value="Top"/>
+                                        </Style>
+                                    </ItemsControl.ItemContainerStyle>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Border>
+
+            </tccControls:TccPopup>
+        </Grid>
+        <DataTemplate.Triggers>
+            <Trigger SourceName="TranslationIcon" Property="IsMouseOver" Value="True">
+                <Setter TargetName="TranslationPopup" Property="IsOpen" Value="True"/>
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
 
     <!--Channel label templates-->
     <DataTemplate x:Key="WhisperChannelLabelTemplate" DataType="chat:ChatMessage">

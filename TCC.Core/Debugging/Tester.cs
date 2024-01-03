@@ -596,7 +596,11 @@ public static class Tester
         }
     }
 
-
+    public static void AddMessageAndTranslation(){
+        ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateMessage(ChatChannel.Say, "Chobee", "Ciao"));
+        Task.Delay(500).ContinueWith(t => 
+        ChatManager.Instance.HandleTranslation("Chobee", (uint)ChatChannel.Say, "Translation", false));
+    }
 
     static void OnPlayerLocation(C_PLAYER_LOCATION l)
     {

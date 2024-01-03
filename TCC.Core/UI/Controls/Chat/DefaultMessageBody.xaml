@@ -13,7 +13,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <ItemsControl ItemsSource="{Binding Lines}"
+                <ItemsControl ItemsSource="{Binding DisplayedLines}"
                               Background="Transparent"
                               Margin="5 0 0 5" 
                               VerticalAlignment="Center" >
