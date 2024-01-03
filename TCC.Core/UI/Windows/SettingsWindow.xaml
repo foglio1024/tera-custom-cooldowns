@@ -1590,7 +1590,37 @@
                                     </Grid>
                                 </settings:CheckboxSetting.ToolTip>
                             </settings:CheckboxSetting>
-
+                            <settings:SelectionSetting SettingName="Translation mode"
+                                                       SelectedItem="{Binding TranslationMode, Mode=TwoWay}"
+                                                       Choices="{Binding TranslationModes}"
+                                                       ChoicesType="{x:Type data:TranslationMode}"
+                                                       IsEnabled="{Binding ChatWindowEnabled}">
+                                <settings:SelectionSetting.ToolTip>
+                                    <ToolTip Background="Transparent">
+                                        <Grid Margin="5">
+                                            <Border Style="{StaticResource RevampBorderStyle}" Grid.RowSpan="2" />
+                                            <TextBlock Foreground="LightGray" Margin="10" TextWrapping="Wrap" MaxWidth="300">
+                                                <Run Text="translate-chat mod by hsdn is required for this feature to work." Foreground="{StaticResource HpBrush}" />
+                                                <LineBreak />
+                                                <LineBreak />
+                                                <Run Text="Decides how translated chat messages are displayed:" />
+                                                <LineBreak />
+                                                <LineBreak />
+                                                <Run Text=" - Separated" FontWeight="Bold" Foreground="White" />
+                                                <Run Text=": translated messages are displayed separated from the original ones (same behavior as translate-chat mod)" />
+                                                <LineBreak />
+                                                <LineBreak />
+                                                <Run Text=" - Merged, translation first" FontWeight="Bold" Foreground="White" />
+                                                <Run Text=": translated and original messages are merged into a single message, displaying the translated one only. An icon is appended at the end of the text. Hovering the icon will display the original text." />
+                                                <LineBreak />
+                                                <LineBreak />
+                                                <Run Text=" - Merged, original first" FontWeight="Bold" Foreground="White" />
+                                                <Run Text=": translated and original messages are merged into a single message, displaying the original one only. An icon is appended at the end of the text. Hovering the icon will display the translated text." />
+                                            </TextBlock>
+                                        </Grid>
+                                    </ToolTip>
+                                </settings:SelectionSetting.ToolTip>
+                            </settings:SelectionSetting>
 
                         </StackPanel>
                         <!-- Actions -->

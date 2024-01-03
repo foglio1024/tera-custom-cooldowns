@@ -53,19 +53,23 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         get
         {
             var ret = _translation != null
-                    ? App.Settings.TranslationFirst
+                    ? App.Settings.TranslationMode is TranslationMode.MergedTranslationFirst
                         ? _translation.Lines
                         : Lines
                     : Lines;
-            var lastLine = ret.LastOrDefault();
 
-            if (lastLine != null)
+            Dispatcher.Invoke(() =>
             {
-                if (lastLine.LinePieces.LastOrDefault() is not TranslationIndicatorPiece)
+                var lastLine = ret.LastOrDefault();
+
+                if (lastLine != null)
                 {
-                    lastLine.LinePieces.Add(new TranslationIndicatorPiece { Container = this });
+                    if (lastLine.LinePieces.LastOrDefault() is not TranslationIndicatorPiece)
+                    {
+                        lastLine.LinePieces.Add(new TranslationIndicatorPiece { Container = this });
+                    }
                 }
-            }
+            });
             return ret;
         }
     }
@@ -75,34 +79,39 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         get
         {
             var ret = _translation != null
-                    ? !App.Settings.TranslationFirst
+                    ? App.Settings.TranslationMode is TranslationMode.MergedOriginalFirst
                         ? _translation.Lines
                         : Lines
                     : Lines;
 
-            var lastLine = ret.LastOrDefault();
-            if (lastLine != null)
+            Dispatcher.Invoke(() =>
             {
-                if (lastLine.LinePieces.LastOrDefault() is TranslationIndicatorPiece tip)
+                var lastLine = ret.LastOrDefault();
+                if (lastLine != null)
                 {
-                    lastLine.LinePieces.Remove(tip);
+                    if (lastLine.LinePieces.LastOrDefault() is TranslationIndicatorPiece tip)
+                    {
+                        lastLine.LinePieces.Remove(tip);
+                    }
                 }
-            }
+            });
             return ret;
         }
     }
 
     public ThreadSafeObservableCollection<MessagePieceBase> UsedPieces => _translation != null
-    ? App.Settings.TranslationFirst
+    ? App.Settings.TranslationMode is TranslationMode.MergedTranslationFirst
         ? _translation.Pieces
         : Pieces
     : Pieces;
 
     public ThreadSafeObservableCollection<MessagePieceBase> SecondaryPieces => _translation != null
-    ? !App.Settings.TranslationFirst
+    ? App.Settings.TranslationMode is TranslationMode.MergedOriginalFirst
         ? _translation.Pieces
         : Pieces
     : Pieces;
+
+    public bool IsShowingTranslationFirst => App.Settings.TranslationMode is TranslationMode.MergedTranslationFirst;
 
     public bool IsVisible
     {
@@ -112,21 +121,30 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
             UsedPieces.ToList().ForEach(p => p.IsVisible = value);
             if (value)
             {
-                SettingsWindowViewModel.ChatShowChannelChanged += ShowChannelNPC;
-                SettingsWindowViewModel.ChatShowTimestampChanged += ShowTimestampNPC;
-                SettingsWindowViewModel.FontSizeChanged += FontSizeNPC;
+                SettingsWindowViewModel.ChatShowChannelChanged += NotifyShowChannelChanged;
+                SettingsWindowViewModel.ChatShowTimestampChanged += NotifyShowTimestampChanged;
+                SettingsWindowViewModel.FontSizeChanged += NotifyFontSizeChanged;
+                SettingsWindowViewModel.TranslationModeChanged += NotifyTranslationModeChanged;
             }
             else
             {
-                SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
-                SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
-                SettingsWindowViewModel.FontSizeChanged -= FontSizeNPC;
+                SettingsWindowViewModel.ChatShowChannelChanged -= NotifyShowChannelChanged;
+                SettingsWindowViewModel.ChatShowTimestampChanged -= NotifyShowTimestampChanged;
+                SettingsWindowViewModel.FontSizeChanged -= NotifyFontSizeChanged;
+                SettingsWindowViewModel.TranslationModeChanged -= NotifyTranslationModeChanged;
             }
 
             if (_isVisible == value) return;
             _isVisible = value;
             N();
         }
+    }
+
+    private void NotifyTranslationModeChanged()
+    {
+        N(nameof(IsShowingTranslationFirst));
+        N(nameof(DisplayedLines));
+        N(nameof(SecondaryLines));
     }
 
     bool _hasTranslation;
@@ -300,17 +318,17 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         }
     }
 
-    void ShowChannelNPC()
+    void NotifyShowChannelChanged()
     {
         N(nameof(ShowChannel));
     }
 
-    void ShowTimestampNPC()
+    void NotifyShowTimestampChanged()
     {
         N(nameof(ShowTimestamp));
     }
 
-    void FontSizeNPC()
+    void NotifyFontSizeChanged()
     {
         N(nameof(Size));
     }
@@ -465,9 +483,9 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 
     protected virtual void DisposeImpl()
     {
-        SettingsWindowViewModel.ChatShowChannelChanged -= ShowChannelNPC;
-        SettingsWindowViewModel.ChatShowTimestampChanged -= ShowTimestampNPC;
-        SettingsWindowViewModel.FontSizeChanged -= FontSizeNPC;
+        SettingsWindowViewModel.ChatShowChannelChanged -= NotifyShowChannelChanged;
+        SettingsWindowViewModel.ChatShowTimestampChanged -= NotifyShowTimestampChanged;
+        SettingsWindowViewModel.FontSizeChanged -= NotifyFontSizeChanged;
 
         foreach (var messagePiece in Pieces.ToSyncList())
         {
@@ -486,9 +504,8 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     public void AddTranslation(ChatMessage message)
     {
         message.SplitSimplePieces();
-        // Lines.ToSyncList().Last().LinePieces.Add(new TranslationIndicatorPiece(){Container = this});
-        // message.Lines.ToSyncList().Last().LinePieces.Add(new TranslationIndicatorPiece(){Container = message});
         _translation = message;
-        HasTranslation = true;
+        N(nameof(DisplayedLines));
+        N(nameof(SecondaryLines));
     }
 }

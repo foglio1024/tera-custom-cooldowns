@@ -74,10 +74,17 @@ public partial class DataTemplates
         else FocusManager.PauseTopmost = false;
     }
 
-    private void OnTranslationIndicatorMouseEnter(object sender, MouseEventArgs e)
+    void OnTranslationIndicatorMouseEnter(object sender, MouseEventArgs e)
     {
-        var uiel = sender as FrameworkElement;
+        if(sender is not FrameworkElement uiel) return;
         var popup = uiel.Parent.FindVisualChild<TccPopup>();
         if (popup != null) { popup.IsOpen = true; }
+    }
+
+    void OnTranslationIndicatorMouseLeave(object sender, MouseEventArgs e)
+    {
+        if(sender is not FrameworkElement uiel) return;
+        var popup = uiel.Parent.FindVisualChild<TccPopup>();
+        if (popup != null) { popup.IsOpen = false; }
     }
 }

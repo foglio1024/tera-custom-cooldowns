@@ -237,3 +237,13 @@ public enum CooldownDecimalMode
     [Description("Less than ten seconds")]
     LessThanTen
 }
+
+public enum TranslationMode
+{
+    [Description("Separated")]
+    Separated,
+    [Description("Merged, translation first")]
+    MergedTranslationFirst,
+    [Description("Merged, original first")]
+    MergedOriginalFirst
+}

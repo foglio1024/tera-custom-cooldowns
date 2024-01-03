@@ -141,7 +141,7 @@ public class SettingsContainer
     public int FontSize { get; set; }
     public int ChatScrollAmount { get; set; }
     public List<string> UserExcludedSysMsg { get; set; }
-    public bool TranslationFirst { get; set; }
+    public TranslationMode TranslationMode { get; set; }
 
     #endregion Chat
 
@@ -234,7 +234,7 @@ public class SettingsContainer
         WebhookUrlMentions = "";
         IntegratedGpuSleepWorkaround = false;
         CooldownsDecimalMode = CooldownDecimalMode.LessThanTen;
-        TranslationFirst = true;
+        TranslationMode = TranslationMode.MergedTranslationFirst;
     }
 
     public static SettingsContainer Load()

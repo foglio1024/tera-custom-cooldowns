@@ -90,7 +90,7 @@ public class StubMessageParser
 
         var jMessage = parameters["message"];
         if (jMessage == null) return;
-        var message = (jMessage.Value<string>() ?? "").AddFontTagsIfMissing().Replace("(Translated) ", "");
+        var message = (jMessage.Value<string>() ?? "").AddFontTagsIfMissing();
 
         HandleTranslatedMessageEvent?.Invoke(author, channel, message, gm);
     }

@@ -33,6 +33,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
     public static event Action? AbnormalityShapeChanged;
     public static event Action? SkillShapeChanged;
     public static event Action? FontSizeChanged;
+    public static event Action? TranslationModeChanged;
     public static event Action? IntegratedGpuSleepWorkaroundChanged;
 
     public bool Beta => App.Beta;
@@ -625,6 +626,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             N();
         }
     }
+
     public bool ChatWindowEnabled
     {
         get => App.Settings.ChatEnabled;
@@ -685,7 +687,17 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
     //        else Kernel32.FreeConsole();
     //    }
     //}
-
+    public TranslationMode TranslationMode
+    {
+        get => App.Settings.TranslationMode;
+        set
+        {
+            if (App.Settings.TranslationMode == value) return;
+            App.Settings.TranslationMode = value;
+            TranslationModeChanged?.Invoke();
+            N();
+        }
+    }
     public IEnumerable<ClickThruMode> ClickThruModes
     {
         get
@@ -712,6 +724,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
     public IEnumerable<MentionMode> MentionModes => EnumUtils.ListFromEnum<MentionMode>();
     public IEnumerable<LanguageOverride> LanguageOverrides => EnumUtils.ListFromEnum<LanguageOverride>();
     public IEnumerable<CooldownDecimalMode> CooldownDecimalModes => EnumUtils.ListFromEnum<CooldownDecimalMode>();
+    public IEnumerable<TranslationMode> TranslationModes => EnumUtils.ListFromEnum<TranslationMode>();
 
 
     ThreadSafeObservableCollection<BlacklistedMonsterVM>? _blacklistedMonsters;

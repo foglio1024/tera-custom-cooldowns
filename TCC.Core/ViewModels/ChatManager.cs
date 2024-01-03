@@ -673,7 +673,16 @@ public class ChatManager : TccWindowViewModel
 
     internal void HandleTranslation(string author, uint channel, string message, bool gm)
     {
-        var translatedMsg = Factory.CreateMessage((ChatChannel)channel, author, message, isGm: gm);
+
+        if (App.Settings.TranslationMode is TranslationMode.Separated)
+        {
+            var sepMsg = Factory.CreateMessage((ChatChannel)channel, author, message, isGm: gm);
+            AddChatMessage(sepMsg);
+            return;
+        }
+        
+        var translatedMsg = Factory.CreateMessage((ChatChannel)channel, author, message.Replace("(Translated) ", ""), isGm: gm);
+
         if (Filtered(translatedMsg)) return;
         var pausedCount = _pauseQueue.Count;
         for (var i = 0; i < 10; i++)
