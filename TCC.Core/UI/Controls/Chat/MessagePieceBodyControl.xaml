@@ -24,6 +24,7 @@
                         Content="{Binding}" 
                         HorizontalAlignment="Right"
                         Visibility="Visible"
+                        VerticalAlignment="Center"
                         ContentTemplateSelector="{StaticResource PieceTemplateSelector}"
                         >
             <b:Interaction.Triggers>

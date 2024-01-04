@@ -448,7 +448,7 @@
     <DataTemplate x:Key="TranslationIndicatorTemplate" DataType="chat:MessagePieceBase">
         <Grid VerticalAlignment="Center" Height="Auto">
             <Border  Background="#1fff" Padding="4 1" x:Name="TranslationIcon" IsHitTestVisible="True"
-                CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center"
                      MouseEnter="OnTranslationIndicatorMouseEnter"
                      MouseLeave="OnTranslationIndicatorMouseLeave"
                      Margin="3 0 0 0" Height="{Binding Size}" >

@@ -596,10 +596,14 @@ public static class Tester
         }
     }
 
-    public static void AddMessageAndTranslation(){
-        ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateMessage(ChatChannel.Say, "Chobee", "Ciao"));
-        Task.Delay(500).ContinueWith(t => 
-        ChatManager.Instance.HandleTranslation("Chobee", (uint)ChatChannel.Say, "Translation", false));
+    public static void AddMessageAndTranslation()
+    {
+        ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateMessage(ChatChannel.Say, "Foglio", "There's no such thing as \"dead memes\"")); //chatMessage.ContainsPlayerName = true;
+        var chatMessage = ChatManager.Instance.Factory.CreateMessage(ChatChannel.Say, "Foglio", "Il Gioco - hai appena perso"); //chatMessage.ContainsPlayerName = true;
+        ChatManager.Instance.AddChatMessage(chatMessage);
+        Task.Delay(500).ContinueWith(t =>
+        ChatManager.Instance.Dispatcher.Invoke(() =>
+        ChatManager.Instance.HandleTranslation("Foglio", (uint)ChatChannel.Say, "The Game - you just lost", false)));
     }
 
     static void OnPlayerLocation(C_PLAYER_LOCATION l)

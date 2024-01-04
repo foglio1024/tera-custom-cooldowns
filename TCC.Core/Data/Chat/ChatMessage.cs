@@ -113,6 +113,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         set
         {
             UsedPieces.ToList().ForEach(p => p.IsVisible = value);
+            SecondaryPieces.ToList().ForEach(p => p.IsVisible = value);
             if (value)
             {
                 SettingsWindowViewModel.ChatShowChannelChanged += NotifyShowChannelChanged;
@@ -130,11 +131,12 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 
             if (_isVisible == value) return;
             _isVisible = value;
+            if(_translation is not null) _translation.IsVisible = value;
             N();
         }
     }
 
-    private void NotifyTranslationModeChanged()
+    void NotifyTranslationModeChanged()
     {
         N(nameof(IsShowingTranslationFirst));
         N(nameof(DisplayedLines));
@@ -480,6 +482,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         SettingsWindowViewModel.ChatShowChannelChanged -= NotifyShowChannelChanged;
         SettingsWindowViewModel.ChatShowTimestampChanged -= NotifyShowTimestampChanged;
         SettingsWindowViewModel.FontSizeChanged -= NotifyFontSizeChanged;
+        SettingsWindowViewModel.TranslationModeChanged -= NotifyTranslationModeChanged;
 
         foreach (var messagePiece in Pieces.ToSyncList())
         {
@@ -499,7 +502,9 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     {
         message.SplitSimplePieces();
         _translation = message;
+        _translation.IsVisible = IsVisible;
         N(nameof(DisplayedLines));
         N(nameof(SecondaryLines));
+
     }
 }

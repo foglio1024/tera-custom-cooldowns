@@ -709,8 +709,6 @@ public class ChatManager : TccWindowViewModel
             }
 
             if(!found) AddChatMessage(sepMsg);
-
-            translatedMsg.Dispose();
         });
     }
 }

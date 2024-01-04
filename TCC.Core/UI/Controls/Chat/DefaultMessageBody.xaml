@@ -35,7 +35,7 @@
                                 <ItemsControl.ItemContainerStyle>
                                     <Style TargetType="FrameworkElement">
                                         <Setter Property="Margin" Value="0 0 0 -3"/>
-                                        <Setter Property="VerticalAlignment" Value="Top"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
                                     </Style>
                                 </ItemsControl.ItemContainerStyle>
                             </ItemsControl>
