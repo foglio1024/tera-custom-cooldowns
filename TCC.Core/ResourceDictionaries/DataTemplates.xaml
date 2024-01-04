@@ -446,14 +446,14 @@
 
 
     <DataTemplate x:Key="TranslationIndicatorTemplate" DataType="chat:MessagePieceBase">
-        <Grid VerticalAlignment="Stretch" >
-            <Border  Background="#1fff" Padding="5 2" x:Name="TranslationIcon" IsHitTestVisible="True"
+        <Grid VerticalAlignment="Center" Height="Auto">
+            <Border  Background="#1fff" Padding="4 1" x:Name="TranslationIcon" IsHitTestVisible="True"
                 CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Stretch"
                      MouseEnter="OnTranslationIndicatorMouseEnter"
                      MouseLeave="OnTranslationIndicatorMouseLeave"
-                     Margin="3 5 0 -5">
+                     Margin="3 0 0 0" Height="{Binding Size}" >
                 <Path Data="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
-                    Fill="#9fff" Stretch="Uniform" Width="Auto" Height="10" 
+                    Fill="#9fff" Stretch="Uniform" Width="Auto" 
                       VerticalAlignment="Center" IsHitTestVisible="False"
               />
             </Border>
@@ -470,8 +470,19 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock x:Name="SecondaryTextTitle" Text="Translated message"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Path Data="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
+                              Fill="#3fff" Stretch="Uniform" Width="32" Grid.RowSpan="2"
+                              Height="32" Grid.Column="1"
+                              VerticalAlignment="Center" IsHitTestVisible="False" Margin="10 0 0 0"
+                        />
+                        <TextBlock x:Name="SecondaryTextTitle" Text="Translated message" Grid.Column="0"
+                                   FontWeight="Normal"  />
                         <ItemsControl ItemsSource="{Binding Container.SecondaryLines}"
+                                      Grid.Column="0"
                                       Grid.Row="1"
                           Background="Transparent"
                           Margin="0" 
