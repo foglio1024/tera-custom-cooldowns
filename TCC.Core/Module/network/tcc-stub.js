@@ -90,7 +90,7 @@ class TccStub {
         this.mod.hook("S_SHOW_CANDIDATE_LIST", "raw", () => { return !Globals.useLfg; });
         // block tcc messages from gpk file
         this.mod.hook("S_CHAT", this.mod.majorPatchVersion >= 108 ? 4 : 3, { order: 999, filter: { fake: true } }, (p) => {
-            if(p.message.indexOf("(Translated)") !== -1){
+            if (p.message.indexOf("(Translated)") !== -1) {
 
                 this.globalMod().call("handleTranslatedMessage", {
                     'author': p.name,
@@ -100,8 +100,20 @@ class TccStub {
                 });
                 return false;
             }
-            if(p.name !== "tccChatLink") return false;
+            if (p.name !== "tccChatLink") return false;
         });
+        this.mod.hook("S_WHISPER", this.mod.majorPatchVersion >= 108 ? 4 : 3, { order: 999, filter: { fake: true } }, (p) => {
+            if (p.message.indexOf("(Translated)") !== -1) {
+
+                this.globalMod().call("handleTranslatedMessage", {
+                    'author': p.name,
+                    'channel': 301, // ReceivedWhisper (custom)
+                    'message': p.message,
+                    'gm': p.gm
+                });
+            }
+        });
+
         // hook Command messages to display them in tcc {order: 999, filter:{fake:true}}
         this.mod.hook("S_PRIVATE_CHAT", 1, { order: 999, filter: { fake: true } }, p => {
             var author = "";
