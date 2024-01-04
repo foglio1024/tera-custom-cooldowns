@@ -7,16 +7,13 @@ namespace TCC.Data.Abnormalities;
 
 public class MysticAbnormalityTracker : AbnormalityTracker
 {
-    // ReSharper disable UnusedMember.Local
-    const int HurricaneId = 60010;
+    //const int HurricaneId = 60010;
+    //const int HurricaneDuration = 120000;
+    const int VowOfRebirthId = 700100;
 
-    const int HurricaneDuration = 120000;
-    // ReSharper restore UnusedMember.Local
-
-    const int VowId = 700100;
-    const int VocId = 27160;
-    const int TovId = 702003;
-    const int TowId = 702004;
+    const int VolleyOfCursesId = 27160;
+    const int ThrallOfVengeanceId = 702003;
+    const int ThrallOfWrathId = 702004;
 
     static readonly uint[] CritAuraIDs = [700600, 700601, 700602, 700603];
     static readonly uint[] ManaAuraIDs = [700300];
@@ -31,11 +28,34 @@ public class MysticAbnormalityTracker : AbnormalityTracker
     //    SkillManager.AddSkillDirectly(hurricane, HurricaneDuration);
     //}
 
-    public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
+    public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
-        if (!IsViewModelAvailable<MysticLayoutVM>(out var vm)) return;
-        CheckVoc(p);
+        if (!TryGetClassViewModel<MysticLayoutVM>(out var vm)) return;
+
+        CheckVolleyOfCursesBegin(p);
+        CheckAurasBegin(p, vm);
+    }
+
+    public override void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+    {
+        if (!TryGetClassViewModel<MysticLayoutVM>(out var vm)) return;
+
+        CheckVolleyOfCursesRefresh(p);
+        CheckAurasRefresh(p, vm);
+    }
+
+    public override void OnAbnormalityEnd(S_ABNORMALITY_END p)
+    {
+        if (!TryGetClassViewModel<MysticLayoutVM>(out var vm)) return;
+
+        CheckVolleyOfCursesEnd(p);
+        CheckAurasEnd(p, vm);
+    }
+
+    static void CheckAurasBegin(S_ABNORMALITY_BEGIN p, MysticLayoutVM vm)
+    {
         if (!Game.IsMe(p.TargetId)) return;
+
         if (CritAuraIDs.Contains(p.AbnormalityId))
         {
             vm.Auras.CritAura = true;
@@ -52,7 +72,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         {
             vm.Auras.SwiftAura = true;
         }
-        else if (p.AbnormalityId == VowId)
+        else if (p.AbnormalityId == VowOfRebirthId)
         {
             vm.Vow.StartEffect(p.Duration);
         }
@@ -60,21 +80,18 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         {
             vm.Elementalize = true;
         }
-        else if (p.AbnormalityId == TovId)
+        else if (p.AbnormalityId == ThrallOfVengeanceId)
         {
             vm.ThrallOfVengeance.StartEffect(p.Duration);
         }
-        else if (p.AbnormalityId == TowId)
+        else if (p.AbnormalityId == ThrallOfWrathId)
         {
             vm.ThrallOfWrath.StartEffect(p.Duration);
         }
     }
-    public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
+
+    static void CheckAurasRefresh(S_ABNORMALITY_REFRESH p, MysticLayoutVM vm)
     {
-        if (!IsViewModelAvailable<MysticLayoutVM>(out var vm)) return;
-
-        CheckVoc(p);
-
         if (!Game.IsMe(p.TargetId)) return;
 
         if (CritAuraIDs.Contains(p.AbnormalityId))
@@ -93,15 +110,15 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         {
             vm.Auras.SwiftAura = true;
         }
-        else if (p.AbnormalityId == VowId)
+        else if (p.AbnormalityId == VowOfRebirthId)
         {
             vm.Vow.RefreshEffect(p.Duration);
         }
-        else if (p.AbnormalityId == TovId)
+        else if (p.AbnormalityId == ThrallOfVengeanceId)
         {
             vm.ThrallOfVengeance.RefreshEffect(p.Duration);
         }
-        else if (p.AbnormalityId == TowId)
+        else if (p.AbnormalityId == ThrallOfWrathId)
         {
             vm.ThrallOfWrath.RefreshEffect(p.Duration);
         }
@@ -110,12 +127,9 @@ public class MysticAbnormalityTracker : AbnormalityTracker
             vm.Elementalize = true;
         }
     }
-    public override void CheckAbnormality(S_ABNORMALITY_END p)
+
+    static void CheckAurasEnd(S_ABNORMALITY_END p, MysticLayoutVM vm)
     {
-        if (!IsViewModelAvailable<MysticLayoutVM>(out var vm)) return;
-
-        CheckVoc(p);
-
         if (!Game.IsMe(p.TargetId)) return;
 
         if (CritAuraIDs.Contains(p.AbnormalityId))
@@ -134,15 +148,15 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         {
             vm.Auras.SwiftAura = false;
         }
-        else if (p.AbnormalityId == VowId)
+        else if (p.AbnormalityId == VowOfRebirthId)
         {
             vm.Vow.StopEffect();
         }
-        else if (p.AbnormalityId == TovId)
+        else if (p.AbnormalityId == ThrallOfVengeanceId)
         {
             vm.ThrallOfVengeance.StopEffect();
         }
-        else if (p.AbnormalityId == TowId)
+        else if (p.AbnormalityId == ThrallOfWrathId)
         {
             vm.ThrallOfWrath.StopEffect();
         }
@@ -152,32 +166,28 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    public static void CheckVoc(ulong target)
+    static void CheckVolleyOfCursesBegin(S_ABNORMALITY_BEGIN p)
     {
-        if (!MarkedTargets.Contains(target)) return;
-        MarkedTargets.Remove(target);
-        if (MarkedTargets.Count == 0) InvokeMarkingExpired();
-    }
-
-    static void CheckVoc(S_ABNORMALITY_BEGIN p)
-    {
-        if (VocId != p.AbnormalityId) return;
+        if (VolleyOfCursesId != p.AbnormalityId) return;
         if (!WindowManager.ViewModels.NpcVM.TryFindNPC(p.TargetId, out _)) return;
+
         if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
         InvokeMarkingRefreshed(p.Duration);
     }
 
-    static void CheckVoc(S_ABNORMALITY_REFRESH p)
+    static void CheckVolleyOfCursesRefresh(S_ABNORMALITY_REFRESH p)
     {
-        if (VocId != p.AbnormalityId) return;
+        if (VolleyOfCursesId != p.AbnormalityId) return;
         if (!WindowManager.ViewModels.NpcVM.TryFindNPC(p.TargetId, out _)) return;
+
         if (!MarkedTargets.Contains(p.TargetId)) MarkedTargets.Add(p.TargetId);
         InvokeMarkingRefreshed(p.Duration);
     }
 
-    static void CheckVoc(S_ABNORMALITY_END p)
+    static void CheckVolleyOfCursesEnd(S_ABNORMALITY_END p)
     {
-        if (VocId != p.AbnormalityId) return;
+        if (VolleyOfCursesId != p.AbnormalityId) return;
+
         if (MarkedTargets.Contains(p.TargetId)) MarkedTargets.Remove(p.TargetId);
         if (MarkedTargets.Count == 0) InvokeMarkingExpired();
     }

@@ -9,6 +9,7 @@ namespace TCC.Data.Abnormalities;
 public class WarriorAbnormalityTracker : AbnormalityTracker
 {
     //private static readonly uint[] GambleIDs = { 100800, 100801, 100802, 100803 };
+    const uint GambleID = 100801;
     static readonly uint[] AstanceIDs = [100100, 100101, 100102, 100103];
     static readonly uint[] DstanceIDs = [100200, 100201, 100202, 100203];
     static readonly uint[] TraverseCutIDs = [101300/*, 101301*/];
@@ -20,178 +21,201 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     public WarriorAbnormalityTracker()
     {
         Game.DB!.SkillsDatabase.TryGetSkillByIconName("icon_skills.doublesworddance_tex", Game.Me.Class, out var bw);
-
         _bladeWaltz = bw ?? throw new NullReferenceException("Skill not found!");
     }
 
-    public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
+    public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!Game.IsMe(p.TargetId)) return;
-        CheckAssaultStance(p);
-        CheckDefensiveStance(p);
-        CheckDeadlyGamble(p);
-        CheckTraverseCut(p);
-        CheckSwiftGlyphs(p);
-        CheckArush(p);
-        CheckBladeWaltz(p);
+
+        CheckAssaultStanceBegin(p);
+        CheckDefensiveStanceBegin(p);
+        CheckDeadlyGambleBegin(p);
+        CheckTraverseCutBegin(p);
+        CheckSwiftGlyphsBegin(p);
+        CheckArushBegin(p);
+        CheckBladeWaltzBegin(p);
     }
-    public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
+
+    public override void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!Game.IsMe(p.TargetId)) return;
-        CheckAssaultStance(p);
-        CheckDefensiveStance(p);
-        CheckDeadlyGamble(p);
-        CheckTraverseCut(p);
-        CheckSwiftGlyphs(p);
-        CheckArush(p);
-        //CheckTempestAura(p);
-    }
-    public override void CheckAbnormality(S_ABNORMALITY_END p)
-    {
-        if (!Game.IsMe(p.TargetId)) return;
-        CheckTraverseCut(p);
-        CheckSwiftGlyphs(p);
-        CheckArush(p);
-        CheckDefensiveStance(p);
-        CheckAssaultStance(p);
-        CheckDeadlyGamble(p);
+
+        CheckAssaultStanceRefresh(p);
+        CheckDefensiveStanceRefresh(p);
+        CheckDeadlyGambleRefresh(p);
+        CheckTraverseCutRefresh(p);
+        CheckSwiftGlyphsRefresh(p);
+        CheckArushRefresh(p);
         //CheckTempestAura(p);
     }
 
-    static void CheckAssaultStance(S_ABNORMALITY_BEGIN p)
+    public override void OnAbnormalityEnd(S_ABNORMALITY_END p)
+    {
+        if (!Game.IsMe(p.TargetId)) return;
+
+        CheckTraverseCutEnd(p);
+        CheckSwiftGlyphsEnd(p);
+        CheckArushEnd(p);
+        CheckDefensiveStanceEnd(p);
+        CheckAssaultStanceEnd(p);
+        CheckDeadlyGambleEnd(p);
+        //CheckTempestAura(p);
+    }
+
+    static void CheckAssaultStanceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+
         Game.Me.WarriorStance.CurrentStance = WarriorStance.Assault;
     }
 
-    static void CheckAssaultStance(S_ABNORMALITY_REFRESH p)
+    static void CheckAssaultStanceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+
         Game.Me.WarriorStance.CurrentStance = WarriorStance.Assault;
     }
 
-    static void CheckAssaultStance(S_ABNORMALITY_END p)
+    static void CheckAssaultStanceEnd(S_ABNORMALITY_END p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+
         Game.Me.WarriorStance.CurrentStance = WarriorStance.None;
     }
 
-    static void CheckDefensiveStance(S_ABNORMALITY_BEGIN p)
+    static void CheckDefensiveStanceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+
         Game.Me.WarriorStance.CurrentStance = WarriorStance.Defensive;
     }
 
-    static void CheckDefensiveStance(S_ABNORMALITY_REFRESH p)
+    static void CheckDefensiveStanceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+
         Game.Me.WarriorStance.CurrentStance = WarriorStance.Defensive;
     }
 
-    static void CheckDefensiveStance(S_ABNORMALITY_END p)
+    static void CheckDefensiveStanceEnd(S_ABNORMALITY_END p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+
         Game.Me.WarriorStance.CurrentStance = WarriorStance.None;
     }
 
-    static void CheckDeadlyGamble(S_ABNORMALITY_BEGIN p)
+    static void CheckDeadlyGambleBegin(S_ABNORMALITY_BEGIN p)
     {
-        if (p.AbnormalityId != 100801) return;
+        if (p.AbnormalityId != GambleID) return;
         //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
         vm.DeadlyGamble.StartEffect(p.Duration);
     }
 
-    static void CheckDeadlyGamble(S_ABNORMALITY_REFRESH p)
+    static void CheckDeadlyGambleRefresh(S_ABNORMALITY_REFRESH p)
     {
-        if (p.AbnormalityId != 100801) return;
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (p.AbnormalityId != GambleID) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
         //if (!GambleIDs.Contains(p.AbnormalityId)) return;
         //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
+
         vm.DeadlyGamble.RefreshEffect(p.Duration);
     }
 
-    static void CheckDeadlyGamble(S_ABNORMALITY_END p)
+    static void CheckDeadlyGambleEnd(S_ABNORMALITY_END p)
     {
-        if (p.AbnormalityId != 100801) return;
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (p.AbnormalityId != GambleID) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
         //if (!GambleIDs.Contains(p.AbnormalityId)) return;
         //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
+
         vm.DeadlyGamble.StopEffect();
     }
 
-    void CheckBladeWaltz(S_ABNORMALITY_BEGIN p)
+    void CheckBladeWaltzBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!BladeWaltzIDs.Contains(p.AbnormalityId)) return;
+
         StartPrecooldown(_bladeWaltz, p.Duration);
     }
 
-    static void CheckTraverseCut(S_ABNORMALITY_BEGIN p)
+    static void CheckTraverseCutBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.TraverseCut.Val = p.Stacks;
         vm.TraverseCut.InvokeToZero(p.Duration);
     }
 
-    static void CheckTraverseCut(S_ABNORMALITY_REFRESH p)
+    static void CheckTraverseCutRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.TraverseCut.Val = p.Stacks;
         vm.TraverseCut.InvokeToZero(p.Duration);
     }
 
-    static void CheckTraverseCut(S_ABNORMALITY_END p)
+    static void CheckTraverseCutEnd(S_ABNORMALITY_END p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.TraverseCut.Val = 0;
     }
 
-    static void CheckSwiftGlyphs(S_ABNORMALITY_BEGIN p)
+    static void CheckSwiftGlyphsBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.SetSwift(p.Duration);
     }
 
-    static void CheckSwiftGlyphs(S_ABNORMALITY_REFRESH p)
+    static void CheckSwiftGlyphsRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.SetSwift(p.Duration);
     }
 
-    static void CheckSwiftGlyphs(S_ABNORMALITY_END p)
+    static void CheckSwiftGlyphsEnd(S_ABNORMALITY_END p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.SetSwift(0);
     }
 
-    static void CheckArush(S_ABNORMALITY_BEGIN p)
+    static void CheckArushBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.SetArush(p.Duration);
     }
 
-    static void CheckArush(S_ABNORMALITY_REFRESH p)
+    static void CheckArushRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.SetArush(p.Duration);
     }
 
-    static void CheckArush(S_ABNORMALITY_END p)
+    static void CheckArushEnd(S_ABNORMALITY_END p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<WarriorLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
+
         vm.SetArush(0);
     }
 }
+
 /*
         private static readonly uint[] TempestAuraIDs = { 103000, 103102, 103120, 103131 };
         private static readonly uint[] ShadowTempestIDs = { 103104, 103130 };

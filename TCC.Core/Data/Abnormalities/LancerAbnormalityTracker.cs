@@ -11,99 +11,101 @@ public class LancerAbnormalityTracker : AbnormalityTracker
     const uint LineHeldId = 201701;
     public const string AdrenalineRushIconName = "icon_skills.fightingwill_tex";
 
-    public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
+    public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!Game.IsMe(p.TargetId)) return;
-        CheckArush(p);
-        CheckGshout(p);
-        CheckLineHeld(p);
-    }
-    public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
-    {
-        if (!Game.IsMe(p.TargetId)) return;
-        CheckArush(p);
-        CheckGshout(p);
-        CheckLineHeld(p);
-    }
-    public override void CheckAbnormality(S_ABNORMALITY_END p)
-    {
-        if (!Game.IsMe(p.TargetId)) return;
-        CheckArush(p);
-        CheckGshout(p);
-        CheckLineHeld(p);
+
+        CheckArushBegin(p);
+        CheckGshoutBegin(p);
+        CheckLineHeldBegin(p);
     }
 
-    static void CheckArush(S_ABNORMALITY_BEGIN p)
+    public override void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
-        //if (!ARushIDs.Contains(p.AbnormalityId)) return;
+        if (!Game.IsMe(p.TargetId)) return;
+
+        CheckArushRefresh(p);
+        CheckGshoutRefresh(p);
+        CheckLineHeldRefresh(p);
+    }
+
+    public override void OnAbnormalityEnd(S_ABNORMALITY_END p)
+    {
+        if (!Game.IsMe(p.TargetId)) return;
+
+        CheckArushEnd(p);
+        CheckGshoutEnd(p);
+        CheckLineHeldEnd(p);
+    }
+
+    static void CheckArushBegin(S_ABNORMALITY_BEGIN p)
+    {
         if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.AdrenalineRush.StartEffect(p.Duration);
     }
 
-    static void CheckArush(S_ABNORMALITY_REFRESH p)
+    static void CheckArushRefresh(S_ABNORMALITY_REFRESH p)
     {
-        //if (!ARushIDs.Contains(p.AbnormalityId)) return;
         if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.AdrenalineRush.StartEffect(p.Duration);
     }
 
-    static void CheckArush(S_ABNORMALITY_END p)
+    static void CheckArushEnd(S_ABNORMALITY_END p)
     {
-        //if (!ARushIDs.Contains(p.AbnormalityId)) return;
         if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.AdrenalineRush.StopEffect();
     }
 
-    static void CheckGshout(S_ABNORMALITY_BEGIN p)
+    static void CheckGshoutBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.GuardianShout.StartEffect(p.Duration);
     }
 
-    static void CheckGshout(S_ABNORMALITY_REFRESH p)
+    static void CheckGshoutRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.GuardianShout.StartEffect(p.Duration);
     }
 
-    static void CheckGshout(S_ABNORMALITY_END p)
+    static void CheckGshoutEnd(S_ABNORMALITY_END p)
     {
         if (!GShoutIDs.Contains(p.AbnormalityId)) return;
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.GuardianShout.StopEffect();
     }
 
-    static void CheckLineHeld(S_ABNORMALITY_BEGIN p)
+    static void CheckLineHeldBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != LineHeldId) return;
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.LH.StartBaseBuff(p.Duration);
     }
 
-    static void CheckLineHeld(S_ABNORMALITY_REFRESH p)
+    static void CheckLineHeldRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != LineHeldId) return;
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.LH.RefreshBaseBuff(p.Stacks, p.Duration);
     }
 
-    static void CheckLineHeld(S_ABNORMALITY_END p)
+    static void CheckLineHeldEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != LineHeldId) return;
-        if (!IsViewModelAvailable<LancerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
 
         vm.LH.Stop();
     }

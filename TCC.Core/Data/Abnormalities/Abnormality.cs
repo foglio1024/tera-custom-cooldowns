@@ -15,14 +15,12 @@ public class Abnormality
     public AbnormalityType Type { get; set; }
     public uint ShieldSize { get; private set; }
     public bool IsShield { get; private set; }
-
     public bool CanShow => IsShow
                            && !ToolTip.Contains("BTS")
                            && !Name.Contains("BTS")
                            && !Name.Contains("(Hidden)")
                            && !Name.Equals("Unknown")
                            && !Name.Equals(string.Empty);
-
 
     public Abnormality(uint id, bool isShow, bool isBuff, bool infinity, AbnormalityType prop, string iconName, string name, string tooltip)
     {
@@ -37,7 +35,6 @@ public class Abnormality
         ShieldSize = 0;
         IsShield = false;
     }
-
 
     public void SetShield(double size)
     {

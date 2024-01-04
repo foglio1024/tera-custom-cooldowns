@@ -7,68 +7,75 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
 {
     const int BloodlustId = 400701;
     const int FieryRageId = 400105;
-
     const int UnleashId = 401705;
-    const int SinisterDexter = 401706; // no idea
+    const int SinisterDexter = 401706;
     const int Rampage = 401710;
 
-
-    public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
+    public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!Game.IsMe(p.TargetId)) return;
-        if (!IsViewModelAvailable<BerserkerLayoutViewModel>(out var vm)) return;
-        CheckUnleashAbnormals(p);
+        if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
+
+        CheckUnleashAbnormalsBegin(p);
 
         switch (p.AbnormalityId)
         {
             case BloodlustId:
                 vm.Bloodlust.StartEffect(p.Duration);
                 break;
+
             case FieryRageId:
                 vm.FieryRage.StartEffect(p.Duration);
                 break;
+
             case UnleashId:
                 vm.Unleash.StartEffect(p.Duration);
                 vm.IsUnleashOn = true;
                 break;
         }
     }
-    public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
+
+    public override void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!Game.IsMe(p.TargetId)) return;
-        if (!IsViewModelAvailable<BerserkerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
 
-        CheckUnleashAbnormals(p);
+        CheckUnleashAbnormalsRefresh(p);
 
         switch (p.AbnormalityId)
         {
             case BloodlustId:
                 vm.Bloodlust.RefreshEffect(p.Duration);
                 break;
+
             case FieryRageId:
                 vm.FieryRage.RefreshEffect(p.Duration);
                 break;
+
             case UnleashId:
                 vm.Unleash.RefreshEffect(p.Duration);
                 vm.IsUnleashOn = true;
                 break;
         }
     }
-    public override void CheckAbnormality(S_ABNORMALITY_END p)
+
+    public override void OnAbnormalityEnd(S_ABNORMALITY_END p)
     {
         if (!Game.IsMe(p.TargetId)) return;
-        if (!IsViewModelAvailable<BerserkerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
 
-        CheckUnleashAbnormals(p);
+        CheckUnleashAbnormalsEnd(p);
 
         switch (p.AbnormalityId)
         {
             case BloodlustId:
                 vm.Bloodlust.StopEffect();
                 break;
+
             case FieryRageId:
                 vm.FieryRage.StopEffect();
                 break;
+
             case UnleashId:
                 vm.Unleash.StopEffect();
                 vm.IsUnleashOn = false;
@@ -76,9 +83,9 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckUnleashAbnormals(S_ABNORMALITY_BEGIN p)
+    static void CheckUnleashAbnormalsBegin(S_ABNORMALITY_BEGIN p)
     {
-        if (!IsViewModelAvailable<BerserkerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
 
         switch (p.AbnormalityId)
         {
@@ -86,6 +93,7 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
                 vm.DexterSinixterTracker.Val = p.Stacks;
                 vm.DexterSinixterTracker.InvokeToZero(p.Duration);
                 break;
+
             case Rampage:
                 vm.RampageTracker.Val = p.Stacks;
                 vm.RampageTracker.InvokeToZero(p.Duration);
@@ -93,9 +101,9 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckUnleashAbnormals(S_ABNORMALITY_REFRESH p)
+    static void CheckUnleashAbnormalsRefresh(S_ABNORMALITY_REFRESH p)
     {
-        if (!IsViewModelAvailable<BerserkerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
 
         switch (p.AbnormalityId)
         {
@@ -103,6 +111,7 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
                 vm.DexterSinixterTracker.Val = p.Stacks;
                 vm.DexterSinixterTracker.InvokeToZero(p.Duration);
                 break;
+
             case Rampage:
                 vm.RampageTracker.Val = p.Stacks;
                 vm.RampageTracker.InvokeToZero(p.Duration);
@@ -110,19 +119,19 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckUnleashAbnormals(S_ABNORMALITY_END p)
+    static void CheckUnleashAbnormalsEnd(S_ABNORMALITY_END p)
     {
-        if (!IsViewModelAvailable<BerserkerLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
 
         switch (p.AbnormalityId)
         {
             case SinisterDexter:
                 vm.DexterSinixterTracker.Val = 0;
                 break;
+
             case Rampage:
                 vm.RampageTracker.Val = 0;
                 break;
         }
     }
-
 }

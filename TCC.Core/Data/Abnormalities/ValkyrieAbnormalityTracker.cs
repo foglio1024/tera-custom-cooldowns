@@ -11,8 +11,8 @@ public class ValkyrieAbnormalityTracker : AbnormalityTracker
     const uint RagnarokId = 10155130;
     const uint GrugnirsBiteId = 10155530;
     const uint GodsfallId = 10155512;
-    static readonly List<uint> GodsfallPreCdIds = new() { 10155510, 10155512 };
-    static readonly List<uint> TwilightWaltzIds = new() { 10155530, 10155540, 10155541, 10155542 };
+    static readonly List<uint> GodsfallPreCdIds = [10155510, 10155512];
+    static readonly List<uint> TwilightWaltzIds = [10155530, 10155540, 10155541, 10155542];
 
     readonly Skill _godsfall;
     readonly Skill _twilightWaltz;
@@ -29,89 +29,100 @@ public class ValkyrieAbnormalityTracker : AbnormalityTracker
         _grugnirsBite = gb ?? throw new NullReferenceException("Skill not found!");
     }
 
-    public override void CheckAbnormality(S_ABNORMALITY_BEGIN p)
+    public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!Game.IsMe(p.TargetId)) return;
-        CheckGrugnirsBite(p);
-        CheckTwilightWaltz(p);
-        CheckRagnarok(p);
-        CheckGodsfallPrecd(p);
-        CheckGodsfall(p);
-    }
-    public override void CheckAbnormality(S_ABNORMALITY_REFRESH p)
-    {
-        if (!Game.IsMe(p.TargetId)) return;
-        CheckRagnarok(p);
-        CheckGodsfall(p);
-    }
-    public override void CheckAbnormality(S_ABNORMALITY_END p)
-    {
-        if (!Game.IsMe(p.TargetId)) return;
-        CheckRagnarok(p);
-        CheckGodsfall(p);
+
+        CheckGrugnirsBiteBegin(p);
+        CheckTwilightWaltzBegin(p);
+        CheckRagnarokBegin(p);
+        CheckGodsfallPrecdBegin(p);
+        CheckGodsfallBegin(p);
     }
 
-    static void CheckRagnarok(S_ABNORMALITY_BEGIN p)
+    public override void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+    {
+        if (!Game.IsMe(p.TargetId)) return;
+
+        CheckRagnarokRefresh(p);
+        CheckGodsfallRefresh(p);
+    }
+
+    public override void OnAbnormalityEnd(S_ABNORMALITY_END p)
+    {
+        if (!Game.IsMe(p.TargetId)) return;
+
+        CheckRagnarokEnd(p);
+        CheckGodsfallEnd(p);
+    }
+
+    static void CheckRagnarokBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != RagnarokId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<ValkyrieLayoutViewModel>(out var vm)) return;
 
         vm.Ragnarok.StartEffect(p.Duration);
     }
 
-    static void CheckRagnarok(S_ABNORMALITY_END p)
+    static void CheckRagnarokEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != RagnarokId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<ValkyrieLayoutViewModel>(out var vm)) return;
+
         vm.Ragnarok.StopEffect();
     }
 
-    static void CheckRagnarok(S_ABNORMALITY_REFRESH p)
+    static void CheckRagnarokRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != RagnarokId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<ValkyrieLayoutViewModel>(out var vm)) return;
+
         vm.Ragnarok.RefreshEffect(p.Duration);
     }
 
-    static void CheckGodsfall(S_ABNORMALITY_BEGIN p)
+    static void CheckGodsfallBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != GodsfallId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<ValkyrieLayoutViewModel>(out var vm)) return;
+
         vm.Godsfall.StartEffect(p.Duration);
     }
 
-    static void CheckGodsfall(S_ABNORMALITY_REFRESH p)
+    static void CheckGodsfallRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != GodsfallId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<ValkyrieLayoutViewModel>(out var vm)) return;
+
         vm.Godsfall.RefreshEffect(p.Duration);
     }
 
-    static void CheckGodsfall(S_ABNORMALITY_END p)
+    static void CheckGodsfallEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != GodsfallId) return;
-        if (!IsViewModelAvailable<ValkyrieLayoutViewModel>(out var vm)) return;
+        if (!TryGetClassViewModel<ValkyrieLayoutViewModel>(out var vm)) return;
+
         vm.Godsfall.StopEffect();
     }
 
-    void CheckTwilightWaltz(S_ABNORMALITY_BEGIN p)
+    void CheckTwilightWaltzBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!TwilightWaltzIds.Contains(p.AbnormalityId)) return;
         if (p is { AbnormalityId: 10155530, Duration: 7000 }) return; // ewww
-        //Log.CW($"Starting TW {p.AbnormalityId} {p.Duration}");
+
         StartPrecooldown(_twilightWaltz, p.Duration);
     }
 
-    void CheckGodsfallPrecd(S_ABNORMALITY_BEGIN p)
+    void CheckGodsfallPrecdBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!GodsfallPreCdIds.Contains(p.AbnormalityId)) return;
+
         StartPrecooldown(_godsfall, p.Duration);
     }
 
-    void CheckGrugnirsBite(S_ABNORMALITY_BEGIN p)
+    void CheckGrugnirsBiteBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != GrugnirsBiteId) return;
+
         StartPrecooldown(_grugnirsBite, p.Duration);
     }
-
 }
