@@ -74,7 +74,7 @@ public class StubMessageParser
 
     }
 
-        static void HandleTranslatedMessage(JObject parameters)
+    static void HandleTranslatedMessage(JObject parameters)
     {
         var jAuthor = parameters["author"];
         if (jAuthor == null) return;
@@ -90,7 +90,20 @@ public class StubMessageParser
 
         var jMessage = parameters["message"];
         if (jMessage == null) return;
-        var message = (jMessage.Value<string>() ?? "").AddFontTagsIfMissing();
+
+        var message = (jMessage.Value<string>() ?? "");
+
+        if (channel == 9 || channel == 10) // remove <font> tags from Greets and Anglers  
+        {
+            if (message.StartsWith("<font>", StringComparison.OrdinalIgnoreCase))
+            {
+                message = message.ReplaceCaseInsensitive("<font>", "").ReplaceCaseInsensitive("</font>", "");
+            }
+        }
+        else // add <font> tag to all other channels
+        {
+            message = message.AddFontTagsIfMissing();
+        }
 
         HandleTranslatedMessageEvent?.Invoke(author, channel, message, gm);
     }
