@@ -11,12 +11,10 @@ public class Lfg : ThreadSafeObservableObject
     bool _raid;
     string _dungeonName = "";
     int _membersCount;
-    readonly Timer _removeTimer;
+    readonly Timer _removeDelay;
 
     public uint Id { get; }
-
     public uint ServerId { get; }
-
     public string Name
     {
         get => _name; set
@@ -45,7 +43,6 @@ public class Lfg : ThreadSafeObservableObject
             N();
         }
     }
-
     public string DungeonName
     {
         get => _dungeonName;
@@ -56,7 +53,6 @@ public class Lfg : ThreadSafeObservableObject
             N();
         }
     }
-
     public int MembersCount
     {
         get => _membersCount; set
@@ -81,22 +77,22 @@ public class Lfg : ThreadSafeObservableObject
         MembersCount = 0;
         UpdateDungeonName();
 
-        _removeTimer = new Timer(3 * 60 * 1000);
-        _removeTimer.Elapsed += _removeTimer_Elapsed;
-        _removeTimer.Start();
-
+        _removeDelay = new Timer(3 * 60 * 1000);
+        _removeDelay.Elapsed += RemoveDelayElapsed;
+        _removeDelay.Start();
     }
 
-    void _removeTimer_Elapsed(object? sender, ElapsedEventArgs e)
+    void RemoveDelayElapsed(object? sender, ElapsedEventArgs e)
     {
         ChatManager.Instance.RemoveLfg(this);
     }
+
     public void Refresh()
     {
         try
         {
-            _removeTimer.Stop();
-            _removeTimer.Start();
+            _removeDelay.Stop();
+            _removeDelay.Start();
             N();
         }
         catch
@@ -110,12 +106,14 @@ public class Lfg : ThreadSafeObservableObject
         var a = Message.Split(' ');
         DungeonName = a[0].Length <= 5 ? a[0] : "LFG";
     }
+
     public void Dispose()
     {
-        _removeTimer.Elapsed -= _removeTimer_Elapsed;
-        _removeTimer.Stop();
-        _removeTimer.Dispose();
+        _removeDelay.Elapsed -= RemoveDelayElapsed;
+        _removeDelay.Stop();
+        _removeDelay.Dispose();
     }
+
     public override string ToString()
     {
         return $"[{Id}] {Name}: {Message}";

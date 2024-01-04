@@ -10,5 +10,4 @@ public struct SystemMessageData
         Template = s;
         ChatChannel = ch;
     }
-
 }

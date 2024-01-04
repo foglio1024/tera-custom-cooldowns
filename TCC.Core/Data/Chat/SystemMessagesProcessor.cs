@@ -1,9 +1,9 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using Nostrum.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using HtmlAgilityPack;
-using Nostrum.Extensions;
 using TCC.Data.Pc;
 using TCC.UI;
 using TCC.Utils;
@@ -23,6 +23,7 @@ public static class SystemMessagesProcessor
         var txt = template.Template.UnescapeHtml().Replace("<BR>", "\r\n");
         var html = new HtmlDocument(); html.LoadHtml(txt);
         var htmlPieces = html.DocumentNode.ChildNodes;
+        // BIG TODO: why is this duplicated in SystemMessage.ctor?
         if (prm == null)
         {
             //only one parameter (opcode) so just add text
@@ -140,16 +141,17 @@ public static class SystemMessagesProcessor
         var opcodeName = PacketAnalyzer.Factory!.SystemMessageNamer.GetName(opcode);
         AnalyzeMessage(fullParameters, opcodeName);
     }
+
     public static void AnalyzeMessage(string parameters, string opcodeName)
     {
         if (!Game.DB!.SystemMessagesDatabase.Messages.TryGetValue(opcodeName, out var template)) return;
+
         AnalyzeMessage(parameters, template, opcodeName);
     }
 
     static void AnalyzeMessage(string parameters, SystemMessageData template, string opcodeName)
     {
         if (!Pass(opcodeName)) return;
-
         if (Process(parameters, template, opcodeName)) return;
 
         ChatManager.Instance.AddSystemMessage(parameters, template);
@@ -175,6 +177,7 @@ public static class SystemMessagesProcessor
     {
         var currChar = WindowManager.ViewModels.DashboardVM.CurrentCharacter;
         if (currChar == null) return;
+
         var cleared = currChar.GuardianInfo.Cleared;
         var standardCountString = ChatUtils.Font($"({cleared}/{GuardianInfo.MaxDailies})", "cccccc");
         var maxedCountString = ChatUtils.Font("(", "cccccc")
@@ -195,7 +198,6 @@ public static class SystemMessagesProcessor
         Log.N("Guild", msg.ToString(), NotificationType.Info);
         ChatManager.Instance.AddChatMessage(msg);
         msg.ContainsPlayerName = true;
-
     }
 
     static void HandleGuilBamSpawn(string parameters, SystemMessageData template)
@@ -203,9 +205,7 @@ public static class SystemMessagesProcessor
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
         Log.N("Guild BAM", msg.ToString(), NotificationType.Info, 2 * 60 * 1000);
         ChatManager.Instance.AddChatMessage(msg);
-
         GameEventManager.Instance.UploadGuildBamTimestamp();
-
         WindowManager.ViewModels.DashboardVM.SetGuildBamTime(true);
         GameEventManager.ExecuteGuildBamWebhook();
     }
@@ -223,6 +223,7 @@ public static class SystemMessagesProcessor
     static void HandleFriendInAreaMessage(string parameters, SystemMessageData template)
     {
         if (!App.Settings.ChatEnabled) return;
+
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.Friend);
         var start = parameters.IndexOf("UserName\v", StringComparison.InvariantCultureIgnoreCase) + "UserName\v".Length;
         var end = parameters.IndexOf("\v", start, StringComparison.InvariantCultureIgnoreCase);
@@ -239,7 +240,6 @@ public static class SystemMessagesProcessor
             .Replace("{PartyPlayerName}", ChatUtils.Font("{PartyPlayerName}", "cccccc")), (int)ChatChannel.Ress);
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, newSysMsg, ChatChannel.Ress);
         ChatManager.Instance.AddChatMessage(msg);
-
     }
 
     static void HandleDeathMessage(string parameters, SystemMessageData template)
@@ -254,9 +254,11 @@ public static class SystemMessagesProcessor
 
     static void HandleInvalidLink(string parameters, SystemMessageData template)
     {
-        if (App.Settings.LfgWindowSettings.Enabled) WindowManager.ViewModels.LfgVM.RemoveDeadLfg();
+        if (App.Settings.LfgWindowSettings.Enabled)
+            WindowManager.ViewModels.LfgVM.RemoveDeadLfg();
 
         if (!App.Settings.ChatEnabled) return;
+
         ChatManager.Instance.RemoveDeadLfg();
         ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel));
     }
@@ -290,6 +292,7 @@ public static class SystemMessagesProcessor
     static void HandleFieldBossAppear(string parameters, SystemMessageData template)
     {
         string notificationText;
+
         if (App.Settings.ChatEnabled)
         {
             var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
@@ -311,11 +314,9 @@ public static class SystemMessagesProcessor
         var monsterName = GetFieldBossName(parameters);
         var regName = parameters.Split('\v')[2].Replace("@rgn:", "");
         var regId = uint.Parse(regName);
-
         var regionName = Game.DB!.RegionsDatabase.GetZoneName(regId);
 
         GameEventManager.ExecuteFieldBossSpawnWebhook(monsterName, regionName, notificationText);
-
     }
 
     static void HandleFieldBossDie(string parameters, SystemMessageData template)
@@ -359,6 +360,7 @@ public static class SystemMessagesProcessor
         var zoneId = uint.Parse(npcName.Split('#')[0]);
         var templateId = uint.Parse(npcName.Split('#')[1]);
         Game.DB!.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m);
+
         return m.Name;
     }
 
@@ -369,6 +371,7 @@ public static class SystemMessagesProcessor
         var srvMsgSplit = parameters.Split('\v').ToList();
         var idx = srvMsgSplit.IndexOf("userName") + 1;
         if (idx != -1 && idx < srvMsgSplit.Count) ret = srvMsgSplit[idx];
+
         return ret;
     }
 
@@ -379,6 +382,7 @@ public static class SystemMessagesProcessor
         var srvMsgSplit = parameters.Split('\v').ToList();
         var idx = srvMsgSplit.IndexOf("guildName") + 1;
         if (idx != -1 && idx < srvMsgSplit.Count) ret = srvMsgSplit[idx];
+
         return ret;
     }
 
@@ -457,12 +461,14 @@ public static class SystemMessagesProcessor
         { "SMT_WORLDSPAWN_NOTIFY_DESPAWN",              new Action<string, SystemMessageData>(HandleMerchantDespawn)}
     };
 
-
     static bool Process(string parameters, SystemMessageData template, string opcodeName)
     {
         if (!Processor.TryGetValue(opcodeName, out var type)) return false;
+
         App.BaseDispatcher.InvokeAsync(() => type.DynamicInvoke(parameters, template));
+
         return true;
     }
-    #endregion
+
+    #endregion Factory
 }

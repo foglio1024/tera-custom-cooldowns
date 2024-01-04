@@ -1,14 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using Nostrum.Extensions;
 using Nostrum.WPF.Extensions;
 using Nostrum.WPF.ThreadSafe;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using TCC.Debugging;
 using TCC.R;
-using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels;
@@ -22,32 +21,27 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 
     bool _animate = true;
     bool _isVisible;
+    bool _hasTranslation;
+    ChatMessage? _translation;
 
     public ChatChannel Channel { get; protected set; }
-
     public string Timestamp { get; }
-
     public string RawMessage { get; protected init; }
-
     public string Author { get; set; } = "";
     public ulong AuthorGameId { get; set; }
     public uint AuthorPlayerId { get; set; }
     uint AuthorServerId { get; }
-
     public bool ContainsPlayerName { get; set; }
+    public bool IsGm { get; protected set; }
+    public bool ShowTimestamp => App.Settings.ShowTimestamp;
+    public bool ShowChannel => App.Settings.ShowChannel;
     public bool Animate
     {
         get => _animate && App.Settings.AnimateChatMessages;
         set => _animate = value;
     }
-    public bool ShowTimestamp => App.Settings.ShowTimestamp;
-    public bool IsGm { get; protected set; }
-    public bool ShowChannel => App.Settings.ShowChannel;
     public ThreadSafeObservableCollection<MessageLine> Lines { get; }
     public ThreadSafeObservableCollection<MessagePieceBase> Pieces { get; }
-
-    ChatMessage? _translation;
-
     public ThreadSafeObservableCollection<MessageLine> DisplayedLines
     {
         get
@@ -70,7 +64,6 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
             return ret;
         }
     }
-
     public ThreadSafeObservableCollection<MessageLine> SecondaryLines
     {
         get
@@ -92,21 +85,17 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
             return ret;
         }
     }
-
     public ThreadSafeObservableCollection<MessagePieceBase> UsedPieces => _translation != null
     ? App.Settings.TranslationMode is TranslationMode.MergedTranslationFirst
         ? _translation.Pieces
         : Pieces
     : Pieces;
-
     public ThreadSafeObservableCollection<MessagePieceBase> SecondaryPieces => _translation != null
     ? App.Settings.TranslationMode is TranslationMode.MergedOriginalFirst
         ? _translation.Pieces
         : Pieces
     : Pieces;
-
     public bool IsShowingTranslationFirst => App.Settings.TranslationMode is TranslationMode.MergedTranslationFirst;
-
     public bool IsVisible
     {
         get => _isVisible;
@@ -131,19 +120,10 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 
             if (_isVisible == value) return;
             _isVisible = value;
-            if(_translation is not null) _translation.IsVisible = value;
+            if (_translation is not null) _translation.IsVisible = value;
             N();
         }
     }
-
-    void NotifyTranslationModeChanged()
-    {
-        N(nameof(IsShowingTranslationFirst));
-        N(nameof(DisplayedLines));
-        N(nameof(SecondaryLines));
-    }
-
-    bool _hasTranslation;
     public bool HasTranslation
     {
         get => _hasTranslation;
@@ -155,13 +135,11 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
             N(nameof(DisplayedLines));
         }
     }
-
-
     public int Size => App.Settings.FontSize;
     public string PlainMessage { get; protected init; }
     public string DisplayedAuthor { get; protected init; } = string.Empty;
 
-    #endregion
+    #endregion Properties
 
     protected ChatMessage()
     {
@@ -173,10 +151,12 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         RawMessage = "";
         PlainMessage = "";
     }
+
     public ChatMessage(ChatChannel ch) : this()
     {
         Channel = ch;
     }
+
     public ChatMessage(ChatChannel ch, string auth, string msg, ulong authorGameId, bool isGm, uint authorPlayerId, uint authorServerId) : this()
     {
         Channel = ch;
@@ -208,9 +188,11 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
                 case ChatChannel.Angler:
                     ParseDirectMessage(RawMessage.UnescapeHtml());
                     break;
+
                 case ChatChannel.Emote:
                     ParseEmoteMessage(msg);
                     break;
+
                 default:
                     //ParseFormattedMessage(msg);
                     ParseHtmlMessage(msg);
@@ -226,17 +208,6 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         {
             // ignored
         }
-
-
-    }
-
-    internal void AddPiece(MessagePieceBase mp)
-    {
-        mp.Container = this;
-        //Dispatcher.InvokeAsyncIfRequired(() =>
-        //{
-        //}, DispatcherPriority.DataBind);
-        Pieces.Add(mp);
     }
 
     ~ChatMessage()
@@ -244,22 +215,23 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         ObjectTracker.Unregister(GetType());
     }
 
+    internal void AddPiece(MessagePieceBase mp)
+    {
+        mp.Container = this;
+        Pieces.Add(mp);
+    }
+
     void InsertPiece(MessagePieceBase mp, int index)
     {
         mp.Container = this;
-        //Dispatcher.InvokeAsyncIfRequired(() =>
-        //{
         Pieces.Insert(index, mp);
-        //}, DispatcherPriority.DataBind);
     }
 
     void RemovePiece(MessagePieceBase mp)
     {
-        //Dispatcher.InvokeAsyncIfRequired(() =>
-        //{
         Pieces.Remove(mp);
-        //}, DispatcherPriority.DataBind);
     }
+
     //TODO: refactor
     public void SplitSimplePieces()
     {
@@ -328,19 +300,13 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     {
         N(nameof(Size));
     }
-    public override string ToString()
-    {
-        var sb = new StringBuilder();
-        _dispatcher.Invoke(() =>
-        {
-            foreach (var item in Pieces.ToSyncList())
-            {
-                sb.Append(item.Text);
-            }
-        });
-        return sb.ToString();
-    }
 
+    void NotifyTranslationModeChanged()
+    {
+        N(nameof(IsShowingTranslationFirst));
+        N(nameof(DisplayedLines));
+        N(nameof(SecondaryLines));
+    }
 
     void ParseDirectMessage(string msg)
     {
@@ -438,13 +404,12 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         }
     }
 
-
     void CheckRedirect(string text)
     {
         //redirect trading message if it's in global
-        if ((text.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
-             text.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
-             text.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) >= 0) &&
+        if ((text.Contains("WTS", StringComparison.InvariantCultureIgnoreCase) ||
+             text.Contains("WTB", StringComparison.InvariantCultureIgnoreCase) ||
+             text.Contains("WTT", StringComparison.InvariantCultureIgnoreCase)) &&
             Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
     }
 
@@ -505,6 +470,18 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         _translation.IsVisible = IsVisible;
         N(nameof(DisplayedLines));
         N(nameof(SecondaryLines));
+    }
 
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        _dispatcher.Invoke(() =>
+        {
+            foreach (var item in Pieces.ToSyncList())
+            {
+                sb.Append(item.Text);
+            }
+        });
+        return sb.ToString();
     }
 }

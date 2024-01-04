@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
-using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Pc;
 using TCC.UI;
 using TCC.Utils;
@@ -16,12 +16,13 @@ namespace TCC.Data.Chat;
 public class LfgMessage : ChatMessage
 {
     int _tries = 10;
-    readonly ThreadSafeObservableCollection<User> _members;
+    readonly ThreadSafeObservableCollection<User> _members = [];
     readonly Timer _timer;
-
     Listing? _linkedListing;
-    public ICollectionView MembersView { get; }
 
+    public uint AuthorId { get; }
+    public uint ServerId { get; } //TODO: should be added to base class and assigned from S_CHAT, S_WHISPER, etc
+    public bool ShowMembers => LinkedListing is { Players.Count: <= 7 };
     public Listing? LinkedListing
     {
         get => _linkedListing;
@@ -45,15 +46,12 @@ public class LfgMessage : ChatMessage
             N();
         }
     }
-    public uint AuthorId { get; }
-    public uint ServerId { get; } //TODO: should be added to base class and assigned from S_CHAT, S_WHISPER, etc
-    public bool ShowMembers => LinkedListing is { Players.Count: <= 7 };
+    public ICollectionView MembersView { get; }
 
     public LfgMessage(uint authorId, string author, string msg, uint serverId) : base(ChatChannel.LFG, author, msg, 0, false, authorId, serverId)
     {
         AuthorId = authorId;
         ServerId = serverId;
-        _members = new ThreadSafeObservableCollection<User>();
         _timer = new Timer(1500);
         _timer.Elapsed += OnTimerTick;
 
@@ -80,9 +78,11 @@ public class LfgMessage : ChatMessage
                 case NotifyCollectionChangedAction.Add:
                     e.NewItems?.Cast<User>().ToList().ForEach(item => _members.Add(item));
                     break;
+
                 case NotifyCollectionChangedAction.Remove:
                     e.OldItems?.Cast<User>().ToList().ForEach(item => _members.Remove(item));
                     break;
+
                 case NotifyCollectionChangedAction.Reset:
                     _members.Clear();
                     break;
@@ -106,8 +106,7 @@ public class LfgMessage : ChatMessage
             return;
         }
         _timer.Stop();
-        WindowManager.ViewModels.LfgVM.EnqueueRequest(LinkedListing.LeaderId,  LinkedListing.ServerId);
-
+        WindowManager.ViewModels.LfgVM.EnqueueRequest(LinkedListing.LeaderId, LinkedListing.ServerId);
     }
 
     Listing? FindListing()
@@ -117,12 +116,14 @@ public class LfgMessage : ChatMessage
             x.LeaderName == Author ||
             x.Message == RawMessage);
     }
+
     public void LinkListing()
     {
         _dispatcher.InvokeAsync(() =>
         {
             LinkedListing = FindListing();
             if (LinkedListing != null) return;
+
             //Log.CW($"Linked listing ({Author}/{AuthorId}) is null! Requesting list.");
             WindowManager.ViewModels.LfgVM.EnqueueListRequest();
             _timer.Start();

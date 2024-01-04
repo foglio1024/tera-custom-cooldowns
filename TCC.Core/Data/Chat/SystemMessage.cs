@@ -9,6 +9,8 @@ namespace TCC.Data.Chat;
 
 public class SystemMessage : ChatMessage
 {
+    static readonly char[] CurlyBrackets = ['{', '}'];
+
     public SystemMessage(string parameters, SystemMessageData template, ChatChannel ch)
     {
         Channel = ch;
@@ -21,11 +23,9 @@ public class SystemMessage : ChatMessage
             var html = new HtmlDocument(); html.LoadHtml(txt);
             var htmlPieces = html.DocumentNode.ChildNodes;
 
-
             if (prm == null)
             {
                 //only one parameter (opcode) so just add text
-
                 foreach (var htmlPiece in htmlPieces)
                 {
                     var customColor = ChatUtils.GetCustomColor(htmlPiece);
@@ -37,7 +37,6 @@ public class SystemMessage : ChatMessage
             else
             {
                 //more parameters
-
                 foreach (var htmlPiece in htmlPieces)
                 {
                     ParseSysHtmlPiece(htmlPiece, prm);
@@ -48,12 +47,10 @@ public class SystemMessage : ChatMessage
             {
                 PlainMessage += p.Text;
             }
-
         }
         catch (Exception e)
         {
             Log.F($"Failed to parse system message: {parameters} -- {template.Template}\n {e}");
-            // ignored
         }
     }
 
@@ -70,9 +67,8 @@ public class SystemMessage : ChatMessage
         else
         {
             var col = ChatUtils.GetCustomColor(piece);
-
             var content = ChatUtils.ReplaceParameters(piece.InnerText, prm, true);
-            var innerPieces = content.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
+            var innerPieces = content.Split(CurlyBrackets, StringSplitOptions.RemoveEmptyEntries);
             var plural = false;
             var selectionStep = 0;
 
@@ -95,11 +91,13 @@ public class SystemMessage : ChatMessage
                 }
 
                 MessagePieceBase mp;
+
                 if (inPiece.StartsWith("@select", StringComparison.InvariantCultureIgnoreCase))
                 {
                     selectionStep++;
                     continue;
                 }
+
                 if (inPiece.Contains("@item", StringComparison.InvariantCultureIgnoreCase))
                 {
                     mp = MessagePieceBuilder.BuildSysMsgItem(inPiece);
@@ -130,7 +128,7 @@ public class SystemMessage : ChatMessage
                 {
                     mp = MessagePieceBuilder.BuildSysMsgAchiGrade(inPiece);
                 }
-                else if (inPiece.Contains("@achievement", StringComparison.InvariantCultureIgnoreCase)) // this has to be here, find a better way pls
+                else if (inPiece.Contains("@achievement", StringComparison.InvariantCultureIgnoreCase)) // todo: this has to be here, find a better way pls
                 {
                     mp = MessagePieceBuilder.BuildSysMsgAchi(inPiece);
                     mp.Color = col;
@@ -169,5 +167,4 @@ public class SystemMessage : ChatMessage
             }
         }
     }
-
 }

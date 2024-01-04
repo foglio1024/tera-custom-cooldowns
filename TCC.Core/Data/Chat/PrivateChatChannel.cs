@@ -6,6 +6,7 @@ public struct PrivateChatChannel
     public readonly string Name;
     public readonly int Index;
     public bool Joined;
+
     public PrivateChatChannel(uint id, string name, int index)
     {
         Id = id;

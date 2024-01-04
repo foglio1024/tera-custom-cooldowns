@@ -5,11 +5,9 @@ namespace TCC.Data.Chat;
 
 public class BrokerChatMessage : ChatMessage
 {
-
     public bool Handled = false;
     public uint PlayerId { get; }
     public uint ListingId { get; }
-        
     public MessagePieceBase StartingPrice { get; set; }
     public MessagePieceBase OfferedPrice { get; set; }
     public MessagePieceBase Listing { get; }
