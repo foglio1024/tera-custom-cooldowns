@@ -58,18 +58,15 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
                         : Lines
                     : Lines;
 
-            Dispatcher.Invoke(() =>
-            {
-                var lastLine = ret.LastOrDefault();
+            var lastLine = ret.LastOrDefault();
 
-                if (lastLine != null)
+            if (lastLine != null)
+            {
+                if (lastLine.LinePieces.LastOrDefault() is not TranslationIndicatorPiece)
                 {
-                    if (lastLine.LinePieces.LastOrDefault() is not TranslationIndicatorPiece)
-                    {
-                        lastLine.LinePieces.Add(new TranslationIndicatorPiece { Container = this });
-                    }
+                    lastLine.LinePieces.Add(new TranslationIndicatorPiece { Container = this });
                 }
-            });
+            }
             return ret;
         }
     }
@@ -84,17 +81,14 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
                         : Lines
                     : Lines;
 
-            Dispatcher.Invoke(() =>
+            var lastLine = ret.LastOrDefault();
+            if (lastLine != null)
             {
-                var lastLine = ret.LastOrDefault();
-                if (lastLine != null)
+                if (lastLine.LinePieces.LastOrDefault() is TranslationIndicatorPiece tip)
                 {
-                    if (lastLine.LinePieces.LastOrDefault() is TranslationIndicatorPiece tip)
-                    {
-                        lastLine.LinePieces.Remove(tip);
-                    }
+                    lastLine.LinePieces.Remove(tip);
                 }
-            });
+            }
             return ret;
         }
     }

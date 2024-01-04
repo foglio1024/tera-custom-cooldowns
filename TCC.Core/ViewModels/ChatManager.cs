@@ -673,35 +673,44 @@ public class ChatManager : TccWindowViewModel
 
     internal void HandleTranslation(string author, uint channel, string message, bool gm)
     {
-
-        if (App.Settings.TranslationMode is TranslationMode.Separated)
+        _dispatcher.InvokeAsync(() =>
         {
             var sepMsg = Factory.CreateMessage((ChatChannel)channel, author, message, isGm: gm);
-            AddChatMessage(sepMsg);
-            return;
-        }
-        
-        var translatedMsg = Factory.CreateMessage((ChatChannel)channel, author, message.Replace("(Translated) ", ""), isGm: gm);
-
-        if (Filtered(translatedMsg)) return;
-        var pausedCount = _pauseQueue.Count;
-        for (var i = 0; i < 10; i++)
-        {
-            if (i >= pausedCount + ChatMessages.Count) continue;
-            var target = i <= pausedCount - 1
-                    ? _pauseQueue.ElementAt(i)
-                    : ChatMessages[i - pausedCount];
-
-            if (target.Author != author ||
-               target.Channel != (ChatChannel)channel)
+            
+            if (App.Settings.TranslationMode is TranslationMode.Separated)
             {
-                continue;
+                AddChatMessage(sepMsg);
+                return;
             }
-            else{
-                target.AddTranslation(translatedMsg);
-                break;
+
+            var translatedMsg = Factory.CreateMessage((ChatChannel)channel, author, message.Replace("(Translated) ", ""), isGm: gm);
+
+            if (Filtered(translatedMsg)) return;
+            var pausedCount = _pauseQueue.Count;
+            var found = false;
+            for (var i = 0; i < 10; i++)
+            {
+                if (i >= pausedCount + ChatMessages.Count) continue;
+                var target = i <= pausedCount - 1
+                        ? _pauseQueue.ElementAt(i)
+                        : ChatMessages[i - pausedCount];
+
+                if (target.Author != author ||
+                    target.Channel != (ChatChannel)channel)
+                {
+                    continue;
+                }
+                else
+                {
+                    target.AddTranslation(translatedMsg);
+                    found = true;
+                    break;
+                }
             }
-        }
-        translatedMsg.Dispose();
+
+            if(!found) AddChatMessage(sepMsg);
+
+            translatedMsg.Dispose();
+        });
     }
 }
