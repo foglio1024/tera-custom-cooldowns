@@ -10,11 +10,10 @@ public class ItemExpDatabase : DatabaseBase
     protected override string FolderName => "equip_exp";
     protected override string Extension => "xml";
 
-    public readonly Dictionary<uint, Dictionary<int, int>> ExpData;
+    public readonly Dictionary<uint, Dictionary<int, int>> ExpData = [];
 
     public ItemExpDatabase(string lang) : base(lang)
     {
-        ExpData = new Dictionary<uint, Dictionary<int, int>>();
     }
 
     public override void Load()
@@ -31,7 +30,6 @@ public class ItemExpDatabase : DatabaseBase
                 var max = Convert.ToInt32(element.Attribute("maxExp")?.Value);
                 d.Add(step, max);
             }
-
             ExpData.Add(id, d);
         }
     }

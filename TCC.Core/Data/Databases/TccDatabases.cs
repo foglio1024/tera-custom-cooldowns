@@ -8,7 +8,7 @@ namespace TCC.Data.Databases;
 /// <summary>
 /// Class which holds all databases and exposes some methods that output results from different databases.
 /// </summary>
-public class TccDatabase
+public class TccDatabases
 {
     public AccountBenefitDatabase AccountBenefitDatabase { get; }
     public MonsterDatabase MonsterDatabase { get; }
@@ -26,6 +26,17 @@ public class TccDatabase
     public DungeonDatabase DungeonDatabase { get; }
     public SocialDatabase SocialDatabase { get; }
 
+    List<DatabaseBase> Databases
+    {
+        get
+        {
+            var type = GetType();
+            var props = type.GetProperties().Where(p => p.PropertyType.IsSubclassOf(typeof(DatabaseBase)));
+            var dbs = props.Select(prop => (DatabaseBase)prop.GetValue(this)!).ToList();
+            return dbs;
+        }
+    }
+
     /// <summary>
     /// True if all database files are found.
     /// </summary>
@@ -35,7 +46,7 @@ public class TccDatabase
 
     public string Language { get; }
 
-    public TccDatabase(string lang)
+    public TccDatabases(string lang)
     {
         Language = lang;
         MonsterDatabase = new MonsterDatabase(lang);
@@ -74,15 +85,23 @@ public class TccDatabase
         var dungWorld = MapDatabase.Worlds[9999];
         var guardList = dungWorld.Guards.Values.ToList();
         var guard = guardList.FirstOrDefault(x => x.Sections.ContainsKey(dungeonId));
-        if (guard == default) return ret;
+
+        if (guard == default)
+        {
+            return ret;
+        }
 
         var openWorld = MapDatabase.Worlds[1];
 
-        if (!openWorld.Guards.TryGetValue(guard.Id, out var grd)) return ret;
+        if (!openWorld.Guards.TryGetValue(guard.Id, out var grd))
+        {
+            return ret;
+        }
 
         ret = RegionsDatabase.GetZoneName(grd.NameId);
         return ret;
     }
+
     /// <summary>
     /// Gets the section name starting from guard and section ids.
     /// </summary>
@@ -94,13 +113,15 @@ public class TccDatabase
         var ret = "Unknown";
         try
         {
-            MapDatabase.Worlds.ToList().ForEach(w =>
+            foreach (var w in MapDatabase.Worlds)
             {
-                if (!w.Value.Guards.TryGetValue(guardId, out var g)) return;
-                if (!g.Sections.TryGetValue(sectionId, out var s)) return;
+                if (!w.Value.Guards.TryGetValue(guardId, out var g)
+                 || !g.Sections.TryGetValue(sectionId, out var s)) continue;
+
                 var nameId = s.NameId;
                 ret = RegionsDatabase.GetZoneName(nameId);
-            });
+                break;
+            }
         }
         catch
         {
@@ -109,23 +130,17 @@ public class TccDatabase
         return ret;
     }
 
-    public static bool GetSkillFromId(uint id, Class c, CooldownType t, out Skill sk)
+    public bool GetSkillFromId(uint id, Class c, CooldownType t, out Skill sk)
     {
         sk = new Skill(0, Class.None, "", "");
-        switch (t)
-        {
-            case CooldownType.Skill:
-                if (!Game.DB!.SkillsDatabase.TryGetSkill(id, c, out sk)) return false;
-                break;
-            case CooldownType.Item:
-                if (!Game.DB!.ItemsDatabase.TryGetItemSkill(id, out sk)) return false;
-                break;
-            case CooldownType.Passive:
-                if (!Game.DB!.AbnormalityDatabase.TryGetPassiveSkill(id, out sk)) return false;
-                break;
-        }
 
-        return true;
+        return t switch
+        {
+            CooldownType.Skill => SkillsDatabase.TryGetSkill(id, c, out sk),
+            CooldownType.Item => ItemsDatabase.TryGetItemSkill(id, out sk),
+            CooldownType.Passive => AbnormalityDatabase.TryGetPassiveSkill(id, out sk),
+            _ => true,
+        };
     }
 
     public void DownloadOutdatedDatabases()
@@ -144,20 +159,12 @@ public class TccDatabase
     /// <returns>max exp amount</returns>
     public int GetItemMaxExp(uint id, int enchant)
     {
-        if (!ItemsDatabase.Items.TryGetValue(id, out var item)) return 0;
-        return item.ExpId == 0 ? 0 : ItemExpDatabase.ExpData[item.ExpId][enchant];
+        return !ItemsDatabase.Items.TryGetValue(id, out var item) || item.ExpId == 0 
+                ? 0 
+                : ItemExpDatabase.ExpData[item.ExpId][enchant];
     }
 
-    List<DatabaseBase> Databases
-    {
-        get
-        {
-            var type = GetType();
-            var props = type.GetProperties().Where(p => p.PropertyType.IsSubclassOf(typeof(DatabaseBase)));
-            var dbs = props.Select(prop => (DatabaseBase)prop.GetValue(this)!).ToList();
-            return dbs;
-        }
-    }
+
     public void CheckVersion()
     {
         Databases.ForEach(db => db.CheckVersion());
@@ -176,15 +183,15 @@ public class TccDatabase
             name = dung.Name;
             return true;
         }
-        var (_, guard) = MapDatabase.Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continentId);
 
+        var (_, guard) = MapDatabase.Worlds[1].Guards.FirstOrDefault(x => x.Value.ContinentId == continentId);
         if (guard == default)
         {
             name = "Unknown";
             return false;
         }
+        
         name = RegionsDatabase.GetZoneName(guard.NameId);
         return true;
-
     }
 }

@@ -431,8 +431,8 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
             void TryAddToList(CooldownData cdData, ThreadSafeObservableCollection<Cooldown> list)
             {
-                if (!TccDatabase.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)
-                && !TccDatabase.GetSkillFromId(cdData.Id, Class.Common, cdData.Type, out sk)) return;
+                if (!Game.DB!.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)
+                && !Game.DB!.GetSkillFromId(cdData.Id, Class.Common, cdData.Type, out sk)) return;
                 list.Add(new Cooldown(sk, false, cdData.Type, _dispatcher));
             }
             #endregion

@@ -150,7 +150,7 @@ public static class Game
     public static event Action? LootDistributionWindowShowRequest;
 
     public static Player Me { get; } = new();
-    public static TccDatabase? DB { get; private set; }
+    public static TccDatabases? DB { get; private set; }
 
     public static bool CivilUnrestZone => CurrentZoneId == 152;
     public static bool IsInDungeon => DB!.MapDatabase.IsDungeon(CurrentZoneId);
@@ -216,7 +216,7 @@ public static class Game
         var updated = false;
         if (!samedb)
         {
-            DB = new TccDatabase(lang);
+            DB = new TccDatabases(lang);
         }
         DB!.CheckVersion();
         if (DB.IsUpToDate == false)

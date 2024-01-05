@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Nostrum;
+﻿using Nostrum;
+using System.IO;
 using TCC.Update;
 using TCC.Utils;
 
@@ -10,15 +10,22 @@ public abstract class DatabaseBase
     int _outdatedCount;
 
     protected readonly string Language;
+
     protected abstract string FolderName { get; }
     protected abstract string Extension { get; }
-
     protected string RelativePath => $"{FolderName}/{FolderName}-{Language}.{Extension}";
     protected string FullPath { get; }
     public virtual bool Exists => File.Exists(FullPath);
     public bool IsUpToDate => _outdatedCount == 0 && Exists;
 
+    protected DatabaseBase(string lang)
+    {
+        Language = lang;
+        FullPath = Path.Combine(App.DataPath, RelativePath);
+    }
+
     public abstract void Load();
+
     public virtual void CheckVersion(string customAbsPath = "", string customRelPath = "")
     {
         if (!Exists)
@@ -26,6 +33,7 @@ public abstract class DatabaseBase
             Log.F($"{(string.IsNullOrEmpty(customAbsPath) ? FullPath : customAbsPath)} not found. Skipping hash check.");
             return;
         }
+
         var localHash = HashUtils.GenerateFileHash(string.IsNullOrEmpty(customAbsPath) ? FullPath : customAbsPath);
         if (UpdateManager.DatabaseHashes.Count == 0)
         {
@@ -43,29 +51,13 @@ public abstract class DatabaseBase
         {
             return;
         }
-        //Log.F($"Hash mismatch for {customRelPath ?? RelativePath} (local:{localHash} remote:{remoteHash})");
+
         _outdatedCount++;
-
-    }
-
-    protected DatabaseBase(string lang)
-    {
-        Language = lang;
-        FullPath = Path.Combine(App.DataPath, RelativePath);
     }
 
     public virtual void Update(string custom = "")
     {
-#if TOOLBOX
-            UpdateFromToolbox(custom);
-#else
         UpdateFromRemote(custom);
-#endif
-    }
-
-    protected virtual void UpdateFromToolbox(string custom)
-    {
-
     }
 
     void UpdateFromRemote(string custom)

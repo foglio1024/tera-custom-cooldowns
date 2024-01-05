@@ -13,10 +13,9 @@ public class DatabaseQueryMeasure
     static long _totTotalTime;
     static long _totHitTime;
     static long _totMissTime;
-    static double _avgTotalTime => _totalCount == 0 ? 0 : _totTotalTime / (double) _totalCount;
-    static double _avgHitTime => _hitCount == 0 ? 0 : _totHitTime / (double) _hitCount;
-    static double _avgMissTime => _missCount == 0 ? 0 : _totMissTime / (double) _missCount;
-
+    static double _avgTotalTime => _totalCount == 0 ? 0 : _totTotalTime / (double)_totalCount;
+    static double _avgHitTime => _hitCount == 0 ? 0 : _totHitTime / (double)_hitCount;
+    static double _avgMissTime => _missCount == 0 ? 0 : _totMissTime / (double)_missCount;
 
     public void StartQuery()
     {

@@ -13,25 +13,28 @@ public class MonsterDatabase : DatabaseBase
     public static event Action<uint, uint, bool>? OverrideChangedEvent;
     public static event Action<uint, uint, bool>? BlacklistChangedEvent;
 
-    readonly Dictionary<uint, Zone> _zones;
-
+    readonly Dictionary<uint, Zone> _zones = [];
 
     protected override string FolderName => "monsters";
     protected override string Extension => "xml";
+
     public override bool Exists => base.Exists && File.Exists(OverrideFileFullPath);
     string OverrideFileFullPath => FullPath.Replace($"{FolderName}-{Language}.{Extension}", $"{FolderName}-override.{Extension}");
     string OverrideFileRelativePath => RelativePath.Replace(Language, "override");
 
     public MonsterDatabase(string lang) : base(lang)
     {
-        _zones = new Dictionary<uint, Zone>();
     }
 
     public bool TryGetMonster(uint templateId, uint zoneId, [NotNullWhen(true)] out Monster m)
     {
         m = new Monster(0, 0, "Unknown", 0, false, false, Species.Unknown);
+
         if (!_zones.TryGetValue(zoneId, out var z) || !z.Monsters.TryGetValue(templateId, out var found))
+        {
             return false;
+        }
+
         m = found;
         return !found.IsHidden;
     }
@@ -61,6 +64,7 @@ public class MonsterDatabase : DatabaseBase
         {
             var zoneId = Convert.ToUInt32(zone.Attribute("id")?.Value);
             var zoneName = zone.Attribute("name")?.Value;
+
             if (string.IsNullOrEmpty(zoneName)) continue;
 
             var z = new Zone(zoneName);
@@ -88,14 +92,19 @@ public class MonsterDatabase : DatabaseBase
 
             foreach (var monst in zone.Descendants().Where(x => x.Name == "Monster"))
             {
-                var mId = Convert.ToUInt32(monst.Attribute("id")?.Value);
                 if (!_zones.TryGetValue(zoneId, out var z)) continue;
+                
+                var mId = Convert.ToUInt32(monst.Attribute("id")?.Value);
                 if (z.Monsters.TryGetValue(mId, out var m))
                 {
                     if (monst.Attribute("isBoss") != null)
+                    {
                         m.IsBoss = bool.Parse(monst.Attribute("isBoss")?.Value ?? "false");
+                    }
                     if (monst.Attribute("isHidden") != null)
+                    {
                         m.IsHidden = bool.Parse(monst.Attribute("isHidden")?.Value ?? "false");
+                    }
                     if (string.IsNullOrEmpty(m.Name))
                     {
                         m.Name = monst.Attribute("name")?.Value ?? $"Unknown {zoneId}.{mId}";
@@ -132,9 +141,9 @@ public class MonsterDatabase : DatabaseBase
 
                 var hasIsBossOverride = xMonster.Attribute("isBoss") != null;
                 var hasIsHiddenOverride = xMonster.Attribute("isHidden") != null;
-
                 var keepBoss = true;
                 var keepHidden = true;
+
                 if (hasIsBossOverride)
                 {
                     var isBossOverride = xMonster.Attribute("isBoss")?.Value == true.ToString();
@@ -149,16 +158,23 @@ public class MonsterDatabase : DatabaseBase
 
                 var keep = keepBoss && hasIsBossOverride || keepHidden && hasIsHiddenOverride;
 
-                if (!keepHidden) xMonster.Attribute("isHidden")?.Remove();
-
-                if (!keepBoss) xMonster.Attribute("isBoss")?.Remove();
+                if (!keepHidden)
+                {
+                    xMonster.Attribute("isHidden")?.Remove();
+                }
+                if (!keepBoss)
+                {
+                    xMonster.Attribute("isBoss")?.Remove();
+                }
 
                 if (keep) continue;
+                
                 toRemove.Add(new Tuple<uint, uint>(zoneId, templateId));
             }
         }
 
         foreach (var tuple in toRemove)
+        {
             overrideDoc.Descendants("Zone")
                 .Where(x => x.Attribute("id")?.Value == tuple.Item1.ToString()).ToList()
                 .ForEach(xz =>
@@ -169,6 +185,8 @@ public class MonsterDatabase : DatabaseBase
 
                     if (!xz.Descendants("Monster").Any()) xz.Remove();
                 });
+        }
+
         overrideDoc.Save(OverrideFileFullPath);
         return overrideDoc;
     }
@@ -176,16 +194,17 @@ public class MonsterDatabase : DatabaseBase
     public override void Update(string custom = "")
     {
         base.Update(custom);
-        if (!File.Exists(OverrideFileFullPath)) base.Update(OverrideFileRelativePath);
+
+        if (!File.Exists(OverrideFileFullPath))
+        {
+            base.Update(OverrideFileRelativePath);
+        }
     }
 
-    [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
     public void ToggleOverride(uint zoneId, uint templateId, bool b)
     {
-        //var changed = false;
         if (TryGetMonster(templateId, zoneId, out var m))
         {
-            //changed = m.IsBoss != b;
             m.IsBoss = b;
         }
 
@@ -201,8 +220,11 @@ public class MonsterDatabase : DatabaseBase
                 monster.Attribute("isBoss")!.Value = b.ToString();
             }
             else
-                zone.Add(new XElement("Monster", new XAttribute("id", templateId),
+            {
+                zone.Add(new XElement("Monster", 
+                    new XAttribute("id", templateId),
                     new XAttribute("isBoss", b.ToString())));
+            }
         }
         else
         {
@@ -219,7 +241,11 @@ public class MonsterDatabase : DatabaseBase
 
     public void Blacklist(uint zoneId, uint templateId, bool b)
     {
-        if (TryGetMonster(templateId, zoneId, out var m)) m.IsHidden = b;
+        if (TryGetMonster(templateId, zoneId, out var m))
+        {
+            m.IsHidden = b;
+        }
+
         var overrideDoc = XDocument.Load(OverrideFileFullPath);
         var zone = overrideDoc.Descendants("Zone")
             .FirstOrDefault(x => uint.Parse(x.Attribute("id")?.Value ?? "0") == zoneId);
@@ -231,14 +257,23 @@ public class MonsterDatabase : DatabaseBase
             {
                 if (!b)
                 {
-                    if (monster.Attribute("isBoss") == null) monster.Remove();
-                    else monster.Attribute("isHidden")?.Remove();
-                    if (!zone.Descendants().Any()) zone.Remove();
+                    if (monster.Attribute("isBoss") == null)
+                    {
+                        monster.Remove();
+                    }
+                    else
+                    {
+                        monster.Attribute("isHidden")?.Remove();
+                    }
+
+                    if (!zone.Descendants().Any())
+                    {
+                        zone.Remove();
+                    }
                 }
                 else
                 {
                     monster.SetAttributeValue("isHidden", true.ToString());
-                    //monster.Attribute("isHidden").Value = true.ToString();
                 }
             }
         }
@@ -262,9 +297,7 @@ public class MonsterDatabase : DatabaseBase
 
     public List<Monster> GetBlacklistedMonsters()
     {
-        var ret = new List<Monster>();
-        foreach (var zone in _zones.Values) ret.AddRange(zone.Monsters.Values.Where(m => m.IsHidden));
-        return ret;
+        return _zones.Values.SelectMany(x => x.Monsters.Values.Where(y => y.IsHidden)).ToList();
     }
 }
 
@@ -273,15 +306,15 @@ internal class Zone
     public string Name { get; }
     public Dictionary<uint, Monster> Monsters { get; }
 
-    public void AddMonster(Monster m)
-    {
-        Monsters.Add(m.TemplateId, m);
-    }
-
     public Zone(string name)
     {
         Monsters = new Dictionary<uint, Monster>();
         Name = name;
+    }
+
+    public void AddMonster(Monster m)
+    {
+        Monsters.Add(m.TemplateId, m);
     }
 }
 

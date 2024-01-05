@@ -30,6 +30,7 @@ public static class PassivityDatabase
         {13030, 180},{13031, 180},{13032, 180},
         {13033, 180},{13034, 180},{13035, 180},
         {13036, 180},{13037, 180},
+
         // magic amp
         { 13040, 180 }, { 13041, 180 }, { 13042, 180 },
         { 13043, 180 }, { 13044, 180 }, { 13045, 180 },
@@ -66,8 +67,8 @@ public static class PassivityDatabase
         sk = new Skill(0, Class.None, string.Empty, string.Empty);
 
         if (!Game.DB!.AbnormalityDatabase.Abnormalities.TryGetValue(id, out var ab)) return false;
+
         sk = new Skill(id, Class.Common, ab.Name, "") { IconName = ab.IconName };
         return true;
-
     }
 }

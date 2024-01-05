@@ -11,16 +11,15 @@ public class ItemsDatabase : DatabaseBase
     protected override string FolderName => "items";
     protected override string Extension => "tsv";
 
-    public readonly Dictionary<uint, Item> Items;
+    public readonly Dictionary<uint, Item> Items = [];
+    public IEnumerable<Item> ItemSkills => Items.Values.Where(x => x.Cooldown > 0).ToList();
+
     public ItemsDatabase(string lang) : base(lang)
     {
-        Items = new Dictionary<uint, Item>();
     }
 
-    public string GetItemName(uint id)
-    {
-        return Items.TryGetValue(id, out var item) ? item.Name : "Unknown";
-    }
+    public string GetItemName(uint id) => Items.TryGetValue(id, out var item) ? item.Name : "Unknown";
+
     public bool TryGetItem(uint itemId, out Item item)
     {
         if (!Items.TryGetValue(itemId, out var found))
@@ -36,20 +35,19 @@ public class ItemsDatabase : DatabaseBase
     public bool TryGetItemSkill(uint itemId, out Skill sk)
     {
         sk = new Skill(0, Class.None, string.Empty, string.Empty);
+
         if (!Items.TryGetValue(itemId, out var item)) return false;
+
         sk = new Skill(itemId, Class.Common, item.Name, "") { IconName = item.IconName };
         return true;
-
     }
 
     public override void Load()
     {
         Items.Clear();
-        //var f = File.OpenText(FullPath);
         var lines = File.ReadAllLines(FullPath);
         foreach (var line in lines)
         {
-            //var line = f.ReadLine();
             if (string.IsNullOrWhiteSpace(line)) break;
 
             var s = line.Split('\t');
@@ -91,6 +89,4 @@ public class ItemsDatabase : DatabaseBase
     {
         Items[item.Id] = item;
     }
-
-    public IEnumerable<Item> ItemSkills => Items.Values.Where(x => x.Cooldown > 0).ToList();
 }

@@ -5,15 +5,13 @@ namespace TCC.Data.Databases;
 
 public class AchievementGradeDatabase : DatabaseBase
 {
-    public Dictionary<uint, string> Grades { get; }
-
     protected override string FolderName => "achi_grade";
-
     protected override string Extension => "tsv";
+
+    public Dictionary<uint, string> Grades { get; } = [];
 
     public AchievementGradeDatabase(string lang) : base(lang)
     {
-        Grades = new Dictionary<uint, string>();
     }
 
     public override void Load()
@@ -22,12 +20,13 @@ public class AchievementGradeDatabase : DatabaseBase
         var lines = File.ReadAllLines(FullPath);
         foreach (var line in lines)
         {
-            //var line = f.ReadLine();
             if (string.IsNullOrWhiteSpace(line)) break;
-            var s = line.Split('\t');
-            if (!uint.TryParse(s[0], out var id)) continue;
-            var name = s[1];
 
+            var s = line.Split('\t');
+
+            if (!uint.TryParse(s[0], out var id)) continue;
+
+            var name = s[1];
             Grades.Add(id, name);
         }
     }

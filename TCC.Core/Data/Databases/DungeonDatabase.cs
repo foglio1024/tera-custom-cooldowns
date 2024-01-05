@@ -10,17 +10,23 @@ public class DungeonDatabase : DatabaseBase
 {
     const string DefaultDefsRelativePath = "default-dungeon-defs.tsv";
     const string ImagesRelativePath = "section_images.tsv";
+
+    protected override string FolderName => "dungeons";
+    protected override string Extension => "tsv";
+
     readonly string _customDefsPath = Path.Combine(App.DataPath, "dungeon-defs.tsv");
     readonly string _defaultDefsFullPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
     readonly string _imagesFullPath = Path.Combine(App.DataPath, "section_images.tsv");
 
-    public readonly Dictionary<uint, Dungeon> Dungeons;
+    public readonly Dictionary<uint, Dungeon> Dungeons = [];
 
-    protected override string FolderName => "dungeons";
-    protected override string Extension => "tsv";
     public override bool Exists => base.Exists
                                    && File.Exists(_defaultDefsFullPath)
                                    && File.Exists(_imagesFullPath);
+
+    public DungeonDatabase(string lang) : base(lang)
+    {
+    }
 
     public override void CheckVersion(string customAbsPath = "", string customRelPath = "")
     {
@@ -28,96 +34,12 @@ public class DungeonDatabase : DatabaseBase
         base.CheckVersion(_defaultDefsFullPath, DefaultDefsRelativePath);
         base.CheckVersion(_imagesFullPath, ImagesRelativePath);
     }
+
     public override void Update(string custom = "")
     {
         base.Update(RelativePath);
         base.Update(DefaultDefsRelativePath);
         base.Update(ImagesRelativePath);
-    }
-
-    public DungeonDatabase(string lang) : base(lang)
-    {
-        Dungeons = new Dictionary<uint, Dungeon>();
-    }
-
-
-    void ParseDungeons()
-    {
-        //var f = File.OpenText(FullPath);
-        var lines = File.ReadAllLines(FullPath);
-        foreach (var line in lines)
-        {
-            //var line = f.ReadLine();
-            if (string.IsNullOrWhiteSpace(line)) break;
-            var s = line.Split('\t');
-            var id = uint.Parse(s[0]);
-            var name = s[1];
-            var dg = new Dungeon(id, name);
-            if (s.Length > 2) //TODO: remove check when all regions are updated
-            {
-                dg.Cost = int.Parse(s[2]);
-            }
-            Dungeons[id] = dg;
-
-        }
-    }
-
-    void ParseDungeonDefs()
-    {
-        if (!File.Exists(_customDefsPath)) File.Copy(_defaultDefsFullPath, _customDefsPath);
-        //var def = File.OpenText(CustomDefsPath);
-        var lines = File.ReadAllLines(_customDefsPath);
-        foreach (var line in lines)
-        {
-            //var line = def.ReadLine();
-            if (string.IsNullOrWhiteSpace(line)) break;
-            if (line.StartsWith("#")) continue;
-            var s = line.Split('\t');
-            var id = uint.Parse(s[0]);
-            var shortName = s[1];
-            var sMaxBaseRuns = s[2];
-            var sReqIlvl = s[3];
-            var sDobuleElite = s[4];
-            var sIndex = s[5];
-            var resetMode = ResetMode.Daily;
-            if (s.Length >= 7 && (ResetMode)Enum.Parse(typeof(ResetMode), s[6]) == ResetMode.Weekly) resetMode = ResetMode.Weekly;
-
-            if (!Dungeons.TryGetValue(id, out var dung)) continue;
-            dung.Show = true;
-            dung.HasDef = true;
-            dung.ShortName = shortName;
-            dung.DoublesOnElite = bool.Parse(sDobuleElite);
-            dung.Index = int.Parse(sIndex);
-            dung.ResetMode = resetMode;
-            if (short.TryParse(sMaxBaseRuns, out var baseRuns)) dung.MaxBaseRuns = baseRuns;
-            if (!int.TryParse(sReqIlvl, out var reqIlvl)) continue;
-            try
-            {
-                dung.ItemLevel = reqIlvl;
-            }
-            catch
-            {
-                // ignored
-            }
-        }
-
-    }
-
-    void ParseDungeonIcons()
-    {
-        //var f = File.OpenText(ImagesFullPath);
-        var lines = File.ReadAllLines(_imagesFullPath);
-        foreach (var line in lines)
-        {
-            //var line = f.ReadLine();
-            if (string.IsNullOrWhiteSpace(line)) break;
-            var split = line.Split('\t');
-
-            var id = Convert.ToUInt32(split[2]);
-            var icon = split[3];
-
-            if (Dungeons.TryGetValue(id, out var dung)) dung.IconName = icon;
-        }
     }
 
     public string GetDungeonNameOrOpenWorld(uint continentId)
@@ -141,7 +63,7 @@ public class DungeonDatabase : DatabaseBase
             sb.Append("\t");
             sb.Append(d.MaxBaseRuns);
             sb.Append("\t");
-            sb.Append(d.ItemLevel); 
+            sb.Append(d.ItemLevel);
             sb.Append("\t");
             sb.Append(d.DoublesOnElite);
             sb.Append("\t");
@@ -159,5 +81,89 @@ public class DungeonDatabase : DatabaseBase
         ParseDungeons();
         ParseDungeonDefs();
         ParseDungeonIcons();
+    }
+
+    void ParseDungeons()
+    {
+        var lines = File.ReadAllLines(FullPath);
+        foreach (var line in lines)
+        {
+            if (string.IsNullOrWhiteSpace(line)) break;
+
+            var s = line.Split('\t');
+            var id = uint.Parse(s[0]);
+            var name = s[1];
+            var dg = new Dungeon(id, name);
+            if (s.Length > 2) //TODO: remove check when all regions are updated
+            {
+                dg.Cost = int.Parse(s[2]);
+            }
+            Dungeons[id] = dg;
+        }
+    }
+
+    void ParseDungeonDefs()
+    {
+        if (!File.Exists(_customDefsPath)) File.Copy(_defaultDefsFullPath, _customDefsPath);
+        var lines = File.ReadAllLines(_customDefsPath);
+        foreach (var line in lines)
+        {
+            if (string.IsNullOrWhiteSpace(line)) break;
+            if (line.StartsWith("#")) continue;
+
+            var s = line.Split('\t');
+            var id = uint.Parse(s[0]);
+            var shortName = s[1];
+            var sMaxBaseRuns = s[2];
+            var sReqIlvl = s[3];
+            var sDobuleElite = s[4];
+            var sIndex = s[5];
+            var resetMode = ResetMode.Daily;
+            if (s.Length >= 7 && (ResetMode)Enum.Parse(typeof(ResetMode), s[6]) is ResetMode.Weekly)
+            {
+                resetMode = ResetMode.Weekly;
+            }
+
+            if (!Dungeons.TryGetValue(id, out var dung)) continue;
+
+            dung.Show = true;
+            dung.HasDef = true;
+            dung.ShortName = shortName;
+            dung.DoublesOnElite = bool.Parse(sDobuleElite);
+            dung.Index = int.Parse(sIndex);
+            dung.ResetMode = resetMode;
+            if (short.TryParse(sMaxBaseRuns, out var baseRuns))
+            {
+                dung.MaxBaseRuns = baseRuns;
+            }
+
+            if (!int.TryParse(sReqIlvl, out var reqIlvl)) continue;
+
+            try
+            {
+                dung.ItemLevel = reqIlvl;
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+    }
+
+    void ParseDungeonIcons()
+    {
+        var lines = File.ReadAllLines(_imagesFullPath);
+        foreach (var line in lines)
+        {
+            if (string.IsNullOrWhiteSpace(line)) break;
+
+            var split = line.Split('\t');
+            var id = Convert.ToUInt32(split[2]);
+            var icon = split[3];
+            if (Dungeons.TryGetValue(id, out var dung))
+            {
+                dung.IconName = icon;
+            }
+        }
     }
 }

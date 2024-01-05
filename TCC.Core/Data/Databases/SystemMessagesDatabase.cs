@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Nostrum.WPF.Extensions;
+using System.Collections.Generic;
 using System.IO;
-using Nostrum.WPF.Extensions;
 using TCC.Data.Chat;
 using TCC.R;
 using TCC.Utils;
@@ -10,32 +10,31 @@ namespace TCC.Data.Databases;
 
 public class SystemMessagesDatabase : DatabaseBase
 {
-    readonly List<string> _handledInternally = new() { "SMT_FIELD_EVENT_REWARD_AVAILABLE" };
-    public Dictionary<string, SystemMessageData> Messages { get; }
     protected override string FolderName => "sys_msg";
     protected override string Extension => "tsv";
 
+    readonly List<string> _handledInternally = ["SMT_FIELD_EVENT_REWARD_AVAILABLE"];
+
+    public Dictionary<string, SystemMessageData> Messages { get; } = [];
+
     public SystemMessagesDatabase(string lang) : base(lang)
     {
-        Messages = new Dictionary<string, SystemMessageData>();
     }
 
     public override void Load()
     {
         Messages.Clear();
-        //var f = File.OpenText(FullPath);
         var lines = File.ReadAllLines(FullPath);
         foreach (var line in lines)
         {
-            //var line = f.ReadLine();
             if (string.IsNullOrWhiteSpace(line)) break;
 
             var s = line.Split('\t');
 
             if (!int.TryParse(s[0], out var ch)) continue;
+
             var opcodeName = s[1];
             var msg = s[2].Replace("&#xA", "\n");
-
             var sm = new SystemMessageData(msg, ch);
             Messages[opcodeName] = sm;
         }
