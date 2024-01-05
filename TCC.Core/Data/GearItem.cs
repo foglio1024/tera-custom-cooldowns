@@ -7,44 +7,34 @@ public class GearItem
     public uint Id { get; }
     public GearTier Tier { get; }
     public GearPiece Piece { get; }
-
     public int Enchant { get; }
     public long Experience { get; }
     public int MaxExperience => Game.DB!.GetItemMaxExp(Id, Enchant);
-
     public double ExperienceFactor
     {
         get
         {
-            if (MaxExperience == 0) return 0;
-            if (Experience >= MaxExperience) return 1;
-            return Experience / (double)MaxExperience;
+            return MaxExperience == 0
+                ? 0
+                    : Experience >= MaxExperience
+                    ? 1
+                : Experience / (double)MaxExperience;
         }
     }
-
     public int CorrectedEnchant
     {
         get
         {
-            if (!IsJewel) return Enchant;
-            return Tier == 0 ? 6 : 9;
+            return !IsJewel
+                ? Enchant
+                    : Tier == 0
+                    ? 6
+                : 9;
         }
     }
-
     public bool IsJewel => (int)Piece >= 5;
     public int TotalLevel => CalculateLevel();
     public double LevelFactor => TotalLevel / (double)37;
-
-    int CalculateLevel()
-    {
-        var t = 0;
-        if (Tier > GearTier.Low)
-        {
-            t = ((int)Tier - 1) * 9 + 6;
-        }
-        return t + CorrectedEnchant;
-    }
-
     public string Name => Game.DB!.ItemsDatabase.GetItemName(Id);
 
     public GearItem(uint id, GearTier t, GearPiece p, int enchant, long exp)
@@ -61,6 +51,16 @@ public class GearItem
         Id = data.Id;
         Tier = data.Tier;
         Piece = data.Piece;
+    }
+
+    int CalculateLevel()
+    {
+        var t = 0;
+        if (Tier > GearTier.Low)
+        {
+            t = ((int)Tier - 1) * 9 + 6;
+        }
+        return t + CorrectedEnchant;
     }
 
     public override string ToString()

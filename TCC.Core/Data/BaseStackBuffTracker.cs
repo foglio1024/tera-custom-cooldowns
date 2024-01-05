@@ -12,10 +12,9 @@ public class BaseStackBuffTracker : ThreadSafeObservableObject
     public event Action<long>? BaseBuffRefreshed;
     public event Action<long>? EmpoweredBuffStarted;
 
-    // ReSharper disable once UnusedAutoPropertyAccessor.Global
-    public static bool IsEmpoweredBuffRunning { get; set; }
-
     int _stacks;
+
+    public static bool IsEmpoweredBuffRunning { get; set; }
     public int Stacks
     {
         get => _stacks;
@@ -38,6 +37,7 @@ public class BaseStackBuffTracker : ThreadSafeObservableObject
         Stacks = 1;
         BaseBuffStarted?.Invoke(duration);
     }
+    
     public virtual void RefreshBaseBuff(int stacks, long duration)
     {
         Stacks = stacks;

@@ -4,6 +4,8 @@ namespace TCC.Data;
 
 public static class EpDataProvider
 {
+    public static float ManaBarrierMult = 1;
+
     // just keep this here, since it's the only perk we need
     static readonly Dictionary<uint, float> ManaBarrierAmplification = new()
     {
@@ -29,10 +31,9 @@ public static class EpDataProvider
         { 19, 1.62f },
         { 20, 1.65f }
     };
+
     public static void SetManaBarrierPerkLevel(uint level)
     {
         ManaBarrierMult = ManaBarrierAmplification[level];
     }
-
-    public static float ManaBarrierMult = 1;
 }

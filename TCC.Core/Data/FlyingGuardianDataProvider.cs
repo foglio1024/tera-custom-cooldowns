@@ -6,6 +6,12 @@ namespace TCC.Data;
 
 public static class FlyingGuardianDataProvider
 {
+    public static event Action? StacksChanged;
+
+    public static event Action? StackTypeChanged;
+
+    public static event Action? IsInProgressChanged;
+
     const uint AirEssenceId = 630400;
     const uint FireEssenceId = 630500;
     const uint SparkEssenceId = 631001;
@@ -13,10 +19,6 @@ public static class FlyingGuardianDataProvider
     static int _stacks;
     static FlightStackType _stackType;
     static bool _ignoreNextEnd;
-
-    public static event Action? StacksChanged;
-    public static event Action? StackTypeChanged;
-    public static event Action? IsInProgressChanged;
 
     public static int Stacks
     {
@@ -33,7 +35,7 @@ public static class FlyingGuardianDataProvider
         get => _stackType;
         set
         {
-            if(_stackType == value) return;
+            if (_stackType == value) return;
             _stackType = value;
             StackTypeChanged?.Invoke();
         }
@@ -53,44 +55,47 @@ public static class FlyingGuardianDataProvider
     {
         IsInProgressChanged?.Invoke();
     }
-    public static void HandleAbnormal(S_ABNORMALITY_END p)
+
+    public static void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!IsEssence(p.AbnormalityId)) return;
+
+        if (IdToStackType(p.AbnormalityId) != StackType)
+        {
+            _ignoreNextEnd = true;
+        }
+        Stacks = p.Stacks;
+        StackType = IdToStackType(p.AbnormalityId);
+    }
+
+    public static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+    {
+        if (!IsEssence(p.AbnormalityId)) return;
+
+        Stacks = p.Stacks;
+        StackType = IdToStackType(p.AbnormalityId);
+    }
+
+    public static void OnAbnormalityEnd(S_ABNORMALITY_END p)
+    {
+        if (!IsEssence(p.AbnormalityId)) return;
+
         if (_ignoreNextEnd)
         {
             _ignoreNextEnd = false;
             return;
         }
+
         Stacks = 0;
     }
-    public static void HandleAbnormal(S_ABNORMALITY_REFRESH p)
-    {
-        if (!IsEssence(p.AbnormalityId)) return;
-        Stacks = p.Stacks;
-        StackType = IdToStackType(p.AbnormalityId);
-    }
-    public static void HandleAbnormal(S_ABNORMALITY_BEGIN p)
-    {
-        if (!IsEssence(p.AbnormalityId)) return;
-        if (IdToStackType(p.AbnormalityId) != StackType) _ignoreNextEnd = true;
-        Stacks = p.Stacks;
-        StackType = IdToStackType(p.AbnormalityId);
-    }
 
-    static FlightStackType IdToStackType(uint id)
+    static FlightStackType IdToStackType(uint id) => id switch
     {
-        return id switch
-        {
-            FireEssenceId => FlightStackType.Fire,
-            SparkEssenceId => FlightStackType.Spark,
-            AirEssenceId => FlightStackType.Air,
-            _ => FlightStackType.None
-        };
-    }
+        FireEssenceId => FlightStackType.Fire,
+        SparkEssenceId => FlightStackType.Spark,
+        AirEssenceId => FlightStackType.Air,
+        _ => FlightStackType.None
+    };
 
-    static bool IsEssence(uint id)
-    {
-        return id is AirEssenceId or FireEssenceId or SparkEssenceId;
-    }
-
+    static bool IsEssence(uint id) => id is AirEssenceId or FireEssenceId or SparkEssenceId;
 }

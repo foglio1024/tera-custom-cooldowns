@@ -1078,7 +1078,7 @@ public static class Game
         if (!DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
         ab.Infinity = p.Duration >= int.MaxValue / 2;
         Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
-        FlyingGuardianDataProvider.HandleAbnormal(p);
+        FlyingGuardianDataProvider.OnAbnormalityBegin(p);
     }
 
     static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
@@ -1088,7 +1088,7 @@ public static class Game
         if (!DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
         ab.Infinity = p.Duration >= int.MaxValue / 2;
         Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
-        FlyingGuardianDataProvider.HandleAbnormal(p);
+        FlyingGuardianDataProvider.OnAbnormalityRefresh(p);
     }
 
     static void OnAbnormalityEnd(S_ABNORMALITY_END p)
@@ -1096,7 +1096,7 @@ public static class Game
         CurrentAbnormalityTracker.OnAbnormalityEnd(p);
         if (!IsMe(p.TargetId)) return;
         if (!DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
-        FlyingGuardianDataProvider.HandleAbnormal(p);
+        FlyingGuardianDataProvider.OnAbnormalityEnd(p);
         Me.EndAbnormality(ab);
     }
 

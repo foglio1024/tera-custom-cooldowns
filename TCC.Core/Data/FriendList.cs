@@ -8,26 +8,26 @@ namespace TCC.Data;
 
 public class FriendList
 {
-
     bool _waitingForFirstUpdate = true;
-    readonly List<FriendEntry> _friends  = new();
+    readonly List<FriendEntry> _friends = [];
 
-    internal void UpdateFriendInfo(List<FriendInfoUpdate> friendUpdates)
+    internal void UpdateFriendInfo(IReadOnlyCollection<FriendInfoUpdate> friendUpdates)
     {
-        friendUpdates.ForEach(update =>
+        foreach (var update in friendUpdates)
         {
             var friend = _friends.Find(x => x.Id == update.Id);
-            if (friend == default) return;
+            if (friend == default) continue;
+
             var fireMessage = update.Status != friend.Status
                               && update.Status is FriendStatus.Online
                               && !_waitingForFirstUpdate;
-            //Log.Chat($"Updating {friend.Name} from {friend.Status} to {update.Status} ({nameof(_waitingForFirstUpdate)}:{_waitingForFirstUpdate})");
             var idx = _friends.IndexOf(friend);
             friend.UpdateFrom(update);
             _friends[idx] = friend;
-            if (!fireMessage) return;
+            if (!fireMessage) continue;
+
             SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{friend.Name}", "SMT_FRIEND_IS_CONNECTED");
-        });
+        }
         _waitingForFirstUpdate = false;
     }
 
@@ -41,6 +41,7 @@ public class FriendList
     {
         var friend = _friends.Find(f => f.Id == playerId);
         if (friend == default) return;
+
         var areaName = sectionId.ToString();
         try
         {
@@ -67,7 +68,9 @@ public class FriendList
         {
             var existing = _friends.Find(x => x.Id == updated.Id);
             if (existing == default)
+            {
                 _friends.Add(updated);
+            }
             else
             {
                 var idx = _friends.IndexOf(existing);
@@ -84,6 +87,6 @@ public class FriendList
 
     internal bool Has(string name)
     {
-        return _friends.Any(x => x.Name == name && x.Type is FriendEntryType.Friend);
+        return _friends.Exists(x => x.Name == name && x.Type is FriendEntryType.Friend);
     }
 }

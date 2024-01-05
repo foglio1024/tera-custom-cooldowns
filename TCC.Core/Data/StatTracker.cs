@@ -5,14 +5,14 @@ namespace TCC.Data;
 
 public class StatTracker : ThreadSafeObservableObject
 {
+    public event Action<uint>? ToZero;
+    public event Action<double>? FactorChanged;
+
     int _max = 1;
     int _val;
     bool _status;
     bool _maxed;
     double _factor;
-
-    public event Action<uint>? ToZero;
-    public event Action<double>? FactorChanged;
 
     public int Val
     {
@@ -21,8 +21,8 @@ public class StatTracker : ThreadSafeObservableObject
         {
             if (_val == value) return;
             _val = value;
-
             N();
+
             Factor = (double)_val / _max;
             Maxed = Factor == 1;
         }
@@ -62,12 +62,6 @@ public class StatTracker : ThreadSafeObservableObject
             N();
         }
     }
-
-    void InvokeFactorChanged()
-    {
-        FactorChanged?.Invoke(_factor);
-    }
-
     public bool Status
     {
         get => _status;
@@ -82,5 +76,10 @@ public class StatTracker : ThreadSafeObservableObject
     public void InvokeToZero(uint pDuration)
     {
         ToZero?.Invoke(pDuration);
+    }
+
+    void InvokeFactorChanged()
+    {
+        FactorChanged?.Invoke(_factor);
     }
 }

@@ -8,10 +8,10 @@ namespace TCC.Data;
 
 public class Account : ICloneable
 {
-    public bool IsElite { get; set; }
     [JsonIgnore]
     public Character? CurrentCharacter { get; private set; }
-    public ThreadSafeObservableCollection<Character> Characters { get; } = new();
+    public ThreadSafeObservableCollection<Character> Characters { get; } = [];
+    public bool IsElite { get; set; }
 
     public void LoginCharacter(uint id)
     {
@@ -23,7 +23,7 @@ public class Account : ICloneable
     /// </summary>
     public object Clone()
     {
-        var account = new Account {IsElite = IsElite};
+        var account = new Account { IsElite = IsElite };
         Characters.ToSyncList().ForEach(account.Characters.Add);
         return account;
     }

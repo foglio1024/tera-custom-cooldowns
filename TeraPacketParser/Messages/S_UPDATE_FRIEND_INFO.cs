@@ -45,7 +45,7 @@ array    friends
  */
 public class S_UPDATE_FRIEND_INFO : ParsedMessage
 {
-    public List<FriendInfoUpdate> FriendUpdates { get; } = new List<FriendInfoUpdate>();
+    public IReadOnlyCollection<FriendInfoUpdate> FriendUpdates;
 
     public S_UPDATE_FRIEND_INFO(TeraMessageReader reader) : base(reader)
     {
@@ -53,6 +53,7 @@ public class S_UPDATE_FRIEND_INFO : ParsedMessage
 
         reader.Skip(2); // friendsPtr
 
+        List<FriendInfoUpdate> friends = [];
         for (var i = 0; i < count; i++)
         {
             reader.Skip(4); // curr + next
@@ -76,7 +77,9 @@ public class S_UPDATE_FRIEND_INFO : ParsedMessage
             reader.RepositionAt(namePtr);
             var name = reader.ReadTeraString();
 
-            FriendUpdates.Add(new FriendInfoUpdate(id, level, race, cl, gender, status, world, guard, section, updated, isWorldEventTarget, isSummonable, lastOnline, name));
+            friends.Add(new FriendInfoUpdate(id, level, race, cl, gender, status, world, guard, section, updated, isWorldEventTarget, isSummonable, lastOnline, name));
         }
+
+        FriendUpdates = friends.AsReadOnly();
     }
 }

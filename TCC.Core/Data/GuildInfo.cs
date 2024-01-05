@@ -1,47 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using Nostrum.WPF.ThreadSafe;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nostrum.WPF.ThreadSafe;
 using TeraDataLite;
 
 namespace TCC.Data;
 
 public class GuildInfo
 {
-    public bool InGuild { get; private set; }
-    public GuildMemberData Master { get; private set; }
+    readonly ThreadSafeObservableCollection<GuildMemberData> _members = [];
 
-    readonly ThreadSafeObservableCollection<GuildMemberData> _members = new();
+    public bool InGuild { get; private set; }
     public bool AmIMaster { get; private set; }
+    public GuildMemberData Master { get; private set; }
 
     public string NameOf(uint id)
     {
         var found = _members.ToSyncList().FirstOrDefault(m => m.PlayerId == id);
-        return found.Name != "" ? found.Name : "Unknown player";
+        return found.Name != ""
+            ? found.Name
+            : "Unknown player";
     }
 
-    public void Set(List<GuildMemberData> mMembers, uint masterId, string masterName)
+    public void Set(List<GuildMemberData> newMembers, uint masterId, string masterName)
     {
-        mMembers.ForEach(m =>
+        foreach (var member in newMembers.Where(x => !Has(x.Name)))
         {
-            if (Has(m.Name)) return;
-            _members.Add(m);
-        });
-
-        //var toRemove = new List<GuildMemberData>();
-        //Members.ToSyncList().ForEach(m =>
-        //{
-        //    if (mMembers.All(f => f.PlayerId != m.PlayerId)) toRemove.Add(m);
-        //});
-        //toRemove.ForEach(m => Members.Remove(m));
-
+            _members.Add(member);
+        }
         InGuild = true;
         SetMaster(masterId, masterName);
     }
 
     public bool Has(string name)
     {
-        return _members.ToSyncList().Any(m => m.Name == name);
+        return _members.ToSyncList().Exists(m => m.Name == name);
     }
 
     public void Clear()

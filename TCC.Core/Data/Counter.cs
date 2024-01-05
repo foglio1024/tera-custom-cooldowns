@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Nostrum.WPF.ThreadSafe;
+using System;
 using System.Windows.Threading;
-using Nostrum.WPF.ThreadSafe;
 using TeraDataLite;
 
 namespace TCC.Data;
@@ -37,13 +37,12 @@ public class Counter : ThreadSafeObservableObject
     public int MaxValue { get; private set; }
     bool AutoExpire { get; set; }
 
-
     public Counter(int max, bool autoexpire)
     {
         Dispatcher = Dispatcher.CurrentDispatcher;
         MaxValue = max;
         AutoExpire = autoexpire;
-        _expire = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(9000) };
+        _expire = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(9000) }; //todo: set time from outside
         _expire.Tick += OnExpireTick;
     }
 
@@ -55,8 +54,10 @@ public class Counter : ThreadSafeObservableObject
     void RefreshTimer()
     {
         _expire.Stop();
+
         if (_val == 0) return;
         if (!AutoExpire) return;
+
         _expire.Start();
     }
 
@@ -64,7 +65,7 @@ public class Counter : ThreadSafeObservableObject
     {
         switch (c)
         {
-            case Class.Warrior: 
+            case Class.Warrior:
                 MaxValue = 10;
                 AutoExpire = true;
                 break;

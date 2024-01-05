@@ -16,18 +16,16 @@ public enum GroupCompositionChangeReason
 
 public class GroupInfo
 {
-    GroupMemberData _leader = new() { Class = Class.None, Name = "", PlayerId = 0 };
-    List<GroupMemberData> _members = new();
-
     public event Action? LeaderChanged;
-
     public event Action<ReadOnlyCollection<GroupMemberData>, GroupCompositionChangeReason>? CompositionChanged;
+
+    GroupMemberData _leader = new() { Class = Class.None, Name = "", PlayerId = 0 };
+    List<GroupMemberData> _members = [];
 
     public bool InGroup { get; private set; }
     public bool IsRaid { get; private set; }
     public bool AmILeader => Game.Me.Name == Leader.Name && InGroup;
     public int Size { get; private set; }
-
     public GroupMemberData Leader
     {
         get => _leader;
@@ -41,7 +39,9 @@ public class GroupInfo
 
     public void UpdateComposition(ReadOnlyCollection<GroupMemberData> members, bool raid)
     {
-        var reason = Size == 0 ? GroupCompositionChangeReason.Created : GroupCompositionChangeReason.Updated;
+        var reason = Size == 0 
+            ? GroupCompositionChangeReason.Created 
+            : GroupCompositionChangeReason.Updated;
 
         _members = members.ToList();
         Leader = members.FirstOrDefault(m => m.IsLeader)!;
@@ -62,6 +62,7 @@ public class GroupInfo
     {
         var target = _members.FirstOrDefault(m => m.PlayerId == playerId && m.ServerId == serverId);
         if (target == null) return;
+
         _members.Remove(target);
         Size = _members.Count;
 
@@ -86,12 +87,12 @@ public class GroupInfo
 
     public bool Has(string name)
     {
-        return _members.Any(m => m.Name == name);
+        return _members.Exists(m => m.Name == name);
     }
 
     public bool Has(uint pId)
     {
-        return _members.Any(m => m.PlayerId == pId);
+        return _members.Exists(m => m.PlayerId == pId);
     }
 
     public bool HasPowers(string name)

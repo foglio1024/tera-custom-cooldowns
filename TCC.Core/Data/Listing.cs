@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Nostrum.WPF;
-using Nostrum.WPF.ThreadSafe;
-using TCC.Data.Chat;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.UI;
@@ -29,18 +27,8 @@ public class Listing : ThreadSafeObservableObject
     readonly DateTime _createdOn;
     bool _isFullOffline;
 
-    public ICommand ExpandCollapseCommand { get; }
-    public ICommand PostCommand { get; }
-    public ICommand RemoveCommand { get; }
-    public ICommand BrowseTwitchCommand { get; }
-    public ICommand OpenPopupCommand { get; }
-    public ICommand WhisperLeaderCommand { get; }
-    public ICommand ToggleAutoPublicizeCommand { get; }
-
     public uint LeaderId { get; set; }
-
     public uint ServerId { get; set; }
-
     public bool IsRaid
     {
         get => _isRaid;
@@ -76,7 +64,7 @@ public class Listing : ThreadSafeObservableObject
     }
     public string LeaderName
     {
-        get => _leaderName; //Players.ToSyncList().Count == 0 ? _leaderName : Players.ToSyncList().FirstOrDefault(x => x.IsLeader)?.Name;
+        get => _leaderName;
         set
         {
             if (_leaderName == value) return;
@@ -125,19 +113,11 @@ public class Listing : ThreadSafeObservableObject
             N();
         }
     }
-    public bool IsTrade => _message.IndexOf("WTS", StringComparison.InvariantCultureIgnoreCase) != -1 ||
-                           _message.IndexOf("WTB", StringComparison.InvariantCultureIgnoreCase) != -1 ||
-                           _message.IndexOf("WTT", StringComparison.InvariantCultureIgnoreCase) != -1;
-
+    public bool IsTrade => _message.Contains("WTS", StringComparison.InvariantCultureIgnoreCase) ||
+                           _message.Contains("WTB", StringComparison.InvariantCultureIgnoreCase) ||
+                           _message.Contains("WTT", StringComparison.InvariantCultureIgnoreCase);
     public double AliveSinceMs => (DateTime.Now - _createdOn).TotalMilliseconds;
-
-
-    public ThreadSafeObservableCollection<User> Players { get; }
-    public ThreadSafeObservableCollection<User> Applicants { get; }
-
     public int MaxCount => IsRaid ? 30 : 5;
-    public ApplyCommand ApplyCommand { get; }
-    public ICommand RefreshApplicantsCommand { get; }
     public bool CanApply
     {
         get => _canApply;
@@ -148,13 +128,12 @@ public class Listing : ThreadSafeObservableObject
             N();
         }
     }
-
     public string TwitchLink
     {
         get
         {
             var username = "";
-            var split = _message.Split(' ').ToList();
+            var split = _message.Split(' ');
             var twLink = split.FirstOrDefault(x =>
                 x.Contains("twitch.tv", StringComparison.InvariantCultureIgnoreCase));
             var splitLink = twLink?.Split('/');
@@ -162,31 +141,29 @@ public class Listing : ThreadSafeObservableObject
             return $"https://www.twitch.tv/{username}";
         }
     }
-
-    public bool IsTwitch => _message.IndexOf("twitch.tv", StringComparison.InvariantCultureIgnoreCase) != -1;
-
+    public bool IsTwitch => _message.Contains("twitch.tv", StringComparison.InvariantCultureIgnoreCase);
     public bool IsFullOffline
     {
         get => _isFullOffline;
         set
         {
-            if(_isFullOffline == value) return;
+            if (_isFullOffline == value) return;
             _isFullOffline = value;
             N();
         }
     }
+    public ThreadSafeObservableCollection<User> Players { get; }
+    public ThreadSafeObservableCollection<User> Applicants { get; }
 
-    public void UpdateIsMyLfg()
-    {
-        _dispatcher.InvokeAsync(() =>
-        {
-            IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId) 
-                    || LeaderId == Game.Me.PlayerId 
-                    || LeaderId == Game.Group.Leader.PlayerId;
-        }, DispatcherPriority.DataBind);
-    }
-
-
+    public ICommand ExpandCollapseCommand { get; }
+    public ICommand PostCommand { get; }
+    public ICommand RemoveCommand { get; }
+    public ICommand BrowseTwitchCommand { get; }
+    public ICommand OpenPopupCommand { get; }
+    public ICommand WhisperLeaderCommand { get; }
+    public ICommand ToggleAutoPublicizeCommand { get; }
+    public ICommand RefreshApplicantsCommand { get; }
+    public ApplyCommand ApplyCommand { get; }
 
     public Listing()
     {
@@ -194,74 +171,13 @@ public class Listing : ThreadSafeObservableObject
         Players = new ThreadSafeObservableCollection<User>(_dispatcher);
         Applicants = new ThreadSafeObservableCollection<User>(_dispatcher);
         ApplyCommand = new ApplyCommand(this);
-        RefreshApplicantsCommand = new RelayCommand(_ => StubInterface.Instance.StubClient.RequestListingCandidates(), _ => IsMyLfg);
-        ExpandCollapseCommand = new RelayCommand(force =>
-        {
-            if (IsPopupOpen) return;
-            if (force != null)
-            {
-                bool bForce;
-                if (force is string s) bForce = bool.TryParse(s, out var v) && v;
-                else bForce = (bool)force;
-                if (bForce)
-                {
-                    IsExpanded = !IsExpanded;
-                    if (!IsExpanded) return;
-                    WindowManager.ViewModels.LfgVM.LastClicked = this;
-                    StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId, ServerId);
-                }
-                else
-                {
-                    if (IsExpanded) IsExpanded = false;
-                }
-            }
-            else
-            {
-                if (IsExpanded)
-                {
-                    IsExpanded = false;
-                }
-                else
-                {
-                    WindowManager.ViewModels.LfgVM.LastClicked = this;
-                    StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId, ServerId);
-                }
-            }
-        });
-        BrowseTwitchCommand = new RelayCommand(_ =>
-        {
-            if (!IsTwitch) return;
-            Utils.Utilities.OpenUrl(TwitchLink);
-        });
-        PostCommand = new RelayCommand(_ =>
-            {
-                var msg = Message;
-                var isRaid = IsRaid;
-
-                if (Temp) WindowManager.ViewModels.LfgVM.Listings.Remove(this);
-
-                StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
-
-                Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
-
-            },
-            _ => Temp && !string.IsNullOrEmpty(Message));
-        RemoveCommand = new RelayCommand(_ =>
-        {
-            if (Temp)
-                WindowManager.ViewModels.LfgVM.Listings.Remove(this);
-            else
-                WindowManager.ViewModels.LfgVM.RemoveMessageCommand.Execute(null);
-        });
-
+        RefreshApplicantsCommand = new RelayCommand(StubInterface.Instance.StubClient.RequestListingCandidates, _ => IsMyLfg);
+        ExpandCollapseCommand = new RelayCommand(ExpandCollapse); // todo: use proper type
+        BrowseTwitchCommand = new RelayCommand(BrowseTwitch);
+        PostCommand = new RelayCommand(Post, _ => Temp && !string.IsNullOrEmpty(Message));
+        RemoveCommand = new RelayCommand(Remove);
         OpenPopupCommand = new RelayCommand(_ => IsPopupOpen = true);
-
-        WhisperLeaderCommand = new RelayCommand(_ =>
-        {
-            if (!Game.InGameChatOpen) FocusManager.SendNewLine();
-            FocusManager.SendString($"/w {LeaderName} ");
-        });
-
+        WhisperLeaderCommand = new RelayCommand(WhisperLeader);
         ToggleAutoPublicizeCommand = new RelayCommand(_ => WindowManager.ViewModels.LfgVM.ToggleAutoPublicizeCommand.Execute(null));
 
         _createdOn = DateTime.Now;
@@ -277,38 +193,89 @@ public class Listing : ThreadSafeObservableObject
         PlayerCount = l.PlayerCount;
         Temp = l.Temp;
     }
-}
 
-public class ApplyCommand : ICommand
-{
-    readonly Listing _listing;
-    readonly Timer _t;
-    public ApplyCommand(Listing listing)
+    public void UpdateIsMyLfg()
     {
-        _listing = listing;
-        _t = new Timer { Interval = 5000 };
-        _t.Elapsed += OnTimerElapsed;
+        _dispatcher.InvokeAsync(() =>
+        {
+            IsMyLfg = Players.Any(x => x.PlayerId == Game.Me.PlayerId)
+                    || LeaderId == Game.Me.PlayerId
+                    || LeaderId == Game.Group.Leader.PlayerId;
+        }, DispatcherPriority.DataBind);
     }
 
-    void OnTimerElapsed(object? s, ElapsedEventArgs ev)
+    void ExpandCollapse(object? force) // todo: use proper type
     {
-        _t.Stop();
-        _listing.CanApply = true;
-    }
-#pragma warning disable CS0067
-    public event EventHandler? CanExecuteChanged;
-#pragma warning restore CS0067
-    public bool CanExecute(object? parameter)
-    {
-        return _listing.CanApply;
+        if (IsPopupOpen) return;
+
+        if (force != null)
+        {
+            bool bForce = force is string s
+                ? bool.TryParse(s, out var v) && v
+                : (bool)force;
+
+            if (bForce)
+            {
+                IsExpanded = !IsExpanded;
+                if (!IsExpanded) return;
+
+                WindowManager.ViewModels.LfgVM.LastClicked = this; // todo: maybe remove this reference (event?)
+                StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId, ServerId);
+            }
+            else
+            {
+                if (IsExpanded)
+                {
+                    IsExpanded = false;
+                }
+            }
+        }
+        else
+        {
+            if (IsExpanded)
+            {
+                IsExpanded = false;
+            }
+            else
+            {
+                WindowManager.ViewModels.LfgVM.LastClicked = this; // todo: maybe remove this reference (event?)
+                StubInterface.Instance.StubClient.RequestPartyInfo(LeaderId, ServerId);
+            }
+        }
     }
 
-    public async void Execute(object? parameter)
+    void BrowseTwitch()
     {
-        var success = await StubInterface.Instance.StubClient.ApplyToGroup(_listing.LeaderId, _listing.ServerId); //ProxyOld.ApplyToLfg(_listing.LeaderId);
-        if (!success) return;
-        SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{_listing.LeaderName}", "SMT_PARTYBOARD_APPLY");
-        _listing.CanApply = false;
-        _t.Start();
+        if (!IsTwitch) return;
+
+        Utils.Utilities.OpenUrl(TwitchLink);
+    }
+
+    void Post()
+    {
+        var msg = Message;
+        var isRaid = IsRaid;
+
+        if (Temp) WindowManager.ViewModels.LfgVM.Listings.Remove(this);
+        StubInterface.Instance.StubClient.RegisterListing(msg, isRaid);
+        Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
+    }
+
+    void Remove()
+    {
+        if (Temp)
+        {
+            WindowManager.ViewModels.LfgVM.Listings.Remove(this);
+        }
+        else
+        {
+            WindowManager.ViewModels.LfgVM.RemoveMessageCommand.Execute(null);
+        }
+    }
+
+    void WhisperLeader()
+    {
+        if (!Game.InGameChatOpen) FocusManager.SendNewLine();
+        FocusManager.SendString($"/w {LeaderName} ");
     }
 }
