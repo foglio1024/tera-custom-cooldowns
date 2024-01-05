@@ -34,7 +34,6 @@ public class GuardianInfo : ThreadSafeObservableObject
             N();
             N(nameof(ClearedFactor));
         }
-
     }
     public int Claimed
     {
@@ -47,7 +46,6 @@ public class GuardianInfo : ThreadSafeObservableObject
             N(nameof(ClaimedFactor));
         }
     }
-
     [JsonIgnore] public float CreditsFactor => (float)MathUtils.FactorCalc(Credits, MaxCredits);
     [JsonIgnore] public float ClearedFactor => (float)MathUtils.FactorCalc(Cleared, MaxDailies);
     [JsonIgnore] public float ClaimedFactor => (float)MathUtils.FactorCalc(Claimed, MaxDailies);

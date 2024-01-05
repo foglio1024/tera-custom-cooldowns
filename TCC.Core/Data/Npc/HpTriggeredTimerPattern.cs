@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
-
-namespace TCC.Data.Npc;
+﻿namespace TCC.Data.Npc;
 
 public class HpTriggeredTimerPattern : TimerPattern
 {
     public float StartAt { get; }
+
     /// <summary>
     /// Creates a new TimerPattern triggered by HP value.
     /// </summary>
@@ -18,14 +17,14 @@ public class HpTriggeredTimerPattern : TimerPattern
     public override void SetTarget(Npc target)
     {
         base.SetTarget(target);
-        target.PropertyChanged += OnTargetPropertyChanged;
+        target.HpFactorChanged += OnTargetHpChanged;
     }
 
-    void OnTargetPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    void OnTargetHpChanged(double hpFactor)
     {
-        if (Running) return;
-        if (e.PropertyName != nameof(Npc.HPFactor)) return;
-        if (sender is not Npc npc || !(npc.HPFactor < StartAt)) return;
+        if (IsRunning) return;
+        if (hpFactor >= StartAt) return;
+
         Start();
     }
 }

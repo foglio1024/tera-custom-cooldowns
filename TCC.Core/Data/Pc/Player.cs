@@ -35,8 +35,7 @@ public class Player : ThreadSafeObservableObject
     float _flightEnergy;
     bool _isInCombat;
     float _critFactor;
-
-    bool _fire;
+    bool _fire; // todo: move class-specific stuff away from here
     bool _ice;
     bool _arcane;
     bool _fireBoost;
@@ -47,6 +46,10 @@ public class Player : ThreadSafeObservableObject
     uint _maxCoins;
     readonly List<uint> _debuffList = [];
     readonly Dictionary<uint, uint> _shields = [];
+    readonly object _listLock = new();
+    ThreadSafeObservableCollection<AbnormalityDuration> _buffs = [];
+    ThreadSafeObservableCollection<AbnormalityDuration> _debuffs = [];
+    ThreadSafeObservableCollection<AbnormalityDuration> _infBuffs = [];
 
     public string Name
     {
@@ -222,7 +225,6 @@ public class Player : ThreadSafeObservableObject
         }
     }
     public int MagicalResistance { get; set; }
-
     public uint Coins
     {
         get => _coins;
@@ -255,7 +257,6 @@ public class Player : ThreadSafeObservableObject
 
         }
     }
-
     public double CoinsFactor => MathUtils.FactorCalc(_coins, _maxCoins);
     public bool IsDebuffed => _debuffList.Count != 0;
     public bool IsInCombat
@@ -349,17 +350,8 @@ public class Player : ThreadSafeObservableObject
             N();
         }
     }
-
-    public Counter StacksCounter { get; set; } = new(10, true);
-
-    // tracking only warrior stance for now
-    public StanceTracker<WarriorStance> WarriorStance { get; set; } = new();
-    
-    readonly object _listLock = new();
-    ThreadSafeObservableCollection<AbnormalityDuration> _buffs = [];
-    ThreadSafeObservableCollection<AbnormalityDuration> _debuffs = [];
-    ThreadSafeObservableCollection<AbnormalityDuration> _infBuffs = [];
-
+    public Counter StacksCounter { get; set; } = new(10, true); // todo: move class-specific stuff away from here
+    public StanceTracker<WarriorStance> WarriorStance { get; set; } = new(); // todo: move class-specific stuff away from here
     public ThreadSafeObservableCollection<AbnormalityDuration> Buffs
     {
         get
@@ -370,7 +362,6 @@ public class Player : ThreadSafeObservableObject
             }
         }
     }
-
     public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs
     {
         get
@@ -381,7 +372,6 @@ public class Player : ThreadSafeObservableObject
             }
         }
     }
-
     public ThreadSafeObservableCollection<AbnormalityDuration> InfBuffs
     {
         get
@@ -393,13 +383,14 @@ public class Player : ThreadSafeObservableObject
         }
     }
 
-
-    #region Shield
+    // todo: maybe all this logic should be in its own class too
+    #region Shield 
     public void DamageShield(uint damage)
     {
         _dispatcher.Invoke(() =>
         {
             if (_shields.Count == 0) return;
+
             var firstShield = _shields.First();
             if (firstShield.Value >= damage)
             {
@@ -452,11 +443,13 @@ public class Player : ThreadSafeObservableObject
         {
             CurrentShield = 0;
             MaxShield = 0;
-            return;
         }
-        _currentShield = 0;
-        var total = _shields.Values.Aggregate(0U, (current, amount) => current + amount);
-        CurrentShield = total;
+        else
+        {
+            _currentShield = 0;
+            var total = _shields.Values.Aggregate(0U, (current, amount) => current + amount);
+            CurrentShield = total;
+        }
     }
 
     void RefreshMaxShieldAmount()
@@ -468,6 +461,7 @@ public class Player : ThreadSafeObservableObject
     }
     #endregion
 
+    // todo: maybe all this logic should be in its own class too
     #region Abnormalities
     public void InitAbnormalityCollections(Dispatcher disp)
     {
@@ -479,49 +473,43 @@ public class Player : ThreadSafeObservableObject
     public void UpdateAbnormality(Abnormality ab, uint pDuration, int pStacks)
     {
         if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
+
         lock (_listLock)
         {
-            FindAndUpdate(ab, pDuration, pStacks);
+            FindAndUpdateAbnormality(ab, pDuration, pStacks);
         }
     }
+
     public void EndAbnormality(Abnormality ab)
     {
         if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
-        lock (_listLock)
-        {
-            FindAndRemove(ab);
-        }
-    }
-    public void EndAbnormality(uint id)
-    {
-        if (!Game.DB!.AbnormalityDatabase.GetAbnormality(id, out var ab) || !ab.CanShow) return;
-        if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
+
         lock (_listLock)
         {
             FindAndRemove(ab);
         }
     }
 
-
-    void FindAndUpdate(Abnormality ab, uint duration, int stacks)
+    void FindAndUpdateAbnormality(Abnormality ab, uint duration, int stacks)
     {
         _dispatcher.Invoke(() =>
         {
             var list = GetList(ab);
-            var existing = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (existing == null)
+            var abnormality = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+            if (abnormality != null)
+            {
+                abnormality.Duration = duration;
+                abnormality.DurationLeft = duration;
+                abnormality.Stacks = stacks;
+                abnormality.Refresh();
+            }
+            else
             {
                 var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, App.Settings.BuffWindowSettings.Hidden.Contains(ab.Id));
                 list.Add(newAb);
                 if (ab.IsShield) AddShield(ab);
                 if (ab.IsDebuff) AddToDebuffList(ab);
-                return;
             }
-
-            existing.Duration = duration;
-            existing.DurationLeft = duration;
-            existing.Stacks = stacks;
-            existing.Refresh();
         });
     }
 
@@ -530,9 +518,9 @@ public class Player : ThreadSafeObservableObject
         var list = GetList(ab);
         var target = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
         if (target == null) return;
+
         list.Remove(target);
         target.Dispose();
-
         if (ab.IsShield) EndShield(ab);
         if (ab.IsDebuff) RemoveFromDebuffList(ab);
     }
@@ -540,6 +528,7 @@ public class Player : ThreadSafeObservableObject
     internal void AddToDebuffList(Abnormality ab)
     {
         if (ab.IsBuff || _debuffList.Contains(ab.Id)) return;
+
         _debuffList.Add(ab.Id);
         N(nameof(IsDebuffed));
     }
@@ -547,6 +536,7 @@ public class Player : ThreadSafeObservableObject
     internal void RemoveFromDebuffList(Abnormality ab)
     {
         if (ab.IsBuff) return;
+
         _debuffList.Remove(ab.Id);
         N(nameof(IsDebuffed));
     }
@@ -563,10 +553,11 @@ public class Player : ThreadSafeObservableObject
             _debuffs.Clear();
             _infBuffs.Clear();
         }
+
         _debuffList.Clear();
+        N(nameof(IsDebuffed));
 
         CurrentShield = 0;
-        N(nameof(IsDebuffed));
     }
 
     // utils
@@ -582,10 +573,7 @@ public class Player : ThreadSafeObservableObject
             _ => throw new ArgumentOutOfRangeException(nameof(abnormality))
         };
 
-        if (list == null)
-            throw new InvalidOperationException("Invalid list type requested");
-
-        return list;
+        return list ?? throw new InvalidOperationException("Invalid list type requested");
     }
     #endregion
 }

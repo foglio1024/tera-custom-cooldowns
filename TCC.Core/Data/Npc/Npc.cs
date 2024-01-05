@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Nostrum;
+using Nostrum.WPF;
+using Nostrum.WPF.ThreadSafe;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Nostrum;
-using Nostrum.WPF;
-using Nostrum.WPF.ThreadSafe;
 using TCC.Data.Abnormalities;
 using TCC.UI;
 using TCC.Utilities;
@@ -14,11 +14,29 @@ namespace TCC.Data.Npc;
 
 public class Npc : ThreadSafeObservableObject, IDisposable
 {
+    public event Action<double>? HpFactorChanged;
+    public event Action? DeleteEvent;
+
+    string _name = "";
+    bool _enraged;
+    double _maxHP;
+    double _currentHP;
+    uint _maxShield;
+    double _currentShield;
+    bool _visible;
+    ulong _target;
+    bool _isSelected = true;
+    int _remainingEnrageTime;
+    bool _isBoss;
+    double _hPFactor;
+    double currentPercentage;
+    AggroCircle _currentAggroType = AggroCircle.None;
+    ThreadSafeObservableCollection<AbnormalityDuration> _buffs;
+
     public bool HasGage { get; set; }
     public ICommand Override { get; }
     public ICommand Blacklist { get; }
     public ulong EntityId { get; }
-    string _name = "";
     public string Name
     {
         get => _name;
@@ -29,7 +47,6 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             N();
         }
     }
-
     public bool IsBoss
     {
         get => _isBoss;
@@ -40,20 +57,6 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             N();
         }
     }
-
-    ThreadSafeObservableCollection<AbnormalityDuration> _buffs;
-    public ThreadSafeObservableCollection<AbnormalityDuration> Buffs
-    {
-        get => _buffs;
-        set
-        {
-            if (_buffs == value) return;
-            _buffs = value;
-            N();
-        }
-    }
-
-    bool _enraged;
     public bool Enraged
     {
         get => _enraged;
@@ -64,8 +67,6 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             N();
         }
     }
-
-    double _maxHP;
     public double MaxHP
     {
         get => _maxHP;
@@ -75,10 +76,9 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             _maxHP = value;
             EnragePattern?.Update(value);
             N();
+            HPFactor = MathUtils.FactorCalc(_currentHP, _maxHP);
         }
     }
-
-    double _currentHP;
     public double CurrentHP
     {
         get => _currentHP;
@@ -87,12 +87,9 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             if (_currentHP == value) return;
             _currentHP = value;
             N();
-            N(nameof(CurrentPercentage));
-            N(nameof(HPFactor));
+            HPFactor = MathUtils.FactorCalc(_currentHP, _maxHP);
         }
     }
-
-    uint _maxShield;
     public uint MaxShield
     {
         get => _maxShield;
@@ -104,8 +101,6 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             N(nameof(ShieldFactor));
         }
     }
-
-    double _currentShield;
     public double CurrentShield
     {
         get => _currentShield;
@@ -117,12 +112,29 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             N(nameof(ShieldFactor));
         }
     }
-
     public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
-
-    public double HPFactor => MathUtils.FactorCalc(_currentHP, _maxHP); //_maxHP == 0 ? 0 : (_currentHP / _maxHP);
-    public double CurrentPercentage => HPFactor * 100;
-    bool _visible;
+    public double HPFactor
+    {
+        get => _hPFactor;
+        set
+        {
+            if (_hPFactor == value) return;
+            _hPFactor = value;
+            N();
+            CurrentPercentage = HPFactor * 100;
+            HpFactorChanged?.Invoke(_hPFactor);
+        }
+    }
+    public double CurrentPercentage
+    {
+        get => currentPercentage;
+        private set
+        {
+            if (currentPercentage == value) return;
+            currentPercentage = value;
+            N();
+        }
+    }
     public bool Visible
     {
         get => _visible;
@@ -133,8 +145,26 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             N();
         }
     }
-
-    ulong _target;
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set
+        {
+            if (_isSelected == value) return;
+            _isSelected = value;
+            N();
+        }
+    }
+    public int RemainingEnrageTime
+    {
+        get => _remainingEnrageTime;
+        set
+        {
+            if (_remainingEnrageTime == value) return;
+            _remainingEnrageTime = value;
+            N();
+        }
+    }
     public ulong Target
     {
         get => _target;
@@ -145,8 +175,6 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             N();
         }
     }
-
-    AggroCircle _currentAggroType = AggroCircle.None;
     public AggroCircle CurrentAggroType
     {
         get => _currentAggroType;
@@ -157,87 +185,32 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             N();
         }
     }
-
     public uint ZoneId { get; }
     public uint TemplateId { get; }
     public Species Species { get; set; }
-
     public EnragePattern? EnragePattern { get; private set; }
     public TimerPattern? TimerPattern { get; private set; }
-
-    public void AddorRefresh(Abnormality ab, uint duration, int stacks)
-    {
-        var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-        if (existing == null)
-        {
-            var newAb = new AbnormalityDuration(ab, duration, stacks, _target, _dispatcher, true);
-            if (ab.Infinity) Buffs.Insert(0, newAb);
-            else Buffs.Add(newAb);
-            if (!ab.IsShield) return;
-            MaxShield = ab.ShieldSize;
-            CurrentShield = ab.ShieldSize;
-            return;
-        }
-        existing.Duration = duration;
-        existing.DurationLeft = duration;
-        existing.Stacks = stacks;
-        existing.Refresh();
-
-    }
-    public void EndBuff(Abnormality ab)
-    {
-        try
-        {
-            var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-            if (buff == null) return;
-
-            Buffs.Remove(buff);
-            buff.Dispose();
-
-            if (!ab.IsShield) return;
-            CurrentShield = 0;
-            MaxShield = 0;
-        }
-        catch
-        {
-            // ignored
-        }
-    }
-
     public bool IsTower => TccUtils.IsGuildTower(ZoneId, TemplateId);
     public bool IsPhase1Dragon => TccUtils.IsPhase1Dragon(ZoneId, TemplateId);
-
-    public uint GuildId
+    public uint GuildId //todo: inheritance when?
     {
         get
         {
-            WindowManager.ViewModels.NpcVM.GuildIds.TryGetValue(EntityId, out var val);
+            WindowManager.ViewModels.NpcVM.GuildIds.TryGetValue(EntityId, out var val); // todo: also no pls
             return val;
         }
     }
+    public ThreadSafeObservableCollection<AbnormalityDuration> Buffs
+    {
+        get => _buffs;
+        set
+        {
+            if (_buffs == value) return;
+            _buffs = value;
+            N();
+        }
+    }
 
-    //public NPC(ulong eId, uint zId, uint tId, float curHP, float maxHP, Visibility visible)
-    //{
-    //    _dispatcher = WindowManager.ViewModels.NPC.Dispatcher;
-    //    EntityId = eId;
-    //    Name = EntityManager.MonsterDatabase.GetName(tId, zId);
-    //    ZoneId = zId;
-    //    TemplateId = tId;
-    //    MaxHP = maxHP;
-    //    CurrentHP = curHP;
-    //    _buffs = new SynchronizedObservableCollection<AbnormalityDuration>(_dispatcher);
-    //    Visible = visible;
-
-    //    IsShieldPhase = false;
-    //    IsSelected = false;
-    //    if (WindowManager.ViewModels.NPC.CurrentHHphase == HarrowholdPhase.Phase1)
-    //    {
-    //        ShieldDuration = new DispatcherTimer();
-    //        ShieldDuration.Interval = TimeSpan.FromSeconds(13);
-    //        ShieldDuration.Tick += ShieldFailed;
-    //    }
-
-    //}
     public Npc(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern? ep = null, TimerPattern? tp = null)
     {
         _dispatcher = WindowManager.ViewModels.NpcVM.Dispatcher;
@@ -256,22 +229,63 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         TimerPattern = tp;
         TimerPattern?.SetTarget(this);
         //if (IsPhase1Dragon)
-        //{
         //    _shieldDuration = new Timer { Interval = NpcWindowViewModel.Ph1ShieldDuration * 1000 };
         //    _shieldDuration.Elapsed += ShieldFailed;
         //}
         Override = new RelayCommand(_ =>
         {
             Game.DB.MonsterDatabase.ToggleOverride(ZoneId, TemplateId, !IsBoss);
-
         }, _ => true);
         Blacklist = new RelayCommand(_ =>
         {
             Game.DB.MonsterDatabase.Blacklist(ZoneId, TemplateId, true);
-
         }, _ => true);
     }
 
+    public void AddorRefreshAbnormality(Abnormality ab, uint duration, int stacks)
+    {
+        var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+        if (existing != null)
+        {
+            existing.Duration = duration;
+            existing.DurationLeft = duration;
+            existing.Stacks = stacks;
+            existing.Refresh();
+        }
+        else
+        {
+            var newAb = new AbnormalityDuration(ab, duration, stacks, _target, _dispatcher, true);
+            if (ab.Infinity) Buffs.Insert(0, newAb);
+            else Buffs.Add(newAb);
+
+            if (!ab.IsShield) return;
+
+            MaxShield = ab.ShieldSize;
+            CurrentShield = ab.ShieldSize;
+        }
+    }
+
+    public void EndBuff(Abnormality ab)
+    {
+        try
+        {
+            var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+
+            if (buff == null) return;
+
+            Buffs.Remove(buff);
+            buff.Dispose();
+
+            if (!ab.IsShield) return;
+
+            CurrentShield = 0;
+            MaxShield = 0;
+        }
+        catch
+        {
+            // ignored
+        }
+    }
 
     public override string ToString()
     {
@@ -280,22 +294,31 @@ public class Npc : ThreadSafeObservableObject, IDisposable
 
     public void Dispose()
     {
-        foreach (var buff in _buffs) buff.Dispose();
-        //if (_shieldDuration != null) _shieldDuration.Elapsed -= ShieldFailed;
+        foreach (var buff in _buffs)
+        {
+            buff.Dispose();
+        }
 
-        //_shieldDuration?.Dispose();
         TimerPattern?.Dispose();
         DeleteEvent?.Invoke();
     }
 
-    ///////////////////TIMER////////////////////////
+    public void Delete()
+    {
+        foreach (var buff in _buffs)
+        {
+            buff.Dispose();
+        }
 
+        DeleteEvent?.Invoke();
+    }
 
     //////////////////SHIELD////////////////////////
     //TODO: make this a separate class
     //private readonly Timer _shieldDuration;
 
     ShieldStatus _shield = ShieldStatus.Off;
+
     public ShieldStatus Shield
     {
         get => _shield;
@@ -307,39 +330,14 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         }
     }
 
-    bool _isSelected = true;
-    public bool IsSelected
-    {
-        get => _isSelected;
-        set
-        {
-            if (_isSelected == value) return;
-            _isSelected = value;
-            N();
-        }
-    }
+    /*
+            private void ShieldFailed(object sender, EventArgs e)
+            {
+                //_shieldDuration.Stop();
+                Shield = ShieldStatus.Failed;
+            }
+    */
 
-    int _remainingEnrageTime;
-    bool _isBoss;
-
-    public int RemainingEnrageTime
-    {
-        get => _remainingEnrageTime;
-        set
-        {
-            if (_remainingEnrageTime == value) return;
-            _remainingEnrageTime = value;
-            N();
-        }
-    }
-
-/*
-        private void ShieldFailed(object sender, EventArgs e)
-        {
-            //_shieldDuration.Stop();
-            Shield = ShieldStatus.Failed;
-        }
-*/
     public void BreakShield()
     {
         //_shieldDuration.Stop();
@@ -349,21 +347,14 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             Shield = ShieldStatus.Off;
         });
     }
+
     public void StartShield()
     {
         //_shieldDuration.Start();
         Shield = ShieldStatus.On;
     }
 
-    public event Action? DeleteEvent;
-    public void Delete()
-    {
-        foreach (var buff in _buffs) buff.Dispose();
-
-        DeleteEvent?.Invoke();
-    }
-
-    public void SetTimerPattern()
+    public void SetTimerPattern() // todo: get these from somewhere instead of hardcoding
     {
         if (App.Settings.EthicalMode) return;
 
@@ -408,7 +399,6 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         if (TemplateId == 81312 && ZoneId == 713) EnragePattern = new EnragePattern(0, 0);
         if (TemplateId == 81398 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, int.MaxValue) { StaysEnraged = true };
         if (TemplateId == 81399 && ZoneId == 713) EnragePattern = new EnragePattern(100 - 25, int.MaxValue) { StaysEnraged = true };
-
 
         if (ZoneId == 620 && TemplateId == 1000) EnragePattern = new EnragePattern((long)MaxHP, 420000000, 36);
         if (ZoneId == 622 && TemplateId == 1000) EnragePattern = new EnragePattern((long)MaxHP, 480000000, 36);

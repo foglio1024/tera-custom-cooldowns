@@ -10,8 +10,8 @@ using TCC.Data.Map;
 using TeraDataLite;
 
 namespace TCC.Data.Pc;
-//TODO: remove INPC from properties where it's not needed
 
+//TODO: remove INPC from properties where it's not needed
 public class Character : ThreadSafeObservableObject, IComparable
 {
     string _name = "";
@@ -34,6 +34,16 @@ public class Character : ThreadSafeObservableObject, IComparable
     public uint Id { get; set; }
     public int Position { get; set; }
     public string GuildName { get; set; } = "";
+    public string ServerName
+    {
+        get => _serverName;
+        set
+        {
+            if (_serverName == value) return;
+            _serverName = value;
+            N();
+        }
+    }
     public string Name
     {
         get => _name; set
@@ -165,28 +175,11 @@ public class Character : ThreadSafeObservableObject, IComparable
             N();
         }
     }
-
     public GuardianInfo GuardianInfo { get; }
     public VanguardInfo VanguardInfo { get; }
     public DungeonInfo DungeonInfo { get; }
-
     public ThreadSafeObservableCollection<AbnormalityData> Buffs { get; }
     public ThreadSafeObservableCollection<InventoryItem> Inventory { get; }
-
-    [JsonIgnore]
-    public ICommand UnhideCommand { get; }
-
-    //[JsonIgnore]
-    public string ServerName
-    {
-        get => _serverName;
-        set
-        {
-            if (_serverName == value) return;
-            _serverName = value;
-            N();
-        }
-    }
     [JsonIgnore]
     public bool IsLoggedIn
     {
@@ -223,9 +216,14 @@ public class Character : ThreadSafeObservableObject, IComparable
             return ret;
         }
     }
-    [JsonIgnore] public float ElleonMarksFactor => (float)MathUtils.FactorCalc(ElleonMarks, 1000);
-    [JsonIgnore] public float DragonwingScalesFactor => (float)MathUtils.FactorCalc(DragonwingScales, 10);
-    [JsonIgnore] public float PiecesOfDragonScrollFactor => (float)MathUtils.FactorCalc(PiecesOfDragonScroll, 40);
+    [JsonIgnore]
+    public float ElleonMarksFactor => (float)MathUtils.FactorCalc(ElleonMarks, 1000);
+    [JsonIgnore]
+    public float DragonwingScalesFactor => (float)MathUtils.FactorCalc(DragonwingScales, 10);
+    [JsonIgnore]
+    public float PiecesOfDragonScrollFactor => (float)MathUtils.FactorCalc(PiecesOfDragonScroll, 40);
+    [JsonIgnore]
+    public ICommand UnhideCommand { get; }
 
     public Character()
     {
@@ -236,6 +234,7 @@ public class Character : ThreadSafeObservableObject, IComparable
         DungeonInfo = new DungeonInfo();
         UnhideCommand = new RelayCommand(_ => Hidden = false);
     }
+
     public Character(string name, Class c, uint id, int pos) : this()
     {
         Name = name;
@@ -243,6 +242,7 @@ public class Character : ThreadSafeObservableObject, IComparable
         Id = id;
         Position = pos;
     }
+
     public Character(CharacterData item) : this()
     {
         Id = item.Id;

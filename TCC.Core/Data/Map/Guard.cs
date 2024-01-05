@@ -32,12 +32,12 @@ public readonly record struct Guard
         });
 
         var guard = new Guard(guardId, guardNameId, continentId);
-
         guardElem.Descendants().Where(x => x.Name == "Section").ToList().ForEach(sectionElem =>
         {
             var section = Section.FromXElement(sectionElem);
             guard.Sections[section.Id] = section;
         });
+
         return guard;
     }
 }

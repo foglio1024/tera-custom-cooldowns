@@ -739,7 +739,7 @@ public static class Game
     {
         #region Aura meme
 
-        if (p.EntityId == _foglioEid) Me.EndAbnormality(10241024);
+        if (p.EntityId == _foglioEid) Me.EndAbnormality(DB!.AbnormalityDatabase.Abnormalities[10241024]);
 
         #endregion Aura meme
 
@@ -753,18 +753,7 @@ public static class Game
         switch (p.Name)
         {
             case "Foglio":
-                //case "Fogolio":
-                //case "Foglietto":
-                //case "Foglia":
-                //case "Myvia":
-                //case "Foglietta.Blu":
-                //case "Foglia.Trancer":
-                //case "Folyria":
-                //case "Folyvia":
-                //case "Fogliolina":
-                //case "Folyemi":
-                //case "Foiya":
-                //case "Fogliarya":
+            case "Folyemi":
                 if (p.ServerId != 2800) break;
                 if (CivilUnrestZone) break;
                 _foglioEid = p.EntityId;

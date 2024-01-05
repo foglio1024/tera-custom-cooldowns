@@ -17,9 +17,9 @@ public class Location
 
     public Location()
     {
-        Position = new Point(0,0);
-
+        Position = new Point(0, 0);
     }
+
     public Location(uint w, uint g, uint s, double x, double y)
     {
         World = w;
@@ -27,6 +27,7 @@ public class Location
         Section = s;
         Position = new Point(x, y);
     }
+
     public Location(uint w, uint g, uint s)
     {
         World = w;
@@ -34,10 +35,11 @@ public class Location
         Section = s;
         Position = new Point(0, 0);
     }
+
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    /// <param name="value">WorldId_GuardId_SectionId</param>
+    /// <param name="value">"WorldId_GuardId_SectionId"</param>
     public Location(string value)
     {
         var split = value.Split('_');

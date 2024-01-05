@@ -123,7 +123,7 @@ public class NpcWindowViewModel : TccWindowViewModel
 
             var delay = (uint)(DateTime.Now - ab.ArrivalTime).TotalMilliseconds;
             if (delay >= ab.Duration) return;
-            npc.AddorRefresh(ab.Abnormality, ab.Duration - delay, ab.Stacks);
+            npc.AddorRefreshAbnormality(ab.Abnormality, ab.Duration - delay, ab.Stacks);
             //Log.CW($"Applied pending abnormal {ab.Abnormality.Name} to {ab.Target} ({npc.Name})");
         });
         npcAbs.ForEach(aa => PendingAbnormalities.Remove(aa));
@@ -166,7 +166,7 @@ public class NpcWindowViewModel : TccWindowViewModel
             });
             return;
         }
-        boss.AddorRefresh(ab, duration, stacks);
+        boss.AddorRefreshAbnormality(ab, duration, stacks);
     }
 
     public List<PendingAbnormality> PendingAbnormalities { get; }

@@ -59,9 +59,10 @@ public class VanguardInfo : ThreadSafeObservableObject
             N(nameof(WeeklyCompletion));
         }
     }
-
-    [JsonIgnore] public float CreditsFactor => (float)MathUtils.FactorCalc(Credits, MAX_CREDITS);
-    [JsonIgnore] public float DailyCompletion => (float)MathUtils.FactorCalc(DailiesDone, MAX_DAILIES);
-    [JsonIgnore] public float WeeklyCompletion => (float)MathUtils.FactorCalc(WeekliesDone, WeekliesMax);
-
+    [JsonIgnore] 
+    public float CreditsFactor => (float)MathUtils.FactorCalc(Credits, MAX_CREDITS);
+    [JsonIgnore] 
+    public float DailyCompletion => (float)MathUtils.FactorCalc(DailiesDone, MAX_DAILIES);
+    [JsonIgnore] 
+    public float WeeklyCompletion => (float)MathUtils.FactorCalc(WeekliesDone, WeekliesMax);
 }

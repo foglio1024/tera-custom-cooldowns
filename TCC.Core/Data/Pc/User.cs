@@ -382,105 +382,10 @@ public class User : ThreadSafeObservableObject
             N();
         }
     }
-
     public ICommand RequestInteractiveCommand { get; }
     public ICommand AcceptApplyCommand { get; set; }
     public ICommand DeclineApplyCommand { get; set; }
     public ICommand InspectCommand { get; set; }
-
-
-    public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
-    {
-        if (!App.Settings.GroupWindowSettings.ShowAllAbnormalities)
-        {
-            if (App.Settings.GroupWindowSettings.GroupAbnormals.TryGetValue(Class.Common, out var commonList))
-            {
-                if (!commonList.Contains(ab.Id))
-                {
-                    if (App.Settings.GroupWindowSettings.GroupAbnormals.TryGetValue(Game.Me.Class, out var classList))
-                    {
-                        if (!classList.Contains(ab.Id)) return;
-                    }
-                    else return;
-                }
-            }
-            else return;
-        }
-
-        var existing = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-        if (existing == null)
-        {
-            var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher,
-                Game.Group.Size < App.Settings.GroupWindowSettings.DisableAbnormalitiesAnimationThreshold, 
-                App.Settings.GroupWindowSettings.Hidden.Contains(ab.Id));
-            Buffs.Add(newAb);
-            return;
-        }
-        existing.Duration = duration;
-        existing.DurationLeft = duration;
-        existing.Stacks = stacks;
-        existing.Refresh();
-
-    }
-    public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
-    {
-        if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
-        {
-            _debuffList.Add(ab.Id);
-            N(nameof(IsDebuffed));
-        }
-
-        var existing = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-        if (existing == null)
-        {
-            var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, 
-                Game.Group.Size < App.Settings.GroupWindowSettings.DisableAbnormalitiesAnimationThreshold, 
-                App.Settings.GroupWindowSettings.Hidden.Contains(ab.Id));
-
-            Debuffs.Add(newAb);
-            return;
-        }
-        existing.Duration = duration;
-        existing.DurationLeft = duration;
-        existing.Stacks = stacks;
-        existing.Refresh();
-    }
-    public void RemoveBuff(Abnormality ab)
-    {
-        var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-        if (buff == null) return;
-        Buffs.Remove(buff);
-        buff.Dispose();
-    }
-    public void RemoveDebuff(Abnormality ab)
-    {
-        if (!ab.IsBuff)
-        {
-            _debuffList.Remove(ab.Id);
-            N(nameof(IsDebuffed));
-        }
-        var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
-        if (buff == null) return;
-        Debuffs.Remove(buff);
-        buff.Dispose();
-    }
-    public void ClearAbnormalities()
-    {
-        _dispatcher.Invoke(() =>
-        {
-            foreach (var item in Buffs)
-            {
-                item.Dispose();
-            }
-            foreach (var item in Debuffs)
-            {
-                item.Dispose();
-            }
-            Buffs.Clear();
-            Debuffs.Clear();
-            _debuffList.Clear();
-        });
-    }
 
     public User(Dispatcher? d) : base(d)
     {
@@ -499,7 +404,6 @@ public class User : ThreadSafeObservableObject
         RequestInteractiveCommand = new RelayCommand(_ =>
         {
             WindowManager.ViewModels.PlayerMenuVM.Open(Name, ServerId, (int)Level);
-            //ProxyInterface.Instance.Stub.AskInteractive(ServerId, Name);
         });
         InspectCommand = new RelayCommand(_ =>
         {
@@ -532,5 +436,98 @@ public class User : ThreadSafeObservableObject
         MaxSt = other.MaxST;
         InCombat = other.InCombat;
 
+    }
+
+    public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
+    {
+        if (!App.Settings.GroupWindowSettings.ShowAllAbnormalities
+         && !App.Settings.GroupWindowSettings.GroupAbnormals[Class.Common].Contains(ab.Id)
+         && !App.Settings.GroupWindowSettings.GroupAbnormals[Game.Me.Class].Contains(ab.Id))
+        {
+            return;
+        }
+
+        var buff = Buffs.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+        if (buff != null)
+        {
+            buff.Duration = duration;
+            buff.DurationLeft = duration;
+            buff.Stacks = stacks;
+            buff.Refresh();
+        }
+        else
+        {
+            var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher,
+                Game.Group.Size < App.Settings.GroupWindowSettings.DisableAbnormalitiesAnimationThreshold,
+                App.Settings.GroupWindowSettings.Hidden.Contains(ab.Id));
+            Buffs.Add(newAb);
+        }
+    }
+
+    public void AddOrRefreshDebuff(Abnormality ab, uint duration, int stacks)
+    {
+        if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
+        {
+            _debuffList.Add(ab.Id);
+            N(nameof(IsDebuffed));
+        }
+
+        var debuff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+        if (debuff == null)
+        {
+            var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher,
+                Game.Group.Size < App.Settings.GroupWindowSettings.DisableAbnormalitiesAnimationThreshold,
+                App.Settings.GroupWindowSettings.Hidden.Contains(ab.Id));
+
+            Debuffs.Add(newAb);
+        }
+        else
+        {
+            debuff.Duration = duration;
+            debuff.DurationLeft = duration;
+            debuff.Stacks = stacks;
+            debuff.Refresh();
+        }
+    }
+
+    public void RemoveBuff(Abnormality ab)
+    {
+        var buff = Buffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+        if (buff == null) return;
+
+        Buffs.Remove(buff);
+        buff.Dispose();
+    }
+
+    public void RemoveDebuff(Abnormality ab)
+    {
+        if (!ab.IsBuff)
+        {
+            _debuffList.Remove(ab.Id);
+            N(nameof(IsDebuffed));
+        }
+        var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
+        if (buff == null) return;
+        
+        Debuffs.Remove(buff);
+        buff.Dispose();
+    }
+
+    public void ClearAbnormalities()
+    {
+        _dispatcher.Invoke(() =>
+        {
+            foreach (var item in Buffs)
+            {
+                item.Dispose();
+            }
+            foreach (var item in Debuffs)
+            {
+                item.Dispose();
+            }
+            Buffs.Clear();
+            Debuffs.Clear();
+            _debuffList.Clear();
+        });
     }
 }

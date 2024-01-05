@@ -6,14 +6,20 @@ namespace TCC.Data.Npc;
 
 public class TimerPattern : ThreadSafeObservableObject, IDisposable
 {
+    public event Action? Started;
+    public event Action? Ended;
+
     readonly Timer _timer;
-    protected bool Running => _timer.Enabled;
+    protected bool IsRunning => _timer.Enabled;
     protected Npc? Target { get; set; }
     public int Duration { get; }
 
-    public event Action? Started;
-    public event Action? Ended;
-    //public event Action Reset;
+    protected TimerPattern(int duration)
+    {
+        Duration = duration;
+        _timer = new Timer(Duration * 1000);
+        _timer.Elapsed += OnTimerElapsed;
+    }
 
     protected void Start()
     {
@@ -25,14 +31,7 @@ public class TimerPattern : ThreadSafeObservableObject, IDisposable
     {
         Target = target;
     }
-
-    protected TimerPattern(int duration)
-    {
-        Duration = duration;
-        _timer = new Timer(Duration * 1000);
-        _timer.Elapsed += OnTimerElapsed;
-    }
-
+ 
     void OnTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         _timer.Stop();
@@ -44,6 +43,5 @@ public class TimerPattern : ThreadSafeObservableObject, IDisposable
         _timer.Elapsed -= OnTimerElapsed;
         _timer.Stop();
         _timer.Dispose();
-
     }
 }

@@ -7,17 +7,17 @@ namespace TCC.Data.Skills;
 public record struct Skill
 {
     string _iconName = "";
+    
     public string IconName
     {
-        get => _iconName;
+        readonly get => _iconName;
         set => _iconName = value.ToLower();
     }
-
     public uint Id { get; }
     public Class Class { get; }
     public string Name { get; }
     public string ToolTip { get; }
-    public string ShortName
+    public readonly string ShortName
     {
         get
         {
@@ -25,6 +25,7 @@ public record struct Skill
             var last = n[^1];
             if (last.Length >= 5) return Name;
             if (!(last.Contains('X') || last.Contains('I') || last.Contains('V'))) return Name;
+
             var sb = new StringBuilder();
             for (var i = 0; i < n.Length - 1; i++)
             {
@@ -35,7 +36,6 @@ public record struct Skill
             return sb.Length == 0 ? "" : sb.ToString()[..(sb.Length - 1)];
         }
     }
-
     public string Detail { get; set; } = "";
 
     public Skill(uint id, Class c, string name, string toolTip)
@@ -45,6 +45,7 @@ public record struct Skill
         Name = name;
         ToolTip = toolTip;
     }
+
     public Skill(Abnormality ab, Class c = Class.Common)
     {
         Id = ab.Id;

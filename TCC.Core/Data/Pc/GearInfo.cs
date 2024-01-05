@@ -25,5 +25,4 @@ public class GearInfo
         Jewels.Filter = g => ((GearItem)g).IsJewel && ((GearItem)g).Piece < GearPiece.Circlet;
         Jewels.SortDescriptions.Add(new SortDescription("Piece", ListSortDirection.Ascending));
     }
-
 }

@@ -10,7 +10,6 @@ public class DungeonCooldownData
     public uint Id { get; set; }
     public int Entries { get; set; }
     public int Clears { get; set; }
-
     [JsonIgnore]
     public Dungeon Dungeon => Game.DB!.DungeonDatabase.Dungeons.TryGetValue(Id, out var dg)
         ? dg

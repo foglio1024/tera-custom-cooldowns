@@ -110,9 +110,9 @@
     <PackageReference Include="Microsoft.Diagnostics.Runtime" Version="2.3.405304" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="Nostrum" Version="2.0.10" />
-    <PackageReference Include="Nostrum.WPF" Version="1.2.24" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Nostrum" Version="2.0.11" />
+    <PackageReference Include="Nostrum.WPF" Version="1.2.26" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TCC.Loader\TCC.Loader\TCC.Loader.csproj" />
