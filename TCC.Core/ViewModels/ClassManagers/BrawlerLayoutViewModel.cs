@@ -18,23 +18,13 @@ public class BrawlerLayoutViewModel : BaseClassLayoutViewModel
     public bool IsGfOn
     {
         get => _isGfOn;
-        set
-        {
-            if (_isGfOn == value) return;
-            _isGfOn = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isGfOn);
     }
 
     public bool CounterProc
     {
         get => _counterProc;
-        set
-        {
-            if (_counterProc == value) return;
-            _counterProc = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _counterProc);
     }
 
 

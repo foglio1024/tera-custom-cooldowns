@@ -61,7 +61,7 @@ public class NpcViewModel : ThreadSafeObservableObject
 
     void OnShowMenuButtonTimerTick(object? _, EventArgs __)
     {
-        N(nameof(ShowOverrideBtn));
+        InvokePropertyChanged(nameof(ShowOverrideBtn));
         ShowMenuButtonTimer.Stop();
     }
     protected virtual void OnDeleteTimerTick(object? s, EventArgs ev)

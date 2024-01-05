@@ -23,22 +23,12 @@ public class FloatingButtonViewModel : TccWindowViewModel
     public bool PendingNotifications
     {
         get => _pendingNotifications;
-        set
-        {
-            if (_pendingNotifications == value) return;
-            _pendingNotifications = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _pendingNotifications);
     }
     public int PendingNotificationsAmount
     {
         get => _pendingNotificationsAmount;
-        set
-        {
-            if (_pendingNotificationsAmount == value) return;
-            _pendingNotificationsAmount = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _pendingNotificationsAmount);
     }
     public ICommand OpenSettingsCommand { get; }
     public ICommand OpenLfgCommand { get; }
@@ -47,22 +37,12 @@ public class FloatingButtonViewModel : TccWindowViewModel
     public int CurrPP
     {
         get => _currPP;
-        set
-        {
-            if (_currPP == value) return;
-            _currPP = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _currPP);
     }
     public int MaxPP
     {
         get => _maxPP;
-        set
-        {
-            if (_maxPP == value) return;
-            _maxPP = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _maxPP);
     }
 
     public double CoinsFactor => Game.Me.CoinsFactor;
@@ -88,9 +68,9 @@ public class FloatingButtonViewModel : TccWindowViewModel
 
     void OnCoinsUpdated()
     {
-        N(nameof(CoinsFactor));
-        N(nameof(CurrCoins));
-        N(nameof(MaxCoins));
+        InvokePropertyChanged(nameof(CoinsFactor));
+        InvokePropertyChanged(nameof(CurrCoins));
+        InvokePropertyChanged(nameof(MaxCoins));
     }
 
     protected override void InstallHooks()
@@ -102,7 +82,7 @@ public class FloatingButtonViewModel : TccWindowViewModel
     {
         CurrPP = p.CurrFatigability;
         MaxPP = p.MaxFatigability;
-        N(nameof(PPFactor));
+        InvokePropertyChanged(nameof(PPFactor));
     }
 
     public void WarnCloseEvents(int closeEventsCount)

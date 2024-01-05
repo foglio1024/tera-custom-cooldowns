@@ -114,7 +114,7 @@ public class ChatManager : TccWindowViewModel
                 }
                 ChatMessages.RemoveBatch(toRemove);
             }
-            N(nameof(MessageCount));
+            InvokePropertyChanged(nameof(MessageCount));
 
         }
 #endif
@@ -409,7 +409,7 @@ public class ChatManager : TccWindowViewModel
             else
             {
                 _pauseQueue.Enqueue(chatMessage);
-                N(nameof(QueuedMessagesCount));
+                InvokePropertyChanged(nameof(QueuedMessagesCount));
 
             }
 
@@ -423,7 +423,7 @@ public class ChatManager : TccWindowViewModel
                 ChatMessages.RemoveAt(ChatMessages.Count - 1);
             }
 
-            N(nameof(MessageCount));
+            InvokePropertyChanged(nameof(MessageCount));
 #endif
         }, DispatcherPriority.DataBind);
     }
@@ -455,7 +455,7 @@ public class ChatManager : TccWindowViewModel
         for (var i = 0; i < itemsToAdd; i++)
             if (_pauseQueue.TryDequeue(out var msg))
             {
-                N(nameof(QueuedMessagesCount));
+                InvokePropertyChanged(nameof(QueuedMessagesCount));
 #if BATCH
                     _mainQueue.Enqueue(msg);
 #else

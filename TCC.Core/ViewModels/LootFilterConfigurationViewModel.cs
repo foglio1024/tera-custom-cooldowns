@@ -18,14 +18,12 @@ public class LootFilterConfigurationViewModel : ThreadSafeObservableObject
         get => _searchFilter;
         set
         {
-            if (_searchFilter == value) return;
-            _searchFilter = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _searchFilter)) return;
 
             var view = (ICollectionView?)ItemsView;
             if (view == null) return;
 
-            view.Filter = o => ((Item)o).Name.IndexOf(_searchFilter, StringComparison.InvariantCultureIgnoreCase) != -1;
+            view.Filter = o => ((Item)o).Name.Contains(_searchFilter, StringComparison.InvariantCultureIgnoreCase);
             view.Refresh();
         }
     }

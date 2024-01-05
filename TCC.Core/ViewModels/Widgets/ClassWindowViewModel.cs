@@ -24,8 +24,7 @@ public class ClassWindowViewModel : TccWindowViewModel
         get => _currentClass;
         set
         {
-            if (_currentClass == value) return;
-            _currentClass = value;
+            if (!RaiseAndSetIfChanged(value, ref _currentClass)) return;
 
             _dispatcher.Invoke(() =>
             {
@@ -48,20 +47,13 @@ public class ClassWindowViewModel : TccWindowViewModel
                     _ => new NullClassLayoutViewModel()
                 };
             });
-            N();
         }
     }
 
     public BaseClassLayoutViewModel CurrentManager
     {
         get => _currentManager;
-        set
-        {
-            if (_currentManager == value) return;
-            _currentManager = value;
-            CurrentManager = _currentManager;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _currentManager);
     }
 
     public ClassWindowViewModel(ClassWindowSettings settings) : base(settings)

@@ -24,43 +24,23 @@ public class AbnormalityDuration : ThreadSafeObservableObject, IDisposable
     public uint Duration
     {
         get => _duration;
-        set
-        {
-            if (value == _duration) return;
-            _duration = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _duration);
     }
     public int Stacks
     {
         get => _stacks;
-        set
-        {
-            if (value == _stacks) return;
-            _stacks = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _stacks);
     }
     public double DurationLeft
     {
         get => _durationLeft;
-        set
-        {
-            if (value == _durationLeft) return;
-            _durationLeft = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _durationLeft);
     }
     public bool Animated { get; private set; }
     public bool IsHidden
     {
         get => _isHidden;
-        set
-        {
-            if (_isHidden == value) return;
-            _isHidden = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isHidden);
     }
     public bool CanBeHidden { get; set; }
     public DateTime TimeOfArrival { get; } = DateTime.Now;

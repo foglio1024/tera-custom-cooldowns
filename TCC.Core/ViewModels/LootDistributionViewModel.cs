@@ -48,23 +48,13 @@ public class LootDistributionViewModel : TccWindowViewModel
     public LootItemViewModel? ItemInDistribution
     {
         get => _itemInDistribution;
-        set
-        {
-            if (_itemInDistribution == value) return;
-            _itemInDistribution = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _itemInDistribution);
     }
 
     public bool IsListVisible
     {
         get => _isListVisible;
-        set
-        {
-            if (_isListVisible == value) return;
-            _isListVisible = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isListVisible);
     }
 
     public int ItemsLeftAmount
@@ -75,30 +65,20 @@ public class LootDistributionViewModel : TccWindowViewModel
             if (_itemsLeftAmount == value) return;
             _itemsLeftAmount = value;
             if (_itemsLeftAmount < 0) _itemsLeftAmount = 0;
-            N();
+            N(); // change value first
         }
     }
 
     public int TimeLeft
     {
         get => _timeLeft;
-        set
-        {
-            if (_timeLeft == value) return;
-            _timeLeft = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _timeLeft);
     }
 
     public float DelayFactor
     {
         get => _delayFactor;
-        set
-        {
-            if (_delayFactor == value) return;
-            _delayFactor = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _delayFactor);
     }
 
     public ThreadSafeObservableCollection<LootItemViewModel> DistributionList { get; }

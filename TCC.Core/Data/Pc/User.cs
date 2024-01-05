@@ -175,7 +175,7 @@ public class User : ThreadSafeObservableObject
             if (_currentHp == value) return;
             _currentHp = value;
             N();
-            N(nameof(HpFactor));
+            InvokePropertyChanged(nameof(HpFactor));
         }
     }
     public int CurrentMp
@@ -186,7 +186,7 @@ public class User : ThreadSafeObservableObject
             if (_currentMp == value) return;
             _currentMp = value;
             N();
-            N(nameof(MpFactor));
+            InvokePropertyChanged(nameof(MpFactor));
         }
     }
     public int CurrentSt
@@ -197,7 +197,7 @@ public class User : ThreadSafeObservableObject
             if (_currentSt == value) return;
             _currentSt = value;
             N();
-            N(nameof(StFactor));
+            InvokePropertyChanged(nameof(StFactor));
         }
     }
     public long MaxHp
@@ -208,7 +208,7 @@ public class User : ThreadSafeObservableObject
             if (_maxHp == value) return;
             _maxHp = value;
             N();
-            N(nameof(HpFactor));
+            InvokePropertyChanged(nameof(HpFactor));
         }
     }
     public int MaxMp
@@ -219,7 +219,7 @@ public class User : ThreadSafeObservableObject
             if (_maxMp == value) return;
             _maxMp = value;
             N();
-            N(nameof(MpFactor));
+            InvokePropertyChanged(nameof(MpFactor));
         }
     }
     public int MaxSt
@@ -230,7 +230,7 @@ public class User : ThreadSafeObservableObject
             if (_maxSt == value) return;
             _maxSt = value;
             N();
-            N(nameof(StFactor));
+            InvokePropertyChanged(nameof(StFactor));
         }
     }
     public double HpFactor => MathUtils.FactorCalc(CurrentHp, MaxHp);
@@ -469,7 +469,7 @@ public class User : ThreadSafeObservableObject
         if (!ab.IsBuff && !_debuffList.Contains(ab.Id))
         {
             _debuffList.Add(ab.Id);
-            N(nameof(IsDebuffed));
+            InvokePropertyChanged(nameof(IsDebuffed));
         }
 
         var debuff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -504,7 +504,7 @@ public class User : ThreadSafeObservableObject
         if (!ab.IsBuff)
         {
             _debuffList.Remove(ab.Id);
-            N(nameof(IsDebuffed));
+            InvokePropertyChanged(nameof(IsDebuffed));
         }
         var buff = Debuffs.FirstOrDefault(x => x.Abnormality.Id == ab.Id);
         if (buff == null) return;

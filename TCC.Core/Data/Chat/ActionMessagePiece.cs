@@ -23,7 +23,7 @@ public class ActionMessagePiece : SimpleMessagePiece
                     .Where(x => x.ChatLinkAction == ChatLinkAction)
                     .ToList()
                     .ForEach(x => x.IsHovered = value);
-            N();
+            InvokePropertyChanged();
         }
     }
     public string ChatLinkAction { get; }

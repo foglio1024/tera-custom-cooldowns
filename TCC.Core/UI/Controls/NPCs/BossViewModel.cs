@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Nostrum;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Threading;
-using Nostrum;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Npc;
 
@@ -64,8 +64,8 @@ public class BossViewModel : NpcViewModel
             if (_nextEnragePerc == value) return;
             _nextEnragePerc = value;
             if (value < 0) _nextEnragePerc = 0;
-            N();
-            N(nameof(EnrageTBtext));
+            InvokePropertyChanged();
+            InvokePropertyChanged(nameof(EnrageTBtext));
         }
     }
     public string EnrageTBtext
@@ -105,23 +105,16 @@ public class BossViewModel : NpcViewModel
         get => _curEnrageTime;
         set
         {
-            if (_curEnrageTime == value) return;
-            _curEnrageTime = value;
-            N();
-            N(nameof(EnrageTBtext));
-            N(nameof(RhombEnrageTimerText));
+            if (!RaiseAndSetIfChanged(value, ref _curEnrageTime)) return;
+            InvokePropertyChanged(nameof(EnrageTBtext));
+            InvokePropertyChanged(nameof(RhombEnrageTimerText));
         }
     }
 
     public bool IsTimerRunning
     {
         get => _isTimerRunning;
-        set
-        {
-            if (_isTimerRunning == value) return;
-            _isTimerRunning = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isTimerRunning);
     }
 
     public BossViewModel(Npc npc) : base(npc)
@@ -195,15 +188,15 @@ public class BossViewModel : NpcViewModel
                     if (EnrageHistory.Count > 0)
                     {
                         EnrageHistory.Last().SetEnd(CurrentPercentage);
-                        //N(nameof(EnrageHistory));
+                        //InvokePropertyChanged(nameof(EnrageHistory));
                     }
                 }
                 InvokeHpChanged();
-                N(nameof(EnrageTBtext));
-                N(nameof(RemainingPercentage));
-                N(nameof(TotalEnrage));
-                N(nameof(MainPercDec));
-                N(nameof(MainPercInt));
+                InvokePropertyChanged(nameof(EnrageTBtext));
+                InvokePropertyChanged(nameof(RemainingPercentage));
+                InvokePropertyChanged(nameof(TotalEnrage));
+                InvokePropertyChanged(nameof(MainPercDec));
+                InvokePropertyChanged(nameof(MainPercInt));
                 break;
             case nameof(NPC.MaxHP):
                 if (NPC is { HPFactor: 1, EnragePattern: not null })
@@ -217,8 +210,8 @@ public class BossViewModel : NpcViewModel
                     EnrageHistory.Add(new EnragePeriodItem(CurrentPercentage));
                     _addEnrageItem = false;
                     _numberTimer.Refresh();
-                    N(nameof(RhombEnrageTimerText));
-                    //N(nameof(EnrageHistory));
+                    InvokePropertyChanged(nameof(RhombEnrageTimerText));
+                    //InvokePropertyChanged(nameof(EnrageHistory));
                 }
                 else
                 {
@@ -233,7 +226,7 @@ public class BossViewModel : NpcViewModel
                             : NPC.EnragePattern.Duration;
                     }
 
-                    N(nameof(RemainingPercentage));
+                    InvokePropertyChanged(nameof(RemainingPercentage));
                 }
                 EnragedChanged?.Invoke();
                 break;
@@ -246,8 +239,8 @@ public class BossViewModel : NpcViewModel
                 if (CurrentEnrageTime < NPC.RemainingEnrageTime / 1000) ReEnraged?.Invoke();
                 _numberTimer.Refresh();
                 CurrentEnrageTime = NPC.RemainingEnrageTime / 1000;
-                N(nameof(EnrageTBtext));
-                N(nameof(RemainingPercentage));
+                InvokePropertyChanged(nameof(EnrageTBtext));
+                InvokePropertyChanged(nameof(RemainingPercentage));
 
                 break;
 

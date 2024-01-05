@@ -23,10 +23,8 @@ public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
         get => _customSize ? _fontSize : App.Settings.FontSize;
         init
         {
-            if (_fontSize == value) return;
             _fontSize = value;
             _customSize = value != App.Settings.FontSize;
-            N();
         }
     }
     public string Color { get; set; } = "";
@@ -37,8 +35,17 @@ public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
         get => _isVisible;
         set
         {
-            if (value) SettingsWindowViewModel.FontSizeChanged += OnFontSizeChanged;
-            else SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
+            /// todo: can we do this?
+            //if (!RaiseAndSetIfChanged(value, ref _isVisible)) return;
+
+            if (value)
+            {
+                SettingsWindowViewModel.FontSizeChanged += OnFontSizeChanged;
+            }
+            else
+            {
+                SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
+            }
 
             if (_isVisible == value) return;
             _isVisible = value;
@@ -73,7 +80,7 @@ public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
 
     void OnFontSizeChanged()
     {
-        N(nameof(Size));
+        InvokePropertyChanged(nameof(Size));
     }
 
     public void Dispose()

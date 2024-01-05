@@ -30,9 +30,7 @@ public class ChatWindowSettings : WindowSettingsBase
         get => _hideTimeout;
         set
         {
-            if (_hideTimeout == value) return;
-            _hideTimeout = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hideTimeout)) return;
             TimeoutChanged?.Invoke();
         }
     }
@@ -41,9 +39,7 @@ public class ChatWindowSettings : WindowSettingsBase
         get => _backgroundOpacity;
         set
         {
-            if (_backgroundOpacity == value) return;
-            _backgroundOpacity = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _backgroundOpacity)) return;
             OpacityChanged?.Invoke();
         }
     }
@@ -52,9 +48,7 @@ public class ChatWindowSettings : WindowSettingsBase
         get => _frameOpacity;
         set
         {
-            if (_frameOpacity == value) return;
-            _frameOpacity = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _frameOpacity)) return;
             OpacityChanged?.Invoke();
         }
     }
@@ -63,30 +57,21 @@ public class ChatWindowSettings : WindowSettingsBase
         get => _fadeOut;
         set
         {
-            if (_fadeOut == value) return;
-            _fadeOut = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _fadeOut)) return;
             FadeoutChanged?.Invoke();
         }
     }
     public bool LfgOn
     {
         get => _lfgOn;
-        set
-        {
-            if (_lfgOn == value) return;
-            _lfgOn = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _lfgOn);
     }
     public bool CanCollapse
     {
         get => _canCollapse;
         set
         {
-            if (_canCollapse == value) return;
-            _canCollapse = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _canCollapse)) return;
             if (!_canCollapse) StaysCollapsed = false;
             CanCollapseChanged?.Invoke();
         }
@@ -96,21 +81,14 @@ public class ChatWindowSettings : WindowSettingsBase
         get => _staysCollapsed;
         set
         {
-            if (_staysCollapsed == value) return;
-            _staysCollapsed = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _staysCollapsed)) return;
             StaysCollapsedChanged?.Invoke();
         }
     }
     public bool ShowImportant
     {
         get => _showImportant;
-        set
-        {
-            if (_showImportant == value) return;
-            _showImportant = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _showImportant);
     }
 
 
@@ -119,9 +97,7 @@ public class ChatWindowSettings : WindowSettingsBase
         get => _collapsedHeight;
         set
         {
-            if (_collapsedHeight == value) return;
-            _collapsedHeight = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _collapsedHeight)) return;
             CollapsedHeightChanged?.Invoke();
         }
     }
@@ -147,8 +123,5 @@ public class ChatWindowSettings : WindowSettingsBase
         Tabs = new List<TabInfo>();
         PerClassPosition = false;
         IgnoreSize = false;
-
     }
-
-
 }

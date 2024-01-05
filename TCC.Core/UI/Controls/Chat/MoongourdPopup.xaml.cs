@@ -15,12 +15,7 @@ public class MoongourdPopupViewModel : ThreadSafeObservableObject
     public string PlayerName
     {
         get => _playerName;
-        set
-        {
-            if (_playerName == value) return;
-            _playerName = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _playerName);
     }
 
     string _emptyText = "No data.";
@@ -28,12 +23,7 @@ public class MoongourdPopupViewModel : ThreadSafeObservableObject
     public string EmptyText
     {
         get => _emptyText;
-        set
-        {
-            if (_emptyText == value) return;
-            _emptyText = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _emptyText);
     }
 
     public ThreadSafeObservableCollection<EncounterViewModel> Encounters { get; }

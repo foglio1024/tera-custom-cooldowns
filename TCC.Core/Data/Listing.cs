@@ -23,7 +23,6 @@ public class Listing : ThreadSafeObservableObject
     int _playerCount;
     bool _canApply = true;
     bool _isMyLfg;
-    readonly bool _temp;
     readonly DateTime _createdOn;
     bool _isFullOffline;
 
@@ -34,21 +33,14 @@ public class Listing : ThreadSafeObservableObject
         get => _isRaid;
         set
         {
-            if (_isRaid == value) return;
-            _isRaid = value;
-            N();
-            N(nameof(MaxCount));
+            if (!RaiseAndSetIfChanged(value, ref _isRaid)) return;
+            InvokePropertyChanged(nameof(MaxCount));
         }
     }
     public int PlayerCount
     {
         get => _playerCount;
-        set
-        {
-            if (_playerCount == value) return;
-            _playerCount = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _playerCount);
     }
     public string Message
     {
@@ -56,62 +48,36 @@ public class Listing : ThreadSafeObservableObject
         set
         {
             if (_message == value) return;
-            _message = value.Replace("&gt;", ">").Replace("&lt;", "<");
+            _message = value.Replace("&gt;", ">").Replace("&lt;", "<"); // todo: change value before setting
             N();
-            N(nameof(IsTrade));
-            N(nameof(IsTwitch));
+            InvokePropertyChanged(nameof(IsTrade));
+            InvokePropertyChanged(nameof(IsTwitch));
         }
     }
     public string LeaderName
     {
         get => _leaderName;
-        set
-        {
-            if (_leaderName == value) return;
-            _leaderName = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _leaderName);
     }
     public bool IsExpanded
     {
         get => _isExpanded;
-        set
-        {
-            if (_isExpanded == value) return;
-            _isExpanded = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isExpanded);
     }
     public bool IsPopupOpen
     {
         get => _isPopupOpen;
         set
         {
-            if (_isPopupOpen == value) return;
-            _isPopupOpen = value;
+            if (!RaiseAndSetIfChanged(value, ref _isPopupOpen)) return;
             FocusManager.PauseTopmost = _isPopupOpen;
-            N();
         }
     }
-    public bool Temp
-    {
-        get => _temp;
-        private init
-        {
-            if (_temp == value) return;
-            _temp = value;
-            N();
-        }
-    }
+    public bool Temp { get; }
     public bool IsMyLfg
     {
         get => _isMyLfg;
-        set
-        {
-            if (_isMyLfg == value) return;
-            _isMyLfg = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isMyLfg);
     }
     public bool IsTrade => _message.Contains("WTS", StringComparison.InvariantCultureIgnoreCase) ||
                            _message.Contains("WTB", StringComparison.InvariantCultureIgnoreCase) ||
@@ -121,12 +87,7 @@ public class Listing : ThreadSafeObservableObject
     public bool CanApply
     {
         get => _canApply;
-        set
-        {
-            if (_canApply == value) return;
-            _canApply = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _canApply);
     }
     public string TwitchLink
     {
@@ -145,12 +106,7 @@ public class Listing : ThreadSafeObservableObject
     public bool IsFullOffline
     {
         get => _isFullOffline;
-        set
-        {
-            if (_isFullOffline == value) return;
-            _isFullOffline = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isFullOffline);
     }
     public ThreadSafeObservableCollection<User> Players { get; }
     public ThreadSafeObservableCollection<User> Applicants { get; }

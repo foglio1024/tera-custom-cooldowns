@@ -422,7 +422,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.EnableProxy == value) return;
             App.Settings.EnableProxy = value;
             N();
-            N(nameof(ClickThruModes));
+            InvokePropertyChanged(nameof(ClickThruModes));
             StubInterface.Instance.StubClient.UpdateSetting("EnableProxy", App.Settings.ChatEnabled);
 
         }
@@ -846,12 +846,12 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
 
     void OnReleaseVersionChanged(int obj)
     {
-        N(nameof(ClickThruModes));
+        InvokePropertyChanged(nameof(ClickThruModes));
     }
 
     void MonsterDatabase_BlacklistChangedEvent(uint arg1, uint arg2, bool arg3)
     {
-        N(nameof(BlacklistedMonsters));
+        InvokePropertyChanged(nameof(BlacklistedMonsters));
     }
 
     void OnShowSettingsWindowHotkeyPressed()

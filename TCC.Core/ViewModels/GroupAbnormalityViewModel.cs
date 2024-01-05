@@ -14,12 +14,7 @@ public class GroupAbnormalityViewModel : ThreadSafeObservableObject
     public bool Hidden
     {
         get => _hidden;
-        set
-        {
-            if (_hidden == value) return;
-            _hidden = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _hidden);
     }
 
     public ICommand HiddenCommand { get; }

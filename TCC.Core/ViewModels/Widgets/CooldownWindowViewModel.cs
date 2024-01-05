@@ -33,12 +33,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
     public bool IsDragging
     {
         get => _isDragging;
-        set
-        {
-            if (_isDragging == value) return;
-            _isDragging = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isDragging);
     }
 
     public bool ShowItems => App.Settings.CooldownWindowSettings.ShowItems;
@@ -421,9 +416,9 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
             _dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(Game.DB!.SkillsDatabase.SkillsForClass(c)));
 
-            N(nameof(SkillsView));
-            N(nameof(MainSkills));
-            N(nameof(SecondarySkills));
+            InvokePropertyChanged(nameof(SkillsView));
+            InvokePropertyChanged(nameof(MainSkills));
+            InvokePropertyChanged(nameof(SecondarySkills));
 
             SkillsLoaded?.Invoke();
 
@@ -463,7 +458,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     public void NotifyModeChanged()
     {
-        N(nameof(Mode));
+        InvokePropertyChanged(nameof(Mode));
     }
 
     public CooldownWindowViewModel(WindowSettingsBase settings) : base(settings)
@@ -503,7 +498,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     void OnCombatChanged()
     {
-        N(nameof(Combat));
+        InvokePropertyChanged(nameof(Combat));
     }
 
 
@@ -523,7 +518,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     public void NotifyItemsDisplay()
     {
-        N(nameof(ShowItems));
+        InvokePropertyChanged(nameof(ShowItems));
     }
     public void ResetSkill(Skill skill)
     {

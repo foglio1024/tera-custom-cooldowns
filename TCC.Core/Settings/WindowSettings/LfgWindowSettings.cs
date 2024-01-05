@@ -43,9 +43,7 @@ public class LfgWindowSettings : WindowSettingsBase
         get => _hideTradeListings;
         set
         {
-            if (_hideTradeListings == value) return;
-            _hideTradeListings = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hideTradeListings)) return;
             HideTradeListingsChangedEvent?.Invoke();
         }
     }
@@ -57,9 +55,9 @@ public class LfgWindowSettings : WindowSettingsBase
         get => _autoPublicizeCooldown;
         set
         {
-            if (_autoPublicizeCooldown == value) return;
+            if (_autoPublicizeCooldown == value) return; //todo: change value and use RaiseAndSetIfChanged?
             _autoPublicizeCooldown = value < MinAutoPublicizeCooldown ? MinAutoPublicizeCooldown : value;
-            N();
+            InvokePropertyChanged();
         }
     }
 

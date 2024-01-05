@@ -30,9 +30,9 @@ public class PerfMonitorViewModel : TccWindowViewModel
             if (_memory == value) return;
             _memory = value;
             N();
-            N(nameof(MemoryCritical));
-            N(nameof(MemoryWarning));
-            N(nameof(MemoryAAAAAAAAAAAAAAA));
+            InvokePropertyChanged(nameof(MemoryCritical));
+            InvokePropertyChanged(nameof(MemoryWarning));
+            InvokePropertyChanged(nameof(MemoryAAAAAAAAAAAAAAA));
         }
     }
     public double CPU

@@ -46,10 +46,10 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
             if (_name == value) return;
             _name = value;
             N();
-            N(nameof(BlockLabelText));
-            N(nameof(ShowAddFriend));
-            N(nameof(ShowWhisper));
-            N(nameof(ShowBlockUnblock));
+            InvokePropertyChanged(nameof(BlockLabelText));
+            InvokePropertyChanged(nameof(ShowAddFriend));
+            InvokePropertyChanged(nameof(ShowWhisper));
+            InvokePropertyChanged(nameof(ShowBlockUnblock));
         }
     }
 
@@ -89,9 +89,9 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
             if (_isFromOtherServer == value) return;
             _isFromOtherServer = value;
             N();
-            N(nameof(ShowAddFriend));
-            N(nameof(ShowBlockUnblock));
-            N(nameof(ShowWhisper));
+            InvokePropertyChanged(nameof(ShowAddFriend));
+            InvokePropertyChanged(nameof(ShowBlockUnblock));
+            InvokePropertyChanged(nameof(ShowWhisper));
         }
     }
 
@@ -289,7 +289,7 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
                     UnfriendConfirmationRequested?.Invoke();
                 }
                 Unfriending = !Unfriending;
-                N(nameof(FriendLabelText));
+                InvokePropertyChanged(nameof(FriendLabelText));
             }
             else
             {
@@ -310,7 +310,7 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
                     {
                         Log.N("Error", "Failed to block user: server id cannot be 0.", NotificationType.Error);
                         Blocking = !Blocking;
-                        N(nameof(BlockLabelText));
+                        InvokePropertyChanged(nameof(BlockLabelText));
                         Refresh();
                         return;
                     }
@@ -330,7 +330,7 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
                     BlockConfirmationRequested?.Invoke();
                 }
                 Blocking = !Blocking;
-                N(nameof(BlockLabelText));
+                InvokePropertyChanged(nameof(BlockLabelText));
             }
             else
             {
@@ -484,23 +484,23 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
 
     void Refresh()
     {
-        N(nameof(ShowPartyInvite));
-        N(nameof(ShowGuildInvite));
-        N(nameof(ShowAddFriend));
-        N(nameof(ShowKick));
-        N(nameof(ShowWhisper));
-        N(nameof(BlockLabelText));
-        N(nameof(FriendLabelText));
-        N(nameof(IsBlocked));
-        N(nameof(IsFriend));
-        N(nameof(PowersLabelText));
-        N(nameof(ShowDelegateLeader));
-        N(nameof(ShowGrantPowers));
-        N(nameof(ShowFpsUtils));
-        N(nameof(ShowMakeGuildMaster));
-        N(nameof(ShowGuildKick));
-        N(nameof(ShowSeparator1));
-        N(nameof(ShowSeparator2));
+        InvokePropertyChanged(nameof(ShowPartyInvite));
+        InvokePropertyChanged(nameof(ShowGuildInvite));
+        InvokePropertyChanged(nameof(ShowAddFriend));
+        InvokePropertyChanged(nameof(ShowKick));
+        InvokePropertyChanged(nameof(ShowWhisper));
+        InvokePropertyChanged(nameof(BlockLabelText));
+        InvokePropertyChanged(nameof(FriendLabelText));
+        InvokePropertyChanged(nameof(IsBlocked));
+        InvokePropertyChanged(nameof(IsFriend));
+        InvokePropertyChanged(nameof(PowersLabelText));
+        InvokePropertyChanged(nameof(ShowDelegateLeader));
+        InvokePropertyChanged(nameof(ShowGrantPowers));
+        InvokePropertyChanged(nameof(ShowFpsUtils));
+        InvokePropertyChanged(nameof(ShowMakeGuildMaster));
+        InvokePropertyChanged(nameof(ShowGuildKick));
+        InvokePropertyChanged(nameof(ShowSeparator1));
+        InvokePropertyChanged(nameof(ShowSeparator2));
     }
 
     void AskInteractive()

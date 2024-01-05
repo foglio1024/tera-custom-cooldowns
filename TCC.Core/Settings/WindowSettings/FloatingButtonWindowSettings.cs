@@ -10,12 +10,7 @@ public class FloatingButtonWindowSettings : WindowSettingsBase
     public bool ShowNotificationBubble
     {
         get => _showNotificationBubble;
-        set
-        {
-            if (_showNotificationBubble == value) return;
-            _showNotificationBubble = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _showNotificationBubble);
     }
 
     public FloatingButtonWindowSettings()

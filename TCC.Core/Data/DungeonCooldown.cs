@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using System.Windows.Threading;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Nostrum.WPF.ThreadSafe;
+using System.ComponentModel;
+using System.Windows.Threading;
 using TCC.Data.Pc;
 
 namespace TCC.Data;
@@ -9,31 +9,18 @@ namespace TCC.Data;
 public class DungeonCooldown : ThreadSafeObservableObject
 {
     int _entries;
-    readonly int _clears;
 
     uint Id { get; }
+    public int Clears { get; }
     public int Entries
     {
         get => _entries;
         set
         {
-            if (_entries == value) return;
-            _entries = value;
-            N();
-            N(nameof(AvailableEntries));
+            if (!RaiseAndSetIfChanged(value, ref _entries)) return;
+            InvokePropertyChanged(nameof(AvailableEntries));
         }
     }
-    public int Clears
-    {
-        get => _clears;
-        private init
-        {
-            if (_clears == value) return;
-            _clears = value;
-            N();
-        }
-    }
-
     [JsonIgnore]
     public int AvailableEntries
     {
@@ -65,13 +52,14 @@ public class DungeonCooldown : ThreadSafeObservableObject
         : new Dungeon(0, "");
     [JsonIgnore]
     public int Runs => Dungeon.MaxEntries;
-    [JsonIgnore] 
+    [JsonIgnore]
     public Character? Owner { get; }
+    [JsonIgnore]
+    public int Index => Dungeon.Index;
     //used only for filtering
     //[JsonIgnore]
     //public ItemLevelTier RequiredIlvl => Dungeon.RequiredIlvl;
-    [JsonIgnore]
-    public int Index => Dungeon.Index;
+
     [JsonConstructor]
     public DungeonCooldown(uint id, int entries, int clears)
     {
@@ -79,9 +67,10 @@ public class DungeonCooldown : ThreadSafeObservableObject
         Entries = entries;
         Clears = clears;
     }
+
     public DungeonCooldown(uint id, Dispatcher d, Character owner)
     {
-        Dispatcher = d; 
+        Dispatcher = d;
         Id = id;
         Entries = Runs;
         Owner = owner;
@@ -93,10 +82,11 @@ public class DungeonCooldown : ThreadSafeObservableObject
         switch (args.PropertyName)
         {
             case nameof(Character.Coins):
-                N(nameof(AvailableEntries));
+                InvokePropertyChanged(nameof(AvailableEntries));
                 break;
+
             case nameof(Character.MaxCoins):
-                N(nameof(MaxAvailableEntries));
+                InvokePropertyChanged(nameof(MaxAvailableEntries));
                 break;
         }
     }
@@ -105,5 +95,4 @@ public class DungeonCooldown : ThreadSafeObservableObject
     {
         Entries = Runs;
     }
-
 }

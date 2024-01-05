@@ -17,9 +17,7 @@ public class CooldownWindowSettings : WindowSettingsBase
         get => _showItems;
         set
         {
-            if (_showItems == value) return;
-            _showItems = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _showItems)) return;
             ShowItemsChanged?.Invoke();
         }
     }
@@ -29,9 +27,7 @@ public class CooldownWindowSettings : WindowSettingsBase
         get => _mode;
         set
         {
-            if (_mode == value) return;
-            _mode = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _mode)) return;
             ModeChanged?.Invoke();
         }
     }

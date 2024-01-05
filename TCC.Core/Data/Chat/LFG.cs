@@ -17,50 +17,34 @@ public class Lfg : ThreadSafeObservableObject
     public uint ServerId { get; }
     public string Name
     {
-        get => _name; set
-        {
-            if (_name == value) return;
-            _name = value;
-            N();
-        }
+        get => _name; 
+        set => RaiseAndSetIfChanged(value, ref _name);
     }
     public string Message
     {
         get => _message; set
         {
-            if (_message == value) return;
-            _message = value;
+            if (!RaiseAndSetIfChanged(value, ref _message)) return;
             UpdateDungeonName();
-            N();
         }
     }
     public bool Raid
     {
-        get => _raid; set
-        {
-            if (_raid == value) return;
-            _raid = value;
-            N();
-        }
+        get => _raid; set => RaiseAndSetIfChanged(value, ref _raid);
+
     }
     public string DungeonName
     {
         get => _dungeonName;
-        private set
-        {
-            if (_dungeonName == value) return;
-            _dungeonName = value;
-            N();
-        }
+        private set => RaiseAndSetIfChanged(value, ref _dungeonName);
+
     }
     public int MembersCount
     {
         get => _membersCount; set
         {
-            if (_membersCount == value) return;
-            _membersCount = value;
-            N();
-            N(nameof(MembersCountLabel));
+            if (!RaiseAndSetIfChanged(value, ref _membersCount)) return;
+            InvokePropertyChanged(nameof(MembersCountLabel));
         }
     }
     public string MembersCountLabel => MembersCount == 0 ? "" : MembersCount.ToString();
@@ -93,7 +77,7 @@ public class Lfg : ThreadSafeObservableObject
         {
             _removeDelay.Stop();
             _removeDelay.Start();
-            N();
+            N(); //todo: dafuq?
         }
         catch
         {

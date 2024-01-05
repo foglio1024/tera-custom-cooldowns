@@ -34,9 +34,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _hpLabelMode;
         set
         {
-            if (_hpLabelMode == value) return;
-            _hpLabelMode = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hpLabelMode)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -45,9 +43,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _ignoreMe;
         set
         {
-            if (_ignoreMe == value) return;
-            _ignoreMe = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _ignoreMe)) return;
             IgnoreMeChanged?.Invoke();
         }
     }
@@ -56,9 +52,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _hideBuffsThreshold;
         set
         {
-            if (_hideBuffsThreshold == value) return;
-            _hideBuffsThreshold = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hideBuffsThreshold)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -67,9 +61,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _hideDebuffsThreshold;
         set
         {
-            if (_hideDebuffsThreshold == value) return;
-            _hideDebuffsThreshold = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hideDebuffsThreshold)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -78,9 +70,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _hideHpThreshold;
         set
         {
-            if (_hideHpThreshold == value) return;
-            _hideHpThreshold = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hideHpThreshold)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -89,9 +79,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _hideMpThreshold;
         set
         {
-            if (_hideMpThreshold == value) return;
-            _hideMpThreshold = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hideMpThreshold)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -100,9 +88,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _hideStThreshold;
         set
         {
-            if (_hideStThreshold == value) return;
-            _hideStThreshold = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hideStThreshold)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -111,9 +97,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _disableAbnormalitiesThreshold;
         set
         {
-            if (_disableAbnormalitiesThreshold == value) return;
-            _disableAbnormalitiesThreshold = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _disableAbnormalitiesThreshold)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -122,9 +106,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _disableAbnormalitiesAnimationThreshold;
         set
         {
-            if (_disableAbnormalitiesAnimationThreshold == value) return;
-            _disableAbnormalitiesAnimationThreshold = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _disableAbnormalitiesAnimationThreshold)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -133,9 +115,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _groupSizeThreshold;
         set
         {
-            if (_groupSizeThreshold == value) return;
-            _groupSizeThreshold = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _groupSizeThreshold)) return;
             ThresholdChanged?.Invoke();
         }
     }
@@ -144,10 +124,8 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _layout;
         set
         {
-            if (_layout == value) return;
-            _layout = value;
+            if (!RaiseAndSetIfChanged(value, ref _layout)) return;
             LayoutChanged?.Invoke();
-            N();
         }
     }
     public bool ShowAwakenIcon
@@ -155,9 +133,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _showAwakenIcon;
         set
         {
-            if (_showAwakenIcon == value) return;
-            _showAwakenIcon = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _showAwakenIcon)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -166,9 +142,7 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _showDetails;
         set
         {
-            if (_showDetails == value) return;
-            _showDetails = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _showDetails)) return;
             SettingsUpdated?.Invoke();
         }
     }
@@ -177,21 +151,14 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _showLaurels;
         set
         {
-            if (_showLaurels == value) return;
-            _showLaurels = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _showLaurels)) return;
             SettingsUpdated?.Invoke();
         }
     }
     public bool ShowOnlyAggroStacks
     {
         get => _showOnlyAggroStacks;
-        set
-        {
-            if (_showOnlyAggroStacks == value) return;
-            _showOnlyAggroStacks = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _showOnlyAggroStacks);
     }
     public bool ShowAllAbnormalities { get; set; }
 

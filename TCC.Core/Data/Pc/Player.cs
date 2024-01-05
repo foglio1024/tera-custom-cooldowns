@@ -121,8 +121,8 @@ public class Player : ThreadSafeObservableObject
             if (_currentHP == value) return;
             _currentHP = value;
             N();
-            N(nameof(TotalHP));
-            N(nameof(HpFactor));
+            InvokePropertyChanged(nameof(TotalHP));
+            InvokePropertyChanged(nameof(HpFactor));
         }
     }
     public float CurrentMP
@@ -133,7 +133,7 @@ public class Player : ThreadSafeObservableObject
             if (_currentMP == value) return;
             _currentMP = value;
             N();
-            N(nameof(MpFactor));
+            InvokePropertyChanged(nameof(MpFactor));
         }
     }
     public float CurrentST
@@ -144,7 +144,7 @@ public class Player : ThreadSafeObservableObject
             if (_currentST == value) return;
             _currentST = value;
             N();
-            N(nameof(StFactor));
+            InvokePropertyChanged(nameof(StFactor));
         }
     }
     public long MaxHP
@@ -155,7 +155,7 @@ public class Player : ThreadSafeObservableObject
             if (_maxHP == value) return;
             _maxHP = value;
             N();
-            N(nameof(HpFactor));
+            InvokePropertyChanged(nameof(HpFactor));
 
         }
     }
@@ -167,7 +167,7 @@ public class Player : ThreadSafeObservableObject
             if (_maxMP == value) return;
             _maxMP = value;
             N();
-            N(nameof(MpFactor));
+            InvokePropertyChanged(nameof(MpFactor));
 
         }
     }
@@ -179,7 +179,7 @@ public class Player : ThreadSafeObservableObject
             if (_maxST == value) return;
             _maxST = value;
             N();
-            N(nameof(StFactor));
+            InvokePropertyChanged(nameof(StFactor));
         }
     }
     public uint MaxShield
@@ -190,8 +190,8 @@ public class Player : ThreadSafeObservableObject
             if (_maxShield == value) return;
             _maxShield = value;
             N();
-            N(nameof(ShieldFactor));
-            N(nameof(HasShield));
+            InvokePropertyChanged(nameof(ShieldFactor));
+            InvokePropertyChanged(nameof(HasShield));
         }
     }
     public double HpFactor => MaxHP > 0 ? CurrentHP / MaxHP : 1;
@@ -209,9 +209,9 @@ public class Player : ThreadSafeObservableObject
             if (value < 0) return;
             _currentShield = value;
             N();
-            N(nameof(TotalHP));
-            N(nameof(ShieldFactor));
-            N(nameof(HasShield));
+            InvokePropertyChanged(nameof(TotalHP));
+            InvokePropertyChanged(nameof(ShieldFactor));
+            InvokePropertyChanged(nameof(HasShield));
         }
     }
     public float FlightEnergy
@@ -239,7 +239,7 @@ public class Player : ThreadSafeObservableObject
             }
 
             N();
-            N(nameof(CoinsFactor));
+            InvokePropertyChanged(nameof(CoinsFactor));
             CoinsUpdated?.Invoke();
 
         }
@@ -252,7 +252,7 @@ public class Player : ThreadSafeObservableObject
             if (_maxCoins == value) return;
             _maxCoins = value;
             N();
-            N(nameof(CoinsFactor));
+            InvokePropertyChanged(nameof(CoinsFactor));
             CoinsUpdated?.Invoke();
 
         }
@@ -530,7 +530,7 @@ public class Player : ThreadSafeObservableObject
         if (ab.IsBuff || _debuffList.Contains(ab.Id)) return;
 
         _debuffList.Add(ab.Id);
-        N(nameof(IsDebuffed));
+        InvokePropertyChanged(nameof(IsDebuffed));
     }
 
     internal void RemoveFromDebuffList(Abnormality ab)
@@ -538,7 +538,7 @@ public class Player : ThreadSafeObservableObject
         if (ab.IsBuff) return;
 
         _debuffList.Remove(ab.Id);
-        N(nameof(IsDebuffed));
+        InvokePropertyChanged(nameof(IsDebuffed));
     }
 
     public void ClearAbnormalities()
@@ -555,7 +555,7 @@ public class Player : ThreadSafeObservableObject
         }
 
         _debuffList.Clear();
-        N(nameof(IsDebuffed));
+        InvokePropertyChanged(nameof(IsDebuffed));
 
         CurrentShield = 0;
     }

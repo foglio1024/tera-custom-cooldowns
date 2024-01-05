@@ -57,8 +57,8 @@ public class DailyEvent : ThreadSafeObservableObject
         Start = time;
         Duration = TimeSpan.Zero;
         _happened = true;
-        N(nameof(StartFactor));
-        N(nameof(DurationFactor));
-        N(nameof(ToolTip));
+        InvokePropertyChanged(nameof(StartFactor));
+        InvokePropertyChanged(nameof(DurationFactor));
+        InvokePropertyChanged(nameof(ToolTip));
     }
 }

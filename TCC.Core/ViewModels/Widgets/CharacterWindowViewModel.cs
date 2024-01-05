@@ -43,24 +43,25 @@ public class CharacterWindowViewModel : TccWindowViewModel // hooks in Game
     {
         Game.Me.PropertyChanged += MePropertyChanged;
         Game.Group.LeaderChanged += OnLeaderChanged;
-        settings.SorcererShowElementsChanged += () => N(nameof(ShowElements));
-        settings.WarriorShowEdgeChanged += () => N(nameof(ShowEdge));
-        settings.ShowStaminaChanged += () => N(nameof(ShowRe));
-        settings.CustomLaurelChanged += () => N(nameof(Laurel));
+        settings.SorcererShowElementsChanged += () => InvokePropertyChanged(nameof(ShowElements));
+        settings.WarriorShowEdgeChanged += () => InvokePropertyChanged(nameof(ShowEdge));
+        settings.ShowStaminaChanged += () => InvokePropertyChanged(nameof(ShowRe));
+        settings.CustomLaurelChanged += () => InvokePropertyChanged(nameof(Laurel));
     }
 
     void OnLeaderChanged()
     {
-        N(nameof(ShowLeaderIcon));
+        InvokePropertyChanged(nameof(ShowLeaderIcon));
     }
 
     void MePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        N(e.PropertyName); // TODO: remove????
+        InvokePropertyChanged(e.PropertyName); // TODO: remove????
         if (e.PropertyName != nameof(Data.Pc.Player.Class)) return;
-        N(nameof(ShowRe));
-        N(nameof(ShowEdge));
-        N(nameof(ShowElements));
-        N(nameof(Laurel));
+
+        InvokePropertyChanged(nameof(ShowRe));
+        InvokePropertyChanged(nameof(ShowEdge));
+        InvokePropertyChanged(nameof(ShowElements));
+        InvokePropertyChanged(nameof(Laurel));
     }
 }

@@ -24,9 +24,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         get => _autorollDelaySec;
         set
         {
-            if (_autorollDelaySec == value) return;
-            _autorollDelaySec = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _autorollDelaySec)) return;
             DelayChanged?.Invoke(value);
         }
     }
@@ -37,10 +35,12 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         set
         {
             if (_rollHotKey.Equals(value)) return;
-            if (_passHotKey.Equals(value)) PassHotKey = new HotKey(Keys.None, ModifierKeys.None);
-
             _rollHotKey = value;
             N();
+            /// verify that it doesn't break anything
+            //if (!RaiseAndSetIfChanged(value, ref _rollHotKey)) return;
+
+            if (_passHotKey.Equals(value)) PassHotKey = new HotKey(Keys.None, ModifierKeys.None);
         }
     }
 
@@ -49,11 +49,14 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         get => _passHotKey;
         set
         {
+            
             if (_passHotKey.Equals(value)) return;
-            if (_rollHotKey.Equals(value)) RollHotKey = new HotKey(Keys.None, ModifierKeys.None);
-
             _passHotKey = value;
             N();
+            /// verify that it doesn't break anything
+            //if (!RaiseAndSetIfChanged(value, ref _passHotKey)) return;
+
+            if (_rollHotKey.Equals(value)) RollHotKey = new HotKey(Keys.None, ModifierKeys.None);
         }
     }
 
@@ -63,9 +66,12 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         set
         {
             if (_toggleHotKey.Equals(value)) return;
-            KeyboardHook.Instance.ChangeHotkey(_toggleHotKey, value);
             _toggleHotKey = value;
             N();
+            /// verify that it doesn't break anything
+            //if (!RaiseAndSetIfChanged(value, ref _toggleHotKey)) return;
+
+            KeyboardHook.Instance.ChangeHotkey(_toggleHotKey, value);
         }
     }
 
@@ -74,12 +80,11 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         get => _alwaysRoll;
         set
         {
-            if (_alwaysRoll == value) return;
-            _alwaysRoll = value;
+            if (!RaiseAndSetIfChanged(value, ref _alwaysRoll)) return;
+
             if (_alwaysPass == _alwaysRoll && value)
                 _alwaysPass = !_alwaysRoll;
-            N();
-            N(nameof(AlwaysPass));
+            InvokePropertyChanged(nameof(AlwaysPass));
             AutoRollPolicyChanged?.Invoke();
         }
     }
@@ -89,12 +94,11 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         get => _alwaysPass;
         set
         {
-            if (_alwaysPass == value) return;
-            _alwaysPass = value;
+            if (!RaiseAndSetIfChanged(value, ref _alwaysPass)) return;
+
             if (_alwaysPass == _alwaysRoll && value)
                 _alwaysRoll = !_alwaysPass;
-            N();
-            N(nameof(AlwaysRoll));
+            InvokePropertyChanged(nameof(AlwaysRoll));
             AutoRollPolicyChanged?.Invoke();
         }
     }
@@ -102,12 +106,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
     public bool AutoShowUponRoll
     {
         get => _autoShowUponRoll;
-        set
-        {
-            if (_autoShowUponRoll == value) return;
-            _autoShowUponRoll = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _autoShowUponRoll);
     }
 
     bool _autoRollItemsBlacklistMode;
@@ -115,12 +114,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
     public bool AutoRollItemsBlacklistMode
     {
         get => _autoRollItemsBlacklistMode;
-        set
-        {
-            if (_autoRollItemsBlacklistMode == value) return;
-            _autoRollItemsBlacklistMode = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _autoRollItemsBlacklistMode);
     }
 
     bool _autoPassItemsBlacklistMode;
@@ -128,12 +122,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
     public bool AutoPassItemsBlacklistMode
     {
         get => _autoPassItemsBlacklistMode;
-        set
-        {
-            if (_autoPassItemsBlacklistMode == value) return;
-            _autoPassItemsBlacklistMode = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _autoPassItemsBlacklistMode);
     }
 
     public List<uint> AutoRollItems { get; set; } = new();

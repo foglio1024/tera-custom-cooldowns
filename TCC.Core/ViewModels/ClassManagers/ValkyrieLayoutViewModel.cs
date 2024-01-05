@@ -48,7 +48,7 @@ public class ValkyrieLayoutViewModel : BaseClassLayoutViewModel
 
     void OnEffectSecondsUpdated()
     {
-        N(nameof(RagnarokEffectSecondsText));
+        InvokePropertyChanged(nameof(RagnarokEffectSecondsText));
     }
 
     public override void Dispose()

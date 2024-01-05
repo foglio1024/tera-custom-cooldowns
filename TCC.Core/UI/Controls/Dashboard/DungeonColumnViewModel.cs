@@ -18,7 +18,7 @@ public class DungeonColumnViewModel : ThreadSafeObservableObject
     void OnDungeonPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(Dungeon.Show)) return;
-        N(nameof(IsVisible));
+        InvokePropertyChanged(nameof(IsVisible));
     }
 
     public ThreadSafeObservableCollection<DungeonCooldownViewModel> DungeonsList { get; private set; }
@@ -28,19 +28,14 @@ public class DungeonColumnViewModel : ThreadSafeObservableObject
     public bool Hilight
     {
         get => _hilight;
-        set
-        {
-            if (_hilight == value) return;
-            _hilight = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _hilight);
     }
 
     public DungeonColumnViewModel(Dungeon dungeon)
     {
         Dungeon = dungeon;
         Dungeon.PropertyChanged += OnDungeonPropertyChanged;
-        DungeonsList = new ThreadSafeObservableCollection<DungeonCooldownViewModel>();
+        DungeonsList = [];
         DungeonsListView = CollectionViewFactory.CreateLiveCollectionView(DungeonsList,
                                o => !o.Owner.Hidden,
                                [$"{nameof(DungeonCooldownViewModel.Owner)}.{nameof(Character.Hidden)}"],

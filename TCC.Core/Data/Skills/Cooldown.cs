@@ -41,12 +41,7 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
     public Skill Skill
     {
         get => _skill;
-        set
-        {
-            if (_skill == value) return;
-            _skill = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _skill);
     }
 
     public ulong Duration { get; private set; }
@@ -55,12 +50,8 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
 
     public CooldownMode Mode
     {
-        get => _mode; private set
-        {
-            if (_mode == value) return;
-            _mode = value;
-            N();
-        }
+        get => _mode; 
+        private set => RaiseAndSetIfChanged(value, ref _mode);
     }
 
     public bool FlashOnAvailable
@@ -69,7 +60,7 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
         set
         {
             _flashOnAvailable = value;
-            N();
+            InvokePropertyChanged();
             if (value) ForceFlashing();
             else ForceStopFlashing();
         }
@@ -80,9 +71,7 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
         get => _seconds;
         private set
         {
-            if (_seconds == value) return;
-            _seconds = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _seconds)) return;
             _dispatcher.Invoke(() => SecondsUpdated?.Invoke());
         }
     }

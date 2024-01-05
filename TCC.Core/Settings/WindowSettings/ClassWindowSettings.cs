@@ -30,9 +30,7 @@ public class ClassWindowSettings : WindowSettingsBase
         get => _warriorShowEdge;
         set
         {
-            if (_warriorShowEdge == value) return;
-            _warriorShowEdge = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _warriorShowEdge)) return;
             WarriorShowEdgeChanged?.Invoke();
         }
     }
@@ -41,9 +39,7 @@ public class ClassWindowSettings : WindowSettingsBase
         get => _warriorShowInfuriate;
         set
         {
-            if (_warriorShowInfuriate == value) return;
-            _warriorShowInfuriate = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _warriorShowInfuriate)) return;
             WarriorShowInfuriateChanged?.Invoke();
         }
     }
@@ -52,9 +48,7 @@ public class ClassWindowSettings : WindowSettingsBase
         get => _valkyrieShowRagnarok;
         set
         {
-            if (_valkyrieShowRagnarok == value) return;
-            _valkyrieShowRagnarok = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _valkyrieShowRagnarok)) return;
             ValkyrieShowRagnarokChanged?.Invoke();
         }
     }
@@ -63,9 +57,7 @@ public class ClassWindowSettings : WindowSettingsBase
         get => _valkyrieShowGodsfall;
         set
         {
-            if (_valkyrieShowGodsfall == value) return;
-            _valkyrieShowGodsfall = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _valkyrieShowGodsfall)) return;
             ValkyrieShowGodsfallChanged?.Invoke();
         }
     }
@@ -74,9 +66,7 @@ public class ClassWindowSettings : WindowSettingsBase
         get => _sorcererShowElements;
         set
         {
-            if (_sorcererShowElements == value) return;
-            _sorcererShowElements = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _sorcererShowElements)) return;
             SorcererShowElementsChanged?.Invoke();
         }
     }
@@ -85,9 +75,7 @@ public class ClassWindowSettings : WindowSettingsBase
         get => _warriorShowTraverseCut;
         set
         {
-            if (_warriorShowTraverseCut == value) return;
-            _warriorShowTraverseCut = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _warriorShowTraverseCut)) return;
             WarriorShowTraverseCutChanged?.Invoke();
 
         }
@@ -97,9 +85,7 @@ public class ClassWindowSettings : WindowSettingsBase
         get => _flashAvailableSkills;
         set
         {
-            if (_flashAvailableSkills == value) return;
-            _flashAvailableSkills = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _flashAvailableSkills)) return;
             FlashAvailableSkillsChanged?.Invoke();
         }
     }
@@ -108,9 +94,7 @@ public class ClassWindowSettings : WindowSettingsBase
         get => _warriorEdgeMode;
         set
         {
-            if (_warriorEdgeMode == value) return;
-            _warriorEdgeMode = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _warriorEdgeMode)) return;
             WarriorEdgeModeChanged?.Invoke();
         }
     }

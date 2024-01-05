@@ -57,12 +57,7 @@ public class DashboardViewModel : TccWindowViewModel
     public Character? SelectedCharacter
     {
         get => _selectedCharacter;
-        set
-        {
-            if (_selectedCharacter == value) return;
-            _selectedCharacter = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _selectedCharacter);
     }
 
     public bool ShowElleonMarks => App.Settings.LastLanguage.Contains("EU");
@@ -187,13 +182,11 @@ public class DashboardViewModel : TccWindowViewModel
         get => _showDetails;
         set
         {
-            if (_showDetails == value) return;
-            _showDetails = value;
+            if (!RaiseAndSetIfChanged(value, ref _showDetails)) return;
             if (!value)
             {
                 InventoryFilter = "";
             }
-            N();
         }
     }
 
@@ -202,10 +195,8 @@ public class DashboardViewModel : TccWindowViewModel
         get => _inventoryFilter;
         set
         {
-            if(_inventoryFilter == value) return;
-            _inventoryFilter = value;
+            if (!RaiseAndSetIfChanged(value, ref _inventoryFilter)) return;
             FilterInventory();
-            N();
         }
     }
 
@@ -217,7 +208,7 @@ public class DashboardViewModel : TccWindowViewModel
         {
             var item = ((InventoryItem)o).Item;
             var name = item.Name;
-            return name.IndexOf(InventoryFilter, StringComparison.InvariantCultureIgnoreCase) != -1;
+            return name.Contains(InventoryFilter, StringComparison.InvariantCultureIgnoreCase);
         };
         view.Refresh();
     }
@@ -441,28 +432,28 @@ public class DashboardViewModel : TccWindowViewModel
         CurrentCharacter.VanguardInfo.DailiesDone = dailyDone;
         CurrentCharacter.VanguardInfo.Credits = vanguardCredits;
         SaveCharacters();
-        N(nameof(TotalVanguardCredits));
+        InvokePropertyChanged(nameof(TotalVanguardCredits));
     }
     public void SetVanguardCredits(int pCredits)
     {
         if (CurrentCharacter == null) return;
 
         CurrentCharacter.VanguardInfo.Credits = pCredits;
-        N(nameof(TotalVanguardCredits));
+        InvokePropertyChanged(nameof(TotalVanguardCredits));
     }
     public void SetGuardianCredits(int pCredits)
     {
         if (CurrentCharacter == null) return;
 
         CurrentCharacter.GuardianInfo.Credits = pCredits;
-        N(nameof(TotalGuardianCredits));
+        InvokePropertyChanged(nameof(TotalGuardianCredits));
     }
     public void SetElleonMarks(int val)
     {
         if (CurrentCharacter == null) return;
 
         CurrentCharacter.ElleonMarks = val;
-        N(nameof(TotalElleonMarks));
+        InvokePropertyChanged(nameof(TotalElleonMarks));
     }
 
     public void SelectCharacter(Character character)
@@ -481,7 +472,7 @@ public class DashboardViewModel : TccWindowViewModel
 
             //WindowManager.DashboardWindow.ShowDetails();
             ShowDetails = true;
-            Task.Delay(300).ContinueWith(_ => Task.Factory.StartNew(() => N(nameof(SelectedCharacterInventory))));
+            Task.Delay(300).ContinueWith(_ => Task.Factory.StartNew(() => InvokePropertyChanged(nameof(SelectedCharacterInventory))));
         }
         catch (Exception e)
         {

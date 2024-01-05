@@ -16,12 +16,7 @@ public class ArcherLayoutViewModel : BaseClassLayoutViewModel
     public bool WindWalkProc
     {
         get => _windWalkProc;
-        set
-        {
-            if (_windWalkProc == value) return;
-            _windWalkProc = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _windWalkProc);
     }
 
     public ArcherLayoutViewModel()

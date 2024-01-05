@@ -17,9 +17,7 @@ public class FlightWindowSettings : WindowSettingsBase
         get => _flip;
         set
         {
-            if (_flip == value) return;
-            _flip = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _flip)) return;
             FlipChanged?.Invoke();
         }
     }
@@ -29,9 +27,7 @@ public class FlightWindowSettings : WindowSettingsBase
         get => _rotation;
         set
         {
-            if (_rotation == value) return;
-            _rotation = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _rotation)) return;
             RotationChanged?.Invoke();
         }
     }

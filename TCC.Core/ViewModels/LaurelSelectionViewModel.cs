@@ -18,12 +18,7 @@ internal class LaurelSelectionViewModel : ObservableObject
     public CustomLaurel CurrentLaurel
     {
         get => _currentLaurel;
-        set
-        {
-            if (_currentLaurel == value) return;
-            _currentLaurel = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _currentLaurel);
     }
 
     public Class ExampleClass { get; }

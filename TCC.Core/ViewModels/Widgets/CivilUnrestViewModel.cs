@@ -32,34 +32,19 @@ public class CivilUnrestGuild : ThreadSafeObservableObject
     public string Name
     {
         get => _name;
-        set
-        {
-            if (_name == value) return;
-            _name = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _name);
     }
 
     public uint Id { get; set; }
     public float TowerHp
     {
         get => _towerHp;
-        set
-        {
-            if (_towerHp == value) return;
-            _towerHp = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _towerHp);
     }
     public uint TowersDestroyed
     {
         get => _towersDestroyed;
-        set
-        {
-            if (_towersDestroyed == value) return;
-            _towersDestroyed = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _towersDestroyed);
     }
 }
 
@@ -211,6 +196,6 @@ public class CivilUnrestViewModel : TccWindowViewModel
 
     void NotifyTeleported()
     {
-        N(nameof(CivilUnrest));
+        InvokePropertyChanged(nameof(CivilUnrest));
     }
 }

@@ -19,63 +19,35 @@ public class Dungeon : ThreadSafeObservableObject
     public string ShortName
     {
         get => _shortName;
-        set
-        {
-            if (_shortName == value) return;
-            _shortName = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _shortName);
+
     }
     public short MaxBaseRuns
     {
         get => _maxBaseRuns;
-        set
-        {
-            if (_maxBaseRuns == value) return;
-            _maxBaseRuns = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _maxBaseRuns);
+
     }
     // TODO: get this from DC
     public int ItemLevel
     {
         get => _itemLevel;
-        set
-        {
-            if (_itemLevel == value) return;
-            _itemLevel = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _itemLevel);
     }
     public bool Show
     {
         get => _show;
-        set
-        {
-            if (_show == value) return;
-            _show = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _show);
     }
     public bool DoublesOnElite
     {
         get => _doublesOnElite;
-        set
-        {
-            if (_doublesOnElite == value) return;
-            _doublesOnElite = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _doublesOnElite);
     }
     public int Index
     {
         get => _index;
-        set
-        {
-            if (_index == value) return;
-            _index = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _index);
     }
     public int MaxEntries => MaxBaseRuns * (Game.Account.IsElite && DoublesOnElite ? 2 : 1);
     public string IconName { get; set; } = "";
@@ -89,7 +61,7 @@ public class Dungeon : ThreadSafeObservableObject
     //        if (_requiredIlvl == value) return;
     //        _requiredIlvl = value;
     //        N();
-    //        N(nameof(ItemLevel));
+    //        ItemLevel));
     //    }
     //}
 

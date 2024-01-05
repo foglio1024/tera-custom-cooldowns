@@ -98,7 +98,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             if (_maxShield == value) return;
             _maxShield = value;
             N();
-            N(nameof(ShieldFactor));
+            InvokePropertyChanged(nameof(ShieldFactor));
         }
     }
     public double CurrentShield
@@ -109,7 +109,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             if (_currentShield == value) return;
             _currentShield = value;
             N();
-            N(nameof(ShieldFactor));
+            InvokePropertyChanged(nameof(ShieldFactor));
         }
     }
     public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;

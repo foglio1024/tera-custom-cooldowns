@@ -48,10 +48,8 @@ public class FUBHVM : ThreadSafeObservableObject
         get => _dontshowagain;
         set
         {
-            if (_dontshowagain == value) return;
-            _dontshowagain = value;
-            N();
-            N(nameof(CloseMessage));
+            if (!RaiseAndSetIfChanged(value, ref _dontshowagain)) return;
+            InvokePropertyChanged(nameof(CloseMessage));
             App.Settings.DontShowFUBH = value;
         }
     }

@@ -70,7 +70,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
 
     void OnLoaded(object sender, RoutedEventArgs e)
     {
-        N(nameof(ValueString));
+        InvokePropertyChanged(nameof(ValueString));
     }
 
     void UIElement_OnKeyDown(object sender, KeyEventArgs e)
@@ -108,7 +108,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
         Enum.TryParse(key.ToString(), out Keys wfKey); // Microsoft pls
         if (wfKey == Keys.None) return;
         Value = new HotKey(wfKey, mod);
-        N(nameof(ValueString));
+        InvokePropertyChanged(nameof(ValueString));
     }
 
     void UIElement_OnKeyUp(object sender, KeyEventArgs e)
@@ -128,7 +128,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected void N([CallerMemberName] string? propertyName = null)
+    protected void InvokePropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

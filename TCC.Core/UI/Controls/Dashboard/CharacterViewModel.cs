@@ -7,21 +7,15 @@ public class CharacterViewModel : ThreadSafeObservableObject
 {
     bool _hilight;
 
+    public Character Character { get; }
     public bool Hilight
     {
         get => _hilight;
-        set
-        {
-            if (_hilight == value) return;
-            _hilight = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _hilight);
     }
-    public Character Character { get; }
 
     public CharacterViewModel(Character c)
     {
         Character = c;
     }
-
 }

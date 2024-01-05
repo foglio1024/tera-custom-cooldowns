@@ -22,9 +22,7 @@ public class BuffWindowSettings : WindowSettingsBase
         get => _direction;
         set
         {
-            if (_direction == value) return;
-            _direction = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _direction)) return;
             DirectionChanged?.Invoke();
         }
     }
@@ -33,17 +31,13 @@ public class BuffWindowSettings : WindowSettingsBase
         get => _overlap;
         set
         {
-            if(_overlap == value) return;
-            _overlap = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _overlap)) return;
             OverlapChanged?.Invoke();
         }
     }
-
     public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
     public List<uint> Specials { get; }
     public List<uint> Hidden { get; }
-
 
     public bool Pass(Abnormality ab) // by HQ
     {

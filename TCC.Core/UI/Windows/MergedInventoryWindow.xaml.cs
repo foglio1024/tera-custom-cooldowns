@@ -20,7 +20,7 @@ public class MergedInventoryViewModel : ThreadSafeObservableObject
     public MergedInventoryViewModel()
     {
         MergedInventory = new ThreadSafeObservableCollection<MergedInventoryItem>();
-        MergedInventoryView = CollectionViewFactory.CreateLiveCollectionView(MergedInventory, 
+        MergedInventoryView = CollectionViewFactory.CreateLiveCollectionView(MergedInventory,
                                   sortFilters:
                                   [
                                       new SortDescription($"{nameof(MergedInventoryItem.Item)}.{nameof(InventoryItem.Item)}.{nameof(Item.Id)}", ListSortDirection.Ascending),
@@ -33,12 +33,8 @@ public class MergedInventoryViewModel : ThreadSafeObservableObject
 
     public double TotalProgress
     {
-        get => _totalProgress*100;
-        set
-        {
-            _totalProgress = value;
-            N();
-        }
+        get => _totalProgress * 100;
+        set => RaiseAndSetIfChanged(value, ref _totalProgress);
     }
 
     public void LoadItems()
@@ -110,7 +106,7 @@ public class MergedInventoryItem : ThreadSafeObservableObject
     public MergedInventoryItem()
     {
         Items = new ThreadSafeObservableCollection<InventoryItemWithOwner>();
-        Items.CollectionChanged += (_, _) => N(nameof(TotalAmount));
+        Items.CollectionChanged += (_, _) => InvokePropertyChanged(nameof(TotalAmount));
     }
 }
 public partial class MergedInventoryWindow
@@ -119,14 +115,14 @@ public partial class MergedInventoryWindow
     {
         InitializeComponent();
         DataContext = new MergedInventoryViewModel();
-        ((MergedInventoryViewModel) DataContext).Dispatcher = Dispatcher;
+        ((MergedInventoryViewModel)DataContext).Dispatcher = Dispatcher;
         Loaded += OnLoaded;
 
     }
 
     void OnLoaded(object sender, RoutedEventArgs e)
     {
-        ((MergedInventoryViewModel) DataContext).LoadItems();
+        ((MergedInventoryViewModel)DataContext).LoadItems();
     }
 
     void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
@@ -144,7 +140,7 @@ public partial class MergedInventoryWindow
     {
         Dispatcher?.InvokeAsync(() =>
         {
-            var view = (ICollectionView)((MergedInventoryViewModel) DataContext).MergedInventoryView;
+            var view = (ICollectionView)((MergedInventoryViewModel)DataContext).MergedInventoryView;
             view.Filter = o =>
             {
                 var item = ((MergedInventoryItem)o).Item?.Item;

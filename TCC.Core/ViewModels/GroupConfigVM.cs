@@ -26,9 +26,9 @@ public class GroupConfigVM : ThreadSafeObservableObject
         {
             if (App.Settings.GroupWindowSettings.ShowAllAbnormalities == value) return;
             App.Settings.GroupWindowSettings.ShowAllAbnormalities = value;
+            InvokePropertyChanged();
             _dispatcher.Invoke(() => ShowAllChanged?.Invoke());
             App.Settings.Save();
-            N();
         }
     }
     public List<Class> Classes

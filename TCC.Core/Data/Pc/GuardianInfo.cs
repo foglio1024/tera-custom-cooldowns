@@ -18,10 +18,8 @@ public class GuardianInfo : ThreadSafeObservableObject
         get => _credits;
         set
         {
-            if (_credits == value) return;
-            _credits = value;
-            N();
-            N(nameof(CreditsFactor));
+            if (!RaiseAndSetIfChanged(value, ref _credits)) return;
+            InvokePropertyChanged(nameof(CreditsFactor));
         }
     }
     public int Cleared
@@ -29,10 +27,8 @@ public class GuardianInfo : ThreadSafeObservableObject
         get => _cleared;
         set
         {
-            if (_cleared == value) return;
-            _cleared = value;
-            N();
-            N(nameof(ClearedFactor));
+            if (!RaiseAndSetIfChanged(value, ref _cleared)) return;
+            InvokePropertyChanged(nameof(ClearedFactor));
         }
     }
     public int Claimed
@@ -40,10 +36,8 @@ public class GuardianInfo : ThreadSafeObservableObject
         get => _claimed;
         set
         {
-            if (_claimed == value) return;
-            _claimed = value;
-            N();
-            N(nameof(ClaimedFactor));
+            if (!RaiseAndSetIfChanged(value, ref _claimed)) return;
+            InvokePropertyChanged(nameof(ClaimedFactor));
         }
     }
     [JsonIgnore] public float CreditsFactor => (float)MathUtils.FactorCalc(Credits, MaxCredits);

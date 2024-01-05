@@ -26,24 +26,14 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
     public Thickness GlobalMargin
     {
         get => _globalMargin;
-        set
-        {
-            if (_globalMargin == value) return;
-            _globalMargin = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _globalMargin);
     }
 
     Thickness _containersMargin;
     public Thickness ContainersMargin
     {
         get => _containersMargin;
-        set
-        {
-            if (_containersMargin == value) return;
-            _containersMargin = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _containersMargin);
     }
 
     public ControlShape Shape => App.Settings.AbnormalityShape;

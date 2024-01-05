@@ -23,12 +23,7 @@ public class BerserkerLayoutViewModel : BaseClassLayoutViewModel
     public bool IsUnleashOn
     {
         get => _isUnleashOn;
-        set
-        {
-            if (_isUnleashOn == value) return;
-            _isUnleashOn = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isUnleashOn);
     }
 
     public BerserkerLayoutViewModel()

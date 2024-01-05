@@ -52,70 +52,43 @@ public class ChatViewModel : ThreadSafeObservableObject
     public bool Paused
     {
         get => _paused;
-        set
-        {
-            if (_paused == value) return;
-            _paused = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _paused);
     }
     public bool Visible
     {
         get => _visible;
-        set
-        {
-            if (_visible == value) return;
-            _visible = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _visible);
     }
     public bool Collapsed
     {
         get => WindowSettings.CanCollapse && _collapsed;
         set
         {
-            if (_collapsed == value) return;
-            _collapsed = value;
+            if (!RaiseAndSetIfChanged(value, ref _collapsed)) return;
             if (_collapsed && WindowSettings.StaysCollapsed)
             {
                 WindowSettings.H = 84;
                 WindowSettings.Y += 84;
                 ForceSizePosUpdateEvent?.Invoke();
             }
-            N();
         }
     }
     public bool MouseOver
     {
         get => _mouseOver;
-        set
-        {
-            if (_mouseOver == value) return;
-            _mouseOver = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _mouseOver);
     }
     public bool ShowCollapsedSettingsButton
     {
         get => _showCollapsedSettingsButton;
-        set
-        {
-            if (_showCollapsedSettingsButton == value) return;
-            _showCollapsedSettingsButton = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _showCollapsedSettingsButton);
     }
 
         
     public Tab? CurrentTab
     {
         get => _currentTab;
-        set
-        {
-            if (_currentTab == value) return;
-            _currentTab = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _currentTab);
     }
     public ICommand MakeGlobalCommand { get; }
     public ICommand OpenSysMsgSettingsCommand { get; }
@@ -174,8 +147,8 @@ public class ChatViewModel : ThreadSafeObservableObject
         ChatManager.Instance.NewMessage += CheckAttention;
         Game.GameUiModeChanged += CheckCollapsed;
         Game.ChatModeChanged += CheckCollapsed;
-        WindowSettings.CanCollapseChanged += () => N(nameof(Collapsed));
-        WindowSettings.StaysCollapsedChanged += () => N(nameof(Collapsed));
+        WindowSettings.CanCollapseChanged += () => InvokePropertyChanged(nameof(Collapsed));
+        WindowSettings.StaysCollapsedChanged += () => InvokePropertyChanged(nameof(Collapsed));
         if (WindowSettings.StaysCollapsed) _collapsed = true;
     }
 

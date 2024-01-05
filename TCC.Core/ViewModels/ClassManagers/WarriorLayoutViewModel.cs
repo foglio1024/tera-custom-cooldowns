@@ -134,7 +134,7 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
         {
             Swift.StartEffect(duration);
         }
-        N(nameof(AtkSpeedProc));
+        InvokePropertyChanged(nameof(AtkSpeedProc));
     }
 
     public void SetArush(uint duration)
@@ -147,6 +147,6 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
         {
             AdrenalineRush.StartEffect(duration);
         }
-        N(nameof(AtkSpeedProc));
+        InvokePropertyChanged(nameof(AtkSpeedProc));
     }
 }

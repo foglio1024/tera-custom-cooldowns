@@ -43,7 +43,7 @@ public class LfgMessage : ChatMessage
                 }
             }
             _linkedListing = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public ICollectionView MembersView { get; }

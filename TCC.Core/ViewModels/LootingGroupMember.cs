@@ -12,12 +12,7 @@ public class LootingGroupMember : ThreadSafeObservableObject
     public int Roll
     {
         get => _roll;
-        set
-        {
-            if (_roll == value) return;
-            _roll = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _roll);
     }
 
     bool _isWinning;
@@ -25,12 +20,7 @@ public class LootingGroupMember : ThreadSafeObservableObject
     public bool IsWinning
     {
         get => _isWinning;
-        set
-        {
-            if (_isWinning == value) return;
-            _isWinning = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isWinning);
     }
 
     BidAction _bidAction;
@@ -38,12 +28,7 @@ public class LootingGroupMember : ThreadSafeObservableObject
     public BidAction BidAction
     {
         get => _bidAction;
-        set
-        {
-            if (_bidAction == value) return;
-            _bidAction = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _bidAction);
     }
 
     public bool IsPlayer { get; }

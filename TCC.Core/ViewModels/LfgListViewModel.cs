@@ -66,8 +66,8 @@ public class LfgListViewModel : TccWindowViewModel
         {
             if (((LfgWindowSettings)Settings!).AutoPublicizeCooldown == value) return;
             ((LfgWindowSettings)Settings!).AutoPublicizeCooldown = value;
+            InvokePropertyChanged();
             AutoPublicizeTimer.Interval = TimeSpan.FromSeconds(value);
-            N();
         }
     }
 
@@ -92,12 +92,7 @@ public class LfgListViewModel : TccWindowViewModel
     public bool IsAutoPublicizeEnabled
     {
         get => _isAutoPublicizeEnabled;
-        set
-        {
-            if (_isAutoPublicizeEnabled == value) return;
-            _isAutoPublicizeEnabled = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isAutoPublicizeEnabled);
     }
 
     public bool Creating
@@ -105,9 +100,7 @@ public class LfgListViewModel : TccWindowViewModel
         get => _creating;
         set
         {
-            if (_creating == value) return;
-            _creating = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _creating)) return;
             CreatingStateChanged?.Invoke();
         }
     }
@@ -115,12 +108,7 @@ public class LfgListViewModel : TccWindowViewModel
     public bool CreatingRaid
     {
         get => _creatingRaid;
-        set
-        {
-            if (_creatingRaid == value) return;
-            _creatingRaid = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _creatingRaid);
     }
 
     public string NewMessage
@@ -128,9 +116,7 @@ public class LfgListViewModel : TccWindowViewModel
         get => _newMessage;
         set
         {
-            if (_newMessage == value) return;
-            _newMessage = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _newMessage)) return;
             CreatingStateChanged?.Invoke();
         }
     }
@@ -139,12 +125,7 @@ public class LfgListViewModel : TccWindowViewModel
     public bool AmIinLfg
     {
         get => _amIinLfg;
-        set
-        {
-            if (_amIinLfg == value) return;
-            _amIinLfg = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _amIinLfg);
     }
 
     public bool AmILeader => Game.Group.AmILeader
@@ -157,9 +138,7 @@ public class LfgListViewModel : TccWindowViewModel
         get => _myLfg;
         set
         {
-            if (_myLfg == value) return;
-            _myLfg = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _myLfg)) return;
             AmIinLfg = value != null;
             MyLfgStateChanged?.Invoke();
         }
@@ -172,8 +151,8 @@ public class LfgListViewModel : TccWindowViewModel
         {
             if (((LfgWindowSettings)Settings!).MinLevel == value) return;
             ((LfgWindowSettings)Settings).MinLevel = value;
-            N();
-            N(nameof(MaxLevel));
+            InvokePropertyChanged();
+            InvokePropertyChanged(nameof(MaxLevel));
         }
     }
 
@@ -184,8 +163,8 @@ public class LfgListViewModel : TccWindowViewModel
         {
             if (((LfgWindowSettings)Settings!).MaxLevel == value) return;
             ((LfgWindowSettings)Settings).MaxLevel = value;
-            N();
-            N(nameof(MinLevel));
+            InvokePropertyChanged(); // todo: in cases like this, add a backing field and call a method to update the settings
+            InvokePropertyChanged(nameof(MinLevel));
         }
     }
 
@@ -196,7 +175,7 @@ public class LfgListViewModel : TccWindowViewModel
         {
             if (((LfgWindowSettings)Settings!).HideTradeListings == value) return;
             ((LfgWindowSettings)Settings).HideTradeListings = value;
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -205,10 +184,8 @@ public class LfgListViewModel : TccWindowViewModel
         get => _isPopupOpen;
         set
         {
-            if (_isPopupOpen == value) return;
-            _isPopupOpen = value;
+            if (!RaiseAndSetIfChanged(value, ref _isPopupOpen)) return;
             FocusManager.PauseTopmost = _isPopupOpen;
-            N();
         }
     }
 
@@ -217,12 +194,7 @@ public class LfgListViewModel : TccWindowViewModel
     public int ActualListingsAmount
     {
         get => _actualListingsAmount;
-        set
-        {
-            if (_actualListingsAmount == value) return;
-            _actualListingsAmount = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _actualListingsAmount);
     }
 
     public LfgListViewModel(LfgWindowSettings settings) : base(settings)
@@ -366,8 +338,8 @@ public class LfgListViewModel : TccWindowViewModel
         if (_stopAuto)
         {
             AutoPublicizeTimer.Stop();
-            N(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
-            //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+            InvokePropertyChanged(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
+            //InvokePropertyChanged(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
             _stopAuto = false;
         }
         else
@@ -382,7 +354,7 @@ public class LfgListViewModel : TccWindowViewModel
     {
         if (Game.IsInDungeon) return;
         //PublicizeTimer.Start();
-        //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+        //InvokePropertyChanged(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
         if (!StubInterface.Instance.IsStubAvailable) return;
         StubInterface.Instance.StubClient.PublicizeListing();
         Publicized?.Invoke(PublicizeCooldown);
@@ -419,8 +391,8 @@ public class LfgListViewModel : TccWindowViewModel
             IsAutoPublicizeEnabled = true;
 
             AutoPublicizeTimer.Start();
-            N(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
-            //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+            InvokePropertyChanged(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
+            //InvokePropertyChanged(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
             if (!StubInterface.Instance.IsStubAvailable) return;
             StubInterface.Instance.StubClient.PublicizeListing();
             Publicized?.Invoke(AutoPublicizeCooldown);
@@ -491,8 +463,8 @@ public class LfgListViewModel : TccWindowViewModel
     {
         //PublicizeTimer.Stop();
         AutoPublicizeTimer.Stop();
-        //N(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
-        N(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
+        //InvokePropertyChanged(nameof(IsPublicizeEnabled)); //notify UI that CanPublicize changed
+        InvokePropertyChanged(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
     }
 
     void SyncListings(List<ListingData> listings)
@@ -587,7 +559,7 @@ public class LfgListViewModel : TccWindowViewModel
         }
 
         MyLfg?.UpdateIsMyLfg();
-        N(nameof(AmILeader));
+        InvokePropertyChanged(nameof(AmILeader));
     }
 
     protected override void InstallHooks()
@@ -775,7 +747,7 @@ public class LfgListViewModel : TccWindowViewModel
 
     void OnChangePartyManager(S_CHANGE_PARTY_MANAGER obj)
     {
-        N(nameof(AmILeader));
+        InvokePropertyChanged(nameof(AmILeader));
     }
 
     void OnReturnToLobby(S_RETURN_TO_LOBBY m)

@@ -16,12 +16,7 @@ public class InventoryItem : ThreadSafeObservableObject
     public int Amount
     {
         get => _amount;
-        set
-        {
-            if (_amount == value) return;
-            _amount = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _amount);
     }
 
     public InventoryItem(uint slot, uint id, int amount)

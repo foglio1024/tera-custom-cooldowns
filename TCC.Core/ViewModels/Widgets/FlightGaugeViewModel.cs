@@ -19,10 +19,10 @@ public class FlightGaugeViewModel : TccWindowViewModel
 
     public FlightGaugeViewModel(FlightWindowSettings settings) : base(settings)
     {
-        FlyingGuardianDataProvider.StackTypeChanged += () => N(nameof(Type));
-        FlyingGuardianDataProvider.IsInProgressChanged += () => N(nameof(FlyingMissionInProgress));
-        settings.RotationChanged += () => N(nameof(FlightGaugeRotation));
-        settings.FlipChanged += () => N(nameof(FlipFlightGauge));
+        FlyingGuardianDataProvider.StackTypeChanged += () => InvokePropertyChanged(nameof(Type));
+        FlyingGuardianDataProvider.IsInProgressChanged += () => InvokePropertyChanged(nameof(FlyingMissionInProgress));
+        settings.RotationChanged += () => InvokePropertyChanged(nameof(FlightGaugeRotation));
+        settings.FlipChanged += () => InvokePropertyChanged(nameof(FlipFlightGauge));
     }
 
     protected override void InstallHooks()

@@ -115,16 +115,16 @@ public class SorcererLayoutVM : BaseClassLayoutViewModel
 
     public void NotifyElementChanged()
     {
-        N(nameof(Fire));
-        N(nameof(Ice));
-        N(nameof(Arcane));
+        InvokePropertyChanged(nameof(Fire));
+        InvokePropertyChanged(nameof(Ice));
+        InvokePropertyChanged(nameof(Arcane));
         Fusion.Skill = CurrentFusionSkill;
     }
 
     public void NotifyElementBoostChanged()
     {
-        N(nameof(IsBoostFire));
-        N(nameof(IsBoostFrost));
-        N(nameof(IsBoostArcane));
+        InvokePropertyChanged(nameof(IsBoostFire));
+        InvokePropertyChanged(nameof(IsBoostFrost));
+        InvokePropertyChanged(nameof(IsBoostArcane));
     }
 }

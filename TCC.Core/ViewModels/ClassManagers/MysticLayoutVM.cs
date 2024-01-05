@@ -31,7 +31,7 @@ internal class MysticLayoutVM : BaseClassLayoutViewModel
             if (_elementalize == value) return;
             _elementalize = value;
             N();
-            N(nameof(ElementalizeWarning));
+            InvokePropertyChanged(nameof(ElementalizeWarning));
         }
     }
     public bool ElementalizeWarning => !Elementalize && (Game.Combat || Game.Encounter);
@@ -111,15 +111,15 @@ internal class MysticLayoutVM : BaseClassLayoutViewModel
         AuraTenacious.FlashOnAvailable = Auras is { ManaAura: false, CritResAura: false };
         AuraUnyielding.FlashOnAvailable = Auras is { ManaAura: false, CritResAura: false };
 
-        N(nameof(OffenseAuraWarning));
-        N(nameof(SupportAuraWarning));
+        InvokePropertyChanged(nameof(OffenseAuraWarning));
+        InvokePropertyChanged(nameof(SupportAuraWarning));
     }
 
     void OnCombatChanged()
     {
-        N(nameof(ElementalizeWarning));
-        N(nameof(OffenseAuraWarning));
-        N(nameof(SupportAuraWarning));
+        InvokePropertyChanged(nameof(ElementalizeWarning));
+        InvokePropertyChanged(nameof(OffenseAuraWarning));
+        InvokePropertyChanged(nameof(SupportAuraWarning));
         CheckAurasWarning();
     }
 

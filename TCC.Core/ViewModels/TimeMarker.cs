@@ -28,7 +28,7 @@ public class TimeMarker : ThreadSafeObservableObject
     void T_Tick(object? sender, EventArgs e)
     {
         _dateTime = DateTime.Now.AddHours(_hourOffset);
-        N(nameof(TimeString));
-        N(nameof(TimeFactor));
+        InvokePropertyChanged(nameof(TimeString));
+        InvokePropertyChanged(nameof(TimeFactor));
     }
 }

@@ -47,7 +47,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
             if(_forcedClickable == value) return;
             _forcedClickable = value;
             N();
-            N(nameof(ClickThruMode));
+            InvokePropertyChanged(nameof(ClickThruMode));
         }
     }
     [JsonIgnore] public bool ForcedVisible

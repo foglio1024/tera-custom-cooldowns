@@ -37,59 +37,35 @@ public class Character : ThreadSafeObservableObject, IComparable
     public string ServerName
     {
         get => _serverName;
-        set
-        {
-            if (_serverName == value) return;
-            _serverName = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _serverName);
     }
     public string Name
     {
-        get => _name; set
-        {
-            if (_name == value) return;
-            _name = value;
-            N();
-        }
+        get => _name; 
+        set => RaiseAndSetIfChanged(value, ref _name);
     }
     public Class Class
     {
-        get => _class; set
-        {
-            if (_class == value) return;
-            _class = value;
-            N();
-        }
+        get => _class; 
+        set => RaiseAndSetIfChanged(value, ref _class);
     }
     public Laurel Laurel
     {
-        get => _laurel; set
-        {
-            if (_laurel == value) return;
-            _laurel = value;
-            N();
-        }
+        get => _laurel; 
+        set => RaiseAndSetIfChanged(value, ref _laurel);
     }
     public int Level
     {
         get => _level;
-        set
-        {
-            if (_level == value) return;
-            _level = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _level);
     }
     public float ItemLevel
     {
         get => _itemLevel;
         set
         {
-            if (_itemLevel == value) return;
-            _itemLevel = value;
-            N();
-            N(nameof(ItemLevelTier));
+            if (!RaiseAndSetIfChanged(value, ref _itemLevel)) return;
+            InvokePropertyChanged(nameof(ItemLevelTier));
         }
     }
     public uint Coins
@@ -97,9 +73,7 @@ public class Character : ThreadSafeObservableObject, IComparable
         get => _coins;
         set
         {
-            if (_coins == value) return;
-            _coins = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _coins)) return;
             DungeonInfo.UpdateAvailableEntries(_coins, _maxCoins);
         }
     }
@@ -108,9 +82,7 @@ public class Character : ThreadSafeObservableObject, IComparable
         get => _maxCoins;
         set
         {
-            if (_maxCoins == value) return;
-            _maxCoins = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxCoins)) return;
             DungeonInfo.UpdateAvailableEntries(_coins, _maxCoins);
         }
     }
@@ -118,10 +90,8 @@ public class Character : ThreadSafeObservableObject, IComparable
     {
         get => _elleonMarks; set
         {
-            if (_elleonMarks == value) return;
-            _elleonMarks = value;
-            N();
-            N(nameof(ElleonMarksFactor));
+            if (!RaiseAndSetIfChanged(value, ref _elleonMarks)) return;
+            InvokePropertyChanged(nameof(ElleonMarksFactor));
         }
     }
     public int DragonwingScales
@@ -129,10 +99,8 @@ public class Character : ThreadSafeObservableObject, IComparable
         get => _dragonwingScales;
         set
         {
-            if (_dragonwingScales == value) return;
-            _dragonwingScales = value;
-            N();
-            N(nameof(DragonwingScalesFactor));
+            if (!RaiseAndSetIfChanged(value, ref _dragonwingScales)) return;
+            InvokePropertyChanged(nameof(DragonwingScalesFactor));
         }
     }
     public int PiecesOfDragonScroll
@@ -140,40 +108,24 @@ public class Character : ThreadSafeObservableObject, IComparable
         get => _piecesOfDragonScroll;
         set
         {
-            if (_piecesOfDragonScroll == value) return;
-            _piecesOfDragonScroll = value;
-            N();
-            N(nameof(PiecesOfDragonScrollFactor));
+            if (!RaiseAndSetIfChanged(value, ref _piecesOfDragonScroll)) return;
+            InvokePropertyChanged(nameof(PiecesOfDragonScrollFactor));
         }
     }
     public long LastOnline
     {
         get => _lastOnline;
-        set
-        {
-            if (_lastOnline == value) return;
-            _lastOnline = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _lastOnline);
     }
     public Location LastLocation
     {
         get => _lastLocation;
-        set
-        {
-            if (_lastLocation == value) return;
-            _lastLocation = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _lastLocation);
     }
     public bool Hidden
     {
-        get => _hidden; set
-        {
-            if (_hidden == value) return;
-            _hidden = value;
-            N();
-        }
+        get => _hidden; 
+        set => RaiseAndSetIfChanged(value, ref _hidden);
     }
     public GuardianInfo GuardianInfo { get; }
     public VanguardInfo VanguardInfo { get; }
@@ -184,22 +136,13 @@ public class Character : ThreadSafeObservableObject, IComparable
     public bool IsLoggedIn
     {
         get => _isLoggedIn;
-        set
-        {
-            if (_isLoggedIn == value) return;
-            _isLoggedIn = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isLoggedIn);
     }
     [JsonIgnore]
     public bool IsSelected
     {
-        get => _isSelected; set
-        {
-            if (_isSelected == value) return;
-            _isSelected = value;
-            N();
-        }
+        get => _isSelected;
+        set => RaiseAndSetIfChanged(value, ref _isSelected);
     }
     [JsonIgnore]
     public ItemLevelTier ItemLevelTier

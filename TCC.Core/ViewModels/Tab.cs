@@ -309,20 +309,20 @@ public class Tab : ThreadSafeObservableObject
     public void AddImportantMessage(ChatMessage chatMessage)
     {
         ImportantMessages.Add(chatMessage);
-        N(nameof(Attention));
-        N(nameof(ImportantMessagesLabel));
+        InvokePropertyChanged(nameof(Attention));
+        InvokePropertyChanged(nameof(ImportantMessagesLabel));
     }
 
     public void RemoveImportantMessage(ChatMessage? msg)
     {
         if(msg != null) ImportantMessages.Remove(msg);
-        N(nameof(Attention));
-        N(nameof(ImportantMessagesLabel));
+        InvokePropertyChanged(nameof(Attention));
+        InvokePropertyChanged(nameof(ImportantMessagesLabel));
     }
     public void ClearImportant()
     {
         ImportantMessages.Clear();
-        N(nameof(Attention));
-        N(nameof(ImportantMessagesLabel));
+        InvokePropertyChanged(nameof(Attention));
+        InvokePropertyChanged(nameof(ImportantMessagesLabel));
     }
 }

@@ -27,12 +27,14 @@ public class LootItemViewModel : ThreadSafeObservableObject
         get => _distributionStatus;
         set
         {
-            if (_distributionStatus == value) return;
-            _distributionStatus = value;
+            if (!RaiseAndSetIfChanged(value, ref _distributionStatus)) return;
+
             if (_distributionStatus != DistributionStatus.Distributing
                 && _commitCheckTimer.IsEnabled)
+            {
                 _commitCheckTimer.Stop();
-            N();
+            }
+
             Dispatcher.InvokeAsync(CommandManager.InvalidateRequerySuggested);
         }
     }
@@ -40,23 +42,13 @@ public class LootItemViewModel : ThreadSafeObservableObject
     public string WinnerName
     {
         get => _winnerName;
-        set
-        {
-            if (_winnerName == value) return;
-            _winnerName = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _winnerName);
     }
 
     public BidAction BidIntent
     {
         get => _bidIntent;
-        set
-        {
-            if (_bidIntent == value) return;
-            _bidIntent = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _bidIntent);
     }
 
     public bool BidSent
@@ -64,10 +56,12 @@ public class LootItemViewModel : ThreadSafeObservableObject
         get => _bidSent;
         set
         {
-            if (_bidSent == value) return;
-            _bidSent = value;
-            if (_bidSent) _commitCheckTimer.Stop();
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _bidSent)) return;
+
+            if (_bidSent)
+            {
+                _commitCheckTimer.Stop();
+            }
             Dispatcher.InvokeAsync(CommandManager.InvalidateRequerySuggested);
         }
     }
@@ -77,12 +71,7 @@ public class LootItemViewModel : ThreadSafeObservableObject
     public int WinnerRoll
     {
         get => _winnerRoll;
-        set
-        {
-            if (_winnerRoll == value) return;
-            _winnerRoll = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _winnerRoll);
     }
 
     public ICommand SetBidIntentCommand { get; }

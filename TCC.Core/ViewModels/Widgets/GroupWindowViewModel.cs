@@ -46,12 +46,7 @@ public class GroupWindowViewModel : TccWindowViewModel
     public bool Raid
     {
         get => _raid;
-        set
-        {
-            if (_raid == value) return;
-            _raid = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _raid);
     }
     public int Size => Members.Count;
     public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
@@ -112,11 +107,11 @@ public class GroupWindowViewModel : TccWindowViewModel
 
     void OnLayoutChanged()
     {
-        N(nameof(GroupWindowLayout));
-        N(nameof(All));
-        N(nameof(Dps));
-        N(nameof(Healers));
-        N(nameof(Tanks));
+        InvokePropertyChanged(nameof(GroupWindowLayout));
+        InvokePropertyChanged(nameof(All));
+        InvokePropertyChanged(nameof(Dps));
+        InvokePropertyChanged(nameof(Healers));
+        InvokePropertyChanged(nameof(Tanks));
     }
 
     void OnTeleported()
@@ -134,20 +129,20 @@ public class GroupWindowViewModel : TccWindowViewModel
         //Task.Delay(0).ContinueWith(t =>
         //{
         //});
-        N(nameof(Size));
-        N(nameof(Formed));
-        N(nameof(AmILeader));
-        N(nameof(ShowDetails));
-        N(nameof(ShowLeaveButton));
-        N(nameof(AliveCount));
-        N(nameof(ReadyCount));
-        N(nameof(ShowLeaderButtons));
+        InvokePropertyChanged(nameof(Size));
+        InvokePropertyChanged(nameof(Formed));
+        InvokePropertyChanged(nameof(AmILeader));
+        InvokePropertyChanged(nameof(ShowDetails));
+        InvokePropertyChanged(nameof(ShowLeaveButton));
+        InvokePropertyChanged(nameof(AliveCount));
+        InvokePropertyChanged(nameof(ReadyCount));
+        InvokePropertyChanged(nameof(ShowLeaderButtons));
     }
     void NotifySettingUpdated()
     {
         SettingsUpdated?.Invoke();
 
-        N(nameof(ShowDetails));
+        InvokePropertyChanged(nameof(ShowDetails));
     }
     bool Exists(ulong id)
     {
@@ -426,8 +421,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             m.IsLeader = m.Name == name;
         }
         _leaderOverride = name == Game.Me.Name;
-        N(nameof(AmILeader));
-        N(nameof(ShowLeaderButtons));
+        InvokePropertyChanged(nameof(AmILeader));
+        InvokePropertyChanged(nameof(ShowLeaderButtons));
     }
 
     public void StartRoll()
@@ -499,7 +494,7 @@ public class GroupWindowViewModel : TccWindowViewModel
         var user = Members.ToSyncList().FirstOrDefault(u => u.PlayerId == p.PlayerId && u.ServerId == p.ServerId);
         if (user != null) user.Ready = p.Status;
         _firstCheck = false;
-        N(nameof(ReadyCount));
+        InvokePropertyChanged(nameof(ReadyCount));
     }
     void EndReadyCheck()
     {
@@ -564,13 +559,13 @@ public class GroupWindowViewModel : TccWindowViewModel
                 current.CurrentHp = 0; // force hp to 0 when ded
             }
             current.Alive = update.Alive;
-            N(nameof(AliveCount));
+            InvokePropertyChanged(nameof(AliveCount));
             if (!update.Alive) current.HasAggro = false;
         });
     }
     void NotifyThresholdChanged()
     {
-        N(nameof(Size));
+        InvokePropertyChanged(nameof(Size));
     }
 
     void UpdateMemberLocation(uint playerId, uint serverId, int channel, uint continentId)

@@ -33,7 +33,7 @@ public class SmallMobViewModel : NpcViewModel
 
     void OnNpcVMOnNpcListChanged()
     {
-        N(nameof(Compact));
+        InvokePropertyChanged(nameof(Compact));
     }
 
     void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)

@@ -20,9 +20,7 @@ public class BaseStackBuffTracker : ThreadSafeObservableObject
         get => _stacks;
         private set
         {
-            if (_stacks == value) return;
-            _stacks = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _stacks)) return;
             BaseStacksChanged?.Invoke(Stacks);
         }
     }

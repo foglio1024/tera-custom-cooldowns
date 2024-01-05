@@ -104,13 +104,7 @@ public class ClassToggle : ThreadSafeObservableObject
     public bool Selected
     {
         get => _selected;
-        set
-        {
-            if (_selected == value) return;
-            _selected = value;
-            N();
-
-        }
+        set => RaiseAndSetIfChanged(value, ref _selected);
     }
     public Class Class { get; }
     public ToggleCommand ToggleCommand { get; }

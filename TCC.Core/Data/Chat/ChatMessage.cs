@@ -118,10 +118,11 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
                 SettingsWindowViewModel.TranslationModeChanged -= NotifyTranslationModeChanged;
             }
 
-            if (_isVisible == value) return;
-            _isVisible = value;
-            if (_translation is not null) _translation.IsVisible = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _isVisible)) return;
+            if (_translation is not null)
+            {
+                _translation.IsVisible = value;
+            }
         }
     }
     public bool HasTranslation
@@ -129,10 +130,8 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         get => _hasTranslation;
         set
         {
-            if (_hasTranslation == value) return;
-            _hasTranslation = value;
-            N();
-            N(nameof(DisplayedLines));
+            if (!RaiseAndSetIfChanged(value, ref _hasTranslation)) return;
+            InvokePropertyChanged(nameof(DisplayedLines));
         }
     }
     public int Size => App.Settings.FontSize;
@@ -288,24 +287,24 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 
     void NotifyShowChannelChanged()
     {
-        N(nameof(ShowChannel));
+        InvokePropertyChanged(nameof(ShowChannel));
     }
 
     void NotifyShowTimestampChanged()
     {
-        N(nameof(ShowTimestamp));
+        InvokePropertyChanged(nameof(ShowTimestamp));
     }
 
     void NotifyFontSizeChanged()
     {
-        N(nameof(Size));
+        InvokePropertyChanged(nameof(Size));
     }
 
     void NotifyTranslationModeChanged()
     {
-        N(nameof(IsShowingTranslationFirst));
-        N(nameof(DisplayedLines));
-        N(nameof(SecondaryLines));
+        InvokePropertyChanged(nameof(IsShowingTranslationFirst));
+        InvokePropertyChanged(nameof(DisplayedLines));
+        InvokePropertyChanged(nameof(SecondaryLines));
     }
 
     void ParseDirectMessage(string msg)
@@ -468,8 +467,8 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         message.SplitSimplePieces();
         _translation = message;
         _translation.IsVisible = IsVisible;
-        N(nameof(DisplayedLines));
-        N(nameof(SecondaryLines));
+        InvokePropertyChanged(nameof(DisplayedLines));
+        InvokePropertyChanged(nameof(SecondaryLines));
     }
 
     public override string ToString()

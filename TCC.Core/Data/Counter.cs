@@ -17,22 +17,15 @@ public class Counter : ThreadSafeObservableObject
         get => _val;
         set
         {
-            if (_val == value) return;
-            _val = value;
+            if (!RaiseAndSetIfChanged(value, ref _val)) return;
             IsMaxed = Val == MaxValue;
             RefreshTimer();
-            N();
         }
     }
     public bool IsMaxed
     {
         get => _isMaxed;
-        private set
-        {
-            if (_isMaxed == value) return;
-            _isMaxed = value;
-            N();
-        }
+        private set => RaiseAndSetIfChanged(value, ref _isMaxed);
     }
     public int MaxValue { get; private set; }
     bool AutoExpire { get; set; }

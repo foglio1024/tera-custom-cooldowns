@@ -29,22 +29,16 @@ public class CharacterWindowSettings : WindowSettingsBase
     public bool CompactMode
     {
         get => _compactMode;
-        set
-        {
-            if (_compactMode == value) return;
-            _compactMode = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _compactMode);
     }
     public bool SorcererShowElements
     {
         get => _sorcererShowElements;
         set
         {
-            if (_sorcererShowElements == value) return;
-            _sorcererShowElements = value;
+            if (!RaiseAndSetIfChanged(value, ref _sorcererShowElements)) return;
             SorcererShowElementsChanged?.Invoke();
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool WarriorShowEdge
@@ -52,10 +46,9 @@ public class CharacterWindowSettings : WindowSettingsBase
         get => _warriorShowEdge;
         set
         {
-            if (_warriorShowEdge == value) return;
-            _warriorShowEdge = value;
+            if (!RaiseAndSetIfChanged(value, ref _warriorShowEdge)) return;
             WarriorShowEdgeChanged?.Invoke();
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool ShowStamina
@@ -63,10 +56,8 @@ public class CharacterWindowSettings : WindowSettingsBase
         get => _showStamina;
         set
         {
-            if (_showStamina == value) return;
-            _showStamina = value;
+            if (!RaiseAndSetIfChanged(value, ref _showStamina)) return;
             ShowStaminaChanged?.Invoke();
-            N();
         }
     }
     public CustomLaurel CustomLaurel
@@ -74,10 +65,8 @@ public class CharacterWindowSettings : WindowSettingsBase
         get => _customLaurel;
         set
         {
-            if (_customLaurel == value) return;
-            _customLaurel = value;
+            if (!RaiseAndSetIfChanged(value, ref _customLaurel)) return;
             CustomLaurelChanged?.Invoke();
-            N();
         }
     }
 
