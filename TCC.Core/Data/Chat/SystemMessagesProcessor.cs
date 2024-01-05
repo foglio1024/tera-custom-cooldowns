@@ -14,126 +14,6 @@ namespace TCC.Data.Chat;
 
 public static class SystemMessagesProcessor
 {
-    static string Build(SystemMessageData template, params string[] parameters)
-    {
-        var pieces = new List<string>();
-        var sb = new StringBuilder();
-
-        var prm = ChatUtils.SplitDirectives(parameters);
-        var txt = template.Template.UnescapeHtml().Replace("<BR>", "\r\n");
-        var html = new HtmlDocument(); html.LoadHtml(txt);
-        var htmlPieces = html.DocumentNode.ChildNodes;
-        // BIG TODO: why is this duplicated in SystemMessage.ctor?
-        if (prm == null)
-        {
-            //only one parameter (opcode) so just add text
-
-            pieces.AddRange(htmlPieces.Select(htmlPiece => htmlPiece.InnerText));
-        }
-        else
-        {
-            //more parameters
-            foreach (var piece in htmlPieces)
-            {
-                if (piece.Name == "img") continue;
-                var content = ChatUtils.ReplaceParameters(piece.InnerText, prm, true);
-                var innerPieces = content.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries);
-                var plural = false;
-                var selectionStep = 0;
-
-                foreach (var inPiece in innerPieces)
-                {
-                    switch (selectionStep)
-                    {
-                        case 1:
-                            if (int.Parse(inPiece) != 1) plural = true;
-                            selectionStep++;
-                            continue;
-                        case 2:
-                            if (inPiece == "/s//s" && plural)
-                            {
-                                pieces[^1] = pieces.Last() + "s";
-                                plural = false;
-                            }
-
-                            selectionStep = 0;
-                            continue;
-                    }
-
-                    string mp;
-                    if (inPiece.StartsWith("@select", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        selectionStep++;
-                        continue;
-                    }
-
-                    if (inPiece.StartsWith("@item", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgItem(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@abnormal", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        var abName = "Unknown";
-                        if (Game.DB!.AbnormalityDatabase.Abnormalities.TryGetValue(uint.Parse(inPiece.Split(':')[1]),
-                                out var ab)) abName = ab.Name;
-                        mp = abName;
-                    }
-                    else if (inPiece.StartsWith("@GuildQuest", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgGuildQuest(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@dungeon", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgDungeon(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@accountBenefit", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgAccBenefit(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@AchievementGradeInfo", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgAchiGrade(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@achievement", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgAchi(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@quest", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgQuest(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@creature", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgCreature(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@rgn", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgRegion(inPiece);
-                    }
-                    else if (inPiece.StartsWith("@zoneName", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        mp = SystemMessageParser.ParseSysMsgZone(inPiece);
-                    }
-                    else if (inPiece.Contains("@money"))
-                    {
-                        var t = inPiece.Replace("@money", "");
-                        mp = new Money(t).ToString();
-                    }
-                    else
-                    {
-                        mp = inPiece.UnescapeHtml();
-                    }
-
-                    pieces.Add(mp);
-                }
-            }
-        }
-
-        pieces.ForEach(p => sb.Append(p));
-
-        return sb.ToString();
-    }
-
     public static void AnalyzeMessage(string fullParameters)
     {
         var opcodeStr = fullParameters.Split('\v')[0]; // "@opcode \v parameters"
@@ -301,7 +181,9 @@ public static class SystemMessagesProcessor
         }
         else
         {
-            notificationText = Build(template, parameters.Split('\v'));
+            var msg = new SystemMessage(parameters, template, ChatChannel.System);
+            notificationText = msg.PlainMessage;
+            msg.Dispose();
         }
         Log.N("Field Boss", notificationText, NotificationType.Info, 10000);
 
@@ -331,7 +213,9 @@ public static class SystemMessagesProcessor
         }
         else
         {
-            notificationText = Build(template, parameters.Split('\v'));
+            var msg = new SystemMessage(parameters, template, ChatChannel.System);
+            notificationText = msg.PlainMessage;
+            msg.Dispose();
         }
         Log.N("Field Boss", notificationText, NotificationType.Info, 10000);
         if (!App.Settings.WebhookEnabledFieldBoss) return;
