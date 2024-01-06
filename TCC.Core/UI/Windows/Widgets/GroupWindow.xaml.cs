@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using TCC.Interop.Proxy;
-using TCC.UI.Controls.Abnormalities;
 using TCC.ViewModels.Widgets;
 
 namespace TCC.UI.Windows.Widgets;

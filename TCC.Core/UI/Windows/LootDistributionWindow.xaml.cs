@@ -1,5 +1,4 @@
-﻿using System.Runtime;
-using System.Windows;
+﻿using System.Windows;
 using TCC.ViewModels;
 
 namespace TCC.UI.Windows;
@@ -32,7 +31,7 @@ public partial class LootDistributionWindow
     void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         e.Handled = true;
-        _vm.Settings.Visible = false;
+        _vm.Settings!.Visible = false;
     }
 
 

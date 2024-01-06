@@ -33,7 +33,7 @@ public class MyAbnormalConfigVM : ThreadSafeObservableObject, IDisposable
             App.Settings.BuffWindowSettings.ShowAll= value;
             _dispatcher.Invoke(() => ShowAllChanged?.Invoke());
             App.Settings.Save();
-            N();
+            InvokePropertyChanged();
         }
     }
     public List<Class> Classes

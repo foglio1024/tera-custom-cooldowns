@@ -10,12 +10,7 @@ public class NotificationAreaSettings : WindowSettingsBase
     public int DefaultNotificationDuration
     {
         get => _defaultNotificationDuration;
-        set
-        {
-            if (_defaultNotificationDuration == value) return;
-            _defaultNotificationDuration = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _defaultNotificationDuration);
     }
 
     public NotificationAreaSettings()

@@ -427,7 +427,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
             void TryAddToList(CooldownData cdData, ThreadSafeObservableCollection<Cooldown> list)
             {
                 if (!Game.DB!.GetSkillFromId(cdData.Id, c, cdData.Type, out var sk)
-                && !Game.DB!.GetSkillFromId(cdData.Id, Class.Common, cdData.Type, out sk)) return;
+                && !Game.DB.GetSkillFromId(cdData.Id, Class.Common, cdData.Type, out sk)) return;
                 list.Add(new Cooldown(sk, false, cdData.Type, _dispatcher));
             }
             #endregion
@@ -646,7 +646,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
     void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
     {
         if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)
-         && !Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Class.Common, out skill))
+         && !Game.DB.SkillsDatabase.TryGetSkill(m.SkillId, Class.Common, out skill))
             return;
 
         if (!Pass(skill)) return;

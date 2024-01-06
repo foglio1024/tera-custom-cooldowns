@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Nostrum.WPF.Controls;
+using Nostrum.WPF.Factories;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using Nostrum.WPF.Controls;
-using Nostrum.WPF.Factories;
 using TCC.Data.Abnormalities;
-using TCC.UI.Windows.Widgets;
 
 namespace TCC.UI.Controls.Abnormalities;
 

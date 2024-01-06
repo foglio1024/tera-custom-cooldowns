@@ -47,9 +47,8 @@ public class Listing : ThreadSafeObservableObject
         get => _message;
         set
         {
-            if (_message == value) return;
-            _message = value.Replace("&gt;", ">").Replace("&lt;", "<"); // todo: change value before setting
-            N();
+            if (!RaiseAndSetIfChanged(value.Replace("&gt;", ">").Replace("&lt;", "<"), ref _message)) return;
+
             InvokePropertyChanged(nameof(IsTrade));
             InvokePropertyChanged(nameof(IsTwitch));
         }

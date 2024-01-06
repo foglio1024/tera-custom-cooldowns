@@ -19,9 +19,7 @@ public class VanguardInfo : ThreadSafeObservableObject
         get => _credits;
         set
         {
-            if (_credits == value) return;
-            _credits = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _credits)) return;
             InvokePropertyChanged(nameof(CreditsFactor));
         }
     }
@@ -30,9 +28,7 @@ public class VanguardInfo : ThreadSafeObservableObject
         get => _dailiesDone;
         set
         {
-            if (_dailiesDone == value) return;
-            _dailiesDone = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _dailiesDone)) return;
             InvokePropertyChanged(nameof(DailyCompletion));
         }
     }
@@ -41,9 +37,7 @@ public class VanguardInfo : ThreadSafeObservableObject
         get => _weekliesDone;
         set
         {
-            if (_weekliesDone == value) return;
-            _weekliesDone = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _weekliesDone)) return;
             InvokePropertyChanged(nameof(WeeklyCompletion));
 
         }
@@ -53,9 +47,7 @@ public class VanguardInfo : ThreadSafeObservableObject
         get => _weekliesMax;
         set
         {
-            if (_weekliesMax == value) return;
-            _weekliesMax = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _weekliesMax)) return;
             InvokePropertyChanged(nameof(WeeklyCompletion));
         }
     }

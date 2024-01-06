@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-using Newtonsoft.Json.Linq;
-using Nostrum;
 using TCC.Data;
 using TCC.UI.Windows;
 using TCC.Utilities;
@@ -170,7 +169,7 @@ public static class UpdateManager
 
             await App.SplashScreen.Dispatcher.InvokeAsync(() =>
             {
-                c.DownloadFileAsync(new Uri(url), "update.zip");
+                _ = c.DownloadFileAsync(new Uri(url), "update.zip");
             });
 
             while (_waitingDownload) Thread.Sleep(1000); //only way to wait for downlaod

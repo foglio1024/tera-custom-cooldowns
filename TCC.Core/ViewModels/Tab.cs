@@ -42,12 +42,7 @@ public class TabInfoVM : ThreadSafeObservableObject
     public string TabName
     {
         get => _tabName;
-        set
-        {
-            if (_tabName == value) return;
-            _tabName = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _tabName);
     }
 
     public ThreadSafeObservableCollection<string> Authors { get; set; }
@@ -172,7 +167,7 @@ public class Tab : ThreadSafeObservableObject
             if (TabInfo.Name == value) return;
             TabInfo.Name = value;
             TabInfoVM.TabName = value;
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -199,12 +194,7 @@ public class Tab : ThreadSafeObservableObject
     public ChatMessage? PinnedMessage
     {
         get => _pinnedMessage;
-        set
-        {
-            if (_pinnedMessage == value) return;
-            _pinnedMessage = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _pinnedMessage);
     }
     public void Refresh()
     {

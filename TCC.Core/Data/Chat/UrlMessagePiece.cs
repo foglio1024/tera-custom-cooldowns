@@ -12,12 +12,7 @@ public class UrlMessagePiece : SimpleMessagePiece
     public override bool IsHovered
     {
         get => _isHovered;
-        set
-        {
-            if (_isHovered == value) return;
-            _isHovered = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isHovered);
     }
     public override ICommand ClickCommand { get; }
 

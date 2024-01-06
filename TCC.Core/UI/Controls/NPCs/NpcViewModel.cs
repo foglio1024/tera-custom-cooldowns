@@ -34,7 +34,7 @@ public class NpcViewModel : ThreadSafeObservableObject
             }
             else
             {
-                N();
+                InvokePropertyChanged();
             }
         }
     }

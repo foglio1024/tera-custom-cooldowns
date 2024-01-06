@@ -1,9 +1,6 @@
-﻿using HtmlAgilityPack;
-using Nostrum.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TCC.Data.Pc;
 using TCC.UI;
 using TCC.Utils;

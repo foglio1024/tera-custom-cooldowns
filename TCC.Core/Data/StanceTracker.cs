@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Nostrum.WPF.ThreadSafe;
+﻿using Nostrum.WPF.ThreadSafe;
+using System;
 
 namespace TCC.Data;
 
@@ -11,11 +10,6 @@ public class StanceTracker<T> : ThreadSafeObservableObject where T : struct, ICo
     public T CurrentStance
     {
         get => _currentStance;
-        set
-        {
-            if (EqualityComparer<T>.Default.Equals(_currentStance, value)) return;
-            _currentStance = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _currentStance);
     }
 }

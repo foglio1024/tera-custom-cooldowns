@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Input;
 using Nostrum.WPF;
-using Nostrum.WPF.Extensions;
 using TCC.Interop.Proxy;
 
 namespace TCC.Data.Chat;

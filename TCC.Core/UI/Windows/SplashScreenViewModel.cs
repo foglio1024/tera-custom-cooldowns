@@ -32,22 +32,12 @@ public class SplashScreenViewModel : ThreadSafeObservableObject
     public bool Waiting
     {
         get => _waiting;
-        private set
-        {
-            if (_waiting == value) return;
-            _waiting = value;
-            N();
-        }
+        private set => RaiseAndSetIfChanged(value, ref _waiting);
     }
     public string BottomText
     {
         get => _bottomText;
-        set
-        {
-            if (_bottomText == value) return;
-            _bottomText = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _bottomText);
     }
 
     public string Version => App.AppVersion.Replace("TCC ", "").Replace("-b", "");

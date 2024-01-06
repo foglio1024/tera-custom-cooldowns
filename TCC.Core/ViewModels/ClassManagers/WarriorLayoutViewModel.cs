@@ -28,12 +28,7 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
     public bool WarningStance
     {
         get => _warningStance;
-        set
-        {
-            if (_warningStance == value) return;
-            _warningStance = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _warningStance);
     }
 
     public bool AtkSpeedProc => !(Swift.Effect.IsAvailable && AdrenalineRush.Effect.IsAvailable);

@@ -10,7 +10,7 @@ public class HttpClientProgress : HttpClient
     public event Action<long, long>? DownloadProgressChanged;
     public event Action<bool>? DownloadFileCompleted;
 
-    public HttpClientProgress() : base()
+    public HttpClientProgress()
     {
         DefaultRequestHeaders.ExpectContinue = false;
     }

@@ -115,7 +115,7 @@ public static class Tester
     }
     public static void StartUnleash()
     {
-        var vm = TccUtils.CurrentClassVM<BerserkerLayoutViewModel>();
+        var vm = TccUtils.CurrentClassVM<BerserkerLayoutViewModel>()!;
         vm.IsUnleashOn = !vm.IsUnleashOn;
     }
     public static void AddFakeGroupMember(int id, Class c, Laurel l, bool leader = false)

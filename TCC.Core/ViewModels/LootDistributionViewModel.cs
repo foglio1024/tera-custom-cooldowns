@@ -28,8 +28,22 @@ public class LootDistributionViewModel : TccWindowViewModel
 
     readonly IReadOnlyCollection<uint> _itemExclusions =
     [
-        8008, 8009, 8010, 8011, 8012, 8013, 8014, 8015,
-        8016, 8017, 8018, 8019, 8020, 8021, 8022, 8023
+        8008,
+        8009,
+        8010,
+        8011,
+        8012,
+        8013,
+        8014,
+        8015,
+        8016,
+        8017,
+        8018,
+        8019,
+        8020,
+        8021,
+        8022,
+        8023
     ];
     readonly Dictionary<GameId, DropItem> _droppedItems = new();
     readonly Dictionary<(uint, uint), uint> _amountsDistributed = new();
@@ -60,13 +74,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     public int ItemsLeftAmount
     {
         get => _itemsLeftAmount;
-        set
-        {
-            if (_itemsLeftAmount == value) return;
-            _itemsLeftAmount = value;
-            if (_itemsLeftAmount < 0) _itemsLeftAmount = 0;
-            N(); // change value first
-        }
+        set => RaiseAndSetIfChanged(value >= 0 ? value : 0, ref _itemsLeftAmount);
     }
 
     public int TimeLeft

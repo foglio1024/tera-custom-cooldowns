@@ -1,4 +1,8 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using Nostrum.WPF.ThreadSafe;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,10 +11,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
-using JetBrains.Annotations;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.Factories;
-using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Abnormalities;
 using TCC.Data.Databases;
@@ -628,23 +628,13 @@ public class NpcWindowViewModel : TccWindowViewModel
     public Npc? SelectedDragon
     {
         get => _selectedDragon;
-        set
-        {
-            if (_selectedDragon == value) return;
-            _selectedDragon = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _selectedDragon);
     }
 
     public Npc? Vergos
     {
         get => _vergos;
-        set
-        {
-            if (_vergos == value) return;
-            _vergos = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _vergos);
     }
 
     public HarrowholdPhase CurrentHHphase
@@ -652,8 +642,8 @@ public class NpcWindowViewModel : TccWindowViewModel
         get => _currentHHphase;
         set
         {
-            if (_currentHHphase == value) return;
-            _currentHHphase = value;
+            if (!RaiseAndSetIfChanged(value, ref _currentHHphase)) return;
+
             if (value == HarrowholdPhase.Phase1)
             {
                 PacketAnalyzer.Processor.Hook<S_DUNGEON_EVENT_MESSAGE>(OnDungeonEventMessage);
@@ -665,7 +655,6 @@ public class NpcWindowViewModel : TccWindowViewModel
                 PacketAnalyzer.Processor.Unhook<C_PLAYER_LOCATION>(OnPlayerLocation);
             }
             //PacketAnalyzer.Processor.Update(); //TODO?
-            N();
         }
     }
 

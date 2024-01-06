@@ -236,7 +236,7 @@ public partial class ChatWindow
         }
         if (left + w - 6 >= 0) RightLine.Margin = new Thickness(left + w - 6, 0, 0, 0);
 
-        if (VM.Tabs.IndexOf(VM.CurrentTab) > 0)
+        if (VM.Tabs.IndexOf(VM.CurrentTab!) > 0)
         {
             MainBorder.CornerRadius = MainBorder.CornerRadius with { TopLeft = 5 };
         }

@@ -93,7 +93,7 @@ public class StubMessageParser
 
         var message = (jMessage.Value<string>() ?? "");
 
-        if (channel == 9 || channel == 10) // remove <font> tags from Greets and Anglers  
+        if (channel is 9 or 10) // remove <font> tags from Greets and Anglers  
         {
             if (message.StartsWith("<font>", StringComparison.OrdinalIgnoreCase))
             {

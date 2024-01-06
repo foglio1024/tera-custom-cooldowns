@@ -39,30 +39,29 @@ public class WindowSettingsBase : ThreadSafeObservableObject
     [JsonIgnore] public string Name { get; } = "";
     [JsonIgnore] protected List<string> GpkNames { get; }
 
-    [JsonIgnore] public bool ForcedClickable
+    [JsonIgnore]
+    public bool ForcedClickable
     {
         get => _forcedClickable;
         set
         {
-            if(_forcedClickable == value) return;
-            _forcedClickable = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _forcedClickable)) return;
             InvokePropertyChanged(nameof(ClickThruMode));
         }
     }
-    [JsonIgnore] public bool ForcedVisible
+    [JsonIgnore]
+    public bool ForcedVisible
     {
         get => _forcedVisible;
         set
         {
-            if(_forcedVisible == value) return;
-            _forcedVisible = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _forcedVisible)) return;
             WindowManager.VisibilityManager.RefreshDim();
         }
     }
 
-    [JsonIgnore] public double X
+    [JsonIgnore]
+    public double X
     {
         get => Positions.Position(!PerClassPosition ? Class.Common : CurrentClass()).X;
         set
@@ -73,10 +72,11 @@ public class WindowSettingsBase : ThreadSafeObservableObject
             var old = Positions.Position(cc);
             if (old.X == value) return;
             Positions.SetPosition(cc, old with { X = value });
-            N();
+            InvokePropertyChanged();
         }
     }
-    [JsonIgnore] public double Y
+    [JsonIgnore]
+    public double Y
     {
         get => Positions.Position(!PerClassPosition ? Class.Common : CurrentClass()).Y;
         set
@@ -87,7 +87,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
             var old = Positions.Position(cc);
             if (old.Y == value) return;
             Positions.SetPosition(cc, old with { Y = value });
-            N();
+            InvokePropertyChanged();
         }
     }
     [JsonIgnore] public bool IgnoreSize { get; set; } = true;
@@ -105,29 +105,8 @@ public class WindowSettingsBase : ThreadSafeObservableObject
         get => _enabled;
         set
         {
-            if (_enabled == value) return;
-            //if (value == false && TccMessageBox.Show("TCC",
-            //        "Re-enabling this later will require TCC restart.\nDo you want to continue?",
-            //        MessageBoxButton.OKCancel, MessageBoxImage.Question) ==
-            //    MessageBoxResult.Cancel)
-            //{
-            //    return;
-            //}
-            //else if (value == false)
-            //{
-            //    Visible = false;
-            //    _enabled = false;
-            //    SafeClosed?.Invoke();
-            //}
-            //else
-            //{
-            //    TccMessageBox.Show("TCC", "TCC will now be restarted.", MessageBoxButton.OK,
-            //        MessageBoxImage.Information);
-            //    Visible = true;
-            //    _enabled = true;
-            //    App.Restart();
-            //}
-            _enabled = value;
+            if (!RaiseAndSetIfChanged(value, ref _enabled)) return;
+
             if (_enabled)
             {
                 Visible = true;
@@ -135,19 +114,13 @@ public class WindowSettingsBase : ThreadSafeObservableObject
 
             if (App.Loading) return;
             EnabledChanged?.Invoke(_enabled);
-            N();
         }
     }
 
     public virtual bool HideIngameUI
     {
         get => _hideIngameUI;
-        set
-        {
-            if(_hideIngameUI == value) return;
-            _hideIngameUI = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _hideIngameUI);
     }
 
     public bool Visible
@@ -155,9 +128,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
         get => _visible;
         set
         {
-            if (_visible == value) return;
-            _visible = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _visible)) return;
             VisibilityChanged?.Invoke(_visible);
         }
     }
@@ -166,8 +137,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
         get => _showAlways;
         set
         {
-            _showAlways = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _showAlways)) return;
             VisibilityChanged?.Invoke(Visible);
             WindowManager.VisibilityManager.RefreshVisible();
         }
@@ -175,20 +145,14 @@ public class WindowSettingsBase : ThreadSafeObservableObject
     public bool AllowOffScreen
     {
         get => _allowOffScreen;
-        set
-        {
-            if (_allowOffScreen == value) return;
-            _allowOffScreen = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _allowOffScreen);
     }
     public bool AutoDim
     {
         get => _autoDim;
         set
         {
-            _autoDim = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _autoDim)) return;
             WindowManager.VisibilityManager.RefreshDim();
         }
     }
@@ -197,9 +161,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
         get => _dimOpacity;
         set
         {
-            if (_dimOpacity == value) return;
-            _dimOpacity = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _dimOpacity)) return;
             WindowManager.VisibilityManager.RefreshDim();
         }
     }
@@ -208,47 +170,32 @@ public class WindowSettingsBase : ThreadSafeObservableObject
         get => _maxOpacity;
         set
         {
-            if (_maxOpacity == value) return;
-            _maxOpacity = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxOpacity)) return;
             WindowManager.VisibilityManager.RefreshDim();
         }
     }
     public double Scale
     {
         get => _scale;
-        set
-        {
-            if (_scale == value) return;
-            _scale = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _scale);
+
     }
     public double W
     {
         get => _w;
-        set
-        {
-            _w = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _w);
     }
     public double H
     {
         get => _h;
-        set
-        {
-            _h = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _h);
     }
     public ClickThruMode ClickThruMode
     {
         get => ForcedClickable ? ClickThruMode.Never : _clickThruMode;
         set
         {
-            _clickThruMode = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _clickThruMode)) return;
             ClickThruModeChanged?.Invoke();
         }
     }
@@ -264,7 +211,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
             var cc = CurrentClass();
             if (cc == Class.None) return;
             Positions.SetButtons(cc, value);
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -273,7 +220,7 @@ public class WindowSettingsBase : ThreadSafeObservableObject
     public WindowSettingsBase()
     {
         Positions = new ClassPositions();
-        GpkNames = new List<string>();
+        GpkNames = [];
         EnabledChanged += OnEnabledChanged;
 
         ResetPositionCommand = new RelayCommand(_ => ResetToCenter?.Invoke());

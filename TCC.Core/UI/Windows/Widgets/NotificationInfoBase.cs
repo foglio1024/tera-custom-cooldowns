@@ -13,12 +13,7 @@ public class ProgressNotificationInfo : NotificationInfoBase
     public double Progress
     {
         get => _progress;
-        set
-        {
-            if (_progress == value) return;
-            _progress = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _progress);
     }
 
     public ProgressNotificationInfo(int id, string title, string message, NotificationType type, int duration, NotificationTemplate template) : base(id, title, message, type, duration, template)
@@ -53,22 +48,13 @@ public class NotificationInfoBase : ThreadSafeObservableObject
     public string Message
     {
         get => _message;
-        set
-        {
-            if (_message == value) return;
-            _message = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _message);
+
     }
     public NotificationType NotificationType
     {
         get => _notificationType;
-        set
-        {
-            if (_notificationType == value) return;
-            _notificationType = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _notificationType);
     }
 
     bool _canClose;
@@ -76,12 +62,7 @@ public class NotificationInfoBase : ThreadSafeObservableObject
     public bool CanClose
     {
         get => _canClose;
-        set
-        {
-            if (_canClose == value) return;
-            _canClose = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _canClose);
     }
 
     public NotificationTemplate NotificationTemplate { get; }
@@ -114,5 +95,4 @@ public class NotificationInfoBase : ThreadSafeObservableObject
     {
         Disposed?.Invoke();
     }
-
 }

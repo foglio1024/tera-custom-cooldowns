@@ -1079,6 +1079,16 @@ public static class Game
         ab.Infinity = p.Duration >= int.MaxValue / 2;
         Me.UpdateAbnormality(ab, p.Duration, p.Stacks);
         FlyingGuardianDataProvider.OnAbnormalityBegin(p);
+
+        if (p.AbnormalityId != 303401008) return;
+        if (!IsMe(p.CasterId)) return;
+
+        var username = "Unknown";
+        if(NearbyPlayers.TryGetValue(p.CasterId, out var player))
+        {
+            username = player.Name;
+        }
+        ChatManager.Instance.AddTccMessage($"{username} used Cooldown Bomb");
     }
 
     static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)

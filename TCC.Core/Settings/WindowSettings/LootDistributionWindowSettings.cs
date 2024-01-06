@@ -34,12 +34,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         get => _rollHotKey;
         set
         {
-            if (_rollHotKey.Equals(value)) return;
-            _rollHotKey = value;
-            N();
-            /// verify that it doesn't break anything
-            //if (!RaiseAndSetIfChanged(value, ref _rollHotKey)) return;
-
+            if (!RaiseAndSetIfChanged(value, ref _rollHotKey)) return;
             if (_passHotKey.Equals(value)) PassHotKey = new HotKey(Keys.None, ModifierKeys.None);
         }
     }
@@ -49,13 +44,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         get => _passHotKey;
         set
         {
-            
-            if (_passHotKey.Equals(value)) return;
-            _passHotKey = value;
-            N();
-            /// verify that it doesn't break anything
-            //if (!RaiseAndSetIfChanged(value, ref _passHotKey)) return;
-
+            if (!RaiseAndSetIfChanged(value, ref _passHotKey)) return;
             if (_rollHotKey.Equals(value)) RollHotKey = new HotKey(Keys.None, ModifierKeys.None);
         }
     }
@@ -65,12 +54,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         get => _toggleHotKey;
         set
         {
-            if (_toggleHotKey.Equals(value)) return;
-            _toggleHotKey = value;
-            N();
-            /// verify that it doesn't break anything
-            //if (!RaiseAndSetIfChanged(value, ref _toggleHotKey)) return;
-
+            if (!RaiseAndSetIfChanged(value, ref _toggleHotKey)) return;
             KeyboardHook.Instance.ChangeHotkey(_toggleHotKey, value);
         }
     }

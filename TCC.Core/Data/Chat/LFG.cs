@@ -77,7 +77,6 @@ public class Lfg : ThreadSafeObservableObject
         {
             _removeDelay.Stop();
             _removeDelay.Start();
-            N(); //todo: dafuq?
         }
         catch
         {

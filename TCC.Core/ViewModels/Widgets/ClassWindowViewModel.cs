@@ -1,8 +1,7 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using System;
 using TCC.Data.Skills;
 using TCC.Settings.WindowSettings;
-using TCC.UI;
 using TCC.Utilities;
 using TCC.Utils;
 using TCC.ViewModels.ClassManagers;

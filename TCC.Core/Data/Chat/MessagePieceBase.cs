@@ -35,8 +35,7 @@ public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
         get => _isVisible;
         set
         {
-            /// todo: can we do this?
-            //if (!RaiseAndSetIfChanged(value, ref _isVisible)) return;
+            if (!RaiseAndSetIfChanged(value, ref _isVisible)) return;
 
             if (value)
             {
@@ -46,10 +45,6 @@ public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
             {
                 SettingsWindowViewModel.FontSizeChanged -= OnFontSizeChanged;
             }
-
-            if (_isVisible == value) return;
-            _isVisible = value;
-            N();
         }
     }
     public ChatMessage? Container

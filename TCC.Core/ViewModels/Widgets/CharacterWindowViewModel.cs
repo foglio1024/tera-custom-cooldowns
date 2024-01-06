@@ -1,12 +1,10 @@
-﻿using System.ComponentModel;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using System.ComponentModel;
 using TCC.Data.Pc;
 using TCC.Settings.WindowSettings;
 using TCC.Utilities;
 using TCC.Utils;
 using TeraDataLite;
-using TeraPacketParser.Analysis;
-using TeraPacketParser.Messages;
 
 namespace TCC.ViewModels.Widgets;
 

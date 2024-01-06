@@ -54,73 +54,41 @@ public class Player : ThreadSafeObservableObject
     public string Name
     {
         get => _name;
-        set
-        {
-            if (_name == value) return;
-            _name = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _name);
     }
     public ulong EntityId
     {
         get => _entityId;
-        set
-        {
-            if (_entityId == value) return;
-            _entityId = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _entityId);
     }
     public uint PlayerId { get; internal set; }
     public uint ServerId { get; internal set; }
     public Class Class
     {
         get => _playerclass;
-        set
-        {
-            if (_playerclass == value) return;
-            _playerclass = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _playerclass);
     }
     public Laurel Laurel
     {
         get => _laurel;
-        set
-        {
-            if (_laurel == value) return;
-            _laurel = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _laurel);
     }
     public int Level
     {
         get => _level;
-        set
-        {
-            if (_level == value) return;
-            _level = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _level);
     }
     public float ItemLevel
     {
         get => _itemLevel;
-        set
-        {
-            if (value == _itemLevel) return;
-            _itemLevel = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _itemLevel);
     }
     public float CurrentHP
     {
         get => _currentHP;
         set
         {
-            if (_currentHP == value) return;
-            _currentHP = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentHP)) return;
             InvokePropertyChanged(nameof(TotalHP));
             InvokePropertyChanged(nameof(HpFactor));
         }
@@ -130,9 +98,7 @@ public class Player : ThreadSafeObservableObject
         get => _currentMP;
         set
         {
-            if (_currentMP == value) return;
-            _currentMP = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentMP)) return;
             InvokePropertyChanged(nameof(MpFactor));
         }
     }
@@ -141,9 +107,7 @@ public class Player : ThreadSafeObservableObject
         get => _currentST;
         set
         {
-            if (_currentST == value) return;
-            _currentST = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentST)) return;
             InvokePropertyChanged(nameof(StFactor));
         }
     }
@@ -152,11 +116,8 @@ public class Player : ThreadSafeObservableObject
         get => _maxHP;
         set
         {
-            if (_maxHP == value) return;
-            _maxHP = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxHP)) return;
             InvokePropertyChanged(nameof(HpFactor));
-
         }
     }
     public int MaxMP
@@ -164,11 +125,8 @@ public class Player : ThreadSafeObservableObject
         get => _maxMP;
         set
         {
-            if (_maxMP == value) return;
-            _maxMP = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxMP)) return;
             InvokePropertyChanged(nameof(MpFactor));
-
         }
     }
     public int MaxST
@@ -176,9 +134,7 @@ public class Player : ThreadSafeObservableObject
         get => _maxST;
         set
         {
-            if (_maxST == value) return;
-            _maxST = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxST)) return;
             InvokePropertyChanged(nameof(StFactor));
         }
     }
@@ -187,9 +143,7 @@ public class Player : ThreadSafeObservableObject
         get => _maxShield;
         private set
         {
-            if (_maxShield == value) return;
-            _maxShield = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxShield)) return;
             InvokePropertyChanged(nameof(ShieldFactor));
             InvokePropertyChanged(nameof(HasShield));
         }
@@ -205,10 +159,9 @@ public class Player : ThreadSafeObservableObject
         get => _currentShield;
         private set
         {
-            if (_currentShield == value) return;
             if (value < 0) return;
-            _currentShield = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentShield)) return;
+
             InvokePropertyChanged(nameof(TotalHP));
             InvokePropertyChanged(nameof(ShieldFactor));
             InvokePropertyChanged(nameof(HasShield));
@@ -217,12 +170,7 @@ public class Player : ThreadSafeObservableObject
     public float FlightEnergy
     {
         get => _flightEnergy;
-        set
-        {
-            if (_flightEnergy == value) return;
-            _flightEnergy = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _flightEnergy);
     }
     public int MagicalResistance { get; set; }
     public uint Coins
@@ -230,18 +178,15 @@ public class Player : ThreadSafeObservableObject
         get => _coins;
         set
         {
-            if (_coins == value) return;
-            _coins = value;
+            if (!RaiseAndSetIfChanged(value, ref _coins)) return;
+
             if (_coins == _maxCoins)
             {
                 Log.N("TCC", "Adventure coins maxed!", NotificationType.Info);
                 ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateMessage(ChatChannel.Notify, "System", "Adventure coins maxed!"));
             }
-
-            N();
             InvokePropertyChanged(nameof(CoinsFactor));
             CoinsUpdated?.Invoke();
-
         }
     }
     public uint MaxCoins
@@ -249,12 +194,9 @@ public class Player : ThreadSafeObservableObject
         get => _maxCoins;
         set
         {
-            if (_maxCoins == value) return;
-            _maxCoins = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxCoins)) return;
             InvokePropertyChanged(nameof(CoinsFactor));
             CoinsUpdated?.Invoke();
-
         }
     }
     public double CoinsFactor => MathUtils.FactorCalc(_coins, _maxCoins);
@@ -262,12 +204,7 @@ public class Player : ThreadSafeObservableObject
     public bool IsInCombat
     {
         get => _isInCombat;
-        set
-        {
-            if (value == _isInCombat) return;
-            _isInCombat = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isInCombat);
     }
     public bool IsAlive
     {
@@ -283,72 +220,37 @@ public class Player : ThreadSafeObservableObject
     public float CritFactor
     {
         get => _critFactor;
-        set
-        {
-            if (_critFactor == value) return;
-            _critFactor = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _critFactor);
     }
     public bool FireBoost
     {
         get => _fireBoost;
-        set
-        {
-            if (_fireBoost == value) return;
-            _fireBoost = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _fireBoost);
     }
     public bool IceBoost
     {
         get => _iceBoost;
-        set
-        {
-            if (_iceBoost == value) return;
-            _iceBoost = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _iceBoost);
     }
     public bool ArcaneBoost
     {
         get => _arcaneBoost;
-        set
-        {
-            if (_arcaneBoost == value) return;
-            _arcaneBoost = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _arcaneBoost);
     }
     public bool Fire
     {
         get => _fire;
-        set
-        {
-            if (_fire == value) return;
-            _fire = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _fire);
     }
     public bool Ice
     {
         get => _ice;
-        set
-        {
-            if (_ice == value) return;
-            _ice = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _ice);
     }
     public bool Arcane
     {
         get => _arcane;
-        set
-        {
-            if (_arcane == value) return;
-            _arcane = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _arcane);
     }
     public Counter StacksCounter { get; set; } = new(10, true); // todo: move class-specific stuff away from here
     public StanceTracker<WarriorStance> WarriorStance { get; set; } = new(); // todo: move class-specific stuff away from here

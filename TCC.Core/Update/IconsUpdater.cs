@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Nostrum;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json.Linq;
-using Nostrum;
 using TCC.Data;
 using TCC.UI;
 using TCC.UI.Windows;

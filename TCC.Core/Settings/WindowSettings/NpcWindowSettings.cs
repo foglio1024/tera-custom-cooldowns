@@ -18,9 +18,7 @@ public class NpcWindowSettings : WindowSettingsBase
         get => _hideAdds;
         set
         {
-            if (_hideAdds == value) return;
-            _hideAdds = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hideAdds)) return;
             HideAddsChanged?.Invoke();
         }
     }
@@ -29,21 +27,14 @@ public class NpcWindowSettings : WindowSettingsBase
         get => _accurateHp;
         set
         {
-            if (_accurateHp == value) return;
-            _accurateHp = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _accurateHp)) return;
             AccurateHpChanged?.Invoke();
         }
     }
     public EnrageLabelMode EnrageLabelMode
     {
         get => _enrageLabelMode;
-        set
-        {
-            if (_enrageLabelMode == value) return;
-            _enrageLabelMode = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _enrageLabelMode);
     }
 
     public NpcWindowSettings()

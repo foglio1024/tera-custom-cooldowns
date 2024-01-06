@@ -25,7 +25,9 @@ public static class Cloud
             using var c = new HttpClient();
             var req = new HttpRequestMessage(HttpMethod.Post, "https://foglio.ns0.it/tcc/api/usage-stats/post")
             {
-                Content = JsonContent.Create(new UsageStat(region, serverId, serverName, serverIp, account, version, HashUtils.GenerateFileHash(Assembly.GetEntryAssembly()?.Location ?? ""), isDailyFirst)),
+                Content = JsonContent.Create(
+                    new UsageStat(region, serverId, serverName, serverIp, account, version, HashUtils.GenerateFileHash(Assembly.GetEntryAssembly()?.Location ?? ""),
+                    isDailyFirst)),
             };
             req.Headers.Add("User-Agent", "TCC/Windows");
             var resp = await c.SendAsync(req);

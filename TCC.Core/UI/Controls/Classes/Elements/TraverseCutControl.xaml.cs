@@ -1,7 +1,6 @@
 ﻿using Nostrum.WPF.Controls;
 using Nostrum.WPF.Factories;
 using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;

@@ -72,7 +72,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.EthicalMode == value) return;
             App.Settings.EthicalMode = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool UseHotkeys
@@ -84,7 +84,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             App.Settings.UseHotkeys = value;
             if (value) KeyboardHook.Instance.Enable();
             else KeyboardHook.Instance.Disable();
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -96,7 +96,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.SettingsHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.SettingsHotkey, value);
             App.Settings.SettingsHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey RollHotkey
@@ -106,7 +106,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (LootDistributionWindowSettings.RollHotKey.Equals(value)) return;
             LootDistributionWindowSettings.RollHotKey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey PassHotkey
@@ -116,7 +116,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (LootDistributionWindowSettings.PassHotKey.Equals(value)) return;
             LootDistributionWindowSettings.PassHotKey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey SkillSettingsHotkey
@@ -127,7 +127,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.SkillSettingsHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.SkillSettingsHotkey, value);
             App.Settings.SkillSettingsHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey AbnormalSettingsHotkey
@@ -138,7 +138,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.AbnormalSettingsHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.AbnormalSettingsHotkey, value);
             App.Settings.AbnormalSettingsHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey ForceClickableChatHotkey
@@ -149,7 +149,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.ForceClickableChatHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.ForceClickableChatHotkey, value);
             App.Settings.ForceClickableChatHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey DashboardHotkey
@@ -160,7 +160,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.DashboardHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.DashboardHotkey, value);
             App.Settings.DashboardHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey LfgHotkey
@@ -171,7 +171,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.LfgHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.LfgHotkey, value);
             App.Settings.LfgHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey ReturnToLobbyHotkey
@@ -182,7 +182,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.ReturnToLobbyHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.ReturnToLobbyHotkey, value);
             App.Settings.ReturnToLobbyHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey ToggleBoundariesHotkey
@@ -193,7 +193,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.ToggleBoundariesHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.ToggleBoundariesHotkey, value);
             App.Settings.ToggleBoundariesHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public HotKey ToggleHideAllHotkey
@@ -204,7 +204,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.ToggleHideAllHotkey.Equals(value)) return;
             KeyboardHook.Instance.ChangeHotkey(App.Settings.ToggleHideAllHotkey, value);
             App.Settings.ToggleHideAllHotkey = value;
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -230,12 +230,12 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
                     Utils.Utilities.OpenUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
                     break;
             }
-            N();
+            InvokePropertyChanged();
 
             _khCount++;
             if (_khCount > 2) _khCount = 0;
             _kh = false;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool DisableLfgChatMessages
@@ -245,7 +245,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.DisableLfgChatMessages == value) return;
             App.Settings.DisableLfgChatMessages = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool BetaNotification
@@ -255,7 +255,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.BetaNotification == value) return;
             App.Settings.BetaNotification = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool CheckOpcodesHash
@@ -265,7 +265,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.CheckOpcodesHash == value) return;
             App.Settings.CheckOpcodesHash = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool CheckGuildBamWithoutOpcode  // by HQ 20190324
@@ -275,7 +275,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.CheckGuildBamWithoutOpcode == value) return;
             App.Settings.CheckGuildBamWithoutOpcode = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool IntegratedGpuSleepWorkaround
@@ -286,7 +286,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.IntegratedGpuSleepWorkaround == value) return;
             App.Settings.IntegratedGpuSleepWorkaround = value;
             IntegratedGpuSleepWorkaroundChanged?.Invoke();
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -299,7 +299,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.AbnormalityShape == value) return;
             App.Settings.AbnormalityShape = value;
             AbnormalityShapeChanged?.Invoke();
-            N();
+            InvokePropertyChanged();
         }
     }
     public ControlShape SkillShape
@@ -310,7 +310,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.SkillShape == value) return;
             App.Settings.SkillShape = value;
             SkillShapeChanged?.Invoke();
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -334,7 +334,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.LanguageOverride == value) return;
             App.Settings.LanguageOverride = value;
             if (value == LanguageOverride.None) App.Settings.LastLanguage = "EU-EN";
-            N();
+            InvokePropertyChanged();
         }
     }
     public int MaxMessages
@@ -344,7 +344,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.MaxMessages == value) return;
             App.Settings.MaxMessages = value == 0 ? int.MaxValue : value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public int ChatScrollAmount
@@ -354,7 +354,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.ChatScrollAmount == value) return;
             App.Settings.ChatScrollAmount = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public int SpamThreshold
@@ -364,7 +364,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.SpamThreshold == value) return;
             App.Settings.SpamThreshold = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool ShowTimestamp
@@ -374,7 +374,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.ShowTimestamp == value) return;
             App.Settings.ShowTimestamp = value;
-            N();
+            InvokePropertyChanged();
             ChatShowTimestampChanged?.Invoke();
         }
 
@@ -386,7 +386,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.ChatTimestampSeconds == value) return;
             App.Settings.ChatTimestampSeconds = value;
-            N();
+            InvokePropertyChanged();
         }
 
     }
@@ -398,7 +398,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.ShowChannel == value) return;
             App.Settings.ShowChannel = value;
             ChatShowChannelChanged?.Invoke();
-            N();
+            InvokePropertyChanged();
         }
 
     }
@@ -411,7 +411,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.FpsAtGuardian == value) return;
             App.Settings.FpsAtGuardian = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool EnableProxy
@@ -421,7 +421,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.EnableProxy == value) return;
             App.Settings.EnableProxy = value;
-            N();
+            InvokePropertyChanged();
             InvokePropertyChanged(nameof(ClickThruModes));
             StubInterface.Instance.StubClient.UpdateSetting("EnableProxy", App.Settings.ChatEnabled);
 
@@ -434,7 +434,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.HideHandles == value) return;
             App.Settings.HideHandles = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public CooldownDecimalMode CooldownsDecimalMode
@@ -444,7 +444,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.CooldownsDecimalMode == value) return;
             App.Settings.CooldownsDecimalMode = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool AnimateChatMessages
@@ -454,7 +454,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.AnimateChatMessages == value) return;
             App.Settings.AnimateChatMessages = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool BackgroundNotifications
@@ -464,7 +464,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.BackgroundNotifications == value) return;
             App.Settings.BackgroundNotifications = value;
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -475,7 +475,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.WebhookEnabledGuildBam == value) return;
             App.Settings.WebhookEnabledGuildBam = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool WebhookEnabledFieldBoss
@@ -485,7 +485,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.WebhookEnabledFieldBoss == value) return;
             App.Settings.WebhookEnabledFieldBoss = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool WebhookEnabledMentions
@@ -495,7 +495,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.WebhookEnabledMentions == value) return;
             App.Settings.WebhookEnabledMentions = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public string WebhookUrlGuildBam
@@ -505,7 +505,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.WebhookUrlGuildBam) return;
             App.Settings.WebhookUrlGuildBam = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public string WebhookUrlFieldBoss
@@ -515,7 +515,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.WebhookUrlFieldBoss) return;
             App.Settings.WebhookUrlFieldBoss = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public string WebhookUrlMentions
@@ -525,7 +525,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.WebhookUrlMentions) return;
             App.Settings.WebhookUrlMentions = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public string WebhookMessageGuildBam
@@ -535,7 +535,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.WebhookMessageGuildBam) return;
             App.Settings.WebhookMessageGuildBam = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public string WebhookMessageFieldBossSpawn
@@ -545,7 +545,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.WebhookMessageFieldBossSpawn) return;
             App.Settings.WebhookMessageFieldBossSpawn = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public string WebhookMessageFieldBossDie
@@ -555,7 +555,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.WebhookMessageFieldBossDie) return;
             App.Settings.WebhookMessageFieldBossDie = value;
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -566,7 +566,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.TwitchName) return;
             App.Settings.TwitchName = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public string TwitchToken
@@ -576,7 +576,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.TwitchToken) return;
             App.Settings.TwitchToken = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public string TwitchChannelName
@@ -586,7 +586,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (value == App.Settings.TwitchChannelName) return;
             App.Settings.TwitchChannelName = value;
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -599,7 +599,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             var res = TccMessageBox.Show("TCC", SR.RestartToApplySetting, MessageBoxButton.OKCancel, MessageBoxImage.Question);
             if (res == MessageBoxResult.Cancel) return;
             App.Settings.CaptureMode = value;
-            N();
+            InvokePropertyChanged();
             if (res == MessageBoxResult.OK) App.Restart();
         }
     }
@@ -610,7 +610,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.MentionMode == value) return;
             App.Settings.MentionMode = value;
-            N();
+            InvokePropertyChanged();
         }
     }
     public int FontSize
@@ -623,7 +623,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (val < 10) val = 10;
             App.Settings.FontSize = val;
             FontSizeChanged?.Invoke();
-            N();
+            InvokePropertyChanged();
         }
     }
 
@@ -633,18 +633,10 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         set
         {
             if (App.Settings.ChatEnabled == value) return;
-            //if (!value)
-            //{
-            //    TccMessageBox.Show("Warning",
-            //        "Disabling this while still having modded Chat2.gpk installed may cause corrupted data to be sent to the server. Make sure you keep Chat enabled active if you're using modded Chat2.gpk.",
-            //        MessageBoxButton.OK, MessageBoxImage.Warning);
-            //}
             App.Settings.ChatEnabled = value;
             ChatManager.Instance.NotifyEnabledChanged(value);
             StubInterface.Instance.StubClient.UpdateSetting("TccChatEnabled", value);
-
-            //StubInterface.Instance.StubClient.UpdateSetting("ChatEnabled", App.Settings.ChatEnabled);
-            N();
+            InvokePropertyChanged();
         }
     }
     public bool ForceSoftwareRendering
@@ -654,7 +646,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.ForceSoftwareRendering == value) return;
             App.Settings.ForceSoftwareRendering = value;
-            N();
+            InvokePropertyChanged();
             RenderOptions.ProcessRenderMode = value ? RenderMode.SoftwareOnly : RenderMode.Default;
         }
     }
@@ -665,7 +657,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.HighPriority == value) return;
             App.Settings.HighPriority = value;
-            N();
+            InvokePropertyChanged();
             Process.GetCurrentProcess().PriorityClass = value ? ProcessPriorityClass.High : ProcessPriorityClass.Normal;
         }
     }
@@ -695,7 +687,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             if (App.Settings.TranslationMode == value) return;
             App.Settings.TranslationMode = value;
             TranslationModeChanged?.Invoke();
-            N();
+            InvokePropertyChanged();
         }
     }
     public IEnumerable<ClickThruMode> ClickThruModes
@@ -757,7 +749,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.EnablePlayerMenu == value) return;
             App.Settings.EnablePlayerMenu = value;
-            N();
+            InvokePropertyChanged();
             StubInterface.Instance.StubClient.UpdateSetting("EnablePlayerMenu", App.Settings.EnablePlayerMenu);
         }
     }
@@ -769,7 +761,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         {
             if (App.Settings.ShowIngameChat == value) return;
             App.Settings.ShowIngameChat = value;
-            N();
+            InvokePropertyChanged();
             StubInterface.Instance.StubClient.UpdateSetting("ShowIngameChat", App.Settings.ShowIngameChat);
         }
     }
@@ -777,12 +769,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
     public bool ShowDebugSettings
     {
         get => _showDebugSettings;
-        set
-        {
-            if(_showDebugSettings == value) return;
-            _showDebugSettings = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _showDebugSettings);
     }
 
 
@@ -797,7 +784,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             Utils.Utilities.OpenUrl(strUrl);
         });
         RegisterWebhookCommand = new RelayCommand(webhook => Firebase.RegisterWebhook(webhook?.ToString(), true, Game.CurrentAccountNameHash),
-            ce => Game.Logged);
+            _ => Game.Logged);
         OpenWindowCommand = new RelayCommand(winType =>
         {
             if(winType == null)
@@ -881,7 +868,7 @@ public class BlacklistedMonsterVM : ThreadSafeObservableObject
             if (Monster.IsHidden == value) return;
             Monster.IsHidden = value;
             if (!value) Game.DB?.MonsterDatabase.Blacklist(Monster, false);
-            N();
+            InvokePropertyChanged();
         }
     }
 

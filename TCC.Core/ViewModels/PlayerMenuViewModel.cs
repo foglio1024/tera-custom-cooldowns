@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows.Input;
-using Nostrum.WPF;
+﻿using Nostrum.WPF;
 using Nostrum.WPF.ThreadSafe;
+using System;
+using System.Windows.Input;
 using TCC.Interop.Proxy;
 using TCC.UI.Controls.Chat;
 using TCC.Utilities;
@@ -43,9 +43,8 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
     {
         get => _name; set
         {
-            if (_name == value) return;
-            _name = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _name)) return;
+
             InvokePropertyChanged(nameof(BlockLabelText));
             InvokePropertyChanged(nameof(ShowAddFriend));
             InvokePropertyChanged(nameof(ShowWhisper));
@@ -55,30 +54,21 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
 
     public string Info
     {
-        get => _info; set
-        {
-            if (_info == value) return; _info = value;
-            N();
-        }
+        get => _info;
+        set => RaiseAndSetIfChanged(value, ref _info);
+
     }
 
     public int Level
     {
-        get => _level; set
-        {
-            if (_level == value) return; _level = value; N();
-        }
+        get => _level; 
+        set => RaiseAndSetIfChanged(value, ref _level);
     }
 
     public Class Class
     {
         get => _class;
-        set
-        {
-            if (_class == value) return;
-            _class = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _class);
     }
 
     public bool IsFromOtherServer
@@ -86,9 +76,7 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
         get => _isFromOtherServer;
         set
         {
-            if (_isFromOtherServer == value) return;
-            _isFromOtherServer = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _isFromOtherServer)) return;
             InvokePropertyChanged(nameof(ShowAddFriend));
             InvokePropertyChanged(nameof(ShowBlockUnblock));
             InvokePropertyChanged(nameof(ShowWhisper));
@@ -98,23 +86,13 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
     public bool ShowPartyInvite
     {
         get => _showPartyInvite;
-        set
-        {
-            if (_showPartyInvite == value) return;
-            _showPartyInvite = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _showPartyInvite);
     }
 
     public bool ShowGuildInvite
     {
         get => _showGuildInvite;
-        set
-        {
-            if (_showGuildInvite == value) return;
-            _showGuildInvite = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _showGuildInvite);
     }
 
     public bool ShowAddFriend => !IsBlocked && Name != Game.Me.Name && !IsFromOtherServer;
@@ -126,23 +104,13 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
     public string KickLabelText
     {
         get => _kickLabelText;
-        set
-        {
-            if (_kickLabelText == value) return;
-            _kickLabelText = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _kickLabelText);
     }
 
     public string GKickLabelText
     {
         get => _gkickLabelText;
-        set
-        {
-            if (_gkickLabelText == value) return;
-            _gkickLabelText = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _gkickLabelText);
     }
 
     public string PowersLabelText => !Game.Group.HasPowers(Name) ?
@@ -184,45 +152,25 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
     public bool Unfriending
     {
         get => _unfriending;
-        set
-        {
-            if (_unfriending == value) return;
-            _unfriending = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _unfriending);
     }
 
     public bool Blocking
     {
         get => _blocking;
-        set
-        {
-            if (_blocking == value) return;
-            _blocking = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _blocking);
     }
 
     public bool Kicking
     {
         get => _kicking;
-        set
-        {
-            if (_kicking == value) return;
-            _kicking = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _kicking);
     }
 
     public bool Gkicking
     {
         get => _gkicking;
-        set
-        {
-            if (_gkicking == value) return;
-            _gkicking = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _gkicking);
     }
 
     public ICommand InspectCommand { get; }

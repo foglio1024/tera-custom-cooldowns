@@ -700,12 +700,10 @@ public class ChatManager : TccWindowViewModel
                 {
                     continue;
                 }
-                else
-                {
-                    target.AddTranslation(translatedMsg);
-                    found = true;
-                    break;
-                }
+
+                target.AddTranslation(translatedMsg);
+                found = true;
+                break;
             }
 
             if(!found) AddChatMessage(sepMsg);

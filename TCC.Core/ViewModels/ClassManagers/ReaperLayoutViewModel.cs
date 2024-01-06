@@ -1,5 +1,4 @@
-﻿using System;
-using TCC.Data.Skills;
+﻿using TCC.Data.Skills;
 using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;

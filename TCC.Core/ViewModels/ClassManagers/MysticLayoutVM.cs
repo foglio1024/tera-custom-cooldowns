@@ -28,9 +28,7 @@ internal class MysticLayoutVM : BaseClassLayoutViewModel
         get => _elementalize;
         set
         {
-            if (_elementalize == value) return;
-            _elementalize = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _elementalize)) return;
             InvokePropertyChanged(nameof(ElementalizeWarning));
         }
     }

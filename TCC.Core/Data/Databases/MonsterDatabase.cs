@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -26,7 +25,7 @@ public class MonsterDatabase : DatabaseBase
     {
     }
 
-    public bool TryGetMonster(uint templateId, uint zoneId, [NotNullWhen(true)] out Monster m)
+    public bool TryGetMonster(uint templateId, uint zoneId, out Monster m)
     {
         m = new Monster(0, 0, "Unknown", 0, false, false, Species.Unknown);
 

@@ -27,9 +27,8 @@ public class PerfMonitorViewModel : TccWindowViewModel
         get => _memory;
         private set
         {
-            if (_memory == value) return;
-            _memory = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _memory)) return;
+
             InvokePropertyChanged(nameof(MemoryCritical));
             InvokePropertyChanged(nameof(MemoryWarning));
             InvokePropertyChanged(nameof(MemoryAAAAAAAAAAAAAAA));
@@ -38,12 +37,7 @@ public class PerfMonitorViewModel : TccWindowViewModel
     public double CPU
     {
         get => _cpu;
-        private set
-        {
-            if (_cpu == value) return;
-            _cpu = value;
-            N();
-        }
+        private set => RaiseAndSetIfChanged(value, ref _cpu);
     }
 
     public bool MemoryWarning => _memory > 500;
@@ -57,12 +51,7 @@ public class PerfMonitorViewModel : TccWindowViewModel
     public bool ShowDumpButton
     {
         get => _showDumpButton;
-        set
-        {
-            if (_showDumpButton == value) return;
-            _showDumpButton = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _showDumpButton);
     }
 
     public PerfMonitorViewModel(PerfMonitorSettings settings) : base(settings)

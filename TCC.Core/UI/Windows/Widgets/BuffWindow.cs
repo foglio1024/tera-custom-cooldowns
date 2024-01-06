@@ -1,12 +1,11 @@
-﻿using System.Linq;
+﻿using Nostrum.WPF.Extensions;
+using Nostrum.WPF.Factories;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.Factories;
-using TCC.UI.Controls.Abnormalities;
 using TCC.ViewModels;
 using TCC.ViewModels.Widgets;
 

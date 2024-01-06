@@ -15,13 +15,7 @@ public class NinjaLayoutViewModel : BaseClassLayoutViewModel
     public bool FocusOn
     {
         get => _focusOn;
-        set
-        {
-            if (_focusOn == value) return;
-            _focusOn = value;
-            N();
-        }
-
+        set => RaiseAndSetIfChanged(value, ref _focusOn);
     }
 
     void FlashOnMaxSt(object? sender, PropertyChangedEventArgs e)

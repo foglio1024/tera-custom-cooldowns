@@ -29,9 +29,8 @@ public class Npc : ThreadSafeObservableObject, IDisposable
     int _remainingEnrageTime;
     bool _isBoss;
     double _hPFactor;
-    double currentPercentage;
+    double _currentPercentage;
     AggroCircle _currentAggroType = AggroCircle.None;
-    ThreadSafeObservableCollection<AbnormalityDuration> _buffs;
 
     public bool HasGage { get; set; }
     public ICommand Override { get; }
@@ -40,42 +39,27 @@ public class Npc : ThreadSafeObservableObject, IDisposable
     public string Name
     {
         get => _name;
-        set
-        {
-            if (_name == value) return;
-            _name = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _name);
     }
     public bool IsBoss
     {
         get => _isBoss;
-        set
-        {
-            if (_isBoss == value) return;
-            _isBoss = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isBoss);
+
     }
     public bool Enraged
     {
         get => _enraged;
-        set
-        {
-            if (_enraged == value) return;
-            _enraged = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _enraged);
+
     }
     public double MaxHP
     {
         get => _maxHP;
         set
         {
-            if (_maxHP == value) return;
-            _maxHP = value;
+            if (!RaiseAndSetIfChanged(value, ref _maxHP)) return;
             EnragePattern?.Update(value);
-            N();
             HPFactor = MathUtils.FactorCalc(_currentHP, _maxHP);
         }
     }
@@ -84,9 +68,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         get => _currentHP;
         set
         {
-            if (_currentHP == value) return;
-            _currentHP = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentHP)) return;
             HPFactor = MathUtils.FactorCalc(_currentHP, _maxHP);
         }
     }
@@ -95,9 +77,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         get => _maxShield;
         set
         {
-            if (_maxShield == value) return;
-            _maxShield = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxShield)) return;
             InvokePropertyChanged(nameof(ShieldFactor));
         }
     }
@@ -106,9 +86,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         get => _currentShield;
         set
         {
-            if (_currentShield == value) return;
-            _currentShield = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentShield)) return;
             InvokePropertyChanged(nameof(ShieldFactor));
         }
     }
@@ -118,72 +96,40 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         get => _hPFactor;
         set
         {
-            if (_hPFactor == value) return;
-            _hPFactor = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _hPFactor)) return;
             CurrentPercentage = HPFactor * 100;
             HpFactorChanged?.Invoke(_hPFactor);
         }
     }
     public double CurrentPercentage
     {
-        get => currentPercentage;
-        private set
-        {
-            if (currentPercentage == value) return;
-            currentPercentage = value;
-            N();
-        }
+        get => _currentPercentage;
+        private set => RaiseAndSetIfChanged(value, ref _currentPercentage);
     }
     public bool Visible
     {
         get => _visible;
-        set
-        {
-            if (_visible == value) return;
-            _visible = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _visible);
     }
     public bool IsSelected
     {
         get => _isSelected;
-        set
-        {
-            if (_isSelected == value) return;
-            _isSelected = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isSelected);
     }
     public int RemainingEnrageTime
     {
         get => _remainingEnrageTime;
-        set
-        {
-            if (_remainingEnrageTime == value) return;
-            _remainingEnrageTime = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _remainingEnrageTime);
     }
     public ulong Target
     {
         get => _target;
-        set
-        {
-            if (_target == value) return;
-            _target = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _target);
     }
     public AggroCircle CurrentAggroType
     {
         get => _currentAggroType;
-        set
-        {
-            if (_currentAggroType == value) return;
-            _currentAggroType = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _currentAggroType);
     }
     public uint ZoneId { get; }
     public uint TemplateId { get; }
@@ -200,21 +146,12 @@ public class Npc : ThreadSafeObservableObject, IDisposable
             return val;
         }
     }
-    public ThreadSafeObservableCollection<AbnormalityDuration> Buffs
-    {
-        get => _buffs;
-        set
-        {
-            if (_buffs == value) return;
-            _buffs = value;
-            N();
-        }
-    }
+    public ThreadSafeObservableCollection<AbnormalityDuration> Buffs { get; }
 
     public Npc(ulong eId, uint zId, uint tId, bool boss, bool visible, EnragePattern? ep = null, TimerPattern? tp = null)
     {
         _dispatcher = WindowManager.ViewModels.NpcVM.Dispatcher;
-        _buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);
+        Buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(_dispatcher);
         Game.DB!.MonsterDatabase.TryGetMonster(tId, zId, out var monster);
         Name = monster.Name;
         MaxHP = monster.MaxHP;
@@ -294,7 +231,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
 
     public void Dispose()
     {
-        foreach (var buff in _buffs)
+        foreach (var buff in Buffs)
         {
             buff.Dispose();
         }
@@ -305,7 +242,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
 
     public void Delete()
     {
-        foreach (var buff in _buffs)
+        foreach (var buff in Buffs)
         {
             buff.Dispose();
         }
@@ -322,12 +259,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
     public ShieldStatus Shield
     {
         get => _shield;
-        set
-        {
-            if (_shield == value) return;
-            _shield = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _shield);
     }
 
     /*

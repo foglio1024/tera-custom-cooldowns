@@ -40,7 +40,7 @@ public class User : ThreadSafeObservableObject
     bool _isLeader;
     bool _hasAggro;
     string _location = "";
-    readonly List<uint> _debuffList = new();
+    readonly List<uint> _debuffList = [];
     GearItem? _weapon;
     GearItem? _armor;
     GearItem? _gloves;
@@ -51,30 +51,20 @@ public class User : ThreadSafeObservableObject
     public ulong EntityId
     {
         get => _entityId;
-        set
-        {
-            if (_entityId == value) return;
-            _entityId = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _entityId);
     }
     public uint Level
     {
         get => _level;
-        set
-        {
-            if (_level == value) return;
-            _level = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _level);
     }
     public Class UserClass
     {
         get => _userClass;
         set
         {
-            if (_userClass == value) return;
-            _userClass = value;
+            if (!RaiseAndSetIfChanged(value, ref _userClass)) return;
+
             Role = value switch
             {
                 Class.Lancer => Role.Tank,
@@ -83,98 +73,61 @@ public class User : ThreadSafeObservableObject
                 Class.Brawler => Role.Tank,
                 _ => Role.Dps
             };
-            N();
         }
     }
     public Role Role
     {
         get => _role;
-        set
-        {
-            if (_role == value) return;
-            _role = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _role);
     }
     public bool Online
     {
         get => _online;
         set
         {
-            if (_online == value) return;
-            _online = value;
-            if (!_online) { CurrentHp = 0; CurrentMp = 0; }
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _online)) return;
+            if (_online) return;
+
+            CurrentHp = 0;
+            CurrentMp = 0;
         }
     }
     public uint ServerId
     {
         get => _serverId;
-        set
-        {
-            if (_serverId == value) return;
-            _serverId = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _serverId);
     }
     public uint PlayerId
     {
         get => _playerId;
-        set
-        {
-            if (_playerId == value) return;
-            _playerId = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _playerId);
     }
     public int Order
     {
         get => _order;
-        set
-        {
-            if (_order == value) return;
-            _order = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _order);
     }
     public bool CanInvite
     {
         get => _canInvite;
-        set
-        {
-            if (_canInvite == value) return;
-            _canInvite = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _canInvite);
     }
     public Laurel Laurel
     {
         get => _laurel;
-        set
-        {
-            if (_laurel == value) return;
-            _laurel = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _laurel);
     }
     public string Name
     {
         get => _name;
-        set
-        {
-            if (_name == value) return;
-            _name = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _name);
     }
     public long CurrentHp
     {
         get => _currentHp;
         set
         {
-            if (_currentHp == value) return;
-            _currentHp = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentHp)) return;
             InvokePropertyChanged(nameof(HpFactor));
         }
     }
@@ -183,9 +136,7 @@ public class User : ThreadSafeObservableObject
         get => _currentMp;
         set
         {
-            if (_currentMp == value) return;
-            _currentMp = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentMp)) return;
             InvokePropertyChanged(nameof(MpFactor));
         }
     }
@@ -194,9 +145,7 @@ public class User : ThreadSafeObservableObject
         get => _currentSt;
         set
         {
-            if (_currentSt == value) return;
-            _currentSt = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _currentSt)) return;
             InvokePropertyChanged(nameof(StFactor));
         }
     }
@@ -205,9 +154,7 @@ public class User : ThreadSafeObservableObject
         get => _maxHp;
         set
         {
-            if (_maxHp == value) return;
-            _maxHp = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxHp)) return;
             InvokePropertyChanged(nameof(HpFactor));
         }
     }
@@ -216,9 +163,7 @@ public class User : ThreadSafeObservableObject
         get => _maxMp;
         set
         {
-            if (_maxMp == value) return;
-            _maxMp = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxMp)) return;
             InvokePropertyChanged(nameof(MpFactor));
         }
     }
@@ -227,9 +172,7 @@ public class User : ThreadSafeObservableObject
         get => _maxSt;
         set
         {
-            if (_maxSt == value) return;
-            _maxSt = value;
-            N();
+            if (!RaiseAndSetIfChanged(value, ref _maxSt)) return;
             InvokePropertyChanged(nameof(StFactor));
         }
     }
@@ -239,124 +182,69 @@ public class User : ThreadSafeObservableObject
     public ReadyStatus Ready
     {
         get => _ready;
-        set
-        {
-            if (_ready == value) return;
-            _ready = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _ready);
     }
     public bool Alive
     {
         get => _alive;
-        set
-        {
-            if (_alive == value) return;
-            _alive = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _alive);
     }
     public int RollResult
     {
         get => _rollResult;
         set
         {
-            if (_rollResult == value) return;
-            _rollResult = value;
+            if (!RaiseAndSetIfChanged(value, ref _rollResult)) return;
             if (_rollResult == -1) IsRolling = false;
-            N();
         }
     }
     public bool IsRolling
     {
         get => _isRolling;
-        set
-        {
-            if (_isRolling == value) return;
-            _isRolling = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isRolling);
     }
     public bool IsWinning
     {
         get => _isWinning;
-        set
-        {
-            if (_isWinning == value) return;
-            _isWinning = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isWinning);
     }
     public bool IsLeader
     {
         get => _isLeader;
-        set
-        {
-            if (_isLeader == value) return;
-            _isLeader = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _isLeader);
+
     }
     public bool IsPlayer => Name == Game.Me.Name;
     public bool IsDebuffed => _debuffList.Count != 0;
     public bool HasAggro
     {
-        get => _hasAggro; set
-        {
-            if (_hasAggro == value) return;
-            _hasAggro = value;
-            N();
-        }
+        get => _hasAggro;
+        set => RaiseAndSetIfChanged(value, ref _hasAggro);
     }
     public string Location
     {
         get => _location;
-        set
-        {
-            if (_location == value) return;
-            _location = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _location);
     }
     public GearItem? Weapon
     {
         get => _weapon;
-        set
-        {
-            if (_weapon == value) return;
-            _weapon = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _weapon);
     }
     public GearItem? Armor
     {
         get => _armor;
-        set
-        {
-            if (_armor == value) return;
-            _armor = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _armor);
     }
     public GearItem? Gloves
     {
         get => _gloves;
-        set
-        {
-            if (_gloves == value) return;
-            _gloves = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _gloves);
     }
     public GearItem? Boots
     {
         get => _boots;
-        set
-        {
-            if (_boots == value) return;
-            _boots = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _boots);
     }
     public ThreadSafeObservableCollection<AbnormalityDuration> Buffs { get; }
     public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs { get; }
@@ -365,22 +253,12 @@ public class User : ThreadSafeObservableObject
     public bool Visible
     {
         get => _visible;
-        set
-        {
-            if (_visible == value) return;
-            _visible = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _visible);
     }
     public bool InRange
     {
         get => _inRange || IsPlayer;
-        set
-        {
-            if (_inRange == value) return;
-            _inRange = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _inRange);
     }
     public ICommand RequestInteractiveCommand { get; }
     public ICommand AcceptApplyCommand { get; set; }

@@ -4,9 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
-             xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
+             xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
-             xmlns:classmanagers="clr-namespace:TCC.ViewModels.ClassManagers" xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
+             xmlns:classmanagers="clr-namespace:TCC.ViewModels.ClassManagers"
              d:DataContext="{d:DesignInstance Type=classmanagers:BerserkerLayoutViewModel}"
              UseLayoutRounding="True"
              mc:Ignorable="d" >

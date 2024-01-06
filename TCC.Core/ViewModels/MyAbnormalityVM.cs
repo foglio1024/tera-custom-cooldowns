@@ -26,22 +26,12 @@ public class MyAbnormalityVM : ThreadSafeObservableObject
     public bool Special
     {
         get => _special;
-        set
-        {
-            if (_special == value) return;
-            _special = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _special);
     }
     public bool Hidden
     {
         get => _hidden;
-        set
-        {
-            if (_hidden == value) return;
-            _hidden = value;
-            N();
-        }
+        set => RaiseAndSetIfChanged(value, ref _hidden);
     }
 
     public bool CanBeSpecial => Abnormality.Type is AbnormalityType.Special or AbnormalityType.Buff;
