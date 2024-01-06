@@ -32,7 +32,7 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
     Skill _skill;
     DateTime _endTime;
     CooldownMode _mode;
-    bool _isAvailable;
+    bool _isAvailable = true;
 
     // properties
 
