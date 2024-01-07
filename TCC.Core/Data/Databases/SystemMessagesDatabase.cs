@@ -111,6 +111,16 @@ public class SystemMessagesDatabase : DatabaseBase
         var ench = Messages["SMT_MAX_ENCHANT_SUCCEED"];
         var newEnch = new SystemMessageData(ChatUtils.Font(ench.Template, Colors.ChatSystemGenericColor.ToHex()), ench.ChatChannel);
         Messages["SMT_MAX_ENCHANT_SUCCEED"] = newEnch;
+
+        // ---------------------
+        var msgBomb =
+            ChatUtils.Font("{UserName}", R.Colors.ChatSystemErrorColor.ToHex(sharp: false)) +
+            ChatUtils.Font(" used ") +
+            ChatUtils.Font("{ItemName}", R.Colors.ItemSuperiorColor.ToHex(sharp: false)) +
+            ChatUtils.Font(".");
+
+        var bomb = new SystemMessageData(msgBomb, (int)ChatChannel.Group);
+        Messages["TCC_MT_USER_THROW_BOMB"] = bomb;
     }
 
     public bool IsHandledInternally(string msg)

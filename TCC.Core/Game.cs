@@ -1081,14 +1081,15 @@ public static class Game
         FlyingGuardianDataProvider.OnAbnormalityBegin(p);
 
         if (p.AbnormalityId != 303401008) return;
-        if (!IsMe(p.CasterId)) return;
+        if (IsMe(p.CasterId)) return;
 
-        var username = "Unknown";
+        var username = "An unknown player";
         if(NearbyPlayers.TryGetValue(p.CasterId, out var player))
         {
             username = player.Name;
         }
-        ChatManager.Instance.AddTccMessage($"{username} used Cooldown Bomb");
+
+        ChatManager.Instance.AddCooldownBombMessage(username);
     }
 
     static void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)

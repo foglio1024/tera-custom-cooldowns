@@ -449,6 +449,14 @@ public class ChatManager : TccWindowViewModel
             : !crit ? "TCC_DAMAGE_RECEIVED" : "TCC_DAMAGE_RECEIVED_CRIT");
     }
 
+    public void AddCooldownBombMessage(string username)
+    {
+        if (!Game.DB!.ItemsDatabase.TryGetItem(281026, out var item)) return;
+
+        var parameters = $"@0\vUserName\v{username}\vItemName\v<{item.Name}>";
+        SystemMessagesProcessor.AnalyzeMessage(parameters, "TCC_MT_USER_THROW_BOMB");
+    }
+
     public void AddFromQueue(int itemsToAdd = 0)
     {
         if (itemsToAdd == 0) itemsToAdd = _pauseQueue.Count;
