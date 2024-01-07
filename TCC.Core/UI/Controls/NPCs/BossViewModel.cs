@@ -177,7 +177,7 @@ public class BossViewModel : NpcViewModel
     {
         switch (e.PropertyName)
         {
-            case nameof(NPC.CurrentHP):
+            case nameof(NPC.HPFactor):
                 if (NPC.Enraged)
                 {
                     if (_addEnrageItem)
