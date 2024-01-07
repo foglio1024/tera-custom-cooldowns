@@ -42,7 +42,7 @@ public class AbnormalityDatabase : DatabaseBase
 
             if (Abnormalities.TryGetValue(id, out var ex))
             {
-                if (!ex.IsShield && ab.IsShield) Abnormalities[id] = ab;
+                if (!ex.IsShield && ab.IsShield) AddAbnormality(id, ab);
                 if (ab.Infinity && !ex.Infinity) ex.Infinity = false;
                 if (ex.Type is not AbnormalityType.Debuff && ab.Type is AbnormalityType.Debuff)
                     ex.Type = AbnormalityType.Debuff;
@@ -50,12 +50,16 @@ public class AbnormalityDatabase : DatabaseBase
                 continue;
             }
 
-            if (App.Settings.BuffWindowSettings.Specials.Contains(id) && ab.Type is AbnormalityType.Buff)
-            {
-                ab.Type = AbnormalityType.Special;
-            }
+            AddAbnormality(id, ab);
+        }
 
-            Abnormalities[id] = ab;
+        void AddAbnormality(uint abnormalityId, Abnormality abnormality)
+        {
+            if (App.Settings.BuffWindowSettings.Specials.Contains(abnormalityId) && abnormality.Type is AbnormalityType.Buff)
+            {
+                abnormality.Type = AbnormalityType.Special;
+            }
+            Abnormalities[abnormalityId] = abnormality;
         }
 
         #region Foglio overrides
