@@ -249,6 +249,13 @@ public class ChatManager : TccWindowViewModel
 
     void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
     {
+        if (!App.Settings.ChatEnabled) return;
+        if (!Game.IsMe(m.Target)
+            || m.Diff > 0
+            || m.Target == m.Source
+            || m.Source == 0
+            || !TccUtils.IsEntitySpawned(m.Source)) return;
+
         Task.Run(() => AddDamageReceivedMessage(m.Source, m.Target, m.Diff, m.MaxHP, m.Crit));
     }
 
@@ -438,9 +445,6 @@ public class ChatManager : TccWindowViewModel
 
     void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP, bool crit)
     {
-        if (!App.Settings.ChatEnabled) return;
-
-        if (!Game.IsMe(target) || diff > 0 || target == source || source == 0 || !TccUtils.IsEntitySpawned(source)) return;
         var srcName = TccUtils.GetEntityName(source);
         var parameters = $"@0\vAmount\v{-diff}\vPerc\v{-diff / (double)maxHP:P}{(srcName != "" ? $"\vSource\v{srcName}" : "")}";
 
@@ -684,7 +688,7 @@ public class ChatManager : TccWindowViewModel
         _dispatcher.InvokeAsync(() =>
         {
             var sepMsg = Factory.CreateMessage((ChatChannel)channel, author, message, isGm: gm);
-            
+
             if (App.Settings.TranslationMode is TranslationMode.Separated)
             {
                 AddChatMessage(sepMsg);
@@ -714,7 +718,7 @@ public class ChatManager : TccWindowViewModel
                 break;
             }
 
-            if(!found) AddChatMessage(sepMsg);
+            if (!found) AddChatMessage(sepMsg);
         });
     }
 }
