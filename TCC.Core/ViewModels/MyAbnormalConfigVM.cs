@@ -50,7 +50,7 @@ public class MyAbnormalConfigVM : ThreadSafeObservableObject, IDisposable
         var myAbnormals = new ThreadSafeObservableCollection<MyAbnormalityVM>(_dispatcher);
         foreach (var abnormality in Game.DB!.AbnormalityDatabase.Abnormalities.Values.Where(a => a is { IsShow: true, CanShow: true }))
         {
-            var abVM = new MyAbnormalityVM(abnormality);
+            var abVM = new MyAbnormalityVM(abnormality) { Hidden = App.Settings.BuffWindowSettings.Hidden.Contains(abnormality.Id) };
             myAbnormals.Add(abVM);
         }
 
