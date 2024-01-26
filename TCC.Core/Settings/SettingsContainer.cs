@@ -250,6 +250,7 @@ public class SettingsContainer
     {
         var toRemove = ChatWindowsSettings.Where(s => s.Tabs.Count == 0).ToList();
         toRemove.ForEach(s => ChatWindowsSettings.Remove(s));
+        BuffWindowSettings.SanitizeHiddenBuffs();
         App.BaseDispatcher.InvokeAsync(() => new JsonSettingsWriter().Save());
     }
 }

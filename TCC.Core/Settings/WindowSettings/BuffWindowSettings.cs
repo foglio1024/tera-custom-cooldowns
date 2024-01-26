@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -37,7 +38,7 @@ public class BuffWindowSettings : WindowSettingsBase
     }
     public Dictionary<Class, List<uint>> MyAbnormals { get; } // by HQ
     public List<uint> Specials { get; }
-    public List<uint> Hidden { get; }
+    public List<uint> Hidden { get; private set; }
 
     public bool Pass(Abnormality ab) // by HQ
     {
@@ -94,6 +95,10 @@ public class BuffWindowSettings : WindowSettingsBase
 
         GpkNames.Add("Abnormality");
 
+    }
 
+    public void SanitizeHiddenBuffs()
+    {
+        Hidden = Hidden.Distinct().ToList();
     }
 }
