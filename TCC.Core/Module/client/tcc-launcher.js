@@ -22,11 +22,11 @@ class TccLauncher
             try
             {
                 installer.gpk(`client/gpk/${arch}/${removerGpkName}`);
-                //m.log(`Installed ${removerNiceName} remover (${removerGpkName})`);
+                m.log(`Installed ${removerNiceName} remover (${removerGpkName})`);
             } 
             catch (error)
             {
-                //m.error(`${removerGpkName} has been already installed by another mod. ${removerNiceName} remover won't be installed.`);
+                m.error(`${removerGpkName} has been already installed by another mod. ${removerNiceName} remover won't be installed.`);
                 m.error("Error while installing " + removerGpkName + ": ");
                 m.error(error);
             }
