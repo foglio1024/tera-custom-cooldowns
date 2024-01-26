@@ -617,6 +617,7 @@ public class DashboardViewModel : TccWindowViewModel
 
     /* -- TODO EVENTS: TO BE REFACTORED ------------------------- */
 
+    readonly object _eventLock = new object();
     public ThreadSafeObservableCollection<EventGroup> EventGroups { get; }
     public ThreadSafeObservableCollection<TimeMarker> Markers { get; }
     public ThreadSafeObservableCollection<DailyEvent> SpecialEvents { get; }
@@ -631,7 +632,10 @@ public class DashboardViewModel : TccWindowViewModel
     }
     public void ClearEvents()
     {
-        EventGroups.Clear();
+        lock (_eventLock)
+        {
+            EventGroups.Clear();
+        }
         SpecialEvents.Clear();
     }
 
@@ -784,17 +788,20 @@ public class DashboardViewModel : TccWindowViewModel
     }
     public void AddEventGroup(EventGroup eg)
     {
-        var g = EventGroups.ToSyncList().FirstOrDefault(x => x.Name == eg.Name);
-        if (g != null)
+        lock (_eventLock)
         {
-            foreach (var ev in eg.Events)
+            var g = EventGroups.ToSyncList().FirstOrDefault(x => x.Name == eg.Name);
+            if (g != null)
             {
-                g.AddEvent(ev);
+                foreach (var ev in eg.Events)
+                {
+                    g.AddEvent(ev);
+                }
             }
-        }
-        else
-        {
-            EventGroups.Add(eg);
+            else
+            {
+                EventGroups.Add(eg);
+            }
         }
     }
 
@@ -859,11 +866,14 @@ public class DashboardViewModel : TccWindowViewModel
 
     public void SetGuildBamTime(bool force)
     {
-        foreach (var eg in EventGroups.ToSyncList().Where(x => x.RemoteCheck))
+        lock (_eventLock)
         {
-            foreach (var ev in eg.Events.ToSyncList())
+            foreach (var eg in EventGroups.ToSyncList().Where(x => x.RemoteCheck))
             {
-                ev.UpdateFromServer(force);
+                foreach (var ev in eg.Events.ToSyncList())
+                {
+                    ev.UpdateFromServer(force);
+                }
             }
         }
     }
