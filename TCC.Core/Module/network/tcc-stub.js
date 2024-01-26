@@ -90,6 +90,9 @@ class TccStub {
         this.mod.hook("S_SHOW_CANDIDATE_LIST", "raw", () => { return !Globals.useLfg; });
         // block tcc messages from gpk file
         this.mod.hook("S_CHAT", this.mod.majorPatchVersion >= 108 ? 4 : 3, { order: 999, filter: { fake: true } }, (p) => {
+
+            if (!Globals.TccChatEnabled) return;
+
             if (p.message.indexOf("(Translated)") !== -1) {
 
                 this.globalMod().call("handleTranslatedMessage", {
@@ -103,6 +106,9 @@ class TccStub {
             if (p.name !== "tccChatLink") return false;
         });
         this.mod.hook("S_WHISPER", this.mod.majorPatchVersion >= 108 ? 4 : 3, { order: 999, filter: { fake: true } }, (p) => {
+
+            if (!Globals.TccChatEnabled) return;
+
             if (p.message.indexOf("(Translated)") !== -1) {
 
                 this.globalMod().call("handleTranslatedMessage", {
