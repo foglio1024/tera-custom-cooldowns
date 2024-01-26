@@ -35,6 +35,23 @@ public class SystemMessagesDatabase : DatabaseBase
 
             var opcodeName = s[1];
             var msg = s[2].Replace("&#xA", "\n");
+
+            // -- overrides
+
+            switch (opcodeName)
+            {
+                case "SMT_WORLDSPAWN_NOTIFY_SPAWN":
+                case "SMT_WORLDSPAWN_NOTIFY_DESPAWN":
+                    msg = msg.Replace("<font color = '#ff3300'>{npcname}</font>", 
+                                     $"</font><font color = '{Colors.ChatSystemWorldBossColor.ToHex()}'>{{npcname}}</font><font color = '#cccccc'>")
+                             .Replace("{RegionName}",
+                                     $"</font><font color = '{Colors.ChatSystemWorldBossColor.ToHex()}'>{{RegionName}}</font><font color = '#cccccc'>");
+                    msg = $"<font color='#cccccc'>{msg}</font>";
+                    break;
+            }
+
+            // ------------
+
             var sm = new SystemMessageData(msg, ch);
             Messages[opcodeName] = sm;
         }

@@ -142,14 +142,15 @@ public static class SystemMessagesProcessor
 
     static void HandleMerchantSpawn(string parameters, SystemMessageData template)
     {
-        var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
+        var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.MysteryMerchant);
         Log.N("Mystery Merchant", msg.ToString(), NotificationType.Info, 10000);
+        
         ChatManager.Instance.AddChatMessage(msg);
     }
 
     static void HandleMerchantDespawn(string parameters, SystemMessageData template)
     {
-        var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
+        var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.MysteryMerchant);
         Log.N("Mystery Merchant", msg.ToString(), NotificationType.Info, 10000);
         ChatManager.Instance.AddChatMessage(msg);
     }

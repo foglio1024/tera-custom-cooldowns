@@ -213,4 +213,9 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
     {
         Tester.StartUnleash();
     }
+
+    private void NotifyMysteryMerchant(object sender, RoutedEventArgs e)
+    {
+        Tester.AddFakeSystemMessage("SMT_WORLDSPAWN_NOTIFY_SPAWN", "npcname", "Gokoro", "RegionName", "Allemantheia");
+    }
 }

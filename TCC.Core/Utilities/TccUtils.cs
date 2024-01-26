@@ -295,6 +295,7 @@ public static class TccUtils
             ChatChannel.Friend => Brushes.ChatSystemFriendBrush,
             ChatChannel.Twitch => Brushes.TwitchBrush,
             ChatChannel.WorldBoss => Brushes.ChatSystemWorldBossBrush,
+            ChatChannel.MysteryMerchant => Brushes.ChatSystemWorldBossBrush,
             ChatChannel.Guardian => Brushes.GuardianBrush,
             _ => Brushes.ChatSystemGenericBrush
         };
@@ -324,10 +325,11 @@ public static class TccUtils
             ChatChannel.Enchant => "Gear",
             ChatChannel.RaidLeader => "Leader",
             ChatChannel.Bargain => "Offer",
-            ChatChannel.WorldBoss => "W.B.",
+            ChatChannel.WorldBoss => "WB",
+            ChatChannel.MysteryMerchant => "MM",
             ChatChannel.SystemDefault => "System",
             ChatChannel.Damage => "Dmg",
-            ChatChannel.Guardian => "G.L.",
+            ChatChannel.Guardian => "GL",
             ChatChannel.ReceivedWhisper => "Whisper",
             _ => ch.ToString()
         };

@@ -95,6 +95,7 @@ public enum ChatChannel
     Guardian = 319,
     Enchant = 320,
     LFG = 321, // not sure if old /u is still here
+    MysteryMerchant = 322,
     TCC = 1000,
     Twitch = 1001
     // --custom

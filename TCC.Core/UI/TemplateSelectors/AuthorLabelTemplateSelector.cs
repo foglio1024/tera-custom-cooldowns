@@ -37,6 +37,7 @@ public class AuthorLabelTemplateSelector : DataTemplateSelector
             case ChatChannel.Friend:
             case ChatChannel.SystemDefault:
             case ChatChannel.WorldBoss:
+            case ChatChannel.MysteryMerchant:
             case ChatChannel.Laurel:
             case ChatChannel.Guardian:
                 return SystemAuthorTemplate;

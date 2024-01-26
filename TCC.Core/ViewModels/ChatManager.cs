@@ -526,6 +526,7 @@ public class ChatManager : TccWindowViewModel
             ChatChannel.Death => true,
             ChatChannel.Ress => true,
             ChatChannel.WorldBoss => true,
+            ChatChannel.MysteryMerchant => true,
             ChatChannel.Enchant => true,
             ChatChannel.Friend => true,
             ChatChannel.Laurel => true,

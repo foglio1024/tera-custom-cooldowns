@@ -50,6 +50,7 @@
             <Button Click="NotifyGuildBam">Guild BAM</Button>
             <Button Click="NotifyFieldBoss">Field Boss Spawn</Button>
             <Button Click="NotifyFieldBossDie">Field Boss Die</Button>
+            <Button Click="NotifyMysteryMerchant">Spawn MM</Button>
         </StackPanel>
         <Grid Width="50" Height="50">
             <Button Style="{StaticResource NostrumMainButtonStyle}"

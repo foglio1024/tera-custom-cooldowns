@@ -468,7 +468,7 @@ public static class Tester
         };
         t.Start();
     }
-
+    
     public static void SpawnNPC(ushort zoneId, uint templateId, ulong entityId, bool v, bool villager, int remainingEnrageTime)
     {
         if (Game.DB!.MonsterDatabase.TryGetMonster(templateId, zoneId, out var m))
