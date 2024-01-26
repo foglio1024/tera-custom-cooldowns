@@ -319,7 +319,7 @@ public partial class App
         var tries = 50;
         while (tries > 0)
         {
-            if (RunningDispatchers.Count == 0) break;
+            if (RunningDispatchers.IsEmpty) break;
             //Log.CW($"Waiting for all dispatcher to shutdown... ({RunningDispatchers.Count} left)");
             Thread.Sleep(100);
             tries--;
@@ -348,7 +348,7 @@ public partial class App
                                 //Log.CW($"{dispatcher.Thread.Name} is alive!");
                                 return;
                             }
-                            Log.F($"{dispatcher.Thread.Name} didn't respond in time!");
+                            //Log.F($"{dispatcher.Thread.Name} didn't respond in time!");
                             deadlockedDispatchers.Add(dispatcher);
                         });
                         Thread.Sleep(1000);
