@@ -48,7 +48,7 @@ public class BrawlerLayoutViewModel : BaseClassLayoutViewModel
 
     }
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == RhythmicBlows.Skill.IconName)
         {

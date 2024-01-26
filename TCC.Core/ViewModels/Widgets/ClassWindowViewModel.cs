@@ -35,10 +35,10 @@ public class ClassWindowViewModel : TccWindowViewModel
                     Class.Archer => new ArcherLayoutViewModel(),
                     Class.Lancer => new LancerLayoutViewModel(),
                     Class.Priest => new PriestLayoutViewModel(),
-                    Class.Mystic => new MysticLayoutVM(),
+                    Class.Mystic => new MysticLayoutViewModel(),
                     Class.Slayer => new SlayerLayoutViewModel(),
                     Class.Berserker => new BerserkerLayoutViewModel(),
-                    Class.Sorcerer => new SorcererLayoutVM(),
+                    Class.Sorcerer => new SorcererLayoutViewModel(),
                     Class.Reaper => new ReaperLayoutViewModel(),
                     Class.Gunner => new GunnerLayoutViewModel(),
                     Class.Brawler => new BrawlerLayoutViewModel(),
@@ -166,7 +166,7 @@ public class ClassWindowViewModel : TccWindowViewModel
         // check enabled?
         switch (CurrentClass)
         {
-            case Class.Sorcerer when CurrentManager is SorcererLayoutVM sm:
+            case Class.Sorcerer when CurrentManager is SorcererLayoutViewModel sm:
                 sm.NotifyElementChanged();
                 break;
         }

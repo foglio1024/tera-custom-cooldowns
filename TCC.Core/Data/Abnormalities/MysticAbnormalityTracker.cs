@@ -30,7 +30,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
 
     public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
-        if (!TryGetClassViewModel<MysticLayoutVM>(out var vm)) return;
+        if (!TryGetClassViewModel<MysticLayoutViewModel>(out var vm)) return;
 
         CheckVolleyOfCursesBegin(p);
         CheckAurasBegin(p, vm);
@@ -38,7 +38,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
 
     public override void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
-        if (!TryGetClassViewModel<MysticLayoutVM>(out var vm)) return;
+        if (!TryGetClassViewModel<MysticLayoutViewModel>(out var vm)) return;
 
         CheckVolleyOfCursesRefresh(p);
         CheckAurasRefresh(p, vm);
@@ -46,13 +46,13 @@ public class MysticAbnormalityTracker : AbnormalityTracker
 
     public override void OnAbnormalityEnd(S_ABNORMALITY_END p)
     {
-        if (!TryGetClassViewModel<MysticLayoutVM>(out var vm)) return;
+        if (!TryGetClassViewModel<MysticLayoutViewModel>(out var vm)) return;
 
         CheckVolleyOfCursesEnd(p);
         CheckAurasEnd(p, vm);
     }
 
-    static void CheckAurasBegin(S_ABNORMALITY_BEGIN p, MysticLayoutVM vm)
+    static void CheckAurasBegin(S_ABNORMALITY_BEGIN p, MysticLayoutViewModel vm)
     {
         if (!Game.IsMe(p.TargetId)) return;
 
@@ -90,7 +90,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckAurasRefresh(S_ABNORMALITY_REFRESH p, MysticLayoutVM vm)
+    static void CheckAurasRefresh(S_ABNORMALITY_REFRESH p, MysticLayoutViewModel vm)
     {
         if (!Game.IsMe(p.TargetId)) return;
 
@@ -128,7 +128,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckAurasEnd(S_ABNORMALITY_END p, MysticLayoutVM vm)
+    static void CheckAurasEnd(S_ABNORMALITY_END p, MysticLayoutViewModel vm)
     {
         if (!Game.IsMe(p.TargetId)) return;
 

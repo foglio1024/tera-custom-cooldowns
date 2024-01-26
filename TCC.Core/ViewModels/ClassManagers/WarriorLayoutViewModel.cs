@@ -85,7 +85,7 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
         CheckStanceWarning();
     }
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == DeadlyGamble.Cooldown.Skill.IconName)
         {

@@ -64,7 +64,7 @@ public class PriestLayoutViewModel : BaseClassLayoutViewModel
     void OnEdictBuffEnded(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = true;
     void OnEdictBuffStarted(ulong cd, CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = false;
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == EnergyStars.Cooldown.Skill.IconName)
         {

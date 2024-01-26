@@ -98,7 +98,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
             if (App.Settings.ClassWindowSettings.Enabled
                 && Game.Me.Class == Class.Sorcerer
-                && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutVM sm)
+                && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutViewModel sm)
             {
                 sm.NotifyElementChanged();
             }
@@ -128,7 +128,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        TccUtils.CurrentClassVM<SorcererLayoutVM>()?.ManaBoost.StartEffect(10000);
+        TccUtils.CurrentClassVM<SorcererLayoutViewModel>()?.ManaBoost.StartEffect(10000);
 
         //SkillManager.AddSkill(100700, 20000);
         //SkillManager.AddSkill(400120, 20000);

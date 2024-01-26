@@ -6,7 +6,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-public class SorcererLayoutVM : BaseClassLayoutViewModel
+public class SorcererLayoutViewModel : BaseClassLayoutViewModel
 {
     readonly Stopwatch _sw;
     long _latestCooldown;
@@ -42,7 +42,7 @@ public class SorcererLayoutVM : BaseClassLayoutViewModel
 
 
 
-    public SorcererLayoutVM()
+    public SorcererLayoutViewModel()
     {
         SorcererAbnormalityTracker.BoostChanged += OnBoostChanged;
 
@@ -77,7 +77,7 @@ public class SorcererLayoutVM : BaseClassLayoutViewModel
     }
 
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == ManaBoost.Cooldown.Skill.IconName)
         {

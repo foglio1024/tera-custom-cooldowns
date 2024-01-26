@@ -7,7 +7,13 @@ namespace TCC.ViewModels.ClassManagers;
 
 public abstract class BaseClassLayoutViewModel : ThreadSafeObservableObject, IDisposable
 {
-    public virtual bool StartSpecialSkill(Cooldown sk)
+    public bool StartSpecialSkill(Cooldown cd)
+    {
+        var ret = StartSpecialSkillImpl(cd);
+        cd.Dispose();
+        return ret;
+    }
+    protected virtual bool StartSpecialSkillImpl(Cooldown cd)
     {
         return false;
     }

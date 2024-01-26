@@ -29,7 +29,7 @@ public class SlayerLayoutViewModel : BaseClassLayoutViewModel
         InColdBlood.Dispose();
     }
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == InColdBlood.Cooldown.Skill.IconName)
         {

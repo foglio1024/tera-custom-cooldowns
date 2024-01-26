@@ -59,7 +59,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
     static void CheckManaBoostBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!ManaBoostIds.Contains(p.AbnormalityId)) return;
-        if (!TryGetClassViewModel<SorcererLayoutVM>(out var vm)) return;
+        if (!TryGetClassViewModel<SorcererLayoutViewModel>(out var vm)) return;
 
         vm.ManaBoost.StartEffect(p.Duration);
     }
@@ -67,7 +67,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
     static void CheckManaBoostRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!ManaBoostIds.Contains(p.AbnormalityId)) return;
-        if (!TryGetClassViewModel<SorcererLayoutVM>(out var vm)) return;
+        if (!TryGetClassViewModel<SorcererLayoutViewModel>(out var vm)) return;
 
         vm.ManaBoost.RefreshEffect(p.Duration);
     }
@@ -75,7 +75,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
     static void CheckManaBoostEnd(S_ABNORMALITY_END p)
     {
         if (!ManaBoostIds.Contains(p.AbnormalityId)) return;
-        if (!TryGetClassViewModel<SorcererLayoutVM>(out var vm)) return;
+        if (!TryGetClassViewModel<SorcererLayoutViewModel>(out var vm)) return;
 
         vm.ManaBoost.StopEffect();
     }
@@ -157,7 +157,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
     static void CheckFusionsEnd(S_ABNORMALITY_END p)
     {
         if (FireIceFusionId != p.AbnormalityId) return;
-        if (!TryGetClassViewModel<SorcererLayoutVM>(out var vm)) return;
+        if (!TryGetClassViewModel<SorcererLayoutViewModel>(out var vm)) return;
 
         vm.EndFireIcePre();
         //else if (FireArcaneFusionId == p.AbnormalityId)

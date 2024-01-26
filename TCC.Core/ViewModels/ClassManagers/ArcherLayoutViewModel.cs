@@ -30,7 +30,7 @@ public class ArcherLayoutViewModel : BaseClassLayoutViewModel
         WindWalk = new Cooldown(ww, false);
     }
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == Thunderbolt.Skill.IconName)
         {

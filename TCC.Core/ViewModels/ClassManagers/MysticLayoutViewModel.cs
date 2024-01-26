@@ -5,7 +5,7 @@ using TeraDataLite;
 
 namespace TCC.ViewModels.ClassManagers;
 
-internal class MysticLayoutVM : BaseClassLayoutViewModel
+internal class MysticLayoutViewModel : BaseClassLayoutViewModel
 {
     bool _elementalize;
     public AurasTracker Auras { get; }
@@ -36,7 +36,7 @@ internal class MysticLayoutVM : BaseClassLayoutViewModel
     public bool OffenseAuraWarning => !Auras.OffenseAura && (Game.Combat || Game.Encounter);
     public bool SupportAuraWarning => !Auras.SupportAura && (Game.Combat || Game.Encounter);
 
-    public MysticLayoutVM()
+    public MysticLayoutViewModel()
     {
         Auras = new AurasTracker();
         Game.DB!.SkillsDatabase.TryGetSkill(251900, Class.Mystic, out var top);
@@ -137,7 +137,7 @@ internal class MysticLayoutVM : BaseClassLayoutViewModel
     }
 
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == Contagion.Skill.IconName)
         {

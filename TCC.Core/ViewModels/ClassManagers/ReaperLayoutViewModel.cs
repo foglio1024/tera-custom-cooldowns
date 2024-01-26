@@ -31,7 +31,7 @@ public class ReaperLayoutViewModel : BaseClassLayoutViewModel
         ShroudedEscape.Dispose();
     }
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == ShadowReaping.Cooldown.Skill.IconName)
         {

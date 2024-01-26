@@ -40,7 +40,7 @@ public class GunnerLayoutViewModel : BaseClassLayoutViewModel
         ModularSystem.Dispose();
     }
 
-    public override bool StartSpecialSkill(Cooldown sk)
+    protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
         if (sk.Skill.IconName == Balder.Skill.IconName)
         {
