@@ -982,52 +982,55 @@ public static class Game
             )
         {
 
+            App.Settings.LastLanguage = Language;
+
+            Logged = true;
+            LoadingScreen = true;
+            Encounter = false;
+            Account.LoginCharacter(m.PlayerId);
+            Guild.Clear();
+            Friends.Clear();
+            BlockList.Clear();
+
+            Server = PacketAnalyzer.ServerDatabase.GetServer(m.ServerId);
+
+            Me.Name = m.Name;
+            Me.Class = m.CharacterClass;
+            Me.EntityId = m.EntityId;
+            Me.Level = m.Level;
+            Me.PlayerId = m.PlayerId;
+            Me.ServerId = m.ServerId;
+            Me.Laurel = GetLaurel(Me.PlayerId);
+            Me.ClearAbnormalities();
+            Me.StacksCounter.SetClass(m.CharacterClass);
+
+            WindowManager.ReloadPositions();
+            GameEventManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
+            await InitDatabasesAsync(App.Settings.LastLanguage);
+            SetAbnormalityTracker(m.CharacterClass);
+
             bool isDailyFirst = App.Settings.StatSentTime.Month == DateTime.Now.Month &&
-                                App.Settings.StatSentTime.Day == DateTime.Now.Day &&
-                                App.Settings.StatSentVersion != App.AppVersion;
+                            App.Settings.StatSentTime.Day == DateTime.Now.Day &&
+                            App.Settings.StatSentVersion != App.AppVersion;
 
-            if (await Cloud.SendUsageStatAsync(Server.Region,
-                                               Server.ServerId,
-                                               Server.Ip,
-                                               Server.Name,
-                                               account,
-                                               App.AppVersion,
-                                               isDailyFirst))
+
+            _ = Task.Run(async () =>
             {
-                App.Settings.StatSentTime = DateTime.UtcNow;
-                App.Settings.StatSentVersion = App.AppVersion;
-                App.Settings.Save();
-            }
+                if (await Cloud.SendUsageStatAsync(Server.Region,
+                                                   Server.ServerId,
+                                                   Server.Ip,
+                                                   Server.Name,
+                                                   account,
+                                                   App.AppVersion,
+                                                   isDailyFirst))
+                {
+                    App.Settings.StatSentTime = DateTime.UtcNow;
+                    App.Settings.StatSentVersion = App.AppVersion;
+                    App.Settings.Save();
+                }
+            });
         }
-
-        App.Settings.LastLanguage = Language;
-
-        Logged = true;
-        LoadingScreen = true;
-        Encounter = false;
-        Account.LoginCharacter(m.PlayerId);
-        Guild.Clear();
-        Friends.Clear();
-        BlockList.Clear();
-
-        Server = PacketAnalyzer.ServerDatabase.GetServer(m.ServerId);
-
-        Me.Name = m.Name;
-        Me.Class = m.CharacterClass;
-        Me.EntityId = m.EntityId;
-        Me.Level = m.Level;
-        Me.PlayerId = m.PlayerId;
-        Me.ServerId = m.ServerId;
-        Me.Laurel = GetLaurel(Me.PlayerId);
-        Me.ClearAbnormalities();
-        Me.StacksCounter.SetClass(m.CharacterClass);
-
-        WindowManager.ReloadPositions();
-        GameEventManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
-        await InitDatabasesAsync(App.Settings.LastLanguage);
-        SetAbnormalityTracker(m.CharacterClass);
     }
-
     static async Task OnLoginArbiter(C_LOGIN_ARBITER m)
     {
         CurrentAccountNameHash = HashUtils.GenerateHash(m.AccountName);
@@ -1084,7 +1087,7 @@ public static class Game
         if (IsMe(p.CasterId)) return;
 
         var username = "An unknown player";
-        if(NearbyPlayers.TryGetValue(p.CasterId, out var player))
+        if (NearbyPlayers.TryGetValue(p.CasterId, out var player))
         {
             username = player.Name;
         }
