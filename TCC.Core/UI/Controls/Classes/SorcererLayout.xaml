@@ -6,7 +6,7 @@
              xmlns:elements="clr-namespace:TCC.UI.Controls.Classes.Elements"
              xmlns:skills="clr-namespace:TCC.UI.Controls.Skills"
              xmlns:classManagers="clr-namespace:TCC.ViewModels.ClassManagers"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:SorcererLayoutVM}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance classManagers:SorcererLayoutViewModel}">
 
     <Grid Width="Auto" Margin="20" Name="Root">
         <Grid HorizontalAlignment="Center" Margin="0">
