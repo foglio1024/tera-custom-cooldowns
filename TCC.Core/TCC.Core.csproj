@@ -14,7 +14,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Foglio</Authors>
     <Company>Foglio</Company>
-    <Version>1.4.158</Version>
+    <Version>1.4.159</Version>
     <Description>TERA Custom Cooldowns</Description>
     <PackageIcon>tcc.ico</PackageIcon>
     <PackageIconUrl />
@@ -112,7 +112,7 @@
     <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Nostrum" Version="2.0.11" />
-    <PackageReference Include="Nostrum.WPF" Version="1.2.28" />
+    <PackageReference Include="Nostrum.WPF" Version="1.2.29" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\TCC.Loader\TCC.Loader\TCC.Loader.csproj" />
