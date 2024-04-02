@@ -52,8 +52,8 @@ public class CooldownWindowViewModel : TccWindowViewModel
     public ICollectionViewLiveShaping? SkillsView { get; private set; }
     public ICollectionViewLiveShaping ItemsView { get; }
     public ICollectionViewLiveShaping AbnormalitiesView { get; }
-    public IEnumerable<Item> Items => Game.DB!.ItemsDatabase.ItemSkills;
-    public IEnumerable<Abnormality> Passivities => Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList();
+    public ThreadSafeCollection<Item> Items { get; } = [.. Game.DB!.ItemsDatabase.ItemSkills];
+    public ThreadSafeCollection<Abnormality> Passivities { get; } = [.. Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList()];
 
     static bool FindAndUpdate(ThreadSafeObservableCollection<Cooldown> list, Cooldown sk)
     {
