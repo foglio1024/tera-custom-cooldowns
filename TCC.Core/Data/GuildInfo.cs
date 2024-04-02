@@ -8,6 +8,7 @@ namespace TCC.Data;
 
 public class GuildInfo
 {
+    readonly object _lock = new object();
     readonly ThreadSafeObservableCollection<GuildMemberData> _members = [];
 
     public bool InGuild { get; private set; }
@@ -16,7 +17,11 @@ public class GuildInfo
 
     public string NameOf(uint id)
     {
-        var found = _members.ToSyncList().FirstOrDefault(m => m.PlayerId == id);
+        GuildMemberData found;
+        lock (_lock)
+        {
+            found = _members.ToSyncList().FirstOrDefault(m => m.PlayerId == id);
+        }
         return found.Name != ""
             ? found.Name
             : "Unknown player";
@@ -24,9 +29,12 @@ public class GuildInfo
 
     public void Set(List<GuildMemberData> newMembers, uint masterId, string masterName)
     {
-        foreach (var member in newMembers.Where(x => !Has(x.Name)))
+        lock (_lock)
         {
-            _members.Add(member);
+            foreach (var member in newMembers.Where(x => !Has(x.Name)))
+            {
+                _members.Add(member);
+            }
         }
         InGuild = true;
         SetMaster(masterId, masterName);
@@ -34,12 +42,22 @@ public class GuildInfo
 
     public bool Has(string name)
     {
-        return _members.ToSyncList().Exists(m => m.Name == name);
+        bool ret = false;
+
+        lock (_lock)
+        {
+            ret = _members.ToSyncList().Exists(m => m.Name == name);
+        }
+        return ret;
     }
 
     public void Clear()
     {
-        Task.Run(() => _members.Clear());
+        lock (_lock)
+        {
+            _members.Clear();
+        }
+
         InGuild = false;
         Master = default;
         AmIMaster = false;
