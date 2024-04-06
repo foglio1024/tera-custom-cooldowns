@@ -71,6 +71,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         }
 
         existing.Refresh(sk.Skill.Id, sk.Duration, sk.Mode);
+        sk.Dispose();
         return true;
     }
 

@@ -53,6 +53,7 @@ public class ArcherLayoutViewModel : BaseClassLayoutViewModel
 
     public override void Dispose()
     {
+        WindWalk.Dispose();
         Windsong.Dispose();
         Thunderbolt.Dispose();
     }

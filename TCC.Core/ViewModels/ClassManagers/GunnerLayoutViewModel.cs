@@ -35,6 +35,7 @@ public class GunnerLayoutViewModel : BaseClassLayoutViewModel
 
     public override void Dispose()
     {
+        BurstFire.Dispose();
         Bombardment.Dispose();
         Balder.Dispose();
         ModularSystem.Dispose();

@@ -88,8 +88,10 @@ internal class MysticLayoutViewModel : BaseClassLayoutViewModel
 
     public override void Dispose()
     {
+        ThrallOfProtection.Dispose();
         ThrallOfVengeance.Dispose();
         ThrallOfWrath.Dispose();
+        ThrallOfLife.Dispose();
 
         AuraTenacious.Dispose();
         AuraMerciless.Dispose();
@@ -97,6 +99,9 @@ internal class MysticLayoutViewModel : BaseClassLayoutViewModel
         AuraUnyielding.Dispose();
 
         Contagion.Dispose();
+
+        Vow.Effect.Ended -= OnVowBuffEnded;
+        Vow.Effect.Started -= OnVowBuffStarted;
 
         Vow.Dispose();
         VolleyOfCurse.Dispose();

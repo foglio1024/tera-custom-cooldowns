@@ -78,6 +78,7 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
         Stance.PropertyChanged -= OnStanceOnPropertyChanged;
         DeadlyGamble.Dispose();
         Infuriate.Dispose();
+        Swift.Dispose();
     }
 
     void OnStanceOnPropertyChanged(object? _, PropertyChangedEventArgs __)

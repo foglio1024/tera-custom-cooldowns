@@ -27,6 +27,7 @@ public class SlayerLayoutViewModel : BaseClassLayoutViewModel
     public override void Dispose()
     {
         InColdBlood.Dispose();
+        OverhandStrike.Dispose();
     }
 
     protected override bool StartSpecialSkillImpl(Cooldown sk)

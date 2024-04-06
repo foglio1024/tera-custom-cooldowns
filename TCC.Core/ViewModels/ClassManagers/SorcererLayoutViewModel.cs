@@ -73,6 +73,7 @@ public class SorcererLayoutViewModel : BaseClassLayoutViewModel
     public override void Dispose()
     {
         ManaBoost.Dispose();
+        Fusion.Dispose();
         SorcererAbnormalityTracker.BoostChanged -= OnBoostChanged;
     }
 

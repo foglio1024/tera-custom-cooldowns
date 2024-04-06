@@ -78,5 +78,6 @@ public class BrawlerLayoutViewModel : BaseClassLayoutViewModel
     {
         RhythmicBlows.Dispose();
         Infuriate.Dispose();
+        Counter.Dispose();
     }
 }
