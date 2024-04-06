@@ -20,8 +20,20 @@ public class TccPopup : Popup
 
     public TccPopup()
     {
+        Loaded += OnLoaded;
+        Unloaded += OnUnloaded;
+    }
+
+    private void OnLoaded(object sender, RoutedEventArgs e)
+    {
         WindowManager.VisibilityManager.VisibilityChanged += OnVisiblityChanged;
         FocusManager.ForegroundChanged += OnForegroundChanged;
+    }
+
+    private void OnUnloaded(object sender, RoutedEventArgs e)
+    {
+        WindowManager.VisibilityManager.VisibilityChanged -= OnVisiblityChanged;
+        FocusManager.ForegroundChanged -= OnForegroundChanged;
     }
 
 

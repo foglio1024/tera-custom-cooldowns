@@ -11,8 +11,8 @@
                     xmlns:chat="clr-namespace:TCC.Data.Chat"
                     xmlns:pc="clr-namespace:TCC.Data.Pc"
                     xmlns:skills="clr-namespace:TCC.Data.Skills"
-                    xmlns:abnormalities1="clr-namespace:TCC.UI.Controls.Abnormalities"
-                    xmlns:chat1="clr-namespace:TCC.UI.Controls.Chat"
+                    xmlns:abControls="clr-namespace:TCC.UI.Controls.Abnormalities"
+                    xmlns:chatControls="clr-namespace:TCC.UI.Controls.Chat"
                     xmlns:tccControls="clr-namespace:TCC.UI.Controls"
                     xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
                     xmlns:group="clr-namespace:TCC.UI.Controls.Group"
@@ -82,40 +82,40 @@
 
     <!--#region Abnormalities -->
     <DataTemplate x:Key="SquareAbnormality">
-        <abnormalities1:SquareAbnormalityIndicator HorizontalAlignment="Right" Size="32">
-            <abnormalities1:SquareAbnormalityIndicator.Resources>
+        <abControls:SquareAbnormalityIndicator HorizontalAlignment="Right" Size="32">
+            <abControls:SquareAbnormalityIndicator.Resources>
                 <Style TargetType="{x:Type Path}">
                     <Setter Property="FlowDirection" Value="RightToLeft" />
                 </Style>
-            </abnormalities1:SquareAbnormalityIndicator.Resources>
-        </abnormalities1:SquareAbnormalityIndicator>
+            </abControls:SquareAbnormalityIndicator.Resources>
+        </abControls:SquareAbnormalityIndicator>
     </DataTemplate>
     <DataTemplate x:Key="RoundAbnormality">
-        <abnormalities1:RoundAbnormalityIndicator HorizontalAlignment="Right" Size="32">
-            <abnormalities1:RoundAbnormalityIndicator.Resources>
+        <abControls:RoundAbnormalityIndicator HorizontalAlignment="Right" Size="32">
+            <abControls:RoundAbnormalityIndicator.Resources>
                 <Style TargetType="{x:Type Path}">
                     <Setter Property="FlowDirection" Value="RightToLeft" />
                 </Style>
-            </abnormalities1:RoundAbnormalityIndicator.Resources>
-        </abnormalities1:RoundAbnormalityIndicator>
+            </abControls:RoundAbnormalityIndicator.Resources>
+        </abControls:RoundAbnormalityIndicator>
     </DataTemplate>
     <DataTemplate x:Key="RoundPartyAbnormality">
-        <abnormalities1:RoundAbnormalityIndicator Size="28" DataContext="{Binding}" />
+        <abControls:RoundAbnormalityIndicator Size="28" DataContext="{Binding}" />
     </DataTemplate>
     <DataTemplate x:Key="SquarePartyAbnormality">
-        <abnormalities1:SquareAbnormalityIndicator Size="28" DataContext="{Binding}" />
+        <abControls:SquareAbnormalityIndicator Size="28" DataContext="{Binding}" />
     </DataTemplate>
     <DataTemplate x:Key="RoundRaidAbnormality">
-        <abnormalities1:RoundAbnormalityIndicator Size="20" DataContext="{Binding}" />
+        <abControls:RoundAbnormalityIndicator Size="20" DataContext="{Binding}" />
     </DataTemplate>
     <DataTemplate x:Key="SquareRaidAbnormality">
-        <abnormalities1:SquareAbnormalityIndicator Size="20" DataContext="{Binding}" />
+        <abControls:SquareAbnormalityIndicator Size="20" DataContext="{Binding}" />
     </DataTemplate>
     <DataTemplate x:Key="RoundBossAbnormality">
-        <abnormalities1:RoundAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}" />
+        <abControls:RoundAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}" />
     </DataTemplate>
     <DataTemplate x:Key="SquareBossAbnormality">
-        <abnormalities1:SquareAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}" />
+        <abControls:SquareAbnormalityIndicator Size="30" Margin="2" DataContext="{Binding}" />
     </DataTemplate>
     <DataTemplate x:Key="AbnormalityDataTemplate" DataType="abnormalities:Abnormality">
         <Grid Background="Transparent" ToolTip="{Binding ToolTip}">
@@ -150,7 +150,7 @@
             <Grid.ToolTip>
                 <ToolTip Background="Transparent" BorderBrush="Transparent">
                     <Grid>
-                        <abnormalities1:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}"
+                        <abControls:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}"
                                                                   AbnormalityToolTip="{Binding Abnormality.ToolTip}"
                                                                   Id="{Binding Abnormality.Id}" />
                     </Grid>
@@ -249,7 +249,7 @@
             <Grid.ToolTip>
                 <ToolTip Background="Transparent" BorderBrush="Transparent">
                     <Grid>
-                        <abnormalities1:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}"
+                        <abControls:AbnormalityToolTipControl AbnormalityName="{Binding Abnormality.Name}"
                                                                   AbnormalityToolTip="{Binding Abnormality.ToolTip}"
                                                                   Id="{Binding Abnormality.Id}" />
                     </Grid>
@@ -402,10 +402,10 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="MoneyTemplate">
-        <chat1:MoneyMessagePieceControl />
+        <chatControls:MoneyMessagePieceControl />
     </DataTemplate>
     <DataTemplate x:Key="EmojiTemplate">
-        <chat1:EmojiMessagePiece />
+        <chatControls:EmojiMessagePiece />
     </DataTemplate>
     <DataTemplate x:Key="IconTemplate" DataType="chat:IconMessagePiece">
         <Ellipse Width="24" Height="24" Margin="0 0 3 0" VerticalAlignment="Center">
@@ -426,114 +426,27 @@
 
 
     <DataTemplate x:Key="MessageHeaderTemplate">
-        <chat1:ChatMessageHeader />
+        <chatControls:ChatMessageHeader />
     </DataTemplate>
     <DataTemplate x:Key="MessageBodyTemplate">
-        <chat1:MessagePieceBodyControl />
+        <chatControls:MessagePieceBodyControl />
     </DataTemplate>
     <DataTemplate x:Key="DefaultBody">
-        <chat1:DefaultMessageBody />
+        <chatControls:DefaultMessageBody />
     </DataTemplate>
     <DataTemplate x:Key="BrokerOfferBody">
-        <chat1:BrokerOfferBody />
+        <chatControls:BrokerOfferBody />
     </DataTemplate>
     <DataTemplate x:Key="ApplyBody">
-        <chat1:ApplyBody />
+        <chatControls:ApplyBody />
     </DataTemplate>
     <DataTemplate x:Key="LfgBody">
-        <chat1:LfgBody />
+        <chatControls:LfgBody />
     </DataTemplate>
 
 
     <DataTemplate x:Key="TranslationIndicatorTemplate" DataType="chat:MessagePieceBase">
-        <Grid VerticalAlignment="Center" Height="Auto">
-            <Border  Background="#1fff" Padding="4 1" x:Name="TranslationIcon" IsHitTestVisible="True"
-                CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center"
-                     MouseEnter="OnTranslationIndicatorMouseEnter"
-                     MouseLeave="OnTranslationIndicatorMouseLeave"
-                     Margin="3 0 0 0" Height="{Binding Size}" >
-                <Path Data="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
-                    Fill="#9fff" Stretch="Uniform" Width="Auto" 
-                      VerticalAlignment="Center" IsHitTestVisible="False"
-              />
-            </Border>
-            <tccControls:TccPopup x:Name="TranslationPopup" PlacementTarget="{Binding ElementName=TranslationIcon}" Placement="Top"
-            AllowsTransparency="True" MouseLeaveTolerance="10" 
-                                  >
-                <Border Background="{StaticResource RevampDarkerBackgroundBrush}"
-                            Style="{StaticResource RevampBorderStyle}" MaxWidth="300" Padding="10" >
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="15" Opacity=".4" Direction="-90" />
-                    </Border.Effect>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="0" Margin="0 0 0 2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <Path Data="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
-                                  Fill="#3fff" Stretch="Uniform" Width="12" 
-                                  Height="12" Grid.Column="1" HorizontalAlignment="Left"
-                                  VerticalAlignment="Center" IsHitTestVisible="False" Margin="4 0 0 0"
-                            />
-                            <TextBlock x:Name="SecondaryTextTitle" Text="Translated message"
-                                       FontWeight="Normal"  Grid.Column="0"/>
-                        </Grid>
-                        
-                        <Separator Grid.ColumnSpan="2" VerticalAlignment="Top"
-                                   Background="#2fff"
-                                   Foreground="#2fff"
-                                   Grid.Row="1"
-                        />
-
-                        <ItemsControl ItemsSource="{Binding Container.SecondaryLines}"
-                                      Grid.Column="0"
-                                      Grid.Row="1"
-                          Background="Transparent"
-                          Margin="0 4 0 0" 
-                          VerticalAlignment="Center" >
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel VerticalAlignment="Top"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <ItemsControl ItemsSource="{Binding LinePieces}"
-                                      ItemTemplate="{StaticResource MessageBodyTemplate}" Background="Transparent"
-                                      VerticalAlignment="Center" >
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapPanel HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemContainerStyle>
-                                            <Style TargetType="FrameworkElement">
-                                                <Setter Property="Margin" Value="0 0 0 -3"/>
-                                                <Setter Property="VerticalAlignment" Value="Top"/>
-                                            </Style>
-                                        </ItemsControl.ItemContainerStyle>
-                                    </ItemsControl>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
-                </Border>
-
-            </tccControls:TccPopup>
-        </Grid>
-        <DataTemplate.Triggers>
-            <DataTrigger Binding="{Binding Container.IsShowingTranslationFirst}" Value="True">
-                <Setter TargetName="SecondaryTextTitle" Property="Text" Value="Original message"/>
-            </DataTrigger>
-        </DataTemplate.Triggers>
+        <chatControls:TranslationIndicator/> 
     </DataTemplate>
 
 
@@ -681,11 +594,11 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="LfgTemplate">
-        <chat1:LfgControl Margin="1" />
+        <chatControls:LfgControl Margin="1" />
     </DataTemplate>
 
     <DataTemplate x:Key="TabSettingsTemplate">
-        <chat1:TabSettingControl />
+        <chatControls:TabSettingControl />
     </DataTemplate>
     <DataTemplate x:Key="SimpleChatChannelTemplate" DataType="chat:ChatChannelOnOff">
         <Grid ToolTip="{Binding Channel}">
@@ -1797,7 +1710,7 @@
                        VerticalAlignment="Center" Margin="5 0" />
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="MoongourdEncounterDataTemplate" DataType="chat1:EncounterViewModel">
+    <DataTemplate x:Key="MoongourdEncounterDataTemplate" DataType="chatControls:EncounterViewModel">
         <Grid VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="230" />
