@@ -66,43 +66,49 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static void CheckAssaultStanceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
-        Game.Me.WarriorStance.CurrentStance = WarriorStance.Assault;
+        vm.SetStance(WarriorStance.Assault);
     }
 
     static void CheckAssaultStanceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
-        Game.Me.WarriorStance.CurrentStance = WarriorStance.Assault;
+        vm.SetStance(WarriorStance.Assault);
     }
 
     static void CheckAssaultStanceEnd(S_ABNORMALITY_END p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
-        Game.Me.WarriorStance.CurrentStance = WarriorStance.None;
+        vm.SetStance(WarriorStance.None);
     }
 
     static void CheckDefensiveStanceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
-        Game.Me.WarriorStance.CurrentStance = WarriorStance.Defensive;
+        vm.SetStance(WarriorStance.Defensive);
     }
 
     static void CheckDefensiveStanceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
-        Game.Me.WarriorStance.CurrentStance = WarriorStance.Defensive;
+        vm.SetStance(WarriorStance.Defensive);
     }
 
     static void CheckDefensiveStanceEnd(S_ABNORMALITY_END p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+        if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
-        Game.Me.WarriorStance.CurrentStance = WarriorStance.None;
+        vm.SetStance(WarriorStance.None);
     }
 
     static void CheckDeadlyGambleBegin(S_ABNORMALITY_BEGIN p)
