@@ -50,6 +50,7 @@
     <ImageSource x:Key="RainbowBySnugLaurelRhomb">        pack://application:,,,/resources/images/Icon_Laurels/rainbow_by_snug.png          </ImageSource>
     <ImageSource x:Key="ChampionBlackLaurelRhombBig">     pack://application:,,,/resources/images/Icon_Laurels/champion_kr_big_black.png  </ImageSource>
     <ImageSource x:Key="RainbowBySnugLaurelRhombBig">pack://application:,,,/resources/images/Icon_Laurels/rainbow_by_snug_big.png  </ImageSource>
+    <ImageSource x:Key="WhitebyYngirLaurelRhombBig">pack://application:,,,/resources/images/Icon_Laurels/champion_kr_big_white.png  </ImageSource>
 
     <ImageSource x:Key="CharWindowBg">             pack://application:,,,/resources/images/char_window_bg.png                    </ImageSource>
     <ImageSource x:Key="CharWindowBgSide2">        pack://application:,,,/resources/images/char_window_bg_side_2.png             </ImageSource>
@@ -58,6 +59,7 @@
     <ImageSource x:Key="CharWindowFg">             pack://application:,,,/resources/images/char_window_fg.png                    </ImageSource>
 
     <ImageSource x:Key="SlotNeutralBg">             pack://application:,,,/resources/images/slot_bg_neutral.png                    </ImageSource>
+    <ImageSource x:Key="PleaseStandBy">             pack://application:,,,/resources/images/pleasestandby.jpg                    </ImageSource>
 
     <ImageSource x:Key="MobIcon">                  pack://application:,,,/resources/images/kr_mob_icon.png                       </ImageSource>
     <ImageSource x:Key="BossIcon">                 pack://application:,,,/resources/images/kr_boss_icon.png                      </ImageSource>

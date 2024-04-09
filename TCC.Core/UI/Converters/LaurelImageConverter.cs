@@ -50,6 +50,7 @@ public class LaurelImageConverter : MarkupExtension, IValueConverter
             (LaurelType.RhombBig,    CustomLaurel.ChampionPink)  => MiscResources.ChampionPinkLaurelRhombBig,
             (LaurelType.RhombBig,    CustomLaurel.ChampionBlack) => MiscResources.ChampionBlackLaurelRhombBig,
             (LaurelType.RhombBig,    CustomLaurel.RainbowBySnug) => MiscResources.RainbowBySnugLaurelRhombBig,
+            (LaurelType.RhombBig,    CustomLaurel.WhitebyYngir)  => MiscResources.WhitebyYngirLaurelRhombBig,
             (LaurelType.RhombBottom, CustomLaurel.Bronze)        => MiscResources.BronzeLaurelRhombBottom, 
             (LaurelType.RhombBottom, CustomLaurel.Silver)        => MiscResources.SilverLaurelRhombBottom, 
             (LaurelType.RhombBottom, CustomLaurel.Gold)          => MiscResources.GoldLaurelRhombBottom, 

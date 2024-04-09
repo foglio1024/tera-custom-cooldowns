@@ -120,6 +120,14 @@ public class AbnormalityDatabase : DatabaseBase
         Abnormalities[98200379].IsBuff = false;
 
         #endregion Menma's GLSH override
+
+        #region Fallout override
+
+        var fallout = new Abnormality(11042024, true, true, true, AbnormalityType.Special, "icon_status.vault_boy_ab", "Rad-X", 
+            "Your resistance to radiation increases by $H_W_GOOD75%$COLOR_END.");
+        Abnormalities[fallout.Id] = fallout;
+
+        #endregion Fallout override
     }
 
     public bool TryGetPassiveSkill(uint id, out Skill sk)

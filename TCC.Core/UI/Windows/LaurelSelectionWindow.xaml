@@ -74,7 +74,7 @@
             </Border.Effect>
 
         </Border>
-        <Grid Width="Auto" Height="100" HorizontalAlignment="Center" Grid.Row="1">
+        <Grid Width="Auto" Height="110" HorizontalAlignment="Center" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
@@ -122,7 +122,7 @@
             </Path>
 
             <TextBlock Text="{Binding CurrentLaurel, Converter={nsCv:EnumDescriptionConverter}}" Grid.Row="1"
-                       Grid.Column="1" Foreground="{StaticResource TccWhiteGradientBrush}"
+                       Grid.Column="1" Foreground="{StaticResource TccWhiteGradientBrush}" Margin="0 10 0 0"
                        TextAlignment="Center"/>
             <Button Command="{Binding PrevLaurelCommand}">
                 <Path Data="{StaticResource SvgChevronLeft}"/>
