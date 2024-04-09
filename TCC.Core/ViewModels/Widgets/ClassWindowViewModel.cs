@@ -149,7 +149,13 @@ public class ClassWindowViewModel : TccWindowViewModel
         _dispatcher.InvokeAsync(() =>
         {
             CurrentClass = m.CharacterClass;
+
+            if(m.CharacterClass is Class.Warrior)
+            {
+                TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.EdgeCounter.SetClass(m.CharacterClass);
+            }
         });
+
         if (m.CharacterClass == Class.Valkyrie)
             PacketAnalyzer.Processor.Hook<S_WEAK_POINT>(OnWeakPoint);
         else
@@ -168,6 +174,9 @@ public class ClassWindowViewModel : TccWindowViewModel
         {
             case Class.Sorcerer when CurrentManager is SorcererLayoutViewModel sm:
                 sm.NotifyElementChanged();
+                break;
+            case Class.Warrior when CurrentManager is WarriorLayoutViewModel wm:
+                wm.EdgeCounter.Val = m.Edge;
                 break;
         }
     }

@@ -14,20 +14,20 @@
     <UserControl.Resources>
         <ControlTemplate x:Key="EdgeArrowLayout">
             <elements:EdgeArrowLayout EdgeCounter="{Binding EdgeCounter}"  Margin="0 -40"
-                                      FillBrush="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter Light=True, Fallback=True}}"
-                                      GlowColor="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter Fallback=True}}"/>
+                                      FillBrush="{Binding StanceTracker.CurrentStance, Converter={conv:WarriorStanceToColorConverter Light=True, Fallback=True}}"
+                                      GlowColor="{Binding StanceTracker.CurrentStance, Converter={conv:WarriorStanceToColorConverter Fallback=True}}"/>
         </ControlTemplate>
         <ControlTemplate x:Key="EdgeRhombLayout" >
             <elements:EdgeRhombControl EdgeCounter="{Binding EdgeCounter}" 
-                                       FillBrush="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter Light=True, Fallback=True}}"
-                                       GlowColor="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter Fallback=True}}"/>
+                                       FillBrush="{Binding StanceTracker.CurrentStance, Converter={conv:WarriorStanceToColorConverter Light=True, Fallback=True}}"
+                                       GlowColor="{Binding StanceTracker.CurrentStance, Converter={conv:WarriorStanceToColorConverter Fallback=True}}"/>
         </ControlTemplate>
         <ControlTemplate x:Key="EdgeBarLayout">
             <elements:EdgeBarLayout VerticalAlignment="Center"
                                      Height="12"
                                     EdgeCounter="{Binding EdgeCounter}" 
-                                    FillBrush="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter Light=True, Fallback=True}}"
-                                    GlowColor="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter Fallback=True}}">
+                                    FillBrush="{Binding StanceTracker.CurrentStance, Converter={conv:WarriorStanceToColorConverter Light=True, Fallback=True}}"
+                                    GlowColor="{Binding StanceTracker.CurrentStance, Converter={conv:WarriorStanceToColorConverter Fallback=True}}">
                 <FrameworkElement.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"/>
@@ -54,10 +54,10 @@
                         <Setter Property="EndAngle" Value="123"/>
                         <Setter Property="Margin" Value="-14"/>
                         <Setter Property="RenderTransformOrigin" Value=".5 .5"/>
-                        <Setter Property="Stroke" Value="{Binding Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter}}"/>
+                        <Setter Property="Stroke" Value="{Binding StanceTracker.CurrentStance, Converter={conv:WarriorStanceToColorConverter}}"/>
                         <Setter Property="Effect" >
                             <Setter.Value>
-                                <DropShadowEffect Color="{Binding  Stance.CurrentStance, Converter={conv:WarriorStanceToColorConverter}}" ShadowDepth="0" BlurRadius="15"/>
+                                <DropShadowEffect Color="{Binding  StanceTracker.CurrentStance, Converter={conv:WarriorStanceToColorConverter}}" ShadowDepth="0" BlurRadius="15"/>
                             </Setter.Value>
                         </Setter>
                     </Style>
@@ -176,7 +176,7 @@
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding Stance.CurrentStance}" 
+                                    <Condition Binding="{Binding StanceTracker.CurrentStance}" 
                                                Value="{x:Static tcc:WarriorStance.Defensive}"/>
                                     <Condition Binding="{Binding ShowInfuriate}" Value="True"/>
                                 </MultiDataTrigger.Conditions>
@@ -283,7 +283,7 @@
                     </FrameworkElement.RenderTransform>
                 </Border>
                 <elements:TraverseCutControl Tracker="{Binding TraverseCut}" 
-                                             IconName="{Binding Stance.CurrentStance, Converter={StaticResource WarriorStanceToTraverseCutIconName}}"
+                                             IconName="{Binding StanceTracker.CurrentStance, Converter={StaticResource WarriorStanceToTraverseCutIconName}}"
                                              HorizontalAlignment="Center"
                                              VerticalAlignment="Center" IsHitTestVisible="False">
                     <FrameworkElement.RenderTransform>

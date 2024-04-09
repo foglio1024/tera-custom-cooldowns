@@ -376,6 +376,9 @@ public partial class App
     public static bool FI { get; } = DateTime.Now >= TimeUtils.FromUnixTime(1567123200) &&
                                      DateTime.Now < TimeUtils.FromUnixTime(1567209600);
 
+    public static bool FO { get; } = DateTime.Now >= TimeUtils.FromUnixTime(1712613600) &&
+                                     DateTime.Now < TimeUtils.FromUnixTime(1712872800);
+
     public static void FUBH()
     {
         BaseDispatcher.InvokeAsync(() =>

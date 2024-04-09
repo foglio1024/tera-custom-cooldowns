@@ -60,7 +60,10 @@ public class SplashScreenViewModel : ThreadSafeObservableObject
             if (File.Exists(path))
             {
                 bm.BeginInit();
-                bm.UriSource = new Uri(App.FI ? "pack://application:,,,/resources/images/10kdays.jpg" : path,
+                bm.UriSource = new Uri(
+                    App.FI ? "pack://application:,,,/resources/images/10kdays.jpg" 
+                    : App.FO ? "pack://application:,,,/resources/images/pleasestandby.jpg" 
+                    : path,
                     UriKind.Absolute);
                 bm.CacheOption = BitmapCacheOption.OnLoad;
                 bm.EndInit();

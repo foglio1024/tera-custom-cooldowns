@@ -252,8 +252,6 @@ public class Player : ThreadSafeObservableObject
         get => _arcane;
         set => RaiseAndSetIfChanged(value, ref _arcane);
     }
-    public Counter StacksCounter { get; set; } = new(10, true); // todo: move class-specific stuff away from here
-    public StanceTracker<WarriorStance> WarriorStance { get; set; } = new(); // todo: move class-specific stuff away from here
     public ThreadSafeObservableCollection<AbnormalityDuration> Buffs
     {
         get

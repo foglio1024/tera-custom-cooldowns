@@ -9,7 +9,6 @@ namespace TCC.ViewModels.ClassManagers;
 
 public class WarriorLayoutViewModel : BaseClassLayoutViewModel
 {
-
     public SkillWithEffect DeadlyGamble { get; set; }
     public SkillWithEffect AdrenalineRush { get; set; }
     public SkillWithEffect Swift { get; set; }
@@ -21,10 +20,11 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
     public Cooldown AerialScythe { get; }
 #endif
 
-    public StanceTracker<WarriorStance> Stance => Game.Me.WarriorStance; //for binding
-    public Counter EdgeCounter => Game.Me.StacksCounter; //for binding
+    public Counter EdgeCounter { get; set; } = new(10, true);
+    public StanceTracker<WarriorStance> StanceTracker { get; } = new();
 
     bool _warningStance;
+
     public bool WarningStance
     {
         get => _warningStance;
@@ -33,12 +33,16 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
 
     public bool AtkSpeedProc => !(Swift.Effect.IsAvailable && AdrenalineRush.Effect.IsAvailable);
 
+    public bool ShowEdge => App.Settings.ClassWindowSettings.WarriorShowEdge;
+    public bool ShowInfuriate => App.Settings.ClassWindowSettings.WarriorShowInfuriate;
+    public bool ShowTraverseCut => App.Settings.ClassWindowSettings.WarriorShowTraverseCut;
+    public WarriorEdgeMode WarriorEdgeMode => App.Settings.ClassWindowSettings.WarriorEdgeMode;
+
     public WarriorLayoutViewModel()
     {
         TraverseCut = new StatTracker { Max = 13, Val = 0 };
         Game.Me.Death += OnDeath;
         Game.CombatChanged += CheckStanceWarning;
-        Stance.PropertyChanged += OnStanceOnPropertyChanged; // StanceTracker has only one prop
 
         Game.DB!.SkillsDatabase.TryGetSkill(200200, Class.Warrior, out var dg);
         DeadlyGamble = new SkillWithEffect(_dispatcher, dg);
@@ -57,33 +61,15 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
 #endif
         var ab = Game.DB.AbnormalityDatabase.Abnormalities[21010];
         Swift = new SkillWithEffect(_dispatcher, new Skill(ab), false);
-
     }
-
-    void OnDeath()
-    {
-        DeadlyGamble.StopEffect();
-    }
-
-    public bool ShowEdge => App.Settings.ClassWindowSettings.WarriorShowEdge;
-    public bool ShowInfuriate => App.Settings.ClassWindowSettings.WarriorShowInfuriate;
-    public bool ShowTraverseCut => App.Settings.ClassWindowSettings.WarriorShowTraverseCut;
-    public WarriorEdgeMode WarriorEdgeMode => App.Settings.ClassWindowSettings.WarriorEdgeMode;
-
 
     public override void Dispose()
     {
         Game.Me.Death -= OnDeath;
         Game.CombatChanged -= CheckStanceWarning;
-        Stance.PropertyChanged -= OnStanceOnPropertyChanged;
         DeadlyGamble.Dispose();
         Infuriate.Dispose();
         Swift.Dispose();
-    }
-
-    void OnStanceOnPropertyChanged(object? _, PropertyChangedEventArgs __)
-    {
-        CheckStanceWarning();
     }
 
     protected override bool StartSpecialSkillImpl(Cooldown sk)
@@ -117,7 +103,7 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
 
     void CheckStanceWarning()
     {
-        WarningStance = Game.Me.WarriorStance.CurrentStance == WarriorStance.None && Game.Combat;
+        WarningStance = StanceTracker.CurrentStance == WarriorStance.None && Game.Combat;
     }
 
     public void SetSwift(uint duration)
@@ -144,5 +130,16 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
             AdrenalineRush.StartEffect(duration);
         }
         InvokePropertyChanged(nameof(AtkSpeedProc));
+    }
+
+    public void SetStance(WarriorStance stance)
+    {
+        StanceTracker.CurrentStance = stance;
+        CheckStanceWarning();
+    }
+
+    void OnDeath()
+    {
+        DeadlyGamble.StopEffect();
     }
 }

@@ -138,19 +138,19 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     void SetStance(object sender, RoutedEventArgs e)
     {
-        Game.Me.WarriorStance.CurrentStance = ((Button)sender).Content.ToString() switch
+        TccUtils.CurrentClassVM<WarriorLayoutViewModel>().StanceTracker.CurrentStance = ((Button)sender).Content.ToString() switch
         {
             "Assault" => WarriorStance.Assault,
             "Defensive" => WarriorStance.Defensive,
-            "None" => WarriorStance.None,
-            _ => Game.Me.WarriorStance.CurrentStance
+            _ => WarriorStance.None,
         };
     }
 
     void IncreaseEdge(object sender, RoutedEventArgs e)
     {
-        if (Game.Me.StacksCounter.IsMaxed) Game.Me.StacksCounter.Val = 0;
-        Game.Me.StacksCounter.Val++;
+        var edge = TccUtils.CurrentClassVM<WarriorLayoutViewModel>().EdgeCounter;
+        if (edge.IsMaxed) edge.Val = 0;
+        edge.Val++;
 
     }
 

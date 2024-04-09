@@ -524,10 +524,6 @@ public static class Game
                 Me.Ice = m.Ice;
                 Me.Arcane = m.Arcane;
                 break;
-
-            case Class.Warrior:
-                Me.StacksCounter.Val = m.Edge;
-                break;
         }
     }
 
@@ -791,6 +787,13 @@ public static class Game
                 SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
             }
 
+            if (App.FO)
+            {
+                var ab = DB!.AbnormalityDatabase.Abnormalities[11042024];
+                Me.UpdateAbnormality(ab, int.MaxValue, 1);
+                SystemMessagesProcessor.AnalyzeMessage($"@0\vAbnormalName\v{ab.Name}", "SMT_BATTLE_BUFF_DEBUFF");
+            }
+
             #endregion Fear Inoculum
 
             #region Lockdown
@@ -1002,7 +1005,6 @@ public static class Game
             Me.ServerId = m.ServerId;
             Me.Laurel = GetLaurel(Me.PlayerId);
             Me.ClearAbnormalities();
-            Me.StacksCounter.SetClass(m.CharacterClass);
 
             WindowManager.ReloadPositions();
             GameEventManager.Instance.SetServerTimeZone(App.Settings.LastLanguage);
