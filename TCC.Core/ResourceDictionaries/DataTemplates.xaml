@@ -13,7 +13,6 @@
                     xmlns:skills="clr-namespace:TCC.Data.Skills"
                     xmlns:abControls="clr-namespace:TCC.UI.Controls.Abnormalities"
                     xmlns:chatControls="clr-namespace:TCC.UI.Controls.Chat"
-                    xmlns:tccControls="clr-namespace:TCC.UI.Controls"
                     xmlns:dashboard="clr-namespace:TCC.UI.Controls.Dashboard"
                     xmlns:group="clr-namespace:TCC.UI.Controls.Group"
                     xmlns:npCs="clr-namespace:TCC.UI.Controls.NPCs"
