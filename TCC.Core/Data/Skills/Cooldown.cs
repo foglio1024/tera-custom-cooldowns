@@ -320,6 +320,8 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
         _mainTimer.Stop();
         _offsetTimer.Stop();
         _secondsTimer.Stop();
+
+        ObjectTracker.Unregister(GetType());
     }
 
     public override string ToString()
