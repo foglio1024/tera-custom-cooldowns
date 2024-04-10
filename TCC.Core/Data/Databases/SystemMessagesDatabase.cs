@@ -131,9 +131,9 @@ public class SystemMessagesDatabase : DatabaseBase
 
         // ---------------------
         var msgBomb =
-            ChatUtils.Font("{UserName}", R.Colors.ChatSystemErrorColor.ToHex(sharp: false)) +
+            ChatUtils.Font("{UserName}", Colors.ChatSystemErrorColor.ToHex(sharp: false)) +
             ChatUtils.Font(" used ") +
-            ChatUtils.Font("{ItemName}", R.Colors.ItemSuperiorColor.ToHex(sharp: false)) +
+            ChatUtils.Font("{ItemName}", Colors.ItemSuperiorColor.ToHex(sharp: false)) +
             ChatUtils.Font(".");
 
         var bomb = new SystemMessageData(msgBomb, (int)ChatChannel.Group);
