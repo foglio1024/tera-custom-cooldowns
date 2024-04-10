@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System;
+using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Settings.WindowSettings;
 using TCC.Utilities;
@@ -150,7 +151,7 @@ public class ClassWindowViewModel : TccWindowViewModel
         {
             CurrentClass = m.CharacterClass;
 
-            if(m.CharacterClass is Class.Warrior)
+            if (m.CharacterClass is Class.Warrior)
             {
                 TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.EdgeCounter.SetClass(m.CharacterClass);
             }
@@ -173,7 +174,8 @@ public class ClassWindowViewModel : TccWindowViewModel
         switch (CurrentClass)
         {
             case Class.Sorcerer when CurrentManager is SorcererLayoutViewModel sm:
-                sm.NotifyElementChanged();
+                sm.SetElements(TccUtils.BoolsToElements(m.Fire, m.Ice, m.Arcane));
+
                 break;
             case Class.Warrior when CurrentManager is WarriorLayoutViewModel wm:
                 wm.EdgeCounter.Val = m.Edge;

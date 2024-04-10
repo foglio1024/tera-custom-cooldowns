@@ -15,7 +15,9 @@ namespace TCC.Data.Pc;
 public class Player : ThreadSafeObservableObject
 {
     public event Action? Death;
+
     public event Action? Ress;
+
     public event Action? CoinsUpdated;
 
     string _name = "";
@@ -35,12 +37,6 @@ public class Player : ThreadSafeObservableObject
     float _flightEnergy;
     bool _isInCombat;
     float _critFactor;
-    bool _fire; // todo: move class-specific stuff away from here
-    bool _ice;
-    bool _arcane;
-    bool _fireBoost;
-    bool _iceBoost;
-    bool _arcaneBoost;
     bool _isAlive;
     uint _coins;
     uint _maxCoins;
@@ -56,33 +52,40 @@ public class Player : ThreadSafeObservableObject
         get => _name;
         set => RaiseAndSetIfChanged(value, ref _name);
     }
+
     public ulong EntityId
     {
         get => _entityId;
         set => RaiseAndSetIfChanged(value, ref _entityId);
     }
+
     public uint PlayerId { get; internal set; }
     public uint ServerId { get; internal set; }
+
     public Class Class
     {
         get => _playerclass;
         set => RaiseAndSetIfChanged(value, ref _playerclass);
     }
+
     public Laurel Laurel
     {
         get => _laurel;
         set => RaiseAndSetIfChanged(value, ref _laurel);
     }
+
     public int Level
     {
         get => _level;
         set => RaiseAndSetIfChanged(value, ref _level);
     }
+
     public float ItemLevel
     {
         get => _itemLevel;
         set => RaiseAndSetIfChanged(value, ref _itemLevel);
     }
+
     public float CurrentHP
     {
         get => _currentHP;
@@ -93,6 +96,7 @@ public class Player : ThreadSafeObservableObject
             InvokePropertyChanged(nameof(HpFactor));
         }
     }
+
     public float CurrentMP
     {
         get => _currentMP;
@@ -102,6 +106,7 @@ public class Player : ThreadSafeObservableObject
             InvokePropertyChanged(nameof(MpFactor));
         }
     }
+
     public float CurrentST
     {
         get => _currentST;
@@ -111,6 +116,7 @@ public class Player : ThreadSafeObservableObject
             InvokePropertyChanged(nameof(StFactor));
         }
     }
+
     public long MaxHP
     {
         get => _maxHP;
@@ -120,6 +126,7 @@ public class Player : ThreadSafeObservableObject
             InvokePropertyChanged(nameof(HpFactor));
         }
     }
+
     public int MaxMP
     {
         get => _maxMP;
@@ -129,6 +136,7 @@ public class Player : ThreadSafeObservableObject
             InvokePropertyChanged(nameof(MpFactor));
         }
     }
+
     public int MaxST
     {
         get => _maxST;
@@ -138,6 +146,7 @@ public class Player : ThreadSafeObservableObject
             InvokePropertyChanged(nameof(StFactor));
         }
     }
+
     public uint MaxShield
     {
         get => _maxShield;
@@ -148,12 +157,14 @@ public class Player : ThreadSafeObservableObject
             InvokePropertyChanged(nameof(HasShield));
         }
     }
+
     public double HpFactor => MaxHP > 0 ? CurrentHP / MaxHP : 1;
     public double MpFactor => MaxMP > 0 ? CurrentMP / MaxMP : 1;
     public double StFactor => MaxST > 0 ? CurrentST / MaxST : 1;
     public double ShieldFactor => MaxShield > 0 ? CurrentShield / MaxShield : 0;
     public bool HasShield => ShieldFactor > 0;
     public float TotalHP => CurrentHP + CurrentShield;
+
     public float CurrentShield
     {
         get => _currentShield;
@@ -167,12 +178,15 @@ public class Player : ThreadSafeObservableObject
             InvokePropertyChanged(nameof(HasShield));
         }
     }
+
     public float FlightEnergy
     {
         get => _flightEnergy;
         set => RaiseAndSetIfChanged(value, ref _flightEnergy);
     }
+
     public int MagicalResistance { get; set; }
+
     public uint Coins
     {
         get => _coins;
@@ -189,6 +203,7 @@ public class Player : ThreadSafeObservableObject
             CoinsUpdated?.Invoke();
         }
     }
+
     public uint MaxCoins
     {
         get => _maxCoins;
@@ -199,13 +214,16 @@ public class Player : ThreadSafeObservableObject
             CoinsUpdated?.Invoke();
         }
     }
+
     public double CoinsFactor => MathUtils.FactorCalc(_coins, _maxCoins);
     public bool IsDebuffed => _debuffList.Count != 0;
+
     public bool IsInCombat
     {
         get => _isInCombat;
         set => RaiseAndSetIfChanged(value, ref _isInCombat);
     }
+
     public bool IsAlive
     {
         get => _isAlive;
@@ -217,41 +235,13 @@ public class Player : ThreadSafeObservableObject
             else Death?.Invoke();
         }
     }
+
     public float CritFactor
     {
         get => _critFactor;
         set => RaiseAndSetIfChanged(value, ref _critFactor);
     }
-    public bool FireBoost
-    {
-        get => _fireBoost;
-        set => RaiseAndSetIfChanged(value, ref _fireBoost);
-    }
-    public bool IceBoost
-    {
-        get => _iceBoost;
-        set => RaiseAndSetIfChanged(value, ref _iceBoost);
-    }
-    public bool ArcaneBoost
-    {
-        get => _arcaneBoost;
-        set => RaiseAndSetIfChanged(value, ref _arcaneBoost);
-    }
-    public bool Fire
-    {
-        get => _fire;
-        set => RaiseAndSetIfChanged(value, ref _fire);
-    }
-    public bool Ice
-    {
-        get => _ice;
-        set => RaiseAndSetIfChanged(value, ref _ice);
-    }
-    public bool Arcane
-    {
-        get => _arcane;
-        set => RaiseAndSetIfChanged(value, ref _arcane);
-    }
+    
     public ThreadSafeObservableCollection<AbnormalityDuration> Buffs
     {
         get
@@ -262,6 +252,7 @@ public class Player : ThreadSafeObservableObject
             }
         }
     }
+
     public ThreadSafeObservableCollection<AbnormalityDuration> Debuffs
     {
         get
@@ -272,6 +263,7 @@ public class Player : ThreadSafeObservableObject
             }
         }
     }
+
     public ThreadSafeObservableCollection<AbnormalityDuration> InfBuffs
     {
         get
@@ -284,7 +276,9 @@ public class Player : ThreadSafeObservableObject
     }
 
     // todo: maybe all this logic should be in its own class too
-    #region Shield 
+
+    #region Shield
+
     public void DamageShield(uint damage)
     {
         _dispatcher.Invoke(() =>
@@ -359,10 +353,13 @@ public class Player : ThreadSafeObservableObject
             MaxShield += amount;
         }
     }
-    #endregion
+
+    #endregion Shield
 
     // todo: maybe all this logic should be in its own class too
+
     #region Abnormalities
+
     public void InitAbnormalityCollections(Dispatcher disp)
     {
         _buffs = new ThreadSafeObservableCollection<AbnormalityDuration>(disp);
@@ -372,7 +369,7 @@ public class Player : ThreadSafeObservableObject
 
     public void UpdateAbnormality(Abnormality ab, uint pDuration, int pStacks)
     {
-        if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
+        if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ
 
         lock (_listLock)
         {
@@ -382,7 +379,7 @@ public class Player : ThreadSafeObservableObject
 
     public void EndAbnormality(Abnormality ab)
     {
-        if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ 
+        if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ
 
         lock (_listLock)
         {
@@ -460,6 +457,35 @@ public class Player : ThreadSafeObservableObject
         CurrentShield = 0;
     }
 
+    public void SetAbnormalitiesVisibility(bool visible)
+    {
+        lock (_listLock)
+        {
+            var normal = _buffs.ToSyncList()
+                .Where(x => x.CanBeHidden)
+                .ToArray();
+            var perma = _infBuffs.ToSyncList()
+                .Where(x => x.CanBeHidden)
+                .ToArray();
+            var debuffs = _debuffs.ToSyncList()
+                .Where(x => x.CanBeHidden)
+                .ToArray();
+
+            foreach (var abnormality in normal)
+            {
+                abnormality.IsHidden = !visible;
+            }
+            foreach (var abnormality in perma)
+            {
+                abnormality.IsHidden = !visible;
+            }
+            foreach (var abnormality in debuffs)
+            {
+                abnormality.IsHidden = !visible;
+            }
+        }
+    }
+
     // utils
     ThreadSafeObservableCollection<AbnormalityDuration> GetList(Abnormality abnormality)
     {
@@ -475,5 +501,6 @@ public class Player : ThreadSafeObservableObject
 
         return list ?? throw new InvalidOperationException("Invalid list type requested");
     }
-    #endregion
+
+    #endregion Abnormalities
 }

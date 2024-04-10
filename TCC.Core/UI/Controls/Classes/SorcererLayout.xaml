@@ -17,12 +17,8 @@
             <Image Source="{StaticResource CharWindowBgSorc}" Stretch="Uniform" Width="101" Height="Auto"/>
             <Path Data="{StaticResource SvgClassSorcerer}" Width="30" Stretch="Uniform" Opacity=".5" />
 
-            <elements:SorcererElementsControl Fire="{Binding Fire}" 
-                                           Ice="{Binding Ice}" 
-                                           Arcane="{Binding Arcane}"
-                                           FireBoosted="{Binding IsBoostFire}"
-                                           IceBoosted="{Binding IsBoostFrost}"
-                                           ArcaneBoosted="{Binding IsBoostArcane}"
+            <elements:SorcererElementsControl Elements="{Binding Elements}"
+                                              Boosts="{Binding Boosts}"
                                            IndicatorsHeight="87"
                                            IndicatorsWidth="87"
                                            ArcaneBoostWidth="39"

@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Nostrum;
+using Nostrum.WinAPI;
+using Nostrum.WPF.Extensions;
+using Nostrum.WPF.ThreadSafe;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,11 +11,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
-using Newtonsoft.Json;
-using Nostrum;
-using Nostrum.WinAPI;
-using Nostrum.WPF.Extensions;
-using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Data.Chat;
 using TCC.Interop;
@@ -23,6 +23,7 @@ using TCC.ViewModels.ClassManagers;
 using TeraDataLite;
 using Brushes = TCC.R.Brushes;
 using Colors = TCC.R.Colors;
+using FusionElements = TCC.Data.FusionElements;
 
 namespace TCC.Utilities;
 
@@ -368,5 +369,25 @@ public static class TccUtils
             Laurel.Champion => CustomLaurel.Champion,
             _ => CustomLaurel.None
         };
+    }
+
+    public static FusionElements BoolsToElements(bool flame, bool frost, bool arcane)
+    {
+        var ret = FusionElements.None;
+
+        if (flame) ret |= FusionElements.Flame;
+        if (frost) ret |= FusionElements.Frost;
+        if (arcane) ret |= FusionElements.Arcane;
+
+        return ret;
+    }
+
+    public static (bool flame, bool frost, bool arcane) ElementsToBooleans(FusionElements elements)
+    {
+        return (
+            (elements | FusionElements.Flame) == FusionElements.Flame,
+            (elements | FusionElements.Frost) == FusionElements.Frost,
+            (elements | FusionElements.Arcane) == FusionElements.Arcane
+            );
     }
 }

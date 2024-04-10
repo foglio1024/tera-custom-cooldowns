@@ -412,12 +412,6 @@ public static class Game
         }
     }
 
-    public static void SetSorcererElementsBoost(bool f, bool i, bool a)
-    {
-        Me.FireBoost = f;
-        Me.IceBoost = i;
-        Me.ArcaneBoost = a;
-    }
 
     static void OnReturnToLobbyHotkeyPressed()
     {
@@ -516,15 +510,6 @@ public static class Game
         Me.CurrentMP = m.CurrentMP;
         Me.CurrentST = m.CurrentST;
         Me.MagicalResistance = m.TotalMagicalResistance;
-
-        switch (Me.Class)
-        {
-            case Class.Sorcerer:
-                Me.Fire = m.Fire;
-                Me.Ice = m.Ice;
-                Me.Arcane = m.Arcane;
-                break;
-        }
     }
 
     static void OnCreatureLife(S_CREATURE_LIFE m)

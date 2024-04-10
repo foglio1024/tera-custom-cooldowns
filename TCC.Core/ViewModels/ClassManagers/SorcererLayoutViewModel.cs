@@ -24,23 +24,30 @@ public class SorcererLayoutViewModel : BaseClassLayoutViewModel
     {
         get
         {
-            if (Fire && Ice && Arcane) return FusionSkill;
-            if (Fire && Ice) return PrimeFlame;
-            if (Ice && Arcane) return Iceberg;
-            if (Fire && Arcane) return ArcaneStorm;
-            return FusionSkill;
+            return Elements switch
+            {
+                (FusionElements.Flame | FusionElements.Frost | FusionElements.Arcane) => FusionSkill,
+                (FusionElements.Flame | FusionElements.Frost) => PrimeFlame,
+                (FusionElements.Frost | FusionElements.Arcane) => Iceberg,
+                (FusionElements.Flame | FusionElements.Arcane) => ArcaneStorm,
+                _ => FusionSkill
+            };
         }
     }
 
-    public bool Fire => Game.Me.Fire;
-    public bool Ice => Game.Me.Ice;
-    public bool Arcane => Game.Me.Arcane;
+    private FusionElements _elements;
+    public FusionElements Elements
+    {
+        get => _elements;
+        private set => RaiseAndSetIfChanged(value, ref _elements);
+    }
 
-    public bool IsBoostFire => Game.Me.FireBoost;
-    public bool IsBoostFrost => Game.Me.IceBoost;
-    public bool IsBoostArcane => Game.Me.ArcaneBoost;
-
-
+    private FusionElements _boosts;
+    public FusionElements Boosts
+    {
+        get => _boosts;
+        set => RaiseAndSetIfChanged(value, ref _boosts);
+    }
 
     public SorcererLayoutViewModel()
     {
@@ -66,9 +73,9 @@ public class SorcererLayoutViewModel : BaseClassLayoutViewModel
 
     }
 
-    void OnBoostChanged()
+    void OnBoostChanged(FusionElements elements)
     {
-        NotifyElementBoostChanged();
+        Boosts = elements;
     }
     public override void Dispose()
     {
@@ -76,7 +83,6 @@ public class SorcererLayoutViewModel : BaseClassLayoutViewModel
         Fusion.Dispose();
         SorcererAbnormalityTracker.BoostChanged -= OnBoostChanged;
     }
-
 
     protected override bool StartSpecialSkillImpl(Cooldown sk)
     {
@@ -114,18 +120,9 @@ public class SorcererLayoutViewModel : BaseClassLayoutViewModel
         Fusion.Start(_latestCooldown > _sw.ElapsedMilliseconds ? (ulong)(_latestCooldown - _sw.ElapsedMilliseconds) : (ulong)_latestCooldown);
     }
 
-    public void NotifyElementChanged()
+    public void SetElements(FusionElements elements)
     {
-        InvokePropertyChanged(nameof(Fire));
-        InvokePropertyChanged(nameof(Ice));
-        InvokePropertyChanged(nameof(Arcane));
+        Elements = elements;
         Fusion.Skill = CurrentFusionSkill;
-    }
-
-    public void NotifyElementBoostChanged()
-    {
-        InvokePropertyChanged(nameof(IsBoostFire));
-        InvokePropertyChanged(nameof(IsBoostFrost));
-        InvokePropertyChanged(nameof(IsBoostArcane));
     }
 }

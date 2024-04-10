@@ -80,9 +80,16 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         var ice = el == "Ice";
         var arc = el == "Arcane";
 
-        var currFire = Game.Me.Fire;
-        var currIce = Game.Me.Ice;
-        var currArc = Game.Me.Arcane;
+        if (!(App.Settings.ClassWindowSettings.Enabled
+            && Game.Me.Class == Class.Sorcerer
+            && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutViewModel sm))
+        {
+            return;
+        }
+
+        var currFire = (sm.Elements & FusionElements.Flame) == FusionElements.Flame;
+        var currIce = (sm.Elements & FusionElements.Frost) == FusionElements.Frost;
+        var currArc = (sm.Elements & FusionElements.Arcane) == FusionElements.Arcane;
 
         if (fire) SetSorcererElements(!currFire, currIce, currArc);
         if (ice) SetSorcererElements(currFire, !currIce, currArc);
@@ -92,15 +99,17 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
         static void SetSorcererElements(bool pFire, bool pIce, bool pArcane)
         {
-            Game.Me.Fire = pFire;
-            Game.Me.Ice = pIce;
-            Game.Me.Arcane = pArcane;
+            var elements = FusionElements.None;
+
+            if (pFire) elements |= FusionElements.Flame;
+            if (pIce) elements |= FusionElements.Frost;
+            if (pArcane) elements |= FusionElements.Arcane;
 
             if (App.Settings.ClassWindowSettings.Enabled
                 && Game.Me.Class == Class.Sorcerer
                 && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutViewModel sm)
             {
-                sm.NotifyElementChanged();
+                sm.SetElements(elements);
             }
 
         }
@@ -115,13 +124,37 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         var ice = el == "Ice";
         var arc = el == "Arcane";
 
-        var currFire = Game.Me.FireBoost;
-        var currIce = Game.Me.IceBoost;
-        var currArc = Game.Me.ArcaneBoost;
+        if (!(App.Settings.ClassWindowSettings.Enabled
+              && Game.Me.Class == Class.Sorcerer
+              && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutViewModel sm))
+        {
+            return;
+        }
 
-        if (fire) Game.SetSorcererElementsBoost(!currFire, currIce, currArc);
-        if (ice) Game.SetSorcererElementsBoost(currFire, !currIce, currArc);
-        if (arc) Game.SetSorcererElementsBoost(currFire, currIce, !currArc);
+
+        var currFire = (sm.Boosts & FusionElements.Flame) == FusionElements.Flame;
+        var currIce = (sm.Boosts & FusionElements.Frost) == FusionElements.Frost;
+        var currArc = (sm.Boosts & FusionElements.Arcane) == FusionElements.Arcane;
+
+        if (fire) SetBoosts(!currFire, currIce, currArc);
+        if (ice) SetBoosts(currFire, !currIce, currArc);
+        if (arc) SetBoosts(currFire, currIce, !currArc);
+
+        static void SetBoosts(bool pFire, bool pIce, bool pArcane)
+        {
+            var elements = FusionElements.None;
+
+            if (pFire) elements |= FusionElements.Flame;
+            if (pIce) elements |= FusionElements.Frost;
+            if (pArcane) elements |= FusionElements.Arcane;
+
+            if (App.Settings.ClassWindowSettings.Enabled
+                && Game.Me.Class == Class.Sorcerer
+                && WindowManager.ViewModels.ClassVM.CurrentManager is SorcererLayoutViewModel sm)
+            {
+                sm.Boosts = elements;
+            }
+        }
 
 
     }
@@ -138,7 +171,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     void SetStance(object sender, RoutedEventArgs e)
     {
-        TccUtils.CurrentClassVM<WarriorLayoutViewModel>().StanceTracker.CurrentStance = ((Button)sender).Content.ToString() switch
+        TccUtils.CurrentClassVM<WarriorLayoutViewModel>()!.StanceTracker.CurrentStance = ((Button)sender).Content.ToString() switch
         {
             "Assault" => WarriorStance.Assault,
             "Defensive" => WarriorStance.Defensive,
@@ -148,7 +181,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     void IncreaseEdge(object sender, RoutedEventArgs e)
     {
-        var edge = TccUtils.CurrentClassVM<WarriorLayoutViewModel>().EdgeCounter;
+        var edge = TccUtils.CurrentClassVM<WarriorLayoutViewModel>()!.EdgeCounter;
         if (edge.IsMaxed) edge.Val = 0;
         edge.Val++;
 

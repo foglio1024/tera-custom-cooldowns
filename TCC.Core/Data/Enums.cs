@@ -3,6 +3,16 @@ using System.ComponentModel;
 
 namespace TCC.Data;
 
+
+[Flags]
+public enum FusionElements
+{
+    None = 0x0,
+    Flame = 0x1,
+    Frost = 0x2,
+    Arcane = 0x4
+}
+
 public enum NoticeTrigger
 {
     // before setup, only MessageBox

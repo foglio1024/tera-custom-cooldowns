@@ -17,22 +17,36 @@ namespace TCC.ViewModels.Widgets;
 public class CharacterWindowViewModel : TccWindowViewModel // hooks in Game
 {
     public Player Player => Game.Me;
-    public bool ShowRe => Player.Class is Class.Brawler 
-                                       or Class.Gunner 
-                                       or Class.Ninja 
-                                       or Class.Valkyrie 
+    public bool ShowRe => Player.Class is Class.Brawler
+                                       or Class.Gunner
+                                       or Class.Ninja
+                                       or Class.Valkyrie
                                     && ((CharacterWindowSettings)Settings!).ShowStamina;
     public bool ShowElements => Player.Class == Class.Sorcerer &&
                                 ((CharacterWindowSettings)Settings!).SorcererShowElements;
 
     public bool ShowEdge => Player.Class == Class.Warrior &&
-                            ((CharacterWindowSettings) Settings!).WarriorShowEdge;
+                            ((CharacterWindowSettings)Settings!).WarriorShowEdge;
 
     public bool ShowLeaderIcon => Game.Group.AmILeader;
 
     public Counter EdgeCounter { get; set; } = new(10, true);
 
     public StanceTracker<WarriorStance> WarriorStanceTracker { get; } = new();
+
+    private FusionElements _sorcererFusionBoost;
+    public FusionElements SorcererFusionBoost
+    {
+        get => _sorcererFusionBoost;
+        set => RaiseAndSetIfChanged(value, ref _sorcererFusionBoost);
+    }
+
+    private FusionElements _sorcererFusionElements;
+    public FusionElements SorcererFusionElements
+    {
+        get => _sorcererFusionElements;
+        set => RaiseAndSetIfChanged(value, ref _sorcererFusionElements);
+    }
 
     public CustomLaurel Laurel
     {
@@ -54,7 +68,7 @@ public class CharacterWindowViewModel : TccWindowViewModel // hooks in Game
         settings.ShowStaminaChanged += () => InvokePropertyChanged(nameof(ShowRe));
         settings.CustomLaurelChanged += () => InvokePropertyChanged(nameof(Laurel));
     }
-    
+
     protected override void InstallHooks()
     {
         PacketAnalyzer.Processor.Hook<S_LOGIN>(OnLogin);
@@ -67,30 +81,49 @@ public class CharacterWindowViewModel : TccWindowViewModel // hooks in Game
         PacketAnalyzer.Processor.Unhook<S_GET_USER_LIST>(OnGetUserList);
     }
 
-    void OnLogin(S_LOGIN m)
-    {
-        if (m.CharacterClass is Class.Warrior)
-        {
-            PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-            WarriorAbnormalityTracker.StanceChanged += OnStanceChanged;
-        }
-    }
-
-    private void OnStanceChanged(WarriorStance stance)
+    private void OnWarriorStanceChanged(WarriorStance stance)
     {
         WarriorStanceTracker.CurrentStance = stance;
+    }
+    private void OnSorcererBoostChanged(FusionElements element)
+    {
+        SorcererFusionBoost = element;
+    }
+    void OnLogin(S_LOGIN m)
+    {
+        switch (m.CharacterClass)
+        {
+            case Class.Warrior:
+                PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+                WarriorAbnormalityTracker.StanceChanged += OnWarriorStanceChanged;
+                break;
+            case Class.Sorcerer:
+                PacketAnalyzer.Processor.Hook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
+                SorcererAbnormalityTracker.BoostChanged += OnSorcererBoostChanged;
+                break;
+
+        }
     }
 
     void OnGetUserList(S_GET_USER_LIST m)
     {
         PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
-        WarriorAbnormalityTracker.StanceChanged -= OnStanceChanged;
+        WarriorAbnormalityTracker.StanceChanged -= OnWarriorStanceChanged;
+        SorcererAbnormalityTracker.BoostChanged -= OnSorcererBoostChanged;
     }
-
 
     void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
     {
-        EdgeCounter.Val = m.Edge;
+        switch (Game.Me.Class)
+        {
+            case Class.Warrior:
+                EdgeCounter.Val = m.Edge;
+                break;
+
+            case Class.Sorcerer:
+                SorcererFusionElements = TccUtils.BoolsToElements(m.Fire, m.Ice, m.Arcane);
+                break;
+        }
     }
 
     void OnLeaderChanged()

@@ -646,12 +646,8 @@
                            Source="{Binding Laurel, Converter={converters:LaurelImageConverter LaurelType=RhombBig}}"
                            Margin="-3 -2 -3 -4"/>
 
-                    <elements:SorcererElementsControl Fire="{Binding Player.Fire}"
-                                               Ice="{Binding Player.Ice}"
-                                               Arcane="{Binding Player.Arcane}"
-                                               FireBoosted="{Binding Player.FireBoost}"
-                                               IceBoosted="{Binding Player.IceBoost}"
-                                               ArcaneBoosted="{Binding Player.ArcaneBoost}"
+                    <elements:SorcererElementsControl Boosts="{Binding SorcererFusionBoost}"
+                                                      Elements="{Binding SorcererFusionElements}"
                                                IndicatorsWidth="86"
                                                IndicatorsHeight="86"
                                                FireIceBoostWidth="28"

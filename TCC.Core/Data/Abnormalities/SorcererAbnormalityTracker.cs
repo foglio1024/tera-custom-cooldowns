@@ -22,7 +22,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
     //private static Skill _fireArcaneFusion;
     //private static Skill _iceArcaneFusion;
 
-    public static event Action? BoostChanged;
+    public static event Action<FusionElements>? BoostChanged;
 
     public SorcererAbnormalityTracker()
     {
@@ -82,60 +82,61 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
 
     static void CheckFusionBoostBegin(S_ABNORMALITY_BEGIN p)
     {
+        FusionElements element;
         switch (p.AbnormalityId)
         {
             case FlameFusionIncreaseId:
-                Game.SetSorcererElementsBoost(true, false, false);
+                element = FusionElements.Flame;
                 break;
 
             case FrostFusionIncreaseId:
-                Game.SetSorcererElementsBoost(false, true, false);
+                element = FusionElements.Frost;
                 break;
 
             case ArcaneFusionIncreaseId:
-                Game.SetSorcererElementsBoost(false, false, true);
+                element = FusionElements.Arcane;
                 break;
 
             default:
                 return;
         }
 
-        BoostChanged?.Invoke();
+        BoostChanged?.Invoke(element);
     }
 
     static void CheckFusionBoostRefresh(S_ABNORMALITY_REFRESH p)
     {
+        FusionElements element;
+
         switch (p.AbnormalityId)
         {
             case FlameFusionIncreaseId:
-                Game.SetSorcererElementsBoost(true, false, false);
+                element = FusionElements.Flame;
                 break;
-
             case FrostFusionIncreaseId:
-                Game.SetSorcererElementsBoost(false, true, false);
+                element = FusionElements.Frost;
                 break;
 
             case ArcaneFusionIncreaseId:
-                Game.SetSorcererElementsBoost(false, false, true);
+                element = FusionElements.Arcane;
                 break;
 
             default:
                 return;
         }
 
-        BoostChanged?.Invoke();
+        BoostChanged?.Invoke(element);
     }
 
     static void CheckFusionBoostEnd(S_ABNORMALITY_END p)
     {
-        if (p.AbnormalityId is FlameFusionIncreaseId
-                            or FrostFusionIncreaseId
-                            or ArcaneFusionIncreaseId)
-        {
-            Game.SetSorcererElementsBoost(false, false, false);
-        }
-        else return;
-        BoostChanged?.Invoke();
+        if (p.AbnormalityId is not 
+            (FlameFusionIncreaseId
+            or FrostFusionIncreaseId
+            or ArcaneFusionIncreaseId))
+            return;
+
+        BoostChanged?.Invoke(FusionElements.None);
     }
 
     void CheckFusionsBegin(S_ABNORMALITY_BEGIN p)
