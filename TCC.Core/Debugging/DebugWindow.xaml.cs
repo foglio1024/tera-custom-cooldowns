@@ -214,6 +214,13 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         Game.Account.Characters[0].VanguardInfo.WeekliesDone = App.Random.Next(0, 16);
     }
 
+    void MaxEnchant(object sender, RoutedEventArgs e)
+    {
+        //"@464\vUserName\vHeve\vItemName\v@item:89607?dbid:327641239?enchantCount:11"
+
+        Tester.AddFakeSystemMessage("SMT_MAX_ENCHANT_SUCCEED", "UserName", "Foglio", "ItemName", "@item:89607?dbid:327641239?enchantCount:11");
+    }
+
     void NotifyGuildBam(object sender, RoutedEventArgs e)
     {
         Tester.AddFakeSystemMessage("SMT_GQUEST_URGENT_NOTIFY", "questName", "Frygaras", "npcName", "Frygaras", "zoneName", "Zone");

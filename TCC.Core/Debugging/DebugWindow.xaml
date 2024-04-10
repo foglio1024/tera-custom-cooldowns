@@ -51,6 +51,7 @@
             <Button Click="NotifyFieldBoss">Field Boss Spawn</Button>
             <Button Click="NotifyFieldBossDie">Field Boss Die</Button>
             <Button Click="NotifyMysteryMerchant">Spawn MM</Button>
+            <Button Click="MaxEnchant">Enchant</Button>
         </StackPanel>
         <Grid Width="50" Height="50">
             <Button Style="{StaticResource NostrumMainButtonStyle}"

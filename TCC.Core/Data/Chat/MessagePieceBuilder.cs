@@ -45,7 +45,7 @@ public static class MessagePieceBuilder
             grade = i.RareGrade;
         }
 
-        var enchant = dictionary.TryGetValue("enchantCount", out var enchCount)
+        var enchant = dictionary.TryGetValue("enchantcount", out var enchCount)
             ? $"+{enchCount} "
             : "";
 
