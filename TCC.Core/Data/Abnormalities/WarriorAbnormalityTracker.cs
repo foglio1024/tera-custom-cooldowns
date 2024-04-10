@@ -8,6 +8,7 @@ namespace TCC.Data.Abnormalities;
 
 public class WarriorAbnormalityTracker : AbnormalityTracker
 {
+    public static event Action<WarriorStance>? StanceChanged;
     //private static readonly uint[] GambleIDs = { 100800, 100801, 100802, 100803 };
     const uint GambleID = 100801;
     static readonly uint[] AstanceIDs = [100100, 100101, 100102, 100103];
@@ -17,6 +18,17 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static readonly uint[] SwiftGlyphs = [21010, 21070];
 
     readonly Skill _bladeWaltz;
+
+    static WarriorStance _stance;
+    static WarriorStance Stance
+    {
+        set
+        {
+            if (_stance == value) return;
+            _stance = value;
+            StanceChanged?.Invoke(value);
+        }
+    }
 
     public WarriorAbnormalityTracker()
     {
@@ -66,6 +78,9 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static void CheckAssaultStanceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+
+        Stance = WarriorStance.Assault;
+
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
         vm.SetStance(WarriorStance.Assault);
@@ -74,6 +89,9 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static void CheckAssaultStanceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+
+        Stance = WarriorStance.Assault;
+
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
         vm.SetStance(WarriorStance.Assault);
@@ -82,6 +100,9 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static void CheckAssaultStanceEnd(S_ABNORMALITY_END p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
+
+        Stance = WarriorStance.None;
+        
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
         vm.SetStance(WarriorStance.None);
@@ -90,6 +111,9 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static void CheckDefensiveStanceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+
+        Stance = WarriorStance.Defensive;
+
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
         vm.SetStance(WarriorStance.Defensive);
@@ -98,6 +122,9 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static void CheckDefensiveStanceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+
+        Stance = WarriorStance.Defensive;
+
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
         vm.SetStance(WarriorStance.Defensive);
@@ -106,6 +133,9 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
     static void CheckDefensiveStanceEnd(S_ABNORMALITY_END p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
+
+        Stance = WarriorStance.None;
+
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
 
         vm.SetStance(WarriorStance.None);

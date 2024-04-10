@@ -672,9 +672,10 @@
                         </FrameworkElement.Style>
                     </elements:SorcererElementsControl>
                     <Grid>
-                        <elements:EdgeRhombControl EdgeCounter="{Binding Player.StacksCounter}"
-                                                   FillBrush="{Binding Player.WarriorStance.CurrentStance, Converter={converters:WarriorStanceToColorConverter Light=True, Fallback=True}}"
-                                                   GlowColor="{Binding Player.WarriorStance.CurrentStance, Converter={converters:WarriorStanceToColorConverter Fallback=True}}"
+                        <!-- TODO: this should be a content control and set based on the class -->
+                        <elements:EdgeRhombControl EdgeCounter="{Binding EdgeCounter}"
+                                                   FillBrush="{Binding WarriorStanceTracker.CurrentStance, Converter={converters:WarriorStanceToColorConverter Light=True, Fallback=True}}"
+                                                   GlowColor="{Binding WarriorStanceTracker.CurrentStance, Converter={converters:WarriorStanceToColorConverter Fallback=True}}"
                                                    >
                             <FrameworkElement.Style>
                                 <Style TargetType="FrameworkElement">
