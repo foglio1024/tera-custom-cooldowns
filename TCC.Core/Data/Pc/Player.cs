@@ -20,32 +20,32 @@ public class Player : ThreadSafeObservableObject
 
     public event Action? CoinsUpdated;
 
-    string _name = "";
-    ulong _entityId;
-    Class _playerclass = Class.None;
-    Laurel _laurel = Laurel.None;
-    int _level;
-    float _itemLevel;
-    float _currentHP;
-    float _currentMP;
-    float _currentST;
-    long _maxHP;
-    int _maxMP;
-    int _maxST;
-    uint _maxShield;
-    float _currentShield;
-    float _flightEnergy;
-    bool _isInCombat;
-    float _critFactor;
-    bool _isAlive;
-    uint _coins;
-    uint _maxCoins;
-    readonly List<uint> _debuffList = [];
-    readonly Dictionary<uint, uint> _shields = [];
-    readonly object _listLock = new();
-    ThreadSafeObservableCollection<AbnormalityDuration> _buffs = [];
-    ThreadSafeObservableCollection<AbnormalityDuration> _debuffs = [];
-    ThreadSafeObservableCollection<AbnormalityDuration> _infBuffs = [];
+    private string _name = "";
+    private ulong _entityId;
+    private Class _playerclass = Class.None;
+    private Laurel _laurel = Laurel.None;
+    private int _level;
+    private float _itemLevel;
+    private float _currentHP;
+    private float _currentMP;
+    private float _currentST;
+    private long _maxHP;
+    private int _maxMP;
+    private int _maxST;
+    private uint _maxShield;
+    private float _currentShield;
+    private float _flightEnergy;
+    private bool _isInCombat;
+    private float _critFactor;
+    private bool _isAlive;
+    private uint _coins;
+    private uint _maxCoins;
+    private readonly List<uint> _debuffList = [];
+    private readonly Dictionary<uint, uint> _shields = [];
+    private readonly object _listLock = new();
+    private ThreadSafeObservableCollection<AbnormalityDuration> _buffs = [];
+    private ThreadSafeObservableCollection<AbnormalityDuration> _debuffs = [];
+    private ThreadSafeObservableCollection<AbnormalityDuration> _infBuffs = [];
 
     public string Name
     {
@@ -298,7 +298,7 @@ public class Player : ThreadSafeObservableObject
         });
     }
 
-    void AddShield(Abnormality ab)
+    private void AddShield(Abnormality ab)
     {
         _dispatcher.Invoke(() =>
         {
@@ -322,7 +322,7 @@ public class Player : ThreadSafeObservableObject
         }
     }
 
-    void EndShield(Abnormality ab)
+    private void EndShield(Abnormality ab)
     {
         _dispatcher.Invoke(() =>
         {
@@ -331,7 +331,7 @@ public class Player : ThreadSafeObservableObject
         });
     }
 
-    void RefreshShieldAmount()
+    private void RefreshShieldAmount()
     {
         if (_shields.Count == 0)
         {
@@ -346,7 +346,7 @@ public class Player : ThreadSafeObservableObject
         }
     }
 
-    void RefreshMaxShieldAmount()
+    private void RefreshMaxShieldAmount()
     {
         foreach (var amount in _shields.Values)
         {
@@ -387,7 +387,7 @@ public class Player : ThreadSafeObservableObject
         }
     }
 
-    void FindAndUpdateAbnormality(Abnormality ab, uint duration, int stacks)
+    private void FindAndUpdateAbnormality(Abnormality ab, uint duration, int stacks)
     {
         _dispatcher.Invoke(() =>
         {
@@ -410,7 +410,7 @@ public class Player : ThreadSafeObservableObject
         });
     }
 
-    void FindAndRemove(Abnormality ab)
+    private void FindAndRemove(Abnormality ab)
     {
         var list = GetList(ab);
         var target = list.ToSyncList().FirstOrDefault(x => x.Abnormality.Id == ab.Id);
@@ -487,7 +487,7 @@ public class Player : ThreadSafeObservableObject
     }
 
     // utils
-    ThreadSafeObservableCollection<AbnormalityDuration> GetList(Abnormality abnormality)
+    private ThreadSafeObservableCollection<AbnormalityDuration> GetList(Abnormality abnormality)
     {
         var list = abnormality.Type switch
         {

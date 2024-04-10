@@ -31,12 +31,12 @@ public class SmallMobViewModel : NpcViewModel
         DeleteTimer.Start();
     }
 
-    void OnNpcVMOnNpcListChanged()
+    private void OnNpcVMOnNpcListChanged()
     {
         InvokePropertyChanged(nameof(Compact));
     }
 
-    void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {

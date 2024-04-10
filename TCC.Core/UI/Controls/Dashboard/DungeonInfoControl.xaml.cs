@@ -6,8 +6,8 @@ namespace TCC.UI.Controls.Dashboard;
 
 public partial class DungeonInfoControl
 {
-    readonly DoubleAnimation _bubbleScale;
-    readonly DoubleAnimation _fadeIn;
+    private readonly DoubleAnimation _bubbleScale;
+    private readonly DoubleAnimation _fadeIn;
 
     public DungeonInfoControl()
     {

@@ -11,8 +11,8 @@ namespace TCC.UI.Controls.Abnormalities;
 
 public class AbnormalityIndicatorBase : UserControl
 {
-    readonly DoubleAnimation _an;
-    AbnormalityDuration? _context;
+    private readonly DoubleAnimation _an;
+    private AbnormalityDuration? _context;
     protected FrameworkElement? DurationLabelRef;
     protected FrameworkElement? MainArcRef;
 
@@ -23,7 +23,7 @@ public class AbnormalityIndicatorBase : UserControl
         Unloaded += UserControl_Unloaded;
     }
 
-    void UserControl_Loaded(object sender, RoutedEventArgs e)
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
         if (DesignerProperties.GetIsInDesignMode(this)) return;
         if (DataContext is not AbnormalityDuration ab) return;
@@ -38,7 +38,7 @@ public class AbnormalityIndicatorBase : UserControl
         BeginAnimation(OpacityProperty, AnimationFactory.CreateDoubleAnimation(100, from: 0, to: 1));
     }
 
-    void UserControl_Unloaded(object sender, RoutedEventArgs e)
+    private void UserControl_Unloaded(object sender, RoutedEventArgs e)
     {
         if (_context == null) return;
         _context.Refreshed -= OnRefreshed;
@@ -50,7 +50,7 @@ public class AbnormalityIndicatorBase : UserControl
     }
 
 
-    void OnRefreshed()
+    private void OnRefreshed()
     {
         if (_context == null) return;
         if (_context.Duration == uint.MaxValue) return;
@@ -58,7 +58,7 @@ public class AbnormalityIndicatorBase : UserControl
         Dispatcher?.Invoke(AnimateCooldown);
     }
 
-    void AnimateCooldown()
+    private void AnimateCooldown()
     {
         if (_context == null) return;
         _an.Duration = TimeSpan.FromMilliseconds(_context.DurationLeft);

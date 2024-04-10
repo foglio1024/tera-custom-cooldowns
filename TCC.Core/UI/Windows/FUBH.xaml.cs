@@ -15,24 +15,24 @@ public partial class FUBH
         Closing += FUBH_Closing;
     }
 
-    void FUBH_Closing(object? sender, CancelEventArgs e)
+    private void FUBH_Closing(object? sender, CancelEventArgs e)
     {
         e.Cancel = true;
         Hide();
     }
 
-    void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+    private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
     {
         this.TryDragMove();
     }
 
-    void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         Hide();
         App.Settings.Save();
     }
 
-    void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
+    private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
     {
         Utils.Utilities.OpenUrl(e.Uri.AbsoluteUri);
     }
@@ -41,7 +41,7 @@ public partial class FUBH
 public class FUBHVM : ThreadSafeObservableObject
 {
     public string CloseMessage => $"Click to {(!_dontshowagain ? "temporarily " : "")}close this window";
-    bool _dontshowagain;
+    private bool _dontshowagain;
 
     public bool DontShowAgain
     {

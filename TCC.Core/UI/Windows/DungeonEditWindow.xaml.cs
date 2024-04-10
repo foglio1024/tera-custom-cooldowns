@@ -20,24 +20,24 @@ public partial class DungeonEditWindow
     public IEnumerable<ItemLevelTier> ItemLevelTiers => EnumUtils.ListFromEnum<ItemLevelTier>();
     public IEnumerable<ResetMode> ResetModes => EnumUtils.ListFromEnum<ResetMode>();
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         Game.DB!.DungeonDatabase.SaveCustomDefs();
         Close();
 
     }
 
-    void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
+    private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
     {
         DragMove();
     }
 
-    void RemoveDungeon(object sender, RoutedEventArgs e)
+    private void RemoveDungeon(object sender, RoutedEventArgs e)
     {
         if (((FrameworkElement) sender).DataContext is DungeonColumnViewModel dng) dng.Dungeon.Show = false;
     }
 
-    void OnDungeonsOrderChanged(object sender, OrderChangedEventArgs e)
+    private void OnDungeonsOrderChanged(object sender, OrderChangedEventArgs e)
     {
         foreach (DungeonColumnViewModel dcvm in e.NewOrder)
         {
@@ -46,7 +46,7 @@ public partial class DungeonEditWindow
 
     }
 
-    void AddDungeon(object sender, RoutedEventArgs e)
+    private void AddDungeon(object sender, RoutedEventArgs e)
     {
         new NewDungeonDialog { Topmost = true, Owner = this}.ShowDialog();
     }

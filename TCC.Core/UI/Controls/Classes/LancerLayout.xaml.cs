@@ -10,9 +10,9 @@ namespace TCC.UI.Controls.Classes;
 // TODO: refactor dis
 public partial class LancerLayout
 {
-    LancerLayoutViewModel? _dc;
-    readonly DoubleAnimation _lineHeldDurationAn;
-    readonly DoubleAnimation _lineHeldStacksAn;
+    private LancerLayoutViewModel? _dc;
+    private readonly DoubleAnimation _lineHeldDurationAn;
+    private readonly DoubleAnimation _lineHeldStacksAn;
 
     public LancerLayout()
     {
@@ -24,7 +24,7 @@ public partial class LancerLayout
         Loaded += OnLoaded;
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         _dc = (LancerLayoutViewModel)DataContext;
 
@@ -35,7 +35,7 @@ public partial class LancerLayout
         _dc.LH.BuffEnded += OnLineHeldEnded;
     }
 
-    void OnLineHeldEnded()
+    private void OnLineHeldEnded()
     {
         Dispatcher?.Invoke(() =>
         {
@@ -46,7 +46,7 @@ public partial class LancerLayout
 
     }
 
-    void OnStacksChanged(int stacks)
+    private void OnStacksChanged(int stacks)
     {
         Dispatcher?.Invoke(() =>
         {
@@ -55,7 +55,7 @@ public partial class LancerLayout
         });
     }
 
-    void OnLineHeldRefreshed(long duration)
+    private void OnLineHeldRefreshed(long duration)
     {
         Dispatcher?.Invoke(() =>
         {

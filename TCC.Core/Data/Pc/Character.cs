@@ -14,22 +14,22 @@ namespace TCC.Data.Pc;
 //TODO: remove INPC from properties where it's not needed
 public class Character : ThreadSafeObservableObject, IComparable
 {
-    string _name = "";
-    Class _class;
-    Laurel _laurel = Laurel.None;
-    bool _isLoggedIn;
-    bool _isSelected;
-    int _elleonMarks;
-    int _dragonwingScales;
-    int _piecesOfDragonScroll;
-    float _itemLevel;
-    int _level;
-    Location _lastLocation = new();
-    long _lastOnline;
-    string _serverName = "";
-    bool _hidden;
-    uint _coins;
-    uint _maxCoins;
+    private string _name = "";
+    private Class _class;
+    private Laurel _laurel = Laurel.None;
+    private bool _isLoggedIn;
+    private bool _isSelected;
+    private int _elleonMarks;
+    private int _dragonwingScales;
+    private int _piecesOfDragonScroll;
+    private float _itemLevel;
+    private int _level;
+    private Location _lastLocation = new();
+    private long _lastOnline;
+    private string _serverName = "";
+    private bool _hidden;
+    private uint _coins;
+    private uint _maxCoins;
 
     public uint Id { get; set; }
     public int Position { get; set; }

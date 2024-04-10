@@ -6,7 +6,7 @@ namespace TCC.Data.Abnormalities;
 
 public class SlayerAbnormalityTracker : AbnormalityTracker
 {
-    static readonly uint[] IcbIds = [300800, 300801, 300805];
+    private static readonly uint[] IcbIds = [300800, 300801, 300805];
 
     public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
@@ -29,7 +29,7 @@ public class SlayerAbnormalityTracker : AbnormalityTracker
         CheckInColdBloodEnd(p);
     }
 
-    static void CheckInColdBloodBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckInColdBloodBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!IcbIds.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<SlayerLayoutViewModel>(out var vm)) return;
@@ -37,7 +37,7 @@ public class SlayerAbnormalityTracker : AbnormalityTracker
         vm.InColdBlood.StartEffect(p.Duration);
     }
 
-    static void CheckInColdBloodRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckInColdBloodRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!IcbIds.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<SlayerLayoutViewModel>(out var vm)) return;
@@ -45,7 +45,7 @@ public class SlayerAbnormalityTracker : AbnormalityTracker
         vm.InColdBlood.StartEffect(p.Duration);
     }
 
-    static void CheckInColdBloodEnd(S_ABNORMALITY_END p)
+    private static void CheckInColdBloodEnd(S_ABNORMALITY_END p)
     {
         if (!IcbIds.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<SlayerLayoutViewModel>(out var vm)) return;

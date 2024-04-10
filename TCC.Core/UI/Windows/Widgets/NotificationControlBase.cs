@@ -56,13 +56,13 @@ public class NotificationControlBase : UserControl
         _root.Effect = _rootEffect;
     }
 
-    void OnShrinkFinished(object? sender, EventArgs e)
+    private void OnShrinkFinished(object? sender, EventArgs e)
     {
         if (_dc == null) return;
         WindowManager.ViewModels.NotificationAreaVM.DeleteNotification(_dc);
     }
 
-    void OnFadeFinished(object? sender, EventArgs e)
+    private void OnFadeFinished(object? sender, EventArgs e)
     {
         Dispatcher?.InvokeAsync(() =>
         {

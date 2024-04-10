@@ -12,7 +12,7 @@ public class LootFilterConfigurationViewModel : ThreadSafeObservableObject
     public ICollectionViewLiveShaping? ItemsView { get; }
     public LootDistributionWindowSettings Settings { get; }
 
-    string _searchFilter = "";
+    private string _searchFilter = "";
     public string SearchFilter
     {
         get => _searchFilter;

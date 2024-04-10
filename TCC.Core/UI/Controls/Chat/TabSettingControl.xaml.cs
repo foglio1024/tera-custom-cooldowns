@@ -12,18 +12,18 @@ namespace TCC.UI.Controls.Chat;
 
 public partial class TabSettingControl
 {
-    Tab? _dc;
+    private Tab? _dc;
     public TabSettingControl()
     {
         InitializeComponent();
     }
 
-    void TabSettingControl_OnLoaded(object sender, RoutedEventArgs e)
+    private void TabSettingControl_OnLoaded(object sender, RoutedEventArgs e)
     {
         _dc = DataContext as Tab;
     }
 
-    void RemoveAuthor(object sender, RoutedEventArgs e)
+    private void RemoveAuthor(object sender, RoutedEventArgs e)
     {
         var author = (string)((FrameworkElement)sender).DataContext;
         _dc?.TabInfoVM.Authors.Remove(author);
@@ -31,14 +31,14 @@ public partial class TabSettingControl
 
     }
 
-    void RemoveChannel(object sender, RoutedEventArgs e)
+    private void RemoveChannel(object sender, RoutedEventArgs e)
     {
         _dc?.TabInfoVM.ShowedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
         _dc?.ApplyFilter();
 
     }
 
-    void OnRequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
+    private void OnRequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
     {
         if (Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.Up))
             return;
@@ -46,21 +46,21 @@ public partial class TabSettingControl
         e.Handled = true;
     }
 
-    void RemoveExAuthor(object sender, RoutedEventArgs e)
+    private void RemoveExAuthor(object sender, RoutedEventArgs e)
     {
         _dc?.TabInfoVM.ExcludedAuthors.Remove((string)((FrameworkElement)sender).DataContext);
         _dc?.ApplyFilter();
 
     }
 
-    void RemoveExChannel(object sender, RoutedEventArgs e)
+    private void RemoveExChannel(object sender, RoutedEventArgs e)
     {
         _dc?.TabInfoVM.ExcludedChannels.Remove((ChatChannel)((FrameworkElement)sender).DataContext);
         _dc?.ApplyFilter();
 
     }
 
-    void NewChannelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void NewChannelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         try
         {
@@ -84,7 +84,7 @@ public partial class TabSettingControl
         }
     }
 
-    void NewExChannelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void NewExChannelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         try
         {
@@ -109,7 +109,7 @@ public partial class TabSettingControl
         }
     }
 
-    void NewAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
+    private void NewAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
         if (_dc == null) return;
@@ -121,12 +121,12 @@ public partial class TabSettingControl
 
     }
 
-    void NewAuthorTextBox_LostFocus(object sender, RoutedEventArgs e)
+    private void NewAuthorTextBox_LostFocus(object sender, RoutedEventArgs e)
     {
         ((TextBox)sender).Text = "New author...";
     }
 
-    void NewExAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
+    private void NewExAuthorTextBox_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
         if (_dc == null) return;
@@ -136,13 +136,13 @@ public partial class TabSettingControl
         _dc.ApplyFilter();
     }
 
-    void NewExAuthorTextBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void NewExAuthorTextBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if ((sender as TextBox)?.Text != "New author...") return;
         ((TextBox)sender).Text = "";
     }
 
-    void DeleteTab(object sender, RoutedEventArgs e)
+    private void DeleteTab(object sender, RoutedEventArgs e)
     {
         if (_dc == null) return;
 
@@ -158,18 +158,18 @@ public partial class TabSettingControl
         Window.GetWindow(this)?.Close();
     }
 
-    void NewExKeywordTextBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void NewExKeywordTextBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if ((sender as TextBox)?.Text != "New keyword...") return;
         ((TextBox)sender).Text = "";
     }
 
-    void NewKeywordTextBox_LostFocus(object sender, RoutedEventArgs e)
+    private void NewKeywordTextBox_LostFocus(object sender, RoutedEventArgs e)
     {
         ((TextBox)sender).Text = "New keyword...";
     }
 
-    void NewKeywordTextBox_KeyDown(object sender, KeyEventArgs e)
+    private void NewKeywordTextBox_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
         if (_dc == null) return;
@@ -180,7 +180,7 @@ public partial class TabSettingControl
         _dc.ApplyFilter();
     }
 
-    void NewExKeywordTextBox_KeyDown(object sender, KeyEventArgs e)
+    private void NewExKeywordTextBox_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
         if (_dc == null) return;
@@ -192,13 +192,13 @@ public partial class TabSettingControl
 
     }
 
-    void RemoveKeyword(object sender, RoutedEventArgs e)
+    private void RemoveKeyword(object sender, RoutedEventArgs e)
     {
         _dc?.TabInfoVM.Keywords.Remove((string)((FrameworkElement)sender).DataContext);
         _dc?.ApplyFilter();
     }
 
-    void RemoveExKeyword(object sender, RoutedEventArgs e)
+    private void RemoveExKeyword(object sender, RoutedEventArgs e)
     {
         _dc?.TabInfoVM.ExcludedKeywords.Remove((string)((FrameworkElement)sender).DataContext);
         _dc?.ApplyFilter();

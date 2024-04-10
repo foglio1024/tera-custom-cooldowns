@@ -27,7 +27,7 @@ public class TeraMessageReader : BinaryReader
     internal OpCodeNamer SysMsgNamer { get; private set; }
     public MessageFactory Factory { get; set; }
 
-    static MemoryStream GetStream(Message message)
+    private static MemoryStream GetStream(Message message)
     {
         return message.Payload.Array != null 
             ? new MemoryStream(message.Payload.Array, message.Payload.Offset, message.Payload.Count, false, true) 

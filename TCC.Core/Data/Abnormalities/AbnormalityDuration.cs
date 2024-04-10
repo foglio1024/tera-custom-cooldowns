@@ -8,14 +8,14 @@ namespace TCC.Data.Abnormalities;
 
 public class AbnormalityDuration : ThreadSafeObservableObject, IDisposable
 {
-    readonly Timer _timer;
-    uint _duration;
-    int _stacks;
-    double _durationLeft;
-    bool _isTimerDisposed;
-    DateTime _startTime;
-    DateTime _endTime;
-    bool _isHidden;
+    private readonly Timer _timer;
+    private uint _duration;
+    private int _stacks;
+    private double _durationLeft;
+    private bool _isTimerDisposed;
+    private DateTime _startTime;
+    private DateTime _endTime;
+    private bool _isHidden;
 
     public event Action? Refreshed;
     
@@ -45,7 +45,7 @@ public class AbnormalityDuration : ThreadSafeObservableObject, IDisposable
     public bool CanBeHidden { get; set; }
     public DateTime TimeOfArrival { get; } = DateTime.Now;
 
-    AbnormalityDuration(Abnormality b)
+    private AbnormalityDuration(Abnormality b)
     {
         Abnormality = b;
         _timer = new Timer { Interval = 900 };
@@ -77,7 +77,7 @@ public class AbnormalityDuration : ThreadSafeObservableObject, IDisposable
         ObjectTracker.Unregister(GetType());
     }
 
-    void DecreaseDuration(object? sender, EventArgs e)
+    private void DecreaseDuration(object? sender, EventArgs e)
     {
         DurationLeft = (_endTime - DateTime.Now).TotalMilliseconds;
         if (DurationLeft < 0) DurationLeft = 0;

@@ -9,9 +9,9 @@ public class GuardianInfo : ThreadSafeObservableObject
     public const float MaxCredits = 100000;
     public const int MaxDailies = 100;
 
-    int _credits;
-    int _cleared;
-    int _claimed;
+    private int _credits;
+    private int _cleared;
+    private int _claimed;
 
     public int Credits
     {

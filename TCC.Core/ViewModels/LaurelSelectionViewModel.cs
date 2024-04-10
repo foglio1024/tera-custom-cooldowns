@@ -13,7 +13,7 @@ namespace TCC.ViewModels;
 
 internal class LaurelSelectionViewModel : ObservableObject
 {
-    CustomLaurel _currentLaurel;
+    private CustomLaurel _currentLaurel;
 
     public CustomLaurel CurrentLaurel
     {
@@ -29,7 +29,7 @@ internal class LaurelSelectionViewModel : ObservableObject
 
     public readonly List<CustomLaurel> AvailableLaurels = Enum.GetValues<CustomLaurel>().ToList();
 
-    int _laurelIdx;
+    private int _laurelIdx;
 
     public LaurelSelectionViewModel(Class cl, CustomLaurel selectedLaurel)
     {
@@ -45,7 +45,7 @@ internal class LaurelSelectionViewModel : ObservableObject
         ConfirmCommand = new RelayCommand(Confirm);
     }
 
-    void Confirm()
+    private void Confirm()
     {
         var settings = (CharacterWindowSettings?)WindowManager.ViewModels.CharacterVM.Settings;
         if(settings != null) settings.CustomLaurel = CurrentLaurel;
@@ -55,7 +55,7 @@ internal class LaurelSelectionViewModel : ObservableObject
         win?.Close();
     }
 
-    void PrevLaurel()
+    private void PrevLaurel()
     {
         if (_laurelIdx == 0) _laurelIdx = AvailableLaurels.Count - 1;
         else _laurelIdx--;
@@ -63,7 +63,7 @@ internal class LaurelSelectionViewModel : ObservableObject
         CurrentLaurel = AvailableLaurels[_laurelIdx];
     }
 
-    void NextLaurel()
+    private void NextLaurel()
     {
         if (_laurelIdx == AvailableLaurels.Count - 1) _laurelIdx = 0;
         else _laurelIdx++;

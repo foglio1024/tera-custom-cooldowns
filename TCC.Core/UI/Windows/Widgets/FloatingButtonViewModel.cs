@@ -15,10 +15,10 @@ public class FloatingButtonViewModel : TccWindowViewModel
 {
     public event Action? NotificationsAdded;
     public event Action? NotificationsCleared;
-    bool _pendingNotifications;
-    int _pendingNotificationsAmount;
-    int _currPP;
-    int _maxPP;
+    private bool _pendingNotifications;
+    private int _pendingNotificationsAmount;
+    private int _currPP;
+    private int _maxPP;
 
     public bool PendingNotifications
     {
@@ -66,7 +66,7 @@ public class FloatingButtonViewModel : TccWindowViewModel
         Game.Me.CoinsUpdated += OnCoinsUpdated;
     }
 
-    void OnCoinsUpdated()
+    private void OnCoinsUpdated()
     {
         InvokePropertyChanged(nameof(CoinsFactor));
         InvokePropertyChanged(nameof(CurrCoins));
@@ -78,7 +78,7 @@ public class FloatingButtonViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Hook<S_FATIGABILITY_POINT>(OnFatigabilityPoint);
     }
 
-    void OnFatigabilityPoint(S_FATIGABILITY_POINT p)
+    private void OnFatigabilityPoint(S_FATIGABILITY_POINT p)
     {
         CurrPP = p.CurrFatigability;
         MaxPP = p.MaxFatigability;

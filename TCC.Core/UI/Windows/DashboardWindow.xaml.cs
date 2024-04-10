@@ -6,7 +6,7 @@ namespace TCC.UI.Windows;
 
 public partial class DashboardWindow
 {
-    readonly DashboardViewModel _vm;
+    private readonly DashboardViewModel _vm;
 
     public DashboardWindow(DashboardViewModel vm) : base(false)
     {
@@ -17,13 +17,13 @@ public partial class DashboardWindow
         Hidden += Game.DB!.DungeonDatabase.SaveCustomDefs;
     }
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         HideWindow();
         _vm.SaveCharacters();
     }
 
-    void OnTabChanged(object sender, SelectionChangedEventArgs e)
+    private void OnTabChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.AddedItems.Count == 0 || e.AddedItems[0] is not TabItem) return;
         _vm.ShowDetails = false;

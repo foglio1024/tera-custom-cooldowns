@@ -13,8 +13,8 @@ namespace TCC.UI.Controls.Skills;
 
 public partial class RhombSkillEffectControl : INotifyPropertyChanged
 {
-    SkillWithEffect? _context;
-    readonly DoubleAnimation _anim;
+    private SkillWithEffect? _context;
+    private readonly DoubleAnimation _anim;
 
     public RhombSkillEffectControl()
     {
@@ -25,7 +25,7 @@ public partial class RhombSkillEffectControl : INotifyPropertyChanged
         Unloaded += OnUnloaded;
     }
 
-    void OnUnloaded(object sender, RoutedEventArgs e)
+    private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
@@ -39,7 +39,7 @@ public partial class RhombSkillEffectControl : INotifyPropertyChanged
     public string DurationLabel => _context == null ? "" : TimeUtils.FormatSeconds(Convert.ToInt64(_context.Effect.Seconds));
     public bool ShowEffectSeconds => _context?.Effect is { Seconds: > 0 };
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (DesignerProperties.GetIsInDesignMode(this) || DataContext is not SkillWithEffect swe) return;
         _context = swe;
@@ -49,19 +49,19 @@ public partial class RhombSkillEffectControl : INotifyPropertyChanged
         _context.Effect.Ended += OnBuffEnded;
     }
 
-    void OnBuffEnded(CooldownMode obj)
+    private void OnBuffEnded(CooldownMode obj)
     {
         ExternalArc.BeginAnimation(Arc.EndAngleProperty, null);
         ExternalArc.EndAngle = 32;
     }
 
-    void OnSecondsUpdated()
+    private void OnSecondsUpdated()
     {
         NPC(nameof(DurationLabel));
         NPC(nameof(ShowEffectSeconds));
     }
 
-    void OnBuffStarted(ulong duration, CooldownMode mode)
+    private void OnBuffStarted(ulong duration, CooldownMode mode)
     {
         _anim.Duration = TimeSpan.FromMilliseconds(duration);
         ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);

@@ -9,11 +9,11 @@ namespace TCC.Interop.Moongourd;
 
 public class KabedonManager : IMoongourdManager
 {
-    const string SEARCH_URL = "https://moongourd.com/api/mg/search?";
-    const string LOG_URL = "https://storage.googleapis.com/mg-uploads/#region#/#zoneId#/#bossId#/1/#logId#.json";
-    const int MAX_ENCOUNTERS = 5;
+    private const string SEARCH_URL = "https://moongourd.com/api/mg/search?";
+    private const string LOG_URL = "https://storage.googleapis.com/mg-uploads/#region#/#zoneId#/#bossId#/1/#logId#.json";
+    private const int MAX_ENCOUNTERS = 5;
 
-    bool _requestInProgress;
+    private bool _requestInProgress;
 
     public event Action? Started;
 
@@ -21,12 +21,12 @@ public class KabedonManager : IMoongourdManager
 
     public event Action<string>? Failed;
 
-    static string BuildSearchUrl(string region, string server, string name)
+    private static string BuildSearchUrl(string region, string server, string name)
     {
         return $"{SEARCH_URL}region={region}&name={name}&server={server}";
     }
 
-    static string BuildLogUrl(string region, int zoneId, int bossId, long logId)
+    private static string BuildLogUrl(string region, int zoneId, int bossId, long logId)
     {
         return LOG_URL.Replace("#region#", region)
             .Replace("#zoneId#", zoneId.ToString())

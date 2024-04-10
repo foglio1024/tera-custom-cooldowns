@@ -11,9 +11,9 @@ namespace TCC.UI.Controls.Classes.Elements;
 
 public partial class RagnarokBuffControl : INotifyPropertyChanged
 {
-    bool _running;
-    SkillWithEffect? _context;
-    readonly DoubleAnimation _an;
+    private bool _running;
+    private SkillWithEffect? _context;
+    private readonly DoubleAnimation _an;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -44,7 +44,7 @@ public partial class RagnarokBuffControl : INotifyPropertyChanged
         InitializeComponent();
     }
 
-    void UserControl_Loaded(object sender, RoutedEventArgs e)
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
         if (DesignerProperties.GetIsInDesignMode(this)) return;
         _context = (SkillWithEffect)DataContext;
@@ -52,7 +52,7 @@ public partial class RagnarokBuffControl : INotifyPropertyChanged
         WindowManager.ViewModels.ClassVM.CurrentManager.StaminaTracker.PropertyChanged += ST_PropertyChanged;
     }
 
-    void OnRagnarokStarted(ulong duration, CooldownMode mode)
+    private void OnRagnarokStarted(ulong duration, CooldownMode mode)
     {
         Running = true;
         _an.Duration = TimeSpan.FromMilliseconds(duration);
@@ -60,7 +60,7 @@ public partial class RagnarokBuffControl : INotifyPropertyChanged
     }
 
 
-    void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != "Val") return;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SecondsText)));

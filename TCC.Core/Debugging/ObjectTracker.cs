@@ -6,8 +6,8 @@ namespace TCC.Debugging;
 
 public static class ObjectTracker
 {
-    static ConcurrentDictionary<Type, long> Instances { get; } = new();
-    static readonly object Lock = new();
+    private static ConcurrentDictionary<Type, long> Instances { get; } = new();
+    private static readonly object Lock = new();
     public static void Register(Type t)
     {
         lock (Lock)

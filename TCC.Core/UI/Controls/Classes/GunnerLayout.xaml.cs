@@ -9,15 +9,15 @@ namespace TCC.UI.Controls.Classes;
 
 public partial class GunnerLayout
 {
-    GunnerLayoutViewModel? _dc;
-    readonly DoubleAnimation _an;
+    private GunnerLayoutViewModel? _dc;
+    private readonly DoubleAnimation _an;
     public GunnerLayout()
     {
         _an = AnimationFactory.CreateDoubleAnimation(150, to: 400);
         InitializeComponent();
     }
 
-    void GunnerLayout_OnLoaded(object sender, RoutedEventArgs e)
+    private void GunnerLayout_OnLoaded(object sender, RoutedEventArgs e)
     {
         _dc = (GunnerLayoutViewModel) DataContext;
         _an.To = _dc.StaminaTracker.Factor * 359.99 + 40;
@@ -25,7 +25,7 @@ public partial class GunnerLayout
 
     }
 
-    void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
         if (_dc == null) return;

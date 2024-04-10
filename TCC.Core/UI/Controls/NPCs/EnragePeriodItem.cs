@@ -21,7 +21,7 @@ public class EnragePeriodItem : ThreadSafeObservableObject
         Refresh();
     }
 
-    void Refresh()
+    private void Refresh()
     {
         InvokePropertyChanged(nameof(Factor));
         InvokePropertyChanged(nameof(StartFactor));

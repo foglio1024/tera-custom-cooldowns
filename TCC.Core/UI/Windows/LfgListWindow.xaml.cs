@@ -11,9 +11,9 @@ namespace TCC.UI.Windows;
 
 public partial class LfgListWindow
 {
-    bool _keepPopupOpen;
+    private bool _keepPopupOpen;
 
-    readonly LfgListViewModel _vm;
+    private readonly LfgListViewModel _vm;
 
     public ICommand HideWindowCommand { get; }
 
@@ -57,7 +57,7 @@ public partial class LfgListWindow
         base.ShowWindow();
     }
 
-    void OnTbMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void OnTbMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         _keepPopupOpen = true;
         FocusManager.UndoUnfocusable(Handle);
@@ -72,25 +72,25 @@ public partial class LfgListWindow
         Keyboard.Focus((FrameworkElement)sender);
     }
 
-    void OnTbLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    private void OnTbLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         FocusManager.MakeUnfocusable(Handle);
         _keepPopupOpen = false;
     }
 
-    void OnBgMouseLeftButtonDown(object sender, MouseButtonEventArgs? e)
+    private void OnBgMouseLeftButtonDown(object sender, MouseButtonEventArgs? e)
     {
         Keyboard.ClearFocus();
         _keepPopupOpen = false;
     }
 
-    void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
+    private void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
     {
         if (_keepPopupOpen) return;
         _vm.IsPopupOpen = false;
     }
 
-    void OnTbKeyDown(object sender, KeyEventArgs e)
+    private void OnTbKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Enter)
         {
@@ -98,7 +98,7 @@ public partial class LfgListWindow
         }
     }
 
-    void OnTbMouseLeave(object sender, MouseEventArgs e)
+    private void OnTbMouseLeave(object sender, MouseEventArgs e)
     {
         _keepPopupOpen = false;
     }

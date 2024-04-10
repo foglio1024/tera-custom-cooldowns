@@ -31,16 +31,16 @@ namespace TCC.ViewModels;
 [TccModule]
 public class ChatManager : TccWindowViewModel
 {
-    static ChatManager? _instance;
+    private static ChatManager? _instance;
 
     public static ChatManager Instance => _instance ??= new ChatManager(App.Settings.ChatSettings);
 
     public ChatMessageFactory Factory { get; }
 
-    readonly ConcurrentQueue<ChatMessage> _pauseQueue;
-    readonly List<TempPrivateMessage> _privateMessagesCache;
+    private readonly ConcurrentQueue<ChatMessage> _pauseQueue;
+    private readonly List<TempPrivateMessage> _privateMessagesCache;
     public readonly PrivateChatChannel[] PrivateChannels = new PrivateChatChannel[8];
-    readonly object _lock = new();
+    private readonly object _lock = new();
 
     public event Action<ChatMessage>? NewMessage;
     public event Action<int>? PrivateChannelJoined;
@@ -60,7 +60,7 @@ public class ChatManager : TccWindowViewModel
 #endif
     public ThreadSafeObservableCollection<Lfg> LFGs { get; }
 
-    ChatManager(WindowSettingsBase settings) : base(settings)
+    private ChatManager(WindowSettingsBase settings) : base(settings)
     {
         _pauseQueue = new ConcurrentQueue<ChatMessage>();
         _privateMessagesCache = new List<TempPrivateMessage>();
@@ -89,7 +89,7 @@ public class ChatManager : TccWindowViewModel
         Log.NewChatMessage += OnLogChatMessage;
     }
 
-    void OnLogChatMessage(ChatChannel ch, string msg, string auth)
+    private void OnLogChatMessage(ChatChannel ch, string msg, string auth)
     {
         AddChatMessage(Factory.CreateMessage(ch, auth, msg));
     }
@@ -152,22 +152,22 @@ public class ChatManager : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_EXP>(OnPlayerChangeExp);
     }
 
-    void OnConnected(Server srv)
+    private void OnConnected(Server srv)
     {
         AddTccMessage($"Connected to {srv.Name}.");
     }
 
-    void OnDisconnected()
+    private void OnDisconnected()
     {
         AddTccMessage("Disconnected from the server.");
     }
 
-    void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
+    private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
     {
         UpdateLfgMembers(m.Id, m.Members.Count);
     }
 
-    void OnPartyMatchLink(S_PARTY_MATCH_LINK m)
+    private void OnPartyMatchLink(S_PARTY_MATCH_LINK m)
     {
         Task.Run(() =>
         {
@@ -179,17 +179,17 @@ public class ChatManager : TccWindowViewModel
         });
     }
 
-    void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
+    private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
     {
         AddChatMessage(new ApplyMessage(m.PlayerId, m.Class, m.Level, m.Name, m.ServerId));
     }
 
-    void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
+    private void OnTradeBrokerDealSuggested(S_TRADE_BROKER_DEAL_SUGGESTED m)
     {
         AddChatMessage(new BrokerChatMessage(m.PlayerId, m.Listing, m.Item, m.Amount, m.SellerPrice, m.OfferedPrice, m.Name));
     }
 
-    void OnWhisper(S_WHISPER m)
+    private void OnWhisper(S_WHISPER m)
     {
         var isMe = m.Author == Game.Me.Name;
         var author = isMe ? m.Recipient : m.Author;
@@ -197,18 +197,18 @@ public class ChatManager : TccWindowViewModel
         AddChatMessage(Factory.CreateMessage(channel, author, m.Message, authorServerId: m.SenderServerId, isGm: m.IsGm, authorGameId: m.GameId));
     }
 
-    void OnLeavePrivateChannel(S_LEAVE_PRIVATE_CHANNEL m)
+    private void OnLeavePrivateChannel(S_LEAVE_PRIVATE_CHANNEL m)
     {
         var i = PrivateChannels.FirstOrDefault(c => c.Id == m.Id).Index;
         PrivateChannels[i].Joined = false;
     }
 
-    void OnJoinPrivateChannel(S_JOIN_PRIVATE_CHANNEL m)
+    private void OnJoinPrivateChannel(S_JOIN_PRIVATE_CHANNEL m)
     {
         JoinPrivateChannel(m.Id, m.Index, m.Name);
     }
 
-    void OnPrivateChat(S_PRIVATE_CHAT m)
+    private void OnPrivateChat(S_PRIVATE_CHAT m)
     {
         // ignore these since they're handled differently
         //if (m.Message.Contains(":tcc-chatMode:") || m.Message.Contains(":tcc-uiMode:")) return;
@@ -219,7 +219,7 @@ public class ChatManager : TccWindowViewModel
         AddChatMessage(Factory.CreateMessage(ch, m.AuthorName, m.Message, isGm: false, authorGameId: m.AuthorId));
     }
 
-    void OnChat(S_CHAT m)
+    private void OnChat(S_CHAT m)
     {
         Task.Run(() =>
         {
@@ -227,7 +227,7 @@ public class ChatManager : TccWindowViewModel
         });
     }
 
-    void OnPlayerChangeExp(S_PLAYER_CHANGE_EXP m)
+    private void OnPlayerChangeExp(S_PLAYER_CHANGE_EXP m)
     {
         if (Game.Me.Level == 70) return;
 
@@ -247,7 +247,7 @@ public class ChatManager : TccWindowViewModel
         AddChatMessage(Factory.CreateMessage(ChatChannel.Exp, "System", msg));
     }
 
-    void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
+    private void OnCreatureChangeHp(S_CREATURE_CHANGE_HP m)
     {
         if (!App.Settings.ChatEnabled) return;
         if (!Game.IsMe(m.Target)
@@ -259,7 +259,7 @@ public class ChatManager : TccWindowViewModel
         Task.Run(() => AddDamageReceivedMessage(m.Source, m.Target, m.Diff, m.MaxHP, m.Crit));
     }
 
-    void InitWindows()
+    private void InitWindows()
     {
         ChatWindows.Clear();
         App.Settings.ChatWindowsSettings.ToList().ForEach(s =>
@@ -326,7 +326,7 @@ public class ChatManager : TccWindowViewModel
 
     }
 
-    bool Filtered(ChatMessage message)
+    private bool Filtered(ChatMessage message)
     {
         if (!App.Settings.ChatEnabled)
         {
@@ -387,7 +387,7 @@ public class ChatManager : TccWindowViewModel
         Task.Run(() => AddChatMessage(Factory.CreateSystemMessage(template, sysMsg, channelOverride, authorOverride)));
     }
 
-    void AddLfgMessage(uint id, string name, string msg, uint serverId)
+    private void AddLfgMessage(uint id, string name, string msg, uint serverId)
     {
         if (!App.Settings.ChatEnabled) return;
         Task.Run(() => AddChatMessage(Factory.CreateLfgMessage(id, name, msg, serverId)));
@@ -443,7 +443,7 @@ public class ChatManager : TccWindowViewModel
         AddChatMessage(msg);
     }
 
-    void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP, bool crit)
+    private void AddDamageReceivedMessage(ulong source, ulong target, long diff, long maxHP, bool crit)
     {
         var srcName = TccUtils.GetEntityName(source);
         var parameters = $"@0\vAmount\v{-diff}\vPerc\v{-diff / (double)maxHP:P}{(srcName != "" ? $"\vSource\v{srcName}" : "")}";
@@ -497,7 +497,7 @@ public class ChatManager : TccWindowViewModel
         //ChatMessages.Clear();
     }
 
-    static bool Pass(ChatMessage current, ChatMessage old)
+    private static bool Pass(ChatMessage current, ChatMessage old)
     {
         if (current.Author == "System") return true;
         if (current.Author == Game.Me.Name) return true;
@@ -537,13 +537,13 @@ public class ChatManager : TccWindowViewModel
         };
     }
 
-    void JoinPrivateChannel(uint id, int index, string name)
+    private void JoinPrivateChannel(uint id, int index, string name)
     {
         Instance.PrivateChannels[index] = new PrivateChatChannel(id, name, index);
         PrivateChannelJoined?.Invoke(index);
     }
 
-    void OnPrivateChannelJoined(int index)
+    private void OnPrivateChannelJoined(int index)
     {
         var messagesToAdd = _privateMessagesCache.Where(x => x.Channel == PrivateChannels[index].Id).ToList();
         messagesToAdd.ForEach(x =>
@@ -561,7 +561,7 @@ public class ChatManager : TccWindowViewModel
         _privateMessagesCache.Add(new TempPrivateMessage { Channel = channel, Author = author, Message = message });
     }
 
-    static void OnChatWindowsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private static void OnChatWindowsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.Action != NotifyCollectionChangedAction.Remove) return;
         if (e.OldItems?.Count == 0) return;
@@ -570,7 +570,7 @@ public class ChatManager : TccWindowViewModel
         App.Settings.ChatWindowsSettings.Remove(ws);
     }
 
-    void OnChatMessagesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void OnChatMessagesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.Action != NotifyCollectionChangedAction.Add) return;
         //TODO
@@ -580,7 +580,7 @@ public class ChatManager : TccWindowViewModel
         }
     }
 
-    void AddOrRefreshLfg(ListingData x)
+    private void AddOrRefreshLfg(ListingData x)
     {
         if (TryGetLfg(x.LeaderId, x.Message, x.LeaderName, out var lfg))
         {
@@ -606,7 +606,7 @@ public class ChatManager : TccWindowViewModel
         LastClickedLfg = null;
     }
 
-    bool TryGetLfg(uint id, string msg, string name, out Lfg? lfg)
+    private bool TryGetLfg(uint id, string msg, string name, out Lfg? lfg)
     {
         lfg = LFGs.ToSyncList().FirstOrDefault(x => x.Id == id);
         if (lfg != null) return true;
@@ -616,7 +616,7 @@ public class ChatManager : TccWindowViewModel
         return lfg != null;
     }
 
-    void UpdateLfgMembers(uint id, int count)
+    private void UpdateLfgMembers(uint id, int count)
     {
         if (!TryGetLfg(id, "", "", out var lfg)) return;
         lfg!.MembersCount = count;
@@ -634,7 +634,7 @@ public class ChatManager : TccWindowViewModel
         win?.ScrollToMessage(tab, msg);
     }
 
-    void ToggleForcedClickThru()
+    private void ToggleForcedClickThru()
     {
         App.Settings.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForcedClickable = !s.ForcedClickable; });
         if (App.Settings.ChatWindowsSettings.Count == 0) return;

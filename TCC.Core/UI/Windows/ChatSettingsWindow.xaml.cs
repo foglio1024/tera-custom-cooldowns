@@ -11,8 +11,8 @@ public partial class ChatSettingsWindow
 {
     public static readonly List<ChatSettingsWindow> OpenWindows = new();
 
-    readonly DoubleAnimation _closeAnimation;
-    readonly DoubleAnimation _openAnimation;
+    private readonly DoubleAnimation _closeAnimation;
+    private readonly DoubleAnimation _openAnimation;
 
     public ChatSettingsWindow(Tab dataContext)
     {
@@ -23,8 +23,8 @@ public partial class ChatSettingsWindow
         DataContext = dataContext;
         Opacity = 0;
     }
-    
-    void CloseChannelSettings(object sender, RoutedEventArgs e)
+
+    private void CloseChannelSettings(object sender, RoutedEventArgs e)
     {
         App.Settings.Save();
         FocusManager.ForceFocused = false;
@@ -32,12 +32,12 @@ public partial class ChatSettingsWindow
         OpenWindows.Remove(this);
     }
 
-    void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         DragMove();
     }
 
-    void Window_Loaded(object sender, RoutedEventArgs e)
+    private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         FocusManager.ForceFocused = true;
         BeginAnimation(OpacityProperty, _openAnimation);

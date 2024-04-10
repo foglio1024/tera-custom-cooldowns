@@ -13,9 +13,9 @@ namespace TCC.UI.Controls.NPCs;
 
 public partial class DragonControl
 {
-    Npc? _dc;
-    readonly DoubleAnimation _shieldArcAn;
-    readonly DoubleAnimation _enrageEndAnim;
+    private Npc? _dc;
+    private readonly DoubleAnimation _shieldArcAn;
+    private readonly DoubleAnimation _enrageEndAnim;
 
     public DragonControl()
     {
@@ -24,7 +24,7 @@ public partial class DragonControl
         _enrageEndAnim = AnimationFactory.CreateDoubleAnimation(0, from: 359.99, to: 0);
     }
 
-    void UserControl_Loaded(object sender, RoutedEventArgs e)
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
         _dc = (Npc)DataContext;
         _dc.PropertyChanged += Dc_PropertyChanged;
@@ -34,7 +34,7 @@ public partial class DragonControl
             : new RotateTransform(0);
     }
 
-    void Dc_DeleteEvent()
+    private void Dc_DeleteEvent()
     {
         if (_dc == null) return;
         _dc.DeleteEvent -= Dc_DeleteEvent;
@@ -53,7 +53,7 @@ public partial class DragonControl
         });
     }
 
-    void Dc_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void Dc_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_dc == null) return;
         switch (e.PropertyName)

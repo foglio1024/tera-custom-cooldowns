@@ -4,7 +4,7 @@ namespace TeraPacketParser.Data;
 
 public struct Angle
 {
-    readonly short _raw;
+    private readonly short _raw;
 
     public Angle(short raw)
         : this()

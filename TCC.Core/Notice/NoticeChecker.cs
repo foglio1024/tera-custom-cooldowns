@@ -13,9 +13,9 @@ namespace TCC.Notice;
 
 public static class NoticeChecker
 {
-    const string Url = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/messages.json";
-    static List<NoticeBase> _notices = new();
-    static readonly Timer _checkTimer = new(60 * 5 * 1000);
+    private const string Url = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/messages.json";
+    private static List<NoticeBase> _notices = new();
+    private static readonly Timer _checkTimer = new(60 * 5 * 1000);
 
     public static void Init()
     {
@@ -36,18 +36,18 @@ public static class NoticeChecker
         FireNotices(NoticeTrigger.Ready);
     }
 
-    static void OnNewConnection(Server obj)
+    private static void OnNewConnection(Server obj)
     {
         FireNotices(NoticeTrigger.Connection);
     }
 
-    static void OnLoggedChanged()
+    private static void OnLoggedChanged()
     {
         if (!Game.Logged) return;
         FireNotices(NoticeTrigger.Login);
     }
 
-    static void FireNotices(NoticeTrigger trigger)
+    private static void FireNotices(NoticeTrigger trigger)
     {
         App.BaseDispatcher.Invoke(() =>
         {
@@ -59,12 +59,12 @@ public static class NoticeChecker
         });
     }
 
-    static void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    private static void OnTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         Check();
     }
 
-    static void Check()
+    private static void Check()
     {
         try
         {

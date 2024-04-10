@@ -5,9 +5,9 @@ namespace TCC.UI;
 
 public class VisibilityManager
 {
-    readonly DispatcherTimer _dimTimer;
-    bool _forceVisible;
-    bool _forceUndim;
+    private readonly DispatcherTimer _dimTimer;
+    private bool _forceVisible;
+    private bool _forceUndim;
 
     public event Action? VisibilityChanged;
     public event Action? DimChanged;
@@ -59,25 +59,25 @@ public class VisibilityManager
         };
     }
 
-    void OnGameUiModeChanged()
+    private void OnGameUiModeChanged()
     {
         App.BaseDispatcher.Invoke(() => ClickThruChanged?.Invoke());
     }
 
-    void OnSkillStarted()
+    private void OnSkillStarted()
     {
         _dimTimer.Stop();
         _dimTimer.Start();
         NotifyDimChanged();
     }
 
-    void NotifyVisibilityChanged()
+    private void NotifyVisibilityChanged()
     {
         App.BaseDispatcher.InvokeAsync(() =>
             VisibilityChanged?.Invoke(), DispatcherPriority.Background);
     }
 
-    void NotifyDimChanged()
+    private void NotifyDimChanged()
     {
         App.BaseDispatcher.InvokeAsync(() =>
             DimChanged?.Invoke(), DispatcherPriority.Background);

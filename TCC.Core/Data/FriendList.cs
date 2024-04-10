@@ -8,8 +8,8 @@ namespace TCC.Data;
 
 public class FriendList
 {
-    bool _waitingForFirstUpdate = true;
-    readonly List<FriendEntry> _friends = [];
+    private bool _waitingForFirstUpdate = true;
+    private readonly List<FriendEntry> _friends = [];
 
     internal void UpdateFriendInfo(IReadOnlyCollection<FriendInfoUpdate> friendUpdates)
     {

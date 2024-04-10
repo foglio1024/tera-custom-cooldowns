@@ -52,7 +52,7 @@ public partial class CheckboxSetting
         DependencyProperty.Register(nameof(CheckboxSize), typeof(double), typeof(CheckboxSetting), new PropertyMetadata(18D));
 
 
-    void OnMouseButtonDown(object sender, MouseButtonEventArgs e)
+    private void OnMouseButtonDown(object sender, MouseButtonEventArgs e)
     {
         CheckBox.IsChecked = !CheckBox.IsChecked;
     }

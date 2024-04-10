@@ -20,18 +20,18 @@ namespace TCC.UI.Windows.Widgets;
 
 public class TccWidget : Window
 {
-    static bool _showBoundaries;
-    static bool _hidden;
-    static event Action? ShowBoundariesToggled;
-    static event Action? HiddenToggled;
-    static readonly List<TccWidget> _activeWidgets = new();
+    private static bool _showBoundaries;
+    private static bool _hidden;
+    private static event Action? ShowBoundariesToggled;
+    private static event Action? HiddenToggled;
+    private static readonly List<TccWidget> _activeWidgets = new();
 
-    readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, 0);
-    readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, 0);
-    readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, 1);
-    readonly DispatcherTimer _buttonsTimer;
+    private readonly DoubleAnimation _opacityAnimation = AnimationFactory.CreateDoubleAnimation(100, 0);
+    private readonly DoubleAnimation _hideButtonsAnimation = AnimationFactory.CreateDoubleAnimation(1000, 0);
+    private readonly DoubleAnimation _showButtonsAnimation = AnimationFactory.CreateDoubleAnimation(150, 1);
+    private readonly DispatcherTimer _buttonsTimer;
     protected bool _canMove = true;
-    Point WindowCenter => new(Left + ActualWidth / 2, Top + ActualHeight / 2);
+    private Point WindowCenter => new(Left + ActualWidth / 2, Top + ActualHeight / 2);
 
     protected WindowButtons? ButtonsRef;
     protected UIElement? MainContent;
@@ -113,12 +113,12 @@ public class TccWidget : Window
         }
     }
 
-    void OnHiddenToggled()
+    private void OnHiddenToggled()
     {
         OnVisibilityChanged();
     }
 
-    void OnTeraScreenChanged(System.Drawing.Point oldPos, System.Drawing.Point newPos, Size size)
+    private void OnTeraScreenChanged(System.Drawing.Point oldPos, System.Drawing.Point newPos, Size size)
     {
         var op = new Point(oldPos.X, oldPos.Y); //sigh
         var np = new Point(newPos.X, newPos.Y); //sigh
@@ -128,7 +128,7 @@ public class TccWidget : Window
         ReloadPosition();
     }
 
-    void ShowHideBoundaries()
+    private void ShowHideBoundaries()
     {
         var anim = _showBoundaries ? _showButtonsAnimation : _hideButtonsAnimation;
         Dispatcher?.InvokeAsync(() =>
@@ -167,26 +167,26 @@ public class TccWidget : Window
         });
     }
 
-    void OnFocusTick()
+    private void OnFocusTick()
     {
         if (FocusManager.PauseTopmost) return;
         if (WindowSettings?.ShowAlways == true || WindowManager.VisibilityManager.ForceVisible) RefreshTopmost();
         if (WindowManager.VisibilityManager.Visible) RefreshTopmost();
     }
 
-    void OnWindowVisibilityChanged(bool visible)
+    private void OnWindowVisibilityChanged(bool visible)
     {
         SetVisibility(visible);
     }
 
-    void OnButtonsTimerTick(object? sender, EventArgs e)
+    private void OnButtonsTimerTick(object? sender, EventArgs e)
     {
         _buttonsTimer.Stop();
         if (IsMouseOver || _showBoundaries) return;
         ButtonsRef?.BeginAnimation(OpacityProperty, _hideButtonsAnimation);
     }
 
-    void OnSizeChanged(object sender, SizeChangedEventArgs e)
+    private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
         if (WindowSettings == null) return;
         if (!WindowSettings.AllowOffScreen) CheckBounds();
@@ -205,7 +205,7 @@ public class TccWidget : Window
         if (WindowSettings?.Enabled == false) Hide();
     }
 
-    void OnDimChanged()
+    private void OnDimChanged()
     {
         if (!WindowManager.VisibilityManager.Visible) return;
         if (WindowSettings == null) return;
@@ -256,7 +256,7 @@ public class TccWidget : Window
         RefreshTopmost();
     }
 
-    void OnClickThruModeChanged()
+    private void OnClickThruModeChanged()
     {
         if (_showBoundaries)
         {
@@ -307,7 +307,7 @@ public class TccWidget : Window
         }
     }
 
-    void AnimateContentOpacity(double opacity)
+    private void AnimateContentOpacity(double opacity)
     {
         if (MainContent == null) return;
         Dispatcher?.InvokeAsync(() =>
@@ -318,7 +318,7 @@ public class TccWidget : Window
             , DispatcherPriority.DataBind);
     }
 
-    void RefreshTopmost()
+    private void RefreshTopmost()
     {
         Dispatcher?.InvokeAsync(() =>
         {
@@ -328,7 +328,7 @@ public class TccWidget : Window
         }, DispatcherPriority.DataBind);
     }
 
-    void SetVisibility(bool v)
+    private void SetVisibility(bool v)
     {
         if (Dispatcher?.Thread.IsAlive == false) return;
         Dispatcher?.Invoke(() =>
@@ -338,7 +338,7 @@ public class TccWidget : Window
         });
     }
 
-    void CheckBounds()
+    private void CheckBounds()
     {
         if (WindowSettings == null) return;
 
@@ -351,7 +351,7 @@ public class TccWidget : Window
         SetRelativeCoordinates();
     }
 
-    void CheckIndividualScreensBounds()
+    private void CheckIndividualScreensBounds()
     {
         if (IsWindowFullyVisible()) return;
         var nearestScreen = FindNearestScreen();
@@ -364,7 +364,7 @@ public class TccWidget : Window
         else if (Left < nearestScreen.Bounds.X) Left = nearestScreen.Bounds.X;
     }
 
-    Screen FindNearestScreen()
+    private Screen FindNearestScreen()
     {
         var screenFromWinCenter = ScreenFromWindowCenter();
         if (screenFromWinCenter != null) return screenFromWinCenter;
@@ -383,7 +383,7 @@ public class TccWidget : Window
     }
 
 
-    bool IsWindowFullyVisible()
+    private bool IsWindowFullyVisible()
     {
         var tl = false;
         var tr = false;
@@ -400,33 +400,33 @@ public class TccWidget : Window
         return tl && tr && bl && br;
     }
 
-    bool IsTopLeftCornerInScreen(Screen screen)
+    private bool IsTopLeftCornerInScreen(Screen screen)
     {
         return screen.Bounds.Contains(Convert.ToInt32(Left), Convert.ToInt32(Top));
     }
 
-    bool IsBottomRightCornerInScreen(Screen screen)
+    private bool IsBottomRightCornerInScreen(Screen screen)
     {
         return screen.Bounds.Contains(Convert.ToInt32(Left + ActualWidth), Convert.ToInt32(Top + ActualHeight));
     }
 
-    bool IsTopRightCornerInScreen(Screen screen)
+    private bool IsTopRightCornerInScreen(Screen screen)
     {
         return screen.Bounds.Contains(Convert.ToInt32(Left + ActualWidth), Convert.ToInt32(Top));
     }
 
-    bool IsBottomLeftCornerInScreen(Screen screen)
+    private bool IsBottomLeftCornerInScreen(Screen screen)
     {
         return screen.Bounds.Contains(Convert.ToInt32(Left), Convert.ToInt32(Top + ActualHeight));
     }
 
-    Screen? ScreenFromWindowCenter()
+    private Screen? ScreenFromWindowCenter()
     {
         return Screen.AllScreens.FirstOrDefault(x =>
             x.Bounds.Contains(Convert.ToInt32(WindowCenter.X), Convert.ToInt32(WindowCenter.Y)));
     }
 
-    void UpdateButtons()
+    private void UpdateButtons()
     {
         if (ButtonsRef == null) return;
 
@@ -475,7 +475,7 @@ public class TccWidget : Window
         App.Settings.Save();
     }
 
-    void SetRelativeCoordinates()
+    private void SetRelativeCoordinates()
     {
         if (WindowSettings == null) return;
 

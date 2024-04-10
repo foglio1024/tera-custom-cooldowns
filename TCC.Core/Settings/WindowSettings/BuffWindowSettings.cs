@@ -14,8 +14,8 @@ public class BuffWindowSettings : WindowSettingsBase
     public event Action? DirectionChanged;
     public event Action? OverlapChanged;
 
-    FlowDirection _direction;
-    double _overlap;
+    private FlowDirection _direction;
+    private double _overlap;
     public bool ShowAll { get; set; } // by HQ
 
     public FlowDirection Direction

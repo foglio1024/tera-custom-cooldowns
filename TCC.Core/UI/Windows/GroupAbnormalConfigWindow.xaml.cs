@@ -16,9 +16,9 @@ namespace TCC.UI.Windows;
 
 public partial class GroupAbnormalConfigWindow
 {
-    Class _currentFilter;
-    readonly DispatcherTimer _searchCooldown;
-    string _searchText = "";
+    private Class _currentFilter;
+    private readonly DispatcherTimer _searchCooldown;
+    private string _searchText = "";
 
     public GroupConfigVM DC { get; private set; }
 
@@ -31,7 +31,7 @@ public partial class GroupAbnormalConfigWindow
 
     }
 
-    void OnSearchTriggered(object? sender, EventArgs e)
+    private void OnSearchTriggered(object? sender, EventArgs e)
     {
         _searchCooldown.Stop();
         if (string.IsNullOrWhiteSpace(_searchText)) return;
@@ -41,7 +41,7 @@ public partial class GroupAbnormalConfigWindow
     }
 
 
-    void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
+    private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
     {
         _searchText = ((TextBox)sender).Text;
         if (string.IsNullOrWhiteSpace(_searchText)) return;
@@ -49,7 +49,7 @@ public partial class GroupAbnormalConfigWindow
     }
 
 
-    void Close(object sender, RoutedEventArgs e)
+    private void Close(object sender, RoutedEventArgs e)
     {
         App.Settings.Save();
         var anim = AnimationFactory.CreateDoubleAnimation(200, 1, completed: (_, _) =>
@@ -61,7 +61,7 @@ public partial class GroupAbnormalConfigWindow
         BeginAnimation(OpacityProperty, anim);
     }
 
-    void FilterByClass(object sender, RoutedEventArgs e)
+    private void FilterByClass(object sender, RoutedEventArgs e)
     {
         var c = (Class)((FrameworkElement)sender).DataContext;
         var view = DC.AbnormalitiesView;
@@ -99,7 +99,7 @@ public partial class GroupAbnormalConfigWindow
 
 public class ClassToggle : ThreadSafeObservableObject
 {
-    bool _selected;
+    private bool _selected;
 
     public bool Selected
     {
@@ -119,7 +119,7 @@ public class ClassToggle : ThreadSafeObservableObject
 
 public class ToggleCommand : ICommand
 {
-    readonly ClassToggle _toggle;
+    private readonly ClassToggle _toggle;
     public bool CanExecute(object? parameter)
     {
         return true;

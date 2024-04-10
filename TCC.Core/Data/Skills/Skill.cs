@@ -6,7 +6,7 @@ namespace TCC.Data.Skills;
 
 public record struct Skill
 {
-    string _iconName = "";
+    private string _iconName = "";
     
     public string IconName
     {

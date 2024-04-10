@@ -89,7 +89,8 @@ public class CharacterWindowViewModel : TccWindowViewModel // hooks in Game
     {
         SorcererFusionBoost = element;
     }
-    void OnLogin(S_LOGIN m)
+
+    private void OnLogin(S_LOGIN m)
     {
         switch (m.CharacterClass)
         {
@@ -105,14 +106,14 @@ public class CharacterWindowViewModel : TccWindowViewModel // hooks in Game
         }
     }
 
-    void OnGetUserList(S_GET_USER_LIST m)
+    private void OnGetUserList(S_GET_USER_LIST m)
     {
         PacketAnalyzer.Processor.Unhook<S_PLAYER_STAT_UPDATE>(OnPlayerStatUpdate);
         WarriorAbnormalityTracker.StanceChanged -= OnWarriorStanceChanged;
         SorcererAbnormalityTracker.BoostChanged -= OnSorcererBoostChanged;
     }
 
-    void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
+    private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
     {
         switch (Game.Me.Class)
         {
@@ -126,12 +127,12 @@ public class CharacterWindowViewModel : TccWindowViewModel // hooks in Game
         }
     }
 
-    void OnLeaderChanged()
+    private void OnLeaderChanged()
     {
         InvokePropertyChanged(nameof(ShowLeaderIcon));
     }
 
-    void MePropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void MePropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         InvokePropertyChanged(e.PropertyName); // TODO: remove????
         if (e.PropertyName != nameof(Data.Pc.Player.Class)) return;

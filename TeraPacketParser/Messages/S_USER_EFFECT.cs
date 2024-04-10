@@ -4,7 +4,7 @@ namespace TeraPacketParser.Messages;
 
 public class S_USER_EFFECT : ParsedMessage
 {
-    int _circle, _action;
+    private int _circle, _action;
     public ulong User { get; private set; }
     public ulong Source { get; private set; }
     public AggroAction Action => (AggroAction)_action;

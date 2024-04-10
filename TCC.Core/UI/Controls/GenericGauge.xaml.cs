@@ -9,9 +9,9 @@ namespace TCC.UI.Controls;
 
 public partial class GenericGauge : INotifyPropertyChanged
 {
-    const int AnimTime = 200;
-    readonly DoubleAnimation _a;
-    readonly DependencyPropertyWatcher<float> _curValwatcher; //https://blogs.msdn.microsoft.com/flaviencharlon/2012/12/07/getting-change-notifications-from-any-dependency-property-in-windows-store-apps/
+    private const int AnimTime = 200;
+    private readonly DoubleAnimation _a;
+    private readonly DependencyPropertyWatcher<float> _curValwatcher; //https://blogs.msdn.microsoft.com/flaviencharlon/2012/12/07/getting-change-notifications-from-any-dependency-property-in-windows-store-apps/
     public GenericGauge()
     {
         InitializeComponent();
@@ -23,12 +23,12 @@ public partial class GenericGauge : INotifyPropertyChanged
 
     }
 
-    void CurValWatcher_PropertyChanged(object? sender, EventArgs e)
+    private void CurValWatcher_PropertyChanged(object? sender, EventArgs e)
     {
         Factor = MaxVal > 0 ? _curValwatcher.Value / MaxVal : 0;
     }
 
-    double _factor;
+    private double _factor;
     public double Factor
     {
         get => _factor;
@@ -41,7 +41,7 @@ public partial class GenericGauge : INotifyPropertyChanged
         }
     }
 
-    void AnimateBar(double factor)
+    private void AnimateBar(double factor)
     {
         if (factor > 1)
         {
@@ -107,7 +107,7 @@ public partial class GenericGauge : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    void UserControl_Loaded(object sender, RoutedEventArgs e)
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
     }
 }

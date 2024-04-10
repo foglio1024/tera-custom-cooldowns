@@ -10,17 +10,18 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
 {
     public static event Action<WarriorStance>? StanceChanged;
     //private static readonly uint[] GambleIDs = { 100800, 100801, 100802, 100803 };
-    const uint GambleID = 100801;
-    static readonly uint[] AstanceIDs = [100100, 100101, 100102, 100103];
-    static readonly uint[] DstanceIDs = [100200, 100201, 100202, 100203];
-    static readonly uint[] TraverseCutIDs = [101300/*, 101301*/];
-    static readonly uint[] BladeWaltzIDs = [104100];
-    static readonly uint[] SwiftGlyphs = [21010, 21070];
+    private const uint GambleID = 100801;
+    private static readonly uint[] AstanceIDs = [100100, 100101, 100102, 100103];
+    private static readonly uint[] DstanceIDs = [100200, 100201, 100202, 100203];
+    private static readonly uint[] TraverseCutIDs = [101300/*, 101301*/];
+    private static readonly uint[] BladeWaltzIDs = [104100];
+    private static readonly uint[] SwiftGlyphs = [21010, 21070];
 
-    readonly Skill _bladeWaltz;
+    private readonly Skill _bladeWaltz;
 
-    static WarriorStance _stance;
-    static WarriorStance Stance
+    private static WarriorStance _stance;
+
+    private static WarriorStance Stance
     {
         set
         {
@@ -75,7 +76,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         //CheckTempestAura(p);
     }
 
-    static void CheckAssaultStanceBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckAssaultStanceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
 
@@ -86,7 +87,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetStance(WarriorStance.Assault);
     }
 
-    static void CheckAssaultStanceRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckAssaultStanceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
 
@@ -97,7 +98,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetStance(WarriorStance.Assault);
     }
 
-    static void CheckAssaultStanceEnd(S_ABNORMALITY_END p)
+    private static void CheckAssaultStanceEnd(S_ABNORMALITY_END p)
     {
         if (!AstanceIDs.Contains(p.AbnormalityId)) return;
 
@@ -108,7 +109,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetStance(WarriorStance.None);
     }
 
-    static void CheckDefensiveStanceBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckDefensiveStanceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
 
@@ -119,7 +120,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetStance(WarriorStance.Defensive);
     }
 
-    static void CheckDefensiveStanceRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckDefensiveStanceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
 
@@ -130,7 +131,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetStance(WarriorStance.Defensive);
     }
 
-    static void CheckDefensiveStanceEnd(S_ABNORMALITY_END p)
+    private static void CheckDefensiveStanceEnd(S_ABNORMALITY_END p)
     {
         if (!DstanceIDs.Contains(p.AbnormalityId)) return;
 
@@ -141,7 +142,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetStance(WarriorStance.None);
     }
 
-    static void CheckDeadlyGambleBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckDeadlyGambleBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != GambleID) return;
         //if (!CheckByIconName(p.AbnormalityId, DeadlyGambleIconName)) return; //temporary
@@ -150,7 +151,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.DeadlyGamble.StartEffect(p.Duration);
     }
 
-    static void CheckDeadlyGambleRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckDeadlyGambleRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != GambleID) return;
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -160,7 +161,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.DeadlyGamble.RefreshEffect(p.Duration);
     }
 
-    static void CheckDeadlyGambleEnd(S_ABNORMALITY_END p)
+    private static void CheckDeadlyGambleEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != GambleID) return;
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -170,14 +171,14 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.DeadlyGamble.StopEffect();
     }
 
-    void CheckBladeWaltzBegin(S_ABNORMALITY_BEGIN p)
+    private void CheckBladeWaltzBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!BladeWaltzIDs.Contains(p.AbnormalityId)) return;
 
         StartPrecooldown(_bladeWaltz, p.Duration);
     }
 
-    static void CheckTraverseCutBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckTraverseCutBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -186,7 +187,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.TraverseCut.InvokeToZero(p.Duration);
     }
 
-    static void CheckTraverseCutRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckTraverseCutRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -195,7 +196,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.TraverseCut.InvokeToZero(p.Duration);
     }
 
-    static void CheckTraverseCutEnd(S_ABNORMALITY_END p)
+    private static void CheckTraverseCutEnd(S_ABNORMALITY_END p)
     {
         if (!TraverseCutIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -203,7 +204,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.TraverseCut.Val = 0;
     }
 
-    static void CheckSwiftGlyphsBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckSwiftGlyphsBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -211,7 +212,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetSwift(p.Duration);
     }
 
-    static void CheckSwiftGlyphsRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckSwiftGlyphsRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -219,7 +220,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetSwift(p.Duration);
     }
 
-    static void CheckSwiftGlyphsEnd(S_ABNORMALITY_END p)
+    private static void CheckSwiftGlyphsEnd(S_ABNORMALITY_END p)
     {
         if (!SwiftGlyphs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -227,7 +228,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetSwift(0);
     }
 
-    static void CheckArushBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckArushBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -235,7 +236,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetArush(p.Duration);
     }
 
-    static void CheckArushRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckArushRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;
@@ -243,7 +244,7 @@ public class WarriorAbnormalityTracker : AbnormalityTracker
         vm.SetArush(p.Duration);
     }
 
-    static void CheckArushEnd(S_ABNORMALITY_END p)
+    private static void CheckArushEnd(S_ABNORMALITY_END p)
     {
         if (!CheckByIconName(p.AbnormalityId, LancerAbnormalityTracker.AdrenalineRushIconName)) return; //temporary
         if (!TryGetClassViewModel<WarriorLayoutViewModel>(out var vm)) return;

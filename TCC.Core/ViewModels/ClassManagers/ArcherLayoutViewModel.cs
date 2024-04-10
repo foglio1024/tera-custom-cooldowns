@@ -6,7 +6,7 @@ namespace TCC.ViewModels.ClassManagers;
 
 public class ArcherLayoutViewModel : BaseClassLayoutViewModel
 {
-    bool _windWalkProc;
+    private bool _windWalkProc;
 
     public ArcherFocusTracker Focus { get; private set; }
     public Cooldown Thunderbolt { get; set; }

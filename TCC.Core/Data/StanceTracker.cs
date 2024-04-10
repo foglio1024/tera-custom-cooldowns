@@ -5,7 +5,7 @@ namespace TCC.Data;
 
 public class StanceTracker<T> : ThreadSafeObservableObject where T : struct, IComparable
 {
-    T _currentStance;
+    private T _currentStance;
 
     public T CurrentStance
     {

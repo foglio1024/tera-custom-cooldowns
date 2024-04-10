@@ -12,8 +12,8 @@ namespace TeraPacketParser;
 // Since this mapping is version dependent, we can't use a sing global instance of this
 public class OpCodeNamer
 {
-    Dictionary<string, ushort> _opCodeCodes;
-    Dictionary<ushort, string> _opCodeNames;
+    private Dictionary<string, ushort> _opCodeCodes;
+    private Dictionary<ushort, string> _opCodeNames;
 
     public OpCodeNamer(IEnumerable<KeyValuePair<ushort, string>> names)
     {
@@ -31,7 +31,7 @@ public class OpCodeNamer
         return _opCodeNames.TryGetValue(opCode, out var name) ? name : opCode.ToString("X4");
     }
 
-    static async Task<IEnumerable<KeyValuePair<ushort, string>>> ReadOpCodeFile(string filename)
+    private static async Task<IEnumerable<KeyValuePair<ushort, string>>> ReadOpCodeFile(string filename)
     {
         if (!File.Exists(filename))
         {

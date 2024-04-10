@@ -7,10 +7,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing;
 
 public class TcpSniffer
 {
-    readonly ConcurrentDictionary<ConnectionId, TcpConnection> _connections = new();
+    private readonly ConcurrentDictionary<ConnectionId, TcpConnection> _connections = new();
 
-    readonly object _lock = new();
-    readonly string? _snifferType;
+    private readonly object _lock = new();
+    private readonly string? _snifferType;
     public TcpSniffer(IpSniffer ipSniffer)
     {
         ipSniffer.PacketReceived += Receive;
@@ -50,7 +50,7 @@ public class TcpSniffer
     //    }
     //}
 
-    void Receive(IPv4Packet ipData)
+    private void Receive(IPv4Packet ipData)
     {
         var tcpPacket = ipData.PayloadPacket as TcpPacket;
         if (tcpPacket == null || tcpPacket.DataOffset*4 > ipData.PayloadLength) return;

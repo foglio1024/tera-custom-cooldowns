@@ -5,11 +5,11 @@ namespace TCC.Data.Abnormalities;
 
 public class BerserkerAbnormalityTracker : AbnormalityTracker
 {
-    const int BloodlustId = 400701;
-    const int FieryRageId = 400105;
-    const int UnleashId = 401705;
-    const int SinisterDexter = 401706;
-    const int Rampage = 401710;
+    private const int BloodlustId = 400701;
+    private const int FieryRageId = 400105;
+    private const int UnleashId = 401705;
+    private const int SinisterDexter = 401706;
+    private const int Rampage = 401710;
 
     public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
@@ -83,7 +83,7 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckUnleashAbnormalsBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckUnleashAbnormalsBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
 
@@ -101,7 +101,7 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckUnleashAbnormalsRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckUnleashAbnormalsRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
 
@@ -119,7 +119,7 @@ public class BerserkerAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckUnleashAbnormalsEnd(S_ABNORMALITY_END p)
+    private static void CheckUnleashAbnormalsEnd(S_ABNORMALITY_END p)
     {
         if (!TryGetClassViewModel<BerserkerLayoutViewModel>(out var vm)) return;
 

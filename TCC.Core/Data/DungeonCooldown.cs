@@ -8,9 +8,9 @@ namespace TCC.Data;
 
 public class DungeonCooldown : ThreadSafeObservableObject
 {
-    int _entries;
+    private int _entries;
 
-    uint Id { get; }
+    private uint Id { get; }
     public int Clears { get; }
     public int Entries
     {
@@ -77,7 +77,7 @@ public class DungeonCooldown : ThreadSafeObservableObject
         owner.PropertyChanged += OnOwnerPropertyChanged;
     }
 
-    void OnOwnerPropertyChanged(object? sender, PropertyChangedEventArgs args)
+    private void OnOwnerPropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
         switch (args.PropertyName)
         {

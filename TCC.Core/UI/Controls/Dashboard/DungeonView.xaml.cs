@@ -16,7 +16,7 @@ public partial class DungeonView
         IsVisibleChanged += (_, _) => { (DataContext as DashboardViewModel)?.LoadDungeonsCommand.Execute(null); };
     }
 
-    void DungeonColumns_OnScrollChanged(object sender, ScrollChangedEventArgs e)
+    private void DungeonColumns_OnScrollChanged(object sender, ScrollChangedEventArgs e)
     {
         var headerSw = DungeonHeaders.FindVisualChild<ScrollViewer>();
         var namesSw = CharacterNames.FindVisualChild<ScrollViewer>();
@@ -26,7 +26,7 @@ public partial class DungeonView
 
     }
 
-    void OnEntryMouseEnter(object sender, MouseEventArgs e)
+    private void OnEntryMouseEnter(object sender, MouseEventArgs e)
     {
         if ((sender as FrameworkElement)?.DataContext is not DungeonCooldownViewModel cd) return;
         var chara = cd.Owner;
@@ -39,7 +39,7 @@ public partial class DungeonView
         if (ch != null) ch.Hilight = true;
     }
 
-    void OnEntryMouseLeave(object sender, MouseEventArgs e)
+    private void OnEntryMouseLeave(object sender, MouseEventArgs e)
     {
         var cd = (sender as FrameworkElement)?.DataContext as DungeonCooldownViewModel;
         var chara = cd?.Owner;
@@ -51,7 +51,7 @@ public partial class DungeonView
         if (chVM != null) chVM.Hilight = false;
     }
 
-    void OnDungeonEditButtonClick(object sender, RoutedEventArgs e)
+    private void OnDungeonEditButtonClick(object sender, RoutedEventArgs e)
     {
         new DungeonEditWindow { Topmost = true, Owner = WindowManager.DashboardWindow }.ShowDialog();
     }

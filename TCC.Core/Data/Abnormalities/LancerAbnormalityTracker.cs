@@ -7,8 +7,8 @@ namespace TCC.Data.Abnormalities;
 public class LancerAbnormalityTracker : AbnormalityTracker
 {
     public static readonly uint[] ARushIDs = [200700, 200701, 200731];
-    static readonly uint[] GShoutIDs = [200200, 200201, 200202];
-    const uint LineHeldId = 201701;
+    private static readonly uint[] GShoutIDs = [200200, 200201, 200202];
+    private const uint LineHeldId = 201701;
     public const string AdrenalineRushIconName = "icon_skills.fightingwill_tex";
 
     public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
@@ -38,7 +38,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         CheckLineHeldEnd(p);
     }
 
-    static void CheckArushBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckArushBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
@@ -46,7 +46,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         vm.AdrenalineRush.StartEffect(p.Duration);
     }
 
-    static void CheckArushRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckArushRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
@@ -54,7 +54,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         vm.AdrenalineRush.StartEffect(p.Duration);
     }
 
-    static void CheckArushEnd(S_ABNORMALITY_END p)
+    private static void CheckArushEnd(S_ABNORMALITY_END p)
     {
         if (!CheckByIconName(p.AbnormalityId, AdrenalineRushIconName)) return; //temporary
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
@@ -62,7 +62,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         vm.AdrenalineRush.StopEffect();
     }
 
-    static void CheckGshoutBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckGshoutBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!GShoutIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
@@ -70,7 +70,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         vm.GuardianShout.StartEffect(p.Duration);
     }
 
-    static void CheckGshoutRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckGshoutRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!GShoutIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
@@ -78,7 +78,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         vm.GuardianShout.StartEffect(p.Duration);
     }
 
-    static void CheckGshoutEnd(S_ABNORMALITY_END p)
+    private static void CheckGshoutEnd(S_ABNORMALITY_END p)
     {
         if (!GShoutIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
@@ -86,7 +86,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         vm.GuardianShout.StopEffect();
     }
 
-    static void CheckLineHeldBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckLineHeldBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != LineHeldId) return;
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
@@ -94,7 +94,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         vm.LH.StartBaseBuff(p.Duration);
     }
 
-    static void CheckLineHeldRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckLineHeldRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != LineHeldId) return;
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;
@@ -102,7 +102,7 @@ public class LancerAbnormalityTracker : AbnormalityTracker
         vm.LH.RefreshBaseBuff(p.Stacks, p.Duration);
     }
 
-    static void CheckLineHeldEnd(S_ABNORMALITY_END p)
+    private static void CheckLineHeldEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != LineHeldId) return;
         if (!TryGetClassViewModel<LancerLayoutViewModel>(out var vm)) return;

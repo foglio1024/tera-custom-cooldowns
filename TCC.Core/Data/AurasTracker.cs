@@ -7,7 +7,7 @@ public class AurasTracker : ThreadSafeObservableObject
 {
     public event Action? AuraChanged;
 
-    bool _crit, _mp, _res, _swift;
+    private bool _crit, _mp, _res, _swift;
     public bool CritAura
     {
         get => _crit; set

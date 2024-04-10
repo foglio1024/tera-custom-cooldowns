@@ -15,7 +15,7 @@ public class NpcViewModel : ThreadSafeObservableObject
     protected readonly DispatcherTimer DeleteTimer;
     protected readonly DispatcherTimer ShowMenuButtonTimer;
 
-    bool _showOverrideBtn;
+    private bool _showOverrideBtn;
 
 
 
@@ -59,7 +59,7 @@ public class NpcViewModel : ThreadSafeObservableObject
         DeleteTimer.Start();
     }
 
-    void OnShowMenuButtonTimerTick(object? _, EventArgs __)
+    private void OnShowMenuButtonTimerTick(object? _, EventArgs __)
     {
         InvokePropertyChanged(nameof(ShowOverrideBtn));
         ShowMenuButtonTimer.Stop();

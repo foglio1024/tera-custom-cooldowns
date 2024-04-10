@@ -10,10 +10,10 @@ namespace TCC.Updater
 {
     internal class Program
     {
-        static string SourcePath = Path.GetDirectoryName(typeof(Program).Assembly.Location)+ "/tmp";
-        static string DestinationPath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+        private static string SourcePath = Path.GetDirectoryName(typeof(Program).Assembly.Location)+ "/tmp";
+        private static string DestinationPath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (!HasUpdateArg(args)) return;
             WaitForTccExit();
@@ -32,7 +32,7 @@ namespace TCC.Updater
             Environment.Exit(0);
         }
 
-        static void ReplaceFiles()
+        private static void ReplaceFiles()
         {
             foreach (var newPath in Directory.GetFiles(SourcePath, "*.*", SearchOption.AllDirectories).Where(p => !p.Contains(@"\config\")))
             {
@@ -41,7 +41,7 @@ namespace TCC.Updater
             }
         }
 
-        static void CreateDirectories()
+        private static void CreateDirectories()
         {
             foreach (var dirPath in Directory.GetDirectories(SourcePath, "*", SearchOption.AllDirectories))
             {
@@ -49,7 +49,7 @@ namespace TCC.Updater
             }
         }
 
-        static void WaitForTccExit()
+        private static void WaitForTccExit()
         {
             var pl = Process.GetProcesses();
             var tries = 10;
@@ -71,7 +71,7 @@ namespace TCC.Updater
             }
         }
 
-        static bool HasUpdateArg(IEnumerable<string> args)
+        private static bool HasUpdateArg(IEnumerable<string> args)
         {
             if (args.Any(x => x == "update")) return true;
             MessageBox.Show("This is not meant to be launched manually!", "TCC Updater", MessageBoxButton.OK,

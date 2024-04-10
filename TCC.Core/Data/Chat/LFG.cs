@@ -6,12 +6,12 @@ namespace TCC.Data.Chat;
 
 public class Lfg : ThreadSafeObservableObject
 {
-    string _name = "";
-    string _message = "";
-    bool _raid;
-    string _dungeonName = "";
-    int _membersCount;
-    readonly Timer _removeDelay;
+    private string _name = "";
+    private string _message = "";
+    private bool _raid;
+    private string _dungeonName = "";
+    private int _membersCount;
+    private readonly Timer _removeDelay;
 
     public uint Id { get; }
     public uint ServerId { get; }
@@ -66,7 +66,7 @@ public class Lfg : ThreadSafeObservableObject
         _removeDelay.Start();
     }
 
-    void RemoveDelayElapsed(object? sender, ElapsedEventArgs e)
+    private void RemoveDelayElapsed(object? sender, ElapsedEventArgs e)
     {
         ChatManager.Instance.RemoveLfg(this);
     }
@@ -84,7 +84,7 @@ public class Lfg : ThreadSafeObservableObject
         }
     }
 
-    void UpdateDungeonName()
+    private void UpdateDungeonName()
     {
         var a = Message.Split(' ');
         DungeonName = a[0].Length <= 5 ? a[0] : "LFG";

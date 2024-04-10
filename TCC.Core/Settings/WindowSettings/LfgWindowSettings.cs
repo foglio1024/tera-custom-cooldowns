@@ -6,13 +6,13 @@ namespace TCC.Settings.WindowSettings;
 
 public class LfgWindowSettings : WindowSettingsBase
 {
-    const int MinAutoPublicizeCooldown = 20;
+    private const int MinAutoPublicizeCooldown = 20;
 
     public event Action? HideTradeListingsChangedEvent;
 
-    bool _hideTradeListings;
-    int _minLevel;
-    int _maxLevel;
+    private bool _hideTradeListings;
+    private int _minLevel;
+    private int _maxLevel;
 
     public int MinLevel
     {
@@ -48,7 +48,7 @@ public class LfgWindowSettings : WindowSettingsBase
         }
     }
 
-    int _autoPublicizeCooldown;
+    private int _autoPublicizeCooldown;
 
     public int AutoPublicizeCooldown
     {

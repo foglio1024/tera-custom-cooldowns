@@ -41,13 +41,13 @@ public class ChatViewModel : ThreadSafeObservableObject
 {
     public event Action? ForceSizePosUpdateEvent;
 
-    bool _paused;
-    bool _visible = true;
-    readonly DispatcherTimer _hideTimer;
-    bool _collapsed;
-    bool _mouseOver;
-    Tab? _currentTab;
-    bool _showCollapsedSettingsButton;
+    private bool _paused;
+    private bool _visible = true;
+    private readonly DispatcherTimer _hideTimer;
+    private bool _collapsed;
+    private bool _mouseOver;
+    private Tab? _currentTab;
+    private bool _showCollapsedSettingsButton;
 
     public bool Paused
     {
@@ -152,19 +152,19 @@ public class ChatViewModel : ThreadSafeObservableObject
         if (WindowSettings.StaysCollapsed) _collapsed = true;
     }
 
-    void CheckCollapsed()
+    private void CheckCollapsed()
     {
         Collapsed = !(Game.InGameUiOn || Game.InGameChatOpen) || WindowSettings.StaysCollapsed;
         ShowCollapsedSettingsButton = Game.InGameUiOn;
     }
 
-    void ChangeTimerInterval()
+    private void ChangeTimerInterval()
     {
         _hideTimer.Interval = TimeSpan.FromSeconds(WindowSettings.HideTimeout);
         _hideTimer.Refresh();
     }
 
-    void OnHideTimerTick(object? sender, EventArgs e)
+    private void OnHideTimerTick(object? sender, EventArgs e)
     {
         if (!WindowSettings.FadeOut)
         {
@@ -177,7 +177,7 @@ public class ChatViewModel : ThreadSafeObservableObject
         _hideTimer.Stop();
     }
 
-    void CheckAttention(ChatMessage chatMessage)
+    private void CheckAttention(ChatMessage chatMessage)
     {
         if (!WindowSettings.ShowImportant) return;
         if (!chatMessage.ContainsPlayerName && chatMessage.Channel != ChatChannel.ReceivedWhisper) return;

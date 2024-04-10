@@ -10,13 +10,13 @@ namespace TCC.UI.Controls.Classes.Elements;
 
 public partial class TraverseCutControl
 {
-    readonly DoubleAnimation _toZeroAnimation;
-    readonly DoubleAnimation _anim;
+    private readonly DoubleAnimation _toZeroAnimation;
+    private readonly DoubleAnimation _anim;
 
-    bool _isAnimating;
+    private bool _isAnimating;
 
-    readonly DispatcherTimer _delay;
-    uint _lastDuration;
+    private readonly DispatcherTimer _delay;
+    private uint _lastDuration;
 
     public string IconName
     {
@@ -36,13 +36,13 @@ public partial class TraverseCutControl
     public static readonly DependencyProperty TrackerProperty =
         DependencyProperty.Register(nameof(Tracker), typeof(StatTracker), typeof(TraverseCutControl), new PropertyMetadata(null, HandleTrackerChanged));
 
-    static void HandleTrackerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void HandleTrackerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is not TraverseCutControl tc) return;
         tc.OnTrackerChanged((StatTracker?)e.NewValue, (StatTracker?)e.OldValue);
     }
 
-    void OnTrackerChanged(StatTracker? newValue, StatTracker? oldValue)
+    private void OnTrackerChanged(StatTracker? newValue, StatTracker? oldValue)
     {
         if (oldValue != null)
         {
@@ -76,7 +76,7 @@ public partial class TraverseCutControl
     }
 
 
-    void OnToZero(uint duration)
+    private void OnToZero(uint duration)
     {
         if (_isAnimating)
         {
@@ -96,7 +96,7 @@ public partial class TraverseCutControl
         });
     }
 
-    void OnFactorChanged(double newFactor)
+    private void OnFactorChanged(double newFactor)
     {
         if (Tracker != null)
         {

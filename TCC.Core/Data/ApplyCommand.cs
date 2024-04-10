@@ -8,8 +8,8 @@ namespace TCC.Data;
 
 public class ApplyCommand : ICommand
 {
-    readonly Listing _listing;
-    readonly Timer _t;
+    private readonly Listing _listing;
+    private readonly Timer _t;
     public ApplyCommand(Listing listing)
     {
         _listing = listing;
@@ -17,7 +17,7 @@ public class ApplyCommand : ICommand
         _t.Elapsed += OnTimerElapsed;
     }
 
-    void OnTimerElapsed(object? s, ElapsedEventArgs ev)
+    private void OnTimerElapsed(object? s, ElapsedEventArgs ev)
     {
         _t.Stop();
         _listing.CanApply = true;

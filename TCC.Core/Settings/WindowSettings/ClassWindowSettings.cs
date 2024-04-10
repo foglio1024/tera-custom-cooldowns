@@ -15,15 +15,15 @@ public class ClassWindowSettings : WindowSettingsBase
     public event Action? SorcererShowElementsChanged;
     public event Action? FlashAvailableSkillsChanged;
 
-    bool _warriorShowEdge;
-    bool _warriorShowInfuriate;
-    bool _warriorShowTraverseCut;
-    bool _sorcererShowElements;
-    bool _valkyrieShowRagnarok;
-    bool _valkyrieShowGodsfall;
-    bool _flashAvailableSkills;
+    private bool _warriorShowEdge;
+    private bool _warriorShowInfuriate;
+    private bool _warriorShowTraverseCut;
+    private bool _sorcererShowElements;
+    private bool _valkyrieShowRagnarok;
+    private bool _valkyrieShowGodsfall;
+    private bool _flashAvailableSkills;
 
-    WarriorEdgeMode _warriorEdgeMode;
+    private WarriorEdgeMode _warriorEdgeMode;
 
     public bool WarriorShowEdge
     {

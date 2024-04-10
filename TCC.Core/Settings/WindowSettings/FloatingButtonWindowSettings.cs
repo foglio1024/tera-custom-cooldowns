@@ -5,7 +5,7 @@ namespace TCC.Settings.WindowSettings;
 
 public class FloatingButtonWindowSettings : WindowSettingsBase
 {
-    bool _showNotificationBubble;
+    private bool _showNotificationBubble;
 
     public bool ShowNotificationBubble
     {

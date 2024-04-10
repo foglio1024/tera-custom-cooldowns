@@ -27,15 +27,15 @@ namespace TCC.UI.Windows;
 
 public partial class MyAbnormalConfigWindow
 {
-    static MyAbnormalConfigWindow? _instance;
+    private static MyAbnormalConfigWindow? _instance;
     public static MyAbnormalConfigWindow Instance => _instance ?? new MyAbnormalConfigWindow();
-    Class _currentFilter;
+    private Class _currentFilter;
 
     public MyAbnormalConfigVM DC { get; private set; }
 
 
-    readonly DispatcherTimer _searchCooldown;
-    string _searchText = "";
+    private readonly DispatcherTimer _searchCooldown;
+    private string _searchText = "";
 
     public MyAbnormalConfigWindow() : base(true)
     {
@@ -46,7 +46,7 @@ public partial class MyAbnormalConfigWindow
         _searchCooldown = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, OnSearchTriggered, Dispatcher ?? throw new InvalidOperationException());
     }
 
-    void OnSearchTriggered(object? sender, EventArgs e)
+    private void OnSearchTriggered(object? sender, EventArgs e)
     {
         _searchCooldown.Stop();
         if (string.IsNullOrWhiteSpace(_searchText)) return;
@@ -56,14 +56,14 @@ public partial class MyAbnormalConfigWindow
     }
 
 
-    void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
+    private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
     {
         _searchText = ((TextBox)sender).Text;
         if (string.IsNullOrWhiteSpace(_searchText)) return;
         _searchCooldown.Refresh();
     }
 
-    void Close(object sender, RoutedEventArgs e)
+    private void Close(object sender, RoutedEventArgs e)
     {
         App.Settings.Save();
         var an = AnimationFactory.CreateDoubleAnimation(200, 0, completed: (_, _) =>
@@ -77,7 +77,7 @@ public partial class MyAbnormalConfigWindow
         BeginAnimation(OpacityProperty, an);
     }
 
-    void FilterByClass(object sender, RoutedEventArgs e)
+    private void FilterByClass(object sender, RoutedEventArgs e)
     {
         var c = (Class)((FrameworkElement)sender).DataContext;
         var view = DC.AbnormalitiesView;
@@ -115,7 +115,7 @@ public partial class MyAbnormalConfigWindow
 
 public class MyClassToggle : ThreadSafeObservableObject
 {
-    bool _selected;
+    private bool _selected;
     public bool Selected
     {
         get => _selected;

@@ -9,8 +9,8 @@ public class CooldownWindowSettings : WindowSettingsBase
     public event Action? ShowItemsChanged;
     public event Action? ModeChanged;
 
-    bool _showItems;
-    CooldownBarMode _mode;
+    private bool _showItems;
+    private CooldownBarMode _mode;
 
     public bool ShowItems
     {

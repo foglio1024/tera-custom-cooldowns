@@ -15,10 +15,10 @@ namespace TCC.Data.Chat;
 
 public class LfgMessage : ChatMessage
 {
-    int _tries = 10;
-    readonly ThreadSafeObservableCollection<User> _members = [];
-    readonly Timer _timer;
-    Listing? _linkedListing;
+    private int _tries = 10;
+    private readonly ThreadSafeObservableCollection<User> _members = [];
+    private readonly Timer _timer;
+    private Listing? _linkedListing;
 
     public uint AuthorId { get; }
     public uint ServerId { get; } //TODO: should be added to base class and assigned from S_CHAT, S_WHISPER, etc
@@ -69,7 +69,7 @@ public class LfgMessage : ChatMessage
         base.DisposeImpl();
     }
 
-    void OnMembersChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void OnMembersChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         Task.Run(() =>
         {
@@ -90,7 +90,7 @@ public class LfgMessage : ChatMessage
         });
     }
 
-    void OnTimerTick(object? sender, EventArgs e)
+    private void OnTimerTick(object? sender, EventArgs e)
     {
         if (_tries == 0)
         {
@@ -109,7 +109,7 @@ public class LfgMessage : ChatMessage
         WindowManager.ViewModels.LfgVM.EnqueueRequest(LinkedListing.LeaderId, LinkedListing.ServerId);
     }
 
-    Listing? FindListing()
+    private Listing? FindListing()
     {
         return WindowManager.ViewModels.LfgVM.Listings.ToSyncList().FirstOrDefault(x =>
             x.Players.ToSyncList().Any(p => p.Name == Author) ||

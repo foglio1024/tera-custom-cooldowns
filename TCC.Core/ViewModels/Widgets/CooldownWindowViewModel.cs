@@ -27,7 +27,7 @@ namespace TCC.ViewModels.Widgets;
 [TccModule]
 public class CooldownWindowViewModel : TccWindowViewModel
 {
-    bool _isDragging;
+    private bool _isDragging;
 
     public bool IsDragging
     {
@@ -38,7 +38,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
     public bool ShowItems => App.Settings.CooldownWindowSettings.ShowItems;
 
     public event Action? SkillsLoaded;
-    const int LongSkillTreshold = 40000; //TODO: make configurable?
+    private const int LongSkillTreshold = 40000; //TODO: make configurable?
 
     public ThreadSafeObservableCollection<Cooldown> ShortSkills { get; }
     public ThreadSafeObservableCollection<Cooldown> LongSkills { get; }
@@ -54,7 +54,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
     public ThreadSafeCollection<Item> Items { get; } = [.. Game.DB!.ItemsDatabase.ItemSkills];
     public ThreadSafeCollection<Abnormality> Passivities { get; } = [.. Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList()];
 
-    static bool FindAndUpdate(ThreadSafeObservableCollection<Cooldown> list, Cooldown sk)
+    private static bool FindAndUpdate(ThreadSafeObservableCollection<Cooldown> list, Cooldown sk)
     {
         var existing = list.ToSyncList().FirstOrDefault(x => x.Skill.IconName == sk.Skill.IconName);
         if (existing == null)
@@ -74,7 +74,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         return true;
     }
 
-    bool NormalMode_Update(Cooldown sk)
+    private bool NormalMode_Update(Cooldown sk)
     {
         if (!App.Settings.CooldownWindowSettings.Enabled) return false;
 
@@ -117,7 +117,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         }
     }
 
-    void NormalMode_Change(Skill skill, uint cd)
+    private void NormalMode_Change(Skill skill, uint cd)
     {
         if (!App.Settings.CooldownWindowSettings.Enabled) return;
 
@@ -177,7 +177,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         SaveConfig();
     }
 
-    void NormalMode_Remove(Skill sk)
+    private void NormalMode_Remove(Skill sk)
     {
         if (!App.Settings.CooldownWindowSettings.Enabled) return;
 
@@ -208,7 +208,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
     }
 
 
-    bool FixedMode_Update(Cooldown sk)
+    private bool FixedMode_Update(Cooldown sk)
     {
         if (!App.Settings.CooldownWindowSettings.Enabled)
         {
@@ -241,7 +241,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         return true;
     }
 
-    void FixedMode_Change(Skill sk, uint cd)
+    private void FixedMode_Change(Skill sk, uint cd)
     {
         if (!App.Settings.CooldownWindowSettings.Enabled) return;
 
@@ -273,7 +273,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         }
     }
 
-    void FixedMode_Remove(Skill sk)
+    private void FixedMode_Remove(Skill sk)
     {
         //sk.SetDispatcher(Dispatcher);
         if (!App.Settings.CooldownWindowSettings.Enabled) return;
@@ -313,7 +313,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         }
     }
 
-    bool UpdateOther(Cooldown sk)
+    private bool UpdateOther(Cooldown sk)
     {
         if (!App.Settings.CooldownWindowSettings.Enabled)
         {
@@ -496,7 +496,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     public bool Combat => Game.Combat;
 
-    void OnCombatChanged()
+    private void OnCombatChanged()
     {
         InvokePropertyChanged(nameof(Combat));
     }
@@ -566,14 +566,14 @@ public class CooldownWindowViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
     }
 
-    void OnDisconnected()
+    private void OnDisconnected()
     {
         SaveConfig();
         ClearSkills();
     }
 
 
-    void CheckPassivity(Abnormality ab, uint cd)
+    private void CheckPassivity(Abnormality ab, uint cd)
     {
         if (!PassivityDatabase.TryGetPassivitySkill(ab.Id, out var skill)) return;
         if (PassivityDatabase.Passivities.TryGetValue(ab.Id, out var cdFromDb))
@@ -589,7 +589,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
 
     }
 
-    void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
+    private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
         if (App.Settings.EthicalMode) return;
         if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
@@ -597,7 +597,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         if (Game.IsMe(p.CasterId) || Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
     }
 
-    void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+    private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (App.Settings.EthicalMode) return;
         if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
@@ -605,7 +605,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         if (Game.IsMe(p.TargetId)) CheckPassivity(ab, p.Duration);
     }
 
-    void OnAbnormalityEnd(S_ABNORMALITY_END p)
+    private void OnAbnormalityEnd(S_ABNORMALITY_END p)
     {
         if (App.Settings.EthicalMode) return;
         if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
@@ -613,37 +613,37 @@ public class CooldownWindowViewModel : TccWindowViewModel
         if (Game.IsMe(p.TargetId)) CheckPassivity(ab, 0);
     }
 
-    void OnLogin(S_LOGIN m)
+    private void OnLogin(S_LOGIN m)
     {
         ClearSkills();
         LoadConfig(m.CharacterClass);
     }
 
-    void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+    private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
     {
         SaveConfig();
         ClearSkills();
     }
 
-    void OnGetUserList(S_GET_USER_LIST m)
+    private void OnGetUserList(S_GET_USER_LIST m)
     {
         ClearSkills();
     }
 
-    void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
+    private void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
     {
         if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
         if (!Pass(skill)) return;
         Change(skill, m.Cooldown);
     }
 
-    void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
+    private void OnStartCooltimeItem(S_START_COOLTIME_ITEM m)
     {
         if (!Game.DB!.ItemsDatabase.TryGetItemSkill(m.ItemId, out var itemSkill)) return;
         RouteSkill(new Cooldown(itemSkill, m.Cooldown, CooldownType.Item));
     }
 
-    void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
+    private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
     {
         if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)
          && !Game.DB.SkillsDatabase.TryGetSkill(m.SkillId, Class.Common, out skill))
@@ -655,7 +655,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
         RouteSkill(new Cooldown(skill, cd));
     }
 
-    void OnCrestMessage(S_CREST_MESSAGE m)
+    private void OnCrestMessage(S_CREST_MESSAGE m)
     {
         if (m.Type != 6) return;
         if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
@@ -664,7 +664,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
     }
 
 
-    void RouteSkill(Cooldown skillCooldown)
+    private void RouteSkill(Cooldown skillCooldown)
     {
         if (skillCooldown.Duration == 0)
         {
@@ -677,12 +677,12 @@ public class CooldownWindowViewModel : TccWindowViewModel
         }
     }
 
-    void OnPrecooldownStarted(Skill sk, uint duration)
+    private void OnPrecooldownStarted(Skill sk, uint duration)
     {
         RouteSkill(new Cooldown(sk, duration, CooldownType.Skill, CooldownMode.Pre));
     }
 
-    static bool Pass(Skill sk)
+    private static bool Pass(Skill sk)
     {
         if (sk.Detail is "off" or "mount" or "eventseed") return false;
         if (sk.Id == 245109 && Game.Me.Class == Class.Valkyrie) return false; // bad but idk

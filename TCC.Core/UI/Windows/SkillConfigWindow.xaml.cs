@@ -17,11 +17,11 @@ namespace TCC.UI.Windows;
 //TODO: make this inherit from TccWindow
 public partial class SkillConfigWindow
 {
-    static SkillConfigWindow? _instance;
+    private static SkillConfigWindow? _instance;
     public static SkillConfigWindow Instance => _instance ?? new SkillConfigWindow();
 
 
-    CooldownWindowViewModel VM { get; }
+    private CooldownWindowViewModel VM { get; }
     public SkillConfigWindow() : base(true)
     {
         _instance = this;
@@ -70,7 +70,7 @@ public partial class SkillConfigWindow
 
     }
 
-    void ClosewWindow(object? sender, RoutedEventArgs? e)
+    private void ClosewWindow(object? sender, RoutedEventArgs? e)
     {
         //var an = new DoubleAnimation(0, TimeSpan.FromMilliseconds(200));
         //FocusManager.ForceFocused = false;
@@ -115,12 +115,12 @@ public partial class SkillConfigWindow
         //});
     }
 
-    void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         DragMove();
     }
 
-    void SkillSearch_OnTextChanged(object sender, TextChangedEventArgs e)
+    private void SkillSearch_OnTextChanged(object sender, TextChangedEventArgs e)
     {
         if (VM.SkillsView == null) return;
         var view = (ICollectionView)VM.SkillsView;
@@ -128,21 +128,21 @@ public partial class SkillConfigWindow
         view.Refresh();
     }
 
-    void ItemSearch_OnTextChanged(object sender, TextChangedEventArgs e)
+    private void ItemSearch_OnTextChanged(object sender, TextChangedEventArgs e)
     {
         var view = (ICollectionView)VM.ItemsView;
         view.Filter = o => ((Item)o).Name.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
         view.Refresh();
     }
 
-    void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
+    private void PassivitySearch_OnTextChanged(object sender, TextChangedEventArgs e)
     {
         var view = (ICollectionView)VM.AbnormalitiesView;
         view.Filter = o => ((Abnormality)o).Name.IndexOf(((TextBox)sender).Text, StringComparison.InvariantCultureIgnoreCase) != -1;
         view.Refresh();
     }
 
-    void RemoveHiddenSkill(object sender, RoutedEventArgs e)
+    private void RemoveHiddenSkill(object sender, RoutedEventArgs e)
     {
         VM.RemoveHiddenSkill((Cooldown) ((Button)sender).DataContext);
     }

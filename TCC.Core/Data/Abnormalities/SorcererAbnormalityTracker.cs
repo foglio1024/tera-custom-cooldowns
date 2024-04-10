@@ -9,16 +9,16 @@ namespace TCC.Data.Abnormalities;
 
 public class SorcererAbnormalityTracker : AbnormalityTracker
 {
-    static readonly List<uint> ManaBoostIds = [500150, 501602, 503061];
-    const int FlameFusionIncreaseId = 502070;   // Equipoise-Flame
-    const int FrostFusionIncreaseId = 502071;   // Equipoise-Frost
-    const int ArcaneFusionIncreaseId = 502072;  // Equipoise-Arcane
+    private static readonly List<uint> ManaBoostIds = [500150, 501602, 503061];
+    private const int FlameFusionIncreaseId = 502070;   // Equipoise-Flame
+    private const int FrostFusionIncreaseId = 502071;   // Equipoise-Frost
+    private const int ArcaneFusionIncreaseId = 502072;  // Equipoise-Arcane
 
-    const int FireIceFusionId = 502020;
+    private const int FireIceFusionId = 502020;
     //private const int FireArcaneFusionId = 502030;
     //private const int IceArcaneFusionId = 502040;
 
-    readonly Skill _fireIceFusion;
+    private readonly Skill _fireIceFusion;
     //private static Skill _fireArcaneFusion;
     //private static Skill _iceArcaneFusion;
 
@@ -56,7 +56,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         CheckFusionsEnd(p);
     }
 
-    static void CheckManaBoostBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckManaBoostBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!ManaBoostIds.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<SorcererLayoutViewModel>(out var vm)) return;
@@ -64,7 +64,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         vm.ManaBoost.StartEffect(p.Duration);
     }
 
-    static void CheckManaBoostRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckManaBoostRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!ManaBoostIds.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<SorcererLayoutViewModel>(out var vm)) return;
@@ -72,7 +72,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         vm.ManaBoost.RefreshEffect(p.Duration);
     }
 
-    static void CheckManaBoostEnd(S_ABNORMALITY_END p)
+    private static void CheckManaBoostEnd(S_ABNORMALITY_END p)
     {
         if (!ManaBoostIds.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<SorcererLayoutViewModel>(out var vm)) return;
@@ -80,7 +80,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         vm.ManaBoost.StopEffect();
     }
 
-    static void CheckFusionBoostBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckFusionBoostBegin(S_ABNORMALITY_BEGIN p)
     {
         FusionElements element;
         switch (p.AbnormalityId)
@@ -104,7 +104,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         BoostChanged?.Invoke(element);
     }
 
-    static void CheckFusionBoostRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckFusionBoostRefresh(S_ABNORMALITY_REFRESH p)
     {
         FusionElements element;
 
@@ -128,7 +128,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         BoostChanged?.Invoke(element);
     }
 
-    static void CheckFusionBoostEnd(S_ABNORMALITY_END p)
+    private static void CheckFusionBoostEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId is not 
             (FlameFusionIncreaseId
@@ -139,7 +139,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         BoostChanged?.Invoke(FusionElements.None);
     }
 
-    void CheckFusionsBegin(S_ABNORMALITY_BEGIN p)
+    private void CheckFusionsBegin(S_ABNORMALITY_BEGIN p)
     {
         if (FireIceFusionId == p.AbnormalityId)
         {
@@ -155,7 +155,7 @@ public class SorcererAbnormalityTracker : AbnormalityTracker
         //}
     }
 
-    static void CheckFusionsEnd(S_ABNORMALITY_END p)
+    private static void CheckFusionsEnd(S_ABNORMALITY_END p)
     {
         if (FireIceFusionId != p.AbnormalityId) return;
         if (!TryGetClassViewModel<SorcererLayoutViewModel>(out var vm)) return;

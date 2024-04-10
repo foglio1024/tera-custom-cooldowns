@@ -30,13 +30,13 @@ public partial class FieldSetting
         InitializeComponent();
     }
 
-    void TextBox_LostFocus(object sender, RoutedEventArgs e)
+    private void TextBox_LostFocus(object sender, RoutedEventArgs e)
     {
         App.Settings.Save();
 
     }
 
-    void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (sender is TextBox tb) Value = tb.Text;
     }

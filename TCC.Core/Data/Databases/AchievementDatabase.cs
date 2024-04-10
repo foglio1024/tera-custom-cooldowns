@@ -8,8 +8,8 @@ public readonly record struct Achievement(uint Id, uint NameId, string Name);
 
 public class AchievementDatabase : DatabaseBase
 {
-    readonly Dictionary<uint, Achievement> _achievements = [];
-    readonly Dictionary<uint, Achievement> _achievementsByName = [];
+    private readonly Dictionary<uint, Achievement> _achievements = [];
+    private readonly Dictionary<uint, Achievement> _achievementsByName = [];
 
     protected override string FolderName => "achievements";
     protected override string Extension => "tsv";

@@ -5,7 +5,7 @@ namespace TCC.UI.Controls.Dashboard;
 
 public class CharacterViewModel : ThreadSafeObservableObject
 {
-    bool _hilight;
+    private bool _hilight;
 
     public Character Character { get; }
     public bool Hilight

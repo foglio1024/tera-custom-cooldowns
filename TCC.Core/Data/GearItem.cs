@@ -53,7 +53,7 @@ public class GearItem
         Piece = data.Piece;
     }
 
-    int CalculateLevel()
+    private int CalculateLevel()
     {
         var t = 0;
         if (Tier > GearTier.Low)

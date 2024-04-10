@@ -11,11 +11,11 @@ namespace TCC.UI.Controls.Dashboard;
 
 public class DungeonColumnViewModel : ThreadSafeObservableObject
 {
-    bool _hilight;
+    private bool _hilight;
 
     public Dungeon Dungeon { get; }
 
-    void OnDungeonPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void OnDungeonPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(Dungeon.Show)) return;
         InvokePropertyChanged(nameof(IsVisible));

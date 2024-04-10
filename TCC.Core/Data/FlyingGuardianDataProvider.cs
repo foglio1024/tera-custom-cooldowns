@@ -12,13 +12,13 @@ public static class FlyingGuardianDataProvider
 
     public static event Action? IsInProgressChanged;
 
-    const uint AirEssenceId = 630400;
-    const uint FireEssenceId = 630500;
-    const uint SparkEssenceId = 631001;
+    private const uint AirEssenceId = 630400;
+    private const uint FireEssenceId = 630500;
+    private const uint SparkEssenceId = 631001;
 
-    static int _stacks;
-    static FlightStackType _stackType;
-    static bool _ignoreNextEnd;
+    private static int _stacks;
+    private static FlightStackType _stackType;
+    private static bool _ignoreNextEnd;
 
     public static int Stacks
     {
@@ -89,7 +89,7 @@ public static class FlyingGuardianDataProvider
         Stacks = 0;
     }
 
-    static FlightStackType IdToStackType(uint id) => id switch
+    private static FlightStackType IdToStackType(uint id) => id switch
     {
         FireEssenceId => FlightStackType.Fire,
         SparkEssenceId => FlightStackType.Spark,
@@ -97,5 +97,5 @@ public static class FlyingGuardianDataProvider
         _ => FlightStackType.None
     };
 
-    static bool IsEssence(uint id) => id is AirEssenceId or FireEssenceId or SparkEssenceId;
+    private static bool IsEssence(uint id) => id is AirEssenceId or FireEssenceId or SparkEssenceId;
 }

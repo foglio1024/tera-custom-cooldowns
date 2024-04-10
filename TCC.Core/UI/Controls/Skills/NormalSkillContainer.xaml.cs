@@ -13,7 +13,7 @@ public partial class NormalSkillContainer
         Unloaded += OnUnloaded;
     }
 
-    void OnUnloaded(object _, RoutedEventArgs __)
+    private void OnUnloaded(object _, RoutedEventArgs __)
     {
         SettingsWindowViewModel.SkillShapeChanged -= OnSkillShapeChanged;
         Loaded -= OnLoaded;
@@ -21,12 +21,12 @@ public partial class NormalSkillContainer
 
     }
 
-    void OnLoaded(object _, RoutedEventArgs __)
+    private void OnLoaded(object _, RoutedEventArgs __)
     {
         SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
     }
 
-    void OnSkillShapeChanged()
+    private void OnSkillShapeChanged()
     {
         NormalSkillsPanel.RefreshTemplate("NormalSkillTemplateSelector");
         LongSkillsPanel.RefreshTemplate("NormalSkillTemplateSelector");

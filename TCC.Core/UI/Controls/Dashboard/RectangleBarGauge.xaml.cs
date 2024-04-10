@@ -16,7 +16,7 @@ public partial class RectangleBarGauge
         Loaded += OnLoaded;
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         var a = new DoubleAnimation(0, Factor, TimeSpan.FromMilliseconds(App.Random.Next(350, 650))) { EasingFunction = new QuadraticEase() };
         GaugeValue.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, a);
@@ -54,7 +54,7 @@ public partial class RectangleBarGauge
     public static readonly DependencyProperty FactorProperty =
         DependencyProperty.Register(nameof(Factor), typeof(double), typeof(RectangleBarGauge), new PropertyMetadata(0d, OnFactorChanged));
 
-    static void OnFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnFactorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
 
         var a = new DoubleAnimation((double)e.NewValue, TimeSpan.FromMilliseconds(250)) { EasingFunction = new QuadraticEase() };

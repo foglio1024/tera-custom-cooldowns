@@ -10,7 +10,7 @@ namespace TeraPacketParser.Messages;
 
 public class S_IMAGE_DATA : ParsedMessage
 {
-    static Dictionary<uint, Bitmap>? _database;
+    private static Dictionary<uint, Bitmap>? _database;
     public static Dictionary<uint, Bitmap> Database => _database ??= new Dictionary<uint, Bitmap>();
 
     public S_IMAGE_DATA(TeraMessageReader reader) : base(reader)

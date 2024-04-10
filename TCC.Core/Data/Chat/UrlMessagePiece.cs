@@ -7,7 +7,7 @@ namespace TCC.Data.Chat;
 
 public class UrlMessagePiece : SimpleMessagePiece
 {
-    bool _isHovered;
+    private bool _isHovered;
 
     public override bool IsHovered
     {
@@ -16,7 +16,7 @@ public class UrlMessagePiece : SimpleMessagePiece
     }
     public override ICommand ClickCommand { get; }
 
-    UrlMessagePiece(string url) : base(url)
+    private UrlMessagePiece(string url) : base(url)
     {
         ClickCommand = new RelayCommand(Click);
     }
@@ -28,7 +28,7 @@ public class UrlMessagePiece : SimpleMessagePiece
         Color = col;
     }
 
-    void Click()
+    private void Click()
     {
         try
         {

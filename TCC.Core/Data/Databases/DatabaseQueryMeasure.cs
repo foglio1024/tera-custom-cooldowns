@@ -6,16 +6,16 @@ namespace TCC.Data.Databases;
 
 public class DatabaseQueryMeasure
 {
-    readonly Stopwatch _sw = new();
-    static int _totalCount;
-    static int _hitCount;
-    static int _missCount;
-    static long _totTotalTime;
-    static long _totHitTime;
-    static long _totMissTime;
-    static double _avgTotalTime => _totalCount == 0 ? 0 : _totTotalTime / (double)_totalCount;
-    static double _avgHitTime => _hitCount == 0 ? 0 : _totHitTime / (double)_hitCount;
-    static double _avgMissTime => _missCount == 0 ? 0 : _totMissTime / (double)_missCount;
+    private readonly Stopwatch _sw = new();
+    private static int _totalCount;
+    private static int _hitCount;
+    private static int _missCount;
+    private static long _totTotalTime;
+    private static long _totHitTime;
+    private static long _totMissTime;
+    private static double _avgTotalTime => _totalCount == 0 ? 0 : _totTotalTime / (double)_totalCount;
+    private static double _avgHitTime => _hitCount == 0 ? 0 : _totHitTime / (double)_hitCount;
+    private static double _avgMissTime => _missCount == 0 ? 0 : _totMissTime / (double)_missCount;
 
     public void StartQuery()
     {

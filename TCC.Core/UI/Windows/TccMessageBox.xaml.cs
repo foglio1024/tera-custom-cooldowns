@@ -16,25 +16,25 @@ namespace TCC.UI.Windows;
 //TODO: refactor and make multiple messageboxes
 public partial class TccMessageBox
 {
-    static TccMessageBox _messageBox = null!;
-    static MessageBoxResult _result = MessageBoxResult.No;
+    private static TccMessageBox _messageBox = null!;
+    private static MessageBoxResult _result = MessageBoxResult.No;
     public static bool IsOpen { get; set; }
 
-    TccMessageBox()
+    private TccMessageBox()
     {
         InitializeComponent();
         Closing += OnClosing;
     }
 
 
-    void OnClosing(object? sender, CancelEventArgs e)
+    private void OnClosing(object? sender, CancelEventArgs e)
     {
         e.Cancel = true;
         Hide();
         IsOpen = false;
     }
 
-    static MessageBoxResult Show (string caption, string msg, MessageBoxType type)
+    private static MessageBoxResult Show (string caption, string msg, MessageBoxType type)
     {
         return type switch
         {
@@ -76,7 +76,7 @@ public partial class TccMessageBox
         return _result;
     }
 
-    static void SetVisibilityOfButtons(MessageBoxButton button)
+    private static void SetVisibilityOfButtons(MessageBoxButton button)
     {
         _messageBox.BtnCancel.Visibility = Visibility.Visible;
         _messageBox.BtnNo.Visibility = Visibility.Visible;
@@ -108,7 +108,7 @@ public partial class TccMessageBox
         }
     }
 
-    static void SetImageOfMessageBox(MessageBoxImage image)
+    private static void SetImageOfMessageBox(MessageBoxImage image)
     {
         //return;
         switch (image)
@@ -125,7 +125,7 @@ public partial class TccMessageBox
         }
     }
 
-    void Button_Click(object sender, RoutedEventArgs e)
+    private void Button_Click(object sender, RoutedEventArgs e)
     {
         if (ReferenceEquals(sender, BtnOk))
             _result = MessageBoxResult.OK;
@@ -147,7 +147,7 @@ public partial class TccMessageBox
         });
     }
 
-    void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
     {
         if ((bool)e.NewValue != true) return;
         BeginAnimation(OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(200)) { EasingFunction = new QuadraticEase() });
@@ -157,7 +157,7 @@ public partial class TccMessageBox
         //RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, new DoubleAnimation(.5, 1, TimeSpan.FromMilliseconds(500)) { EasingFunction = new ElasticEase() { Oscillations = 1 } });
     }
 
-    void BG_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void BG_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         DragMove();
     }

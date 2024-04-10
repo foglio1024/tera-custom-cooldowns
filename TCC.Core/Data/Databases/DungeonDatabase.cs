@@ -8,15 +8,15 @@ namespace TCC.Data.Databases;
 
 public class DungeonDatabase : DatabaseBase
 {
-    const string DefaultDefsRelativePath = "default-dungeon-defs.tsv";
-    const string ImagesRelativePath = "section_images.tsv";
+    private const string DefaultDefsRelativePath = "default-dungeon-defs.tsv";
+    private const string ImagesRelativePath = "section_images.tsv";
 
     protected override string FolderName => "dungeons";
     protected override string Extension => "tsv";
 
-    readonly string _customDefsPath = Path.Combine(App.DataPath, "dungeon-defs.tsv");
-    readonly string _defaultDefsFullPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
-    readonly string _imagesFullPath = Path.Combine(App.DataPath, "section_images.tsv");
+    private readonly string _customDefsPath = Path.Combine(App.DataPath, "dungeon-defs.tsv");
+    private readonly string _defaultDefsFullPath = Path.Combine(App.DataPath, "default-dungeon-defs.tsv");
+    private readonly string _imagesFullPath = Path.Combine(App.DataPath, "section_images.tsv");
 
     public readonly Dictionary<uint, Dungeon> Dungeons = [];
 
@@ -83,7 +83,7 @@ public class DungeonDatabase : DatabaseBase
         ParseDungeonIcons();
     }
 
-    void ParseDungeons()
+    private void ParseDungeons()
     {
         var lines = File.ReadAllLines(FullPath);
         foreach (var line in lines)
@@ -102,7 +102,7 @@ public class DungeonDatabase : DatabaseBase
         }
     }
 
-    void ParseDungeonDefs()
+    private void ParseDungeonDefs()
     {
         if (!File.Exists(_customDefsPath)) File.Copy(_defaultDefsFullPath, _customDefsPath);
         var lines = File.ReadAllLines(_customDefsPath);
@@ -150,7 +150,7 @@ public class DungeonDatabase : DatabaseBase
         }
     }
 
-    void ParseDungeonIcons()
+    private void ParseDungeonIcons()
     {
         var lines = File.ReadAllLines(_imagesFullPath);
         foreach (var line in lines)

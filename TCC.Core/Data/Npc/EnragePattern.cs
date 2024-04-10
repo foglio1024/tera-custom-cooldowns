@@ -2,7 +2,7 @@
 
 public class EnragePattern
 {
-    readonly float _flatHp;
+    private readonly float _flatHp;
 
     public double Percentage { get; set; }
     public int Duration { get; set; }

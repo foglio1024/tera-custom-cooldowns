@@ -35,9 +35,9 @@ public partial class App
 {
     public static event Action? ReadyEvent;
 
-    static bool _restarted;
-    static bool _running;
-    static Mutex? _mutex;
+    private static bool _restarted;
+    private static bool _running;
+    private static Mutex? _mutex;
 
     public static bool Beta => GlobalFlags.IsBeta;
 
@@ -63,7 +63,7 @@ public partial class App
 
     public static bool Loading { get; private set; }
     public static bool ToolboxMode { get; private set; }
-    static bool FirstStart { get; set; }
+    private static bool FirstStart { get; set; }
 
     public static Random Random { get; } = new(DateTime.Now.DayOfYear + DateTime.Now.Year +
                                                DateTime.Now.Minute + DateTime.Now.Second +
@@ -73,8 +73,7 @@ public partial class App
     public static SettingsContainer Settings { get; private set; } = null!;
 
 
-
-    async void OnStartup(object sender, StartupEventArgs e)
+    private async void OnStartup(object sender, StartupEventArgs e)
     {
         _running = true;
         AppVersion = TccUtils.GetTccVersion();
@@ -128,7 +127,8 @@ public partial class App
         //TCC.Debug.Tester.AddAbnormalityToGroupMember(memberId: 1, abnormalId: 101301);
         //Tester.StartItemCooldown(444);
     }
-    static async Task Setup()
+
+    private static async Task Setup()
     {
         TccUtils.SetAlignment();
 
@@ -208,7 +208,7 @@ public partial class App
         }
     }
 
-    static void ParseStartupArgs(IList<string> args)
+    private static void ParseStartupArgs(IList<string> args)
     {
         // --toolbox
         ToolboxMode = args.IndexOf("--toolbox") != -1;
@@ -253,7 +253,7 @@ public partial class App
         Environment.Exit(code);
     }
 
-    static bool IsAlreadyRunning()
+    private static bool IsAlreadyRunning()
     {
         _mutex = new Mutex(true, nameof(TCC), out var createdNew);
         if (createdNew || !_restarted) return !createdNew;
@@ -277,7 +277,7 @@ public partial class App
         });
     }
 
-    static void LoadModules()
+    private static void LoadModules()
     {
         BaseDispatcher.Invoke(() =>
         {
@@ -328,7 +328,7 @@ public partial class App
         //Log.CW("All dispatchers shut down.");
     }
 
-    static void StartDispatcherWatcher()
+    private static void StartDispatcherWatcher()
     {
         const int limit = 60000;
 
@@ -371,7 +371,7 @@ public partial class App
 
     #region Misc
 
-    static FUBH? _fubh;
+    private static FUBH? _fubh;
 
     public static bool FI { get; } = DateTime.Now >= TimeUtils.FromUnixTime(1567123200) &&
                                      DateTime.Now < TimeUtils.FromUnixTime(1567209600);

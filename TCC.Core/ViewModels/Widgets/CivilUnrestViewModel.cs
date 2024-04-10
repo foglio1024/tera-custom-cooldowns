@@ -17,9 +17,9 @@ namespace TCC.ViewModels.Widgets;
 
 public class CivilUnrestGuild : ThreadSafeObservableObject
 {
-    float _towerHp;
-    uint _towersDestroyed;
-    string _name;
+    private float _towerHp;
+    private uint _towersDestroyed;
+    private string _name;
 
     public CivilUnrestGuild(uint id, string name, float towerHp, uint towersDestroyed)
     {
@@ -52,7 +52,7 @@ public class CivilUnrestGuild : ThreadSafeObservableObject
 public class CivilUnrestViewModel : TccWindowViewModel
 {
     public bool CivilUnrest => Game.CivilUnrestZone;
-    readonly ThreadSafeObservableCollection<CivilUnrestGuild> _guilds;
+    private readonly ThreadSafeObservableCollection<CivilUnrestGuild> _guilds;
 
     public ICollectionViewLiveShaping Guilds //TODO: fix getter
     {
@@ -115,7 +115,7 @@ public class CivilUnrestViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_DESTROY_GUILD_TOWER>(OnDestroyGuildTower);
     }
 
-    void OnDestroyGuildTower(S_DESTROY_GUILD_TOWER m)
+    private void OnDestroyGuildTower(S_DESTROY_GUILD_TOWER m)
     {
         Task.Run(() =>
         {
@@ -130,7 +130,7 @@ public class CivilUnrestViewModel : TccWindowViewModel
         });
     }
 
-    void OnRequestCityWarMapInfo(S_REQUEST_CITY_WAR_MAP_INFO m)
+    private void OnRequestCityWarMapInfo(S_REQUEST_CITY_WAR_MAP_INFO m)
     {
         Task.Run(() =>
         {
@@ -145,7 +145,7 @@ public class CivilUnrestViewModel : TccWindowViewModel
         });
     }
 
-    void OnRequestCityWarMapInfoDetail(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL m)
+    private void OnRequestCityWarMapInfoDetail(S_REQUEST_CITY_WAR_MAP_INFO_DETAIL m)
     {
         try
         {
@@ -194,7 +194,7 @@ public class CivilUnrestViewModel : TccWindowViewModel
         }
     }
 
-    void NotifyTeleported()
+    private void NotifyTeleported()
     {
         InvokePropertyChanged(nameof(CivilUnrest));
     }

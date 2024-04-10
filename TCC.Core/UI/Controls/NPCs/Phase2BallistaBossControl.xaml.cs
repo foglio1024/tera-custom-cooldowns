@@ -15,7 +15,7 @@ public partial class Phase2BallistaBossControl
         InitializeComponent();
     }
 
-    void UserControl_Loaded(object sender, RoutedEventArgs e)
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
         EnrageEll.RenderTransform.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(240, 0, TimeSpan.FromSeconds(240)));
     }

@@ -49,7 +49,7 @@ public class HttpClientProgress : HttpClient
         DownloadFileCompleted?.Invoke(true);
     }
 
-    void ReportProgress(long? totalLen, int totalBytesRead)
+    private void ReportProgress(long? totalLen, int totalBytesRead)
     {
         DownloadProgressChanged?.Invoke(totalBytesRead, totalLen ?? -1);
     }

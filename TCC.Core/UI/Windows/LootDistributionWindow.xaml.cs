@@ -4,7 +4,7 @@ using TCC.ViewModels;
 namespace TCC.UI.Windows;
 public partial class LootDistributionWindow
 {
-    readonly LootDistributionViewModel _vm;
+    private readonly LootDistributionViewModel _vm;
     public LootDistributionWindow(LootDistributionViewModel vm)
     {
         _vm = vm;
@@ -28,20 +28,19 @@ public partial class LootDistributionWindow
         FocusManager.MakeUnfocusable(Handle);
     }
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         e.Handled = true;
         _vm.Settings!.Visible = false;
     }
 
 
-
-    void OnShowListButtonClick(object sender, RoutedEventArgs e)
+    private void OnShowListButtonClick(object sender, RoutedEventArgs e)
     {
         SizeToContent = SizeToContent.Width;
     }
 
-    void OnSizeChanged(object sender, SizeChangedEventArgs e)
+    private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
         if (_vm.Settings == null) return;
         if (_vm.Settings.IgnoreSize) return;

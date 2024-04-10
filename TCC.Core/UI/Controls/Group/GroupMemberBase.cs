@@ -27,8 +27,8 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
     #endregion
 
 
-    DataTemplateSelector? _currentAbnormalityTemplateSelector;
-    DataTemplateSelector? _initialAbnormalityDataTemplateSelector;
+    private DataTemplateSelector? _currentAbnormalityTemplateSelector;
+    private DataTemplateSelector? _initialAbnormalityDataTemplateSelector;
     protected DataTemplateSelector? InitialAbnormalityDataTemplateSelector
     {
         private get => _initialAbnormalityDataTemplateSelector;
@@ -73,8 +73,8 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
     public ICollectionViewLiveShaping? BuffsSource => ShowBuffs ? _buffs : null;
     public ICollectionViewLiveShaping? DebuffsSource => ShowDebuffs ? _debuffs : null;
 
-    ICollectionViewLiveShaping? _buffs;
-    ICollectionViewLiveShaping? _debuffs;
+    private ICollectionViewLiveShaping? _buffs;
+    private ICollectionViewLiveShaping? _debuffs;
 
     protected GroupMemberBase()
     {
@@ -85,11 +85,12 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         MouseLeave += OnMouseLeave;
     }
 
-    void OnMouseEnter(object sender, MouseEventArgs e)
+    private void OnMouseEnter(object sender, MouseEventArgs e)
     {
         SetAbnormalitiesVisibility(true);
     }
-    void OnMouseLeave(object sender, MouseEventArgs e)
+
+    private void OnMouseLeave(object sender, MouseEventArgs e)
     {
         Task.Delay(1000).ContinueWith(_ => Dispatcher.InvokeAsync(() =>
         {
@@ -98,7 +99,7 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         }));
     }
 
-    void SetAbnormalitiesVisibility(bool visible)
+    private void SetAbnormalitiesVisibility(bool visible)
     {
         if (DataContext is not User user) return;
 
@@ -118,7 +119,8 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
             abnormality.IsHidden = !visible;
         }
     }
-    void OnLoaded(object _, RoutedEventArgs __)
+
+    private void OnLoaded(object _, RoutedEventArgs __)
     {
         UpdateSettings();
 
@@ -157,7 +159,7 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         }
     }
 
-    void OnUnloaded(object _, RoutedEventArgs __)
+    private void OnUnloaded(object _, RoutedEventArgs __)
     {
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
@@ -169,12 +171,12 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         WindowManager.ViewModels.GroupVM.SettingsUpdated -= UpdateSettings;
     }
 
-    void OnGroupCompositionChanged(IReadOnlyCollection<GroupMemberData> members, GroupCompositionChangeReason reason)
+    private void OnGroupCompositionChanged(IReadOnlyCollection<GroupMemberData> members, GroupCompositionChangeReason reason)
     {
         UpdateSettings();
     }
 
-    void UpdateSettings()
+    private void UpdateSettings()
     {
         NPC(nameof(ShowHp));
         NPC(nameof(ShowMp));
@@ -189,7 +191,7 @@ public class GroupMemberBase : UserControl, INotifyPropertyChanged
         NPC(nameof(ShowHpPercentage));
     }
 
-    void OnAbnormalityShapeChanged()
+    private void OnAbnormalityShapeChanged()
     {
         CurrentAbnormalityTemplateSelector = null;
         CurrentAbnormalityTemplateSelector = InitialAbnormalityDataTemplateSelector;

@@ -15,7 +15,7 @@ public partial class BrokerOfferBody
         InitializeComponent();
     }
 
-    void Accept(object sender, MouseButtonEventArgs e)
+    private void Accept(object sender, MouseButtonEventArgs e)
     {
         var dc = (BrokerChatMessage) DataContext;
         StubInterface.Instance.StubClient.AcceptBrokerOffer(dc.PlayerId, dc.ListingId); //ProxyOld.AcceptBrokerOffer(dc.PlayerId, dc.ListingId);
@@ -24,7 +24,7 @@ public partial class BrokerOfferBody
 
     }
 
-    void Decline(object sender, MouseButtonEventArgs e)
+    private void Decline(object sender, MouseButtonEventArgs e)
     {
         var dc = (BrokerChatMessage) DataContext;
         if (dc.Handled) return;
@@ -35,7 +35,7 @@ public partial class BrokerOfferBody
 
     }
 
-    void OnHandled()
+    private void OnHandled()
     {
         var dc = (BrokerChatMessage) DataContext;
         dc.Handled = true;
@@ -43,13 +43,13 @@ public partial class BrokerOfferBody
         //acceptButton.Visibility = Visibility.Collapsed;
     }
 
-    void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
+    private void UIElement_OnMouseEnter(object sender, MouseEventArgs e)
     {
         var dc = (BrokerChatMessage) DataContext;
         ChatManager.Instance.SetPaused(true, dc);
     }
 
-    void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
+    private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
     {
         try
         {

@@ -10,7 +10,7 @@ public class Money : ThreadSafeObservableObject
     public long Silver { get; set; }
     public long Copper { get; set; }
 
-    Money()
+    private Money()
     {
         Dispatcher = ChatManager.Instance.Dispatcher;
     }

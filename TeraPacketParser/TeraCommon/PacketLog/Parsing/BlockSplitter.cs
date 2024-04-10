@@ -11,10 +11,10 @@ internal class BlockSplitter
     public event Action<int, int>? Resync;
     public event Action<byte[]>? BlockFinished;
 
-    readonly MemoryStream _buffer = new();
-    volatile int _last;
-    volatile int _prev;
-    volatile int _pPrev;
+    private readonly MemoryStream _buffer = new();
+    private volatile int _last;
+    private volatile int _prev;
+    private volatile int _pPrev;
 
     protected virtual void OnBlockFinished(byte[] block)
     {
@@ -22,13 +22,13 @@ internal class BlockSplitter
         handler?.Invoke(block);
     }
 
-    static void RemoveFront(MemoryStream stream, int count)
+    private static void RemoveFront(MemoryStream stream, int count)
     {
         Array.Copy(stream.GetBuffer(), count, stream.GetBuffer(), 0, stream.Length - count);
         stream.SetLength(stream.Length - count);
     }
 
-    static byte[]? PopBlock(MemoryStream stream)
+    private static byte[]? PopBlock(MemoryStream stream)
     {
         if (stream.Length < 2)
             return null;

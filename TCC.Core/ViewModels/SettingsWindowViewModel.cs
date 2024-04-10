@@ -208,8 +208,8 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         }
     }
 
-    int _khCount;
-    bool _kh;
+    private int _khCount;
+    private bool _kh;
     public bool KylosHelper
     {
         get => _kh;
@@ -719,8 +719,8 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
     public IEnumerable<TranslationMode> TranslationModes => EnumUtils.ListFromEnum<TranslationMode>();
 
 
-    ThreadSafeObservableCollection<BlacklistedMonsterVM>? _blacklistedMonsters;
-    bool _showDebugSettings;
+    private ThreadSafeObservableCollection<BlacklistedMonsterVM>? _blacklistedMonsters;
+    private bool _showDebugSettings;
 
     public ThreadSafeObservableCollection<BlacklistedMonsterVM> BlacklistedMonsters
     {
@@ -831,17 +831,17 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         MessageFactory.ReleaseVersionChanged += OnReleaseVersionChanged;
     }
 
-    void OnReleaseVersionChanged(int obj)
+    private void OnReleaseVersionChanged(int obj)
     {
         InvokePropertyChanged(nameof(ClickThruModes));
     }
 
-    void MonsterDatabase_BlacklistChangedEvent(uint arg1, uint arg2, bool arg3)
+    private void MonsterDatabase_BlacklistChangedEvent(uint arg1, uint arg2, bool arg3)
     {
         InvokePropertyChanged(nameof(BlacklistedMonsters));
     }
 
-    void OnShowSettingsWindowHotkeyPressed()
+    private void OnShowSettingsWindowHotkeyPressed()
     {
         if (WindowManager.SettingsWindow.IsVisible) WindowManager.SettingsWindow.HideWindow();
         else WindowManager.SettingsWindow.ShowWindow();

@@ -7,11 +7,11 @@ namespace TCC.Data.Abnormalities;
 
 public class PriestAbnormalityTracker : AbnormalityTracker
 {
-    static readonly uint[] EnergyStarsIDs = [801500, 801501, 801502, 801503, 98000107];
-    const int GraceId = 801700;
-    const int TripleNemesisId = 28090;
-    const int DivineId = 805713;
-    static readonly uint[] EdictIDs = [805800];
+    private static readonly uint[] EnergyStarsIDs = [801500, 801501, 801502, 801503, 98000107];
+    private const int GraceId = 801700;
+    private const int TripleNemesisId = 28090;
+    private const int DivineId = 805713;
+    private static readonly uint[] EdictIDs = [805800];
 
     public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
@@ -49,7 +49,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         CheckEdictEnd(p);
     }
 
-    static void CheckTripleNemesisBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckTripleNemesisBegin(S_ABNORMALITY_BEGIN p)
     {
         if (TripleNemesisId != p.AbnormalityId) return;
         if (!WindowManager.ViewModels.NpcVM.TryFindNPC(p.TargetId, out _)) return;
@@ -58,7 +58,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         InvokeMarkingRefreshed(p.Duration);
     }
 
-    static void CheckTripleNemesisRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckTripleNemesisRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (TripleNemesisId != p.AbnormalityId) return;
         if (!WindowManager.ViewModels.NpcVM.TryFindNPC(p.TargetId, out _)) return;
@@ -67,7 +67,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         InvokeMarkingRefreshed(p.Duration);
     }
 
-    static void CheckTripleNemesisEnd(S_ABNORMALITY_END p)
+    private static void CheckTripleNemesisEnd(S_ABNORMALITY_END p)
     {
         if (TripleNemesisId != p.AbnormalityId) return;
         
@@ -75,7 +75,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         if (MarkedTargets.Count == 0) InvokeMarkingExpired();
     }
 
-    static void CheckEnergyStarsBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckEnergyStarsBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -83,7 +83,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.EnergyStars.StartEffect(p.Duration);
     }
 
-    static void CheckEnergyStarsRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckEnergyStarsRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -91,7 +91,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.EnergyStars.RefreshEffect(p.Duration);
     }
 
-    static void CheckEnergyStarsEnd(S_ABNORMALITY_END p)
+    private static void CheckEnergyStarsEnd(S_ABNORMALITY_END p)
     {
         if (!EnergyStarsIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -99,7 +99,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.EnergyStars.StopEffect();
     }
 
-    static void CheckGraceBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckGraceBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != GraceId) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -107,7 +107,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.Grace.StartEffect(p.Duration);
     }
 
-    static void CheckGraceRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckGraceRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != GraceId) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -115,7 +115,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.Grace.RefreshEffect(p.Duration);
     }
 
-    static void CheckGraceEnd(S_ABNORMALITY_END p)
+    private static void CheckGraceEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != GraceId) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -123,7 +123,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.Grace.StopEffect();
     }
 
-    static void CheckEdictBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckEdictBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!EdictIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -131,7 +131,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.EdictOfJudgment.StartEffect(p.Duration);
     }
 
-    static void CheckEdictRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckEdictRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!EdictIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -139,7 +139,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.EdictOfJudgment.RefreshEffect(p.Duration);
     }
 
-    static void CheckEdictEnd(S_ABNORMALITY_END p)
+    private static void CheckEdictEnd(S_ABNORMALITY_END p)
     {
         if (!EdictIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -147,7 +147,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.EdictOfJudgment.StopEffect();
     }
 
-    static void CheckDivineBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckDivineBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != DivineId) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -155,7 +155,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.DivineCharge.StartEffect(p.Duration);
     }
 
-    static void CheckDivineRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckDivineRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != DivineId) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;
@@ -163,7 +163,7 @@ public class PriestAbnormalityTracker : AbnormalityTracker
         vm.DivineCharge.RefreshEffect(p.Duration);
     }
 
-    static void CheckDivineEnd(S_ABNORMALITY_END p)
+    private static void CheckDivineEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != DivineId) return;
         if (!TryGetClassViewModel<PriestLayoutViewModel>(out var vm)) return;

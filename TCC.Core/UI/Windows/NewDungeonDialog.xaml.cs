@@ -18,7 +18,7 @@ public partial class NewDungeonDialog
         new SortDescription(nameof(Dungeon.Name), ListSortDirection.Ascending)
     });
 
-    void AddDungeon(object sender, RoutedEventArgs e)
+    private void AddDungeon(object sender, RoutedEventArgs e)
     {
         if (((FrameworkElement)sender).DataContext is not Dungeon dg) return;
         if (dg.Show) return;
@@ -31,13 +31,13 @@ public partial class NewDungeonDialog
         //WindowManager.ViewModels.Dashboard.RefreshDungeons();
     }
 
-    void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
+    private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
     {
         DragMove();
 
     }
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
     }

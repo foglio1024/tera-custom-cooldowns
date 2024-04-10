@@ -20,11 +20,11 @@ public class IpSnifferWinPcap : IpSniffer
     //private static readonly ILog Logger = LogManager.GetLogger
     //    (MethodBase.GetCurrentMethod().DeclaringType);
 
-    readonly string _filter;
-    NpcapDeviceList? _devices;
-    volatile uint _droppedPackets;
-    volatile uint _interfaceDroppedPackets;
-    DateTime _nextCheck;
+    private readonly string _filter;
+    private NpcapDeviceList? _devices;
+    private volatile uint _droppedPackets;
+    private volatile uint _interfaceDroppedPackets;
+    private DateTime _nextCheck;
 
     public IpSnifferWinPcap(string filter)
     {
@@ -52,12 +52,12 @@ public class IpSnifferWinPcap : IpSniffer
             Finish();
     }
 
-    static bool IsInteresting(NpcapDevice device)
+    private static bool IsInteresting(NpcapDevice device)
     {
         return true;
     }
 
-    void Start()
+    private void Start()
     {
         Debug.Assert(_devices == null);
         _devices = NpcapDeviceList.New();
@@ -93,7 +93,7 @@ public class IpSnifferWinPcap : IpSniffer
         }
     }
 
-    void Finish()
+    private void Finish()
     {
         Debug.Assert(_devices != null);
         foreach (var device in _devices.Where(device => device.Opened))
@@ -121,7 +121,7 @@ public class IpSnifferWinPcap : IpSniffer
         handler?.Invoke(obj);
     }
 
-    void device_OnPacketArrival(object sender, CaptureEventArgs e)
+    private void device_OnPacketArrival(object sender, CaptureEventArgs e)
     {
         IPv4Packet? ipPacket;
         try

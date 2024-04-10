@@ -12,7 +12,7 @@ namespace TCC.UI.Windows;
 
 public partial class TccSplashScreen
 {
-    readonly DoubleAnimation _progressAnimation;
+    private readonly DoubleAnimation _progressAnimation;
     public SplashScreenViewModel VM { get; }
     public TccSplashScreen()
     {
@@ -40,7 +40,7 @@ public partial class TccSplashScreen
         }
     }
 
-    void OnProgressChanged()
+    private void OnProgressChanged()
     {
         Dispatcher?.InvokeAsync(() =>
         {

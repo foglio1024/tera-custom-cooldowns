@@ -38,7 +38,7 @@ public class TabInfo
 }
 public class TabInfoVM : ThreadSafeObservableObject
 {
-    string _tabName = "";
+    private string _tabName = "";
     public string TabName
     {
         get => _tabName;
@@ -156,7 +156,7 @@ public class Tab : ThreadSafeObservableObject
     public TabInfo TabInfo { get; }
     public TabInfoVM TabInfoVM { get; set; }
 
-    ChatMessage? _pinnedMessage;
+    private ChatMessage? _pinnedMessage;
 
 
     public string TabName
@@ -250,7 +250,7 @@ public class Tab : ThreadSafeObservableObject
     //    ApplyFilter();
     //}
 
-    void SyncImportant(Tab source, ImportantRemovedArgs e)
+    private void SyncImportant(Tab source, ImportantRemovedArgs e)
     {
         if (source == this) return;
         switch (e.Action)

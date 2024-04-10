@@ -7,7 +7,7 @@ namespace TCC.Data.Chat;
 
 public class ActionMessagePiece : SimpleMessagePiece
 {
-    bool _isHovered;
+    private bool _isHovered;
 
     public override bool IsHovered
     {

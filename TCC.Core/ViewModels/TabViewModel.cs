@@ -17,7 +17,7 @@ public class TabViewModel : HeaderedItemViewModel
         ImportantRemoved?.Invoke(source, e);
     }
 
-    bool _showImportantPopup;
+    private bool _showImportantPopup;
     public bool ShowImportantPopup
     {
         get => _showImportantPopup;
@@ -44,14 +44,14 @@ public class TabViewModel : HeaderedItemViewModel
         TabOpened += OnTabOpened;
     }
 
-    void SetPopupStatus(object? par)
+    private void SetPopupStatus(object? par)
     {
         var val = Convert.ToBoolean(par);
         ShowImportantPopup = val;
         if (val) TabOpened?.Invoke(this);
     }
 
-    void OnTabOpened(TabViewModel vm)
+    private void OnTabOpened(TabViewModel vm)
     {
         if (vm == this) return;
         ShowImportantPopup = false;

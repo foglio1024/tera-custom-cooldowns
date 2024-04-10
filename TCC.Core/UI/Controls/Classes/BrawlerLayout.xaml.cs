@@ -9,8 +9,8 @@ namespace TCC.UI.Controls.Classes;
 
 public partial class BrawlerLayout
 {
-    BrawlerLayoutViewModel? _dc;
-    readonly DoubleAnimation _an;
+    private BrawlerLayoutViewModel? _dc;
+    private readonly DoubleAnimation _an;
 
     public BrawlerLayout()
     {
@@ -18,13 +18,13 @@ public partial class BrawlerLayout
         InitializeComponent();
     }
 
-    void BrawlerLayout_OnLoaded(object sender, RoutedEventArgs e)
+    private void BrawlerLayout_OnLoaded(object sender, RoutedEventArgs e)
     {
         _dc = (BrawlerLayoutViewModel)DataContext;
         _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
     }
 
-    void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;
         if (_dc == null) return;

@@ -4,8 +4,8 @@ namespace TCC.Data.Pc;
 
 public class DungeonCooldownData
 {
-    uint _coins;
-    uint _maxCoins;
+    private uint _coins;
+    private uint _maxCoins;
 
     public uint Id { get; set; }
     public int Entries { get; set; }

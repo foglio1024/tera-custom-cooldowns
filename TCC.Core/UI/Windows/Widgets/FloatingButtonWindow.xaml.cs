@@ -13,19 +13,19 @@ namespace TCC.UI.Windows.Widgets;
 
 public partial class FloatingButtonWindow
 {
-    readonly DoubleAnimation _slideInAnim;
-    readonly DoubleAnimation _slideOutAnim;
-    readonly DoubleAnimation _bubbleAnim;
-    readonly DoubleAnimation _bubbleSlideIn;
-    readonly DoubleAnimation _bubbleSlideOut;
-    readonly ScaleTransform _bubbleScaleTransform;
-    readonly TranslateTransform _bubbleTranslateTransform;
-    readonly Timer _animRepeatTimer;
+    private readonly DoubleAnimation _slideInAnim;
+    private readonly DoubleAnimation _slideOutAnim;
+    private readonly DoubleAnimation _bubbleAnim;
+    private readonly DoubleAnimation _bubbleSlideIn;
+    private readonly DoubleAnimation _bubbleSlideOut;
+    private readonly ScaleTransform _bubbleScaleTransform;
+    private readonly TranslateTransform _bubbleTranslateTransform;
+    private readonly Timer _animRepeatTimer;
 
 
-    readonly DoubleAnimation _s1Anim;
-    readonly DoubleAnimation _s2Anim;
-    readonly DoubleAnimation _s3Anim;
+    private readonly DoubleAnimation _s1Anim;
+    private readonly DoubleAnimation _s2Anim;
+    private readonly DoubleAnimation _s3Anim;
 
 
     public FloatingButtonWindow(FloatingButtonViewModel vm)
@@ -68,7 +68,7 @@ public partial class FloatingButtonWindow
         SettingsWindowViewModel.IntegratedGpuSleepWorkaroundChanged += OnIntegratedGpuSleepWorkaroundChanged;
     }
 
-    void OnIntegratedGpuSleepWorkaroundChanged()
+    private void OnIntegratedGpuSleepWorkaroundChanged()
     {
         Dispatcher.InvokeAsync(() =>
         {
@@ -77,14 +77,14 @@ public partial class FloatingButtonWindow
         });
     }
 
-    void StartGradientAnimation()
+    private void StartGradientAnimation()
     {
         Stop1.BeginAnimation(GradientStop.OffsetProperty, _s1Anim);
         Stop2.BeginAnimation(GradientStop.OffsetProperty, _s2Anim);
         Stop3.BeginAnimation(GradientStop.OffsetProperty, _s3Anim);
     }
 
-    void StopGradientAnimation()
+    private void StopGradientAnimation()
     {
         Stop1.BeginAnimation(GradientStop.OffsetProperty, null);
         Stop2.BeginAnimation(GradientStop.OffsetProperty, null);
@@ -112,7 +112,7 @@ public partial class FloatingButtonWindow
         });
     }
 
-    void OnNotificationsAdded()
+    private void OnNotificationsAdded()
     {
         Dispatcher?.InvokeAsync(() =>
         {
@@ -121,7 +121,7 @@ public partial class FloatingButtonWindow
         });
     }
 
-    void OnNotificationsCleared()
+    private void OnNotificationsCleared()
     {
         Dispatcher?.InvokeAsync(() =>
         {
@@ -131,19 +131,19 @@ public partial class FloatingButtonWindow
         });
     }
 
-    void AnimateBubble()
+    private void AnimateBubble()
     {
         _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _bubbleAnim);
         _bubbleScaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _bubbleAnim);
     }
 
-    void OnMouseEnter(object sender, MouseEventArgs e)
+    private void OnMouseEnter(object sender, MouseEventArgs e)
     {
         RootGrid.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _slideInAnim);
         _bubbleTranslateTransform.BeginAnimation(TranslateTransform.XProperty, _bubbleSlideIn);
     }
 
-    void OnMouseLeave(object sender, MouseEventArgs e)
+    private void OnMouseLeave(object sender, MouseEventArgs e)
     {
         Task.Delay(1000).ContinueWith(_ =>
         {

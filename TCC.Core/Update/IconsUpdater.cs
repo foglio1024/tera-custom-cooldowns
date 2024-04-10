@@ -18,10 +18,10 @@ namespace TCC.Update;
 
 public class IconsUpdater
 {
-    static string DownloadedIconsDir => Path.Combine(App.BasePath, "tera-used-icons-master");
-    const string IconsUrl = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
+    private static string DownloadedIconsDir => Path.Combine(App.BasePath, "tera-used-icons-master");
+    private const string IconsUrl = "https://github.com/Foglio1024/tera-used-icons/archive/master.zip";
 
-    ProgressNotificationInfo? _n;
+    private ProgressNotificationInfo? _n;
 
     public async Task CheckForUpdates()
     {
@@ -36,7 +36,7 @@ public class IconsUpdater
         }
     }
 
-    async Task CheckHashes()
+    private async Task CheckHashes()
     {
         string hashFile;
         try
@@ -82,7 +82,7 @@ public class IconsUpdater
         //Log.N("TCC icon updater", "All icons are up to date.", NotificationType.Success);
     }
 
-    async Task DownloadArchive()
+    private async Task DownloadArchive()
     {
         using var c = new HttpClientProgress();
 
@@ -129,7 +129,7 @@ public class IconsUpdater
         }
     }
 
-    void DownloadMissingIcons(List<string> missing)
+    private void DownloadMissingIcons(List<string> missing)
     {
         var idx = 1;
         var fails = 0;
@@ -166,7 +166,7 @@ public class IconsUpdater
         _n.Dispose(2000);
     }
 
-    void Extract()
+    private void Extract()
     {
         try
         {
@@ -229,7 +229,7 @@ public class IconsUpdater
         }
     }
 
-    static void CleanTempIcons()
+    private static void CleanTempIcons()
     {
         try
         {

@@ -26,7 +26,7 @@ public static class SystemMessagesProcessor
         AnalyzeMessage(parameters, template, opcodeName);
     }
 
-    static void AnalyzeMessage(string parameters, SystemMessageData template, string opcodeName)
+    private static void AnalyzeMessage(string parameters, SystemMessageData template, string opcodeName)
     {
         if (!Pass(opcodeName)) return;
         if (Process(parameters, template, opcodeName)) return;
@@ -34,7 +34,7 @@ public static class SystemMessagesProcessor
         ChatManager.Instance.AddSystemMessage(parameters, template);
     }
 
-    static bool Pass(string opcodeName)
+    private static bool Pass(string opcodeName)
     {
         return !App.Settings.UserExcludedSysMsg.Contains(opcodeName);
     }
@@ -45,12 +45,12 @@ public static class SystemMessagesProcessor
     //    var templ = new SystemMessageData( ChatUtils.Font(template.Template, R.Colors.ChatSystemGenericColor.ToHex()), template.ChatChannel);
     //    ChatWindowManager.Instance.AddSystemMessage(parameters, templ, ChatChannel.Enchant);
     //}
-    static void HandleFriendLogin(string parameters, SystemMessageData template)
+    private static void HandleFriendLogin(string parameters, SystemMessageData template)
     {
         ChatManager.Instance.AddSystemMessage(parameters, template, ChatChannel.Friend, ChatUtils.SplitDirectives(parameters)?["UserName"] ?? "");
     }
 
-    static void HandleClearedGuardianQuestsMessage(string parameters, SystemMessageData template)
+    private static void HandleClearedGuardianQuestsMessage(string parameters, SystemMessageData template)
     {
         var currChar = WindowManager.ViewModels.DashboardVM.CurrentCharacter;
         if (currChar == null) return;
@@ -69,7 +69,7 @@ public static class SystemMessagesProcessor
         ChatManager.Instance.AddChatMessage(msg);
     }
 
-    static void HandleNewGuildMasterMessage(string parameters, SystemMessageData template)
+    private static void HandleNewGuildMasterMessage(string parameters, SystemMessageData template)
     {
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.GuildNotice);
         Log.N("Guild", msg.ToString(), NotificationType.Info);
@@ -77,7 +77,7 @@ public static class SystemMessagesProcessor
         msg.ContainsPlayerName = true;
     }
 
-    static void HandleGuilBamSpawn(string parameters, SystemMessageData template)
+    private static void HandleGuilBamSpawn(string parameters, SystemMessageData template)
     {
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel);
         Log.N("Guild BAM", msg.ToString(), NotificationType.Info, 2 * 60 * 1000);
@@ -87,7 +87,7 @@ public static class SystemMessagesProcessor
         GameEventManager.ExecuteGuildBamWebhook();
     }
 
-    static void HandleDungeonEngagedMessage(string parameters, SystemMessageData template)
+    private static void HandleDungeonEngagedMessage(string parameters, SystemMessageData template)
     {
         const string s = "dungeon:";
         var dgId = Convert.ToUInt32(parameters[(parameters.IndexOf(s, StringComparison.Ordinal) + s.Length)..]);
@@ -97,7 +97,7 @@ public static class SystemMessagesProcessor
         ChatManager.Instance.AddChatMessage(msg);
     }
 
-    static void HandleFriendInAreaMessage(string parameters, SystemMessageData template)
+    private static void HandleFriendInAreaMessage(string parameters, SystemMessageData template)
     {
         if (!App.Settings.ChatEnabled) return;
 
@@ -109,7 +109,7 @@ public static class SystemMessagesProcessor
         ChatManager.Instance.AddChatMessage(msg);
     }
 
-    static void HandleRessMessage(string parameters, SystemMessageData template)
+    private static void HandleRessMessage(string parameters, SystemMessageData template)
     {
         if (!App.Settings.ChatEnabled) return;
 
@@ -119,7 +119,7 @@ public static class SystemMessagesProcessor
         ChatManager.Instance.AddChatMessage(msg);
     }
 
-    static void HandleDeathMessage(string parameters, SystemMessageData template)
+    private static void HandleDeathMessage(string parameters, SystemMessageData template)
     {
         if (!App.Settings.ChatEnabled) return;
 
@@ -129,7 +129,7 @@ public static class SystemMessagesProcessor
         ChatManager.Instance.AddChatMessage(msg);
     }
 
-    static void HandleInvalidLink(string parameters, SystemMessageData template)
+    private static void HandleInvalidLink(string parameters, SystemMessageData template)
     {
         if (App.Settings.LfgWindowSettings.Enabled)
             WindowManager.ViewModels.LfgVM.RemoveDeadLfg();
@@ -140,7 +140,7 @@ public static class SystemMessagesProcessor
         ChatManager.Instance.AddChatMessage(ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, (ChatChannel)template.ChatChannel));
     }
 
-    static void HandleMerchantSpawn(string parameters, SystemMessageData template)
+    private static void HandleMerchantSpawn(string parameters, SystemMessageData template)
     {
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.MysteryMerchant);
         Log.N("Mystery Merchant", msg.ToString(), NotificationType.Info, 10000);
@@ -148,26 +148,26 @@ public static class SystemMessagesProcessor
         ChatManager.Instance.AddChatMessage(msg);
     }
 
-    static void HandleMerchantDespawn(string parameters, SystemMessageData template)
+    private static void HandleMerchantDespawn(string parameters, SystemMessageData template)
     {
         var msg = ChatManager.Instance.Factory.CreateSystemMessage(parameters, template, ChatChannel.MysteryMerchant);
         Log.N("Mystery Merchant", msg.ToString(), NotificationType.Info, 10000);
         ChatManager.Instance.AddChatMessage(msg);
     }
 
-    static void HandleLfgNotListed(string parameters, SystemMessageData template)
+    private static void HandleLfgNotListed(string parameters, SystemMessageData template)
     {
         ChatManager.Instance.AddSystemMessage(parameters, template);
         WindowManager.ViewModels.LfgVM.ForceStopPublicize();
     }
 
-    static void Redirect(string parameters, SystemMessageData template, ChatChannel ch)
+    private static void Redirect(string parameters, SystemMessageData template, ChatChannel ch)
     {
         ChatManager.Instance.AddSystemMessage(parameters, template, ch);
     }
 
     //by HQ 20181224
-    static void HandleFieldBossAppear(string parameters, SystemMessageData template)
+    private static void HandleFieldBossAppear(string parameters, SystemMessageData template)
     {
         string notificationText;
 
@@ -199,7 +199,7 @@ public static class SystemMessagesProcessor
         GameEventManager.ExecuteFieldBossSpawnWebhook(monsterName, regionName, notificationText);
     }
 
-    static void HandleFieldBossDie(string parameters, SystemMessageData template)
+    private static void HandleFieldBossDie(string parameters, SystemMessageData template)
     {
         string notificationText;
 
@@ -234,7 +234,7 @@ public static class SystemMessagesProcessor
         GameEventManager.ExecuteFieldBossDieWebhook(monsterName, notificationText, userName, guildName);
     }
 
-    static string GetFieldBossName(string parameters)
+    private static string GetFieldBossName(string parameters)
     {
         // only for 'SMT_FIELDBOSS_*'
         var srvMsgSplit = parameters.Split('\v');
@@ -246,7 +246,7 @@ public static class SystemMessagesProcessor
         return m.Name;
     }
 
-    static string GetFieldBossKillerName(string parameters)
+    private static string GetFieldBossKillerName(string parameters)
     {
         // only for 'SMT_FIELDBOSS_*'
         var ret = "";
@@ -257,7 +257,7 @@ public static class SystemMessagesProcessor
         return ret;
     }
 
-    static string GetFieldBossKillerGuild(string parameters)
+    private static string GetFieldBossKillerGuild(string parameters)
     {
         // only for 'SMT_FIELDBOSS_*'
         var ret = "";
@@ -270,7 +270,7 @@ public static class SystemMessagesProcessor
 
     #region Factory
 
-    static readonly Dictionary<string, Delegate> Processor = new()
+    private static readonly Dictionary<string, Delegate> Processor = new()
     {
         { "SMT_FRIEND_IS_CONNECTED",                    new Action<string, SystemMessageData>(HandleFriendLogin) },
         { "SMT_FRIEND_WALK_INTO_SAME_AREA",             new Action<string, SystemMessageData>(HandleFriendInAreaMessage) },
@@ -343,7 +343,7 @@ public static class SystemMessagesProcessor
         { "SMT_WORLDSPAWN_NOTIFY_DESPAWN",              new Action<string, SystemMessageData>(HandleMerchantDespawn)}
     };
 
-    static bool Process(string parameters, SystemMessageData template, string opcodeName)
+    private static bool Process(string parameters, SystemMessageData template, string opcodeName)
     {
         if (!Processor.TryGetValue(opcodeName, out var type)) return false;
 

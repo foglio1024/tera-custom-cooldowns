@@ -7,7 +7,7 @@ namespace TCC.ViewModels.ClassManagers;
 
 internal class MysticLayoutViewModel : BaseClassLayoutViewModel
 {
-    bool _elementalize;
+    private bool _elementalize;
     public AurasTracker Auras { get; }
     public Cooldown Contagion { get; }
     public SkillWithEffect Vow { get; }
@@ -107,7 +107,7 @@ internal class MysticLayoutViewModel : BaseClassLayoutViewModel
         VolleyOfCurse.Dispose();
     }
 
-    void CheckAurasWarning()
+    private void CheckAurasWarning()
     {
         AuraMerciless.FlashOnAvailable = Auras is { CritAura: false, SwiftAura: false };
         AuraSwift.FlashOnAvailable = Auras is { CritAura: false, SwiftAura: false };
@@ -118,7 +118,7 @@ internal class MysticLayoutViewModel : BaseClassLayoutViewModel
         InvokePropertyChanged(nameof(SupportAuraWarning));
     }
 
-    void OnCombatChanged()
+    private void OnCombatChanged()
     {
         InvokePropertyChanged(nameof(ElementalizeWarning));
         InvokePropertyChanged(nameof(OffenseAuraWarning));
@@ -126,16 +126,16 @@ internal class MysticLayoutViewModel : BaseClassLayoutViewModel
         CheckAurasWarning();
     }
 
-    void OnVowBuffStarted(ulong cd, CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
-    void OnVowBuffEnded(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
+    private void OnVowBuffStarted(ulong cd, CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
+    private void OnVowBuffEnded(CooldownMode obj) => Vow.Cooldown.FlashOnAvailable = true;
 
-    void OnVocRefreshed(ulong duration)
+    private void OnVocRefreshed(ulong duration)
     {
         VolleyOfCurse.RefreshEffect(duration);
         VolleyOfCurse.Cooldown.FlashOnAvailable = false;
     }
 
-    void OnVocExpired()
+    private void OnVocExpired()
     {
         VolleyOfCurse.StopEffect();
         VolleyOfCurse.Cooldown.FlashOnAvailable = true;

@@ -15,22 +15,22 @@ public partial class FriendMessageDialog
         TargetName = WindowManager.ViewModels.PlayerMenuVM.Name;
     }
 
-    string _message = "Friend me?";
+    private string _message = "Friend me?";
     public string TargetName { get; set; }
 
-    void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         _message = ((TextBox)sender).Text;
     }
 
-    void CancelClick(object sender, RoutedEventArgs e)
+    private void CancelClick(object sender, RoutedEventArgs e)
     {
         _message = "Friend me?";
         //ChatWindowManager.Instance.LockTooltip();
         Close();
     }
 
-    void OkClick(object sender, RoutedEventArgs e)
+    private void OkClick(object sender, RoutedEventArgs e)
     {
         StubInterface.Instance.StubClient.FriendUser(WindowManager.ViewModels.PlayerMenuVM.Name, _message);//ProxyOld.FriendRequest(WindowManager.FloatingButton.TooltipInfo.Name, _message);
         //ChatWindowManager.Instance.LockTooltip();

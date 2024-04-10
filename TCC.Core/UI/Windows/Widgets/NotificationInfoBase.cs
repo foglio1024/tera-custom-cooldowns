@@ -9,7 +9,7 @@ namespace TCC.UI.Windows.Widgets;
 
 public class ProgressNotificationInfo : NotificationInfoBase
 {
-    double _progress;
+    private double _progress;
     public double Progress
     {
         get => _progress;
@@ -40,8 +40,8 @@ public class NotificationInfoBase : ThreadSafeObservableObject
     public event Action? Disposed;
     public event Action<int>? Disposing;
 
-    string _message = "";
-    NotificationType _notificationType;
+    private string _message = "";
+    private NotificationType _notificationType;
 
     public int Id { get; }
     public string Title { get; }
@@ -57,7 +57,7 @@ public class NotificationInfoBase : ThreadSafeObservableObject
         set => RaiseAndSetIfChanged(value, ref _notificationType);
     }
 
-    bool _canClose;
+    private bool _canClose;
 
     public bool CanClose
     {

@@ -17,7 +17,7 @@ namespace TeraPacketParser.Analysis;
 
 public static class PacketAnalyzer
 {
-    static readonly ConcurrentQueue<Message> Packets = new();
+    private static readonly ConcurrentQueue<Message> Packets = new();
 
     public static event Action? ProcessorReady;
 
@@ -43,7 +43,7 @@ public static class PacketAnalyzer
         ServerDatabase = new ServerDatabase(path, overridePath) { Language = Enum.Parse<LangEnum>(lang.Replace("EU-", "")) };
     }
 
-    static void Init(CaptureMode mode, bool toolboxMode)
+    private static void Init(CaptureMode mode, bool toolboxMode)
     {
         Factory = new MessageFactory();
 
@@ -58,7 +58,7 @@ public static class PacketAnalyzer
         AnalysisThread.Start();
     }
 
-    static void PacketAnalysisLoop()
+    private static void PacketAnalysisLoop()
     {
         Processor = new MessageProcessor();
 
@@ -86,18 +86,18 @@ public static class PacketAnalyzer
         // ReSharper disable once FunctionNeverReturns
     }
 
-    static void OnNewConnection(Server srv)
+    private static void OnNewConnection(Server srv)
     {
         if (Sniffer is not TeraSniffer) return;
         DetectClientVersionFromFile();
     }
 
-    static void OnEndConnection()
+    private static void OnEndConnection()
     {
         Log.N("TCC", SR.Disconnected, NotificationType.None);
     }
 
-    static void DetectClientVersionFromFile()
+    private static void DetectClientVersionFromFile()
     {
         try
         {

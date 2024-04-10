@@ -16,17 +16,17 @@ namespace TeraPacketParser.TeraCommon.Sniffing;
 
 public class IpSnifferRawSocketSingleInterface : IpSniffer
 {
-    readonly IPAddress _localIp;
+    private readonly IPAddress _localIp;
 
-    bool _isInit;
-    Socket? _socket;
+    private bool _isInit;
+    private Socket? _socket;
 
     public IpSnifferRawSocketSingleInterface(IPAddress localIp)
     {
         _localIp = localIp;
     }
 
-    void Init()
+    private void Init()
     {
         Debug.Assert(_socket == null);
         _socket = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.IP);
@@ -39,7 +39,7 @@ public class IpSnifferRawSocketSingleInterface : IpSniffer
         Task.Run(()=>ReadAsync(_socket));
     }
 
-    async Task ReadAsync(Socket s)
+    private async Task ReadAsync(Socket s)
     {
         // Reusable SocketAsyncEventArgs and awaitable wrapper 
         var args = new SocketAsyncEventArgs();
@@ -57,7 +57,7 @@ public class IpSnifferRawSocketSingleInterface : IpSniffer
         }
     }
 
-    void Finish()
+    private void Finish()
     {
         if (!_isInit)
         {
@@ -97,10 +97,10 @@ public class IpSnifferRawSocketSingleInterface : IpSniffer
 
 public sealed class SocketAwaitable : INotifyCompletion
 {
-    static readonly Action Sentinel = () => { };
+    private static readonly Action Sentinel = () => { };
 
     internal bool MWasCompleted;
-    Action? _mContinuation;
+    private Action? _mContinuation;
     internal readonly SocketAsyncEventArgs MEventArgs;
 
     public SocketAwaitable(SocketAsyncEventArgs eventArgs)

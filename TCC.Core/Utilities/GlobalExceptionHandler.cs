@@ -19,7 +19,7 @@ namespace TCC.Utilities;
 
 public static class GlobalExceptionHandler
 {
-    static readonly int[] _excludedWin32codes =
+    private static readonly int[] _excludedWin32codes =
     [
         1816  // "Not enough quota"
     ];
@@ -30,7 +30,7 @@ public static class GlobalExceptionHandler
         HandleGlobalException(e);
     }
 
-    static void HandleGlobalException(UnhandledExceptionEventArgs e)
+    private static void HandleGlobalException(UnhandledExceptionEventArgs e)
     {
         var ex = (Exception)e.ExceptionObject;
         var js = ExceptionReportBuilder.BuildJsonCrashReport(ex);
@@ -85,7 +85,7 @@ public static class GlobalExceptionHandler
         Environment.Exit(-1);
     }
 
-    static void WriteCrashReportToFile(JObject js, Exception ex)
+    private static void WriteCrashReportToFile(JObject js, Exception ex)
     {
         var sb = new StringBuilder();
         sb.AppendLine($"id: {js["id"]}");
@@ -108,7 +108,7 @@ public static class GlobalExceptionHandler
         Log.F(sb.ToString(), "crash.log");
     }
 
-    static void UploadCrashReport(JObject js)
+    private static void UploadCrashReport(JObject js)
     {
         try
         {

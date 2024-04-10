@@ -6,7 +6,7 @@ namespace TCC.ViewModels.ClassManagers;
 
 public class NinjaLayoutViewModel : BaseClassLayoutViewModel
 {
-    bool _focusOn;
+    private bool _focusOn;
 
     public Cooldown BurningHeart { get; set; }
     public Cooldown FireAvalanche { get; set; }
@@ -18,7 +18,7 @@ public class NinjaLayoutViewModel : BaseClassLayoutViewModel
         set => RaiseAndSetIfChanged(value, ref _focusOn);
     }
 
-    void FlashOnMaxSt(object? sender, PropertyChangedEventArgs e)
+    private void FlashOnMaxSt(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(StaminaTracker.Maxed)) return;
         BurningHeart.FlashOnAvailable = StaminaTracker.Maxed;

@@ -9,7 +9,7 @@ public class RegionsDatabase : DatabaseBase
     protected override string FolderName => "regions";
     protected override string Extension => "tsv";
 
-    Dictionary<uint, string> Names { get; } = [];
+    private Dictionary<uint, string> Names { get; } = [];
 
     public RegionsDatabase(string lang) : base(lang)
     {

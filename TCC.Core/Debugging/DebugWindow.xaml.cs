@@ -19,9 +19,9 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         InitializeComponent();
     }
 
-    int _last;
-    int _sum;
-    int _max;
+    private int _last;
+    private int _sum;
+    private int _max;
 
     public int Last
     {
@@ -34,14 +34,14 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         private set { _max = value; NPC(); }
     }
 
-    int Sum
+    private int Sum
     {
         get => _sum;
         set { _sum = value; NPC(); }
     }
     public double Avg => _count == 0 ? 0 : Sum / (float)_count;
 
-    int _count;
+    private int _count;
     public void SetQueuedPackets(int val)
     {
         Last = val;
@@ -59,12 +59,12 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    void NPC([CallerMemberName] string? propertyName = null)
+    private void NPC([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    void SwitchClass(object sender, RoutedEventArgs e)
+    private void SwitchClass(object sender, RoutedEventArgs e)
     {
         Game.Me.Class = Enum.Parse<Class>(((Button) sender).Content.ToString() ?? "None");
         WindowManager.ViewModels.ClassVM.CurrentClass = Game.Me.Class;
@@ -72,7 +72,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         WindowManager.ViewModels.CooldownsVM.LoadConfig(Game.Me.Class);
     }
 
-    void SetSorcElement(object sender, RoutedEventArgs e)
+    private void SetSorcElement(object sender, RoutedEventArgs e)
     {
         var el = ((Button) sender).Content.ToString();
 
@@ -116,7 +116,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     }
 
-    void SetSorcElementBoost(object sender, RoutedEventArgs e)
+    private void SetSorcElementBoost(object sender, RoutedEventArgs e)
     {
         var el = ((Button) sender).Content.ToString()?.Split(' ')[0];
 
@@ -159,7 +159,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     }
 
-    void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
         TccUtils.CurrentClassVM<SorcererLayoutViewModel>()?.ManaBoost.StartEffect(10000);
 
@@ -169,7 +169,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         //SkillManager.ResetSkill(400120);
     }
 
-    void SetStance(object sender, RoutedEventArgs e)
+    private void SetStance(object sender, RoutedEventArgs e)
     {
         TccUtils.CurrentClassVM<WarriorLayoutViewModel>()!.StanceTracker.CurrentStance = ((Button)sender).Content.ToString() switch
         {
@@ -179,7 +179,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         };
     }
 
-    void IncreaseEdge(object sender, RoutedEventArgs e)
+    private void IncreaseEdge(object sender, RoutedEventArgs e)
     {
         var edge = TccUtils.CurrentClassVM<WarriorLayoutViewModel>()!.EdgeCounter;
         if (edge.IsMaxed) edge.Val = 0;
@@ -187,7 +187,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     }
 
-    void RegisterWebhook(object sender, RoutedEventArgs e)
+    private void RegisterWebhook(object sender, RoutedEventArgs e)
     {
         for (var i = 0; i < 80; i++)
         {
@@ -196,7 +196,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         }
     }
 
-    void FireWebhook(object sender, RoutedEventArgs e)
+    private void FireWebhook(object sender, RoutedEventArgs e)
     {
         for (var i = 0; i < 80; i++)
         {
@@ -205,7 +205,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         }
     }
 
-    void DungeonTest(object sender, RoutedEventArgs e)
+    private void DungeonTest(object sender, RoutedEventArgs e)
     {
         //i = 0;
         //WindowManager.Dashboard.VM.SetDungeons(20000078, new Dictionary<uint, short>() { { 9770U, i++ } });
@@ -214,29 +214,29 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         Game.Account.Characters[0].VanguardInfo.WeekliesDone = App.Random.Next(0, 16);
     }
 
-    void MaxEnchant(object sender, RoutedEventArgs e)
+    private void MaxEnchant(object sender, RoutedEventArgs e)
     {
         //"@464\vUserName\vHeve\vItemName\v@item:89607?dbid:327641239?enchantCount:11"
 
         Tester.AddFakeSystemMessage("SMT_MAX_ENCHANT_SUCCEED", "UserName", "Foglio", "ItemName", "@item:89607?dbid:327641239?enchantCount:11");
     }
 
-    void NotifyGuildBam(object sender, RoutedEventArgs e)
+    private void NotifyGuildBam(object sender, RoutedEventArgs e)
     {
         Tester.AddFakeSystemMessage("SMT_GQUEST_URGENT_NOTIFY", "questName", "Frygaras", "npcName", "Frygaras", "zoneName", "Zone");
     }
 
-    void NotifyFieldBoss(object sender, RoutedEventArgs e)
+    private void NotifyFieldBoss(object sender, RoutedEventArgs e)
     {
         Tester.AddFakeSystemMessage("SMT_FIELDBOSS_APPEAR", "npcName", "Ortan", "RegionName", "Zone");
     }
 
-    void NotifyFieldBossDie(object sender, RoutedEventArgs e)
+    private void NotifyFieldBossDie(object sender, RoutedEventArgs e)
     {
         Tester.AddFakeSystemMessage("SMT_FIELDBOSS_DIE_NOGUILD", "userName", "Foglio", "npcName", "Ortan");
     }
 
-    void SetAtkSpeed(object sender, RoutedEventArgs e)
+    private void SetAtkSpeed(object sender, RoutedEventArgs e)
     {
         switch (((Button)sender).Content.ToString())
         {
@@ -249,7 +249,7 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
         }
     }
 
-    void Unleash(object sender, RoutedEventArgs e)
+    private void Unleash(object sender, RoutedEventArgs e)
     {
         Tester.StartUnleash();
     }

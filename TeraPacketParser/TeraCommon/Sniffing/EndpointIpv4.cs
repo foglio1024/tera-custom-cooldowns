@@ -9,8 +9,8 @@ namespace TeraPacketParser.TeraCommon.Sniffing;
 
 internal struct EndpointIpv4 : IEquatable<EndpointIpv4>
 {
-    readonly uint _ip;
-    readonly ushort _port;
+    private readonly uint _ip;
+    private readonly ushort _port;
 
     public static bool operator ==(EndpointIpv4 x, EndpointIpv4 y)
     {
@@ -43,7 +43,7 @@ internal struct EndpointIpv4 : IEquatable<EndpointIpv4>
         _port = port;
     }
 
-    static IPAddress ToIpAddress(uint ip)
+    private static IPAddress ToIpAddress(uint ip)
     {
         var bytes = new byte[4];
         bytes[0] = (byte) (ip >> 24);

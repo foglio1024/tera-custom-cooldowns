@@ -9,10 +9,10 @@ public class VanguardInfo : ThreadSafeObservableObject
     public const float MAX_CREDITS = 100000;
     public const int MAX_DAILIES = 8;
 
-    int _credits;
-    int _dailiesDone;
-    int _weekliesDone;
-    int _weekliesMax;
+    private int _credits;
+    private int _dailiesDone;
+    private int _weekliesDone;
+    private int _weekliesMax;
 
     public int Credits
     {

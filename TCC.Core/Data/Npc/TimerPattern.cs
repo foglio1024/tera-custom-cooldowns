@@ -9,7 +9,7 @@ public class TimerPattern : ThreadSafeObservableObject, IDisposable
     public event Action? Started;
     public event Action? Ended;
 
-    readonly Timer _timer;
+    private readonly Timer _timer;
     protected bool IsRunning => _timer.Enabled;
     protected Npc? Target { get; set; }
     public int Duration { get; }
@@ -31,8 +31,8 @@ public class TimerPattern : ThreadSafeObservableObject, IDisposable
     {
         Target = target;
     }
- 
-    void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         _timer.Stop();
         Ended?.Invoke();

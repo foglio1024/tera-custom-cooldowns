@@ -5,8 +5,8 @@ namespace TCC.Data.Abnormalities;
 
 public class NinjaAbnormalityTracker : AbnormalityTracker
 {
-    const int FocusId = 10154030;
-    const int InnerHarmonyBuffId = 10154480;
+    private const int FocusId = 10154030;
+    private const int InnerHarmonyBuffId = 10154480;
 
     public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
@@ -32,7 +32,7 @@ public class NinjaAbnormalityTracker : AbnormalityTracker
         CheckInnerHarmonyEnd(p);
     }
 
-    static void CheckFocusBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckFocusBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != FocusId) return;
         if (!TryGetClassViewModel<NinjaLayoutViewModel>(out var vm)) return;
@@ -40,7 +40,7 @@ public class NinjaAbnormalityTracker : AbnormalityTracker
         vm.FocusOn = true;
     }
 
-    static void CheckFocusRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckFocusRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != FocusId) return;
         if (!TryGetClassViewModel<NinjaLayoutViewModel>(out var vm)) return;
@@ -48,7 +48,7 @@ public class NinjaAbnormalityTracker : AbnormalityTracker
         vm.FocusOn = true;
     }
 
-    static void CheckFocusEnd(S_ABNORMALITY_END p)
+    private static void CheckFocusEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != FocusId) return;
         if (!TryGetClassViewModel<NinjaLayoutViewModel>(out var vm)) return;
@@ -56,7 +56,7 @@ public class NinjaAbnormalityTracker : AbnormalityTracker
         vm.FocusOn = false;
     }
 
-    static void CheckInnerHarmonyBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckInnerHarmonyBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != InnerHarmonyBuffId) return;
         if (!TryGetClassViewModel<NinjaLayoutViewModel>(out var vm)) return;
@@ -64,7 +64,7 @@ public class NinjaAbnormalityTracker : AbnormalityTracker
         vm.InnerHarmony.StartEffect(p.Duration);
     }
 
-    static void CheckInnerHarmonyRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckInnerHarmonyRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != InnerHarmonyBuffId) return;
         if (!TryGetClassViewModel<NinjaLayoutViewModel>(out var vm)) return;
@@ -72,7 +72,7 @@ public class NinjaAbnormalityTracker : AbnormalityTracker
         vm.InnerHarmony.RefreshEffect(p.Duration);
     }
 
-    static void CheckInnerHarmonyEnd(S_ABNORMALITY_END p)
+    private static void CheckInnerHarmonyEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != InnerHarmonyBuffId) return;
         if (!TryGetClassViewModel<NinjaLayoutViewModel>(out var vm)) return;

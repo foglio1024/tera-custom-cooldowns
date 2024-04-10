@@ -58,13 +58,13 @@ public partial class SelectionSetting
         InitializeComponent();
     }
 
-    void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var cb = (ComboBox)sender;
         SelectedItem = cb.SelectedItem == null ? cb.Items[0]?.ToString() : cb.SelectedItem.ToString();
     }
 
-    void SelectionSetting_OnLoaded(object sender, RoutedEventArgs e)
+    private void SelectionSetting_OnLoaded(object sender, RoutedEventArgs e)
     {
         var i = 0;
         if(Choices == null) return;
@@ -79,7 +79,7 @@ public partial class SelectionSetting
 
     }
 
-    void OnMouseButtonDown(object sender, MouseButtonEventArgs e)
+    private void OnMouseButtonDown(object sender, MouseButtonEventArgs e)
     {
         Cbox.IsDropDownOpen = true;
     }

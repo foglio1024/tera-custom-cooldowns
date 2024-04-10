@@ -9,17 +9,17 @@ public class MysticAbnormalityTracker : AbnormalityTracker
 {
     //const int HurricaneId = 60010;
     //const int HurricaneDuration = 120000;
-    const int VowOfRebirthId = 700100;
+    private const int VowOfRebirthId = 700100;
 
-    const int VolleyOfCursesId = 27160;
-    const int ThrallOfVengeanceId = 702003;
-    const int ThrallOfWrathId = 702004;
+    private const int VolleyOfCursesId = 27160;
+    private const int ThrallOfVengeanceId = 702003;
+    private const int ThrallOfWrathId = 702004;
 
-    static readonly uint[] CritAuraIDs = [700600, 700601, 700602, 700603];
-    static readonly uint[] ManaAuraIDs = [700300];
-    static readonly uint[] CritResAuraIDs = [700200, 700201, 700202, 700203];
-    static readonly uint[] SwiftAuraIDs = [700700, 700701];
-    static readonly uint[] ElementalizeIDs = [702000];
+    private static readonly uint[] CritAuraIDs = [700600, 700601, 700602, 700603];
+    private static readonly uint[] ManaAuraIDs = [700300];
+    private static readonly uint[] CritResAuraIDs = [700200, 700201, 700202, 700203];
+    private static readonly uint[] SwiftAuraIDs = [700700, 700701];
+    private static readonly uint[] ElementalizeIDs = [702000];
 
     //public static void CheckHurricane(S_ABNORMALITY_BEGIN msg)
     //{
@@ -52,7 +52,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         CheckAurasEnd(p, vm);
     }
 
-    static void CheckAurasBegin(S_ABNORMALITY_BEGIN p, MysticLayoutViewModel vm)
+    private static void CheckAurasBegin(S_ABNORMALITY_BEGIN p, MysticLayoutViewModel vm)
     {
         if (!Game.IsMe(p.TargetId)) return;
 
@@ -90,7 +90,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckAurasRefresh(S_ABNORMALITY_REFRESH p, MysticLayoutViewModel vm)
+    private static void CheckAurasRefresh(S_ABNORMALITY_REFRESH p, MysticLayoutViewModel vm)
     {
         if (!Game.IsMe(p.TargetId)) return;
 
@@ -128,7 +128,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckAurasEnd(S_ABNORMALITY_END p, MysticLayoutViewModel vm)
+    private static void CheckAurasEnd(S_ABNORMALITY_END p, MysticLayoutViewModel vm)
     {
         if (!Game.IsMe(p.TargetId)) return;
 
@@ -166,7 +166,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         }
     }
 
-    static void CheckVolleyOfCursesBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckVolleyOfCursesBegin(S_ABNORMALITY_BEGIN p)
     {
         if (VolleyOfCursesId != p.AbnormalityId) return;
         if (!WindowManager.ViewModels.NpcVM.TryFindNPC(p.TargetId, out _)) return;
@@ -175,7 +175,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         InvokeMarkingRefreshed(p.Duration);
     }
 
-    static void CheckVolleyOfCursesRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckVolleyOfCursesRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (VolleyOfCursesId != p.AbnormalityId) return;
         if (!WindowManager.ViewModels.NpcVM.TryFindNPC(p.TargetId, out _)) return;
@@ -184,7 +184,7 @@ public class MysticAbnormalityTracker : AbnormalityTracker
         InvokeMarkingRefreshed(p.Duration);
     }
 
-    static void CheckVolleyOfCursesEnd(S_ABNORMALITY_END p)
+    private static void CheckVolleyOfCursesEnd(S_ABNORMALITY_END p)
     {
         if (VolleyOfCursesId != p.AbnormalityId) return;
 

@@ -11,13 +11,13 @@ public class LootDistributionWindowSettings : WindowSettingsBase
     public event Action<int>? DelayChanged;
     public event Action? AutoRollPolicyChanged;
 
-    bool _alwaysRoll;
-    bool _alwaysPass;
-    HotKey _toggleHotKey = new(Keys.L, ModifierKeys.Control);
-    HotKey _rollHotKey = new(Keys.PageUp, ModifierKeys.None);
-    HotKey _passHotKey = new(Keys.Next, ModifierKeys.None);
-    int _autorollDelaySec = 10;
-    bool _autoShowUponRoll;
+    private bool _alwaysRoll;
+    private bool _alwaysPass;
+    private HotKey _toggleHotKey = new(Keys.L, ModifierKeys.Control);
+    private HotKey _rollHotKey = new(Keys.PageUp, ModifierKeys.None);
+    private HotKey _passHotKey = new(Keys.Next, ModifierKeys.None);
+    private int _autorollDelaySec = 10;
+    private bool _autoShowUponRoll;
 
     public int AutorollDelaySec
     {
@@ -93,7 +93,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         set => RaiseAndSetIfChanged(value, ref _autoShowUponRoll);
     }
 
-    bool _autoRollItemsBlacklistMode;
+    private bool _autoRollItemsBlacklistMode;
 
     public bool AutoRollItemsBlacklistMode
     {
@@ -101,7 +101,7 @@ public class LootDistributionWindowSettings : WindowSettingsBase
         set => RaiseAndSetIfChanged(value, ref _autoRollItemsBlacklistMode);
     }
 
-    bool _autoPassItemsBlacklistMode;
+    private bool _autoPassItemsBlacklistMode;
 
     public bool AutoPassItemsBlacklistMode
     {

@@ -19,8 +19,8 @@ public class GroupInfo
     public event Action? LeaderChanged;
     public event Action<ReadOnlyCollection<GroupMemberData>, GroupCompositionChangeReason>? CompositionChanged;
 
-    GroupMemberData _leader = new() { Class = Class.None, Name = "", PlayerId = 0 };
-    List<GroupMemberData> _members = [];
+    private GroupMemberData _leader = new() { Class = Class.None, Name = "", PlayerId = 0 };
+    private List<GroupMemberData> _members = [];
 
     public bool InGroup { get; private set; }
     public bool IsRaid { get; private set; }

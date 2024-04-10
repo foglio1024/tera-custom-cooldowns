@@ -6,9 +6,9 @@ namespace TCC.ViewModels;
 
 public class TimeMarker : ThreadSafeObservableObject
 {
-    readonly DispatcherTimer _t = new();
-    DateTime _dateTime;
-    readonly int _hourOffset;
+    private readonly DispatcherTimer _t = new();
+    private DateTime _dateTime;
+    private readonly int _hourOffset;
     public string TimeString => _dateTime.ToShortTimeString();
 
     public double TimeFactor => (_dateTime.Hour * 60 + _dateTime.Minute) * 60 / GameEventManager.SecondsInDay;
@@ -25,7 +25,7 @@ public class TimeMarker : ThreadSafeObservableObject
         _t.Start();
     }
 
-    void T_Tick(object? sender, EventArgs e)
+    private void T_Tick(object? sender, EventArgs e)
     {
         _dateTime = DateTime.Now.AddHours(_hourOffset);
         InvokePropertyChanged(nameof(TimeString));

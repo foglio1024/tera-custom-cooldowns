@@ -26,7 +26,7 @@ public class S_FRIEND_LIST : ParsedMessage
         }
     }
 
-    static FriendEntry ParseFriend(TeraMessageReader reader)
+    private static FriendEntry ParseFriend(TeraMessageReader reader)
     {
         reader.Skip(4); // curr + next
 

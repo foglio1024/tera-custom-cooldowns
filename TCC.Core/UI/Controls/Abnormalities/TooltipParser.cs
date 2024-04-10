@@ -10,17 +10,17 @@ namespace TCC.UI.Controls.Abnormalities;
 
 public class TooltipParser
 {
-    const string GoodMarker = "H_W_GOOD";
-    const string BadMarker = "H_W_BAD";
-    const string CustomMarker = "H_W_CSTM";
-    const string EndMarker = "COLOR_END";
+    private const string GoodMarker = "H_W_GOOD";
+    private const string BadMarker = "H_W_BAD";
+    private const string CustomMarker = "H_W_CSTM";
+    private const string EndMarker = "COLOR_END";
 
-    const string CarriageReturn1 = "$BR";
-    const string CarriageReturn2 = "<br>";
+    private const string CarriageReturn1 = "$BR";
+    private const string CarriageReturn2 = "<br>";
 
-    string _t;
+    private string _t;
 
-    readonly List<Inline> _ret;
+    private readonly List<Inline> _ret;
 
     public TooltipParser(string s)
     {
@@ -55,7 +55,7 @@ public class TooltipParser
         return _ret;
     }
 
-    void Clean()
+    private void Clean()
     {
         _t = _t.Replace(CarriageReturn1, "\n")
             .Replace(CarriageReturn2, "\n")
@@ -64,7 +64,7 @@ public class TooltipParser
             .Replace("\">", "'>");
     }
 
-    void CorrectOrder()
+    private void CorrectOrder()
     {
         var correctionSplit = _t.Split('$');
         var swapped = false;
@@ -93,7 +93,7 @@ public class TooltipParser
         foreach (var s1 in correctionSplit) _t += s1;
     }
 
-    void ReplaceHTML()
+    private void ReplaceHTML()
     {
         while (_t.Contains("<font"))
             _t = _t.Replace("<font color='", $"${CustomMarker}")
@@ -101,7 +101,7 @@ public class TooltipParser
                 .Replace("</font>", $"${EndMarker}");
     }
 
-    bool ParseGood(string piece)
+    private bool ParseGood(string piece)
     {
         if (!IsGood(piece)) return false;
         var d = SplitOn(piece, GoodMarker);
@@ -111,7 +111,7 @@ public class TooltipParser
         return true;
     }
 
-    bool ParseBad(string piece)
+    private bool ParseBad(string piece)
     {
         if (!IsBad(piece)) return false;
         var d = SplitOn(piece, BadMarker);
@@ -121,7 +121,7 @@ public class TooltipParser
         return true;
     }
 
-    bool ParseCustom(string piece)
+    private bool ParseCustom(string piece)
     {
         if (!IsCustom(piece)) return false;
         var d = SplitOn(piece, CustomMarker);
@@ -135,32 +135,32 @@ public class TooltipParser
         return true;
     }
 
-    void Add(string content)
+    private void Add(string content)
     {
         _ret.Add(new Run(content));
     }
 
-    void AddFormatted(string content, Color color)
+    private void AddFormatted(string content, Color color)
     {
         _ret.Add(new Run(content) {Foreground = new SolidColorBrush(color), FontWeight = FontWeights.DemiBold});
     }
 
-    static string[] SplitOn(string input, string marker)
+    private static string[] SplitOn(string input, string marker)
     {
         return input.Split(new[] {$"${marker}"}, StringSplitOptions.None);
     }
 
-    static bool IsGood(string input)
+    private static bool IsGood(string input)
     {
         return input.Contains($"${GoodMarker}");
     }
 
-    static bool IsBad(string input)
+    private static bool IsBad(string input)
     {
         return input.Contains($"${BadMarker}");
     }
 
-    static bool IsCustom(string input)
+    private static bool IsCustom(string input)
     {
         return input.Contains($"${CustomMarker}");
     }

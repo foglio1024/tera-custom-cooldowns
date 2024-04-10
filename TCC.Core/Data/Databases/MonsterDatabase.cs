@@ -12,14 +12,14 @@ public class MonsterDatabase : DatabaseBase
     public static event Action<uint, uint, bool>? OverrideChangedEvent;
     public static event Action<uint, uint, bool>? BlacklistChangedEvent;
 
-    readonly Dictionary<uint, Zone> _zones = [];
+    private readonly Dictionary<uint, Zone> _zones = [];
 
     protected override string FolderName => "monsters";
     protected override string Extension => "xml";
 
     public override bool Exists => base.Exists && File.Exists(OverrideFileFullPath);
-    string OverrideFileFullPath => FullPath.Replace($"{FolderName}-{Language}.{Extension}", $"{FolderName}-override.{Extension}");
-    string OverrideFileRelativePath => RelativePath.Replace(Language, "override");
+    private string OverrideFileFullPath => FullPath.Replace($"{FolderName}-{Language}.{Extension}", $"{FolderName}-override.{Extension}");
+    private string OverrideFileRelativePath => RelativePath.Replace(Language, "override");
 
     public MonsterDatabase(string lang) : base(lang)
     {
@@ -122,7 +122,7 @@ public class MonsterDatabase : DatabaseBase
         }
     }
 
-    XDocument CleanAndLoadOverrideDoc()
+    private XDocument CleanAndLoadOverrideDoc()
     {
         var overrideDoc = XDocument.Load(OverrideFileFullPath);
         var toRemove = new List<Tuple<uint, uint>>();

@@ -6,22 +6,22 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt;
 
 public class Cryptor
 {
-    readonly CryptorKey[] _key =
+    private readonly CryptorKey[] _key =
     [
         new(55, 31),
         new(57, 50),
         new(58, 39)
     ];
 
-    int _changeData;
-    int _changeLen;
+    private int _changeData;
+    private int _changeLen;
 
     public Cryptor(byte[] key)
     {
         GenerateKey(key);
     }
 
-    byte[] FillKey(byte[] src)
+    private byte[] FillKey(byte[] src)
     {
         var result = new byte[680];
 
@@ -33,7 +33,7 @@ public class Cryptor
         return result;
     }
 
-    void GenerateKey(byte[] src)
+    private void GenerateKey(byte[] src)
     {
         var buf = FillKey(src);
         for (var i = 0; i < 680; i += 20)

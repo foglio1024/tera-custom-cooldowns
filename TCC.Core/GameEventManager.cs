@@ -23,11 +23,11 @@ namespace TCC;
 //TODO: big refactor here
 public class GameEventManager : ThreadSafeObservableObject
 {
-    static GameEventManager? _instance;
+    private static GameEventManager? _instance;
     public static GameEventManager Instance => _instance ??= new GameEventManager();
 
     // TODO: not sure about other regions reset days
-    readonly Dictionary<RegionEnum, TeraServerTimeInfo> _serverTimezones = new()
+    private readonly Dictionary<RegionEnum, TeraServerTimeInfo> _serverTimezones = new()
     {
         { RegionEnum.EU,  new TeraServerTimeInfo("Central Europe Standard Time", 6, DayOfWeek.Wednesday, DayOfWeek.Thursday) },
         { RegionEnum.NA,  new TeraServerTimeInfo("Central Standard Time",        6, DayOfWeek.Tuesday,   DayOfWeek.Thursday) },
@@ -39,7 +39,7 @@ public class GameEventManager : ThreadSafeObservableObject
     };
 
     public const double SecondsInDay = 60 * 60 * 24;
-    const string BaseUrl = "https://tcc-web-99a64.firebaseapp.com/bam"; //  todo: replace this
+    private const string BaseUrl = "https://tcc-web-99a64.firebaseapp.com/bam"; //  todo: replace this
 
     public int ResetHour;
     public RegionEnum CurrentRegion { get; set; }
@@ -48,14 +48,14 @@ public class GameEventManager : ThreadSafeObservableObject
 
     public DateTime CurrentServerTime => DateTime.Now.AddHours(ServerHourOffsetFromLocal);
 
-    GameEventManager()
+    private GameEventManager()
     {
         var s = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         s.Tick += CheckNewDay;
         s.Start();
     }
 
-    void CheckCloseEvents()
+    private void CheckCloseEvents()
     {
         var closeEventsCount = WindowManager.ViewModels.DashboardVM.EventGroups.Count(evGroup => evGroup.Events.Any(x => x.IsClose));
         if (closeEventsCount == 0) return;
@@ -63,7 +63,7 @@ public class GameEventManager : ThreadSafeObservableObject
 
     }
 
-    void CheckNewDay(object? sender, EventArgs e)
+    private void CheckNewDay(object? sender, EventArgs e)
     {
         if (CurrentServerTime is { Hour: 0, Minute: 0 })
             WindowManager.ViewModels.DashboardVM.LoadEvents(CurrentServerTime.DayOfWeek, CurrentRegion.ToString());
@@ -104,7 +104,7 @@ public class GameEventManager : ThreadSafeObservableObject
 
     }
 
-    void CheckReset()
+    private void CheckReset()
     {
         var todayReset = DateTime.Today.AddHours(ResetHour + ServerHourOffsetFromLocal);
         if (App.Settings.LastRun > todayReset || DateTime.Now < todayReset) return;
@@ -122,7 +122,7 @@ public class GameEventManager : ThreadSafeObservableObject
         App.Settings.Save();
     }
 
-    async Task<long> DownloadGuildBamTimestamp()
+    private async Task<long> DownloadGuildBamTimestamp()
     {
         try
         {
@@ -197,12 +197,12 @@ public class GameEventManager : ThreadSafeObservableObject
         SendWebhook(content, App.Settings.WebhookUrlFieldBoss, testMessage);
     }
 
-    static void SendWebhook(string content, string url, bool test = false)
+    private static void SendWebhook(string content, string url, bool test = false)
     {
         Discord.FireWebhook(url, $"{content}{(test ? " (test message)" : "")}", App.AppVersion, Game.CurrentAccountNameHash);
     }
 
-    struct TeraServerTimeInfo
+    private struct TeraServerTimeInfo
     {
         public readonly string Timezone;
         public readonly int ResetHour;

@@ -85,7 +85,7 @@ public class ItemsDatabase : DatabaseBase
         AddOverride(new Item(139520, "Minify", RareGrade.Common, 0, 3, "icon_items.icon_janggoe_item_tex_minus"));
     }
 
-    void AddOverride(Item item)
+    private void AddOverride(Item item)
     {
         Items[item.Id] = item;
     }

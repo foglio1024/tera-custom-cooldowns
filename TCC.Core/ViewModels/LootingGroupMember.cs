@@ -7,7 +7,7 @@ public class LootingGroupMember : ThreadSafeObservableObject
 {
     public GroupMemberData Member { get; }
 
-    int _roll;
+    private int _roll;
 
     public int Roll
     {
@@ -15,7 +15,7 @@ public class LootingGroupMember : ThreadSafeObservableObject
         set => RaiseAndSetIfChanged(value, ref _roll);
     }
 
-    bool _isWinning;
+    private bool _isWinning;
 
     public bool IsWinning
     {
@@ -23,7 +23,7 @@ public class LootingGroupMember : ThreadSafeObservableObject
         set => RaiseAndSetIfChanged(value, ref _isWinning);
     }
 
-    BidAction _bidAction;
+    private BidAction _bidAction;
 
     public BidAction BidAction
     {

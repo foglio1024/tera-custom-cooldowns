@@ -29,7 +29,7 @@ public class MergedInventoryViewModel : ThreadSafeObservableObject
                               ?? throw new Exception("Failed to create LiveCollectionView");
     }
 
-    double _totalProgress;
+    private double _totalProgress;
 
     public double TotalProgress
     {
@@ -120,23 +120,23 @@ public partial class MergedInventoryWindow
 
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         ((MergedInventoryViewModel)DataContext).LoadItems();
     }
 
-    void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
+    private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
     {
         DragMove();
 
     }
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void FilterInventory(object sender, TextChangedEventArgs e)
+    private void FilterInventory(object sender, TextChangedEventArgs e)
     {
         Dispatcher?.InvokeAsync(() =>
         {

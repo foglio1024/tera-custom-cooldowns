@@ -19,10 +19,10 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
 {
     #region Properties
 
-    bool _animate = true;
-    bool _isVisible;
-    bool _hasTranslation;
-    ChatMessage? _translation;
+    private bool _animate = true;
+    private bool _isVisible;
+    private bool _hasTranslation;
+    private ChatMessage? _translation;
 
     public ChatChannel Channel { get; protected set; }
     public string Timestamp { get; }
@@ -30,7 +30,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
     public string Author { get; set; } = "";
     public ulong AuthorGameId { get; set; }
     public uint AuthorPlayerId { get; set; }
-    uint AuthorServerId { get; }
+    private uint AuthorServerId { get; }
     public bool ContainsPlayerName { get; set; }
     public bool IsGm { get; protected set; }
     public bool ShowTimestamp => App.Settings.ShowTimestamp;
@@ -220,13 +220,13 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         Pieces.Add(mp);
     }
 
-    void InsertPiece(MessagePieceBase mp, int index)
+    private void InsertPiece(MessagePieceBase mp, int index)
     {
         mp.Container = this;
         Pieces.Insert(index, mp);
     }
 
-    void RemovePiece(MessagePieceBase mp)
+    private void RemovePiece(MessagePieceBase mp)
     {
         Pieces.Remove(mp);
     }
@@ -285,34 +285,34 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         }
     }
 
-    void NotifyShowChannelChanged()
+    private void NotifyShowChannelChanged()
     {
         InvokePropertyChanged(nameof(ShowChannel));
     }
 
-    void NotifyShowTimestampChanged()
+    private void NotifyShowTimestampChanged()
     {
         InvokePropertyChanged(nameof(ShowTimestamp));
     }
 
-    void NotifyFontSizeChanged()
+    private void NotifyFontSizeChanged()
     {
         InvokePropertyChanged(nameof(Size));
     }
 
-    void NotifyTranslationModeChanged()
+    private void NotifyTranslationModeChanged()
     {
         InvokePropertyChanged(nameof(IsShowingTranslationFirst));
         InvokePropertyChanged(nameof(DisplayedLines));
         InvokePropertyChanged(nameof(SecondaryLines));
     }
 
-    void ParseDirectMessage(string msg)
+    private void ParseDirectMessage(string msg)
     {
         AddPiece(new SimpleMessagePiece(msg, App.Settings.FontSize, false));
     }
 
-    void ParseEmoteMessage(string msg)
+    private void ParseEmoteMessage(string msg)
     {
         const string header = "@social:";
         var start = msg.IndexOf(header, StringComparison.Ordinal);
@@ -327,7 +327,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         AddPiece(new SimpleMessagePiece(text, App.Settings.FontSize, false));
     }
 
-    void ParseHtmlMessage(string msg)
+    private void ParseHtmlMessage(string msg)
     {
         var html = new HtmlDocument(); html.LoadHtml(msg);
         var htmlPieces = html.DocumentNode.ChildNodes;
@@ -338,7 +338,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         }
     }
 
-    void ParseHtmlPiece(HtmlNode piece)
+    private void ParseHtmlPiece(HtmlNode piece)
     {
         if (piece.HasAttributes)
         {
@@ -403,7 +403,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         }
     }
 
-    void CheckRedirect(string text)
+    private void CheckRedirect(string text)
     {
         //redirect trading message if it's in global
         if ((text.Contains("WTS", StringComparison.InvariantCultureIgnoreCase) ||
@@ -412,7 +412,7 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
             Channel == ChatChannel.Global) Channel = ChatChannel.TradeRedirect;
     }
 
-    string GetPieceContent(string text)
+    private string GetPieceContent(string text)
     {
         var textToSplit = text.Replace(" ", " [[");
         var split = textToSplit.Split(new[] { "[[" }, StringSplitOptions.RemoveEmptyEntries).ToList();

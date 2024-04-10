@@ -25,8 +25,7 @@ namespace TCC.ViewModels;
 [TccModule]
 public class LootDistributionViewModel : TccWindowViewModel
 {
-
-    readonly IReadOnlyCollection<uint> _itemExclusions =
+    private readonly IReadOnlyCollection<uint> _itemExclusions =
     [
         8008,
         8009,
@@ -45,19 +44,20 @@ public class LootDistributionViewModel : TccWindowViewModel
         8022,
         8023
     ];
-    readonly Dictionary<GameId, DropItem> _droppedItems = new();
-    readonly Dictionary<(uint, uint), uint> _amountsDistributed = new();
-    readonly DispatcherTimer _countdown;
-    readonly DispatcherTimer _commitDelay;
-    readonly DispatcherTimer _clear;
 
-    LootDistributionWindowSettings _settings => (LootDistributionWindowSettings)Settings!;
+    private readonly Dictionary<GameId, DropItem> _droppedItems = new();
+    private readonly Dictionary<(uint, uint), uint> _amountsDistributed = new();
+    private readonly DispatcherTimer _countdown;
+    private readonly DispatcherTimer _commitDelay;
+    private readonly DispatcherTimer _clear;
 
-    LootItemViewModel? _itemInDistribution;
-    bool _isListVisible;
-    int _itemsLeftAmount;
-    int _timeLeft = 59;
-    float _delayFactor;
+    private LootDistributionWindowSettings _settings => (LootDistributionWindowSettings)Settings!;
+
+    private LootItemViewModel? _itemInDistribution;
+    private bool _isListVisible;
+    private int _itemsLeftAmount;
+    private int _timeLeft = 59;
+    private float _delayFactor;
 
     public LootItemViewModel? ItemInDistribution
     {
@@ -145,30 +145,30 @@ public class LootDistributionViewModel : TccWindowViewModel
         Game.LootDistributionWindowShowRequest += OnShowRequest;
     }
 
-    void OnShowRequest()
+    private void OnShowRequest()
     {
         _settings.Visible = true;
     }
 
-    void SetWaitForCurrentCategory()
+    private void SetWaitForCurrentCategory()
     {
         if (ItemInDistribution == null) return;
         SetWaitForCategory((int)ItemInDistribution.DbItem.Id);
     }
 
-    void SetPassForCurrentCategory()
+    private void SetPassForCurrentCategory()
     {
         if (ItemInDistribution == null) return;
         SetPassForCategory((int)ItemInDistribution.DbItem.Id);
     }
 
-    void SetRollForCurrentCategory()
+    private void SetRollForCurrentCategory()
     {
         if (ItemInDistribution == null) return;
         SetRollForCategory((int)ItemInDistribution.DbItem.Id);
     }
 
-    void OnAutoRollPolicyChanged()
+    private void OnAutoRollPolicyChanged()
     {
         var policy = _settings.AlwaysRoll ? BidAction.Roll : _settings.AlwaysPass ? BidAction.Pass : BidAction.Unset;
 
@@ -180,20 +180,20 @@ public class LootDistributionViewModel : TccWindowViewModel
         }
     }
 
-    void OnClearTick(object? sender, EventArgs e)
+    private void OnClearTick(object? sender, EventArgs e)
     {
         _clear.Stop();
         _settings.Visible = false;
         ClearLoot();
     }
 
-    void OnShowLootWindowHotkeyPressed()
+    private void OnShowLootWindowHotkeyPressed()
     {
         if (!Game.Group.InGroup) return;
         _settings.Visible = true;
     }
 
-    void OnLoginStatusChanged()
+    private void OnLoginStatusChanged()
     {
         if (Game.Logged) return;
         _settings.Visible = false;
@@ -212,13 +212,13 @@ public class LootDistributionViewModel : TccWindowViewModel
         StubInterface.Instance.StubClient.UpdateSetting("LootWindowEnabled", enabled);
     }
 
-    void ClearAll()
+    private void ClearAll()
     {
         Members.Clear();
         ClearLoot();
     }
 
-    void ClearLoot()
+    private void ClearLoot()
     {
         DistributionList.Clear();
         _droppedItems.Clear();
@@ -234,13 +234,13 @@ public class LootDistributionViewModel : TccWindowViewModel
         ItemsLeftAmount = 0;
     }
 
-    void OnDelaySettingChanged(int newValue)
+    private void OnDelaySettingChanged(int newValue)
     {
         _commitDelay.Interval = TimeSpan.FromSeconds(newValue);
         DelayFactor = newValue / 59f;
     }
 
-    void OnDelayTick(object? sender, EventArgs e)
+    private void OnDelayTick(object? sender, EventArgs e)
     {
         if (ItemInDistribution != null && ItemInDistribution.BidIntent != BidAction.Unset)
         {
@@ -249,25 +249,25 @@ public class LootDistributionViewModel : TccWindowViewModel
         _commitDelay.Stop();
     }
 
-    void OnCountdownTick(object? sender, EventArgs e)
+    private void OnCountdownTick(object? sender, EventArgs e)
     {
         TimeLeft--;
         if (TimeLeft == 0) _countdown.Stop();
     }
 
-    void ResetTimeLeft()
+    private void ResetTimeLeft()
     {
         _countdown.Stop();
         TimeLeft = 59;
         _countdown.Start();
     }
 
-    void ToggleListView()
+    private void ToggleListView()
     {
         IsListVisible = !IsListVisible;
     }
 
-    void SetRollForCategory(int itemId)
+    private void SetRollForCategory(int itemId)
     {
         DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
         {
@@ -276,7 +276,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         });
     }
 
-    void SetPassForCategory(int itemId)
+    private void SetPassForCategory(int itemId)
     {
         DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
         {
@@ -285,7 +285,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         });
     }
 
-    void SetWaitForCategory(int itemId)
+    private void SetWaitForCategory(int itemId)
     {
         DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
         {
@@ -293,7 +293,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         });
     }
 
-    void OnGroupCompositionChanged(ReadOnlyCollection<GroupMemberData> members, GroupCompositionChangeReason reason)
+    private void OnGroupCompositionChanged(ReadOnlyCollection<GroupMemberData> members, GroupCompositionChangeReason reason)
     {
         switch (reason)
         {
@@ -314,7 +314,7 @@ public class LootDistributionViewModel : TccWindowViewModel
         Dispatcher.InvokeAsync(() => UpdateGroupMembers(members, reason));
     }
 
-    void UpdateGroupMembers(ReadOnlyCollection<GroupMemberData> members, GroupCompositionChangeReason reason)
+    private void UpdateGroupMembers(ReadOnlyCollection<GroupMemberData> members, GroupCompositionChangeReason reason)
     {
         switch (reason)
         {
@@ -374,7 +374,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     /// <summary>
     /// A new item is presented for distribution.
     /// </summary>
-    void OnAskBiddingRareItem(S_ASK_BIDDING_RARE_ITEM m)
+    private void OnAskBiddingRareItem(S_ASK_BIDDING_RARE_ITEM m)
     {
         Log.CW($"> S_ASK_BIDDING_RARE_ITEM: itemId:{m.ItemId} amount:{m.Amount}");
 
@@ -450,7 +450,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     /// <summary>
     /// Updats the amount of items left.
     /// </summary>
-    void OnUpdateItemBiddingCount(S_UPDATE_BIDDING_COUNT p)
+    private void OnUpdateItemBiddingCount(S_UPDATE_BIDDING_COUNT p)
     {
         Log.CW($"> S_UPDATE_BIDDING_COUNT.count = {p.Count}");
         ItemsLeftAmount = p.Count + 1;
@@ -459,7 +459,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     /// <summary>
     /// A player rolled or passed for the item.
     /// </summary>
-    void OnResultBiddingDiceThrow(S_RESULT_BIDDING_DICE_THROW m)
+    private void OnResultBiddingDiceThrow(S_RESULT_BIDDING_DICE_THROW m)
     {
         Log.CW($"> S_RESULT_BIDDING_DICE_THROW: gameId:{m.EntityId} result:{m.RollResult}");
 
@@ -514,7 +514,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     /// <summary>
     /// Distribution is finished for the item.
     /// </summary>
-    void OnResultItemBidding(S_RESULT_ITEM_BIDDING p)
+    private void OnResultItemBidding(S_RESULT_ITEM_BIDDING p)
     {
         Log.CW("> S_RESULT_ITEM_BIDDING");
 
@@ -576,7 +576,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     /// <summary>
     /// An item is set/unset for distribution.
     /// </summary>
-    void OnSetItemBiddingFlag(S_SET_ITEM_BIDDING_FLAG p)
+    private void OnSetItemBiddingFlag(S_SET_ITEM_BIDDING_FLAG p)
     {
         Log.CW($"> S_SET_ITEM_BIDDING_FLAG: gameId:{p.GameId} flag:{p.Flag}");
 
@@ -620,7 +620,7 @@ public class LootDistributionViewModel : TccWindowViewModel
     /// <summary>
     /// An item is spawned on the ground.
     /// </summary>
-    void OnSpawnDropitem(S_SPAWN_DROPITEM p)
+    private void OnSpawnDropitem(S_SPAWN_DROPITEM p)
     {
         if (_itemExclusions.Contains(p.ItemId)) return;
         Log.CW($"> S_SPAWN_DROPITEM: gameId:{p.GameId} itemId:{p.ItemId} amount:{p.Amount}");

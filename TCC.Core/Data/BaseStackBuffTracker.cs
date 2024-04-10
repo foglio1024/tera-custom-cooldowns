@@ -12,7 +12,7 @@ public class BaseStackBuffTracker : ThreadSafeObservableObject
     public event Action<long>? BaseBuffRefreshed;
     public event Action<long>? EmpoweredBuffStarted;
 
-    int _stacks;
+    private int _stacks;
 
     public static bool IsEmpoweredBuffRunning { get; set; }
     public int Stacks

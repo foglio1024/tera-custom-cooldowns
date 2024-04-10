@@ -9,7 +9,7 @@ namespace TCC.ViewModels;
 
 public class GroupAbnormalityViewModel : ThreadSafeObservableObject
 {
-    bool _hidden;
+    private bool _hidden;
 
     public bool Hidden
     {

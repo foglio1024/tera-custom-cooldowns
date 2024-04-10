@@ -43,7 +43,7 @@ internal class LancerLayoutViewModel : BaseClassLayoutViewModel
         return true;
     }
 
-    void OnDeath()
+    private void OnDeath()
     {
         LH.Stop();
         GuardianShout.StopEffect();

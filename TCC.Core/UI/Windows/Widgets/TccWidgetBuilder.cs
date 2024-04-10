@@ -72,7 +72,7 @@ public class TccWidgetBuilder<TWindow, TViewModel> : WindowBuilderBase<TWindow, 
         Create(ws);
     }
 
-    void Create(WindowSettingsBase? ws)
+    private void Create(WindowSettingsBase? ws)
     {
         var thread = new Thread(() =>
         {

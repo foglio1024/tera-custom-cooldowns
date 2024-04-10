@@ -8,7 +8,7 @@ namespace TeraPacketParser.Processing;
 
 public class MessageProcessor
 {
-    readonly ConcurrentDictionary<Type, List<Delegate>> _hooks;
+    private readonly ConcurrentDictionary<Type, List<Delegate>> _hooks;
 
     public MessageProcessor()
     {

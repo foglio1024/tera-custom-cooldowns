@@ -9,8 +9,8 @@ namespace TCC.UI.Controls.Chat;
 
 public partial class ChatMessageControl
 {
-    readonly DoubleAnimation _anim;
-    ChatMessage? _dc;
+    private readonly DoubleAnimation _anim;
+    private ChatMessage? _dc;
     public ChatMessageControl()
     {
         InitializeComponent();
@@ -20,7 +20,7 @@ public partial class ChatMessageControl
         Unloaded += OnUnloaded;
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (_dc == null) return;
         _dc.IsVisible = true;
@@ -28,25 +28,25 @@ public partial class ChatMessageControl
         Unloaded -= OnUnloaded;
     }
 
-    void OnUnloaded(object sender, RoutedEventArgs e)
+    private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         if(_dc == null) return;
         _dc.IsVisible = false;
         _dc = null;
     }
 
-    void AnimCompleted(object? sender, EventArgs e)
+    private void AnimCompleted(object? sender, EventArgs e)
     {
         SetAnimated();
     }
 
-    void SetAnimated()
+    private void SetAnimated()
     {
         if (_dc == null) return;
         _dc.Animate = false;
     }
 
-    void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+    private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
     {
         if(DataContext is not ChatMessage message) return;
         _dc = message;

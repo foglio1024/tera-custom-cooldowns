@@ -10,9 +10,9 @@ namespace TCC.UI.Windows.Widgets;
 
 public partial class FlightDurationWindow 
 {
-    readonly DoubleAnimation _arcAn;
-    readonly DoubleAnimation _winShow;
-    readonly DoubleAnimation _winHide;
+    private readonly DoubleAnimation _arcAn;
+    private readonly DoubleAnimation _winShow;
+    private readonly DoubleAnimation _winHide;
 
     public FlightDurationWindow(FlightGaugeViewModel vm)
     {
@@ -51,7 +51,7 @@ public partial class FlightDurationWindow
         };
     }
 
-    FlightGaugeViewModel VM { get; set; }
+    private FlightGaugeViewModel VM { get; set; }
 
     public void SetEnergy(double val)
     {
@@ -65,12 +65,12 @@ public partial class FlightDurationWindow
         });
     }
 
-    void OnCombatChanged()
+    private void OnCombatChanged()
     {
         if (Game.Combat) HideWindow();
     }
 
-    void SetStacks()
+    private void SetStacks()
     {
         Dispatcher?.InvokeAsync(() =>
         {
@@ -81,12 +81,12 @@ public partial class FlightDurationWindow
         });
     }
 
-    void HideWindow()
+    private void HideWindow()
     {
         BeginAnimation(OpacityProperty, _winHide);
     }
 
-    void ShowWindow()
+    private void ShowWindow()
     {
         Opacity = 0;
         BeginAnimation(OpacityProperty, _winShow);

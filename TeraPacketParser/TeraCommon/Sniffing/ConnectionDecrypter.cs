@@ -10,17 +10,17 @@ namespace TeraPacketParser.TeraCommon.Sniffing;
 
 public class ConnectionDecrypter
 {
-    readonly string _region;
-    MemoryStream _client = new();
-    MemoryStream _server = new();
-    Session? _session;
+    private readonly string _region;
+    private MemoryStream _client = new();
+    private MemoryStream _server = new();
+    private Session? _session;
 
     public ConnectionDecrypter(string region = "Unknown")
     {
         _region = region;
     }
 
-    bool Initialized => _session != null;
+    private bool Initialized => _session != null;
 
     public event Action<byte[]>? ClientToServerDecrypted;
     public event Action<byte[]>? ServerToClientDecrypted;
@@ -37,7 +37,7 @@ public class ConnectionDecrypter
         action?.Invoke(data);
     }
 
-    Session CreateSession(byte[] clientKey1, byte[] clientKey2, byte[] serverKey1, byte[] serverKey2)
+    private Session CreateSession(byte[] clientKey1, byte[] clientKey2, byte[] serverKey1, byte[] serverKey2)
     {
         var session = Session.Instance;
         session.ClientKey1 = clientKey1;
@@ -50,7 +50,7 @@ public class ConnectionDecrypter
         return session;
     }
 
-    void TryInitialize()
+    private void TryInitialize()
     {
         if (Initialized)
             throw new InvalidOperationException("Already initalized");

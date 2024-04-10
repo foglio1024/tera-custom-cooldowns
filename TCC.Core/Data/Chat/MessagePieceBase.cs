@@ -14,8 +14,8 @@ public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
 {
     protected bool _customSize;
     protected int _fontSize = 18;
-    bool _isVisible;
-    ChatMessage? _container;
+    private bool _isVisible;
+    private ChatMessage? _container;
 
     public string Text { get; set; } = "";
     public int Size
@@ -73,7 +73,7 @@ public class MessagePieceBase : ThreadSafeObservableObject, IDisposable
         ObjectTracker.Unregister(GetType());
     }
 
-    void OnFontSizeChanged()
+    private void OnFontSizeChanged()
     {
         InvokePropertyChanged(nameof(Size));
     }

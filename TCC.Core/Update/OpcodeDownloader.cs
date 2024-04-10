@@ -17,7 +17,7 @@ public static class OpcodeDownloader
         return DownloadSysmsg(version, directory, revision);
     }
 
-    static bool IsFileValid(string filename)
+    private static bool IsFileValid(string filename)
     {
         return File.Exists(filename);
         //if (!File.Exists(filename)) return false;
@@ -53,7 +53,7 @@ public static class OpcodeDownloader
         //return false;
     }
 
-    static bool DownloadOpcode(uint version, string directory)
+    private static bool DownloadOpcode(uint version, string directory)
     {
         Directory.CreateDirectory(directory);
         var ret = false;
@@ -109,13 +109,13 @@ public static class OpcodeDownloader
         return false;
     }
 
-    static void Download(string remote, string local)
+    private static void Download(string remote, string local)
     {
         using var client = MiscUtils.GetDefaultHttpClient();
         client.DownloadFileAsync(remote, local).Wait();
     }
 
-    static void DownloadJson(string remote, string filename, uint version)
+    private static void DownloadJson(string remote, string filename, uint version)
     {
         using var client = MiscUtils.GetDefaultHttpClient();
         var req = client.GetStringAsync(remote);

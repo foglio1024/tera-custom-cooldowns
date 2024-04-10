@@ -21,7 +21,7 @@ public partial class ProgressNotificationControl
         ((ProgressNotificationInfo)_dc).Disposing += OnNotificationDisposing;
     }
 
-    void OnNotificationDisposing(int duration)
+    private void OnNotificationDisposing(int duration)
     {
         Dispatcher?.Invoke(() =>
         {
@@ -30,7 +30,7 @@ public partial class ProgressNotificationControl
         });
     }
 
-    void OnNotificationDisposed()
+    private void OnNotificationDisposed()
     {
         Dispatcher?.InvokeAsync(() =>
         {

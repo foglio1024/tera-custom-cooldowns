@@ -12,10 +12,10 @@ namespace TeraPacketParser.TeraCommon.Sniffing;
 
 public class IpSnifferRawSocketMultipleInterfaces : IpSniffer
 {
-    readonly List<IpSnifferRawSocketSingleInterface> _individualSniffers =
+    private readonly List<IpSnifferRawSocketSingleInterface> _individualSniffers =
         new();
 
-    readonly IEnumerable<IPAddress> _ipAddresses;
+    private readonly IEnumerable<IPAddress> _ipAddresses;
 
     public IpSnifferRawSocketMultipleInterfaces()
         : this(DefaultInterfaceIPs)

@@ -5,8 +5,8 @@ namespace TeraPacketParser.Messages;
 
 public class S_BAN_PARTY_MEMBER : ParsedMessage
 {
-    uint _serverId, _playerId;
-    string _name;
+    private uint _serverId, _playerId;
+    private string _name;
 
     public uint ServerId => _serverId;
     public uint PlayerId => _playerId;

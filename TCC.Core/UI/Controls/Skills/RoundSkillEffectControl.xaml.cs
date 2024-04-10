@@ -13,8 +13,8 @@ namespace TCC.UI.Controls.Skills;
 
 public partial class RoundSkillEffectControl : INotifyPropertyChanged
 {
-    readonly DoubleAnimation _anim;
-    SkillWithEffect? _context;
+    private readonly DoubleAnimation _anim;
+    private SkillWithEffect? _context;
 
     public string DurationLabel => _context == null ? "" : TimeUtils.FormatSeconds(Convert.ToInt64(_context.Effect.Seconds / _context.Effect.Interval));
     public bool ShowEffectSeconds => _context?.Effect is { Seconds: > 0 };
@@ -28,7 +28,7 @@ public partial class RoundSkillEffectControl : INotifyPropertyChanged
 
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (DesignerProperties.GetIsInDesignMode(this) || DataContext == null) return;
         _context = (SkillWithEffect)DataContext;
@@ -38,7 +38,7 @@ public partial class RoundSkillEffectControl : INotifyPropertyChanged
         _context.Effect.Ended += OnBuffEnded;
     }
 
-    void OnUnloaded(object sender, RoutedEventArgs e)
+    private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         if (_context != null)
         {
@@ -51,19 +51,19 @@ public partial class RoundSkillEffectControl : INotifyPropertyChanged
         Unloaded -= OnUnloaded;
     }
 
-    void OnBuffEnded(CooldownMode obj)
+    private void OnBuffEnded(CooldownMode obj)
     {
         ExternalArc.BeginAnimation(Arc.EndAngleProperty, null);
         ExternalArc.EndAngle = 0;
     }
 
-    void OnSecondsUpdated()
+    private void OnSecondsUpdated()
     {
         NPC(nameof(DurationLabel));
         NPC(nameof(ShowEffectSeconds));
     }
 
-    void OnBuffStarted(ulong duration, CooldownMode mode)
+    private void OnBuffStarted(ulong duration, CooldownMode mode)
     {
         _anim.Duration = TimeSpan.FromMilliseconds(duration);
         ExternalArc.BeginAnimation(Arc.EndAngleProperty, _anim);

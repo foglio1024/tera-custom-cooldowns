@@ -11,9 +11,9 @@ namespace TCC.UI.Controls.NPCs;
 
 public partial class SmallMobControl
 {
-    bool _firstLoad = true;
-    readonly DoubleAnimation _hpAnim;
-    readonly DoubleAnimation _shrinkAnim;
+    private bool _firstLoad = true;
+    private readonly DoubleAnimation _hpAnim;
+    private readonly DoubleAnimation _shrinkAnim;
 
     public SmallMobViewModel? VM { get; private set; }
 
@@ -26,14 +26,14 @@ public partial class SmallMobControl
         _shrinkAnim = AnimationFactory.CreateDoubleAnimation(200, 0, 1, easing: true, framerate: 20);
     }
 
-    void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
+    private void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
     {
         if (e.NewValue is not Npc npc) return;
         VM = new SmallMobViewModel(npc);
     }
 
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (!_firstLoad) return;
         _firstLoad = false;
@@ -46,7 +46,7 @@ public partial class SmallMobControl
         SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
     }
 
-    void OnDispose()
+    private void OnDispose()
     {
         if (VM != null)
         {
@@ -58,7 +58,7 @@ public partial class SmallMobControl
         RootGrid.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _shrinkAnim);
     }
 
-    void OnHpChanged()
+    private void OnHpChanged()
     {
         if (VM == null) return;
 
@@ -74,19 +74,19 @@ public partial class SmallMobControl
         }
     }
 
-    void RefreshAbnormalityTemplate()
+    private void RefreshAbnormalityTemplate()
     {
         Abnormalities.ItemTemplateSelector = null;
         Abnormalities.ItemTemplateSelector = R.TemplateSelectors.RaidAbnormalityTemplateSelector;
     }
 
-    void SmallMobControl_OnMouseEnter(object sender, MouseEventArgs e)
+    private void SmallMobControl_OnMouseEnter(object sender, MouseEventArgs e)
     {
         if (VM == null) return;
         VM.ShowOverrideBtn = true;
     }
 
-    void SmallMobControl_OnMouseLeave(object sender, MouseEventArgs e)
+    private void SmallMobControl_OnMouseLeave(object sender, MouseEventArgs e)
     {
         if (VM == null) return;
         VM.ShowOverrideBtn = false;

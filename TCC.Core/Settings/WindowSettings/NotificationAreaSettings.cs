@@ -5,7 +5,7 @@ namespace TCC.Settings.WindowSettings;
 
 public class NotificationAreaSettings : WindowSettingsBase
 {
-    int _defaultNotificationDuration;
+    private int _defaultNotificationDuration;
     public int MaxNotifications { get; set; }
     public int DefaultNotificationDuration
     {

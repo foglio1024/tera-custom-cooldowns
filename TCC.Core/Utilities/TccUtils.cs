@@ -215,13 +215,13 @@ public static class TccUtils
     }
 
     // TODO: move to nostrum
-    const uint StdOutputHandle = 0xFFFFFFF5;
+    private const uint StdOutputHandle = 0xFFFFFFF5;
 
     [DllImport("kernel32.dll")]
-    static extern IntPtr GetStdHandle(uint nStdHandle);
+    private static extern IntPtr GetStdHandle(uint nStdHandle);
 
     [DllImport("kernel32.dll")]
-    static extern void SetStdHandle(uint nStdHandle, IntPtr handle);
+    private static extern void SetStdHandle(uint nStdHandle, IntPtr handle);
 
     public static void CreateConsole()
     {

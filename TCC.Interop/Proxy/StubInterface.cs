@@ -5,18 +5,18 @@ namespace TCC.Interop.Proxy;
 
 public class StubInterface
 {
-    static StubInterface? _instance;
+    private static StubInterface? _instance;
     public static StubInterface Instance => _instance ?? new StubInterface();
 
     public readonly StubClient StubClient;
-    readonly RpcServer2 _stubServer;
-    readonly StubMessageParser _messageParser;
+    private readonly RpcServer2 _stubServer;
+    private readonly StubMessageParser _messageParser;
 
     public bool IsFpsModAvailable { get; set; }
     public bool IsStubAvailable { get; private set; }
     public bool IsConnected => _stubServer.Connected;
 
-    StubInterface()
+    private StubInterface()
     {
         _instance = this;
 
@@ -52,7 +52,7 @@ public class StubInterface
 
     }
 
-    void OnStubConnectionChanged(bool connected)
+    private void OnStubConnectionChanged(bool connected)
     {
         if(!connected)
         {

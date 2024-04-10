@@ -11,8 +11,8 @@ namespace TCC.UI.Windows;
 
 public partial class SettingsWindow
 {
-    readonly DoubleAnimation _bigPathSlideAnim;
-    readonly DoubleAnimation _bigPathFadeAnim;
+    private readonly DoubleAnimation _bigPathSlideAnim;
+    private readonly DoubleAnimation _bigPathFadeAnim;
 
     public SettingsWindow() : base(false)
     {
@@ -31,13 +31,13 @@ public partial class SettingsWindow
         });
     }
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         HideWindow();
         App.Settings.Save();
     }
 
-    void OnBigPathLoaded(object sender, RoutedEventArgs e)
+    private void OnBigPathLoaded(object sender, RoutedEventArgs e)
     {
         if (sender is not FrameworkElement t) return;
         t.Opacity = 0;
@@ -46,7 +46,7 @@ public partial class SettingsWindow
         t.RenderTransform.BeginAnimation(TranslateTransform.XProperty, _bigPathSlideAnim);
     }
 
-    void OnTabBackgroundMouseLeftDown(object sender, MouseButtonEventArgs e)
+    private void OnTabBackgroundMouseLeftDown(object sender, MouseButtonEventArgs e)
     {
         Keyboard.ClearFocus();
         ((FrameworkElement)sender).Focus();
@@ -62,9 +62,9 @@ public partial class SettingsWindow
     }
 
     // memeing
-    int _testNotifIdx;
+    private int _testNotifIdx;
 
-    readonly List<string> _lyrics = new()
+    private readonly List<string> _lyrics = new()
     {
         "This was a triumph",
         "I'm making a note here:",
@@ -130,7 +130,7 @@ public partial class SettingsWindow
         "Still alive" //55
     };
 
-    void TestNotification(object sender, RoutedEventArgs e)
+    private void TestNotification(object sender, RoutedEventArgs e)
     {
         var msg = _lyrics[_testNotifIdx];
 
@@ -148,13 +148,13 @@ public partial class SettingsWindow
         if (_testNotifIdx >= _lyrics.Count) _testNotifIdx = 0;
     }
 
-    void OnKeyDown(object sender, KeyEventArgs e)
+    private void OnKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.LeftCtrl) return;
         ((SettingsWindowViewModel) DataContext).ShowDebugSettings = true;
     }
 
-    void OnKeyUp(object sender, KeyEventArgs e)
+    private void OnKeyUp(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.LeftCtrl) return;
         ((SettingsWindowViewModel)DataContext).ShowDebugSettings = false;

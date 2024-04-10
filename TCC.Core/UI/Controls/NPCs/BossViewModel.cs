@@ -13,11 +13,11 @@ namespace TCC.UI.Controls.NPCs;
 
 public class BossViewModel : NpcViewModel
 {
-    double _nextEnragePerc;
-    bool _isTimerRunning;
-    bool _serverSentEnrage;
+    private double _nextEnragePerc;
+    private bool _isTimerRunning;
+    private bool _serverSentEnrage;
 
-    readonly DispatcherTimer _numberTimer;
+    private readonly DispatcherTimer _numberTimer;
 
     public event Action? EnragedChanged;
     public event Action? ReEnraged;
@@ -99,7 +99,7 @@ public class BossViewModel : NpcViewModel
         }
     }
 
-    int _curEnrageTime;
+    private int _curEnrageTime;
     public int CurrentEnrageTime
     {
         get => _curEnrageTime;
@@ -141,17 +141,17 @@ public class BossViewModel : NpcViewModel
 
     }
 
-    void OnTimerPatternEnded()
+    private void OnTimerPatternEnded()
     {
         IsTimerRunning = false;
     }
 
-    void OnTimerPatternStarted()
+    private void OnTimerPatternStarted()
     {
         IsTimerRunning = true;
     }
 
-    void OnNumberTimerTick(object? _, EventArgs __)
+    private void OnNumberTimerTick(object? _, EventArgs __)
     {
         if (NPC.EnragePattern?.StaysEnraged == false) CurrentEnrageTime--;
     }
@@ -171,9 +171,9 @@ public class BossViewModel : NpcViewModel
         base.OnNpcDelete();
     }
 
-    bool _addEnrageItem = true;
+    private bool _addEnrageItem = true;
 
-    void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {

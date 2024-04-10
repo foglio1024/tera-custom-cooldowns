@@ -9,7 +9,7 @@ namespace TCC.UI.Windows;
 
 public partial class LfgFilterConfigWindow
 {
-    readonly LfgListViewModel _dc;
+    private readonly LfgListViewModel _dc;
 
     public LfgFilterConfigWindow(LfgListViewModel vm)
     {
@@ -24,18 +24,18 @@ public partial class LfgFilterConfigWindow
 
     public ICommand RemoveEntryCommand { get; }
 
-    void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
+    private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
     {
         this.TryDragMove();
     }
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         App.Settings.Save();
         Close();
     }
 
-    void OnTextBoxKeyUp(object sender, KeyEventArgs e)
+    private void OnTextBoxKeyUp(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
         var content = ((TextBox)sender).Text.Trim();

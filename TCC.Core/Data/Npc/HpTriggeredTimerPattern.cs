@@ -20,7 +20,7 @@ public class HpTriggeredTimerPattern : TimerPattern
         target.HpFactorChanged += OnTargetHpChanged;
     }
 
-    void OnTargetHpChanged(double hpFactor)
+    private void OnTargetHpChanged(double hpFactor)
     {
         if (IsRunning) return;
         if (hpFactor >= StartAt) return;

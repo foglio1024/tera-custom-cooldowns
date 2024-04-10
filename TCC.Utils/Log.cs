@@ -10,8 +10,8 @@ public static class Log
     public static event Func<string, string, NotificationType, int, NotificationTemplate, int, int>? NewNotification;
     public static event Action<string>? NewMessageBox;
 
-    static string _logPath = "logs";
-    static string _version = "";
+    private static string _logPath = "logs";
+    private static string _version = "";
 
     public static void Config(string path, string version)
     {

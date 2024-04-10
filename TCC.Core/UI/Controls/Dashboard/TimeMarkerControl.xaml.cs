@@ -7,20 +7,20 @@ namespace TCC.UI.Controls.Dashboard;
 
 public partial class TimeMarkerControl
 {
-    TimeMarker? _dc;
+    private TimeMarker? _dc;
 
     public TimeMarkerControl()
     {
         InitializeComponent();
     }
 
-    void TimeMarkerControl_OnLoaded(object sender, RoutedEventArgs e)
+    private void TimeMarkerControl_OnLoaded(object sender, RoutedEventArgs e)
     {
         _dc = (TimeMarker)DataContext;
         _dc.PropertyChanged += Dc_PropertyChanged;
     }
 
-    void Dc_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void Dc_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_dc == null) return;
         if (e.PropertyName != nameof(_dc.TimeFactor)) return;

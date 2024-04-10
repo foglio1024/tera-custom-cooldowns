@@ -8,8 +8,8 @@ namespace TCC.UI.Windows.Widgets;
 
 public partial class DefaultNotificationControl
 {
-    readonly DispatcherTimer _duration;
-    readonly DoubleAnimation _anim;
+    private readonly DispatcherTimer _duration;
+    private readonly DoubleAnimation _anim;
 
     public DefaultNotificationControl()
     {
@@ -33,19 +33,19 @@ public partial class DefaultNotificationControl
 
     }
 
-    void OnDisposed()
+    private void OnDisposed()
     {
         OnTimeExpired(null, null);
     }
 
-    void OnTimeExpired(object? sender, EventArgs? e)
+    private void OnTimeExpired(object? sender, EventArgs? e)
     {
         _duration.Stop();
         _duration.Tick -= OnTimeExpired;
         AnimateDismiss();
     }
 
-    void AnimateDismiss()
+    private void AnimateDismiss()
     {
         Dispatcher?.InvokeAsync(() =>
         {

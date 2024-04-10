@@ -46,7 +46,7 @@ public class ValkyrieLayoutViewModel : BaseClassLayoutViewModel
         Ragnarok.Effect.SecondsUpdated += OnEffectSecondsUpdated;
     }
 
-    void OnEffectSecondsUpdated()
+    private void OnEffectSecondsUpdated()
     {
         InvokePropertyChanged(nameof(RagnarokEffectSecondsText));
     }

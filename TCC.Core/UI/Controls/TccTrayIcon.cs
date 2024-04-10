@@ -7,11 +7,11 @@ namespace TCC.UI.Controls;
 
 public class TccTrayIcon
 {
-    bool _connected;
-    readonly NotifyIcon _trayIcon;
-    readonly ContextMenu _contextMenu;
-    readonly Icon? _defaultIcon;
-    readonly Icon? _connectedIcon;
+    private bool _connected;
+    private readonly NotifyIcon _trayIcon;
+    private readonly ContextMenu _contextMenu;
+    private readonly Icon? _defaultIcon;
+    private readonly Icon? _connectedIcon;
 
     public bool Connected
     {
@@ -59,7 +59,7 @@ public class TccTrayIcon
 
     }
 
-    void OnMouseDown(object? sender, MouseEventArgs e)
+    private void OnMouseDown(object? sender, MouseEventArgs e)
     {
         _contextMenu.IsOpen = e.Button switch
         {

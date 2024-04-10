@@ -64,17 +64,17 @@ public partial class ValueSetting
         InitializeComponent();
     }
 
-    void AddValue(object sender, MouseButtonEventArgs e)
+    private void AddValue(object sender, MouseButtonEventArgs e)
     {
         Value = Math.Round(Value + 0.01, 2);
     }
 
-    void SubtractValue(object sender, MouseButtonEventArgs e)
+    private void SubtractValue(object sender, MouseButtonEventArgs e)
     {
         Value = Math.Round(Value - 0.01, 2);
     }
 
-    void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
         if (Mouse.LeftButton != MouseButtonState.Pressed) return;
 
@@ -84,12 +84,12 @@ public partial class ValueSetting
         Value = Math.Round(s.Value, 2);
     }
 
-    void Slider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    private void Slider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         Value = 1;
     }
 
-    void TextBox_LostFocus(object sender, RoutedEventArgs e)
+    private void TextBox_LostFocus(object sender, RoutedEventArgs e)
     {
         var tb = (TextBox) sender;
         try
@@ -121,12 +121,12 @@ public partial class ValueSetting
         }
 */
 
-void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e)
+private void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e)
     {
 
     }
 
-void UIElement_OnKeyDown(object sender, KeyEventArgs e)
+    private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
         Keyboard.ClearFocus();

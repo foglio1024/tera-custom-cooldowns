@@ -13,12 +13,12 @@ namespace TCC.UI.Windows.Widgets;
 //TODO: refactor more?
 public partial class CharacterWindow
 {
-    readonly DoubleAnimation _hpAnim;
-    readonly DoubleAnimation _mpAnim;
-    readonly DoubleAnimation _stAnim;
-    readonly DoubleAnimation _shAnim;
+    private readonly DoubleAnimation _hpAnim;
+    private readonly DoubleAnimation _mpAnim;
+    private readonly DoubleAnimation _stAnim;
+    private readonly DoubleAnimation _shAnim;
 
-    CharacterWindowViewModel _vm { get; }
+    private CharacterWindowViewModel _vm { get; }
 
     public CharacterWindow(CharacterWindowViewModel vm)
     {
@@ -40,7 +40,7 @@ public partial class CharacterWindow
     }
 
 
-    void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         Action action;
         switch (e.PropertyName)
@@ -54,7 +54,7 @@ public partial class CharacterWindow
         Dispatcher?.InvokeAsync(action, DispatcherPriority.DataBind);
     }
 
-    void ChangeHP()
+    private void ChangeHP()
     {
         _hpAnim.From = (HpGovernor.LayoutTransform as ScaleTransform)?.ScaleX;
         _hpAnim.To = _vm.Player.HpFactor;
@@ -73,7 +73,7 @@ public partial class CharacterWindow
         }
     }
 
-    void ChangeMP()
+    private void ChangeMP()
     {
         _mpAnim.From = ((ScaleTransform)MpGovernor.LayoutTransform).ScaleX;
         _mpAnim.To = _vm.Player.MpFactor;
@@ -91,7 +91,7 @@ public partial class CharacterWindow
         }
     }
 
-    void ChangeStamina()
+    private void ChangeStamina()
     {
         _stAnim.From = ((ScaleTransform)StGovernor.LayoutTransform).ScaleX;
         _stAnim.To = _vm.Player.StFactor;
@@ -111,7 +111,7 @@ public partial class CharacterWindow
 
     }
 
-    void ChangeShield()
+    private void ChangeShield()
     {
         _shAnim.From = (ShGovernor.LayoutTransform as ScaleTransform)?.ScaleX;
         _shAnim.To = _vm.Player.ShieldFactor;

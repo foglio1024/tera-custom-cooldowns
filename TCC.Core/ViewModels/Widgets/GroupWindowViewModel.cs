@@ -28,11 +28,11 @@ namespace TCC.ViewModels.Widgets;
 [UsedImplicitly]
 public class GroupWindowViewModel : TccWindowViewModel
 {
-    bool _raid;
-    bool _firstCheck = true;
-    readonly object _lock = new();
-    bool _leaderOverride;
-    ulong _aggroHolder;
+    private bool _raid;
+    private bool _firstCheck = true;
+    private readonly object _lock = new();
+    private bool _leaderOverride;
+    private ulong _aggroHolder;
 
     public event Action? SettingsUpdated;
 
@@ -99,13 +99,13 @@ public class GroupWindowViewModel : TccWindowViewModel
         ShowLootWindowCommand = new RelayCommand(Game.ShowLootDistributionWindow);
     }
 
-    void OnEncounterChanged()
+    private void OnEncounterChanged()
     {
         if (!Game.Encounter)
             SetAggro(0);
     }
 
-    void OnLayoutChanged()
+    private void OnLayoutChanged()
     {
         InvokePropertyChanged(nameof(GroupWindowLayout));
         InvokePropertyChanged(nameof(All));
@@ -114,7 +114,7 @@ public class GroupWindowViewModel : TccWindowViewModel
         InvokePropertyChanged(nameof(Tanks));
     }
 
-    void OnTeleported()
+    private void OnTeleported()
     {
         if (!Game.CivilUnrestZone)
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
@@ -124,7 +124,7 @@ public class GroupWindowViewModel : TccWindowViewModel
     }
 
 
-    void Members_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void Members_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         //Task.Delay(0).ContinueWith(t =>
         //{
@@ -138,21 +138,25 @@ public class GroupWindowViewModel : TccWindowViewModel
         InvokePropertyChanged(nameof(ReadyCount));
         InvokePropertyChanged(nameof(ShowLeaderButtons));
     }
-    void NotifySettingUpdated()
+
+    private void NotifySettingUpdated()
     {
         SettingsUpdated?.Invoke();
 
         InvokePropertyChanged(nameof(ShowDetails));
     }
-    bool Exists(ulong id)
+
+    private bool Exists(ulong id)
     {
         return Members.ToSyncList().Any(x => x.EntityId == id);
     }
-    bool Exists(string name)
+
+    private bool Exists(string name)
     {
         return Members.ToSyncList().Any(x => x.Name == name);
     }
-    bool Exists(uint pId, uint sId)
+
+    private bool Exists(uint pId, uint sId)
     {
         return Members.ToSyncList().Any(x => x.PlayerId == pId && x.ServerId == sId);
     }
@@ -201,7 +205,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             item.HasAggro = item.EntityId == target;
         }
     }
-    void SetAggroCircle(AggroCircle circle, AggroAction action, ulong user)
+
+    private void SetAggroCircle(AggroCircle circle, AggroAction action, ulong user)
     {
         if (WindowManager.ViewModels.NpcVM.CurrentHHphase != HarrowholdPhase.None) return;
 
@@ -239,7 +244,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             }
         });
     }
-    void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
+
+    private void EndAbnormality(Abnormality ab, uint playerId, uint serverId)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -262,7 +268,7 @@ public class GroupWindowViewModel : TccWindowViewModel
         });
     }
 
-    void ClearAbnormality(uint playerId, uint serverId)
+    private void ClearAbnormality(uint playerId, uint serverId)
     {
         _dispatcher.Invoke(() =>
         {
@@ -297,7 +303,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             user.Visible = !(((GroupWindowSettings)Settings).IgnoreMe && p.IsPlayer);
         }
     }
-    void AddOrUpdateMember(GroupMemberData p)
+
+    private void AddOrUpdateMember(GroupMemberData p)
     {
         var visible = true;
         if (((GroupWindowSettings)Settings!).IgnoreMe && p.Name == Game.Me.Name)
@@ -326,12 +333,12 @@ public class GroupWindowViewModel : TccWindowViewModel
         //}
     }
 
-    static void SendOnlineMessage(string name, bool newVal)
+    private static void SendOnlineMessage(string name, bool newVal)
     {
         SystemMessagesProcessor.AnalyzeMessage($"@0\vUserName\v{name}", newVal ? "TCC_PARTY_MEMBER_LOGON" : "TCC_PARTY_MEMBER_LOGOUT");
     }
 
-    void SendAddMessage(string name)
+    private void SendAddMessage(string name)
     {
         string msg;
         string opcode;
@@ -347,12 +354,14 @@ public class GroupWindowViewModel : TccWindowViewModel
         }
         SystemMessagesProcessor.AnalyzeMessage(msg, opcode);
     }
-    void SendDeathMessage(string name)
+
+    private void SendDeathMessage(string name)
     {
         var msg = Raid ? $"@0\vPartyPlayerName\v{name}" : $"@0\vPartyPlayerName\v{name}\vparty\vparty";
         SystemMessagesProcessor.AnalyzeMessage(msg, "SMT_BATTLE_PARTY_DIE");
     }
-    void SendLeaveMessage(string name)
+
+    private void SendLeaveMessage(string name)
     {
         string msg;
         string opcode;
@@ -369,7 +378,8 @@ public class GroupWindowViewModel : TccWindowViewModel
         SystemMessagesProcessor.AnalyzeMessage(msg, opcode);
 
     }
-    void RemoveMember(uint playerId, uint serverId, bool kick = false)
+
+    private void RemoveMember(uint playerId, uint serverId, bool kick = false)
     {
         var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
         if (u == null) return;
@@ -377,7 +387,8 @@ public class GroupWindowViewModel : TccWindowViewModel
         Members.Remove(u);
         if (!kick) SendLeaveMessage(u.Name);
     }
-    void ClearAll()
+
+    private void ClearAll()
     {
         if (!((GroupWindowSettings)Settings!).Enabled || !_dispatcher.Thread.IsAlive) return;
         Members.ToSyncList().ForEach(x => x.ClearAbnormalities());
@@ -385,20 +396,23 @@ public class GroupWindowViewModel : TccWindowViewModel
         Raid = false;
         _leaderOverride = false;
     }
-    void LogoutMember(uint playerId, uint serverId)
+
+    private void LogoutMember(uint playerId, uint serverId)
     {
         var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
         if (u == null) return;
         SendOnlineMessage(u.Name, false);
         u.Online = false;
     }
-    void ToggleMe()
+
+    private void ToggleMe()
     {
         var me = Members.ToSyncList().FirstOrDefault(x => x.IsPlayer);
         if (me == null) return;
         me.Visible = !((GroupWindowSettings)Settings!).IgnoreMe;
     }
-    void ClearAllAbnormalities()
+
+    private void ClearAllAbnormalities()
     {
         foreach (var x in Members.ToSyncList())
         {
@@ -414,7 +428,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             x.Debuffs.Clear();
         }
     }
-    void SetNewLeader(string name)
+
+    private void SetNewLeader(string name)
     {
         foreach (var m in Members.ToSyncList())
         {
@@ -434,7 +449,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             m.IsRolling = true;
         }
     }
-    void SetRoll(ulong entityId, int rollResult)
+
+    private void SetRoll(ulong entityId, int rollResult)
     {
         if (rollResult == int.MaxValue) rollResult = -1;
         Members.ToSyncList().ForEach(member =>
@@ -446,7 +462,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             member.IsWinning = member.EntityId == GetWinningUser() && member.RollResult != -1;
         });
     }
-    void SetRoll(uint serverId, uint playerId, int rollResult)
+
+    private void SetRoll(uint serverId, uint playerId, int rollResult)
     {
         if (rollResult == int.MaxValue) rollResult = -1;
         Members.ToSyncList().ForEach(member =>
@@ -458,7 +475,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             member.IsWinning = member.EntityId == GetWinningUser() && member.RollResult != -1;
         });
     }
-    void EndRoll()
+
+    private void EndRoll()
     {
         Rolling = false;
 
@@ -476,7 +494,8 @@ public class GroupWindowViewModel : TccWindowViewModel
         //u.RollResult = 0;
         //});
     }
-    ulong GetWinningUser()
+
+    private ulong GetWinningUser()
     {
         return Members.ToSyncList().OrderByDescending(u => u.RollResult).First().EntityId;
         //Members.ToList().ForEach(user => user.IsWinning = user.EntityId == Members.OrderByDescending(u => u.RollResult).First().EntityId);
@@ -496,7 +515,8 @@ public class GroupWindowViewModel : TccWindowViewModel
         _firstCheck = false;
         InvokePropertyChanged(nameof(ReadyCount));
     }
-    void EndReadyCheck()
+
+    private void EndReadyCheck()
     {
         Task.Delay(4000).ContinueWith(_ =>
         {
@@ -508,7 +528,8 @@ public class GroupWindowViewModel : TccWindowViewModel
         });
         _firstCheck = true;
     }
-    void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
+
+    private void UpdateMemberHp(uint playerId, uint serverId, int curHp, int maxHp)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -518,7 +539,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             u.MaxHp = maxHp;
         });
     }
-    void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
+
+    private void UpdateMemberMp(uint playerId, uint serverId, int curMp, int maxMp)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -528,7 +550,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             u.MaxMp = maxMp;
         });
     }
-    void UpdateMemberStamina(uint playerId, uint serverId, int curSt, int maxSt)
+
+    private void UpdateMemberStamina(uint playerId, uint serverId, int curSt, int maxSt)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -538,11 +561,13 @@ public class GroupWindowViewModel : TccWindowViewModel
             u.MaxSt = maxSt;
         });
     }
-    void SetRaid(bool raid)
+
+    private void SetRaid(bool raid)
     {
         _dispatcher.InvokeAsync(new Action(() => Raid = raid));
     }
-    void UpdateMember(GroupMemberData update)
+
+    private void UpdateMember(GroupMemberData update)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -563,19 +588,21 @@ public class GroupWindowViewModel : TccWindowViewModel
             if (!update.Alive) current.HasAggro = false;
         });
     }
-    void NotifyThresholdChanged()
+
+    private void NotifyThresholdChanged()
     {
         InvokePropertyChanged(nameof(Size));
     }
 
-    void UpdateMemberLocation(uint playerId, uint serverId, int channel, uint continentId)
+    private void UpdateMemberLocation(uint playerId, uint serverId, int channel, uint continentId)
     {
         var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
         if (u == null) return;
         var ch = channel > 1000 ? "" : " ch." + channel;
         u.Location = Game.DB!.TryGetGuardOrDungeonNameFromContinentId(continentId, out var l) ? l + ch : "Unknown";
     }
-    void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
+
+    private void UpdatePartyMemberAbnormality(uint playerId, uint serverId, uint id, uint duration, int stacks)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -583,7 +610,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             BeginOrRefreshAbnormality(ab, stacks, duration, playerId, serverId);
         });
     }
-    void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
+
+    private void EndPartyMemberAbnormality(uint playerId, uint serverId, uint id)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -666,12 +694,12 @@ public class GroupWindowViewModel : TccWindowViewModel
 
     }
 
-    void OnDisconnected()
+    private void OnDisconnected()
     {
         ClearAllAbnormalities();
     }
 
-    void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
+    private void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
         if (Game.IsMe(p.TargetId))
         {
@@ -692,7 +720,8 @@ public class GroupWindowViewModel : TccWindowViewModel
             UpdatePartyMemberAbnormality(u.PlayerId, u.ServerId, p.AbnormalityId, p.Duration, p.Stacks);
         }
     }
-    void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
+
+    private void OnAbnormalityRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!Game.IsMe(p.TargetId)) return;
 
@@ -702,7 +731,8 @@ public class GroupWindowViewModel : TccWindowViewModel
 
         BeginOrRefreshAbnormality(ab, p.Stacks, p.Duration, Game.Me.PlayerId, Game.Me.ServerId);
     }
-    void OnAbnormalityEnd(S_ABNORMALITY_END p)
+
+    private void OnAbnormalityEnd(S_ABNORMALITY_END p)
     {
         if (!Game.DB!.AbnormalityDatabase.GetAbnormality(p.AbnormalityId, out var ab) || !ab.CanShow) return;
 
@@ -719,44 +749,54 @@ public class GroupWindowViewModel : TccWindowViewModel
             EndAbnormality(ab, u.PlayerId, u.ServerId);
         }
     }
-    void OnCheckToReadyPartyFin(S_CHECK_TO_READY_PARTY_FIN p)
+
+    private void OnCheckToReadyPartyFin(S_CHECK_TO_READY_PARTY_FIN p)
     {
         EndReadyCheck();
     }
-    void OnCheckToReadyParty(S_CHECK_TO_READY_PARTY p)
+
+    private void OnCheckToReadyParty(S_CHECK_TO_READY_PARTY p)
     {
         _dispatcher.InvokeAsync(() => p.Party.ForEach(SetReadyStatus));
     }
-    void OnPartyMemberStatUpdate(S_PARTY_MEMBER_STAT_UPDATE p)
+
+    private void OnPartyMemberStatUpdate(S_PARTY_MEMBER_STAT_UPDATE p)
     {
         UpdateMember(p.GroupMemberData);
     }
-    void OnPartyMemberChangeMp(S_PARTY_MEMBER_CHANGE_MP p)
+
+    private void OnPartyMemberChangeMp(S_PARTY_MEMBER_CHANGE_MP p)
     {
         UpdateMemberMp(p.PlayerId, p.ServerId, p.CurrentMP, p.MaxMP);
     }
-    void OnPartyMemberChangeStamina(S_PARTY_MEMBER_CHANGE_STAMINA p)
+
+    private void OnPartyMemberChangeStamina(S_PARTY_MEMBER_CHANGE_STAMINA p)
     {
         UpdateMemberStamina(p.PlayerId, p.ServerId, p.CurrentST, p.MaxST);
     }
-    void OnPartyMemberChangeHp(S_PARTY_MEMBER_CHANGE_HP p)
+
+    private void OnPartyMemberChangeHp(S_PARTY_MEMBER_CHANGE_HP p)
     {
         UpdateMemberHp(p.PlayerId, p.ServerId, p.CurrentHP, p.MaxHP);
     }
-    void OnLogoutPartyMember(S_LOGOUT_PARTY_MEMBER p)
+
+    private void OnLogoutPartyMember(S_LOGOUT_PARTY_MEMBER p)
     {
         LogoutMember(p.PlayerId, p.ServerId);
         ClearAbnormality(p.PlayerId, p.ServerId);
     }
-    void OnBanPartyMember(S_BAN_PARTY_MEMBER p)
+
+    private void OnBanPartyMember(S_BAN_PARTY_MEMBER p)
     {
         RemoveMember(p.PlayerId, p.ServerId, true);
     }
-    void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER p)
+
+    private void OnLeavePartyMember(S_LEAVE_PARTY_MEMBER p)
     {
         RemoveMember(p.PlayerId, p.ServerId);
     }
-    void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
+
+    private void OnPartyMemberList(S_PARTY_MEMBER_LIST p)
     {
         SetRaid(p.Raid);
         _dispatcher.InvokeAsync(() =>
@@ -764,47 +804,57 @@ public class GroupWindowViewModel : TccWindowViewModel
             foreach (var member in p.Members) AddOrUpdateMember(member);
         });
     }
-    void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)
+
+    private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER m)
     {
         SetNewLeader(m.Name);
     }
-    void OnPartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH m)
+
+    private void OnPartyMemberAbnormalRefresh(S_PARTY_MEMBER_ABNORMAL_REFRESH m)
     {
         UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id, m.Duration, m.Stacks);
     }
-    void OnPartyMemberAbnormalClear(S_PARTY_MEMBER_ABNORMAL_CLEAR m)
+
+    private void OnPartyMemberAbnormalClear(S_PARTY_MEMBER_ABNORMAL_CLEAR m)
     {
         ClearAbnormality(m.PlayerId, m.ServerId);
     }
-    void OnPartyMemberAbnormalDel(S_PARTY_MEMBER_ABNORMAL_DEL m)
+
+    private void OnPartyMemberAbnormalDel(S_PARTY_MEMBER_ABNORMAL_DEL m)
     {
         EndPartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id);
     }
-    void OnPartyMemberAbnormalAdd(S_PARTY_MEMBER_ABNORMAL_ADD m)
+
+    private void OnPartyMemberAbnormalAdd(S_PARTY_MEMBER_ABNORMAL_ADD m)
     {
         UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, m.Id, m.Duration, m.Stacks);
     }
-    void OnPartyMemberBuffUpdate(S_PARTY_MEMBER_BUFF_UPDATE m)
+
+    private void OnPartyMemberBuffUpdate(S_PARTY_MEMBER_BUFF_UPDATE m)
     {
         foreach (var buff in m.Abnormals) UpdatePartyMemberAbnormality(m.PlayerId, m.ServerId, buff.Id, buff.Duration, buff.Stacks);
     }
-    void OnSpawnUser(S_SPAWN_USER m)
+
+    private void OnSpawnUser(S_SPAWN_USER m)
     {
         if (!TryGetUser(m.PlayerId, m.ServerId, out var u)) return;
         u.InRange = true;
         u.EntityId = m.EntityId;
         //UpdateMemberGear(m.PlayerId, m.ServerId, m.Weapon, m.Armor, m.Gloves, m.Boots);
     }
-    void OnDespawnUser(S_DESPAWN_USER m)
+
+    private void OnDespawnUser(S_DESPAWN_USER m)
     {
         if (!TryGetUser(m.EntityId, out var u)) return;
         u.InRange = false;
     }
-    void OnResultItemBidding(S_RESULT_ITEM_BIDDING m)
+
+    private void OnResultItemBidding(S_RESULT_ITEM_BIDDING m)
     {
         EndRoll();
     }
-    void OnResultBiddingDiceThrow(S_RESULT_BIDDING_DICE_THROW m)
+
+    private void OnResultBiddingDiceThrow(S_RESULT_BIDDING_DICE_THROW m)
     {
         if (!Rolling) StartRoll();
         if (m.EntityId != 0)
@@ -812,45 +862,54 @@ public class GroupWindowViewModel : TccWindowViewModel
         else
             SetRoll(m.ServerId, m.PlayerId, m.RollResult);
     }
-    void OnAskBiddingRareItem(S_ASK_BIDDING_RARE_ITEM m)
+
+    private void OnAskBiddingRareItem(S_ASK_BIDDING_RARE_ITEM m)
     {
         StartRoll();
     }
 
-    void OnLoadTopo(S_LOAD_TOPO m)
+    private void OnLoadTopo(S_LOAD_TOPO m)
     {
         ClearAllAbnormalities();
         SetAggro(0);
     }
-    void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+
+    private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
     {
         ClearAll();
     }
-    void OnLogin(S_LOGIN m)
+
+    private void OnLogin(S_LOGIN m)
     {
         ClearAll();
     }
-    void OnBanParty(S_BAN_PARTY m)
+
+    private void OnBanParty(S_BAN_PARTY m)
     {
         ClearAll();
     }
-    void OnLeaveParty(S_LEAVE_PARTY m)
+
+    private void OnLeaveParty(S_LEAVE_PARTY m)
     {
         ClearAll();
     }
-    void OnGetUserList(S_GET_USER_LIST m)
+
+    private void OnGetUserList(S_GET_USER_LIST m)
     {
         ClearAll();
     }
-    void OnUserEffect(S_USER_EFFECT m)
+
+    private void OnUserEffect(S_USER_EFFECT m)
     {
         SetAggroCircle(m.Circle, m.Action, m.User);
     }
-    void OnPartyMemberIntervalPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
+
+    private void OnPartyMemberIntervalPosUpdate(S_PARTY_MEMBER_INTERVAL_POS_UPDATE p)
     {
         UpdateMemberLocation(p.PlayerId, p.ServerId, p.Channel, p.ContinentId);
     }
-    void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
+
+    private void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA p)
     {
         UpdateMemberStamina(Game.Me.PlayerId, Game.Me.ServerId, p.CurrentST, Game.Me.MaxST);
     }

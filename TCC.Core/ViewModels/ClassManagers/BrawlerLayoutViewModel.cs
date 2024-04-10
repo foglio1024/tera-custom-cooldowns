@@ -6,8 +6,8 @@ namespace TCC.ViewModels.ClassManagers;
 
 public class BrawlerLayoutViewModel : BaseClassLayoutViewModel
 {
-    bool _isGfOn;
-    bool _counterProc;
+    private bool _isGfOn;
+    private bool _counterProc;
 
     public SkillWithEffect GrowingFury { get;  }
     public Cooldown Counter { get;  }

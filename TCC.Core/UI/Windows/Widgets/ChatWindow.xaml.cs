@@ -15,7 +15,7 @@ namespace TCC.UI.Windows.Widgets;
 
 public partial class ChatWindow
 {
-    bool _bottom = true;
+    private bool _bottom = true;
     public ChatViewModel VM { get; }
     public bool IsPaused => VM.Paused;
 
@@ -40,7 +40,7 @@ public partial class ChatWindow
         ((ChatWindowSettings)WindowSettings).FadeoutChanged += () => VM.RefreshHideTimer();
     }
 
-    void OnForceSizePosUpdate()
+    private void OnForceSizePosUpdate()
     {
         if (WindowSettings == null) return;
 
@@ -57,7 +57,7 @@ public partial class ChatWindow
         Dispatcher?.InvokeAsync(() => { VM.UpdateSettings(Left, Top); });
     }
 
-    void TabLoaded(object sender, RoutedEventArgs e)
+    private void TabLoaded(object sender, RoutedEventArgs e)
     {
         if (sender is not FrameworkElement s) return;
         var p = s.FindVisualParent<DragablzItemsControl>();
@@ -67,7 +67,7 @@ public partial class ChatWindow
         SetTopBorder(s);
     }
 
-    void OpenTabSettings(object sender, MouseButtonEventArgs e)
+    private void OpenTabSettings(object sender, MouseButtonEventArgs e)
     {
         if (sender is not FrameworkElement s) return;
         if (s.DataContext is not HeaderedItemViewModel dc) return;
@@ -105,12 +105,12 @@ public partial class ChatWindow
         }
     }
 
-    void OnIsDraggingChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
+    private void OnIsDraggingChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
     {
         VM.HandleIsDraggingChanged(e.NewValue, TabControl.GetOrderedHeaders());
     }
 
-    void OnWindowMouseLeave(object sender, MouseEventArgs e)
+    private void OnWindowMouseLeave(object sender, MouseEventArgs e)
     {
         VM.MouseOver = false;
         VM.RefreshHideTimer();
@@ -118,30 +118,30 @@ public partial class ChatWindow
             UpdateSettings();
     }
 
-    void OnWindowMouseEnter(object sender, MouseEventArgs e)
+    private void OnWindowMouseEnter(object sender, MouseEventArgs e)
     {
         VM.MouseOver = true;
         VM.StopHideTimer();
     }
 
-    void OnSettingsButtonClick(object sender, RoutedEventArgs e)
+    private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
     {
         SettingsPopup.IsOpen = !SettingsPopup.IsOpen;
     }
 
-    void OnWindowPreviewMouseUp(object sender, MouseButtonEventArgs e)
+    private void OnWindowPreviewMouseUp(object sender, MouseButtonEventArgs e)
     {
         ChatManager.Instance.RemoveEmptyChatWindows();
         UpdateSettings();
     }
 
-    new void OnLoaded(object sender, RoutedEventArgs e)
+    private new void OnLoaded(object sender, RoutedEventArgs e)
     {
         base.OnLoaded(sender, e);
         TabControl.SelectedIndex = 0;
     }
 
-    void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
+    private void ItemsControl_OnMouseWheel(object sender, MouseWheelEventArgs e)
     {
         var sw = ((ItemsControl)sender).FindVisualChild<ScrollViewer>();
         if (sw == null) return;
@@ -194,7 +194,7 @@ public partial class ChatWindow
         });
     }
 
-    void TabChanged(object sender, SelectionChangedEventArgs e)
+    private void TabChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.AddedItems.Count == 0) return;
         var tabVm = (TabViewModel?)e.AddedItems[0];
@@ -220,13 +220,13 @@ public partial class ChatWindow
         }
     }
 
-    void SetLines(object sender, MouseButtonEventArgs e)
+    private void SetLines(object sender, MouseButtonEventArgs e)
     {
         if (VM.CurrentTab != (Tab)((TabViewModel)((FrameworkElement)sender).DataContext).Content) return;
         SetTopBorder((FrameworkElement)sender);
     }
 
-    void SetTopBorder(FrameworkElement s)
+    private void SetTopBorder(FrameworkElement s)
     {
         var w = s.ActualWidth;
         var left = s.TransformToAncestor(this).Transform(new Point()).X;

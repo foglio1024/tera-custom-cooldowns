@@ -5,8 +5,8 @@ namespace TCC.Data.Abnormalities;
 
 public class BrawlerAbnormalityTracker : AbnormalityTracker
 {
-    const int GrowingFuryId = 10153040;
-    const int CounterGlyphId = 31020;
+    private const int GrowingFuryId = 10153040;
+    private const int CounterGlyphId = 31020;
 
     public override void OnAbnormalityBegin(S_ABNORMALITY_BEGIN p)
     {
@@ -32,7 +32,7 @@ public class BrawlerAbnormalityTracker : AbnormalityTracker
         CheckCounterProcEnd(p);
     }
 
-    static void CheckGrowingFuryBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckGrowingFuryBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != GrowingFuryId) return;
         if (!TryGetClassViewModel<BrawlerLayoutViewModel>(out var vm)) return;
@@ -40,7 +40,7 @@ public class BrawlerAbnormalityTracker : AbnormalityTracker
         vm.IsGfOn = true;
     }
 
-    static void CheckGrowingFuryRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckGrowingFuryRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != GrowingFuryId) return;
         if (!TryGetClassViewModel<BrawlerLayoutViewModel>(out var vm)) return;
@@ -48,7 +48,7 @@ public class BrawlerAbnormalityTracker : AbnormalityTracker
         vm.IsGfOn = true;
     }
 
-    static void CheckGrowingFuryEnd(S_ABNORMALITY_END p)
+    private static void CheckGrowingFuryEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != GrowingFuryId) return;
         if (!TryGetClassViewModel<BrawlerLayoutViewModel>(out var vm)) return;
@@ -56,7 +56,7 @@ public class BrawlerAbnormalityTracker : AbnormalityTracker
         vm.IsGfOn = false;
     }
 
-    static void CheckCounterProcBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckCounterProcBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != CounterGlyphId) return;
         if (!TryGetClassViewModel<BrawlerLayoutViewModel>(out var vm)) return;
@@ -65,7 +65,7 @@ public class BrawlerAbnormalityTracker : AbnormalityTracker
         vm.CounterProc = true;
     }
 
-    static void CheckCounterProcRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckCounterProcRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (p.AbnormalityId != CounterGlyphId) return;
         if (!TryGetClassViewModel<BrawlerLayoutViewModel>(out var vm)) return;
@@ -74,7 +74,7 @@ public class BrawlerAbnormalityTracker : AbnormalityTracker
         vm.CounterProc = true;
     }
 
-    static void CheckCounterProcEnd(S_ABNORMALITY_END p)
+    private static void CheckCounterProcEnd(S_ABNORMALITY_END p)
     {
         if (p.AbnormalityId != CounterGlyphId) return;
         if (!TryGetClassViewModel<BrawlerLayoutViewModel>(out var vm)) return;

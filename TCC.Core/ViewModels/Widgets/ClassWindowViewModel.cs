@@ -16,8 +16,8 @@ namespace TCC.ViewModels.Widgets;
 [UsedImplicitly]
 public class ClassWindowViewModel : TccWindowViewModel
 {
-    Class _currentClass = Class.None;
-    BaseClassLayoutViewModel _currentManager = new NullClassLayoutViewModel();
+    private Class _currentClass = Class.None;
+    private BaseClassLayoutViewModel _currentManager = new NullClassLayoutViewModel();
 
     public Class CurrentClass
     {
@@ -92,32 +92,32 @@ public class ClassWindowViewModel : TccWindowViewModel
         }
     }
 
-    void OnValkyrieShowRagnarokChanged()
+    private void OnValkyrieShowRagnarokChanged()
     {
         TccUtils.CurrentClassVM<ValkyrieLayoutViewModel>()?.ExN(nameof(ValkyrieLayoutViewModel.ShowRagnarok));
     }
 
-    void OnValkyrieShowGodsfallChanged()
+    private void OnValkyrieShowGodsfallChanged()
     {
         TccUtils.CurrentClassVM<ValkyrieLayoutViewModel>()?.ExN(nameof(ValkyrieLayoutViewModel.ShowGodsfall));
     }
 
-    void OnWarriorEdgeModeChanged()
+    private void OnWarriorEdgeModeChanged()
     {
         TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.WarriorEdgeMode));
     }
 
-    void OnWarriorShowTraverseCutChanged()
+    private void OnWarriorShowTraverseCutChanged()
     {
         TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.ShowTraverseCut));
     }
 
-    void OnWarriorShowInfuriateChanged()
+    private void OnWarriorShowInfuriateChanged()
     {
         TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.ShowInfuriate));
     }
 
-    void OnWarriorShowEdgeChanged()
+    private void OnWarriorShowEdgeChanged()
     {
         TccUtils.CurrentClassVM<WarriorLayoutViewModel>()?.ExN(nameof(WarriorLayoutViewModel.ShowEdge));
     }
@@ -145,7 +145,7 @@ public class ClassWindowViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_CREST_MESSAGE>(OnCrestMessage);
     }
 
-    void OnLogin(S_LOGIN m)
+    private void OnLogin(S_LOGIN m)
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -163,12 +163,12 @@ public class ClassWindowViewModel : TccWindowViewModel
             PacketAnalyzer.Processor.Unhook<S_WEAK_POINT>(OnWeakPoint);
     }
 
-    void OnGetUserList(S_GET_USER_LIST m)
+    private void OnGetUserList(S_GET_USER_LIST m)
     {
         CurrentClass = Class.None;
     }
 
-    void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
+    private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
     {
         // check enabled?
         switch (CurrentClass)
@@ -183,31 +183,31 @@ public class ClassWindowViewModel : TccWindowViewModel
         }
     }
 
-    void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA m)
+    private void OnPlayerChangeStamina(S_PLAYER_CHANGE_STAMINA m)
     {
         CurrentManager.SetMaxST(Convert.ToInt32(m.MaxST));
         CurrentManager.SetST(Convert.ToInt32(m.CurrentST));
     }
 
-    void OnWeakPoint(S_WEAK_POINT p)
+    private void OnWeakPoint(S_WEAK_POINT p)
     {
         if (CurrentManager is not ValkyrieLayoutViewModel vvm) return;
         vvm.RunemarksCounter.Val = p.TotalRunemarks;
     }
 
-    void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
+    private void OnStartCooltimeSkill(S_START_COOLTIME_SKILL m)
     {
         if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
         CurrentManager.StartSpecialSkill(new Cooldown(skill, m.Cooldown));
     }
 
-    void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
+    private void OnDecreaseCooltimeSkill(S_DECREASE_COOLTIME_SKILL m)
     {
         if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;
         CurrentManager.ChangeSpecialSkill(skill, m.Cooldown);
     }
 
-    void OnCrestMessage(S_CREST_MESSAGE m)
+    private void OnCrestMessage(S_CREST_MESSAGE m)
     {
         if (m.Type != 6) return;
         if (!Game.DB!.SkillsDatabase.TryGetSkill(m.SkillId, Game.Me.Class, out var skill)) return;

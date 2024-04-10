@@ -15,23 +15,23 @@ namespace TCC.ViewModels;
 
 public class PlayerMenuViewModel : ThreadSafeObservableObject
 {
-    string _name = "";
-    string _info = "";
-    int _level;
-    Class _class = Class.Warrior;
-    uint _serverId;
-    bool _showPartyInvite;
-    bool _showGuildInvite;
-    bool _isFromOtherServer;
-    bool _unfriending;
-    bool _blocking;
-    bool _kicking;
-    bool _gkicking;
-    uint _playerId;
+    private string _name = "";
+    private string _info = "";
+    private int _level;
+    private Class _class = Class.Warrior;
+    private uint _serverId;
+    private bool _showPartyInvite;
+    private bool _showGuildInvite;
+    private bool _isFromOtherServer;
+    private bool _unfriending;
+    private bool _blocking;
+    private bool _kicking;
+    private bool _gkicking;
+    private uint _playerId;
 
-    string _kickLabelText = "Kick";
-    string _gkickLabelText = "Kick from guild";
-    readonly PlayerMenuWindow _win;
+    private string _kickLabelText = "Kick";
+    private string _gkickLabelText = "Kick from guild";
+    private readonly PlayerMenuWindow _win;
     public MoongourdPopupViewModel MoongourdPopupViewModel { get; }
 
     public event Action? UnfriendConfirmationRequested;
@@ -409,7 +409,7 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
         Unfriending = false;
     }
 
-    void OnAnswerInteractive(S_ANSWER_INTERACTIVE x)
+    private void OnAnswerInteractive(S_ANSWER_INTERACTIVE x)
     {
         if (!App.Settings.EnablePlayerMenu) return;
 
@@ -430,7 +430,7 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
         });
     }
 
-    void Refresh()
+    private void Refresh()
     {
         InvokePropertyChanged(nameof(ShowPartyInvite));
         InvokePropertyChanged(nameof(ShowGuildInvite));
@@ -451,7 +451,7 @@ public class PlayerMenuViewModel : ThreadSafeObservableObject
         InvokePropertyChanged(nameof(ShowSeparator2));
     }
 
-    void AskInteractive()
+    private void AskInteractive()
     {
         if (_serverId == 0 || string.IsNullOrEmpty(Name) || !StubInterface.Instance.IsStubAvailable) return;
 

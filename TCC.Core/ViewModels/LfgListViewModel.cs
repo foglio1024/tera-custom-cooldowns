@@ -42,19 +42,19 @@ public class LfgListViewModel : TccWindowViewModel
     #endregion Events
 
     // ReSharper disable once NotAccessedField.Local
-    DispatcherTimer _requestTimer;
+    private DispatcherTimer _requestTimer;
 
-    readonly DispatcherTimer AutoPublicizeTimer;
-    static readonly Queue<(uint, uint)> _requestQueue = new();
-    bool _creating;
-    bool _creatingRaid;
-    int _lastGroupSize;
+    private readonly DispatcherTimer AutoPublicizeTimer;
+    private static readonly Queue<(uint, uint)> _requestQueue = new();
+    private bool _creating;
+    private bool _creatingRaid;
+    private int _lastGroupSize;
     public Listing? LastClicked;
-    string _newMessage = "";
-    bool _isPopupOpen;
-    bool _isAutoPublicizeEnabled;
-    bool _stopAuto;
-    int _actualListingsAmount;
+    private string _newMessage = "";
+    private bool _isPopupOpen;
+    private bool _isAutoPublicizeEnabled;
+    private bool _stopAuto;
+    private int _actualListingsAmount;
 
     public string LastSortDescr { get; set; } = "Message";
     public int PublicizeCooldown => 5;
@@ -121,7 +121,7 @@ public class LfgListViewModel : TccWindowViewModel
         }
     }
 
-    bool _amIinLfg;
+    private bool _amIinLfg;
     public bool AmIinLfg
     {
         get => _amIinLfg;
@@ -132,7 +132,7 @@ public class LfgListViewModel : TccWindowViewModel
         || (MyLfg != null
             && MyLfg?.LeaderId == Game.Me.PlayerId);
 
-    Listing? _myLfg;
+    private Listing? _myLfg;
     public Listing? MyLfg
     {
         get => _myLfg;
@@ -237,7 +237,7 @@ public class LfgListViewModel : TccWindowViewModel
         ConfigureBlacklistCommand = new RelayCommand(_ => ConfigureBlacklist());
     }
 
-    void ConfigureBlacklist()
+    private void ConfigureBlacklist()
     {
         FocusManager.PauseTopmost = true;
         new LfgFilterConfigWindow(this)
@@ -258,7 +258,7 @@ public class LfgListViewModel : TccWindowViewModel
         StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
     }
 
-    void OnBlacklistedWordsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void OnBlacklistedWordsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         switch (e.Action)
         {
@@ -285,22 +285,22 @@ public class LfgListViewModel : TccWindowViewModel
         }
     }
 
-    void CollapseAll()
+    private void CollapseAll()
     {
         Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(false));
     }
 
-    void ExpandAll()
+    private void ExpandAll()
     {
         Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(true));
     }
 
-    bool CanCreateMessage()
+    private bool CanCreateMessage()
     {
         return Listings.ToSyncList().All(l => !l.Temp && !AmIinLfg);
     }
 
-    void CreateMessage()
+    private void CreateMessage()
     {
         var listing = new Listing(new ListingData
         {
@@ -315,14 +315,14 @@ public class LfgListViewModel : TccWindowViewModel
         TempLfgCreated?.Invoke();
     }
 
-    void RemoveMessage()
+    private void RemoveMessage()
     {
         ForceStopPublicize();
         StubInterface.Instance.StubClient.RemoveListing();
         StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
     }
 
-    void OnShowLfgHotkeyPressed()
+    private void OnShowLfgHotkeyPressed()
     {
         if (!Game.Logged) return;
         if (!StubInterface.Instance.IsStubAvailable) return;
@@ -331,7 +331,7 @@ public class LfgListViewModel : TccWindowViewModel
         else WindowManager.LfgListWindow.HideWindow();
     }
 
-    void OnAutoPublicizeTimerTick(object? sender, EventArgs e)
+    private void OnAutoPublicizeTimerTick(object? sender, EventArgs e)
     {
         if (Game.IsInDungeon || !AmIinLfg) _stopAuto = true;
 
@@ -350,7 +350,7 @@ public class LfgListViewModel : TccWindowViewModel
         }
     }
 
-    void Publicize()
+    private void Publicize()
     {
         if (Game.IsInDungeon) return;
         //PublicizeTimer.Start();
@@ -360,12 +360,12 @@ public class LfgListViewModel : TccWindowViewModel
         Publicized?.Invoke(PublicizeCooldown);
     }
 
-    bool CanPublicize()
+    private bool CanPublicize()
     {
         return /*IsPublicizeEnabled &&*/ !IsAutoPublicizeRunning;
     }
 
-    void ToggleAutoPublicize()
+    private void ToggleAutoPublicize()
     {
         if (IsAutoPublicizeRunning)
         {
@@ -399,7 +399,7 @@ public class LfgListViewModel : TccWindowViewModel
         }
     }
 
-    bool CanToggleAutoPublicize()
+    private bool CanToggleAutoPublicize()
     {
         if (!IsAutoPublicizeEnabled)
         {
@@ -412,7 +412,7 @@ public class LfgListViewModel : TccWindowViewModel
         return StubInterface.Instance.IsStubAvailable;
     }
 
-    void RequestNextLfg(object? sender, EventArgs e)
+    private void RequestNextLfg(object? sender, EventArgs e)
     {
         if (!App.Settings.LfgWindowSettings.Enabled) return;
         if (_requestQueue.Count == 0) return;
@@ -439,7 +439,7 @@ public class LfgListViewModel : TccWindowViewModel
         }, DispatcherPriority.Background);
     }
 
-    void ListingsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void ListingsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         Task.Delay(500).ContinueWith(_ => _dispatcher.Invoke(NotifyMyLfg));
     }
@@ -467,7 +467,7 @@ public class LfgListViewModel : TccWindowViewModel
         InvokePropertyChanged(nameof(IsAutoPublicizeRunning)); //notify UI that CanPublicize changed
     }
 
-    void SyncListings(List<ListingData> listings)
+    private void SyncListings(List<ListingData> listings)
     {
         Task.Factory.StartNew(() =>
         {
@@ -519,7 +519,7 @@ public class LfgListViewModel : TccWindowViewModel
         }
     }
 
-    bool IsMessageBlacklisted(string lMessage)
+    private bool IsMessageBlacklisted(string lMessage)
     {
         var words = lMessage.Split(" ");
         return words.Any(w =>
@@ -527,12 +527,12 @@ public class LfgListViewModel : TccWindowViewModel
                 w.ToLowerInvariant().Contains(b.ToLowerInvariant())));
     }
 
-    void AddOrRefreshListing(ListingData l)
+    private void AddOrRefreshListing(ListingData l)
     {
         AddOrRefreshListing(new Listing(l));
     }
 
-    void OnHideTradeChanged()
+    private void OnHideTradeChanged()
     {
         if (!((LfgWindowSettings)Settings!).HideTradeListings) return;
         var toRemove = Listings.ToSyncList().Where(l => l.IsTrade).Select(s => s.LeaderId).ToList();
@@ -543,7 +543,7 @@ public class LfgListViewModel : TccWindowViewModel
         });
     }
 
-    void NotifyMyLfg()
+    private void NotifyMyLfg()
     {
         MyLfg = Listings.ToSyncList().FirstOrDefault(listing =>
                     // a lfg containing a player with my id
@@ -592,13 +592,13 @@ public class LfgListViewModel : TccWindowViewModel
 
     #region Hooks
 
-    void OnLogin(S_LOGIN m)
+    private void OnLogin(S_LOGIN m)
     {
         //Listings.Clear();
         EnqueueListRequest(); // need invoke?
     }
 
-    void OnShowCandidateList(S_SHOW_CANDIDATE_LIST p)
+    private void OnShowCandidateList(S_SHOW_CANDIDATE_LIST p)
     {
         if (MyLfg == null) return;
 
@@ -611,7 +611,7 @@ public class LfgListViewModel : TccWindowViewModel
         toRemove.ForEach(r => dest.Remove(r));
     }
 
-    void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
+    private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
     {
         //if (!App.Settings.LfgWindowSettings.Enabled) return;
         try
@@ -683,17 +683,17 @@ public class LfgListViewModel : TccWindowViewModel
         }
     }
 
-    void OnLeaveParty(S_LEAVE_PARTY m)
+    private void OnLeaveParty(S_LEAVE_PARTY m)
     {
         NotifyMyLfg();
     }
 
-    void OnBanParty(S_BAN_PARTY m)
+    private void OnBanParty(S_BAN_PARTY m)
     {
         NotifyMyLfg();
     }
 
-    void OnPartyMemberList(S_PARTY_MEMBER_LIST m)
+    private void OnPartyMemberList(S_PARTY_MEMBER_LIST m)
     {
         if (_lastGroupSize == 0) NotifyMyLfg();
         _lastGroupSize = m.Members.Count;
@@ -704,7 +704,7 @@ public class LfgListViewModel : TccWindowViewModel
         StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel);
     }
 
-    void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
+    private void OnOtherUserApplyParty(S_OTHER_USER_APPLY_PARTY m)
     {
         //if (!App.Settings.LfgWindowSettings.Enabled) return;
         if (MyLfg == null) return;
@@ -721,7 +721,7 @@ public class LfgListViewModel : TccWindowViewModel
         });
     }
 
-    void OnShowPartyMatchInfo(S_SHOW_PARTY_MATCH_INFO m)
+    private void OnShowPartyMatchInfo(S_SHOW_PARTY_MATCH_INFO m)
     {
         if (!m.IsLast && StubInterface.Instance.IsStubAvailable && m.Page <= m.Pages)
             StubInterface.Instance.StubClient.RequestListingsPage(m.Page + 1);
@@ -745,12 +745,12 @@ public class LfgListViewModel : TccWindowViewModel
         //Dispatcher?.InvokeAsync(RefreshSorting, DispatcherPriority.Background);
     }
 
-    void OnChangePartyManager(S_CHANGE_PARTY_MANAGER obj)
+    private void OnChangePartyManager(S_CHANGE_PARTY_MANAGER obj)
     {
         InvokePropertyChanged(nameof(AmILeader));
     }
 
-    void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+    private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
     {
         ForceStopPublicize();
     }
@@ -760,9 +760,9 @@ public class LfgListViewModel : TccWindowViewModel
 
 public class SortCommand : ICommand
 {
-    readonly ICollectionViewLiveShaping _view;
-    bool _refreshing;
-    ListSortDirection _direction = ListSortDirection.Ascending;
+    private readonly ICollectionViewLiveShaping _view;
+    private bool _refreshing;
+    private ListSortDirection _direction = ListSortDirection.Ascending;
 #pragma warning disable CS0067
 
     public event EventHandler? CanExecuteChanged;

@@ -49,13 +49,13 @@ public class TccPopup : Popup
         FocusManager.PauseTopmost = false;
     }
 
-    void OnForegroundChanged()
+    private void OnForegroundChanged()
     {
         if (FocusManager.IsForeground) return;
         Dispatcher?.InvokeAsync(() => IsOpen = false);
     }
 
-    void OnVisiblityChanged()
+    private void OnVisiblityChanged()
     {
         if (WindowManager.VisibilityManager.Visible) return;
         Dispatcher?.InvokeAsync(() => IsOpen = false);

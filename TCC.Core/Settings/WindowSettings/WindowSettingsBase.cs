@@ -26,9 +26,9 @@ public class WindowSettingsBase : ThreadSafeObservableObject
     protected bool _showAlways;
     protected bool _enabled;
     protected bool _allowOffScreen;
-    bool _forcedClickable;
-    bool _forcedVisible;
-    bool _hideIngameUI = true;
+    private bool _forcedClickable;
+    private bool _forcedVisible;
+    private bool _hideIngameUI = true;
 
 
     public event Action? ResetToCenter;

@@ -22,14 +22,14 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
     public Player Player => Game.Me;
     public FlowDirection Direction => ((BuffWindowSettings)Settings!).Direction;
 
-    Thickness _globalMargin;
+    private Thickness _globalMargin;
     public Thickness GlobalMargin
     {
         get => _globalMargin;
         set => RaiseAndSetIfChanged(value, ref _globalMargin);
     }
 
-    Thickness _containersMargin;
+    private Thickness _containersMargin;
     public Thickness ContainersMargin
     {
         get => _containersMargin;
@@ -82,7 +82,7 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
         OnOverlapChanged();
     }
 
-    void OnOverlapChanged()
+    private void OnOverlapChanged()
     {
         GlobalMargin = Direction switch
         {
@@ -94,7 +94,7 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
         ContainersMargin = new Thickness { Right = ((BuffWindowSettings)Settings!).Overlap };
     }
 
-    void OnShowAbnormalConfigHotkeyPressed()
+    private void OnShowAbnormalConfigHotkeyPressed()
     {
         _dispatcher.InvokeAsync(() =>
         {

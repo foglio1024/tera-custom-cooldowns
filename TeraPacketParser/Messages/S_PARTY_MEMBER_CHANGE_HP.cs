@@ -5,8 +5,8 @@ namespace TeraPacketParser.Messages;
 
 public class S_PARTY_MEMBER_CHANGE_HP : ParsedMessage
 {
-    uint _serverId, _playerId;
-    int _currentHP, _maxHP;
+    private uint _serverId, _playerId;
+    private int _currentHP, _maxHP;
     public uint ServerId => _serverId;
     public uint PlayerId => _playerId;
     public int CurrentHP => _currentHP;

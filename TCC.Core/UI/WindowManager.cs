@@ -66,7 +66,7 @@ public static class WindowManager
 
     }
 
-    static void SystemEventsOnDisplaySettingsChanged(object? sender, EventArgs e)
+    private static void SystemEventsOnDisplaySettingsChanged(object? sender, EventArgs e)
     {
         ReloadPositions();
     }
@@ -85,14 +85,14 @@ public static class WindowManager
         });
     }
 
-    static void CloseOtherWindows()
+    private static void CloseOtherWindows()
     {
         Application.Current.Windows.ToList()
             .Where(w => w is not TccWidget).ToList()
             .ForEach(w => w.TryClose());
     }
 
-    static async Task LoadWindows()
+    private static async Task LoadWindows()
     {
         // TODO: TccModules should define and create their own windows
         var b1 = new TccWidgetBuilder<CharacterWindow, CharacterWindowViewModel>(App.Settings.CharacterWindowSettings);
@@ -177,9 +177,9 @@ public static class WindowManager
 
     public static class ViewModels
     {
-        static CivilUnrestViewModel? _civilUnrestVm;
-        static LfgListViewModel? _lfgVm;
-        static FlightGaugeViewModel? _flightGaugeVm;
+        private static CivilUnrestViewModel? _civilUnrestVm;
+        private static LfgListViewModel? _lfgVm;
+        private static FlightGaugeViewModel? _flightGaugeVm;
 
         public static CooldownWindowViewModel CooldownsVM { get; set; } = null!;
         public static CharacterWindowViewModel CharacterVM { get; set; } = null!;

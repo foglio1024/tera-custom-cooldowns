@@ -10,7 +10,7 @@ public readonly record struct Section
     public string MapId { get; }
     public bool IsDungeon { get; }
 
-    Section(uint sId, uint sNameId, string mapId, bool dg)
+    private Section(uint sId, uint sNameId, string mapId, bool dg)
     {
         Id = sId;
         NameId = sNameId;

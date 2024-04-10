@@ -15,8 +15,8 @@ namespace TCC.UI.Controls.Chat;
 
 public partial class PlayerMenuWindow
 {
-    readonly DoubleAnimation _openAnim;
-    readonly DoubleAnimation _closeAnim;
+    private readonly DoubleAnimation _openAnim;
+    private readonly DoubleAnimation _closeAnim;
 
     public PlayerMenuWindow(PlayerMenuViewModel vm)
     {
@@ -50,7 +50,7 @@ public partial class PlayerMenuWindow
         InitializeComponent();
     }
 
-    void OnForegroundChanged()
+    private void OnForegroundChanged()
     {
         if (!IsVisible) return;
         Dispatcher.InvokeAsync(Close);
@@ -101,54 +101,54 @@ public partial class PlayerMenuWindow
         RootBorder.BeginAnimation(OpacityProperty, _closeAnim);
     }
 
-    void OnMouseLeave(object sender, MouseEventArgs e)
+    private void OnMouseLeave(object sender, MouseEventArgs e)
     {
         Close();
     }
 
-    void InspectClick(object sender, RoutedEventArgs e)
+    private void InspectClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void PartyInviteClick(object sender, RoutedEventArgs e)
+    private void PartyInviteClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void GuildInviteClick(object sender, RoutedEventArgs e)
+    private void GuildInviteClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void WhisperClick(object sender, RoutedEventArgs e)
+    private void WhisperClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void GrantInviteClick(object sender, RoutedEventArgs e)
+    private void GrantInviteClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void DelegateLeaderClick(object sender, RoutedEventArgs e)
+    private void DelegateLeaderClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void MakeGuildMasterClick(object sender, RoutedEventArgs e)
+    private void MakeGuildMasterClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
+    private void MoongourdClick(object sender, RoutedEventArgs routedEventArgs)
     {
         //var p = MgPopup.Child as MoongourdPopup;
         //p?.SetInfo(_vm.Name, App.Settings.LastLanguage);
         MgPopup.IsOpen = true;
     }
 
-    void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)
+    private void FpsUtilsClick(object sender, RoutedEventArgs routedEventArgs)
     {
         FpsUtilsPopup.IsOpen = true;
     }

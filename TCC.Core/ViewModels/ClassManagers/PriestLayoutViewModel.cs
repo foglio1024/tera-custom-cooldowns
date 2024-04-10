@@ -45,24 +45,24 @@ public class PriestLayoutViewModel : BaseClassLayoutViewModel
         AbnormalityTracker.MarkingRefreshed += OnTripleNemesisRefreshed;
     }
 
-    void OnTripleNemesisRefreshed(ulong duration)
+    private void OnTripleNemesisRefreshed(ulong duration)
     {
         TripleNemesis.RefreshEffect(duration);
         TripleNemesis.Cooldown.FlashOnAvailable = false;
 
     }
 
-    void OnTripleNemesisExpired()
+    private void OnTripleNemesisExpired()
     {
         TripleNemesis.StopEffect();
         TripleNemesis.Cooldown.FlashOnAvailable = true;
 
     }
 
-    void OnGraceBuffEnded(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = true;
-    void OnGraceBuffStarted(ulong cd, CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = false;
-    void OnEdictBuffEnded(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = true;
-    void OnEdictBuffStarted(ulong cd, CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = false;
+    private void OnGraceBuffEnded(CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = true;
+    private void OnGraceBuffStarted(ulong cd, CooldownMode obj) => Grace.Cooldown.FlashOnAvailable = false;
+    private void OnEdictBuffEnded(CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = true;
+    private void OnEdictBuffStarted(ulong cd, CooldownMode obj) => EdictOfJudgment.Cooldown.FlashOnAvailable = false;
 
     protected override bool StartSpecialSkillImpl(Cooldown sk)
     {

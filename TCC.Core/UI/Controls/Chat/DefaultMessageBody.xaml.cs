@@ -16,7 +16,7 @@ public partial class DefaultMessageBody
 
     }
 
-    void PinBtn_OnClick(object sender, RoutedEventArgs e)
+    private void PinBtn_OnClick(object sender, RoutedEventArgs e)
     {
         var dc = DataContext as ChatMessage;
         foreach (var w in ChatManager.Instance.ChatWindows)
@@ -28,7 +28,7 @@ public partial class DefaultMessageBody
         }
     }
 
-    void CopyBtn_OnClick(object sender, RoutedEventArgs e)
+    private void CopyBtn_OnClick(object sender, RoutedEventArgs e)
     {
         try
         {

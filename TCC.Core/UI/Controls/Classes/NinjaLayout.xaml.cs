@@ -9,8 +9,8 @@ namespace TCC.UI.Controls.Classes;
 
 public partial class NinjaLayout
 {
-    NinjaLayoutViewModel? _dc;
-    readonly DoubleAnimation _an;
+    private NinjaLayoutViewModel? _dc;
+    private readonly DoubleAnimation _an;
 
     public NinjaLayout()
     {
@@ -18,13 +18,13 @@ public partial class NinjaLayout
         InitializeComponent();
     }
 
-    void NinjaLayout_OnLoaded(object sender, RoutedEventArgs e)
+    private void NinjaLayout_OnLoaded(object sender, RoutedEventArgs e)
     {
         _dc = (NinjaLayoutViewModel)DataContext;
         _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
     }
 
-    void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_dc == null) return;
         if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;

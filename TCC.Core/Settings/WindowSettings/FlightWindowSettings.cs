@@ -9,8 +9,8 @@ public class FlightWindowSettings : WindowSettingsBase
     public event Action? RotationChanged;
     public event Action? FlipChanged;
 
-    bool _flip;
-    double _rotation;
+    private bool _flip;
+    private double _rotation;
 
     public bool Flip
     {

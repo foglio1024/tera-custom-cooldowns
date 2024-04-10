@@ -9,7 +9,7 @@ namespace TCC.Data.Chat;
 
 public class SystemMessage : ChatMessage
 {
-    static readonly char[] CurlyBrackets = ['{', '}'];
+    private static readonly char[] CurlyBrackets = ['{', '}'];
 
     public SystemMessage(string parameters, SystemMessageData template, ChatChannel ch)
     {
@@ -54,7 +54,7 @@ public class SystemMessage : ChatMessage
         }
     }
 
-    void ParseSysHtmlPiece(HtmlNode piece, Dictionary<string, string> prm)
+    private void ParseSysHtmlPiece(HtmlNode piece, Dictionary<string, string> prm)
     {
         if (piece.Name == "img")
         {

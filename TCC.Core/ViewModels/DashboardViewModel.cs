@@ -41,14 +41,14 @@ public class DashboardViewModel : TccWindowViewModel
 {
     /* -- Fields ----------------------------------------------- */
 
-    bool _discardFirstVanguardPacket = true;
-    ICollectionViewLiveShaping? _sortedColumns;
-    ObservableCollection<DungeonColumnViewModel>? _columns;
-    Character? _selectedCharacter;
-    readonly object _lock = new();
-    readonly Timer _tabFlushTimer;
-    readonly List<Dictionary<uint, ItemAmount>> _pendingTabs;
-    bool _showDetails;
+    private bool _discardFirstVanguardPacket = true;
+    private ICollectionViewLiveShaping? _sortedColumns;
+    private ObservableCollection<DungeonColumnViewModel>? _columns;
+    private Character? _selectedCharacter;
+    private readonly object _lock = new();
+    private readonly Timer _tabFlushTimer;
+    private readonly List<Dictionary<uint, ItemAmount>> _pendingTabs;
+    private bool _showDetails;
 
 
     /* -- Properties ------------------------------------------- */
@@ -62,7 +62,7 @@ public class DashboardViewModel : TccWindowViewModel
 
     public bool ShowElleonMarks => App.Settings.LastLanguage.Contains("EU");
 
-    ThreadSafeObservableCollection<Character> _characters { get; }
+    private ThreadSafeObservableCollection<Character> _characters { get; }
     public ICollectionViewLiveShaping SortedCharacters { get; }
     public ICollectionViewLiveShaping HiddenCharacters { get; }
     public ICollectionViewLiveShaping SortedColumns// { get; }
@@ -141,7 +141,7 @@ public class DashboardViewModel : TccWindowViewModel
         //}
     }
 
-    void SyncViewModel(object? sender, NotifyCollectionChangedEventArgs e)
+    private void SyncViewModel(object? sender, NotifyCollectionChangedEventArgs e)
     {
         switch (e.Action)
         {
@@ -200,7 +200,7 @@ public class DashboardViewModel : TccWindowViewModel
         }
     }
 
-    void FilterInventory()
+    private void FilterInventory()
     {
         var view = (ICollectionView?)SelectedCharacterInventory;
         if (view == null) return;
@@ -214,8 +214,8 @@ public class DashboardViewModel : TccWindowViewModel
     }
 
     /* -- Constructor ------------------------------------------ */
-    bool _loaded;
-    string _inventoryFilter = "";
+    private bool _loaded;
+    private string _inventoryFilter = "";
 
     public DashboardViewModel(WindowSettingsBase? settings) : base(settings)
     {
@@ -310,7 +310,7 @@ public class DashboardViewModel : TccWindowViewModel
         //    new[] { new SortDescription($"{nameof(Dungeon)}.{nameof(Dungeon.Index)}", ListSortDirection.Ascending) });
     }
 
-    void OnTabFlushTimerElapsed(object? sender, ElapsedEventArgs e)
+    private void OnTabFlushTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         try
         {
@@ -342,7 +342,7 @@ public class DashboardViewModel : TccWindowViewModel
         }
     }
 
-    void OnShowDashboardHotkeyPressed()
+    private void OnShowDashboardHotkeyPressed()
     {
         if (WindowManager.DashboardWindow.IsVisible) WindowManager.DashboardWindow.HideWindow();
         else WindowManager.DashboardWindow.ShowWindow();
@@ -376,7 +376,7 @@ public class DashboardViewModel : TccWindowViewModel
         });
     }
 
-    void LoadCharacters()
+    private void LoadCharacters()
     {
         try
         {
@@ -510,13 +510,13 @@ public class DashboardViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_DUNGEON_CLEAR_COUNT_LIST>(OnDungeonClearCountList);
     }
 
-    void OnDisconnected()
+    private void OnDisconnected()
     {
         UpdateBuffs();
         SaveCharacters();
     }
 
-    void OnDungeonClearCountList(S_DUNGEON_CLEAR_COUNT_LIST m)
+    private void OnDungeonClearCountList(S_DUNGEON_CLEAR_COUNT_LIST m)
     {
         if (CurrentCharacter == null) return;
         if (m.Failed) return;
@@ -527,28 +527,28 @@ public class DashboardViewModel : TccWindowViewModel
         }
     }
 
-    void OnAvailableEventMatchingList(S_AVAILABLE_EVENT_MATCHING_LIST m)
+    private void OnAvailableEventMatchingList(S_AVAILABLE_EVENT_MATCHING_LIST m)
     {
         SetVanguard(m.WeeklyDone,m.WeeklyMax, m.DailyDone, m.VanguardCredits);
     }
 
-    void OnDungeonCoolTimeList(S_DUNGEON_COOL_TIME_LIST m)
+    private void OnDungeonCoolTimeList(S_DUNGEON_COOL_TIME_LIST m)
     {
         SetDungeons(m.DungeonCooldowns);
     }
 
-    void OnReturnToLobby(S_RETURN_TO_LOBBY m)
+    private void OnReturnToLobby(S_RETURN_TO_LOBBY m)
     {
         UpdateBuffs();
     }
 
-    void OnLogin(S_LOGIN m)
+    private void OnLogin(S_LOGIN m)
     {
         SetLoggedIn(m.PlayerId);
         SetGuildBamTime(false);
     }
 
-    void OnGetUserList(S_GET_USER_LIST m)
+    private void OnGetUserList(S_GET_USER_LIST m)
     {
         try
         {
@@ -561,7 +561,7 @@ public class DashboardViewModel : TccWindowViewModel
         Dispatcher.BeginInvoke(SaveCharacters);
     }
 
-    void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
+    private void OnPlayerStatUpdate(S_PLAYER_STAT_UPDATE m)
     {
         if (CurrentCharacter == null) return;
         CurrentCharacter.Coins = m.Coins;
@@ -570,7 +570,7 @@ public class DashboardViewModel : TccWindowViewModel
         CurrentCharacter.Level = m.Level;
     }
 
-    void OnItemList(S_ITEMLIST m)
+    private void OnItemList(S_ITEMLIST m)
     {
         if (m.Failed || m.Container == 14) return;
         lock (_lock)
@@ -583,7 +583,7 @@ public class DashboardViewModel : TccWindowViewModel
         //UpdateInventory(m.Items);
     }
 
-    void OnNpcGuildList(S_NPCGUILD_LIST m)
+    private void OnNpcGuildList(S_NPCGUILD_LIST m)
     {
         if (!Game.IsMe(m.UserId)) return;
         m.NpcGuildList.Keys.ToList()
@@ -601,7 +601,7 @@ public class DashboardViewModel : TccWindowViewModel
             });
     }
 
-    void OnUpdateNpcGuild(S_UPDATE_NPCGUILD m)
+    private void OnUpdateNpcGuild(S_UPDATE_NPCGUILD m)
     {
         switch (m.Guild)
         {
@@ -617,7 +617,7 @@ public class DashboardViewModel : TccWindowViewModel
 
     /* -- TODO EVENTS: TO BE REFACTORED ------------------------- */
 
-    readonly object _eventLock = new object();
+    private readonly object _eventLock = new object();
     public ThreadSafeObservableCollection<EventGroup> EventGroups { get; }
     public ThreadSafeObservableCollection<TimeMarker> Markers { get; }
     public ThreadSafeObservableCollection<DailyEvent> SpecialEvents { get; }
@@ -639,7 +639,7 @@ public class DashboardViewModel : TccWindowViewModel
         SpecialEvents.Clear();
     }
 
-    void LoadEventFile(DayOfWeek today, string region)
+    private void LoadEventFile(DayOfWeek today, string region)
     {
         var yesterday = today - 1;
         if (region.StartsWith("EU")) region = "EU";

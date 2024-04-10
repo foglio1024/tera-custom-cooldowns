@@ -11,12 +11,12 @@ public partial class WelcomeWindow
         InitializeComponent();
     }
 
-    void OnOkButtonClick(object sender, RoutedEventArgs e)
+    private void OnOkButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
 
-    void OnWikiButtonClick(object sender, RoutedEventArgs e)
+    private void OnWikiButtonClick(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -28,7 +28,7 @@ public partial class WelcomeWindow
         }
     }
 
-    void OnTeraDpsDiscordButtonClick(object sender, RoutedEventArgs e)
+    private void OnTeraDpsDiscordButtonClick(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -40,7 +40,7 @@ public partial class WelcomeWindow
         }
     }
 
-    void OnToolboxDiscordButtonClick(object sender, RoutedEventArgs e)
+    private void OnToolboxDiscordButtonClick(object sender, RoutedEventArgs e)
     {
         try
         {
@@ -52,7 +52,7 @@ public partial class WelcomeWindow
         }
     }
 
-    void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         this.TryDragMove();
     }

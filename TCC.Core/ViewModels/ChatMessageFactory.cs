@@ -8,7 +8,7 @@ namespace TCC.ViewModels;
 
 public class ChatMessageFactory
 {
-    readonly Dispatcher _dispatcher;
+    private readonly Dispatcher _dispatcher;
     public ChatMessageFactory(Dispatcher d)
     {
         _dispatcher = d;

@@ -12,14 +12,14 @@ namespace TCC.ResourceDictionaries;
 
 public partial class DataTemplates
 {
-    void OnCharacterNameMouseLeftButtonDown(object? sender, MouseButtonEventArgs e)
+    private void OnCharacterNameMouseLeftButtonDown(object? sender, MouseButtonEventArgs e)
     {
         var dc = (sender as FrameworkElement)?.DataContext;
         if (dc != null)
             WindowManager.ViewModels.DashboardVM.SelectCharacter((Character)dc);
     }
 
-    void LfgMessage_OnKeyDown(object sender, KeyEventArgs e)
+    private void LfgMessage_OnKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
 
@@ -36,18 +36,18 @@ public partial class DataTemplates
         Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
     }
 
-    void LfgMessage_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    private void LfgMessage_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
         WindowManager.LfgListWindow.Activate();
     }
 
-    void LfgMessage_OnTbLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    private void LfgMessage_OnTbLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         FocusManager.MakeUnfocusable(WindowManager.LfgListWindow.Handle);
     }
 
-    void LfgMessage_OnTbLoaded(object sender, RoutedEventArgs e)
+    private void LfgMessage_OnTbLoaded(object sender, RoutedEventArgs e)
     {
         FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
         WindowManager.LfgListWindow.Activate();
@@ -56,7 +56,7 @@ public partial class DataTemplates
         Keyboard.Focus((TextBox)sender);
     }
 
-    void LfgMessage_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void LfgMessage_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         FocusManager.UndoUnfocusable(WindowManager.LfgListWindow.Handle);
         ((TextBox)sender).Focus();
@@ -66,7 +66,7 @@ public partial class DataTemplates
 
     }
 
-    void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
+    private void LfgPopup_OnMouseLeave(object sender, MouseEventArgs e)
     {
         if (sender is FrameworkElement { DataContext: Listing l }) l.IsPopupOpen = false;
         else FocusManager.PauseTopmost = false;

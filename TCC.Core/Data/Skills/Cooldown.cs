@@ -23,16 +23,16 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
 
     // fields
 
-    readonly DispatcherTimer _mainTimer;
-    readonly DispatcherTimer _offsetTimer;
-    readonly DispatcherTimer _secondsTimer;
-    double _seconds;
-    bool _flashOnAvailable;
-    bool _canFlash;
-    Skill _skill;
-    DateTime _endTime;
-    CooldownMode _mode;
-    bool _isAvailable = true;
+    private readonly DispatcherTimer _mainTimer;
+    private readonly DispatcherTimer _offsetTimer;
+    private readonly DispatcherTimer _secondsTimer;
+    private double _seconds;
+    private bool _flashOnAvailable;
+    private bool _canFlash;
+    private Skill _skill;
+    private DateTime _endTime;
+    private CooldownMode _mode;
+    private bool _isAvailable = true;
 
     // properties
 
@@ -135,12 +135,12 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
         ObjectTracker.Unregister(GetType());
     }
 
-    void OnGlobalFlashChanged()
+    private void OnGlobalFlashChanged()
     {
         _dispatcher.InvokeAsync(OnCombatStatusChanged);
     }
 
-    void OnCombatStatusChanged()
+    private void OnCombatStatusChanged()
     {
         _dispatcher.InvokeAsync(() =>
         {
@@ -157,7 +157,7 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
 
     // timers tick handlers
 
-    void CooldownEnded(object? sender, EventArgs? e)
+    private void CooldownEnded(object? sender, EventArgs? e)
     {
         StopMainTimer();
         _secondsTimer.Stop();
@@ -165,13 +165,13 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
         _dispatcher.Invoke(() => Ended?.Invoke(Mode));
     }
 
-    void StartSecondsTimer(object? sender, EventArgs? e)
+    private void StartSecondsTimer(object? sender, EventArgs? e)
     {
         _offsetTimer.Stop();
         _secondsTimer.Start();
     }
 
-    void DecreaseSeconds(object? sender, EventArgs? e)
+    private void DecreaseSeconds(object? sender, EventArgs? e)
     {
         if (Seconds > 0)
         {
@@ -273,18 +273,18 @@ public class Cooldown : ThreadSafeObservableObject, IDisposable
         Refresh(cd.Skill.Id, cd.Duration, cd.Mode);
     }
 
-    void ForceFlashing()
+    private void ForceFlashing()
     {
         _dispatcher.InvokeAsync(() => FlashingForced?.Invoke());
     }
 
-    void StartMainTimer()
+    private void StartMainTimer()
     {
         IsAvailable = false;
         _mainTimer.Start();
     }
 
-    void StopMainTimer()
+    private void StopMainTimer()
     {
         _mainTimer.Stop();
         IsAvailable = true;

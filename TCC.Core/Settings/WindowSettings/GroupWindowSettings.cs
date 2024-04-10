@@ -13,21 +13,21 @@ public class GroupWindowSettings : WindowSettingsBase
     public event Action? ThresholdChanged;
     public event Action? LayoutChanged;
 
-    GroupHpLabelMode _hpLabelMode;
-    bool _ignoreMe;
-    uint _hideBuffsThreshold;
-    uint _hideDebuffsThreshold;
-    uint _hideHpThreshold;
-    uint _hideMpThreshold;
-    uint _hideStThreshold;
-    uint _disableAbnormalitiesThreshold;
-    uint _disableAbnormalitiesAnimationThreshold;
-    uint _groupSizeThreshold;
-    GroupWindowLayout _layout;
-    bool _showAwakenIcon;
-    bool _showDetails;
-    bool _showLaurels;
-    bool _showOnlyAggroStacks;
+    private GroupHpLabelMode _hpLabelMode;
+    private bool _ignoreMe;
+    private uint _hideBuffsThreshold;
+    private uint _hideDebuffsThreshold;
+    private uint _hideHpThreshold;
+    private uint _hideMpThreshold;
+    private uint _hideStThreshold;
+    private uint _disableAbnormalitiesThreshold;
+    private uint _disableAbnormalitiesAnimationThreshold;
+    private uint _groupSizeThreshold;
+    private GroupWindowLayout _layout;
+    private bool _showAwakenIcon;
+    private bool _showDetails;
+    private bool _showLaurels;
+    private bool _showOnlyAggroStacks;
 
     public GroupHpLabelMode HpLabelMode
     {

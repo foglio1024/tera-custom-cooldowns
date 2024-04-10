@@ -7,7 +7,7 @@ namespace TCC.UI.Controls.Dashboard;
 
 public partial class GearItemControl
 {
-    readonly DoubleAnimation _anim;
+    private readonly DoubleAnimation _anim;
     public GearItemControl()
     {
         InitializeComponent();
@@ -18,7 +18,7 @@ public partial class GearItemControl
         };
     }
 
-    void GearItemControl_OnLoaded(object sender, RoutedEventArgs e)
+    private void GearItemControl_OnLoaded(object sender, RoutedEventArgs e)
     {
         var dc = (GearItem?)DataContext;
         if (dc == null) return;

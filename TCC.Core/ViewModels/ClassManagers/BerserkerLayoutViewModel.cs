@@ -6,7 +6,7 @@ namespace TCC.ViewModels.ClassManagers;
 
 public class BerserkerLayoutViewModel : BaseClassLayoutViewModel
 {
-    bool _isUnleashOn;
+    private bool _isUnleashOn;
 
     public SkillWithEffect FieryRage { get; set; }
     public SkillWithEffect Bloodlust { get; set; }

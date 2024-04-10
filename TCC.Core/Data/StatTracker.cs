@@ -8,11 +8,11 @@ public class StatTracker : ThreadSafeObservableObject
     public event Action<uint>? ToZero;
     public event Action<double>? FactorChanged;
 
-    int _max = 1;
-    int _val;
-    bool _status;
-    bool _maxed;
-    double _factor;
+    private int _max = 1;
+    private int _val;
+    private bool _status;
+    private bool _maxed;
+    private double _factor;
 
     public int Val
     {
@@ -61,7 +61,7 @@ public class StatTracker : ThreadSafeObservableObject
         ToZero?.Invoke(pDuration);
     }
 
-    void InvokeFactorChanged()
+    private void InvokeFactorChanged()
     {
         FactorChanged?.Invoke(_factor);
     }

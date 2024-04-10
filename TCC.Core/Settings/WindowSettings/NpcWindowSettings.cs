@@ -9,9 +9,9 @@ public class NpcWindowSettings : WindowSettingsBase
     public event Action? AccurateHpChanged;
     public event Action? HideAddsChanged;
 
-    bool _accurateHp;
-    bool _hideAdds;
-    EnrageLabelMode _enrageLabelMode;
+    private bool _accurateHp;
+    private bool _hideAdds;
+    private EnrageLabelMode _enrageLabelMode;
 
     public bool HideAdds
     {

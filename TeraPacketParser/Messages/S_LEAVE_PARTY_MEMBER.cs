@@ -5,13 +5,13 @@ namespace TeraPacketParser.Messages;
 
 public class S_LEAVE_PARTY_MEMBER : ParsedMessage
 {
-    uint _serverId;
+    private uint _serverId;
     public uint ServerId => _serverId;
 
-    uint _playerId;
+    private uint _playerId;
     public uint PlayerId => _playerId;
 
-    string _name;
+    private string _name;
     public string Name => _name;
 
     public S_LEAVE_PARTY_MEMBER(TeraMessageReader reader) : base(reader)

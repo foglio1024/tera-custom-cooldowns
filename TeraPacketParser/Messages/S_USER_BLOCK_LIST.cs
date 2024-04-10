@@ -20,7 +20,7 @@ public class S_USER_BLOCK_LIST : ParsedMessage
 
     }
 
-    string ParseBlockedUser(TeraMessageReader reader)
+    private string ParseBlockedUser(TeraMessageReader reader)
     {
         reader.Skip(4);
         var nameOffset = reader.ReadUInt16();

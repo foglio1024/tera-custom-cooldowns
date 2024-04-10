@@ -14,7 +14,7 @@ public partial class LfgBody
         InitializeComponent();
     }
 
-    void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         var dc = (LfgMessage)DataContext;
         if (dc.LinkedListing != null)
@@ -26,18 +26,18 @@ public partial class LfgBody
         StubInterface.Instance.StubClient.RequestPartyInfo(dc.AuthorId, dc.ServerId); 
     }
 
-    void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
         if ((sender as FrameworkElement)?.DataContext is not User user) return;
         WindowManager.ViewModels.PlayerMenuVM.Open(user.Name, user.ServerId);
     }
 
-    void OnMessageMouseEnter(object sender, MouseEventArgs e)
+    private void OnMessageMouseEnter(object sender, MouseEventArgs e)
     {
         Underline.Visibility = Visibility.Visible;
     }
 
-    void OnMessageMouseLeave(object sender, MouseEventArgs e)
+    private void OnMessageMouseLeave(object sender, MouseEventArgs e)
     {
         Underline.Visibility = Visibility.Collapsed;
     }

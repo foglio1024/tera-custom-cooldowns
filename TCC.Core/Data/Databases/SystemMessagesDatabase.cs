@@ -13,7 +13,7 @@ public class SystemMessagesDatabase : DatabaseBase
     protected override string FolderName => "sys_msg";
     protected override string Extension => "tsv";
 
-    readonly List<string> _handledInternally = ["SMT_FIELD_EVENT_REWARD_AVAILABLE"];
+    private readonly List<string> _handledInternally = ["SMT_FIELD_EVENT_REWARD_AVAILABLE"];
 
     public Dictionary<string, SystemMessageData> Messages { get; } = [];
 
@@ -59,7 +59,7 @@ public class SystemMessagesDatabase : DatabaseBase
         AddCustom();
     }
 
-    void AddCustom()
+    private void AddCustom()
     {
         // party member login/out ------------------------------------------------------------------------
 

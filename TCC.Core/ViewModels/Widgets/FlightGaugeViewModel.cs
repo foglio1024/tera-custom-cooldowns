@@ -35,7 +35,7 @@ public class FlightGaugeViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_PLAYER_CHANGE_FLIGHT_ENERGY>(OnPlayerChangeFlightEnergy);
     }
 
-    void OnPlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY m)
+    private void OnPlayerChangeFlightEnergy(S_PLAYER_CHANGE_FLIGHT_ENERGY m)
     {
         EnergyChanged?.Invoke(m.Energy);
     }

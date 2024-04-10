@@ -53,7 +53,7 @@ public class GroupConfigVM : ThreadSafeObservableObject
         AbnormalitiesView.Filter = null;
     }
     //to keep view referenced
-    void OnAbnormalitiesViewOnCurrentChanged(object? s, EventArgs ev)
+    private void OnAbnormalitiesViewOnCurrentChanged(object? s, EventArgs ev)
     {
     }
 }

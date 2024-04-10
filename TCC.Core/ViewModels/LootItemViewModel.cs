@@ -12,12 +12,12 @@ namespace TCC.ViewModels;
 
 public class LootItemViewModel : ThreadSafeObservableObject
 {
-    readonly DispatcherTimer _commitCheckTimer;
-    BidAction _bidIntent;
-    DistributionStatus _distributionStatus;
-    bool _bidSent;
-    string _winnerName = "";
-    int _winnerRoll = -1;
+    private readonly DispatcherTimer _commitCheckTimer;
+    private BidAction _bidIntent;
+    private DistributionStatus _distributionStatus;
+    private bool _bidSent;
+    private string _winnerName = "";
+    private int _winnerRoll = -1;
 
     public DropItem Item { get; }
     public Item DbItem { get; }
@@ -91,7 +91,7 @@ public class LootItemViewModel : ThreadSafeObservableObject
         _commitCheckTimer.Tick += OnCommitCheck;
     }
 
-    void OnCommitCheck(object? sender, EventArgs e)
+    private void OnCommitCheck(object? sender, EventArgs e)
     {
         _commitCheckTimer.Stop();
 
@@ -100,7 +100,7 @@ public class LootItemViewModel : ThreadSafeObservableObject
         CommitIntent();
     }
 
-    void SetBidIntent(BidAction intent)
+    private void SetBidIntent(BidAction intent)
     {
         BidIntent = BidIntent == intent ? BidAction.Unset : intent;
         CommitIntent();

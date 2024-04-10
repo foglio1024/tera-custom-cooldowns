@@ -59,7 +59,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
     public static readonly DependencyProperty AllowModifiersProperty =
         DependencyProperty.Register(nameof(AllowModifiers), typeof(bool), typeof(HotkeySetting), new PropertyMetadata(true));
 
-    readonly List<Key> _pressedKeys;
+    private readonly List<Key> _pressedKeys;
 
     public HotkeySetting()
     {
@@ -68,12 +68,12 @@ public partial class HotkeySetting : INotifyPropertyChanged
         Loaded += OnLoaded;
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         InvokePropertyChanged(nameof(ValueString));
     }
 
-    void UIElement_OnKeyDown(object sender, KeyEventArgs e)
+    private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
     {
         KeyboardHook.Instance.Disable();
 
@@ -93,7 +93,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
         UpdateValue();
     }
 
-    void UpdateValue()
+    private void UpdateValue()
     {
         var shift = _pressedKeys.Contains(Key.LeftShift);
         var alt = _pressedKeys.Contains(Key.LeftAlt);
@@ -111,7 +111,7 @@ public partial class HotkeySetting : INotifyPropertyChanged
         InvokePropertyChanged(nameof(ValueString));
     }
 
-    void UIElement_OnKeyUp(object sender, KeyEventArgs e)
+    private void UIElement_OnKeyUp(object sender, KeyEventArgs e)
     {
         e.Handled = true;
         var k = e.Key;
@@ -133,12 +133,12 @@ public partial class HotkeySetting : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    void UIElement_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    private void UIElement_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         KeyboardHook.Instance.Disable();
     }
 
-    void UIElement_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+    private void UIElement_OnLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
     {
         KeyboardHook.Instance.Enable();
     }

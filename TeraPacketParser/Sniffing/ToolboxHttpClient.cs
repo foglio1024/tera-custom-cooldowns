@@ -11,15 +11,15 @@ namespace TeraPacketParser.Sniffing;
 /// </summary>
 public class ToolboxHttpClient
 {
-    readonly HttpClient _client;
-    readonly string _address;
+    private readonly HttpClient _client;
+    private readonly string _address;
     public ToolboxHttpClient(string address)
     {
         _address = address;
         _client = new HttpClient();
     }
 
-    async Task<Response?> Send(JObject obj)
+    private async Task<Response?> Send(JObject obj)
     {
         var req = new StringContent(obj.ToString(), Encoding.UTF8, "application/json");
 
@@ -38,7 +38,7 @@ public class ToolboxHttpClient
         return await CallAsync(new Request(methodName, parameters));
     }
 
-    async Task<Response?> CallAsync(Request req)
+    private async Task<Response?> CallAsync(Request req)
     {
         var resp = await Send(req);
         if (resp?.Error != null)

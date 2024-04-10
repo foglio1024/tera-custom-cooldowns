@@ -5,7 +5,7 @@ namespace TCC.Data.Pc;
 
 public class InventoryItem : ThreadSafeObservableObject
 {
-    int _amount;
+    private int _amount;
     public uint Id { get; }
 
     [JsonIgnore]

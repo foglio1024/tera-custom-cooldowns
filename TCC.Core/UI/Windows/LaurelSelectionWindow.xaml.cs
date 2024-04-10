@@ -9,7 +9,7 @@ public partial class LaurelSelectionWindow
         InitializeComponent();
     }
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
     }

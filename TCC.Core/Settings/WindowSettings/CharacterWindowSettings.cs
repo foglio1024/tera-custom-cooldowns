@@ -20,11 +20,11 @@ public class CharacterWindowSettings : WindowSettingsBase
     public event Action? ShowStaminaChanged;
     public event Action? CustomLaurelChanged;
 
-    bool _sorcererShowElements;
-    bool _warriorShowEdge;
-    bool _compactMode;
-    bool _showStamina;
-    CustomLaurel _customLaurel;
+    private bool _sorcererShowElements;
+    private bool _warriorShowEdge;
+    private bool _compactMode;
+    private bool _showStamina;
+    private CustomLaurel _customLaurel;
 
     public bool CompactMode
     {
@@ -92,7 +92,7 @@ public class CharacterWindowSettings : WindowSettingsBase
 
     }
 
-    void ChooseCustomLaurel()
+    private void ChooseCustomLaurel()
     {
         var w = Application.Current.Windows.ToList().OfType<LaurelSelectionWindow>().FirstOrDefault();
 

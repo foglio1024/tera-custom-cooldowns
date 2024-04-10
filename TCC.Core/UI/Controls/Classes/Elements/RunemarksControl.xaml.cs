@@ -10,7 +10,7 @@ namespace TCC.UI.Controls.Classes.Elements;
 
 public partial class RunemarksControl
 {
-    ValkyrieLayoutViewModel? _dc;
+    private ValkyrieLayoutViewModel? _dc;
 
     public RunemarksControl()
     {
@@ -19,14 +19,14 @@ public partial class RunemarksControl
 
     }
 
-    void OnLoaded(object _, RoutedEventArgs __)
+    private void OnLoaded(object _, RoutedEventArgs __)
     {
         _dc = (ValkyrieLayoutViewModel) DataContext;
         if (_dc == null) return;
         _dc.RunemarksCounter.PropertyChanged += OnRunemarksPropertyChanged;
     }
 
-    void OnRunemarksPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void OnRunemarksPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName != nameof(Counter.Val)) return;
         if (_dc == null) return;

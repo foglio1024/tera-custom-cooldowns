@@ -8,9 +8,9 @@ namespace TCC.Data;
 public class Counter : ThreadSafeObservableObject
 {
     //TODO use events here
-    int _val;
-    bool _isMaxed;
-    readonly DispatcherTimer _expire;
+    private int _val;
+    private bool _isMaxed;
+    private readonly DispatcherTimer _expire;
 
     public int Val
     {
@@ -28,7 +28,7 @@ public class Counter : ThreadSafeObservableObject
         private set => RaiseAndSetIfChanged(value, ref _isMaxed);
     }
     public int MaxValue { get; private set; }
-    bool AutoExpire { get; set; }
+    private bool AutoExpire { get; set; }
 
     public Counter(int max, bool autoexpire)
     {
@@ -39,12 +39,12 @@ public class Counter : ThreadSafeObservableObject
         _expire.Tick += OnExpireTick;
     }
 
-    void OnExpireTick(object? s, EventArgs ev)
+    private void OnExpireTick(object? s, EventArgs ev)
     {
         Val = 0;
     }
 
-    void RefreshTimer()
+    private void RefreshTimer()
     {
         _expire.Stop();
 

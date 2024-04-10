@@ -24,8 +24,8 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
     protected Arc? MainArcRef;
     protected Arc? PreArcRef; // todo: remove (#315)
     protected FrameworkElement? ResetArcRef;
-    readonly DoubleAnimation _arcAnimation;
-    bool _isRunning;
+    private readonly DoubleAnimation _arcAnimation;
+    private bool _isRunning;
 
     public bool IsRunning
     {
@@ -38,7 +38,7 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
         }
     }
 
-    string _secondsText = "0";
+    private string _secondsText = "0";
     public string SecondsText
     {
         get => _secondsText;
@@ -97,7 +97,7 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
 
     }
 
-    void OnSecondsUpdated()
+    private void OnSecondsUpdated()
     {
         if (Context == null)
         {
@@ -152,7 +152,7 @@ public class SkillControlBase : UserControl, INotifyPropertyChanged
         }
     }
 
-    void StartArcAnimation(ulong duration, Arc? arc, double val = 1)
+    private void StartArcAnimation(ulong duration, Arc? arc, double val = 1)
     {
         Dispatcher?.Invoke(() =>
         {

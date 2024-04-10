@@ -23,7 +23,7 @@ public class CooldownConfigParser
         Data = GetDefaults(c);
     }
 
-    static CooldownConfigData GetDefaults(Class c)
+    private static CooldownConfigData GetDefaults(Class c)
     {
         var ret = new CooldownConfigData();
         switch (c)

@@ -7,15 +7,15 @@ namespace TCC.Settings.WindowSettings;
 
 public class ChatWindowSettings : WindowSettingsBase
 {
-    bool _fadeOut = true;
-    double _backgroundOpacity = .3;
-    double _frameOpacity = 1;
-    bool _lfgOn = true;
-    int _hideTimeout;
-    bool _canCollapse = true;
-    bool _staysCollapsed;
-    bool _showImportant = true;
-    int _collapsedHeight = 64;
+    private bool _fadeOut = true;
+    private double _backgroundOpacity = .3;
+    private double _frameOpacity = 1;
+    private bool _lfgOn = true;
+    private int _hideTimeout;
+    private bool _canCollapse = true;
+    private bool _staysCollapsed;
+    private bool _showImportant = true;
+    private int _collapsedHeight = 64;
 
     public event Action? FadeoutChanged;
     public event Action? OpacityChanged;

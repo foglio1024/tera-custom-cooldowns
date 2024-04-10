@@ -8,11 +8,11 @@ namespace TeraPacketParser.TeraCommon.Game.Services;
 //TODO: make this the same as other DBs
 public class ServerDatabase
 {
-    const string DefaultOverride = "###########################################################\n# Add additional servers in this file (needed only for\n# VPN/Proxy that is not supported out-of-box)\n#\n# Format must follow the format IP Region ServerName\n#\n# Example:\n# 111.22.33.44 NA VPN Server 1\n#\n# Current possible regions: EU, NA, RU, KR, TW, JP\n#\n# Lines starting with '#' are ignored\n# Place servers below the next line\n###########################################################";
-    LangEnum _language;
+    private const string DefaultOverride = "###########################################################\n# Add additional servers in this file (needed only for\n# VPN/Proxy that is not supported out-of-box)\n#\n# Format must follow the format IP Region ServerName\n#\n# Example:\n# 111.22.33.44 NA VPN Server 1\n#\n# Current possible regions: EU, NA, RU, KR, TW, JP\n#\n# Lines starting with '#' are ignored\n# Place servers below the next line\n###########################################################";
+    private LangEnum _language;
 
-    readonly List<Server> _servers;
-    List<Server> _serverlist;
+    private readonly List<Server> _servers;
+    private List<Server> _serverlist;
 
     public string Region { get; set; } = "";
     public LangEnum Language
@@ -75,7 +75,7 @@ public class ServerDatabase
 
     }
 
-    static IEnumerable<Server> GetServers(string filename)
+    private static IEnumerable<Server> GetServers(string filename)
     {
         return File.ReadAllLines(filename)
             .Where(s => !s.StartsWith("#") && !string.IsNullOrWhiteSpace(s))
@@ -99,7 +99,7 @@ public class ServerDatabase
         return servers.FirstOrDefault(x => x.Region == Region)?.Name ?? servers.First().Name;
     }
 
-    void AddOverrides(IEnumerable<Server> newServers)
+    private void AddOverrides(IEnumerable<Server> newServers)
     {
         _serverlist = _serverlist.Concat(newServers.Where(sl => _serverlist.All(os => os.Ip != sl.Ip))).ToList();
     }

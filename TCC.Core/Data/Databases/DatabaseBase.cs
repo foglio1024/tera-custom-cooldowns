@@ -7,7 +7,7 @@ namespace TCC.Data.Databases;
 
 public abstract class DatabaseBase
 {
-    int _outdatedCount;
+    private int _outdatedCount;
 
     protected readonly string Language;
 
@@ -60,7 +60,7 @@ public abstract class DatabaseBase
         UpdateFromRemote(custom);
     }
 
-    void UpdateFromRemote(string custom)
+    private void UpdateFromRemote(string custom)
     {
         UpdateManager.UpdateDatabase(string.IsNullOrEmpty(custom) ? RelativePath : custom);
     }

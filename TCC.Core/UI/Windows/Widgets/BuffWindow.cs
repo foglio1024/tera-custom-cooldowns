@@ -1,6 +1,5 @@
 ﻿using Nostrum.WPF.Extensions;
 using Nostrum.WPF.Factories;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,9 +12,8 @@ namespace TCC.UI.Windows.Widgets;
 
 public partial class BuffWindow
 {
-    readonly DoubleAnimation _opacityUp;
-    readonly DoubleAnimation _opacityDown;
-    readonly AbnormalityWindowViewModel _vm;
+    private readonly DoubleAnimation _opacityUp;
+    private readonly DoubleAnimation _opacityDown;
 
     public BuffWindow(AbnormalityWindowViewModel vm)
     {
@@ -25,8 +23,7 @@ public partial class BuffWindow
 
 
         InitializeComponent();
-        _vm = vm;
-        DataContext = _vm;
+        DataContext = vm;
         ButtonsRef = Buttons;
         MainContent = WindowContent;
         BoundaryRef = Boundary;
@@ -37,7 +34,7 @@ public partial class BuffWindow
         OnDirectionChanged();
     }
 
-    void OnDirectionChanged()
+    private void OnDirectionChanged()
     {
         Dispatcher?.InvokeAsync(() =>
         {
@@ -56,20 +53,20 @@ public partial class BuffWindow
         });
     }
 
-    void OnAbnormalityShapeChanged()
+    private void OnAbnormalityShapeChanged()
     {
         Buffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
         Debuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
         InfBuffs.RefreshTemplate(R.TemplateSelectors.PlayerAbnormalityTemplateSelector);
     }
 
-    void OnWindowMouseEnter(object sender, MouseEventArgs e)
+    private void OnWindowMouseEnter(object sender, MouseEventArgs e)
     {
         SetAbnormalitiesVisibility(true);
         SettingsButton.BeginAnimation(OpacityProperty, _opacityUp);
     }
 
-    void OnWindowMouseLeave(object sender, MouseEventArgs e)
+    private void OnWindowMouseLeave(object sender, MouseEventArgs e)
     {
         SettingsButton.BeginAnimation(OpacityProperty, _opacityDown);
         Task.Delay(1000).ContinueWith(_ => Dispatcher.InvokeAsync(() =>
@@ -79,33 +76,12 @@ public partial class BuffWindow
         }));
     }
 
-    void SetAbnormalitiesVisibility(bool visible)
+    private void SetAbnormalitiesVisibility(bool visible)
     {
-        var normal = _vm.Player.Buffs.ToSyncList()
-            .Where(x => x.CanBeHidden)
-            .ToArray();
-        var perma = _vm.Player.InfBuffs.ToSyncList()
-            .Where(x => x.CanBeHidden)
-            .ToArray();
-        var debuffs = _vm.Player.Debuffs.ToSyncList()
-            .Where(x => x.CanBeHidden)
-            .ToArray();
-
-        foreach (var abnormality in normal)
-        {
-            abnormality.IsHidden = !visible;
-        }
-        foreach (var abnormality in perma)
-        {
-            abnormality.IsHidden = !visible;
-        }
-        foreach (var abnormality in debuffs)
-        {
-            abnormality.IsHidden = !visible;
-        }
+        Game.Me.SetAbnormalitiesVisibility(visible);
     }
 
-    void OpenBuffSettings(object sender, RoutedEventArgs e)
+    private void OpenBuffSettings(object sender, RoutedEventArgs e)
     {
         if (TccWindow.Exists(typeof(MyAbnormalConfigWindow))) return;
         new MyAbnormalConfigWindow().Show();

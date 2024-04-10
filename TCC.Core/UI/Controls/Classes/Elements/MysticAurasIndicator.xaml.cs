@@ -7,7 +7,7 @@ namespace TCC.UI.Controls.Classes.Elements;
 
 public partial class MysticAurasIndicator
 {
-    AurasTracker? _context;
+    private AurasTracker? _context;
 
     public MysticAurasIndicator()
     {
@@ -15,7 +15,7 @@ public partial class MysticAurasIndicator
     }
 
 
-    void UserControl_Loaded(object sender, RoutedEventArgs e)
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
         if (DesignerProperties.GetIsInDesignMode(this)) return;
         //lazy way of making sure that DataContext is not null
@@ -28,7 +28,7 @@ public partial class MysticAurasIndicator
         _context.PropertyChanged += OnContextPropertyChanged;
     }
 
-    void OnContextPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void OnContextPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_context == null) return;
 

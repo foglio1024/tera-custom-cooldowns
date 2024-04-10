@@ -11,14 +11,14 @@ public partial class TranslationIndicator
         InitializeComponent();
     }
 
-    void OnTranslationIndicatorMouseEnter(object sender, MouseEventArgs e)
+    private void OnTranslationIndicatorMouseEnter(object sender, MouseEventArgs e)
     {
         if (sender is not FrameworkElement uiel) return;
         var popup = uiel.Parent.FindVisualChild<TccPopup>();
         if (popup != null) { popup.IsOpen = true; }
     }
 
-    void OnTranslationIndicatorMouseLeave(object sender, MouseEventArgs e)
+    private void OnTranslationIndicatorMouseLeave(object sender, MouseEventArgs e)
     {
         if (sender is not FrameworkElement uiel) return;
         var popup = uiel.Parent.FindVisualChild<TccPopup>();

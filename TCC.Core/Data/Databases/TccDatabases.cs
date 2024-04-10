@@ -26,7 +26,7 @@ public class TccDatabases
     public DungeonDatabase DungeonDatabase { get; }
     public SocialDatabase SocialDatabase { get; }
 
-    List<DatabaseBase> Databases
+    private List<DatabaseBase> Databases
     {
         get
         {

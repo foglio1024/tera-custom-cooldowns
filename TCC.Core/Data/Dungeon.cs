@@ -4,12 +4,13 @@ namespace TCC.Data;
 
 public class Dungeon : ThreadSafeObservableObject
 {
-    string _shortName = "";
-    bool _doublesOnElite;
-    bool _show;
-    int _index = -1;
-    short _maxBaseRuns = 1;
-    int _itemLevel;
+    private string _shortName = "";
+    private bool _doublesOnElite;
+    private bool _show;
+    private int _index = -1;
+    private short _maxBaseRuns = 1;
+
+    private int _itemLevel;
     //ItemLevelTier _requiredIlvl = ItemLevelTier.Tier0;
 
     public uint Id { get; }

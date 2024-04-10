@@ -16,11 +16,11 @@ namespace TCC.ViewModels.Widgets;
 [UsedImplicitly]
 public class PerfMonitorViewModel : TccWindowViewModel
 {
-    double _memory;
-    double _cpu;
-    PerformanceCounter _cpuCounter = null!;
-    PerformanceCounter _ramCounter = null!;
-    Process _process = null!;
+    private double _memory;
+    private double _cpu;
+    private PerformanceCounter _cpuCounter = null!;
+    private PerformanceCounter _ramCounter = null!;
+    private Process _process = null!;
 
     public double Memory
     {
@@ -45,8 +45,8 @@ public class PerfMonitorViewModel : TccWindowViewModel
     public bool MemoryAAAAAAAAAAAAAAA => _memory > 3000;
 
     public ICommand DumpThreadAllocationCommand { get; }
-    readonly object _lock = new();
-    bool _showDumpButton;
+    private readonly object _lock = new();
+    private bool _showDumpButton;
 
     public bool ShowDumpButton
     {
@@ -94,7 +94,7 @@ public class PerfMonitorViewModel : TccWindowViewModel
         Task.Run(OnTick);
     }
 
-    string BuildThreadString(Dispatcher dispatcher, ref int count)
+    private string BuildThreadString(Dispatcher dispatcher, ref int count)
     {
         var ret = "";
         var name = $"- {dispatcher.Thread.Name} ";
@@ -110,7 +110,7 @@ public class PerfMonitorViewModel : TccWindowViewModel
         return ret;
     }
 
-    void OnTick()
+    private void OnTick()
     {
         _process = Process.GetCurrentProcess();
         var name = string.Empty;

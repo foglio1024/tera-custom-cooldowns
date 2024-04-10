@@ -12,7 +12,7 @@ public class Request : JObject
     public string Method => ContainsKey(MethodKey) ? this[MethodKey]?.Value<string>() ?? "" : "";
     public JObject? Parameters => ContainsKey(ParametersKey) ? this[ParametersKey] as JObject : null;
 
-    static uint _nextId;
+    private static uint _nextId;
     public Request(string methodName, JObject? parameters = null)
     {
         this["jsonrpc"] = "2.0";
@@ -29,7 +29,7 @@ public class Request : JObject
         this[IdKey] = j[IdKey];
     }
 
-    static uint GetNextId()
+    private static uint GetNextId()
     {
         return _nextId++;
     }

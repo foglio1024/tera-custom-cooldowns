@@ -6,7 +6,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing.Crypt;
 
 public class Session
 {
-    static Session? _instance;
+    private static Session? _instance;
     public byte[] ClientKey1 = new byte[128];
     public byte[] ClientKey2 = new byte[128];
     public byte[] DecryptKey = new byte[128];
@@ -21,7 +21,7 @@ public class Session
     public byte[] TmpKey2 = new byte[128];
 
 
-    Session() { }
+    private Session() { }
 
     public static Session Instance => _instance ??= new Session();
 

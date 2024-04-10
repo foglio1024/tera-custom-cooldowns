@@ -14,7 +14,7 @@ public partial class ApplyBody
         InitializeComponent();
     }
 
-    void AcceptApplyBtn(object sender, MouseButtonEventArgs e)
+    private void AcceptApplyBtn(object sender, MouseButtonEventArgs e)
     {
         var dc = (ApplyMessage)DataContext;
         if (dc.Handled) return;
@@ -22,13 +22,13 @@ public partial class ApplyBody
         dc.Handled = true;
     }
 
-    void InspectBtn(object sender, MouseButtonEventArgs e)
+    private void InspectBtn(object sender, MouseButtonEventArgs e)
     {
         var dc = (ApplyMessage)DataContext;
         StubInterface.Instance.StubClient.InspectUser(dc.Author, dc.ServerId);
     }
 
-    void DeclineApplyBtn(object sender, MouseButtonEventArgs e)
+    private void DeclineApplyBtn(object sender, MouseButtonEventArgs e)
     {
         var dc = (ApplyMessage)DataContext;
         if (dc.Handled) return;

@@ -22,7 +22,7 @@ public class ToolboxSniffer : ITeraSniffer
     /// </summary>
     public class ToolboxControlInterface
     {
-        readonly ToolboxHttpClient _client;
+        private readonly ToolboxHttpClient _client;
 
         public ToolboxControlInterface(string address)
         {
@@ -167,12 +167,12 @@ public class ToolboxSniffer : ITeraSniffer
 #if SERVER
         private readonly TcpListener _dataConnection;
 #else
-    TcpClient _dataConnection;
+    private TcpClient _dataConnection;
 #endif
     public readonly ToolboxControlInterface ControlConnection;
-    readonly bool _failed;
-    bool _enabled;
-    bool _connected;
+    private readonly bool _failed;
+    private bool _enabled;
+    private bool _connected;
 
     public bool Enabled
     {
@@ -288,7 +288,7 @@ public class ToolboxSniffer : ITeraSniffer
             }
         }
 #else
-    async Task ReceiveAsync()
+    private async Task ReceiveAsync()
     {
         if (_failed) return;
         while (Enabled)

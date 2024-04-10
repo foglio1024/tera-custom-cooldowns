@@ -10,18 +10,18 @@ namespace TCC.UI;
 
 public sealed class KeyboardHook : IDisposable
 {
-    static KeyboardHook? _instance;
+    private static KeyboardHook? _instance;
     public static KeyboardHook Instance => _instance ??= new KeyboardHook();
 
-    readonly Window _window;
-    readonly Dictionary<HotKey, Action> _callbacks;
-    int _currentId;
-    bool _isRegistered;
-    bool _isInitialized;
+    private readonly Window _window;
+    private readonly Dictionary<HotKey, Action> _callbacks;
+    private int _currentId;
+    private bool _isRegistered;
+    private bool _isInitialized;
 
     public event Action<HotKey>? KeyPressed;
 
-    KeyboardHook()
+    private KeyboardHook()
     {
         _callbacks = new Dictionary<HotKey, Action>();
         _window = new Window();
@@ -72,7 +72,7 @@ public sealed class KeyboardHook : IDisposable
         BeginCheckEnable();
     }
 
-    void CheckEnable(bool value)
+    private void CheckEnable(bool value)
     {
         if (value && !_isRegistered)
         {
@@ -84,21 +84,21 @@ public sealed class KeyboardHook : IDisposable
         ClearHotkeys();
     }
 
-    void BeginCheckEnable()
+    private void BeginCheckEnable()
     {
         App.BaseDispatcher.InvokeAsync(
             () => { CheckEnable(!Game.InGameChatOpen && FocusManager.IsForeground); },
             DispatcherPriority.Background);
     }
 
-    void RegisterHotkeys()
+    private void RegisterHotkeys()
     {
         //Console.WriteLine("RegisterHotkeys()");
         _callbacks.Keys.ToList().ForEach(RegisterHotKey);
         _isRegistered = true;
     }
 
-    void RegisterHotKey(ModifierKeys modifier, Keys key)
+    private void RegisterHotKey(ModifierKeys modifier, Keys key)
     {
         if (key == Keys.None) return; //allow disable hotkeys using "None" key
         // increment the counter.
@@ -108,12 +108,12 @@ public sealed class KeyboardHook : IDisposable
         User32.RegisterHotKey(_window.Handle, _currentId, (uint)modifier, (uint)key);
     }
 
-    void RegisterHotKey(HotKey hk)
+    private void RegisterHotKey(HotKey hk)
     {
         RegisterHotKey(hk.Modifier, hk.Key);
     }
 
-    void OnKeyPressed(HotKey hk)
+    private void OnKeyPressed(HotKey hk)
     {
         if (!_callbacks.TryGetValue(hk, out var cb)) return;
         Console.WriteLine($"Executing callback for {hk}");
@@ -127,9 +127,9 @@ public sealed class KeyboardHook : IDisposable
     /// <summary>
     ///     Represents the window that is used internally to get the messages.
     /// </summary>
-    sealed class Window : NativeWindow, IDisposable
+    private sealed class Window : NativeWindow, IDisposable
     {
-        const int WmHotkey = 0x0312;
+        private const int WmHotkey = 0x0312;
 
         public Window()
         {
@@ -180,7 +180,7 @@ public sealed class KeyboardHook : IDisposable
         _window.Dispose();
     }
 
-    void ClearHotkeys()
+    private void ClearHotkeys()
     {
         //Console.WriteLine("ClearHotkeys()");
 

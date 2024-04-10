@@ -13,12 +13,12 @@ namespace TCC.UI;
 
 public static class FocusManager
 {
-    static bool _isForeground;
-    static bool _forceFocused;
-    static bool _disposed;
-    static readonly object _lock = new();
-    static Screen? _teraScreen;
-    static Timer? _focusTimer;
+    private static bool _isForeground;
+    private static bool _forceFocused;
+    private static bool _disposed;
+    private static readonly object _lock = new();
+    private static Screen? _teraScreen;
+    private static Timer? _focusTimer;
 
     // events
     public static event Action<Point, Point, Size>? TeraScreenChanged;
@@ -45,7 +45,7 @@ public static class FocusManager
         }
     }
 
-    static bool IsActive
+    private static bool IsActive
     {
         get
         {
@@ -56,7 +56,7 @@ public static class FocusManager
         }
     }
 
-    static int _pausedCount;
+    private static int _pausedCount;
     public static bool PauseTopmost
     {
         get => _pausedCount > 0;
@@ -69,9 +69,9 @@ public static class FocusManager
         }
     }
 
-    static IntPtr TeraWindow => User32.FindWindow("LaunchUnrealUWindowsClient", "TERA");
-    static IntPtr MeterWindow => User32.FindWindow("Shinra Meter", null!); // todo: fix in Nostrum
-    static IntPtr ForegroundWindow => User32.GetForegroundWindow();
+    private static IntPtr TeraWindow => User32.FindWindow("LaunchUnrealUWindowsClient", "TERA");
+    private static IntPtr MeterWindow => User32.FindWindow("Shinra Meter", null!); // todo: fix in Nostrum
+    private static IntPtr ForegroundWindow => User32.GetForegroundWindow();
 
     public static Screen TeraScreen
     {
@@ -167,7 +167,7 @@ public static class FocusManager
         User32.SetForegroundWindow(TeraWindow);
     }
 
-    static void CheckForegroundWindow(object? sender, ElapsedEventArgs e)
+    private static void CheckForegroundWindow(object? sender, ElapsedEventArgs e)
     {
         if (_disposed) return;
         if (!PauseTopmost) FocusTick?.Invoke();

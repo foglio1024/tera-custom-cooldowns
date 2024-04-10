@@ -22,7 +22,7 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
     public Counter EdgeCounter { get; set; } = new(10, true);
     public StanceTracker<WarriorStance> StanceTracker { get; } = new();
 
-    bool _warningStance;
+    private bool _warningStance;
 
     public bool WarningStance
     {
@@ -100,7 +100,7 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
         return false;
     }
 
-    void CheckStanceWarning()
+    private void CheckStanceWarning()
     {
         WarningStance = StanceTracker.CurrentStance == WarriorStance.None && Game.Combat;
     }
@@ -137,7 +137,7 @@ public class WarriorLayoutViewModel : BaseClassLayoutViewModel
         CheckStanceWarning();
     }
 
-    void OnDeath()
+    private void OnDeath()
     {
         DeadlyGamble.StopEffect();
     }

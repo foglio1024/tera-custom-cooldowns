@@ -33,12 +33,12 @@ public partial class AbnormalityToolTipControl
         Unloaded -= OnLoaded;
     }
 
-    void ParseToolTip(string t)
+    private void ParseToolTip(string t)
     {
         new TooltipParser(t).Parse().ForEach(ToolTipTb.Inlines.Add);
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         ToolTipTb.Text = "";
         ToolTipTb.FontSize = 11;

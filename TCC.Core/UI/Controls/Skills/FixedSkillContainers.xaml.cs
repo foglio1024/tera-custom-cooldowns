@@ -26,12 +26,12 @@ namespace TCC.UI.Controls.Skills;
 //TODO: refactor this
 public partial class FixedSkillContainers 
 {
-    object[] _mainOrder = Array.Empty<object>();
-    object[] _secondaryOrder = Array.Empty<object>();
-    readonly DoubleAnimation _opacityUp;
-    readonly DoubleAnimation _opacityDown;
-    static readonly Action EmptyDelegate = delegate { };
-    CooldownWindowViewModel? VM { get; set; }
+    private object[] _mainOrder = Array.Empty<object>();
+    private object[] _secondaryOrder = Array.Empty<object>();
+    private readonly DoubleAnimation _opacityUp;
+    private readonly DoubleAnimation _opacityDown;
+    private static readonly Action EmptyDelegate = delegate { };
+    private CooldownWindowViewModel? VM { get; set; }
 
     public SkillDropHandler DropHandler { get; private set; }
 
@@ -49,7 +49,7 @@ public partial class FixedSkillContainers
         Unloaded += OnUnloaded;
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         VM = (CooldownWindowViewModel?)Window.GetWindow(this)?.DataContext;
         if (VM == null) return;
@@ -62,12 +62,12 @@ public partial class FixedSkillContainers
         SettingsWindowViewModel.SkillShapeChanged += OnSkillShapeChanged;
     }
 
-    void OtherSkills_CollectionChanged(object? _, NotifyCollectionChangedEventArgs __)
+    private void OtherSkills_CollectionChanged(object? _, NotifyCollectionChangedEventArgs __)
     {
         SetSeparatorVisibility();
     }
 
-    void SetSeparatorVisibility()
+    private void SetSeparatorVisibility()
     {
         Dispatcher?.InvokeIfRequired(() =>
         {
@@ -75,7 +75,7 @@ public partial class FixedSkillContainers
         }, DispatcherPriority.DataBind);
     }
 
-    void OnUnloaded(object _, RoutedEventArgs __)
+    private void OnUnloaded(object _, RoutedEventArgs __)
     {
         SettingsWindowViewModel.AbnormalityShapeChanged -= OnSkillShapeChanged;
         Loaded -= OnLoaded;
@@ -89,7 +89,7 @@ public partial class FixedSkillContainers
         VM.SkillsLoaded -= OnSkillsLoaded;
     }
 
-    void OnSkillsLoaded()
+    private void OnSkillsLoaded()
     {
         //really absurd way of fixing order issue
         if (VM == null) return;
@@ -100,7 +100,7 @@ public partial class FixedSkillContainers
         });
     }
 
-    void ReorderSkillContainer(ItemsControl container, IEnumerable<Cooldown> collection)
+    private void ReorderSkillContainer(ItemsControl container, IEnumerable<Cooldown> collection)
     {
         var positions = new Dictionary<int, double>(); //index, X
         for (var i = 0; i < container.Items.Count; i++)
@@ -124,14 +124,14 @@ public partial class FixedSkillContainers
         container.ItemsSource = collection;
     }
 
-    void MainSkills_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void MainSkills_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.Action != NotifyCollectionChangedAction.Remove) return;
         RefreshMeasure(MainSkills);
         VM?.SaveConfig();
     }
 
-    void SecondarySkills_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void SecondarySkills_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.Action != NotifyCollectionChangedAction.Remove) return;
         RefreshMeasure(SecSkills);
@@ -139,11 +139,11 @@ public partial class FixedSkillContainers
         SetSeparatorVisibility();
     }
 
-    void ItemDragStarted(object? sender, DragablzDragStartedEventArgs e)
+    private void ItemDragStarted(object? sender, DragablzDragStartedEventArgs e)
     {
     }
 
-    void ItemDragCompleted(object? sender, DragablzDragCompletedEventArgs e)
+    private void ItemDragCompleted(object? sender, DragablzDragCompletedEventArgs e)
     {
         var cd = (Cooldown)e.DragablzItem.DataContext;
         if (VM == null) return;
@@ -158,7 +158,7 @@ public partial class FixedSkillContainers
         VM.SaveConfig();
     }
 
-    void Reorder(ObservableCollection<Cooldown> list, object[] order)
+    private void Reorder(ObservableCollection<Cooldown> list, object[] order)
     {
         for (var j = 0; j < list.Count; j++)
         {
@@ -167,35 +167,35 @@ public partial class FixedSkillContainers
         }
     }
 
-    void MainSkillOrderChanged(object sender, OrderChangedEventArgs e)
+    private void MainSkillOrderChanged(object sender, OrderChangedEventArgs e)
     {
         _mainOrder = e.NewOrder;
     }
 
-    void SecondarySkillOrderChanged(object sender, OrderChangedEventArgs e)
+    private void SecondarySkillOrderChanged(object sender, OrderChangedEventArgs e)
     {
         _secondaryOrder = e.NewOrder;
     }
 
-    void MainSkillsGrid_MouseEnter(object sender, MouseEventArgs e)
+    private void MainSkillsGrid_MouseEnter(object sender, MouseEventArgs e)
     {
         AnimateSettingsButton(true);
     }
 
-    void MainSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
+    private void MainSkillsGrid_MouseLeave(object sender, MouseEventArgs e)
     {
         AnimateSettingsButton(false);
         OnSkillsLoaded();
     }
 
-    void FixedSkillContainers_OnDragOver(object sender, DragEventArgs e)
+    private void FixedSkillContainers_OnDragOver(object sender, DragEventArgs e)
     {
         if (SecSkills.ActualWidth != 0) return;
         SecSkills.MinWidth = 59;
         //VM.IsDragging = true;
     }
 
-    void FixedSkillContainers_OnDragLeave(object sender, DragEventArgs e)
+    private void FixedSkillContainers_OnDragLeave(object sender, DragEventArgs e)
     {
         //Task.Delay(500).ContinueWith(t =>
         //{
@@ -209,18 +209,18 @@ public partial class FixedSkillContainers
         SecSkills.MinWidth = 0;
     }
 
-    void MainSkills_OnDrop(object sender, DragEventArgs e)
+    private void MainSkills_OnDrop(object sender, DragEventArgs e)
     {
         MainSkills.InvalidateArrange();
         RefreshMeasure(MainSkills);
     }
 
-    void OpenCooldownSettings(object sender, RoutedEventArgs e)
+    private void OpenCooldownSettings(object sender, RoutedEventArgs e)
     {
         VM?.OnShowSkillConfigHotkeyPressed();
     }
 
-    void OnSkillShapeChanged()
+    private void OnSkillShapeChanged()
     {
         OtherSkills.RefreshTemplate("NormalSkillTemplateSelector");
         ItemSkills.RefreshTemplate("NormalSkillTemplateSelector");
@@ -230,7 +230,7 @@ public partial class FixedSkillContainers
         RefreshControlTemplate(SecSkills);
     }
 
-    void RefreshControlTemplate(ItemsControl ic)
+    private void RefreshControlTemplate(ItemsControl ic)
     {
         Dispatcher?.InvokeAsync(() =>
         {
@@ -241,13 +241,13 @@ public partial class FixedSkillContainers
         }, DispatcherPriority.Background);
     }
 
-    static void RefreshMeasure(UIElement ic)
+    private static void RefreshMeasure(UIElement ic)
     {
         ic.InvalidateMeasure();
         ic.Dispatcher?.Invoke(DispatcherPriority.Render, EmptyDelegate);
     }
 
-    void AnimateSettingsButton(bool open)
+    private void AnimateSettingsButton(bool open)
     {
         SettingsButton.BeginAnimation(OpacityProperty, open ? _opacityUp : _opacityDown);
     }

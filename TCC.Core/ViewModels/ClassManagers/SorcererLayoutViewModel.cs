@@ -8,8 +8,8 @@ namespace TCC.ViewModels.ClassManagers;
 
 public class SorcererLayoutViewModel : BaseClassLayoutViewModel
 {
-    readonly Stopwatch _sw;
-    long _latestCooldown;
+    private readonly Stopwatch _sw;
+    private long _latestCooldown;
 
     public SkillWithEffect ManaBoost { get; set; }
 
@@ -20,7 +20,7 @@ public class SorcererLayoutViewModel : BaseClassLayoutViewModel
     public Skill FusionSkill { get; set; }
     public Skill FusionSkillBoost { get; set; }
 
-    Skill CurrentFusionSkill
+    private Skill CurrentFusionSkill
     {
         get
         {
@@ -73,7 +73,7 @@ public class SorcererLayoutViewModel : BaseClassLayoutViewModel
 
     }
 
-    void OnBoostChanged(FusionElements elements)
+    private void OnBoostChanged(FusionElements elements)
     {
         Boosts = elements;
     }

@@ -8,9 +8,9 @@ namespace TCC.UI.Controls.Chat;
 
 public class MoongourdPopupViewModel : ThreadSafeObservableObject
 {
-    readonly IMoongourdManager _manager;
+    private readonly IMoongourdManager _manager;
 
-    string _playerName = "";
+    private string _playerName = "";
 
     public string PlayerName
     {
@@ -18,7 +18,7 @@ public class MoongourdPopupViewModel : ThreadSafeObservableObject
         set => RaiseAndSetIfChanged(value, ref _playerName);
     }
 
-    string _emptyText = "No data.";
+    private string _emptyText = "No data.";
 
     public string EmptyText
     {
@@ -38,12 +38,12 @@ public class MoongourdPopupViewModel : ThreadSafeObservableObject
         _manager.Failed += OnSearchFailed;
     }
 
-    void OnSearchStarted()
+    private void OnSearchStarted()
     {
         _dispatcher.Invoke(() => EmptyText = "Loading...");
     }
 
-    void OnSearchFinished(List<IMoongourdEncounter> list)
+    private void OnSearchFinished(List<IMoongourdEncounter> list)
     {
         _dispatcher.Invoke(() =>
         {
@@ -53,7 +53,7 @@ public class MoongourdPopupViewModel : ThreadSafeObservableObject
         });
     }
 
-    void OnSearchFailed(string error)
+    private void OnSearchFailed(string error)
     {
         _dispatcher.Invoke(() =>
         {

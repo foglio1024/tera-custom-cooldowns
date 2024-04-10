@@ -8,7 +8,7 @@ namespace TCC.UI.Windows.Widgets;
 /// </summary>
 public partial class CivilUnrestWindow 
 {
-    readonly CivilUnrestViewModel _vm;
+    private readonly CivilUnrestViewModel _vm;
     
 
     public CivilUnrestWindow(CivilUnrestViewModel vm)
@@ -22,7 +22,7 @@ public partial class CivilUnrestWindow
         Init(App.Settings.CivilUnrestWindowSettings);
     }
 
-    void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+    private void OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         _vm.CopyToClipboard();
     }

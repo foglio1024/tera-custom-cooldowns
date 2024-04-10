@@ -6,9 +6,9 @@ namespace TeraPacketParser.TeraCommon.Sniffing;
 
 public class MessageSplitter
 {
-    readonly BlockSplitter _clientSplitter = new();
-    readonly BlockSplitter _serverSplitter = new();
-    DateTime _time;
+    private readonly BlockSplitter _clientSplitter = new();
+    private readonly BlockSplitter _serverSplitter = new();
+    private DateTime _time;
 
     public MessageSplitter()
     {
@@ -21,12 +21,12 @@ public class MessageSplitter
     public event Action<Message>? MessageReceived;
     public event Action<MessageDirection, int, int>? Resync;
 
-    void ClientResync(int skipped, int size)
+    private void ClientResync(int skipped, int size)
     {
         OnResync(MessageDirection.ClientToServer, skipped, size);
     }
 
-    void ServerResync(int skipped, int size)
+    private void ServerResync(int skipped, int size)
     {
         OnResync(MessageDirection.ServerToClient, skipped, size);
     }
@@ -37,12 +37,12 @@ public class MessageSplitter
         handler?.Invoke(direction,skipped,size);
     }
 
-    void ClientBlockFinished(byte[] block)
+    private void ClientBlockFinished(byte[] block)
     {
         OnMessageReceived(new Message(_time, MessageDirection.ClientToServer, new ArraySegment<byte>(block)));
     }
 
-    void ServerBlockFinished(byte[] block)
+    private void ServerBlockFinished(byte[] block)
     {
         OnMessageReceived(new Message(_time, MessageDirection.ServerToClient, new ArraySegment<byte>(block)));
     }

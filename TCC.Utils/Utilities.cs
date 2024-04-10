@@ -22,7 +22,7 @@ public static class Utilities
         _mainDispatcher = Dispatcher.CurrentDispatcher;
     }
 
-    static Dispatcher? _mainDispatcher;
+    private static Dispatcher? _mainDispatcher;
 
     public static Dispatcher GetMainDispatcher()
     {

@@ -7,8 +7,8 @@ namespace TCC.UI.Controls.Dashboard;
 
 public partial class EventControl
 {
-    readonly DoubleAnimation _scaleUp;
-    readonly DoubleAnimation _scaleDown;
+    private readonly DoubleAnimation _scaleUp;
+    private readonly DoubleAnimation _scaleDown;
 
     public EventControl()
     {
@@ -19,13 +19,13 @@ public partial class EventControl
         InitializeComponent();
     }
 
-    void UserControl_MouseEnter(object sender, MouseEventArgs e)
+    private void UserControl_MouseEnter(object sender, MouseEventArgs e)
     {
         Border.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _scaleUp);
         Border.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _scaleUp);
     }
 
-    void UserControl_MouseLeave(object sender, MouseEventArgs e)
+    private void UserControl_MouseLeave(object sender, MouseEventArgs e)
     {
         Border.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _scaleDown);
         Border.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, _scaleDown);

@@ -11,9 +11,9 @@ namespace TCC.UI.Windows;
 
 public class SplashScreenViewModel : ThreadSafeObservableObject
 {
-    int _progress;
-    bool _waiting;
-    string _bottomText = "Initializing...";
+    private int _progress;
+    private bool _waiting;
+    private string _bottomText = "Initializing...";
 
     public event Action? ProgressChangedEvent;
 

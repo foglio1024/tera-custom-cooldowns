@@ -12,9 +12,9 @@ public class SkillsDatabase : DatabaseBase
     protected override string FolderName => "skills";
     protected override string Extension => "tsv";
 
-    Dictionary<Class, Dictionary<uint, Skill>> Skills { get; } = [];
+    private Dictionary<Class, Dictionary<uint, Skill>> Skills { get; } = [];
 
-    static readonly Dictionary<Class, List<string>> IgnoredSkills = new()
+    private static readonly Dictionary<Class, List<string>> IgnoredSkills = new()
     {
         {
             Class.Archer,
@@ -154,7 +154,7 @@ public class SkillsDatabase : DatabaseBase
         return ret;
     }
 
-    static bool IsIgnoredSkill(Skill skill)
+    private static bool IsIgnoredSkill(Skill skill)
     {
         return IgnoredSkills[skill.Class].Any(x => x == skill.IconName);
     }

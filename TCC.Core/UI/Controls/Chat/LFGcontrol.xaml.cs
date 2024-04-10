@@ -15,7 +15,7 @@ namespace TCC.UI.Controls.Chat;
 //TODO: rework when?
 public partial class LfgControl
 {
-    Lfg? _dc;
+    private Lfg? _dc;
     public LfgControl()
     {
         InitializeComponent();
@@ -23,7 +23,7 @@ public partial class LfgControl
         Unloaded += OnUnloaded;
     }
 
-    void OnUnloaded(object sender, RoutedEventArgs e)
+    private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         Loaded -= OnLoaded;
         Unloaded -= OnUnloaded;
@@ -31,13 +31,13 @@ public partial class LfgControl
         _dc.PropertyChanged -= DC_PropertyChanged;
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         _dc = (Lfg)DataContext;
         _dc.PropertyChanged += DC_PropertyChanged;
     }
 
-    void DC_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void DC_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == "Refresh")
         {
@@ -46,7 +46,7 @@ public partial class LfgControl
         }
     }
 
-    void root_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void root_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (App.Settings.LfgWindowSettings.Enabled)
         {

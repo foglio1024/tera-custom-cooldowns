@@ -17,7 +17,7 @@ namespace TCC.Settings;
 /// </summary>
 public class JsonIgnoreResolver : DefaultContractResolver
 {
-    readonly Dictionary<Type, HashSet<string>> _ignores = new();
+    private readonly Dictionary<Type, HashSet<string>> _ignores = new();
 
     /// <summary>
     /// Explicitly ignore the given property(s) for the given type
@@ -41,7 +41,7 @@ public class JsonIgnoreResolver : DefaultContractResolver
     /// <param name="type"></param>
     /// <param name="propertyName"></param>
     /// <returns></returns>
-    bool IsIgnored(Type type, string propertyName)
+    private bool IsIgnored(Type type, string propertyName)
     {
         if (!_ignores.TryGetValue(type, out var props)) return false;
 

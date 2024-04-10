@@ -7,8 +7,8 @@ namespace TCC.Data;
 
 public class GuildInfo
 {
-    readonly object _lock = new object();
-    readonly ThreadSafeObservableCollection<GuildMemberData> _members = [];
+    private readonly object _lock = new object();
+    private readonly ThreadSafeObservableCollection<GuildMemberData> _members = [];
 
     public bool InGuild { get; private set; }
     public bool AmIMaster { get; private set; }

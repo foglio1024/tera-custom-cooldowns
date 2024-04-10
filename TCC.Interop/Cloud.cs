@@ -8,7 +8,8 @@ namespace TCC.Interop;
 
 public static class Cloud
 {
-    readonly record struct UsageStat(string Region,
+    // ReSharper disable NotAccessedPositionalProperty.Local
+    private readonly record struct UsageStat(string Region,
         uint ServerId,
         string ServerName,
         string ServerIp,

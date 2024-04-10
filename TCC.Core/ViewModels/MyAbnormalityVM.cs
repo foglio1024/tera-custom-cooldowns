@@ -17,8 +17,8 @@ namespace TCC.ViewModels;
 
 public class MyAbnormalityVM : ThreadSafeObservableObject   
 {
-    bool _special;
-    bool _hidden;
+    private bool _special;
+    private bool _hidden;
     public Abnormality Abnormality { get; }
     public ICommand SpecialCommand { get; }
     public ICommand HiddenCommand { get; }

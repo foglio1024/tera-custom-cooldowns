@@ -8,10 +8,10 @@ namespace TCC.Data.Abnormalities;
 
 public class GunnerAbnormalityTracker : AbnormalityTracker
 {
-    const uint DashingReloadId = 10152354;
-    static readonly List<uint> LaserTargetingIDs = [10152340];
-    readonly Skill _dashingReload;
-    readonly Skill _rollingReload;
+    private const uint DashingReloadId = 10152354;
+    private static readonly List<uint> LaserTargetingIDs = [10152340];
+    private readonly Skill _dashingReload;
+    private readonly Skill _rollingReload;
 
     public GunnerAbnormalityTracker()
     {
@@ -44,7 +44,7 @@ public class GunnerAbnormalityTracker : AbnormalityTracker
         CheckLaserTargetingEnd(p);
     }
 
-    void CheckDashingReloadBegin(S_ABNORMALITY_BEGIN p)
+    private void CheckDashingReloadBegin(S_ABNORMALITY_BEGIN p)
     {
         if (p.AbnormalityId != DashingReloadId) return;
 
@@ -53,7 +53,7 @@ public class GunnerAbnormalityTracker : AbnormalityTracker
         StartPrecooldown(_rollingReload, p.Duration);
     }
 
-    static void CheckLaserTargetingBegin(S_ABNORMALITY_BEGIN p)
+    private static void CheckLaserTargetingBegin(S_ABNORMALITY_BEGIN p)
     {
         if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<GunnerLayoutViewModel>(out var vm)) return;
@@ -61,7 +61,7 @@ public class GunnerAbnormalityTracker : AbnormalityTracker
         vm.ModularSystem.StartEffect(p.Duration);
     }
 
-    static void CheckLaserTargetingRefresh(S_ABNORMALITY_REFRESH p)
+    private static void CheckLaserTargetingRefresh(S_ABNORMALITY_REFRESH p)
     {
         if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<GunnerLayoutViewModel>(out var vm)) return;
@@ -69,7 +69,7 @@ public class GunnerAbnormalityTracker : AbnormalityTracker
         vm.ModularSystem.RefreshEffect(p.Duration);
     }
 
-    static void CheckLaserTargetingEnd(S_ABNORMALITY_END p)
+    private static void CheckLaserTargetingEnd(S_ABNORMALITY_END p)
     {
         if (!LaserTargetingIDs.Contains(p.AbnormalityId)) return;
         if (!TryGetClassViewModel<GunnerLayoutViewModel>(out var vm)) return;

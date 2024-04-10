@@ -10,7 +10,7 @@ namespace TCC.Interop.Proxy;
 /// </summary>
 public class StubClient
 {
-    ToolboxHttpClient TccStub { get; }
+    private ToolboxHttpClient TccStub { get; }
 
     public StubClient()
     {

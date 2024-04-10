@@ -5,12 +5,12 @@ namespace TCC.ViewModels;
 
 public class DailyEvent : ThreadSafeObservableObject
 {
-    DateTime Start { get; set; }
-    TimeSpan Duration { get; set; }
-    readonly TimeSpan _realDuration;
+    private DateTime Start { get; set; }
+    private TimeSpan Duration { get; set; }
+    private readonly TimeSpan _realDuration;
     public double StartFactor => 60 * (Start.Hour * 60 + Start.Minute) / GameEventManager.SecondsInDay;
     public double DurationFactor => Duration.TotalSeconds / GameEventManager.SecondsInDay;
-    bool _happened;
+    private bool _happened;
     public bool IsClose
     {
         get

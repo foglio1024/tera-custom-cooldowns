@@ -17,17 +17,17 @@ public class TeraSniffer : ITeraSniffer
     // Only take this lock in callbacks from tcp sniffing, not in code that can be called by the user.
     // Otherwise this could cause a deadlock if the user calls such a method from a callback that already holds a lock
     //private readonly object _eventLock = new object();
-    readonly IpSniffer _ipSniffer;
+    private readonly IpSniffer _ipSniffer;
 
-    readonly ConcurrentDictionary<TcpConnection, byte> _isNew = new();
+    private readonly ConcurrentDictionary<TcpConnection, byte> _isNew = new();
 
-    readonly Dictionary<string, Server> _serversByIp;
-    TcpConnection? _clientToServer;
-    ConnectionDecrypter? _decrypter;
-    MessageSplitter? _messageSplitter;
-    TcpConnection? _serverToClient;
+    private readonly Dictionary<string, Server> _serversByIp;
+    private TcpConnection? _clientToServer;
+    private ConnectionDecrypter? _decrypter;
+    private MessageSplitter? _messageSplitter;
+    private TcpConnection? _serverToClient;
     public int ClientProxyOverhead;
-    bool _connected;
+    private bool _connected;
 
     public bool Connected
     {
@@ -105,7 +105,7 @@ public class TeraSniffer : ITeraSniffer
     }
 
 
-    void HandleEndConnection(TcpConnection? connection)
+    private void HandleEndConnection(TcpConnection? connection)
     {
         if (connection == _clientToServer || connection == _serverToClient)
         {
@@ -119,7 +119,7 @@ public class TeraSniffer : ITeraSniffer
     }
 
     // called from the tcp sniffer, so it needs to lock
-    void HandleNewConnection(TcpConnection? connection)
+    private void HandleNewConnection(TcpConnection? connection)
     {
         {
             if (Connected || !_serversByIp.ContainsKey(connection!.Destination.Address.ToString()) &&
@@ -130,7 +130,7 @@ public class TeraSniffer : ITeraSniffer
     }
 
     // called from the tcp sniffer, so it needs to lock
-    void HandleTcpDataReceived(TcpConnection connection, byte[] data, int needToSkip)
+    private void HandleTcpDataReceived(TcpConnection connection, byte[] data, int needToSkip)
     {
         {
             if (data.Length == 0)
@@ -182,25 +182,25 @@ public class TeraSniffer : ITeraSniffer
         }
     }
 
-    void OnResync(MessageDirection direction, int skipped, int size)
+    private void OnResync(MessageDirection direction, int skipped, int size)
     {
         //Log.F("Resync occured " + direction + ", skipped:" + skipped + ", block size:" + size);
     }
 
     // called indirectly from HandleTcpDataReceived, so the current thread already holds the lock
-    void HandleMessageReceived(Message message)
+    private void HandleMessageReceived(Message message)
     {
         OnMessageReceived(message);
     }
 
     // called indirectly from HandleTcpDataReceived, so the current thread already holds the lock
-    void HandleServerToClientDecrypted(byte[] data)
+    private void HandleServerToClientDecrypted(byte[] data)
     {
         _messageSplitter?.ServerToClient(DateTime.UtcNow, data);
     }
 
     // called indirectly from HandleTcpDataReceived, so the current thread already holds the lock
-    void HandleClientToServerDecrypted(byte[] data)
+    private void HandleClientToServerDecrypted(byte[] data)
     {
         _messageSplitter?.ClientToServer(DateTime.UtcNow, data);
     }

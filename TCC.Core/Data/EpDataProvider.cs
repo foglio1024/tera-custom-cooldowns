@@ -7,7 +7,7 @@ public static class EpDataProvider
     public static float ManaBarrierMult = 1;
 
     // just keep this here, since it's the only perk we need
-    static readonly Dictionary<uint, float> ManaBarrierAmplification = new()
+    private static readonly Dictionary<uint, float> ManaBarrierAmplification = new()
     {
         { 0,  1.00f },
         { 1,  1.11f },

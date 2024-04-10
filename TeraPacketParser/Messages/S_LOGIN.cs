@@ -4,35 +4,35 @@ namespace TeraPacketParser.Messages;
 
 public class S_LOGIN : ParsedMessage
 {
-    short NameOffset { get; }
+    private short NameOffset { get; }
     public ulong EntityId { get; }
     public uint ServerId { get; }
     public uint PlayerId { get; }
     public short Level { get; }
-    uint Model { get; }
+    private uint Model { get; }
     // ReSharper disable UnusedAutoPropertyAccessor.Local
-    ulong Appearance { get; }
-    long RestCurr { get; }
-    long RestMax { get; }
-    int Weap { get; }
-    int Chest { get; }
-    int Gloves { get; }
-    int Boots { get; }
-    int InnerWear { get; }
-    int Head { get; }
-    int Face { get; }
-    int Title { get; }
-    int WeapMod { get; }
-    int ChestMod { get; }
-    int GlovesMod { get; }
-    int BootsMod { get; }
-    int WeapEnch { get; }
-    int HairAdorn { get; }
-    int Mask { get; }
-    int Back { get; }
-    int WeapSkin { get; }
+    private ulong Appearance { get; }
+    private long RestCurr { get; }
+    private long RestMax { get; }
+    private int Weap { get; }
+    private int Chest { get; }
+    private int Gloves { get; }
+    private int Boots { get; }
+    private int InnerWear { get; }
+    private int Head { get; }
+    private int Face { get; }
+    private int Title { get; }
+    private int WeapMod { get; }
+    private int ChestMod { get; }
+    private int GlovesMod { get; }
+    private int BootsMod { get; }
+    private int WeapEnch { get; }
+    private int HairAdorn { get; }
+    private int Mask { get; }
+    private int Back { get; }
+    private int WeapSkin { get; }
 
-    int Costume { get; }
+    private int Costume { get; }
     // ReSharper restore UnusedAutoPropertyAccessor.Local
     public string Name { get; }
 

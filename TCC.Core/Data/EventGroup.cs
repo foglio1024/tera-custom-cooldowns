@@ -8,8 +8,8 @@ namespace TCC.Data;
 
 public class EventGroup : ThreadSafeObservableObject
 {
-    readonly DateTime _start;
-    readonly DateTime _end;
+    private readonly DateTime _start;
+    private readonly DateTime _end;
 
     public string Name { get; }
     public bool RemoteCheck { get; }

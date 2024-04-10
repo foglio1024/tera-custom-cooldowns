@@ -86,7 +86,7 @@ public static class ExceptionReportBuilder
         return ret;
     }
 
-    static JObject BuildInnerExceptionJObject(Exception ex)
+    private static JObject BuildInnerExceptionJObject(Exception ex)
     {
         var ret = new JObject
         {
@@ -101,7 +101,7 @@ public static class ExceptionReportBuilder
         return ret;
     }
 
-    static string GetStackTraceClrmd(ClrThread runtimeThread)
+    private static string GetStackTraceClrmd(ClrThread runtimeThread)
     {
         var sb = new StringBuilder();
         foreach (var frame in runtimeThread.EnumerateStackTrace())
@@ -113,7 +113,7 @@ public static class ExceptionReportBuilder
         return sb.ToString();
     }
 
-    static JArray GetThreadTraces()
+    private static JArray GetThreadTraces()
     {
         using var dataTarget = DataTarget.CreateSnapshotAndAttach(Process.GetCurrentProcess().Id);
 
@@ -141,7 +141,7 @@ public static class ExceptionReportBuilder
         return ret;
     }
 
-    static JValue BuildExceptionMessage(Exception ex)
+    private static JValue BuildExceptionMessage(Exception ex)
     {
         if (ex is Win32Exception w32ex)
         {

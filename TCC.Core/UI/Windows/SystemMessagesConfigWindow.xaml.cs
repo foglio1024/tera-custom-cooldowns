@@ -64,18 +64,18 @@ public partial class SystemMessagesConfigWindow
                              ?? throw new Exception("Failed to create LiveCollectionView");
     }
 
-    void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
+    private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
     {
         DragMove();
 
     }
 
-    void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
     //TODO: use commands
-    void ExcludeMessage(object sender, RoutedEventArgs e)
+    private void ExcludeMessage(object sender, RoutedEventArgs e)
     {
         var msgVm = (SystemMessageViewModel) ((FrameworkElement) sender).DataContext;
         if (HiddenMessages.Any(x => x.Opcode == msgVm?.Opcode)) return;
@@ -83,7 +83,7 @@ public partial class SystemMessagesConfigWindow
         ShowedMessages.Remove(msgVm);
     }
 
-    void RestoreMessage(object sender, RoutedEventArgs e)
+    private void RestoreMessage(object sender, RoutedEventArgs e)
     {
         var msgVm = (SystemMessageViewModel) ((FrameworkElement) sender).DataContext;
         if (HiddenMessages.All(x => x.Opcode != msgVm?.Opcode)) return;
@@ -91,7 +91,7 @@ public partial class SystemMessagesConfigWindow
         HiddenMessages.Remove(msgVm);
     }
 
-    void FilterShowedMessages(object sender, TextChangedEventArgs e)
+    private void FilterShowedMessages(object sender, TextChangedEventArgs e)
     {
         var view = (ICollectionView)ShowedMessagesView;
         view.Filter = o =>
@@ -103,7 +103,7 @@ public partial class SystemMessagesConfigWindow
 
     }
 
-    void FilterHiddenMessages(object sender, TextChangedEventArgs e)
+    private void FilterHiddenMessages(object sender, TextChangedEventArgs e)
     {
         var view = (ICollectionView)HiddenMessagesView;
         view.Filter = o =>

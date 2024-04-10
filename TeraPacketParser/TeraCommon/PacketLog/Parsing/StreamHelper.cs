@@ -7,7 +7,7 @@ namespace TeraPacketParser.TeraCommon.PacketLog.Parsing;
 
 internal static class StreamHelper
 {
-    static void ReadBytes(Stream stream, byte[] buffer, int offset, int count)
+    private static void ReadBytes(Stream stream, byte[] buffer, int offset, int count)
     {
         while (count > 0)
         {

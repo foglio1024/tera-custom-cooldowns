@@ -16,8 +16,8 @@ namespace TCC.UI.Windows.Widgets;
 [UsedImplicitly]
 public class NotificationAreaViewModel : TccWindowViewModel
 {
-    static int _id;
-    readonly ConcurrentQueue<NotificationInfoBase> _queue;
+    private static int _id;
+    private readonly ConcurrentQueue<NotificationInfoBase> _queue;
     public ThreadSafeObservableCollection<NotificationInfoBase> Notifications { get; }
 
     public NotificationAreaViewModel(WindowSettingsBase settings) : base(settings)
@@ -33,7 +33,7 @@ public class NotificationAreaViewModel : TccWindowViewModel
         PacketAnalyzer.Sniffer.NewConnection += OnNewConnection;
     }
 
-    void OnNewConnection(Server srv)
+    private void OnNewConnection(Server srv)
     {
         Enqueue("TCC", SR.ConnectedToServer(srv.Name), NotificationType.Success,
             template: NotificationTemplate.Progress,
@@ -51,7 +51,7 @@ public class NotificationAreaViewModel : TccWindowViewModel
         //Log.N("TCC", SR.ConnectedToServer(srv.Name), NotificationType.Success, forcedId: 10241024);
     }
 
-    void OnLoginArbiter(C_LOGIN_ARBITER obj)
+    private void OnLoginArbiter(C_LOGIN_ARBITER obj)
     {
         var notif = GetNotification<ProgressNotificationInfo>(10241024);
         if (notif == null) return;
@@ -59,7 +59,7 @@ public class NotificationAreaViewModel : TccWindowViewModel
         notif.Dispose(3000);
     }
 
-    void CheckShow()
+    private void CheckShow()
     {
         _dispatcher.Invoke(() =>
         {
@@ -73,12 +73,12 @@ public class NotificationAreaViewModel : TccWindowViewModel
         });
     }
 
-    bool Pass(NotificationInfoBase infoBase)
+    private bool Pass(NotificationInfoBase infoBase)
     {
         return Notifications.ToSyncList().All(n => n.Message != infoBase.Message);
     }
 
-    int Enqueue(string title, string message, NotificationType type, int secDuration = -1, NotificationTemplate template = NotificationTemplate.Default, int forcedId = -1)
+    private int Enqueue(string title, string message, NotificationType type, int secDuration = -1, NotificationTemplate template = NotificationTemplate.Default, int forcedId = -1)
     {
         _dispatcher.Invoke(() =>
         {

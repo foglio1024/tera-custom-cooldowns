@@ -20,8 +20,8 @@ public class RpcServer
     public event Action<Response>? ResponseReceived;
     public event Action<Request>? RequestReceived;
 
-    readonly HttpListener _server;
-    bool _listening;
+    private readonly HttpListener _server;
+    private bool _listening;
     public RpcServer()
     {
         _server = new HttpListener { Prefixes = { "http://127.0.0.51:9551/" } };
@@ -48,7 +48,7 @@ public class RpcServer
         _listening = false;
     }
 
-    void Listen()
+    private void Listen()
     {
         while (_listening)
         {
@@ -90,9 +90,9 @@ public class RpcServer2
     public event Action<Request>? RequestReceived;
     public event Action<bool>? ConnectionChanged;
 
-    TcpClient _socket;
-    bool _listening;
-    bool _connected;
+    private TcpClient _socket;
+    private bool _listening;
+    private bool _connected;
 
     public bool Connected
     {
@@ -130,7 +130,7 @@ public class RpcServer2
         _listening = false;
     }
 
-    async Task Listen()
+    private async Task Listen()
     {
         _socket = new TcpClient();
 

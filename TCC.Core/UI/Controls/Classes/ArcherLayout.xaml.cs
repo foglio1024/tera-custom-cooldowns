@@ -9,9 +9,9 @@ namespace TCC.UI.Controls.Classes;
 
 public partial class ArcherLayout
 {
-    ArcherLayoutViewModel? _context;
-    readonly DoubleAnimation _an;
-    readonly DoubleAnimation _an2;
+    private ArcherLayoutViewModel? _context;
+    private readonly DoubleAnimation _an;
+    private readonly DoubleAnimation _an2;
 
     public ArcherLayout()
     {
@@ -20,7 +20,7 @@ public partial class ArcherLayout
         InitializeComponent();
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         _context = (ArcherLayoutViewModel)DataContext;
         _context.Focus.EmpoweredBuffStarted += OnFocusXStarted;
@@ -28,7 +28,7 @@ public partial class ArcherLayout
     }
 
 
-    void OnStacksChanged(int stacks)
+    private void OnStacksChanged(int stacks)
     {
         Dispatcher?.InvokeAsync(() =>
         {
@@ -39,7 +39,7 @@ public partial class ArcherLayout
 
     }
 
-    void OnFocusXStarted(long duration)
+    private void OnFocusXStarted(long duration)
     {
         Dispatcher?.Invoke(() =>
         {

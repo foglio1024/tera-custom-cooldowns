@@ -17,20 +17,20 @@ public class Npc : ThreadSafeObservableObject, IDisposable
     public event Action<double>? HpFactorChanged;
     public event Action? DeleteEvent;
 
-    string _name = "";
-    bool _enraged;
-    double _maxHP;
-    double _currentHP;
-    uint _maxShield;
-    double _currentShield;
-    bool _visible;
-    ulong _target;
-    bool _isSelected = true;
-    int _remainingEnrageTime;
-    bool _isBoss;
-    double _hPFactor;
-    double _currentPercentage;
-    AggroCircle _currentAggroType = AggroCircle.None;
+    private string _name = "";
+    private bool _enraged;
+    private double _maxHP;
+    private double _currentHP;
+    private uint _maxShield;
+    private double _currentShield;
+    private bool _visible;
+    private ulong _target;
+    private bool _isSelected = true;
+    private int _remainingEnrageTime;
+    private bool _isBoss;
+    private double _hPFactor;
+    private double _currentPercentage;
+    private AggroCircle _currentAggroType = AggroCircle.None;
 
     public bool HasGage { get; set; }
     public ICommand Override { get; }
@@ -254,7 +254,7 @@ public class Npc : ThreadSafeObservableObject, IDisposable
     //TODO: make this a separate class
     //private readonly Timer _shieldDuration;
 
-    ShieldStatus _shield = ShieldStatus.Off;
+    private ShieldStatus _shield = ShieldStatus.Off;
 
     public ShieldStatus Shield
     {

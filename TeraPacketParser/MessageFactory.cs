@@ -11,10 +11,10 @@ public class MessageFactory
 {
     public static event Action<int>? ReleaseVersionChanged;
 
-    static readonly Delegate? UnknownMessageDelegate = Constructor<Func<TeraMessageReader, UnknownMessage>>();
-    static readonly Dictionary<ushort, Delegate?> OpcodeNameToType = new() { { 19900, Constructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
+    private static readonly Delegate? UnknownMessageDelegate = Constructor<Func<TeraMessageReader, UnknownMessage>>();
+    private static readonly Dictionary<ushort, Delegate?> OpcodeNameToType = new() { { 19900, Constructor<Func<TeraMessageReader, C_CHECK_VERSION>>() } };
 
-    static readonly Dictionary<string, Delegate?> TeraMessages = new()
+    private static readonly Dictionary<string, Delegate?> TeraMessages = new()
     {
         { nameof(C_CHECK_VERSION),                         Constructor<Func<TeraMessageReader, C_CHECK_VERSION>>()},
         { nameof(C_LOGIN_ARBITER),                         Constructor<Func<TeraMessageReader, C_LOGIN_ARBITER>>()},
@@ -136,7 +136,7 @@ public class MessageFactory
     public static readonly Dictionary<string, ushort> Extras = new();
     public uint Version { get; private set; }
 
-    int _releaseVersion;
+    private int _releaseVersion;
     public int ReleaseVersion
     {
         get => _releaseVersion;
@@ -197,7 +197,7 @@ public class MessageFactory
     }
 
 
-    ParsedMessage? Instantiate(ushort opCode, TeraMessageReader reader)
+    private ParsedMessage? Instantiate(ushort opCode, TeraMessageReader reader)
     {
         if (!OpcodeNameToType.TryGetValue(opCode, out var type)) type = UnknownMessageDelegate;
         return (ParsedMessage?)type?.DynamicInvoke(reader);

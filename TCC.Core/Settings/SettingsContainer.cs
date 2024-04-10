@@ -17,10 +17,10 @@ namespace TCC.Settings;
 
 public class SettingsContainer
 {
-    string _lastLanguage;
-    bool _chatEnabled;
-    bool _enableProxy;
-    LootDistributionWindowSettings _lootDistributionWindowSettings;
+    private string _lastLanguage;
+    private bool _chatEnabled;
+    private bool _enableProxy;
+    private LootDistributionWindowSettings _lootDistributionWindowSettings;
 
     #region Misc
 

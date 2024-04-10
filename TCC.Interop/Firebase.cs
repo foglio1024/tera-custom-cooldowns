@@ -13,9 +13,9 @@ namespace TCC.Interop;
 
 public static class Firebase
 {
-    readonly record struct Webhook(string URL, string AccountHash);
-    
-    static readonly List<Webhook> _registeredWebhooks = [];
+    private readonly record struct Webhook(string URL, string AccountHash);
+
+    private static readonly List<Webhook> _registeredWebhooks = [];
     public static async void RegisterWebhook(string? url, bool online, string accountHash)
     {
         if (string.IsNullOrEmpty(url) || string.IsNullOrEmpty(accountHash)) return;

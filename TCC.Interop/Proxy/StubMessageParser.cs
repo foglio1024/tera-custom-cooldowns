@@ -14,7 +14,7 @@ namespace TCC.Interop.Proxy;
 /// </summary>
 public class StubMessageParser
 {
-    readonly Dictionary<string, Delegate> Methods = new()
+    private readonly Dictionary<string, Delegate> Methods = new()
     {
         { "setUiMode", new Action<JObject>(SetUiMode) },
         { "setChatMode", new Action<JObject>(SetChatMode) },
@@ -30,7 +30,7 @@ public class StubMessageParser
     public static event Action<string, uint, string, bool>? HandleTranslatedMessageEvent;
     public static event Action<Message>? HandleRawPacketEvent;
 
-    static void SetUiMode(JObject parameters)
+    private static void SetUiMode(JObject parameters)
     {
         var jMode = parameters["uiMode"];
         if (jMode == null) return;
@@ -38,7 +38,7 @@ public class StubMessageParser
         //Game.InGameUiOn = jMode.Value<bool>();
     }
 
-    static void SetChatMode(JObject parameters)
+    private static void SetChatMode(JObject parameters)
     {
         var jMode = parameters["chatMode"];
         if (jMode == null) return;
@@ -47,7 +47,7 @@ public class StubMessageParser
         //Game.InGameChatOpen = jMode.Value<bool>();
     }
 
-    static void HandleChatMessage(JObject parameters)
+    private static void HandleChatMessage(JObject parameters)
     {
         var jAuthor = parameters["author"];
         if (jAuthor == null) return;
@@ -74,7 +74,7 @@ public class StubMessageParser
 
     }
 
-    static void HandleTranslatedMessage(JObject parameters)
+    private static void HandleTranslatedMessage(JObject parameters)
     {
         var jAuthor = parameters["author"];
         if (jAuthor == null) return;
@@ -109,8 +109,7 @@ public class StubMessageParser
     }
 
 
-
-    static void HandleRawPacket(JObject parameters)
+    private static void HandleRawPacket(JObject parameters)
     {
         var jDir = parameters["direction"];
         if (jDir == null) return;
@@ -126,7 +125,7 @@ public class StubMessageParser
         //PacketAnalyzer.EnqueuePacket(content);
     }
 
-    static void HandleEnqueueNotification(JObject parameters)
+    private static void HandleEnqueueNotification(JObject parameters)
     {
         var jTitle = parameters["title"];
         var message = parameters["message"]?.Value<string>();

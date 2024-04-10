@@ -11,7 +11,7 @@ public readonly record struct Guard
     public uint NameId { get; }
     public uint ContinentId { get; }
 
-    Guard(uint gId, uint gNameId, uint continentId)
+    private Guard(uint gId, uint gNameId, uint continentId)
     {
         Id = gId;
         NameId = gNameId;

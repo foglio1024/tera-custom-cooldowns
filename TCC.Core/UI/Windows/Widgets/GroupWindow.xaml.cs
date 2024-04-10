@@ -9,7 +9,7 @@ namespace TCC.UI.Windows.Widgets;
 
 public partial class GroupWindow
 {
-    readonly GroupWindowViewModel _vm;
+    private readonly GroupWindowViewModel _vm;
 
     public GroupWindow(GroupWindowViewModel vm)
     {
@@ -23,39 +23,39 @@ public partial class GroupWindow
     }
 
     //TODO: to commands in VM
-    void DisbandButtonClicked(object sender, RoutedEventArgs e)
+    private void DisbandButtonClicked(object sender, RoutedEventArgs e)
     {
         if(!_vm.AmILeader) return;
         StubInterface.Instance.StubClient.DisbandGroup(); //ProxyOld.DisbandParty();
     }
 
     //TODO: to commands in VM
-    void ResetButtonClicked(object sender, RoutedEventArgs e)
+    private void ResetButtonClicked(object sender, RoutedEventArgs e)
     {
         if(!_vm.AmILeader) return;
         StubInterface.Instance.StubClient.ResetInstance(); //ProxyOld.ResetInstance();
     }
 
-    void GroupWindow_OnMouseEnter(object sender, MouseEventArgs e)
+    private void GroupWindow_OnMouseEnter(object sender, MouseEventArgs e)
     {
         GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
         GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(1, TimeSpan.FromMilliseconds(300)));
     }
 
-    void GroupWindow_OnMouseLeave(object sender, MouseEventArgs e)
+    private void GroupWindow_OnMouseLeave(object sender, MouseEventArgs e)
     {
         GroupButtonsSingle.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)) { BeginTime = TimeSpan.FromMilliseconds(500) });
         GroupButtons.BeginAnimation(OpacityProperty, new DoubleAnimation(0, TimeSpan.FromMilliseconds(300)) { BeginTime = TimeSpan.FromMilliseconds(500) });
     }
 
     //TODO: to commands in VM
-    void LeaveParty(object sender, RoutedEventArgs e)
+    private void LeaveParty(object sender, RoutedEventArgs e)
     {
         StubInterface.Instance.StubClient.LeaveGroup(); //ProxyOld.LeaveParty();
     }
 
     //TODO: to commands in VM
-    void ShowAbnormalSettings(object sender, RoutedEventArgs e)
+    private void ShowAbnormalSettings(object sender, RoutedEventArgs e)
     {
         new GroupAbnormalConfigWindow().ShowWindow();
         //WindowManager.GroupAbnormalConfigWindow.ShowWindow();

@@ -8,7 +8,7 @@ namespace TCC.UI.Converters;
 
 public class GearLevelToFactorConverter : IValueConverter
 {
-    const int Levels = 37;
+    private const int Levels = 37;
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         if (value is not GearItem val) return 0;

@@ -15,16 +15,16 @@ namespace TCC.Data;
 
 public class Listing : ThreadSafeObservableObject
 {
-    bool _isRaid;
-    string _message = "";
-    string _leaderName = "";
-    bool _isExpanded;
-    bool _isPopupOpen;
-    int _playerCount;
-    bool _canApply = true;
-    bool _isMyLfg;
-    readonly DateTime _createdOn;
-    bool _isFullOffline;
+    private bool _isRaid;
+    private string _message = "";
+    private string _leaderName = "";
+    private bool _isExpanded;
+    private bool _isPopupOpen;
+    private int _playerCount;
+    private bool _canApply = true;
+    private bool _isMyLfg;
+    private readonly DateTime _createdOn;
+    private bool _isFullOffline;
 
     public uint LeaderId { get; set; }
     public uint ServerId { get; set; }
@@ -159,7 +159,7 @@ public class Listing : ThreadSafeObservableObject
         }, DispatcherPriority.DataBind);
     }
 
-    void ExpandCollapse(object? force) // todo: use proper type
+    private void ExpandCollapse(object? force) // todo: use proper type
     {
         if (IsPopupOpen) return;
 
@@ -199,14 +199,14 @@ public class Listing : ThreadSafeObservableObject
         }
     }
 
-    void BrowseTwitch()
+    private void BrowseTwitch()
     {
         if (!IsTwitch) return;
 
         Utils.Utilities.OpenUrl(TwitchLink);
     }
 
-    void Post()
+    private void Post()
     {
         var msg = Message;
         var isRaid = IsRaid;
@@ -216,7 +216,7 @@ public class Listing : ThreadSafeObservableObject
         Task.Delay(200).ContinueWith(_ => StubInterface.Instance.StubClient.RequestListings(App.Settings.LfgWindowSettings.MinLevel, App.Settings.LfgWindowSettings.MaxLevel));
     }
 
-    void Remove()
+    private void Remove()
     {
         if (Temp)
         {
@@ -228,7 +228,7 @@ public class Listing : ThreadSafeObservableObject
         }
     }
 
-    void WhisperLeader()
+    private void WhisperLeader()
     {
         if (!Game.InGameChatOpen) FocusManager.SendNewLine();
         FocusManager.SendString($"/w {LeaderName} ");

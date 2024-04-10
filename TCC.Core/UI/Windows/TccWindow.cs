@@ -14,14 +14,14 @@ namespace TCC.UI.Windows;
 
 public class TccWindow : Window
 {
-    static readonly List<TccWindow> _createdWindows = new();
+    private static readonly List<TccWindow> _createdWindows = new();
 
     public event Action? Hidden;
     public event Action? Showed;
 
-    readonly bool _canClose;
+    private readonly bool _canClose;
     //readonly DoubleAnimation _showAnim;
-    readonly DoubleAnimation _hideAnim;
+    private readonly DoubleAnimation _hideAnim;
 
     public IntPtr Handle { get; private set; }
 

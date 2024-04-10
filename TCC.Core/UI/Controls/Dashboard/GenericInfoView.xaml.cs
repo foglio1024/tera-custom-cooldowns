@@ -10,12 +10,12 @@ public partial class GenericInfoView
         InitializeComponent();
     }
 
-    void ContentListOnScrollChanged(object sender, ScrollChangedEventArgs e)
+    private void ContentListOnScrollChanged(object sender, ScrollChangedEventArgs e)
     {
         CharNames.FindVisualChild<ScrollViewer>()?.ScrollToVerticalOffset(e.VerticalOffset);
     }
 
-    void CharNames_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    private void CharNames_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
         ContentList.FindVisualChild<ScrollViewer>()?.ScrollToVerticalOffset(e.VerticalOffset);
     }

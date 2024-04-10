@@ -125,22 +125,22 @@ public static class MessagePieceBuilder
         return mp;
     }
 
-    static ActionMessagePiece ParseHtmlAchievement(HtmlNode node)
+    private static ActionMessagePiece ParseHtmlAchievement(HtmlNode node)
     {
         return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
     }
 
-    static ActionMessagePiece ParseHtmlItem(HtmlNode node)
+    private static ActionMessagePiece ParseHtmlItem(HtmlNode node)
     {
         return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
     }
 
-    static ActionMessagePiece ParseHtmlQuest(HtmlNode node)
+    private static ActionMessagePiece ParseHtmlQuest(HtmlNode node)
     {
         return new ActionMessagePiece(node.InnerText.UnescapeHtml(), node.GetAttributeValue("param", ""));
     }
 
-    static ActionMessagePiece ParseHtmlLocation(HtmlNode node)
+    private static ActionMessagePiece ParseHtmlLocation(HtmlNode node)
     {
         var linkData = node.GetAttributeValue("param", "");
         var pars = linkData[6..].Split('@');

@@ -5,9 +5,9 @@ namespace TeraPacketParser.Messages;
 
 public class S_PLAYER_CHANGE_MP : ParsedMessage
 {
-    int _currentMP, _maxMP, _diff;
-    uint _type;
-    ulong _target, _source;
+    private int _currentMP, _maxMP, _diff;
+    private uint _type;
+    private ulong _target, _source;
 
     public int CurrentMP => _currentMP;
     public int MaxMP => _maxMP;

@@ -8,7 +8,7 @@ namespace TeraPacketParser.TeraCommon.Sniffing;
 
 public abstract class IpSniffer
 {
-    bool _enabled;
+    private bool _enabled;
 
     public bool Enabled
     {

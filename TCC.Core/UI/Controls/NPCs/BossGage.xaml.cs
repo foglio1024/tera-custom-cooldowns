@@ -11,15 +11,15 @@ namespace TCC.UI.Controls.NPCs;
 
 public partial class BossGage
 {
-    bool _firstLoad = true;
+    private bool _firstLoad = true;
 
     public BossViewModel? VM { get; private set; }
 
-    readonly DoubleAnimation _enrageArcAnimation;
-    readonly DoubleAnimation _hpAnim;
-    readonly DoubleAnimation _slideAnim;
-    readonly DoubleAnimation _timerAnim;
-    readonly DoubleAnimation _fadeAnim;
+    private readonly DoubleAnimation _enrageArcAnimation;
+    private readonly DoubleAnimation _hpAnim;
+    private readonly DoubleAnimation _slideAnim;
+    private readonly DoubleAnimation _timerAnim;
+    private readonly DoubleAnimation _fadeAnim;
 
     public BossGage()
     {
@@ -37,19 +37,19 @@ public partial class BossGage
         SettingsWindowViewModel.AbnormalityShapeChanged += RefreshAbnormalityTemplate;
     }
 
-    void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
+    private void OnDataContextChanged(object _, DependencyPropertyChangedEventArgs e)
     {
         if (e.NewValue is not Npc npc) return;
         VM = new BossViewModel(npc);
     }
 
-    void RefreshAbnormalityTemplate()
+    private void RefreshAbnormalityTemplate()
     {
         Abnormalities.ItemTemplateSelector = null;
         Abnormalities.ItemTemplateSelector = R.TemplateSelectors.BossAbnormalityTemplateSelector;
     }
 
-    void AnimateTimer()
+    private void AnimateTimer()
     {
         Dispatcher?.Invoke(() =>
         {
@@ -61,14 +61,14 @@ public partial class BossGage
         });
     }
 
-    void OnHpChanged()
+    private void OnHpChanged()
     {
         AnimateHp();
         if (VM?.NPC == null) return;
         if (VM.NPC.Enraged) SlideEnrageIndicator(VM.CurrentPercentage);
     }
 
-    void OnEnragedChanged()
+    private void OnEnragedChanged()
     {
         if (VM?.NPC == null) return;
         if (VM.NPC.Enraged)
@@ -89,7 +89,7 @@ public partial class BossGage
 
     }
 
-    void AnimateHp()
+    private void AnimateHp()
     {
         if (VM?.NPC == null) return; //weird but could happen 
         _hpAnim.To = VM.NPC.HPFactor; //still crashing here ffs
@@ -97,7 +97,7 @@ public partial class BossGage
         HpBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _hpAnim);
     }
 
-    void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         if (!_firstLoad) return;
         _firstLoad = false;
@@ -115,14 +115,14 @@ public partial class BossGage
 
     }
 
-    void OnReEnraged()
+    private void OnReEnraged()
     {
         if (VM?.NPC.EnragePattern == null) return;
         _enrageArcAnimation.Duration = TimeSpan.FromSeconds(VM.NPC.EnragePattern.Duration);
         EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, _enrageArcAnimation);
     }
 
-    void OnDispose()
+    private void OnDispose()
     {
         DataContextChanged -= OnDataContextChanged;
         SettingsWindowViewModel.AbnormalityShapeChanged -= RefreshAbnormalityTemplate;
@@ -135,13 +135,13 @@ public partial class BossGage
         AnimateFadeOut();
     }
 
-    void AnimateFadeOut()
+    private void AnimateFadeOut()
     {
         _fadeAnim.Duration = TimeSpan.FromMilliseconds(500);
         BeginAnimation(OpacityProperty, _fadeAnim);
     }
 
-    void EnrageArcAnimation_Completed(object? sender, EventArgs e)
+    private void EnrageArcAnimation_Completed(object? sender, EventArgs e)
     {
         EnrageBar.RenderTransform.BeginAnimation(ScaleTransform.ScaleXProperty, null);
         try
@@ -155,7 +155,7 @@ public partial class BossGage
         }
     }
 
-    void SlideEnrageIndicator(double val)
+    private void SlideEnrageIndicator(double val)
     {
         Dispatcher?.InvokeAsync(() =>
         {
@@ -164,13 +164,13 @@ public partial class BossGage
         });
     }
 
-    void BossGage_OnMouseEnter(object sender, MouseEventArgs e)
+    private void BossGage_OnMouseEnter(object sender, MouseEventArgs e)
     {
         if (VM == null) return;
         VM.ShowOverrideBtn = true;
     }
 
-    void BossGage_OnMouseLeave(object sender, MouseEventArgs e)
+    private void BossGage_OnMouseLeave(object sender, MouseEventArgs e)
     {
         if (VM == null) return;
         VM.ShowOverrideBtn = false;

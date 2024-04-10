@@ -17,12 +17,12 @@ public partial class PerfMonitorWindow
         Init(vm.Settings!);
     }
 
-    void PerfMonitorWindow_OnMouseEnter(object sender, MouseEventArgs e)
+    private void PerfMonitorWindow_OnMouseEnter(object sender, MouseEventArgs e)
     {
         ((PerfMonitorViewModel) DataContext).ShowDumpButton = true;
     }
 
-    void PerfMonitorWindow_OnMouseLeave(object sender, MouseEventArgs e)
+    private void PerfMonitorWindow_OnMouseLeave(object sender, MouseEventArgs e)
     {
         ((PerfMonitorViewModel) DataContext).ShowDumpButton = false;
     }

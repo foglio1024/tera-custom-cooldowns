@@ -11,9 +11,9 @@ namespace TCC.UI.Controls.Classes;
 
 public partial class ValkyrieLayout
 {
-    ValkyrieLayoutViewModel? _dc;
-    readonly DoubleAnimation _an;
-    readonly DoubleAnimation _rag;
+    private ValkyrieLayoutViewModel? _dc;
+    private readonly DoubleAnimation _an;
+    private readonly DoubleAnimation _rag;
 
     public ValkyrieLayout()
     {
@@ -22,20 +22,20 @@ public partial class ValkyrieLayout
         InitializeComponent();
     }
 
-    void UserControl_Loaded(object sender, RoutedEventArgs e)
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
         _dc = (ValkyrieLayoutViewModel)DataContext;
         _dc.StaminaTracker.PropertyChanged += ST_PropertyChanged;
         _dc.Ragnarok.Effect.Started += OnRagnarokStarted;
     }
 
-    void OnRagnarokStarted(ulong duration, CooldownMode mode)
+    private void OnRagnarokStarted(ulong duration, CooldownMode mode)
     {
         _rag.Duration = TimeSpan.FromMilliseconds(duration);
         RagArc.BeginAnimation(Arc.EndAngleProperty, _rag);
     }
 
-    void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void ST_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (_dc == null) return;
         if (e.PropertyName != nameof(_dc.StaminaTracker.Factor)) return;

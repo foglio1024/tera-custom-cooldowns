@@ -22,12 +22,12 @@ namespace TCC.Update;
 
 public static class UpdateManager
 {
-    const string AppVersionUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
-    const string AppVersionBetaUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/beta/version";
-    static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{(App.Beta ? "beta" : "master")}/database-hashes.json";
+    private const string AppVersionUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/master/version";
+    private const string AppVersionBetaUrl = "https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/beta/version";
+    private static readonly string DatabaseHashFileUrl = $"https://raw.githubusercontent.com/Foglio1024/Tera-custom-cooldowns/{(App.Beta ? "beta" : "master")}/database-hashes.json";
 
-    static readonly Timer _checkTimer = new((App.ToolboxMode ? 2 : 10) * 60 * 1000);
-    static bool _waitingDownload = true;
+    private static readonly Timer _checkTimer = new((App.ToolboxMode ? 2 : 10) * 60 * 1000);
+    private static bool _waitingDownload = true;
 
     public static Dictionary<string, string> DatabaseHashes { get; } = new();
     public static bool UpdateAvailable { get; private set; }
@@ -158,7 +158,7 @@ public static class UpdateManager
     }
 
     //---------------------------------------------------------------------
-    static async Task Update(string url)
+    private static async Task Update(string url)
     {
         using var c = new HttpClientProgress();
         try
@@ -195,7 +195,7 @@ public static class UpdateManager
         }
     }
 
-    static void DownloadServersFile()
+    private static void DownloadServersFile()
     {
         if (!Directory.Exists(App.DataPath)) Directory.CreateDirectory(App.DataPath);
         using var c = MiscUtils.GetDefaultHttpClient();
@@ -211,14 +211,14 @@ public static class UpdateManager
         }
     }
 
-    static void CheckTimer_Elapsed(object? sender, ElapsedEventArgs e)
+    private static void CheckTimer_Elapsed(object? sender, ElapsedEventArgs e)
     {
         _checkTimer.Stop();
         CheckAppVersionPeriodic();
         if (!UpdateAvailable) _checkTimer.Start();
     }
 
-    static void CheckAppVersionPeriodic()
+    private static void CheckAppVersionPeriodic()
     {
         try
         {
@@ -236,7 +236,7 @@ public static class UpdateManager
         }
     }
 
-    static async Task DownloadDatabaseHashes()
+    private static async Task DownloadDatabaseHashes()
     {
         DatabaseHashes.Clear();
         using var c = MiscUtils.GetDefaultHttpClient();
@@ -252,9 +252,9 @@ public static class UpdateManager
     }
 
 
-    class VersionParser
+    private class VersionParser
     {
-        Version Version => Version.Parse(NewVersionNumber);
+        private Version Version => Version.Parse(NewVersionNumber);
 
         public string NewVersionNumber { get; }
         public string NewVersionUrl { get; }

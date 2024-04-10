@@ -19,10 +19,10 @@ public partial class BoolSetting
         MainGrid.Background = new SolidColorBrush(Colors.Transparent);
     }
 
-    readonly ColorAnimation _glow;
-    readonly ColorAnimation _unglow;
-    readonly DoubleAnimation _fadeIn;
-    readonly DoubleAnimation _fadeOut;
+    private readonly ColorAnimation _glow;
+    private readonly ColorAnimation _unglow;
+    private readonly DoubleAnimation _fadeIn;
+    private readonly DoubleAnimation _fadeOut;
 
     public string SettingName
     {
@@ -48,18 +48,18 @@ public partial class BoolSetting
     public static readonly DependencyProperty SettingImageProperty =
         DependencyProperty.Register("SvgIcon", typeof(ImageSource), typeof(BoolSetting));
 
-    void ToggleSetting(object sender, MouseButtonEventArgs e)
+    private void ToggleSetting(object sender, MouseButtonEventArgs e)
     {
         IsOn = !IsOn;
     }
 
-    void Grid_MouseEnter(object sender, MouseEventArgs e)
+    private void Grid_MouseEnter(object sender, MouseEventArgs e)
     {
         (sender as Grid)?.Background.BeginAnimation(SolidColorBrush.ColorProperty, _glow);
         Img.BeginAnimation(OpacityProperty, _fadeIn);
     }
 
-    void Grid_MouseLeave(object sender, MouseEventArgs e)
+    private void Grid_MouseLeave(object sender, MouseEventArgs e)
     {
         (sender as Grid)?.Background.BeginAnimation(SolidColorBrush.ColorProperty, _unglow);
         Img.BeginAnimation(OpacityProperty, _fadeOut);

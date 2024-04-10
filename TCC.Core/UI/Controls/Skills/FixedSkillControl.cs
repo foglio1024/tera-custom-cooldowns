@@ -12,9 +12,9 @@ public class FixedSkillControl : SkillControlBase
 {
     protected FrameworkElement? GlowRef;
     protected FrameworkElement? DeleteButtonRef;
-    readonly DoubleAnimation _resetAnimation;
-    readonly DoubleAnimation _glowAnimation;
-    bool _warning;
+    private readonly DoubleAnimation _resetAnimation;
+    private readonly DoubleAnimation _glowAnimation;
+    private bool _warning;
     public bool Warning
     {
         get => _warning;
@@ -84,12 +84,12 @@ public class FixedSkillControl : SkillControlBase
         Warning = false;
     }
 
-    void OnReset()
+    private void OnReset()
     {
         ResetArcRef?.BeginAnimation(Shape.StrokeThicknessProperty, _resetAnimation);
     }
 
-    void AnimateAvailableSkill()
+    private void AnimateAvailableSkill()
     {
 
         StopArcAnimation(MainArcRef); //stop any arc animations

@@ -5,7 +5,7 @@ namespace TCC.Data.Chat;
 
 public class ChatChannelOnOff : ThreadSafeObservableObject
 {
-    bool _enabled;
+    private bool _enabled;
 
     public bool Enabled
     {
