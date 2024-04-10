@@ -4,7 +4,6 @@
              xmlns:chat="clr-namespace:TCC.Data.Chat"
              xmlns:controls="clr-namespace:TCC.UI.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:TCC.UI.Controls.Chat"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DataContext="{d:DesignInstance Type=chat:MessagePieceBase}"
              d:DesignHeight="450"

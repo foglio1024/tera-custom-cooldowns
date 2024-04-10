@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -53,7 +52,7 @@ public class CooldownWindowViewModel : TccWindowViewModel
     public ICollectionViewLiveShaping ItemsView { get; }
     public ICollectionViewLiveShaping AbnormalitiesView { get; }
     public ThreadSafeCollection<Item> Items { get; } = [.. Game.DB!.ItemsDatabase.ItemSkills];
-    public ThreadSafeCollection<Abnormality> Passivities { get; } = [.. Game.DB!.AbnormalityDatabase.Abnormalities.Values.ToList()];
+    public ThreadSafeCollection<Abnormality> Passivities { get; } = [.. Game.DB.AbnormalityDatabase.Abnormalities.Values.ToList()];
 
     static bool FindAndUpdate(ThreadSafeObservableCollection<Cooldown> list, Cooldown sk)
     {

@@ -2,12 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Nostrum.WPF.Extensions;
 using TCC.Data;
 using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.UI;
-using TCC.UI.Controls;
 using FocusManager = TCC.UI.FocusManager;
 
 namespace TCC.ResourceDictionaries;

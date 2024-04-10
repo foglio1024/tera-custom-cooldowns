@@ -1,11 +1,10 @@
 ﻿using Nostrum.WPF.Extensions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace TCC.UI.Controls.Chat;
 
-public partial class TranslationIndicator : UserControl
+public partial class TranslationIndicator 
 {
     public TranslationIndicator()
     {

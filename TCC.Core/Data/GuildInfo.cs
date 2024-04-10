@@ -1,7 +1,6 @@
 ﻿using Nostrum.WPF.ThreadSafe;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TeraDataLite;
 
 namespace TCC.Data;
@@ -42,7 +41,7 @@ public class GuildInfo
 
     public bool Has(string name)
     {
-        bool ret = false;
+        bool ret;
 
         lock (_lock)
         {
