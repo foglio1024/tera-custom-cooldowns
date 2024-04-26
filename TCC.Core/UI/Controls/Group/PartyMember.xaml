@@ -7,6 +7,7 @@
                        xmlns:group="clr-namespace:TCC.UI.Controls.Group"
                        xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
                        xmlns:converters1="clr-namespace:TCC.UI.Converters"
+                       xmlns:data="clr-namespace:TCC.Data"
                        mc:Ignorable="d"
                        d:DataContext="{d:DesignInstance pc:User}">
     <group:GroupMemberBase.Resources>
@@ -296,10 +297,51 @@
                     RenderTransformOrigin=".5 .5"
                     Background="{StaticResource RevampBackgroundBrush}"
                     BorderThickness="2"
+                    BorderBrush="{StaticResource RevampBorderBrush}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    BorderBrush="{StaticResource RevampBorderBrush}"
-                    Margin="5" />
+                    Margin="5" >
+            </Border>
+            <Border RenderTransform="{StaticResource Rotate45}"
+                    RenderTransformOrigin=".5 .5"
+                    BorderThickness="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="7" >
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="{StaticResource RevampBorderBrush}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Role}" Value="{x:Static data:Role.Dps}">
+                                <Setter Property="BorderBrush" Value="{StaticResource DpsRoleBrush}"/>
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource DpsRoleColor}" Opacity=".1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Role}" Value="{x:Static data:Role.Tank}">
+                                <Setter Property="BorderBrush" Value="{StaticResource TankRoleBrush}"/>
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource TankRoleColor}" Opacity=".1"/>
+                                    </Setter.Value>
+                                </Setter>
+
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Role}" Value="{x:Static data:Role.Healer}">
+                                <Setter Property="BorderBrush" Value="{StaticResource HealerRoleBrush}"/>
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource HealerRoleColor}" Opacity=".1"/>
+                                    </Setter.Value>
+                                </Setter>
+
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
             <!--Aggro indicator -->
             <Grid x:Name="AggroBorderGrid" RenderTransformOrigin=".5 .5">
                 <Border Name="AggroBorder"
