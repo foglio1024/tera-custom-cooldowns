@@ -64,7 +64,7 @@
     <Color x:Key="DefensiveStanceColorDark">       #1A617A   </Color>
     <Color x:Key="SniperEyeColor">                 #38BDE5   </Color>
                                                              
-    <Color x:Key="DpsRoleColor">                   #FF894A   </Color>
+    <Color x:Key="DpsRoleColor">                   #ff694a   </Color>
     <Color x:Key="HealerRoleColor">                #8BDB83   </Color>
     <Color x:Key="TankRoleColor">                  #32B3E2   </Color>
                                                              
