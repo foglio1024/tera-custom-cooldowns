@@ -13,7 +13,7 @@
                       Grid.Row="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" MaxHeight="700" Width="Auto" />
+                    <WrapPanel Orientation="Vertical" Width="Auto" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

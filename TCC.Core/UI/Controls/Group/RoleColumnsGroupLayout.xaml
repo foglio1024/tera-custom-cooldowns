@@ -20,7 +20,7 @@
                           Grid.Row="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" MaxHeight="700" Width="Auto" Name="DpsPanel" />
+                    <WrapPanel Orientation="Vertical" Width="Auto" Name="DpsPanel" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
@@ -29,7 +29,7 @@
                           ItemsSource="{Binding Healers}" Grid.Row="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" MaxHeight="700" Width="Auto" />
+                    <WrapPanel Orientation="Vertical" Width="Auto" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
@@ -38,7 +38,7 @@
                           ItemsSource="{Binding Tanks}" Grid.Row="0">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Vertical" MaxHeight="700" Width="Auto" />
+                    <WrapPanel Orientation="Vertical" Width="Auto" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>

@@ -26,7 +26,7 @@ public class ClassToReColorConverter : MarkupExtension, IValueConverter
             (Class.Ninja,    false) => Brushes.ArcaneBrush,
             (Class.Ninja,    true)  => Brushes.ArcaneBrushLight,
             (Class.Valkyrie, _)     => System.Windows.Media.Brushes.White,
-            _                              => null
+            _                              => System.Windows.Media.Brushes.White
         };
         if(targetType == typeof(Color)) return brush?.Color;
         else return brush;
