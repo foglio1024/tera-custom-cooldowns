@@ -289,7 +289,7 @@ class RpcHandler {
         Globals.debug(`Sent S_SYSTEM_MESSAGE`);
     }
     invokeCommand(params) {
-        this.mod.command.exec(params.command);
+        this.currNetworkMod.command.exec(params.command);
         Globals.debug(`Invoking command: ${params.command}`);
     }
     returnToLobby(params) {
