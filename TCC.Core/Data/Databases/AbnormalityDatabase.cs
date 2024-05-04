@@ -64,7 +64,7 @@ public class AbnormalityDatabase : DatabaseBase
 
         #region Foglio overrides
 
-        var foglioAura = new Abnormality(10241024, true, true, true, AbnormalityType.Special, "icon_items.bloodchipa_tex", "Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END 's characters is nearby.$BRDoes not stack with Skill prediction.");
+        var foglioAura = new Abnormality(10241024, true, true, true, AbnormalityType.Special, "icon_items.bloodchipa_tex", "Foglio's aura", "Reduces your ping by $H_W_GOOD80$COLOR_END ms when one of $H_W_GOODFoglio$COLOR_END's characters is nearby.$BRDoes not stack with Skill prediction.");
         Abnormalities[foglioAura.Id] = foglioAura;
 
         #endregion Foglio overrides
