@@ -49,7 +49,8 @@ public class MoongourdPopupViewModel : ThreadSafeObservableObject
         {
             EmptyText = "No entries.";
             Encounters.Clear();
-            list.ForEach(e => Encounters.Add(new EncounterViewModel(e.AreaId, e.BossId, e.LogId) { PlayerDeaths = e.PlayerDeaths, PlayerDps = e.PlayerDps }));
+            foreach (var e in list) 
+                Encounters.Add(new EncounterViewModel(e.AreaId, e.BossId, e.LogId) { PlayerDeaths = e.PlayerDeaths, PlayerDps = e.PlayerDps });
         });
     }
 

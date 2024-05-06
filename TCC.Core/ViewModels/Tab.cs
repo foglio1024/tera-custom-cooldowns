@@ -22,9 +22,9 @@ public class TabInfo
     public List<string> ShowedKeywords { get; }
     public List<string> HiddenKeywords { get; }
     public List<ChatChannel> ShowedChannels { get; }
-    public List<ChatChannel> HiddenChannels { get;  }
+    public List<ChatChannel> HiddenChannels { get; }
 
-    public TabInfo(string name) 
+    public TabInfo(string name)
     {
         ShowedAuthors = new List<string>();
         HiddenAuthors = new List<string>();
@@ -70,12 +70,12 @@ public class TabInfoVM : ThreadSafeObservableObject
     public TabInfoVM(TabInfo info) : this()
     {
         TabName = info.Name;
-        info.ShowedAuthors.ForEach(Authors.Add);
-        info.HiddenAuthors.ForEach(ExcludedAuthors.Add);
-        info.ShowedKeywords.ForEach(Keywords.Add);
-        info.HiddenKeywords.ForEach(ExcludedKeywords.Add);
-        info.ShowedChannels.ForEach(ShowedChannels.Add);
-        info.HiddenChannels.ForEach(ExcludedChannels.Add);
+        foreach (var a in info.ShowedAuthors) Authors.Add(a);
+        foreach (var a in info.HiddenAuthors) ExcludedAuthors.Add(a);
+        foreach (var k in info.ShowedKeywords) Keywords.Add(k);
+        foreach (var k in info.HiddenKeywords) ExcludedKeywords.Add(k);
+        foreach (var c in info.ShowedChannels) ShowedChannels.Add(c);
+        foreach (var c in info.HiddenChannels) ExcludedChannels.Add(c);
 
         Authors.CollectionChanged += (_, ev) =>
         {
@@ -85,7 +85,7 @@ public class TabInfoVM : ThreadSafeObservableObject
                     info.ShowedAuthors.AddRange(ev.NewItems!.Cast<string>());
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    ev.OldItems!.Cast<string>().ToList().ForEach(i => info.ShowedAuthors.Remove(i));
+                    foreach (var i in ev.OldItems!.Cast<string>()) info.ShowedAuthors.Remove(i);
                     break;
             }
         };
@@ -97,7 +97,7 @@ public class TabInfoVM : ThreadSafeObservableObject
                     info.HiddenAuthors.AddRange(ev.NewItems!.Cast<string>());
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    ev.OldItems!.Cast<string>().ToList().ForEach(i => info.HiddenAuthors.Remove(i));
+                    foreach (var i in ev.OldItems!.Cast<string>()) info.HiddenAuthors.Remove(i);
                     break;
             }
         };
@@ -109,7 +109,7 @@ public class TabInfoVM : ThreadSafeObservableObject
                     info.ShowedKeywords.AddRange(ev.NewItems!.Cast<string>());
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    ev.OldItems!.Cast<string>().ToList().ForEach(i => info.ShowedKeywords.Remove(i));
+                    foreach (var i in ev.OldItems!.Cast<string>()) info.ShowedKeywords.Remove(i);
                     break;
             }
         };
@@ -121,7 +121,7 @@ public class TabInfoVM : ThreadSafeObservableObject
                     info.HiddenKeywords.AddRange(ev.NewItems!.Cast<string>());
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    ev.OldItems!.Cast<string>().ToList().ForEach(i => info.HiddenKeywords.Remove(i));
+                    foreach (var i in ev.OldItems!.Cast<string>()) info.HiddenKeywords.Remove(i);
                     break;
             }
         };
@@ -133,7 +133,7 @@ public class TabInfoVM : ThreadSafeObservableObject
                     info.ShowedChannels.AddRange(ev.NewItems!.Cast<ChatChannel>());
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    ev.OldItems!.Cast<ChatChannel>().ToList().ForEach(i => info.ShowedChannels.Remove(i));
+                    foreach (var i in ev.OldItems!.Cast<ChatChannel>()) info.ShowedChannels.Remove(i);
                     break;
             }
         };
@@ -145,7 +145,7 @@ public class TabInfoVM : ThreadSafeObservableObject
                     info.HiddenChannels.AddRange(ev.NewItems!.Cast<ChatChannel>());
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    ev.OldItems!.Cast<ChatChannel>().ToList().ForEach(i => info.HiddenChannels.Remove(i));
+                    foreach (var i in ev.OldItems!.Cast<ChatChannel>()) info.HiddenChannels.Remove(i);
                     break;
             }
         };
@@ -201,7 +201,7 @@ public class Tab : ThreadSafeObservableObject
         Messages.Refresh();
     }
 
-    public Tab(TabInfo tabInfo) 
+    public Tab(TabInfo tabInfo)
     {
         Messages = new ListCollectionView(ChatManager.Instance.ChatMessages);
         ImportantMessages = new ThreadSafeObservableCollection<ChatMessage>(_dispatcher);
@@ -290,7 +290,7 @@ public class Tab : ThreadSafeObservableObject
         {
             Messages.Filter = f =>
             {
-                var m = (ChatMessage) f;
+                var m = (ChatMessage)f;
                 return Filter(m);
             };
         });
@@ -305,7 +305,7 @@ public class Tab : ThreadSafeObservableObject
 
     public void RemoveImportantMessage(ChatMessage? msg)
     {
-        if(msg != null) ImportantMessages.Remove(msg);
+        if (msg != null) ImportantMessages.Remove(msg);
         InvokePropertyChanged(nameof(Attention));
         InvokePropertyChanged(nameof(ImportantMessagesLabel));
     }

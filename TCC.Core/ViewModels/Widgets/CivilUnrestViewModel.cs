@@ -136,7 +136,8 @@ public class CivilUnrestViewModel : TccWindowViewModel
         {
             try
             {
-                m.Guilds.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrestVM.AddGuild(x));
+                foreach (var guild in m.Guilds)
+                    WindowManager.ViewModels.CivilUnrestVM.AddGuild(guild);
             }
             catch
             {
@@ -149,7 +150,8 @@ public class CivilUnrestViewModel : TccWindowViewModel
     {
         try
         {
-            m.GuildDetails.ToList().ForEach(x => WindowManager.ViewModels.CivilUnrestVM.SetGuildName(x.Item1, x.Item2));
+            foreach (var (id, name) in m.GuildDetails.ToList())
+                WindowManager.ViewModels.CivilUnrestVM.SetGuildName(id, name);
         }
         catch
         {

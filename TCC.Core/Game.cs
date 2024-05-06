@@ -1144,11 +1144,10 @@ public static class Game
 
     private static void OnUserBlockList(S_USER_BLOCK_LIST m)
     {
-        m.BlockedUsers.ForEach(u =>
+        foreach (var u in m.BlockedUsers.Where(u => !BlockList.Contains(u)))
         {
-            if (BlockList.Contains(u)) return;
             BlockList.Add(u);
-        });
+        }
     }
 
     //private static void OnFatigabilityPoint(S_FATIGABILITY_POINT p)

@@ -71,7 +71,7 @@ public class TccDatabases
     /// </summary>
     public void Load()
     {
-        Databases.ForEach(db => db.Load());
+        foreach (var db in Databases) db.Load();
     }
 
     /// <summary>
@@ -167,7 +167,7 @@ public class TccDatabases
 
     public void CheckVersion()
     {
-        Databases.ForEach(db => db.CheckVersion());
+        foreach (var db in Databases) db.CheckVersion();
     }
 
     /// <summary>

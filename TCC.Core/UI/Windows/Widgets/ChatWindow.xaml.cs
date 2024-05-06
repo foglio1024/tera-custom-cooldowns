@@ -168,30 +168,28 @@ public partial class ChatWindow
     {
         if (VM.CurrentTab == null)
             TabControl.SelectedIndex = 0;
-        TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+        foreach (var ic in TabControl.GetVisualDescendents<ItemsControl>())
         {
-            if (!x.IsVisible) return;
-            var host = x.FindVisualChild<VirtualizingStackPanel>();
+            if (!ic.IsVisible) continue;
+            var host = ic.FindVisualChild<VirtualizingStackPanel>();
             var sw = host?.FindVisualParent<ScrollViewer>();
-            if (sw == null) return;
-            sw.ScrollToTop();
-        });
-
+            sw?.ScrollToTop();
+        }
     }
 
     public void ScrollToMessage(Tab tab, ChatMessage msg)
     {
         if (VM.CurrentTab != tab) TabControl.SelectedIndex = VM.Tabs.IndexOf(tab);
-        TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+        foreach (var x in TabControl.GetVisualDescendents<ItemsControl>())
         {
-            if (!x.IsVisible) return;
+            if (!x.IsVisible) continue;
 
             var host = x.FindVisualChild<VirtualizingStackPanel>();
-            if (host == null) return;
+            if (host == null) continue;
             var idx = x.Items.IndexOf(msg);
-            if (idx == -1) return;
+            if (idx == -1) continue;
             host.BringIndexIntoViewPublic(idx);
-        });
+        }
     }
 
     private void TabChanged(object sender, SelectionChangedEventArgs e)
@@ -208,11 +206,12 @@ public partial class ChatWindow
         else
         {
             // scroll all tabs to bottom if the same has been clicked
-            TabControl.GetVisualDescendents<ItemsControl>().ToList().ForEach(x =>
+            foreach (var sw in TabControl.GetVisualDescendents<ItemsControl>()
+                .Select(x => x.FindVisualChild<ScrollViewer>()))
             {
-                var sw = x.FindVisualChild<ScrollViewer>();
                 sw?.ScrollToVerticalOffset(0);
-            });
+            }
+
             _bottom = true;
             ChatManager.Instance.AddFromQueue(2);
             if (ChatManager.Instance.IsQueueEmpty) ChatManager.Instance.SetPaused(false);

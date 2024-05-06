@@ -99,15 +99,9 @@ public class ChatViewModel : ThreadSafeObservableObject
     public ThreadSafeObservableCollection<TabViewModel> TabVMs { get; set; }
     public ThreadSafeObservableCollection<Lfg> LFGs => ChatManager.Instance.LFGs;
     public IInterTabClient InterTabClient { get; }
-    public List<Tab> Tabs
-    {
-        get
-        {
-            var ret = new List<Tab>();
-            TabVMs.ToList().ForEach(x => ret.Add((Tab) x.Content));
-            return ret;
-        }
-    }
+
+    public List<Tab> Tabs => TabVMs.ToArray().Select(x => x.Content).Cast<Tab>().ToList();
+
     public Func<TabViewModel> AddNewTabCommand
     {
         get
@@ -181,14 +175,13 @@ public class ChatViewModel : ThreadSafeObservableObject
     {
         if (!WindowSettings.ShowImportant) return;
         if (!chatMessage.ContainsPlayerName && chatMessage.Channel != ChatChannel.ReceivedWhisper) return;
-        TabVMs.Where(x => ((Tab)x.Content).Dispatcher
-                .Invoke(() => ((Tab)x.Content).Messages.Contains(chatMessage)))
-            .ToList()
-            .ForEach(t =>
-            {
-                ((Tab)t.Content).AddImportantMessage(chatMessage);
-                //((Tab) t.Content).Attention = true;
-            });
+        foreach (var t in TabVMs
+            .Select(x => x.Content)
+            .Cast<Tab>()
+            .Where(tab => tab.Dispatcher.Invoke(() => tab.Messages.Contains(chatMessage))))
+        {
+            t.AddImportantMessage(chatMessage);
+        }
     }
     public void HandleIsDraggingChanged(bool isDragging, IEnumerable<DragablzItem> newOrder)
     {
@@ -220,7 +213,7 @@ public class ChatViewModel : ThreadSafeObservableObject
     {
         WindowSettings.Tabs.Clear();
         //_windowSettings.Tabs.AddRange(Tabs);
-        Tabs.ForEach(t => WindowSettings.Tabs.Add(t.TabInfo));
+        foreach (var t in Tabs) WindowSettings.Tabs.Add(t.TabInfo);
         WindowSettings.X = (left + FocusManager.TeraScreen.Bounds.Left) / WindowManager.ScreenSize.Width;
         WindowSettings.Y = (top + FocusManager.TeraScreen.Bounds.Top) / WindowManager.ScreenSize.Height;
         Task.Run(() =>
@@ -285,7 +278,7 @@ public class ChatViewModel : ThreadSafeObservableObject
         TabVMs.Add(new TabViewModel(w.TabInfoVM.TabName, w));
         TabVMs.Add(new TabViewModel(sys.TabInfoVM.TabName, sys));
         CurrentTab = TabVMs[0].Content as Tab;
-        Tabs.ForEach(t => WindowSettings.Tabs.Add(t.TabInfo));
+        foreach (var t in Tabs) WindowSettings.Tabs.Add(t.TabInfo);
     }
     public void RemoveTab(Tab dc)
     {

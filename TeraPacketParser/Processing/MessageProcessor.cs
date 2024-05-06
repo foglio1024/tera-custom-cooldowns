@@ -39,7 +39,7 @@ public class MessageProcessor
         lock (_hooks)
         {
             if (!_hooks.TryGetValue(msg.GetType(), out var handlers)) return;
-            handlers.ForEach(del =>
+            foreach (var del in handlers)
             {
                 try
                 {
@@ -50,7 +50,7 @@ public class MessageProcessor
                     Log.F($"Error while executing callback for {msg.GetType()}.\n{e}\n{e.InnerException}");
                     throw new MessageProcessException($"Error while executing callback for {msg.GetType()}", e);
                 }
-            });
+            }
         }
     }
 }

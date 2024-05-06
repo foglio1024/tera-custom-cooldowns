@@ -24,15 +24,16 @@ public partial class SystemMessagesConfigWindow
         HiddenMessages = new ThreadSafeObservableCollection<SystemMessageViewModel>();
         ShowedMessages = new ThreadSafeObservableCollection<SystemMessageViewModel>();
 
-        App.Settings.UserExcludedSysMsg.ForEach(opc =>
+        foreach (var opc in App.Settings.UserExcludedSysMsg)
         {
             HiddenMessages.Add(new SystemMessageViewModel(opc, Game.DB!.SystemMessagesDatabase.Messages[opc]));
-        });
-        Game.DB!.SystemMessagesDatabase.Messages.ToList().ForEach(keyVal =>
+        }
+
+        foreach (var (opcode, message) in Game.DB!.SystemMessagesDatabase.Messages
+            .Where((keyVal) => !App.Settings.UserExcludedSysMsg.Contains(keyVal.Key)))
         {
-            if (App.Settings.UserExcludedSysMsg.Contains(keyVal.Key)) return;
-            ShowedMessages.Add(new SystemMessageViewModel(keyVal.Key, keyVal.Value));
-        });
+            ShowedMessages.Add(new SystemMessageViewModel(opcode, message));
+        }
 
         HiddenMessages.CollectionChanged += (_, args) =>
         {

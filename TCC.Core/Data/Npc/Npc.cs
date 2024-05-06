@@ -311,6 +311,8 @@ public class Npc : ThreadSafeObservableObject, IDisposable
         if (TemplateId == 10000 && ZoneId == 434) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
         // nightmare gossamer regent
         if (TemplateId == 2000 && ZoneId == 3201) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 0.75f);
+        // nightmare commander kalligar
+        if (TemplateId == 1000 && ZoneId == 3202) TimerPattern = new HpTriggeredTimerPattern(10 * 60, 1f);
 
         TimerPattern?.SetTarget(this);
     }

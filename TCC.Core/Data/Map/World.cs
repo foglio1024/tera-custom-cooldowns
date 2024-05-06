@@ -11,17 +11,19 @@ public readonly record struct World(uint Id)
     public static World FromXElement(XElement worldElem)
     {
         var worldId = 0U;
-        worldElem.Attributes().ToList().ForEach(a =>
+        foreach (var a in worldElem.Attributes()
+            .Where(a => a.Name == "id"))
         {
-            if (a.Name == "id") worldId = uint.Parse(a.Value);
-        });
+            worldId = uint.Parse(a.Value);
+        }
 
         var world = new World(worldId);
-        worldElem.Descendants().Where(x => x.Name == "Guard").ToList().ForEach(guardElem =>
+        foreach (var guard in worldElem.Descendants()
+            .Where(x => x.Name == "Guard")
+            .Select(Guard.FromXElement))
         {
-            var guard = Guard.FromXElement(guardElem);
             world.Guards[guard.Id] = guard;
-        });
+        }
 
         return world;
     }

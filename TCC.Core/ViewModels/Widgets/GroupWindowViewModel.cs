@@ -120,7 +120,7 @@ public class GroupWindowViewModel : TccWindowViewModel
             PacketAnalyzer.Processor.Hook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
         else
             PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
-        Members.ToSyncList().ForEach(u => u.InRange = false);
+        foreach (var u in Members.ToSyncList()) u.InRange = false;
     }
 
 
@@ -391,7 +391,7 @@ public class GroupWindowViewModel : TccWindowViewModel
     private void ClearAll()
     {
         if (!((GroupWindowSettings)Settings!).Enabled || !_dispatcher.Thread.IsAlive) return;
-        Members.ToSyncList().ForEach(x => x.ClearAbnormalities());
+        foreach (var x in Members.ToSyncList()) x.ClearAbnormalities();
         Members.Clear();
         Raid = false;
         _leaderOverride = false;
@@ -453,27 +453,27 @@ public class GroupWindowViewModel : TccWindowViewModel
     private void SetRoll(ulong entityId, int rollResult)
     {
         if (rollResult == int.MaxValue) rollResult = -1;
-        Members.ToSyncList().ForEach(member =>
+        foreach (var member in Members.ToSyncList())
         {
             if (member.EntityId == entityId)
             {
                 member.RollResult = rollResult;
             }
             member.IsWinning = member.EntityId == GetWinningUser() && member.RollResult != -1;
-        });
+        }
     }
 
     private void SetRoll(uint serverId, uint playerId, int rollResult)
     {
         if (rollResult == int.MaxValue) rollResult = -1;
-        Members.ToSyncList().ForEach(member =>
+        foreach (var member in Members.ToSyncList())
         {
             if (member.PlayerId == playerId && member.ServerId == serverId)
             {
                 member.RollResult = rollResult;
             }
             member.IsWinning = member.EntityId == GetWinningUser() && member.RollResult != -1;
-        });
+        }
     }
 
     private void EndRoll()
@@ -757,7 +757,11 @@ public class GroupWindowViewModel : TccWindowViewModel
 
     private void OnCheckToReadyParty(S_CHECK_TO_READY_PARTY p)
     {
-        _dispatcher.InvokeAsync(() => p.Party.ForEach(SetReadyStatus));
+        _dispatcher.InvokeAsync(() =>
+        {
+            foreach (var readyPartyMember in p.Party) 
+                SetReadyStatus(readyPartyMember);
+        });
     }
 
     private void OnPartyMemberStatUpdate(S_PARTY_MEMBER_STAT_UPDATE p)

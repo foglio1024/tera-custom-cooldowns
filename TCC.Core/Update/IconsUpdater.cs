@@ -52,32 +52,37 @@ public class IconsUpdater
         }
         var jHash = JObject.Parse(hashFile);
         var mismatched = new List<string>();
-        var dirs = jHash.Children().Select(j => (JProperty)j).ToList();
-        dirs.ForEach(jDir =>
+        var dirs = jHash.Children().Select(j => (JProperty)j);
+        foreach (var jDir in dirs)
         {
             var dirPath = Path.Combine(App.ResourcesPath, "images", jDir.Name);
-            ((JObject)jDir.Value).Children().Select(j => (JProperty)j).ToList().ForEach(jFile =>
+            foreach (var jFile in ((JObject)jDir.Value).Children().Select(j => (JProperty)j))
             {
                 var filePath = Path.Combine(dirPath, jFile.Name);
                 var remoteHash = jFile.Value.ToString();
                 var localHash = HashUtils.GenerateFileHash(filePath);
 
-                if (File.Exists(filePath) && localHash == remoteHash) return;
+                if (File.Exists(filePath) && localHash == remoteHash) continue;
                 mismatched.Add($"{dirPath}/{jFile.Name}");
-            });
-        });
-
-        if (mismatched.Count > 100)
-        {
-            var ni = Log.N("TCC icon updater", "Many icons are missing, downloading the whole archive...", NotificationType.Info, template: NotificationTemplate.Progress);
-            _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(ni);
-            await DownloadArchive();
+            }
         }
-        else if (mismatched.Count > 0)
+
+        switch (mismatched.Count)
         {
-            var ni = Log.N("TCC icon updater", $"Updating {mismatched.Count} icons...", NotificationType.Info, template: NotificationTemplate.Progress);
-            _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(ni);
-            await Task.Run(() => DownloadMissingIcons(mismatched));
+            case > 100:
+            {
+                var ni = Log.N("TCC icon updater", "Many icons are missing, downloading the whole archive...", NotificationType.Info, template: NotificationTemplate.Progress);
+                _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(ni);
+                await DownloadArchive();
+                break;
+            }
+            case > 0:
+            {
+                var ni = Log.N("TCC icon updater", $"Updating {mismatched.Count} icons...", NotificationType.Info, template: NotificationTemplate.Progress);
+                _n = WindowManager.ViewModels.NotificationAreaVM.GetNotification<ProgressNotificationInfo>(ni);
+                await Task.Run(() => DownloadMissingIcons(mismatched));
+                break;
+            }
         }
         //Log.N("TCC icon updater", "All icons are up to date.", NotificationType.Success);
     }
@@ -176,18 +181,17 @@ public class IconsUpdater
             if (!Directory.Exists(imagesPath)) Directory.CreateDirectory(imagesPath);
             ZipFile.ExtractToDirectory(Path.Combine(App.BasePath, "icons.zip"), App.BasePath);
             if (_n != null) _n.Message = "Creating directories...";
-            Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).ToList().ForEach(
-                dirPath =>
-                {
-                    var dir = Path.GetFileName(dirPath);
-                    Directory.CreateDirectory(Path.Combine(imagesPath,
-                        dir ?? throw new InvalidOperationException()));
-                });
+            foreach (var dir in Directory.GetDirectories(DownloadedIconsDir, "*", SearchOption.AllDirectories).Select(Path.GetFileName))
+            {
+                Directory.CreateDirectory(Path.Combine(imagesPath,
+                    dir ?? throw new InvalidOperationException()));
+            }
+
             if (_n != null) _n.Message = "Copying icons...";
-            var paths = Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories).ToList();
+            var paths = Directory.GetFiles(DownloadedIconsDir, "*.*", SearchOption.AllDirectories);
             var count = 0;
-            var total = paths.Count;
-            paths.ForEach(newPath =>
+            var total = paths.Length;
+            foreach (var newPath in paths)
             {
                 try
                 {
@@ -200,10 +204,11 @@ public class IconsUpdater
                     Log.F("Failed to copy icon " + newPath + "\n" + e);
                 }
 
-                if (_n == null) return;
+                if (_n == null) continue;
                 _n.Message = $"Copying icons...\n({++count}/{total})";
                 _n.Progress = count * 100 / (double)total;
-            });
+            }
+
             if (_n != null)
             {
                 _n.Progress = 0;

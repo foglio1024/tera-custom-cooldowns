@@ -37,9 +37,8 @@ public class DungeonInfo
 
     public void ResetAll(ResetMode mode)
     {
-        DungeonList.Where(d => d.Dungeon.ResetMode == mode)
-            .ToList()
-            .ForEach(dg => dg.Reset());
+        foreach (var dg in DungeonList.Where(d => d.Dungeon.ResetMode == mode)) 
+            dg.Reset();
     }
 
     public void UpdateEntries(Dictionary<uint, short> dungeonCooldowns)
@@ -49,7 +48,7 @@ public class DungeonInfo
             DungeonList.Add(new DungeonCooldownData(kv.Key) { Entries = kv.Value });
         }
 
-        DungeonList.ForEach(dung =>
+        foreach (var dung in DungeonList)
         {
             if (dungeonCooldowns.TryGetValue(dung.Dungeon.Id, out var entries))
             {
@@ -59,7 +58,7 @@ public class DungeonInfo
             {
                 dung.Reset();
             }
-        });
+        }
     }
 
     public void UpdateClears(uint dgId, int runs)
@@ -79,6 +78,6 @@ public class DungeonInfo
 
     public void UpdateAvailableEntries(uint coins, uint maxCoins)
     {
-        DungeonList.ForEach(x => x.UpdateAvailableEntries(coins, maxCoins));
+        foreach (var x in DungeonList) x.UpdateAvailableEntries(coins, maxCoins);
     }
 }

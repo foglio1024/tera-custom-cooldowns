@@ -64,7 +64,7 @@ public class FriendList
             _friends.Remove(item);
         }
 
-        friends.ForEach(updated =>
+        foreach (var updated in friends)
         {
             var existing = _friends.Find(x => x.Id == updated.Id);
             if (existing == default)
@@ -77,7 +77,7 @@ public class FriendList
                 existing.UpdateFrom(updated);
                 _friends[idx] = existing;
             }
-        });
+        }
     }
 
     internal void Remove(string name)

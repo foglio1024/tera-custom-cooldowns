@@ -39,15 +39,15 @@ public class MergedInventoryViewModel : ThreadSafeObservableObject
 
     public void LoadItems()
     {
-        var totalItemsAmount = Game.Account.Characters.Where(c => !c.Hidden).Sum(ch => ch.Inventory.Count);
+        var totalItemsAmount = Game.Account.Characters.ToArray().Where(c => !c.Hidden).Sum(ch => ch.Inventory.Count);
         var itemsParsed = 0;
         Task.Factory.StartNew(() =>
         {
-            Game.Account.Characters.Where(c => !c.Hidden).ToList().ForEach(ch =>
+            foreach (var ch in Game.Account.Characters.ToArray().Where(c => !c.Hidden))
             {
                 _dispatcher.InvokeAsync(() =>
                 {
-                    ch.Inventory.ToList().ForEach(item =>
+                    foreach (var item in ch.Inventory.ToArray())
                     {
                         _dispatcher.InvokeAsync(() =>
                         {
@@ -73,9 +73,9 @@ public class MergedInventoryViewModel : ThreadSafeObservableObject
                             itemsParsed++;
                             TotalProgress = itemsParsed / (double)totalItemsAmount;
                         }, DispatcherPriority.DataBind);
-                    });
+                    }
                 }, DispatcherPriority.Background);
-            });
+            }
         });
     }
 }
@@ -93,15 +93,7 @@ public class MergedInventoryItem : ThreadSafeObservableObject
 {
     public InventoryItem? Item => Items.Count > 0 ? Items[0].Item : null;
     public ThreadSafeObservableCollection<InventoryItemWithOwner> Items { get; }
-    public int TotalAmount
-    {
-        get
-        {
-            var ret = 0;
-            Items.ToList().ForEach(i => ret += i.Item.Amount);
-            return ret;
-        }
-    }
+    public int TotalAmount => Items.ToArray().Sum(i => i.Item.Amount);
 
     public MergedInventoryItem()
     {

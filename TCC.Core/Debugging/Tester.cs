@@ -133,8 +133,9 @@ public static class Tester
             PlayerId = Convert.ToUInt32(id),
             UserClass = c,
             Online = true,
+            HasAggro = true,
             Laurel = l,
-            InRange = App.Random.Next(0, 10) >= 5,
+            InRange = true, //App.Random.Next(0, 10) >= 5,
             IsLeader = leader,
             Name = id.ToString()
         });
@@ -173,7 +174,7 @@ public static class Tester
     internal static void AddFakeSystemMessage(string opcodeNname, params string[] p)
     {
         var srvMsg = $"@0";
-        p.ToList().ForEach(par => srvMsg += $"\v{par}");
+        foreach (var par in p.ToList()) srvMsg += $"\v{par}";
         SystemMessagesProcessor.AnalyzeMessage(srvMsg, opcodeNname);
         //ChatWindowManager.Instance.AddSystemMessage(srvMsg, sysmsg);
     }

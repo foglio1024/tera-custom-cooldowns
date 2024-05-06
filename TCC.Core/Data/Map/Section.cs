@@ -25,13 +25,14 @@ public readonly record struct Section
         var sectionMapId = "";
         var isDungeon = false;
 
-        sectionElem.Attributes().ToList().ForEach(a =>
+        foreach (var a in sectionElem.Attributes())
         {
             if (a.Name == "id") sectionId = uint.Parse(a.Value);
             if (a.Name == "nameId") sectionNameId = uint.Parse(a.Value);
             if (a.Name == "mapId") sectionMapId = a.Value;
             if (a.Name == "type") isDungeon = a.Value == "dungeon";
-        });
+        }
+
         return new Section(sectionId, sectionNameId, sectionMapId, isDungeon);
     }
 }

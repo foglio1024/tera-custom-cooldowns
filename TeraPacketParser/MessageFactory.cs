@@ -164,7 +164,7 @@ public class MessageFactory
 
     public void Refresh()
     {
-        TeraMessages.ToList().ForEach(x => OpcodeNameToType[OpCodeNamer.GetCode(x.Key)] = x.Value);
+        foreach (var (opcode, handler) in TeraMessages) OpcodeNameToType[OpCodeNamer.GetCode(opcode)] = handler;
     }
     public void Set(uint version, OpCodeNamer opcNamer)
     {

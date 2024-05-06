@@ -38,10 +38,10 @@ public class MapDatabase : DatabaseBase
     {
         Worlds.Clear();
         var xdoc = XDocument.Load(FullPath);
-        xdoc.Descendants().Where(x => x.Name == "World").ToList().ForEach(worldElem =>
+        foreach (var worldElem in xdoc.Descendants().Where(x => x.Name == "World"))
         {
             var world = World.FromXElement(worldElem);
             Worlds[world.Id] = world;
-        });
+        }
     }
 }

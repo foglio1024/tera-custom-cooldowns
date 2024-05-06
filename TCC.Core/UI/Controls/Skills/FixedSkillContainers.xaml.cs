@@ -284,24 +284,26 @@ public partial class FixedSkillContainers
                     break;
             }
 
-            var tmp = target.ToList();
+            var tmp = target.ToArray();
 
             //force correct order as it's not preserved
             target.Clear();
-            tmp.ForEach(x => target.Add(x));
+            foreach (var x in tmp) 
+                target.Add(x);
 
             const ulong delay = 500;
             //wait a bit and restart any running skill
             Task.Delay(TimeSpan.FromMilliseconds(delay)).ContinueWith(_ =>
             {
-                WindowManager.ViewModels.CooldownsVM.MainSkills.ToList().ForEach(x =>
+                foreach (var x in WindowManager.ViewModels.CooldownsVM.MainSkills.ToArray().Where(x => x.Seconds > 0))
                 {
-                    if (x.Seconds > 0) x.Start(Convert.ToUInt64(x.Seconds * 1000 - delay));
-                });
-                WindowManager.ViewModels.CooldownsVM.SecondarySkills.ToList().ForEach(x =>
+                    x.Start(Convert.ToUInt64(x.Seconds * 1000 - delay));
+                }
+
+                foreach (var x in WindowManager.ViewModels.CooldownsVM.SecondarySkills.ToArray().Where(x => x.Seconds > 0))
                 {
-                    if (x.Seconds > 0) x.Start(Convert.ToUInt64(x.Seconds * 1000 - delay));
-                });
+                    x.Start(Convert.ToUInt64(x.Seconds * 1000 - delay));
+                }
             });
 
             WindowManager.ViewModels.CooldownsVM.SaveConfig();

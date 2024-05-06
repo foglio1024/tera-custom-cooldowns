@@ -87,16 +87,16 @@ public class NpcWindowViewModel : TccWindowViewModel
     private void RefreshBlacklist(uint zoneId, uint templateId, bool b)
     {
         if (!b) return;
-        _npcList.ToSyncList()
-            .Where(n => n.ZoneId == zoneId && n.TemplateId == templateId)
-            .ToList()
-            .ForEach(RemoveAndDisposeNPC);
+        foreach (var npc in _npcList.ToSyncList()
+                     .Where(n => n.ZoneId == zoneId && n.TemplateId == templateId))
+            RemoveAndDisposeNPC(npc);
     }
 
     private void OnHideAddsChanged()
     {
         if (!((NpcWindowSettings)Settings!).HideAdds) return;
-        _npcList.ToSyncList().Where(x => !x.IsBoss).ToList().ForEach(RemoveAndDisposeNPC);
+        foreach (var npc in _npcList.ToSyncList().Where(x => !x.IsBoss)) 
+            RemoveAndDisposeNPC(npc);
     }
 
     public void AddOrUpdateNpc(ulong entityId, float maxHp, float curHp, bool isBoss, HpChangeSource src, uint templateId = 0, uint zoneId = 0, bool visibility = true, int remainingEnrageTime = 0)
@@ -116,17 +116,17 @@ public class NpcWindowViewModel : TccWindowViewModel
     private void CheckPendingAbnormalities(Npc npc)
     {
         if (PendingAbnormalities.Count == 0) return;
-        var npcAbs = PendingAbnormalities.Where(x => x.Target == npc.EntityId).ToList();
-        npcAbs.ForEach(ab =>
+        var npcAbs = PendingAbnormalities.Where(x => x.Target == npc.EntityId).ToArray();
+        foreach (var ab in npcAbs)
         {
-            if (npc.EntityId != ab.Target) return;
-
             var delay = (uint)(DateTime.Now - ab.ArrivalTime).TotalMilliseconds;
-            if (delay >= ab.Duration) return;
+            if (delay >= ab.Duration) continue;
             npc.AddorRefreshAbnormality(ab.Abnormality, ab.Duration - delay, ab.Stacks);
             //Log.CW($"Applied pending abnormal {ab.Abnormality.Name} to {ab.Target} ({npc.Name})");
-        });
-        npcAbs.ForEach(aa => PendingAbnormalities.Remove(aa));
+        }
+
+        foreach (var aa in npcAbs) 
+            PendingAbnormalities.Remove(aa);
     }
 
     public void RemoveNPC(Npc npc, uint delay)
@@ -232,10 +232,9 @@ public class NpcWindowViewModel : TccWindowViewModel
 
     private void RefreshOverride(uint zoneId, uint templateId, bool b)
     {
-        _npcList.ToSyncList()
-            .Where(n => n.ZoneId == zoneId && n.TemplateId == templateId)
-            .ToList()
-            .ForEach(n => n.IsBoss = b);
+        foreach (var n in _npcList.ToSyncList()
+                     .Where(n => n.ZoneId == zoneId && n.TemplateId == templateId))
+            n.IsBoss = b;
     }
 
     private Npc GetOrAddNpc(ulong eid, uint zone, uint template, bool isBoss, bool visible)
@@ -289,7 +288,7 @@ public class NpcWindowViewModel : TccWindowViewModel
             if (_cache.Count == 0) return;
             try
             {
-                _cache.ToList().ForEach(hpc => SetFromCache(hpc.Key, hpc.Value));
+                foreach (var (entityId, hp) in _cache) SetFromCache(entityId, hp);
             }
             catch (Exception ex)
             {

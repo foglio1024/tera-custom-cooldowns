@@ -35,7 +35,7 @@ public class TeraSniffer : ITeraSniffer
         set
         {
             _connected = value;
-            _isNew.Keys.ToList().ForEach(x => x.RemoveCallback());
+            foreach (var x in _isNew.Keys) x.RemoveCallback();
             _isNew.Clear();
         }
     }

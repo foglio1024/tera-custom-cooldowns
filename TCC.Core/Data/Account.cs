@@ -24,7 +24,7 @@ public class Account : ICloneable
     public object Clone()
     {
         var account = new Account { IsElite = IsElite };
-        Characters.ToSyncList().ForEach(account.Characters.Add);
+        foreach (var c in Characters.ToSyncList()) account.Characters.Add(c);
         return account;
     }
 }

@@ -54,8 +54,8 @@ public partial class LfgControl
             Task.Delay(1000).ContinueWith(_ =>
             {
                 if (_dc == null) return;
-                WindowManager.ViewModels.LfgVM.Listings.ToList()
-                    .ForEach(x => x.IsExpanded = x.LeaderId == _dc.Id);
+                foreach (var x in WindowManager.ViewModels.LfgVM.Listings.ToList()) 
+                    x.IsExpanded = x.LeaderId == _dc.Id;
             });
         }
 

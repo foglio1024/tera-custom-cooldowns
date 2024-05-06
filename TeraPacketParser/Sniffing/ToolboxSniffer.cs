@@ -91,7 +91,7 @@ public class ToolboxSniffer : ITeraSniffer
         public async Task<bool> AddHooks(List<string> opcodes)
         {
             var jArray = new JArray();
-            opcodes.ForEach(opc => jArray.Add(opc));
+            foreach (var opc in opcodes) jArray.Add(opc);
             var resp = await _client.CallAsync("addHooks", new JObject
             {
                 {"hooks", jArray}
@@ -126,7 +126,7 @@ public class ToolboxSniffer : ITeraSniffer
         public async Task<bool> RemoveHooks(List<string> opcodes)
         {
             var jArray = new JArray();
-            opcodes.ForEach(opc => jArray.Add(opc));
+            foreach (var opc in opcodes) jArray.Add(opc);
             var resp = await _client.CallAsync("removeHooks", new JObject
             {
                 {"hooks", jArray}

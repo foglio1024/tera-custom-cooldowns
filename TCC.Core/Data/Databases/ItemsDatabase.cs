@@ -80,7 +80,6 @@ public class ItemsDatabase : DatabaseBase
             var item = new Item(id, name, (RareGrade)grad, expId, cd, icon);
             Items[id] = item;
         }
-
         AddOverride(new Item(149644, "Harrowhold Rejuvenation Potion", RareGrade.Uncommon, 0, 30, "icon_items.potion1_tex"));
         AddOverride(new Item(139520, "Minify", RareGrade.Common, 0, 3, "icon_items.icon_janggoe_item_tex_minus"));
     }

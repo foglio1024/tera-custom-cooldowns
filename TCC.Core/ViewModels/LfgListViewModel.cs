@@ -201,7 +201,7 @@ public class LfgListViewModel : TccWindowViewModel
     {
         Listings = new ThreadSafeObservableCollection<Listing>(_dispatcher);
         BlacklistedWords = new ThreadSafeObservableCollection<string>(_dispatcher);
-        settings.BlacklistedWords.ForEach(w => BlacklistedWords.Add(w));
+        foreach (var w in settings.BlacklistedWords) BlacklistedWords.Add(w);
         ListingsView = CollectionViewFactory.CreateLiveCollectionView(Listings,
             //l => !l.IsFullOffline,
             filters: [nameof(Listing.IsFullOffline)],
@@ -287,12 +287,12 @@ public class LfgListViewModel : TccWindowViewModel
 
     private void CollapseAll()
     {
-        Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(false));
+        foreach (var l in Listings.ToSyncList()) l.ExpandCollapseCommand.Execute(false);
     }
 
     private void ExpandAll()
     {
-        Listings.ToSyncList().ForEach(l => l.ExpandCollapseCommand.Execute(true));
+        foreach (var l in Listings.ToSyncList()) l.ExpandCollapseCommand.Execute(true);
     }
 
     private bool CanCreateMessage()
@@ -473,26 +473,24 @@ public class LfgListViewModel : TccWindowViewModel
         {
             _dispatcher.InvokeAsync(() => ActualListingsAmount = listings.Count);
             RemoveMissingListings();
-            listings.ForEach(l => _dispatcher.InvokeAsync(() => AddOrRefreshListing(l)));
+            foreach (var l in listings) _dispatcher.InvokeAsync(() => AddOrRefreshListing(l));
         });
         return;
 
         void RemoveMissingListings()
         {
-            var toRemove = new List<uint>();
+            var toRemove = from l in Listings.ToSyncList()
+                           where listings.All(f => f.LeaderId != l.LeaderId) && !l.Temp 
+                           select l.LeaderId;
 
-            Listings.ToSyncList().ForEach(l =>
-            {
-                if (listings.All(f => f.LeaderId != l.LeaderId) && !l.Temp) toRemove.Add(l.LeaderId);
-            });
-            toRemove.ForEach(r =>
+            foreach (var r in toRemove)
             {
                 _dispatcher.InvokeAsync(() =>
                 {
                     var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
                     if (target != null) Listings.Remove(target);
                 });
-            });
+            }
         }
     }
 
@@ -535,12 +533,12 @@ public class LfgListViewModel : TccWindowViewModel
     private void OnHideTradeChanged()
     {
         if (!((LfgWindowSettings)Settings!).HideTradeListings) return;
+
         var toRemove = Listings.ToSyncList().Where(l => l.IsTrade).Select(s => s.LeaderId).ToList();
-        toRemove.ForEach(r =>
+        foreach (var target in toRemove.Select(r => Listings.FirstOrDefault(rm => rm.LeaderId == r)).OfType<Listing>())
         {
-            var target = Listings.FirstOrDefault(rm => rm.LeaderId == r);
-            if (target != null) Listings.Remove(target);
-        });
+            Listings.Remove(target);
+        }
     }
 
     private void NotifyMyLfg()
@@ -608,7 +606,7 @@ public class LfgListViewModel : TccWindowViewModel
 
         var toRemove = dest.Where(user => p.Candidates.All(x => x.PlayerId != user.PlayerId)).ToList();
 
-        toRemove.ForEach(r => dest.Remove(r));
+        foreach (var r in toRemove) dest.Remove(r);
     }
 
     private void OnPartyMemberInfo(S_PARTY_MEMBER_INFO m)
@@ -622,17 +620,17 @@ public class LfgListViewModel : TccWindowViewModel
             if (lfg == null) return;
             Task.Factory.StartNew(() =>
             {
-                m.Members.ForEach(member =>
+                foreach (var member in m.Members)
                 {
                     if (lfg.Players.ToSyncList().Any(toFind => toFind.PlayerId == member.PlayerId))
                     {
                         var target = lfg.Players.ToSyncList()
                             .FirstOrDefault(player => player.PlayerId == member.PlayerId);
-                        if (target == null) return;
+                        if (target == null) continue;
                         target.IsLeader = member.IsLeader;
                         target.Online = member.Online;
                         target.Location = Game.DB!.GetSectionName(member.GuardId, member.SectionId);
-                        if (!member.IsLeader) return;
+                        if (!member.IsLeader) continue;
                         lfg.LeaderId = member.PlayerId;
                         lfg.ServerId = member.ServerId;
                         lfg.LeaderName = member.Name;
@@ -648,20 +646,18 @@ public class LfgListViewModel : TccWindowViewModel
                             lfg.LeaderName = member.Name;
                         });
                     }
-                });
+                }
 
-                var toDelete = new List<uint>();
-                lfg.Players.ToSyncList().ForEach(player =>
-                {
-                    if (m.Members.All(newMember => newMember.PlayerId != player.PlayerId))
-                        toDelete.Add(player.PlayerId);
-                });
-                toDelete.ForEach(targetId =>
+                var toDelete = from player in lfg.Players.ToSyncList()
+                               where m.Members.All(newMember => newMember.PlayerId != player.PlayerId)
+                               select player.PlayerId;
+
+                foreach (var targetId in toDelete)
                 {
                     var target = lfg.Players.ToSyncList()
                         .FirstOrDefault(playerToRemove => playerToRemove.PlayerId == targetId);
                     if (target != null) lfg.Players.Remove(target);
-                });
+                }
 
                 lfg.IsFullOffline = lfg.Players.Count > 0 && lfg.Players.All(p => !p.Online);
 

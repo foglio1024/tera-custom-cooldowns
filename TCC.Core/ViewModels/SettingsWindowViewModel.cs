@@ -727,17 +727,17 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         get
         {
             _blacklistedMonsters ??= new ThreadSafeObservableCollection<BlacklistedMonsterVM>(_dispatcher);
-            var bl =Game.DB?.MonsterDatabase.GetBlacklistedMonsters();
-            bl?.ForEach(m =>
+            var bl = Game.DB?.MonsterDatabase.GetBlacklistedMonsters() ?? [];
+            foreach (var m in bl.Where(m => _blacklistedMonsters.All(x => x.Monster != m)))
             {
-                if (_blacklistedMonsters.Any(x => x.Monster == m)) return;
                 _blacklistedMonsters.Add(new BlacklistedMonsterVM(m));
-            });
-            _blacklistedMonsters.ToSyncList().ForEach(vm =>
+            }
+
+            foreach (var vm in _blacklistedMonsters.ToSyncList().Where(vm => !bl.Contains(vm.Monster)))
             {
-                if (bl?.Contains(vm.Monster) == true) return;
                 _blacklistedMonsters.Remove(vm);
-            });
+            }
+
             return _blacklistedMonsters;
         }
     }
@@ -753,7 +753,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             StubInterface.Instance.StubClient.UpdateSetting("EnablePlayerMenu", App.Settings.EnablePlayerMenu);
         }
     }
-                
+
     public bool ShowIngameChat
     {
         get => App.Settings.ShowIngameChat;
@@ -787,13 +787,13 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
             _ => Game.Logged);
         OpenWindowCommand = new RelayCommand(winType =>
         {
-            if(winType == null)
+            if (winType == null)
             {
                 //Log.CW("Failed to open window with null type");
                 return;
             }
-            var t = (Type) winType;
-            if (TccWindow.Exists(t)) return; 
+            var t = (Type)winType;
+            if (TccWindow.Exists(t)) return;
             var win = Activator.CreateInstance(t, null) as TccWindow;
             win?.ShowWindow();
         });
@@ -817,7 +817,7 @@ public class SettingsWindowViewModel : ThreadSafeObservableObject
         });
         MakePositionsGlobalCommand = new RelayCommand(_ => WindowManager.MakeGlobal());
         ResetWindowPositionsCommand = new RelayCommand(_ => WindowManager.ResetToCenter());
-        OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(new ProcessStartInfo(Path.Combine(App.ResourcesPath, "config")){UseShellExecute = true}));
+        OpenResourcesFolderCommand = new RelayCommand(_ => Process.Start(new ProcessStartInfo(Path.Combine(App.ResourcesPath, "config")) { UseShellExecute = true }));
         ClearChatCommand = new RelayCommand(_ => ChatManager.Instance.ClearMessages());
         OpenConfigureLfgWindowCommand = new RelayCommand(_ =>
         {

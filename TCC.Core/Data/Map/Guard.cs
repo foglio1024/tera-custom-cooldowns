@@ -24,19 +24,19 @@ public readonly record struct Guard
         var guardNameId = 0U;
         var continentId = 0U;
 
-        guardElem.Attributes().ToList().ForEach(a =>
+        foreach (var a in guardElem.Attributes())
         {
             if (a.Name == "id") guardId = uint.Parse(a.Value);
             if (a.Name == "nameId") guardNameId = uint.Parse(a.Value);
             if (a.Name == "continentId") continentId = uint.Parse(a.Value);
-        });
+        }
 
         var guard = new Guard(guardId, guardNameId, continentId);
-        guardElem.Descendants().Where(x => x.Name == "Section").ToList().ForEach(sectionElem =>
+        foreach (var sectionElem in guardElem.Descendants().Where(x => x.Name == "Section"))
         {
             var section = Section.FromXElement(sectionElem);
             guard.Sections[section.Id] = section;
-        });
+        }
 
         return guard;
     }

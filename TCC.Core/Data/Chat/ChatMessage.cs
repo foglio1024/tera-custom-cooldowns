@@ -101,8 +101,8 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
         get => _isVisible;
         set
         {
-            UsedPieces.ToList().ForEach(p => p.IsVisible = value);
-            SecondaryPieces.ToList().ForEach(p => p.IsVisible = value);
+            foreach (var p in UsedPieces.ToArray()) p.IsVisible = value;
+            foreach (var p in SecondaryPieces.ToArray()) p.IsVisible = value;
             if (value)
             {
                 SettingsWindowViewModel.ChatShowChannelChanged += NotifyShowChannelChanged;
@@ -361,7 +361,10 @@ public class ChatMessage : ThreadSafeObservableObject, IDisposable
                 }
                 else
                 {
-                    piece.ChildNodes.ToList().ForEach(ParseHtmlPiece);
+                    foreach (var node in piece.ChildNodes)
+                    {
+                        ParseHtmlPiece(node);
+                    }
                 }
             }
             else

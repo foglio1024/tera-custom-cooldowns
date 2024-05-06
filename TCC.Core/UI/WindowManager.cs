@@ -31,7 +31,7 @@ public static class WindowManager
     public static CooldownWindow CooldownWindow { get; private set; } = null!;
     public static CharacterWindow CharacterWindow { get; private set; } = null!;
     public static BossWindow BossWindow { get; private set; } = null!;
-    public static BuffWindow BuffWindow { get; private set; } = null!;
+    public static AbnormalityWindow BuffWindow { get; private set; } = null!;
     public static GroupWindow GroupWindow { get; private set; } = null!;
     public static ClassWindow ClassWindow { get; private set; } = null!;
     public static SettingsWindow SettingsWindow { get; private set; } = null!;
@@ -87,9 +87,11 @@ public static class WindowManager
 
     private static void CloseOtherWindows()
     {
-        Application.Current.Windows.ToList()
-            .Where(w => w is not TccWidget).ToList()
-            .ForEach(w => w.TryClose());
+        foreach (var w in Application.Current.Windows.ToList()
+                     .Where(w => w is not TccWidget))
+        {
+            w.TryClose();
+        }
     }
 
     private static async Task LoadWindows()
@@ -115,7 +117,7 @@ public static class WindowManager
         BossWindow = await b5.GetWindow();
         ViewModels.NpcVM = await b5.GetViewModel();
 
-        var b6 = new TccWidgetBuilder<BuffWindow, AbnormalityWindowViewModel>(App.Settings.BuffWindowSettings);
+        var b6 = new TccWidgetBuilder<AbnormalityWindow, AbnormalityWindowViewModel>(App.Settings.BuffWindowSettings);
         BuffWindow = await b6.GetWindow();
         ViewModels.AbnormalVM = await b6.GetViewModel();
 

@@ -244,11 +244,10 @@ public static class UpdateManager
         using var sr = new StreamReader(f);
         var sHashes = await sr.ReadToEndAsync();
         var jHashes = JObject.Parse(sHashes);
-        jHashes.Descendants().ToList().ForEach(jDesc =>
+        foreach (var jProp in jHashes.Descendants().OfType<JProperty>())
         {
-            if (jDesc is not JProperty jProp) return;
             DatabaseHashes[jProp.Name] = jProp.Value.ToString();
-        });
+        }
     }
 
 

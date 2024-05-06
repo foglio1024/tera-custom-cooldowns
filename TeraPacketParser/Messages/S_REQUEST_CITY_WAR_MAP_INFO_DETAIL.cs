@@ -5,11 +5,11 @@ namespace TeraPacketParser.Messages;
 
 public class S_REQUEST_CITY_WAR_MAP_INFO_DETAIL : ParsedMessage
 {
-    public readonly List<Tuple<uint, string>> GuildDetails;
+    public readonly List<(uint Id, string Name)> GuildDetails;
 
     public S_REQUEST_CITY_WAR_MAP_INFO_DETAIL(TeraMessageReader reader) : base(reader)
     {
-        GuildDetails = new List<Tuple<uint, string>>();
+        GuildDetails = new List<(uint Id, string Name)>();
         try
         {
             var count = reader.ReadUInt16();
@@ -25,7 +25,7 @@ public class S_REQUEST_CITY_WAR_MAP_INFO_DETAIL : ParsedMessage
                 var name = reader.ReadTeraString();
                 /*var gm = */reader.ReadTeraString();
                 /*var logo = */reader.ReadTeraString();
-                GuildDetails.Add(new Tuple<uint, string>(id, name));
+                GuildDetails.Add((id, name));
                 if (next != 0) reader.BaseStream.Position = next - 4;
             }
         }

@@ -262,14 +262,13 @@ public class ChatManager : TccWindowViewModel
     private void InitWindows()
     {
         ChatWindows.Clear();
-        App.Settings.ChatWindowsSettings.ToList().ForEach(s =>
+        foreach (var s in App.Settings.ChatWindowsSettings.Where(s => s.Tabs.Count != 0))
         {
-            if (s.Tabs.Count == 0) return;
             var m = new ChatViewModel(s);
             var w = new ChatWindow(m);
             ChatWindows.Add(w);
             m.LoadTabs(s.Tabs);
-        });
+        }
 
         if (ChatWindows.Count != 0) return;
         {
@@ -300,16 +299,16 @@ public class ChatManager : TccWindowViewModel
 
     public void SetPaused(bool v)
     {
-        ChatWindows.ToList().ForEach(w => w.VM.Paused = v);
+        foreach (var w in ChatWindows) w.VM.Paused = v;
     }
 
     public void SetPaused(bool v, ChatMessage dc)
     {
-        ChatWindows.ToList().ForEach(w =>
+        foreach (var w in ChatWindows)
         {
-            if (w.VM.CurrentTab?.Messages == null) return;
+            if (w.VM.CurrentTab?.Messages == null) continue;
             if (w.VM.CurrentTab.Messages.Contains(dc)) w.VM.Paused = v;
-        });
+        }
     }
 
     public void ScrollToBottom()
@@ -546,14 +545,15 @@ public class ChatManager : TccWindowViewModel
     private void OnPrivateChannelJoined(int index)
     {
         var messagesToAdd = _privateMessagesCache.Where(x => x.Channel == PrivateChannels[index].Id).ToList();
-        messagesToAdd.ForEach(x =>
+        foreach (var message in messagesToAdd)
         {
             AddChatMessage(Factory.CreateMessage(
                 (ChatChannel)index + 11,
-                x.Author == "undefined" ? "System" : x.Author,
-                x.Message));
-        });
-        messagesToAdd.ForEach(x => _privateMessagesCache.Remove(x));
+                message.Author == "undefined" ? "System" : message.Author,
+                message.Message));
+        }
+
+        foreach (var message in messagesToAdd) _privateMessagesCache.Remove(message);
     }
 
     public void CachePrivateMessage(uint channel, string author, string message)
@@ -636,7 +636,11 @@ public class ChatManager : TccWindowViewModel
 
     private void ToggleForcedClickThru()
     {
-        App.Settings.ChatWindowsSettings.ToSyncList().ForEach(s => { s.ForcedClickable = !s.ForcedClickable; });
+        foreach (var s in App.Settings.ChatWindowsSettings.ToSyncList())
+        {
+            s.ForcedClickable = !s.ForcedClickable; 
+        }
+
         if (App.Settings.ChatWindowsSettings.Count == 0) return;
         var msg =
             $"Forcing chat clickable turned {(App.Settings.ChatWindowsSettings[0].ForcedClickable ? "on" : "off")}";

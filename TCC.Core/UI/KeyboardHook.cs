@@ -94,7 +94,9 @@ public sealed class KeyboardHook : IDisposable
     private void RegisterHotkeys()
     {
         //Console.WriteLine("RegisterHotkeys()");
-        _callbacks.Keys.ToList().ForEach(RegisterHotKey);
+        foreach (var hotKey in _callbacks.Keys.ToList()) 
+            RegisterHotKey(hotKey);
+
         _isRegistered = true;
     }
 

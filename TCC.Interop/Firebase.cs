@@ -96,10 +96,10 @@ public static class Firebase
         {
             var webhooks = new List<Webhook> { Capacity = _registeredWebhooks.Count }.ToArray();
             _registeredWebhooks.CopyTo(webhooks);
-            webhooks.ToList().ForEach(w =>
+            foreach (var w in webhooks)
             {
                 RegisterWebhook(w.URL, false, w.AccountHash);
-            });
+            }
         }
         catch (Exception e)
         {

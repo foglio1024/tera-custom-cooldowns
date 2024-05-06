@@ -87,45 +87,23 @@ public class DashboardViewModel : TccWindowViewModel
             Task.Factory.StartNew(() =>
             {
                 if (SelectedCharacter == null) return;
-                SelectedCharacter.Inventory.ToList().ForEach(item =>
+                foreach (var item in SelectedCharacter.Inventory.ToList())
                 {
                     App.BaseDispatcher.InvokeAsync(() =>
                     {
                         ret.Add(item);
                     }, DispatcherPriority.Background);
-                });
+                }
             });
             return ret;
         }
     }
 
-    public int TotalElleonMarks
-    {
-        get
-        {
-            var ret = 0;
-            Game.Account.Characters.ToSyncList().ForEach(c => ret += c.ElleonMarks);
-            return ret;
-        }
-    }
-    public int TotalVanguardCredits
-    {
-        get
-        {
-            var ret = 0;
-            Game.Account.Characters.ToSyncList().ForEach(c => ret += c.VanguardInfo.Credits);
-            return ret;
-        }
-    }
-    public int TotalGuardianCredits
-    {
-        get
-        {
-            var ret = 0;
-            Game.Account.Characters.ToSyncList().ForEach(c => ret += c.GuardianInfo.Credits);
-            return ret;
-        }
-    }
+    public int TotalElleonMarks => Game.Account.Characters.ToSyncList().Sum(c => c.ElleonMarks);
+
+    public int TotalVanguardCredits => Game.Account.Characters.ToSyncList().Sum(c => c.VanguardInfo.Credits);
+
+    public int TotalGuardianCredits => Game.Account.Characters.ToSyncList().Sum(c => c.GuardianInfo.Credits);
 
     public ThreadSafeObservableCollection<CharacterViewModel> CharacterViewModels
     {
@@ -231,20 +209,21 @@ public class DashboardViewModel : TccWindowViewModel
 
             Task.Factory.StartNew(() =>
             {
-                Game.DB!.DungeonDatabase.Dungeons.Values/*.Where(d => d.HasDef)*/.ToList().ForEach(dungeon =>
+                foreach (var dungeon in Game.DB!.DungeonDatabase.Dungeons.Values)
                 {
                     App.BaseDispatcher.InvokeAsync(() =>
                     {
                         var dvc = new DungeonColumnViewModel(dungeon);
-                        CharacterViewModels.ToList().ForEach(charVm =>
+                        foreach (var charVm in CharacterViewModels.ToArray())
                         {
                             dvc.DungeonsList.Add(new DungeonCooldownViewModel(
                                 charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id) ?? throw new NullReferenceException("Dungeon not found!"),
                                 charVm.Character));
-                        });
+                        }
+
                         _columns?.Add(dvc);
                     }, DispatcherPriority.Background);
-                });
+                }
             });
             _loaded = true;
         }, _ => !_loaded);
@@ -270,11 +249,11 @@ public class DashboardViewModel : TccWindowViewModel
 
         LoadCharacters();
 
-        Game.Account.Characters.ToList().ForEach(c =>
+        foreach (var c in Game.Account.Characters)
         {
             _characters.Add(c);
             CharacterViewModels.Add(new CharacterViewModel(c));
-        });
+        }
 
         Game.Account.Characters.CollectionChanged += SyncViewModel;
 
@@ -406,7 +385,7 @@ public class DashboardViewModel : TccWindowViewModel
     public void SetLoggedIn(uint id)
     {
         _discardFirstVanguardPacket = true;
-        Game.Account.Characters.ToList().ForEach(x => x.IsLoggedIn = x.Id == id);
+        foreach (var x in Game.Account.Characters) x.IsLoggedIn = x.Id == id;
     }
     public void SetDungeons(Dictionary<uint, short> dungeonCooldowns)
     {
@@ -529,7 +508,7 @@ public class DashboardViewModel : TccWindowViewModel
 
     private void OnAvailableEventMatchingList(S_AVAILABLE_EVENT_MATCHING_LIST m)
     {
-        SetVanguard(m.WeeklyDone,m.WeeklyMax, m.DailyDone, m.VanguardCredits);
+        SetVanguard(m.WeeklyDone, m.WeeklyMax, m.DailyDone, m.VanguardCredits);
     }
 
     private void OnDungeonCoolTimeList(S_DUNGEON_COOL_TIME_LIST m)
@@ -586,19 +565,18 @@ public class DashboardViewModel : TccWindowViewModel
     private void OnNpcGuildList(S_NPCGUILD_LIST m)
     {
         if (!Game.IsMe(m.UserId)) return;
-        m.NpcGuildList.Keys.ToList()
-            .ForEach(k =>
+        foreach (var (guild, credits) in m.NpcGuildList)
+        {
+            switch (guild)
             {
-                switch (k)
-                {
-                    case (int)NpcGuild.Vanguard:
-                        SetVanguardCredits(m.NpcGuildList[k]);
-                        break;
-                    case (int)NpcGuild.Guardian:
-                        SetGuardianCredits(m.NpcGuildList[k]);
-                        break;
-                }
-            });
+                case (int)NpcGuild.Vanguard:
+                    SetVanguardCredits(credits);
+                    break;
+                case (int)NpcGuild.Guardian:
+                    SetGuardianCredits(credits);
+                    break;
+            }
+        }
     }
 
     private void OnUpdateNpcGuild(S_UPDATE_NPCGUILD m)
@@ -811,32 +789,33 @@ public class DashboardViewModel : TccWindowViewModel
         Task.Run(() =>
         {
             CurrentCharacter.Buffs.Clear();
-            Game.Me.Buffs.ToSyncList().ForEach(b =>
+            foreach (var b in Game.Me.Buffs.ToSyncList())
             {
                 CurrentCharacter?.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-            });
-            Game.Me.Debuffs.ToSyncList().ForEach(b =>
+            }
+
+            foreach (var b in Game.Me.Debuffs.ToSyncList())
             {
                 CurrentCharacter?.Buffs.Add(new AbnormalityData { Id = b.Abnormality.Id, Duration = b.DurationLeft, Stacks = b.Stacks });
-            });
+            }
         });
     }
 
     public void ResetDailyData()
     {
-        Game.Account.Characters.ToList().ForEach(ch => ch.ResetDailyData());
+        foreach (var ch in Game.Account.Characters.ToList()) ch.ResetDailyData();
         ChatManager.Instance.AddTccMessage("Daily data has been reset.");
     }
 
     public void ResetWeeklyDungeons()
     {
-        Game.Account.Characters.ToSyncList().ForEach(ch => ch.DungeonInfo.ResetAll(ResetMode.Weekly));
+        foreach (var ch in Game.Account.Characters.ToSyncList()) ch.DungeonInfo.ResetAll(ResetMode.Weekly);
         ChatManager.Instance.AddTccMessage("Weekly dungeon entries have been reset.");
     }
 
     public void ResetVanguardWeekly()
     {
-        Game.Account.Characters.ToList().ForEach(ch => ch.VanguardInfo.WeekliesDone = 0);
+        foreach (var ch in Game.Account.Characters.ToSyncList()) ch.VanguardInfo.WeekliesDone = 0;
         ChatManager.Instance.AddTccMessage("Weekly vanguard data has been reset.");
     }
 
@@ -845,22 +824,23 @@ public class DashboardViewModel : TccWindowViewModel
         _columns?.Clear();
         Task.Factory.StartNew(() =>
         {
-            Game.DB!.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef).ToList().ForEach(dungeon =>
+            foreach (var dungeon in Game.DB!.DungeonDatabase.Dungeons.Values.Where(d => d.HasDef))
             {
                 App.BaseDispatcher.InvokeAsync(() =>
                 {
                     var dvc = new DungeonColumnViewModel(dungeon);
-                    CharacterViewModels.ToList().ForEach(charVm =>
+                    foreach (var charVm in CharacterViewModels.ToArray())
                     {
                         dvc.DungeonsList.Add(
                             new DungeonCooldownViewModel(
                                 charVm.Character.DungeonInfo.DungeonList.FirstOrDefault(x => x.Dungeon.Id == dungeon.Id) ?? throw new NullReferenceException("Dungeon not found!"),
                                 charVm.Character
                             ));
-                    });
+                    }
+
                     _columns?.Add(dvc);
                 }, DispatcherPriority.Background);
-            });
+            }
         });
     }
 

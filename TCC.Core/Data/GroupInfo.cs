@@ -54,7 +54,7 @@ public class GroupInfo
 
     public void ChangeLeader(string name)
     {
-        _members.ForEach(x => x.IsLeader = x.Name == name);
+        foreach (var x in _members) x.IsLeader = x.Name == name;
         Leader = _members.FirstOrDefault(m => m.Name == name)!;
     }
 

@@ -65,7 +65,7 @@ public class TccPopup : Popup
     {
         base.OnMouseLeave(e);
         if (Child == null) return;
-        var content = (FrameworkElement) Child;
+        var content = (FrameworkElement)Child;
         var pos = e.MouseDevice.GetPosition(content);
         if (pos.X > MouseLeaveTolerance && pos.X < content.ActualWidth - MouseLeaveTolerance
                                         && pos.Y > MouseLeaveTolerance && pos.Y < content.ActualHeight - MouseLeaveTolerance) return;

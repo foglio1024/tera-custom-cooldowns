@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using Nostrum.WPF;
 using TCC.Interop.Proxy;
@@ -17,11 +18,16 @@ public class ActionMessagePiece : SimpleMessagePiece
             if (_isHovered == value) return;
 
             _isHovered = value;
-            Container?.Pieces.ToSyncList()
+            var items = Container?.Pieces.ToSyncList()
                     .OfType<ActionMessagePiece>()
                     .Where(x => x.ChatLinkAction == ChatLinkAction)
-                    .ToList()
-                    .ForEach(x => x.IsHovered = value);
+                    ?? [];
+
+            foreach (var actionMessagePiece in items)
+            {
+                actionMessagePiece.IsHovered = value;
+            }
+
             InvokePropertyChanged();
         }
     }

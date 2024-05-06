@@ -269,28 +269,28 @@ public class LootDistributionViewModel : TccWindowViewModel
 
     private void SetRollForCategory(int itemId)
     {
-        DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
+        foreach (var x in DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent))
         {
             x.BidIntent = BidAction.Roll;
             if (x.DistributionStatus is DistributionStatus.Distributing) x.CommitIntent();
-        });
+        }
     }
 
     private void SetPassForCategory(int itemId)
     {
-        DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
+        foreach (var x in DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent))
         {
             x.BidIntent = BidAction.Pass;
             if (x.DistributionStatus is DistributionStatus.Distributing) x.CommitIntent();
-        });
+        }
     }
 
     private void SetWaitForCategory(int itemId)
     {
-        DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent).ToList().ForEach(x =>
+        foreach (var x in DistributionList.ToSyncList().Where(x => x.DbItem.Id == itemId && !x.BidSent))
         {
             x.BidIntent = BidAction.Unset;
-        });
+        }
     }
 
     private void OnGroupCompositionChanged(ReadOnlyCollection<GroupMemberData> members, GroupCompositionChangeReason reason)
@@ -524,7 +524,7 @@ public class LootDistributionViewModel : TccWindowViewModel
 
         if (members.All(m => m.Roll < 1))
         {
-            members.ForEach(m => m.BidAction = BidAction.Pass);
+            foreach (var m in members) m.BidAction = BidAction.Pass;
             Log.CW("  no rolls for current item");
         }
         else

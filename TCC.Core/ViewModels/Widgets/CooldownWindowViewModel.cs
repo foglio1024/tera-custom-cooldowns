@@ -385,12 +385,12 @@ public class CooldownWindowViewModel : TccWindowViewModel
     {
         _dispatcher.InvokeAsync(() =>
         {
-            ShortSkills.ToSyncList().ForEach(sk => sk.Dispose());
-            LongSkills.ToSyncList().ForEach(sk => sk.Dispose());
-            MainSkills.ToSyncList().ForEach(sk => sk.Dispose());
-            SecondarySkills.ToSyncList().ForEach(sk => sk.Dispose());
-            OtherSkills.ToSyncList().ForEach(sk => sk.Dispose());
-            ItemSkills.ToSyncList().ForEach(sk => sk.Dispose());
+            foreach (var sk in ShortSkills.ToSyncList()) sk.Dispose();
+            foreach (var sk in LongSkills.ToSyncList()) sk.Dispose();
+            foreach (var sk in MainSkills.ToSyncList()) sk.Dispose();
+            foreach (var sk in SecondarySkills.ToSyncList()) sk.Dispose();
+            foreach (var sk in OtherSkills.ToSyncList()) sk.Dispose();
+            foreach (var sk in ItemSkills.ToSyncList()) sk.Dispose();
 
             ShortSkills.Clear();
             LongSkills.Clear();
@@ -410,9 +410,9 @@ public class CooldownWindowViewModel : TccWindowViewModel
         {
             var data = new CooldownConfigParser(c).Data;
 
-            data.Main.ForEach(cdData => TryAddToList(cdData, MainSkills));
-            data.Secondary.ForEach(cdData => TryAddToList(cdData, SecondarySkills));
-            data.Hidden.ForEach(cdData => TryAddToList(cdData, HiddenSkills));
+            foreach (var cdData in data.Main) TryAddToList(cdData, MainSkills);
+            foreach (var cdData in data.Secondary) TryAddToList(cdData, SecondarySkills);
+            foreach (var cdData in data.Hidden) TryAddToList(cdData, HiddenSkills);
 
             _dispatcher.Invoke(() => SkillsView = CollectionViewFactory.CreateLiveCollectionView(Game.DB!.SkillsDatabase.SkillsForClass(c)));
 
@@ -438,9 +438,9 @@ public class CooldownWindowViewModel : TccWindowViewModel
         if (MainSkills.Count == 0 && SecondarySkills.Count == 0 && HiddenSkills.Count == 0) return;
         var data = new CooldownConfigData();
 
-        MainSkills.ToList().ForEach(sk => data.Main.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
-        SecondarySkills.ToList().ForEach(sk => data.Secondary.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
-        HiddenSkills.ToList().ForEach(sk => data.Hidden.Add(new CooldownData(sk.Skill.Id, sk.CooldownType)));
+        foreach (var sk in MainSkills.ToList()) data.Main.Add(new CooldownData(sk.Skill.Id, sk.CooldownType));
+        foreach (var sk in SecondarySkills.ToList()) data.Secondary.Add(new CooldownData(sk.Skill.Id, sk.CooldownType));
+        foreach (var sk in HiddenSkills.ToList()) data.Hidden.Add(new CooldownData(sk.Skill.Id, sk.CooldownType));
         var path = Path.Combine(App.ResourcesPath, "config", "skills", $"{Game.Me.Class.ToString().ToLower()}-skills.json");
         if (!Directory.Exists(Path.GetDirectoryName(path))) Directory.CreateDirectory(Path.GetDirectoryName(path) ?? throw new InvalidOperationException());
         File.WriteAllText(path, JsonConvert.SerializeObject(data, TccUtils.GetDefaultJsonSerializerSettings()));

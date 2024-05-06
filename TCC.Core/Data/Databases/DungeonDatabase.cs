@@ -55,7 +55,7 @@ public class DungeonDatabase : DatabaseBase
     public void SaveCustomDefs()
     {
         var sb = new StringBuilder();
-        Dungeons.Values.Where(d => d.Index != -1 && d.Show).ToList().ForEach(d =>
+        foreach (var d in Dungeons.Values.Where(d => d.Index != -1 && d.Show))
         {
             sb.Append(d.Id);
             sb.Append("\t");
@@ -71,7 +71,8 @@ public class DungeonDatabase : DatabaseBase
             sb.Append("\t");
             sb.Append(d.ResetMode);
             sb.Append("\n");
-        });
+        }
+
         File.WriteAllText(_customDefsPath, sb.ToString());
     }
 

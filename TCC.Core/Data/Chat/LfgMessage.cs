@@ -76,11 +76,11 @@ public class LfgMessage : ChatMessage
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    e.NewItems?.Cast<User>().ToList().ForEach(item => _members.Add(item));
+                    foreach (var item in e.NewItems?.Cast<User>() ?? []) _members.Add(item);
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    e.OldItems?.Cast<User>().ToList().ForEach(item => _members.Remove(item));
+                    foreach (var item in e.OldItems?.Cast<User>() ?? []) _members.Remove(item);
                     break;
 
                 case NotifyCollectionChangedAction.Reset:

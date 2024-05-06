@@ -92,7 +92,7 @@ public class MonsterDatabase : DatabaseBase
             foreach (var monst in zone.Descendants().Where(x => x.Name == "Monster"))
             {
                 if (!_zones.TryGetValue(zoneId, out var z)) continue;
-                
+
                 var mId = Convert.ToUInt32(monst.Attribute("id")?.Value);
                 if (z.Monsters.TryGetValue(mId, out var m))
                 {
@@ -125,7 +125,7 @@ public class MonsterDatabase : DatabaseBase
     private XDocument CleanAndLoadOverrideDoc()
     {
         var overrideDoc = XDocument.Load(OverrideFileFullPath);
-        var toRemove = new List<Tuple<uint, uint>>();
+        var toRemove = new List<(uint ZoneId, uint TemplateId)>();
         foreach (var xZone in overrideDoc.Descendants("Zone"))
         {
             var zoneId = Convert.ToUInt32(xZone.Attribute("id")?.Value);
@@ -134,7 +134,7 @@ public class MonsterDatabase : DatabaseBase
                 var templateId = Convert.ToUInt32(xMonster.Attribute("id")?.Value);
                 if (!TryGetMonster(templateId, zoneId, out var m))
                 {
-                    toRemove.Add(new Tuple<uint, uint>(zoneId, templateId));
+                    toRemove.Add((zoneId, templateId));
                     continue;
                 }
 
@@ -167,23 +167,24 @@ public class MonsterDatabase : DatabaseBase
                 }
 
                 if (keep) continue;
-                
-                toRemove.Add(new Tuple<uint, uint>(zoneId, templateId));
+
+                toRemove.Add((zoneId, templateId));
             }
         }
 
         foreach (var tuple in toRemove)
         {
-            overrideDoc.Descendants("Zone")
-                .Where(x => x.Attribute("id")?.Value == tuple.Item1.ToString()).ToList()
-                .ForEach(xz =>
+            foreach (var xz in overrideDoc.Descendants("Zone")
+                         .Where(x => x.Attribute("id")?.Value == tuple.ZoneId.ToString()))
+            {
+                foreach (var xm in xz.Descendants("Monster")
+                             .Where(m => m.Attribute("id")?.Value == tuple.TemplateId.ToString()))
                 {
-                    xz.Descendants("Monster")
-                        .Where(m => m.Attribute("id")?.Value == tuple.Item2.ToString()).ToList()
-                        .ForEach(xm => xm.Remove());
+                    xm.Remove();
+                }
 
-                    if (!xz.Descendants("Monster").Any()) xz.Remove();
-                });
+                if (!xz.Descendants("Monster").Any()) xz.Remove();
+            }
         }
 
         overrideDoc.Save(OverrideFileFullPath);
@@ -220,7 +221,7 @@ public class MonsterDatabase : DatabaseBase
             }
             else
             {
-                zone.Add(new XElement("Monster", 
+                zone.Add(new XElement("Monster",
                     new XAttribute("id", templateId),
                     new XAttribute("isBoss", b.ToString())));
             }
