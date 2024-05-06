@@ -315,7 +315,7 @@
                                VerticalAlignment="Bottom"
                                Grid.Column="1"
                                Grid.Row="1"
-                               Margin="0 -1 0 1"
+                               Margin="0 4 0 -4"
                                Foreground="#7fff"
                                FontWeight="DemiBold"
                                FontSize="18">
