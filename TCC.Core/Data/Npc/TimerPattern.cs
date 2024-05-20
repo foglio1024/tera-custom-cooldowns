@@ -27,6 +27,12 @@ public class TimerPattern : ThreadSafeObservableObject, IDisposable
         Started?.Invoke();
     }
 
+    protected void Reset()
+    {
+        _timer.Stop();
+        Ended?.Invoke();
+    }
+
     public virtual void SetTarget(Npc target)
     {
         Target = target;
@@ -34,8 +40,7 @@ public class TimerPattern : ThreadSafeObservableObject, IDisposable
 
     private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
     {
-        _timer.Stop();
-        Ended?.Invoke();
+        Reset();
     }
 
     public void Dispose()

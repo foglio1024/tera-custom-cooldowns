@@ -22,8 +22,12 @@ public class HpTriggeredTimerPattern : TimerPattern
 
     private void OnTargetHpChanged(double hpFactor)
     {
+        if (hpFactor >= StartAt)
+        {
+            Reset();
+            return;
+        }
         if (IsRunning) return;
-        if (hpFactor >= StartAt) return;
 
         Start();
     }
