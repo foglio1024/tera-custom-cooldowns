@@ -1,4 +1,4 @@
-﻿<widgets:TccWidget x:Class="TCC.UI.Windows.Widgets.BuffWindow"
+﻿<widgets:TccWidget x:Class="TCC.UI.Windows.Widgets.AbnormalityWindow"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -86,7 +86,8 @@
                         Height="18"
                         extensions:ButtonExtensions.CornerRadius="1"
                         Opacity="0"
-                        Click="OpenBuffSettings" ToolTip="Configure buffs" VerticalAlignment="Bottom"
+                        Command="{Binding ConfigureAbnormalitiesCommand}"
+                        ToolTip="Configure buffs" VerticalAlignment="Bottom"
                         x:Name="SettingsButton">
                     <Path Data="{StaticResource SvgSettings}" />
                 </Button>

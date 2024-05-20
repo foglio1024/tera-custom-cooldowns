@@ -10,12 +10,12 @@ using TCC.ViewModels.Widgets;
 
 namespace TCC.UI.Windows.Widgets;
 
-public partial class BuffWindow
+public partial class AbnormalityWindow
 {
     private readonly DoubleAnimation _opacityUp;
     private readonly DoubleAnimation _opacityDown;
 
-    public BuffWindow(AbnormalityWindowViewModel vm)
+    public AbnormalityWindow(AbnormalityWindowViewModel vm)
     {
 
         _opacityUp = AnimationFactory.CreateDoubleAnimation(250, 1, easing: true);
@@ -79,11 +79,5 @@ public partial class BuffWindow
     private void SetAbnormalitiesVisibility(bool visible)
     {
         Game.Me.SetAbnormalitiesVisibility(visible);
-    }
-
-    private void OpenBuffSettings(object sender, RoutedEventArgs e)
-    {
-        if (TccWindow.Exists(typeof(MyAbnormalConfigWindow))) return;
-        new MyAbnormalConfigWindow().Show();
     }
 }

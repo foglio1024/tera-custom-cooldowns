@@ -1,4 +1,6 @@
-﻿namespace TCC.UI.Windows.Widgets;
+﻿using TCC.ViewModels.Widgets;
+
+namespace TCC.UI.Windows.Widgets;
 
 public partial class NotificationAreaWindow
 {

@@ -5,13 +5,13 @@ using System.Windows.Threading;
 using JetBrains.Annotations;
 using Nostrum.WPF.ThreadSafe;
 using TCC.Settings.WindowSettings;
+using TCC.UI.Windows.Widgets;
 using TCC.Utils;
-using TCC.ViewModels;
 using TeraPacketParser.Analysis;
 using TeraPacketParser.Messages;
 using TeraPacketParser.TeraCommon.Game;
 
-namespace TCC.UI.Windows.Widgets;
+namespace TCC.ViewModels.Widgets;
 
 [UsedImplicitly]
 public class NotificationAreaViewModel : TccWindowViewModel
