@@ -8,13 +8,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PostBuildEvent>
-      del "$(SolutionDir)\release\*.xml"
-      del "$(SolutionDir)\release\*.dev.json"
-      xcopy $(SolutionDir)\TCC.Core\Module\index.js $(SolutionDir)\release\ /y /i
-      xcopy $(SolutionDir)\TCC.Core\Module\module.json $(SolutionDir)\release\ /y /i
-      xcopy $(SolutionDir)\TCC.Core\Module\ $(SolutionDir)\release\ /y /s 
-      node E:\Repos\tcc-stub\manifest-generator.js $(SolutionDir)\release\
-    </PostBuildEvent>
+		del "$(SolutionDir)\release\*.xml"
+		del "$(SolutionDir)\release\*.dev.json"
+		xcopy $(SolutionDir)\TCC.Core\Module\index.js $(SolutionDir)\release\ /y /i
+		xcopy $(SolutionDir)\TCC.Core\Module\module.json $(SolutionDir)\release\ /y /i
+		xcopy $(SolutionDir)\TCC.Core\Module\ $(SolutionDir)\release\ /y /s
+		node X:\tools\manifest-generator.js $(SolutionDir)\release\
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugToolbox|AnyCPU'">
     <PostBuildEvent>
