@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using JetBrains.Annotations;
+using Nostrum.WPF;
 using Nostrum.WPF.Factories;
 using TCC.Data;
 using TCC.Data.Abnormalities;
@@ -10,6 +12,7 @@ using TCC.Data.Pc;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.UI.Windows;
+using TCC.UI.Windows.Configuration.Abnormalities;
 using TCC.Utils;
 
 namespace TCC.ViewModels.Widgets;
@@ -40,6 +43,8 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
     public ICollectionViewLiveShaping BuffsView { get; }
     public ICollectionViewLiveShaping InfBuffsView { get; }
     public ICollectionViewLiveShaping DebuffsView { get; }
+
+    public ICommand ConfigureAbnormalitiesCommand{ get; }
 
     public AbnormalityWindowViewModel(WindowSettingsBase settings) : base(settings)
     {
@@ -77,9 +82,21 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
                 new SortDescription($"{nameof(AbnormalityDuration.TimeOfArrival)}", ListSortDirection.Ascending)
             ]) ?? throw new Exception("Failed to create LiveCollectionView");
 
-        KeyboardHook.Instance.RegisterCallback(App.Settings.AbnormalSettingsHotkey, OnShowAbnormalConfigHotkeyPressed);
+        KeyboardHook.Instance.RegisterCallback(App.Settings.AbnormalSettingsHotkey, ConfigureAbnormalities);
 
         OnOverlapChanged();
+
+        ConfigureAbnormalitiesCommand = new RelayCommand(ConfigureAbnormalities);
+    }
+
+    private void ConfigureAbnormalities()
+    {
+        _dispatcher.InvokeAsync(() =>
+            {
+                if (TccWindow.Exists(typeof(AbnormalityConfigWindow))) return;
+                new AbnormalityConfigWindow().Show();
+            },
+            DispatcherPriority.Background);
     }
 
     private void OnOverlapChanged()
@@ -92,14 +109,5 @@ public class AbnormalityWindowViewModel : TccWindowViewModel
         };
 
         ContainersMargin = new Thickness { Right = ((BuffWindowSettings)Settings!).Overlap };
-    }
-
-    private void OnShowAbnormalConfigHotkeyPressed()
-    {
-        _dispatcher.InvokeAsync(() =>
-        {
-            MyAbnormalConfigWindow.Instance.ShowWindow();
-        },
-        DispatcherPriority.Background);
     }
 }

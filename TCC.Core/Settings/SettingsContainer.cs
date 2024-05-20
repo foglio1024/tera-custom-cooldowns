@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Nostrum.Extensions;
+using Nostrum.WPF.ThreadSafe;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Nostrum.Extensions;
-using Nostrum.WPF.ThreadSafe;
 using TCC.Data;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
 using TCC.Utils;
+using TeraDataLite;
 using TeraPacketParser;
 using Key = System.Windows.Forms.Keys;
 
@@ -25,11 +26,13 @@ public class SettingsContainer
     #region Misc
 
     public DateTime LastRun { get; set; }
+
     public string LastLanguage
     {
         get => LanguageOverride != LanguageOverride.None ? LanguageOverride.GetDescription() : _lastLanguage;
         set => _lastLanguage = value;
     }
+
     public Size LastScreenSize { get; set; }
     public DateTime StatSentTime { get; set; }
     public string StatSentVersion { get; set; }
@@ -47,11 +50,13 @@ public class SettingsContainer
     public bool BetaNotification { get; set; }
     public bool FpsAtGuardian { get; set; }
     public bool IntegratedGpuSleepWorkaround { get; set; }
+
     public bool EnableProxy
     {
         get => _enableProxy || App.ToolboxMode;
         set => _enableProxy = value;
     }
+
     public bool DontShowFUBH { get; set; }
     public ControlShape AbnormalityShape { get; set; }
     public ControlShape SkillShape { get; set; }
@@ -100,6 +105,7 @@ public class SettingsContainer
     public LfgWindowSettings LfgWindowSettings { get; set; }
     public NotificationAreaSettings NotificationAreaSettings { get; set; }
     public PerfMonitorSettings PerfMonitorSettings { get; set; }
+
     public LootDistributionWindowSettings LootDistributionWindowSettings
     {
         get => _lootDistributionWindowSettings;
@@ -114,6 +120,7 @@ public class SettingsContainer
 
     public ThreadSafeObservableCollection<ChatWindowSettings> ChatWindowsSettings { get; }
     public WindowSettingsBase ChatSettings { get; private set; } // added to have the EnabledChanged event
+
     public bool ChatEnabled
     {
         get => ChatWindowsSettings.Count > 0 ? ChatWindowsSettings[0].Enabled : _chatEnabled;
@@ -123,7 +130,7 @@ public class SettingsContainer
             if (ChatWindowsSettings.Count > 0)
             {
                 if (ChatWindowsSettings[0].Enabled == value) return;
-                ChatWindowsSettings.ToList().ForEach(x => x.Enabled = value);
+                foreach (var x in ChatWindowsSettings) x.Enabled = value;
             }
             else
             {
@@ -131,6 +138,7 @@ public class SettingsContainer
             }
         }
     }
+
     public bool DisableLfgChatMessages { get; set; }
     public bool ShowChannel { get; set; }
     public bool ShowTimestamp { get; set; }
@@ -164,12 +172,29 @@ public class SettingsContainer
     public bool EnablePlayerMenu { get; set; }
     public CooldownDecimalMode CooldownsDecimalMode { get; set; }
 
+    public AbnormalitySettingsContainer AbnormalitySettings { get; set; }
+
     public SettingsContainer()
     {
         StatSentVersion = App.AppVersion;
         _lastLanguage = "";
         StatSentTime = DateTime.MinValue;
         LastScreenSize = FocusManager.TeraScreen.Bounds.Size;
+
+        AbnormalitySettings = new AbnormalitySettingsContainer();
+        AbnormalitySettings.Self.Whitelist[Class.Warrior] = [100800, 100801];
+        AbnormalitySettings.Self.Whitelist[Class.Lancer] = [200230, 200231, 200232, 201701];
+        AbnormalitySettings.Self.Whitelist[Class.Slayer] = [300800, 300801, 300805];
+        AbnormalitySettings.Self.Whitelist[Class.Berserker] = [401705, 401706, 401710, 400500, 400501, 400508, 400710, 400711];
+        AbnormalitySettings.Self.Whitelist[Class.Sorcerer] = [21170, 22120, 23180, 26250, 29011, 25170, 25171, 25201, 25202, 500100, 500150, 501600, 501650, 502001, 502051, 502070, 502071, 502072];
+        AbnormalitySettings.Self.Whitelist[Class.Archer] = [601400, 601450, 601460, 88608101, 88608102, 88608103, 88608104, 88608105, 88608106, 88608107, 88608108, 88608109, 88608110, 602101, 602102, 602103, 601611];
+        AbnormalitySettings.Self.Whitelist[Class.Reaper] = [10151010, 10151131, 10151192];
+        AbnormalitySettings.Self.Whitelist[Class.Gunner] = [89105101, 89105102, 89105103, 89105104, 89105105, 89105106, 89105107, 89105108, 89105109, 89105110, 89105111, 89105112, 89105113, 89105114, 89105115, 89105116, 89105117, 89105118, 89105119, 89105120, 10152340, 10152351];
+        AbnormalitySettings.Self.Whitelist[Class.Brawler] = [31020, 10153210];
+        AbnormalitySettings.Self.Whitelist[Class.Ninja] = [89314201, 89314202, 89314203, 89314204, 89314205, 89314206, 89314207, 89314208, 89314209, 89314210, 89314211, 89314212, 89314213, 89314214, 89314215, 89314216, 89314217, 89314218, 89314219, 89314220, 10154480, 10154450];
+        AbnormalitySettings.Self.Whitelist[Class.Valkyrie] = [10155130, 10155551, 10155510, 10155512, 10155540, 10155541, 10155542];
+        AbnormalitySettings.Self.Whitelist[Class.Common] = [6001, 6002, 6003, 6004, 6012, 6013, 702004, 805800, 805803, 200700, 200701, 200731, 800300, 800301, 800302, 800303, 800304, 702001];
+
         CooldownWindowSettings = new CooldownWindowSettings();
         CharacterWindowSettings = new CharacterWindowSettings();
         NpcWindowSettings = new NpcWindowSettings();
@@ -249,8 +274,66 @@ public class SettingsContainer
     public void Save()
     {
         var toRemove = ChatWindowsSettings.Where(s => s.Tabs.Count == 0).ToList();
-        toRemove.ForEach(s => ChatWindowsSettings.Remove(s));
-        BuffWindowSettings.SanitizeHiddenBuffs();
+        foreach (var s in toRemove) ChatWindowsSettings.Remove(s);
         App.BaseDispatcher.InvokeAsync(() => new JsonSettingsWriter().Save());
+    }
+}
+
+public class AbnormalitySettingsContainer
+{
+    public List<uint> Favorites { get; } = [];
+
+    public AbnormalitySettings Self { get; } = new();
+    public AbnormalitySettings Group { get; } = new();
+
+    public bool IsFavorite(uint id)
+    {
+        return Favorites.Contains(id);
+    }
+}
+
+public class AbnormalitySettings
+{
+    public List<uint> Collapsible { get; } = [];
+    public bool ShowAll { get; set; }
+    public Dictionary<Class, List<uint>> Whitelist { get; }
+
+    public AbnormalitySettings()
+    {
+        Whitelist = Enum.GetValues<Class>()
+            .Select(c => (c, new List<uint>()))
+            .ToDictionary();
+    }
+
+    public bool CanCollapse(uint id)
+    {
+        return Collapsible.Contains(id);
+    }
+
+    public bool CanShow(uint id)
+    {
+        if (ShowAll) return true;
+
+        if (Whitelist.TryGetValue(Class.Common, out var commonList))
+        {
+            if (commonList.Contains(id))
+                return true;
+
+            if (Whitelist.TryGetValue(Game.Me.Class, out var classList))
+            {
+                if (!classList.Contains(id))
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+
+        return true;
     }
 }

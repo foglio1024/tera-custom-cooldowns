@@ -9,6 +9,7 @@
                    xmlns:utils="clr-namespace:TCC.Utils;assembly=TCC.Utils"
                    xmlns:viewModels="clr-namespace:TCC.ViewModels"
                    xmlns:teraPacketParser="clr-namespace:TeraPacketParser;assembly=TeraPacketParser"
+                   xmlns:abnormalities="clr-namespace:TCC.UI.Windows.Configuration.Abnormalities"
                    Topmost="True"
                  mc:Ignorable="d" WindowStyle="None" AllowsTransparency="True"
                  Title="TCC Settings" Height="637" Width="916" ResizeMode="NoResize"
@@ -884,7 +885,7 @@
                             <Button Style="{StaticResource SettingsButton}"
                                     Content="Open buffs settings"
                                     Command="{Binding OpenWindowCommand}"
-                                    CommandParameter="{x:Type windows:MyAbnormalConfigWindow}"
+                                    CommandParameter="{x:Type abnormalities:AbnormalityConfigWindow}"
                                     IsEnabled="{Binding BuffWindowSettings.Enabled}" />
                             <!--=====================================================================================-->
 
@@ -1288,7 +1289,7 @@
                             <Button Style="{StaticResource SettingsButton}"
                                     IsEnabled="{Binding GroupWindowSettings.Enabled}" 
                                     Command="{Binding OpenWindowCommand}"
-                                    CommandParameter="{x:Type windows:GroupAbnormalConfigWindow}"
+                                    CommandParameter="{x:Type abnormalities:AbnormalityConfigWindow}"
                                     Content="Open group buff settings" />
 
                         </StackPanel>

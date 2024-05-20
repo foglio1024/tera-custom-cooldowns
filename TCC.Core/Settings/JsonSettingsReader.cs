@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Nostrum.WPF.Extensions;
 using TCC.UI.Windows;
 using TCC.Utilities;
 using TCC.Utils;
@@ -46,7 +47,7 @@ public class JsonIgnoreResolver : DefaultContractResolver
         if (!_ignores.TryGetValue(type, out var props)) return false;
 
         // if no properties provided, ignore the type entirely
-        return props.Count == 0 
+        return props.Count == 0
             || props.Contains(propertyName);
     }
 
@@ -76,6 +77,7 @@ public class JsonSettingsReader : SettingsReaderBase
         FileName = SettingsGlobals.SettingsFileName;
 
     }
+
     public SettingsContainer LoadSettings(string path)
     {
         try
@@ -93,6 +95,51 @@ public class JsonSettingsReader : SettingsReaderBase
 
                 #endregion
                 var ret = JsonConvert.DeserializeObject<SettingsContainer>(file, TccUtils.GetDefaultJsonSerializerSettings())!;
+
+                #region Compatibility
+
+#pragma warning disable CS0612 // Il tipo o il membro è obsoleto
+
+                if (ret.StatSentVersion != App.AppVersion)
+                {
+                    foreach (var special in ret.BuffWindowSettings.Specials)
+                    {
+                        ret.AbnormalitySettings.Favorites.Add(special);
+                    }
+                    ret.BuffWindowSettings.Specials.Clear();
+
+                    foreach (var hidden in ret.BuffWindowSettings.Hidden)
+                    {
+                        ret.AbnormalitySettings.Self.Collapsible.Add(hidden);
+                    }
+                    ret.BuffWindowSettings.Hidden.Clear();
+
+                    foreach (var hidden in ret.GroupWindowSettings.Hidden)
+                    {
+                        ret.AbnormalitySettings.Group.Collapsible.Add(hidden);
+                    }
+                    ret.GroupWindowSettings.Hidden.Clear();
+
+                    foreach (var (cl, list) in ret.BuffWindowSettings.MyAbnormals)
+                    {
+                        ret.AbnormalitySettings.Self.Whitelist[cl] = list;
+                    }
+                    ret.BuffWindowSettings.MyAbnormals.Clear();
+
+                    foreach (var (cl, list) in ret.GroupWindowSettings.GroupAbnormals)
+                    {
+                        ret.AbnormalitySettings.Group.Whitelist[cl] = list;
+                    }
+                    ret.GroupWindowSettings.GroupAbnormals.Clear();
+
+                    ret.AbnormalitySettings.Self.ShowAll = ret.BuffWindowSettings.ShowAll;
+                    ret.AbnormalitySettings.Group.ShowAll = ret.GroupWindowSettings.ShowAllAbnormalities;
+                }
+
+#pragma warning restore CS0612 // Il tipo o il membro è obsoleto
+
+                #endregion
+
                 return ret;
             }
             //                else

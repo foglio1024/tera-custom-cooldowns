@@ -38,6 +38,7 @@
     <SolidColorBrush x:Key="RevampDarkBackground70Brush"    Color="{StaticResource RevampDarkBackgroundColor}"   Opacity=".7"  />
     <SolidColorBrush x:Key="RevampDarkerBackgroundBrush"    Color="{StaticResource RevampDarkerBackgroundColor}"               />
     <SolidColorBrush x:Key="RevampDarkerBackground70Brush"  Color="{StaticResource RevampDarkerBackgroundColor}" Opacity=".7"  />
+    <SolidColorBrush x:Key="RevampDarkerBackground50Brush"  Color="{StaticResource RevampDarkerBackgroundColor}" Opacity=".5"  />
     <SolidColorBrush x:Key="RevampBorderBrush"              Color="{StaticResource RevampBorderColor}"                         />
 
     <SolidColorBrush x:Key="TeraRestylePanelBrush"          Color="{StaticResource TeraRestylePanelColor}"                     />

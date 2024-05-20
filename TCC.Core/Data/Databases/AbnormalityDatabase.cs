@@ -55,7 +55,7 @@ public class AbnormalityDatabase : DatabaseBase
 
         void AddAbnormality(uint abnormalityId, Abnormality abnormality)
         {
-            if (App.Settings.BuffWindowSettings.Specials.Contains(abnormalityId) && abnormality.Type is AbnormalityType.Buff)
+            if (App.Settings.AbnormalitySettings.IsFavorite(abnormalityId) && abnormality.Type is AbnormalityType.Buff)
             {
                 abnormality.Type = AbnormalityType.Special;
             }

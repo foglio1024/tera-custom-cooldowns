@@ -318,9 +318,7 @@ public class User : ThreadSafeObservableObject
 
     public void AddOrRefreshBuff(Abnormality ab, uint duration, int stacks)
     {
-        if (!App.Settings.GroupWindowSettings.ShowAllAbnormalities
-         && !App.Settings.GroupWindowSettings.GroupAbnormals[Class.Common].Contains(ab.Id)
-         && !App.Settings.GroupWindowSettings.GroupAbnormals[Game.Me.Class].Contains(ab.Id))
+        if (!App.Settings.AbnormalitySettings.Group.CanShow(ab.Id))
         {
             return;
         }
@@ -337,7 +335,7 @@ public class User : ThreadSafeObservableObject
         {
             var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher,
                 Game.Group.Size < App.Settings.GroupWindowSettings.DisableAbnormalitiesAnimationThreshold,
-                App.Settings.GroupWindowSettings.Hidden.Contains(ab.Id));
+                App.Settings.AbnormalitySettings.Group.CanCollapse(ab.Id));
             Buffs.Add(newAb);
         }
     }
@@ -355,7 +353,7 @@ public class User : ThreadSafeObservableObject
         {
             var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher,
                 Game.Group.Size < App.Settings.GroupWindowSettings.DisableAbnormalitiesAnimationThreshold,
-                App.Settings.GroupWindowSettings.Hidden.Contains(ab.Id));
+                App.Settings.AbnormalitySettings.Group.CanCollapse(ab.Id));
 
             Debuffs.Add(newAb);
         }

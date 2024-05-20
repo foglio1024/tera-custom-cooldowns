@@ -1,38 +1,48 @@
 ﻿<ResourceDictionary x:Class="TCC.ResourceDictionaries.Styles"
                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:extensions="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
                     xmlns:controls="clr-namespace:Nostrum.WPF.Controls;assembly=Nostrum.WPF"
-                    xmlns:tccControls="clr-namespace:TCC.UI.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:extensions="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:settings="clr-namespace:TCC.UI.Controls.Settings"
+                    xmlns:tccControls="clr-namespace:TCC.UI.Controls"
                     mc:Ignorable="d">
 
-    <Style TargetType="{x:Type Path}" BasedOn="{StaticResource NostrumDefaultPathStyle}"/>
-    <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource DefaultListBoxStyle}"/>
-    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource NostrumMainCheckBoxStyle}"/>
+    <Style BasedOn="{StaticResource NostrumDefaultPathStyle}"
+           TargetType="{x:Type Path}" />
+    <Style BasedOn="{StaticResource DefaultListBoxStyle}"
+           TargetType="{x:Type ListBox}" />
+    <Style BasedOn="{StaticResource NostrumMainCheckBoxStyle}"
+           TargetType="{x:Type CheckBox}" />
 
-    <Style x:Key="BaseSkillArcStyle" TargetType="controls:Arc">
+    <Style x:Key="BaseSkillArcStyle"
+           TargetType="controls:Arc">
         <Setter Property="EndAngle" Value="0.01" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="RenderTransformOrigin" Value=".5 .5" />
         <Setter Property="UseLayoutRounding" Value="False" />
     </Style>
-    <Style x:Key="RoundSkillArcStyle" BasedOn="{StaticResource BaseSkillArcStyle}" TargetType="controls:Arc">
+    <Style x:Key="RoundSkillArcStyle"
+           BasedOn="{StaticResource BaseSkillArcStyle}"
+           TargetType="controls:Arc">
         <Setter Property="Width" Value="Auto" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="StrokeThickness" Value="26" />
         <Setter Property="Margin" Value="2" />
     </Style>
-    <Style x:Key="SquareSkillArcStyle" BasedOn="{StaticResource BaseSkillArcStyle}" TargetType="controls:Arc">
+    <Style x:Key="SquareSkillArcStyle"
+           BasedOn="{StaticResource BaseSkillArcStyle}"
+           TargetType="controls:Arc">
         <Setter Property="Width" Value="80" />
         <Setter Property="Height" Value="80" />
         <Setter Property="StrokeThickness" Value="40" />
         <Setter Property="Margin" Value="-20" />
     </Style>
-    <Style x:Key="RhombSkillArcStyle" BasedOn="{StaticResource SquareSkillArcStyle}" TargetType="controls:Arc">
+    <Style x:Key="RhombSkillArcStyle"
+           BasedOn="{StaticResource SquareSkillArcStyle}"
+           TargetType="controls:Arc">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="RenderTransform">
@@ -42,18 +52,22 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SkillResetShapeStyle" TargetType="Shape">
+    <Style x:Key="SkillResetShapeStyle"
+           TargetType="Shape">
         <Setter Property="StrokeThickness" Value="0" />
         <Setter Property="Stroke" Value="White" />
         <Setter Property="Margin" Value="2" />
         <Setter Property="Effect">
             <Setter.Value>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="White" />
+                <DropShadowEffect BlurRadius="20"
+                                  ShadowDepth="0"
+                                  Color="White" />
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style x:Key="SkillDeleteButtonStyle" TargetType="Button">
+    <Style x:Key="SkillDeleteButtonStyle"
+           TargetType="Button">
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Visibility" Value="Collapsed" />
@@ -62,18 +76,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Grid Width="20" Height="20">
-                        <Ellipse Fill="{StaticResource HpBrush}"
-                                 Effect="{StaticResource DropShadow}" />
-                        <Path Data="{StaticResource SvgClose}"
-                              Fill="White" Stretch="Uniform" Margin="5" />
+                    <Grid Width="20"
+                          Height="20">
+                        <Ellipse Effect="{StaticResource DropShadow}"
+                                 Fill="{StaticResource HpBrush}" />
+                        <Path Margin="5"
+                              Data="{StaticResource SvgClose}"
+                              Fill="White"
+                              Stretch="Uniform" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style x:Key="CooldownSecondsTextStyle" TargetType="TextBlock">
+    <Style x:Key="CooldownSecondsTextStyle"
+           TargetType="TextBlock">
         <Setter Property="Foreground" Value="#dfff" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -83,7 +101,8 @@
         <Setter Property="Margin" Value="4 0" />
     </Style>
 
-    <Style TargetType="{x:Type TextBlock}" x:Key="NotificationTitle">
+    <Style x:Key="NotificationTitle"
+           TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Margin" Value="4 2" />
@@ -92,7 +111,8 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="#4fff" />
     </Style>
-    <Style TargetType="{x:Type TextBlock}" x:Key="NotificationBody">
+    <Style x:Key="NotificationBody"
+           TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Margin" Value="12 10" />
@@ -100,7 +120,8 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="#fff" />
     </Style>
-    <Style TargetType="{x:Type TextBlock}" x:Key="NotificationVersion">
+    <Style x:Key="NotificationVersion"
+           TargetType="{x:Type TextBlock}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Margin" Value="10 2 10 4" />
@@ -108,17 +129,21 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="#3fff" />
     </Style>
-    <Style TargetType="{x:Type TextBlock}" x:Key="NotificationTimestamp" BasedOn="{StaticResource NotificationVersion}">
+    <Style x:Key="NotificationTimestamp"
+           BasedOn="{StaticResource NotificationVersion}"
+           TargetType="{x:Type TextBlock}">
         <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
-    <Style TargetType="{x:Type Rectangle}" x:Key="NotificationRectangle">
+    <Style x:Key="NotificationRectangle"
+           TargetType="{x:Type Rectangle}">
         <Setter Property="Fill" Value="{StaticResource TccNormalGradientBrush}" />
         <Setter Property="Opacity" Value=".1" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
     </Style>
 
-    <Style TargetType="{x:Type Window}" x:Key="BaseWindowStyle">
+    <Style x:Key="BaseWindowStyle"
+           TargetType="{x:Type Window}">
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Width" Value="Auto" />
         <Setter Property="ResizeMode" Value="NoResize" />
@@ -130,7 +155,8 @@
         <Setter Property="WindowStyle" Value="None" />
     </Style>
 
-    <Style TargetType="{x:Type Border}" x:Key="DefaultBorderStyle">
+    <Style x:Key="DefaultBorderStyle"
+           TargetType="{x:Type Border}">
         <Setter Property="Background" Value="#d223" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="BorderThickness" Value="1" />
@@ -140,7 +166,8 @@
         <Setter Property="Effect" Value="{StaticResource DropShadow}" />
         <Setter Property="Opacity" Value=".85" />
     </Style>
-    <Style TargetType="{x:Type Border}" x:Key="RevampBorderStyle">
+    <Style x:Key="RevampBorderStyle"
+           TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{StaticResource RevampBackgroundBrush}" />
         <Setter Property="CornerRadius" Value="5" />
         <Setter Property="BorderThickness" Value="1" />
@@ -150,19 +177,23 @@
         <Setter Property="Effect" Value="{StaticResource DropShadow}" />
         <Setter Property="Opacity" Value=".95" />
     </Style>
-    <Style TargetType="{x:Type Border}" x:Key="BoundaryBorderStyle">
+    <Style x:Key="BoundaryBorderStyle"
+           TargetType="{x:Type Border}">
         <Setter Property="Background" Value="#05ffffff" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="CornerRadius" Value="5" />
         <Setter Property="BorderBrush" Value="#4fff" />
     </Style>
 
-    <Style TargetType="{x:Type TextBlock}" x:Key="DefaultTextStyle">
+    <Style x:Key="DefaultTextStyle"
+           TargetType="{x:Type TextBlock}">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="Foreground" Value="#ccffffff" />
     </Style>
 
-    <Style TargetType="{x:Type Button}" x:Key="SettingsButton" BasedOn="{StaticResource NostrumMainButtonStyle}">
+    <Style x:Key="SettingsButton"
+           BasedOn="{StaticResource NostrumMainButtonStyle}"
+           TargetType="{x:Type Button}">
         <Setter Property="Margin" Value="35 5 7 5" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -184,16 +215,25 @@
         <Setter Property="Opacity" Value="0" />
     </Style>
 
-    <Style TargetType="{x:Type Thumb}" x:Key="ScrollThumbs">
+    <Style x:Key="ScrollThumbs"
+           TargetType="{x:Type Thumb}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
                     <Grid x:Name="Grid">
-                        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"
-                                   Height="Auto" Fill="Transparent" />
-                        <Border x:Name="border" CornerRadius="3" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" Width="Auto" Height="Auto" Margin="0"
-                                Background="{TemplateBinding Background}" />
+                        <Rectangle Width="Auto"
+                                   Height="Auto"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"
+                                   Fill="Transparent" />
+                        <Border x:Name="border"
+                                Width="Auto"
+                                Height="Auto"
+                                Margin="0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="3" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Tag" Value="Horizontal">
@@ -206,7 +246,8 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type ScrollBar}" x:Key="ReversedScrollBar">
+    <Style x:Key="ReversedScrollBar"
+           TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
         <Setter Property="Foreground" Value="#777" />
         <Setter Property="Background" Value="Transparent" />
@@ -216,23 +257,37 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
-                    <Grid x:Name="GridRoot" Width="5" Background="{TemplateBinding Background}" Margin="0 5">
+                    <Grid x:Name="GridRoot"
+                          Width="5"
+                          Margin="0 5"
+                          Background="{TemplateBinding Background}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.0001*" />
                         </Grid.RowDefinitions>
-                        <Border Background="#3fff" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="1" />
-                        <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="False" Focusable="false">
+                        <Border Width="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="#3fff" />
+                        <Track x:Name="PART_Track"
+                               Grid.Row="0"
+                               Focusable="false"
+                               IsDirectionReversed="False">
                             <Track.Thumb>
-                                <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}"
+                                <Thumb x:Name="Thumb"
+                                       Background="{TemplateBinding Foreground}"
                                        Style="{StaticResource ScrollThumbs}" />
                             </Track.Thumb>
                             <Track.IncreaseRepeatButton>
-                                <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0"
-                                              Focusable="false" />
+                                <RepeatButton x:Name="PageUp"
+                                              Command="ScrollBar.PageDownCommand"
+                                              Focusable="false"
+                                              Opacity="0" />
                             </Track.IncreaseRepeatButton>
                             <Track.DecreaseRepeatButton>
-                                <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0"
-                                              Focusable="false" />
+                                <RepeatButton x:Name="PageDown"
+                                              Command="ScrollBar.PageUpCommand"
+                                              Focusable="false"
+                                              Opacity="0" />
                             </Track.DecreaseRepeatButton>
                             <Track.LayoutTransform>
                                 <RotateTransform Angle="0" />
@@ -269,7 +324,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="{x:Type ScrollBar}" x:Key="{x:Type ScrollBar}">
+    <Style x:Key="{x:Type ScrollBar}"
+           TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
         <Setter Property="Foreground" Value="#777" />
         <Setter Property="Background" Value="Transparent" />
@@ -279,23 +335,37 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollBar}">
-                    <Grid x:Name="GridRoot" Width="5" Background="{TemplateBinding Background}" Margin="0 5">
+                    <Grid x:Name="GridRoot"
+                          Width="5"
+                          Margin="0 5"
+                          Background="{TemplateBinding Background}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.0001*" />
                         </Grid.RowDefinitions>
-                        <Border Background="#3fff" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="1" />
-                        <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="True" Focusable="false">
+                        <Border Width="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="#3fff" />
+                        <Track x:Name="PART_Track"
+                               Grid.Row="0"
+                               Focusable="false"
+                               IsDirectionReversed="True">
                             <Track.Thumb>
-                                <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}"
+                                <Thumb x:Name="Thumb"
+                                       Background="{TemplateBinding Foreground}"
                                        Style="{StaticResource ScrollThumbs}" />
                             </Track.Thumb>
                             <Track.IncreaseRepeatButton>
-                                <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0"
-                                              Focusable="false" />
+                                <RepeatButton x:Name="PageUp"
+                                              Command="ScrollBar.PageDownCommand"
+                                              Focusable="false"
+                                              Opacity="0" />
                             </Track.IncreaseRepeatButton>
                             <Track.DecreaseRepeatButton>
-                                <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0"
-                                              Focusable="false" />
+                                <RepeatButton x:Name="PageDown"
+                                              Command="ScrollBar.PageUpCommand"
+                                              Focusable="false"
+                                              Opacity="0" />
                             </Track.DecreaseRepeatButton>
                             <Track.LayoutTransform>
                                 <RotateTransform Angle="0" />
@@ -349,31 +419,35 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Border Grid.Column="0" BorderThickness="0" Background="Transparent"
-                                HorizontalAlignment="Stretch">
+                        <Border Grid.Column="0"
+                                HorizontalAlignment="Stretch"
+                                Background="Transparent"
+                                BorderThickness="0">
                             <ScrollContentPresenter HorizontalAlignment="Stretch"
                                                     CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}" />
                         </Border>
                         <ScrollBar x:Name="PART_VerticalScrollBar"
-                                   Value="{TemplateBinding VerticalOffset}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
                                    Maximum="{TemplateBinding ScrollableHeight}"
                                    ViewportSize="{TemplateBinding ViewportHeight}"
                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                   Grid.Row="0" Grid.Column="1" />
+                                   Value="{TemplateBinding VerticalOffset}" />
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                   Orientation="Horizontal"
                                    Grid.Row="1"
                                    Grid.Column="0"
-                                   Value="{TemplateBinding HorizontalOffset}"
                                    Maximum="{TemplateBinding ScrollableWidth}"
+                                   Orientation="Horizontal"
                                    ViewportSize="{TemplateBinding ViewportWidth}"
-                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                   Value="{TemplateBinding HorizontalOffset}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="{x:Type ScrollViewer}" x:Key="ScrollViewerWithReversedVerticalScrollBar">
+    <Style x:Key="ScrollViewerWithReversedVerticalScrollBar"
+           TargetType="{x:Type ScrollViewer}">
         <Setter Property="OverridesDefaultStyle" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -387,33 +461,37 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Border Grid.Column="0" BorderThickness="0" Background="Transparent"
-                                HorizontalAlignment="Stretch">
+                        <Border Grid.Column="0"
+                                HorizontalAlignment="Stretch"
+                                Background="Transparent"
+                                BorderThickness="0">
                             <ScrollContentPresenter HorizontalAlignment="Stretch"
                                                     CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}" />
                         </Border>
                         <ScrollBar x:Name="PART_VerticalScrollBar"
-                                   Value="{TemplateBinding VerticalOffset}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
                                    Maximum="{TemplateBinding ScrollableHeight}"
+                                   Style="{StaticResource ReversedScrollBar}"
                                    ViewportSize="{TemplateBinding ViewportHeight}"
                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                   Style="{StaticResource ReversedScrollBar}"
-                                   Grid.Row="0" Grid.Column="1" />
+                                   Value="{TemplateBinding VerticalOffset}" />
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                   Orientation="Horizontal"
                                    Grid.Row="1"
                                    Grid.Column="0"
-                                   Value="{TemplateBinding HorizontalOffset}"
                                    Maximum="{TemplateBinding ScrollableWidth}"
+                                   Orientation="Horizontal"
                                    ViewportSize="{TemplateBinding ViewportWidth}"
-                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                   Value="{TemplateBinding HorizontalOffset}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type TabControl}" x:Key="ChatTabControlStyle">
+    <Style x:Key="ChatTabControlStyle"
+           TargetType="{x:Type TabControl}">
         <Setter Property="Padding" Value="2" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -424,62 +502,77 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true"
-                          KeyboardNavigation.TabNavigation="Local">
+                    <Grid x:Name="templateRoot"
+                          ClipToBounds="true"
+                          KeyboardNavigation.TabNavigation="Local"
+                          SnapsToDevicePixels="true">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="ColumnDefinition0" />
-                            <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
+                            <ColumnDefinition x:Name="ColumnDefinition1"
+                                              Width="0" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition x:Name="RowDefinition0" Height="Auto" />
-                            <RowDefinition x:Name="RowDefinition1" Height="*" />
+                            <RowDefinition x:Name="RowDefinition0"
+                                           Height="Auto" />
+                            <RowDefinition x:Name="RowDefinition1"
+                                           Height="*" />
                         </Grid.RowDefinitions>
-                        <TabPanel x:Name="headerPanel" Background="#1000" Grid.Column="0" IsItemsHost="true"
-                                  Margin="0,0,0,0" Grid.Row="0"
-                                  KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" HorizontalAlignment="Stretch" />
-                        <Border x:Name="contentPanel" BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
+                        <TabPanel x:Name="headerPanel"
+                                  Grid.Row="0"
+                                  Grid.Column="0"
+                                  Margin="0 0 0 0"
+                                  HorizontalAlignment="Stretch"
+                                  Panel.ZIndex="1"
+                                  Background="#1000"
+                                  IsItemsHost="true"
+                                  KeyboardNavigation.TabIndex="1" />
+                        <Border x:Name="contentPanel"
+                                Grid.Row="1"
+                                Grid.Column="0"
                                 Background="{TemplateBinding Background}"
-                                Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1"
-                                KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
-                            <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                KeyboardNavigation.TabIndex="2"
+                                KeyboardNavigation.TabNavigation="Local">
+                            <ContentPresenter x:Name="PART_SelectedContentHost"
                                               Margin="{TemplateBinding Padding}"
+                                              ContentSource="SelectedContent"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
-                            <Setter Property="Grid.Row" TargetName="headerPanel" Value="1" />
-                            <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
-                            <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
-                            <Setter Property="Height" TargetName="RowDefinition1" Value="Auto" />
-                            <Setter Property="Margin" TargetName="headerPanel" Value="2,0,2,2" />
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition1" Property="Height" Value="Auto" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="2 0 2 2" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
-                            <Setter Property="Grid.Row" TargetName="headerPanel" Value="0" />
-                            <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
-                            <Setter Property="Grid.Column" TargetName="headerPanel" Value="0" />
-                            <Setter Property="Grid.Column" TargetName="contentPanel" Value="1" />
-                            <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto" />
-                            <Setter Property="Width" TargetName="ColumnDefinition1" Value="*" />
-                            <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
-                            <Setter Property="Height" TargetName="RowDefinition1" Value="0" />
-                            <Setter Property="Margin" TargetName="headerPanel" Value="2,2,0,2" />
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="Auto" />
+                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="*" />
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="2 2 0 2" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
-                            <Setter Property="Grid.Row" TargetName="headerPanel" Value="0" />
-                            <Setter Property="Grid.Row" TargetName="contentPanel" Value="0" />
-                            <Setter Property="Grid.Column" TargetName="headerPanel" Value="1" />
-                            <Setter Property="Grid.Column" TargetName="contentPanel" Value="0" />
-                            <Setter Property="Width" TargetName="ColumnDefinition0" Value="*" />
-                            <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto" />
-                            <Setter Property="Height" TargetName="RowDefinition0" Value="*" />
-                            <Setter Property="Height" TargetName="RowDefinition1" Value="0" />
-                            <Setter Property="Margin" TargetName="headerPanel" Value="0,2,2,2" />
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
+                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="Auto" />
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="0 2 2 2" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="TextElement.Foreground" TargetName="templateRoot"
-                                    Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -495,19 +588,22 @@
         <Setter Property="Padding" Value="16 6" />
         <Setter Property="Margin" Value="10" />
         <Setter Property="Effect" Value="{StaticResource DropShadow}" />
-        <EventSetter Event="Opened" Handler="ToolTip_Opened" />
-        <EventSetter Event="Closed" Handler="ToolTip_Closed" />
+        <EventSetter Event="Opened"
+                     Handler="ToolTip_Opened" />
+        <EventSetter Event="Closed"
+                     Handler="ToolTip_Closed" />
     </Style>
 
-    <Style TargetType="{x:Type Grid}" x:Key="GlowHoverGrid">
+    <Style x:Key="GlowHoverGrid"
+           TargetType="{x:Type Grid}">
         <Style.Setters>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush Opacity="0">
                         <GradientStop Color="#0ddf" />
-                        <GradientStop Color="#1ddf" Offset=".3" />
-                        <GradientStop Color="#1ddf" Offset=".7" />
-                        <GradientStop Color="#0ddf" Offset="1" />
+                        <GradientStop Offset=".3" Color="#1ddf" />
+                        <GradientStop Offset=".7" Color="#1ddf" />
+                        <GradientStop Offset="1" Color="#0ddf" />
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
@@ -517,8 +613,9 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation From="0" To="1"
-                                             Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                            <DoubleAnimation Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                                             From="0"
+                                             To="1"
                                              Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -526,8 +623,9 @@
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation From="1" To="0"
-                                             Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                            <DoubleAnimation Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                                             From="1"
+                                             To="0"
                                              Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -536,15 +634,16 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    <Style TargetType="{x:Type Grid}" x:Key="GlowHoverGridLeft">
+    <Style x:Key="GlowHoverGridLeft"
+           TargetType="{x:Type Grid}">
         <Style.Setters>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush Opacity="0">
                         <GradientStop Color="#0ddf" />
-                        <GradientStop Color="#2ddf" Offset="0.2" />
+                        <GradientStop Offset="0.2" Color="#2ddf" />
                         <!--<GradientStop Color="#1ddf" Offset="0.6" />-->
-                        <GradientStop Color="#0ddf" Offset="1" />
+                        <GradientStop Offset="1" Color="#0ddf" />
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
@@ -554,8 +653,9 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation From="0" To="1"
-                                             Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                            <DoubleAnimation Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                                             From="0"
+                                             To="1"
                                              Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -563,8 +663,9 @@
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation From="1" To="0"
-                                             Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                            <DoubleAnimation Storyboard.TargetProperty="(Grid.Background).(Brush.Opacity)"
+                                             From="1"
+                                             To="0"
                                              Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -574,7 +675,8 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type Border}" x:Key="ClassWindowSkillBorder">
+    <Style x:Key="ClassWindowSkillBorder"
+           TargetType="{x:Type Border}">
         <Setter Property="BorderBrush" Value="#89a" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Width" Value="51" />
@@ -600,7 +702,9 @@
         <Setter Property="OffColor" Value="#f222" />
     </Style>
 
-    <Style TargetType="{x:Type Path}" x:Key="WindowLogo" BasedOn="{StaticResource NostrumDefaultPathStyle}">
+    <Style x:Key="WindowLogo"
+           BasedOn="{StaticResource NostrumDefaultPathStyle}"
+           TargetType="{x:Type Path}">
         <Setter Property="Data" Value="{StaticResource SvgTera}" />
         <Setter Property="Fill" Value="#6fff" />
         <Setter Property="Height" Value="20" />
@@ -609,14 +713,59 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
 
-    <!--#region Based on Nostrum -->
-    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource ComboBoxMainStyle}">
+    <Style TargetType="{x:Type ToggleButton}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#9fff" />
+        <Setter Property="tccControls:ToggleButtonExtensions.HighlightBrush" Value="#1fff" />
+        <Setter Property="tccControls:ToggleButtonExtensions.CheckedBrush" Value="{StaticResource DefensiveStanceBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid Background="Transparent">
+                        <Border x:Name="MouseOverBorder"
+                                Background="{TemplateBinding tccControls:ToggleButtonExtensions.HighlightBrush}"
+                                BorderBrush="Transparent"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding tccControls:ToggleButtonExtensions.CornerRadius}"
+                                Visibility="Collapsed" />
+
+                        <Border x:Name="Border"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding tccControls:ToggleButtonExtensions.CornerRadius}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MouseOverBorder" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{Binding Path=(tccControls:ToggleButtonExtensions.CheckedBrush), RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#region Based on Nostrum-->
+    <Style BasedOn="{StaticResource ComboBoxMainStyle}"
+           TargetType="{x:Type ComboBox}">
         <Setter Property="extensions:ComboBoxExtensions.DropDownBorderStyle" Value="{StaticResource RevampBorderStyle}" />
     </Style>
-    <Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource {x:Type ContextMenu}}">
+    <Style BasedOn="{StaticResource {x:Type ContextMenu}}"
+           TargetType="{x:Type ContextMenu}">
         <Setter Property="Background" Value="{StaticResource RevampDarkerBackgroundBrush}" />
     </Style>
-    <Style TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+    <Style BasedOn="{StaticResource {x:Type MenuItem}}"
+           TargetType="{x:Type MenuItem}">
         <Setter Property="Background" Value="{StaticResource RevampDarkerBackgroundBrush}" />
         <Setter Property="Foreground" Value="White" />
     </Style>

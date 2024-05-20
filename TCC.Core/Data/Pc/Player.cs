@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
@@ -369,7 +369,7 @@ public class Player : ThreadSafeObservableObject
 
     public void UpdateAbnormality(Abnormality ab, uint pDuration, int pStacks)
     {
-        if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ
+        if (!App.Settings.AbnormalitySettings.Self.CanShow(ab.Id)) return; // by HQ
 
         lock (_listLock)
         {
@@ -379,7 +379,7 @@ public class Player : ThreadSafeObservableObject
 
     public void EndAbnormality(Abnormality ab)
     {
-        if (!App.Settings.BuffWindowSettings.Pass(ab)) return; // by HQ
+        if (!App.Settings.AbnormalitySettings.Self.CanShow(ab.Id)) return; // by HQ
 
         lock (_listLock)
         {
@@ -402,7 +402,7 @@ public class Player : ThreadSafeObservableObject
             }
             else
             {
-                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, App.Settings.BuffWindowSettings.Hidden.Contains(ab.Id));
+                var newAb = new AbnormalityDuration(ab, duration, stacks, EntityId, _dispatcher, true, App.Settings.AbnormalitySettings.Self.CanCollapse(ab.Id));
                 list.Add(newAb);
                 if (ab.IsShield) AddShield(ab);
                 if (ab.IsDebuff) AddToDebuffList(ab);

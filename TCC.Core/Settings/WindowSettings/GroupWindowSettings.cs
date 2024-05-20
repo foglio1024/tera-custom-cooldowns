@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TCC.Data;
+using TCC.Data.Abnormalities;
 using TCC.UI.Windows.Widgets;
 using TeraDataLite;
 
@@ -160,11 +161,14 @@ public class GroupWindowSettings : WindowSettingsBase
         get => _showOnlyAggroStacks;
         set => RaiseAndSetIfChanged(value, ref _showOnlyAggroStacks);
     }
+
+    [Obsolete]
     public bool ShowAllAbnormalities { get; set; }
-
+    [Obsolete]
     public Dictionary<Class, List<uint>> GroupAbnormals { get; }
+    [Obsolete]
     public List<uint> Hidden { get; set; }
-
+    
     public GroupWindowSettings()
     {
         _visible = true;
@@ -192,25 +196,7 @@ public class GroupWindowSettings : WindowSettingsBase
         ShowAwakenIcon = true;
         HpLabelMode = GroupHpLabelMode.Percentage;
         Layout = GroupWindowLayout.RoleSeparated;
-
-        GroupAbnormals = new Dictionary<Class, List<uint>>
-        {
-            {       0, new List<uint>()},
-            {(Class)1, new List<uint>()},
-            {(Class)2, new List<uint>()},
-            {(Class)3, new List<uint>()},
-            {(Class)4, new List<uint>()},
-            {(Class)5, new List<uint>()},
-            {(Class)6, new List<uint>()},
-            {(Class)7, new List<uint>()},
-            {(Class)8, new List<uint>()},
-            {(Class)9, new List<uint>()},
-            {(Class)10, new List<uint>()},
-            {(Class)11, new List<uint>()},
-            {(Class)12, new List<uint>()},
-            {(Class)255, new List<uint>()}
-        };
-
+        
         GpkNames.Add("PartyWindow");
         GpkNames.Add("PartyWindowRaidInfo");
 
