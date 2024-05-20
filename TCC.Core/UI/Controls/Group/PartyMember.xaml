@@ -297,10 +297,40 @@
                     RenderTransformOrigin=".5 .5"
                     Background="{StaticResource RevampBackgroundBrush}"
                     BorderThickness="2"
-                    BorderBrush="{StaticResource RevampBorderBrush}"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Margin="5" >
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush" Value="{StaticResource RevampBorderBrush}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Role}" Value="{x:Static data:Role.Dps}">
+                                <Setter Property="BorderBrush" >
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource DpsRoleColor}" Opacity=".3"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Role}" Value="{x:Static data:Role.Tank}">
+                                <Setter Property="BorderBrush" >
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource TankRoleColor}" Opacity=".3"/>
+                                    </Setter.Value>
+                                </Setter>
+
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Role}" Value="{x:Static data:Role.Healer}">
+                                <Setter Property="BorderBrush" >
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource HealerRoleColor}" Opacity=".3"/>
+                                    </Setter.Value>
+                                </Setter>
+
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+
             </Border>
             <Border RenderTransform="{StaticResource Rotate45}"
                     RenderTransformOrigin=".5 .5"
@@ -316,7 +346,7 @@
                                 <Setter Property="BorderBrush" Value="{StaticResource DpsRoleBrush}"/>
                                 <Setter Property="Background" >
                                     <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource DpsRoleColor}" Opacity=".1"/>
+                                        <SolidColorBrush Color="{StaticResource DpsRoleColor}" Opacity=".2"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
@@ -324,7 +354,7 @@
                                 <Setter Property="BorderBrush" Value="{StaticResource TankRoleBrush}"/>
                                 <Setter Property="Background" >
                                     <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource TankRoleColor}" Opacity=".1"/>
+                                        <SolidColorBrush Color="{StaticResource TankRoleColor}" Opacity=".2"/>
                                     </Setter.Value>
                                 </Setter>
 
@@ -333,7 +363,7 @@
                                 <Setter Property="BorderBrush" Value="{StaticResource HealerRoleBrush}"/>
                                 <Setter Property="Background" >
                                     <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource HealerRoleColor}" Opacity=".1"/>
+                                        <SolidColorBrush Color="{StaticResource HealerRoleColor}" Opacity=".2"/>
                                     </Setter.Value>
                                 </Setter>
 
