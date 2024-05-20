@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using JetBrains.Annotations;
 using Nostrum.WPF;
 using Nostrum.WPF.Factories;
@@ -16,6 +17,8 @@ using TCC.Data.Pc;
 using TCC.Interop.Proxy;
 using TCC.Settings.WindowSettings;
 using TCC.UI;
+using TCC.UI.Windows;
+using TCC.UI.Windows.Configuration.Abnormalities;
 using TCC.Utils;
 using TeraDataLite;
 using TeraPacketParser.Analysis;
@@ -43,11 +46,13 @@ public class GroupWindowViewModel : TccWindowViewModel
     public ICollectionViewLiveShaping Dps { get; }
     public ICollectionViewLiveShaping Tanks { get; }
     public ICollectionViewLiveShaping Healers { get; }
+
     public bool Raid
     {
         get => _raid;
         set => RaiseAndSetIfChanged(value, ref _raid);
     }
+
     public int Size => Members.Count;
     public int ReadyCount => Members.Count(x => x.Ready == ReadyStatus.Ready);
     public int AliveCount => Members.Count(x => x.Alive);
@@ -58,6 +63,10 @@ public class GroupWindowViewModel : TccWindowViewModel
     public bool Rolling { get; set; }
 
     public ICommand ShowLootWindowCommand { get; }
+    public ICommand ConfigureAbnormalitiesCommand { get; }
+    public ICommand LeaveGroupCommand { get; }
+    public ICommand DisbandGroupCommand { get; }
+    public ICommand ResetInstanceCommand { get; }
 
     public GroupWindowViewModel(GroupWindowSettings settings) : base(settings)
     {
@@ -88,7 +97,6 @@ public class GroupWindowViewModel : TccWindowViewModel
                   ])
               ?? throw new Exception("Failed to create LiveCollectionView");
 
-
         Game.Teleported += OnTeleported;
         Game.EncounterChanged += OnEncounterChanged;
         settings.SettingsUpdated += NotifySettingUpdated;
@@ -97,6 +105,38 @@ public class GroupWindowViewModel : TccWindowViewModel
         settings.LayoutChanged += OnLayoutChanged;
 
         ShowLootWindowCommand = new RelayCommand(Game.ShowLootDistributionWindow);
+
+        ConfigureAbnormalitiesCommand = new RelayCommand(ConfigureAbnormalities);
+        LeaveGroupCommand = new RelayCommand(LeaveGroup);
+        DisbandGroupCommand = new RelayCommand(DisbandGroup);
+        ResetInstanceCommand = new RelayCommand(ResetInstance);
+    }
+
+    private void ResetInstance()
+    {
+        if (!AmILeader) return;
+        StubInterface.Instance.StubClient.ResetInstance();
+    }
+
+    private void DisbandGroup()
+    {
+        if (!AmILeader) return;
+        StubInterface.Instance.StubClient.DisbandGroup();
+    }
+
+    private void LeaveGroup()
+    {
+        StubInterface.Instance.StubClient.LeaveGroup();
+    }
+
+    private void ConfigureAbnormalities()
+    {
+        _dispatcher.InvokeAsync(() =>
+            {
+                if (TccWindow.Exists(typeof(AbnormalityConfigWindow))) return;
+                new AbnormalityConfigWindow().Show();
+            },
+            DispatcherPriority.Background);
     }
 
     private void OnEncounterChanged()
@@ -122,7 +162,6 @@ public class GroupWindowViewModel : TccWindowViewModel
             PacketAnalyzer.Processor.Unhook<S_PARTY_MEMBER_INTERVAL_POS_UPDATE>(OnPartyMemberIntervalPosUpdate);
         foreach (var u in Members.ToSyncList()) u.InRange = false;
     }
-
 
     private void Members_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
@@ -167,6 +206,7 @@ public class GroupWindowViewModel : TccWindowViewModel
         u = exists ? Members.ToSyncList().FirstOrDefault(x => x.Name == name) : new User(_dispatcher);
         return exists;
     }
+
     public bool TryGetUser(ulong id, [MaybeNullWhen(false)] out User u)
     {
         var exists = Exists(id);
@@ -174,6 +214,7 @@ public class GroupWindowViewModel : TccWindowViewModel
         u = exists ? Members.ToSyncList().FirstOrDefault(x => x.EntityId == id) : new User(_dispatcher);
         return u != null;
     }
+
     public bool TryGetUser(uint pId, uint sId, [MaybeNullWhen(false)] out User u)
     {
         var exists = Exists(pId, sId);
@@ -185,6 +226,7 @@ public class GroupWindowViewModel : TccWindowViewModel
     {
         return Members.FirstOrDefault(x => x.Name == name)?.IsLeader ?? false;
     }
+
     public bool AmILeader => IsLeader(Game.Me.Name) || _leaderOverride;
 
     public void SetAggro(ulong target)
@@ -216,6 +258,7 @@ public class GroupWindowViewModel : TccWindowViewModel
             SetAggro(user);
         }
     }
+
     internal void BeginOrRefreshAbnormality(Abnormality ab, int stacks, uint duration, uint playerId, uint serverId)
     {
         _dispatcher.InvokeAsync(() =>
@@ -229,7 +272,7 @@ public class GroupWindowViewModel : TccWindowViewModel
                 u.AddOrRefreshBuff(ab, duration, stacks);
                 if (u.UserClass == Class.Warrior && ab.Id is >= 100200 and <= 100203)
                 {
-                    u.Role = Role.Tank; //def stance turned on: switch warrior to tank 
+                    u.Role = Role.Tank; //def stance turned on: switch warrior to tank
                 }
             }
             else
@@ -249,7 +292,6 @@ public class GroupWindowViewModel : TccWindowViewModel
     {
         _dispatcher.InvokeAsync(() =>
         {
-
             var u = Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId);
             if (u == null) return;
 
@@ -275,6 +317,7 @@ public class GroupWindowViewModel : TccWindowViewModel
             Members.ToSyncList().FirstOrDefault(x => x.PlayerId == playerId && x.ServerId == serverId)?.ClearAbnormalities();
         });
     }
+
     [Obsolete]
     public void AddOrUpdateMember(User p)
     {
@@ -376,7 +419,6 @@ public class GroupWindowViewModel : TccWindowViewModel
             msg = "@0\vPartyPlayerName\v" + name + "\vparty\vparty";
         }
         SystemMessagesProcessor.AnalyzeMessage(msg, opcode);
-
     }
 
     private void RemoveMember(uint playerId, uint serverId, bool kick = false)
@@ -480,7 +522,6 @@ public class GroupWindowViewModel : TccWindowViewModel
     {
         Rolling = false;
 
-
         foreach (var m in Members.ToSyncList())
         {
             m.IsRolling = false;
@@ -500,9 +541,9 @@ public class GroupWindowViewModel : TccWindowViewModel
         return Members.ToSyncList().OrderByDescending(u => u.RollResult).First().EntityId;
         //Members.ToList().ForEach(user => user.IsWinning = user.EntityId == Members.OrderByDescending(u => u.RollResult).First().EntityId);
     }
+
     public void SetReadyStatus(ReadyPartyMember p)
     {
-
         if (_firstCheck)
         {
             foreach (var u in Members.ToSyncList())
@@ -691,7 +732,6 @@ public class GroupWindowViewModel : TccWindowViewModel
         PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_BEGIN>(OnAbnormalityBegin);
         PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_REFRESH>(OnAbnormalityRefresh);
         PacketAnalyzer.Processor.Unhook<S_ABNORMALITY_END>(OnAbnormalityEnd);
-
     }
 
     private void OnDisconnected()
@@ -759,7 +799,7 @@ public class GroupWindowViewModel : TccWindowViewModel
     {
         _dispatcher.InvokeAsync(() =>
         {
-            foreach (var readyPartyMember in p.Party) 
+            foreach (var readyPartyMember in p.Party)
                 SetReadyStatus(readyPartyMember);
         });
     }

@@ -4,6 +4,7 @@
                     xmlns:controls="clr-namespace:TCC.UI.Controls"
                     xmlns:converters="clr-namespace:Nostrum.WPF.Converters;assembly=Nostrum.WPF"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:extensions="clr-namespace:Nostrum.WPF.Extensions;assembly=Nostrum.WPF"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:widgets="clr-namespace:TCC.ViewModels.Widgets"
                     xmlns:widgets1="clr-namespace:TCC.UI.Windows.Widgets"
@@ -15,6 +16,30 @@
                     Style="{StaticResource BaseWindowStyle}"
                     UseLayoutRounding="True"
                     mc:Ignorable="d">
+
+    <FrameworkElement.Resources>
+        <Style x:Key="CommandButtonStyle"
+               BasedOn="{StaticResource NostrumMainButtonStyle}"
+               TargetType="Button">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="WhiteSmoke" />
+            <Setter Property="extensions:ButtonExtensions.HighlightBrush" Value="#1fff" />
+        </Style>
+        <Style x:Key="CommandButtonIconStyle"
+               BasedOn="{StaticResource {x:Type Path}}"
+               TargetType="Path">
+            <Setter Property="Height" Value="18" />
+            <Setter Property="Width" Value="18" />
+            <Setter Property="Fill" Value="WhiteSmoke" />
+            <Setter Property="Margin" Value="0 0 8 0" />
+            <Setter Property="Stretch" Value="Uniform" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </FrameworkElement.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -113,91 +138,100 @@
                         BorderBrush="{StaticResource RevampBorderBrush}"
                         CornerRadius="5"
                         Opacity="0"
-                        Style="{StaticResource DefaultBorderStyle}"
-                        Visibility="{Binding Formed, Converter={converters:BoolToVisibility}}">
-                    <StackPanel Orientation="Horizontal">
+                      Visibility="{Binding Formed, Converter={converters:BoolToVisibility}}"  
+                        Style="{StaticResource DefaultBorderStyle}">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="8 4">
+                            <Path Width="14" Height="14" Data="{StaticResource SvgUsers}"></Path>
+                            <TextBlock Text="Group commands" Margin="4 0 0 0" Foreground="#5fff"/>
+                        </StackPanel>
+                        <Separator Background="#1fff" Margin="0 1"/>
                         <Button x:Name="LootWindowButton"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Center"
                                 Command="{Binding ShowLootWindowCommand}"
-                                Style="{StaticResource NostrumContentOpacityButtonStyle}"
+                                Style="{StaticResource CommandButtonStyle}"
                                 ToolTip="Show loot window">
-                            <Path Width="15"
-                                  Height="15"
-                                  Margin="3 3"
-                                  Data="{StaticResource SvgLoot}"
-                                  Fill="#fff" />
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgLoot}"
+                                      Style="{StaticResource CommandButtonIconStyle}" />
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="Loot window" />
+                            </StackPanel>
                         </Button>
                         <Button x:Name="SettingsButton"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Center"
-                                Click="ShowAbnormalSettings"
-                                Style="{StaticResource NostrumContentOpacityButtonStyle}"
+                                Command="{Binding ConfigureAbnormalitiesCommand}"
+                                Style="{StaticResource CommandButtonStyle}"
                                 ToolTip="Configure buffs">
-                            <Path Width="15"
-                                  Height="15"
-                                  Margin="3 3"
-                                  Data="{StaticResource SvgSettings}"
-                                  Fill="#fff" />
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgSettings}"
+                                      Style="{StaticResource CommandButtonIconStyle}" />
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="Buffs settings" />
+
+                            </StackPanel>
                         </Button>
                         <Button x:Name="LeaveButton"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Center"
-                                Click="LeaveParty"
-                                Style="{StaticResource NostrumContentOpacityButtonStyle}"
+                                Command="{Binding LeaveGroupCommand}"
+                                Style="{StaticResource CommandButtonStyle}"
+                              Visibility="{Binding ShowLeaveButton, Converter={converters:BoolToVisibility}}"  
                                 ToolTip="Leave party">
-                            <Path Width="15"
-                                  Height="15"
-                                  Margin="3 3"
-                                  Data="{StaticResource SvgRemoveCircle}"
-                                  Fill="{StaticResource HpBrush}"
-                                  Visibility="{Binding ShowLeaveButton, Converter={converters:BoolToVisibility}}" />
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgRemoveCircle}"
+                                      Fill="{StaticResource HpBrush}"
+                                      Style="{StaticResource CommandButtonIconStyle}" />
+                                <TextBlock VerticalAlignment="Center"
+                                           Foreground="{StaticResource HpBrush}"
+                                           Text="Leave group" />
+                            </StackPanel>
                         </Button>
-                    </StackPanel>
-                </Border>
-                <Border x:Name="GroupButtons"
-                        Grid.Column="2"
-                        Margin="4 0 0 0"
-                        VerticalAlignment="Top"
-                        Background="{StaticResource RevampBackgroundBrush}"
-                        BorderBrush="{StaticResource RevampBorderBrush}"
-                        CornerRadius="5"
-                        Opacity="0"
-                        Style="{StaticResource DefaultBorderStyle}"
-                        Visibility="{Binding ShowLeaderButtons, Converter={converters:BoolToVisibility}}">
-                    <StackPanel Orientation="Horizontal">
-
-                        <!--<Button Style="{StaticResource NostrumContentOpacityButtonStyle}" x:Name="LootSettingsButton" Padding="10 0" Visibility="Collapsed"
-                            ToolTip="Loot options" Click="LootSettingsButtonClicked" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
-                            <Path Data="{StaticResource SvgGift}" Fill="#fff" Margin="3 3" Width="15" Height="15"/>
-                        </Button>-->
+                        <Grid Margin="0 2"
+                              Visibility="{Binding ShowLeaderButtons, Converter={converters:BoolToVisibility}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Separator Margin="5 2"
+                                       Background="#2fff" />
+                            <Path Grid.Column="1"
+                                  Width="8"
+                                  Height="8"
+                                  Data="{StaticResource SvgCrown}"
+                                  Fill="Orange" />
+                            <Separator Grid.Column="2"
+                                       Margin="5 2"
+                                       Background="#2fff" />
+                        </Grid>
                         <Button x:Name="ResetButton"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Center"
-                                Click="ResetButtonClicked"
-                                Style="{StaticResource NostrumContentOpacityButtonStyle}"
-                                ToolTip="Reset instance">
-                            <Path Width="15"
-                                  Height="15"
-                                  Margin="3 3"
-                                  Data="{StaticResource SvgReload}"
-                                  Fill="#fff" />
+                                Command="{Binding ResetInstanceCommand}"
+                                Style="{StaticResource CommandButtonStyle}"
+                                ToolTip="Reset instance"
+                                Visibility="{Binding ShowLeaderButtons, Converter={converters:BoolToVisibility}}">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgReload}"
+                                      Style="{StaticResource CommandButtonIconStyle}" />
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="Reset instance" />
+
+                            </StackPanel>
                         </Button>
                         <Button x:Name="DisbandButton"
-                                HorizontalAlignment="Stretch"
-                                HorizontalContentAlignment="Center"
-                                Click="DisbandButtonClicked"
-                                Style="{StaticResource NostrumContentOpacityButtonStyle}"
-                                ToolTip="Disband">
-                            <Path Width="15"
-                                  Height="15"
-                                  Margin="3 3"
-                                  Data="{StaticResource SvgDisband}"
-                                  Fill="{StaticResource HpBrush}" />
+                                Command="{Binding DisbandGroupCommand}"
+                                Style="{StaticResource CommandButtonStyle}"
+                                ToolTip="Disband"
+                                Visibility="{Binding ShowLeaderButtons, Converter={converters:BoolToVisibility}}">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource SvgDisband}"
+                                      Fill="{StaticResource HpBrush}"
+                                      Style="{StaticResource CommandButtonIconStyle}" />
+                                <TextBlock VerticalAlignment="Center"
+                                           Foreground="{StaticResource HpBrush}"
+                                           Text="Disband group" />
+
+                            </StackPanel>
                         </Button>
+
                     </StackPanel>
                 </Border>
-
             </Grid>
 
             <ContentControl MaxHeight="500"
