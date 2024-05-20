@@ -602,7 +602,6 @@
                     <Setter TargetName="GroupWhitelistContainer" Property="IsEnabled" Value="False" />
                     <Setter TargetName="GroupWhitelistDisabledWarning" Property="Visibility" Value="Visible" />
                     <Setter TargetName="GroupWhitelistDisabledWarningText" Property="Text" Value="Whitelist is disabled because effects are not being filtered" />
-                    <!--<Setter TargetName="GroupWhitelistDisabledWarningText" Property="Visibility" Value="Collapsed" />-->
                 </DataTrigger>
 
             </DataTemplate.Triggers>

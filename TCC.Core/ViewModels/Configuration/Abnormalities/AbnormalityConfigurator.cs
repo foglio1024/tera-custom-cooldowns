@@ -38,7 +38,7 @@ public class AbnormalityConfigurator : ObservableObject
 
     public bool IsWhitelisted => WhitelistToggles.Any(p => p.IsWhitelisted);
 
-    public bool CanBeWhitelisted => _abnormality.Type is AbnormalityType.Buff && _abnormality.IsBuff && !_settings.ShowAll;
+    public bool CanBeWhitelisted => _abnormality.Type is AbnormalityType.Buff or AbnormalityType.Special && _abnormality.IsBuff && !_settings.ShowAll;
     public bool IsWhitelistingEnabled => !_settings.ShowAll;
 
     public AbnormalityWhitelistToggle[] WhitelistToggles { get; }
