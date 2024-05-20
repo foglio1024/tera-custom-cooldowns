@@ -1,6 +1,5 @@
 ﻿using JetBrains.Annotations;
 using System;
-using TCC.Data;
 using TCC.Data.Skills;
 using TCC.Settings.WindowSettings;
 using TCC.Utilities;

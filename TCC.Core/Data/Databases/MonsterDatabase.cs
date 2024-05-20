@@ -175,10 +175,12 @@ public class MonsterDatabase : DatabaseBase
         foreach (var tuple in toRemove)
         {
             foreach (var xz in overrideDoc.Descendants("Zone")
-                         .Where(x => x.Attribute("id")?.Value == tuple.ZoneId.ToString()))
+                         .Where(x => x.Attribute("id")?.Value == tuple.ZoneId.ToString())
+                         .ToArray())
             {
                 foreach (var xm in xz.Descendants("Monster")
-                             .Where(m => m.Attribute("id")?.Value == tuple.TemplateId.ToString()))
+                             .Where(m => m.Attribute("id")?.Value == tuple.TemplateId.ToString())
+                             .ToArray())
                 {
                     xm.Remove();
                 }

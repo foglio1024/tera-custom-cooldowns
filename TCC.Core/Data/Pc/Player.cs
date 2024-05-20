@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Threading;
@@ -442,9 +442,9 @@ public class Player : ThreadSafeObservableObject
     {
         lock (_listLock)
         {
-            _buffs.ToSyncList().ForEach(item => item.Dispose());
-            _debuffs.ToSyncList().ForEach(item => item.Dispose());
-            _infBuffs.ToSyncList().ForEach(item => item.Dispose());
+            foreach (var item in _buffs.ToSyncList()) item.Dispose();
+            foreach (var item in _debuffs.ToSyncList()) item.Dispose();
+            foreach (var item in _infBuffs.ToSyncList()) item.Dispose();
 
             _buffs.Clear();
             _debuffs.Clear();

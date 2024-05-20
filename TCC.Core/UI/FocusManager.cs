@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics;
+﻿using Nostrum.WinAPI;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Timers;
 using System.Windows.Forms;
-using Nostrum.WinAPI;
+using TCC.Data;
 using TCC.UI.Windows;
 using TCC.UI.Windows.Widgets;
 using Timer = System.Timers.Timer;
@@ -22,7 +22,9 @@ public static class FocusManager
 
     // events
     public static event Action<Point, Point, Size>? TeraScreenChanged;
+
     public static event Action? ForegroundChanged;
+
     public static event Action? FocusTick;
 
     // properties
@@ -36,6 +38,7 @@ public static class FocusManager
             ForegroundChanged?.Invoke();
         }
     }
+
     public static bool IsForeground
     {
         get => _isForeground || ForceFocused;
@@ -57,6 +60,7 @@ public static class FocusManager
     }
 
     private static int _pausedCount;
+
     public static bool PauseTopmost
     {
         get => _pausedCount > 0;
@@ -64,7 +68,7 @@ public static class FocusManager
         {
             if (value) _pausedCount++;
             else _pausedCount--;
-            if(_pausedCount < 0) _pausedCount = 0;
+            if (_pausedCount < 0) _pausedCount = 0;
             //Log.CW($"TopMost paused {_pausedCount}");
         }
     }
@@ -108,6 +112,7 @@ public static class FocusManager
 
         WindowManager.DisposeEvent += Dispose;
     }
+
     public static void Dispose()
     {
         if (_disposed) return;
@@ -120,26 +125,37 @@ public static class FocusManager
         if (TeraWindow == IntPtr.Zero) return;
         InputInjector.PasteString(TeraWindow, s);
     }
+
     public static void SendNewLine()
     {
         if (TeraWindow == IntPtr.Zero) { return; }
         InputInjector.NewLine(TeraWindow);
     }
+
     public static void SendPgUp(int delayMs)
     {
-        if (TeraWindow == IntPtr.Zero) { Debugger.Break(); return; }
+        if (TeraWindow == IntPtr.Zero) { return; }
         InputInjector.PgUp(TeraWindow, delayMs);
     }
+
     public static void SendPgDown(int delayMs)
     {
-        if (TeraWindow == IntPtr.Zero) { Debugger.Break(); return; }
+        if (TeraWindow == IntPtr.Zero) { return; }
         InputInjector.PgDown(TeraWindow, delayMs);
     }
+
+    public static void SendHotKey(HotKey hk)
+    {
+        if (TeraWindow == IntPtr.Zero) { return; }
+        InputInjector.InjectHotkey(TeraWindow, hk); ;
+    }
+
     public static void MakeUnfocusable(IntPtr hwnd)
     {
         var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
         User32.SetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE, extendedStyle | (int)User32.ExtendedWindowStyles.WS_EX_NOACTIVATE);
     }
+
     public static void UndoUnfocusable(IntPtr hwnd)
     {
         var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
@@ -157,11 +173,13 @@ public static class FocusManager
         var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
         User32.SetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE, extendedStyle | (int)User32.ExtendedWindowStyles.WS_EX_TRANSPARENT);
     }
+
     public static void UndoClickThru(IntPtr hwnd)
     {
         var extendedStyle = User32.GetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE);
         User32.SetWindowLong(hwnd, (int)User32.GWL.GWL_EXSTYLE, extendedStyle & ~(uint)User32.ExtendedWindowStyles.WS_EX_TRANSPARENT);
     }
+
     public static void FocusTera()
     {
         User32.SetForegroundWindow(TeraWindow);

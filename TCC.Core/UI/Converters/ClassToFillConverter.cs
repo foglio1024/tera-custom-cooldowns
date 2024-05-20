@@ -20,6 +20,7 @@ public class ClassToFillConverter : IValueConverter
         {
             Class.Lancer or Class.Brawler => Tank,
             Class.Priest or Class.Mystic => Healer,
+            Class.Common => Brushes.White,
             _ => Dps,
         };
         if (targetType == typeof(Color)) return brush?.Color;

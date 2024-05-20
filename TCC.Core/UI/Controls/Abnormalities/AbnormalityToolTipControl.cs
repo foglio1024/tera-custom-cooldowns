@@ -35,7 +35,8 @@ public partial class AbnormalityToolTipControl
 
     private void ParseToolTip(string t)
     {
-        new TooltipParser(t).Parse().ForEach(ToolTipTb.Inlines.Add);
+        foreach (var inline in new TooltipParser(t).Parse()) 
+            ToolTipTb.Inlines.Add(inline);
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
