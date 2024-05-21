@@ -165,7 +165,7 @@ public class GroupWindowSettings : WindowSettingsBase
     [Obsolete]
     public bool ShowAllAbnormalities { get; set; }
     [Obsolete]
-    public Dictionary<Class, List<uint>> GroupAbnormals { get; }
+    public Dictionary<Class, List<uint>> GroupAbnormals { get; } = [];
     [Obsolete]
     public List<uint> Hidden { get; set; }
     
