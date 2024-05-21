@@ -3,9 +3,6 @@ using TCC.Data;
 
 namespace TCC.UI.Controls.Classes.Elements;
 
-/// <summary>
-/// Logica di interazione per SorcererElementsControl.xaml
-/// </summary>
 public partial class SorcererElementsControl
 {
     public SorcererElementsControl()
@@ -35,8 +32,7 @@ public partial class SorcererElementsControl
         private set => SetValue(FireProperty, value);
     }
 
-    private static readonly DependencyPropertyKey FirePropertyKey = DependencyProperty.RegisterReadOnly(nameof(Fire), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
-    public static readonly DependencyProperty FireProperty = FirePropertyKey.DependencyProperty;
+    private static readonly DependencyProperty FireProperty = DependencyProperty.Register(nameof(Fire), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
 
     public bool Ice
     {
@@ -44,8 +40,7 @@ public partial class SorcererElementsControl
         private set => SetValue(IceProperty, value);
     }
 
-    private static readonly DependencyPropertyKey IcePropertyKey = DependencyProperty.RegisterReadOnly(nameof(Ice), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
-    public static readonly DependencyProperty IceProperty = IcePropertyKey.DependencyProperty;
+    private static readonly DependencyProperty IceProperty = DependencyProperty.Register(nameof(Ice), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
 
     public bool Arcane
     {
@@ -53,8 +48,7 @@ public partial class SorcererElementsControl
         private set => SetValue(ArcaneProperty, value);
     }
 
-    private static readonly DependencyPropertyKey ArcanePropertyKey = DependencyProperty.RegisterReadOnly(nameof(Arcane), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
-    public static readonly DependencyProperty ArcaneProperty = ArcanePropertyKey.DependencyProperty;
+    private static readonly DependencyProperty ArcaneProperty = DependencyProperty.Register(nameof(Arcane), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
 
     public bool FireBoosted
     {
@@ -62,8 +56,7 @@ public partial class SorcererElementsControl
         private set => SetValue(FireBoostedProperty, value);
     }
 
-    private static readonly DependencyPropertyKey FireBoostedPropertyKey = DependencyProperty.RegisterReadOnly(nameof(FireBoosted), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
-    public static readonly DependencyProperty FireBoostedProperty = FireBoostedPropertyKey.DependencyProperty;
+    private static readonly DependencyProperty FireBoostedProperty = DependencyProperty.Register(nameof(FireBoosted), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
 
     public bool IceBoosted
     {
@@ -71,8 +64,7 @@ public partial class SorcererElementsControl
         private set => SetValue(IceBoostedProperty, value);
     }
 
-    private static readonly DependencyPropertyKey IceBoostedPropertyKey = DependencyProperty.RegisterReadOnly(nameof(IceBoosted), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
-    public static readonly DependencyProperty IceBoostedProperty = IceBoostedPropertyKey.DependencyProperty;
+    private static readonly DependencyProperty IceBoostedProperty = DependencyProperty.Register(nameof(IceBoosted), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
 
     public bool ArcaneBoosted
     {
@@ -80,8 +72,7 @@ public partial class SorcererElementsControl
         private set => SetValue(ArcaneBoostedProperty, value);
     }
 
-    private static readonly DependencyPropertyKey ArcaneBoostedPropertyKey = DependencyProperty.RegisterReadOnly(nameof(ArcaneBoosted), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
-    public static readonly DependencyProperty ArcaneBoostedProperty = ArcaneBoostedPropertyKey.DependencyProperty;
+    private static readonly DependencyProperty ArcaneBoostedProperty = DependencyProperty.Register(nameof(ArcaneBoosted), typeof(bool), typeof(SorcererElementsControl), new PropertyMetadata(false));
 
     public double IndicatorsWidth
     {
