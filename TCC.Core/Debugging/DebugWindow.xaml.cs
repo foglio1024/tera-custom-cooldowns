@@ -228,12 +228,12 @@ public sealed partial class DebugWindow : INotifyPropertyChanged
 
     private void NotifyFieldBoss(object sender, RoutedEventArgs e)
     {
-        Tester.AddFakeSystemMessage("SMT_FIELDBOSS_APPEAR", "npcName", "Ortan", "RegionName", "Zone");
+        Tester.AddFakeSystemMessage("SMT_FIELDBOSS_APPEAR", "regionName", "@rgn:213", "npcName", "@creature:26#5001");
     }
 
     private void NotifyFieldBossDie(object sender, RoutedEventArgs e)
     {
-        Tester.AddFakeSystemMessage("SMT_FIELDBOSS_DIE_NOGUILD", "userName", "Foglio", "npcName", "Ortan");
+        Tester.AddFakeSystemMessage("SMT_FIELDBOSS_DIE_NOGUILD", "userName", "Foglio", "npcName", "@creature:26#5001");
     }
 
     private void SetAtkSpeed(object sender, RoutedEventArgs e)
