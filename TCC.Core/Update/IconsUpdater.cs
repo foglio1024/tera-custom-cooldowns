@@ -93,12 +93,13 @@ public class IconsUpdater
 
         c.DownloadProgressChanged += (read, total) =>
         {
-            if (total == -1) total = 71000000;
+            //if (total == -1) total = 71000000;
             var perc = read * 100 / (double)total;
             if (_n == null) return;
             _n.Progress = perc;
-            _n.Message =
-                $"Downloading icons...\n({read / (1024 * 1024D):N1}/{total / (1024 * 1024D):N1}MB)";
+            _n.Message = total != -1 ?
+                $"Downloading icons...\n({read / (1024 * 1024D):N1}/{total / (1024 * 1024D):N1}MB)"
+                : $"Downloading icons...\n({read / (1024 * 1024D):N1}MB)";
         };
         c.DownloadFileCompleted += async (success) =>
         {
