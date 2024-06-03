@@ -113,7 +113,7 @@ public partial class App
         }
 
 
-        //TCC.Debug.Tester.Enable(true,true,true);
+        //TCC.Debug.Tester.Enable(true, true, true);
         //TCC.Debug.Tester.ShowDebugWindow();
         //TCC.Debug.Tester.AddAbnormality(101301);
         //TCC.Debug.Tester.AddAbnormality(690093);
